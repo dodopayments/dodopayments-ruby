@@ -30,7 +30,7 @@ module Dodopayments
         (
           ?Dodopayments::Models::LicenseKeyListParams
           | ::Hash[Symbol, top] params
-        ) -> Dodopayments::Models::license_key_list_response
+        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::LicenseKey]
         | (
           customer_id: String?,
           page_number: Integer?,
@@ -38,7 +38,7 @@ module Dodopayments
           product_id: String?,
           status: Dodopayments::Models::license_key_status?,
           request_options: Dodopayments::request_opts
-        ) -> Dodopayments::Models::license_key_list_response
+        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::LicenseKey]
 
       def initialize: (client: Dodopayments::Client) -> void
     end

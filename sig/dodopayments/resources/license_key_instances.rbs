@@ -28,13 +28,13 @@ module Dodopayments
         (
           ?Dodopayments::Models::LicenseKeyInstanceListParams
           | ::Hash[Symbol, top] params
-        ) -> Dodopayments::Models::license_key_instance_list_response
+        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::LicenseKeyInstance]
         | (
           license_key_id: String?,
           page_number: Integer?,
           page_size: Integer?,
           request_options: Dodopayments::request_opts
-        ) -> Dodopayments::Models::license_key_instance_list_response
+        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::LicenseKeyInstance]
 
       def initialize: (client: Dodopayments::Client) -> void
     end

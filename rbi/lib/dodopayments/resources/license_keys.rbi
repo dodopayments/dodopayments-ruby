@@ -52,7 +52,7 @@ module Dodopayments
           status: T.nilable(Symbol),
           request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
         )
-          .returns(Dodopayments::Models::LicenseKeyListResponse)
+          .returns(Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::LicenseKey])
       end
       def list(
         # Filter by customer ID

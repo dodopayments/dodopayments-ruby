@@ -60,14 +60,15 @@ module Dodopayments
       #
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
-      # @return [Array<Dodopayments::Models::LicenseKeyListResponseItem>]
+      # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::LicenseKey>]
       def list(params = {})
         parsed, options = Dodopayments::Models::LicenseKeyListParams.dump_request(params)
         @client.request(
           method: :get,
           path: "license_keys",
           query: parsed,
-          model: Dodopayments::ArrayOf[Dodopayments::Models::LicenseKeyListResponseItem],
+          page: Dodopayments::DefaultPageNumberPagination,
+          model: Dodopayments::Models::LicenseKey,
           options: options
         )
       end
