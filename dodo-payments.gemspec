@@ -14,6 +14,6 @@ Gem::Specification.new do |s|
   s.add_dependency "connection_pool"
   s.homepage = "https://gemdocs.org/gems/dodo-payments/latest"
   s.metadata["homepage_uri"] = s.homepage
-  s.metadata["source_code_uri"] = "https://github.com/stainless-sdks/dodo-payments-ruby"
+  s.metadata["source_code_uri"] = "https://github.com/dodopayments/dodopayments-ruby"
   s.metadata["rubygems_mfa_required"] = "false"
 end
