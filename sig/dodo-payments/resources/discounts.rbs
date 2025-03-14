@@ -1,0 +1,73 @@
+module DodoPayments
+  module Resources
+    class Discounts
+      def create:
+        (
+          DodoPayments::Models::DiscountCreateParams
+          | ::Hash[Symbol, top] params
+        ) -> DodoPayments::Models::Discount
+        | (
+          amount: Integer,
+          type: DodoPayments::Models::DiscountCreateParams::type_,
+          code: String?,
+          expires_at: Time?,
+          name: String?,
+          restricted_to: ::Array[String]?,
+          usage_limit: Integer?,
+          request_options: DodoPayments::request_opts
+        ) -> DodoPayments::Models::Discount
+
+      def retrieve:
+        (
+          String discount_id,
+          ?DodoPayments::Models::DiscountRetrieveParams
+          | ::Hash[Symbol, top] params
+        ) -> DodoPayments::Models::Discount
+        | (
+          String discount_id,
+          request_options: DodoPayments::request_opts
+        ) -> DodoPayments::Models::Discount
+
+      def update:
+        (
+          String discount_id,
+          ?DodoPayments::Models::DiscountUpdateParams
+          | ::Hash[Symbol, top] params
+        ) -> DodoPayments::Models::Discount
+        | (
+          String discount_id,
+          amount: Integer?,
+          code: String?,
+          expires_at: Time?,
+          name: String?,
+          restricted_to: ::Array[String]?,
+          type: DodoPayments::Models::DiscountUpdateParams::type_?,
+          usage_limit: Integer?,
+          request_options: DodoPayments::request_opts
+        ) -> DodoPayments::Models::Discount
+
+      def list:
+        (
+          ?DodoPayments::Models::DiscountListParams | ::Hash[Symbol, top] params
+        ) -> DodoPayments::DefaultPageNumberPagination[DodoPayments::Models::Discount]
+        | (
+          page_number: Integer?,
+          page_size: Integer?,
+          request_options: DodoPayments::request_opts
+        ) -> DodoPayments::DefaultPageNumberPagination[DodoPayments::Models::Discount]
+
+      def delete:
+        (
+          String discount_id,
+          ?DodoPayments::Models::DiscountDeleteParams
+          | ::Hash[Symbol, top] params
+        ) -> nil
+        | (
+          String discount_id,
+          request_options: DodoPayments::request_opts
+        ) -> nil
+
+      def initialize: (client: DodoPayments::Client) -> void
+    end
+  end
+end

@@ -1,0 +1,19 @@
+module DodoPayments
+  module Models
+    type refund_retrieve_params = {  } & DodoPayments::request_parameters
+
+    class RefundRetrieveParams < DodoPayments::BaseModel
+      extend DodoPayments::RequestParameters::Converter
+      include DodoPayments::RequestParameters
+
+      def initialize:
+        (request_options: DodoPayments::request_opts) -> void
+        | (
+          ?DodoPayments::Models::refund_retrieve_params
+          | DodoPayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> DodoPayments::Models::refund_retrieve_params
+    end
+  end
+end

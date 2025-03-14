@@ -1,0 +1,42 @@
+module DodoPayments
+  module Resources
+    class Refunds
+      def create:
+        (
+          DodoPayments::Models::RefundCreateParams | ::Hash[Symbol, top] params
+        ) -> DodoPayments::Models::Refund
+        | (
+          payment_id: String,
+          amount: Integer?,
+          reason: String?,
+          request_options: DodoPayments::request_opts
+        ) -> DodoPayments::Models::Refund
+
+      def retrieve:
+        (
+          String refund_id,
+          ?DodoPayments::Models::RefundRetrieveParams
+          | ::Hash[Symbol, top] params
+        ) -> DodoPayments::Models::Refund
+        | (
+          String refund_id,
+          request_options: DodoPayments::request_opts
+        ) -> DodoPayments::Models::Refund
+
+      def list:
+        (
+          ?DodoPayments::Models::RefundListParams | ::Hash[Symbol, top] params
+        ) -> DodoPayments::DefaultPageNumberPagination[DodoPayments::Models::Refund]
+        | (
+          created_at_gte: Time?,
+          created_at_lte: Time?,
+          page_number: Integer?,
+          page_size: Integer?,
+          status: DodoPayments::Models::RefundListParams::status?,
+          request_options: DodoPayments::request_opts
+        ) -> DodoPayments::DefaultPageNumberPagination[DodoPayments::Models::Refund]
+
+      def initialize: (client: DodoPayments::Client) -> void
+    end
+  end
+end

@@ -1,0 +1,18 @@
+module DodoPayments
+  module Models
+    type license_validate_response = { valid: bool }
+
+    class LicenseValidateResponse < DodoPayments::BaseModel
+      attr_accessor valid: bool
+
+      def initialize:
+        (valid: bool) -> void
+        | (
+          ?DodoPayments::Models::license_validate_response
+          | DodoPayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> DodoPayments::Models::license_validate_response
+    end
+  end
+end

@@ -1,0 +1,171 @@
+module DodoPayments
+  module Models
+    type payment_create_params =
+      {
+        billing: DodoPayments::Models::PaymentCreateParams::Billing,
+        customer: DodoPayments::Models::PaymentCreateParams::customer,
+        product_cart: ::Array[DodoPayments::Models::PaymentCreateParams::ProductCart],
+        discount_code: String?,
+        metadata: ::Hash[Symbol, String],
+        payment_link: bool?,
+        return_url: String?,
+        tax_id: String?
+      }
+      & DodoPayments::request_parameters
+
+    class PaymentCreateParams < DodoPayments::BaseModel
+      extend DodoPayments::RequestParameters::Converter
+      include DodoPayments::RequestParameters
+
+      attr_accessor billing: DodoPayments::Models::PaymentCreateParams::Billing
+
+      attr_accessor customer: DodoPayments::Models::PaymentCreateParams::customer
+
+      attr_accessor product_cart: ::Array[DodoPayments::Models::PaymentCreateParams::ProductCart]
+
+      attr_accessor discount_code: String?
+
+      attr_reader metadata: ::Hash[Symbol, String]?
+
+      def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+      attr_accessor payment_link: bool?
+
+      attr_accessor return_url: String?
+
+      attr_accessor tax_id: String?
+
+      def initialize:
+        (
+          billing: DodoPayments::Models::PaymentCreateParams::Billing,
+          customer: DodoPayments::Models::PaymentCreateParams::customer,
+          product_cart: ::Array[DodoPayments::Models::PaymentCreateParams::ProductCart],
+          discount_code: String?,
+          metadata: ::Hash[Symbol, String],
+          payment_link: bool?,
+          return_url: String?,
+          tax_id: String?,
+          request_options: DodoPayments::request_opts
+        ) -> void
+        | (
+          ?DodoPayments::Models::payment_create_params
+          | DodoPayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> DodoPayments::Models::payment_create_params
+
+      type billing =
+        {
+          city: String,
+          country: DodoPayments::Models::Misc::country_code,
+          state: String,
+          street: String,
+          zipcode: String
+        }
+
+      class Billing < DodoPayments::BaseModel
+        attr_accessor city: String
+
+        attr_accessor country: DodoPayments::Models::Misc::country_code
+
+        attr_accessor state: String
+
+        attr_accessor street: String
+
+        attr_accessor zipcode: String
+
+        def initialize:
+          (
+            city: String,
+            country: DodoPayments::Models::Misc::country_code,
+            state: String,
+            street: String,
+            zipcode: String
+          ) -> void
+          | (
+            ?DodoPayments::Models::PaymentCreateParams::billing
+            | DodoPayments::BaseModel data
+          ) -> void
+
+        def to_hash: -> DodoPayments::Models::PaymentCreateParams::billing
+      end
+
+      type customer =
+        DodoPayments::Models::PaymentCreateParams::Customer::AttachExistingCustomer
+        | DodoPayments::Models::PaymentCreateParams::Customer::CreateNewCustomer
+
+      class Customer < DodoPayments::Union
+        type attach_existing_customer = { customer_id: String }
+
+        class AttachExistingCustomer < DodoPayments::BaseModel
+          attr_accessor customer_id: String
+
+          def initialize:
+            (customer_id: String) -> void
+            | (
+              ?DodoPayments::Models::PaymentCreateParams::Customer::attach_existing_customer
+              | DodoPayments::BaseModel data
+            ) -> void
+
+          def to_hash: -> DodoPayments::Models::PaymentCreateParams::Customer::attach_existing_customer
+        end
+
+        type create_new_customer =
+          {
+            email: String,
+            name: String,
+            create_new_customer: bool,
+            phone_number: String?
+          }
+
+        class CreateNewCustomer < DodoPayments::BaseModel
+          attr_accessor email: String
+
+          attr_accessor name: String
+
+          attr_reader create_new_customer: bool?
+
+          def create_new_customer=: (bool) -> bool
+
+          attr_accessor phone_number: String?
+
+          def initialize:
+            (
+              email: String,
+              name: String,
+              create_new_customer: bool,
+              phone_number: String?
+            ) -> void
+            | (
+              ?DodoPayments::Models::PaymentCreateParams::Customer::create_new_customer
+              | DodoPayments::BaseModel data
+            ) -> void
+
+          def to_hash: -> DodoPayments::Models::PaymentCreateParams::Customer::create_new_customer
+        end
+
+        def self.variants: -> [DodoPayments::Models::PaymentCreateParams::Customer::AttachExistingCustomer, DodoPayments::Models::PaymentCreateParams::Customer::CreateNewCustomer]
+      end
+
+      type product_cart =
+        { product_id: String, quantity: Integer, amount: Integer? }
+
+      class ProductCart < DodoPayments::BaseModel
+        attr_accessor product_id: String
+
+        attr_accessor quantity: Integer
+
+        attr_accessor amount: Integer?
+
+        def initialize:
+          (product_id: String, quantity: Integer, amount: Integer?) -> void
+          | (
+            ?DodoPayments::Models::PaymentCreateParams::product_cart
+            | DodoPayments::BaseModel data
+          ) -> void
+
+        def to_hash: -> DodoPayments::Models::PaymentCreateParams::product_cart
+      end
+    end
+  end
+end

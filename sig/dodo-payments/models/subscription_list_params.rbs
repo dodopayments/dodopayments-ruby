@@ -1,0 +1,69 @@
+module DodoPayments
+  module Models
+    type subscription_list_params =
+      {
+        created_at_gte: Time?,
+        created_at_lte: Time?,
+        customer_id: String?,
+        page_number: Integer?,
+        page_size: Integer?,
+        status: DodoPayments::Models::SubscriptionListParams::status?
+      }
+      & DodoPayments::request_parameters
+
+    class SubscriptionListParams < DodoPayments::BaseModel
+      extend DodoPayments::RequestParameters::Converter
+      include DodoPayments::RequestParameters
+
+      attr_accessor created_at_gte: Time?
+
+      attr_accessor created_at_lte: Time?
+
+      attr_accessor customer_id: String?
+
+      attr_accessor page_number: Integer?
+
+      attr_accessor page_size: Integer?
+
+      attr_accessor status: DodoPayments::Models::SubscriptionListParams::status?
+
+      def initialize:
+        (
+          created_at_gte: Time?,
+          created_at_lte: Time?,
+          customer_id: String?,
+          page_number: Integer?,
+          page_size: Integer?,
+          status: DodoPayments::Models::SubscriptionListParams::status?,
+          request_options: DodoPayments::request_opts
+        ) -> void
+        | (
+          ?DodoPayments::Models::subscription_list_params
+          | DodoPayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> DodoPayments::Models::subscription_list_params
+
+      type status =
+        :pending
+        | :active
+        | :on_hold
+        | :paused
+        | :cancelled
+        | :failed
+        | :expired
+
+      class Status < DodoPayments::Enum
+        PENDING: :pending
+        ACTIVE: :active
+        ON_HOLD: :on_hold
+        PAUSED: :paused
+        CANCELLED: :cancelled
+        FAILED: :failed
+        EXPIRED: :expired
+
+        def self.values: -> ::Array[DodoPayments::Models::SubscriptionListParams::status]
+      end
+    end
+  end
+end

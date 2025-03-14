@@ -1,0 +1,49 @@
+module DodoPayments
+  module Resources
+    class Payments
+      def create:
+        (
+          DodoPayments::Models::PaymentCreateParams | ::Hash[Symbol, top] params
+        ) -> DodoPayments::Models::PaymentCreateResponse
+        | (
+          billing: DodoPayments::Models::PaymentCreateParams::Billing,
+          customer: DodoPayments::Models::PaymentCreateParams::customer,
+          product_cart: ::Array[DodoPayments::Models::PaymentCreateParams::ProductCart],
+          discount_code: String?,
+          metadata: ::Hash[Symbol, String],
+          payment_link: bool?,
+          return_url: String?,
+          tax_id: String?,
+          request_options: DodoPayments::request_opts
+        ) -> DodoPayments::Models::PaymentCreateResponse
+
+      def retrieve:
+        (
+          String payment_id,
+          ?DodoPayments::Models::PaymentRetrieveParams
+          | ::Hash[Symbol, top] params
+        ) -> DodoPayments::Models::Payment
+        | (
+          String payment_id,
+          request_options: DodoPayments::request_opts
+        ) -> DodoPayments::Models::Payment
+
+      def list:
+        (
+          ?DodoPayments::Models::PaymentListParams | ::Hash[Symbol, top] params
+        ) -> DodoPayments::DefaultPageNumberPagination[DodoPayments::Models::PaymentListResponse]
+        | (
+          created_at_gte: Time?,
+          created_at_lte: Time?,
+          customer_id: String?,
+          page_number: Integer?,
+          page_size: Integer?,
+          status: DodoPayments::Models::PaymentListParams::status?,
+          subscription_id: String?,
+          request_options: DodoPayments::request_opts
+        ) -> DodoPayments::DefaultPageNumberPagination[DodoPayments::Models::PaymentListResponse]
+
+      def initialize: (client: DodoPayments::Client) -> void
+    end
+  end
+end

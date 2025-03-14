@@ -1,0 +1,1115 @@
+module DodoPayments
+  module Models
+    type product_list_response =
+      {
+        business_id: String,
+        created_at: Time,
+        is_recurring: bool,
+        product_id: String,
+        tax_category: DodoPayments::Models::ProductListResponse::tax_category,
+        updated_at: Time,
+        currency: DodoPayments::Models::ProductListResponse::currency?,
+        description: String?,
+        image: String?,
+        name: String?,
+        price: Integer?,
+        price_detail: DodoPayments::Models::ProductListResponse::price_detail?,
+        tax_inclusive: bool?
+      }
+
+    class ProductListResponse < DodoPayments::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor is_recurring: bool
+
+      attr_accessor product_id: String
+
+      attr_accessor tax_category: DodoPayments::Models::ProductListResponse::tax_category
+
+      attr_accessor updated_at: Time
+
+      attr_accessor currency: DodoPayments::Models::ProductListResponse::currency?
+
+      attr_accessor description: String?
+
+      attr_accessor image: String?
+
+      attr_accessor name: String?
+
+      attr_accessor price: Integer?
+
+      attr_accessor price_detail: DodoPayments::Models::ProductListResponse::price_detail?
+
+      attr_accessor tax_inclusive: bool?
+
+      def initialize:
+        (
+          business_id: String,
+          created_at: Time,
+          is_recurring: bool,
+          product_id: String,
+          tax_category: DodoPayments::Models::ProductListResponse::tax_category,
+          updated_at: Time,
+          currency: DodoPayments::Models::ProductListResponse::currency?,
+          description: String?,
+          image: String?,
+          name: String?,
+          price: Integer?,
+          price_detail: DodoPayments::Models::ProductListResponse::price_detail?,
+          tax_inclusive: bool?
+        ) -> void
+        | (
+          ?DodoPayments::Models::product_list_response
+          | DodoPayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> DodoPayments::Models::product_list_response
+
+      type tax_category = :digital_products | :saas | :e_book | :edtech
+
+      class TaxCategory < DodoPayments::Enum
+        DIGITAL_PRODUCTS: :digital_products
+        SAAS: :saas
+        E_BOOK: :e_book
+        EDTECH: :edtech
+
+        def self.values: -> ::Array[DodoPayments::Models::ProductListResponse::tax_category]
+      end
+
+      type currency =
+        :AED
+        | :ALL
+        | :AMD
+        | :ANG
+        | :AOA
+        | :ARS
+        | :AUD
+        | :AWG
+        | :AZN
+        | :BAM
+        | :BBD
+        | :BDT
+        | :BGN
+        | :BHD
+        | :BIF
+        | :BMD
+        | :BND
+        | :BOB
+        | :BRL
+        | :BSD
+        | :BWP
+        | :BYN
+        | :BZD
+        | :CAD
+        | :CHF
+        | :CLP
+        | :CNY
+        | :COP
+        | :CRC
+        | :CUP
+        | :CVE
+        | :CZK
+        | :DJF
+        | :DKK
+        | :DOP
+        | :DZD
+        | :EGP
+        | :ETB
+        | :EUR
+        | :FJD
+        | :FKP
+        | :GBP
+        | :GEL
+        | :GHS
+        | :GIP
+        | :GMD
+        | :GNF
+        | :GTQ
+        | :GYD
+        | :HKD
+        | :HNL
+        | :HRK
+        | :HTG
+        | :HUF
+        | :IDR
+        | :ILS
+        | :INR
+        | :IQD
+        | :JMD
+        | :JOD
+        | :JPY
+        | :KES
+        | :KGS
+        | :KHR
+        | :KMF
+        | :KRW
+        | :KWD
+        | :KYD
+        | :KZT
+        | :LAK
+        | :LBP
+        | :LKR
+        | :LRD
+        | :LSL
+        | :LYD
+        | :MAD
+        | :MDL
+        | :MGA
+        | :MKD
+        | :MMK
+        | :MNT
+        | :MOP
+        | :MRU
+        | :MUR
+        | :MVR
+        | :MWK
+        | :MXN
+        | :MYR
+        | :MZN
+        | :NAD
+        | :NGN
+        | :NIO
+        | :NOK
+        | :NPR
+        | :NZD
+        | :OMR
+        | :PAB
+        | :PEN
+        | :PGK
+        | :PHP
+        | :PKR
+        | :PLN
+        | :PYG
+        | :QAR
+        | :RON
+        | :RSD
+        | :RUB
+        | :RWF
+        | :SAR
+        | :SBD
+        | :SCR
+        | :SEK
+        | :SGD
+        | :SHP
+        | :SLE
+        | :SLL
+        | :SOS
+        | :SRD
+        | :SSP
+        | :STN
+        | :SVC
+        | :SZL
+        | :THB
+        | :TND
+        | :TOP
+        | :TRY
+        | :TTD
+        | :TWD
+        | :TZS
+        | :UAH
+        | :UGX
+        | :USD
+        | :UYU
+        | :UZS
+        | :VES
+        | :VND
+        | :VUV
+        | :WST
+        | :XAF
+        | :XCD
+        | :XOF
+        | :XPF
+        | :YER
+        | :ZAR
+        | :ZMW
+
+      class Currency < DodoPayments::Enum
+        AED: :AED
+        ALL: :ALL
+        AMD: :AMD
+        ANG: :ANG
+        AOA: :AOA
+        ARS: :ARS
+        AUD: :AUD
+        AWG: :AWG
+        AZN: :AZN
+        BAM: :BAM
+        BBD: :BBD
+        BDT: :BDT
+        BGN: :BGN
+        BHD: :BHD
+        BIF: :BIF
+        BMD: :BMD
+        BND: :BND
+        BOB: :BOB
+        BRL: :BRL
+        BSD: :BSD
+        BWP: :BWP
+        BYN: :BYN
+        BZD: :BZD
+        CAD: :CAD
+        CHF: :CHF
+        CLP: :CLP
+        CNY: :CNY
+        COP: :COP
+        CRC: :CRC
+        CUP: :CUP
+        CVE: :CVE
+        CZK: :CZK
+        DJF: :DJF
+        DKK: :DKK
+        DOP: :DOP
+        DZD: :DZD
+        EGP: :EGP
+        ETB: :ETB
+        EUR: :EUR
+        FJD: :FJD
+        FKP: :FKP
+        GBP: :GBP
+        GEL: :GEL
+        GHS: :GHS
+        GIP: :GIP
+        GMD: :GMD
+        GNF: :GNF
+        GTQ: :GTQ
+        GYD: :GYD
+        HKD: :HKD
+        HNL: :HNL
+        HRK: :HRK
+        HTG: :HTG
+        HUF: :HUF
+        IDR: :IDR
+        ILS: :ILS
+        INR: :INR
+        IQD: :IQD
+        JMD: :JMD
+        JOD: :JOD
+        JPY: :JPY
+        KES: :KES
+        KGS: :KGS
+        KHR: :KHR
+        KMF: :KMF
+        KRW: :KRW
+        KWD: :KWD
+        KYD: :KYD
+        KZT: :KZT
+        LAK: :LAK
+        LBP: :LBP
+        LKR: :LKR
+        LRD: :LRD
+        LSL: :LSL
+        LYD: :LYD
+        MAD: :MAD
+        MDL: :MDL
+        MGA: :MGA
+        MKD: :MKD
+        MMK: :MMK
+        MNT: :MNT
+        MOP: :MOP
+        MRU: :MRU
+        MUR: :MUR
+        MVR: :MVR
+        MWK: :MWK
+        MXN: :MXN
+        MYR: :MYR
+        MZN: :MZN
+        NAD: :NAD
+        NGN: :NGN
+        NIO: :NIO
+        NOK: :NOK
+        NPR: :NPR
+        NZD: :NZD
+        OMR: :OMR
+        PAB: :PAB
+        PEN: :PEN
+        PGK: :PGK
+        PHP: :PHP
+        PKR: :PKR
+        PLN: :PLN
+        PYG: :PYG
+        QAR: :QAR
+        RON: :RON
+        RSD: :RSD
+        RUB: :RUB
+        RWF: :RWF
+        SAR: :SAR
+        SBD: :SBD
+        SCR: :SCR
+        SEK: :SEK
+        SGD: :SGD
+        SHP: :SHP
+        SLE: :SLE
+        SLL: :SLL
+        SOS: :SOS
+        SRD: :SRD
+        SSP: :SSP
+        STN: :STN
+        SVC: :SVC
+        SZL: :SZL
+        THB: :THB
+        TND: :TND
+        TOP: :TOP
+        TRY: :TRY
+        TTD: :TTD
+        TWD: :TWD
+        TZS: :TZS
+        UAH: :UAH
+        UGX: :UGX
+        USD: :USD
+        UYU: :UYU
+        UZS: :UZS
+        VES: :VES
+        VND: :VND
+        VUV: :VUV
+        WST: :WST
+        XAF: :XAF
+        XCD: :XCD
+        XOF: :XOF
+        XPF: :XPF
+        YER: :YER
+        ZAR: :ZAR
+        ZMW: :ZMW
+
+        def self.values: -> ::Array[DodoPayments::Models::ProductListResponse::currency]
+      end
+
+      type price_detail =
+        DodoPayments::Models::ProductListResponse::PriceDetail::OneTimePrice
+        | DodoPayments::Models::ProductListResponse::PriceDetail::RecurringPrice
+
+      class PriceDetail < DodoPayments::Union
+        type one_time_price =
+          {
+            currency: DodoPayments::Models::ProductListResponse::PriceDetail::OneTimePrice::currency,
+            discount: Float,
+            price: Integer,
+            purchasing_power_parity: bool,
+            type: :one_time_price,
+            pay_what_you_want: bool,
+            suggested_price: Integer?,
+            tax_inclusive: bool?
+          }
+
+        class OneTimePrice < DodoPayments::BaseModel
+          attr_accessor currency: DodoPayments::Models::ProductListResponse::PriceDetail::OneTimePrice::currency
+
+          attr_accessor discount: Float
+
+          attr_accessor price: Integer
+
+          attr_accessor purchasing_power_parity: bool
+
+          attr_accessor type: :one_time_price
+
+          attr_reader pay_what_you_want: bool?
+
+          def pay_what_you_want=: (bool) -> bool
+
+          attr_accessor suggested_price: Integer?
+
+          attr_accessor tax_inclusive: bool?
+
+          def initialize:
+            (
+              currency: DodoPayments::Models::ProductListResponse::PriceDetail::OneTimePrice::currency,
+              discount: Float,
+              price: Integer,
+              purchasing_power_parity: bool,
+              pay_what_you_want: bool,
+              suggested_price: Integer?,
+              tax_inclusive: bool?,
+              type: :one_time_price
+            ) -> void
+            | (
+              ?DodoPayments::Models::ProductListResponse::PriceDetail::one_time_price
+              | DodoPayments::BaseModel data
+            ) -> void
+
+          def to_hash: -> DodoPayments::Models::ProductListResponse::PriceDetail::one_time_price
+
+          type currency =
+            :AED
+            | :ALL
+            | :AMD
+            | :ANG
+            | :AOA
+            | :ARS
+            | :AUD
+            | :AWG
+            | :AZN
+            | :BAM
+            | :BBD
+            | :BDT
+            | :BGN
+            | :BHD
+            | :BIF
+            | :BMD
+            | :BND
+            | :BOB
+            | :BRL
+            | :BSD
+            | :BWP
+            | :BYN
+            | :BZD
+            | :CAD
+            | :CHF
+            | :CLP
+            | :CNY
+            | :COP
+            | :CRC
+            | :CUP
+            | :CVE
+            | :CZK
+            | :DJF
+            | :DKK
+            | :DOP
+            | :DZD
+            | :EGP
+            | :ETB
+            | :EUR
+            | :FJD
+            | :FKP
+            | :GBP
+            | :GEL
+            | :GHS
+            | :GIP
+            | :GMD
+            | :GNF
+            | :GTQ
+            | :GYD
+            | :HKD
+            | :HNL
+            | :HRK
+            | :HTG
+            | :HUF
+            | :IDR
+            | :ILS
+            | :INR
+            | :IQD
+            | :JMD
+            | :JOD
+            | :JPY
+            | :KES
+            | :KGS
+            | :KHR
+            | :KMF
+            | :KRW
+            | :KWD
+            | :KYD
+            | :KZT
+            | :LAK
+            | :LBP
+            | :LKR
+            | :LRD
+            | :LSL
+            | :LYD
+            | :MAD
+            | :MDL
+            | :MGA
+            | :MKD
+            | :MMK
+            | :MNT
+            | :MOP
+            | :MRU
+            | :MUR
+            | :MVR
+            | :MWK
+            | :MXN
+            | :MYR
+            | :MZN
+            | :NAD
+            | :NGN
+            | :NIO
+            | :NOK
+            | :NPR
+            | :NZD
+            | :OMR
+            | :PAB
+            | :PEN
+            | :PGK
+            | :PHP
+            | :PKR
+            | :PLN
+            | :PYG
+            | :QAR
+            | :RON
+            | :RSD
+            | :RUB
+            | :RWF
+            | :SAR
+            | :SBD
+            | :SCR
+            | :SEK
+            | :SGD
+            | :SHP
+            | :SLE
+            | :SLL
+            | :SOS
+            | :SRD
+            | :SSP
+            | :STN
+            | :SVC
+            | :SZL
+            | :THB
+            | :TND
+            | :TOP
+            | :TRY
+            | :TTD
+            | :TWD
+            | :TZS
+            | :UAH
+            | :UGX
+            | :USD
+            | :UYU
+            | :UZS
+            | :VES
+            | :VND
+            | :VUV
+            | :WST
+            | :XAF
+            | :XCD
+            | :XOF
+            | :XPF
+            | :YER
+            | :ZAR
+            | :ZMW
+
+          class Currency < DodoPayments::Enum
+            AED: :AED
+            ALL: :ALL
+            AMD: :AMD
+            ANG: :ANG
+            AOA: :AOA
+            ARS: :ARS
+            AUD: :AUD
+            AWG: :AWG
+            AZN: :AZN
+            BAM: :BAM
+            BBD: :BBD
+            BDT: :BDT
+            BGN: :BGN
+            BHD: :BHD
+            BIF: :BIF
+            BMD: :BMD
+            BND: :BND
+            BOB: :BOB
+            BRL: :BRL
+            BSD: :BSD
+            BWP: :BWP
+            BYN: :BYN
+            BZD: :BZD
+            CAD: :CAD
+            CHF: :CHF
+            CLP: :CLP
+            CNY: :CNY
+            COP: :COP
+            CRC: :CRC
+            CUP: :CUP
+            CVE: :CVE
+            CZK: :CZK
+            DJF: :DJF
+            DKK: :DKK
+            DOP: :DOP
+            DZD: :DZD
+            EGP: :EGP
+            ETB: :ETB
+            EUR: :EUR
+            FJD: :FJD
+            FKP: :FKP
+            GBP: :GBP
+            GEL: :GEL
+            GHS: :GHS
+            GIP: :GIP
+            GMD: :GMD
+            GNF: :GNF
+            GTQ: :GTQ
+            GYD: :GYD
+            HKD: :HKD
+            HNL: :HNL
+            HRK: :HRK
+            HTG: :HTG
+            HUF: :HUF
+            IDR: :IDR
+            ILS: :ILS
+            INR: :INR
+            IQD: :IQD
+            JMD: :JMD
+            JOD: :JOD
+            JPY: :JPY
+            KES: :KES
+            KGS: :KGS
+            KHR: :KHR
+            KMF: :KMF
+            KRW: :KRW
+            KWD: :KWD
+            KYD: :KYD
+            KZT: :KZT
+            LAK: :LAK
+            LBP: :LBP
+            LKR: :LKR
+            LRD: :LRD
+            LSL: :LSL
+            LYD: :LYD
+            MAD: :MAD
+            MDL: :MDL
+            MGA: :MGA
+            MKD: :MKD
+            MMK: :MMK
+            MNT: :MNT
+            MOP: :MOP
+            MRU: :MRU
+            MUR: :MUR
+            MVR: :MVR
+            MWK: :MWK
+            MXN: :MXN
+            MYR: :MYR
+            MZN: :MZN
+            NAD: :NAD
+            NGN: :NGN
+            NIO: :NIO
+            NOK: :NOK
+            NPR: :NPR
+            NZD: :NZD
+            OMR: :OMR
+            PAB: :PAB
+            PEN: :PEN
+            PGK: :PGK
+            PHP: :PHP
+            PKR: :PKR
+            PLN: :PLN
+            PYG: :PYG
+            QAR: :QAR
+            RON: :RON
+            RSD: :RSD
+            RUB: :RUB
+            RWF: :RWF
+            SAR: :SAR
+            SBD: :SBD
+            SCR: :SCR
+            SEK: :SEK
+            SGD: :SGD
+            SHP: :SHP
+            SLE: :SLE
+            SLL: :SLL
+            SOS: :SOS
+            SRD: :SRD
+            SSP: :SSP
+            STN: :STN
+            SVC: :SVC
+            SZL: :SZL
+            THB: :THB
+            TND: :TND
+            TOP: :TOP
+            TRY: :TRY
+            TTD: :TTD
+            TWD: :TWD
+            TZS: :TZS
+            UAH: :UAH
+            UGX: :UGX
+            USD: :USD
+            UYU: :UYU
+            UZS: :UZS
+            VES: :VES
+            VND: :VND
+            VUV: :VUV
+            WST: :WST
+            XAF: :XAF
+            XCD: :XCD
+            XOF: :XOF
+            XPF: :XPF
+            YER: :YER
+            ZAR: :ZAR
+            ZMW: :ZMW
+
+            def self.values: -> ::Array[DodoPayments::Models::ProductListResponse::PriceDetail::OneTimePrice::currency]
+          end
+        end
+
+        type recurring_price =
+          {
+            currency: DodoPayments::Models::ProductListResponse::PriceDetail::RecurringPrice::currency,
+            discount: Float,
+            payment_frequency_count: Integer,
+            payment_frequency_interval: DodoPayments::Models::ProductListResponse::PriceDetail::RecurringPrice::payment_frequency_interval,
+            price: Integer,
+            purchasing_power_parity: bool,
+            subscription_period_count: Integer,
+            subscription_period_interval: DodoPayments::Models::ProductListResponse::PriceDetail::RecurringPrice::subscription_period_interval,
+            type: :recurring_price,
+            tax_inclusive: bool?,
+            trial_period_days: Integer
+          }
+
+        class RecurringPrice < DodoPayments::BaseModel
+          attr_accessor currency: DodoPayments::Models::ProductListResponse::PriceDetail::RecurringPrice::currency
+
+          attr_accessor discount: Float
+
+          attr_accessor payment_frequency_count: Integer
+
+          attr_accessor payment_frequency_interval: DodoPayments::Models::ProductListResponse::PriceDetail::RecurringPrice::payment_frequency_interval
+
+          attr_accessor price: Integer
+
+          attr_accessor purchasing_power_parity: bool
+
+          attr_accessor subscription_period_count: Integer
+
+          attr_accessor subscription_period_interval: DodoPayments::Models::ProductListResponse::PriceDetail::RecurringPrice::subscription_period_interval
+
+          attr_accessor type: :recurring_price
+
+          attr_accessor tax_inclusive: bool?
+
+          attr_reader trial_period_days: Integer?
+
+          def trial_period_days=: (Integer) -> Integer
+
+          def initialize:
+            (
+              currency: DodoPayments::Models::ProductListResponse::PriceDetail::RecurringPrice::currency,
+              discount: Float,
+              payment_frequency_count: Integer,
+              payment_frequency_interval: DodoPayments::Models::ProductListResponse::PriceDetail::RecurringPrice::payment_frequency_interval,
+              price: Integer,
+              purchasing_power_parity: bool,
+              subscription_period_count: Integer,
+              subscription_period_interval: DodoPayments::Models::ProductListResponse::PriceDetail::RecurringPrice::subscription_period_interval,
+              tax_inclusive: bool?,
+              trial_period_days: Integer,
+              type: :recurring_price
+            ) -> void
+            | (
+              ?DodoPayments::Models::ProductListResponse::PriceDetail::recurring_price
+              | DodoPayments::BaseModel data
+            ) -> void
+
+          def to_hash: -> DodoPayments::Models::ProductListResponse::PriceDetail::recurring_price
+
+          type currency =
+            :AED
+            | :ALL
+            | :AMD
+            | :ANG
+            | :AOA
+            | :ARS
+            | :AUD
+            | :AWG
+            | :AZN
+            | :BAM
+            | :BBD
+            | :BDT
+            | :BGN
+            | :BHD
+            | :BIF
+            | :BMD
+            | :BND
+            | :BOB
+            | :BRL
+            | :BSD
+            | :BWP
+            | :BYN
+            | :BZD
+            | :CAD
+            | :CHF
+            | :CLP
+            | :CNY
+            | :COP
+            | :CRC
+            | :CUP
+            | :CVE
+            | :CZK
+            | :DJF
+            | :DKK
+            | :DOP
+            | :DZD
+            | :EGP
+            | :ETB
+            | :EUR
+            | :FJD
+            | :FKP
+            | :GBP
+            | :GEL
+            | :GHS
+            | :GIP
+            | :GMD
+            | :GNF
+            | :GTQ
+            | :GYD
+            | :HKD
+            | :HNL
+            | :HRK
+            | :HTG
+            | :HUF
+            | :IDR
+            | :ILS
+            | :INR
+            | :IQD
+            | :JMD
+            | :JOD
+            | :JPY
+            | :KES
+            | :KGS
+            | :KHR
+            | :KMF
+            | :KRW
+            | :KWD
+            | :KYD
+            | :KZT
+            | :LAK
+            | :LBP
+            | :LKR
+            | :LRD
+            | :LSL
+            | :LYD
+            | :MAD
+            | :MDL
+            | :MGA
+            | :MKD
+            | :MMK
+            | :MNT
+            | :MOP
+            | :MRU
+            | :MUR
+            | :MVR
+            | :MWK
+            | :MXN
+            | :MYR
+            | :MZN
+            | :NAD
+            | :NGN
+            | :NIO
+            | :NOK
+            | :NPR
+            | :NZD
+            | :OMR
+            | :PAB
+            | :PEN
+            | :PGK
+            | :PHP
+            | :PKR
+            | :PLN
+            | :PYG
+            | :QAR
+            | :RON
+            | :RSD
+            | :RUB
+            | :RWF
+            | :SAR
+            | :SBD
+            | :SCR
+            | :SEK
+            | :SGD
+            | :SHP
+            | :SLE
+            | :SLL
+            | :SOS
+            | :SRD
+            | :SSP
+            | :STN
+            | :SVC
+            | :SZL
+            | :THB
+            | :TND
+            | :TOP
+            | :TRY
+            | :TTD
+            | :TWD
+            | :TZS
+            | :UAH
+            | :UGX
+            | :USD
+            | :UYU
+            | :UZS
+            | :VES
+            | :VND
+            | :VUV
+            | :WST
+            | :XAF
+            | :XCD
+            | :XOF
+            | :XPF
+            | :YER
+            | :ZAR
+            | :ZMW
+
+          class Currency < DodoPayments::Enum
+            AED: :AED
+            ALL: :ALL
+            AMD: :AMD
+            ANG: :ANG
+            AOA: :AOA
+            ARS: :ARS
+            AUD: :AUD
+            AWG: :AWG
+            AZN: :AZN
+            BAM: :BAM
+            BBD: :BBD
+            BDT: :BDT
+            BGN: :BGN
+            BHD: :BHD
+            BIF: :BIF
+            BMD: :BMD
+            BND: :BND
+            BOB: :BOB
+            BRL: :BRL
+            BSD: :BSD
+            BWP: :BWP
+            BYN: :BYN
+            BZD: :BZD
+            CAD: :CAD
+            CHF: :CHF
+            CLP: :CLP
+            CNY: :CNY
+            COP: :COP
+            CRC: :CRC
+            CUP: :CUP
+            CVE: :CVE
+            CZK: :CZK
+            DJF: :DJF
+            DKK: :DKK
+            DOP: :DOP
+            DZD: :DZD
+            EGP: :EGP
+            ETB: :ETB
+            EUR: :EUR
+            FJD: :FJD
+            FKP: :FKP
+            GBP: :GBP
+            GEL: :GEL
+            GHS: :GHS
+            GIP: :GIP
+            GMD: :GMD
+            GNF: :GNF
+            GTQ: :GTQ
+            GYD: :GYD
+            HKD: :HKD
+            HNL: :HNL
+            HRK: :HRK
+            HTG: :HTG
+            HUF: :HUF
+            IDR: :IDR
+            ILS: :ILS
+            INR: :INR
+            IQD: :IQD
+            JMD: :JMD
+            JOD: :JOD
+            JPY: :JPY
+            KES: :KES
+            KGS: :KGS
+            KHR: :KHR
+            KMF: :KMF
+            KRW: :KRW
+            KWD: :KWD
+            KYD: :KYD
+            KZT: :KZT
+            LAK: :LAK
+            LBP: :LBP
+            LKR: :LKR
+            LRD: :LRD
+            LSL: :LSL
+            LYD: :LYD
+            MAD: :MAD
+            MDL: :MDL
+            MGA: :MGA
+            MKD: :MKD
+            MMK: :MMK
+            MNT: :MNT
+            MOP: :MOP
+            MRU: :MRU
+            MUR: :MUR
+            MVR: :MVR
+            MWK: :MWK
+            MXN: :MXN
+            MYR: :MYR
+            MZN: :MZN
+            NAD: :NAD
+            NGN: :NGN
+            NIO: :NIO
+            NOK: :NOK
+            NPR: :NPR
+            NZD: :NZD
+            OMR: :OMR
+            PAB: :PAB
+            PEN: :PEN
+            PGK: :PGK
+            PHP: :PHP
+            PKR: :PKR
+            PLN: :PLN
+            PYG: :PYG
+            QAR: :QAR
+            RON: :RON
+            RSD: :RSD
+            RUB: :RUB
+            RWF: :RWF
+            SAR: :SAR
+            SBD: :SBD
+            SCR: :SCR
+            SEK: :SEK
+            SGD: :SGD
+            SHP: :SHP
+            SLE: :SLE
+            SLL: :SLL
+            SOS: :SOS
+            SRD: :SRD
+            SSP: :SSP
+            STN: :STN
+            SVC: :SVC
+            SZL: :SZL
+            THB: :THB
+            TND: :TND
+            TOP: :TOP
+            TRY: :TRY
+            TTD: :TTD
+            TWD: :TWD
+            TZS: :TZS
+            UAH: :UAH
+            UGX: :UGX
+            USD: :USD
+            UYU: :UYU
+            UZS: :UZS
+            VES: :VES
+            VND: :VND
+            VUV: :VUV
+            WST: :WST
+            XAF: :XAF
+            XCD: :XCD
+            XOF: :XOF
+            XPF: :XPF
+            YER: :YER
+            ZAR: :ZAR
+            ZMW: :ZMW
+
+            def self.values: -> ::Array[DodoPayments::Models::ProductListResponse::PriceDetail::RecurringPrice::currency]
+          end
+
+          type payment_frequency_interval = :Day | :Week | :Month | :Year
+
+          class PaymentFrequencyInterval < DodoPayments::Enum
+            DAY: :Day
+            WEEK: :Week
+            MONTH: :Month
+            YEAR: :Year
+
+            def self.values: -> ::Array[DodoPayments::Models::ProductListResponse::PriceDetail::RecurringPrice::payment_frequency_interval]
+          end
+
+          type subscription_period_interval = :Day | :Week | :Month | :Year
+
+          class SubscriptionPeriodInterval < DodoPayments::Enum
+            DAY: :Day
+            WEEK: :Week
+            MONTH: :Month
+            YEAR: :Year
+
+            def self.values: -> ::Array[DodoPayments::Models::ProductListResponse::PriceDetail::RecurringPrice::subscription_period_interval]
+          end
+        end
+
+        def self.variants: -> [DodoPayments::Models::ProductListResponse::PriceDetail::OneTimePrice, DodoPayments::Models::ProductListResponse::PriceDetail::RecurringPrice]
+      end
+    end
+  end
+end

@@ -1,0 +1,404 @@
+module DodoPayments
+  module Models
+    type payment_list_response =
+      {
+        created_at: Time,
+        currency: DodoPayments::Models::PaymentListResponse::currency,
+        customer: DodoPayments::Models::PaymentListResponse::Customer,
+        metadata: ::Hash[Symbol, String],
+        payment_id: String,
+        total_amount: Integer,
+        payment_method: String?,
+        payment_method_type: String?,
+        status: DodoPayments::Models::PaymentListResponse::status?,
+        subscription_id: String?
+      }
+
+    class PaymentListResponse < DodoPayments::BaseModel
+      attr_accessor created_at: Time
+
+      attr_accessor currency: DodoPayments::Models::PaymentListResponse::currency
+
+      attr_accessor customer: DodoPayments::Models::PaymentListResponse::Customer
+
+      attr_accessor metadata: ::Hash[Symbol, String]
+
+      attr_accessor payment_id: String
+
+      attr_accessor total_amount: Integer
+
+      attr_accessor payment_method: String?
+
+      attr_accessor payment_method_type: String?
+
+      attr_accessor status: DodoPayments::Models::PaymentListResponse::status?
+
+      attr_accessor subscription_id: String?
+
+      def initialize:
+        (
+          created_at: Time,
+          currency: DodoPayments::Models::PaymentListResponse::currency,
+          customer: DodoPayments::Models::PaymentListResponse::Customer,
+          metadata: ::Hash[Symbol, String],
+          payment_id: String,
+          total_amount: Integer,
+          payment_method: String?,
+          payment_method_type: String?,
+          status: DodoPayments::Models::PaymentListResponse::status?,
+          subscription_id: String?
+        ) -> void
+        | (
+          ?DodoPayments::Models::payment_list_response
+          | DodoPayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> DodoPayments::Models::payment_list_response
+
+      type currency =
+        :AED
+        | :ALL
+        | :AMD
+        | :ANG
+        | :AOA
+        | :ARS
+        | :AUD
+        | :AWG
+        | :AZN
+        | :BAM
+        | :BBD
+        | :BDT
+        | :BGN
+        | :BHD
+        | :BIF
+        | :BMD
+        | :BND
+        | :BOB
+        | :BRL
+        | :BSD
+        | :BWP
+        | :BYN
+        | :BZD
+        | :CAD
+        | :CHF
+        | :CLP
+        | :CNY
+        | :COP
+        | :CRC
+        | :CUP
+        | :CVE
+        | :CZK
+        | :DJF
+        | :DKK
+        | :DOP
+        | :DZD
+        | :EGP
+        | :ETB
+        | :EUR
+        | :FJD
+        | :FKP
+        | :GBP
+        | :GEL
+        | :GHS
+        | :GIP
+        | :GMD
+        | :GNF
+        | :GTQ
+        | :GYD
+        | :HKD
+        | :HNL
+        | :HRK
+        | :HTG
+        | :HUF
+        | :IDR
+        | :ILS
+        | :INR
+        | :IQD
+        | :JMD
+        | :JOD
+        | :JPY
+        | :KES
+        | :KGS
+        | :KHR
+        | :KMF
+        | :KRW
+        | :KWD
+        | :KYD
+        | :KZT
+        | :LAK
+        | :LBP
+        | :LKR
+        | :LRD
+        | :LSL
+        | :LYD
+        | :MAD
+        | :MDL
+        | :MGA
+        | :MKD
+        | :MMK
+        | :MNT
+        | :MOP
+        | :MRU
+        | :MUR
+        | :MVR
+        | :MWK
+        | :MXN
+        | :MYR
+        | :MZN
+        | :NAD
+        | :NGN
+        | :NIO
+        | :NOK
+        | :NPR
+        | :NZD
+        | :OMR
+        | :PAB
+        | :PEN
+        | :PGK
+        | :PHP
+        | :PKR
+        | :PLN
+        | :PYG
+        | :QAR
+        | :RON
+        | :RSD
+        | :RUB
+        | :RWF
+        | :SAR
+        | :SBD
+        | :SCR
+        | :SEK
+        | :SGD
+        | :SHP
+        | :SLE
+        | :SLL
+        | :SOS
+        | :SRD
+        | :SSP
+        | :STN
+        | :SVC
+        | :SZL
+        | :THB
+        | :TND
+        | :TOP
+        | :TRY
+        | :TTD
+        | :TWD
+        | :TZS
+        | :UAH
+        | :UGX
+        | :USD
+        | :UYU
+        | :UZS
+        | :VES
+        | :VND
+        | :VUV
+        | :WST
+        | :XAF
+        | :XCD
+        | :XOF
+        | :XPF
+        | :YER
+        | :ZAR
+        | :ZMW
+
+      class Currency < DodoPayments::Enum
+        AED: :AED
+        ALL: :ALL
+        AMD: :AMD
+        ANG: :ANG
+        AOA: :AOA
+        ARS: :ARS
+        AUD: :AUD
+        AWG: :AWG
+        AZN: :AZN
+        BAM: :BAM
+        BBD: :BBD
+        BDT: :BDT
+        BGN: :BGN
+        BHD: :BHD
+        BIF: :BIF
+        BMD: :BMD
+        BND: :BND
+        BOB: :BOB
+        BRL: :BRL
+        BSD: :BSD
+        BWP: :BWP
+        BYN: :BYN
+        BZD: :BZD
+        CAD: :CAD
+        CHF: :CHF
+        CLP: :CLP
+        CNY: :CNY
+        COP: :COP
+        CRC: :CRC
+        CUP: :CUP
+        CVE: :CVE
+        CZK: :CZK
+        DJF: :DJF
+        DKK: :DKK
+        DOP: :DOP
+        DZD: :DZD
+        EGP: :EGP
+        ETB: :ETB
+        EUR: :EUR
+        FJD: :FJD
+        FKP: :FKP
+        GBP: :GBP
+        GEL: :GEL
+        GHS: :GHS
+        GIP: :GIP
+        GMD: :GMD
+        GNF: :GNF
+        GTQ: :GTQ
+        GYD: :GYD
+        HKD: :HKD
+        HNL: :HNL
+        HRK: :HRK
+        HTG: :HTG
+        HUF: :HUF
+        IDR: :IDR
+        ILS: :ILS
+        INR: :INR
+        IQD: :IQD
+        JMD: :JMD
+        JOD: :JOD
+        JPY: :JPY
+        KES: :KES
+        KGS: :KGS
+        KHR: :KHR
+        KMF: :KMF
+        KRW: :KRW
+        KWD: :KWD
+        KYD: :KYD
+        KZT: :KZT
+        LAK: :LAK
+        LBP: :LBP
+        LKR: :LKR
+        LRD: :LRD
+        LSL: :LSL
+        LYD: :LYD
+        MAD: :MAD
+        MDL: :MDL
+        MGA: :MGA
+        MKD: :MKD
+        MMK: :MMK
+        MNT: :MNT
+        MOP: :MOP
+        MRU: :MRU
+        MUR: :MUR
+        MVR: :MVR
+        MWK: :MWK
+        MXN: :MXN
+        MYR: :MYR
+        MZN: :MZN
+        NAD: :NAD
+        NGN: :NGN
+        NIO: :NIO
+        NOK: :NOK
+        NPR: :NPR
+        NZD: :NZD
+        OMR: :OMR
+        PAB: :PAB
+        PEN: :PEN
+        PGK: :PGK
+        PHP: :PHP
+        PKR: :PKR
+        PLN: :PLN
+        PYG: :PYG
+        QAR: :QAR
+        RON: :RON
+        RSD: :RSD
+        RUB: :RUB
+        RWF: :RWF
+        SAR: :SAR
+        SBD: :SBD
+        SCR: :SCR
+        SEK: :SEK
+        SGD: :SGD
+        SHP: :SHP
+        SLE: :SLE
+        SLL: :SLL
+        SOS: :SOS
+        SRD: :SRD
+        SSP: :SSP
+        STN: :STN
+        SVC: :SVC
+        SZL: :SZL
+        THB: :THB
+        TND: :TND
+        TOP: :TOP
+        TRY: :TRY
+        TTD: :TTD
+        TWD: :TWD
+        TZS: :TZS
+        UAH: :UAH
+        UGX: :UGX
+        USD: :USD
+        UYU: :UYU
+        UZS: :UZS
+        VES: :VES
+        VND: :VND
+        VUV: :VUV
+        WST: :WST
+        XAF: :XAF
+        XCD: :XCD
+        XOF: :XOF
+        XPF: :XPF
+        YER: :YER
+        ZAR: :ZAR
+        ZMW: :ZMW
+
+        def self.values: -> ::Array[DodoPayments::Models::PaymentListResponse::currency]
+      end
+
+      type customer = { customer_id: String, email: String, name: String }
+
+      class Customer < DodoPayments::BaseModel
+        attr_accessor customer_id: String
+
+        attr_accessor email: String
+
+        attr_accessor name: String
+
+        def initialize:
+          (customer_id: String, email: String, name: String) -> void
+          | (
+            ?DodoPayments::Models::PaymentListResponse::customer
+            | DodoPayments::BaseModel data
+          ) -> void
+
+        def to_hash: -> DodoPayments::Models::PaymentListResponse::customer
+      end
+
+      type status =
+        :succeeded
+        | :failed
+        | :cancelled
+        | :processing
+        | :requires_customer_action
+        | :requires_merchant_action
+        | :requires_payment_method
+        | :requires_confirmation
+        | :requires_capture
+        | :partially_captured
+        | :partially_captured_and_capturable
+
+      class Status < DodoPayments::Enum
+        SUCCEEDED: :succeeded
+        FAILED: :failed
+        CANCELLED: :cancelled
+        PROCESSING: :processing
+        REQUIRES_CUSTOMER_ACTION: :requires_customer_action
+        REQUIRES_MERCHANT_ACTION: :requires_merchant_action
+        REQUIRES_PAYMENT_METHOD: :requires_payment_method
+        REQUIRES_CONFIRMATION: :requires_confirmation
+        REQUIRES_CAPTURE: :requires_capture
+        PARTIALLY_CAPTURED: :partially_captured
+        PARTIALLY_CAPTURED_AND_CAPTURABLE: :partially_captured_and_capturable
+
+        def self.values: -> ::Array[DodoPayments::Models::PaymentListResponse::status]
+      end
+    end
+  end
+end

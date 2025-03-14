@@ -1,0 +1,22 @@
+module DodoPayments
+  module Models
+    type license_key_instance_update_params =
+      { name: String } & DodoPayments::request_parameters
+
+    class LicenseKeyInstanceUpdateParams < DodoPayments::BaseModel
+      extend DodoPayments::RequestParameters::Converter
+      include DodoPayments::RequestParameters
+
+      attr_accessor name: String
+
+      def initialize:
+        (name: String, request_options: DodoPayments::request_opts) -> void
+        | (
+          ?DodoPayments::Models::license_key_instance_update_params
+          | DodoPayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> DodoPayments::Models::license_key_instance_update_params
+    end
+  end
+end

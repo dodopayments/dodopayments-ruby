@@ -1,0 +1,4 @@
+module DodoPayments
+  module Extern
+  end
+end

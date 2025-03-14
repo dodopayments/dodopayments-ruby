@@ -1,0 +1,60 @@
+module DodoPayments
+  module Models
+    type discount_update_params =
+      {
+        amount: Integer?,
+        code: String?,
+        expires_at: Time?,
+        name: String?,
+        restricted_to: ::Array[String]?,
+        type: DodoPayments::Models::DiscountUpdateParams::type_?,
+        usage_limit: Integer?
+      }
+      & DodoPayments::request_parameters
+
+    class DiscountUpdateParams < DodoPayments::BaseModel
+      extend DodoPayments::RequestParameters::Converter
+      include DodoPayments::RequestParameters
+
+      attr_accessor amount: Integer?
+
+      attr_accessor code: String?
+
+      attr_accessor expires_at: Time?
+
+      attr_accessor name: String?
+
+      attr_accessor restricted_to: ::Array[String]?
+
+      attr_accessor type: DodoPayments::Models::DiscountUpdateParams::type_?
+
+      attr_accessor usage_limit: Integer?
+
+      def initialize:
+        (
+          amount: Integer?,
+          code: String?,
+          expires_at: Time?,
+          name: String?,
+          restricted_to: ::Array[String]?,
+          type: DodoPayments::Models::DiscountUpdateParams::type_?,
+          usage_limit: Integer?,
+          request_options: DodoPayments::request_opts
+        ) -> void
+        | (
+          ?DodoPayments::Models::discount_update_params
+          | DodoPayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> DodoPayments::Models::discount_update_params
+
+      type type_ = :percentage
+
+      class Type < DodoPayments::Enum
+        PERCENTAGE: :percentage
+
+        def self.values: -> ::Array[DodoPayments::Models::DiscountUpdateParams::type_]
+      end
+    end
+  end
+end

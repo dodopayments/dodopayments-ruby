@@ -1,0 +1,66 @@
+module DodoPayments
+  module Models
+    type subscription_create_response =
+      {
+        customer: DodoPayments::Models::SubscriptionCreateResponse::Customer,
+        metadata: ::Hash[Symbol, String],
+        recurring_pre_tax_amount: Integer,
+        subscription_id: String,
+        client_secret: String?,
+        discount_id: String?,
+        payment_link: String?
+      }
+
+    class SubscriptionCreateResponse < DodoPayments::BaseModel
+      attr_accessor customer: DodoPayments::Models::SubscriptionCreateResponse::Customer
+
+      attr_accessor metadata: ::Hash[Symbol, String]
+
+      attr_accessor recurring_pre_tax_amount: Integer
+
+      attr_accessor subscription_id: String
+
+      attr_accessor client_secret: String?
+
+      attr_accessor discount_id: String?
+
+      attr_accessor payment_link: String?
+
+      def initialize:
+        (
+          customer: DodoPayments::Models::SubscriptionCreateResponse::Customer,
+          metadata: ::Hash[Symbol, String],
+          recurring_pre_tax_amount: Integer,
+          subscription_id: String,
+          client_secret: String?,
+          discount_id: String?,
+          payment_link: String?
+        ) -> void
+        | (
+          ?DodoPayments::Models::subscription_create_response
+          | DodoPayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> DodoPayments::Models::subscription_create_response
+
+      type customer = { customer_id: String, email: String, name: String }
+
+      class Customer < DodoPayments::BaseModel
+        attr_accessor customer_id: String
+
+        attr_accessor email: String
+
+        attr_accessor name: String
+
+        def initialize:
+          (customer_id: String, email: String, name: String) -> void
+          | (
+            ?DodoPayments::Models::SubscriptionCreateResponse::customer
+            | DodoPayments::BaseModel data
+          ) -> void
+
+        def to_hash: -> DodoPayments::Models::SubscriptionCreateResponse::customer
+      end
+    end
+  end
+end

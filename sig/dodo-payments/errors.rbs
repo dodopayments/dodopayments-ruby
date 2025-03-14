@@ -1,0 +1,99 @@
+module DodoPayments
+  class Error < StandardError
+    attr_accessor cause: StandardError?
+  end
+
+  class ConversionError < DodoPayments::Error
+  end
+
+  class APIError < DodoPayments::Error
+    attr_accessor url: URI::Generic
+
+    attr_accessor status: Integer?
+
+    attr_accessor body: top?
+
+    def initialize: (
+      url: URI::Generic,
+      status: Integer?,
+      body: Object?,
+      request: nil,
+      response: nil,
+      message: String?
+    ) -> void
+  end
+
+  class APIConnectionError < DodoPayments::APIError
+    def initialize: (
+      url: URI::Generic,
+      status: nil,
+      body: nil,
+      request: nil,
+      response: nil,
+      message: String?
+    ) -> void
+  end
+
+  class APITimeoutError < DodoPayments::APIConnectionError
+    def initialize: (
+      url: URI::Generic,
+      status: nil,
+      body: nil,
+      request: nil,
+      response: nil,
+      message: String?
+    ) -> void
+  end
+
+  class APIStatusError < DodoPayments::APIError
+    def self.for: (
+      url: URI::Generic,
+      status: Integer,
+      body: Object?,
+      request: nil,
+      response: nil,
+      message: String?
+    ) -> instance
+
+    def initialize: (
+      url: URI::Generic,
+      status: Integer,
+      body: Object?,
+      request: nil,
+      response: nil,
+      message: String?
+    ) -> void
+  end
+
+  class BadRequestError < DodoPayments::APIStatusError
+    HTTP_STATUS: 400
+  end
+
+  class AuthenticationError < DodoPayments::APIStatusError
+    HTTP_STATUS: 401
+  end
+
+  class PermissionDeniedError < DodoPayments::APIStatusError
+    HTTP_STATUS: 403
+  end
+
+  class NotFoundError < DodoPayments::APIStatusError
+    HTTP_STATUS: 404
+  end
+
+  class ConflictError < DodoPayments::APIStatusError
+    HTTP_STATUS: 409
+  end
+
+  class UnprocessableEntityError < DodoPayments::APIStatusError
+    HTTP_STATUS: 422
+  end
+
+  class RateLimitError < DodoPayments::APIStatusError
+    HTTP_STATUS: 429
+  end
+
+  class InternalServerError < DodoPayments::APIStatusError
+    HTTP_STATUS: Range[Integer]
+  end
+end

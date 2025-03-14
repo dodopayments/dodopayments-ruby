@@ -1,0 +1,81 @@
+module DodoPayments
+  module Models
+    type payment_list_params =
+      {
+        created_at_gte: Time?,
+        created_at_lte: Time?,
+        customer_id: String?,
+        page_number: Integer?,
+        page_size: Integer?,
+        status: DodoPayments::Models::PaymentListParams::status?,
+        subscription_id: String?
+      }
+      & DodoPayments::request_parameters
+
+    class PaymentListParams < DodoPayments::BaseModel
+      extend DodoPayments::RequestParameters::Converter
+      include DodoPayments::RequestParameters
+
+      attr_accessor created_at_gte: Time?
+
+      attr_accessor created_at_lte: Time?
+
+      attr_accessor customer_id: String?
+
+      attr_accessor page_number: Integer?
+
+      attr_accessor page_size: Integer?
+
+      attr_accessor status: DodoPayments::Models::PaymentListParams::status?
+
+      attr_accessor subscription_id: String?
+
+      def initialize:
+        (
+          created_at_gte: Time?,
+          created_at_lte: Time?,
+          customer_id: String?,
+          page_number: Integer?,
+          page_size: Integer?,
+          status: DodoPayments::Models::PaymentListParams::status?,
+          subscription_id: String?,
+          request_options: DodoPayments::request_opts
+        ) -> void
+        | (
+          ?DodoPayments::Models::payment_list_params
+          | DodoPayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> DodoPayments::Models::payment_list_params
+
+      type status =
+        :succeeded
+        | :failed
+        | :cancelled
+        | :processing
+        | :requires_customer_action
+        | :requires_merchant_action
+        | :requires_payment_method
+        | :requires_confirmation
+        | :requires_capture
+        | :partially_captured
+        | :partially_captured_and_capturable
+
+      class Status < DodoPayments::Enum
+        SUCCEEDED: :succeeded
+        FAILED: :failed
+        CANCELLED: :cancelled
+        PROCESSING: :processing
+        REQUIRES_CUSTOMER_ACTION: :requires_customer_action
+        REQUIRES_MERCHANT_ACTION: :requires_merchant_action
+        REQUIRES_PAYMENT_METHOD: :requires_payment_method
+        REQUIRES_CONFIRMATION: :requires_confirmation
+        REQUIRES_CAPTURE: :requires_capture
+        PARTIALLY_CAPTURED: :partially_captured
+        PARTIALLY_CAPTURED_AND_CAPTURABLE: :partially_captured_and_capturable
+
+        def self.values: -> ::Array[DodoPayments::Models::PaymentListParams::status]
+      end
+    end
+  end
+end

@@ -1,0 +1,42 @@
+module DodoPayments
+  module Models
+    type customer =
+      {
+        business_id: String,
+        created_at: Time,
+        customer_id: String,
+        email: String,
+        name: String,
+        phone_number: String?
+      }
+
+    class Customer < DodoPayments::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor customer_id: String
+
+      attr_accessor email: String
+
+      attr_accessor name: String
+
+      attr_accessor phone_number: String?
+
+      def initialize:
+        (
+          business_id: String,
+          created_at: Time,
+          customer_id: String,
+          email: String,
+          name: String,
+          phone_number: String?
+        ) -> void
+        | (
+          ?DodoPayments::Models::customer | DodoPayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> DodoPayments::Models::customer
+    end
+  end
+end

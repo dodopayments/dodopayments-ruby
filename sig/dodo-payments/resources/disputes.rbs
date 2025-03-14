@@ -1,0 +1,32 @@
+module DodoPayments
+  module Resources
+    class Disputes
+      def retrieve:
+        (
+          String dispute_id,
+          ?DodoPayments::Models::DisputeRetrieveParams
+          | ::Hash[Symbol, top] params
+        ) -> DodoPayments::Models::Dispute
+        | (
+          String dispute_id,
+          request_options: DodoPayments::request_opts
+        ) -> DodoPayments::Models::Dispute
+
+      def list:
+        (
+          ?DodoPayments::Models::DisputeListParams | ::Hash[Symbol, top] params
+        ) -> DodoPayments::DefaultPageNumberPagination[DodoPayments::Models::Dispute]
+        | (
+          created_at_gte: Time?,
+          created_at_lte: Time?,
+          dispute_stage: DodoPayments::Models::DisputeListParams::dispute_stage?,
+          dispute_status: DodoPayments::Models::DisputeListParams::dispute_status?,
+          page_number: Integer?,
+          page_size: Integer?,
+          request_options: DodoPayments::request_opts
+        ) -> DodoPayments::DefaultPageNumberPagination[DodoPayments::Models::Dispute]
+
+      def initialize: (client: DodoPayments::Client) -> void
+    end
+  end
+end

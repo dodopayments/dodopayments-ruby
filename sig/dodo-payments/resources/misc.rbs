@@ -1,0 +1,9 @@
+module DodoPayments
+  module Resources
+    class Misc
+      attr_reader supported_countries: DodoPayments::Resources::Misc::SupportedCountries
+
+      def initialize: (client: DodoPayments::Client) -> void
+    end
+  end
+end
