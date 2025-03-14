@@ -24,6 +24,15 @@ module DodoPayments
       def created_at_lte=(_)
       end
 
+      # Filter by customer_id
+      sig { returns(T.nilable(String)) }
+      def customer_id
+      end
+
+      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
+      def customer_id=(_)
+      end
+
       # Filter by dispute stage
       sig { returns(T.nilable(Symbol)) }
       def dispute_stage
@@ -64,6 +73,7 @@ module DodoPayments
         params(
           created_at_gte: T.nilable(Time),
           created_at_lte: T.nilable(Time),
+          customer_id: T.nilable(String),
           dispute_stage: T.nilable(Symbol),
           dispute_status: T.nilable(Symbol),
           page_number: T.nilable(Integer),
@@ -75,6 +85,7 @@ module DodoPayments
       def self.new(
         created_at_gte: nil,
         created_at_lte: nil,
+        customer_id: nil,
         dispute_stage: nil,
         dispute_status: nil,
         page_number: nil,
@@ -89,6 +100,7 @@ module DodoPayments
             {
               created_at_gte: T.nilable(Time),
               created_at_lte: T.nilable(Time),
+              customer_id: T.nilable(String),
               dispute_stage: T.nilable(Symbol),
               dispute_status: T.nilable(Symbol),
               page_number: T.nilable(Integer),

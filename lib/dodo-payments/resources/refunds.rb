@@ -48,6 +48,8 @@ module DodoPayments
       #
       #   @option params [Time, nil] :created_at_lte Get events created before this time
       #
+      #   @option params [String, nil] :customer_id Filter by customer_id
+      #
       #   @option params [Integer, nil] :page_number Page number default is 0
       #
       #   @option params [Integer, nil] :page_size Page size default is 10 max is 100

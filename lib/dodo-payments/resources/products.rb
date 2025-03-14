@@ -13,6 +13,8 @@ module DodoPayments
       #   @option params [Symbol, DodoPayments::Models::ProductCreateParams::TaxCategory] :tax_category Represents the different categories of taxation applicable to various products
       #     and services.
       #
+      #   @option params [Array<String>, nil] :addons Addons available for subscription product
+      #
       #   @option params [String, nil] :description Optional description of the product
       #
       #   @option params [String, nil] :license_key_activation_message Optional message displayed during license key activation
@@ -58,6 +60,8 @@ module DodoPayments
       # @param id [String]
       #
       # @param params [DodoPayments::Models::ProductUpdateParams, Hash{Symbol=>Object}] .
+      #
+      #   @option params [Array<String>, nil] :addons Available Addons for subscription products
       #
       #   @option params [String, nil] :description Description of the product, optional and must be at most 1000 characters.
       #

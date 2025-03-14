@@ -19,6 +19,12 @@ module DodoPayments
       #   @return [Symbol, DodoPayments::Models::ProductCreateParams::TaxCategory]
       required :tax_category, enum: -> { DodoPayments::Models::ProductCreateParams::TaxCategory }
 
+      # @!attribute addons
+      #   Addons available for subscription product
+      #
+      #   @return [Array<String>, nil]
+      optional :addons, DodoPayments::ArrayOf[String], nil?: true
+
       # @!attribute description
       #   Optional description of the product
       #
@@ -59,6 +65,7 @@ module DodoPayments
       # @!parse
       #   # @param price [DodoPayments::Models::ProductCreateParams::Price::OneTimePrice, DodoPayments::Models::ProductCreateParams::Price::RecurringPrice]
       #   # @param tax_category [Symbol, DodoPayments::Models::ProductCreateParams::TaxCategory]
+      #   # @param addons [Array<String>, nil]
       #   # @param description [String, nil]
       #   # @param license_key_activation_message [String, nil]
       #   # @param license_key_activations_limit [Integer, nil]
@@ -70,6 +77,7 @@ module DodoPayments
       #   def initialize(
       #     price:,
       #     tax_category:,
+      #     addons: nil,
       #     description: nil,
       #     license_key_activation_message: nil,
       #     license_key_activations_limit: nil,

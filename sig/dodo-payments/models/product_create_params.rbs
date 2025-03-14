@@ -4,6 +4,7 @@ module DodoPayments
       {
         price: DodoPayments::Models::ProductCreateParams::price,
         tax_category: DodoPayments::Models::ProductCreateParams::tax_category,
+        addons: ::Array[String]?,
         description: String?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
@@ -21,6 +22,8 @@ module DodoPayments
 
       attr_accessor tax_category: DodoPayments::Models::ProductCreateParams::tax_category
 
+      attr_accessor addons: ::Array[String]?
+
       attr_accessor description: String?
 
       attr_accessor license_key_activation_message: String?
@@ -37,6 +40,7 @@ module DodoPayments
         (
           price: DodoPayments::Models::ProductCreateParams::price,
           tax_category: DodoPayments::Models::ProductCreateParams::tax_category,
+          addons: ::Array[String]?,
           description: String?,
           license_key_activation_message: String?,
           license_key_activations_limit: Integer?,

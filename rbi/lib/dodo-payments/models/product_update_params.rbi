@@ -6,6 +6,15 @@ module DodoPayments
       extend DodoPayments::RequestParameters::Converter
       include DodoPayments::RequestParameters
 
+      # Available Addons for subscription products
+      sig { returns(T.nilable(T::Array[String])) }
+      def addons
+      end
+
+      sig { params(_: T.nilable(T::Array[String])).returns(T.nilable(T::Array[String])) }
+      def addons=(_)
+      end
+
       # Description of the product, optional and must be at most 1000 characters.
       sig { returns(T.nilable(String)) }
       def description
@@ -126,6 +135,7 @@ module DodoPayments
 
       sig do
         params(
+          addons: T.nilable(T::Array[String]),
           description: T.nilable(String),
           image_id: T.nilable(String),
           license_key_activation_message: T.nilable(String),
@@ -145,6 +155,7 @@ module DodoPayments
           .returns(T.attached_class)
       end
       def self.new(
+        addons: nil,
         description: nil,
         image_id: nil,
         license_key_activation_message: nil,
@@ -162,6 +173,7 @@ module DodoPayments
         override
           .returns(
             {
+              addons: T.nilable(T::Array[String]),
               description: T.nilable(String),
               image_id: T.nilable(String),
               license_key_activation_message: T.nilable(String),

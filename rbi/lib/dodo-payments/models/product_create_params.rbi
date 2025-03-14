@@ -44,6 +44,15 @@ module DodoPayments
       def tax_category=(_)
       end
 
+      # Addons available for subscription product
+      sig { returns(T.nilable(T::Array[String])) }
+      def addons
+      end
+
+      sig { params(_: T.nilable(T::Array[String])).returns(T.nilable(T::Array[String])) }
+      def addons=(_)
+      end
+
       # Optional description of the product
       sig { returns(T.nilable(String)) }
       def description
@@ -107,6 +116,7 @@ module DodoPayments
             DodoPayments::Models::ProductCreateParams::Price::RecurringPrice
           ),
           tax_category: Symbol,
+          addons: T.nilable(T::Array[String]),
           description: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
@@ -120,6 +130,7 @@ module DodoPayments
       def self.new(
         price:,
         tax_category:,
+        addons: nil,
         description: nil,
         license_key_activation_message: nil,
         license_key_activations_limit: nil,
@@ -139,6 +150,7 @@ module DodoPayments
                 DodoPayments::Models::ProductCreateParams::Price::RecurringPrice
               ),
               tax_category: Symbol,
+              addons: T.nilable(T::Array[String]),
               description: T.nilable(String),
               license_key_activation_message: T.nilable(String),
               license_key_activations_limit: T.nilable(Integer),

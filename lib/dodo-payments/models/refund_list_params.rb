@@ -19,6 +19,12 @@ module DodoPayments
       #   @return [Time, nil]
       optional :created_at_lte, Time, nil?: true
 
+      # @!attribute customer_id
+      #   Filter by customer_id
+      #
+      #   @return [String, nil]
+      optional :customer_id, String, nil?: true
+
       # @!attribute page_number
       #   Page number default is 0
       #
@@ -40,6 +46,7 @@ module DodoPayments
       # @!parse
       #   # @param created_at_gte [Time, nil]
       #   # @param created_at_lte [Time, nil]
+      #   # @param customer_id [String, nil]
       #   # @param page_number [Integer, nil]
       #   # @param page_size [Integer, nil]
       #   # @param status [Symbol, DodoPayments::Models::RefundListParams::Status, nil]
@@ -48,6 +55,7 @@ module DodoPayments
       #   def initialize(
       #     created_at_gte: nil,
       #     created_at_lte: nil,
+      #     customer_id: nil,
       #     page_number: nil,
       #     page_size: nil,
       #     status: nil,

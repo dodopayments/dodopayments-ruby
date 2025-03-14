@@ -10,6 +10,7 @@ module DodoPayments
         | (
           price: DodoPayments::Models::ProductCreateParams::price,
           tax_category: DodoPayments::Models::ProductCreateParams::tax_category,
+          addons: ::Array[String]?,
           description: String?,
           license_key_activation_message: String?,
           license_key_activations_limit: Integer?,
@@ -38,6 +39,7 @@ module DodoPayments
         ) -> nil
         | (
           String id,
+          addons: ::Array[String]?,
           description: String?,
           image_id: String?,
           license_key_activation_message: String?,

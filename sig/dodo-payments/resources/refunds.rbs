@@ -30,6 +30,7 @@ module DodoPayments
         | (
           created_at_gte: Time?,
           created_at_lte: Time?,
+          customer_id: String?,
           page_number: Integer?,
           page_size: Integer?,
           status: DodoPayments::Models::RefundListParams::status?,

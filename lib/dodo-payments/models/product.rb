@@ -51,6 +51,12 @@ module DodoPayments
       #   @return [Time]
       required :updated_at, Time
 
+      # @!attribute addons
+      #   Available Addons for subscription products
+      #
+      #   @return [Array<String>, nil]
+      optional :addons, DodoPayments::ArrayOf[String], nil?: true
+
       # @!attribute description
       #   Description of the product, optional.
       #
@@ -95,6 +101,7 @@ module DodoPayments
       #   # @param product_id [String]
       #   # @param tax_category [Symbol, DodoPayments::Models::Product::TaxCategory]
       #   # @param updated_at [Time]
+      #   # @param addons [Array<String>, nil]
       #   # @param description [String, nil]
       #   # @param image [String, nil]
       #   # @param license_key_activation_message [String, nil]
@@ -111,6 +118,7 @@ module DodoPayments
       #     product_id:,
       #     tax_category:,
       #     updated_at:,
+      #     addons: nil,
       #     description: nil,
       #     image: nil,
       #     license_key_activation_message: nil,

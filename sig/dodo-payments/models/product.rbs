@@ -10,6 +10,7 @@ module DodoPayments
         product_id: String,
         tax_category: DodoPayments::Models::Product::tax_category,
         updated_at: Time,
+        addons: ::Array[String]?,
         description: String?,
         image: String?,
         license_key_activation_message: String?,
@@ -35,6 +36,8 @@ module DodoPayments
 
       attr_accessor updated_at: Time
 
+      attr_accessor addons: ::Array[String]?
+
       attr_accessor description: String?
 
       attr_accessor image: String?
@@ -57,6 +60,7 @@ module DodoPayments
           product_id: String,
           tax_category: DodoPayments::Models::Product::tax_category,
           updated_at: Time,
+          addons: ::Array[String]?,
           description: String?,
           image: String?,
           license_key_activation_message: String?,

@@ -7,6 +7,12 @@ module DodoPayments
       #   extend DodoPayments::RequestParameters::Converter
       include DodoPayments::RequestParameters
 
+      # @!attribute addons
+      #   Available Addons for subscription products
+      #
+      #   @return [Array<String>, nil]
+      optional :addons, DodoPayments::ArrayOf[String], nil?: true
+
       # @!attribute description
       #   Description of the product, optional and must be at most 1000 characters.
       #
@@ -72,6 +78,7 @@ module DodoPayments
       optional :tax_category, enum: -> { DodoPayments::Models::ProductUpdateParams::TaxCategory }, nil?: true
 
       # @!parse
+      #   # @param addons [Array<String>, nil]
       #   # @param description [String, nil]
       #   # @param image_id [String, nil]
       #   # @param license_key_activation_message [String, nil]
@@ -84,6 +91,7 @@ module DodoPayments
       #   # @param request_options [DodoPayments::RequestOptions, Hash{Symbol=>Object}]
       #   #
       #   def initialize(
+      #     addons: nil,
       #     description: nil,
       #     image_id: nil,
       #     license_key_activation_message: nil,

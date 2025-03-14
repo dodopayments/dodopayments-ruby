@@ -24,6 +24,15 @@ module DodoPayments
       def created_at_lte=(_)
       end
 
+      # Filter by customer_id
+      sig { returns(T.nilable(String)) }
+      def customer_id
+      end
+
+      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
+      def customer_id=(_)
+      end
+
       # Page number default is 0
       sig { returns(T.nilable(Integer)) }
       def page_number
@@ -55,6 +64,7 @@ module DodoPayments
         params(
           created_at_gte: T.nilable(Time),
           created_at_lte: T.nilable(Time),
+          customer_id: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           status: T.nilable(Symbol),
@@ -65,6 +75,7 @@ module DodoPayments
       def self.new(
         created_at_gte: nil,
         created_at_lte: nil,
+        customer_id: nil,
         page_number: nil,
         page_size: nil,
         status: nil,
@@ -78,6 +89,7 @@ module DodoPayments
             {
               created_at_gte: T.nilable(Time),
               created_at_lte: T.nilable(Time),
+              customer_id: T.nilable(String),
               page_number: T.nilable(Integer),
               page_size: T.nilable(Integer),
               status: T.nilable(Symbol),

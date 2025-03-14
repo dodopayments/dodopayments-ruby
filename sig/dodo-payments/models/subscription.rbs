@@ -18,6 +18,7 @@ module DodoPayments
         subscription_period_interval: DodoPayments::Models::Subscription::subscription_period_interval,
         tax_inclusive: bool,
         trial_period_days: Integer,
+        cancelled_at: Time?,
         discount_id: String?
       }
 
@@ -54,6 +55,8 @@ module DodoPayments
 
       attr_accessor trial_period_days: Integer
 
+      attr_accessor cancelled_at: Time?
+
       attr_accessor discount_id: String?
 
       def initialize:
@@ -74,6 +77,7 @@ module DodoPayments
           subscription_period_interval: DodoPayments::Models::Subscription::subscription_period_interval,
           tax_inclusive: bool,
           trial_period_days: Integer,
+          cancelled_at: Time?,
           discount_id: String?
         ) -> void
         | (

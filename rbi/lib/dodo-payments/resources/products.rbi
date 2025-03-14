@@ -14,6 +14,7 @@ module DodoPayments
             DodoPayments::Models::ProductCreateParams::Price::RecurringPrice
           ),
           tax_category: Symbol,
+          addons: T.nilable(T::Array[String]),
           description: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
@@ -29,6 +30,8 @@ module DodoPayments
         # Represents the different categories of taxation applicable to various products
         #   and services.
         tax_category:,
+        # Addons available for subscription product
+        addons: nil,
         # Optional description of the product
         description: nil,
         # Optional message displayed during license key activation
@@ -61,6 +64,7 @@ module DodoPayments
       sig do
         params(
           id: String,
+          addons: T.nilable(T::Array[String]),
           description: T.nilable(String),
           image_id: T.nilable(String),
           license_key_activation_message: T.nilable(String),
@@ -81,6 +85,8 @@ module DodoPayments
       end
       def update(
         id,
+        # Available Addons for subscription products
+        addons: nil,
         # Description of the product, optional and must be at most 1000 characters.
         description: nil,
         # Product image id after its uploaded to S3

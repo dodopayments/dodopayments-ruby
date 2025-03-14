@@ -21,6 +21,7 @@ module DodoPayments
         params(
           created_at_gte: T.nilable(Time),
           created_at_lte: T.nilable(Time),
+          customer_id: T.nilable(String),
           dispute_stage: T.nilable(Symbol),
           dispute_status: T.nilable(Symbol),
           page_number: T.nilable(Integer),
@@ -34,6 +35,8 @@ module DodoPayments
         created_at_gte: nil,
         # Get events created before this time
         created_at_lte: nil,
+        # Filter by customer_id
+        customer_id: nil,
         # Filter by dispute stage
         dispute_stage: nil,
         # Filter by dispute status

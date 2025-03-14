@@ -4,6 +4,7 @@ module DodoPayments
       {
         created_at_gte: Time?,
         created_at_lte: Time?,
+        customer_id: String?,
         dispute_stage: DodoPayments::Models::DisputeListParams::dispute_stage?,
         dispute_status: DodoPayments::Models::DisputeListParams::dispute_status?,
         page_number: Integer?,
@@ -19,6 +20,8 @@ module DodoPayments
 
       attr_accessor created_at_lte: Time?
 
+      attr_accessor customer_id: String?
+
       attr_accessor dispute_stage: DodoPayments::Models::DisputeListParams::dispute_stage?
 
       attr_accessor dispute_status: DodoPayments::Models::DisputeListParams::dispute_status?
@@ -31,6 +34,7 @@ module DodoPayments
         (
           created_at_gte: Time?,
           created_at_lte: Time?,
+          customer_id: String?,
           dispute_stage: DodoPayments::Models::DisputeListParams::dispute_stage?,
           dispute_status: DodoPayments::Models::DisputeListParams::dispute_status?,
           page_number: Integer?,

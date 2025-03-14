@@ -25,6 +25,8 @@ module DodoPayments
       #
       #   @option params [Time, nil] :created_at_lte Get events created before this time
       #
+      #   @option params [String, nil] :customer_id Filter by customer_id
+      #
       #   @option params [Symbol, DodoPayments::Models::DisputeListParams::DisputeStage, nil] :dispute_stage Filter by dispute stage
       #
       #   @option params [Symbol, DodoPayments::Models::DisputeListParams::DisputeStatus, nil] :dispute_status Filter by dispute status

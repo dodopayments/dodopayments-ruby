@@ -95,6 +95,15 @@ module DodoPayments
       def updated_at=(_)
       end
 
+      # Available Addons for subscription products
+      sig { returns(T.nilable(T::Array[String])) }
+      def addons
+      end
+
+      sig { params(_: T.nilable(T::Array[String])).returns(T.nilable(T::Array[String])) }
+      def addons=(_)
+      end
+
       # Description of the product, optional.
       sig { returns(T.nilable(String)) }
       def description
@@ -164,6 +173,7 @@ module DodoPayments
           product_id: String,
           tax_category: Symbol,
           updated_at: Time,
+          addons: T.nilable(T::Array[String]),
           description: T.nilable(String),
           image: T.nilable(String),
           license_key_activation_message: T.nilable(String),
@@ -182,6 +192,7 @@ module DodoPayments
         product_id:,
         tax_category:,
         updated_at:,
+        addons: nil,
         description: nil,
         image: nil,
         license_key_activation_message: nil,
@@ -206,6 +217,7 @@ module DodoPayments
               product_id: String,
               tax_category: Symbol,
               updated_at: Time,
+              addons: T.nilable(T::Array[String]),
               description: T.nilable(String),
               image: T.nilable(String),
               license_key_activation_message: T.nilable(String),

@@ -42,6 +42,7 @@ module DodoPayments
         params(
           created_at_gte: T.nilable(Time),
           created_at_lte: T.nilable(Time),
+          customer_id: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           status: T.nilable(Symbol),
@@ -54,6 +55,8 @@ module DodoPayments
         created_at_gte: nil,
         # Get events created before this time
         created_at_lte: nil,
+        # Filter by customer_id
+        customer_id: nil,
         # Page number default is 0
         page_number: nil,
         # Page size default is 10 max is 100

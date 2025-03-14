@@ -96,6 +96,12 @@ module DodoPayments
       #   @return [Integer]
       required :trial_period_days, Integer
 
+      # @!attribute cancelled_at
+      #   Cancelled timestamp if the subscription is cancelled
+      #
+      #   @return [Time, nil]
+      optional :cancelled_at, Time, nil?: true
+
       # @!attribute discount_id
       #   The discount id if discount is applied
       #
@@ -121,6 +127,7 @@ module DodoPayments
       #   # @param subscription_period_interval [Symbol, DodoPayments::Models::Subscription::SubscriptionPeriodInterval]
       #   # @param tax_inclusive [Boolean]
       #   # @param trial_period_days [Integer]
+      #   # @param cancelled_at [Time, nil]
       #   # @param discount_id [String, nil]
       #   #
       #   def initialize(
@@ -140,6 +147,7 @@ module DodoPayments
       #     subscription_period_interval:,
       #     tax_inclusive:,
       #     trial_period_days:,
+      #     cancelled_at: nil,
       #     discount_id: nil,
       #     **
       #   )

@@ -145,6 +145,15 @@ module DodoPayments
       def trial_period_days=(_)
       end
 
+      # Cancelled timestamp if the subscription is cancelled
+      sig { returns(T.nilable(Time)) }
+      def cancelled_at
+      end
+
+      sig { params(_: T.nilable(Time)).returns(T.nilable(Time)) }
+      def cancelled_at=(_)
+      end
+
       # The discount id if discount is applied
       sig { returns(T.nilable(String)) }
       def discount_id
@@ -173,6 +182,7 @@ module DodoPayments
           subscription_period_interval: Symbol,
           tax_inclusive: T::Boolean,
           trial_period_days: Integer,
+          cancelled_at: T.nilable(Time),
           discount_id: T.nilable(String)
         )
           .returns(T.attached_class)
@@ -194,6 +204,7 @@ module DodoPayments
         subscription_period_interval:,
         tax_inclusive:,
         trial_period_days:,
+        cancelled_at: nil,
         discount_id: nil
       )
       end
@@ -218,6 +229,7 @@ module DodoPayments
               subscription_period_interval: Symbol,
               tax_inclusive: T::Boolean,
               trial_period_days: Integer,
+              cancelled_at: T.nilable(Time),
               discount_id: T.nilable(String)
             }
           )

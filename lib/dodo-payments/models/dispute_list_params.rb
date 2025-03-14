@@ -19,6 +19,12 @@ module DodoPayments
       #   @return [Time, nil]
       optional :created_at_lte, Time, nil?: true
 
+      # @!attribute customer_id
+      #   Filter by customer_id
+      #
+      #   @return [String, nil]
+      optional :customer_id, String, nil?: true
+
       # @!attribute dispute_stage
       #   Filter by dispute stage
       #
@@ -46,6 +52,7 @@ module DodoPayments
       # @!parse
       #   # @param created_at_gte [Time, nil]
       #   # @param created_at_lte [Time, nil]
+      #   # @param customer_id [String, nil]
       #   # @param dispute_stage [Symbol, DodoPayments::Models::DisputeListParams::DisputeStage, nil]
       #   # @param dispute_status [Symbol, DodoPayments::Models::DisputeListParams::DisputeStatus, nil]
       #   # @param page_number [Integer, nil]
@@ -55,6 +62,7 @@ module DodoPayments
       #   def initialize(
       #     created_at_gte: nil,
       #     created_at_lte: nil,
+      #     customer_id: nil,
       #     dispute_stage: nil,
       #     dispute_status: nil,
       #     page_number: nil,

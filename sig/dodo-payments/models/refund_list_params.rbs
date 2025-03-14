@@ -4,6 +4,7 @@ module DodoPayments
       {
         created_at_gte: Time?,
         created_at_lte: Time?,
+        customer_id: String?,
         page_number: Integer?,
         page_size: Integer?,
         status: DodoPayments::Models::RefundListParams::status?
@@ -18,6 +19,8 @@ module DodoPayments
 
       attr_accessor created_at_lte: Time?
 
+      attr_accessor customer_id: String?
+
       attr_accessor page_number: Integer?
 
       attr_accessor page_size: Integer?
@@ -28,6 +31,7 @@ module DodoPayments
         (
           created_at_gte: Time?,
           created_at_lte: Time?,
+          customer_id: String?,
           page_number: Integer?,
           page_size: Integer?,
           status: DodoPayments::Models::RefundListParams::status?,

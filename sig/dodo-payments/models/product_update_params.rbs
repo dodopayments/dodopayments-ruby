@@ -2,6 +2,7 @@ module DodoPayments
   module Models
     type product_update_params =
       {
+        addons: ::Array[String]?,
         description: String?,
         image_id: String?,
         license_key_activation_message: String?,
@@ -17,6 +18,8 @@ module DodoPayments
     class ProductUpdateParams < DodoPayments::BaseModel
       extend DodoPayments::RequestParameters::Converter
       include DodoPayments::RequestParameters
+
+      attr_accessor addons: ::Array[String]?
 
       attr_accessor description: String?
 
@@ -38,6 +41,7 @@ module DodoPayments
 
       def initialize:
         (
+          addons: ::Array[String]?,
           description: String?,
           image_id: String?,
           license_key_activation_message: String?,
