@@ -1,0 +1,14 @@
+module Dodopayments
+  module Models
+    type refund_status = :succeeded | :failed | :pending | :review
+
+    class RefundStatus < Dodopayments::Enum
+      SUCCEEDED: :succeeded
+      FAILED: :failed
+      PENDING: :pending
+      REVIEW: :review
+
+      def self.values: -> ::Array[Dodopayments::Models::refund_status]
+    end
+  end
+end

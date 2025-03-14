@@ -1,0 +1,52 @@
+module Dodopayments
+  module Models
+    type payment_list_params =
+      {
+        created_at_gte: Time?,
+        created_at_lte: Time?,
+        customer_id: String?,
+        page_number: Integer?,
+        page_size: Integer?,
+        status: Dodopayments::Models::intent_status?,
+        subscription_id: String?
+      }
+      & Dodopayments::request_parameters
+
+    class PaymentListParams < Dodopayments::BaseModel
+      extend Dodopayments::RequestParameters::Converter
+      include Dodopayments::RequestParameters
+
+      attr_accessor created_at_gte: Time?
+
+      attr_accessor created_at_lte: Time?
+
+      attr_accessor customer_id: String?
+
+      attr_accessor page_number: Integer?
+
+      attr_accessor page_size: Integer?
+
+      attr_accessor status: Dodopayments::Models::intent_status?
+
+      attr_accessor subscription_id: String?
+
+      def initialize:
+        (
+          created_at_gte: Time?,
+          created_at_lte: Time?,
+          customer_id: String?,
+          page_number: Integer?,
+          page_size: Integer?,
+          status: Dodopayments::Models::intent_status?,
+          subscription_id: String?,
+          request_options: Dodopayments::request_opts
+        ) -> void
+        | (
+          ?Dodopayments::Models::payment_list_params
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::payment_list_params
+    end
+  end
+end

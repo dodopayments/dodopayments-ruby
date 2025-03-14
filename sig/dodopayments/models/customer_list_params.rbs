@@ -1,0 +1,29 @@
+module Dodopayments
+  module Models
+    type customer_list_params =
+      { page_number: Integer?, page_size: Integer? }
+      & Dodopayments::request_parameters
+
+    class CustomerListParams < Dodopayments::BaseModel
+      extend Dodopayments::RequestParameters::Converter
+      include Dodopayments::RequestParameters
+
+      attr_accessor page_number: Integer?
+
+      attr_accessor page_size: Integer?
+
+      def initialize:
+        (
+          page_number: Integer?,
+          page_size: Integer?,
+          request_options: Dodopayments::request_opts
+        ) -> void
+        | (
+          ?Dodopayments::Models::customer_list_params
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::customer_list_params
+    end
+  end
+end

@@ -1,0 +1,17 @@
+module Dodopayments
+  module Resources
+    class Payouts
+      def list:
+        (
+          ?Dodopayments::Models::PayoutListParams | ::Hash[Symbol, top] params
+        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::PayoutListResponse]
+        | (
+          page_number: Integer?,
+          page_size: Integer?,
+          request_options: Dodopayments::request_opts
+        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::PayoutListResponse]
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

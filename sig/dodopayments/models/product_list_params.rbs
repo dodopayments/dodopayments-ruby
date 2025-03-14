@@ -1,0 +1,42 @@
+module Dodopayments
+  module Models
+    type product_list_params =
+      {
+        archived: bool,
+        page_number: Integer?,
+        page_size: Integer?,
+        recurring: bool?
+      }
+      & Dodopayments::request_parameters
+
+    class ProductListParams < Dodopayments::BaseModel
+      extend Dodopayments::RequestParameters::Converter
+      include Dodopayments::RequestParameters
+
+      attr_reader archived: bool?
+
+      def archived=: (bool) -> bool
+
+      attr_accessor page_number: Integer?
+
+      attr_accessor page_size: Integer?
+
+      attr_accessor recurring: bool?
+
+      def initialize:
+        (
+          archived: bool,
+          page_number: Integer?,
+          page_size: Integer?,
+          recurring: bool?,
+          request_options: Dodopayments::request_opts
+        ) -> void
+        | (
+          ?Dodopayments::Models::product_list_params
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::product_list_params
+    end
+  end
+end

@@ -1,0 +1,47 @@
+module Dodopayments
+  module Models
+    type subscription_create_response =
+      {
+        customer: Dodopayments::Models::CustomerLimitedDetails,
+        metadata: ::Hash[Symbol, String],
+        recurring_pre_tax_amount: Integer,
+        subscription_id: String,
+        client_secret: String?,
+        discount_id: String?,
+        payment_link: String?
+      }
+
+    class SubscriptionCreateResponse < Dodopayments::BaseModel
+      attr_accessor customer: Dodopayments::Models::CustomerLimitedDetails
+
+      attr_accessor metadata: ::Hash[Symbol, String]
+
+      attr_accessor recurring_pre_tax_amount: Integer
+
+      attr_accessor subscription_id: String
+
+      attr_accessor client_secret: String?
+
+      attr_accessor discount_id: String?
+
+      attr_accessor payment_link: String?
+
+      def initialize:
+        (
+          customer: Dodopayments::Models::CustomerLimitedDetails,
+          metadata: ::Hash[Symbol, String],
+          recurring_pre_tax_amount: Integer,
+          subscription_id: String,
+          client_secret: String?,
+          discount_id: String?,
+          payment_link: String?
+        ) -> void
+        | (
+          ?Dodopayments::Models::subscription_create_response
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::subscription_create_response
+    end
+  end
+end

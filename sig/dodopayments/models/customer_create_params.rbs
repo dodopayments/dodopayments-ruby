@@ -1,0 +1,32 @@
+module Dodopayments
+  module Models
+    type customer_create_params =
+      { email: String, name: String, phone_number: String? }
+      & Dodopayments::request_parameters
+
+    class CustomerCreateParams < Dodopayments::BaseModel
+      extend Dodopayments::RequestParameters::Converter
+      include Dodopayments::RequestParameters
+
+      attr_accessor email: String
+
+      attr_accessor name: String
+
+      attr_accessor phone_number: String?
+
+      def initialize:
+        (
+          email: String,
+          name: String,
+          phone_number: String?,
+          request_options: Dodopayments::request_opts
+        ) -> void
+        | (
+          ?Dodopayments::Models::customer_create_params
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::customer_create_params
+    end
+  end
+end

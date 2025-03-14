@@ -1,0 +1,21 @@
+module Dodopayments
+  module Models
+    module Invoices
+      type payment_retrieve_params = {  } & Dodopayments::request_parameters
+
+      class PaymentRetrieveParams < Dodopayments::BaseModel
+        extend Dodopayments::RequestParameters::Converter
+        include Dodopayments::RequestParameters
+
+        def initialize:
+          (request_options: Dodopayments::request_opts) -> void
+          | (
+            ?Dodopayments::Models::Invoices::payment_retrieve_params
+            | Dodopayments::BaseModel data
+          ) -> void
+
+        def to_hash: -> Dodopayments::Models::Invoices::payment_retrieve_params
+      end
+    end
+  end
+end

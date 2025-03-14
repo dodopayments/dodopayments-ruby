@@ -1,0 +1,20 @@
+module Dodopayments
+  module Resources
+    class Invoices
+      class Payments
+        def retrieve:
+          (
+            String payment_id,
+            ?Dodopayments::Models::Invoices::PaymentRetrieveParams
+            | ::Hash[Symbol, top] params
+          ) -> nil
+          | (
+            String payment_id,
+            request_options: Dodopayments::request_opts
+          ) -> nil
+
+        def initialize: (client: Dodopayments::Client) -> void
+      end
+    end
+  end
+end

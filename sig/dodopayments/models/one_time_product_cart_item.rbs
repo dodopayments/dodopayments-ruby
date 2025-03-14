@@ -1,0 +1,23 @@
+module Dodopayments
+  module Models
+    type one_time_product_cart_item =
+      { product_id: String, quantity: Integer, amount: Integer? }
+
+    class OneTimeProductCartItem < Dodopayments::BaseModel
+      attr_accessor product_id: String
+
+      attr_accessor quantity: Integer
+
+      attr_accessor amount: Integer?
+
+      def initialize:
+        (product_id: String, quantity: Integer, amount: Integer?) -> void
+        | (
+          ?Dodopayments::Models::one_time_product_cart_item
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::one_time_product_cart_item
+    end
+  end
+end

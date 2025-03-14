@@ -1,0 +1,14 @@
+module Dodopayments
+  module Models
+    type time_interval = :Day | :Week | :Month | :Year
+
+    class TimeInterval < Dodopayments::Enum
+      DAY: :Day
+      WEEK: :Week
+      MONTH: :Month
+      YEAR: :Year
+
+      def self.values: -> ::Array[Dodopayments::Models::time_interval]
+    end
+  end
+end

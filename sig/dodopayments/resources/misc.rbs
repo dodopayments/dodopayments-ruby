@@ -1,0 +1,16 @@
+module Dodopayments
+  module Resources
+    class Misc
+      def list_supported_countries:
+        (
+          ?Dodopayments::Models::MiscListSupportedCountriesParams
+          | ::Hash[Symbol, top] params
+        ) -> Dodopayments::Models::misc_list_supported_countries_response
+        | (
+          request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::misc_list_supported_countries_response
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

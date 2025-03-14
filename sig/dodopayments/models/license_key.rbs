@@ -1,0 +1,66 @@
+module Dodopayments
+  module Models
+    type license_key =
+      {
+        id: String,
+        business_id: String,
+        created_at: Time,
+        customer_id: String,
+        instances_count: Integer,
+        key: String,
+        payment_id: String,
+        product_id: String,
+        status: Dodopayments::Models::license_key_status,
+        activations_limit: Integer?,
+        expires_at: Time?,
+        subscription_id: String?
+      }
+
+    class LicenseKey < Dodopayments::BaseModel
+      attr_accessor id: String
+
+      attr_accessor business_id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor customer_id: String
+
+      attr_accessor instances_count: Integer
+
+      attr_accessor key: String
+
+      attr_accessor payment_id: String
+
+      attr_accessor product_id: String
+
+      attr_accessor status: Dodopayments::Models::license_key_status
+
+      attr_accessor activations_limit: Integer?
+
+      attr_accessor expires_at: Time?
+
+      attr_accessor subscription_id: String?
+
+      def initialize:
+        (
+          id: String,
+          business_id: String,
+          created_at: Time,
+          customer_id: String,
+          instances_count: Integer,
+          key: String,
+          payment_id: String,
+          product_id: String,
+          status: Dodopayments::Models::license_key_status,
+          activations_limit: Integer?,
+          expires_at: Time?,
+          subscription_id: String?
+        ) -> void
+        | (
+          ?Dodopayments::Models::license_key | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::license_key
+    end
+  end
+end

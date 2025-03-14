@@ -1,0 +1,8 @@
+module Dodopayments
+  module Models
+    type misc_list_supported_countries_response =
+      ::Array[Dodopayments::Models::country_code]
+
+    MiscListSupportedCountriesResponse: misc_list_supported_countries_response
+  end
+end

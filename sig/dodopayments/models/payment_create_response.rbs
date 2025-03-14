@@ -1,0 +1,51 @@
+module Dodopayments
+  module Models
+    type payment_create_response =
+      {
+        client_secret: String,
+        customer: Dodopayments::Models::CustomerLimitedDetails,
+        metadata: ::Hash[Symbol, String],
+        payment_id: String,
+        total_amount: Integer,
+        discount_id: String?,
+        payment_link: String?,
+        product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]?
+      }
+
+    class PaymentCreateResponse < Dodopayments::BaseModel
+      attr_accessor client_secret: String
+
+      attr_accessor customer: Dodopayments::Models::CustomerLimitedDetails
+
+      attr_accessor metadata: ::Hash[Symbol, String]
+
+      attr_accessor payment_id: String
+
+      attr_accessor total_amount: Integer
+
+      attr_accessor discount_id: String?
+
+      attr_accessor payment_link: String?
+
+      attr_accessor product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]?
+
+      def initialize:
+        (
+          client_secret: String,
+          customer: Dodopayments::Models::CustomerLimitedDetails,
+          metadata: ::Hash[Symbol, String],
+          payment_id: String,
+          total_amount: Integer,
+          discount_id: String?,
+          payment_link: String?,
+          product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]?
+        ) -> void
+        | (
+          ?Dodopayments::Models::payment_create_response
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::payment_create_response
+    end
+  end
+end

@@ -1,0 +1,89 @@
+module Dodopayments
+  module Models
+    type product =
+      {
+        business_id: String,
+        created_at: Time,
+        is_recurring: bool,
+        license_key_enabled: bool,
+        price: Dodopayments::Models::price,
+        product_id: String,
+        tax_category: Dodopayments::Models::Product::tax_category,
+        updated_at: Time,
+        addons: ::Array[String]?,
+        description: String?,
+        image: String?,
+        license_key_activation_message: String?,
+        license_key_activations_limit: Integer?,
+        license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
+        name: String?
+      }
+
+    class Product < Dodopayments::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor is_recurring: bool
+
+      attr_accessor license_key_enabled: bool
+
+      attr_accessor price: Dodopayments::Models::price
+
+      attr_accessor product_id: String
+
+      attr_accessor tax_category: Dodopayments::Models::Product::tax_category
+
+      attr_accessor updated_at: Time
+
+      attr_accessor addons: ::Array[String]?
+
+      attr_accessor description: String?
+
+      attr_accessor image: String?
+
+      attr_accessor license_key_activation_message: String?
+
+      attr_accessor license_key_activations_limit: Integer?
+
+      attr_accessor license_key_duration: Dodopayments::Models::LicenseKeyDuration?
+
+      attr_accessor name: String?
+
+      def initialize:
+        (
+          business_id: String,
+          created_at: Time,
+          is_recurring: bool,
+          license_key_enabled: bool,
+          price: Dodopayments::Models::price,
+          product_id: String,
+          tax_category: Dodopayments::Models::Product::tax_category,
+          updated_at: Time,
+          addons: ::Array[String]?,
+          description: String?,
+          image: String?,
+          license_key_activation_message: String?,
+          license_key_activations_limit: Integer?,
+          license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
+          name: String?
+        ) -> void
+        | (
+          ?Dodopayments::Models::product | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::product
+
+      type tax_category = :digital_products | :saas | :e_book | :edtech
+
+      class TaxCategory < Dodopayments::Enum
+        DIGITAL_PRODUCTS: :digital_products
+        SAAS: :saas
+        E_BOOK: :e_book
+        EDTECH: :edtech
+
+        def self.values: -> ::Array[Dodopayments::Models::Product::tax_category]
+      end
+    end
+  end
+end

@@ -1,0 +1,21 @@
+module Dodopayments
+  module Models
+    type license_key_duration =
+      { count: Integer, interval: Dodopayments::Models::time_interval }
+
+    class LicenseKeyDuration < Dodopayments::BaseModel
+      attr_accessor count: Integer
+
+      attr_accessor interval: Dodopayments::Models::time_interval
+
+      def initialize:
+        (count: Integer, interval: Dodopayments::Models::time_interval) -> void
+        | (
+          ?Dodopayments::Models::license_key_duration
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::license_key_duration
+    end
+  end
+end

@@ -1,0 +1,71 @@
+module Dodopayments
+  module Models
+    type product_create_params =
+      {
+        price: Dodopayments::Models::price,
+        tax_category: Dodopayments::Models::ProductCreateParams::tax_category,
+        addons: ::Array[String]?,
+        description: String?,
+        license_key_activation_message: String?,
+        license_key_activations_limit: Integer?,
+        license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
+        license_key_enabled: bool?,
+        name: String?
+      }
+      & Dodopayments::request_parameters
+
+    class ProductCreateParams < Dodopayments::BaseModel
+      extend Dodopayments::RequestParameters::Converter
+      include Dodopayments::RequestParameters
+
+      attr_accessor price: Dodopayments::Models::price
+
+      attr_accessor tax_category: Dodopayments::Models::ProductCreateParams::tax_category
+
+      attr_accessor addons: ::Array[String]?
+
+      attr_accessor description: String?
+
+      attr_accessor license_key_activation_message: String?
+
+      attr_accessor license_key_activations_limit: Integer?
+
+      attr_accessor license_key_duration: Dodopayments::Models::LicenseKeyDuration?
+
+      attr_accessor license_key_enabled: bool?
+
+      attr_accessor name: String?
+
+      def initialize:
+        (
+          price: Dodopayments::Models::price,
+          tax_category: Dodopayments::Models::ProductCreateParams::tax_category,
+          addons: ::Array[String]?,
+          description: String?,
+          license_key_activation_message: String?,
+          license_key_activations_limit: Integer?,
+          license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
+          license_key_enabled: bool?,
+          name: String?,
+          request_options: Dodopayments::request_opts
+        ) -> void
+        | (
+          ?Dodopayments::Models::product_create_params
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::product_create_params
+
+      type tax_category = :digital_products | :saas | :e_book | :edtech
+
+      class TaxCategory < Dodopayments::Enum
+        DIGITAL_PRODUCTS: :digital_products
+        SAAS: :saas
+        E_BOOK: :e_book
+        EDTECH: :edtech
+
+        def self.values: -> ::Array[Dodopayments::Models::ProductCreateParams::tax_category]
+      end
+    end
+  end
+end

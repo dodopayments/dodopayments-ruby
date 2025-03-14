@@ -81,9 +81,9 @@ multitask(typecheck: [:steep, :sorbet])
 multitask(lint: [:rubocop, :typecheck])
 
 multitask(:build) do
-  sh(*%w[gem build -- dodo-payments.gemspec])
+  sh(*%w[gem build -- dodopayments.gemspec])
 end
 
 multitask(release: [:build]) do
-  sh(*%w[gem push], *FileList["dodo-payments-*.gem"])
+  sh(*%w[gem push], *FileList["dodopayments-*.gem"])
 end

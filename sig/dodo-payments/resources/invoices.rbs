@@ -1,9 +1,0 @@
-module DodoPayments
-  module Resources
-    class Invoices
-      attr_reader payments: DodoPayments::Resources::Invoices::Payments
-
-      def initialize: (client: DodoPayments::Client) -> void
-    end
-  end
-end

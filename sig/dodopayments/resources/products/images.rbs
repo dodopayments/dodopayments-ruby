@@ -1,0 +1,21 @@
+module Dodopayments
+  module Resources
+    class Products
+      class Images
+        def update:
+          (
+            String id,
+            ?Dodopayments::Models::Products::ImageUpdateParams
+            | ::Hash[Symbol, top] params
+          ) -> Dodopayments::Models::Products::ImageUpdateResponse
+          | (
+            String id,
+            force_update: bool?,
+            request_options: Dodopayments::request_opts
+          ) -> Dodopayments::Models::Products::ImageUpdateResponse
+
+        def initialize: (client: Dodopayments::Client) -> void
+      end
+    end
+  end
+end

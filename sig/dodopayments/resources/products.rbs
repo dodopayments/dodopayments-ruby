@@ -1,0 +1,86 @@
+module Dodopayments
+  module Resources
+    class Products
+      attr_reader images: Dodopayments::Resources::Products::Images
+
+      def create:
+        (
+          Dodopayments::Models::ProductCreateParams | ::Hash[Symbol, top] params
+        ) -> Dodopayments::Models::Product
+        | (
+          price: Dodopayments::Models::price,
+          tax_category: Dodopayments::Models::ProductCreateParams::tax_category,
+          addons: ::Array[String]?,
+          description: String?,
+          license_key_activation_message: String?,
+          license_key_activations_limit: Integer?,
+          license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
+          license_key_enabled: bool?,
+          name: String?,
+          request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::Product
+
+      def retrieve:
+        (
+          String id,
+          ?Dodopayments::Models::ProductRetrieveParams
+          | ::Hash[Symbol, top] params
+        ) -> Dodopayments::Models::Product
+        | (
+          String id,
+          request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::Product
+
+      def update:
+        (
+          String id,
+          ?Dodopayments::Models::ProductUpdateParams
+          | ::Hash[Symbol, top] params
+        ) -> nil
+        | (
+          String id,
+          addons: ::Array[String]?,
+          description: String?,
+          image_id: String?,
+          license_key_activation_message: String?,
+          license_key_activations_limit: Integer?,
+          license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
+          license_key_enabled: bool?,
+          name: String?,
+          price: Dodopayments::Models::price?,
+          tax_category: Dodopayments::Models::ProductUpdateParams::tax_category?,
+          request_options: Dodopayments::request_opts
+        ) -> nil
+
+      def list:
+        (
+          ?Dodopayments::Models::ProductListParams | ::Hash[Symbol, top] params
+        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::ProductListResponse]
+        | (
+          archived: bool,
+          page_number: Integer?,
+          page_size: Integer?,
+          recurring: bool?,
+          request_options: Dodopayments::request_opts
+        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::ProductListResponse]
+
+      def delete:
+        (
+          String id,
+          ?Dodopayments::Models::ProductDeleteParams
+          | ::Hash[Symbol, top] params
+        ) -> nil
+        | (String id, request_options: Dodopayments::request_opts) -> nil
+
+      def unarchive:
+        (
+          String id,
+          ?Dodopayments::Models::ProductUnarchiveParams
+          | ::Hash[Symbol, top] params
+        ) -> nil
+        | (String id, request_options: Dodopayments::request_opts) -> nil
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

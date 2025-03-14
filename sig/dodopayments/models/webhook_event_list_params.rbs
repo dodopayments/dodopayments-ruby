@@ -1,0 +1,48 @@
+module Dodopayments
+  module Models
+    type webhook_event_list_params =
+      {
+        created_at_gte: Time?,
+        created_at_lte: Time?,
+        limit: Integer?,
+        object_id_: String?,
+        page_number: Integer?,
+        page_size: Integer?
+      }
+      & Dodopayments::request_parameters
+
+    class WebhookEventListParams < Dodopayments::BaseModel
+      extend Dodopayments::RequestParameters::Converter
+      include Dodopayments::RequestParameters
+
+      attr_accessor created_at_gte: Time?
+
+      attr_accessor created_at_lte: Time?
+
+      attr_accessor limit: Integer?
+
+      attr_accessor object_id_: String?
+
+      attr_accessor page_number: Integer?
+
+      attr_accessor page_size: Integer?
+
+      def initialize:
+        (
+          created_at_gte: Time?,
+          created_at_lte: Time?,
+          limit: Integer?,
+          object_id_: String?,
+          page_number: Integer?,
+          page_size: Integer?,
+          request_options: Dodopayments::request_opts
+        ) -> void
+        | (
+          ?Dodopayments::Models::webhook_event_list_params
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::webhook_event_list_params
+    end
+  end
+end

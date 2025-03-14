@@ -1,0 +1,27 @@
+module Dodopayments
+  module Models
+    module Products
+      type image_update_params =
+        { force_update: bool? } & Dodopayments::request_parameters
+
+      class ImageUpdateParams < Dodopayments::BaseModel
+        extend Dodopayments::RequestParameters::Converter
+        include Dodopayments::RequestParameters
+
+        attr_accessor force_update: bool?
+
+        def initialize:
+          (
+            force_update: bool?,
+            request_options: Dodopayments::request_opts
+          ) -> void
+          | (
+            ?Dodopayments::Models::Products::image_update_params
+            | Dodopayments::BaseModel data
+          ) -> void
+
+        def to_hash: -> Dodopayments::Models::Products::image_update_params
+      end
+    end
+  end
+end

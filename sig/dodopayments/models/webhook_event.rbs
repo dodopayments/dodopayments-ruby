@@ -1,0 +1,50 @@
+module Dodopayments
+  module Models
+    type webhook_event =
+      {
+        business_id: String,
+        created_at: Time,
+        event_id: String,
+        event_type: String,
+        object_id_: String,
+        latest_attempted_at: Time?,
+        request: String?,
+        response: String?
+      }
+
+    class WebhookEvent < Dodopayments::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor event_id: String
+
+      attr_accessor event_type: String
+
+      attr_accessor object_id_: String
+
+      attr_accessor latest_attempted_at: Time?
+
+      attr_accessor request: String?
+
+      attr_accessor response: String?
+
+      def initialize:
+        (
+          business_id: String,
+          created_at: Time,
+          event_id: String,
+          event_type: String,
+          object_id_: String,
+          latest_attempted_at: Time?,
+          request: String?,
+          response: String?
+        ) -> void
+        | (
+          ?Dodopayments::Models::webhook_event | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::webhook_event
+    end
+  end
+end

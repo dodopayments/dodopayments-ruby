@@ -1,0 +1,62 @@
+# frozen_string_literal: true
+
+module Dodopayments
+  # @abstract
+  #
+  # @example
+  # ```ruby
+  # if page.has_next?
+  #   page = page.next_page
+  # end
+  # ```
+  #
+  # @example
+  # ```ruby
+  # page.auto_paging_each do |payment|
+  #   puts(payment)
+  # end
+  # ```
+  #
+  # @example
+  # ```ruby
+  # payments = page
+  #   .to_enum
+  #   .lazy
+  #   .select { _1.object_id.even? }
+  #   .map(&:itself)
+  #   .take(2)
+  #   .to_a
+  #
+  # payments => Array
+  # ```
+  module BasePage
+    # @return [Boolean]
+    def next_page? = (raise NotImplementedError)
+
+    # @raise [Dodopayments::APIError]
+    # @return [Dodopayments::BasePage]
+    def next_page = (raise NotImplementedError)
+
+    # @param blk [Proc]
+    #
+    # @return [void]
+    def auto_paging_each(&) = (raise NotImplementedError)
+
+    # @return [Enumerable]
+    def to_enum = super(:auto_paging_each)
+
+    alias_method :enum_for, :to_enum
+
+    # @api private
+    #
+    # @param client [Dodopayments::BaseClient]
+    # @param req [Hash{Symbol=>Object}]
+    # @param headers [Hash{String=>String}, Net::HTTPHeader]
+    # @param page_data [Object]
+    def initialize(client:, req:, headers:, page_data:)
+      @client = client
+      @req = req
+      super()
+    end
+  end
+end

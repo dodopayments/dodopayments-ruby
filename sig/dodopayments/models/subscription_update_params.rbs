@@ -1,0 +1,32 @@
+module Dodopayments
+  module Models
+    type subscription_update_params =
+      {
+        metadata: ::Hash[Symbol, String]?,
+        status: Dodopayments::Models::subscription_status?
+      }
+      & Dodopayments::request_parameters
+
+    class SubscriptionUpdateParams < Dodopayments::BaseModel
+      extend Dodopayments::RequestParameters::Converter
+      include Dodopayments::RequestParameters
+
+      attr_accessor metadata: ::Hash[Symbol, String]?
+
+      attr_accessor status: Dodopayments::Models::subscription_status?
+
+      def initialize:
+        (
+          metadata: ::Hash[Symbol, String]?,
+          status: Dodopayments::Models::subscription_status?,
+          request_options: Dodopayments::request_opts
+        ) -> void
+        | (
+          ?Dodopayments::Models::subscription_update_params
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::subscription_update_params
+    end
+  end
+end

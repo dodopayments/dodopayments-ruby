@@ -1,0 +1,29 @@
+module Dodopayments
+  module Models
+    type license_validate_params =
+      { license_key: String, license_key_instance_id: String? }
+      & Dodopayments::request_parameters
+
+    class LicenseValidateParams < Dodopayments::BaseModel
+      extend Dodopayments::RequestParameters::Converter
+      include Dodopayments::RequestParameters
+
+      attr_accessor license_key: String
+
+      attr_accessor license_key_instance_id: String?
+
+      def initialize:
+        (
+          license_key: String,
+          license_key_instance_id: String?,
+          request_options: Dodopayments::request_opts
+        ) -> void
+        | (
+          ?Dodopayments::Models::license_validate_params
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::license_validate_params
+    end
+  end
+end

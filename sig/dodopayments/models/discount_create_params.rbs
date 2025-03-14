@@ -1,0 +1,52 @@
+module Dodopayments
+  module Models
+    type discount_create_params =
+      {
+        amount: Integer,
+        type: Dodopayments::Models::discount_type,
+        code: String?,
+        expires_at: Time?,
+        name: String?,
+        restricted_to: ::Array[String]?,
+        usage_limit: Integer?
+      }
+      & Dodopayments::request_parameters
+
+    class DiscountCreateParams < Dodopayments::BaseModel
+      extend Dodopayments::RequestParameters::Converter
+      include Dodopayments::RequestParameters
+
+      attr_accessor amount: Integer
+
+      attr_accessor type: Dodopayments::Models::discount_type
+
+      attr_accessor code: String?
+
+      attr_accessor expires_at: Time?
+
+      attr_accessor name: String?
+
+      attr_accessor restricted_to: ::Array[String]?
+
+      attr_accessor usage_limit: Integer?
+
+      def initialize:
+        (
+          amount: Integer,
+          type: Dodopayments::Models::discount_type,
+          code: String?,
+          expires_at: Time?,
+          name: String?,
+          restricted_to: ::Array[String]?,
+          usage_limit: Integer?,
+          request_options: Dodopayments::request_opts
+        ) -> void
+        | (
+          ?Dodopayments::Models::discount_create_params
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::discount_create_params
+    end
+  end
+end

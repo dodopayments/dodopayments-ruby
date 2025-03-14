@@ -1,0 +1,42 @@
+module Dodopayments
+  module Resources
+    class LicenseKeyInstances
+      def retrieve:
+        (
+          String id,
+          ?Dodopayments::Models::LicenseKeyInstanceRetrieveParams
+          | ::Hash[Symbol, top] params
+        ) -> Dodopayments::Models::LicenseKeyInstance
+        | (
+          String id,
+          request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::LicenseKeyInstance
+
+      def update:
+        (
+          String id,
+          Dodopayments::Models::LicenseKeyInstanceUpdateParams
+          | ::Hash[Symbol, top] params
+        ) -> Dodopayments::Models::LicenseKeyInstance
+        | (
+          String id,
+          name: String,
+          request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::LicenseKeyInstance
+
+      def list:
+        (
+          ?Dodopayments::Models::LicenseKeyInstanceListParams
+          | ::Hash[Symbol, top] params
+        ) -> Dodopayments::Models::license_key_instance_list_response
+        | (
+          license_key_id: String?,
+          page_number: Integer?,
+          page_size: Integer?,
+          request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::license_key_instance_list_response
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

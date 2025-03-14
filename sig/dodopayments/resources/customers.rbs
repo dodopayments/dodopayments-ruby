@@ -1,0 +1,55 @@
+module Dodopayments
+  module Resources
+    class Customers
+      attr_reader customer_portal: Dodopayments::Resources::Customers::CustomerPortal
+
+      def create:
+        (
+          Dodopayments::Models::CustomerCreateParams
+          | ::Hash[Symbol, top] params
+        ) -> Dodopayments::Models::Customer
+        | (
+          email: String,
+          name: String,
+          phone_number: String?,
+          request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::Customer
+
+      def retrieve:
+        (
+          String customer_id,
+          ?Dodopayments::Models::CustomerRetrieveParams
+          | ::Hash[Symbol, top] params
+        ) -> Dodopayments::Models::Customer
+        | (
+          String customer_id,
+          request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::Customer
+
+      def update:
+        (
+          String customer_id,
+          ?Dodopayments::Models::CustomerUpdateParams
+          | ::Hash[Symbol, top] params
+        ) -> Dodopayments::Models::Customer
+        | (
+          String customer_id,
+          name: String?,
+          phone_number: String?,
+          request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::Customer
+
+      def list:
+        (
+          ?Dodopayments::Models::CustomerListParams | ::Hash[Symbol, top] params
+        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Customer]
+        | (
+          page_number: Integer?,
+          page_size: Integer?,
+          request_options: Dodopayments::request_opts
+        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Customer]
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

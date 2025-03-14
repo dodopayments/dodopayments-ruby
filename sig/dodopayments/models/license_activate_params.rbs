@@ -1,0 +1,28 @@
+module Dodopayments
+  module Models
+    type license_activate_params =
+      { license_key: String, name: String } & Dodopayments::request_parameters
+
+    class LicenseActivateParams < Dodopayments::BaseModel
+      extend Dodopayments::RequestParameters::Converter
+      include Dodopayments::RequestParameters
+
+      attr_accessor license_key: String
+
+      attr_accessor name: String
+
+      def initialize:
+        (
+          license_key: String,
+          name: String,
+          request_options: Dodopayments::request_opts
+        ) -> void
+        | (
+          ?Dodopayments::Models::license_activate_params
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::license_activate_params
+    end
+  end
+end

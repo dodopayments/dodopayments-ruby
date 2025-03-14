@@ -1,0 +1,24 @@
+module Dodopayments
+  module Models
+    type dispute_status =
+      :dispute_opened
+      | :dispute_expired
+      | :dispute_accepted
+      | :dispute_cancelled
+      | :dispute_challenged
+      | :dispute_won
+      | :dispute_lost
+
+    class DisputeStatus < Dodopayments::Enum
+      DISPUTE_OPENED: :dispute_opened
+      DISPUTE_EXPIRED: :dispute_expired
+      DISPUTE_ACCEPTED: :dispute_accepted
+      DISPUTE_CANCELLED: :dispute_cancelled
+      DISPUTE_CHALLENGED: :dispute_challenged
+      DISPUTE_WON: :dispute_won
+      DISPUTE_LOST: :dispute_lost
+
+      def self.values: -> ::Array[Dodopayments::Models::dispute_status]
+    end
+  end
+end

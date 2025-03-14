@@ -1,0 +1,19 @@
+module Dodopayments
+  module Models
+    type dispute_retrieve_params = {  } & Dodopayments::request_parameters
+
+    class DisputeRetrieveParams < Dodopayments::BaseModel
+      extend Dodopayments::RequestParameters::Converter
+      include Dodopayments::RequestParameters
+
+      def initialize:
+        (request_options: Dodopayments::request_opts) -> void
+        | (
+          ?Dodopayments::Models::dispute_retrieve_params
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::dispute_retrieve_params
+    end
+  end
+end

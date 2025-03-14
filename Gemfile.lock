@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    dodo-payments (0.0.1.pre.alpha.0)
+    dodopayments (0.0.1.pre.alpha.0)
       connection_pool
 
 GEM
@@ -169,7 +169,7 @@ PLATFORMS
 
 DEPENDENCIES
   async
-  dodo-payments!
+  dodopayments!
   minitest
   minitest-focus
   minitest-hooks

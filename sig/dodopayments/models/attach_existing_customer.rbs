@@ -1,0 +1,18 @@
+module Dodopayments
+  module Models
+    type attach_existing_customer = { customer_id: String }
+
+    class AttachExistingCustomer < Dodopayments::BaseModel
+      attr_accessor customer_id: String
+
+      def initialize:
+        (customer_id: String) -> void
+        | (
+          ?Dodopayments::Models::attach_existing_customer
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::attach_existing_customer
+    end
+  end
+end

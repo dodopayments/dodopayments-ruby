@@ -6,7 +6,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-Documentation for the most recent release of this gem can be found [on RubyDoc](https://gemdocs.org/gems/dodo-payments/latest).
+Documentation for the most recent release of this gem can be found [on RubyDoc](https://gemdocs.org/gems/dodopayments/latest).
 
 The underlying REST API documentation can be found on [docs.dodopayments.com](https://docs.dodopayments.com).
 
@@ -15,7 +15,7 @@ The underlying REST API documentation can be found on [docs.dodopayments.com](ht
 To use this gem during the beta, install directly from GitHub with Bundler by adding the following to your application's `Gemfile`:
 
 ```ruby
-gem "dodo-payments", git: "https://github.com/dodopayments/dodopayments-ruby", branch: "main"
+gem "dodopayments", git: "https://github.com/dodopayments/dodopayments-ruby", branch: "main"
 ```
 
 To fetch an initial copy of the gem:
@@ -27,16 +27,16 @@ bundle install
 To update the version used by your application when updates are pushed to GitHub:
 
 ```sh
-bundle update dodo-payments
+bundle update dodopayments
 ```
 
 ## Usage
 
 ```ruby
 require "bundler/setup"
-require "dodo-payments"
+require "dodopayments"
 
-dodo_payments = DodoPayments::Client.new(
+dodo_payments = Dodopayments::Client.new(
   bearer_token: "My Bearer Token", # defaults to ENV["DODO_PAYMENTS_API_KEY"]
   environment: "test_mode" # defaults to "live_mode"
 )
@@ -67,12 +67,12 @@ end
 
 ### Errors
 
-When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `DodoPayments::Error` will be thrown:
+When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Dodopayments::Error` will be thrown:
 
 ```ruby
 begin
   payment = dodo_payments.payments.create
-rescue DodoPayments::Error => e
+rescue Dodopayments::Error => e
   puts(e.status) # 400
 end
 ```
@@ -103,7 +103,7 @@ You can use the `max_retries` option to configure or disable this:
 
 ```ruby
 # Configure the default for all requests:
-dodo_payments = DodoPayments::Client.new(
+dodo_payments = Dodopayments::Client.new(
   max_retries: 0 # default is 2
 )
 
@@ -121,7 +121,7 @@ You can use the `timeout` option to configure or disable this:
 
 ```ruby
 # Configure the default for all requests:
-dodo_payments = DodoPayments::Client.new(
+dodo_payments = Dodopayments::Client.new(
   timeout: nil # default is 60
 )
 
@@ -135,7 +135,7 @@ This library is written with [Sorbet type definitions](https://sorbet.org/docs/r
 
 What this means is that while you can use Sorbet to type check your code statically, and benefit from the [Sorbet Language Server](https://sorbet.org/docs/lsp) in your editor, there is no runtime type checking and execution overhead from Sorbet itself.
 
-Due to limitations with the Sorbet type system, where a method otherwise can take an instance of `DodoPayments::BaseModel` class, you will need to use the `**` splat operator to pass the arguments:
+Due to limitations with the Sorbet type system, where a method otherwise can take an instance of `Dodopayments::BaseModel` class, you will need to use the `**` splat operator to pass the arguments:
 
 ```ruby
 model = PaymentCreateParams.new

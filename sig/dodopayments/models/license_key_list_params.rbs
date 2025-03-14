@@ -1,0 +1,44 @@
+module Dodopayments
+  module Models
+    type license_key_list_params =
+      {
+        customer_id: String?,
+        page_number: Integer?,
+        page_size: Integer?,
+        product_id: String?,
+        status: Dodopayments::Models::license_key_status?
+      }
+      & Dodopayments::request_parameters
+
+    class LicenseKeyListParams < Dodopayments::BaseModel
+      extend Dodopayments::RequestParameters::Converter
+      include Dodopayments::RequestParameters
+
+      attr_accessor customer_id: String?
+
+      attr_accessor page_number: Integer?
+
+      attr_accessor page_size: Integer?
+
+      attr_accessor product_id: String?
+
+      attr_accessor status: Dodopayments::Models::license_key_status?
+
+      def initialize:
+        (
+          customer_id: String?,
+          page_number: Integer?,
+          page_size: Integer?,
+          product_id: String?,
+          status: Dodopayments::Models::license_key_status?,
+          request_options: Dodopayments::request_opts
+        ) -> void
+        | (
+          ?Dodopayments::Models::license_key_list_params
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::license_key_list_params
+    end
+  end
+end

@@ -1,0 +1,58 @@
+module Dodopayments
+  module Models
+    type payment_create_params =
+      {
+        billing: Dodopayments::Models::BillingAddress,
+        customer: Dodopayments::Models::customer_request,
+        product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem],
+        discount_code: String?,
+        metadata: ::Hash[Symbol, String],
+        payment_link: bool?,
+        return_url: String?,
+        tax_id: String?
+      }
+      & Dodopayments::request_parameters
+
+    class PaymentCreateParams < Dodopayments::BaseModel
+      extend Dodopayments::RequestParameters::Converter
+      include Dodopayments::RequestParameters
+
+      attr_accessor billing: Dodopayments::Models::BillingAddress
+
+      attr_accessor customer: Dodopayments::Models::customer_request
+
+      attr_accessor product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]
+
+      attr_accessor discount_code: String?
+
+      attr_reader metadata: ::Hash[Symbol, String]?
+
+      def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+      attr_accessor payment_link: bool?
+
+      attr_accessor return_url: String?
+
+      attr_accessor tax_id: String?
+
+      def initialize:
+        (
+          billing: Dodopayments::Models::BillingAddress,
+          customer: Dodopayments::Models::customer_request,
+          product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem],
+          discount_code: String?,
+          metadata: ::Hash[Symbol, String],
+          payment_link: bool?,
+          return_url: String?,
+          tax_id: String?,
+          request_options: Dodopayments::request_opts
+        ) -> void
+        | (
+          ?Dodopayments::Models::payment_create_params
+          | Dodopayments::BaseModel data
+        ) -> void
+
+      def to_hash: -> Dodopayments::Models::payment_create_params
+    end
+  end
+end

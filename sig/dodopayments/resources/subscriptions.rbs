@@ -1,0 +1,65 @@
+module Dodopayments
+  module Resources
+    class Subscriptions
+      def create:
+        (
+          Dodopayments::Models::SubscriptionCreateParams
+          | ::Hash[Symbol, top] params
+        ) -> Dodopayments::Models::SubscriptionCreateResponse
+        | (
+          billing: Dodopayments::Models::BillingAddress,
+          customer: Dodopayments::Models::customer_request,
+          product_id: String,
+          quantity: Integer,
+          discount_code: String?,
+          metadata: ::Hash[Symbol, String],
+          payment_link: bool?,
+          return_url: String?,
+          tax_id: String?,
+          trial_period_days: Integer?,
+          request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::SubscriptionCreateResponse
+
+      def retrieve:
+        (
+          String subscription_id,
+          ?Dodopayments::Models::SubscriptionRetrieveParams
+          | ::Hash[Symbol, top] params
+        ) -> Dodopayments::Models::Subscription
+        | (
+          String subscription_id,
+          request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::Subscription
+
+      def update:
+        (
+          String subscription_id,
+          ?Dodopayments::Models::SubscriptionUpdateParams
+          | ::Hash[Symbol, top] params
+        ) -> Dodopayments::Models::Subscription
+        | (
+          String subscription_id,
+          metadata: ::Hash[Symbol, String]?,
+          status: Dodopayments::Models::subscription_status?,
+          request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::Subscription
+
+      def list:
+        (
+          ?Dodopayments::Models::SubscriptionListParams
+          | ::Hash[Symbol, top] params
+        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Subscription]
+        | (
+          created_at_gte: Time?,
+          created_at_lte: Time?,
+          customer_id: String?,
+          page_number: Integer?,
+          page_size: Integer?,
+          status: Dodopayments::Models::subscription_status?,
+          request_options: Dodopayments::request_opts
+        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Subscription]
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end
