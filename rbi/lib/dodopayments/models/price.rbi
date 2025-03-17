@@ -5,6 +5,8 @@ module Dodopayments
     class Price < Dodopayments::Union
       abstract!
 
+      Variants = type_template(:out) { {fixed: T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice)} }
+
       class OneTimePrice < Dodopayments::BaseModel
         sig { returns(Symbol) }
         def currency
@@ -129,6 +131,8 @@ module Dodopayments
 
         class Currency < Dodopayments::Enum
           abstract!
+
+          Value = type_template(:out) { {fixed: Symbol} }
 
           AED = :AED
           ALL = :ALL
@@ -275,12 +279,6 @@ module Dodopayments
           YER = :YER
           ZAR = :ZAR
           ZMW = :ZMW
-
-          class << self
-            sig { override.returns(T::Array[Symbol]) }
-            def values
-            end
-          end
         end
       end
 
@@ -439,6 +437,8 @@ module Dodopayments
         class Currency < Dodopayments::Enum
           abstract!
 
+          Value = type_template(:out) { {fixed: Symbol} }
+
           AED = :AED
           ALL = :ALL
           AMD = :AMD
@@ -584,18 +584,6 @@ module Dodopayments
           YER = :YER
           ZAR = :ZAR
           ZMW = :ZMW
-
-          class << self
-            sig { override.returns(T::Array[Symbol]) }
-            def values
-            end
-          end
-        end
-      end
-
-      class << self
-        sig { override.returns([Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]) }
-        def variants
         end
       end
     end

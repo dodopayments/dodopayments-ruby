@@ -203,6 +203,8 @@ module Dodopayments
       class Currency < Dodopayments::Enum
         abstract!
 
+        Value = type_template(:out) { {fixed: Symbol} }
+
         AED = :AED
         ALL = :ALL
         AMD = :AMD
@@ -348,26 +350,16 @@ module Dodopayments
         YER = :YER
         ZAR = :ZAR
         ZMW = :ZMW
-
-        class << self
-          sig { override.returns(T::Array[Symbol]) }
-          def values
-          end
-        end
       end
 
       class Status < Dodopayments::Enum
         abstract!
 
+        Value = type_template(:out) { {fixed: Symbol} }
+
         IN_PROGRESS = :in_progress
         FAILED = :failed
         SUCCESS = :success
-
-        class << self
-          sig { override.returns(T::Array[Symbol]) }
-          def values
-          end
-        end
       end
     end
   end

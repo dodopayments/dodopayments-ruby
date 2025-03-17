@@ -5,6 +5,8 @@ module Dodopayments
     class IntentStatus < Dodopayments::Enum
       abstract!
 
+      Value = type_template(:out) { {fixed: Symbol} }
+
       SUCCEEDED = :succeeded
       FAILED = :failed
       CANCELLED = :cancelled
@@ -16,12 +18,6 @@ module Dodopayments
       REQUIRES_CAPTURE = :requires_capture
       PARTIALLY_CAPTURED = :partially_captured
       PARTIALLY_CAPTURED_AND_CAPTURABLE = :partially_captured_and_capturable
-
-      class << self
-        sig { override.returns(T::Array[Symbol]) }
-        def values
-        end
-      end
     end
   end
 end

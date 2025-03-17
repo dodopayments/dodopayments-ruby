@@ -6,6 +6,8 @@ module Dodopayments
     class CountryCode < Dodopayments::Enum
       abstract!
 
+      Value = type_template(:out) { {fixed: Symbol} }
+
       AF = :AF
       AX = :AX
       AL = :AL
@@ -255,12 +257,6 @@ module Dodopayments
       YE = :YE
       ZM = :ZM
       ZW = :ZW
-
-      class << self
-        sig { override.returns(T::Array[Symbol]) }
-        def values
-        end
-      end
     end
   end
 end

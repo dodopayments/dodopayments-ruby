@@ -5,16 +5,12 @@ module Dodopayments
     class TimeInterval < Dodopayments::Enum
       abstract!
 
+      Value = type_template(:out) { {fixed: Symbol} }
+
       DAY = :Day
       WEEK = :Week
       MONTH = :Month
       YEAR = :Year
-
-      class << self
-        sig { override.returns(T::Array[Symbol]) }
-        def values
-        end
-      end
     end
   end
 end

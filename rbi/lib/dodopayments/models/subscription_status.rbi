@@ -5,6 +5,8 @@ module Dodopayments
     class SubscriptionStatus < Dodopayments::Enum
       abstract!
 
+      Value = type_template(:out) { {fixed: Symbol} }
+
       PENDING = :pending
       ACTIVE = :active
       ON_HOLD = :on_hold
@@ -12,12 +14,6 @@ module Dodopayments
       CANCELLED = :cancelled
       FAILED = :failed
       EXPIRED = :expired
-
-      class << self
-        sig { override.returns(T::Array[Symbol]) }
-        def values
-        end
-      end
     end
   end
 end

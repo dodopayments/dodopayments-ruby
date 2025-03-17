@@ -175,16 +175,12 @@ module Dodopayments
       class TaxCategory < Dodopayments::Enum
         abstract!
 
-        DIGITAL_PRODUCTS = T.let(:digital_products, T.nilable(Symbol))
-        SAAS = T.let(:saas, T.nilable(Symbol))
-        E_BOOK = T.let(:e_book, T.nilable(Symbol))
-        EDTECH = T.let(:edtech, T.nilable(Symbol))
+        Value = type_template(:out) { {fixed: Symbol} }
 
-        class << self
-          sig { override.returns(T::Array[Symbol]) }
-          def values
-          end
-        end
+        DIGITAL_PRODUCTS = :digital_products
+        SAAS = :saas
+        E_BOOK = :e_book
+        EDTECH = :edtech
       end
     end
   end

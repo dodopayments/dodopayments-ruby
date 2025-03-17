@@ -5,15 +5,11 @@ module Dodopayments
     class DisputeStage < Dodopayments::Enum
       abstract!
 
+      Value = type_template(:out) { {fixed: Symbol} }
+
       PRE_DISPUTE = :pre_dispute
       DISPUTE = :dispute
       PRE_ARBITRATION = :pre_arbitration
-
-      class << self
-        sig { override.returns(T::Array[Symbol]) }
-        def values
-        end
-      end
     end
   end
 end

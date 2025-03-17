@@ -5,6 +5,8 @@ module Dodopayments
     class DisputeStatus < Dodopayments::Enum
       abstract!
 
+      Value = type_template(:out) { {fixed: Symbol} }
+
       DISPUTE_OPENED = :dispute_opened
       DISPUTE_EXPIRED = :dispute_expired
       DISPUTE_ACCEPTED = :dispute_accepted
@@ -12,12 +14,6 @@ module Dodopayments
       DISPUTE_CHALLENGED = :dispute_challenged
       DISPUTE_WON = :dispute_won
       DISPUTE_LOST = :dispute_lost
-
-      class << self
-        sig { override.returns(T::Array[Symbol]) }
-        def values
-        end
-      end
     end
   end
 end
