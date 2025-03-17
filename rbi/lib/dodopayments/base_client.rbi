@@ -1,6 +1,7 @@
 # typed: strong
 
 module Dodopayments
+  # @api private
   class BaseClient
     abstract!
 

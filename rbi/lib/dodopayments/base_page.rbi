@@ -2,8 +2,6 @@
 
 module Dodopayments
   module BasePage
-    abstract!
-
     Elem = type_member(:out)
 
     sig { overridable.returns(T::Boolean) }
