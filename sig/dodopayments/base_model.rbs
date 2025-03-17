@@ -85,7 +85,7 @@ module Dodopayments
   class Union
     extend Dodopayments::Converter
 
-    private def self.known_variants: -> ::Array[[Symbol?, Proc]]
+    private def self.known_variants: -> ::Array[[Symbol?, (^-> Dodopayments::Converter::input)]]
 
     def self.derefed_variants: -> ::Array[[Symbol?, top]]
 

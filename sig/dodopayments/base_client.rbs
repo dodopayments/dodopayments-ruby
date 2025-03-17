@@ -45,6 +45,11 @@ module Dodopayments
       response_headers: ::Hash[String, String]
     ) -> Dodopayments::BaseClient::request_input
 
+    def self.reap_connection!: (
+      Integer | Dodopayments::APIConnectionError status,
+      stream: Enumerable[String]?
+    ) -> void
+
     # @api private
     attr_accessor requester: top
 

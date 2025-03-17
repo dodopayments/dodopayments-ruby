@@ -59,7 +59,8 @@ module Dodopayments
     # @return [Dodopayments::DefaultPageNumberPagination]
     def next_page
       unless next_page?
-        raise RuntimeError.new("No more pages available. Please check #next_page? before calling ##{__method__}")
+        message = "No more pages available. Please check #next_page? before calling ##{__method__}"
+        raise RuntimeError.new(message)
       end
 
       req = Dodopayments::Util.deep_merge(
