@@ -5,7 +5,8 @@ module Dodopayments
     class Price < Dodopayments::Union
       abstract!
 
-      Variants = type_template(:out) { {fixed: T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice)} }
+      Variants =
+        type_template(:out) { {fixed: T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice)} }
 
       class OneTimePrice < Dodopayments::BaseModel
         sig { returns(Symbol) }

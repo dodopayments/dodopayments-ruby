@@ -10,10 +10,11 @@ module Dodopayments
 
     DEFAULT_MAX_RETRY_DELAY = T.let(8.0, Float)
 
-    ENVIRONMENTS = T.let(
-      {live_mode: "https://live.dodopayments.com", test_mode: "https://test.dodopayments.com"},
-      T::Hash[Symbol, String]
-    )
+    ENVIRONMENTS =
+      T.let(
+        {live_mode: "https://live.dodopayments.com", test_mode: "https://test.dodopayments.com"},
+        T::Hash[Symbol, String]
+      )
 
     # Bearer Token for API authentication
     sig { returns(String) }

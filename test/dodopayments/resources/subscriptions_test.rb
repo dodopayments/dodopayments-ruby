@@ -4,12 +4,13 @@ require_relative "../test_helper"
 
 class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::ResourceTest
   def test_create_required_params
-    response = @dodo_payments.subscriptions.create(
-      billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-      customer: {customer_id: "customer_id"},
-      product_id: "product_id",
-      quantity: 0
-    )
+    response =
+      @dodo_payments.subscriptions.create(
+        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
+        customer: {customer_id: "customer_id"},
+        product_id: "product_id",
+        quantity: 0
+      )
 
     assert_pattern do
       response => Dodopayments::Models::SubscriptionCreateResponse

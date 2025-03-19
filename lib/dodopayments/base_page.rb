@@ -17,7 +17,8 @@ module Dodopayments
   #
   # @example
   # ```ruby
-  # payments = page
+  # payments =
+  #   page
   #   .to_enum
   #   .lazy
   #   .select { _1.object_id.even? }

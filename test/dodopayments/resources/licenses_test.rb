@@ -22,10 +22,11 @@ class Dodopayments::Test::Resources::LicensesTest < Dodopayments::Test::Resource
   end
 
   def test_deactivate_required_params
-    response = @dodo_payments.licenses.deactivate(
-      license_key: "license_key",
-      license_key_instance_id: "license_key_instance_id"
-    )
+    response =
+      @dodo_payments.licenses.deactivate(
+        license_key: "license_key",
+        license_key_instance_id: "license_key_instance_id"
+      )
 
     assert_pattern do
       response => nil

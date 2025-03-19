@@ -4,10 +4,11 @@ require_relative "../test_helper"
 
 class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::ResourceTest
   def test_create_required_params
-    response = @dodo_payments.products.create(
-      price: {currency: :AED, discount: 0, price: 0, purchasing_power_parity: true, type: :one_time_price},
-      tax_category: :digital_products
-    )
+    response =
+      @dodo_payments.products.create(
+        price: {currency: :AED, discount: 0, price: 0, purchasing_power_parity: true, type: :one_time_price},
+        tax_category: :digital_products
+      )
 
     assert_pattern do
       response => Dodopayments::Models::Product

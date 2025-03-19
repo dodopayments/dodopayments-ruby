@@ -68,10 +68,8 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_default_request_default_retry_attempts
-    dodo_payments = Dodopayments::Client.new(
-      base_url: "http://localhost:4010",
-      bearer_token: "My Bearer Token"
-    )
+    dodo_payments =
+      Dodopayments::Client.new(base_url: "http://localhost:4010", bearer_token: "My Bearer Token")
     requester = MockRequester.new(500, {}, {})
     dodo_payments.requester = requester
 
@@ -87,11 +85,12 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_given_request_default_retry_attempts
-    dodo_payments = Dodopayments::Client.new(
-      base_url: "http://localhost:4010",
-      bearer_token: "My Bearer Token",
-      max_retries: 3
-    )
+    dodo_payments =
+      Dodopayments::Client.new(
+        base_url: "http://localhost:4010",
+        bearer_token: "My Bearer Token",
+        max_retries: 3
+      )
     requester = MockRequester.new(500, {}, {})
     dodo_payments.requester = requester
 
@@ -107,10 +106,8 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_default_request_given_retry_attempts
-    dodo_payments = Dodopayments::Client.new(
-      base_url: "http://localhost:4010",
-      bearer_token: "My Bearer Token"
-    )
+    dodo_payments =
+      Dodopayments::Client.new(base_url: "http://localhost:4010", bearer_token: "My Bearer Token")
     requester = MockRequester.new(500, {}, {})
     dodo_payments.requester = requester
 
@@ -127,11 +124,12 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_given_request_given_retry_attempts
-    dodo_payments = Dodopayments::Client.new(
-      base_url: "http://localhost:4010",
-      bearer_token: "My Bearer Token",
-      max_retries: 3
-    )
+    dodo_payments =
+      Dodopayments::Client.new(
+        base_url: "http://localhost:4010",
+        bearer_token: "My Bearer Token",
+        max_retries: 3
+      )
     requester = MockRequester.new(500, {}, {})
     dodo_payments.requester = requester
 
@@ -148,11 +146,12 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_retry_after_seconds
-    dodo_payments = Dodopayments::Client.new(
-      base_url: "http://localhost:4010",
-      bearer_token: "My Bearer Token",
-      max_retries: 1
-    )
+    dodo_payments =
+      Dodopayments::Client.new(
+        base_url: "http://localhost:4010",
+        bearer_token: "My Bearer Token",
+        max_retries: 1
+      )
     requester = MockRequester.new(500, {"retry-after" => "1.3"}, {})
     dodo_payments.requester = requester
 
@@ -169,11 +168,12 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_retry_after_date
-    dodo_payments = Dodopayments::Client.new(
-      base_url: "http://localhost:4010",
-      bearer_token: "My Bearer Token",
-      max_retries: 1
-    )
+    dodo_payments =
+      Dodopayments::Client.new(
+        base_url: "http://localhost:4010",
+        bearer_token: "My Bearer Token",
+        max_retries: 1
+      )
     requester = MockRequester.new(500, {"retry-after" => (Time.now + 10).httpdate}, {})
     dodo_payments.requester = requester
 
@@ -192,11 +192,12 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_retry_after_ms
-    dodo_payments = Dodopayments::Client.new(
-      base_url: "http://localhost:4010",
-      bearer_token: "My Bearer Token",
-      max_retries: 1
-    )
+    dodo_payments =
+      Dodopayments::Client.new(
+        base_url: "http://localhost:4010",
+        bearer_token: "My Bearer Token",
+        max_retries: 1
+      )
     requester = MockRequester.new(500, {"retry-after-ms" => "1300"}, {})
     dodo_payments.requester = requester
 
@@ -213,10 +214,8 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_retry_count_header
-    dodo_payments = Dodopayments::Client.new(
-      base_url: "http://localhost:4010",
-      bearer_token: "My Bearer Token"
-    )
+    dodo_payments =
+      Dodopayments::Client.new(base_url: "http://localhost:4010", bearer_token: "My Bearer Token")
     requester = MockRequester.new(500, {}, {})
     dodo_payments.requester = requester
 
@@ -233,10 +232,8 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_omit_retry_count_header
-    dodo_payments = Dodopayments::Client.new(
-      base_url: "http://localhost:4010",
-      bearer_token: "My Bearer Token"
-    )
+    dodo_payments =
+      Dodopayments::Client.new(base_url: "http://localhost:4010", bearer_token: "My Bearer Token")
     requester = MockRequester.new(500, {}, {})
     dodo_payments.requester = requester
 
@@ -254,10 +251,8 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_overwrite_retry_count_header
-    dodo_payments = Dodopayments::Client.new(
-      base_url: "http://localhost:4010",
-      bearer_token: "My Bearer Token"
-    )
+    dodo_payments =
+      Dodopayments::Client.new(base_url: "http://localhost:4010", bearer_token: "My Bearer Token")
     requester = MockRequester.new(500, {}, {})
     dodo_payments.requester = requester
 
@@ -275,10 +270,8 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_redirect_307
-    dodo_payments = Dodopayments::Client.new(
-      base_url: "http://localhost:4010",
-      bearer_token: "My Bearer Token"
-    )
+    dodo_payments =
+      Dodopayments::Client.new(base_url: "http://localhost:4010", bearer_token: "My Bearer Token")
     requester = MockRequester.new(307, {"location" => "/redirected"}, {})
     dodo_payments.requester = requester
 
@@ -301,10 +294,8 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_redirect_303
-    dodo_payments = Dodopayments::Client.new(
-      base_url: "http://localhost:4010",
-      bearer_token: "My Bearer Token"
-    )
+    dodo_payments =
+      Dodopayments::Client.new(base_url: "http://localhost:4010", bearer_token: "My Bearer Token")
     requester = MockRequester.new(303, {"location" => "/redirected"}, {})
     dodo_payments.requester = requester
 
@@ -324,10 +315,8 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_redirect_auth_keep_same_origin
-    dodo_payments = Dodopayments::Client.new(
-      base_url: "http://localhost:4010",
-      bearer_token: "My Bearer Token"
-    )
+    dodo_payments =
+      Dodopayments::Client.new(base_url: "http://localhost:4010", bearer_token: "My Bearer Token")
     requester = MockRequester.new(307, {"location" => "/redirected"}, {})
     dodo_payments.requester = requester
 
@@ -347,10 +336,8 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_redirect_auth_strip_cross_origin
-    dodo_payments = Dodopayments::Client.new(
-      base_url: "http://localhost:4010",
-      bearer_token: "My Bearer Token"
-    )
+    dodo_payments =
+      Dodopayments::Client.new(base_url: "http://localhost:4010", bearer_token: "My Bearer Token")
     requester = MockRequester.new(307, {"location" => "https://example.com/redirected"}, {})
     dodo_payments.requester = requester
 
@@ -367,10 +354,8 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_default_headers
-    dodo_payments = Dodopayments::Client.new(
-      base_url: "http://localhost:4010",
-      bearer_token: "My Bearer Token"
-    )
+    dodo_payments =
+      Dodopayments::Client.new(base_url: "http://localhost:4010", bearer_token: "My Bearer Token")
     requester = MockRequester.new(200, {}, {})
     dodo_payments.requester = requester
     dodo_payments.payments.create(

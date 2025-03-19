@@ -17,7 +17,8 @@ module Dodopayments
   #
   # @example
   # ```ruby
-  # payments = default_page_number_pagination
+  # payments =
+  #   default_page_number_pagination
   #   .to_enum
   #   .lazy
   #   .select { _1.object_id.even? }

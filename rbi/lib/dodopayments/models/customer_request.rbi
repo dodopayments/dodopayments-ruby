@@ -5,7 +5,8 @@ module Dodopayments
     class CustomerRequest < Dodopayments::Union
       abstract!
 
-      Variants = type_template(:out) { {fixed: T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer)} }
+      Variants =
+        type_template(:out) { {fixed: T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer)} }
     end
   end
 end

@@ -4,11 +4,12 @@ require_relative "../test_helper"
 
 class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::ResourceTest
   def test_create_required_params
-    response = @dodo_payments.payments.create(
-      billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-      customer: {customer_id: "customer_id"},
-      product_cart: [{product_id: "product_id", quantity: 0}]
-    )
+    response =
+      @dodo_payments.payments.create(
+        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
+        customer: {customer_id: "customer_id"},
+        product_cart: [{product_id: "product_id", quantity: 0}]
+      )
 
     assert_pattern do
       response => Dodopayments::Models::PaymentCreateResponse
