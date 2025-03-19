@@ -16,6 +16,7 @@ module Dodopayments
     DEFAULT_MAX_RETRY_DELAY = 8.0
 
     # rubocop:disable Style/MutableConstant
+    # @type [Hash{Symbol=>String}]
     ENVIRONMENTS = {live_mode: "https://live.dodopayments.com", test_mode: "https://test.dodopayments.com"}
     # rubocop:enable Style/MutableConstant
 
