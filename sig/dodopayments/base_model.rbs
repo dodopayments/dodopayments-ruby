@@ -178,6 +178,8 @@ module Dodopayments
     def self.known_fields: -> ::Hash[Symbol, (Dodopayments::BaseModel::known_field
     & { type_fn: (^-> Dodopayments::Converter::input) })]
 
+    def self.reverse_map: -> ::Hash[Symbol, Symbol]
+
     def self.fields: -> ::Hash[Symbol, (Dodopayments::BaseModel::known_field
     & { type: Dodopayments::Converter::input })]
 
