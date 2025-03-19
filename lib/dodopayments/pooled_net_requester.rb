@@ -51,6 +51,7 @@ module Dodopayments
       #
       # @param blk [Proc]
       #
+      # @yieldparam [String]
       # @return [Net::HTTPGenericRequest]
       def build_request(request, &)
         method, url, headers, body = request.fetch_values(:method, :url, :headers, :body)
@@ -86,6 +87,9 @@ module Dodopayments
     # @param url [URI::Generic]
     # @param deadline [Float]
     # @param blk [Proc]
+    #
+    # @raise [Timeout::Error]
+    # @yieldparam [Net::HTTP]
     private def with_pool(url, deadline:, &blk)
       origin = Dodopayments::Util.uri_origin(url)
       timeout = deadline - Dodopayments::Util.monotonic_secs
