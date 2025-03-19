@@ -123,6 +123,13 @@ module Dodopayments
   class ArrayOf[Elem]
     include Dodopayments::Converter
 
+    def self.[]: (
+      ::Hash[Symbol, top]
+      | ^-> Dodopayments::Converter::input
+      | Dodopayments::Converter::input type_info,
+      ?::Hash[Symbol, top] spec
+    ) -> instance
+
     def ===: (top other) -> bool
 
     def ==: (top other) -> bool
@@ -147,6 +154,13 @@ module Dodopayments
 
   class HashOf[Elem]
     include Dodopayments::Converter
+
+    def self.[]: (
+      ::Hash[Symbol, top]
+      | ^-> Dodopayments::Converter::input
+      | Dodopayments::Converter::input type_info,
+      ?::Hash[Symbol, top] spec
+    ) -> instance
 
     def ===: (top other) -> bool
 

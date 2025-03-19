@@ -3,5 +3,7 @@ module Dodopayments
     include Dodopayments::BasePage[Elem]
 
     attr_accessor items: ::Array[Elem]?
+
+    def inspect: -> String
   end
 end

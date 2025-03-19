@@ -13,5 +13,9 @@ module Dodopayments
     sig { params(_: T.nilable(T::Array[Elem])).returns(T.nilable(T::Array[Elem])) }
     def items=(_)
     end
+
+    sig { returns(String) }
+    def inspect
+    end
   end
 end
