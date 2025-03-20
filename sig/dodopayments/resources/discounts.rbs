@@ -9,12 +9,12 @@ module Dodopayments
         | (
           amount: Integer,
           type: Dodopayments::Models::discount_type,
-          code: String?,
-          expires_at: Time?,
-          name: String?,
-          restricted_to: ::Array[String]?,
-          usage_limit: Integer?,
-          request_options: Dodopayments::request_opts
+          ?code: String?,
+          ?expires_at: Time?,
+          ?name: String?,
+          ?restricted_to: ::Array[String]?,
+          ?usage_limit: Integer?,
+          ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::Models::Discount
 
       def retrieve:
@@ -25,7 +25,7 @@ module Dodopayments
         ) -> Dodopayments::Models::Discount
         | (
           String discount_id,
-          request_options: Dodopayments::request_opts
+          ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::Models::Discount
 
       def update:
@@ -36,14 +36,14 @@ module Dodopayments
         ) -> Dodopayments::Models::Discount
         | (
           String discount_id,
-          amount: Integer?,
-          code: String?,
-          expires_at: Time?,
-          name: String?,
-          restricted_to: ::Array[String]?,
-          type: Dodopayments::Models::discount_type?,
-          usage_limit: Integer?,
-          request_options: Dodopayments::request_opts
+          ?amount: Integer?,
+          ?code: String?,
+          ?expires_at: Time?,
+          ?name: String?,
+          ?restricted_to: ::Array[String]?,
+          ?type: Dodopayments::Models::discount_type?,
+          ?usage_limit: Integer?,
+          ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::Models::Discount
 
       def list:
@@ -51,9 +51,9 @@ module Dodopayments
           ?Dodopayments::Models::DiscountListParams | ::Hash[Symbol, top] params
         ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Discount]
         | (
-          page_number: Integer?,
-          page_size: Integer?,
-          request_options: Dodopayments::request_opts
+          ?page_number: Integer?,
+          ?page_size: Integer?,
+          ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Discount]
 
       def delete:
@@ -64,7 +64,7 @@ module Dodopayments
         ) -> nil
         | (
           String discount_id,
-          request_options: Dodopayments::request_opts
+          ?request_options: Dodopayments::request_opts
         ) -> nil
 
       def initialize: (client: Dodopayments::Client) -> void

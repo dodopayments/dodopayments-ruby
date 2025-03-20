@@ -26,12 +26,12 @@ module Dodopayments
 
       def initialize:
         (
-          customer_id: String?,
-          page_number: Integer?,
-          page_size: Integer?,
-          product_id: String?,
-          status: Dodopayments::Models::license_key_status?,
-          request_options: Dodopayments::request_opts
+          ?customer_id: String?,
+          ?page_number: Integer?,
+          ?page_size: Integer?,
+          ?product_id: String?,
+          ?status: Dodopayments::Models::license_key_status?,
+          ?request_options: Dodopayments::request_opts
         ) -> void
         | (
           ?Dodopayments::Models::license_key_list_params

@@ -42,10 +42,10 @@ module Dodopayments
             discount: Float,
             price: Integer,
             purchasing_power_parity: bool,
-            pay_what_you_want: bool,
-            suggested_price: Integer?,
-            tax_inclusive: bool?,
-            type: :one_time_price
+            ?pay_what_you_want: bool,
+            ?suggested_price: Integer?,
+            ?tax_inclusive: bool?,
+            ?type: :one_time_price
           ) -> void
           | (
             ?Dodopayments::Models::Price::one_time_price
@@ -402,9 +402,9 @@ module Dodopayments
             purchasing_power_parity: bool,
             subscription_period_count: Integer,
             subscription_period_interval: Dodopayments::Models::time_interval,
-            tax_inclusive: bool?,
-            trial_period_days: Integer,
-            type: :recurring_price
+            ?tax_inclusive: bool?,
+            ?trial_period_days: Integer,
+            ?type: :recurring_price
           ) -> void
           | (
             ?Dodopayments::Models::Price::recurring_price

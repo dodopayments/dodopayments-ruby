@@ -77,8 +77,8 @@ module Dodopayments
           subscription_period_interval: Dodopayments::Models::time_interval,
           tax_inclusive: bool,
           trial_period_days: Integer,
-          cancelled_at: Time?,
-          discount_id: String?
+          ?cancelled_at: Time?,
+          ?discount_id: String?
         ) -> void
         | (
           ?Dodopayments::Models::subscription | Dodopayments::BaseModel data

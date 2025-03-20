@@ -32,14 +32,14 @@ module Dodopayments
 
       def initialize:
         (
-          amount: Integer?,
-          code: String?,
-          expires_at: Time?,
-          name: String?,
-          restricted_to: ::Array[String]?,
-          type: Dodopayments::Models::discount_type?,
-          usage_limit: Integer?,
-          request_options: Dodopayments::request_opts
+          ?amount: Integer?,
+          ?code: String?,
+          ?expires_at: Time?,
+          ?name: String?,
+          ?restricted_to: ::Array[String]?,
+          ?type: Dodopayments::Models::discount_type?,
+          ?usage_limit: Integer?,
+          ?request_options: Dodopayments::request_opts
         ) -> void
         | (
           ?Dodopayments::Models::discount_update_params

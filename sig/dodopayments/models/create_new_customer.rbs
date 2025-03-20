@@ -23,8 +23,8 @@ module Dodopayments
         (
           email: String,
           name: String,
-          create_new_customer: bool,
-          phone_number: String?
+          ?create_new_customer: bool,
+          ?phone_number: String?
         ) -> void
         | (
           ?Dodopayments::Models::create_new_customer

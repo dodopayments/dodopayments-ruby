@@ -46,13 +46,13 @@ module Dodopayments
     private def auth_headers: -> ::Hash[String, String]
 
     def initialize: (
-      environment: :live_mode | :test_mode | nil,
-      base_url: String?,
-      bearer_token: String?,
-      max_retries: Integer,
-      timeout: Float,
-      initial_retry_delay: Float,
-      max_retry_delay: Float
+      ?environment: :live_mode | :test_mode | nil,
+      ?base_url: String?,
+      ?bearer_token: String?,
+      ?max_retries: Integer,
+      ?timeout: Float,
+      ?initial_retry_delay: Float,
+      ?max_retry_delay: Float
     ) -> void
   end
 end

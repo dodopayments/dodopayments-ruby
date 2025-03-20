@@ -7,7 +7,7 @@ module Dodopayments
           | ::Hash[Symbol, top] params
         ) -> Dodopayments::Models::misc_list_supported_countries_response
         | (
-          request_options: Dodopayments::request_opts
+          ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::Models::misc_list_supported_countries_response
 
       def initialize: (client: Dodopayments::Client) -> void

@@ -12,8 +12,8 @@ module Dodopayments
 
         def initialize:
           (
-            send_email: bool?,
-            request_options: Dodopayments::request_opts
+            ?send_email: bool?,
+            ?request_options: Dodopayments::request_opts
           ) -> void
           | (
             ?Dodopayments::Models::Customers::customer_portal_create_params

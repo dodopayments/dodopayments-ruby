@@ -48,9 +48,9 @@ module Dodopayments
           restricted_to: ::Array[String],
           times_used: Integer,
           type: Dodopayments::Models::discount_type,
-          expires_at: Time?,
-          name: String?,
-          usage_limit: Integer?
+          ?expires_at: Time?,
+          ?name: String?,
+          ?usage_limit: Integer?
         ) -> void
         | (
           ?Dodopayments::Models::discount | Dodopayments::BaseModel data

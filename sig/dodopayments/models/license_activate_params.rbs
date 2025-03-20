@@ -15,7 +15,7 @@ module Dodopayments
         (
           license_key: String,
           name: String,
-          request_options: Dodopayments::request_opts
+          ?request_options: Dodopayments::request_opts
         ) -> void
         | (
           ?Dodopayments::Models::license_activate_params

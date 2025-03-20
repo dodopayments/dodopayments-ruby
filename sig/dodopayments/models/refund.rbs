@@ -36,9 +36,9 @@ module Dodopayments
           payment_id: String,
           refund_id: String,
           status: Dodopayments::Models::refund_status,
-          amount: Integer?,
-          currency: Dodopayments::Models::Refund::currency?,
-          reason: String?
+          ?amount: Integer?,
+          ?currency: Dodopayments::Models::Refund::currency?,
+          ?reason: String?
         ) -> void
         | (?Dodopayments::Models::refund | Dodopayments::BaseModel data) -> void
 

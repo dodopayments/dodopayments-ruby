@@ -14,9 +14,9 @@ module Dodopayments
 
       def initialize:
         (
-          page_number: Integer?,
-          page_size: Integer?,
-          request_options: Dodopayments::request_opts
+          ?page_number: Integer?,
+          ?page_size: Integer?,
+          ?request_options: Dodopayments::request_opts
         ) -> void
         | (
           ?Dodopayments::Models::payout_list_params

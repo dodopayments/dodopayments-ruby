@@ -9,7 +9,7 @@ module Dodopayments
         ) -> Dodopayments::Models::Dispute
         | (
           String dispute_id,
-          request_options: Dodopayments::request_opts
+          ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::Models::Dispute
 
       def list:
@@ -17,14 +17,14 @@ module Dodopayments
           ?Dodopayments::Models::DisputeListParams | ::Hash[Symbol, top] params
         ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Dispute]
         | (
-          created_at_gte: Time?,
-          created_at_lte: Time?,
-          customer_id: String?,
-          dispute_stage: Dodopayments::Models::dispute_stage?,
-          dispute_status: Dodopayments::Models::dispute_status?,
-          page_number: Integer?,
-          page_size: Integer?,
-          request_options: Dodopayments::request_opts
+          ?created_at_gte: Time?,
+          ?created_at_lte: Time?,
+          ?customer_id: String?,
+          ?dispute_stage: Dodopayments::Models::dispute_stage?,
+          ?dispute_status: Dodopayments::Models::dispute_status?,
+          ?page_number: Integer?,
+          ?page_size: Integer?,
+          ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Dispute]
 
       def initialize: (client: Dodopayments::Client) -> void

@@ -9,7 +9,7 @@ module Dodopayments
         ) -> Dodopayments::Models::LicenseKeyInstance
         | (
           String id,
-          request_options: Dodopayments::request_opts
+          ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::Models::LicenseKeyInstance
 
       def update:
@@ -21,7 +21,7 @@ module Dodopayments
         | (
           String id,
           name: String,
-          request_options: Dodopayments::request_opts
+          ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::Models::LicenseKeyInstance
 
       def list:
@@ -30,10 +30,10 @@ module Dodopayments
           | ::Hash[Symbol, top] params
         ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::LicenseKeyInstance]
         | (
-          license_key_id: String?,
-          page_number: Integer?,
-          page_size: Integer?,
-          request_options: Dodopayments::request_opts
+          ?license_key_id: String?,
+          ?page_number: Integer?,
+          ?page_size: Integer?,
+          ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::LicenseKeyInstance]
 
       def initialize: (client: Dodopayments::Client) -> void

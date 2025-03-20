@@ -16,10 +16,10 @@ module Dodopayments
 
       def initialize:
         (
-          license_key_id: String?,
-          page_number: Integer?,
-          page_size: Integer?,
-          request_options: Dodopayments::request_opts
+          ?license_key_id: String?,
+          ?page_number: Integer?,
+          ?page_size: Integer?,
+          ?request_options: Dodopayments::request_opts
         ) -> void
         | (
           ?Dodopayments::Models::license_key_instance_list_params

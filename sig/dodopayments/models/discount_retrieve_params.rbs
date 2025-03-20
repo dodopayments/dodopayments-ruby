@@ -7,7 +7,7 @@ module Dodopayments
       include Dodopayments::RequestParameters
 
       def initialize:
-        (request_options: Dodopayments::request_opts) -> void
+        (?request_options: Dodopayments::request_opts) -> void
         | (
           ?Dodopayments::Models::discount_retrieve_params
           | Dodopayments::BaseModel data

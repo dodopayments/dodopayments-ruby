@@ -30,7 +30,7 @@ module Dodopayments
           customer_id: String,
           email: String,
           name: String,
-          phone_number: String?
+          ?phone_number: String?
         ) -> void
         | (
           ?Dodopayments::Models::customer | Dodopayments::BaseModel data

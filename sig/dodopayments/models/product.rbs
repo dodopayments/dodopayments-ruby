@@ -60,13 +60,13 @@ module Dodopayments
           product_id: String,
           tax_category: Dodopayments::Models::Product::tax_category,
           updated_at: Time,
-          addons: ::Array[String]?,
-          description: String?,
-          image: String?,
-          license_key_activation_message: String?,
-          license_key_activations_limit: Integer?,
-          license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
-          name: String?
+          ?addons: ::Array[String]?,
+          ?description: String?,
+          ?image: String?,
+          ?license_key_activation_message: String?,
+          ?license_key_activations_limit: Integer?,
+          ?license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
+          ?name: String?
         ) -> void
         | (
           ?Dodopayments::Models::product | Dodopayments::BaseModel data

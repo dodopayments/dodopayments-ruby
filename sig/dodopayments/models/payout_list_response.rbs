@@ -64,9 +64,9 @@ module Dodopayments
           status: Dodopayments::Models::PayoutListResponse::status,
           tax: Integer,
           updated_at: Time,
-          name: String?,
-          payout_document_url: String?,
-          remarks: String?
+          ?name: String?,
+          ?payout_document_url: String?,
+          ?remarks: String?
         ) -> void
         | (
           ?Dodopayments::Models::payout_list_response

@@ -17,9 +17,9 @@ module Dodopayments
       def initialize:
         (
           payment_id: String,
-          amount: Integer?,
-          reason: String?,
-          request_options: Dodopayments::request_opts
+          ?amount: Integer?,
+          ?reason: String?,
+          ?request_options: Dodopayments::request_opts
         ) -> void
         | (
           ?Dodopayments::Models::refund_create_params

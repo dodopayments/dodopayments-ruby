@@ -36,9 +36,9 @@ module Dodopayments
           metadata: ::Hash[Symbol, String],
           payment_id: String,
           total_amount: Integer,
-          discount_id: String?,
-          payment_link: String?,
-          product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]?
+          ?discount_id: String?,
+          ?payment_link: String?,
+          ?product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]?
         ) -> void
         | (
           ?Dodopayments::Models::payment_create_response

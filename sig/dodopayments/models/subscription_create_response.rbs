@@ -32,9 +32,9 @@ module Dodopayments
           metadata: ::Hash[Symbol, String],
           recurring_pre_tax_amount: Integer,
           subscription_id: String,
-          client_secret: String?,
-          discount_id: String?,
-          payment_link: String?
+          ?client_secret: String?,
+          ?discount_id: String?,
+          ?payment_link: String?
         ) -> void
         | (
           ?Dodopayments::Models::subscription_create_response

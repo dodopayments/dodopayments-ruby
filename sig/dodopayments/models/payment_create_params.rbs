@@ -40,12 +40,12 @@ module Dodopayments
           billing: Dodopayments::Models::BillingAddress,
           customer: Dodopayments::Models::customer_request,
           product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem],
-          discount_code: String?,
-          metadata: ::Hash[Symbol, String],
-          payment_link: bool?,
-          return_url: String?,
-          tax_id: String?,
-          request_options: Dodopayments::request_opts
+          ?discount_code: String?,
+          ?metadata: ::Hash[Symbol, String],
+          ?payment_link: bool?,
+          ?return_url: String?,
+          ?tax_id: String?,
+          ?request_options: Dodopayments::request_opts
         ) -> void
         | (
           ?Dodopayments::Models::payment_create_params

@@ -25,11 +25,11 @@ module Dodopayments
 
       def initialize:
         (
-          archived: bool,
-          page_number: Integer?,
-          page_size: Integer?,
-          recurring: bool?,
-          request_options: Dodopayments::request_opts
+          ?archived: bool,
+          ?page_number: Integer?,
+          ?page_size: Integer?,
+          ?recurring: bool?,
+          ?request_options: Dodopayments::request_opts
         ) -> void
         | (
           ?Dodopayments::Models::product_list_params

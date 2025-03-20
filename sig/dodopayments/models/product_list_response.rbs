@@ -52,13 +52,13 @@ module Dodopayments
           product_id: String,
           tax_category: Dodopayments::Models::ProductListResponse::tax_category,
           updated_at: Time,
-          currency: Dodopayments::Models::ProductListResponse::currency?,
-          description: String?,
-          image: String?,
-          name: String?,
-          price: Integer?,
-          price_detail: Dodopayments::Models::price?,
-          tax_inclusive: bool?
+          ?currency: Dodopayments::Models::ProductListResponse::currency?,
+          ?description: String?,
+          ?image: String?,
+          ?name: String?,
+          ?price: Integer?,
+          ?price_detail: Dodopayments::Models::price?,
+          ?tax_inclusive: bool?
         ) -> void
         | (
           ?Dodopayments::Models::product_list_response

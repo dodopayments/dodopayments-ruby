@@ -11,8 +11,8 @@ module Dodopayments
         | (
           email: String,
           name: String,
-          phone_number: String?,
-          request_options: Dodopayments::request_opts
+          ?phone_number: String?,
+          ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::Models::Customer
 
       def retrieve:
@@ -23,7 +23,7 @@ module Dodopayments
         ) -> Dodopayments::Models::Customer
         | (
           String customer_id,
-          request_options: Dodopayments::request_opts
+          ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::Models::Customer
 
       def update:
@@ -34,9 +34,9 @@ module Dodopayments
         ) -> Dodopayments::Models::Customer
         | (
           String customer_id,
-          name: String?,
-          phone_number: String?,
-          request_options: Dodopayments::request_opts
+          ?name: String?,
+          ?phone_number: String?,
+          ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::Models::Customer
 
       def list:
@@ -44,9 +44,9 @@ module Dodopayments
           ?Dodopayments::Models::CustomerListParams | ::Hash[Symbol, top] params
         ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Customer]
         | (
-          page_number: Integer?,
-          page_size: Integer?,
-          request_options: Dodopayments::request_opts
+          ?page_number: Integer?,
+          ?page_size: Integer?,
+          ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Customer]
 
       def initialize: (client: Dodopayments::Client) -> void

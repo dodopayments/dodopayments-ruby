@@ -43,10 +43,10 @@ module Dodopayments
           metadata: ::Hash[Symbol, String],
           payment_id: String,
           total_amount: Integer,
-          payment_method: String?,
-          payment_method_type: String?,
-          status: Dodopayments::Models::intent_status?,
-          subscription_id: String?
+          ?payment_method: String?,
+          ?payment_method_type: String?,
+          ?status: Dodopayments::Models::intent_status?,
+          ?subscription_id: String?
         ) -> void
         | (
           ?Dodopayments::Models::payment_list_response

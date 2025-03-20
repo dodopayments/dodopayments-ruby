@@ -16,10 +16,10 @@ module Dodopayments
 
       def initialize:
         (
-          activations_limit: Integer?,
-          disabled: bool?,
-          expires_at: Time?,
-          request_options: Dodopayments::request_opts
+          ?activations_limit: Integer?,
+          ?disabled: bool?,
+          ?expires_at: Time?,
+          ?request_options: Dodopayments::request_opts
         ) -> void
         | (
           ?Dodopayments::Models::license_key_update_params

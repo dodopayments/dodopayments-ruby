@@ -9,7 +9,7 @@ module Dodopayments
         ) -> Dodopayments::Models::WebhookEvent
         | (
           String webhook_event_id,
-          request_options: Dodopayments::request_opts
+          ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::Models::WebhookEvent
 
       def list:
@@ -18,13 +18,13 @@ module Dodopayments
           | ::Hash[Symbol, top] params
         ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::WebhookEvent]
         | (
-          created_at_gte: Time?,
-          created_at_lte: Time?,
-          limit: Integer?,
-          object_id_: String?,
-          page_number: Integer?,
-          page_size: Integer?,
-          request_options: Dodopayments::request_opts
+          ?created_at_gte: Time?,
+          ?created_at_lte: Time?,
+          ?limit: Integer?,
+          ?object_id_: String?,
+          ?page_number: Integer?,
+          ?page_size: Integer?,
+          ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::WebhookEvent]
 
       def initialize: (client: Dodopayments::Client) -> void

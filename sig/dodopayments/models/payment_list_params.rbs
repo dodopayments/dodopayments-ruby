@@ -32,14 +32,14 @@ module Dodopayments
 
       def initialize:
         (
-          created_at_gte: Time?,
-          created_at_lte: Time?,
-          customer_id: String?,
-          page_number: Integer?,
-          page_size: Integer?,
-          status: Dodopayments::Models::intent_status?,
-          subscription_id: String?,
-          request_options: Dodopayments::request_opts
+          ?created_at_gte: Time?,
+          ?created_at_lte: Time?,
+          ?customer_id: String?,
+          ?page_number: Integer?,
+          ?page_size: Integer?,
+          ?status: Dodopayments::Models::intent_status?,
+          ?subscription_id: String?,
+          ?request_options: Dodopayments::request_opts
         ) -> void
         | (
           ?Dodopayments::Models::payment_list_params

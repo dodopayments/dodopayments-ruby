@@ -52,9 +52,9 @@ module Dodopayments
           payment_id: String,
           product_id: String,
           status: Dodopayments::Models::license_key_status,
-          activations_limit: Integer?,
-          expires_at: Time?,
-          subscription_id: String?
+          ?activations_limit: Integer?,
+          ?expires_at: Time?,
+          ?subscription_id: String?
         ) -> void
         | (
           ?Dodopayments::Models::license_key | Dodopayments::BaseModel data

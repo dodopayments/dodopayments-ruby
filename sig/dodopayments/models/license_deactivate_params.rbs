@@ -16,7 +16,7 @@ module Dodopayments
         (
           license_key: String,
           license_key_instance_id: String,
-          request_options: Dodopayments::request_opts
+          ?request_options: Dodopayments::request_opts
         ) -> void
         | (
           ?Dodopayments::Models::license_deactivate_params

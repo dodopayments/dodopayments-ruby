@@ -18,8 +18,8 @@ module Dodopayments
         (
           email: String,
           name: String,
-          phone_number: String?,
-          request_options: Dodopayments::request_opts
+          ?phone_number: String?,
+          ?request_options: Dodopayments::request_opts
         ) -> void
         | (
           ?Dodopayments::Models::customer_create_params

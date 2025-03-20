@@ -17,9 +17,9 @@ module Dodopayments
 
       def initialize:
         (
-          metadata: ::Hash[Symbol, String]?,
-          status: Dodopayments::Models::subscription_status?,
-          request_options: Dodopayments::request_opts
+          ?metadata: ::Hash[Symbol, String]?,
+          ?status: Dodopayments::Models::subscription_status?,
+          ?request_options: Dodopayments::request_opts
         ) -> void
         | (
           ?Dodopayments::Models::subscription_update_params

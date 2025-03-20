@@ -34,12 +34,12 @@ module Dodopayments
         (
           amount: Integer,
           type: Dodopayments::Models::discount_type,
-          code: String?,
-          expires_at: Time?,
-          name: String?,
-          restricted_to: ::Array[String]?,
-          usage_limit: Integer?,
-          request_options: Dodopayments::request_opts
+          ?code: String?,
+          ?expires_at: Time?,
+          ?name: String?,
+          ?restricted_to: ::Array[String]?,
+          ?usage_limit: Integer?,
+          ?request_options: Dodopayments::request_opts
         ) -> void
         | (
           ?Dodopayments::Models::discount_create_params

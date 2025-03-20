@@ -12,8 +12,8 @@ module Dodopayments
 
         def initialize:
           (
-            force_update: bool?,
-            request_options: Dodopayments::request_opts
+            ?force_update: bool?,
+            ?request_options: Dodopayments::request_opts
           ) -> void
           | (
             ?Dodopayments::Models::Products::image_update_params

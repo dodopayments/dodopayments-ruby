@@ -10,8 +10,8 @@ module Dodopayments
           ) -> Dodopayments::Models::Products::ImageUpdateResponse
           | (
             String id,
-            force_update: bool?,
-            request_options: Dodopayments::request_opts
+            ?force_update: bool?,
+            ?request_options: Dodopayments::request_opts
           ) -> Dodopayments::Models::Products::ImageUpdateResponse
 
         def initialize: (client: Dodopayments::Client) -> void

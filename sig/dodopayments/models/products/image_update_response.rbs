@@ -9,7 +9,7 @@ module Dodopayments
         attr_accessor image_id: String?
 
         def initialize:
-          (url: String, image_id: String?) -> void
+          (url: String, ?image_id: String?) -> void
           | (
             ?Dodopayments::Models::Products::image_update_response
             | Dodopayments::BaseModel data

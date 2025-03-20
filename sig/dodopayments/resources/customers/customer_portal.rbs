@@ -10,8 +10,8 @@ module Dodopayments
           ) -> nil
           | (
             String customer_id,
-            send_email: bool?,
-            request_options: Dodopayments::request_opts
+            ?send_email: bool?,
+            ?request_options: Dodopayments::request_opts
           ) -> nil
 
         def initialize: (client: Dodopayments::Client) -> void

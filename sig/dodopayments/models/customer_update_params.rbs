@@ -14,9 +14,9 @@ module Dodopayments
 
       def initialize:
         (
-          name: String?,
-          phone_number: String?,
-          request_options: Dodopayments::request_opts
+          ?name: String?,
+          ?phone_number: String?,
+          ?request_options: Dodopayments::request_opts
         ) -> void
         | (
           ?Dodopayments::Models::customer_update_params

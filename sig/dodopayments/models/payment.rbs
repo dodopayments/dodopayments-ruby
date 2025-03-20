@@ -73,16 +73,16 @@ module Dodopayments
           payment_id: String,
           refunds: ::Array[Dodopayments::Models::Refund],
           total_amount: Integer,
-          discount_id: String?,
-          error_message: String?,
-          payment_link: String?,
-          payment_method: String?,
-          payment_method_type: String?,
-          product_cart: ::Array[Dodopayments::Models::Payment::ProductCart]?,
-          status: Dodopayments::Models::intent_status?,
-          subscription_id: String?,
-          tax: Integer?,
-          updated_at: Time?
+          ?discount_id: String?,
+          ?error_message: String?,
+          ?payment_link: String?,
+          ?payment_method: String?,
+          ?payment_method_type: String?,
+          ?product_cart: ::Array[Dodopayments::Models::Payment::ProductCart]?,
+          ?status: Dodopayments::Models::intent_status?,
+          ?subscription_id: String?,
+          ?tax: Integer?,
+          ?updated_at: Time?
         ) -> void
         | (
           ?Dodopayments::Models::payment | Dodopayments::BaseModel data
