@@ -10,15 +10,10 @@ module Dodopayments
 
         attr_accessor send_email: bool?
 
-        def initialize:
-          (
-            ?send_email: bool?,
-            ?request_options: Dodopayments::request_opts
-          ) -> void
-          | (
-            ?Dodopayments::Models::Customers::customer_portal_create_params
-            | Dodopayments::BaseModel data
-          ) -> void
+        def initialize: (
+          ?send_email: bool?,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
 
         def to_hash: -> Dodopayments::Models::Customers::customer_portal_create_params
       end

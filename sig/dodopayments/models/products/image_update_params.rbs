@@ -10,15 +10,10 @@ module Dodopayments
 
         attr_accessor force_update: bool?
 
-        def initialize:
-          (
-            ?force_update: bool?,
-            ?request_options: Dodopayments::request_opts
-          ) -> void
-          | (
-            ?Dodopayments::Models::Products::image_update_params
-            | Dodopayments::BaseModel data
-          ) -> void
+        def initialize: (
+          ?force_update: bool?,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
 
         def to_hash: -> Dodopayments::Models::Products::image_update_params
       end

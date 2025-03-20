@@ -1,31 +1,21 @@
 module Dodopayments
   module Resources
     class Disputes
-      def retrieve:
-        (
-          String dispute_id,
-          ?Dodopayments::Models::DisputeRetrieveParams
-          | ::Hash[Symbol, top] params
-        ) -> Dodopayments::Models::Dispute
-        | (
-          String dispute_id,
-          ?request_options: Dodopayments::request_opts
-        ) -> Dodopayments::Models::Dispute
+      def retrieve: (
+        String dispute_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::Dispute
 
-      def list:
-        (
-          ?Dodopayments::Models::DisputeListParams | ::Hash[Symbol, top] params
-        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Dispute]
-        | (
-          ?created_at_gte: Time?,
-          ?created_at_lte: Time?,
-          ?customer_id: String?,
-          ?dispute_stage: Dodopayments::Models::dispute_stage?,
-          ?dispute_status: Dodopayments::Models::dispute_status?,
-          ?page_number: Integer?,
-          ?page_size: Integer?,
-          ?request_options: Dodopayments::request_opts
-        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Dispute]
+      def list: (
+        ?created_at_gte: Time?,
+        ?created_at_lte: Time?,
+        ?customer_id: String?,
+        ?dispute_stage: Dodopayments::Models::dispute_stage?,
+        ?dispute_status: Dodopayments::Models::dispute_status?,
+        ?page_number: Integer?,
+        ?page_size: Integer?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Dispute]
 
       def initialize: (client: Dodopayments::Client) -> void
     end

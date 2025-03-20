@@ -23,18 +23,14 @@ module Dodopayments
 
       attr_accessor phone_number: String?
 
-      def initialize:
-        (
-          business_id: String,
-          created_at: Time,
-          customer_id: String,
-          email: String,
-          name: String,
-          ?phone_number: String?
-        ) -> void
-        | (
-          ?Dodopayments::Models::customer | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        business_id: String,
+        created_at: Time,
+        customer_id: String,
+        email: String,
+        name: String,
+        ?phone_number: String?
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::customer
     end

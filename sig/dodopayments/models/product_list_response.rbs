@@ -44,26 +44,21 @@ module Dodopayments
 
       attr_accessor tax_inclusive: bool?
 
-      def initialize:
-        (
-          business_id: String,
-          created_at: Time,
-          is_recurring: bool,
-          product_id: String,
-          tax_category: Dodopayments::Models::ProductListResponse::tax_category,
-          updated_at: Time,
-          ?currency: Dodopayments::Models::ProductListResponse::currency?,
-          ?description: String?,
-          ?image: String?,
-          ?name: String?,
-          ?price: Integer?,
-          ?price_detail: Dodopayments::Models::price?,
-          ?tax_inclusive: bool?
-        ) -> void
-        | (
-          ?Dodopayments::Models::product_list_response
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        business_id: String,
+        created_at: Time,
+        is_recurring: bool,
+        product_id: String,
+        tax_category: Dodopayments::Models::ProductListResponse::tax_category,
+        updated_at: Time,
+        ?currency: Dodopayments::Models::ProductListResponse::currency?,
+        ?description: String?,
+        ?image: String?,
+        ?name: String?,
+        ?price: Integer?,
+        ?price_detail: Dodopayments::Models::price?,
+        ?tax_inclusive: bool?
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::product_list_response
 

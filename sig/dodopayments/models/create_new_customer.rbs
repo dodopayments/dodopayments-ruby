@@ -19,17 +19,12 @@ module Dodopayments
 
       attr_accessor phone_number: String?
 
-      def initialize:
-        (
-          email: String,
-          name: String,
-          ?create_new_customer: bool,
-          ?phone_number: String?
-        ) -> void
-        | (
-          ?Dodopayments::Models::create_new_customer
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        email: String,
+        name: String,
+        ?create_new_customer: bool,
+        ?phone_number: String?
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::create_new_customer
     end

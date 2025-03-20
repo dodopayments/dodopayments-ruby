@@ -29,20 +29,16 @@ module Dodopayments
 
       attr_accessor response: String?
 
-      def initialize:
-        (
-          business_id: String,
-          created_at: Time,
-          event_id: String,
-          event_type: String,
-          object_id_: String,
-          ?latest_attempted_at: Time?,
-          ?request: String?,
-          ?response: String?
-        ) -> void
-        | (
-          ?Dodopayments::Models::webhook_event | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        business_id: String,
+        created_at: Time,
+        event_id: String,
+        event_type: String,
+        object_id_: String,
+        ?latest_attempted_at: Time?,
+        ?request: String?,
+        ?response: String?
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::webhook_event
     end

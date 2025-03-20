@@ -39,24 +39,19 @@ module Dodopayments
 
       attr_accessor tax_category: Dodopayments::Models::ProductUpdateParams::tax_category?
 
-      def initialize:
-        (
-          ?addons: ::Array[String]?,
-          ?description: String?,
-          ?image_id: String?,
-          ?license_key_activation_message: String?,
-          ?license_key_activations_limit: Integer?,
-          ?license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
-          ?license_key_enabled: bool?,
-          ?name: String?,
-          ?price: Dodopayments::Models::price?,
-          ?tax_category: Dodopayments::Models::ProductUpdateParams::tax_category?,
-          ?request_options: Dodopayments::request_opts
-        ) -> void
-        | (
-          ?Dodopayments::Models::product_update_params
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        ?addons: ::Array[String]?,
+        ?description: String?,
+        ?image_id: String?,
+        ?license_key_activation_message: String?,
+        ?license_key_activations_limit: Integer?,
+        ?license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
+        ?license_key_enabled: bool?,
+        ?name: String?,
+        ?price: Dodopayments::Models::price?,
+        ?tax_category: Dodopayments::Models::ProductUpdateParams::tax_category?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::product_update_params
 

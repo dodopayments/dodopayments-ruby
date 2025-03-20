@@ -29,18 +29,16 @@ module Dodopayments
 
       attr_accessor reason: String?
 
-      def initialize:
-        (
-          business_id: String,
-          created_at: Time,
-          payment_id: String,
-          refund_id: String,
-          status: Dodopayments::Models::refund_status,
-          ?amount: Integer?,
-          ?currency: Dodopayments::Models::Refund::currency?,
-          ?reason: String?
-        ) -> void
-        | (?Dodopayments::Models::refund | Dodopayments::BaseModel data) -> void
+      def initialize: (
+        business_id: String,
+        created_at: Time,
+        payment_id: String,
+        refund_id: String,
+        status: Dodopayments::Models::refund_status,
+        ?amount: Integer?,
+        ?currency: Dodopayments::Models::Refund::currency?,
+        ?reason: String?
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::refund
 

@@ -27,20 +27,15 @@ module Dodopayments
 
       attr_accessor page_size: Integer?
 
-      def initialize:
-        (
-          ?created_at_gte: Time?,
-          ?created_at_lte: Time?,
-          ?limit: Integer?,
-          ?object_id_: String?,
-          ?page_number: Integer?,
-          ?page_size: Integer?,
-          ?request_options: Dodopayments::request_opts
-        ) -> void
-        | (
-          ?Dodopayments::Models::webhook_event_list_params
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        ?created_at_gte: Time?,
+        ?created_at_lte: Time?,
+        ?limit: Integer?,
+        ?object_id_: String?,
+        ?page_number: Integer?,
+        ?page_size: Integer?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::webhook_event_list_params
     end

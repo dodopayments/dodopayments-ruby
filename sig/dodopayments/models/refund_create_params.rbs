@@ -14,17 +14,12 @@ module Dodopayments
 
       attr_accessor reason: String?
 
-      def initialize:
-        (
-          payment_id: String,
-          ?amount: Integer?,
-          ?reason: String?,
-          ?request_options: Dodopayments::request_opts
-        ) -> void
-        | (
-          ?Dodopayments::Models::refund_create_params
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        payment_id: String,
+        ?amount: Integer?,
+        ?reason: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::refund_create_params
     end

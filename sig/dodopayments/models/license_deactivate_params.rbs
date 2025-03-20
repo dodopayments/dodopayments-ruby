@@ -12,16 +12,11 @@ module Dodopayments
 
       attr_accessor license_key_instance_id: String
 
-      def initialize:
-        (
-          license_key: String,
-          license_key_instance_id: String,
-          ?request_options: Dodopayments::request_opts
-        ) -> void
-        | (
-          ?Dodopayments::Models::license_deactivate_params
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        license_key: String,
+        license_key_instance_id: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::license_deactivate_params
     end

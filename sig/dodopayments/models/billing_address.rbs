@@ -20,17 +20,13 @@ module Dodopayments
 
       attr_accessor zipcode: String
 
-      def initialize:
-        (
-          city: String,
-          country: Dodopayments::Models::country_code,
-          state: String,
-          street: String,
-          zipcode: String
-        ) -> void
-        | (
-          ?Dodopayments::Models::billing_address | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        city: String,
+        country: Dodopayments::Models::country_code,
+        state: String,
+        street: String,
+        zipcode: String
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::billing_address
     end

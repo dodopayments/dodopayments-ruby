@@ -23,18 +23,13 @@ module Dodopayments
 
       attr_accessor recurring: bool?
 
-      def initialize:
-        (
-          ?archived: bool,
-          ?page_number: Integer?,
-          ?page_size: Integer?,
-          ?recurring: bool?,
-          ?request_options: Dodopayments::request_opts
-        ) -> void
-        | (
-          ?Dodopayments::Models::product_list_params
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        ?archived: bool,
+        ?page_number: Integer?,
+        ?page_size: Integer?,
+        ?recurring: bool?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::product_list_params
     end

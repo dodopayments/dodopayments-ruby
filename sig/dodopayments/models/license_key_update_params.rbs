@@ -14,17 +14,12 @@ module Dodopayments
 
       attr_accessor expires_at: Time?
 
-      def initialize:
-        (
-          ?activations_limit: Integer?,
-          ?disabled: bool?,
-          ?expires_at: Time?,
-          ?request_options: Dodopayments::request_opts
-        ) -> void
-        | (
-          ?Dodopayments::Models::license_key_update_params
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        ?activations_limit: Integer?,
+        ?disabled: bool?,
+        ?expires_at: Time?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::license_key_update_params
     end

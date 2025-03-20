@@ -36,21 +36,16 @@ module Dodopayments
 
         attr_accessor tax_inclusive: bool?
 
-        def initialize:
-          (
-            currency: Dodopayments::Models::Price::OneTimePrice::currency,
-            discount: Float,
-            price: Integer,
-            purchasing_power_parity: bool,
-            ?pay_what_you_want: bool,
-            ?suggested_price: Integer?,
-            ?tax_inclusive: bool?,
-            ?type: :one_time_price
-          ) -> void
-          | (
-            ?Dodopayments::Models::Price::one_time_price
-            | Dodopayments::BaseModel data
-          ) -> void
+        def initialize: (
+          currency: Dodopayments::Models::Price::OneTimePrice::currency,
+          discount: Float,
+          price: Integer,
+          purchasing_power_parity: bool,
+          ?pay_what_you_want: bool,
+          ?suggested_price: Integer?,
+          ?tax_inclusive: bool?,
+          ?type: :one_time_price
+        ) -> void
 
         def to_hash: -> Dodopayments::Models::Price::one_time_price
 
@@ -392,24 +387,19 @@ module Dodopayments
 
         def trial_period_days=: (Integer) -> Integer
 
-        def initialize:
-          (
-            currency: Dodopayments::Models::Price::RecurringPrice::currency,
-            discount: Float,
-            payment_frequency_count: Integer,
-            payment_frequency_interval: Dodopayments::Models::time_interval,
-            price: Integer,
-            purchasing_power_parity: bool,
-            subscription_period_count: Integer,
-            subscription_period_interval: Dodopayments::Models::time_interval,
-            ?tax_inclusive: bool?,
-            ?trial_period_days: Integer,
-            ?type: :recurring_price
-          ) -> void
-          | (
-            ?Dodopayments::Models::Price::recurring_price
-            | Dodopayments::BaseModel data
-          ) -> void
+        def initialize: (
+          currency: Dodopayments::Models::Price::RecurringPrice::currency,
+          discount: Float,
+          payment_frequency_count: Integer,
+          payment_frequency_interval: Dodopayments::Models::time_interval,
+          price: Integer,
+          purchasing_power_parity: bool,
+          subscription_period_count: Integer,
+          subscription_period_interval: Dodopayments::Models::time_interval,
+          ?tax_inclusive: bool?,
+          ?trial_period_days: Integer,
+          ?type: :recurring_price
+        ) -> void
 
         def to_hash: -> Dodopayments::Models::Price::recurring_price
 

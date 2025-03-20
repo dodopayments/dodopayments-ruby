@@ -20,18 +20,13 @@ module Dodopayments
 
       attr_accessor name: String
 
-      def initialize:
-        (
-          id: String,
-          business_id: String,
-          created_at: Time,
-          license_key_id: String,
-          name: String
-        ) -> void
-        | (
-          ?Dodopayments::Models::license_key_instance
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        id: String,
+        business_id: String,
+        created_at: Time,
+        license_key_id: String,
+        name: String
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::license_key_instance
     end

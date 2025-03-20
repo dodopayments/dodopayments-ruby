@@ -5,12 +5,7 @@ module Dodopayments
     class CustomerPortalSession < Dodopayments::BaseModel
       attr_accessor link: String
 
-      def initialize:
-        (link: String) -> void
-        | (
-          ?Dodopayments::Models::customer_portal_session
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (link: String) -> void
 
       def to_hash: -> Dodopayments::Models::customer_portal_session
     end

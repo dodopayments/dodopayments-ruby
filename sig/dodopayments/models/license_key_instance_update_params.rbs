@@ -9,12 +9,10 @@ module Dodopayments
 
       attr_accessor name: String
 
-      def initialize:
-        (name: String, ?request_options: Dodopayments::request_opts) -> void
-        | (
-          ?Dodopayments::Models::license_key_instance_update_params
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        name: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::license_key_instance_update_params
     end

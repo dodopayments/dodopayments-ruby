@@ -1,71 +1,44 @@
 module Dodopayments
   module Resources
     class Discounts
-      def create:
-        (
-          Dodopayments::Models::DiscountCreateParams
-          | ::Hash[Symbol, top] params
-        ) -> Dodopayments::Models::Discount
-        | (
-          amount: Integer,
-          type: Dodopayments::Models::discount_type,
-          ?code: String?,
-          ?expires_at: Time?,
-          ?name: String?,
-          ?restricted_to: ::Array[String]?,
-          ?usage_limit: Integer?,
-          ?request_options: Dodopayments::request_opts
-        ) -> Dodopayments::Models::Discount
+      def create: (
+        amount: Integer,
+        type: Dodopayments::Models::discount_type,
+        ?code: String?,
+        ?expires_at: Time?,
+        ?name: String?,
+        ?restricted_to: ::Array[String]?,
+        ?usage_limit: Integer?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::Discount
 
-      def retrieve:
-        (
-          String discount_id,
-          ?Dodopayments::Models::DiscountRetrieveParams
-          | ::Hash[Symbol, top] params
-        ) -> Dodopayments::Models::Discount
-        | (
-          String discount_id,
-          ?request_options: Dodopayments::request_opts
-        ) -> Dodopayments::Models::Discount
+      def retrieve: (
+        String discount_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::Discount
 
-      def update:
-        (
-          String discount_id,
-          ?Dodopayments::Models::DiscountUpdateParams
-          | ::Hash[Symbol, top] params
-        ) -> Dodopayments::Models::Discount
-        | (
-          String discount_id,
-          ?amount: Integer?,
-          ?code: String?,
-          ?expires_at: Time?,
-          ?name: String?,
-          ?restricted_to: ::Array[String]?,
-          ?type: Dodopayments::Models::discount_type?,
-          ?usage_limit: Integer?,
-          ?request_options: Dodopayments::request_opts
-        ) -> Dodopayments::Models::Discount
+      def update: (
+        String discount_id,
+        ?amount: Integer?,
+        ?code: String?,
+        ?expires_at: Time?,
+        ?name: String?,
+        ?restricted_to: ::Array[String]?,
+        ?type: Dodopayments::Models::discount_type?,
+        ?usage_limit: Integer?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::Discount
 
-      def list:
-        (
-          ?Dodopayments::Models::DiscountListParams | ::Hash[Symbol, top] params
-        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Discount]
-        | (
-          ?page_number: Integer?,
-          ?page_size: Integer?,
-          ?request_options: Dodopayments::request_opts
-        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Discount]
+      def list: (
+        ?page_number: Integer?,
+        ?page_size: Integer?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Discount]
 
-      def delete:
-        (
-          String discount_id,
-          ?Dodopayments::Models::DiscountDeleteParams
-          | ::Hash[Symbol, top] params
-        ) -> nil
-        | (
-          String discount_id,
-          ?request_options: Dodopayments::request_opts
-        ) -> nil
+      def delete: (
+        String discount_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
 
       def initialize: (client: Dodopayments::Client) -> void
     end

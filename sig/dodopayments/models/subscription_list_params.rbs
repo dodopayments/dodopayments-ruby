@@ -27,20 +27,15 @@ module Dodopayments
 
       attr_accessor status: Dodopayments::Models::subscription_status?
 
-      def initialize:
-        (
-          ?created_at_gte: Time?,
-          ?created_at_lte: Time?,
-          ?customer_id: String?,
-          ?page_number: Integer?,
-          ?page_size: Integer?,
-          ?status: Dodopayments::Models::subscription_status?,
-          ?request_options: Dodopayments::request_opts
-        ) -> void
-        | (
-          ?Dodopayments::Models::subscription_list_params
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        ?created_at_gte: Time?,
+        ?created_at_lte: Time?,
+        ?customer_id: String?,
+        ?page_number: Integer?,
+        ?page_size: Integer?,
+        ?status: Dodopayments::Models::subscription_status?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::subscription_list_params
     end

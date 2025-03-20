@@ -29,21 +29,16 @@ module Dodopayments
 
       attr_accessor product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]?
 
-      def initialize:
-        (
-          client_secret: String,
-          customer: Dodopayments::Models::CustomerLimitedDetails,
-          metadata: ::Hash[Symbol, String],
-          payment_id: String,
-          total_amount: Integer,
-          ?discount_id: String?,
-          ?payment_link: String?,
-          ?product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]?
-        ) -> void
-        | (
-          ?Dodopayments::Models::payment_create_response
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        client_secret: String,
+        customer: Dodopayments::Models::CustomerLimitedDetails,
+        metadata: ::Hash[Symbol, String],
+        payment_id: String,
+        total_amount: Integer,
+        ?discount_id: String?,
+        ?payment_link: String?,
+        ?product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]?
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::payment_create_response
     end

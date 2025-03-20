@@ -1,41 +1,27 @@
 module Dodopayments
   module Resources
     class Refunds
-      def create:
-        (
-          Dodopayments::Models::RefundCreateParams | ::Hash[Symbol, top] params
-        ) -> Dodopayments::Models::Refund
-        | (
-          payment_id: String,
-          ?amount: Integer?,
-          ?reason: String?,
-          ?request_options: Dodopayments::request_opts
-        ) -> Dodopayments::Models::Refund
+      def create: (
+        payment_id: String,
+        ?amount: Integer?,
+        ?reason: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::Refund
 
-      def retrieve:
-        (
-          String refund_id,
-          ?Dodopayments::Models::RefundRetrieveParams
-          | ::Hash[Symbol, top] params
-        ) -> Dodopayments::Models::Refund
-        | (
-          String refund_id,
-          ?request_options: Dodopayments::request_opts
-        ) -> Dodopayments::Models::Refund
+      def retrieve: (
+        String refund_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::Refund
 
-      def list:
-        (
-          ?Dodopayments::Models::RefundListParams | ::Hash[Symbol, top] params
-        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Refund]
-        | (
-          ?created_at_gte: Time?,
-          ?created_at_lte: Time?,
-          ?customer_id: String?,
-          ?page_number: Integer?,
-          ?page_size: Integer?,
-          ?status: Dodopayments::Models::refund_status?,
-          ?request_options: Dodopayments::request_opts
-        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Refund]
+      def list: (
+        ?created_at_gte: Time?,
+        ?created_at_lte: Time?,
+        ?customer_id: String?,
+        ?page_number: Integer?,
+        ?page_size: Integer?,
+        ?status: Dodopayments::Models::refund_status?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Refund]
 
       def initialize: (client: Dodopayments::Client) -> void
     end

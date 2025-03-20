@@ -12,16 +12,11 @@ module Dodopayments
 
       attr_accessor page_size: Integer?
 
-      def initialize:
-        (
-          ?page_number: Integer?,
-          ?page_size: Integer?,
-          ?request_options: Dodopayments::request_opts
-        ) -> void
-        | (
-          ?Dodopayments::Models::payout_list_params
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        ?page_number: Integer?,
+        ?page_size: Integer?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::payout_list_params
     end

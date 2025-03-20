@@ -41,24 +41,19 @@ module Dodopayments
 
       attr_accessor trial_period_days: Integer?
 
-      def initialize:
-        (
-          billing: Dodopayments::Models::BillingAddress,
-          customer: Dodopayments::Models::customer_request,
-          product_id: String,
-          quantity: Integer,
-          ?discount_code: String?,
-          ?metadata: ::Hash[Symbol, String],
-          ?payment_link: bool?,
-          ?return_url: String?,
-          ?tax_id: String?,
-          ?trial_period_days: Integer?,
-          ?request_options: Dodopayments::request_opts
-        ) -> void
-        | (
-          ?Dodopayments::Models::subscription_create_params
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        billing: Dodopayments::Models::BillingAddress,
+        customer: Dodopayments::Models::customer_request,
+        product_id: String,
+        quantity: Integer,
+        ?discount_code: String?,
+        ?metadata: ::Hash[Symbol, String],
+        ?payment_link: bool?,
+        ?return_url: String?,
+        ?tax_id: String?,
+        ?trial_period_days: Integer?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::subscription_create_params
     end

@@ -7,12 +7,7 @@ module Dodopayments
         extend Dodopayments::RequestParameters::Converter
         include Dodopayments::RequestParameters
 
-        def initialize:
-          (?request_options: Dodopayments::request_opts) -> void
-          | (
-            ?Dodopayments::Models::Invoices::payment_retrieve_params
-            | Dodopayments::BaseModel data
-          ) -> void
+        def initialize: (?request_options: Dodopayments::request_opts) -> void
 
         def to_hash: -> Dodopayments::Models::Invoices::payment_retrieve_params
       end

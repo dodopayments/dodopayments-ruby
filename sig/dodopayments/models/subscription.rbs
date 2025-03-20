@@ -59,30 +59,26 @@ module Dodopayments
 
       attr_accessor discount_id: String?
 
-      def initialize:
-        (
-          created_at: Time,
-          currency: Dodopayments::Models::Subscription::currency,
-          customer: Dodopayments::Models::CustomerLimitedDetails,
-          metadata: ::Hash[Symbol, String],
-          next_billing_date: Time,
-          payment_frequency_count: Integer,
-          payment_frequency_interval: Dodopayments::Models::time_interval,
-          product_id: String,
-          quantity: Integer,
-          recurring_pre_tax_amount: Integer,
-          status: Dodopayments::Models::subscription_status,
-          subscription_id: String,
-          subscription_period_count: Integer,
-          subscription_period_interval: Dodopayments::Models::time_interval,
-          tax_inclusive: bool,
-          trial_period_days: Integer,
-          ?cancelled_at: Time?,
-          ?discount_id: String?
-        ) -> void
-        | (
-          ?Dodopayments::Models::subscription | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        created_at: Time,
+        currency: Dodopayments::Models::Subscription::currency,
+        customer: Dodopayments::Models::CustomerLimitedDetails,
+        metadata: ::Hash[Symbol, String],
+        next_billing_date: Time,
+        payment_frequency_count: Integer,
+        payment_frequency_interval: Dodopayments::Models::time_interval,
+        product_id: String,
+        quantity: Integer,
+        recurring_pre_tax_amount: Integer,
+        status: Dodopayments::Models::subscription_status,
+        subscription_id: String,
+        subscription_period_count: Integer,
+        subscription_period_interval: Dodopayments::Models::time_interval,
+        tax_inclusive: bool,
+        trial_period_days: Integer,
+        ?cancelled_at: Time?,
+        ?discount_id: String?
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::subscription
 

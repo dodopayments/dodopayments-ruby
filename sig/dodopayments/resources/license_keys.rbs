@@ -1,44 +1,27 @@
 module Dodopayments
   module Resources
     class LicenseKeys
-      def retrieve:
-        (
-          String id,
-          ?Dodopayments::Models::LicenseKeyRetrieveParams
-          | ::Hash[Symbol, top] params
-        ) -> Dodopayments::Models::LicenseKey
-        | (
-          String id,
-          ?request_options: Dodopayments::request_opts
-        ) -> Dodopayments::Models::LicenseKey
+      def retrieve: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::LicenseKey
 
-      def update:
-        (
-          String id,
-          ?Dodopayments::Models::LicenseKeyUpdateParams
-          | ::Hash[Symbol, top] params
-        ) -> Dodopayments::Models::LicenseKey
-        | (
-          String id,
-          ?activations_limit: Integer?,
-          ?disabled: bool?,
-          ?expires_at: Time?,
-          ?request_options: Dodopayments::request_opts
-        ) -> Dodopayments::Models::LicenseKey
+      def update: (
+        String id,
+        ?activations_limit: Integer?,
+        ?disabled: bool?,
+        ?expires_at: Time?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::LicenseKey
 
-      def list:
-        (
-          ?Dodopayments::Models::LicenseKeyListParams
-          | ::Hash[Symbol, top] params
-        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::LicenseKey]
-        | (
-          ?customer_id: String?,
-          ?page_number: Integer?,
-          ?page_size: Integer?,
-          ?product_id: String?,
-          ?status: Dodopayments::Models::license_key_status?,
-          ?request_options: Dodopayments::request_opts
-        ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::LicenseKey]
+      def list: (
+        ?customer_id: String?,
+        ?page_number: Integer?,
+        ?page_size: Integer?,
+        ?product_id: String?,
+        ?status: Dodopayments::Models::license_key_status?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::LicenseKey]
 
       def initialize: (client: Dodopayments::Client) -> void
     end

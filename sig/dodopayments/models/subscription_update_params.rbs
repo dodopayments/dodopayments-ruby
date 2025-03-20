@@ -15,16 +15,11 @@ module Dodopayments
 
       attr_accessor status: Dodopayments::Models::subscription_status?
 
-      def initialize:
-        (
-          ?metadata: ::Hash[Symbol, String]?,
-          ?status: Dodopayments::Models::subscription_status?,
-          ?request_options: Dodopayments::request_opts
-        ) -> void
-        | (
-          ?Dodopayments::Models::subscription_update_params
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        ?metadata: ::Hash[Symbol, String]?,
+        ?status: Dodopayments::Models::subscription_status?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::subscription_update_params
     end

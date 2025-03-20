@@ -50,27 +50,23 @@ module Dodopayments
 
       attr_accessor name: String?
 
-      def initialize:
-        (
-          business_id: String,
-          created_at: Time,
-          is_recurring: bool,
-          license_key_enabled: bool,
-          price: Dodopayments::Models::price,
-          product_id: String,
-          tax_category: Dodopayments::Models::Product::tax_category,
-          updated_at: Time,
-          ?addons: ::Array[String]?,
-          ?description: String?,
-          ?image: String?,
-          ?license_key_activation_message: String?,
-          ?license_key_activations_limit: Integer?,
-          ?license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
-          ?name: String?
-        ) -> void
-        | (
-          ?Dodopayments::Models::product | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        business_id: String,
+        created_at: Time,
+        is_recurring: bool,
+        license_key_enabled: bool,
+        price: Dodopayments::Models::price,
+        product_id: String,
+        tax_category: Dodopayments::Models::Product::tax_category,
+        updated_at: Time,
+        ?addons: ::Array[String]?,
+        ?description: String?,
+        ?image: String?,
+        ?license_key_activation_message: String?,
+        ?license_key_activations_limit: Integer?,
+        ?license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
+        ?name: String?
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::product
 

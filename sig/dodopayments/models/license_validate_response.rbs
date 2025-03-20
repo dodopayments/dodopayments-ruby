@@ -5,12 +5,7 @@ module Dodopayments
     class LicenseValidateResponse < Dodopayments::BaseModel
       attr_accessor valid: bool
 
-      def initialize:
-        (valid: bool) -> void
-        | (
-          ?Dodopayments::Models::license_validate_response
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (valid: bool) -> void
 
       def to_hash: -> Dodopayments::Models::license_validate_response
     end

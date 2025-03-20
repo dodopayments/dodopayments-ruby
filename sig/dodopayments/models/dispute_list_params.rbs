@@ -30,21 +30,16 @@ module Dodopayments
 
       attr_accessor page_size: Integer?
 
-      def initialize:
-        (
-          ?created_at_gte: Time?,
-          ?created_at_lte: Time?,
-          ?customer_id: String?,
-          ?dispute_stage: Dodopayments::Models::dispute_stage?,
-          ?dispute_status: Dodopayments::Models::dispute_status?,
-          ?page_number: Integer?,
-          ?page_size: Integer?,
-          ?request_options: Dodopayments::request_opts
-        ) -> void
-        | (
-          ?Dodopayments::Models::dispute_list_params
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        ?created_at_gte: Time?,
+        ?created_at_lte: Time?,
+        ?customer_id: String?,
+        ?dispute_stage: Dodopayments::Models::dispute_stage?,
+        ?dispute_status: Dodopayments::Models::dispute_status?,
+        ?page_number: Integer?,
+        ?page_size: Integer?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::dispute_list_params
     end

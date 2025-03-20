@@ -12,16 +12,11 @@ module Dodopayments
 
       attr_accessor phone_number: String?
 
-      def initialize:
-        (
-          ?name: String?,
-          ?phone_number: String?,
-          ?request_options: Dodopayments::request_opts
-        ) -> void
-        | (
-          ?Dodopayments::Models::customer_update_params
-          | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        ?name: String?,
+        ?phone_number: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::customer_update_params
     end

@@ -29,20 +29,16 @@ module Dodopayments
 
       attr_accessor payment_id: String
 
-      def initialize:
-        (
-          amount: String,
-          business_id: String,
-          created_at: Time,
-          currency: String,
-          dispute_id: String,
-          dispute_stage: Dodopayments::Models::dispute_stage,
-          dispute_status: Dodopayments::Models::dispute_status,
-          payment_id: String
-        ) -> void
-        | (
-          ?Dodopayments::Models::dispute | Dodopayments::BaseModel data
-        ) -> void
+      def initialize: (
+        amount: String,
+        business_id: String,
+        created_at: Time,
+        currency: String,
+        dispute_id: String,
+        dispute_stage: Dodopayments::Models::dispute_stage,
+        dispute_status: Dodopayments::Models::dispute_status,
+        payment_id: String
+      ) -> void
 
       def to_hash: -> Dodopayments::Models::dispute
     end
