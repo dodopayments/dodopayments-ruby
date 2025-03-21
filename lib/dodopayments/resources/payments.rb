@@ -11,6 +11,13 @@ module Dodopayments
       #
       #   @option params [Array<Dodopayments::Models::OneTimeProductCartItem>] :product_cart List of products in the cart. Must contain at least 1 and at most 100 items.
       #
+      #   @option params [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil] :allowed_payment_method_types List of payment methods allowed during checkout.
+      #
+      #     Customers will **never** see payment methods that are **not** in this list.
+      #     However, adding a method here **does not guarantee** customers will see it.
+      #     Availability still depends on other factors (e.g., customer location, merchant
+      #     settings).
+      #
       #   @option params [String, nil] :discount_code Discount Code to apply to the transaction
       #
       #   @option params [Hash{Symbol=>String}] :metadata

@@ -369,12 +369,15 @@ module Dodopayments
         def self?.values: -> ::Array[Dodopayments::Models::PayoutListResponse::currency]
       end
 
-      type status = :in_progress | :failed | :success
+      type status =
+        :not_initiated | :in_progress | :on_hold | :failed | :success
 
       module Status
         extend Dodopayments::Enum
 
+        NOT_INITIATED: :not_initiated
         IN_PROGRESS: :in_progress
+        ON_HOLD: :on_hold
         FAILED: :failed
         SUCCESS: :success
 

@@ -5,6 +5,7 @@ module Dodopayments
         billing: Dodopayments::Models::BillingAddress,
         customer: Dodopayments::Models::customer_request,
         product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem],
+        allowed_payment_method_types: ::Array[Dodopayments::Models::PaymentCreateParams::allowed_payment_method_type]?,
         discount_code: String?,
         metadata: ::Hash[Symbol, String],
         payment_link: bool?,
@@ -23,6 +24,8 @@ module Dodopayments
 
       attr_accessor product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]
 
+      attr_accessor allowed_payment_method_types: ::Array[Dodopayments::Models::PaymentCreateParams::allowed_payment_method_type]?
+
       attr_accessor discount_code: String?
 
       attr_reader metadata: ::Hash[Symbol, String]?
@@ -39,6 +42,7 @@ module Dodopayments
         billing: Dodopayments::Models::BillingAddress,
         customer: Dodopayments::Models::customer_request,
         product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem],
+        ?allowed_payment_method_types: ::Array[Dodopayments::Models::PaymentCreateParams::allowed_payment_method_type]?,
         ?discount_code: String?,
         ?metadata: ::Hash[Symbol, String],
         ?payment_link: bool?,
@@ -48,6 +52,49 @@ module Dodopayments
       ) -> void
 
       def to_hash: -> Dodopayments::Models::payment_create_params
+
+      type allowed_payment_method_type =
+        :credit
+        | :debit
+        | :upi_collect
+        | :upi_intent
+        | :apple_pay
+        | :cashapp
+        | :google_pay
+        | :multibanco
+        | :bancontact_card
+        | :eps
+        | :ideal
+        | :przelewy24
+        | :affirm
+        | :klarna
+        | :sepa
+        | :ach
+        | :amazon_pay
+
+      module AllowedPaymentMethodType
+        extend Dodopayments::Enum
+
+        CREDIT: :credit
+        DEBIT: :debit
+        UPI_COLLECT: :upi_collect
+        UPI_INTENT: :upi_intent
+        APPLE_PAY: :apple_pay
+        CASHAPP: :cashapp
+        GOOGLE_PAY: :google_pay
+        MULTIBANCO: :multibanco
+        BANCONTACT_CARD: :bancontact_card
+        EPS: :eps
+        IDEAL: :ideal
+        PRZELEWY24: :przelewy24
+        AFFIRM: :affirm
+        KLARNA: :klarna
+        SEPA: :sepa
+        ACH: :ach
+        AMAZON_PAY: :amazon_pay
+
+        def self?.values: -> ::Array[Dodopayments::Models::PaymentCreateParams::allowed_payment_method_type]
+      end
     end
   end
 end

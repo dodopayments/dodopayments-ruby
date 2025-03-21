@@ -1,0 +1,20 @@
+module Dodopayments
+  module Models
+    type subscription_charge_params =
+      { product_price: Integer } & Dodopayments::request_parameters
+
+    class SubscriptionChargeParams < Dodopayments::BaseModel
+      extend Dodopayments::RequestParameters::Converter
+      include Dodopayments::RequestParameters
+
+      attr_accessor product_price: Integer
+
+      def initialize: (
+        product_price: Integer,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> Dodopayments::Models::subscription_charge_params
+    end
+  end
+end

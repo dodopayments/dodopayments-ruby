@@ -292,7 +292,9 @@ module Dodopayments
       module Status
         extend Dodopayments::Enum
 
+        NOT_INITIATED = :not_initiated
         IN_PROGRESS = :in_progress
+        ON_HOLD = :on_hold
         FAILED = :failed
         SUCCESS = :success
 

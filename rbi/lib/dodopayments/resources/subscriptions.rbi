@@ -9,8 +9,10 @@ module Dodopayments
           customer: T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer),
           product_id: String,
           quantity: Integer,
+          allowed_payment_method_types: T.nilable(T::Array[Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType::OrSymbol]),
           discount_code: T.nilable(String),
           metadata: T::Hash[Symbol, String],
+          on_demand: T.nilable(Dodopayments::Models::SubscriptionCreateParams::OnDemand),
           payment_link: T.nilable(T::Boolean),
           return_url: T.nilable(String),
           tax_id: T.nilable(String),
@@ -26,9 +28,17 @@ module Dodopayments
         product_id:,
         # Number of units to subscribe for. Must be at least 1.
         quantity:,
+        # List of payment methods allowed during checkout.
+        #
+        #   Customers will **never** see payment methods that are **not** in this list.
+        #   However, adding a method here **does not guarantee** customers will see it.
+        #   Availability still depends on other factors (e.g., customer location, merchant
+        #   settings).
+        allowed_payment_method_types: nil,
         # Discount Code to apply to the subscription
         discount_code: nil,
         metadata: nil,
+        on_demand: nil,
         # If true, generates a payment link. Defaults to false if not specified.
         payment_link: nil,
         # Optional URL to redirect after successful subscription creation
@@ -100,6 +110,22 @@ module Dodopayments
         page_size: nil,
         # Filter by status
         status: nil,
+        request_options: {}
+      )
+      end
+
+      sig do
+        params(
+          subscription_id: String,
+          product_price: Integer,
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+        )
+          .returns(Dodopayments::Models::SubscriptionChargeResponse)
+      end
+      def charge(
+        # Subscription Id
+        subscription_id,
+        product_price:,
         request_options: {}
       )
       end

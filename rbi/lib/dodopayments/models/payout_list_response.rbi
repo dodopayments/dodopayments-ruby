@@ -372,7 +372,9 @@ module Dodopayments
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::PayoutListResponse::Status) }
         OrSymbol = T.type_alias { T.any(Symbol, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol) }
 
+        NOT_INITIATED = T.let(:not_initiated, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
         IN_PROGRESS = T.let(:in_progress, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
+        ON_HOLD = T.let(:on_hold, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
         FAILED = T.let(:failed, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
         SUCCESS = T.let(:success, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
 

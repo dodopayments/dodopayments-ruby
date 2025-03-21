@@ -126,4 +126,18 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
       }
     end
   end
+
+  def test_charge_required_params
+    response = @dodo_payments.subscriptions.charge("subscription_id", product_price: 0)
+
+    assert_pattern do
+      response => Dodopayments::Models::SubscriptionChargeResponse
+    end
+
+    assert_pattern do
+      response => {
+        payment_id: String
+      }
+    end
+  end
 end

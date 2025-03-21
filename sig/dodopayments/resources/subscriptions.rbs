@@ -6,8 +6,10 @@ module Dodopayments
         customer: Dodopayments::Models::customer_request,
         product_id: String,
         quantity: Integer,
+        ?allowed_payment_method_types: ::Array[Dodopayments::Models::SubscriptionCreateParams::allowed_payment_method_type]?,
         ?discount_code: String?,
         ?metadata: ::Hash[Symbol, String],
+        ?on_demand: Dodopayments::Models::SubscriptionCreateParams::OnDemand?,
         ?payment_link: bool?,
         ?return_url: String?,
         ?tax_id: String?,
@@ -36,6 +38,12 @@ module Dodopayments
         ?status: Dodopayments::Models::subscription_status?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Subscription]
+
+      def charge: (
+        String subscription_id,
+        product_price: Integer,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::SubscriptionChargeResponse
 
       def initialize: (client: Dodopayments::Client) -> void
     end

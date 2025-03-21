@@ -1,0 +1,13 @@
+module Dodopayments
+  module Models
+    type subscription_charge_response = { payment_id: String }
+
+    class SubscriptionChargeResponse < Dodopayments::BaseModel
+      attr_accessor payment_id: String
+
+      def initialize: (payment_id: String) -> void
+
+      def to_hash: -> Dodopayments::Models::subscription_charge_response
+    end
+  end
+end

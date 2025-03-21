@@ -13,9 +13,18 @@ module Dodopayments
       #
       #   @option params [Integer] :quantity Number of units to subscribe for. Must be at least 1.
       #
+      #   @option params [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil] :allowed_payment_method_types List of payment methods allowed during checkout.
+      #
+      #     Customers will **never** see payment methods that are **not** in this list.
+      #     However, adding a method here **does not guarantee** customers will see it.
+      #     Availability still depends on other factors (e.g., customer location, merchant
+      #     settings).
+      #
       #   @option params [String, nil] :discount_code Discount Code to apply to the subscription
       #
       #   @option params [Hash{Symbol=>String}] :metadata
+      #
+      #   @option params [Dodopayments::Models::SubscriptionCreateParams::OnDemand, nil] :on_demand
       #
       #   @option params [Boolean, nil] :payment_link If true, generates a payment link. Defaults to false if not specified.
       #
@@ -104,6 +113,26 @@ module Dodopayments
           query: parsed,
           page: Dodopayments::DefaultPageNumberPagination,
           model: Dodopayments::Models::Subscription,
+          options: options
+        )
+      end
+
+      # @param subscription_id [String] Subscription Id
+      #
+      # @param params [Dodopayments::Models::SubscriptionChargeParams, Hash{Symbol=>Object}] .
+      #
+      #   @option params [Integer] :product_price
+      #
+      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      #
+      # @return [Dodopayments::Models::SubscriptionChargeResponse]
+      def charge(subscription_id, params)
+        parsed, options = Dodopayments::Models::SubscriptionChargeParams.dump_request(params)
+        @client.request(
+          method: :post,
+          path: ["subscriptions/%0s/charge", subscription_id],
+          body: parsed,
+          model: Dodopayments::Models::SubscriptionChargeResponse,
           options: options
         )
       end

@@ -8,6 +8,7 @@ module Dodopayments
           billing: Dodopayments::Models::BillingAddress,
           customer: T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer),
           product_cart: T::Array[Dodopayments::Models::OneTimeProductCartItem],
+          allowed_payment_method_types: T.nilable(T::Array[Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol]),
           discount_code: T.nilable(String),
           metadata: T::Hash[Symbol, String],
           payment_link: T.nilable(T::Boolean),
@@ -22,6 +23,13 @@ module Dodopayments
         customer:,
         # List of products in the cart. Must contain at least 1 and at most 100 items.
         product_cart:,
+        # List of payment methods allowed during checkout.
+        #
+        #   Customers will **never** see payment methods that are **not** in this list.
+        #   However, adding a method here **does not guarantee** customers will see it.
+        #   Availability still depends on other factors (e.g., customer location, merchant
+        #   settings).
+        allowed_payment_method_types: nil,
         # Discount Code to apply to the transaction
         discount_code: nil,
         metadata: nil,

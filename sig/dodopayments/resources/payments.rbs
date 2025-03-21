@@ -5,6 +5,7 @@ module Dodopayments
         billing: Dodopayments::Models::BillingAddress,
         customer: Dodopayments::Models::customer_request,
         product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem],
+        ?allowed_payment_method_types: ::Array[Dodopayments::Models::PaymentCreateParams::allowed_payment_method_type]?,
         ?discount_code: String?,
         ?metadata: ::Hash[Symbol, String],
         ?payment_link: bool?,
