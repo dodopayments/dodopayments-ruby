@@ -2,32 +2,26 @@
 
 module Dodopayments
   # @example
-  # ```ruby
-  # if default_page_number_pagination.has_next?
-  #   default_page_number_pagination = default_page_number_pagination.next_page
-  # end
-  # ```
+  #   if default_page_number_pagination.has_next?
+  #     default_page_number_pagination = default_page_number_pagination.next_page
+  #   end
   #
   # @example
-  # ```ruby
-  # default_page_number_pagination.auto_paging_each do |payment|
-  #   puts(payment)
-  # end
-  # ```
+  #   default_page_number_pagination.auto_paging_each do |payment|
+  #     puts(payment)
+  #   end
   #
   # @example
-  # ```ruby
-  # payments =
-  #   default_page_number_pagination
-  #   .to_enum
-  #   .lazy
-  #   .select { _1.object_id.even? }
-  #   .map(&:itself)
-  #   .take(2)
-  #   .to_a
+  #   payments =
+  #     default_page_number_pagination
+  #     .to_enum
+  #     .lazy
+  #     .select { _1.object_id.even? }
+  #     .map(&:itself)
+  #     .take(2)
+  #     .to_a
   #
-  # payments => Array
-  # ```
+  #   payments => Array
   class DefaultPageNumberPagination
     include Dodopayments::BasePage
 

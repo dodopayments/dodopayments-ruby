@@ -288,33 +288,29 @@ module Dodopayments
   #   values safely.
   #
   # @example
-  # ```ruby
-  # # `intent_status` is a `Dodopayments::Models::IntentStatus`
-  # case intent_status
-  # when Dodopayments::Models::IntentStatus::SUCCEEDED
-  #   # ...
-  # when Dodopayments::Models::IntentStatus::FAILED
-  #   # ...
-  # when Dodopayments::Models::IntentStatus::CANCELLED
-  #   # ...
-  # else
-  #   puts(intent_status)
-  # end
-  # ```
+  #   # `intent_status` is a `Dodopayments::Models::IntentStatus`
+  #   case intent_status
+  #   when Dodopayments::Models::IntentStatus::SUCCEEDED
+  #     # ...
+  #   when Dodopayments::Models::IntentStatus::FAILED
+  #     # ...
+  #   when Dodopayments::Models::IntentStatus::CANCELLED
+  #     # ...
+  #   else
+  #     puts(intent_status)
+  #   end
   #
   # @example
-  # ```ruby
-  # case intent_status
-  # in :succeeded
-  #   # ...
-  # in :failed
-  #   # ...
-  # in :cancelled
-  #   # ...
-  # else
-  #   puts(intent_status)
-  # end
-  # ```
+  #   case intent_status
+  #   in :succeeded
+  #     # ...
+  #   in :failed
+  #     # ...
+  #   in :cancelled
+  #     # ...
+  #   else
+  #     puts(intent_status)
+  #   end
   module Enum
     include Dodopayments::Converter
 
@@ -387,29 +383,25 @@ module Dodopayments
   # @api private
   #
   # @example
-  # ```ruby
-  # # `price` is a `Dodopayments::Models::Price`
-  # case price
-  # when Dodopayments::Models::Price::OneTimePrice
-  #   puts(price.currency)
-  # when Dodopayments::Models::Price::RecurringPrice
-  #   puts(price.discount)
-  # else
-  #   puts(price)
-  # end
-  # ```
+  #   # `price` is a `Dodopayments::Models::Price`
+  #   case price
+  #   when Dodopayments::Models::Price::OneTimePrice
+  #     puts(price.currency)
+  #   when Dodopayments::Models::Price::RecurringPrice
+  #     puts(price.discount)
+  #   else
+  #     puts(price)
+  #   end
   #
   # @example
-  # ```ruby
-  # case price
-  # in {type: :one_time_price, currency: currency, discount: discount, price: price}
-  #   puts(currency)
-  # in {type: :recurring_price, currency: currency, discount: discount, payment_frequency_count: payment_frequency_count}
-  #   puts(discount)
-  # else
-  #   puts(price)
-  # end
-  # ```
+  #   case price
+  #   in {type: :one_time_price, currency: currency, discount: discount, price: price}
+  #     puts(currency)
+  #   in {type: :recurring_price, currency: currency, discount: discount, payment_frequency_count: payment_frequency_count}
+  #     puts(discount)
+  #   else
+  #     puts(price)
+  #   end
   module Union
     include Dodopayments::Converter
 
@@ -874,12 +866,10 @@ module Dodopayments
   # @abstract
   #
   # @example
-  # ```ruby
-  # # `attach_existing_customer` is a `Dodopayments::Models::AttachExistingCustomer`
-  # attach_existing_customer => {
-  #   customer_id: customer_id
-  # }
-  # ```
+  #   # `attach_existing_customer` is a `Dodopayments::Models::AttachExistingCustomer`
+  #   attach_existing_customer => {
+  #     customer_id: customer_id
+  #   }
   class BaseModel
     extend Dodopayments::Converter
 
