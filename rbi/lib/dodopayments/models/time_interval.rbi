@@ -2,15 +2,16 @@
 
 module Dodopayments
   module Models
-    class TimeInterval < Dodopayments::Enum
-      abstract!
+    module TimeInterval
+      extend Dodopayments::Enum
 
-      Value = type_template(:out) { {fixed: Symbol} }
+      TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::TimeInterval) }
+      OrSymbol = T.type_alias { T.any(Symbol, Dodopayments::Models::TimeInterval::TaggedSymbol) }
 
-      DAY = :Day
-      WEEK = :Week
-      MONTH = :Month
-      YEAR = :Year
+      DAY = T.let(:Day, Dodopayments::Models::TimeInterval::OrSymbol)
+      WEEK = T.let(:Week, Dodopayments::Models::TimeInterval::OrSymbol)
+      MONTH = T.let(:Month, Dodopayments::Models::TimeInterval::OrSymbol)
+      YEAR = T.let(:Year, Dodopayments::Models::TimeInterval::OrSymbol)
     end
   end
 end

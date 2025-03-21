@@ -2,8 +2,9 @@
 
 module Dodopayments
   module Models
-    # @abstract
-    class Price < Dodopayments::Union
+    module Price
+      extend Dodopayments::Union
+
       discriminator :type
 
       variant :one_time_price, -> { Dodopayments::Models::Price::OneTimePrice }
@@ -95,8 +96,9 @@ module Dodopayments
 
         # def initialize: (Hash | Dodopayments::BaseModel) -> void
 
-        # @abstract
-        class Currency < Dodopayments::Enum
+        module Currency
+          extend Dodopayments::Enum
+
           AED = :AED
           ALL = :ALL
           AMD = :AMD
@@ -350,8 +352,9 @@ module Dodopayments
 
         # def initialize: (Hash | Dodopayments::BaseModel) -> void
 
-        # @abstract
-        class Currency < Dodopayments::Enum
+        module Currency
+          extend Dodopayments::Enum
+
           AED = :AED
           ALL = :ALL
           AMD = :AMD

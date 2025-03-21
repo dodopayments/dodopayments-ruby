@@ -2,14 +2,15 @@
 
 module Dodopayments
   module Models
-    class LicenseKeyStatus < Dodopayments::Enum
-      abstract!
+    module LicenseKeyStatus
+      extend Dodopayments::Enum
 
-      Value = type_template(:out) { {fixed: Symbol} }
+      TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::LicenseKeyStatus) }
+      OrSymbol = T.type_alias { T.any(Symbol, Dodopayments::Models::LicenseKeyStatus::TaggedSymbol) }
 
-      ACTIVE = :active
-      EXPIRED = :expired
-      DISABLED = :disabled
+      ACTIVE = T.let(:active, Dodopayments::Models::LicenseKeyStatus::OrSymbol)
+      EXPIRED = T.let(:expired, Dodopayments::Models::LicenseKeyStatus::OrSymbol)
+      DISABLED = T.let(:disabled, Dodopayments::Models::LicenseKeyStatus::OrSymbol)
     end
   end
 end

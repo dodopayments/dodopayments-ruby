@@ -2,7 +2,9 @@ module Dodopayments
   module Models
     type dispute_stage = :pre_dispute | :dispute | :pre_arbitration
 
-    class DisputeStage < Dodopayments::Enum
+    module DisputeStage
+      extend Dodopayments::Enum
+
       PRE_DISPUTE: :pre_dispute
       DISPUTE: :dispute
       PRE_ARBITRATION: :pre_arbitration

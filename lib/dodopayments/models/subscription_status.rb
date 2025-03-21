@@ -2,8 +2,9 @@
 
 module Dodopayments
   module Models
-    # @abstract
-    class SubscriptionStatus < Dodopayments::Enum
+    module SubscriptionStatus
+      extend Dodopayments::Enum
+
       PENDING = :pending
       ACTIVE = :active
       ON_HOLD = :on_hold

@@ -45,7 +45,7 @@ module Dodopayments
           customer_id: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          status: T.nilable(Symbol),
+          status: T.nilable(Dodopayments::Models::RefundStatus::OrSymbol),
           request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
         )
           .returns(Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Refund])

@@ -2,7 +2,9 @@ module Dodopayments
   module Models
     type refund_status = :succeeded | :failed | :pending | :review
 
-    class RefundStatus < Dodopayments::Enum
+    module RefundStatus
+      extend Dodopayments::Enum
+
       SUCCEEDED: :succeeded
       FAILED: :failed
       PENDING: :pending

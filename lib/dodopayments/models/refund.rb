@@ -63,8 +63,9 @@ module Dodopayments
 
       # def initialize: (Hash | Dodopayments::BaseModel) -> void
 
-      # @abstract
-      class Currency < Dodopayments::Enum
+      module Currency
+        extend Dodopayments::Enum
+
         AED = :AED
         ALL = :ALL
         AMD = :AMD

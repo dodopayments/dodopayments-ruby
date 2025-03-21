@@ -2,14 +2,15 @@
 
 module Dodopayments
   module Models
-    class DisputeStage < Dodopayments::Enum
-      abstract!
+    module DisputeStage
+      extend Dodopayments::Enum
 
-      Value = type_template(:out) { {fixed: Symbol} }
+      TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::DisputeStage) }
+      OrSymbol = T.type_alias { T.any(Symbol, Dodopayments::Models::DisputeStage::TaggedSymbol) }
 
-      PRE_DISPUTE = :pre_dispute
-      DISPUTE = :dispute
-      PRE_ARBITRATION = :pre_arbitration
+      PRE_DISPUTE = T.let(:pre_dispute, Dodopayments::Models::DisputeStage::OrSymbol)
+      DISPUTE = T.let(:dispute, Dodopayments::Models::DisputeStage::OrSymbol)
+      PRE_ARBITRATION = T.let(:pre_arbitration, Dodopayments::Models::DisputeStage::OrSymbol)
     end
   end
 end

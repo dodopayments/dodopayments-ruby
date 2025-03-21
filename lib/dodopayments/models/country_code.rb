@@ -2,10 +2,10 @@
 
 module Dodopayments
   module Models
-    # @abstract
-    #
     # ISO country code alpha2 variant
-    class CountryCode < Dodopayments::Enum
+    module CountryCode
+      extend Dodopayments::Enum
+
       AF = :AF
       AX = :AX
       AL = :AL

@@ -2,8 +2,9 @@
 
 module Dodopayments
   module Models
-    # @abstract
-    class DiscountType < Dodopayments::Enum
+    module DiscountType
+      extend Dodopayments::Enum
+
       PERCENTAGE = :percentage
 
       finalize!

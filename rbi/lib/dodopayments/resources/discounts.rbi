@@ -7,7 +7,7 @@ module Dodopayments
       sig do
         params(
           amount: Integer,
-          type: Symbol,
+          type: Dodopayments::Models::DiscountType::OrSymbol,
           code: T.nilable(String),
           expires_at: T.nilable(Time),
           name: T.nilable(String),
@@ -68,7 +68,7 @@ module Dodopayments
           expires_at: T.nilable(Time),
           name: T.nilable(String),
           restricted_to: T.nilable(T::Array[String]),
-          type: T.nilable(Symbol),
+          type: T.nilable(Dodopayments::Models::DiscountType::OrSymbol),
           usage_limit: T.nilable(Integer),
           request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
         )

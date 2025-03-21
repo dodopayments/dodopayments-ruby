@@ -2,18 +2,19 @@
 
 module Dodopayments
   module Models
-    class DisputeStatus < Dodopayments::Enum
-      abstract!
+    module DisputeStatus
+      extend Dodopayments::Enum
 
-      Value = type_template(:out) { {fixed: Symbol} }
+      TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::DisputeStatus) }
+      OrSymbol = T.type_alias { T.any(Symbol, Dodopayments::Models::DisputeStatus::TaggedSymbol) }
 
-      DISPUTE_OPENED = :dispute_opened
-      DISPUTE_EXPIRED = :dispute_expired
-      DISPUTE_ACCEPTED = :dispute_accepted
-      DISPUTE_CANCELLED = :dispute_cancelled
-      DISPUTE_CHALLENGED = :dispute_challenged
-      DISPUTE_WON = :dispute_won
-      DISPUTE_LOST = :dispute_lost
+      DISPUTE_OPENED = T.let(:dispute_opened, Dodopayments::Models::DisputeStatus::OrSymbol)
+      DISPUTE_EXPIRED = T.let(:dispute_expired, Dodopayments::Models::DisputeStatus::OrSymbol)
+      DISPUTE_ACCEPTED = T.let(:dispute_accepted, Dodopayments::Models::DisputeStatus::OrSymbol)
+      DISPUTE_CANCELLED = T.let(:dispute_cancelled, Dodopayments::Models::DisputeStatus::OrSymbol)
+      DISPUTE_CHALLENGED = T.let(:dispute_challenged, Dodopayments::Models::DisputeStatus::OrSymbol)
+      DISPUTE_WON = T.let(:dispute_won, Dodopayments::Models::DisputeStatus::OrSymbol)
+      DISPUTE_LOST = T.let(:dispute_lost, Dodopayments::Models::DisputeStatus::OrSymbol)
     end
   end
 end

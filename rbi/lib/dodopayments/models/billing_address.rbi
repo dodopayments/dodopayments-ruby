@@ -13,11 +13,13 @@ module Dodopayments
       end
 
       # ISO country code alpha2 variant
-      sig { returns(Symbol) }
+      sig { returns(Dodopayments::Models::CountryCode::OrSymbol) }
       def country
       end
 
-      sig { params(_: Symbol).returns(Symbol) }
+      sig do
+        params(_: Dodopayments::Models::CountryCode::OrSymbol).returns(Dodopayments::Models::CountryCode::OrSymbol)
+      end
       def country=(_)
       end
 
@@ -49,14 +51,23 @@ module Dodopayments
       end
 
       sig do
-        params(city: String, country: Symbol, state: String, street: String, zipcode: String)
+        params(
+          city: String,
+          country: Dodopayments::Models::CountryCode::OrSymbol,
+          state: String,
+          street: String,
+          zipcode: String
+        )
           .returns(T.attached_class)
       end
       def self.new(city:, country:, state:, street:, zipcode:)
       end
 
       sig do
-        override.returns({city: String, country: Symbol, state: String, street: String, zipcode: String})
+        override
+          .returns(
+            {city: String, country: Dodopayments::Models::CountryCode::OrSymbol, state: String, street: String, zipcode: String}
+          )
       end
       def to_hash
       end

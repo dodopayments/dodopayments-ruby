@@ -56,11 +56,14 @@ module Dodopayments
       def restricted_to=(_)
       end
 
-      sig { returns(T.nilable(Symbol)) }
+      sig { returns(T.nilable(Dodopayments::Models::DiscountType::OrSymbol)) }
       def type
       end
 
-      sig { params(_: T.nilable(Symbol)).returns(T.nilable(Symbol)) }
+      sig do
+        params(_: T.nilable(Dodopayments::Models::DiscountType::OrSymbol))
+          .returns(T.nilable(Dodopayments::Models::DiscountType::OrSymbol))
+      end
       def type=(_)
       end
 
@@ -79,7 +82,7 @@ module Dodopayments
           expires_at: T.nilable(Time),
           name: T.nilable(String),
           restricted_to: T.nilable(T::Array[String]),
-          type: T.nilable(Symbol),
+          type: T.nilable(Dodopayments::Models::DiscountType::OrSymbol),
           usage_limit: T.nilable(Integer),
           request_options: T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything])
         )
@@ -106,7 +109,7 @@ module Dodopayments
               expires_at: T.nilable(Time),
               name: T.nilable(String),
               restricted_to: T.nilable(T::Array[String]),
-              type: T.nilable(Symbol),
+              type: T.nilable(Dodopayments::Models::DiscountType::OrSymbol),
               usage_limit: T.nilable(Integer),
               request_options: Dodopayments::RequestOptions
             }

@@ -2,12 +2,13 @@
 
 module Dodopayments
   module Models
-    class DiscountType < Dodopayments::Enum
-      abstract!
+    module DiscountType
+      extend Dodopayments::Enum
 
-      Value = type_template(:out) { {fixed: Symbol} }
+      TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::DiscountType) }
+      OrSymbol = T.type_alias { T.any(Symbol, Dodopayments::Models::DiscountType::TaggedSymbol) }
 
-      PERCENTAGE = :percentage
+      PERCENTAGE = T.let(:percentage, Dodopayments::Models::DiscountType::OrSymbol)
     end
   end
 end

@@ -2,8 +2,9 @@
 
 module Dodopayments
   module Models
-    # @abstract
-    class DisputeStatus < Dodopayments::Enum
+    module DisputeStatus
+      extend Dodopayments::Enum
+
       DISPUTE_OPENED = :dispute_opened
       DISPUTE_EXPIRED = :dispute_expired
       DISPUTE_ACCEPTED = :dispute_accepted

@@ -2,8 +2,9 @@
 
 module Dodopayments
   module Models
-    # @abstract
-    class RefundStatus < Dodopayments::Enum
+    module RefundStatus
+      extend Dodopayments::Enum
+
       SUCCEEDED = :succeeded
       FAILED = :failed
       PENDING = :pending

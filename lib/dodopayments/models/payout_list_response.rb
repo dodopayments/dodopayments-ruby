@@ -131,8 +131,9 @@ module Dodopayments
 
       # def initialize: (Hash | Dodopayments::BaseModel) -> void
 
-      # @abstract
-      class Currency < Dodopayments::Enum
+      module Currency
+        extend Dodopayments::Enum
+
         AED = :AED
         ALL = :ALL
         AMD = :AMD
@@ -282,8 +283,9 @@ module Dodopayments
         finalize!
       end
 
-      # @abstract
-      class Status < Dodopayments::Enum
+      module Status
+        extend Dodopayments::Enum
+
         IN_PROGRESS = :in_progress
         FAILED = :failed
         SUCCESS = :success

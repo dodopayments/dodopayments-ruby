@@ -61,7 +61,7 @@ module Dodopayments
         params(
           subscription_id: String,
           metadata: T.nilable(T::Hash[Symbol, String]),
-          status: T.nilable(Symbol),
+          status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
           request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
         )
           .returns(Dodopayments::Models::Subscription)
@@ -82,7 +82,7 @@ module Dodopayments
           customer_id: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          status: T.nilable(Symbol),
+          status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
           request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
         )
           .returns(Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Subscription])

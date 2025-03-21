@@ -3,7 +3,9 @@
 require_relative "test_helper"
 
 class Dodopayments::Test::BaseModelTest < Minitest::Test
-  class E1 < Dodopayments::Enum
+  module E1
+    extend Dodopayments::Enum
+
     A = :a
     B = :b
   end
@@ -242,13 +244,17 @@ class Dodopayments::Test::BaseModelTest < Minitest::Test
     optional :b, E1, api_name: :renamed_again
   end
 
-  class U1 < Dodopayments::Union
+  module U1
+    extend Dodopayments::Union
+
     discriminator :type
     variant :a, M1
     variant :b, M3
   end
 
-  class U2 < Dodopayments::Union
+  module U2
+    extend Dodopayments::Union
+
     variant A1
     variant A3
   end
@@ -330,12 +336,16 @@ class Dodopayments::Test::BaseModelTest < Minitest::Test
     end
   end
 
-  class E2 < Dodopayments::Enum
+  module E2
+    extend Dodopayments::Enum
+
     A = :a
     B = :b
   end
 
-  class U3 < Dodopayments::Union
+  module U3
+    extend Dodopayments::Union
+
     discriminator :type
     variant :a, M1
     variant :b, M3
@@ -353,7 +363,9 @@ class Dodopayments::Test::BaseModelTest < Minitest::Test
     assert_equal(U1, U3)
   end
 
-  class U4 < Dodopayments::Union
+  module U4
+    extend Dodopayments::Union
+
     variant :a, const: :a
     variant :b, const: :b
   end

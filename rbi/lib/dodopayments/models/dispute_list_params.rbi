@@ -34,20 +34,26 @@ module Dodopayments
       end
 
       # Filter by dispute stage
-      sig { returns(T.nilable(Symbol)) }
+      sig { returns(T.nilable(Dodopayments::Models::DisputeStage::OrSymbol)) }
       def dispute_stage
       end
 
-      sig { params(_: T.nilable(Symbol)).returns(T.nilable(Symbol)) }
+      sig do
+        params(_: T.nilable(Dodopayments::Models::DisputeStage::OrSymbol))
+          .returns(T.nilable(Dodopayments::Models::DisputeStage::OrSymbol))
+      end
       def dispute_stage=(_)
       end
 
       # Filter by dispute status
-      sig { returns(T.nilable(Symbol)) }
+      sig { returns(T.nilable(Dodopayments::Models::DisputeStatus::OrSymbol)) }
       def dispute_status
       end
 
-      sig { params(_: T.nilable(Symbol)).returns(T.nilable(Symbol)) }
+      sig do
+        params(_: T.nilable(Dodopayments::Models::DisputeStatus::OrSymbol))
+          .returns(T.nilable(Dodopayments::Models::DisputeStatus::OrSymbol))
+      end
       def dispute_status=(_)
       end
 
@@ -74,8 +80,8 @@ module Dodopayments
           created_at_gte: T.nilable(Time),
           created_at_lte: T.nilable(Time),
           customer_id: T.nilable(String),
-          dispute_stage: T.nilable(Symbol),
-          dispute_status: T.nilable(Symbol),
+          dispute_stage: T.nilable(Dodopayments::Models::DisputeStage::OrSymbol),
+          dispute_status: T.nilable(Dodopayments::Models::DisputeStatus::OrSymbol),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           request_options: T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything])
@@ -101,8 +107,8 @@ module Dodopayments
               created_at_gte: T.nilable(Time),
               created_at_lte: T.nilable(Time),
               customer_id: T.nilable(String),
-              dispute_stage: T.nilable(Symbol),
-              dispute_status: T.nilable(Symbol),
+              dispute_stage: T.nilable(Dodopayments::Models::DisputeStage::OrSymbol),
+              dispute_status: T.nilable(Dodopayments::Models::DisputeStatus::OrSymbol),
               page_number: T.nilable(Integer),
               page_size: T.nilable(Integer),
               request_options: Dodopayments::RequestOptions

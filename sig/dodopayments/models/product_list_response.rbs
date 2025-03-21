@@ -64,7 +64,9 @@ module Dodopayments
 
       type tax_category = :digital_products | :saas | :e_book | :edtech
 
-      class TaxCategory < Dodopayments::Enum
+      module TaxCategory
+        extend Dodopayments::Enum
+
         DIGITAL_PRODUCTS: :digital_products
         SAAS: :saas
         E_BOOK: :e_book
@@ -220,7 +222,9 @@ module Dodopayments
         | :ZAR
         | :ZMW
 
-      class Currency < Dodopayments::Enum
+      module Currency
+        extend Dodopayments::Enum
+
         AED: :AED
         ALL: :ALL
         AMD: :AMD

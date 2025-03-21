@@ -2,8 +2,9 @@
 
 module Dodopayments
   module Models
-    # @abstract
-    class TimeInterval < Dodopayments::Enum
+    module TimeInterval
+      extend Dodopayments::Enum
+
       DAY = :Day
       WEEK = :Week
       MONTH = :Month

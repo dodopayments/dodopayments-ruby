@@ -49,19 +49,25 @@ module Dodopayments
       def dispute_id=(_)
       end
 
-      sig { returns(Symbol) }
+      sig { returns(Dodopayments::Models::DisputeStage::TaggedSymbol) }
       def dispute_stage
       end
 
-      sig { params(_: Symbol).returns(Symbol) }
+      sig do
+        params(_: Dodopayments::Models::DisputeStage::TaggedSymbol)
+          .returns(Dodopayments::Models::DisputeStage::TaggedSymbol)
+      end
       def dispute_stage=(_)
       end
 
-      sig { returns(Symbol) }
+      sig { returns(Dodopayments::Models::DisputeStatus::TaggedSymbol) }
       def dispute_status
       end
 
-      sig { params(_: Symbol).returns(Symbol) }
+      sig do
+        params(_: Dodopayments::Models::DisputeStatus::TaggedSymbol)
+          .returns(Dodopayments::Models::DisputeStatus::TaggedSymbol)
+      end
       def dispute_status=(_)
       end
 
@@ -81,8 +87,8 @@ module Dodopayments
           created_at: Time,
           currency: String,
           dispute_id: String,
-          dispute_stage: Symbol,
-          dispute_status: Symbol,
+          dispute_stage: Dodopayments::Models::DisputeStage::TaggedSymbol,
+          dispute_status: Dodopayments::Models::DisputeStatus::TaggedSymbol,
           payment_id: String
         )
           .returns(T.attached_class)
@@ -99,8 +105,8 @@ module Dodopayments
               created_at: Time,
               currency: String,
               dispute_id: String,
-              dispute_stage: Symbol,
-              dispute_status: Symbol,
+              dispute_stage: Dodopayments::Models::DisputeStage::TaggedSymbol,
+              dispute_status: Dodopayments::Models::DisputeStatus::TaggedSymbol,
               payment_id: String
             }
           )

@@ -2,8 +2,9 @@
 
 module Dodopayments
   module Models
-    # @abstract
-    class IntentStatus < Dodopayments::Enum
+    module IntentStatus
+      extend Dodopayments::Enum
+
       SUCCEEDED = :succeeded
       FAILED = :failed
       CANCELLED = :cancelled

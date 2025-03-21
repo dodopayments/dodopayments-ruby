@@ -52,11 +52,14 @@ module Dodopayments
       end
 
       # Filter by status
-      sig { returns(T.nilable(Symbol)) }
+      sig { returns(T.nilable(Dodopayments::Models::RefundStatus::OrSymbol)) }
       def status
       end
 
-      sig { params(_: T.nilable(Symbol)).returns(T.nilable(Symbol)) }
+      sig do
+        params(_: T.nilable(Dodopayments::Models::RefundStatus::OrSymbol))
+          .returns(T.nilable(Dodopayments::Models::RefundStatus::OrSymbol))
+      end
       def status=(_)
       end
 
@@ -67,7 +70,7 @@ module Dodopayments
           customer_id: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          status: T.nilable(Symbol),
+          status: T.nilable(Dodopayments::Models::RefundStatus::OrSymbol),
           request_options: T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything])
         )
           .returns(T.attached_class)
@@ -92,7 +95,7 @@ module Dodopayments
               customer_id: T.nilable(String),
               page_number: T.nilable(Integer),
               page_size: T.nilable(Integer),
-              status: T.nilable(Symbol),
+              status: T.nilable(Dodopayments::Models::RefundStatus::OrSymbol),
               request_options: Dodopayments::RequestOptions
             }
           )

@@ -10,7 +10,7 @@ module Dodopayments
       sig do
         params(
           price: T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice),
-          tax_category: Symbol,
+          tax_category: Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol,
           addons: T.nilable(T::Array[String]),
           description: T.nilable(String),
           license_key_activation_message: T.nilable(String),
@@ -70,7 +70,7 @@ module Dodopayments
           license_key_enabled: T.nilable(T::Boolean),
           name: T.nilable(String),
           price: T.nilable(T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice)),
-          tax_category: T.nilable(Symbol),
+          tax_category: T.nilable(Dodopayments::Models::ProductUpdateParams::TaxCategory::OrSymbol),
           request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
         )
           .void

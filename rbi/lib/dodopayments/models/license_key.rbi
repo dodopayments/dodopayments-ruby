@@ -75,11 +75,14 @@ module Dodopayments
       def product_id=(_)
       end
 
-      sig { returns(Symbol) }
+      sig { returns(Dodopayments::Models::LicenseKeyStatus::TaggedSymbol) }
       def status
       end
 
-      sig { params(_: Symbol).returns(Symbol) }
+      sig do
+        params(_: Dodopayments::Models::LicenseKeyStatus::TaggedSymbol)
+          .returns(Dodopayments::Models::LicenseKeyStatus::TaggedSymbol)
+      end
       def status=(_)
       end
 
@@ -121,7 +124,7 @@ module Dodopayments
           key: String,
           payment_id: String,
           product_id: String,
-          status: Symbol,
+          status: Dodopayments::Models::LicenseKeyStatus::TaggedSymbol,
           activations_limit: T.nilable(Integer),
           expires_at: T.nilable(Time),
           subscription_id: T.nilable(String)
@@ -156,7 +159,7 @@ module Dodopayments
               key: String,
               payment_id: String,
               product_id: String,
-              status: Symbol,
+              status: Dodopayments::Models::LicenseKeyStatus::TaggedSymbol,
               activations_limit: T.nilable(Integer),
               expires_at: T.nilable(Time),
               subscription_id: T.nilable(String)

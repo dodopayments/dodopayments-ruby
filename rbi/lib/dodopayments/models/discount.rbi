@@ -70,11 +70,14 @@ module Dodopayments
       def times_used=(_)
       end
 
-      sig { returns(Symbol) }
+      sig { returns(Dodopayments::Models::DiscountType::TaggedSymbol) }
       def type
       end
 
-      sig { params(_: Symbol).returns(Symbol) }
+      sig do
+        params(_: Dodopayments::Models::DiscountType::TaggedSymbol)
+          .returns(Dodopayments::Models::DiscountType::TaggedSymbol)
+      end
       def type=(_)
       end
 
@@ -114,7 +117,7 @@ module Dodopayments
           discount_id: String,
           restricted_to: T::Array[String],
           times_used: Integer,
-          type: Symbol,
+          type: Dodopayments::Models::DiscountType::TaggedSymbol,
           expires_at: T.nilable(Time),
           name: T.nilable(String),
           usage_limit: T.nilable(Integer)
@@ -147,7 +150,7 @@ module Dodopayments
               discount_id: String,
               restricted_to: T::Array[String],
               times_used: Integer,
-              type: Symbol,
+              type: Dodopayments::Models::DiscountType::TaggedSymbol,
               expires_at: T.nilable(Time),
               name: T.nilable(String),
               usage_limit: T.nilable(Integer)

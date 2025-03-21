@@ -22,11 +22,14 @@ module Dodopayments
       def amount=(_)
       end
 
-      sig { returns(Symbol) }
+      sig { returns(Dodopayments::Models::DiscountType::OrSymbol) }
       def type
       end
 
-      sig { params(_: Symbol).returns(Symbol) }
+      sig do
+        params(_: Dodopayments::Models::DiscountType::OrSymbol)
+          .returns(Dodopayments::Models::DiscountType::OrSymbol)
+      end
       def type=(_)
       end
 
@@ -80,7 +83,7 @@ module Dodopayments
       sig do
         params(
           amount: Integer,
-          type: Symbol,
+          type: Dodopayments::Models::DiscountType::OrSymbol,
           code: T.nilable(String),
           expires_at: T.nilable(Time),
           name: T.nilable(String),
@@ -107,7 +110,7 @@ module Dodopayments
           .returns(
             {
               amount: Integer,
-              type: Symbol,
+              type: Dodopayments::Models::DiscountType::OrSymbol,
               code: T.nilable(String),
               expires_at: T.nilable(Time),
               name: T.nilable(String),

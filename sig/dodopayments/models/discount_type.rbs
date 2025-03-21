@@ -2,7 +2,9 @@ module Dodopayments
   module Models
     type discount_type = :percentage
 
-    class DiscountType < Dodopayments::Enum
+    module DiscountType
+      extend Dodopayments::Enum
+
       PERCENTAGE: :percentage
 
       def self.values: -> ::Array[Dodopayments::Models::discount_type]

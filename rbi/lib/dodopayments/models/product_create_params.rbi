@@ -19,11 +19,14 @@ module Dodopayments
 
       # Represents the different categories of taxation applicable to various products
       #   and services.
-      sig { returns(Symbol) }
+      sig { returns(Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol) }
       def tax_category
       end
 
-      sig { params(_: Symbol).returns(Symbol) }
+      sig do
+        params(_: Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol)
+          .returns(Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol)
+      end
       def tax_category=(_)
       end
 
@@ -95,7 +98,7 @@ module Dodopayments
       sig do
         params(
           price: T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice),
-          tax_category: Symbol,
+          tax_category: Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol,
           addons: T.nilable(T::Array[String]),
           description: T.nilable(String),
           license_key_activation_message: T.nilable(String),
@@ -126,7 +129,7 @@ module Dodopayments
           .returns(
             {
               price: T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice),
-              tax_category: Symbol,
+              tax_category: Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol,
               addons: T.nilable(T::Array[String]),
               description: T.nilable(String),
               license_key_activation_message: T.nilable(String),
@@ -143,15 +146,18 @@ module Dodopayments
 
       # Represents the different categories of taxation applicable to various products
       #   and services.
-      class TaxCategory < Dodopayments::Enum
-        abstract!
+      module TaxCategory
+        extend Dodopayments::Enum
 
-        Value = type_template(:out) { {fixed: Symbol} }
+        TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::ProductCreateParams::TaxCategory) }
+        OrSymbol =
+          T.type_alias { T.any(Symbol, Dodopayments::Models::ProductCreateParams::TaxCategory::TaggedSymbol) }
 
-        DIGITAL_PRODUCTS = :digital_products
-        SAAS = :saas
-        E_BOOK = :e_book
-        EDTECH = :edtech
+        DIGITAL_PRODUCTS =
+          T.let(:digital_products, Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol)
+        SAAS = T.let(:saas, Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol)
+        E_BOOK = T.let(:e_book, Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol)
+        EDTECH = T.let(:edtech, Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol)
       end
     end
   end

@@ -43,11 +43,14 @@ module Dodopayments
       end
 
       # Filter by license key status
-      sig { returns(T.nilable(Symbol)) }
+      sig { returns(T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol)) }
       def status
       end
 
-      sig { params(_: T.nilable(Symbol)).returns(T.nilable(Symbol)) }
+      sig do
+        params(_: T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol))
+          .returns(T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol))
+      end
       def status=(_)
       end
 
@@ -57,7 +60,7 @@ module Dodopayments
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           product_id: T.nilable(String),
-          status: T.nilable(Symbol),
+          status: T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol),
           request_options: T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything])
         )
           .returns(T.attached_class)
@@ -73,7 +76,7 @@ module Dodopayments
               page_number: T.nilable(Integer),
               page_size: T.nilable(Integer),
               product_id: T.nilable(String),
-              status: T.nilable(Symbol),
+              status: T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol),
               request_options: Dodopayments::RequestOptions
             }
           )

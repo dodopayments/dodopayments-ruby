@@ -217,7 +217,9 @@ module Dodopayments
         | :ZAR
         | :ZMW
 
-      class Currency < Dodopayments::Enum
+      module Currency
+        extend Dodopayments::Enum
+
         AED: :AED
         ALL: :ALL
         AMD: :AMD
@@ -369,7 +371,9 @@ module Dodopayments
 
       type status = :in_progress | :failed | :success
 
-      class Status < Dodopayments::Enum
+      module Status
+        extend Dodopayments::Enum
+
         IN_PROGRESS: :in_progress
         FAILED: :failed
         SUCCESS: :success

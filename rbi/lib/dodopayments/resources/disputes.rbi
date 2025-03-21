@@ -22,8 +22,8 @@ module Dodopayments
           created_at_gte: T.nilable(Time),
           created_at_lte: T.nilable(Time),
           customer_id: T.nilable(String),
-          dispute_stage: T.nilable(Symbol),
-          dispute_status: T.nilable(Symbol),
+          dispute_stage: T.nilable(Dodopayments::Models::DisputeStage::OrSymbol),
+          dispute_status: T.nilable(Dodopayments::Models::DisputeStatus::OrSymbol),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))

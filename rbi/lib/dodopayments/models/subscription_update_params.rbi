@@ -14,18 +14,21 @@ module Dodopayments
       def metadata=(_)
       end
 
-      sig { returns(T.nilable(Symbol)) }
+      sig { returns(T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol)) }
       def status
       end
 
-      sig { params(_: T.nilable(Symbol)).returns(T.nilable(Symbol)) }
+      sig do
+        params(_: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol))
+          .returns(T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol))
+      end
       def status=(_)
       end
 
       sig do
         params(
           metadata: T.nilable(T::Hash[Symbol, String]),
-          status: T.nilable(Symbol),
+          status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
           request_options: T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything])
         )
           .returns(T.attached_class)
@@ -38,7 +41,7 @@ module Dodopayments
           .returns(
             {
               metadata: T.nilable(T::Hash[Symbol, String]),
-              status: T.nilable(Symbol),
+              status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
               request_options: Dodopayments::RequestOptions
             }
           )

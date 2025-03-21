@@ -49,7 +49,7 @@ module Dodopayments
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           product_id: T.nilable(String),
-          status: T.nilable(Symbol),
+          status: T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol),
           request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
         )
           .returns(Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::LicenseKey])

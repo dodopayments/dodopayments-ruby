@@ -90,11 +90,11 @@ module Dodopayments
 
       # def initialize: (Hash | Dodopayments::BaseModel) -> void
 
-      # @abstract
-      #
       # Represents the different categories of taxation applicable to various products
       #   and services.
-      class TaxCategory < Dodopayments::Enum
+      module TaxCategory
+        extend Dodopayments::Enum
+
         DIGITAL_PRODUCTS = :digital_products
         SAAS = :saas
         E_BOOK = :e_book

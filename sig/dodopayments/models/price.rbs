@@ -4,7 +4,9 @@ module Dodopayments
       Dodopayments::Models::Price::OneTimePrice
       | Dodopayments::Models::Price::RecurringPrice
 
-    class Price < Dodopayments::Union
+    module Price
+      extend Dodopayments::Union
+
       type one_time_price =
         {
           currency: Dodopayments::Models::Price::OneTimePrice::currency,
@@ -196,7 +198,9 @@ module Dodopayments
           | :ZAR
           | :ZMW
 
-        class Currency < Dodopayments::Enum
+        module Currency
+          extend Dodopayments::Enum
+
           AED: :AED
           ALL: :ALL
           AMD: :AMD
@@ -550,7 +554,9 @@ module Dodopayments
           | :ZAR
           | :ZMW
 
-        class Currency < Dodopayments::Enum
+        module Currency
+          extend Dodopayments::Enum
+
           AED: :AED
           ALL: :ALL
           AMD: :AMD

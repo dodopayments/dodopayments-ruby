@@ -2,8 +2,9 @@
 
 module Dodopayments
   module Models
-    # @abstract
-    class CustomerRequest < Dodopayments::Union
+    module CustomerRequest
+      extend Dodopayments::Union
+
       variant -> { Dodopayments::Models::AttachExistingCustomer }
 
       variant -> { Dodopayments::Models::CreateNewCustomer }

@@ -2,7 +2,9 @@ module Dodopayments
   module Models
     type license_key_status = :active | :expired | :disabled
 
-    class LicenseKeyStatus < Dodopayments::Enum
+    module LicenseKeyStatus
+      extend Dodopayments::Enum
+
       ACTIVE: :active
       EXPIRED: :expired
       DISABLED: :disabled

@@ -251,7 +251,9 @@ module Dodopayments
       | :ZM
       | :ZW
 
-    class CountryCode < Dodopayments::Enum
+    module CountryCode
+      extend Dodopayments::Enum
+
       AF: :AF
       AX: :AX
       AL: :AL
