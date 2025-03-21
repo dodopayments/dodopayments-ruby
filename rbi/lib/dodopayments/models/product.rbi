@@ -222,6 +222,12 @@ module Dodopayments
         SAAS = T.let(:saas, Dodopayments::Models::Product::TaxCategory::TaggedSymbol)
         E_BOOK = T.let(:e_book, Dodopayments::Models::Product::TaxCategory::TaggedSymbol)
         EDTECH = T.let(:edtech, Dodopayments::Models::Product::TaxCategory::TaggedSymbol)
+
+        class << self
+          sig { override.returns(T::Array[Dodopayments::Models::Product::TaxCategory::TaggedSymbol]) }
+          def values
+          end
+        end
       end
     end
   end

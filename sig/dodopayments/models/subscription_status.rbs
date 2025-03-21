@@ -14,7 +14,7 @@ module Dodopayments
       FAILED: :failed
       EXPIRED: :expired
 
-      def self.values: -> ::Array[Dodopayments::Models::subscription_status]
+      def self?.values: -> ::Array[Dodopayments::Models::subscription_status]
     end
   end
 end

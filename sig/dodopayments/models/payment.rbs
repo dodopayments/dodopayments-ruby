@@ -382,7 +382,7 @@ module Dodopayments
         ZAR: :ZAR
         ZMW: :ZMW
 
-        def self.values: -> ::Array[Dodopayments::Models::Payment::currency]
+        def self?.values: -> ::Array[Dodopayments::Models::Payment::currency]
       end
 
       type product_cart = { product_id: String, quantity: Integer }

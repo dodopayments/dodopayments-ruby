@@ -347,7 +347,7 @@ module Dodopayments
           ZAR: :ZAR
           ZMW: :ZMW
 
-          def self.values: -> ::Array[Dodopayments::Models::Price::OneTimePrice::currency]
+          def self?.values: -> ::Array[Dodopayments::Models::Price::OneTimePrice::currency]
         end
       end
 
@@ -703,11 +703,11 @@ module Dodopayments
           ZAR: :ZAR
           ZMW: :ZMW
 
-          def self.values: -> ::Array[Dodopayments::Models::Price::RecurringPrice::currency]
+          def self?.values: -> ::Array[Dodopayments::Models::Price::RecurringPrice::currency]
         end
       end
 
-      def self.variants: -> [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
+      def self?.variants: -> [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
     end
   end
 end

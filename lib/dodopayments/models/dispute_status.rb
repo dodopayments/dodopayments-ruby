@@ -14,6 +14,12 @@ module Dodopayments
       DISPUTE_LOST = :dispute_lost
 
       finalize!
+
+      class << self
+        # @!parse
+        #   # @return [Array<Symbol>]
+        #   def values; end
+      end
     end
   end
 end

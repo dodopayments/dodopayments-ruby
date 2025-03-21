@@ -217,6 +217,12 @@ module Dodopayments
         SAAS = T.let(:saas, Dodopayments::Models::ProductListResponse::TaxCategory::TaggedSymbol)
         E_BOOK = T.let(:e_book, Dodopayments::Models::ProductListResponse::TaxCategory::TaggedSymbol)
         EDTECH = T.let(:edtech, Dodopayments::Models::ProductListResponse::TaxCategory::TaggedSymbol)
+
+        class << self
+          sig { override.returns(T::Array[Dodopayments::Models::ProductListResponse::TaxCategory::TaggedSymbol]) }
+          def values
+          end
+        end
       end
 
       module Currency
@@ -371,6 +377,12 @@ module Dodopayments
         YER = T.let(:YER, Dodopayments::Models::ProductListResponse::Currency::TaggedSymbol)
         ZAR = T.let(:ZAR, Dodopayments::Models::ProductListResponse::Currency::TaggedSymbol)
         ZMW = T.let(:ZMW, Dodopayments::Models::ProductListResponse::Currency::TaggedSymbol)
+
+        class << self
+          sig { override.returns(T::Array[Dodopayments::Models::ProductListResponse::Currency::TaggedSymbol]) }
+          def values
+          end
+        end
       end
     end
   end

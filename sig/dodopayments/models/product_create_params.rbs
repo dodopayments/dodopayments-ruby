@@ -61,7 +61,7 @@ module Dodopayments
         E_BOOK: :e_book
         EDTECH: :edtech
 
-        def self.values: -> ::Array[Dodopayments::Models::ProductCreateParams::tax_category]
+        def self?.values: -> ::Array[Dodopayments::Models::ProductCreateParams::tax_category]
       end
     end
   end

@@ -18,6 +18,12 @@ module Dodopayments
       PARTIALLY_CAPTURED_AND_CAPTURABLE = :partially_captured_and_capturable
 
       finalize!
+
+      class << self
+        # @!parse
+        #   # @return [Array<Symbol>]
+        #   def values; end
+      end
     end
   end
 end

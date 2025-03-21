@@ -338,7 +338,7 @@ module Dodopayments
         ZAR: :ZAR
         ZMW: :ZMW
 
-        def self.values: -> ::Array[Dodopayments::Models::Refund::currency]
+        def self?.values: -> ::Array[Dodopayments::Models::Refund::currency]
       end
     end
   end

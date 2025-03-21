@@ -281,6 +281,12 @@ module Dodopayments
         ZMW = :ZMW
 
         finalize!
+
+        class << self
+          # @!parse
+          #   # @return [Array<Symbol>]
+          #   def values; end
+        end
       end
 
       module Status
@@ -291,6 +297,12 @@ module Dodopayments
         SUCCESS = :success
 
         finalize!
+
+        class << self
+          # @!parse
+          #   # @return [Array<Symbol>]
+          #   def values; end
+        end
       end
     end
   end

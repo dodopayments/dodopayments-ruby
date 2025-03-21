@@ -504,7 +504,7 @@ module Dodopayments
       ZM: :ZM
       ZW: :ZW
 
-      def self.values: -> ::Array[Dodopayments::Models::country_code]
+      def self?.values: -> ::Array[Dodopayments::Models::country_code]
     end
   end
 end

@@ -9,7 +9,7 @@ module Dodopayments
       EXPIRED: :expired
       DISABLED: :disabled
 
-      def self.values: -> ::Array[Dodopayments::Models::license_key_status]
+      def self?.values: -> ::Array[Dodopayments::Models::license_key_status]
     end
   end
 end

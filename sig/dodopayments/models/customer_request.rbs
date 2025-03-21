@@ -7,7 +7,7 @@ module Dodopayments
     module CustomerRequest
       extend Dodopayments::Union
 
-      def self.variants: -> [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
+      def self?.variants: -> [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
     end
   end
 end

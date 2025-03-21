@@ -154,10 +154,16 @@ module Dodopayments
           T.type_alias { T.any(Symbol, Dodopayments::Models::ProductCreateParams::TaxCategory::TaggedSymbol) }
 
         DIGITAL_PRODUCTS =
-          T.let(:digital_products, Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol)
-        SAAS = T.let(:saas, Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol)
-        E_BOOK = T.let(:e_book, Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol)
-        EDTECH = T.let(:edtech, Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol)
+          T.let(:digital_products, Dodopayments::Models::ProductCreateParams::TaxCategory::TaggedSymbol)
+        SAAS = T.let(:saas, Dodopayments::Models::ProductCreateParams::TaxCategory::TaggedSymbol)
+        E_BOOK = T.let(:e_book, Dodopayments::Models::ProductCreateParams::TaxCategory::TaggedSymbol)
+        EDTECH = T.let(:edtech, Dodopayments::Models::ProductCreateParams::TaxCategory::TaggedSymbol)
+
+        class << self
+          sig { override.returns(T::Array[Dodopayments::Models::ProductCreateParams::TaxCategory::TaggedSymbol]) }
+          def values
+          end
+        end
       end
     end
   end

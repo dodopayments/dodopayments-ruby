@@ -346,7 +346,7 @@ module Dodopayments
         ZAR: :ZAR
         ZMW: :ZMW
 
-        def self.values: -> ::Array[Dodopayments::Models::PaymentListResponse::currency]
+        def self?.values: -> ::Array[Dodopayments::Models::PaymentListResponse::currency]
       end
     end
   end

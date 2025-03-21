@@ -358,6 +358,12 @@ module Dodopayments
         YER = T.let(:YER, Dodopayments::Models::PayoutListResponse::Currency::TaggedSymbol)
         ZAR = T.let(:ZAR, Dodopayments::Models::PayoutListResponse::Currency::TaggedSymbol)
         ZMW = T.let(:ZMW, Dodopayments::Models::PayoutListResponse::Currency::TaggedSymbol)
+
+        class << self
+          sig { override.returns(T::Array[Dodopayments::Models::PayoutListResponse::Currency::TaggedSymbol]) }
+          def values
+          end
+        end
       end
 
       module Status
@@ -369,6 +375,12 @@ module Dodopayments
         IN_PROGRESS = T.let(:in_progress, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
         FAILED = T.let(:failed, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
         SUCCESS = T.let(:success, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
+
+        class << self
+          sig { override.returns(T::Array[Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol]) }
+          def values
+          end
+        end
       end
     end
   end

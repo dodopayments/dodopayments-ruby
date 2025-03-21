@@ -72,7 +72,7 @@ module Dodopayments
         E_BOOK: :e_book
         EDTECH: :edtech
 
-        def self.values: -> ::Array[Dodopayments::Models::ProductListResponse::tax_category]
+        def self?.values: -> ::Array[Dodopayments::Models::ProductListResponse::tax_category]
       end
 
       type currency =
@@ -371,7 +371,7 @@ module Dodopayments
         ZAR: :ZAR
         ZMW: :ZMW
 
-        def self.values: -> ::Array[Dodopayments::Models::ProductListResponse::currency]
+        def self?.values: -> ::Array[Dodopayments::Models::ProductListResponse::currency]
       end
     end
   end

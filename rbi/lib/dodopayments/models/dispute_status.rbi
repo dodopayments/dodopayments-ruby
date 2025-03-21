@@ -8,13 +8,19 @@ module Dodopayments
       TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::DisputeStatus) }
       OrSymbol = T.type_alias { T.any(Symbol, Dodopayments::Models::DisputeStatus::TaggedSymbol) }
 
-      DISPUTE_OPENED = T.let(:dispute_opened, Dodopayments::Models::DisputeStatus::OrSymbol)
-      DISPUTE_EXPIRED = T.let(:dispute_expired, Dodopayments::Models::DisputeStatus::OrSymbol)
-      DISPUTE_ACCEPTED = T.let(:dispute_accepted, Dodopayments::Models::DisputeStatus::OrSymbol)
-      DISPUTE_CANCELLED = T.let(:dispute_cancelled, Dodopayments::Models::DisputeStatus::OrSymbol)
-      DISPUTE_CHALLENGED = T.let(:dispute_challenged, Dodopayments::Models::DisputeStatus::OrSymbol)
-      DISPUTE_WON = T.let(:dispute_won, Dodopayments::Models::DisputeStatus::OrSymbol)
-      DISPUTE_LOST = T.let(:dispute_lost, Dodopayments::Models::DisputeStatus::OrSymbol)
+      DISPUTE_OPENED = T.let(:dispute_opened, Dodopayments::Models::DisputeStatus::TaggedSymbol)
+      DISPUTE_EXPIRED = T.let(:dispute_expired, Dodopayments::Models::DisputeStatus::TaggedSymbol)
+      DISPUTE_ACCEPTED = T.let(:dispute_accepted, Dodopayments::Models::DisputeStatus::TaggedSymbol)
+      DISPUTE_CANCELLED = T.let(:dispute_cancelled, Dodopayments::Models::DisputeStatus::TaggedSymbol)
+      DISPUTE_CHALLENGED = T.let(:dispute_challenged, Dodopayments::Models::DisputeStatus::TaggedSymbol)
+      DISPUTE_WON = T.let(:dispute_won, Dodopayments::Models::DisputeStatus::TaggedSymbol)
+      DISPUTE_LOST = T.let(:dispute_lost, Dodopayments::Models::DisputeStatus::TaggedSymbol)
+
+      class << self
+        sig { override.returns(T::Array[Dodopayments::Models::DisputeStatus::TaggedSymbol]) }
+        def values
+        end
+      end
     end
   end
 end

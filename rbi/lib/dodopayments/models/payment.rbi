@@ -410,6 +410,12 @@ module Dodopayments
         YER = T.let(:YER, Dodopayments::Models::Payment::Currency::TaggedSymbol)
         ZAR = T.let(:ZAR, Dodopayments::Models::Payment::Currency::TaggedSymbol)
         ZMW = T.let(:ZMW, Dodopayments::Models::Payment::Currency::TaggedSymbol)
+
+        class << self
+          sig { override.returns(T::Array[Dodopayments::Models::Payment::Currency::TaggedSymbol]) }
+          def values
+          end
+        end
       end
 
       class ProductCart < Dodopayments::BaseModel

@@ -378,7 +378,7 @@ module Dodopayments
         ZAR: :ZAR
         ZMW: :ZMW
 
-        def self.values: -> ::Array[Dodopayments::Models::Subscription::currency]
+        def self?.values: -> ::Array[Dodopayments::Models::Subscription::currency]
       end
     end
   end

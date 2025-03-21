@@ -183,10 +183,16 @@ module Dodopayments
           T.type_alias { T.any(Symbol, Dodopayments::Models::ProductUpdateParams::TaxCategory::TaggedSymbol) }
 
         DIGITAL_PRODUCTS =
-          T.let(:digital_products, Dodopayments::Models::ProductUpdateParams::TaxCategory::OrSymbol)
-        SAAS = T.let(:saas, Dodopayments::Models::ProductUpdateParams::TaxCategory::OrSymbol)
-        E_BOOK = T.let(:e_book, Dodopayments::Models::ProductUpdateParams::TaxCategory::OrSymbol)
-        EDTECH = T.let(:edtech, Dodopayments::Models::ProductUpdateParams::TaxCategory::OrSymbol)
+          T.let(:digital_products, Dodopayments::Models::ProductUpdateParams::TaxCategory::TaggedSymbol)
+        SAAS = T.let(:saas, Dodopayments::Models::ProductUpdateParams::TaxCategory::TaggedSymbol)
+        E_BOOK = T.let(:e_book, Dodopayments::Models::ProductUpdateParams::TaxCategory::TaggedSymbol)
+        EDTECH = T.let(:edtech, Dodopayments::Models::ProductUpdateParams::TaxCategory::TaggedSymbol)
+
+        class << self
+          sig { override.returns(T::Array[Dodopayments::Models::ProductUpdateParams::TaxCategory::TaggedSymbol]) }
+          def values
+          end
+        end
       end
     end
   end

@@ -20,7 +20,7 @@ module Dodopayments
       DISPUTE_WON: :dispute_won
       DISPUTE_LOST: :dispute_lost
 
-      def self.values: -> ::Array[Dodopayments::Models::dispute_status]
+      def self?.values: -> ::Array[Dodopayments::Models::dispute_status]
     end
   end
 end

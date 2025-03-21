@@ -7,7 +7,7 @@ module Dodopayments
 
       PERCENTAGE: :percentage
 
-      def self.values: -> ::Array[Dodopayments::Models::discount_type]
+      def self?.values: -> ::Array[Dodopayments::Models::discount_type]
     end
   end
 end

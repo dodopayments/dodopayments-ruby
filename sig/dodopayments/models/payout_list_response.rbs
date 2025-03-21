@@ -366,7 +366,7 @@ module Dodopayments
         ZAR: :ZAR
         ZMW: :ZMW
 
-        def self.values: -> ::Array[Dodopayments::Models::PayoutListResponse::currency]
+        def self?.values: -> ::Array[Dodopayments::Models::PayoutListResponse::currency]
       end
 
       type status = :in_progress | :failed | :success
@@ -378,7 +378,7 @@ module Dodopayments
         FAILED: :failed
         SUCCESS: :success
 
-        def self.values: -> ::Array[Dodopayments::Models::PayoutListResponse::status]
+        def self?.values: -> ::Array[Dodopayments::Models::PayoutListResponse::status]
       end
     end
   end

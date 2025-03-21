@@ -136,6 +136,12 @@ module Dodopayments
         EDTECH = :edtech
 
         finalize!
+
+        class << self
+          # @!parse
+          #   # @return [Array<Symbol>]
+          #   def values; end
+        end
       end
 
       module Currency
@@ -288,6 +294,12 @@ module Dodopayments
         ZMW = :ZMW
 
         finalize!
+
+        class << self
+          # @!parse
+          #   # @return [Array<Symbol>]
+          #   def values; end
+        end
       end
     end
   end

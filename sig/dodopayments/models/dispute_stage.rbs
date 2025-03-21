@@ -9,7 +9,7 @@ module Dodopayments
       DISPUTE: :dispute
       PRE_ARBITRATION: :pre_arbitration
 
-      def self.values: -> ::Array[Dodopayments::Models::dispute_stage]
+      def self?.values: -> ::Array[Dodopayments::Models::dispute_stage]
     end
   end
 end

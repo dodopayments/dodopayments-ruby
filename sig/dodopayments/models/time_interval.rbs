@@ -10,7 +10,7 @@ module Dodopayments
       MONTH: :Month
       YEAR: :Year
 
-      def self.values: -> ::Array[Dodopayments::Models::time_interval]
+      def self?.values: -> ::Array[Dodopayments::Models::time_interval]
     end
   end
 end
