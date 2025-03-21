@@ -71,8 +71,8 @@ module Dodopayments
       end
 
       sig do
-        params(_: T.nilable(Dodopayments::Models::LicenseKeyDuration))
-          .returns(T.nilable(Dodopayments::Models::LicenseKeyDuration))
+        params(_: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Util::AnyHash)))
+          .returns(T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Util::AnyHash)))
       end
       def license_key_duration=(_)
       end

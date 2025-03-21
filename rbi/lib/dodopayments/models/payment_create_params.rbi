@@ -10,7 +10,10 @@ module Dodopayments
       def billing
       end
 
-      sig { params(_: Dodopayments::Models::BillingAddress).returns(Dodopayments::Models::BillingAddress) }
+      sig do
+        params(_: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Util::AnyHash))
+          .returns(T.any(Dodopayments::Models::BillingAddress, Dodopayments::Util::AnyHash))
+      end
       def billing=(_)
       end
 

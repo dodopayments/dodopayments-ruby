@@ -8,8 +8,8 @@ module Dodopayments
       end
 
       sig do
-        params(_: Dodopayments::Models::CustomerLimitedDetails)
-          .returns(Dodopayments::Models::CustomerLimitedDetails)
+        params(_: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Util::AnyHash))
+          .returns(T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Util::AnyHash))
       end
       def customer=(_)
       end
