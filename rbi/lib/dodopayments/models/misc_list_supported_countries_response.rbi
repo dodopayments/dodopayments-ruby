@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
-    MiscListSupportedCountriesResponse = T.type_alias { T::Array[Symbol] }
+    MiscListSupportedCountriesResponse =
+      T.let(Dodopayments::ArrayOf[enum: Dodopayments::Models::CountryCode], Dodopayments::Converter)
   end
 end

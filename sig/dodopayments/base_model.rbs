@@ -120,7 +120,7 @@ module Dodopayments
     ) -> ([true, top, nil] | [false, bool, Integer])
   end
 
-  class ArrayOf[Elem]
+  class ArrayOf
     include Dodopayments::Converter
 
     def self.[]: (
@@ -142,7 +142,7 @@ module Dodopayments
       top value
     ) -> ([true, top, nil] | [false, bool, Integer])
 
-    def item_type: -> Elem
+    def item_type: -> top
 
     def initialize: (
       ::Hash[Symbol, top]
@@ -152,7 +152,7 @@ module Dodopayments
     ) -> void
   end
 
-  class HashOf[Elem]
+  class HashOf
     include Dodopayments::Converter
 
     def self.[]: (
@@ -174,7 +174,7 @@ module Dodopayments
       top value
     ) -> ([true, top, nil] | [false, bool, Integer])
 
-    def item_type: -> Elem
+    def item_type: -> top
 
     def initialize: (
       ::Hash[Symbol, top]
