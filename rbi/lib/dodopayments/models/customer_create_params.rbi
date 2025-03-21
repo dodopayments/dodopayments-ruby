@@ -35,7 +35,7 @@ module Dodopayments
           email: String,
           name: String,
           phone_number: T.nilable(String),
-          request_options: T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything])
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

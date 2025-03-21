@@ -83,7 +83,7 @@ module Dodopayments
       sig do
         params(
           client_secret: String,
-          customer: Dodopayments::Models::CustomerLimitedDetails,
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Util::AnyHash),
           metadata: T::Hash[Symbol, String],
           payment_id: String,
           total_amount: Integer,

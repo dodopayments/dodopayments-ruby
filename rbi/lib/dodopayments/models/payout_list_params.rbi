@@ -28,7 +28,7 @@ module Dodopayments
         params(
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything])
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

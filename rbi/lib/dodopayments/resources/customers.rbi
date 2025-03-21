@@ -12,7 +12,7 @@ module Dodopayments
           email: String,
           name: String,
           phone_number: T.nilable(String),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
         )
           .returns(Dodopayments::Models::Customer)
       end
@@ -22,7 +22,7 @@ module Dodopayments
       sig do
         params(
           customer_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
         )
           .returns(Dodopayments::Models::Customer)
       end
@@ -38,7 +38,7 @@ module Dodopayments
           customer_id: String,
           name: T.nilable(String),
           phone_number: T.nilable(String),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
         )
           .returns(Dodopayments::Models::Customer)
       end
@@ -55,7 +55,7 @@ module Dodopayments
         params(
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
         )
           .returns(Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Customer])
       end

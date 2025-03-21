@@ -41,7 +41,7 @@ module Dodopayments
           activations_limit: T.nilable(Integer),
           disabled: T.nilable(T::Boolean),
           expires_at: T.nilable(Time),
-          request_options: T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything])
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

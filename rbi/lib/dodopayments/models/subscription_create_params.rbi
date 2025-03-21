@@ -103,7 +103,7 @@ module Dodopayments
 
       sig do
         params(
-          billing: Dodopayments::Models::BillingAddress,
+          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Util::AnyHash),
           customer: T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer),
           product_id: String,
           quantity: Integer,
@@ -113,7 +113,7 @@ module Dodopayments
           return_url: T.nilable(String),
           tax_id: T.nilable(String),
           trial_period_days: T.nilable(Integer),
-          request_options: T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything])
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

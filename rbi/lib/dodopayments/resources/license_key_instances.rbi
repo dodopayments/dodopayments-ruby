@@ -6,7 +6,7 @@ module Dodopayments
       sig do
         params(
           id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
         )
           .returns(Dodopayments::Models::LicenseKeyInstance)
       end
@@ -21,7 +21,7 @@ module Dodopayments
         params(
           id: String,
           name: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
         )
           .returns(Dodopayments::Models::LicenseKeyInstance)
       end
@@ -38,7 +38,7 @@ module Dodopayments
           license_key_id: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
         )
           .returns(Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::LicenseKeyInstance])
       end

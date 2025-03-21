@@ -29,7 +29,7 @@ module Dodopayments
         params(
           metadata: T.nilable(T::Hash[Symbol, String]),
           status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
-          request_options: T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything])
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

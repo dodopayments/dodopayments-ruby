@@ -8,7 +8,7 @@ module Dodopayments
           params(
             customer_id: String,
             send_email: T.nilable(T::Boolean),
-            request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+            request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
           )
             .void
         end

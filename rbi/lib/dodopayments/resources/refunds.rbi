@@ -8,7 +8,7 @@ module Dodopayments
           payment_id: String,
           amount: T.nilable(Integer),
           reason: T.nilable(String),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
         )
           .returns(Dodopayments::Models::Refund)
       end
@@ -27,7 +27,7 @@ module Dodopayments
       sig do
         params(
           refund_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
         )
           .returns(Dodopayments::Models::Refund)
       end
@@ -46,7 +46,7 @@ module Dodopayments
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           status: T.nilable(Dodopayments::Models::RefundStatus::OrSymbol),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
         )
           .returns(Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Refund])
       end

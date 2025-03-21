@@ -71,7 +71,7 @@ module Dodopayments
 
       sig do
         params(
-          customer: Dodopayments::Models::CustomerLimitedDetails,
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Util::AnyHash),
           metadata: T::Hash[Symbol, String],
           recurring_pre_tax_amount: Integer,
           subscription_id: String,

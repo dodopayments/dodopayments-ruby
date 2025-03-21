@@ -39,7 +39,7 @@ module Dodopayments
           payment_id: String,
           amount: T.nilable(Integer),
           reason: T.nilable(String),
-          request_options: T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything])
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

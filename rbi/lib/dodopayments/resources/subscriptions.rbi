@@ -15,7 +15,7 @@ module Dodopayments
           return_url: T.nilable(String),
           tax_id: T.nilable(String),
           trial_period_days: T.nilable(Integer),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
         )
           .returns(Dodopayments::Models::SubscriptionCreateResponse)
       end
@@ -46,7 +46,7 @@ module Dodopayments
       sig do
         params(
           subscription_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
         )
           .returns(Dodopayments::Models::Subscription)
       end
@@ -62,7 +62,7 @@ module Dodopayments
           subscription_id: String,
           metadata: T.nilable(T::Hash[Symbol, String]),
           status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
         )
           .returns(Dodopayments::Models::Subscription)
       end
@@ -83,7 +83,7 @@ module Dodopayments
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
         )
           .returns(Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Subscription])
       end

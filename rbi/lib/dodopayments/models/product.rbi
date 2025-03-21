@@ -161,7 +161,7 @@ module Dodopayments
           image: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
-          license_key_duration: T.nilable(Dodopayments::Models::LicenseKeyDuration),
+          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Util::AnyHash)),
           name: T.nilable(String)
         )
           .returns(T.attached_class)

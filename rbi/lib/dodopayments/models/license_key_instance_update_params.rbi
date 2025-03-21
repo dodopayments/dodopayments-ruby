@@ -19,7 +19,7 @@ module Dodopayments
           name: String,
           request_options: T.any(
             Dodopayments::RequestOptions,
-            T::Hash[Symbol, T.anything]
+            Dodopayments::Util::AnyHash
           )
         )
           .returns(T.attached_class)

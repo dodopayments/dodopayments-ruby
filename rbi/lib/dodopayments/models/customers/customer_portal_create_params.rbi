@@ -19,7 +19,7 @@ module Dodopayments
         sig do
           params(
             send_email: T.nilable(T::Boolean),
-            request_options: T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything])
+            request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
           )
             .returns(T.attached_class)
         end

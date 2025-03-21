@@ -88,7 +88,7 @@ module Dodopayments
 
       sig do
         params(
-          billing: Dodopayments::Models::BillingAddress,
+          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Util::AnyHash),
           customer: T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer),
           product_cart: T::Array[Dodopayments::Models::OneTimeProductCartItem],
           discount_code: T.nilable(String),
@@ -96,7 +96,7 @@ module Dodopayments
           payment_link: T.nilable(T::Boolean),
           return_url: T.nilable(String),
           tax_id: T.nilable(String),
-          request_options: T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything])
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

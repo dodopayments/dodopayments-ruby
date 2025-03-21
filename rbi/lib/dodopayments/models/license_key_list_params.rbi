@@ -61,7 +61,7 @@ module Dodopayments
           page_size: T.nilable(Integer),
           product_id: T.nilable(String),
           status: T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol),
-          request_options: T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything])
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

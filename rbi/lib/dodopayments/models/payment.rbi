@@ -188,7 +188,7 @@ module Dodopayments
           business_id: String,
           created_at: Time,
           currency: Dodopayments::Models::Payment::Currency::TaggedSymbol,
-          customer: Dodopayments::Models::CustomerLimitedDetails,
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Util::AnyHash),
           disputes: T::Array[Dodopayments::Models::Dispute],
           metadata: T::Hash[Symbol, String],
           payment_id: String,

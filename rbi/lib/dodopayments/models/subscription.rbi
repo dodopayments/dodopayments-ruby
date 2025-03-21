@@ -180,7 +180,7 @@ module Dodopayments
         params(
           created_at: Time,
           currency: Dodopayments::Models::Subscription::Currency::TaggedSymbol,
-          customer: Dodopayments::Models::CustomerLimitedDetails,
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Util::AnyHash),
           metadata: T::Hash[Symbol, String],
           next_billing_date: Time,
           payment_frequency_count: Integer,

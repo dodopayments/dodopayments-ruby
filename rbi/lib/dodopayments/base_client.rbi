@@ -26,7 +26,7 @@ module Dodopayments
           page: T.nilable(T::Class[Dodopayments::BasePage[Dodopayments::BaseModel]]),
           stream: T.nilable(T::Class[T.anything]),
           model: T.nilable(Dodopayments::Converter::Input),
-          options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+          options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
         }
       end
 
@@ -130,7 +130,7 @@ module Dodopayments
     # @api private
     sig do
       overridable
-        .params(req: Dodopayments::BaseClient::RequestComponentsShape, opts: T::Hash[Symbol, T.anything])
+        .params(req: Dodopayments::BaseClient::RequestComponentsShape, opts: Dodopayments::Util::AnyHash)
         .returns(Dodopayments::BaseClient::RequestInputShape)
     end
     private def build_request(req, opts)
@@ -176,7 +176,7 @@ module Dodopayments
         page: T.nilable(T::Class[Dodopayments::BasePage[Dodopayments::BaseModel]]),
         stream: T.nilable(T::Class[T.anything]),
         model: T.nilable(Dodopayments::Converter::Input),
-        options: T.nilable(T.any(Dodopayments::RequestOptions, T::Hash[Symbol, T.anything]))
+        options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
       )
         .returns(T.anything)
     end
