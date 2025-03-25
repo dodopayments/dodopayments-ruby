@@ -125,6 +125,8 @@ module Dodopayments
       def charge(
         # Subscription Id
         subscription_id,
+        # The product price. Represented in the lowest denomination of the currency (e.g.,
+        #   cents for USD). For example, to charge $1.00, pass `100`.
         product_price:,
         request_options: {}
       )

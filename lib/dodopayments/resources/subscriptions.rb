@@ -121,7 +121,8 @@ module Dodopayments
       #
       # @param params [Dodopayments::Models::SubscriptionChargeParams, Hash{Symbol=>Object}] .
       #
-      #   @option params [Integer] :product_price
+      #   @option params [Integer] :product_price The product price. Represented in the lowest denomination of the currency (e.g.,
+      #     cents for USD). For example, to charge $1.00, pass `100`.
       #
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #

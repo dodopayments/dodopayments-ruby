@@ -7,7 +7,13 @@ class Dodopayments::Test::Resources::Customers::CustomerPortalTest < Dodopayment
     response = @dodo_payments.customers.customer_portal.create("customer_id")
 
     assert_pattern do
-      response => nil
+      response => Dodopayments::Models::CustomerPortalSession
+    end
+
+    assert_pattern do
+      response => {
+        link: String
+      }
     end
   end
 end

@@ -12,14 +12,14 @@ module Dodopayments
         #
         #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
-        # @return [nil]
+        # @return [Dodopayments::Models::CustomerPortalSession]
         def create(customer_id, params = {})
           parsed, options = Dodopayments::Models::Customers::CustomerPortalCreateParams.dump_request(params)
           @client.request(
             method: :post,
             path: ["customers/%0s/customer-portal/session", customer_id],
             query: parsed,
-            model: NilClass,
+            model: Dodopayments::Models::CustomerPortalSession,
             options: options
           )
         end

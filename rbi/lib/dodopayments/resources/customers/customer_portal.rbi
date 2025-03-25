@@ -10,7 +10,7 @@ module Dodopayments
             send_email: T.nilable(T::Boolean),
             request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
           )
-            .void
+            .returns(Dodopayments::Models::CustomerPortalSession)
         end
         def create(
           # Customer Id
