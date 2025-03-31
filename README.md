@@ -1,6 +1,6 @@
 # Dodo Payments Ruby API library
 
-The Dodo Payments Ruby library provides convenient access to the Dodo Payments REST API from any Ruby 3.0.0+ application.
+The [Dodo Payments](https://dodopayments.com) Ruby library provides convenient access to the Dodo Payments REST API from any Ruby 3.0.0+ application.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
