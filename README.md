@@ -12,22 +12,16 @@ The underlying REST API documentation can be found on [docs.dodopayments.com](ht
 
 ## Installation
 
-To use this gem during the beta, install directly from GitHub with Bundler by adding the following to your application's `Gemfile`:
+To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
 
 ```ruby
-gem "dodopayments", git: "https://github.com/dodopayments/dodopayments-ruby", branch: "main"
+gem "dodopayments", "~> 0.0.1.pre.alpha.0"
 ```
 
 To fetch an initial copy of the gem:
 
 ```sh
 bundle install
-```
-
-To update the version used by your application when updates are pushed to GitHub:
-
-```sh
-bundle update dodopayments
 ```
 
 ## Usage
