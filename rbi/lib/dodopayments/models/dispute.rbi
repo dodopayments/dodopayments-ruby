@@ -93,7 +93,16 @@ module Dodopayments
         )
           .returns(T.attached_class)
       end
-      def self.new(amount:, business_id:, created_at:, currency:, dispute_id:, dispute_stage:, dispute_status:, payment_id:)
+      def self.new(
+        amount:,
+        business_id:,
+        created_at:,
+        currency:,
+        dispute_id:,
+        dispute_stage:,
+        dispute_status:,
+        payment_id:
+      )
       end
 
       sig do

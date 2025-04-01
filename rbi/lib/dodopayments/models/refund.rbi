@@ -92,7 +92,16 @@ module Dodopayments
         )
           .returns(T.attached_class)
       end
-      def self.new(business_id:, created_at:, payment_id:, refund_id:, status:, amount: nil, currency: nil, reason: nil)
+      def self.new(
+        business_id:,
+        created_at:,
+        payment_id:,
+        refund_id:,
+        status:,
+        amount: nil,
+        currency: nil,
+        reason: nil
+      )
       end
 
       sig do

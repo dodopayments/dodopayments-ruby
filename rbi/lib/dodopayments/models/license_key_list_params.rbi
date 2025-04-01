@@ -65,7 +65,14 @@ module Dodopayments
         )
           .returns(T.attached_class)
       end
-      def self.new(customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
+      def self.new(
+        customer_id: nil,
+        page_number: nil,
+        page_size: nil,
+        product_id: nil,
+        status: nil,
+        request_options: {}
+      )
       end
 
       sig do
