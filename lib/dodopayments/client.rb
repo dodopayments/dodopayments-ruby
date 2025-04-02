@@ -77,6 +77,8 @@ module Dodopayments
 
     # Creates and returns a new client for interacting with the API.
     #
+    # @param bearer_token [String, nil] Bearer Token for API authentication Defaults to `ENV["DODO_PAYMENTS_API_KEY"]`
+    #
     # @param environment [:live_mode, :test_mode, nil] Specifies the environment to use for the API.
     #
     #   Each environment maps to a different base URL:
@@ -86,8 +88,6 @@ module Dodopayments
     #
     # @param base_url [String, nil] Override the default base URL for the API, e.g., `"https://api.example.com/v2/"`
     #
-    # @param bearer_token [String, nil] Bearer Token for API authentication Defaults to `ENV["DODO_PAYMENTS_API_KEY"]`
-    #
     # @param max_retries [Integer] Max number of retries to attempt after a failed retryable request.
     #
     # @param timeout [Float]
@@ -96,9 +96,9 @@ module Dodopayments
     #
     # @param max_retry_delay [Float]
     def initialize(
+      bearer_token: ENV["DODO_PAYMENTS_API_KEY"],
       environment: nil,
       base_url: nil,
-      bearer_token: ENV["DODO_PAYMENTS_API_KEY"],
       max_retries: DEFAULT_MAX_RETRIES,
       timeout: DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: DEFAULT_INITIAL_RETRY_DELAY,
@@ -116,7 +116,7 @@ module Dodopayments
       end
 
       if bearer_token.nil?
-        raise ArgumentError.new("bearer_token is required")
+        raise ArgumentError.new("bearer_token is required, and can be set via environ: \"DODO_PAYMENTS_API_KEY\"")
       end
 
       @bearer_token = bearer_token.to_s

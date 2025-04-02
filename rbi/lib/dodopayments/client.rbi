@@ -85,9 +85,9 @@ module Dodopayments
     # Creates and returns a new client for interacting with the API.
     sig do
       params(
+        bearer_token: T.nilable(String),
         environment: NilClass,
         base_url: T.nilable(String),
-        bearer_token: T.nilable(String),
         max_retries: Integer,
         timeout: Float,
         initial_retry_delay: Float,
@@ -96,6 +96,8 @@ module Dodopayments
         .returns(T.attached_class)
     end
     def self.new(
+      # Bearer Token for API authentication Defaults to `ENV["DODO_PAYMENTS_API_KEY"]`
+      bearer_token: ENV["DODO_PAYMENTS_API_KEY"],
       # Specifies the environment to use for the API.
       #
       #   Each environment maps to a different base URL:
@@ -105,8 +107,6 @@ module Dodopayments
       environment: nil,
       # Override the default base URL for the API, e.g., `"https://api.example.com/v2/"`
       base_url: nil,
-      # Bearer Token for API authentication Defaults to `ENV["DODO_PAYMENTS_API_KEY"]`
-      bearer_token: ENV["DODO_PAYMENTS_API_KEY"],
       # Max number of retries to attempt after a failed retryable request.
       max_retries: DEFAULT_MAX_RETRIES,
       timeout: DEFAULT_TIMEOUT_IN_SECONDS,
