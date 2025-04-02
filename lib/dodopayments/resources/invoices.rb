@@ -6,6 +6,8 @@ module Dodopayments
       # @return [Dodopayments::Resources::Invoices::Payments]
       attr_reader :payments
 
+      # @api private
+      #
       # @param client [Dodopayments::Client]
       def initialize(client:)
         @client = client

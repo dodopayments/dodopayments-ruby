@@ -36,6 +36,7 @@ module Dodopayments
       def validate(license_key:, license_key_instance_id: nil, request_options: {})
       end
 
+      # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
       def self.new(client:)
       end

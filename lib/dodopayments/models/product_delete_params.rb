@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Products#delete
     class ProductDeleteParams < Dodopayments::BaseModel
       # @!parse
       #   extend Dodopayments::Type::RequestParameters::Converter

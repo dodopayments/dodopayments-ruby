@@ -3,6 +3,7 @@
 module Dodopayments
   module Models
     module Products
+      # @see Dodopayments::Resources::Products::Images#update
       class ImageUpdateParams < Dodopayments::BaseModel
         # @!parse
         #   extend Dodopayments::Type::RequestParameters::Converter

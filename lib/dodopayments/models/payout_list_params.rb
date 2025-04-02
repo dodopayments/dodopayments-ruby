@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Payouts#list
     class PayoutListParams < Dodopayments::BaseModel
       # @!parse
       #   extend Dodopayments::Type::RequestParameters::Converter

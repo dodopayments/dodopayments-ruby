@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Refunds#list
     class RefundListParams < Dodopayments::BaseModel
       # @!parse
       #   extend Dodopayments::Type::RequestParameters::Converter

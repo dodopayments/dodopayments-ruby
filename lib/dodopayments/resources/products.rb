@@ -30,6 +30,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::Product]
+      #
+      # @see Dodopayments::Models::ProductCreateParams
       def create(params)
         parsed, options = Dodopayments::Models::ProductCreateParams.dump_request(params)
         @client.request(
@@ -48,6 +50,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::Product]
+      #
+      # @see Dodopayments::Models::ProductRetrieveParams
       def retrieve(id, params = {})
         @client.request(
           method: :get,
@@ -94,6 +98,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [nil]
+      #
+      # @see Dodopayments::Models::ProductUpdateParams
       def update(id, params = {})
         parsed, options = Dodopayments::Models::ProductUpdateParams.dump_request(params)
         @client.request(
@@ -122,6 +128,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::ProductListResponse>]
+      #
+      # @see Dodopayments::Models::ProductListParams
       def list(params = {})
         parsed, options = Dodopayments::Models::ProductListParams.dump_request(params)
         @client.request(
@@ -141,6 +149,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [nil]
+      #
+      # @see Dodopayments::Models::ProductDeleteParams
       def delete(id, params = {})
         @client.request(
           method: :delete,
@@ -157,6 +167,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [nil]
+      #
+      # @see Dodopayments::Models::ProductUnarchiveParams
       def unarchive(id, params = {})
         @client.request(
           method: :post,
@@ -166,6 +178,8 @@ module Dodopayments
         )
       end
 
+      # @api private
+      #
       # @param client [Dodopayments::Client]
       def initialize(client:)
         @client = client

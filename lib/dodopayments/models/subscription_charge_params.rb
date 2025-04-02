@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Subscriptions#charge
     class SubscriptionChargeParams < Dodopayments::BaseModel
       # @!parse
       #   extend Dodopayments::Type::RequestParameters::Converter

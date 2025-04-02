@@ -13,6 +13,8 @@ module Dodopayments
         #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Dodopayments::Models::Products::ImageUpdateResponse]
+        #
+        # @see Dodopayments::Models::Products::ImageUpdateParams
         def update(id, params = {})
           parsed, options = Dodopayments::Models::Products::ImageUpdateParams.dump_request(params)
           @client.request(
@@ -24,6 +26,8 @@ module Dodopayments
           )
         end
 
+        # @api private
+        #
         # @param client [Dodopayments::Client]
         def initialize(client:)
           @client = client

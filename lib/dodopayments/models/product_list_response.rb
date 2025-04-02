@@ -127,6 +127,8 @@ module Dodopayments
 
       # Represents the different categories of taxation applicable to various products
       #   and services.
+      #
+      # @see Dodopayments::Models::ProductListResponse#tax_category
       module TaxCategory
         extend Dodopayments::Enum
 
@@ -144,6 +146,7 @@ module Dodopayments
         end
       end
 
+      # @see Dodopayments::Models::ProductListResponse#currency
       module Currency
         extend Dodopayments::Enum
 

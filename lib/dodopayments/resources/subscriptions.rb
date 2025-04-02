@@ -43,6 +43,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::SubscriptionCreateResponse]
+      #
+      # @see Dodopayments::Models::SubscriptionCreateParams
       def create(params)
         parsed, options = Dodopayments::Models::SubscriptionCreateParams.dump_request(params)
         @client.request(
@@ -61,6 +63,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::Subscription]
+      #
+      # @see Dodopayments::Models::SubscriptionRetrieveParams
       def retrieve(subscription_id, params = {})
         @client.request(
           method: :get,
@@ -81,6 +85,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::Subscription]
+      #
+      # @see Dodopayments::Models::SubscriptionUpdateParams
       def update(subscription_id, params = {})
         parsed, options = Dodopayments::Models::SubscriptionUpdateParams.dump_request(params)
         @client.request(
@@ -109,6 +115,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::Subscription>]
+      #
+      # @see Dodopayments::Models::SubscriptionListParams
       def list(params = {})
         parsed, options = Dodopayments::Models::SubscriptionListParams.dump_request(params)
         @client.request(
@@ -131,6 +139,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::SubscriptionChargeResponse]
+      #
+      # @see Dodopayments::Models::SubscriptionChargeParams
       def charge(subscription_id, params)
         parsed, options = Dodopayments::Models::SubscriptionChargeParams.dump_request(params)
         @client.request(
@@ -142,6 +152,8 @@ module Dodopayments
         )
       end
 
+      # @api private
+      #
       # @param client [Dodopayments::Client]
       def initialize(client:)
         @client = client

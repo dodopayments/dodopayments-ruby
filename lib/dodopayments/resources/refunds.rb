@@ -15,6 +15,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::Refund]
+      #
+      # @see Dodopayments::Models::RefundCreateParams
       def create(params)
         parsed, options = Dodopayments::Models::RefundCreateParams.dump_request(params)
         @client.request(
@@ -33,6 +35,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::Refund]
+      #
+      # @see Dodopayments::Models::RefundRetrieveParams
       def retrieve(refund_id, params = {})
         @client.request(
           method: :get,
@@ -59,6 +63,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::Refund>]
+      #
+      # @see Dodopayments::Models::RefundListParams
       def list(params = {})
         parsed, options = Dodopayments::Models::RefundListParams.dump_request(params)
         @client.request(
@@ -71,6 +77,8 @@ module Dodopayments
         )
       end
 
+      # @api private
+      #
       # @param client [Dodopayments::Client]
       def initialize(client:)
         @client = client

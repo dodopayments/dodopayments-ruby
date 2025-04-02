@@ -10,6 +10,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::Dispute]
+      #
+      # @see Dodopayments::Models::DisputeRetrieveParams
       def retrieve(dispute_id, params = {})
         @client.request(
           method: :get,
@@ -38,6 +40,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::Dispute>]
+      #
+      # @see Dodopayments::Models::DisputeListParams
       def list(params = {})
         parsed, options = Dodopayments::Models::DisputeListParams.dump_request(params)
         @client.request(
@@ -50,6 +54,8 @@ module Dodopayments
         )
       end
 
+      # @api private
+      #
       # @param client [Dodopayments::Client]
       def initialize(client:)
         @client = client

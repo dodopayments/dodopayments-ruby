@@ -11,6 +11,8 @@ module Dodopayments
         #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [nil]
+        #
+        # @see Dodopayments::Models::Invoices::PaymentRetrieveParams
         def retrieve(payment_id, params = {})
           @client.request(
             method: :get,
@@ -20,6 +22,8 @@ module Dodopayments
           )
         end
 
+        # @api private
+        #
         # @param client [Dodopayments::Client]
         def initialize(client:)
           @client = client

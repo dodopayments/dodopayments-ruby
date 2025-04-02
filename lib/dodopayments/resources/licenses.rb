@@ -12,6 +12,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::LicenseKeyInstance]
+      #
+      # @see Dodopayments::Models::LicenseActivateParams
       def activate(params)
         parsed, options = Dodopayments::Models::LicenseActivateParams.dump_request(params)
         @client.request(
@@ -32,6 +34,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [nil]
+      #
+      # @see Dodopayments::Models::LicenseDeactivateParams
       def deactivate(params)
         parsed, options = Dodopayments::Models::LicenseDeactivateParams.dump_request(params)
         @client.request(
@@ -52,6 +56,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::LicenseValidateResponse]
+      #
+      # @see Dodopayments::Models::LicenseValidateParams
       def validate(params)
         parsed, options = Dodopayments::Models::LicenseValidateParams.dump_request(params)
         @client.request(
@@ -63,6 +69,8 @@ module Dodopayments
         )
       end
 
+      # @api private
+      #
       # @param client [Dodopayments::Client]
       def initialize(client:)
         @client = client

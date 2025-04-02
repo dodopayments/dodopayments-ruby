@@ -3,6 +3,7 @@
 module Dodopayments
   module Models
     module Invoices
+      # @see Dodopayments::Resources::Invoices::Payments#retrieve
       class PaymentRetrieveParams < Dodopayments::BaseModel
         # @!parse
         #   extend Dodopayments::Type::RequestParameters::Converter

@@ -10,6 +10,7 @@ module Dodopayments
       def list_supported_countries(request_options: {})
       end
 
+      # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
       def self.new(client:)
       end

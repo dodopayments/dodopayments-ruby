@@ -3,6 +3,7 @@
 module Dodopayments
   module Models
     module Customers
+      # @see Dodopayments::Resources::Customers::CustomerPortal#create
       class CustomerPortalCreateParams < Dodopayments::BaseModel
         # @!parse
         #   extend Dodopayments::Type::RequestParameters::Converter

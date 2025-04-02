@@ -10,6 +10,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::LicenseKey]
+      #
+      # @see Dodopayments::Models::LicenseKeyRetrieveParams
       def retrieve(id, params = {})
         @client.request(
           method: :get,
@@ -35,6 +37,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::LicenseKey]
+      #
+      # @see Dodopayments::Models::LicenseKeyUpdateParams
       def update(id, params = {})
         parsed, options = Dodopayments::Models::LicenseKeyUpdateParams.dump_request(params)
         @client.request(
@@ -61,6 +65,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::LicenseKey>]
+      #
+      # @see Dodopayments::Models::LicenseKeyListParams
       def list(params = {})
         parsed, options = Dodopayments::Models::LicenseKeyListParams.dump_request(params)
         @client.request(
@@ -73,6 +79,8 @@ module Dodopayments
         )
       end
 
+      # @api private
+      #
       # @param client [Dodopayments::Client]
       def initialize(client:)
         @client = client

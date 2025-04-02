@@ -34,6 +34,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::Discount]
+      #
+      # @see Dodopayments::Models::DiscountCreateParams
       def create(params)
         parsed, options = Dodopayments::Models::DiscountCreateParams.dump_request(params)
         @client.request(
@@ -54,6 +56,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::Discount]
+      #
+      # @see Dodopayments::Models::DiscountRetrieveParams
       def retrieve(discount_id, params = {})
         @client.request(
           method: :get,
@@ -93,6 +97,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::Discount]
+      #
+      # @see Dodopayments::Models::DiscountUpdateParams
       def update(discount_id, params = {})
         parsed, options = Dodopayments::Models::DiscountUpdateParams.dump_request(params)
         @client.request(
@@ -115,6 +121,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::Discount>]
+      #
+      # @see Dodopayments::Models::DiscountListParams
       def list(params = {})
         parsed, options = Dodopayments::Models::DiscountListParams.dump_request(params)
         @client.request(
@@ -136,6 +144,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [nil]
+      #
+      # @see Dodopayments::Models::DiscountDeleteParams
       def delete(discount_id, params = {})
         @client.request(
           method: :delete,
@@ -145,6 +155,8 @@ module Dodopayments
         )
       end
 
+      # @api private
+      #
       # @param client [Dodopayments::Client]
       def initialize(client:)
         @client = client

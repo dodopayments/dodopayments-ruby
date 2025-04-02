@@ -96,6 +96,7 @@ module Dodopayments
 
         # def initialize: (Hash | Dodopayments::BaseModel) -> void
 
+        # @see Dodopayments::Models::Price::OneTimePrice#currency
         module Currency
           extend Dodopayments::Enum
 
@@ -358,6 +359,7 @@ module Dodopayments
 
         # def initialize: (Hash | Dodopayments::BaseModel) -> void
 
+        # @see Dodopayments::Models::Price::RecurringPrice#currency
         module Currency
           extend Dodopayments::Enum
 

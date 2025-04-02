@@ -131,6 +131,7 @@ module Dodopayments
 
       # def initialize: (Hash | Dodopayments::BaseModel) -> void
 
+      # @see Dodopayments::Models::PayoutListResponse#currency
       module Currency
         extend Dodopayments::Enum
 
@@ -289,6 +290,7 @@ module Dodopayments
         end
       end
 
+      # @see Dodopayments::Models::PayoutListResponse#status
       module Status
         extend Dodopayments::Enum
 

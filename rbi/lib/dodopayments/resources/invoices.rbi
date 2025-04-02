@@ -7,6 +7,7 @@ module Dodopayments
       def payments
       end
 
+      # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
       def self.new(client:)
       end

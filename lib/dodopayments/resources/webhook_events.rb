@@ -10,6 +10,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::WebhookEvent]
+      #
+      # @see Dodopayments::Models::WebhookEventRetrieveParams
       def retrieve(webhook_event_id, params = {})
         @client.request(
           method: :get,
@@ -36,6 +38,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::WebhookEvent>]
+      #
+      # @see Dodopayments::Models::WebhookEventListParams
       def list(params = {})
         parsed, options = Dodopayments::Models::WebhookEventListParams.dump_request(params)
         @client.request(
@@ -48,6 +52,8 @@ module Dodopayments
         )
       end
 
+      # @api private
+      #
       # @param client [Dodopayments::Client]
       def initialize(client:)
         @client = client

@@ -83,6 +83,7 @@ module Dodopayments
 
       # def initialize: (Hash | Dodopayments::BaseModel) -> void
 
+      # @see Dodopayments::Models::PaymentListResponse#currency
       module Currency
         extend Dodopayments::Enum
 

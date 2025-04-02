@@ -17,6 +17,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::Customer]
+      #
+      # @see Dodopayments::Models::CustomerCreateParams
       def create(params)
         parsed, options = Dodopayments::Models::CustomerCreateParams.dump_request(params)
         @client.request(
@@ -35,6 +37,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::Customer]
+      #
+      # @see Dodopayments::Models::CustomerRetrieveParams
       def retrieve(customer_id, params = {})
         @client.request(
           method: :get,
@@ -55,6 +59,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::Models::Customer]
+      #
+      # @see Dodopayments::Models::CustomerUpdateParams
       def update(customer_id, params = {})
         parsed, options = Dodopayments::Models::CustomerUpdateParams.dump_request(params)
         @client.request(
@@ -75,6 +81,8 @@ module Dodopayments
       #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::Customer>]
+      #
+      # @see Dodopayments::Models::CustomerListParams
       def list(params = {})
         parsed, options = Dodopayments::Models::CustomerListParams.dump_request(params)
         @client.request(
@@ -87,6 +95,8 @@ module Dodopayments
         )
       end
 
+      # @api private
+      #
       # @param client [Dodopayments::Client]
       def initialize(client:)
         @client = client
