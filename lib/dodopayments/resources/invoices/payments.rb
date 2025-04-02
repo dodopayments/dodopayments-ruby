@@ -4,11 +4,10 @@ module Dodopayments
   module Resources
     class Invoices
       class Payments
+        # @overload retrieve(payment_id, request_options: {})
+        #
         # @param payment_id [String]
-        #
-        # @param params [Dodopayments::Models::Invoices::PaymentRetrieveParams, Hash{Symbol=>Object}] .
-        #
-        #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+        # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [nil]
         #

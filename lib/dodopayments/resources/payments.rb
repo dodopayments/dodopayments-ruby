@@ -3,38 +3,20 @@
 module Dodopayments
   module Resources
     class Payments
-      # @param params [Dodopayments::Models::PaymentCreateParams, Hash{Symbol=>Object}] .
+      # @overload create(billing:, customer:, product_cart:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, metadata: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
       #
-      #   @option params [Dodopayments::Models::BillingAddress] :billing
-      #
-      #   @option params [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer] :customer
-      #
-      #   @option params [Array<Dodopayments::Models::OneTimeProductCartItem>] :product_cart List of products in the cart. Must contain at least 1 and at most 100 items.
-      #
-      #   @option params [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil] :allowed_payment_method_types List of payment methods allowed during checkout.
-      #
-      #     Customers will **never** see payment methods that are **not** in this list.
-      #     However, adding a method here **does not guarantee** customers will see it.
-      #     Availability still depends on other factors (e.g., customer location, merchant
-      #     settings).
-      #
-      #   @option params [Symbol, Dodopayments::Models::PaymentCreateParams::BillingCurrency, nil] :billing_currency
-      #
-      #   @option params [String, nil] :discount_code Discount Code to apply to the transaction
-      #
-      #   @option params [Hash{Symbol=>String}] :metadata
-      #
-      #   @option params [Boolean, nil] :payment_link Whether to generate a payment link. Defaults to false if not specified.
-      #
-      #   @option params [String, nil] :return_url Optional URL to redirect the customer after payment. Must be a valid URL if
-      #     provided.
-      #
-      #   @option params [Boolean] :show_saved_payment_methods Display saved payment methods of a returning customer False by default
-      #
-      #   @option params [String, nil] :tax_id Tax ID in case the payment is B2B. If tax id validation fails the payment
-      #     creation will fail
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param billing [Dodopayments::Models::BillingAddress]
+      # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
+      # @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>]
+      # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil]
+      # @param billing_currency [Symbol, Dodopayments::Models::PaymentCreateParams::BillingCurrency, nil]
+      # @param discount_code [String, nil]
+      # @param metadata [Hash{Symbol=>String}]
+      # @param payment_link [Boolean, nil]
+      # @param return_url [String, nil]
+      # @param show_saved_payment_methods [Boolean]
+      # @param tax_id [String, nil]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::PaymentCreateResponse]
       #
@@ -50,11 +32,10 @@ module Dodopayments
         )
       end
 
-      # @param payment_id [String] Payment Id
+      # @overload retrieve(payment_id, request_options: {})
       #
-      # @param params [Dodopayments::Models::PaymentRetrieveParams, Hash{Symbol=>Object}] .
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param payment_id [String]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Payment]
       #
@@ -68,23 +49,16 @@ module Dodopayments
         )
       end
 
-      # @param params [Dodopayments::Models::PaymentListParams, Hash{Symbol=>Object}] .
+      # @overload list(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, subscription_id: nil, request_options: {})
       #
-      #   @option params [Time, nil] :created_at_gte Get events after this created time
-      #
-      #   @option params [Time, nil] :created_at_lte Get events created before this time
-      #
-      #   @option params [String, nil] :customer_id Filter by customer id
-      #
-      #   @option params [Integer, nil] :page_number Page number default is 0
-      #
-      #   @option params [Integer, nil] :page_size Page size default is 10 max is 100
-      #
-      #   @option params [Symbol, Dodopayments::Models::IntentStatus, nil] :status Filter by status
-      #
-      #   @option params [String, nil] :subscription_id Filter by subscription id
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param created_at_gte [Time, nil]
+      # @param created_at_lte [Time, nil]
+      # @param customer_id [String, nil]
+      # @param page_number [Integer, nil]
+      # @param page_size [Integer, nil]
+      # @param status [Symbol, Dodopayments::Models::IntentStatus, nil]
+      # @param subscription_id [String, nil]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::PaymentListResponse>]
       #

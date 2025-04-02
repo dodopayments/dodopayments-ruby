@@ -3,11 +3,10 @@
 module Dodopayments
   module Resources
     class WebhookEvents
+      # @overload retrieve(webhook_event_id, request_options: {})
+      #
       # @param webhook_event_id [String]
-      #
-      # @param params [Dodopayments::Models::WebhookEventRetrieveParams, Hash{Symbol=>Object}] .
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::WebhookEvent]
       #
@@ -21,21 +20,15 @@ module Dodopayments
         )
       end
 
-      # @param params [Dodopayments::Models::WebhookEventListParams, Hash{Symbol=>Object}] .
+      # @overload list(created_at_gte: nil, created_at_lte: nil, limit: nil, object_id_: nil, page_number: nil, page_size: nil, request_options: {})
       #
-      #   @option params [Time, nil] :created_at_gte Get events after this created time
-      #
-      #   @option params [Time, nil] :created_at_lte Get events created before this time
-      #
-      #   @option params [Integer, nil] :limit Min : 1, Max : 100, default 10
-      #
-      #   @option params [String, nil] :object_id_ Get events history of a specific object like payment/subscription/refund/dispute
-      #
-      #   @option params [Integer, nil] :page_number Page number default is 0
-      #
-      #   @option params [Integer, nil] :page_size Page size default is 10 max is 100
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param created_at_gte [Time, nil]
+      # @param created_at_lte [Time, nil]
+      # @param limit [Integer, nil]
+      # @param object_id_ [String, nil]
+      # @param page_number [Integer, nil]
+      # @param page_size [Integer, nil]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::WebhookEvent>]
       #

@@ -3,13 +3,11 @@
 module Dodopayments
   module Resources
     class Licenses
-      # @param params [Dodopayments::Models::LicenseActivateParams, Hash{Symbol=>Object}] .
+      # @overload activate(license_key:, name:, request_options: {})
       #
-      #   @option params [String] :license_key
-      #
-      #   @option params [String] :name
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param license_key [String]
+      # @param name [String]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::LicenseKeyInstance]
       #
@@ -25,13 +23,11 @@ module Dodopayments
         )
       end
 
-      # @param params [Dodopayments::Models::LicenseDeactivateParams, Hash{Symbol=>Object}] .
+      # @overload deactivate(license_key:, license_key_instance_id:, request_options: {})
       #
-      #   @option params [String] :license_key
-      #
-      #   @option params [String] :license_key_instance_id
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param license_key [String]
+      # @param license_key_instance_id [String]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
       #
@@ -47,13 +43,11 @@ module Dodopayments
         )
       end
 
-      # @param params [Dodopayments::Models::LicenseValidateParams, Hash{Symbol=>Object}] .
+      # @overload validate(license_key:, license_key_instance_id: nil, request_options: {})
       #
-      #   @option params [String] :license_key
-      #
-      #   @option params [String, nil] :license_key_instance_id
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param license_key [String]
+      # @param license_key_instance_id [String, nil]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::LicenseValidateResponse]
       #

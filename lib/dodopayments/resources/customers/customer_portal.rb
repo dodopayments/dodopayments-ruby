@@ -4,13 +4,11 @@ module Dodopayments
   module Resources
     class Customers
       class CustomerPortal
-        # @param customer_id [String] Customer Id
+        # @overload create(customer_id, send_email: nil, request_options: {})
         #
-        # @param params [Dodopayments::Models::Customers::CustomerPortalCreateParams, Hash{Symbol=>Object}] .
-        #
-        #   @option params [Boolean, nil] :send_email If true, will send link to user.
-        #
-        #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+        # @param customer_id [String]
+        # @param send_email [Boolean, nil]
+        # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Dodopayments::Models::CustomerPortalSession]
         #

@@ -3,13 +3,11 @@
 module Dodopayments
   module Resources
     class Payouts
-      # @param params [Dodopayments::Models::PayoutListParams, Hash{Symbol=>Object}] .
+      # @overload list(page_number: nil, page_size: nil, request_options: {})
       #
-      #   @option params [Integer, nil] :page_number Page number default is 0
-      #
-      #   @option params [Integer, nil] :page_size Page size default is 10 max is 100
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param page_number [Integer, nil]
+      # @param page_size [Integer, nil]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::PayoutListResponse>]
       #

@@ -5,33 +5,16 @@ module Dodopayments
     class Discounts
       # If `code` is omitted or empty, a random 16-char uppercase code is generated.
       #
-      # @param params [Dodopayments::Models::DiscountCreateParams, Hash{Symbol=>Object}] .
+      # @overload create(amount:, type:, code: nil, expires_at: nil, name: nil, restricted_to: nil, usage_limit: nil, request_options: {})
       #
-      #   @option params [Integer] :amount The discount amount.
-      #
-      #     - If `discount_type` is **not** `percentage`, `amount` is in **USD cents**. For
-      #       example, `100` means `$1.00`. Only USD is allowed.
-      #     - If `discount_type` **is** `percentage`, `amount` is in **basis points**. For
-      #       example, `540` means `5.4%`.
-      #
-      #     Must be at least 1.
-      #
-      #   @option params [Symbol, Dodopayments::Models::DiscountType] :type
-      #
-      #   @option params [String, nil] :code Optionally supply a code (will be uppercased).
-      #
-      #     - Must be at least 3 characters if provided.
-      #     - If omitted, a random 16-character code is generated.
-      #
-      #   @option params [Time, nil] :expires_at When the discount expires, if ever.
-      #
-      #   @option params [String, nil] :name
-      #
-      #   @option params [Array<String>, nil] :restricted_to List of product IDs to restrict usage (if any).
-      #
-      #   @option params [Integer, nil] :usage_limit How many times this discount can be used (if any). Must be >= 1 if provided.
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param amount [Integer]
+      # @param type [Symbol, Dodopayments::Models::DiscountType]
+      # @param code [String, nil]
+      # @param expires_at [Time, nil]
+      # @param name [String, nil]
+      # @param restricted_to [Array<String>, nil]
+      # @param usage_limit [Integer, nil]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Discount]
       #
@@ -49,11 +32,10 @@ module Dodopayments
 
       # GET /discounts/{discount_id}
       #
-      # @param discount_id [String] Discount Id
+      # @overload retrieve(discount_id, request_options: {})
       #
-      # @param params [Dodopayments::Models::DiscountRetrieveParams, Hash{Symbol=>Object}] .
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param discount_id [String]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Discount]
       #
@@ -69,32 +51,17 @@ module Dodopayments
 
       # PATCH /discounts/{discount_id}
       #
-      # @param discount_id [String] Discount Id
+      # @overload update(discount_id, amount: nil, code: nil, expires_at: nil, name: nil, restricted_to: nil, type: nil, usage_limit: nil, request_options: {})
       #
-      # @param params [Dodopayments::Models::DiscountUpdateParams, Hash{Symbol=>Object}] .
-      #
-      #   @option params [Integer, nil] :amount If present, update the discount amount:
-      #
-      #     - If `discount_type` is `percentage`, this represents **basis points** (e.g.,
-      #       `540` = `5.4%`).
-      #     - Otherwise, this represents **USD cents** (e.g., `100` = `$1.00`).
-      #
-      #     Must be at least 1 if provided.
-      #
-      #   @option params [String, nil] :code If present, update the discount code (uppercase).
-      #
-      #   @option params [Time, nil] :expires_at
-      #
-      #   @option params [String, nil] :name
-      #
-      #   @option params [Array<String>, nil] :restricted_to If present, replaces all restricted product IDs with this new set. To remove all
-      #     restrictions, send empty array
-      #
-      #   @option params [Symbol, Dodopayments::Models::DiscountType, nil] :type
-      #
-      #   @option params [Integer, nil] :usage_limit
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param discount_id [String]
+      # @param amount [Integer, nil]
+      # @param code [String, nil]
+      # @param expires_at [Time, nil]
+      # @param name [String, nil]
+      # @param restricted_to [Array<String>, nil]
+      # @param type [Symbol, Dodopayments::Models::DiscountType, nil]
+      # @param usage_limit [Integer, nil]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Discount]
       #
@@ -112,13 +79,11 @@ module Dodopayments
 
       # GET /discounts
       #
-      # @param params [Dodopayments::Models::DiscountListParams, Hash{Symbol=>Object}] .
+      # @overload list(page_number: nil, page_size: nil, request_options: {})
       #
-      #   @option params [Integer, nil] :page_number Page number (default = 0).
-      #
-      #   @option params [Integer, nil] :page_size Page size (default = 10, max = 100).
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param page_number [Integer, nil]
+      # @param page_size [Integer, nil]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::Discount>]
       #
@@ -137,11 +102,10 @@ module Dodopayments
 
       # DELETE /discounts/{discount_id}
       #
-      # @param discount_id [String] Discount Id
+      # @overload delete(discount_id, request_options: {})
       #
-      # @param params [Dodopayments::Models::DiscountDeleteParams, Hash{Symbol=>Object}] .
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param discount_id [String]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
       #

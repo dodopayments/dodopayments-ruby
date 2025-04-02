@@ -6,28 +6,18 @@ module Dodopayments
       # @return [Dodopayments::Resources::Products::Images]
       attr_reader :images
 
-      # @param params [Dodopayments::Models::ProductCreateParams, Hash{Symbol=>Object}] .
+      # @overload create(price:, tax_category:, addons: nil, description: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, request_options: {})
       #
-      #   @option params [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice] :price
-      #
-      #   @option params [Symbol, Dodopayments::Models::ProductCreateParams::TaxCategory] :tax_category Represents the different categories of taxation applicable to various products
-      #     and services.
-      #
-      #   @option params [Array<String>, nil] :addons Addons available for subscription product
-      #
-      #   @option params [String, nil] :description Optional description of the product
-      #
-      #   @option params [String, nil] :license_key_activation_message Optional message displayed during license key activation
-      #
-      #   @option params [Integer, nil] :license_key_activations_limit The number of times the license key can be activated. Must be 0 or greater
-      #
-      #   @option params [Dodopayments::Models::LicenseKeyDuration, nil] :license_key_duration
-      #
-      #   @option params [Boolean, nil] :license_key_enabled When true, generates and sends a license key to your customer. Defaults to false
-      #
-      #   @option params [String, nil] :name Optional name of the product
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
+      # @param tax_category [Symbol, Dodopayments::Models::ProductCreateParams::TaxCategory]
+      # @param addons [Array<String>, nil]
+      # @param description [String, nil]
+      # @param license_key_activation_message [String, nil]
+      # @param license_key_activations_limit [Integer, nil]
+      # @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil]
+      # @param license_key_enabled [Boolean, nil]
+      # @param name [String, nil]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Product]
       #
@@ -43,11 +33,10 @@ module Dodopayments
         )
       end
 
-      # @param id [String] Product Id
+      # @overload retrieve(id, request_options: {})
       #
-      # @param params [Dodopayments::Models::ProductRetrieveParams, Hash{Symbol=>Object}] .
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param id [String]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Product]
       #
@@ -61,41 +50,20 @@ module Dodopayments
         )
       end
 
+      # @overload update(id, addons: nil, description: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      #
       # @param id [String]
-      #
-      # @param params [Dodopayments::Models::ProductUpdateParams, Hash{Symbol=>Object}] .
-      #
-      #   @option params [Array<String>, nil] :addons Available Addons for subscription products
-      #
-      #   @option params [String, nil] :description Description of the product, optional and must be at most 1000 characters.
-      #
-      #   @option params [String, nil] :image_id Product image id after its uploaded to S3
-      #
-      #   @option params [String, nil] :license_key_activation_message Message sent to the customer upon license key activation.
-      #
-      #     Only applicable if `license_key_enabled` is `true`. This message contains
-      #     instructions for activating the license key.
-      #
-      #   @option params [Integer, nil] :license_key_activations_limit Limit for the number of activations for the license key.
-      #
-      #     Only applicable if `license_key_enabled` is `true`. Represents the maximum
-      #     number of times the license key can be activated.
-      #
-      #   @option params [Dodopayments::Models::LicenseKeyDuration, nil] :license_key_duration
-      #
-      #   @option params [Boolean, nil] :license_key_enabled Whether the product requires a license key.
-      #
-      #     If `true`, additional fields related to license key (duration, activations
-      #     limit, activation message) become applicable.
-      #
-      #   @option params [String, nil] :name Name of the product, optional and must be at most 100 characters.
-      #
-      #   @option params [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil] :price
-      #
-      #   @option params [Symbol, Dodopayments::Models::ProductUpdateParams::TaxCategory, nil] :tax_category Represents the different categories of taxation applicable to various products
-      #     and services.
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param addons [Array<String>, nil]
+      # @param description [String, nil]
+      # @param image_id [String, nil]
+      # @param license_key_activation_message [String, nil]
+      # @param license_key_activations_limit [Integer, nil]
+      # @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil]
+      # @param license_key_enabled [Boolean, nil]
+      # @param name [String, nil]
+      # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil]
+      # @param tax_category [Symbol, Dodopayments::Models::ProductUpdateParams::TaxCategory, nil]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
       #
@@ -111,21 +79,13 @@ module Dodopayments
         )
       end
 
-      # @param params [Dodopayments::Models::ProductListParams, Hash{Symbol=>Object}] .
+      # @overload list(archived: nil, page_number: nil, page_size: nil, recurring: nil, request_options: {})
       #
-      #   @option params [Boolean] :archived List archived products
-      #
-      #   @option params [Integer, nil] :page_number Page number default is 0
-      #
-      #   @option params [Integer, nil] :page_size Page size default is 10 max is 100
-      #
-      #   @option params [Boolean, nil] :recurring Filter products by pricing type:
-      #
-      #     - `true`: Show only recurring pricing products (e.g. subscriptions)
-      #     - `false`: Show only one-time price products
-      #     - `null` or absent: Show both types of products
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param archived [Boolean]
+      # @param page_number [Integer, nil]
+      # @param page_size [Integer, nil]
+      # @param recurring [Boolean, nil]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::ProductListResponse>]
       #
@@ -142,11 +102,10 @@ module Dodopayments
         )
       end
 
+      # @overload delete(id, request_options: {})
+      #
       # @param id [String]
-      #
-      # @param params [Dodopayments::Models::ProductDeleteParams, Hash{Symbol=>Object}] .
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
       #
@@ -160,11 +119,10 @@ module Dodopayments
         )
       end
 
+      # @overload unarchive(id, request_options: {})
+      #
       # @param id [String]
-      #
-      # @param params [Dodopayments::Models::ProductUnarchiveParams, Hash{Symbol=>Object}] .
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
       #

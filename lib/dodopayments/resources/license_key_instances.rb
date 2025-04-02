@@ -3,11 +3,10 @@
 module Dodopayments
   module Resources
     class LicenseKeyInstances
-      # @param id [String] License key instance ID
+      # @overload retrieve(id, request_options: {})
       #
-      # @param params [Dodopayments::Models::LicenseKeyInstanceRetrieveParams, Hash{Symbol=>Object}] .
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param id [String]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::LicenseKeyInstance]
       #
@@ -21,13 +20,11 @@ module Dodopayments
         )
       end
 
-      # @param id [String] License key instance ID
+      # @overload update(id, name:, request_options: {})
       #
-      # @param params [Dodopayments::Models::LicenseKeyInstanceUpdateParams, Hash{Symbol=>Object}] .
-      #
-      #   @option params [String] :name
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param id [String]
+      # @param name [String]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::LicenseKeyInstance]
       #
@@ -43,15 +40,12 @@ module Dodopayments
         )
       end
 
-      # @param params [Dodopayments::Models::LicenseKeyInstanceListParams, Hash{Symbol=>Object}] .
+      # @overload list(license_key_id: nil, page_number: nil, page_size: nil, request_options: {})
       #
-      #   @option params [String, nil] :license_key_id Filter by license key ID
-      #
-      #   @option params [Integer, nil] :page_number Page number default is 0
-      #
-      #   @option params [Integer, nil] :page_size Page size default is 10 max is 100
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param license_key_id [String, nil]
+      # @param page_number [Integer, nil]
+      # @param page_size [Integer, nil]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::LicenseKeyInstance>]
       #

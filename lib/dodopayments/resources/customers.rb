@@ -6,15 +6,12 @@ module Dodopayments
       # @return [Dodopayments::Resources::Customers::CustomerPortal]
       attr_reader :customer_portal
 
-      # @param params [Dodopayments::Models::CustomerCreateParams, Hash{Symbol=>Object}] .
+      # @overload create(email:, name:, phone_number: nil, request_options: {})
       #
-      #   @option params [String] :email
-      #
-      #   @option params [String] :name
-      #
-      #   @option params [String, nil] :phone_number
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param email [String]
+      # @param name [String]
+      # @param phone_number [String, nil]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Customer]
       #
@@ -30,11 +27,10 @@ module Dodopayments
         )
       end
 
-      # @param customer_id [String] Customer Id
+      # @overload retrieve(customer_id, request_options: {})
       #
-      # @param params [Dodopayments::Models::CustomerRetrieveParams, Hash{Symbol=>Object}] .
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param customer_id [String]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Customer]
       #
@@ -48,15 +44,12 @@ module Dodopayments
         )
       end
 
-      # @param customer_id [String] Customer Id
+      # @overload update(customer_id, name: nil, phone_number: nil, request_options: {})
       #
-      # @param params [Dodopayments::Models::CustomerUpdateParams, Hash{Symbol=>Object}] .
-      #
-      #   @option params [String, nil] :name
-      #
-      #   @option params [String, nil] :phone_number
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param customer_id [String]
+      # @param name [String, nil]
+      # @param phone_number [String, nil]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Customer]
       #
@@ -72,13 +65,11 @@ module Dodopayments
         )
       end
 
-      # @param params [Dodopayments::Models::CustomerListParams, Hash{Symbol=>Object}] .
+      # @overload list(page_number: nil, page_size: nil, request_options: {})
       #
-      #   @option params [Integer, nil] :page_number Page number default is 0
-      #
-      #   @option params [Integer, nil] :page_size Page size default is 10 max is 100
-      #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param page_number [Integer, nil]
+      # @param page_size [Integer, nil]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::Customer>]
       #

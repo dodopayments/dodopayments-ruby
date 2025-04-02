@@ -3,9 +3,9 @@
 module Dodopayments
   module Resources
     class Misc
-      # @param params [Dodopayments::Models::MiscListSupportedCountriesParams, Hash{Symbol=>Object}] .
+      # @overload list_supported_countries(request_options: {})
       #
-      #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Array<Symbol, Dodopayments::Models::CountryCode>]
       #

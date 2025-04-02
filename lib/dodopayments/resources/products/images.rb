@@ -4,13 +4,11 @@ module Dodopayments
   module Resources
     class Products
       class Images
-        # @param id [String] Product Id
+        # @overload update(id, force_update: nil, request_options: {})
         #
-        # @param params [Dodopayments::Models::Products::ImageUpdateParams, Hash{Symbol=>Object}] .
-        #
-        #   @option params [Boolean, nil] :force_update
-        #
-        #   @option params [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+        # @param id [String]
+        # @param force_update [Boolean, nil]
+        # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Dodopayments::Models::Products::ImageUpdateResponse]
         #
