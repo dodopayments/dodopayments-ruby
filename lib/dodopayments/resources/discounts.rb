@@ -57,7 +57,7 @@ module Dodopayments
       def retrieve(discount_id, params = {})
         @client.request(
           method: :get,
-          path: ["discounts/%0s", discount_id],
+          path: ["discounts/%1$s", discount_id],
           model: Dodopayments::Models::Discount,
           options: params[:request_options]
         )
@@ -97,7 +97,7 @@ module Dodopayments
         parsed, options = Dodopayments::Models::DiscountUpdateParams.dump_request(params)
         @client.request(
           method: :patch,
-          path: ["discounts/%0s", discount_id],
+          path: ["discounts/%1$s", discount_id],
           body: parsed,
           model: Dodopayments::Models::Discount,
           options: options
@@ -139,7 +139,7 @@ module Dodopayments
       def delete(discount_id, params = {})
         @client.request(
           method: :delete,
-          path: ["discounts/%0s", discount_id],
+          path: ["discounts/%1$s", discount_id],
           model: NilClass,
           options: params[:request_options]
         )

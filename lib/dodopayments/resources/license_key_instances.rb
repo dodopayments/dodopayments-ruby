@@ -13,7 +13,7 @@ module Dodopayments
       def retrieve(id, params = {})
         @client.request(
           method: :get,
-          path: ["license_key_instances/%0s", id],
+          path: ["license_key_instances/%1$s", id],
           model: Dodopayments::Models::LicenseKeyInstance,
           options: params[:request_options]
         )
@@ -32,7 +32,7 @@ module Dodopayments
         parsed, options = Dodopayments::Models::LicenseKeyInstanceUpdateParams.dump_request(params)
         @client.request(
           method: :patch,
-          path: ["license_key_instances/%0s", id],
+          path: ["license_key_instances/%1$s", id],
           body: parsed,
           model: Dodopayments::Models::LicenseKeyInstance,
           options: options

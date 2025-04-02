@@ -13,7 +13,7 @@ module Dodopayments
       def retrieve(webhook_event_id, params = {})
         @client.request(
           method: :get,
-          path: ["webhook_events/%0s", webhook_event_id],
+          path: ["webhook_events/%1$s", webhook_event_id],
           model: Dodopayments::Models::WebhookEvent,
           options: params[:request_options]
         )

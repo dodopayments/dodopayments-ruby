@@ -58,7 +58,7 @@ module Dodopayments
       def retrieve(payment_id, params = {})
         @client.request(
           method: :get,
-          path: ["payments/%0s", payment_id],
+          path: ["payments/%1$s", payment_id],
           model: Dodopayments::Models::Payment,
           options: params[:request_options]
         )

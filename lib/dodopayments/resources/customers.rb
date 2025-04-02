@@ -38,7 +38,7 @@ module Dodopayments
       def retrieve(customer_id, params = {})
         @client.request(
           method: :get,
-          path: ["customers/%0s", customer_id],
+          path: ["customers/%1$s", customer_id],
           model: Dodopayments::Models::Customer,
           options: params[:request_options]
         )
@@ -59,7 +59,7 @@ module Dodopayments
         parsed, options = Dodopayments::Models::CustomerUpdateParams.dump_request(params)
         @client.request(
           method: :patch,
-          path: ["customers/%0s", customer_id],
+          path: ["customers/%1$s", customer_id],
           body: parsed,
           model: Dodopayments::Models::Customer,
           options: options

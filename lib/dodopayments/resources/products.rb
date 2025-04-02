@@ -51,7 +51,7 @@ module Dodopayments
       def retrieve(id, params = {})
         @client.request(
           method: :get,
-          path: ["products/%0s", id],
+          path: ["products/%1$s", id],
           model: Dodopayments::Models::Product,
           options: params[:request_options]
         )
@@ -98,7 +98,7 @@ module Dodopayments
         parsed, options = Dodopayments::Models::ProductUpdateParams.dump_request(params)
         @client.request(
           method: :patch,
-          path: ["products/%0s", id],
+          path: ["products/%1$s", id],
           body: parsed,
           model: NilClass,
           options: options
@@ -144,7 +144,7 @@ module Dodopayments
       def delete(id, params = {})
         @client.request(
           method: :delete,
-          path: ["products/%0s", id],
+          path: ["products/%1$s", id],
           model: NilClass,
           options: params[:request_options]
         )
@@ -160,7 +160,7 @@ module Dodopayments
       def unarchive(id, params = {})
         @client.request(
           method: :post,
-          path: ["products/%0s/unarchive", id],
+          path: ["products/%1$s/unarchive", id],
           model: NilClass,
           options: params[:request_options]
         )

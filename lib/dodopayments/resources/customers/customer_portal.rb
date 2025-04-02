@@ -17,7 +17,7 @@ module Dodopayments
           parsed, options = Dodopayments::Models::Customers::CustomerPortalCreateParams.dump_request(params)
           @client.request(
             method: :post,
-            path: ["customers/%0s/customer-portal/session", customer_id],
+            path: ["customers/%1$s/customer-portal/session", customer_id],
             query: parsed,
             model: Dodopayments::Models::CustomerPortalSession,
             options: options

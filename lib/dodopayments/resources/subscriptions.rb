@@ -64,7 +64,7 @@ module Dodopayments
       def retrieve(subscription_id, params = {})
         @client.request(
           method: :get,
-          path: ["subscriptions/%0s", subscription_id],
+          path: ["subscriptions/%1$s", subscription_id],
           model: Dodopayments::Models::Subscription,
           options: params[:request_options]
         )
@@ -85,7 +85,7 @@ module Dodopayments
         parsed, options = Dodopayments::Models::SubscriptionUpdateParams.dump_request(params)
         @client.request(
           method: :patch,
-          path: ["subscriptions/%0s", subscription_id],
+          path: ["subscriptions/%1$s", subscription_id],
           body: parsed,
           model: Dodopayments::Models::Subscription,
           options: options
@@ -135,7 +135,7 @@ module Dodopayments
         parsed, options = Dodopayments::Models::SubscriptionChargeParams.dump_request(params)
         @client.request(
           method: :post,
-          path: ["subscriptions/%0s/charge", subscription_id],
+          path: ["subscriptions/%1$s/charge", subscription_id],
           body: parsed,
           model: Dodopayments::Models::SubscriptionChargeResponse,
           options: options

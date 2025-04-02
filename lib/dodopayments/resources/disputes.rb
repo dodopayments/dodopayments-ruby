@@ -13,7 +13,7 @@ module Dodopayments
       def retrieve(dispute_id, params = {})
         @client.request(
           method: :get,
-          path: ["disputes/%0s", dispute_id],
+          path: ["disputes/%1$s", dispute_id],
           model: Dodopayments::Models::Dispute,
           options: params[:request_options]
         )
