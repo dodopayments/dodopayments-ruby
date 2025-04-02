@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Customers#create
     class Customer < Dodopayments::BaseModel
       # @!attribute business_id
       #

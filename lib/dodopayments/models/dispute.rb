@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Disputes#retrieve
     class Dispute < Dodopayments::BaseModel
       # @!attribute amount
       #   The amount involved in the dispute, represented as a string to accommodate

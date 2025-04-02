@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::LicenseKeys#retrieve
     class LicenseKey < Dodopayments::BaseModel
       # @!attribute id
       #   The unique identifier of the license key.

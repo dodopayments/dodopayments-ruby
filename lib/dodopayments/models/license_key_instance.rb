@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::LicenseKeyInstances#retrieve
     class LicenseKeyInstance < Dodopayments::BaseModel
       # @!attribute id
       #

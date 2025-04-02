@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Payments#list
     class PaymentListResponse < Dodopayments::BaseModel
       # @!attribute created_at
       #

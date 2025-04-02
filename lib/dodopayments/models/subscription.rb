@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Subscriptions#retrieve
     class Subscription < Dodopayments::BaseModel
       # @!attribute created_at
       #   Timestamp when the subscription was created

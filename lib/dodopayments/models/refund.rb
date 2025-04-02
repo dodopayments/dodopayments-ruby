@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Refunds#create
     class Refund < Dodopayments::BaseModel
       # @!attribute business_id
       #   The unique identifier of the business issuing the refund.

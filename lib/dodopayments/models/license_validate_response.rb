@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Licenses#validate
     class LicenseValidateResponse < Dodopayments::BaseModel
       # @!attribute valid
       #

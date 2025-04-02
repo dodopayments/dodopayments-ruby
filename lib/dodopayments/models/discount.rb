@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Discounts#create
     class Discount < Dodopayments::BaseModel
       # @!attribute amount
       #   The discount amount.

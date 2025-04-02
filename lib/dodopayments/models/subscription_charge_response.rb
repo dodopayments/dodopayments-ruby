@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Subscriptions#charge
     class SubscriptionChargeResponse < Dodopayments::BaseModel
       # @!attribute payment_id
       #

@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Payments#retrieve
     class Payment < Dodopayments::BaseModel
       # @!attribute business_id
       #   Identifier of the business associated with the payment

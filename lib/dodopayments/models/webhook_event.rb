@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::WebhookEvents#retrieve
     class WebhookEvent < Dodopayments::BaseModel
       # @!attribute business_id
       #

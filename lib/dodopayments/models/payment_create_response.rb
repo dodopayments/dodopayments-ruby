@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Payments#create
     class PaymentCreateResponse < Dodopayments::BaseModel
       # @!attribute client_secret
       #   Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will be

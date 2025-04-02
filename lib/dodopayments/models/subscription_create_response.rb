@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Subscriptions#create
     class SubscriptionCreateResponse < Dodopayments::BaseModel
       # @!attribute customer
       #

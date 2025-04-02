@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Products#list
     class ProductListResponse < Dodopayments::BaseModel
       # @!attribute business_id
       #   Unique identifier for the business to which the product belongs.

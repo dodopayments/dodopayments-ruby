@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # @see Dodopayments::Resources::Payouts#list
     class PayoutListResponse < Dodopayments::BaseModel
       # @!attribute amount
       #   The total amount of the payout.
