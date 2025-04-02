@@ -182,7 +182,7 @@ module Dodopayments
         TaggedSymbol =
           T.type_alias { T.all(Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType) }
         OrSymbol =
-          T.type_alias { T.any(Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol) }
+          T.type_alias { T.any(Symbol, String, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol) }
 
         CREDIT =
           T.let(:credit, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
@@ -229,7 +229,7 @@ module Dodopayments
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::PaymentCreateParams::BillingCurrency) }
         OrSymbol =
-          T.type_alias { T.any(Symbol, Dodopayments::Models::PaymentCreateParams::BillingCurrency::TaggedSymbol) }
+          T.type_alias { T.any(Symbol, String, Dodopayments::Models::PaymentCreateParams::BillingCurrency::TaggedSymbol) }
 
         AED = T.let(:AED, Dodopayments::Models::PaymentCreateParams::BillingCurrency::TaggedSymbol)
         ALL = T.let(:ALL, Dodopayments::Models::PaymentCreateParams::BillingCurrency::TaggedSymbol)

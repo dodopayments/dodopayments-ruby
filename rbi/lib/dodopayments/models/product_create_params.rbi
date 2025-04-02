@@ -151,7 +151,7 @@ module Dodopayments
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::ProductCreateParams::TaxCategory) }
         OrSymbol =
-          T.type_alias { T.any(Symbol, Dodopayments::Models::ProductCreateParams::TaxCategory::TaggedSymbol) }
+          T.type_alias { T.any(Symbol, String, Dodopayments::Models::ProductCreateParams::TaxCategory::TaggedSymbol) }
 
         DIGITAL_PRODUCTS =
           T.let(:digital_products, Dodopayments::Models::ProductCreateParams::TaxCategory::TaggedSymbol)

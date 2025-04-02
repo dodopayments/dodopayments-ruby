@@ -6,7 +6,7 @@ module Dodopayments
       extend Dodopayments::Enum
 
       TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::LicenseKeyStatus) }
-      OrSymbol = T.type_alias { T.any(Symbol, Dodopayments::Models::LicenseKeyStatus::TaggedSymbol) }
+      OrSymbol = T.type_alias { T.any(Symbol, String, Dodopayments::Models::LicenseKeyStatus::TaggedSymbol) }
 
       ACTIVE = T.let(:active, Dodopayments::Models::LicenseKeyStatus::TaggedSymbol)
       EXPIRED = T.let(:expired, Dodopayments::Models::LicenseKeyStatus::TaggedSymbol)

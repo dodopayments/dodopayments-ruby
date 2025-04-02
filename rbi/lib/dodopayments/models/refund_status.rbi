@@ -6,7 +6,7 @@ module Dodopayments
       extend Dodopayments::Enum
 
       TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::RefundStatus) }
-      OrSymbol = T.type_alias { T.any(Symbol, Dodopayments::Models::RefundStatus::TaggedSymbol) }
+      OrSymbol = T.type_alias { T.any(Symbol, String, Dodopayments::Models::RefundStatus::TaggedSymbol) }
 
       SUCCEEDED = T.let(:succeeded, Dodopayments::Models::RefundStatus::TaggedSymbol)
       FAILED = T.let(:failed, Dodopayments::Models::RefundStatus::TaggedSymbol)

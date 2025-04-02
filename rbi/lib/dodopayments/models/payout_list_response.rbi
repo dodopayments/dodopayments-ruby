@@ -211,7 +211,7 @@ module Dodopayments
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::PayoutListResponse::Currency) }
         OrSymbol =
-          T.type_alias { T.any(Symbol, Dodopayments::Models::PayoutListResponse::Currency::TaggedSymbol) }
+          T.type_alias { T.any(Symbol, String, Dodopayments::Models::PayoutListResponse::Currency::TaggedSymbol) }
 
         AED = T.let(:AED, Dodopayments::Models::PayoutListResponse::Currency::TaggedSymbol)
         ALL = T.let(:ALL, Dodopayments::Models::PayoutListResponse::Currency::TaggedSymbol)
@@ -370,7 +370,8 @@ module Dodopayments
         extend Dodopayments::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::PayoutListResponse::Status) }
-        OrSymbol = T.type_alias { T.any(Symbol, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol) }
+        OrSymbol =
+          T.type_alias { T.any(Symbol, String, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol) }
 
         NOT_INITIATED = T.let(:not_initiated, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
         IN_PROGRESS = T.let(:in_progress, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)

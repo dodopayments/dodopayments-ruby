@@ -253,7 +253,8 @@ module Dodopayments
         extend Dodopayments::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::Subscription::Currency) }
-        OrSymbol = T.type_alias { T.any(Symbol, Dodopayments::Models::Subscription::Currency::TaggedSymbol) }
+        OrSymbol =
+          T.type_alias { T.any(Symbol, String, Dodopayments::Models::Subscription::Currency::TaggedSymbol) }
 
         AED = T.let(:AED, Dodopayments::Models::Subscription::Currency::TaggedSymbol)
         ALL = T.let(:ALL, Dodopayments::Models::Subscription::Currency::TaggedSymbol)

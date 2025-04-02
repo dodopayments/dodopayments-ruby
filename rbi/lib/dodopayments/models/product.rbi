@@ -216,7 +216,8 @@ module Dodopayments
         extend Dodopayments::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::Product::TaxCategory) }
-        OrSymbol = T.type_alias { T.any(Symbol, Dodopayments::Models::Product::TaxCategory::TaggedSymbol) }
+        OrSymbol =
+          T.type_alias { T.any(Symbol, String, Dodopayments::Models::Product::TaxCategory::TaggedSymbol) }
 
         DIGITAL_PRODUCTS = T.let(:digital_products, Dodopayments::Models::Product::TaxCategory::TaggedSymbol)
         SAAS = T.let(:saas, Dodopayments::Models::Product::TaxCategory::TaggedSymbol)

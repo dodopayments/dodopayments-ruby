@@ -146,7 +146,7 @@ module Dodopayments
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::PaymentListResponse::Currency) }
         OrSymbol =
-          T.type_alias { T.any(Symbol, Dodopayments::Models::PaymentListResponse::Currency::TaggedSymbol) }
+          T.type_alias { T.any(Symbol, String, Dodopayments::Models::PaymentListResponse::Currency::TaggedSymbol) }
 
         AED = T.let(:AED, Dodopayments::Models::PaymentListResponse::Currency::TaggedSymbol)
         ALL = T.let(:ALL, Dodopayments::Models::PaymentListResponse::Currency::TaggedSymbol)

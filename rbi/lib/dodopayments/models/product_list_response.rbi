@@ -210,7 +210,7 @@ module Dodopayments
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::ProductListResponse::TaxCategory) }
         OrSymbol =
-          T.type_alias { T.any(Symbol, Dodopayments::Models::ProductListResponse::TaxCategory::TaggedSymbol) }
+          T.type_alias { T.any(Symbol, String, Dodopayments::Models::ProductListResponse::TaxCategory::TaggedSymbol) }
 
         DIGITAL_PRODUCTS =
           T.let(:digital_products, Dodopayments::Models::ProductListResponse::TaxCategory::TaggedSymbol)
@@ -230,7 +230,7 @@ module Dodopayments
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::ProductListResponse::Currency) }
         OrSymbol =
-          T.type_alias { T.any(Symbol, Dodopayments::Models::ProductListResponse::Currency::TaggedSymbol) }
+          T.type_alias { T.any(Symbol, String, Dodopayments::Models::ProductListResponse::Currency::TaggedSymbol) }
 
         AED = T.let(:AED, Dodopayments::Models::ProductListResponse::Currency::TaggedSymbol)
         ALL = T.let(:ALL, Dodopayments::Models::ProductListResponse::Currency::TaggedSymbol)

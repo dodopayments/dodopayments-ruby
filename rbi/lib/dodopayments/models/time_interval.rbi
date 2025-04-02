@@ -6,7 +6,7 @@ module Dodopayments
       extend Dodopayments::Enum
 
       TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::TimeInterval) }
-      OrSymbol = T.type_alias { T.any(Symbol, Dodopayments::Models::TimeInterval::TaggedSymbol) }
+      OrSymbol = T.type_alias { T.any(Symbol, String, Dodopayments::Models::TimeInterval::TaggedSymbol) }
 
       DAY = T.let(:Day, Dodopayments::Models::TimeInterval::TaggedSymbol)
       WEEK = T.let(:Week, Dodopayments::Models::TimeInterval::TaggedSymbol)
