@@ -10,11 +10,13 @@ module Dodopayments
           product_id: String,
           quantity: Integer,
           allowed_payment_method_types: T.nilable(T::Array[Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType::OrSymbol]),
+          billing_currency: T.nilable(Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::OrSymbol),
           discount_code: T.nilable(String),
           metadata: T::Hash[Symbol, String],
           on_demand: T.nilable(Dodopayments::Models::SubscriptionCreateParams::OnDemand),
           payment_link: T.nilable(T::Boolean),
           return_url: T.nilable(String),
+          show_saved_payment_methods: T::Boolean,
           tax_id: T.nilable(String),
           trial_period_days: T.nilable(Integer),
           request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
@@ -35,6 +37,7 @@ module Dodopayments
         #   Availability still depends on other factors (e.g., customer location, merchant
         #   settings).
         allowed_payment_method_types: nil,
+        billing_currency: nil,
         # Discount Code to apply to the subscription
         discount_code: nil,
         metadata: nil,
@@ -43,6 +46,8 @@ module Dodopayments
         payment_link: nil,
         # Optional URL to redirect after successful subscription creation
         return_url: nil,
+        # Display saved payment methods of a returning customer False by default
+        show_saved_payment_methods: nil,
         # Tax ID in case the payment is B2B. If tax id validation fails the payment
         #   creation will fail
         tax_id: nil,

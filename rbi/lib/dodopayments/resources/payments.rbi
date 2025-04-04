@@ -9,10 +9,12 @@ module Dodopayments
           customer: T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer),
           product_cart: T::Array[Dodopayments::Models::OneTimeProductCartItem],
           allowed_payment_method_types: T.nilable(T::Array[Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol]),
+          billing_currency: T.nilable(Dodopayments::Models::PaymentCreateParams::BillingCurrency::OrSymbol),
           discount_code: T.nilable(String),
           metadata: T::Hash[Symbol, String],
           payment_link: T.nilable(T::Boolean),
           return_url: T.nilable(String),
+          show_saved_payment_methods: T::Boolean,
           tax_id: T.nilable(String),
           request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
         )
@@ -30,6 +32,7 @@ module Dodopayments
         #   Availability still depends on other factors (e.g., customer location, merchant
         #   settings).
         allowed_payment_method_types: nil,
+        billing_currency: nil,
         # Discount Code to apply to the transaction
         discount_code: nil,
         metadata: nil,
@@ -38,6 +41,8 @@ module Dodopayments
         # Optional URL to redirect the customer after payment. Must be a valid URL if
         #   provided.
         return_url: nil,
+        # Display saved payment methods of a returning customer False by default
+        show_saved_payment_methods: nil,
         # Tax ID in case the payment is B2B. If tax id validation fails the payment
         #   creation will fail
         tax_id: nil,

@@ -18,6 +18,8 @@ module Dodopayments
       #     Availability still depends on other factors (e.g., customer location, merchant
       #     settings).
       #
+      #   @option params [Symbol, Dodopayments::Models::PaymentCreateParams::BillingCurrency, nil] :billing_currency
+      #
       #   @option params [String, nil] :discount_code Discount Code to apply to the transaction
       #
       #   @option params [Hash{Symbol=>String}] :metadata
@@ -26,6 +28,8 @@ module Dodopayments
       #
       #   @option params [String, nil] :return_url Optional URL to redirect the customer after payment. Must be a valid URL if
       #     provided.
+      #
+      #   @option params [Boolean] :show_saved_payment_methods Display saved payment methods of a returning customer False by default
       #
       #   @option params [String, nil] :tax_id Tax ID in case the payment is B2B. If tax id validation fails the payment
       #     creation will fail

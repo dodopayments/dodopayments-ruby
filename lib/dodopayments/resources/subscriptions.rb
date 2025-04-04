@@ -20,6 +20,8 @@ module Dodopayments
       #     Availability still depends on other factors (e.g., customer location, merchant
       #     settings).
       #
+      #   @option params [Symbol, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency, nil] :billing_currency
+      #
       #   @option params [String, nil] :discount_code Discount Code to apply to the subscription
       #
       #   @option params [Hash{Symbol=>String}] :metadata
@@ -29,6 +31,8 @@ module Dodopayments
       #   @option params [Boolean, nil] :payment_link If true, generates a payment link. Defaults to false if not specified.
       #
       #   @option params [String, nil] :return_url Optional URL to redirect after successful subscription creation
+      #
+      #   @option params [Boolean] :show_saved_payment_methods Display saved payment methods of a returning customer False by default
       #
       #   @option params [String, nil] :tax_id Tax ID in case the payment is B2B. If tax id validation fails the payment
       #     creation will fail

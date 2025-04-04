@@ -7,11 +7,13 @@ module Dodopayments
         product_id: String,
         quantity: Integer,
         ?allowed_payment_method_types: ::Array[Dodopayments::Models::SubscriptionCreateParams::allowed_payment_method_type]?,
+        ?billing_currency: Dodopayments::Models::SubscriptionCreateParams::billing_currency?,
         ?discount_code: String?,
         ?metadata: ::Hash[Symbol, String],
         ?on_demand: Dodopayments::Models::SubscriptionCreateParams::OnDemand?,
         ?payment_link: bool?,
         ?return_url: String?,
+        ?show_saved_payment_methods: bool,
         ?tax_id: String?,
         ?trial_period_days: Integer?,
         ?request_options: Dodopayments::request_opts

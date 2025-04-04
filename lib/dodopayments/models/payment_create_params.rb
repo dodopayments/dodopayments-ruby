@@ -36,6 +36,13 @@ module Dodopayments
                -> { Dodopayments::ArrayOf[enum: Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType] },
                nil?: true
 
+      # @!attribute billing_currency
+      #
+      #   @return [Symbol, Dodopayments::Models::PaymentCreateParams::BillingCurrency, nil]
+      optional :billing_currency,
+               enum: -> { Dodopayments::Models::PaymentCreateParams::BillingCurrency },
+               nil?: true
+
       # @!attribute discount_code
       #   Discount Code to apply to the transaction
       #
@@ -64,6 +71,16 @@ module Dodopayments
       #   @return [String, nil]
       optional :return_url, String, nil?: true
 
+      # @!attribute [r] show_saved_payment_methods
+      #   Display saved payment methods of a returning customer False by default
+      #
+      #   @return [Boolean, nil]
+      optional :show_saved_payment_methods, Dodopayments::BooleanModel
+
+      # @!parse
+      #   # @return [Boolean]
+      #   attr_writer :show_saved_payment_methods
+
       # @!attribute tax_id
       #   Tax ID in case the payment is B2B. If tax id validation fails the payment
       #     creation will fail
@@ -76,10 +93,12 @@ module Dodopayments
       #   # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
       #   # @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>]
       #   # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil]
+      #   # @param billing_currency [Symbol, Dodopayments::Models::PaymentCreateParams::BillingCurrency, nil]
       #   # @param discount_code [String, nil]
       #   # @param metadata [Hash{Symbol=>String}]
       #   # @param payment_link [Boolean, nil]
       #   # @param return_url [String, nil]
+      #   # @param show_saved_payment_methods [Boolean]
       #   # @param tax_id [String, nil]
       #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
       #   #
@@ -88,10 +107,12 @@ module Dodopayments
       #     customer:,
       #     product_cart:,
       #     allowed_payment_method_types: nil,
+      #     billing_currency: nil,
       #     discount_code: nil,
       #     metadata: nil,
       #     payment_link: nil,
       #     return_url: nil,
+      #     show_saved_payment_methods: nil,
       #     tax_id: nil,
       #     request_options: {},
       #     **
@@ -129,6 +150,162 @@ module Dodopayments
           #   # @return [Array<Symbol>]
           #   def values; end
         end
+      end
+
+      module BillingCurrency
+        extend Dodopayments::Enum
+
+        AED = :AED
+        ALL = :ALL
+        AMD = :AMD
+        ANG = :ANG
+        AOA = :AOA
+        ARS = :ARS
+        AUD = :AUD
+        AWG = :AWG
+        AZN = :AZN
+        BAM = :BAM
+        BBD = :BBD
+        BDT = :BDT
+        BGN = :BGN
+        BHD = :BHD
+        BIF = :BIF
+        BMD = :BMD
+        BND = :BND
+        BOB = :BOB
+        BRL = :BRL
+        BSD = :BSD
+        BWP = :BWP
+        BYN = :BYN
+        BZD = :BZD
+        CAD = :CAD
+        CHF = :CHF
+        CLP = :CLP
+        CNY = :CNY
+        COP = :COP
+        CRC = :CRC
+        CUP = :CUP
+        CVE = :CVE
+        CZK = :CZK
+        DJF = :DJF
+        DKK = :DKK
+        DOP = :DOP
+        DZD = :DZD
+        EGP = :EGP
+        ETB = :ETB
+        EUR = :EUR
+        FJD = :FJD
+        FKP = :FKP
+        GBP = :GBP
+        GEL = :GEL
+        GHS = :GHS
+        GIP = :GIP
+        GMD = :GMD
+        GNF = :GNF
+        GTQ = :GTQ
+        GYD = :GYD
+        HKD = :HKD
+        HNL = :HNL
+        HRK = :HRK
+        HTG = :HTG
+        HUF = :HUF
+        IDR = :IDR
+        ILS = :ILS
+        INR = :INR
+        IQD = :IQD
+        JMD = :JMD
+        JOD = :JOD
+        JPY = :JPY
+        KES = :KES
+        KGS = :KGS
+        KHR = :KHR
+        KMF = :KMF
+        KRW = :KRW
+        KWD = :KWD
+        KYD = :KYD
+        KZT = :KZT
+        LAK = :LAK
+        LBP = :LBP
+        LKR = :LKR
+        LRD = :LRD
+        LSL = :LSL
+        LYD = :LYD
+        MAD = :MAD
+        MDL = :MDL
+        MGA = :MGA
+        MKD = :MKD
+        MMK = :MMK
+        MNT = :MNT
+        MOP = :MOP
+        MRU = :MRU
+        MUR = :MUR
+        MVR = :MVR
+        MWK = :MWK
+        MXN = :MXN
+        MYR = :MYR
+        MZN = :MZN
+        NAD = :NAD
+        NGN = :NGN
+        NIO = :NIO
+        NOK = :NOK
+        NPR = :NPR
+        NZD = :NZD
+        OMR = :OMR
+        PAB = :PAB
+        PEN = :PEN
+        PGK = :PGK
+        PHP = :PHP
+        PKR = :PKR
+        PLN = :PLN
+        PYG = :PYG
+        QAR = :QAR
+        RON = :RON
+        RSD = :RSD
+        RUB = :RUB
+        RWF = :RWF
+        SAR = :SAR
+        SBD = :SBD
+        SCR = :SCR
+        SEK = :SEK
+        SGD = :SGD
+        SHP = :SHP
+        SLE = :SLE
+        SLL = :SLL
+        SOS = :SOS
+        SRD = :SRD
+        SSP = :SSP
+        STN = :STN
+        SVC = :SVC
+        SZL = :SZL
+        THB = :THB
+        TND = :TND
+        TOP = :TOP
+        TRY = :TRY
+        TTD = :TTD
+        TWD = :TWD
+        TZS = :TZS
+        UAH = :UAH
+        UGX = :UGX
+        USD = :USD
+        UYU = :UYU
+        UZS = :UZS
+        VES = :VES
+        VND = :VND
+        VUV = :VUV
+        WST = :WST
+        XAF = :XAF
+        XCD = :XCD
+        XOF = :XOF
+        XPF = :XPF
+        YER = :YER
+        ZAR = :ZAR
+        ZMW = :ZMW
+
+        finalize!
+
+        # @!parse
+        #   # @return [Array<Symbol>]
+        #   def self.values; end
       end
     end
   end
