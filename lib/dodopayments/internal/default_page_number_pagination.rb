@@ -11,18 +11,6 @@ module Dodopayments
     #   default_page_number_pagination.auto_paging_each do |payment|
     #     puts(payment)
     #   end
-    #
-    # @example
-    #   payments =
-    #     default_page_number_pagination
-    #     .to_enum
-    #     .lazy
-    #     .select { _1.object_id.even? }
-    #     .map(&:itself)
-    #     .take(2)
-    #     .to_a
-    #
-    #   payments => Array
     class DefaultPageNumberPagination
       include Dodopayments::Internal::Type::BasePage
 
