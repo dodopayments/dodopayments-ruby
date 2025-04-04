@@ -3,9 +3,9 @@
 module Dodopayments
   module Internal
     class DefaultPageNumberPagination
-      include Dodopayments::Internal::Type::BasePage
-
       Elem = type_member
+
+      include Dodopayments::Internal::Type::BasePage
 
       sig { returns(T.nilable(T::Array[Elem])) }
       attr_accessor :items

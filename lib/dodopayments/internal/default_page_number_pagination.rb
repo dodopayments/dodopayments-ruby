@@ -2,6 +2,8 @@
 
 module Dodopayments
   module Internal
+    # @generic Elem
+    #
     # @example
     #   if default_page_number_pagination.has_next?
     #     default_page_number_pagination = default_page_number_pagination.next_page
@@ -14,7 +16,7 @@ module Dodopayments
     class DefaultPageNumberPagination
       include Dodopayments::Internal::Type::BasePage
 
-      # @return [Array<Object>, nil]
+      # @return [Array<generic<Elem>>, nil]
       attr_accessor :items
 
       # @api private
@@ -61,6 +63,8 @@ module Dodopayments
       end
 
       # @param blk [Proc]
+      #
+      # @yieldparam [generic<Elem>]
       def auto_paging_each(&blk)
         unless block_given?
           raise ArgumentError.new("A block must be given to ##{__method__}")

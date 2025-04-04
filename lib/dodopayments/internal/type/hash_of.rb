@@ -7,6 +7,8 @@ module Dodopayments
       #
       # @abstract
       #
+      # @generic Elem
+      #
       # Hash of items of a given type.
       class HashOf
         include Dodopayments::Internal::Type::Converter
@@ -111,7 +113,7 @@ module Dodopayments
 
         # @api private
         #
-        # @return [Dodopayments::Internal::Type::Converter, Class]
+        # @return [generic<Elem>]
         protected def item_type = @item_type_fn.call
 
         # @api private
