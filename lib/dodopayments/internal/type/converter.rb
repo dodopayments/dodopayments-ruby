@@ -209,7 +209,9 @@ module Dodopayments
           #
           # @return [Object]
           def dump(target, value)
+            # rubocop:disable Layout/LineLength
             target.is_a?(Dodopayments::Internal::Type::Converter) ? target.dump(value) : Dodopayments::Internal::Type::Unknown.dump(value)
+            # rubocop:enable Layout/LineLength
           end
         end
       end

@@ -62,7 +62,9 @@ module Dodopayments
         #
         # @return [Boolean]
         def ==(other)
+          # rubocop:disable Layout/LineLength
           other.is_a?(Module) && other.singleton_class <= Dodopayments::Internal::Type::Enum && other.values.to_set == values.to_set
+          # rubocop:enable Layout/LineLength
         end
 
         # @api private
