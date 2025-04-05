@@ -129,9 +129,23 @@ dodo_payments.payments.create(request_options: {timeout: 5})
 
 ## LSP Support
 
-### Sorbet
+### Solargraph
 
-**This library emits an intentional warning under the [`tapioca` toolchain](https://github.com/Shopify/tapioca)**. This is normal, and does not impact functionality.
+This library includes [Solargraph](https://solargraph.org) support for both auto completion and go to definition.
+
+```ruby
+gem "solargraph", group: :development
+```
+
+After Solargraph is installed, **you must populate its index** either via the provided editor command, or by running the following in your terminal:
+
+```sh
+bundle exec solargraph gems
+```
+
+Otherwise Solargraph will not be able to provide type information or auto-completion for any non-indexed libraries.
+
+### Sorbet
 
 This library is written with [Sorbet type definitions](https://sorbet.org/docs/rbi). However, there is no runtime dependency on the `sorbet-runtime`.
 
@@ -146,6 +160,12 @@ params = Dodopayments::Models::PaymentCreateParams.new
 
 dodo_payments.payments.create(**params)
 ```
+
+Note: **This library emits an intentional warning under the [`tapioca` toolchain](https://github.com/Shopify/tapioca)**. This is normal, and does not impact functionality.
+
+### Ruby LSP
+
+The Ruby LSP has [best effort support](https://shopify.github.io/ruby-lsp/#guessed-types) for inferring type information from Ruby code, and as such it may not always be able to provide accurate type information.
 
 ## Advanced
 
