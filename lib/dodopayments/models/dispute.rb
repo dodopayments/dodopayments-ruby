@@ -6,7 +6,7 @@ module Dodopayments
     class Dispute < Dodopayments::Internal::Type::BaseModel
       # @!attribute amount
       #   The amount involved in the dispute, represented as a string to accommodate
-      #     precision.
+      #   precision.
       #
       #   @return [String]
       required :amount, String

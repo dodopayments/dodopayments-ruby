@@ -29,7 +29,7 @@ module Dodopayments
       def create(
         price:,
         # Represents the different categories of taxation applicable to various products
-        #   and services.
+        # and services.
         tax_category:,
         # Addons available for subscription product
         addons: nil,
@@ -91,25 +91,25 @@ module Dodopayments
         image_id: nil,
         # Message sent to the customer upon license key activation.
         #
-        #   Only applicable if `license_key_enabled` is `true`. This message contains
-        #   instructions for activating the license key.
+        # Only applicable if `license_key_enabled` is `true`. This message contains
+        # instructions for activating the license key.
         license_key_activation_message: nil,
         # Limit for the number of activations for the license key.
         #
-        #   Only applicable if `license_key_enabled` is `true`. Represents the maximum
-        #   number of times the license key can be activated.
+        # Only applicable if `license_key_enabled` is `true`. Represents the maximum
+        # number of times the license key can be activated.
         license_key_activations_limit: nil,
         license_key_duration: nil,
         # Whether the product requires a license key.
         #
-        #   If `true`, additional fields related to license key (duration, activations
-        #   limit, activation message) become applicable.
+        # If `true`, additional fields related to license key (duration, activations
+        # limit, activation message) become applicable.
         license_key_enabled: nil,
         # Name of the product, optional and must be at most 100 characters.
         name: nil,
         price: nil,
         # Represents the different categories of taxation applicable to various products
-        #   and services.
+        # and services.
         tax_category: nil,
         request_options: {}
       ); end
@@ -132,9 +132,9 @@ module Dodopayments
         page_size: nil,
         # Filter products by pricing type:
         #
-        #   - `true`: Show only recurring pricing products (e.g. subscriptions)
-        #   - `false`: Show only one-time price products
-        #   - `null` or absent: Show both types of products
+        # - `true`: Show only recurring pricing products (e.g. subscriptions)
+        # - `false`: Show only one-time price products
+        # - `null` or absent: Show both types of products
         recurring: nil,
         request_options: {}
       ); end

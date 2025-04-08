@@ -16,7 +16,7 @@ module Dodopayments
 
       # @!attribute amount
       #   The amount to be refunded. Must be non-negative. Optional. Partial refunds are
-      #     currently disabled.
+      #   currently disabled.
       #
       #   @return [Integer, nil]
       optional :amount, Integer, nil?: true

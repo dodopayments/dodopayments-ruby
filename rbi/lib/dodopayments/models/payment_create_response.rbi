@@ -4,7 +4,7 @@ module Dodopayments
   module Models
     class PaymentCreateResponse < Dodopayments::Internal::Type::BaseModel
       # Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will be
-      #   coming soon
+      # coming soon
       sig { returns(String) }
       def client_secret
       end

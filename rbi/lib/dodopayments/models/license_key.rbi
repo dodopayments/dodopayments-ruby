@@ -105,7 +105,7 @@ module Dodopayments
       end
 
       # The unique identifier of the subscription associated with the license key, if
-      #   any.
+      # any.
       sig { returns(T.nilable(String)) }
       def subscription_id
       end

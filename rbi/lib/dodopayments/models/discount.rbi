@@ -5,9 +5,9 @@ module Dodopayments
     class Discount < Dodopayments::Internal::Type::BaseModel
       # The discount amount.
       #
-      #   - If `discount_type` is `percentage`, this is in **basis points** (e.g., 540 =>
-      #     5.4%).
-      #   - Otherwise, this is **USD cents** (e.g., 100 => `$1.00`).
+      # - If `discount_type` is `percentage`, this is in **basis points** (e.g., 540 =>
+      #   5.4%).
+      # - Otherwise, this is **USD cents** (e.g., 100 => `$1.00`).
       sig { returns(Integer) }
       def amount
       end

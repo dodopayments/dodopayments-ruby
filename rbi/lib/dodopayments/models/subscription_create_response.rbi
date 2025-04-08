@@ -21,7 +21,7 @@ module Dodopayments
       end
 
       # Tax will be added to the amount and charged to the customer on each billing
-      #   cycle
+      # cycle
       sig { returns(Integer) }
       def recurring_pre_tax_amount
       end
@@ -40,7 +40,7 @@ module Dodopayments
       end
 
       # Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will be
-      #   coming soon
+      # coming soon
       sig { returns(T.nilable(String)) }
       def client_secret
       end

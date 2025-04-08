@@ -51,7 +51,7 @@ module Dodopayments
 
       # @!attribute total_amount
       #   Total amount charged to the customer including tax, in smallest currency unit
-      #     (e.g. cents)
+      #   (e.g. cents)
       #
       #   @return [Integer]
       required :total_amount, Integer

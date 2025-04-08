@@ -38,10 +38,10 @@ module Dodopayments
         quantity:,
         # List of payment methods allowed during checkout.
         #
-        #   Customers will **never** see payment methods that are **not** in this list.
-        #   However, adding a method here **does not guarantee** customers will see it.
-        #   Availability still depends on other factors (e.g., customer location, merchant
-        #   settings).
+        # Customers will **never** see payment methods that are **not** in this list.
+        # However, adding a method here **does not guarantee** customers will see it.
+        # Availability still depends on other factors (e.g., customer location, merchant
+        # settings).
         allowed_payment_method_types: nil,
         billing_currency: nil,
         # Discount Code to apply to the subscription
@@ -55,10 +55,10 @@ module Dodopayments
         # Display saved payment methods of a returning customer False by default
         show_saved_payment_methods: nil,
         # Tax ID in case the payment is B2B. If tax id validation fails the payment
-        #   creation will fail
+        # creation will fail
         tax_id: nil,
         # Optional trial period in days If specified, this value overrides the trial
-        #   period set in the product's price Must be between 0 and 10000 days
+        # period set in the product's price Must be between 0 and 10000 days
         trial_period_days: nil,
         request_options: {}
       ); end
@@ -129,7 +129,7 @@ module Dodopayments
         # Subscription Id
         subscription_id,
         # The product price. Represented in the lowest denomination of the currency (e.g.,
-        #   cents for USD). For example, to charge $1.00, pass `100`.
+        # cents for USD). For example, to charge $1.00, pass `100`.
         product_price:,
         request_options: {}
       ); end

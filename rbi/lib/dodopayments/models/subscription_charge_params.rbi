@@ -7,7 +7,7 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       # The product price. Represented in the lowest denomination of the currency (e.g.,
-      #   cents for USD). For example, to charge $1.00, pass `100`.
+      # cents for USD). For example, to charge $1.00, pass `100`.
       sig { returns(Integer) }
       def product_price
       end

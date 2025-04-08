@@ -41,7 +41,7 @@ module Dodopayments
       attr_accessor :quantity
 
       # Amount charged before tax for each recurring payment in smallest currency unit
-      #   (e.g. cents)
+      # (e.g. cents)
       sig { returns(Integer) }
       attr_accessor :recurring_pre_tax_amount
 

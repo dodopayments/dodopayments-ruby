@@ -8,12 +8,12 @@ module Dodopayments
 
       # The discount amount.
       #
-      #   - If `discount_type` is **not** `percentage`, `amount` is in **USD cents**. For
-      #     example, `100` means `$1.00`. Only USD is allowed.
-      #   - If `discount_type` **is** `percentage`, `amount` is in **basis points**. For
-      #     example, `540` means `5.4%`.
+      # - If `discount_type` is **not** `percentage`, `amount` is in **USD cents**. For
+      #   example, `100` means `$1.00`. Only USD is allowed.
+      # - If `discount_type` **is** `percentage`, `amount` is in **basis points**. For
+      #   example, `540` means `5.4%`.
       #
-      #   Must be at least 1.
+      # Must be at least 1.
       sig { returns(Integer) }
       def amount
       end
@@ -35,8 +35,8 @@ module Dodopayments
 
       # Optionally supply a code (will be uppercased).
       #
-      #   - Must be at least 3 characters if provided.
-      #   - If omitted, a random 16-character code is generated.
+      # - Must be at least 3 characters if provided.
+      # - If omitted, a random 16-character code is generated.
       sig { returns(T.nilable(String)) }
       def code
       end

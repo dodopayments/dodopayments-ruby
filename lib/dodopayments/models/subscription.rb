@@ -56,7 +56,7 @@ module Dodopayments
 
       # @!attribute recurring_pre_tax_amount
       #   Amount charged before tax for each recurring payment in smallest currency unit
-      #     (e.g. cents)
+      #   (e.g. cents)
       #
       #   @return [Integer]
       required :recurring_pre_tax_amount, Integer

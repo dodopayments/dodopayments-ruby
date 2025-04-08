@@ -38,7 +38,7 @@ module Dodopayments
       attr_accessor :refunds
 
       # Total amount charged to the customer including tax, in smallest currency unit
-      #   (e.g. cents)
+      # (e.g. cents)
       sig { returns(Integer) }
       attr_accessor :total_amount
 

@@ -71,7 +71,7 @@ module Dodopayments
 
       # @!attribute subscription_id
       #   The unique identifier of the subscription associated with the license key, if
-      #     any.
+      #   any.
       #
       #   @return [String, nil]
       optional :subscription_id, String, nil?: true

@@ -6,7 +6,7 @@ module Dodopayments
     class PaymentCreateResponse < Dodopayments::Internal::Type::BaseModel
       # @!attribute client_secret
       #   Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will be
-      #     coming soon
+      #   coming soon
       #
       #   @return [String]
       required :client_secret, String

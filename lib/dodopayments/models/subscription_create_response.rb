@@ -16,7 +16,7 @@ module Dodopayments
 
       # @!attribute recurring_pre_tax_amount
       #   Tax will be added to the amount and charged to the customer on each billing
-      #     cycle
+      #   cycle
       #
       #   @return [Integer]
       required :recurring_pre_tax_amount, Integer
@@ -29,7 +29,7 @@ module Dodopayments
 
       # @!attribute client_secret
       #   Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will be
-      #     coming soon
+      #   coming soon
       #
       #   @return [String, nil]
       optional :client_secret, String, nil?: true

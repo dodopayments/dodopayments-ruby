@@ -33,10 +33,10 @@ module Dodopayments
       # @!attribute allowed_payment_method_types
       #   List of payment methods allowed during checkout.
       #
-      #     Customers will **never** see payment methods that are **not** in this list.
-      #     However, adding a method here **does not guarantee** customers will see it.
-      #     Availability still depends on other factors (e.g., customer location, merchant
-      #     settings).
+      #   Customers will **never** see payment methods that are **not** in this list.
+      #   However, adding a method here **does not guarantee** customers will see it.
+      #   Availability still depends on other factors (e.g., customer location, merchant
+      #   settings).
       #
       #   @return [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil]
       optional :allowed_payment_method_types,
@@ -94,14 +94,14 @@ module Dodopayments
 
       # @!attribute tax_id
       #   Tax ID in case the payment is B2B. If tax id validation fails the payment
-      #     creation will fail
+      #   creation will fail
       #
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
       # @!attribute trial_period_days
       #   Optional trial period in days If specified, this value overrides the trial
-      #     period set in the product's price Must be between 0 and 10000 days
+      #   period set in the product's price Must be between 0 and 10000 days
       #
       #   @return [Integer, nil]
       optional :trial_period_days, Integer, nil?: true
@@ -335,15 +335,15 @@ module Dodopayments
       class OnDemand < Dodopayments::Internal::Type::BaseModel
         # @!attribute mandate_only
         #   If set as True, does not perform any charge and only authorizes payment method
-        #     details for future use.
+        #   details for future use.
         #
         #   @return [Boolean]
         required :mandate_only, Dodopayments::Internal::Type::Boolean
 
         # @!attribute product_price
         #   Product price for the initial charge to customer If not specified the stored
-        #     price of the product will be used Represented in the lowest denomination of the
-        #     currency (e.g., cents for USD). For example, to charge $1.00, pass `100`.
+        #   price of the product will be used Represented in the lowest denomination of the
+        #   currency (e.g., cents for USD). For example, to charge $1.00, pass `100`.
         #
         #   @return [Integer, nil]
         optional :product_price, Integer, nil?: true

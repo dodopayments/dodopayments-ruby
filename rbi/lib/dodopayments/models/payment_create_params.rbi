@@ -21,10 +21,10 @@ module Dodopayments
 
       # List of payment methods allowed during checkout.
       #
-      #   Customers will **never** see payment methods that are **not** in this list.
-      #   However, adding a method here **does not guarantee** customers will see it.
-      #   Availability still depends on other factors (e.g., customer location, merchant
-      #   settings).
+      # Customers will **never** see payment methods that are **not** in this list.
+      # However, adding a method here **does not guarantee** customers will see it.
+      # Availability still depends on other factors (e.g., customer location, merchant
+      # settings).
       sig do
         returns(
           T.nilable(T::Array[Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol])
@@ -50,7 +50,7 @@ module Dodopayments
       attr_accessor :payment_link
 
       # Optional URL to redirect the customer after payment. Must be a valid URL if
-      #   provided.
+      # provided.
       sig { returns(T.nilable(String)) }
       attr_accessor :return_url
 
@@ -62,7 +62,7 @@ module Dodopayments
       attr_writer :show_saved_payment_methods
 
       # Tax ID in case the payment is B2B. If tax id validation fails the payment
-      #   creation will fail
+      # creation will fail
       sig { returns(T.nilable(String)) }
       attr_accessor :tax_id
 

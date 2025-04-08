@@ -25,17 +25,17 @@ module Dodopayments
 
         # @!attribute price
         #   The payment amount, in the smallest denomination of the currency (e.g., cents
-        #     for USD). For example, to charge $1.00, pass `100`.
+        #   for USD). For example, to charge $1.00, pass `100`.
         #
-        #     If [`pay_what_you_want`](Self::pay_what_you_want) is set to `true`, this field
-        #     represents the **minimum** amount the customer must pay.
+        #   If [`pay_what_you_want`](Self::pay_what_you_want) is set to `true`, this field
+        #   represents the **minimum** amount the customer must pay.
         #
         #   @return [Integer]
         required :price, Integer
 
         # @!attribute purchasing_power_parity
         #   Indicates if purchasing power parity adjustments are applied to the price.
-        #     Purchasing power parity feature is not available as of now.
+        #   Purchasing power parity feature is not available as of now.
         #
         #   @return [Boolean]
         required :purchasing_power_parity, Dodopayments::Internal::Type::Boolean
@@ -47,7 +47,7 @@ module Dodopayments
 
         # @!attribute [r] pay_what_you_want
         #   Indicates whether the customer can pay any amount they choose. If set to `true`,
-        #     the [`price`](Self::price) field is the minimum amount.
+        #   the [`price`](Self::price) field is the minimum amount.
         #
         #   @return [Boolean, nil]
         optional :pay_what_you_want, Dodopayments::Internal::Type::Boolean
@@ -58,8 +58,8 @@ module Dodopayments
 
         # @!attribute suggested_price
         #   A suggested price for the user to pay. This value is only considered if
-        #     [`pay_what_you_want`](Self::pay_what_you_want) is `true`. Otherwise, it is
-        #     ignored.
+        #   [`pay_what_you_want`](Self::pay_what_you_want) is `true`. Otherwise, it is
+        #   ignored.
         #
         #   @return [Integer, nil]
         optional :suggested_price, Integer, nil?: true
@@ -270,7 +270,7 @@ module Dodopayments
 
         # @!attribute payment_frequency_count
         #   Number of units for the payment frequency. For example, a value of `1` with a
-        #     `payment_frequency_interval` of `month` represents monthly payments.
+        #   `payment_frequency_interval` of `month` represents monthly payments.
         #
         #   @return [Integer]
         required :payment_frequency_count, Integer
@@ -282,21 +282,21 @@ module Dodopayments
 
         # @!attribute price
         #   The payment amount. Represented in the lowest denomination of the currency
-        #     (e.g., cents for USD). For example, to charge $1.00, pass `100`.
+        #   (e.g., cents for USD). For example, to charge $1.00, pass `100`.
         #
         #   @return [Integer]
         required :price, Integer
 
         # @!attribute purchasing_power_parity
         #   Indicates if purchasing power parity adjustments are applied to the price.
-        #     Purchasing power parity feature is not available as of now
+        #   Purchasing power parity feature is not available as of now
         #
         #   @return [Boolean]
         required :purchasing_power_parity, Dodopayments::Internal::Type::Boolean
 
         # @!attribute subscription_period_count
         #   Number of units for the subscription period. For example, a value of `12` with a
-        #     `subscription_period_interval` of `month` represents a one-year subscription.
+        #   `subscription_period_interval` of `month` represents a one-year subscription.
         #
         #   @return [Integer]
         required :subscription_period_count, Integer

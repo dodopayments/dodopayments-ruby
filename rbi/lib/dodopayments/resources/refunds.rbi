@@ -16,7 +16,7 @@ module Dodopayments
         # The unique identifier of the payment to be refunded.
         payment_id:,
         # The amount to be refunded. Must be non-negative. Optional. Partial refunds are
-        #   currently disabled.
+        # currently disabled.
         amount: nil,
         # The reason for the refund, if any. Maximum length is 3000 characters. Optional.
         reason: nil,

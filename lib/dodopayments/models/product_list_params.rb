@@ -33,9 +33,9 @@ module Dodopayments
       # @!attribute recurring
       #   Filter products by pricing type:
       #
-      #     - `true`: Show only recurring pricing products (e.g. subscriptions)
-      #     - `false`: Show only one-time price products
-      #     - `null` or absent: Show both types of products
+      #   - `true`: Show only recurring pricing products (e.g. subscriptions)
+      #   - `false`: Show only one-time price products
+      #   - `null` or absent: Show both types of products
       #
       #   @return [Boolean, nil]
       optional :recurring, Dodopayments::Internal::Type::Boolean, nil?: true

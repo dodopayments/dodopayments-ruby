@@ -7,7 +7,7 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       # The updated activation limit for the license key. Use `null` to remove the
-      #   limit, or omit this field to leave it unchanged.
+      # limit, or omit this field to leave it unchanged.
       sig { returns(T.nilable(Integer)) }
       def activations_limit
       end
@@ -17,7 +17,7 @@ module Dodopayments
       end
 
       # Indicates whether the license key should be disabled. A value of `true` disables
-      #   the key, while `false` enables it. Omit this field to leave it unchanged.
+      # the key, while `false` enables it. Omit this field to leave it unchanged.
       sig { returns(T.nilable(T::Boolean)) }
       def disabled
       end
@@ -27,7 +27,7 @@ module Dodopayments
       end
 
       # The updated expiration timestamp for the license key in UTC. Use `null` to
-      #   remove the expiration date, or omit this field to leave it unchanged.
+      # remove the expiration date, or omit this field to leave it unchanged.
       sig { returns(T.nilable(Time)) }
       def expires_at
       end

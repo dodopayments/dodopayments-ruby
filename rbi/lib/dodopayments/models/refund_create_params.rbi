@@ -16,7 +16,7 @@ module Dodopayments
       end
 
       # The amount to be refunded. Must be non-negative. Optional. Partial refunds are
-      #   currently disabled.
+      # currently disabled.
       sig { returns(T.nilable(Integer)) }
       def amount
       end

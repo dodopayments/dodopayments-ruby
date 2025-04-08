@@ -20,8 +20,8 @@ module Dodopayments
       end
 
       # When false, the most recently created customer object with the given email is
-      #   used if exists. When true, a new customer object is always created False by
-      #   default
+      # used if exists. When true, a new customer object is always created False by
+      # default
       sig { returns(T.nilable(T::Boolean)) }
       def create_new_customer
       end

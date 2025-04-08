@@ -99,10 +99,10 @@ module Dodopayments
       bearer_token: ENV["DODO_PAYMENTS_API_KEY"],
       # Specifies the environment to use for the API.
       #
-      #   Each environment maps to a different base URL:
+      # Each environment maps to a different base URL:
       #
-      #   - `live_mode` corresponds to `https://live.dodopayments.com`
-      #   - `test_mode` corresponds to `https://test.dodopayments.com`
+      # - `live_mode` corresponds to `https://live.dodopayments.com`
+      # - `test_mode` corresponds to `https://test.dodopayments.com`
       environment: nil,
       # Override the default base URL for the API, e.g., `"https://api.example.com/v2/"`
       base_url: nil,

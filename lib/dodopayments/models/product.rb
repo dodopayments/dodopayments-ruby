@@ -41,7 +41,7 @@ module Dodopayments
 
       # @!attribute tax_category
       #   Represents the different categories of taxation applicable to various products
-      #     and services.
+      #   and services.
       #
       #   @return [Symbol, Dodopayments::Models::Product::TaxCategory]
       required :tax_category, enum: -> { Dodopayments::Models::Product::TaxCategory }
@@ -134,7 +134,7 @@ module Dodopayments
       # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
 
       # Represents the different categories of taxation applicable to various products
-      #   and services.
+      # and services.
       #
       # @see Dodopayments::Models::Product#tax_category
       module TaxCategory

@@ -30,7 +30,7 @@ module Dodopayments
 
       # @!attribute tax_category
       #   Represents the different categories of taxation applicable to various products
-      #     and services.
+      #   and services.
       #
       #   @return [Symbol, Dodopayments::Models::ProductListResponse::TaxCategory]
       required :tax_category, enum: -> { Dodopayments::Models::ProductListResponse::TaxCategory }
@@ -67,14 +67,14 @@ module Dodopayments
       # @!attribute price
       #   Price of the product, optional.
       #
-      #     The price is represented in the lowest denomination of the currency. For
-      #     example:
+      #   The price is represented in the lowest denomination of the currency. For
+      #   example:
       #
-      #     - In USD, a price of `$12.34` would be represented as `1234` (cents).
-      #     - In JPY, a price of `¥1500` would be represented as `1500` (yen).
-      #     - In INR, a price of `₹1234.56` would be represented as `123456` (paise).
+      #   - In USD, a price of `$12.34` would be represented as `1234` (cents).
+      #   - In JPY, a price of `¥1500` would be represented as `1500` (yen).
+      #   - In INR, a price of `₹1234.56` would be represented as `123456` (paise).
       #
-      #     This ensures precision and avoids floating-point rounding errors.
+      #   This ensures precision and avoids floating-point rounding errors.
       #
       #   @return [Integer, nil]
       optional :price, Integer, nil?: true
@@ -127,7 +127,7 @@ module Dodopayments
       # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
 
       # Represents the different categories of taxation applicable to various products
-      #   and services.
+      # and services.
       #
       # @see Dodopayments::Models::ProductListResponse#tax_category
       module TaxCategory

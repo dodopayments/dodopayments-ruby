@@ -15,8 +15,8 @@ module Dodopayments
 
       # @!attribute [r] create_new_customer
       #   When false, the most recently created customer object with the given email is
-      #     used if exists. When true, a new customer object is always created False by
-      #     default
+      #   used if exists. When true, a new customer object is always created False by
+      #   default
       #
       #   @return [Boolean, nil]
       optional :create_new_customer, Dodopayments::Internal::Type::Boolean

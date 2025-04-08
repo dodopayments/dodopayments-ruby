@@ -20,18 +20,18 @@ module Dodopayments
       def create(
         # The discount amount.
         #
-        #   - If `discount_type` is **not** `percentage`, `amount` is in **USD cents**. For
-        #     example, `100` means `$1.00`. Only USD is allowed.
-        #   - If `discount_type` **is** `percentage`, `amount` is in **basis points**. For
-        #     example, `540` means `5.4%`.
+        # - If `discount_type` is **not** `percentage`, `amount` is in **USD cents**. For
+        #   example, `100` means `$1.00`. Only USD is allowed.
+        # - If `discount_type` **is** `percentage`, `amount` is in **basis points**. For
+        #   example, `540` means `5.4%`.
         #
-        #   Must be at least 1.
+        # Must be at least 1.
         amount:,
         type:,
         # Optionally supply a code (will be uppercased).
         #
-        #   - Must be at least 3 characters if provided.
-        #   - If omitted, a random 16-character code is generated.
+        # - Must be at least 3 characters if provided.
+        # - If omitted, a random 16-character code is generated.
         code: nil,
         # When the discount expires, if ever.
         expires_at: nil,
@@ -75,18 +75,18 @@ module Dodopayments
         discount_id,
         # If present, update the discount amount:
         #
-        #   - If `discount_type` is `percentage`, this represents **basis points** (e.g.,
-        #     `540` = `5.4%`).
-        #   - Otherwise, this represents **USD cents** (e.g., `100` = `$1.00`).
+        # - If `discount_type` is `percentage`, this represents **basis points** (e.g.,
+        #   `540` = `5.4%`).
+        # - Otherwise, this represents **USD cents** (e.g., `100` = `$1.00`).
         #
-        #   Must be at least 1 if provided.
+        # Must be at least 1 if provided.
         amount: nil,
         # If present, update the discount code (uppercase).
         code: nil,
         expires_at: nil,
         name: nil,
         # If present, replaces all restricted product IDs with this new set. To remove all
-        #   restrictions, send empty array
+        # restrictions, send empty array
         restricted_to: nil,
         type: nil,
         usage_limit: nil,

@@ -31,10 +31,10 @@ module Dodopayments
         product_cart:,
         # List of payment methods allowed during checkout.
         #
-        #   Customers will **never** see payment methods that are **not** in this list.
-        #   However, adding a method here **does not guarantee** customers will see it.
-        #   Availability still depends on other factors (e.g., customer location, merchant
-        #   settings).
+        # Customers will **never** see payment methods that are **not** in this list.
+        # However, adding a method here **does not guarantee** customers will see it.
+        # Availability still depends on other factors (e.g., customer location, merchant
+        # settings).
         allowed_payment_method_types: nil,
         billing_currency: nil,
         # Discount Code to apply to the transaction
@@ -43,12 +43,12 @@ module Dodopayments
         # Whether to generate a payment link. Defaults to false if not specified.
         payment_link: nil,
         # Optional URL to redirect the customer after payment. Must be a valid URL if
-        #   provided.
+        # provided.
         return_url: nil,
         # Display saved payment methods of a returning customer False by default
         show_saved_payment_methods: nil,
         # Tax ID in case the payment is B2B. If tax id validation fails the payment
-        #   creation will fail
+        # creation will fail
         tax_id: nil,
         request_options: {}
       ); end

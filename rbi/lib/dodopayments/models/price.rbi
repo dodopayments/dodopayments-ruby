@@ -14,15 +14,15 @@ module Dodopayments
         attr_accessor :discount
 
         # The payment amount, in the smallest denomination of the currency (e.g., cents
-        #   for USD). For example, to charge $1.00, pass `100`.
+        # for USD). For example, to charge $1.00, pass `100`.
         #
-        #   If [`pay_what_you_want`](Self::pay_what_you_want) is set to `true`, this field
-        #   represents the **minimum** amount the customer must pay.
+        # If [`pay_what_you_want`](Self::pay_what_you_want) is set to `true`, this field
+        # represents the **minimum** amount the customer must pay.
         sig { returns(Integer) }
         attr_accessor :price
 
         # Indicates if purchasing power parity adjustments are applied to the price.
-        #   Purchasing power parity feature is not available as of now.
+        # Purchasing power parity feature is not available as of now.
         sig { returns(T::Boolean) }
         attr_accessor :purchasing_power_parity
 
@@ -30,7 +30,7 @@ module Dodopayments
         attr_accessor :type
 
         # Indicates whether the customer can pay any amount they choose. If set to `true`,
-        #   the [`price`](Self::price) field is the minimum amount.
+        # the [`price`](Self::price) field is the minimum amount.
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :pay_what_you_want
 
@@ -38,8 +38,8 @@ module Dodopayments
         attr_writer :pay_what_you_want
 
         # A suggested price for the user to pay. This value is only considered if
-        #   [`pay_what_you_want`](Self::pay_what_you_want) is `true`. Otherwise, it is
-        #   ignored.
+        # [`pay_what_you_want`](Self::pay_what_you_want) is `true`. Otherwise, it is
+        # ignored.
         sig { returns(T.nilable(Integer)) }
         attr_accessor :suggested_price
 
@@ -254,7 +254,7 @@ module Dodopayments
         attr_accessor :discount
 
         # Number of units for the payment frequency. For example, a value of `1` with a
-        #   `payment_frequency_interval` of `month` represents monthly payments.
+        # `payment_frequency_interval` of `month` represents monthly payments.
         sig { returns(Integer) }
         attr_accessor :payment_frequency_count
 
@@ -262,17 +262,17 @@ module Dodopayments
         attr_accessor :payment_frequency_interval
 
         # The payment amount. Represented in the lowest denomination of the currency
-        #   (e.g., cents for USD). For example, to charge $1.00, pass `100`.
+        # (e.g., cents for USD). For example, to charge $1.00, pass `100`.
         sig { returns(Integer) }
         attr_accessor :price
 
         # Indicates if purchasing power parity adjustments are applied to the price.
-        #   Purchasing power parity feature is not available as of now
+        # Purchasing power parity feature is not available as of now
         sig { returns(T::Boolean) }
         attr_accessor :purchasing_power_parity
 
         # Number of units for the subscription period. For example, a value of `12` with a
-        #   `subscription_period_interval` of `month` represents a one-year subscription.
+        # `subscription_period_interval` of `month` represents a one-year subscription.
         sig { returns(Integer) }
         attr_accessor :subscription_period_count
 

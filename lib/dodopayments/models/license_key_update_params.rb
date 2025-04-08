@@ -10,21 +10,21 @@ module Dodopayments
 
       # @!attribute activations_limit
       #   The updated activation limit for the license key. Use `null` to remove the
-      #     limit, or omit this field to leave it unchanged.
+      #   limit, or omit this field to leave it unchanged.
       #
       #   @return [Integer, nil]
       optional :activations_limit, Integer, nil?: true
 
       # @!attribute disabled
       #   Indicates whether the license key should be disabled. A value of `true` disables
-      #     the key, while `false` enables it. Omit this field to leave it unchanged.
+      #   the key, while `false` enables it. Omit this field to leave it unchanged.
       #
       #   @return [Boolean, nil]
       optional :disabled, Dodopayments::Internal::Type::Boolean, nil?: true
 
       # @!attribute expires_at
       #   The updated expiration timestamp for the license key in UTC. Use `null` to
-      #     remove the expiration date, or omit this field to leave it unchanged.
+      #   remove the expiration date, or omit this field to leave it unchanged.
       #
       #   @return [Time, nil]
       optional :expires_at, Time, nil?: true

@@ -35,9 +35,9 @@ module Dodopayments
 
       # Filter products by pricing type:
       #
-      #   - `true`: Show only recurring pricing products (e.g. subscriptions)
-      #   - `false`: Show only one-time price products
-      #   - `null` or absent: Show both types of products
+      # - `true`: Show only recurring pricing products (e.g. subscriptions)
+      # - `false`: Show only one-time price products
+      # - `null` or absent: Show both types of products
       sig { returns(T.nilable(T::Boolean)) }
       def recurring
       end

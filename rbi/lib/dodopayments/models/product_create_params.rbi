@@ -10,7 +10,7 @@ module Dodopayments
       attr_accessor :price
 
       # Represents the different categories of taxation applicable to various products
-      #   and services.
+      # and services.
       sig { returns(Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol) }
       attr_accessor :tax_category
 
@@ -100,7 +100,7 @@ module Dodopayments
       def to_hash; end
 
       # Represents the different categories of taxation applicable to various products
-      #   and services.
+      # and services.
       module TaxCategory
         extend Dodopayments::Internal::Type::Enum
 
