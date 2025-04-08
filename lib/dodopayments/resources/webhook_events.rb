@@ -38,7 +38,7 @@ module Dodopayments
         @client.request(
           method: :get,
           path: "webhook_events",
-          query: parsed,
+          query: parsed.transform_keys(object_id_: :object_id),
           page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Models::WebhookEvent,
           options: options
