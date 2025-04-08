@@ -30,7 +30,7 @@ module Dodopayments
       #   Get events history of a specific object like payment/subscription/refund/dispute
       #
       #   @return [String, nil]
-      optional :object_id_, String, api_name: :object_id, nil?: true
+      optional :object_id_, String, nil?: true
 
       # @!attribute page_number
       #   Page number default is 0
