@@ -39,6 +39,8 @@ Layout/LineLength:
   AllowedPatterns:
     - "^\\s*#.*$"
     - ^require(_relative)?
+    - "Dodopayments::Internal::Type::BaseModel$"
+    - "^\\s*[A-Z0-9_]+ = :"
     - "Dodopayments::(Models|Resources|Test)::"
   Max: 110
 
@@ -103,8 +105,7 @@ Metrics/MethodLength:
   Enabled: false
 
 Metrics/ModuleLength:
-  Exclude:
-    - "**/*.rbi"
+  Enabled: false
 
 Metrics/ParameterLists:
   Enabled: false
