@@ -13,7 +13,7 @@ module Dodopayments
         #   If true, will send link to user.
         #
         #   @return [Boolean, nil]
-        optional :send_email, Dodopayments::Internal::Type::BooleanModel, nil?: true
+        optional :send_email, Dodopayments::Internal::Type::Boolean, nil?: true
 
         # @!parse
         #   # @param send_email [Boolean, nil]

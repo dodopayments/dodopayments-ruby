@@ -19,7 +19,7 @@ module Dodopayments
       #     default
       #
       #   @return [Boolean, nil]
-      optional :create_new_customer, Dodopayments::Internal::Type::BooleanModel
+      optional :create_new_customer, Dodopayments::Internal::Type::Boolean
 
       # @!parse
       #   # @return [Boolean]

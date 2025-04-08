@@ -53,7 +53,7 @@ module Dodopayments
       #   When true, generates and sends a license key to your customer. Defaults to false
       #
       #   @return [Boolean, nil]
-      optional :license_key_enabled, Dodopayments::Internal::Type::BooleanModel, nil?: true
+      optional :license_key_enabled, Dodopayments::Internal::Type::Boolean, nil?: true
 
       # @!attribute name
       #   Optional name of the product

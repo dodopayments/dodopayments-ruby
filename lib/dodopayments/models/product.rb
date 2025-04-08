@@ -20,13 +20,13 @@ module Dodopayments
       #   Indicates if the product is recurring (e.g., subscriptions).
       #
       #   @return [Boolean]
-      required :is_recurring, Dodopayments::Internal::Type::BooleanModel
+      required :is_recurring, Dodopayments::Internal::Type::Boolean
 
       # @!attribute license_key_enabled
       #   Indicates whether the product requires a license key.
       #
       #   @return [Boolean]
-      required :license_key_enabled, Dodopayments::Internal::Type::BooleanModel
+      required :license_key_enabled, Dodopayments::Internal::Type::Boolean
 
       # @!attribute price
       #

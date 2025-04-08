@@ -12,7 +12,7 @@ module Dodopayments
         # @!attribute force_update
         #
         #   @return [Boolean, nil]
-        optional :force_update, Dodopayments::Internal::Type::BooleanModel, nil?: true
+        optional :force_update, Dodopayments::Internal::Type::Boolean, nil?: true
 
         # @!parse
         #   # @param force_update [Boolean, nil]

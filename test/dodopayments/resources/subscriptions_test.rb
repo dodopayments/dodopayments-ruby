@@ -52,7 +52,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         subscription_id: String,
         subscription_period_count: Integer,
         subscription_period_interval: Dodopayments::Models::TimeInterval,
-        tax_inclusive: Dodopayments::Internal::Type::BooleanModel,
+        tax_inclusive: Dodopayments::Internal::Type::Boolean,
         trial_period_days: Integer,
         cancelled_at: Time | nil,
         discount_id: String | nil
@@ -83,7 +83,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         subscription_id: String,
         subscription_period_count: Integer,
         subscription_period_interval: Dodopayments::Models::TimeInterval,
-        tax_inclusive: Dodopayments::Internal::Type::BooleanModel,
+        tax_inclusive: Dodopayments::Internal::Type::Boolean,
         trial_period_days: Integer,
         cancelled_at: Time | nil,
         discount_id: String | nil
@@ -119,7 +119,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         subscription_id: String,
         subscription_period_count: Integer,
         subscription_period_interval: Dodopayments::Models::TimeInterval,
-        tax_inclusive: Dodopayments::Internal::Type::BooleanModel,
+        tax_inclusive: Dodopayments::Internal::Type::Boolean,
         trial_period_days: Integer,
         cancelled_at: Time | nil,
         discount_id: String | nil

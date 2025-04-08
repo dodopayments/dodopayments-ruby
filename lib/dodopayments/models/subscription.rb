@@ -87,7 +87,7 @@ module Dodopayments
       #   Indicates if the recurring_pre_tax_amount is tax inclusive
       #
       #   @return [Boolean]
-      required :tax_inclusive, Dodopayments::Internal::Type::BooleanModel
+      required :tax_inclusive, Dodopayments::Internal::Type::Boolean
 
       # @!attribute trial_period_days
       #   Number of days in the trial period (0 if no trial)

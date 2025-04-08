@@ -7,7 +7,7 @@ module Dodopayments
       # @!attribute valid
       #
       #   @return [Boolean]
-      required :valid, Dodopayments::Internal::Type::BooleanModel
+      required :valid, Dodopayments::Internal::Type::Boolean
 
       # @!parse
       #   # @param valid [Boolean]

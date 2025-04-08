@@ -64,7 +64,7 @@ module Dodopayments
             in Hash
               type_info(spec.slice(:const, :enum, :union).first&.last)
             in true | false
-              -> { Dodopayments::Internal::Type::BooleanModel }
+              -> { Dodopayments::Internal::Type::Boolean }
             in Dodopayments::Internal::Type::Converter | Class | Symbol
               -> { spec }
             in NilClass | Integer | Float

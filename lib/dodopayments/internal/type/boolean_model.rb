@@ -8,7 +8,7 @@ module Dodopayments
       # @abstract
       #
       # Ruby has no Boolean class; this is something for models to refer to.
-      class BooleanModel
+      class Boolean
         extend Dodopayments::Internal::Type::Converter
 
         # @param other [Object]
@@ -19,7 +19,7 @@ module Dodopayments
         # @param other [Object]
         #
         # @return [Boolean]
-        def self.==(other) = other.is_a?(Class) && other <= Dodopayments::Internal::Type::BooleanModel
+        def self.==(other) = other.is_a?(Class) && other <= Dodopayments::Internal::Type::Boolean
 
         class << self
           # @api private

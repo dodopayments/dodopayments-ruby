@@ -64,7 +64,7 @@ module Dodopayments
       #   Whether to generate a payment link. Defaults to false if not specified.
       #
       #   @return [Boolean, nil]
-      optional :payment_link, Dodopayments::Internal::Type::BooleanModel, nil?: true
+      optional :payment_link, Dodopayments::Internal::Type::Boolean, nil?: true
 
       # @!attribute return_url
       #   Optional URL to redirect the customer after payment. Must be a valid URL if
@@ -77,7 +77,7 @@ module Dodopayments
       #   Display saved payment methods of a returning customer False by default
       #
       #   @return [Boolean, nil]
-      optional :show_saved_payment_methods, Dodopayments::Internal::Type::BooleanModel
+      optional :show_saved_payment_methods, Dodopayments::Internal::Type::Boolean
 
       # @!parse
       #   # @return [Boolean]

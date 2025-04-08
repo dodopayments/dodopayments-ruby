@@ -18,8 +18,8 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
       response => {
         business_id: String,
         created_at: Time,
-        is_recurring: Dodopayments::Internal::Type::BooleanModel,
-        license_key_enabled: Dodopayments::Internal::Type::BooleanModel,
+        is_recurring: Dodopayments::Internal::Type::Boolean,
+        license_key_enabled: Dodopayments::Internal::Type::Boolean,
         price: Dodopayments::Models::Price,
         product_id: String,
         tax_category: Dodopayments::Models::Product::TaxCategory,
@@ -46,8 +46,8 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
       response => {
         business_id: String,
         created_at: Time,
-        is_recurring: Dodopayments::Internal::Type::BooleanModel,
-        license_key_enabled: Dodopayments::Internal::Type::BooleanModel,
+        is_recurring: Dodopayments::Internal::Type::Boolean,
+        license_key_enabled: Dodopayments::Internal::Type::Boolean,
         price: Dodopayments::Models::Price,
         product_id: String,
         tax_category: Dodopayments::Models::Product::TaxCategory,
@@ -87,7 +87,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
       row => {
         business_id: String,
         created_at: Time,
-        is_recurring: Dodopayments::Internal::Type::BooleanModel,
+        is_recurring: Dodopayments::Internal::Type::Boolean,
         product_id: String,
         tax_category: Dodopayments::Models::ProductListResponse::TaxCategory,
         updated_at: Time,
@@ -97,7 +97,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         name: String | nil,
         price: Integer | nil,
         price_detail: Dodopayments::Models::Price | nil,
-        tax_inclusive: Dodopayments::Internal::Type::BooleanModel | nil
+        tax_inclusive: Dodopayments::Internal::Type::Boolean | nil
       }
     end
   end

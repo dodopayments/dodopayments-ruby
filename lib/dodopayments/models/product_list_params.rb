@@ -12,7 +12,7 @@ module Dodopayments
       #   List archived products
       #
       #   @return [Boolean, nil]
-      optional :archived, Dodopayments::Internal::Type::BooleanModel
+      optional :archived, Dodopayments::Internal::Type::Boolean
 
       # @!parse
       #   # @return [Boolean]
@@ -38,7 +38,7 @@ module Dodopayments
       #     - `null` or absent: Show both types of products
       #
       #   @return [Boolean, nil]
-      optional :recurring, Dodopayments::Internal::Type::BooleanModel, nil?: true
+      optional :recurring, Dodopayments::Internal::Type::Boolean, nil?: true
 
       # @!parse
       #   # @param archived [Boolean]

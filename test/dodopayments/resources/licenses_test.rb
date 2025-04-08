@@ -42,7 +42,7 @@ class Dodopayments::Test::Resources::LicensesTest < Dodopayments::Test::Resource
 
     assert_pattern do
       response => {
-        valid: Dodopayments::Internal::Type::BooleanModel
+        valid: Dodopayments::Internal::Type::Boolean
       }
     end
   end

@@ -74,7 +74,7 @@ module Dodopayments
       #   If true, generates a payment link. Defaults to false if not specified.
       #
       #   @return [Boolean, nil]
-      optional :payment_link, Dodopayments::Internal::Type::BooleanModel, nil?: true
+      optional :payment_link, Dodopayments::Internal::Type::Boolean, nil?: true
 
       # @!attribute return_url
       #   Optional URL to redirect after successful subscription creation
@@ -86,7 +86,7 @@ module Dodopayments
       #   Display saved payment methods of a returning customer False by default
       #
       #   @return [Boolean, nil]
-      optional :show_saved_payment_methods, Dodopayments::Internal::Type::BooleanModel
+      optional :show_saved_payment_methods, Dodopayments::Internal::Type::Boolean
 
       # @!parse
       #   # @return [Boolean]
@@ -338,7 +338,7 @@ module Dodopayments
         #     details for future use.
         #
         #   @return [Boolean]
-        required :mandate_only, Dodopayments::Internal::Type::BooleanModel
+        required :mandate_only, Dodopayments::Internal::Type::Boolean
 
         # @!attribute product_price
         #   Product price for the initial charge to customer If not specified the stored

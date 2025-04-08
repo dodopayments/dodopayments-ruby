@@ -56,7 +56,7 @@ module Dodopayments
       #     limit, activation message) become applicable.
       #
       #   @return [Boolean, nil]
-      optional :license_key_enabled, Dodopayments::Internal::Type::BooleanModel, nil?: true
+      optional :license_key_enabled, Dodopayments::Internal::Type::Boolean, nil?: true
 
       # @!attribute name
       #   Name of the product, optional and must be at most 100 characters.

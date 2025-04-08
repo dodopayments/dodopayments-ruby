@@ -38,7 +38,7 @@ module Dodopayments
         #     Purchasing power parity feature is not available as of now.
         #
         #   @return [Boolean]
-        required :purchasing_power_parity, Dodopayments::Internal::Type::BooleanModel
+        required :purchasing_power_parity, Dodopayments::Internal::Type::Boolean
 
         # @!attribute type
         #
@@ -50,7 +50,7 @@ module Dodopayments
         #     the [`price`](Self::price) field is the minimum amount.
         #
         #   @return [Boolean, nil]
-        optional :pay_what_you_want, Dodopayments::Internal::Type::BooleanModel
+        optional :pay_what_you_want, Dodopayments::Internal::Type::Boolean
 
         # @!parse
         #   # @return [Boolean]
@@ -68,7 +68,7 @@ module Dodopayments
         #   Indicates if the price is tax inclusive.
         #
         #   @return [Boolean, nil]
-        optional :tax_inclusive, Dodopayments::Internal::Type::BooleanModel, nil?: true
+        optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
         # @!parse
         #   # @param currency [Symbol, Dodopayments::Models::Price::OneTimePrice::Currency]
@@ -292,7 +292,7 @@ module Dodopayments
         #     Purchasing power parity feature is not available as of now
         #
         #   @return [Boolean]
-        required :purchasing_power_parity, Dodopayments::Internal::Type::BooleanModel
+        required :purchasing_power_parity, Dodopayments::Internal::Type::Boolean
 
         # @!attribute subscription_period_count
         #   Number of units for the subscription period. For example, a value of `12` with a
@@ -315,7 +315,7 @@ module Dodopayments
         #   Indicates if the price is tax inclusive
         #
         #   @return [Boolean, nil]
-        optional :tax_inclusive, Dodopayments::Internal::Type::BooleanModel, nil?: true
+        optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
         # @!attribute [r] trial_period_days
         #   Number of days for the trial period. A value of `0` indicates no trial period.

@@ -20,7 +20,7 @@ module Dodopayments
       #   Indicates if the product is recurring (e.g., subscriptions).
       #
       #   @return [Boolean]
-      required :is_recurring, Dodopayments::Internal::Type::BooleanModel
+      required :is_recurring, Dodopayments::Internal::Type::Boolean
 
       # @!attribute product_id
       #   Unique identifier for the product.
@@ -88,7 +88,7 @@ module Dodopayments
       #   Indicates if the price is tax inclusive
       #
       #   @return [Boolean, nil]
-      optional :tax_inclusive, Dodopayments::Internal::Type::BooleanModel, nil?: true
+      optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
       # @!parse
       #   # @param business_id [String]

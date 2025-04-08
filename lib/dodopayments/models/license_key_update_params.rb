@@ -20,7 +20,7 @@ module Dodopayments
       #     the key, while `false` enables it. Omit this field to leave it unchanged.
       #
       #   @return [Boolean, nil]
-      optional :disabled, Dodopayments::Internal::Type::BooleanModel, nil?: true
+      optional :disabled, Dodopayments::Internal::Type::Boolean, nil?: true
 
       # @!attribute expires_at
       #   The updated expiration timestamp for the license key in UTC. Use `null` to
