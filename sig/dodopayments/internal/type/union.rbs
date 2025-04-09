@@ -32,10 +32,13 @@ module Dodopayments
 
         def coerce: (
           top value,
-          state: Dodopayments::Internal::Type::Converter::state
+          state: Dodopayments::Internal::Type::Converter::coerce_state
         ) -> top
 
-        def dump: (top value) -> top
+        def dump: (
+          top value,
+          state: Dodopayments::Internal::Type::Converter::dump_state
+        ) -> top
       end
     end
   end

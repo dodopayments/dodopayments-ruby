@@ -55,14 +55,18 @@ module Dodopayments
         # @api private
         sig do
           override
-            .params(value: T.anything, state: Dodopayments::Internal::Type::Converter::State)
+            .params(value: T.anything, state: Dodopayments::Internal::Type::Converter::CoerceState)
             .returns(T.anything)
         end
         def coerce(value, state:); end
 
         # @api private
-        sig { override.params(value: T.anything).returns(T.anything) }
-        def dump(value); end
+        sig do
+          override
+            .params(value: T.anything, state: Dodopayments::Internal::Type::Converter::DumpState)
+            .returns(T.anything)
+        end
+        def dump(value, state:); end
       end
     end
   end

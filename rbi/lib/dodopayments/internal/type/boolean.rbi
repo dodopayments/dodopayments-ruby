@@ -26,16 +26,22 @@ module Dodopayments
                 T::Boolean,
                 T.anything
               ),
-                      state: Dodopayments::Internal::Type::Converter::State)
+                      state: Dodopayments::Internal::Type::Converter::CoerceState)
               .returns(T.any(T::Boolean, T.anything))
           end
           def coerce(value, state:); end
 
           # @api private
           sig(:final) do
-            override.params(value: T.any(T::Boolean, T.anything)).returns(T.any(T::Boolean, T.anything))
+            override
+              .params(value: T.any(
+                T::Boolean,
+                T.anything
+              ),
+                      state: Dodopayments::Internal::Type::Converter::DumpState)
+              .returns(T.any(T::Boolean, T.anything))
           end
-          def dump(value); end
+          def dump(value, state:); end
         end
       end
     end
