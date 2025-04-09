@@ -383,7 +383,7 @@ module Dodopayments
           in (400..) | Dodopayments::Errors::APIConnectionError
             self.class.reap_connection!(status, stream: stream)
 
-            delay = retry_delay(response, retry_count: retry_count)
+            delay = retry_delay(response || {}, retry_count: retry_count)
             sleep(delay)
 
             send_request(
