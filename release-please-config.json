@@ -60,5 +60,8 @@
     }
   ],
   "release-type": "ruby",
-  "version-file": "lib/dodopayments/version.rb"
+  "version-file": "lib/dodopayments/version.rb",
+  "extra-files": [
+    "README.md"
+  ]
 }
