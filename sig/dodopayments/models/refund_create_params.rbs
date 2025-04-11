@@ -1,7 +1,7 @@
 module Dodopayments
   module Models
     type refund_create_params =
-      { payment_id: String, amount: Integer?, reason: String? }
+      { payment_id: String, reason: String? }
       & Dodopayments::Internal::Type::request_parameters
 
     class RefundCreateParams < Dodopayments::Internal::Type::BaseModel
@@ -10,13 +10,10 @@ module Dodopayments
 
       attr_accessor payment_id: String
 
-      attr_accessor amount: Integer?
-
       attr_accessor reason: String?
 
       def initialize: (
         payment_id: String,
-        ?amount: Integer?,
         ?reason: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void

@@ -3,7 +3,6 @@ module Dodopayments
     class Refunds
       def create: (
         payment_id: String,
-        ?amount: Integer?,
         ?reason: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::Refund

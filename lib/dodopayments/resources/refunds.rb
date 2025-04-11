@@ -3,10 +3,9 @@
 module Dodopayments
   module Resources
     class Refunds
-      # @overload create(payment_id:, amount: nil, reason: nil, request_options: {})
+      # @overload create(payment_id:, reason: nil, request_options: {})
       #
       # @param payment_id [String]
-      # @param amount [Integer, nil]
       # @param reason [String, nil]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

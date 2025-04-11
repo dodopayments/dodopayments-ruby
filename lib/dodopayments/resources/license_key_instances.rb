@@ -47,7 +47,7 @@ module Dodopayments
       # @param page_size [Integer, nil]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::LicenseKeyInstance>]
+      # @return [Array<Dodopayments::Models::LicenseKeyInstanceListResponseItem>]
       #
       # @see Dodopayments::Models::LicenseKeyInstanceListParams
       def list(params = {})
@@ -56,8 +56,7 @@ module Dodopayments
           method: :get,
           path: "license_key_instances",
           query: parsed,
-          page: Dodopayments::Internal::DefaultPageNumberPagination,
-          model: Dodopayments::Models::LicenseKeyInstance,
+          model: Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::LicenseKeyInstanceListResponseItem],
           options: options
         )
       end

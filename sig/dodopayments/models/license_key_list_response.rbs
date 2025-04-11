@@ -1,0 +1,19 @@
+module Dodopayments
+  module Models
+    type license_key_list_response_item =
+      { items: ::Array[Dodopayments::Models::LicenseKey] }
+
+    class LicenseKeyListResponseItem < Dodopayments::Internal::Type::BaseModel
+      attr_accessor items: ::Array[Dodopayments::Models::LicenseKey]
+
+      def initialize: (items: ::Array[Dodopayments::Models::LicenseKey]) -> void
+
+      def to_hash: -> Dodopayments::Models::license_key_list_response_item
+    end
+
+    type license_key_list_response =
+      ::Array[Dodopayments::Models::LicenseKeyListResponseItem]
+
+    LicenseKeyListResponse: license_key_list_response
+  end
+end

@@ -6,7 +6,6 @@ module Dodopayments
       sig do
         params(
           payment_id: String,
-          amount: T.nilable(Integer),
           reason: T.nilable(String),
           request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
@@ -15,9 +14,6 @@ module Dodopayments
       def create(
         # The unique identifier of the payment to be refunded.
         payment_id:,
-        # The amount to be refunded. Must be non-negative. Optional. Partial refunds are
-        # currently disabled.
-        amount: nil,
         # The reason for the refund, if any. Maximum length is 3000 characters. Optional.
         reason: nil,
         request_options: {}

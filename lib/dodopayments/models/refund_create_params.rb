@@ -14,13 +14,6 @@ module Dodopayments
       #   @return [String]
       required :payment_id, String
 
-      # @!attribute amount
-      #   The amount to be refunded. Must be non-negative. Optional. Partial refunds are
-      #   currently disabled.
-      #
-      #   @return [Integer, nil]
-      optional :amount, Integer, nil?: true
-
       # @!attribute reason
       #   The reason for the refund, if any. Maximum length is 3000 characters. Optional.
       #
@@ -29,11 +22,10 @@ module Dodopayments
 
       # @!parse
       #   # @param payment_id [String]
-      #   # @param amount [Integer, nil]
       #   # @param reason [String, nil]
       #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
       #   #
-      #   def initialize(payment_id:, amount: nil, reason: nil, request_options: {}, **) = super
+      #   def initialize(payment_id:, reason: nil, request_options: {}, **) = super
 
       # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
