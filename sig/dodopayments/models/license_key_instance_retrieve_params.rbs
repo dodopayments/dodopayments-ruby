@@ -4,7 +4,7 @@ module Dodopayments
       {  } & Dodopayments::request_parameters
 
     class LicenseKeyInstanceRetrieveParams < Dodopayments::BaseModel
-      extend Dodopayments::RequestParameters::Converter
+      extend Dodopayments::Type::RequestParameters::Converter
       include Dodopayments::RequestParameters
 
       def initialize: (?request_options: Dodopayments::request_opts) -> void

@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     class ProductCreateParams < Dodopayments::BaseModel
-      extend Dodopayments::RequestParameters::Converter
+      extend Dodopayments::Type::RequestParameters::Converter
       include Dodopayments::RequestParameters
 
       sig { returns(T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice)) }

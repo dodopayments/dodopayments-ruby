@@ -2,7 +2,7 @@
 
 module Dodopayments
   class DefaultPageNumberPagination
-    include Dodopayments::BasePage
+    include Dodopayments::Type::BasePage
 
     Elem = type_member
 

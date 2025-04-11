@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     class DiscountUpdateParams < Dodopayments::BaseModel
-      extend Dodopayments::RequestParameters::Converter
+      extend Dodopayments::Type::RequestParameters::Converter
       include Dodopayments::RequestParameters
 
       # If present, update the discount amount:

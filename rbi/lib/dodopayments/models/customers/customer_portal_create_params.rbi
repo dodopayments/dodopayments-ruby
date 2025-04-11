@@ -4,7 +4,7 @@ module Dodopayments
   module Models
     module Customers
       class CustomerPortalCreateParams < Dodopayments::BaseModel
-        extend Dodopayments::RequestParameters::Converter
+        extend Dodopayments::Type::RequestParameters::Converter
         include Dodopayments::RequestParameters
 
         # If true, will send link to user.

@@ -1,0 +1,36 @@
+module Dodopayments
+  module Type
+    class ArrayOf
+      include Dodopayments::Type::Converter
+
+      def self.[]: (
+        ::Hash[Symbol, top]
+        | ^-> Dodopayments::Type::Converter::input
+        | Dodopayments::Type::Converter::input type_info,
+        ?::Hash[Symbol, top] spec
+      ) -> instance
+
+      def ===: (top other) -> bool
+
+      def ==: (top other) -> bool
+
+      def coerce: (
+        Enumerable[top] | top value,
+        state: Dodopayments::Type::Converter::state
+      ) -> (::Array[top] | top)
+
+      def dump: (Enumerable[top] | top value) -> (::Array[top] | top)
+
+      def item_type: -> top
+
+      def nilable?: -> bool
+
+      def initialize: (
+        ::Hash[Symbol, top]
+        | ^-> Dodopayments::Type::Converter::input
+        | Dodopayments::Type::Converter::input type_info,
+        ?::Hash[Symbol, top] spec
+      ) -> void
+    end
+  end
+end

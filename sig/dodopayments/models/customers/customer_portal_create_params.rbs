@@ -5,7 +5,7 @@ module Dodopayments
         { send_email: bool? } & Dodopayments::request_parameters
 
       class CustomerPortalCreateParams < Dodopayments::BaseModel
-        extend Dodopayments::RequestParameters::Converter
+        extend Dodopayments::Type::RequestParameters::Converter
         include Dodopayments::RequestParameters
 
         attr_accessor send_email: bool?

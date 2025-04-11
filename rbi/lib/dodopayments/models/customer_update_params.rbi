@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     class CustomerUpdateParams < Dodopayments::BaseModel
-      extend Dodopayments::RequestParameters::Converter
+      extend Dodopayments::Type::RequestParameters::Converter
       include Dodopayments::RequestParameters
 
       sig { returns(T.nilable(String)) }

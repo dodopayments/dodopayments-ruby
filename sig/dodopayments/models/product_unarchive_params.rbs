@@ -3,7 +3,7 @@ module Dodopayments
     type product_unarchive_params = {  } & Dodopayments::request_parameters
 
     class ProductUnarchiveParams < Dodopayments::BaseModel
-      extend Dodopayments::RequestParameters::Converter
+      extend Dodopayments::Type::RequestParameters::Converter
       include Dodopayments::RequestParameters
 
       def initialize: (?request_options: Dodopayments::request_opts) -> void

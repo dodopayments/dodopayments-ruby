@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     class PayoutListParams < Dodopayments::BaseModel
-      extend Dodopayments::RequestParameters::Converter
+      extend Dodopayments::Type::RequestParameters::Converter
       include Dodopayments::RequestParameters
 
       # Page number default is 0

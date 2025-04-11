@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     class ProductListParams < Dodopayments::BaseModel
-      extend Dodopayments::RequestParameters::Converter
+      extend Dodopayments::Type::RequestParameters::Converter
       include Dodopayments::RequestParameters
 
       # List archived products

@@ -4,7 +4,7 @@ module Dodopayments
   module Models
     class CustomerUpdateParams < Dodopayments::BaseModel
       # @!parse
-      #   extend Dodopayments::RequestParameters::Converter
+      #   extend Dodopayments::Type::RequestParameters::Converter
       include Dodopayments::RequestParameters
 
       # @!attribute name

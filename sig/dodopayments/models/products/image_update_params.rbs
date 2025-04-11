@@ -5,7 +5,7 @@ module Dodopayments
         { force_update: bool? } & Dodopayments::request_parameters
 
       class ImageUpdateParams < Dodopayments::BaseModel
-        extend Dodopayments::RequestParameters::Converter
+        extend Dodopayments::Type::RequestParameters::Converter
         include Dodopayments::RequestParameters
 
         attr_accessor force_update: bool?

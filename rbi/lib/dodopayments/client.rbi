@@ -1,7 +1,7 @@
 # typed: strong
 
 module Dodopayments
-  class Client < Dodopayments::BaseClient
+  class Client < Dodopayments::Transport::BaseClient
     DEFAULT_MAX_RETRIES = 2
 
     DEFAULT_TIMEOUT_IN_SECONDS = T.let(60.0, Float)

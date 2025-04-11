@@ -11,7 +11,7 @@ module Dodopayments
       & Dodopayments::request_parameters
 
     class LicenseKeyListParams < Dodopayments::BaseModel
-      extend Dodopayments::RequestParameters::Converter
+      extend Dodopayments::Type::RequestParameters::Converter
       include Dodopayments::RequestParameters
 
       attr_accessor customer_id: String?

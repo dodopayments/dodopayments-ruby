@@ -23,14 +23,14 @@ module Dodopayments
   #
   #   payments => Array
   class DefaultPageNumberPagination
-    include Dodopayments::BasePage
+    include Dodopayments::Type::BasePage
 
     # @return [Array<Object>, nil]
     attr_accessor :items
 
     # @api private
     #
-    # @param client [Dodopayments::BaseClient]
+    # @param client [Dodopayments::Transport::BaseClient]
     # @param req [Hash{Symbol=>Object}]
     # @param headers [Hash{String=>String}, Net::HTTPHeader]
     # @param page_data [Hash{Symbol=>Object}]
@@ -40,7 +40,7 @@ module Dodopayments
 
       case page_data
       in {items: Array | nil => items}
-        @items = items&.map { model.coerce(_1) }
+        @items = items&.map { Dodopayments::Type::Converter.coerce(model, _1) }
       else
       end
     end

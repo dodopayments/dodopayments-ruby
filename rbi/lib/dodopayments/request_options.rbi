@@ -1,29 +1,6 @@
 # typed: strong
 
 module Dodopayments
-  # @api private
-  module RequestParameters
-    # Options to specify HTTP behaviour for this request.
-    sig { returns(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)) }
-    def request_options
-    end
-
-    sig do
-      params(_: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
-        .returns(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
-    end
-    def request_options=(_)
-    end
-
-    # @api private
-    module Converter
-      # @api private
-      sig { params(params: T.anything).returns([T.anything, Dodopayments::Util::AnyHash]) }
-      def dump_request(params)
-      end
-    end
-  end
-
   # Specify HTTP behaviour to use for a specific request. These options supplement
   #   or override those provided at the client level.
   #

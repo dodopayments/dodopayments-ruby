@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     class LicenseKeyUpdateParams < Dodopayments::BaseModel
-      extend Dodopayments::RequestParameters::Converter
+      extend Dodopayments::Type::RequestParameters::Converter
       include Dodopayments::RequestParameters
 
       # The updated activation limit for the license key. Use `null` to remove the

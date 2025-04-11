@@ -4,7 +4,7 @@ module Dodopayments
       { product_price: Integer } & Dodopayments::request_parameters
 
     class SubscriptionChargeParams < Dodopayments::BaseModel
-      extend Dodopayments::RequestParameters::Converter
+      extend Dodopayments::Type::RequestParameters::Converter
       include Dodopayments::RequestParameters
 
       attr_accessor product_price: Integer

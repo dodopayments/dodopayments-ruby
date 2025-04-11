@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     class RefundCreateParams < Dodopayments::BaseModel
-      extend Dodopayments::RequestParameters::Converter
+      extend Dodopayments::Type::RequestParameters::Converter
       include Dodopayments::RequestParameters
 
       # The unique identifier of the payment to be refunded.

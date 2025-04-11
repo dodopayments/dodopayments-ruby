@@ -1,6 +1,6 @@
 module Dodopayments
   class DefaultPageNumberPagination[Elem]
-    include Dodopayments::BasePage[Elem]
+    include Dodopayments::Type::BasePage[Elem]
 
     attr_accessor items: ::Array[Elem]?
 

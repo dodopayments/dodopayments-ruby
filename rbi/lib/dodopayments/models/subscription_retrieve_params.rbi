@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     class SubscriptionRetrieveParams < Dodopayments::BaseModel
-      extend Dodopayments::RequestParameters::Converter
+      extend Dodopayments::Type::RequestParameters::Converter
       include Dodopayments::RequestParameters
 
       sig do
