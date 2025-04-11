@@ -17,11 +17,11 @@ module Dodopayments
         tax_id: String?,
         trial_period_days: Integer?
       }
-      & Dodopayments::request_parameters
+      & Dodopayments::Internal::Type::request_parameters
 
     class SubscriptionCreateParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       attr_accessor billing: Dodopayments::Models::BillingAddress
 

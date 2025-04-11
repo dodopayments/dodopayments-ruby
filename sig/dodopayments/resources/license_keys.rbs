@@ -21,7 +21,7 @@ module Dodopayments
         ?product_id: String?,
         ?status: Dodopayments::Models::license_key_status?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::LicenseKey]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::LicenseKey]
 
       def initialize: (client: Dodopayments::Client) -> void
     end

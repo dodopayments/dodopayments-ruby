@@ -37,11 +37,12 @@ module Dodopayments
       end
 
       sig do
-        params(_: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Util::AnyHash))
-          .returns(T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Util::AnyHash))
+        params(
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::Util::AnyHash)
+        )
+          .void
       end
-      def customer=(_)
-      end
+      attr_writer :customer
 
       # List of disputes associated with this payment
       sig { returns(T::Array[Dodopayments::Models::Dispute]) }
@@ -187,20 +188,22 @@ module Dodopayments
         params(
           business_id: String,
           created_at: Time,
-          currency: Dodopayments::Models::Payment::Currency::TaggedSymbol,
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Util::AnyHash),
-          disputes: T::Array[Dodopayments::Models::Dispute],
+          currency: Dodopayments::Models::Payment::Currency::OrSymbol,
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::Util::AnyHash),
+          disputes: T::Array[T.any(Dodopayments::Models::Dispute, Dodopayments::Internal::Util::AnyHash)],
           metadata: T::Hash[Symbol, String],
           payment_id: String,
-          refunds: T::Array[Dodopayments::Models::Refund],
+          refunds: T::Array[T.any(Dodopayments::Models::Refund, Dodopayments::Internal::Util::AnyHash)],
           total_amount: Integer,
           discount_id: T.nilable(String),
           error_message: T.nilable(String),
           payment_link: T.nilable(String),
           payment_method: T.nilable(String),
           payment_method_type: T.nilable(String),
-          product_cart: T.nilable(T::Array[Dodopayments::Models::Payment::ProductCart]),
-          status: T.nilable(Dodopayments::Models::IntentStatus::TaggedSymbol),
+          product_cart: T.nilable(
+            T::Array[T.any(Dodopayments::Models::Payment::ProductCart, Dodopayments::Internal::Util::AnyHash)]
+          ),
+          status: T.nilable(Dodopayments::Models::IntentStatus::OrSymbol),
           subscription_id: T.nilable(String),
           tax: T.nilable(Integer),
           updated_at: T.nilable(Time)

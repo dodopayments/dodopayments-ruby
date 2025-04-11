@@ -5,8 +5,8 @@ module Dodopayments
     # @see Dodopayments::Resources::Customers#list
     class CustomerListParams < Dodopayments::BaseModel
       # @!parse
-      #   extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute page_number
       #   Page number default is 0

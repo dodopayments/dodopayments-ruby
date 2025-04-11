@@ -2,11 +2,11 @@ module Dodopayments
   module Models
     type refund_create_params =
       { payment_id: String, amount: Integer?, reason: String? }
-      & Dodopayments::request_parameters
+      & Dodopayments::Internal::Type::request_parameters
 
     class RefundCreateParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       attr_accessor payment_id: String
 

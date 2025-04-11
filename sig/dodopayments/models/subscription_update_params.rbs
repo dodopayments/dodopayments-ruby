@@ -5,11 +5,11 @@ module Dodopayments
         metadata: ::Hash[Symbol, String]?,
         status: Dodopayments::Models::subscription_status?
       }
-      & Dodopayments::request_parameters
+      & Dodopayments::Internal::Type::request_parameters
 
     class SubscriptionUpdateParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       attr_accessor metadata: ::Hash[Symbol, String]?
 

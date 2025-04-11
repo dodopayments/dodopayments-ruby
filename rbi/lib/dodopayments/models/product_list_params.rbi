@@ -3,8 +3,8 @@
 module Dodopayments
   module Models
     class ProductListParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       # List archived products
       sig { returns(T.nilable(T::Boolean)) }
@@ -52,7 +52,7 @@ module Dodopayments
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           recurring: T.nilable(T::Boolean),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

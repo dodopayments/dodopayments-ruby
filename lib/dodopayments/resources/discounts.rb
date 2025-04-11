@@ -85,7 +85,7 @@ module Dodopayments
       # @param page_size [Integer, nil]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::Discount>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Discount>]
       #
       # @see Dodopayments::Models::DiscountListParams
       def list(params = {})
@@ -94,7 +94,7 @@ module Dodopayments
           method: :get,
           path: "discounts",
           query: parsed,
-          page: Dodopayments::DefaultPageNumberPagination,
+          page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Models::Discount,
           options: options
         )

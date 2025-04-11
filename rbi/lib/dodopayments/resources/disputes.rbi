@@ -6,7 +6,12 @@ module Dodopayments
       sig do
         params(
           dispute_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+          request_options: T.nilable(
+            T.any(
+              Dodopayments::RequestOptions,
+              Dodopayments::Internal::Util::AnyHash
+            )
+          )
         )
           .returns(Dodopayments::Models::Dispute)
       end
@@ -26,9 +31,14 @@ module Dodopayments
           dispute_status: T.nilable(Dodopayments::Models::DisputeStatus::OrSymbol),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+          request_options: T.nilable(
+            T.any(
+              Dodopayments::RequestOptions,
+              Dodopayments::Internal::Util::AnyHash
+            )
+          )
         )
-          .returns(Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Dispute])
+          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Dispute])
       end
       def list(
         # Get events after this created time

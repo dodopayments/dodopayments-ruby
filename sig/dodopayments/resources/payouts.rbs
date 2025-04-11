@@ -5,7 +5,7 @@ module Dodopayments
         ?page_number: Integer?,
         ?page_size: Integer?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::PayoutListResponse]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::PayoutListResponse]
 
       def initialize: (client: Dodopayments::Client) -> void
     end

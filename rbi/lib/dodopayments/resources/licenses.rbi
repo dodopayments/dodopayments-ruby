@@ -7,7 +7,12 @@ module Dodopayments
         params(
           license_key: String,
           name: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+          request_options: T.nilable(
+            T.any(
+              Dodopayments::RequestOptions,
+              Dodopayments::Internal::Util::AnyHash
+            )
+          )
         )
           .returns(Dodopayments::Models::LicenseKeyInstance)
       end
@@ -18,7 +23,12 @@ module Dodopayments
         params(
           license_key: String,
           license_key_instance_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+          request_options: T.nilable(
+            T.any(
+              Dodopayments::RequestOptions,
+              Dodopayments::Internal::Util::AnyHash
+            )
+          )
         )
           .void
       end
@@ -29,7 +39,12 @@ module Dodopayments
         params(
           license_key: String,
           license_key_instance_id: T.nilable(String),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+          request_options: T.nilable(
+            T.any(
+              Dodopayments::RequestOptions,
+              Dodopayments::Internal::Util::AnyHash
+            )
+          )
         )
           .returns(Dodopayments::Models::LicenseValidateResponse)
       end

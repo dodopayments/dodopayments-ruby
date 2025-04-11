@@ -7,7 +7,7 @@ class Dodopayments::Test::Resources::PayoutsTest < Dodopayments::Test::ResourceT
     response = @dodo_payments.payouts.list
 
     assert_pattern do
-      response => Dodopayments::DefaultPageNumberPagination
+      response => Dodopayments::Internal::DefaultPageNumberPagination
     end
 
     row = response.to_enum.first

@@ -3,8 +3,8 @@
 module Dodopayments
   module Models
     class ProductUpdateParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       # Available Addons for subscription products
       sig { returns(T.nilable(T::Array[String])) }
@@ -62,10 +62,10 @@ module Dodopayments
       end
 
       sig do
-        params(_: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Util::AnyHash)))
-          .returns(T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Util::AnyHash)))
-      end
-      def license_key_duration=(_)
+        params(
+          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::Util::AnyHash))
+        )
+          .void
       end
 
       # Whether the product requires a license key.
@@ -128,12 +128,18 @@ module Dodopayments
           image_id: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
-          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Util::AnyHash)),
+          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::Util::AnyHash)),
           license_key_enabled: T.nilable(T::Boolean),
           name: T.nilable(String),
-          price: T.nilable(T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice)),
+          price: T.nilable(
+            T.any(
+              Dodopayments::Models::Price::OneTimePrice,
+              Dodopayments::Internal::Util::AnyHash,
+              Dodopayments::Models::Price::RecurringPrice
+            )
+          ),
           tax_category: T.nilable(Dodopayments::Models::ProductUpdateParams::TaxCategory::OrSymbol),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

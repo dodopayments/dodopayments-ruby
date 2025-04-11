@@ -31,7 +31,7 @@ module Dodopayments
       # @param page_size [Integer, nil]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::Dispute>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Dispute>]
       #
       # @see Dodopayments::Models::DisputeListParams
       def list(params = {})
@@ -40,7 +40,7 @@ module Dodopayments
           method: :get,
           path: "disputes",
           query: parsed,
-          page: Dodopayments::DefaultPageNumberPagination,
+          page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Models::Dispute,
           options: options
         )

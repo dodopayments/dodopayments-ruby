@@ -1,10 +1,11 @@
 module Dodopayments
   module Models
-    type product_delete_params = {  } & Dodopayments::request_parameters
+    type product_delete_params =
+      {  } & Dodopayments::Internal::Type::request_parameters
 
     class ProductDeleteParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       def initialize: (?request_options: Dodopayments::request_opts) -> void
 

@@ -21,7 +21,7 @@ module Dodopayments
         ?page_size: Integer?,
         ?status: Dodopayments::Models::refund_status?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Refund]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Refund]
 
       def initialize: (client: Dodopayments::Client) -> void
     end

@@ -13,7 +13,12 @@ module Dodopayments
           name: T.nilable(String),
           restricted_to: T.nilable(T::Array[String]),
           usage_limit: T.nilable(Integer),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+          request_options: T.nilable(
+            T.any(
+              Dodopayments::RequestOptions,
+              Dodopayments::Internal::Util::AnyHash
+            )
+          )
         )
           .returns(Dodopayments::Models::Discount)
       end
@@ -48,7 +53,12 @@ module Dodopayments
       sig do
         params(
           discount_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+          request_options: T.nilable(
+            T.any(
+              Dodopayments::RequestOptions,
+              Dodopayments::Internal::Util::AnyHash
+            )
+          )
         )
           .returns(Dodopayments::Models::Discount)
       end
@@ -70,7 +80,12 @@ module Dodopayments
           restricted_to: T.nilable(T::Array[String]),
           type: T.nilable(Dodopayments::Models::DiscountType::OrSymbol),
           usage_limit: T.nilable(Integer),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+          request_options: T.nilable(
+            T.any(
+              Dodopayments::RequestOptions,
+              Dodopayments::Internal::Util::AnyHash
+            )
+          )
         )
           .returns(Dodopayments::Models::Discount)
       end
@@ -103,9 +118,14 @@ module Dodopayments
         params(
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+          request_options: T.nilable(
+            T.any(
+              Dodopayments::RequestOptions,
+              Dodopayments::Internal::Util::AnyHash
+            )
+          )
         )
-          .returns(Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Discount])
+          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Discount])
       end
       def list(
         # Page number (default = 0).
@@ -120,7 +140,12 @@ module Dodopayments
       sig do
         params(
           discount_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+          request_options: T.nilable(
+            T.any(
+              Dodopayments::RequestOptions,
+              Dodopayments::Internal::Util::AnyHash
+            )
+          )
         )
           .void
       end

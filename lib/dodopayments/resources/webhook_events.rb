@@ -30,7 +30,7 @@ module Dodopayments
       # @param page_size [Integer, nil]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::WebhookEvent>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::WebhookEvent>]
       #
       # @see Dodopayments::Models::WebhookEventListParams
       def list(params = {})
@@ -39,7 +39,7 @@ module Dodopayments
           method: :get,
           path: "webhook_events",
           query: parsed,
-          page: Dodopayments::DefaultPageNumberPagination,
+          page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Models::WebhookEvent,
           options: options
         )

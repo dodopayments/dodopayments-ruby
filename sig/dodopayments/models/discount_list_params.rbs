@@ -2,11 +2,11 @@ module Dodopayments
   module Models
     type discount_list_params =
       { page_number: Integer?, page_size: Integer? }
-      & Dodopayments::request_parameters
+      & Dodopayments::Internal::Type::request_parameters
 
     class DiscountListParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       attr_accessor page_number: Integer?
 

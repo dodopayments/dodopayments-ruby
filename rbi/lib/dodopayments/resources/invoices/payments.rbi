@@ -7,7 +7,12 @@ module Dodopayments
         sig do
           params(
             payment_id: String,
-            request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+            request_options: T.nilable(
+              T.any(
+                Dodopayments::RequestOptions,
+                Dodopayments::Internal::Util::AnyHash
+              )
+            )
           )
             .void
         end

@@ -5,8 +5,8 @@ module Dodopayments
     # @see Dodopayments::Resources::LicenseKeys#update
     class LicenseKeyUpdateParams < Dodopayments::BaseModel
       # @!parse
-      #   extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute activations_limit
       #   The updated activation limit for the license key. Use `null` to remove the

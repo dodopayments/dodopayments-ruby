@@ -3,19 +3,15 @@
 module Dodopayments
   module Models
     class SubscriptionCreateParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       sig { returns(Dodopayments::Models::BillingAddress) }
       def billing
       end
 
-      sig do
-        params(_: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Util::AnyHash))
-          .returns(T.any(Dodopayments::Models::BillingAddress, Dodopayments::Util::AnyHash))
-      end
-      def billing=(_)
-      end
+      sig { params(billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::Util::AnyHash)).void }
+      attr_writer :billing
 
       sig { returns(T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer)) }
       def customer
@@ -97,7 +93,9 @@ module Dodopayments
 
       sig do
         params(
-          _: T.nilable(T.any(Dodopayments::Models::SubscriptionCreateParams::OnDemand, Dodopayments::Util::AnyHash))
+          on_demand: T.nilable(
+            T.any(Dodopayments::Models::SubscriptionCreateParams::OnDemand, Dodopayments::Internal::Util::AnyHash)
+          )
         )
           .returns(
             T.nilable(T.any(Dodopayments::Models::SubscriptionCreateParams::OnDemand, Dodopayments::Util::AnyHash))
@@ -153,21 +151,27 @@ module Dodopayments
 
       sig do
         params(
-          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Util::AnyHash),
-          customer: T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer),
+          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::Util::AnyHash),
+          customer: T.any(
+            Dodopayments::Models::AttachExistingCustomer,
+            Dodopayments::Internal::Util::AnyHash,
+            Dodopayments::Models::CreateNewCustomer
+          ),
           product_id: String,
           quantity: Integer,
           allowed_payment_method_types: T.nilable(T::Array[Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::OrSymbol),
           discount_code: T.nilable(String),
           metadata: T::Hash[Symbol, String],
-          on_demand: T.nilable(T.any(Dodopayments::Models::SubscriptionCreateParams::OnDemand, Dodopayments::Util::AnyHash)),
+          on_demand: T.nilable(
+            T.any(Dodopayments::Models::SubscriptionCreateParams::OnDemand, Dodopayments::Internal::Util::AnyHash)
+          ),
           payment_link: T.nilable(T::Boolean),
           return_url: T.nilable(String),
           show_saved_payment_methods: T::Boolean,
           tax_id: T.nilable(String),
           trial_period_days: T.nilable(Integer),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

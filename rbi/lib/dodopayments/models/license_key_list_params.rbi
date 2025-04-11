@@ -3,8 +3,8 @@
 module Dodopayments
   module Models
     class LicenseKeyListParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       # Filter by customer ID
       sig { returns(T.nilable(String)) }
@@ -61,7 +61,7 @@ module Dodopayments
           page_size: T.nilable(Integer),
           product_id: T.nilable(String),
           status: T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

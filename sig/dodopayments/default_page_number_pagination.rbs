@@ -1,9 +1,0 @@
-module Dodopayments
-  class DefaultPageNumberPagination[Elem]
-    include Dodopayments::Type::BasePage[Elem]
-
-    attr_accessor items: ::Array[Elem]?
-
-    def inspect: -> String
-  end
-end

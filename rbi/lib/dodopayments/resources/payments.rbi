@@ -5,9 +5,13 @@ module Dodopayments
     class Payments
       sig do
         params(
-          billing: Dodopayments::Models::BillingAddress,
-          customer: T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer),
-          product_cart: T::Array[Dodopayments::Models::OneTimeProductCartItem],
+          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::Util::AnyHash),
+          customer: T.any(
+            Dodopayments::Models::AttachExistingCustomer,
+            Dodopayments::Internal::Util::AnyHash,
+            Dodopayments::Models::CreateNewCustomer
+          ),
+          product_cart: T::Array[T.any(Dodopayments::Models::OneTimeProductCartItem, Dodopayments::Internal::Util::AnyHash)],
           allowed_payment_method_types: T.nilable(T::Array[Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Models::PaymentCreateParams::BillingCurrency::OrSymbol),
           discount_code: T.nilable(String),
@@ -16,7 +20,12 @@ module Dodopayments
           return_url: T.nilable(String),
           show_saved_payment_methods: T::Boolean,
           tax_id: T.nilable(String),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+          request_options: T.nilable(
+            T.any(
+              Dodopayments::RequestOptions,
+              Dodopayments::Internal::Util::AnyHash
+            )
+          )
         )
           .returns(Dodopayments::Models::PaymentCreateResponse)
       end
@@ -53,7 +62,12 @@ module Dodopayments
       sig do
         params(
           payment_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+          request_options: T.nilable(
+            T.any(
+              Dodopayments::RequestOptions,
+              Dodopayments::Internal::Util::AnyHash
+            )
+          )
         )
           .returns(Dodopayments::Models::Payment)
       end
@@ -73,9 +87,14 @@ module Dodopayments
           page_size: T.nilable(Integer),
           status: T.nilable(Dodopayments::Models::IntentStatus::OrSymbol),
           subscription_id: T.nilable(String),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+          request_options: T.nilable(
+            T.any(
+              Dodopayments::RequestOptions,
+              Dodopayments::Internal::Util::AnyHash
+            )
+          )
         )
-          .returns(Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::PaymentListResponse])
+          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::PaymentListResponse])
       end
       def list(
         # Get events after this created time

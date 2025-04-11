@@ -3,8 +3,8 @@
 module Dodopayments
   module Models
     class LicenseKeyInstanceUpdateParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       sig { returns(String) }
       def name
@@ -17,10 +17,7 @@ module Dodopayments
       sig do
         params(
           name: String,
-          request_options: T.any(
-            Dodopayments::RequestOptions,
-            Dodopayments::Util::AnyHash
-          )
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

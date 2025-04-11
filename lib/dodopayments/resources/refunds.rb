@@ -51,7 +51,7 @@ module Dodopayments
       # @param status [Symbol, Dodopayments::Models::RefundStatus, nil]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::Refund>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Refund>]
       #
       # @see Dodopayments::Models::RefundListParams
       def list(params = {})
@@ -60,7 +60,7 @@ module Dodopayments
           method: :get,
           path: "refunds",
           query: parsed,
-          page: Dodopayments::DefaultPageNumberPagination,
+          page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Models::Refund,
           options: options
         )

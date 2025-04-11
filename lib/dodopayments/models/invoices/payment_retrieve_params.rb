@@ -6,8 +6,8 @@ module Dodopayments
       # @see Dodopayments::Resources::Invoices::Payments#retrieve
       class PaymentRetrieveParams < Dodopayments::BaseModel
         # @!parse
-        #   extend Dodopayments::Type::RequestParameters::Converter
-        include Dodopayments::RequestParameters
+        #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
 
         # @!parse
         #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]

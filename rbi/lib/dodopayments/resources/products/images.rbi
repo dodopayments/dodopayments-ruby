@@ -8,7 +8,12 @@ module Dodopayments
           params(
             id: String,
             force_update: T.nilable(T::Boolean),
-            request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+            request_options: T.nilable(
+              T.any(
+                Dodopayments::RequestOptions,
+                Dodopayments::Internal::Util::AnyHash
+              )
+            )
           )
             .returns(Dodopayments::Models::Products::ImageUpdateResponse)
         end

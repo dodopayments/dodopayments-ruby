@@ -5,8 +5,8 @@ module Dodopayments
     # @see Dodopayments::Resources::Subscriptions#charge
     class SubscriptionChargeParams < Dodopayments::BaseModel
       # @!parse
-      #   extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute product_price
       #   The product price. Represented in the lowest denomination of the currency (e.g.,

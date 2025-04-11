@@ -39,7 +39,7 @@ module Dodopayments
         ?page_size: Integer?,
         ?status: Dodopayments::Models::subscription_status?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Subscription]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Subscription]
 
       def charge: (
         String subscription_id,

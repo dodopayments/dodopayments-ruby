@@ -5,8 +5,8 @@ module Dodopayments
     # @see Dodopayments::Resources::Refunds#list
     class RefundListParams < Dodopayments::BaseModel
       # @!parse
-      #   extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute created_at_gte
       #   Get events after this created time

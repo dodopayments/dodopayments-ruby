@@ -5,8 +5,8 @@ module Dodopayments
     # @see Dodopayments::Resources::Payments#create
     class PaymentCreateParams < Dodopayments::BaseModel
       # @!parse
-      #   extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute billing
       #

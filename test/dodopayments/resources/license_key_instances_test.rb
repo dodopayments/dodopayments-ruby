@@ -43,7 +43,7 @@ class Dodopayments::Test::Resources::LicenseKeyInstancesTest < Dodopayments::Tes
     response = @dodo_payments.license_key_instances.list
 
     assert_pattern do
-      response => Dodopayments::DefaultPageNumberPagination
+      response => Dodopayments::Internal::DefaultPageNumberPagination
     end
 
     row = response.to_enum.first

@@ -158,7 +158,13 @@ module Dodopayments
           image: T.nilable(String),
           name: T.nilable(String),
           price: T.nilable(Integer),
-          price_detail: T.nilable(T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice)),
+          price_detail: T.nilable(
+            T.any(
+              Dodopayments::Models::Price::OneTimePrice,
+              Dodopayments::Internal::Util::AnyHash,
+              Dodopayments::Models::Price::RecurringPrice
+            )
+          ),
           tax_inclusive: T.nilable(T::Boolean)
         )
           .returns(T.attached_class)

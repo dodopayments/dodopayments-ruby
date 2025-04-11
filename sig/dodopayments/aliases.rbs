@@ -1,0 +1,19 @@
+module Dodopayments
+  class Unknown = Dodopayments::Internal::Type::Unknown
+
+  class BooleanModel = Dodopayments::Internal::Type::BooleanModel
+
+  module Enum = Dodopayments::Internal::Type::Enum
+
+  module Union = Dodopayments::Internal::Type::Union
+
+  class ArrayOf = Dodopayments::Internal::Type::ArrayOf
+
+  class HashOf = Dodopayments::Internal::Type::HashOf
+
+  class BaseModel = Dodopayments::Internal::Type::BaseModel
+
+  type request_parameters = Dodopayments::Internal::Type::request_parameters
+
+  module RequestParameters = Dodopayments::Internal::Type::RequestParameters
+end

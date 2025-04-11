@@ -79,7 +79,7 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
     response = @dodo_payments.discounts.list
 
     assert_pattern do
-      response => Dodopayments::DefaultPageNumberPagination
+      response => Dodopayments::Internal::DefaultPageNumberPagination
     end
 
     row = response.to_enum.first

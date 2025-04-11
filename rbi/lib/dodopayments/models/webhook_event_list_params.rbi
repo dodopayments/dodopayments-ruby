@@ -3,8 +3,8 @@
 module Dodopayments
   module Models
     class WebhookEventListParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       # Get events after this created time
       sig { returns(T.nilable(Time)) }
@@ -68,7 +68,7 @@ module Dodopayments
           object_id_: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

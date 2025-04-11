@@ -6,8 +6,8 @@ module Dodopayments
       # @see Dodopayments::Resources::Customers::CustomerPortal#create
       class CustomerPortalCreateParams < Dodopayments::BaseModel
         # @!parse
-        #   extend Dodopayments::Type::RequestParameters::Converter
-        include Dodopayments::RequestParameters
+        #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
 
         # @!attribute send_email
         #   If true, will send link to user.

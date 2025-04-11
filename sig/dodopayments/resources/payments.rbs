@@ -30,7 +30,7 @@ module Dodopayments
         ?status: Dodopayments::Models::intent_status?,
         ?subscription_id: String?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::PaymentListResponse]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::PaymentListResponse]
 
       def initialize: (client: Dodopayments::Client) -> void
     end

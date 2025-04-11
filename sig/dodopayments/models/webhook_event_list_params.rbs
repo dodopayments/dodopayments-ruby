@@ -9,11 +9,11 @@ module Dodopayments
         page_number: Integer?,
         page_size: Integer?
       }
-      & Dodopayments::request_parameters
+      & Dodopayments::Internal::Type::request_parameters
 
     class WebhookEventListParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       attr_accessor created_at_gte: Time?
 

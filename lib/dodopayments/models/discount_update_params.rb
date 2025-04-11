@@ -5,8 +5,8 @@ module Dodopayments
     # @see Dodopayments::Resources::Discounts#update
     class DiscountUpdateParams < Dodopayments::BaseModel
       # @!parse
-      #   extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute amount
       #   If present, update the discount amount:

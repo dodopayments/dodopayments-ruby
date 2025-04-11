@@ -131,10 +131,10 @@ module Dodopayments
       end
 
       sig do
-        params(_: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Util::AnyHash)))
-          .returns(T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Util::AnyHash)))
-      end
-      def license_key_duration=(_)
+        params(
+          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::Util::AnyHash))
+        )
+          .void
       end
 
       # Name of the product, optional.
@@ -152,7 +152,11 @@ module Dodopayments
           created_at: Time,
           is_recurring: T::Boolean,
           license_key_enabled: T::Boolean,
-          price: T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice),
+          price: T.any(
+            Dodopayments::Models::Price::OneTimePrice,
+            Dodopayments::Internal::Util::AnyHash,
+            Dodopayments::Models::Price::RecurringPrice
+          ),
           product_id: String,
           tax_category: Dodopayments::Models::Product::TaxCategory::TaggedSymbol,
           updated_at: Time,
@@ -161,7 +165,7 @@ module Dodopayments
           image: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
-          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Util::AnyHash)),
+          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::Util::AnyHash)),
           name: T.nilable(String)
         )
           .returns(T.attached_class)

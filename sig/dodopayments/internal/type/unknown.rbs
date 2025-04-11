@@ -1,0 +1,20 @@
+module Dodopayments
+  module Internal
+    module Type
+      class Unknown
+        extend Dodopayments::Internal::Type::Converter
+
+        def self.===: (top other) -> bool
+
+        def self.==: (top other) -> bool
+
+        def self.coerce: (
+          top value,
+          state: Dodopayments::Internal::Type::Converter::state
+        ) -> top
+
+        def self.dump: (top value) -> top
+      end
+    end
+  end
+end

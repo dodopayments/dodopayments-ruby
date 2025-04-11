@@ -4,8 +4,8 @@ module Dodopayments
   module Models
     module Products
       class ImageUpdateParams < Dodopayments::BaseModel
-        extend Dodopayments::Type::RequestParameters::Converter
-        include Dodopayments::RequestParameters
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
 
         sig { returns(T.nilable(T::Boolean)) }
         def force_update
@@ -18,7 +18,7 @@ module Dodopayments
         sig do
           params(
             force_update: T.nilable(T::Boolean),
-            request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
+            request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
           )
             .returns(T.attached_class)
         end

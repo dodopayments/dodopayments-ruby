@@ -49,7 +49,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
     response = @dodo_payments.refunds.list
 
     assert_pattern do
-      response => Dodopayments::DefaultPageNumberPagination
+      response => Dodopayments::Internal::DefaultPageNumberPagination
     end
 
     row = response.to_enum.first

@@ -28,11 +28,12 @@ module Dodopayments
       end
 
       sig do
-        params(_: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Util::AnyHash))
-          .returns(T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Util::AnyHash))
+        params(
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::Util::AnyHash)
+        )
+          .void
       end
-      def customer=(_)
-      end
+      attr_writer :customer
 
       sig { returns(T::Hash[Symbol, String]) }
       def metadata
@@ -179,8 +180,8 @@ module Dodopayments
       sig do
         params(
           created_at: Time,
-          currency: Dodopayments::Models::Subscription::Currency::TaggedSymbol,
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Util::AnyHash),
+          currency: Dodopayments::Models::Subscription::Currency::OrSymbol,
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::Util::AnyHash),
           metadata: T::Hash[Symbol, String],
           next_billing_date: Time,
           payment_frequency_count: Integer,

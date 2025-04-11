@@ -18,11 +18,12 @@ module Dodopayments
       end
 
       sig do
-        params(_: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Util::AnyHash))
-          .returns(T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Util::AnyHash))
+        params(
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::Util::AnyHash)
+        )
+          .void
       end
-      def customer=(_)
-      end
+      attr_writer :customer
 
       sig { returns(T::Hash[Symbol, String]) }
       def metadata
@@ -83,13 +84,15 @@ module Dodopayments
       sig do
         params(
           client_secret: String,
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Util::AnyHash),
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::Util::AnyHash),
           metadata: T::Hash[Symbol, String],
           payment_id: String,
           total_amount: Integer,
           discount_id: T.nilable(String),
           payment_link: T.nilable(String),
-          product_cart: T.nilable(T::Array[Dodopayments::Models::OneTimeProductCartItem])
+          product_cart: T.nilable(
+            T::Array[T.any(Dodopayments::Models::OneTimeProductCartItem, Dodopayments::Internal::Util::AnyHash)]
+          )
         )
           .returns(T.attached_class)
       end

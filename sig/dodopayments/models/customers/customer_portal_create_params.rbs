@@ -2,11 +2,11 @@ module Dodopayments
   module Models
     module Customers
       type customer_portal_create_params =
-        { send_email: bool? } & Dodopayments::request_parameters
+        { send_email: bool? } & Dodopayments::Internal::Type::request_parameters
 
       class CustomerPortalCreateParams < Dodopayments::BaseModel
-        extend Dodopayments::Type::RequestParameters::Converter
-        include Dodopayments::RequestParameters
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
 
         attr_accessor send_email: bool?
 

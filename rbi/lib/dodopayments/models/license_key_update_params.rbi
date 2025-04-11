@@ -3,8 +3,8 @@
 module Dodopayments
   module Models
     class LicenseKeyUpdateParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       # The updated activation limit for the license key. Use `null` to remove the
       #   limit, or omit this field to leave it unchanged.
@@ -41,7 +41,7 @@ module Dodopayments
           activations_limit: T.nilable(Integer),
           disabled: T.nilable(T::Boolean),
           expires_at: T.nilable(Time),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

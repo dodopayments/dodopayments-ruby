@@ -83,7 +83,7 @@ module Dodopayments
       # @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::Subscription>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Subscription>]
       #
       # @see Dodopayments::Models::SubscriptionListParams
       def list(params = {})
@@ -92,7 +92,7 @@ module Dodopayments
           method: :get,
           path: "subscriptions",
           query: parsed,
-          page: Dodopayments::DefaultPageNumberPagination,
+          page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Models::Subscription,
           options: options
         )

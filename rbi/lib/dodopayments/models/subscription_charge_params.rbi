@@ -3,8 +3,8 @@
 module Dodopayments
   module Models
     class SubscriptionChargeParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       # The product price. Represented in the lowest denomination of the currency (e.g.,
       #   cents for USD). For example, to charge $1.00, pass `100`.
@@ -19,7 +19,7 @@ module Dodopayments
       sig do
         params(
           product_price: Integer,
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

@@ -1,10 +1,11 @@
 module Dodopayments
   module Models
-    type payment_retrieve_params = {  } & Dodopayments::request_parameters
+    type payment_retrieve_params =
+      {  } & Dodopayments::Internal::Type::request_parameters
 
     class PaymentRetrieveParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       def initialize: (?request_options: Dodopayments::request_opts) -> void
 

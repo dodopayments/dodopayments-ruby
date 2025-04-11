@@ -2,11 +2,11 @@ module Dodopayments
   module Models
     type license_key_instance_list_params =
       { license_key_id: String?, page_number: Integer?, page_size: Integer? }
-      & Dodopayments::request_parameters
+      & Dodopayments::Internal::Type::request_parameters
 
     class LicenseKeyInstanceListParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       attr_accessor license_key_id: String?
 

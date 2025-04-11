@@ -6,7 +6,12 @@ module Dodopayments
       sig do
         params(
           webhook_event_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+          request_options: T.nilable(
+            T.any(
+              Dodopayments::RequestOptions,
+              Dodopayments::Internal::Util::AnyHash
+            )
+          )
         )
           .returns(Dodopayments::Models::WebhookEvent)
       end
@@ -21,9 +26,14 @@ module Dodopayments
           object_id_: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash))
+          request_options: T.nilable(
+            T.any(
+              Dodopayments::RequestOptions,
+              Dodopayments::Internal::Util::AnyHash
+            )
+          )
         )
-          .returns(Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::WebhookEvent])
+          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::WebhookEvent])
       end
       def list(
         # Get events after this created time

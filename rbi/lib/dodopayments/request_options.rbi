@@ -77,7 +77,7 @@ module Dodopayments
     end
 
     # Returns a new instance of RequestOptions.
-    sig { params(values: Dodopayments::Util::AnyHash).returns(T.attached_class) }
+    sig { params(values: Dodopayments::Internal::Util::AnyHash).returns(T.attached_class) }
     def self.new(values = {})
     end
   end

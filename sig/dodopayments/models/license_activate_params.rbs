@@ -1,11 +1,12 @@
 module Dodopayments
   module Models
     type license_activate_params =
-      { license_key: String, name: String } & Dodopayments::request_parameters
+      { license_key: String, name: String }
+      & Dodopayments::Internal::Type::request_parameters
 
     class LicenseActivateParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       attr_accessor license_key: String
 

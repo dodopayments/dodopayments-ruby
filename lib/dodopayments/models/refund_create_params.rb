@@ -5,8 +5,8 @@ module Dodopayments
     # @see Dodopayments::Resources::Refunds#create
     class RefundCreateParams < Dodopayments::BaseModel
       # @!parse
-      #   extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute payment_id
       #   The unique identifier of the payment to be refunded.

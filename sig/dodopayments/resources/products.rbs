@@ -42,7 +42,7 @@ module Dodopayments
         ?page_size: Integer?,
         ?recurring: bool?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::ProductListResponse]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::ProductListResponse]
 
       def delete: (
         String id,

@@ -3,8 +3,8 @@
 module Dodopayments
   module Models
     class DiscountUpdateParams < Dodopayments::BaseModel
-      extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       # If present, update the discount amount:
       #
@@ -84,7 +84,7 @@ module Dodopayments
           restricted_to: T.nilable(T::Array[String]),
           type: T.nilable(Dodopayments::Models::DiscountType::OrSymbol),
           usage_limit: T.nilable(Integer),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

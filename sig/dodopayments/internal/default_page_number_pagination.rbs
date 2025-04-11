@@ -1,0 +1,11 @@
+module Dodopayments
+  module Internal
+    class DefaultPageNumberPagination[Elem]
+      include Dodopayments::Internal::Type::BasePage[Elem]
+
+      attr_accessor items: ::Array[Elem]?
+
+      def inspect: -> String
+    end
+  end
+end

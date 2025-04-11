@@ -51,7 +51,7 @@ module Dodopayments
       # @param status [Symbol, Dodopayments::Models::LicenseKeyStatus, nil]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::LicenseKey>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::LicenseKey>]
       #
       # @see Dodopayments::Models::LicenseKeyListParams
       def list(params = {})
@@ -60,7 +60,7 @@ module Dodopayments
           method: :get,
           path: "license_keys",
           query: parsed,
-          page: Dodopayments::DefaultPageNumberPagination,
+          page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Models::LicenseKey,
           options: options
         )

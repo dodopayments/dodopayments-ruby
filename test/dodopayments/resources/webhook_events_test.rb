@@ -28,7 +28,7 @@ class Dodopayments::Test::Resources::WebhookEventsTest < Dodopayments::Test::Res
     response = @dodo_payments.webhook_events.list
 
     assert_pattern do
-      response => Dodopayments::DefaultPageNumberPagination
+      response => Dodopayments::Internal::DefaultPageNumberPagination
     end
 
     row = response.to_enum.first

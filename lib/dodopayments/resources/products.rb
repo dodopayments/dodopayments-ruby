@@ -87,7 +87,7 @@ module Dodopayments
       # @param recurring [Boolean, nil]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::DefaultPageNumberPagination<Dodopayments::Models::ProductListResponse>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::ProductListResponse>]
       #
       # @see Dodopayments::Models::ProductListParams
       def list(params = {})
@@ -96,7 +96,7 @@ module Dodopayments
           method: :get,
           path: "products",
           query: parsed,
-          page: Dodopayments::DefaultPageNumberPagination,
+          page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Models::ProductListResponse,
           options: options
         )

@@ -28,7 +28,7 @@ class Dodopayments::Test::Resources::DisputesTest < Dodopayments::Test::Resource
     response = @dodo_payments.disputes.list
 
     assert_pattern do
-      response => Dodopayments::DefaultPageNumberPagination
+      response => Dodopayments::Internal::DefaultPageNumberPagination
     end
 
     row = response.to_enum.first

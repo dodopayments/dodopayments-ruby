@@ -33,7 +33,7 @@ module Dodopayments
         ?page_number: Integer?,
         ?page_size: Integer?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Discount]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Discount]
 
       def delete: (
         String discount_id,

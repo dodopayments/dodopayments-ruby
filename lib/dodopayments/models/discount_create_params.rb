@@ -5,8 +5,8 @@ module Dodopayments
     # @see Dodopayments::Resources::Discounts#create
     class DiscountCreateParams < Dodopayments::BaseModel
       # @!parse
-      #   extend Dodopayments::Type::RequestParameters::Converter
-      include Dodopayments::RequestParameters
+      #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute amount
       #   The discount amount.

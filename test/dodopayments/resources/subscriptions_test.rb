@@ -95,7 +95,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
     response = @dodo_payments.subscriptions.list
 
     assert_pattern do
-      response => Dodopayments::DefaultPageNumberPagination
+      response => Dodopayments::Internal::DefaultPageNumberPagination
     end
 
     row = response.to_enum.first

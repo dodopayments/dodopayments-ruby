@@ -15,7 +15,7 @@ module Dodopayments
         ?page_number: Integer?,
         ?page_size: Integer?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::DefaultPageNumberPagination[Dodopayments::Models::Dispute]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Dispute]
 
       def initialize: (client: Dodopayments::Client) -> void
     end
