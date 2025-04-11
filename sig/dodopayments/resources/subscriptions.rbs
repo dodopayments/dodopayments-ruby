@@ -26,8 +26,10 @@ module Dodopayments
 
       def update: (
         String subscription_id,
+        ?billing: Dodopayments::Models::BillingAddress?,
         ?metadata: ::Hash[Symbol, String]?,
         ?status: Dodopayments::Models::subscription_status?,
+        ?tax_id: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::Subscription
 

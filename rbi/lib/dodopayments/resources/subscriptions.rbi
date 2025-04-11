@@ -77,8 +77,10 @@ module Dodopayments
       sig do
         params(
           subscription_id: String,
+          billing: T.nilable(T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash)),
           metadata: T.nilable(T::Hash[Symbol, String]),
           status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
+          tax_id: T.nilable(String),
           request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
           .returns(Dodopayments::Models::Subscription)
@@ -86,8 +88,10 @@ module Dodopayments
       def update(
         # Subscription Id
         subscription_id,
+        billing: nil,
         metadata: nil,
         status: nil,
+        tax_id: nil,
         request_options: {}
       ); end
       sig do

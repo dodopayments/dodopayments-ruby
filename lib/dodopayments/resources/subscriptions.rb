@@ -52,11 +52,13 @@ module Dodopayments
         )
       end
 
-      # @overload update(subscription_id, metadata: nil, status: nil, request_options: {})
+      # @overload update(subscription_id, billing: nil, metadata: nil, status: nil, tax_id: nil, request_options: {})
       #
       # @param subscription_id [String]
+      # @param billing [Dodopayments::Models::BillingAddress, nil]
       # @param metadata [Hash{Symbol=>String}, nil]
       # @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
+      # @param tax_id [String, nil]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Subscription]

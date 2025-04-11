@@ -2,6 +2,7 @@ module Dodopayments
   module Models
     type subscription =
       {
+        billing: Dodopayments::Models::BillingAddress,
         created_at: Time,
         currency: Dodopayments::Models::Subscription::currency,
         customer: Dodopayments::Models::CustomerLimitedDetails,
@@ -23,6 +24,8 @@ module Dodopayments
       }
 
     class Subscription < Dodopayments::Internal::Type::BaseModel
+      attr_accessor billing: Dodopayments::Models::BillingAddress
+
       attr_accessor created_at: Time
 
       attr_accessor currency: Dodopayments::Models::Subscription::currency
@@ -60,6 +63,7 @@ module Dodopayments
       attr_accessor discount_id: String?
 
       def initialize: (
+        billing: Dodopayments::Models::BillingAddress,
         created_at: Time,
         currency: Dodopayments::Models::Subscription::currency,
         customer: Dodopayments::Models::CustomerLimitedDetails,

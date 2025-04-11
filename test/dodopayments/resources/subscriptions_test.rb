@@ -38,6 +38,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
 
     assert_pattern do
       response => {
+        billing: Dodopayments::Models::BillingAddress,
         created_at: Time,
         currency: Dodopayments::Models::Subscription::Currency,
         customer: Dodopayments::Models::CustomerLimitedDetails,
@@ -69,6 +70,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
 
     assert_pattern do
       response => {
+        billing: Dodopayments::Models::BillingAddress,
         created_at: Time,
         currency: Dodopayments::Models::Subscription::Currency,
         customer: Dodopayments::Models::CustomerLimitedDetails,
@@ -105,6 +107,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
 
     assert_pattern do
       row => {
+        billing: Dodopayments::Models::BillingAddress,
         created_at: Time,
         currency: Dodopayments::Models::Subscription::Currency,
         customer: Dodopayments::Models::CustomerLimitedDetails,

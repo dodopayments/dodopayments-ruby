@@ -2,8 +2,10 @@ module Dodopayments
   module Models
     type subscription_update_params =
       {
+        billing: Dodopayments::Models::BillingAddress?,
         metadata: ::Hash[Symbol, String]?,
-        status: Dodopayments::Models::subscription_status?
+        status: Dodopayments::Models::subscription_status?,
+        tax_id: String?
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -11,13 +13,19 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      attr_accessor billing: Dodopayments::Models::BillingAddress?
+
       attr_accessor metadata: ::Hash[Symbol, String]?
 
       attr_accessor status: Dodopayments::Models::subscription_status?
 
+      attr_accessor tax_id: String?
+
       def initialize: (
+        ?billing: Dodopayments::Models::BillingAddress?,
         ?metadata: ::Hash[Symbol, String]?,
         ?status: Dodopayments::Models::subscription_status?,
+        ?tax_id: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
 

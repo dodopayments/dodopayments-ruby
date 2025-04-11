@@ -4,6 +4,11 @@ module Dodopayments
   module Models
     # @see Dodopayments::Resources::Subscriptions#retrieve
     class Subscription < Dodopayments::Internal::Type::BaseModel
+      # @!attribute billing
+      #
+      #   @return [Dodopayments::Models::BillingAddress]
+      required :billing, -> { Dodopayments::Models::BillingAddress }
+
       # @!attribute created_at
       #   Timestamp when the subscription was created
       #
@@ -110,6 +115,7 @@ module Dodopayments
       # @!parse
       #   # Response struct representing subscription details
       #   #
+      #   # @param billing [Dodopayments::Models::BillingAddress]
       #   # @param created_at [Time]
       #   # @param currency [Symbol, Dodopayments::Models::Subscription::Currency]
       #   # @param customer [Dodopayments::Models::CustomerLimitedDetails]
@@ -130,6 +136,7 @@ module Dodopayments
       #   # @param discount_id [String, nil]
       #   #
       #   def initialize(
+      #     billing:,
       #     created_at:,
       #     currency:,
       #     customer:,

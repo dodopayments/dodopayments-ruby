@@ -3,6 +3,12 @@
 module Dodopayments
   module Models
     class Subscription < Dodopayments::Internal::Type::BaseModel
+      sig { returns(Dodopayments::Models::BillingAddress) }
+      attr_reader :billing
+
+      sig { params(billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash)).void }
+      attr_writer :billing
+
       # Timestamp when the subscription was created
       sig { returns(Time) }
       attr_accessor :created_at
@@ -78,6 +84,7 @@ module Dodopayments
       # Response struct representing subscription details
       sig do
         params(
+          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash),
           created_at: Time,
           currency: Dodopayments::Models::Subscription::Currency::OrSymbol,
           customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash),
@@ -100,6 +107,7 @@ module Dodopayments
           .returns(T.attached_class)
       end
       def self.new(
+        billing:,
         created_at:,
         currency:,
         customer:,
@@ -123,6 +131,7 @@ module Dodopayments
         override
           .returns(
             {
+              billing: Dodopayments::Models::BillingAddress,
               created_at: Time,
               currency: Dodopayments::Models::Subscription::Currency::TaggedSymbol,
               customer: Dodopayments::Models::CustomerLimitedDetails,
