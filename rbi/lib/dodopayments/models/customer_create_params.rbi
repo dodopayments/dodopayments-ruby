@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class CustomerCreateParams < Dodopayments::BaseModel
+    class CustomerCreateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
@@ -35,7 +35,7 @@ module Dodopayments
           email: String,
           name: String,
           phone_number: T.nilable(String),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
         )
           .returns(T.attached_class)
       end

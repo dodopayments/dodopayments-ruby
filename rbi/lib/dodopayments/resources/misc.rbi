@@ -8,7 +8,7 @@ module Dodopayments
           request_options: T.nilable(
             T.any(
               Dodopayments::RequestOptions,
-              Dodopayments::Internal::Util::AnyHash
+              Dodopayments::Internal::AnyHash
             )
           )
         )

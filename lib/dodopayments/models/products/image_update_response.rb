@@ -4,7 +4,7 @@ module Dodopayments
   module Models
     module Products
       # @see Dodopayments::Resources::Products::Images#update
-      class ImageUpdateResponse < Dodopayments::BaseModel
+      class ImageUpdateResponse < Dodopayments::Internal::Type::BaseModel
         # @!attribute url
         #
         #   @return [String]
@@ -21,7 +21,7 @@ module Dodopayments
         #   #
         #   def initialize(url:, image_id: nil, **) = super
 
-        # def initialize: (Hash | Dodopayments::BaseModel) -> void
+        # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
       end
     end
   end

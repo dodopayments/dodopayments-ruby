@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class CustomerPortalSession < Dodopayments::BaseModel
+    class CustomerPortalSession < Dodopayments::Internal::Type::BaseModel
       # @!attribute link
       #
       #   @return [String]
@@ -13,7 +13,7 @@ module Dodopayments
       #   #
       #   def initialize(link:, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

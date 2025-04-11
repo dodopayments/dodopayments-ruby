@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Payments#retrieve
-    class Payment < Dodopayments::BaseModel
+    class Payment < Dodopayments::Internal::Type::BaseModel
       # @!attribute business_id
       #   Identifier of the business associated with the payment
       #
@@ -30,12 +30,12 @@ module Dodopayments
       #   List of disputes associated with this payment
       #
       #   @return [Array<Dodopayments::Models::Dispute>]
-      required :disputes, -> { Dodopayments::ArrayOf[Dodopayments::Models::Dispute] }
+      required :disputes, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::Dispute] }
 
       # @!attribute metadata
       #
       #   @return [Hash{Symbol=>String}]
-      required :metadata, Dodopayments::HashOf[String]
+      required :metadata, Dodopayments::Internal::Type::HashOf[String]
 
       # @!attribute payment_id
       #   Unique identifier for the payment
@@ -47,7 +47,7 @@ module Dodopayments
       #   List of refunds issued for this payment
       #
       #   @return [Array<Dodopayments::Models::Refund>]
-      required :refunds, -> { Dodopayments::ArrayOf[Dodopayments::Models::Refund] }
+      required :refunds, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::Refund] }
 
       # @!attribute total_amount
       #   Total amount charged to the customer including tax, in smallest currency unit
@@ -91,7 +91,7 @@ module Dodopayments
       #
       #   @return [Array<Dodopayments::Models::Payment::ProductCart>, nil]
       optional :product_cart,
-               -> { Dodopayments::ArrayOf[Dodopayments::Models::Payment::ProductCart] },
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::Payment::ProductCart] },
                nil?: true
 
       # @!attribute status
@@ -163,11 +163,11 @@ module Dodopayments
       #     super
       #   end
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
 
       # @see Dodopayments::Models::Payment#currency
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         AED = :AED
         ALL = :ALL
@@ -324,7 +324,7 @@ module Dodopayments
         end
       end
 
-      class ProductCart < Dodopayments::BaseModel
+      class ProductCart < Dodopayments::Internal::Type::BaseModel
         # @!attribute product_id
         #
         #   @return [String]
@@ -341,7 +341,7 @@ module Dodopayments
         #   #
         #   def initialize(product_id:, quantity:, **) = super
 
-        # def initialize: (Hash | Dodopayments::BaseModel) -> void
+        # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
       end
     end
   end

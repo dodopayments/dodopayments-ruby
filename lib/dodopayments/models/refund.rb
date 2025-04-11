@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Refunds#create
-    class Refund < Dodopayments::BaseModel
+    class Refund < Dodopayments::Internal::Type::BaseModel
       # @!attribute business_id
       #   The unique identifier of the business issuing the refund.
       #
@@ -62,11 +62,11 @@ module Dodopayments
       #   #
       #   def initialize(business_id:, created_at:, payment_id:, refund_id:, status:, amount: nil, currency: nil, reason: nil, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
 
       # @see Dodopayments::Models::Refund#currency
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         AED = :AED
         ALL = :ALL

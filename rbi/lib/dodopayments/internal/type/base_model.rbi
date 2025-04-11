@@ -22,7 +22,7 @@ module Dodopayments
               T::Hash[
               Symbol,
               T.all(
-                Dodopayments::BaseModel::KnownFieldShape,
+                Dodopayments::Internal::Type::BaseModel::KnownFieldShape,
                 {type_fn: T.proc.returns(Dodopayments::Internal::Type::Converter::Input)}
               )
               ]
@@ -37,7 +37,7 @@ module Dodopayments
               T::Hash[
               Symbol,
               T.all(
-                Dodopayments::BaseModel::KnownFieldShape,
+                Dodopayments::Internal::Type::BaseModel::KnownFieldShape,
                 {type: Dodopayments::Internal::Type::Converter::Input}
               )
               ]
@@ -62,7 +62,7 @@ module Dodopayments
                 T.proc.returns(Dodopayments::Internal::Type::Converter::Input),
                 Dodopayments::Internal::Type::Converter::Input
               ),
-              spec: Dodopayments::Internal::Util::AnyHash
+              spec: Dodopayments::Internal::AnyHash
             )
               .void
           end
@@ -74,11 +74,11 @@ module Dodopayments
             params(
               name_sym: Symbol,
               type_info: T.any(
-                Dodopayments::Internal::Util::AnyHash,
+                Dodopayments::Internal::AnyHash,
                 T.proc.returns(Dodopayments::Internal::Type::Converter::Input),
                 Dodopayments::Internal::Type::Converter::Input
               ),
-              spec: Dodopayments::Internal::Util::AnyHash
+              spec: Dodopayments::Internal::AnyHash
             )
               .void
           end
@@ -90,11 +90,11 @@ module Dodopayments
             params(
               name_sym: Symbol,
               type_info: T.any(
-                Dodopayments::Internal::Util::AnyHash,
+                Dodopayments::Internal::AnyHash,
                 T.proc.returns(Dodopayments::Internal::Type::Converter::Input),
                 Dodopayments::Internal::Type::Converter::Input
               ),
-              spec: Dodopayments::Internal::Util::AnyHash
+              spec: Dodopayments::Internal::AnyHash
             )
               .void
           end
@@ -130,7 +130,11 @@ module Dodopayments
           sig do
             override
               .params(
-                value: T.any(Dodopayments::BaseModel, T::Hash[T.anything, T.anything], T.anything),
+                value: T.any(
+                  Dodopayments::Internal::Type::BaseModel,
+                  T::Hash[T.anything, T.anything],
+                  T.anything
+                ),
                 state: Dodopayments::Internal::Type::Converter::State
               )
               .returns(T.any(T.attached_class, T.anything))
@@ -166,7 +170,7 @@ module Dodopayments
         #
         #   This method is not recursive. The returned value is shared by the object, so it
         #   should not be mutated.
-        sig { overridable.returns(Dodopayments::Internal::Util::AnyHash) }
+        sig { overridable.returns(Dodopayments::Internal::AnyHash) }
         def to_h
         end
 
@@ -178,11 +182,11 @@ module Dodopayments
         #
         #   This method is not recursive. The returned value is shared by the object, so it
         #   should not be mutated.
-        sig { overridable.returns(Dodopayments::Internal::Util::AnyHash) }
+        sig { overridable.returns(Dodopayments::Internal::AnyHash) }
         def to_hash
         end
 
-        sig { params(keys: T.nilable(T::Array[Symbol])).returns(Dodopayments::Internal::Util::AnyHash) }
+        sig { params(keys: T.nilable(T::Array[Symbol])).returns(Dodopayments::Internal::AnyHash) }
         def deconstruct_keys(keys)
         end
 

@@ -144,28 +144,9 @@ module Dodopayments
     end
   end
 
-<<<<<<< HEAD
-  class APIConnectionError < Dodopayments::APIError
-    sig { void }
-    def status
-    end
-
-    sig { params(_: NilClass).void }
-    def status=(_)
-    end
-
-    sig { void }
-    def body
-    end
-
-    sig { params(_: NilClass).void }
-    def body=(_)
-    end
-=======
   Error = Dodopayments::Errors::Error
 
   ConversionError = Dodopayments::Errors::ConversionError
->>>>>>> origin/generated--merge-conflict
 
   APIError = Dodopayments::Errors::APIError
 
@@ -173,17 +154,7 @@ module Dodopayments
 
   APIConnectionError = Dodopayments::Errors::APIConnectionError
 
-<<<<<<< HEAD
-    sig { returns(Integer) }
-    def status
-    end
-
-    sig { params(_: Integer).returns(Integer) }
-    def status=(_)
-    end
-=======
   APITimeoutError = Dodopayments::Errors::APITimeoutError
->>>>>>> origin/generated--merge-conflict
 
   BadRequestError = Dodopayments::Errors::BadRequestError
 

@@ -3,7 +3,7 @@ module Dodopayments
     type discount_delete_params =
       {  } & Dodopayments::Internal::Type::request_parameters
 
-    class DiscountDeleteParams < Dodopayments::BaseModel
+    class DiscountDeleteParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class OneTimeProductCartItem < Dodopayments::BaseModel
+    class OneTimeProductCartItem < Dodopayments::Internal::Type::BaseModel
       sig { returns(String) }
       def product_id
       end

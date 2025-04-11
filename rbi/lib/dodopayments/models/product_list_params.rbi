@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class ProductListParams < Dodopayments::BaseModel
+    class ProductListParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
@@ -52,7 +52,7 @@ module Dodopayments
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           recurring: T.nilable(T::Boolean),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
         )
           .returns(T.attached_class)
       end

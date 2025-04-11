@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::LicenseKeyInstances#retrieve
-    class LicenseKeyInstance < Dodopayments::BaseModel
+    class LicenseKeyInstance < Dodopayments::Internal::Type::BaseModel
       # @!attribute id
       #
       #   @return [String]
@@ -38,7 +38,7 @@ module Dodopayments
       #   #
       #   def initialize(id:, business_id:, created_at:, license_key_id:, name:, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     module SubscriptionStatus
-      extend Dodopayments::Enum
+      extend Dodopayments::Internal::Type::Enum
 
       PENDING = :pending
       ACTIVE = :active

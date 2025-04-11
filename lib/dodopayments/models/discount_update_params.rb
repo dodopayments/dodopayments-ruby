@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Discounts#update
-    class DiscountUpdateParams < Dodopayments::BaseModel
+    class DiscountUpdateParams < Dodopayments::Internal::Type::BaseModel
       # @!parse
       #   extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
@@ -41,7 +41,7 @@ module Dodopayments
       #     restrictions, send empty array
       #
       #   @return [Array<String>, nil]
-      optional :restricted_to, Dodopayments::ArrayOf[String], nil?: true
+      optional :restricted_to, Dodopayments::Internal::Type::ArrayOf[String], nil?: true
 
       # @!attribute type
       #
@@ -77,7 +77,7 @@ module Dodopayments
       #     super
       #   end
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

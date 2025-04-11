@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class LicenseValidateResponse < Dodopayments::BaseModel
+    class LicenseValidateResponse < Dodopayments::Internal::Type::BaseModel
       sig { returns(T::Boolean) }
       def valid
       end

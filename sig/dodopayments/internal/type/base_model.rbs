@@ -7,10 +7,10 @@ module Dodopayments
         type known_field =
           { mode: (:coerce | :dump)?, required: bool, nilable: bool }
 
-        def self.known_fields: -> ::Hash[Symbol, (Dodopayments::BaseModel::known_field
+        def self.known_fields: -> ::Hash[Symbol, (Dodopayments::Internal::Type::BaseModel::known_field
         & { type_fn: (^-> Dodopayments::Internal::Type::Converter::input) })]
 
-        def self.fields: -> ::Hash[Symbol, (Dodopayments::BaseModel::known_field
+        def self.fields: -> ::Hash[Symbol, (Dodopayments::Internal::Type::BaseModel::known_field
         & { type: Dodopayments::Internal::Type::Converter::input })]
 
         private def self.add_field: (
@@ -52,7 +52,9 @@ module Dodopayments
         def ==: (top other) -> bool
 
         def self.coerce: (
-          Dodopayments::BaseModel | ::Hash[top, top] | top value,
+          Dodopayments::Internal::Type::BaseModel
+          | ::Hash[top, top]
+          | top value,
           state: Dodopayments::Internal::Type::Converter::state
         ) -> (instance | top)
 

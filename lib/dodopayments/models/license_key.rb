@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::LicenseKeys#retrieve
-    class LicenseKey < Dodopayments::BaseModel
+    class LicenseKey < Dodopayments::Internal::Type::BaseModel
       # @!attribute id
       #   The unique identifier of the license key.
       #
@@ -108,7 +108,7 @@ module Dodopayments
       #     super
       #   end
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

@@ -5,7 +5,7 @@ module Dodopayments
       | Dodopayments::Models::Price::RecurringPrice
 
     module Price
-      extend Dodopayments::Union
+      extend Dodopayments::Internal::Type::Union
 
       type one_time_price =
         {
@@ -19,7 +19,7 @@ module Dodopayments
           tax_inclusive: bool?
         }
 
-      class OneTimePrice < Dodopayments::BaseModel
+      class OneTimePrice < Dodopayments::Internal::Type::BaseModel
         attr_accessor currency: Dodopayments::Models::Price::OneTimePrice::currency
 
         attr_accessor discount: Float
@@ -199,7 +199,7 @@ module Dodopayments
           | :ZMW
 
         module Currency
-          extend Dodopayments::Enum
+          extend Dodopayments::Internal::Type::Enum
 
           AED: :AED
           ALL: :ALL
@@ -366,7 +366,7 @@ module Dodopayments
           trial_period_days: Integer
         }
 
-      class RecurringPrice < Dodopayments::BaseModel
+      class RecurringPrice < Dodopayments::Internal::Type::BaseModel
         attr_accessor currency: Dodopayments::Models::Price::RecurringPrice::currency
 
         attr_accessor discount: Float
@@ -555,7 +555,7 @@ module Dodopayments
           | :ZMW
 
         module Currency
-          extend Dodopayments::Enum
+          extend Dodopayments::Internal::Type::Enum
 
           AED: :AED
           ALL: :ALL

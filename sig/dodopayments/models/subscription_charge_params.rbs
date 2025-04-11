@@ -4,7 +4,7 @@ module Dodopayments
       { product_price: Integer }
       & Dodopayments::Internal::Type::request_parameters
 
-    class SubscriptionChargeParams < Dodopayments::BaseModel
+    class SubscriptionChargeParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

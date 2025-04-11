@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class DiscountUpdateParams < Dodopayments::BaseModel
+    class DiscountUpdateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
@@ -84,7 +84,7 @@ module Dodopayments
           restricted_to: T.nilable(T::Array[String]),
           type: T.nilable(Dodopayments::Models::DiscountType::OrSymbol),
           usage_limit: T.nilable(Integer),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
         )
           .returns(T.attached_class)
       end

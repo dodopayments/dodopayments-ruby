@@ -21,7 +21,7 @@ module Dodopayments
           #
           # @return [Hash{Symbol=>Hash{Symbol=>Object}}]
           def known_fields
-            @known_fields ||= (self < Dodopayments::BaseModel ? superclass.known_fields.dup : {})
+            @known_fields ||= (self < Dodopayments::Internal::Type::BaseModel ? superclass.known_fields.dup : {})
           end
 
           # @api private
@@ -65,10 +65,10 @@ module Dodopayments
             const = if required && !nilable
               info.fetch(
                 :const,
-                Dodopayments::Internal::Util::OMIT
+                Dodopayments::Internal::OMIT
               )
             else
-              Dodopayments::Internal::Util::OMIT
+              Dodopayments::Internal::OMIT
             end
 
             [name_sym, setter].each { undef_method(_1) } if known_fields.key?(name_sym)
@@ -87,7 +87,7 @@ module Dodopayments
 
             define_method(name_sym) do
               target = type_fn.call
-              value = @data.fetch(name_sym) { const == Dodopayments::Internal::Util::OMIT ? nil : const }
+              value = @data.fetch(name_sym) { const == Dodopayments::Internal::OMIT ? nil : const }
               state = {strictness: :strong, exactness: {yes: 0, no: 0, maybe: 0}, branched: 0}
               if (nilable || !required) && value.nil?
                 nil
@@ -101,7 +101,7 @@ module Dodopayments
               # rubocop:disable Layout/LineLength
               message = "Failed to parse #{cls}.#{__method__} from #{value.class} to #{target.inspect}. To get the unparsed API response, use #{cls}[:#{__method__}]."
               # rubocop:enable Layout/LineLength
-              raise Dodopayments::ConversionError.new(message)
+              raise Dodopayments::Errors::ConversionError.new(message)
             end
           end
 
@@ -171,7 +171,7 @@ module Dodopayments
           # @param other [Object]
           #
           # @return [Boolean]
-          def ==(other) = other.is_a?(Class) && other <= Dodopayments::BaseModel && other.fields == fields
+          def ==(other) = other.is_a?(Class) && other <= Dodopayments::Internal::Type::BaseModel && other.fields == fields
         end
 
         # @param other [Object]
@@ -182,7 +182,7 @@ module Dodopayments
         class << self
           # @api private
           #
-          # @param value [Dodopayments::BaseModel, Hash{Object=>Object}, Object]
+          # @param value [Dodopayments::Internal::Type::BaseModel, Hash{Object=>Object}, Object]
           #
           # @param state [Hash{Symbol=>Object}] .
           #
@@ -192,7 +192,7 @@ module Dodopayments
           #
           #   @option state [Integer] :branched
           #
-          # @return [Dodopayments::BaseModel, Object]
+          # @return [Dodopayments::Internal::Type::BaseModel, Object]
           def coerce(value, state:)
             exactness = state.fetch(:exactness)
 
@@ -217,7 +217,7 @@ module Dodopayments
               api_name, nilable, const = field.fetch_values(:api_name, :nilable, :const)
 
               unless val.key?(api_name)
-                if required && mode != :dump && const == Dodopayments::Internal::Util::OMIT
+                if required && mode != :dump && const == Dodopayments::Internal::OMIT
                   exactness[nilable ? :maybe : :no] += 1
                 else
                   exactness[:yes] += 1
@@ -251,7 +251,7 @@ module Dodopayments
 
           # @api private
           #
-          # @param value [Dodopayments::BaseModel, Object]
+          # @param value [Dodopayments::Internal::Type::BaseModel, Object]
           #
           # @return [Hash{Object=>Object}, Object]
           def dump(value)
@@ -280,7 +280,7 @@ module Dodopayments
 
             known_fields.each_value do |field|
               mode, api_name, const = field.fetch_values(:mode, :api_name, :const)
-              next if mode == :coerce || acc.key?(api_name) || const == Dodopayments::Internal::Util::OMIT
+              next if mode == :coerce || acc.key?(api_name) || const == Dodopayments::Internal::OMIT
               acc.store(api_name, const)
             end
 
@@ -347,13 +347,13 @@ module Dodopayments
 
         # Create a new instance of a model.
         #
-        # @param data [Hash{Symbol=>Object}, Dodopayments::BaseModel]
+        # @param data [Hash{Symbol=>Object}, Dodopayments::Internal::Type::BaseModel]
         def initialize(data = {})
           case Dodopayments::Internal::Util.coerce_hash(data)
           in Hash => coerced
             @data = coerced
           else
-            raise ArgumentError.new("Expected a #{Hash} or #{Dodopayments::BaseModel}, got #{data.inspect}")
+            raise ArgumentError.new("Expected a #{Hash} or #{Dodopayments::Internal::Type::BaseModel}, got #{data.inspect}")
           end
         end
 

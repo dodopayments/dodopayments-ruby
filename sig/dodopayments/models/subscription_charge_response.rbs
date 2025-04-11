@@ -2,7 +2,7 @@ module Dodopayments
   module Models
     type subscription_charge_response = { payment_id: String }
 
-    class SubscriptionChargeResponse < Dodopayments::BaseModel
+    class SubscriptionChargeResponse < Dodopayments::Internal::Type::BaseModel
       attr_accessor payment_id: String
 
       def initialize: (payment_id: String) -> void

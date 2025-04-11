@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Payments#list
-    class PaymentListResponse < Dodopayments::BaseModel
+    class PaymentListResponse < Dodopayments::Internal::Type::BaseModel
       # @!attribute created_at
       #
       #   @return [Time]
@@ -22,7 +22,7 @@ module Dodopayments
       # @!attribute metadata
       #
       #   @return [Hash{Symbol=>String}]
-      required :metadata, Dodopayments::HashOf[String]
+      required :metadata, Dodopayments::Internal::Type::HashOf[String]
 
       # @!attribute payment_id
       #
@@ -82,11 +82,11 @@ module Dodopayments
       #     super
       #   end
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
 
       # @see Dodopayments::Models::PaymentListResponse#currency
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         AED = :AED
         ALL = :ALL

@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Subscriptions#charge
-    class SubscriptionChargeResponse < Dodopayments::BaseModel
+    class SubscriptionChargeResponse < Dodopayments::Internal::Type::BaseModel
       # @!attribute payment_id
       #
       #   @return [String]
@@ -14,7 +14,7 @@ module Dodopayments
       #   #
       #   def initialize(payment_id:, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

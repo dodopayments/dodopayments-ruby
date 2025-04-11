@@ -31,10 +31,10 @@ module Dodopayments
         def dump(value)
           case value
           in Array
-            value.map { Dodopayments::Unknown.dump(_1) }
+            value.map { Dodopayments::Internal::Type::Unknown.dump(_1) }
           in Hash
-            value.transform_values { Dodopayments::Unknown.dump(_1) }
-          in Dodopayments::BaseModel
+            value.transform_values { Dodopayments::Internal::Type::Unknown.dump(_1) }
+          in Dodopayments::Internal::Type::BaseModel
             value.class.dump(value)
           else
             value
@@ -64,7 +64,7 @@ module Dodopayments
             in Hash
               type_info(spec.slice(:const, :enum, :union).first&.last)
             in true | false
-              -> { Dodopayments::BooleanModel }
+              -> { Dodopayments::Internal::Type::BooleanModel }
             in Dodopayments::Internal::Type::Converter | Class | Symbol
               -> { spec }
             in NilClass | Integer | Float
@@ -209,7 +209,7 @@ module Dodopayments
           #
           # @return [Object]
           def dump(target, value)
-            target.is_a?(Dodopayments::Internal::Type::Converter) ? target.dump(value) : Dodopayments::Unknown.dump(value)
+            target.is_a?(Dodopayments::Internal::Type::Converter) ? target.dump(value) : Dodopayments::Internal::Type::Unknown.dump(value)
           end
         end
       end

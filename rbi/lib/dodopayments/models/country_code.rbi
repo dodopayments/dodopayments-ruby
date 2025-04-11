@@ -4,7 +4,7 @@ module Dodopayments
   module Models
     # ISO country code alpha2 variant
     module CountryCode
-      extend Dodopayments::Enum
+      extend Dodopayments::Internal::Type::Enum
 
       TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::CountryCode) }
       OrSymbol = T.type_alias { T.any(Symbol, String, Dodopayments::Models::CountryCode::TaggedSymbol) }

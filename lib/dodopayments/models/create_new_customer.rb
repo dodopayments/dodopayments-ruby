@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class CreateNewCustomer < Dodopayments::BaseModel
+    class CreateNewCustomer < Dodopayments::Internal::Type::BaseModel
       # @!attribute email
       #
       #   @return [String]
@@ -19,7 +19,7 @@ module Dodopayments
       #     default
       #
       #   @return [Boolean, nil]
-      optional :create_new_customer, Dodopayments::BooleanModel
+      optional :create_new_customer, Dodopayments::Internal::Type::BooleanModel
 
       # @!parse
       #   # @return [Boolean]
@@ -38,7 +38,7 @@ module Dodopayments
       #   #
       #   def initialize(email:, name:, create_new_customer: nil, phone_number: nil, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

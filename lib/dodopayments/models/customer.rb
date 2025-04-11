@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Customers#create
-    class Customer < Dodopayments::BaseModel
+    class Customer < Dodopayments::Internal::Type::BaseModel
       # @!attribute business_id
       #
       #   @return [String]
@@ -44,7 +44,7 @@ module Dodopayments
       #   #
       #   def initialize(business_id:, created_at:, customer_id:, email:, name:, phone_number: nil, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

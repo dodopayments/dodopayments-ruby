@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     module Price
-      extend Dodopayments::Union
+      extend Dodopayments::Internal::Type::Union
 
       discriminator :type
 
@@ -11,7 +11,7 @@ module Dodopayments
 
       variant :recurring_price, -> { Dodopayments::Models::Price::RecurringPrice }
 
-      class OneTimePrice < Dodopayments::BaseModel
+      class OneTimePrice < Dodopayments::Internal::Type::BaseModel
         # @!attribute currency
         #
         #   @return [Symbol, Dodopayments::Models::Price::OneTimePrice::Currency]
@@ -38,7 +38,7 @@ module Dodopayments
         #     Purchasing power parity feature is not available as of now.
         #
         #   @return [Boolean]
-        required :purchasing_power_parity, Dodopayments::BooleanModel
+        required :purchasing_power_parity, Dodopayments::Internal::Type::BooleanModel
 
         # @!attribute type
         #
@@ -50,7 +50,7 @@ module Dodopayments
         #     the [`price`](Self::price) field is the minimum amount.
         #
         #   @return [Boolean, nil]
-        optional :pay_what_you_want, Dodopayments::BooleanModel
+        optional :pay_what_you_want, Dodopayments::Internal::Type::BooleanModel
 
         # @!parse
         #   # @return [Boolean]
@@ -68,7 +68,7 @@ module Dodopayments
         #   Indicates if the price is tax inclusive.
         #
         #   @return [Boolean, nil]
-        optional :tax_inclusive, Dodopayments::BooleanModel, nil?: true
+        optional :tax_inclusive, Dodopayments::Internal::Type::BooleanModel, nil?: true
 
         # @!parse
         #   # @param currency [Symbol, Dodopayments::Models::Price::OneTimePrice::Currency]
@@ -94,11 +94,11 @@ module Dodopayments
         #     super
         #   end
 
-        # def initialize: (Hash | Dodopayments::BaseModel) -> void
+        # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
 
         # @see Dodopayments::Models::Price::OneTimePrice#currency
         module Currency
-          extend Dodopayments::Enum
+          extend Dodopayments::Internal::Type::Enum
 
           AED = :AED
           ALL = :ALL
@@ -256,7 +256,7 @@ module Dodopayments
         end
       end
 
-      class RecurringPrice < Dodopayments::BaseModel
+      class RecurringPrice < Dodopayments::Internal::Type::BaseModel
         # @!attribute currency
         #
         #   @return [Symbol, Dodopayments::Models::Price::RecurringPrice::Currency]
@@ -292,7 +292,7 @@ module Dodopayments
         #     Purchasing power parity feature is not available as of now
         #
         #   @return [Boolean]
-        required :purchasing_power_parity, Dodopayments::BooleanModel
+        required :purchasing_power_parity, Dodopayments::Internal::Type::BooleanModel
 
         # @!attribute subscription_period_count
         #   Number of units for the subscription period. For example, a value of `12` with a
@@ -315,7 +315,7 @@ module Dodopayments
         #   Indicates if the price is tax inclusive
         #
         #   @return [Boolean, nil]
-        optional :tax_inclusive, Dodopayments::BooleanModel, nil?: true
+        optional :tax_inclusive, Dodopayments::Internal::Type::BooleanModel, nil?: true
 
         # @!attribute [r] trial_period_days
         #   Number of days for the trial period. A value of `0` indicates no trial period.
@@ -357,11 +357,11 @@ module Dodopayments
         #     super
         #   end
 
-        # def initialize: (Hash | Dodopayments::BaseModel) -> void
+        # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
 
         # @see Dodopayments::Models::Price::RecurringPrice#currency
         module Currency
-          extend Dodopayments::Enum
+          extend Dodopayments::Internal::Type::Enum
 
           AED = :AED
           ALL = :ALL

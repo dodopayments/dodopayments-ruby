@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class Customer < Dodopayments::BaseModel
+    class Customer < Dodopayments::Internal::Type::BaseModel
       sig { returns(String) }
       def business_id
       end

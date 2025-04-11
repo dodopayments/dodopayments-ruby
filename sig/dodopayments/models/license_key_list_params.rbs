@@ -10,7 +10,7 @@ module Dodopayments
       }
       & Dodopayments::Internal::Type::request_parameters
 
-    class LicenseKeyListParams < Dodopayments::BaseModel
+    class LicenseKeyListParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

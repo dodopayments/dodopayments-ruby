@@ -4,7 +4,7 @@ module Dodopayments
       { license_key: String, license_key_instance_id: String? }
       & Dodopayments::Internal::Type::request_parameters
 
-    class LicenseValidateParams < Dodopayments::BaseModel
+    class LicenseValidateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

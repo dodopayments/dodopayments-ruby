@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Products#list
-    class ProductListResponse < Dodopayments::BaseModel
+    class ProductListResponse < Dodopayments::Internal::Type::BaseModel
       # @!attribute business_id
       #   Unique identifier for the business to which the product belongs.
       #
@@ -20,7 +20,7 @@ module Dodopayments
       #   Indicates if the product is recurring (e.g., subscriptions).
       #
       #   @return [Boolean]
-      required :is_recurring, Dodopayments::BooleanModel
+      required :is_recurring, Dodopayments::Internal::Type::BooleanModel
 
       # @!attribute product_id
       #   Unique identifier for the product.
@@ -88,7 +88,7 @@ module Dodopayments
       #   Indicates if the price is tax inclusive
       #
       #   @return [Boolean, nil]
-      optional :tax_inclusive, Dodopayments::BooleanModel, nil?: true
+      optional :tax_inclusive, Dodopayments::Internal::Type::BooleanModel, nil?: true
 
       # @!parse
       #   # @param business_id [String]
@@ -124,14 +124,14 @@ module Dodopayments
       #     super
       #   end
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
 
       # Represents the different categories of taxation applicable to various products
       #   and services.
       #
       # @see Dodopayments::Models::ProductListResponse#tax_category
       module TaxCategory
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         DIGITAL_PRODUCTS = :digital_products
         SAAS = :saas
@@ -149,7 +149,7 @@ module Dodopayments
 
       # @see Dodopayments::Models::ProductListResponse#currency
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         AED = :AED
         ALL = :ALL

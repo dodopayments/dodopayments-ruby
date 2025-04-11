@@ -4,7 +4,7 @@ module Dodopayments
   module Models
     # ISO country code alpha2 variant
     module CountryCode
-      extend Dodopayments::Enum
+      extend Dodopayments::Internal::Type::Enum
 
       AF = :AF
       AX = :AX

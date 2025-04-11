@@ -3,7 +3,7 @@ module Dodopayments
     type dispute_stage = :pre_dispute | :dispute | :pre_arbitration
 
     module DisputeStage
-      extend Dodopayments::Enum
+      extend Dodopayments::Internal::Type::Enum
 
       PRE_DISPUTE: :pre_dispute
       DISPUTE: :dispute

@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class LicenseKeyInstance < Dodopayments::BaseModel
+    class LicenseKeyInstance < Dodopayments::Internal::Type::BaseModel
       sig { returns(String) }
       def id
       end

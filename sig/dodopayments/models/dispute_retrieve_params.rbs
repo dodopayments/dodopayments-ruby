@@ -3,7 +3,7 @@ module Dodopayments
     type dispute_retrieve_params =
       {  } & Dodopayments::Internal::Type::request_parameters
 
-    class DisputeRetrieveParams < Dodopayments::BaseModel
+    class DisputeRetrieveParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

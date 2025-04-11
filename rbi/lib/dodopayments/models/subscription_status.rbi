@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     module SubscriptionStatus
-      extend Dodopayments::Enum
+      extend Dodopayments::Internal::Type::Enum
 
       TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::SubscriptionStatus) }
       OrSymbol = T.type_alias { T.any(Symbol, String, Dodopayments::Models::SubscriptionStatus::TaggedSymbol) }

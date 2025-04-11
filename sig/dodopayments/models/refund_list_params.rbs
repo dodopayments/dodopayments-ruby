@@ -11,7 +11,7 @@ module Dodopayments
       }
       & Dodopayments::Internal::Type::request_parameters
 
-    class RefundListParams < Dodopayments::BaseModel
+    class RefundListParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

@@ -4,7 +4,7 @@ module Dodopayments
       :pending | :active | :on_hold | :paused | :cancelled | :failed | :expired
 
     module SubscriptionStatus
-      extend Dodopayments::Enum
+      extend Dodopayments::Internal::Type::Enum
 
       PENDING: :pending
       ACTIVE: :active

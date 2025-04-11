@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Payments#retrieve
-    class PaymentRetrieveParams < Dodopayments::BaseModel
+    class PaymentRetrieveParams < Dodopayments::Internal::Type::BaseModel
       # @!parse
       #   extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
@@ -13,7 +13,7 @@ module Dodopayments
       #   #
       #   def initialize(request_options: {}, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

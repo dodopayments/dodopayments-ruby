@@ -3,7 +3,7 @@ module Dodopayments
     module Products
       type image_update_response = { url: String, image_id: String? }
 
-      class ImageUpdateResponse < Dodopayments::BaseModel
+      class ImageUpdateResponse < Dodopayments::Internal::Type::BaseModel
         attr_accessor url: String
 
         attr_accessor image_id: String?

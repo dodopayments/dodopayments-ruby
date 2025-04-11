@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class Discount < Dodopayments::BaseModel
+    class Discount < Dodopayments::Internal::Type::BaseModel
       # The discount amount.
       #
       #   - If `discount_type` is `percentage`, this is in **basis points** (e.g., 540 =>

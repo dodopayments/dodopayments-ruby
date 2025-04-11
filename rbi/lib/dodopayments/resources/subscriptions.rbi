@@ -5,10 +5,10 @@ module Dodopayments
     class Subscriptions
       sig do
         params(
-          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::Util::AnyHash),
+          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash),
           customer: T.any(
             Dodopayments::Models::AttachExistingCustomer,
-            Dodopayments::Internal::Util::AnyHash,
+            Dodopayments::Internal::AnyHash,
             Dodopayments::Models::CreateNewCustomer
           ),
           product_id: String,
@@ -18,19 +18,14 @@ module Dodopayments
           discount_code: T.nilable(String),
           metadata: T::Hash[Symbol, String],
           on_demand: T.nilable(
-            T.any(Dodopayments::Models::SubscriptionCreateParams::OnDemand, Dodopayments::Internal::Util::AnyHash)
+            T.any(Dodopayments::Models::SubscriptionCreateParams::OnDemand, Dodopayments::Internal::AnyHash)
           ),
           payment_link: T.nilable(T::Boolean),
           return_url: T.nilable(String),
           show_saved_payment_methods: T::Boolean,
           tax_id: T.nilable(String),
           trial_period_days: T.nilable(Integer),
-          request_options: T.nilable(
-            T.any(
-              Dodopayments::RequestOptions,
-              Dodopayments::Internal::Util::AnyHash
-            )
-          )
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
           .returns(Dodopayments::Models::SubscriptionCreateResponse)
       end
@@ -72,12 +67,7 @@ module Dodopayments
       sig do
         params(
           subscription_id: String,
-          request_options: T.nilable(
-            T.any(
-              Dodopayments::RequestOptions,
-              Dodopayments::Internal::Util::AnyHash
-            )
-          )
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
           .returns(Dodopayments::Models::Subscription)
       end
@@ -93,12 +83,7 @@ module Dodopayments
           subscription_id: String,
           metadata: T.nilable(T::Hash[Symbol, String]),
           status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
-          request_options: T.nilable(
-            T.any(
-              Dodopayments::RequestOptions,
-              Dodopayments::Internal::Util::AnyHash
-            )
-          )
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
           .returns(Dodopayments::Models::Subscription)
       end
@@ -119,12 +104,7 @@ module Dodopayments
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
-          request_options: T.nilable(
-            T.any(
-              Dodopayments::RequestOptions,
-              Dodopayments::Internal::Util::AnyHash
-            )
-          )
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
           .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Subscription])
       end
@@ -149,12 +129,7 @@ module Dodopayments
         params(
           subscription_id: String,
           product_price: Integer,
-          request_options: T.nilable(
-            T.any(
-              Dodopayments::RequestOptions,
-              Dodopayments::Internal::Util::AnyHash
-            )
-          )
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
           .returns(Dodopayments::Models::SubscriptionChargeResponse)
       end

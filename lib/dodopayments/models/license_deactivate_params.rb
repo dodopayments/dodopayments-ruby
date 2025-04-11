@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Licenses#deactivate
-    class LicenseDeactivateParams < Dodopayments::BaseModel
+    class LicenseDeactivateParams < Dodopayments::Internal::Type::BaseModel
       # @!parse
       #   extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
@@ -25,7 +25,7 @@ module Dodopayments
       #   #
       #   def initialize(license_key:, license_key_instance_id:, request_options: {}, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

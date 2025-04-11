@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class SubscriptionUpdateParams < Dodopayments::BaseModel
+    class SubscriptionUpdateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
@@ -29,7 +29,7 @@ module Dodopayments
         params(
           metadata: T.nilable(T::Hash[Symbol, String]),
           status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
         )
           .returns(T.attached_class)
       end

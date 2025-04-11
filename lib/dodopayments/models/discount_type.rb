@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     module DiscountType
-      extend Dodopayments::Enum
+      extend Dodopayments::Internal::Type::Enum
 
       PERCENTAGE = :percentage
 

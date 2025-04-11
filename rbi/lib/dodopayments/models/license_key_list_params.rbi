@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class LicenseKeyListParams < Dodopayments::BaseModel
+    class LicenseKeyListParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
@@ -61,7 +61,7 @@ module Dodopayments
           page_size: T.nilable(Integer),
           product_id: T.nilable(String),
           status: T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
         )
           .returns(T.attached_class)
       end

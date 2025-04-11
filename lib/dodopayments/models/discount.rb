@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Discounts#create
-    class Discount < Dodopayments::BaseModel
+    class Discount < Dodopayments::Internal::Type::BaseModel
       # @!attribute amount
       #   The discount amount.
       #
@@ -42,7 +42,7 @@ module Dodopayments
       #   List of product IDs to which this discount is restricted.
       #
       #   @return [Array<String>]
-      required :restricted_to, Dodopayments::ArrayOf[String]
+      required :restricted_to, Dodopayments::Internal::Type::ArrayOf[String]
 
       # @!attribute times_used
       #   How many times this discount has been used.
@@ -103,7 +103,7 @@ module Dodopayments
       #     super
       #   end
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

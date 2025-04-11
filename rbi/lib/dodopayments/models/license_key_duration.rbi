@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class LicenseKeyDuration < Dodopayments::BaseModel
+    class LicenseKeyDuration < Dodopayments::Internal::Type::BaseModel
       sig { returns(Integer) }
       def count
       end

@@ -16,7 +16,7 @@ module Dodopayments
       }
       & Dodopayments::Internal::Type::request_parameters
 
-    class PaymentCreateParams < Dodopayments::BaseModel
+    class PaymentCreateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
@@ -83,7 +83,7 @@ module Dodopayments
         | :amazon_pay
 
       module AllowedPaymentMethodType
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         CREDIT: :credit
         DEBIT: :debit
@@ -254,7 +254,7 @@ module Dodopayments
         | :ZMW
 
       module BillingCurrency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         AED: :AED
         ALL: :ALL

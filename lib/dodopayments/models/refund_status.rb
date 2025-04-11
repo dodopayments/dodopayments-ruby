@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     module RefundStatus
-      extend Dodopayments::Enum
+      extend Dodopayments::Internal::Type::Enum
 
       SUCCEEDED = :succeeded
       FAILED = :failed

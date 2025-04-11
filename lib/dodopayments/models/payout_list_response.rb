@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Payouts#list
-    class PayoutListResponse < Dodopayments::BaseModel
+    class PayoutListResponse < Dodopayments::Internal::Type::BaseModel
       # @!attribute amount
       #   The total amount of the payout.
       #
@@ -130,11 +130,11 @@ module Dodopayments
       #     super
       #   end
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
 
       # @see Dodopayments::Models::PayoutListResponse#currency
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         AED = :AED
         ALL = :ALL
@@ -293,7 +293,7 @@ module Dodopayments
 
       # @see Dodopayments::Models::PayoutListResponse#status
       module Status
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         NOT_INITIATED = :not_initiated
         IN_PROGRESS = :in_progress

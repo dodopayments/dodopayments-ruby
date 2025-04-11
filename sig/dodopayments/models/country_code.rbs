@@ -252,7 +252,7 @@ module Dodopayments
       | :ZW
 
     module CountryCode
-      extend Dodopayments::Enum
+      extend Dodopayments::Internal::Type::Enum
 
       AF: :AF
       AX: :AX

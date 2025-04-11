@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class AttachExistingCustomer < Dodopayments::BaseModel
+    class AttachExistingCustomer < Dodopayments::Internal::Type::BaseModel
       # @!attribute customer_id
       #
       #   @return [String]
@@ -13,7 +13,7 @@ module Dodopayments
       #   #
       #   def initialize(customer_id:, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

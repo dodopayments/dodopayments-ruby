@@ -3,7 +3,7 @@ module Dodopayments
     type misc_list_supported_countries_params =
       {  } & Dodopayments::Internal::Type::request_parameters
 
-    class MiscListSupportedCountriesParams < Dodopayments::BaseModel
+    class MiscListSupportedCountriesParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

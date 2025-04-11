@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     module DiscountType
-      extend Dodopayments::Enum
+      extend Dodopayments::Internal::Type::Enum
 
       TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::DiscountType) }
       OrSymbol = T.type_alias { T.any(Symbol, String, Dodopayments::Models::DiscountType::TaggedSymbol) }

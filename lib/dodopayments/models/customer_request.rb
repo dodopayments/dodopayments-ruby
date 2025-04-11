@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     module CustomerRequest
-      extend Dodopayments::Union
+      extend Dodopayments::Internal::Type::Union
 
       variant -> { Dodopayments::Models::AttachExistingCustomer }
 

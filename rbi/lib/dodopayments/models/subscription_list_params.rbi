@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class SubscriptionListParams < Dodopayments::BaseModel
+    class SubscriptionListParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
@@ -71,7 +71,7 @@ module Dodopayments
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
         )
           .returns(T.attached_class)
       end

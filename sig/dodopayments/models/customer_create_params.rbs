@@ -4,7 +4,7 @@ module Dodopayments
       { email: String, name: String, phone_number: String? }
       & Dodopayments::Internal::Type::request_parameters
 
-    class CustomerCreateParams < Dodopayments::BaseModel
+    class CustomerCreateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

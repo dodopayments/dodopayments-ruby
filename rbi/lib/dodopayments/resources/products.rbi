@@ -11,7 +11,7 @@ module Dodopayments
         params(
           price: T.any(
             Dodopayments::Models::Price::OneTimePrice,
-            Dodopayments::Internal::Util::AnyHash,
+            Dodopayments::Internal::AnyHash,
             Dodopayments::Models::Price::RecurringPrice
           ),
           tax_category: Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol,
@@ -19,15 +19,10 @@ module Dodopayments
           description: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
-          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::Util::AnyHash)),
+          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::AnyHash)),
           license_key_enabled: T.nilable(T::Boolean),
           name: T.nilable(String),
-          request_options: T.nilable(
-            T.any(
-              Dodopayments::RequestOptions,
-              Dodopayments::Internal::Util::AnyHash
-            )
-          )
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
           .returns(Dodopayments::Models::Product)
       end
@@ -56,12 +51,7 @@ module Dodopayments
       sig do
         params(
           id: String,
-          request_options: T.nilable(
-            T.any(
-              Dodopayments::RequestOptions,
-              Dodopayments::Internal::Util::AnyHash
-            )
-          )
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
           .returns(Dodopayments::Models::Product)
       end
@@ -80,23 +70,18 @@ module Dodopayments
           image_id: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
-          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::Util::AnyHash)),
+          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::AnyHash)),
           license_key_enabled: T.nilable(T::Boolean),
           name: T.nilable(String),
           price: T.nilable(
             T.any(
               Dodopayments::Models::Price::OneTimePrice,
-              Dodopayments::Internal::Util::AnyHash,
+              Dodopayments::Internal::AnyHash,
               Dodopayments::Models::Price::RecurringPrice
             )
           ),
           tax_category: T.nilable(Dodopayments::Models::ProductUpdateParams::TaxCategory::OrSymbol),
-          request_options: T.nilable(
-            T.any(
-              Dodopayments::RequestOptions,
-              Dodopayments::Internal::Util::AnyHash
-            )
-          )
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
           .void
       end
@@ -140,12 +125,7 @@ module Dodopayments
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           recurring: T.nilable(T::Boolean),
-          request_options: T.nilable(
-            T.any(
-              Dodopayments::RequestOptions,
-              Dodopayments::Internal::Util::AnyHash
-            )
-          )
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
           .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::ProductListResponse])
       end
@@ -169,12 +149,7 @@ module Dodopayments
       sig do
         params(
           id: String,
-          request_options: T.nilable(
-            T.any(
-              Dodopayments::RequestOptions,
-              Dodopayments::Internal::Util::AnyHash
-            )
-          )
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
           .void
       end
@@ -184,12 +159,7 @@ module Dodopayments
       sig do
         params(
           id: String,
-          request_options: T.nilable(
-            T.any(
-              Dodopayments::RequestOptions,
-              Dodopayments::Internal::Util::AnyHash
-            )
-          )
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
           .void
       end

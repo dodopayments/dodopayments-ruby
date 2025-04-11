@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class PayoutListResponse < Dodopayments::BaseModel
+    class PayoutListResponse < Dodopayments::Internal::Type::BaseModel
       # The total amount of the payout.
       sig { returns(Integer) }
       def amount
@@ -207,7 +207,7 @@ module Dodopayments
       end
 
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::PayoutListResponse::Currency) }
         OrSymbol =
@@ -367,7 +367,7 @@ module Dodopayments
       end
 
       module Status
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::PayoutListResponse::Status) }
         OrSymbol =

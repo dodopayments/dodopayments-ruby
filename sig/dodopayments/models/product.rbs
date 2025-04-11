@@ -19,7 +19,7 @@ module Dodopayments
         name: String?
       }
 
-    class Product < Dodopayments::BaseModel
+    class Product < Dodopayments::Internal::Type::BaseModel
       attr_accessor business_id: String
 
       attr_accessor created_at: Time
@@ -73,7 +73,7 @@ module Dodopayments
       type tax_category = :digital_products | :saas | :e_book | :edtech
 
       module TaxCategory
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         DIGITAL_PRODUCTS: :digital_products
         SAAS: :saas

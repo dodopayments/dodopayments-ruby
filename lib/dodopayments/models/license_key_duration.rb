@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class LicenseKeyDuration < Dodopayments::BaseModel
+    class LicenseKeyDuration < Dodopayments::Internal::Type::BaseModel
       # @!attribute count
       #
       #   @return [Integer]
@@ -19,7 +19,7 @@ module Dodopayments
       #   #
       #   def initialize(count:, interval:, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

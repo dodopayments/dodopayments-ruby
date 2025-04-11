@@ -21,7 +21,7 @@ module Dodopayments
         # @param other [Object]
         #
         # @return [Boolean]
-        def self.==(other) = other.is_a?(Class) && other <= Dodopayments::Unknown
+        def self.==(other) = other.is_a?(Class) && other <= Dodopayments::Internal::Type::Unknown
 
         class << self
           # @api private

@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class PaymentCreateResponse < Dodopayments::BaseModel
+    class PaymentCreateResponse < Dodopayments::Internal::Type::BaseModel
       # Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will be
       #   coming soon
       sig { returns(String) }
@@ -17,12 +17,7 @@ module Dodopayments
       def customer
       end
 
-      sig do
-        params(
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::Util::AnyHash)
-        )
-          .void
-      end
+      sig { params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void }
       attr_writer :customer
 
       sig { returns(T::Hash[Symbol, String]) }
@@ -84,15 +79,13 @@ module Dodopayments
       sig do
         params(
           client_secret: String,
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::Util::AnyHash),
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash),
           metadata: T::Hash[Symbol, String],
           payment_id: String,
           total_amount: Integer,
           discount_id: T.nilable(String),
           payment_link: T.nilable(String),
-          product_cart: T.nilable(
-            T::Array[T.any(Dodopayments::Models::OneTimeProductCartItem, Dodopayments::Internal::Util::AnyHash)]
-          )
+          product_cart: T.nilable(T::Array[T.any(Dodopayments::Models::OneTimeProductCartItem, Dodopayments::Internal::AnyHash)])
         )
           .returns(T.attached_class)
       end

@@ -16,7 +16,7 @@ module Dodopayments
         subscription_id: String?
       }
 
-    class LicenseKey < Dodopayments::BaseModel
+    class LicenseKey < Dodopayments::Internal::Type::BaseModel
       attr_accessor id: String
 
       attr_accessor business_id: String

@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class LicenseKeyUpdateParams < Dodopayments::BaseModel
+    class LicenseKeyUpdateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
@@ -41,7 +41,7 @@ module Dodopayments
           activations_limit: T.nilable(Integer),
           disabled: T.nilable(T::Boolean),
           expires_at: T.nilable(Time),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
         )
           .returns(T.attached_class)
       end

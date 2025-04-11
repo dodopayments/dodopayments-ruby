@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class CustomerPortalSession < Dodopayments::BaseModel
+    class CustomerPortalSession < Dodopayments::Internal::Type::BaseModel
       sig { returns(String) }
       def link
       end

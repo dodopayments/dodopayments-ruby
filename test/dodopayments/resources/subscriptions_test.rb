@@ -19,7 +19,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
     assert_pattern do
       response => {
         customer: Dodopayments::Models::CustomerLimitedDetails,
-        metadata: ^(Dodopayments::HashOf[String]),
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         recurring_pre_tax_amount: Integer,
         subscription_id: String,
         client_secret: String | nil,
@@ -41,7 +41,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         created_at: Time,
         currency: Dodopayments::Models::Subscription::Currency,
         customer: Dodopayments::Models::CustomerLimitedDetails,
-        metadata: ^(Dodopayments::HashOf[String]),
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         next_billing_date: Time,
         payment_frequency_count: Integer,
         payment_frequency_interval: Dodopayments::Models::TimeInterval,
@@ -52,7 +52,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         subscription_id: String,
         subscription_period_count: Integer,
         subscription_period_interval: Dodopayments::Models::TimeInterval,
-        tax_inclusive: Dodopayments::BooleanModel,
+        tax_inclusive: Dodopayments::Internal::Type::BooleanModel,
         trial_period_days: Integer,
         cancelled_at: Time | nil,
         discount_id: String | nil
@@ -72,7 +72,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         created_at: Time,
         currency: Dodopayments::Models::Subscription::Currency,
         customer: Dodopayments::Models::CustomerLimitedDetails,
-        metadata: ^(Dodopayments::HashOf[String]),
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         next_billing_date: Time,
         payment_frequency_count: Integer,
         payment_frequency_interval: Dodopayments::Models::TimeInterval,
@@ -83,7 +83,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         subscription_id: String,
         subscription_period_count: Integer,
         subscription_period_interval: Dodopayments::Models::TimeInterval,
-        tax_inclusive: Dodopayments::BooleanModel,
+        tax_inclusive: Dodopayments::Internal::Type::BooleanModel,
         trial_period_days: Integer,
         cancelled_at: Time | nil,
         discount_id: String | nil
@@ -108,7 +108,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         created_at: Time,
         currency: Dodopayments::Models::Subscription::Currency,
         customer: Dodopayments::Models::CustomerLimitedDetails,
-        metadata: ^(Dodopayments::HashOf[String]),
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         next_billing_date: Time,
         payment_frequency_count: Integer,
         payment_frequency_interval: Dodopayments::Models::TimeInterval,
@@ -119,7 +119,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         subscription_id: String,
         subscription_period_count: Integer,
         subscription_period_interval: Dodopayments::Models::TimeInterval,
-        tax_inclusive: Dodopayments::BooleanModel,
+        tax_inclusive: Dodopayments::Internal::Type::BooleanModel,
         trial_period_days: Integer,
         cancelled_at: Time | nil,
         discount_id: String | nil

@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Subscriptions#retrieve
-    class Subscription < Dodopayments::BaseModel
+    class Subscription < Dodopayments::Internal::Type::BaseModel
       # @!attribute created_at
       #   Timestamp when the subscription was created
       #
@@ -23,7 +23,7 @@ module Dodopayments
       # @!attribute metadata
       #
       #   @return [Hash{Symbol=>String}]
-      required :metadata, Dodopayments::HashOf[String]
+      required :metadata, Dodopayments::Internal::Type::HashOf[String]
 
       # @!attribute next_billing_date
       #   Timestamp of the next scheduled billing
@@ -87,7 +87,7 @@ module Dodopayments
       #   Indicates if the recurring_pre_tax_amount is tax inclusive
       #
       #   @return [Boolean]
-      required :tax_inclusive, Dodopayments::BooleanModel
+      required :tax_inclusive, Dodopayments::Internal::Type::BooleanModel
 
       # @!attribute trial_period_days
       #   Number of days in the trial period (0 if no trial)
@@ -153,11 +153,11 @@ module Dodopayments
       #     super
       #   end
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
 
       # @see Dodopayments::Models::Subscription#currency
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         AED = :AED
         ALL = :ALL

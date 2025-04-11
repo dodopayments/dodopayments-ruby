@@ -39,13 +39,8 @@ module Dodopayments
         # @api private
         sig do
           params(
-            key: T.any(
-              Symbol,
-              Dodopayments::Internal::Util::AnyHash,
-              T.proc.returns(T.anything),
-              T.anything
-            ),
-            spec: T.any(Dodopayments::Internal::Util::AnyHash, T.proc.returns(T.anything), T.anything)
+            key: T.any(Symbol, Dodopayments::Internal::AnyHash, T.proc.returns(T.anything), T.anything),
+            spec: T.any(Dodopayments::Internal::AnyHash, T.proc.returns(T.anything), T.anything)
           )
             .void
         end

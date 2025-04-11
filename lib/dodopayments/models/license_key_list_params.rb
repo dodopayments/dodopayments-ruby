@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::LicenseKeys#list
-    class LicenseKeyListParams < Dodopayments::BaseModel
+    class LicenseKeyListParams < Dodopayments::Internal::Type::BaseModel
       # @!parse
       #   extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
@@ -48,7 +48,7 @@ module Dodopayments
       #   #
       #   def initialize(customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {}, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

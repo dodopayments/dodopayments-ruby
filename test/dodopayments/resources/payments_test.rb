@@ -19,12 +19,12 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
       response => {
         client_secret: String,
         customer: Dodopayments::Models::CustomerLimitedDetails,
-        metadata: ^(Dodopayments::HashOf[String]),
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         payment_id: String,
         total_amount: Integer,
         discount_id: String | nil,
         payment_link: String | nil,
-        product_cart: ^(Dodopayments::ArrayOf[Dodopayments::Models::OneTimeProductCartItem]) | nil
+        product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::OneTimeProductCartItem]) | nil
       }
     end
   end
@@ -42,17 +42,17 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         created_at: Time,
         currency: Dodopayments::Models::Payment::Currency,
         customer: Dodopayments::Models::CustomerLimitedDetails,
-        disputes: ^(Dodopayments::ArrayOf[Dodopayments::Models::Dispute]),
-        metadata: ^(Dodopayments::HashOf[String]),
+        disputes: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::Dispute]),
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         payment_id: String,
-        refunds: ^(Dodopayments::ArrayOf[Dodopayments::Models::Refund]),
+        refunds: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::Refund]),
         total_amount: Integer,
         discount_id: String | nil,
         error_message: String | nil,
         payment_link: String | nil,
         payment_method: String | nil,
         payment_method_type: String | nil,
-        product_cart: ^(Dodopayments::ArrayOf[Dodopayments::Models::Payment::ProductCart]) | nil,
+        product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::Payment::ProductCart]) | nil,
         status: Dodopayments::Models::IntentStatus | nil,
         subscription_id: String | nil,
         tax: Integer | nil,
@@ -78,7 +78,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         created_at: Time,
         currency: Dodopayments::Models::PaymentListResponse::Currency,
         customer: Dodopayments::Models::CustomerLimitedDetails,
-        metadata: ^(Dodopayments::HashOf[String]),
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         payment_id: String,
         total_amount: Integer,
         payment_method: String | nil,

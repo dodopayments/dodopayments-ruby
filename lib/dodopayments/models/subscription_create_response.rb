@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Subscriptions#create
-    class SubscriptionCreateResponse < Dodopayments::BaseModel
+    class SubscriptionCreateResponse < Dodopayments::Internal::Type::BaseModel
       # @!attribute customer
       #
       #   @return [Dodopayments::Models::CustomerLimitedDetails]
@@ -12,7 +12,7 @@ module Dodopayments
       # @!attribute metadata
       #
       #   @return [Hash{Symbol=>String}]
-      required :metadata, Dodopayments::HashOf[String]
+      required :metadata, Dodopayments::Internal::Type::HashOf[String]
 
       # @!attribute recurring_pre_tax_amount
       #   Tax will be added to the amount and charged to the customer on each billing
@@ -68,7 +68,7 @@ module Dodopayments
       #     super
       #   end
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

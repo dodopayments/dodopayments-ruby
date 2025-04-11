@@ -3,7 +3,7 @@ module Dodopayments
     type license_key_instance_update_params =
       { name: String } & Dodopayments::Internal::Type::request_parameters
 
-    class LicenseKeyInstanceUpdateParams < Dodopayments::BaseModel
+    class LicenseKeyInstanceUpdateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

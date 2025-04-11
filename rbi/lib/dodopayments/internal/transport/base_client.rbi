@@ -25,10 +25,10 @@ module Dodopayments
               ),
               body: T.nilable(T.anything),
               unwrap: T.nilable(Symbol),
-              page: T.nilable(T::Class[Dodopayments::Internal::Type::BasePage[Dodopayments::BaseModel]]),
+              page: T.nilable(T::Class[Dodopayments::Internal::Type::BasePage[Dodopayments::Internal::Type::BaseModel]]),
               stream: T.nilable(T::Class[T.anything]),
               model: T.nilable(Dodopayments::Internal::Type::Converter::Input),
-              options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash))
+              options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
             }
           end
 
@@ -136,7 +136,7 @@ module Dodopayments
           overridable
             .params(
               req: Dodopayments::Internal::Transport::BaseClient::RequestComponentsShape,
-              opts: Dodopayments::Internal::Util::AnyHash
+              opts: Dodopayments::Internal::AnyHash
             )
             .returns(Dodopayments::Internal::Transport::BaseClient::RequestInputShape)
         end
@@ -180,10 +180,10 @@ module Dodopayments
             ),
             body: T.nilable(T.anything),
             unwrap: T.nilable(Symbol),
-            page: T.nilable(T::Class[Dodopayments::Internal::Type::BasePage[Dodopayments::BaseModel]]),
+            page: T.nilable(T::Class[Dodopayments::Internal::Type::BasePage[Dodopayments::Internal::Type::BaseModel]]),
             stream: T.nilable(T::Class[T.anything]),
             model: T.nilable(Dodopayments::Internal::Type::Converter::Input),
-            options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash))
+            options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
           )
             .returns(T.anything)
         end
@@ -196,7 +196,7 @@ module Dodopayments
           unwrap: nil,
           page: nil,
           stream: nil,
-          model: Dodopayments::Unknown,
+          model: Dodopayments::Internal::Type::Unknown,
           options: {}
         )
         end

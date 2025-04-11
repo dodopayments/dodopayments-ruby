@@ -12,7 +12,7 @@ module Dodopayments
         product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]?
       }
 
-    class PaymentCreateResponse < Dodopayments::BaseModel
+    class PaymentCreateResponse < Dodopayments::Internal::Type::BaseModel
       attr_accessor client_secret: String
 
       attr_accessor customer: Dodopayments::Models::CustomerLimitedDetails

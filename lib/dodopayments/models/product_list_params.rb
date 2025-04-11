@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Products#list
-    class ProductListParams < Dodopayments::BaseModel
+    class ProductListParams < Dodopayments::Internal::Type::BaseModel
       # @!parse
       #   extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
@@ -12,7 +12,7 @@ module Dodopayments
       #   List archived products
       #
       #   @return [Boolean, nil]
-      optional :archived, Dodopayments::BooleanModel
+      optional :archived, Dodopayments::Internal::Type::BooleanModel
 
       # @!parse
       #   # @return [Boolean]
@@ -38,7 +38,7 @@ module Dodopayments
       #     - `null` or absent: Show both types of products
       #
       #   @return [Boolean, nil]
-      optional :recurring, Dodopayments::BooleanModel, nil?: true
+      optional :recurring, Dodopayments::Internal::Type::BooleanModel, nil?: true
 
       # @!parse
       #   # @param archived [Boolean]
@@ -49,7 +49,7 @@ module Dodopayments
       #   #
       #   def initialize(archived: nil, page_number: nil, page_size: nil, recurring: nil, request_options: {}, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

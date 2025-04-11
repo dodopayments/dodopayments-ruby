@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class SubscriptionChargeParams < Dodopayments::BaseModel
+    class SubscriptionChargeParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
@@ -19,7 +19,7 @@ module Dodopayments
       sig do
         params(
           product_price: Integer,
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
         )
           .returns(T.attached_class)
       end

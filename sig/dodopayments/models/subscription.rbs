@@ -22,7 +22,7 @@ module Dodopayments
         discount_id: String?
       }
 
-    class Subscription < Dodopayments::BaseModel
+    class Subscription < Dodopayments::Internal::Type::BaseModel
       attr_accessor created_at: Time
 
       attr_accessor currency: Dodopayments::Models::Subscription::currency
@@ -230,7 +230,7 @@ module Dodopayments
         | :ZMW
 
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         AED: :AED
         ALL: :ALL

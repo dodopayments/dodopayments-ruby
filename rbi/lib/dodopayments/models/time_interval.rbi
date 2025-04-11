@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     module TimeInterval
-      extend Dodopayments::Enum
+      extend Dodopayments::Internal::Type::Enum
 
       TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::TimeInterval) }
       OrSymbol = T.type_alias { T.any(Symbol, String, Dodopayments::Models::TimeInterval::TaggedSymbol) }

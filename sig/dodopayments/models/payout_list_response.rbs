@@ -19,7 +19,7 @@ module Dodopayments
         remarks: String?
       }
 
-    class PayoutListResponse < Dodopayments::BaseModel
+    class PayoutListResponse < Dodopayments::Internal::Type::BaseModel
       attr_accessor amount: Integer
 
       attr_accessor business_id: String
@@ -218,7 +218,7 @@ module Dodopayments
         | :ZMW
 
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         AED: :AED
         ALL: :ALL
@@ -373,7 +373,7 @@ module Dodopayments
         :not_initiated | :in_progress | :on_hold | :failed | :success
 
       module Status
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         NOT_INITIATED: :not_initiated
         IN_PROGRESS: :in_progress

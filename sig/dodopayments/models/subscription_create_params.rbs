@@ -19,7 +19,7 @@ module Dodopayments
       }
       & Dodopayments::Internal::Type::request_parameters
 
-    class SubscriptionCreateParams < Dodopayments::BaseModel
+    class SubscriptionCreateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
@@ -95,7 +95,7 @@ module Dodopayments
         | :amazon_pay
 
       module AllowedPaymentMethodType
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         CREDIT: :credit
         DEBIT: :debit
@@ -266,7 +266,7 @@ module Dodopayments
         | :ZMW
 
       module BillingCurrency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         AED: :AED
         ALL: :ALL
@@ -419,7 +419,7 @@ module Dodopayments
 
       type on_demand = { mandate_only: bool, product_price: Integer? }
 
-      class OnDemand < Dodopayments::BaseModel
+      class OnDemand < Dodopayments::Internal::Type::BaseModel
         attr_accessor mandate_only: bool
 
         attr_accessor product_price: Integer?

@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class Dispute < Dodopayments::BaseModel
+    class Dispute < Dodopayments::Internal::Type::BaseModel
       # The amount involved in the dispute, represented as a string to accommodate
       #   precision.
       sig { returns(String) }

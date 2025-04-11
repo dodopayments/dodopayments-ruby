@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Products#create
-    class ProductCreateParams < Dodopayments::BaseModel
+    class ProductCreateParams < Dodopayments::Internal::Type::BaseModel
       # @!parse
       #   extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
@@ -24,7 +24,7 @@ module Dodopayments
       #   Addons available for subscription product
       #
       #   @return [Array<String>, nil]
-      optional :addons, Dodopayments::ArrayOf[String], nil?: true
+      optional :addons, Dodopayments::Internal::Type::ArrayOf[String], nil?: true
 
       # @!attribute description
       #   Optional description of the product
@@ -53,7 +53,7 @@ module Dodopayments
       #   When true, generates and sends a license key to your customer. Defaults to false
       #
       #   @return [Boolean, nil]
-      optional :license_key_enabled, Dodopayments::BooleanModel, nil?: true
+      optional :license_key_enabled, Dodopayments::Internal::Type::BooleanModel, nil?: true
 
       # @!attribute name
       #   Optional name of the product
@@ -89,12 +89,12 @@ module Dodopayments
       #     super
       #   end
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
 
       # Represents the different categories of taxation applicable to various products
       #   and services.
       module TaxCategory
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         DIGITAL_PRODUCTS = :digital_products
         SAAS = :saas

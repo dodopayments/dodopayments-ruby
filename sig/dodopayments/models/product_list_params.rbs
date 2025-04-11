@@ -9,7 +9,7 @@ module Dodopayments
       }
       & Dodopayments::Internal::Type::request_parameters
 
-    class ProductListParams < Dodopayments::BaseModel
+    class ProductListParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

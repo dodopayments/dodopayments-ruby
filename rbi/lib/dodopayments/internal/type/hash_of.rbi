@@ -17,11 +17,11 @@ module Dodopayments
         sig(:final) do
           params(
             type_info: T.any(
-              Dodopayments::Internal::Util::AnyHash,
+              Dodopayments::Internal::AnyHash,
               T.proc.returns(Dodopayments::Internal::Type::Converter::Input),
               Dodopayments::Internal::Type::Converter::Input
             ),
-            spec: Dodopayments::Internal::Util::AnyHash
+            spec: Dodopayments::Internal::AnyHash
           )
             .returns(T.attached_class)
         end
@@ -43,7 +43,7 @@ module Dodopayments
               value: T.any(T::Hash[T.anything, T.anything], T.anything),
               state: Dodopayments::Internal::Type::Converter::State
             )
-            .returns(T.any(Dodopayments::Internal::Util::AnyHash, T.anything))
+            .returns(T.any(Dodopayments::Internal::AnyHash, T.anything))
         end
         def coerce(value, state:)
         end
@@ -52,7 +52,7 @@ module Dodopayments
         sig(:final) do
           override
             .params(value: T.any(T::Hash[T.anything, T.anything], T.anything))
-            .returns(T.any(Dodopayments::Internal::Util::AnyHash, T.anything))
+            .returns(T.any(Dodopayments::Internal::AnyHash, T.anything))
         end
         def dump(value)
         end
@@ -71,11 +71,11 @@ module Dodopayments
         sig(:final) do
           params(
             type_info: T.any(
-              Dodopayments::Internal::Util::AnyHash,
+              Dodopayments::Internal::AnyHash,
               T.proc.returns(Dodopayments::Internal::Type::Converter::Input),
               Dodopayments::Internal::Type::Converter::Input
             ),
-            spec: Dodopayments::Internal::Util::AnyHash
+            spec: Dodopayments::Internal::AnyHash
           )
             .void
         end

@@ -73,7 +73,7 @@ class DodopaymentsTest < Minitest::Test
     requester = MockRequester.new(500, {}, {})
     dodo_payments.requester = requester
 
-    assert_raises(Dodopayments::InternalServerError) do
+    assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
         billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
         customer: {customer_id: "customer_id"},
@@ -94,7 +94,7 @@ class DodopaymentsTest < Minitest::Test
     requester = MockRequester.new(500, {}, {})
     dodo_payments.requester = requester
 
-    assert_raises(Dodopayments::InternalServerError) do
+    assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
         billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
         customer: {customer_id: "customer_id"},
@@ -111,7 +111,7 @@ class DodopaymentsTest < Minitest::Test
     requester = MockRequester.new(500, {}, {})
     dodo_payments.requester = requester
 
-    assert_raises(Dodopayments::InternalServerError) do
+    assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
         billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
         customer: {customer_id: "customer_id"},
@@ -133,7 +133,7 @@ class DodopaymentsTest < Minitest::Test
     requester = MockRequester.new(500, {}, {})
     dodo_payments.requester = requester
 
-    assert_raises(Dodopayments::InternalServerError) do
+    assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
         billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
         customer: {customer_id: "customer_id"},
@@ -155,7 +155,7 @@ class DodopaymentsTest < Minitest::Test
     requester = MockRequester.new(500, {"retry-after" => "1.3"}, {})
     dodo_payments.requester = requester
 
-    assert_raises(Dodopayments::InternalServerError) do
+    assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
         billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
         customer: {customer_id: "customer_id"},
@@ -177,7 +177,7 @@ class DodopaymentsTest < Minitest::Test
     requester = MockRequester.new(500, {"retry-after" => (Time.now + 10).httpdate}, {})
     dodo_payments.requester = requester
 
-    assert_raises(Dodopayments::InternalServerError) do
+    assert_raises(Dodopayments::Errors::InternalServerError) do
       Thread.current.thread_variable_set(:time_now, Time.now)
       dodo_payments.payments.create(
         billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
@@ -201,7 +201,7 @@ class DodopaymentsTest < Minitest::Test
     requester = MockRequester.new(500, {"retry-after-ms" => "1300"}, {})
     dodo_payments.requester = requester
 
-    assert_raises(Dodopayments::InternalServerError) do
+    assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
         billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
         customer: {customer_id: "customer_id"},
@@ -219,7 +219,7 @@ class DodopaymentsTest < Minitest::Test
     requester = MockRequester.new(500, {}, {})
     dodo_payments.requester = requester
 
-    assert_raises(Dodopayments::InternalServerError) do
+    assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
         billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
         customer: {customer_id: "customer_id"},
@@ -237,7 +237,7 @@ class DodopaymentsTest < Minitest::Test
     requester = MockRequester.new(500, {}, {})
     dodo_payments.requester = requester
 
-    assert_raises(Dodopayments::InternalServerError) do
+    assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
         billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
         customer: {customer_id: "customer_id"},
@@ -256,7 +256,7 @@ class DodopaymentsTest < Minitest::Test
     requester = MockRequester.new(500, {}, {})
     dodo_payments.requester = requester
 
-    assert_raises(Dodopayments::InternalServerError) do
+    assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
         billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
         customer: {customer_id: "customer_id"},

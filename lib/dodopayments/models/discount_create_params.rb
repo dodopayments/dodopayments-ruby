@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Discounts#create
-    class DiscountCreateParams < Dodopayments::BaseModel
+    class DiscountCreateParams < Dodopayments::Internal::Type::BaseModel
       # @!parse
       #   extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
@@ -50,7 +50,7 @@ module Dodopayments
       #   List of product IDs to restrict usage (if any).
       #
       #   @return [Array<String>, nil]
-      optional :restricted_to, Dodopayments::ArrayOf[String], nil?: true
+      optional :restricted_to, Dodopayments::Internal::Type::ArrayOf[String], nil?: true
 
       # @!attribute usage_limit
       #   How many times this discount can be used (if any). Must be >= 1 if provided.
@@ -82,7 +82,7 @@ module Dodopayments
       #     super
       #   end
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

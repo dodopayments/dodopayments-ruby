@@ -3,7 +3,7 @@ module Dodopayments
     type license_key_duration =
       { count: Integer, interval: Dodopayments::Models::time_interval }
 
-    class LicenseKeyDuration < Dodopayments::BaseModel
+    class LicenseKeyDuration < Dodopayments::Internal::Type::BaseModel
       attr_accessor count: Integer
 
       attr_accessor interval: Dodopayments::Models::time_interval

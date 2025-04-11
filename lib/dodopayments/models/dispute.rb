@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Disputes#retrieve
-    class Dispute < Dodopayments::BaseModel
+    class Dispute < Dodopayments::Internal::Type::BaseModel
       # @!attribute amount
       #   The amount involved in the dispute, represented as a string to accommodate
       #     precision.
@@ -75,7 +75,7 @@ module Dodopayments
       #     super
       #   end
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

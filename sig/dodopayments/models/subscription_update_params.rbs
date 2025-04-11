@@ -7,7 +7,7 @@ module Dodopayments
       }
       & Dodopayments::Internal::Type::request_parameters
 
-    class SubscriptionUpdateParams < Dodopayments::BaseModel
+    class SubscriptionUpdateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

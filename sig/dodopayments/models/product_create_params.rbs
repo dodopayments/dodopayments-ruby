@@ -14,7 +14,7 @@ module Dodopayments
       }
       & Dodopayments::Internal::Type::request_parameters
 
-    class ProductCreateParams < Dodopayments::BaseModel
+    class ProductCreateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
@@ -54,7 +54,7 @@ module Dodopayments
       type tax_category = :digital_products | :saas | :e_book | :edtech
 
       module TaxCategory
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         DIGITAL_PRODUCTS: :digital_products
         SAAS: :saas

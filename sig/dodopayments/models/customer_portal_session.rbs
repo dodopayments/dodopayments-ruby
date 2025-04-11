@@ -2,7 +2,7 @@ module Dodopayments
   module Models
     type customer_portal_session = { link: String }
 
-    class CustomerPortalSession < Dodopayments::BaseModel
+    class CustomerPortalSession < Dodopayments::Internal::Type::BaseModel
       attr_accessor link: String
 
       def initialize: (link: String) -> void

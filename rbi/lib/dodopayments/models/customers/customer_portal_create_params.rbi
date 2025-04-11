@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     module Customers
-      class CustomerPortalCreateParams < Dodopayments::BaseModel
+      class CustomerPortalCreateParams < Dodopayments::Internal::Type::BaseModel
         extend Dodopayments::Internal::Type::RequestParameters::Converter
         include Dodopayments::Internal::Type::RequestParameters
 
@@ -19,7 +19,7 @@ module Dodopayments
         sig do
           params(
             send_email: T.nilable(T::Boolean),
-            request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
+            request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
           )
             .returns(T.attached_class)
         end

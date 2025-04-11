@@ -18,13 +18,13 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
       response => {
         business_id: String,
         created_at: Time,
-        is_recurring: Dodopayments::BooleanModel,
-        license_key_enabled: Dodopayments::BooleanModel,
+        is_recurring: Dodopayments::Internal::Type::BooleanModel,
+        license_key_enabled: Dodopayments::Internal::Type::BooleanModel,
         price: Dodopayments::Models::Price,
         product_id: String,
         tax_category: Dodopayments::Models::Product::TaxCategory,
         updated_at: Time,
-        addons: ^(Dodopayments::ArrayOf[String]) | nil,
+        addons: ^(Dodopayments::Internal::Type::ArrayOf[String]) | nil,
         description: String | nil,
         image: String | nil,
         license_key_activation_message: String | nil,
@@ -46,13 +46,13 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
       response => {
         business_id: String,
         created_at: Time,
-        is_recurring: Dodopayments::BooleanModel,
-        license_key_enabled: Dodopayments::BooleanModel,
+        is_recurring: Dodopayments::Internal::Type::BooleanModel,
+        license_key_enabled: Dodopayments::Internal::Type::BooleanModel,
         price: Dodopayments::Models::Price,
         product_id: String,
         tax_category: Dodopayments::Models::Product::TaxCategory,
         updated_at: Time,
-        addons: ^(Dodopayments::ArrayOf[String]) | nil,
+        addons: ^(Dodopayments::Internal::Type::ArrayOf[String]) | nil,
         description: String | nil,
         image: String | nil,
         license_key_activation_message: String | nil,
@@ -87,7 +87,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
       row => {
         business_id: String,
         created_at: Time,
-        is_recurring: Dodopayments::BooleanModel,
+        is_recurring: Dodopayments::Internal::Type::BooleanModel,
         product_id: String,
         tax_category: Dodopayments::Models::ProductListResponse::TaxCategory,
         updated_at: Time,
@@ -97,7 +97,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         name: String | nil,
         price: Integer | nil,
         price_detail: Dodopayments::Models::Price | nil,
-        tax_inclusive: Dodopayments::BooleanModel | nil
+        tax_inclusive: Dodopayments::Internal::Type::BooleanModel | nil
       }
     end
   end

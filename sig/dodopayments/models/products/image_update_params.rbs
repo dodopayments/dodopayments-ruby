@@ -5,7 +5,7 @@ module Dodopayments
         { force_update: bool? }
         & Dodopayments::Internal::Type::request_parameters
 
-      class ImageUpdateParams < Dodopayments::BaseModel
+      class ImageUpdateParams < Dodopayments::Internal::Type::BaseModel
         extend Dodopayments::Internal::Type::RequestParameters::Converter
         include Dodopayments::Internal::Type::RequestParameters
 

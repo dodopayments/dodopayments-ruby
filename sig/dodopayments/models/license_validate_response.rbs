@@ -2,7 +2,7 @@ module Dodopayments
   module Models
     type license_validate_response = { valid: bool }
 
-    class LicenseValidateResponse < Dodopayments::BaseModel
+    class LicenseValidateResponse < Dodopayments::Internal::Type::BaseModel
       attr_accessor valid: bool
 
       def initialize: (valid: bool) -> void

@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class ProductListResponse < Dodopayments::BaseModel
+    class ProductListResponse < Dodopayments::Internal::Type::BaseModel
       # Unique identifier for the business to which the product belongs.
       sig { returns(String) }
       def business_id
@@ -161,7 +161,7 @@ module Dodopayments
           price_detail: T.nilable(
             T.any(
               Dodopayments::Models::Price::OneTimePrice,
-              Dodopayments::Internal::Util::AnyHash,
+              Dodopayments::Internal::AnyHash,
               Dodopayments::Models::Price::RecurringPrice
             )
           ),
@@ -212,7 +212,7 @@ module Dodopayments
       # Represents the different categories of taxation applicable to various products
       #   and services.
       module TaxCategory
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::ProductListResponse::TaxCategory) }
         OrSymbol =
@@ -232,7 +232,7 @@ module Dodopayments
       end
 
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::ProductListResponse::Currency) }
         OrSymbol =

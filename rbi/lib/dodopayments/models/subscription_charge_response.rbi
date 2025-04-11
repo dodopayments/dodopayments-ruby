@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class SubscriptionChargeResponse < Dodopayments::BaseModel
+    class SubscriptionChargeResponse < Dodopayments::Internal::Type::BaseModel
       sig { returns(String) }
       def payment_id
       end

@@ -17,7 +17,7 @@ module Dodopayments
         tax_inclusive: bool?
       }
 
-    class ProductListResponse < Dodopayments::BaseModel
+    class ProductListResponse < Dodopayments::Internal::Type::BaseModel
       attr_accessor business_id: String
 
       attr_accessor created_at: Time
@@ -65,7 +65,7 @@ module Dodopayments
       type tax_category = :digital_products | :saas | :e_book | :edtech
 
       module TaxCategory
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         DIGITAL_PRODUCTS: :digital_products
         SAAS: :saas
@@ -223,7 +223,7 @@ module Dodopayments
         | :ZMW
 
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         AED: :AED
         ALL: :ALL

@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class CustomerLimitedDetails < Dodopayments::BaseModel
+    class CustomerLimitedDetails < Dodopayments::Internal::Type::BaseModel
       # @!attribute customer_id
       #   Unique identifier for the customer
       #
@@ -28,7 +28,7 @@ module Dodopayments
       #   #
       #   def initialize(customer_id:, email:, name:, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

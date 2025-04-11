@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class OneTimeProductCartItem < Dodopayments::BaseModel
+    class OneTimeProductCartItem < Dodopayments::Internal::Type::BaseModel
       # @!attribute product_id
       #
       #   @return [String]
@@ -28,7 +28,7 @@ module Dodopayments
       #   #
       #   def initialize(product_id:, quantity:, amount: nil, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

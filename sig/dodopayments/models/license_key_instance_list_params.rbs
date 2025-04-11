@@ -4,7 +4,7 @@ module Dodopayments
       { license_key_id: String?, page_number: Integer?, page_size: Integer? }
       & Dodopayments::Internal::Type::request_parameters
 
-    class LicenseKeyInstanceListParams < Dodopayments::BaseModel
+    class LicenseKeyInstanceListParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

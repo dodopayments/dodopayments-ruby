@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class WebhookEvent < Dodopayments::BaseModel
+    class WebhookEvent < Dodopayments::Internal::Type::BaseModel
       sig { returns(String) }
       def business_id
       end

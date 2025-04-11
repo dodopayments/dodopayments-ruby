@@ -14,7 +14,7 @@ module Dodopayments
       timeout: Float?
     }
 
-  class RequestOptions < Dodopayments::BaseModel
+  class RequestOptions < Dodopayments::Internal::Type::BaseModel
     def self.validate!: (self | ::Hash[Symbol, top] opts) -> void
 
     attr_accessor idempotency_key: String?

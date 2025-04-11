@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class Payment < Dodopayments::BaseModel
+    class Payment < Dodopayments::Internal::Type::BaseModel
       # Identifier of the business associated with the payment
       sig { returns(String) }
       def business_id
@@ -36,12 +36,7 @@ module Dodopayments
       def customer
       end
 
-      sig do
-        params(
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::Util::AnyHash)
-        )
-          .void
-      end
+      sig { params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void }
       attr_writer :customer
 
       # List of disputes associated with this payment
@@ -189,20 +184,18 @@ module Dodopayments
           business_id: String,
           created_at: Time,
           currency: Dodopayments::Models::Payment::Currency::OrSymbol,
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::Util::AnyHash),
-          disputes: T::Array[T.any(Dodopayments::Models::Dispute, Dodopayments::Internal::Util::AnyHash)],
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash),
+          disputes: T::Array[T.any(Dodopayments::Models::Dispute, Dodopayments::Internal::AnyHash)],
           metadata: T::Hash[Symbol, String],
           payment_id: String,
-          refunds: T::Array[T.any(Dodopayments::Models::Refund, Dodopayments::Internal::Util::AnyHash)],
+          refunds: T::Array[T.any(Dodopayments::Models::Refund, Dodopayments::Internal::AnyHash)],
           total_amount: Integer,
           discount_id: T.nilable(String),
           error_message: T.nilable(String),
           payment_link: T.nilable(String),
           payment_method: T.nilable(String),
           payment_method_type: T.nilable(String),
-          product_cart: T.nilable(
-            T::Array[T.any(Dodopayments::Models::Payment::ProductCart, Dodopayments::Internal::Util::AnyHash)]
-          ),
+          product_cart: T.nilable(T::Array[T.any(Dodopayments::Models::Payment::ProductCart, Dodopayments::Internal::AnyHash)]),
           status: T.nilable(Dodopayments::Models::IntentStatus::OrSymbol),
           subscription_id: T.nilable(String),
           tax: T.nilable(Integer),
@@ -263,7 +256,7 @@ module Dodopayments
       end
 
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::Payment::Currency) }
         OrSymbol = T.type_alias { T.any(Symbol, String, Dodopayments::Models::Payment::Currency::TaggedSymbol) }
@@ -421,7 +414,7 @@ module Dodopayments
         end
       end
 
-      class ProductCart < Dodopayments::BaseModel
+      class ProductCart < Dodopayments::Internal::Type::BaseModel
         sig { returns(String) }
         def product_id
         end

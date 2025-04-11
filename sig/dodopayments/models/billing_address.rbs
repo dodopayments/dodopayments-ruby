@@ -9,7 +9,7 @@ module Dodopayments
         zipcode: String
       }
 
-    class BillingAddress < Dodopayments::BaseModel
+    class BillingAddress < Dodopayments::Internal::Type::BaseModel
       attr_accessor city: String
 
       attr_accessor country: Dodopayments::Models::country_code

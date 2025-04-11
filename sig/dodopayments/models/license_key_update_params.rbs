@@ -4,7 +4,7 @@ module Dodopayments
       { activations_limit: Integer?, disabled: bool?, expires_at: Time? }
       & Dodopayments::Internal::Type::request_parameters
 
-    class LicenseKeyUpdateParams < Dodopayments::BaseModel
+    class LicenseKeyUpdateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

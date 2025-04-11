@@ -23,7 +23,7 @@ module Dodopayments
         updated_at: Time?
       }
 
-    class Payment < Dodopayments::BaseModel
+    class Payment < Dodopayments::Internal::Type::BaseModel
       attr_accessor business_id: String
 
       attr_accessor created_at: Time
@@ -234,7 +234,7 @@ module Dodopayments
         | :ZMW
 
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         AED: :AED
         ALL: :ALL
@@ -387,7 +387,7 @@ module Dodopayments
 
       type product_cart = { product_id: String, quantity: Integer }
 
-      class ProductCart < Dodopayments::BaseModel
+      class ProductCart < Dodopayments::Internal::Type::BaseModel
         attr_accessor product_id: String
 
         attr_accessor quantity: Integer

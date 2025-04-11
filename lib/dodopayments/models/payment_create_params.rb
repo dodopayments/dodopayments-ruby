@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Payments#create
-    class PaymentCreateParams < Dodopayments::BaseModel
+    class PaymentCreateParams < Dodopayments::Internal::Type::BaseModel
       # @!parse
       #   extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
@@ -22,7 +22,8 @@ module Dodopayments
       #   List of products in the cart. Must contain at least 1 and at most 100 items.
       #
       #   @return [Array<Dodopayments::Models::OneTimeProductCartItem>]
-      required :product_cart, -> { Dodopayments::ArrayOf[Dodopayments::Models::OneTimeProductCartItem] }
+      required :product_cart,
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::OneTimeProductCartItem] }
 
       # @!attribute allowed_payment_method_types
       #   List of payment methods allowed during checkout.
@@ -34,7 +35,7 @@ module Dodopayments
       #
       #   @return [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil]
       optional :allowed_payment_method_types,
-               -> { Dodopayments::ArrayOf[enum: Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType] },
+               -> { Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType] },
                nil?: true
 
       # @!attribute billing_currency
@@ -53,7 +54,7 @@ module Dodopayments
       # @!attribute [r] metadata
       #
       #   @return [Hash{Symbol=>String}, nil]
-      optional :metadata, Dodopayments::HashOf[String]
+      optional :metadata, Dodopayments::Internal::Type::HashOf[String]
 
       # @!parse
       #   # @return [Hash{Symbol=>String}]
@@ -63,7 +64,7 @@ module Dodopayments
       #   Whether to generate a payment link. Defaults to false if not specified.
       #
       #   @return [Boolean, nil]
-      optional :payment_link, Dodopayments::BooleanModel, nil?: true
+      optional :payment_link, Dodopayments::Internal::Type::BooleanModel, nil?: true
 
       # @!attribute return_url
       #   Optional URL to redirect the customer after payment. Must be a valid URL if
@@ -76,7 +77,7 @@ module Dodopayments
       #   Display saved payment methods of a returning customer False by default
       #
       #   @return [Boolean, nil]
-      optional :show_saved_payment_methods, Dodopayments::BooleanModel
+      optional :show_saved_payment_methods, Dodopayments::Internal::Type::BooleanModel
 
       # @!parse
       #   # @return [Boolean]
@@ -121,10 +122,10 @@ module Dodopayments
       #     super
       #   end
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
 
       module AllowedPaymentMethodType
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         CREDIT = :credit
         DEBIT = :debit
@@ -154,7 +155,7 @@ module Dodopayments
       end
 
       module BillingCurrency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         AED = :AED
         ALL = :ALL

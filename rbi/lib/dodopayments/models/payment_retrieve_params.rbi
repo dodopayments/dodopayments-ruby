@@ -2,12 +2,12 @@
 
 module Dodopayments
   module Models
-    class PaymentRetrieveParams < Dodopayments::BaseModel
+    class PaymentRetrieveParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
       sig do
-        params(request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash))
+        params(request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
           .returns(T.attached_class)
       end
       def self.new(request_options: {})

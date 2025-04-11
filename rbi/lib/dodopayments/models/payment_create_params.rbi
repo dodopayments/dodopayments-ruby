@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class PaymentCreateParams < Dodopayments::BaseModel
+    class PaymentCreateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
@@ -10,7 +10,7 @@ module Dodopayments
       def billing
       end
 
-      sig { params(billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::Util::AnyHash)).void }
+      sig { params(billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash)).void }
       attr_writer :billing
 
       sig { returns(T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer)) }
@@ -119,13 +119,13 @@ module Dodopayments
 
       sig do
         params(
-          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::Util::AnyHash),
+          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash),
           customer: T.any(
             Dodopayments::Models::AttachExistingCustomer,
-            Dodopayments::Internal::Util::AnyHash,
+            Dodopayments::Internal::AnyHash,
             Dodopayments::Models::CreateNewCustomer
           ),
-          product_cart: T::Array[T.any(Dodopayments::Models::OneTimeProductCartItem, Dodopayments::Internal::Util::AnyHash)],
+          product_cart: T::Array[T.any(Dodopayments::Models::OneTimeProductCartItem, Dodopayments::Internal::AnyHash)],
           allowed_payment_method_types: T.nilable(T::Array[Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Models::PaymentCreateParams::BillingCurrency::OrSymbol),
           discount_code: T.nilable(String),
@@ -134,7 +134,7 @@ module Dodopayments
           return_url: T.nilable(String),
           show_saved_payment_methods: T::Boolean,
           tax_id: T.nilable(String),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
         )
           .returns(T.attached_class)
       end
@@ -177,7 +177,7 @@ module Dodopayments
       end
 
       module AllowedPaymentMethodType
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         TaggedSymbol =
           T.type_alias { T.all(Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType) }
@@ -225,7 +225,7 @@ module Dodopayments
       end
 
       module BillingCurrency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::PaymentCreateParams::BillingCurrency) }
         OrSymbol =

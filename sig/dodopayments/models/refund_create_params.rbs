@@ -4,7 +4,7 @@ module Dodopayments
       { payment_id: String, amount: Integer?, reason: String? }
       & Dodopayments::Internal::Type::request_parameters
 
-    class RefundCreateParams < Dodopayments::BaseModel
+    class RefundCreateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

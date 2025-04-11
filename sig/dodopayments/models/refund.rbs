@@ -12,7 +12,7 @@ module Dodopayments
         reason: String?
       }
 
-    class Refund < Dodopayments::BaseModel
+    class Refund < Dodopayments::Internal::Type::BaseModel
       attr_accessor business_id: String
 
       attr_accessor created_at: Time
@@ -190,7 +190,7 @@ module Dodopayments
         | :ZMW
 
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         AED: :AED
         ALL: :ALL

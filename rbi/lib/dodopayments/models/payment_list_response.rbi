@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class PaymentListResponse < Dodopayments::BaseModel
+    class PaymentListResponse < Dodopayments::Internal::Type::BaseModel
       sig { returns(Time) }
       def created_at
       end
@@ -26,12 +26,7 @@ module Dodopayments
       def customer
       end
 
-      sig do
-        params(
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::Util::AnyHash)
-        )
-          .void
-      end
+      sig { params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void }
       attr_writer :customer
 
       sig { returns(T::Hash[Symbol, String]) }
@@ -97,7 +92,7 @@ module Dodopayments
         params(
           created_at: Time,
           currency: Dodopayments::Models::PaymentListResponse::Currency::OrSymbol,
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::Util::AnyHash),
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash),
           metadata: T::Hash[Symbol, String],
           payment_id: String,
           total_amount: Integer,
@@ -143,7 +138,7 @@ module Dodopayments
       end
 
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::PaymentListResponse::Currency) }
         OrSymbol =

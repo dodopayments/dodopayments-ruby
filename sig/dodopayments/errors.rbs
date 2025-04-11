@@ -98,32 +98,4 @@ module Dodopayments
       HTTP_STATUS: Range[Integer]
     end
   end
-
-  class Error = Dodopayments::Errors::Error
-
-  class ConversionError = Dodopayments::Errors::ConversionError
-
-  class APIError = Dodopayments::Errors::APIError
-
-  class APIStatusError = Dodopayments::Errors::APIStatusError
-
-  class APIConnectionError = Dodopayments::Errors::APIConnectionError
-
-  class APITimeoutError = Dodopayments::Errors::APITimeoutError
-
-  class BadRequestError = Dodopayments::Errors::BadRequestError
-
-  class AuthenticationError = Dodopayments::Errors::AuthenticationError
-
-  class PermissionDeniedError = Dodopayments::Errors::PermissionDeniedError
-
-  class NotFoundError = Dodopayments::Errors::NotFoundError
-
-  class ConflictError = Dodopayments::Errors::ConflictError
-
-  class UnprocessableEntityError = Dodopayments::Errors::UnprocessableEntityError
-
-  class RateLimitError = Dodopayments::Errors::RateLimitError
-
-  class InternalServerError = Dodopayments::Errors::InternalServerError
 end

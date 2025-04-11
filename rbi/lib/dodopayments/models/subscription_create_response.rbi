@@ -2,17 +2,12 @@
 
 module Dodopayments
   module Models
-    class SubscriptionCreateResponse < Dodopayments::BaseModel
+    class SubscriptionCreateResponse < Dodopayments::Internal::Type::BaseModel
       sig { returns(Dodopayments::Models::CustomerLimitedDetails) }
       def customer
       end
 
-      sig do
-        params(
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::Util::AnyHash)
-        )
-          .void
-      end
+      sig { params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void }
       attr_writer :customer
 
       sig { returns(T::Hash[Symbol, String]) }
@@ -72,7 +67,7 @@ module Dodopayments
 
       sig do
         params(
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::Util::AnyHash),
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash),
           metadata: T::Hash[Symbol, String],
           recurring_pre_tax_amount: Integer,
           subscription_id: String,

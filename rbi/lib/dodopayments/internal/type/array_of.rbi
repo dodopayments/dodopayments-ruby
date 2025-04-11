@@ -17,11 +17,11 @@ module Dodopayments
         sig(:final) do
           params(
             type_info: T.any(
-              Dodopayments::Internal::Util::AnyHash,
+              Dodopayments::Internal::AnyHash,
               T.proc.returns(Dodopayments::Internal::Type::Converter::Input),
               Dodopayments::Internal::Type::Converter::Input
             ),
-            spec: Dodopayments::Internal::Util::AnyHash
+            spec: Dodopayments::Internal::AnyHash
           )
             .returns(T.attached_class)
         end
@@ -71,11 +71,11 @@ module Dodopayments
         sig(:final) do
           params(
             type_info: T.any(
-              Dodopayments::Internal::Util::AnyHash,
+              Dodopayments::Internal::AnyHash,
               T.proc.returns(Dodopayments::Internal::Type::Converter::Input),
               Dodopayments::Internal::Type::Converter::Input
             ),
-            spec: Dodopayments::Internal::Util::AnyHash
+            spec: Dodopayments::Internal::AnyHash
           )
             .void
         end

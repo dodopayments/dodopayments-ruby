@@ -3,7 +3,7 @@ module Dodopayments
     type one_time_product_cart_item =
       { product_id: String, quantity: Integer, amount: Integer? }
 
-    class OneTimeProductCartItem < Dodopayments::BaseModel
+    class OneTimeProductCartItem < Dodopayments::Internal::Type::BaseModel
       attr_accessor product_id: String
 
       attr_accessor quantity: Integer

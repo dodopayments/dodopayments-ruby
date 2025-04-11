@@ -4,7 +4,7 @@ module Dodopayments
       { page_number: Integer?, page_size: Integer? }
       & Dodopayments::Internal::Type::request_parameters
 
-    class PayoutListParams < Dodopayments::BaseModel
+    class PayoutListParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

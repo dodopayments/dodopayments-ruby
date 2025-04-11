@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     module TimeInterval
-      extend Dodopayments::Enum
+      extend Dodopayments::Internal::Type::Enum
 
       DAY = :Day
       WEEK = :Week

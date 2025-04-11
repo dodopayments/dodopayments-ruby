@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Payments#create
-    class PaymentCreateResponse < Dodopayments::BaseModel
+    class PaymentCreateResponse < Dodopayments::Internal::Type::BaseModel
       # @!attribute client_secret
       #   Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will be
       #     coming soon
@@ -19,7 +19,7 @@ module Dodopayments
       # @!attribute metadata
       #
       #   @return [Hash{Symbol=>String}]
-      required :metadata, Dodopayments::HashOf[String]
+      required :metadata, Dodopayments::Internal::Type::HashOf[String]
 
       # @!attribute payment_id
       #   Unique identifier for the payment
@@ -50,7 +50,7 @@ module Dodopayments
       #
       #   @return [Array<Dodopayments::Models::OneTimeProductCartItem>, nil]
       optional :product_cart,
-               -> { Dodopayments::ArrayOf[Dodopayments::Models::OneTimeProductCartItem] },
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::OneTimeProductCartItem] },
                nil?: true
 
       # @!parse
@@ -77,7 +77,7 @@ module Dodopayments
       #     super
       #   end
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

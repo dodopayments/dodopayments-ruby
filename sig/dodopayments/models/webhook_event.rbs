@@ -12,7 +12,7 @@ module Dodopayments
         response: String?
       }
 
-    class WebhookEvent < Dodopayments::BaseModel
+    class WebhookEvent < Dodopayments::Internal::Type::BaseModel
       attr_accessor business_id: String
 
       attr_accessor created_at: Time

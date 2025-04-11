@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class Subscription < Dodopayments::BaseModel
+    class Subscription < Dodopayments::Internal::Type::BaseModel
       # Timestamp when the subscription was created
       sig { returns(Time) }
       def created_at
@@ -27,12 +27,7 @@ module Dodopayments
       def customer
       end
 
-      sig do
-        params(
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::Util::AnyHash)
-        )
-          .void
-      end
+      sig { params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void }
       attr_writer :customer
 
       sig { returns(T::Hash[Symbol, String]) }
@@ -181,7 +176,7 @@ module Dodopayments
         params(
           created_at: Time,
           currency: Dodopayments::Models::Subscription::Currency::OrSymbol,
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::Util::AnyHash),
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash),
           metadata: T::Hash[Symbol, String],
           next_billing_date: Time,
           payment_frequency_count: Integer,
@@ -251,7 +246,7 @@ module Dodopayments
       end
 
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::Subscription::Currency) }
         OrSymbol =

@@ -7,12 +7,7 @@ module Dodopayments
         params(
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: T.nilable(
-            T.any(
-              Dodopayments::RequestOptions,
-              Dodopayments::Internal::Util::AnyHash
-            )
-          )
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
           .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::PayoutListResponse])
       end

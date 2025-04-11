@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class BillingAddress < Dodopayments::BaseModel
+    class BillingAddress < Dodopayments::Internal::Type::BaseModel
       # @!attribute city
       #   City name
       #
@@ -42,7 +42,7 @@ module Dodopayments
       #   #
       #   def initialize(city:, country:, state:, street:, zipcode:, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

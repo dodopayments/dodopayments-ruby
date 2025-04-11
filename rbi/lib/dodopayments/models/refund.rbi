@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class Refund < Dodopayments::BaseModel
+    class Refund < Dodopayments::Internal::Type::BaseModel
       # The unique identifier of the business issuing the refund.
       sig { returns(String) }
       def business_id
@@ -123,7 +123,7 @@ module Dodopayments
       end
 
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::Refund::Currency) }
         OrSymbol = T.type_alias { T.any(Symbol, String, Dodopayments::Models::Refund::Currency::TaggedSymbol) }

@@ -42,7 +42,7 @@ class Dodopayments::Test::UtilDataHandlingTest < Minitest::Test
   def test_omission
     merged = Dodopayments::Internal::Util.deep_merge(
       {b: {b2: 1, b3: {c: 4, d: 5}}},
-      {b: {b2: 1, b3: {c: Dodopayments::Internal::Util::OMIT, d: 5}}}
+      {b: {b2: 1, b3: {c: Dodopayments::Internal::OMIT, d: 5}}}
     )
 
     assert_pattern do

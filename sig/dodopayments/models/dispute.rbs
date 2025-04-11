@@ -12,7 +12,7 @@ module Dodopayments
         payment_id: String
       }
 
-    class Dispute < Dodopayments::BaseModel
+    class Dispute < Dodopayments::Internal::Type::BaseModel
       attr_accessor amount: String
 
       attr_accessor business_id: String

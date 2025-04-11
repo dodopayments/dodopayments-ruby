@@ -8,7 +8,7 @@ module Dodopayments
         phone_number: String?
       }
 
-    class CreateNewCustomer < Dodopayments::BaseModel
+    class CreateNewCustomer < Dodopayments::Internal::Type::BaseModel
       attr_accessor email: String
 
       attr_accessor name: String

@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     module Products
-      class ImageUpdateResponse < Dodopayments::BaseModel
+      class ImageUpdateResponse < Dodopayments::Internal::Type::BaseModel
         sig { returns(String) }
         def url
         end

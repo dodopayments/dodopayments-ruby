@@ -3,12 +3,9 @@
 module Dodopayments
   module Models
     module Price
-      extend Dodopayments::Union
+      extend Dodopayments::Internal::Type::Union
 
-      Variants =
-        type_template(:out) { {fixed: T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice)} }
-
-      class OneTimePrice < Dodopayments::BaseModel
+      class OneTimePrice < Dodopayments::Internal::Type::BaseModel
         sig { returns(Dodopayments::Models::Price::OneTimePrice::Currency::OrSymbol) }
         def currency
         end
@@ -134,7 +131,7 @@ module Dodopayments
         end
 
         module Currency
-          extend Dodopayments::Enum
+          extend Dodopayments::Internal::Type::Enum
 
           TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::Price::OneTimePrice::Currency) }
           OrSymbol =
@@ -294,7 +291,7 @@ module Dodopayments
         end
       end
 
-      class RecurringPrice < Dodopayments::BaseModel
+      class RecurringPrice < Dodopayments::Internal::Type::BaseModel
         sig { returns(Dodopayments::Models::Price::RecurringPrice::Currency::OrSymbol) }
         def currency
         end
@@ -456,7 +453,7 @@ module Dodopayments
         end
 
         module Currency
-          extend Dodopayments::Enum
+          extend Dodopayments::Internal::Type::Enum
 
           TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::Price::RecurringPrice::Currency) }
           OrSymbol =

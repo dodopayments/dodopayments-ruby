@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class Product < Dodopayments::BaseModel
+    class Product < Dodopayments::Internal::Type::BaseModel
       # Unique identifier for the business to which the product belongs.
       sig { returns(String) }
       def business_id
@@ -132,7 +132,7 @@ module Dodopayments
 
       sig do
         params(
-          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::Util::AnyHash))
+          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::AnyHash))
         )
           .void
       end
@@ -154,7 +154,7 @@ module Dodopayments
           license_key_enabled: T::Boolean,
           price: T.any(
             Dodopayments::Models::Price::OneTimePrice,
-            Dodopayments::Internal::Util::AnyHash,
+            Dodopayments::Internal::AnyHash,
             Dodopayments::Models::Price::RecurringPrice
           ),
           product_id: String,
@@ -165,7 +165,7 @@ module Dodopayments
           image: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
-          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::Util::AnyHash)),
+          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::AnyHash)),
           name: T.nilable(String)
         )
           .returns(T.attached_class)
@@ -217,7 +217,7 @@ module Dodopayments
       # Represents the different categories of taxation applicable to various products
       #   and services.
       module TaxCategory
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::Product::TaxCategory) }
         OrSymbol =

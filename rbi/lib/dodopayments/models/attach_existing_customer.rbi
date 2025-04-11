@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class AttachExistingCustomer < Dodopayments::BaseModel
+    class AttachExistingCustomer < Dodopayments::Internal::Type::BaseModel
       sig { returns(String) }
       def customer_id
       end

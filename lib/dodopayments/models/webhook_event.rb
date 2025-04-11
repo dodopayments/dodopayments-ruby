@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::WebhookEvents#retrieve
-    class WebhookEvent < Dodopayments::BaseModel
+    class WebhookEvent < Dodopayments::Internal::Type::BaseModel
       # @!attribute business_id
       #
       #   @return [String]
@@ -68,7 +68,7 @@ module Dodopayments
       #     super
       #   end
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

@@ -4,7 +4,7 @@ module Dodopayments
       type payment_retrieve_params =
         {  } & Dodopayments::Internal::Type::request_parameters
 
-      class PaymentRetrieveParams < Dodopayments::BaseModel
+      class PaymentRetrieveParams < Dodopayments::Internal::Type::BaseModel
         extend Dodopayments::Internal::Type::RequestParameters::Converter
         include Dodopayments::Internal::Type::RequestParameters
 

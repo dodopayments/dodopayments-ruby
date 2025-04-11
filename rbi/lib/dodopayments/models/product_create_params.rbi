@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class ProductCreateParams < Dodopayments::BaseModel
+    class ProductCreateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
@@ -72,7 +72,7 @@ module Dodopayments
 
       sig do
         params(
-          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::Util::AnyHash))
+          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::AnyHash))
         )
           .void
       end
@@ -99,7 +99,7 @@ module Dodopayments
         params(
           price: T.any(
             Dodopayments::Models::Price::OneTimePrice,
-            Dodopayments::Internal::Util::AnyHash,
+            Dodopayments::Internal::AnyHash,
             Dodopayments::Models::Price::RecurringPrice
           ),
           tax_category: Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol,
@@ -107,10 +107,10 @@ module Dodopayments
           description: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
-          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::Util::AnyHash)),
+          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::AnyHash)),
           license_key_enabled: T.nilable(T::Boolean),
           name: T.nilable(String),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::Util::AnyHash)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
         )
           .returns(T.attached_class)
       end
@@ -151,7 +151,7 @@ module Dodopayments
       # Represents the different categories of taxation applicable to various products
       #   and services.
       module TaxCategory
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::ProductCreateParams::TaxCategory) }
         OrSymbol =

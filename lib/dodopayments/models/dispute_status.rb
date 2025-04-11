@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     module DisputeStatus
-      extend Dodopayments::Enum
+      extend Dodopayments::Internal::Type::Enum
 
       DISPUTE_OPENED = :dispute_opened
       DISPUTE_EXPIRED = :dispute_expired

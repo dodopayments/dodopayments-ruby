@@ -5,13 +5,13 @@ module Dodopayments
     class Payments
       sig do
         params(
-          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::Util::AnyHash),
+          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash),
           customer: T.any(
             Dodopayments::Models::AttachExistingCustomer,
-            Dodopayments::Internal::Util::AnyHash,
+            Dodopayments::Internal::AnyHash,
             Dodopayments::Models::CreateNewCustomer
           ),
-          product_cart: T::Array[T.any(Dodopayments::Models::OneTimeProductCartItem, Dodopayments::Internal::Util::AnyHash)],
+          product_cart: T::Array[T.any(Dodopayments::Models::OneTimeProductCartItem, Dodopayments::Internal::AnyHash)],
           allowed_payment_method_types: T.nilable(T::Array[Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Models::PaymentCreateParams::BillingCurrency::OrSymbol),
           discount_code: T.nilable(String),
@@ -20,12 +20,7 @@ module Dodopayments
           return_url: T.nilable(String),
           show_saved_payment_methods: T::Boolean,
           tax_id: T.nilable(String),
-          request_options: T.nilable(
-            T.any(
-              Dodopayments::RequestOptions,
-              Dodopayments::Internal::Util::AnyHash
-            )
-          )
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
           .returns(Dodopayments::Models::PaymentCreateResponse)
       end
@@ -62,12 +57,7 @@ module Dodopayments
       sig do
         params(
           payment_id: String,
-          request_options: T.nilable(
-            T.any(
-              Dodopayments::RequestOptions,
-              Dodopayments::Internal::Util::AnyHash
-            )
-          )
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
           .returns(Dodopayments::Models::Payment)
       end
@@ -87,12 +77,7 @@ module Dodopayments
           page_size: T.nilable(Integer),
           status: T.nilable(Dodopayments::Models::IntentStatus::OrSymbol),
           subscription_id: T.nilable(String),
-          request_options: T.nilable(
-            T.any(
-              Dodopayments::RequestOptions,
-              Dodopayments::Internal::Util::AnyHash
-            )
-          )
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
           .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::PaymentListResponse])
       end

@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Subscriptions#create
-    class SubscriptionCreateParams < Dodopayments::BaseModel
+    class SubscriptionCreateParams < Dodopayments::Internal::Type::BaseModel
       # @!parse
       #   extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
@@ -40,7 +40,7 @@ module Dodopayments
       #
       #   @return [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil]
       optional :allowed_payment_method_types,
-               -> { Dodopayments::ArrayOf[enum: Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType] },
+               -> { Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType] },
                nil?: true
 
       # @!attribute billing_currency
@@ -59,7 +59,7 @@ module Dodopayments
       # @!attribute [r] metadata
       #
       #   @return [Hash{Symbol=>String}, nil]
-      optional :metadata, Dodopayments::HashOf[String]
+      optional :metadata, Dodopayments::Internal::Type::HashOf[String]
 
       # @!parse
       #   # @return [Hash{Symbol=>String}]
@@ -74,7 +74,7 @@ module Dodopayments
       #   If true, generates a payment link. Defaults to false if not specified.
       #
       #   @return [Boolean, nil]
-      optional :payment_link, Dodopayments::BooleanModel, nil?: true
+      optional :payment_link, Dodopayments::Internal::Type::BooleanModel, nil?: true
 
       # @!attribute return_url
       #   Optional URL to redirect after successful subscription creation
@@ -86,7 +86,7 @@ module Dodopayments
       #   Display saved payment methods of a returning customer False by default
       #
       #   @return [Boolean, nil]
-      optional :show_saved_payment_methods, Dodopayments::BooleanModel
+      optional :show_saved_payment_methods, Dodopayments::Internal::Type::BooleanModel
 
       # @!parse
       #   # @return [Boolean]
@@ -144,10 +144,10 @@ module Dodopayments
       #     super
       #   end
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
 
       module AllowedPaymentMethodType
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         CREDIT = :credit
         DEBIT = :debit
@@ -177,7 +177,7 @@ module Dodopayments
       end
 
       module BillingCurrency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         AED = :AED
         ALL = :ALL
@@ -332,13 +332,13 @@ module Dodopayments
         #   def self.values; end
       end
 
-      class OnDemand < Dodopayments::BaseModel
+      class OnDemand < Dodopayments::Internal::Type::BaseModel
         # @!attribute mandate_only
         #   If set as True, does not perform any charge and only authorizes payment method
         #     details for future use.
         #
         #   @return [Boolean]
-        required :mandate_only, Dodopayments::BooleanModel
+        required :mandate_only, Dodopayments::Internal::Type::BooleanModel
 
         # @!attribute product_price
         #   Product price for the initial charge to customer If not specified the stored
@@ -354,7 +354,7 @@ module Dodopayments
         #   #
         #   def initialize(mandate_only:, product_price: nil, **) = super
 
-        # def initialize: (Hash | Dodopayments::BaseModel) -> void
+        # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
       end
     end
   end

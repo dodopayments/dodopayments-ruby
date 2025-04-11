@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class BillingAddress < Dodopayments::BaseModel
+    class BillingAddress < Dodopayments::Internal::Type::BaseModel
       # City name
       sig { returns(String) }
       def city

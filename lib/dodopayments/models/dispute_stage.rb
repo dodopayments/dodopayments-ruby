@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     module DisputeStage
-      extend Dodopayments::Enum
+      extend Dodopayments::Internal::Type::Enum
 
       PRE_DISPUTE = :pre_dispute
       DISPUTE = :dispute

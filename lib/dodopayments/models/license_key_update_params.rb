@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::LicenseKeys#update
-    class LicenseKeyUpdateParams < Dodopayments::BaseModel
+    class LicenseKeyUpdateParams < Dodopayments::Internal::Type::BaseModel
       # @!parse
       #   extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
@@ -20,7 +20,7 @@ module Dodopayments
       #     the key, while `false` enables it. Omit this field to leave it unchanged.
       #
       #   @return [Boolean, nil]
-      optional :disabled, Dodopayments::BooleanModel, nil?: true
+      optional :disabled, Dodopayments::Internal::Type::BooleanModel, nil?: true
 
       # @!attribute expires_at
       #   The updated expiration timestamp for the license key in UTC. Use `null` to
@@ -37,7 +37,7 @@ module Dodopayments
       #   #
       #   def initialize(activations_limit: nil, disabled: nil, expires_at: nil, request_options: {}, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class CustomerLimitedDetails < Dodopayments::BaseModel
+    class CustomerLimitedDetails < Dodopayments::Internal::Type::BaseModel
       # Unique identifier for the customer
       sig { returns(String) }
       def customer_id

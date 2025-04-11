@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class CreateNewCustomer < Dodopayments::BaseModel
+    class CreateNewCustomer < Dodopayments::Internal::Type::BaseModel
       sig { returns(String) }
       def email
       end

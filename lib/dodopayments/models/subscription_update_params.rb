@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Subscriptions#update
-    class SubscriptionUpdateParams < Dodopayments::BaseModel
+    class SubscriptionUpdateParams < Dodopayments::Internal::Type::BaseModel
       # @!parse
       #   extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
@@ -11,7 +11,7 @@ module Dodopayments
       # @!attribute metadata
       #
       #   @return [Hash{Symbol=>String}, nil]
-      optional :metadata, Dodopayments::HashOf[String], nil?: true
+      optional :metadata, Dodopayments::Internal::Type::HashOf[String], nil?: true
 
       # @!attribute status
       #
@@ -25,7 +25,7 @@ module Dodopayments
       #   #
       #   def initialize(metadata: nil, status: nil, request_options: {}, **) = super
 
-      # def initialize: (Hash | Dodopayments::BaseModel) -> void
+      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
     end
   end
 end

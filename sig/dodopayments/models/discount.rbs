@@ -15,7 +15,7 @@ module Dodopayments
         usage_limit: Integer?
       }
 
-    class Discount < Dodopayments::BaseModel
+    class Discount < Dodopayments::Internal::Type::BaseModel
       attr_accessor amount: Integer
 
       attr_accessor business_id: String

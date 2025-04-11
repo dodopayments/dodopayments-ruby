@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class LicenseKey < Dodopayments::BaseModel
+    class LicenseKey < Dodopayments::Internal::Type::BaseModel
       # The unique identifier of the license key.
       sig { returns(String) }
       def id

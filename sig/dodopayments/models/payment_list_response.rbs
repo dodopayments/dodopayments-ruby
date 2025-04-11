@@ -14,7 +14,7 @@ module Dodopayments
         subscription_id: String?
       }
 
-    class PaymentListResponse < Dodopayments::BaseModel
+    class PaymentListResponse < Dodopayments::Internal::Type::BaseModel
       attr_accessor created_at: Time
 
       attr_accessor currency: Dodopayments::Models::PaymentListResponse::currency
@@ -198,7 +198,7 @@ module Dodopayments
         | :ZMW
 
       module Currency
-        extend Dodopayments::Enum
+        extend Dodopayments::Internal::Type::Enum
 
         AED: :AED
         ALL: :ALL

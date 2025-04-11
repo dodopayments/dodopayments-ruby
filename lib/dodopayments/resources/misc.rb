@@ -14,7 +14,7 @@ module Dodopayments
         @client.request(
           method: :get,
           path: "checkout/supported_countries",
-          model: Dodopayments::ArrayOf[enum: Dodopayments::Models::CountryCode],
+          model: Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::Models::CountryCode],
           options: params[:request_options]
         )
       end

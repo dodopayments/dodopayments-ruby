@@ -11,7 +11,7 @@ module Dodopayments
         payment_link: String?
       }
 
-    class SubscriptionCreateResponse < Dodopayments::BaseModel
+    class SubscriptionCreateResponse < Dodopayments::Internal::Type::BaseModel
       attr_accessor customer: Dodopayments::Models::CustomerLimitedDetails
 
       attr_accessor metadata: ::Hash[Symbol, String]

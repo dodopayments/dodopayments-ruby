@@ -3,7 +3,7 @@ module Dodopayments
     type customer_limited_details =
       { customer_id: String, email: String, name: String }
 
-    class CustomerLimitedDetails < Dodopayments::BaseModel
+    class CustomerLimitedDetails < Dodopayments::Internal::Type::BaseModel
       attr_accessor customer_id: String
 
       attr_accessor email: String
