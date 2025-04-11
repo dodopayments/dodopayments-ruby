@@ -36,7 +36,7 @@ module Dodopayments
           page_size: T.nilable(Integer),
           request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )
-          .returns(T::Array[Dodopayments::Models::LicenseKeyInstanceListResponseItem])
+          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::LicenseKeyInstance])
       end
       def list(
         # Filter by license key ID
