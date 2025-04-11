@@ -1,183 +1,220 @@
 # frozen_string_literal: true
 
 module Dodopayments
-  class Error < StandardError
-    # @!parse
-    #   # @return [StandardError, nil]
-    #   attr_accessor :cause
-  end
-
-  class ConversionError < Dodopayments::Error
-  end
-
-  class APIError < Dodopayments::Error
-    # @return [URI::Generic]
-    attr_accessor :url
-
-    # @return [Integer, nil]
-    attr_accessor :status
-
-    # @return [Object, nil]
-    attr_accessor :body
-
-    # @api private
-    #
-    # @param url [URI::Generic]
-    # @param status [Integer, nil]
-    # @param body [Object, nil]
-    # @param request [nil]
-    # @param response [nil]
-    # @param message [String, nil]
-    def initialize(url:, status: nil, body: nil, request: nil, response: nil, message: nil)
-      @url = url
-      @status = status
-      @body = body
-      @request = request
-      @response = response
-      super(message)
+  module Errors
+    class Error < StandardError
+      # @!parse
+      #   # @return [StandardError, nil]
+      #   attr_accessor :cause
     end
-  end
 
-  class APIConnectionError < Dodopayments::APIError
-    # @!parse
-    #   # @return [nil]
-    #   attr_accessor :status
-
-    # @!parse
-    #   # @return [nil]
-    #   attr_accessor :body
-
-    # @api private
-    #
-    # @param url [URI::Generic]
-    # @param status [nil]
-    # @param body [nil]
-    # @param request [nil]
-    # @param response [nil]
-    # @param message [String, nil]
-    def initialize(
-      url:,
-      status: nil,
-      body: nil,
-      request: nil,
-      response: nil,
-      message: "Connection error."
-    )
-      super
+    class ConversionError < Dodopayments::Errors::Error
     end
-  end
 
-  class APITimeoutError < Dodopayments::APIConnectionError
-    # @api private
-    #
-    # @param url [URI::Generic]
-    # @param status [nil]
-    # @param body [nil]
-    # @param request [nil]
-    # @param response [nil]
-    # @param message [String, nil]
-    def initialize(
-      url:,
-      status: nil,
-      body: nil,
-      request: nil,
-      response: nil,
-      message: "Request timed out."
-    )
-      super
-    end
-  end
+    class APIError < Dodopayments::Errors::Error
+      # @return [URI::Generic]
+      attr_accessor :url
 
-  class APIStatusError < Dodopayments::APIError
-    # @api private
-    #
-    # @param url [URI::Generic]
-    # @param status [Integer]
-    # @param body [Object, nil]
-    # @param request [nil]
-    # @param response [nil]
-    # @param message [String, nil]
-    #
-    # @return [Dodopayments::APIStatusError]
-    def self.for(url:, status:, body:, request:, response:, message: nil)
-      kwargs = {url: url, status: status, body: body, request: request, response: response, message: message}
+      # @return [Integer, nil]
+      attr_accessor :status
 
-      case status
-      in 400
-        Dodopayments::BadRequestError.new(**kwargs)
-      in 401
-        Dodopayments::AuthenticationError.new(**kwargs)
-      in 403
-        Dodopayments::PermissionDeniedError.new(**kwargs)
-      in 404
-        Dodopayments::NotFoundError.new(**kwargs)
-      in 409
-        Dodopayments::ConflictError.new(**kwargs)
-      in 422
-        Dodopayments::UnprocessableEntityError.new(**kwargs)
-      in 429
-        Dodopayments::RateLimitError.new(**kwargs)
-      in (500..)
-        Dodopayments::InternalServerError.new(**kwargs)
-      else
-        Dodopayments::APIStatusError.new(**kwargs)
+      # @return [Object, nil]
+      attr_accessor :body
+
+      # @api private
+      #
+      # @param url [URI::Generic]
+      # @param status [Integer, nil]
+      # @param body [Object, nil]
+      # @param request [nil]
+      # @param response [nil]
+      # @param message [String, nil]
+      def initialize(url:, status: nil, body: nil, request: nil, response: nil, message: nil)
+        @url = url
+        @status = status
+        @body = body
+        @request = request
+        @response = response
+        super(message)
       end
     end
 
-    # @!parse
-    #   # @return [Integer]
-    #   attr_accessor :status
+    class APIConnectionError < Dodopayments::Errors::APIError
+      # @!parse
+      #   # @return [nil]
+      #   attr_accessor :status
 
-    # @api private
-    #
-    # @param url [URI::Generic]
-    # @param status [Integer]
-    # @param body [Object, nil]
-    # @param request [nil]
-    # @param response [nil]
-    # @param message [String, nil]
-    def initialize(url:, status:, body:, request:, response:, message: nil)
-      message ||= {url: url.to_s, status: status, body: body}
-      super(
-        url: url,
-        status: status,
-        body: body,
-        request: request,
-        response: response,
-        message: message&.to_s
+      # @!parse
+      #   # @return [nil]
+      #   attr_accessor :body
+
+      # @api private
+      #
+      # @param url [URI::Generic]
+      # @param status [nil]
+      # @param body [nil]
+      # @param request [nil]
+      # @param response [nil]
+      # @param message [String, nil]
+      def initialize(
+        url:,
+        status: nil,
+        body: nil,
+        request: nil,
+        response: nil,
+        message: "Connection error."
       )
+        super
+      end
+    end
+
+    class APITimeoutError < Dodopayments::Errors::APIConnectionError
+      # @api private
+      #
+      # @param url [URI::Generic]
+      # @param status [nil]
+      # @param body [nil]
+      # @param request [nil]
+      # @param response [nil]
+      # @param message [String, nil]
+      def initialize(
+        url:,
+        status: nil,
+        body: nil,
+        request: nil,
+        response: nil,
+        message: "Request timed out."
+      )
+        super
+      end
+    end
+
+    class APIStatusError < Dodopayments::Errors::APIError
+      # @api private
+      #
+      # @param url [URI::Generic]
+      # @param status [Integer]
+      # @param body [Object, nil]
+      # @param request [nil]
+      # @param response [nil]
+      # @param message [String, nil]
+      #
+      # @return [Dodopayments::Errors::APIStatusError]
+      def self.for(url:, status:, body:, request:, response:, message: nil)
+        kwargs = {
+          url: url,
+          status: status,
+          body: body,
+          request: request,
+          response: response,
+          message: message
+        }
+
+        case status
+        in 400
+          Dodopayments::Errors::BadRequestError.new(**kwargs)
+        in 401
+          Dodopayments::Errors::AuthenticationError.new(**kwargs)
+        in 403
+          Dodopayments::Errors::PermissionDeniedError.new(**kwargs)
+        in 404
+          Dodopayments::Errors::NotFoundError.new(**kwargs)
+        in 409
+          Dodopayments::Errors::ConflictError.new(**kwargs)
+        in 422
+          Dodopayments::Errors::UnprocessableEntityError.new(**kwargs)
+        in 429
+          Dodopayments::Errors::RateLimitError.new(**kwargs)
+        in (500..)
+          Dodopayments::Errors::InternalServerError.new(**kwargs)
+        else
+          Dodopayments::Errors::APIStatusError.new(**kwargs)
+        end
+      end
+
+      # @!parse
+      #   # @return [Integer]
+      #   attr_accessor :status
+
+      # @api private
+      #
+      # @param url [URI::Generic]
+      # @param status [Integer]
+      # @param body [Object, nil]
+      # @param request [nil]
+      # @param response [nil]
+      # @param message [String, nil]
+      def initialize(url:, status:, body:, request:, response:, message: nil)
+        message ||= {url: url.to_s, status: status, body: body}
+        super(
+          url: url,
+          status: status,
+          body: body,
+          request: request,
+          response: response,
+          message: message&.to_s
+        )
+      end
+    end
+
+    class BadRequestError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS = 400
+    end
+
+    class AuthenticationError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS = 401
+    end
+
+    class PermissionDeniedError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS = 403
+    end
+
+    class NotFoundError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS = 404
+    end
+
+    class ConflictError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS = 409
+    end
+
+    class UnprocessableEntityError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS = 422
+    end
+
+    class RateLimitError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS = 429
+    end
+
+    class InternalServerError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS = (500..)
     end
   end
 
-  class BadRequestError < Dodopayments::APIStatusError
-    HTTP_STATUS = 400
-  end
+  Error = Dodopayments::Errors::Error
 
-  class AuthenticationError < Dodopayments::APIStatusError
-    HTTP_STATUS = 401
-  end
+  ConversionError = Dodopayments::Errors::ConversionError
 
-  class PermissionDeniedError < Dodopayments::APIStatusError
-    HTTP_STATUS = 403
-  end
+  APIError = Dodopayments::Errors::APIError
 
-  class NotFoundError < Dodopayments::APIStatusError
-    HTTP_STATUS = 404
-  end
+  APIStatusError = Dodopayments::Errors::APIStatusError
 
-  class ConflictError < Dodopayments::APIStatusError
-    HTTP_STATUS = 409
-  end
+  APIConnectionError = Dodopayments::Errors::APIConnectionError
 
-  class UnprocessableEntityError < Dodopayments::APIStatusError
-    HTTP_STATUS = 422
-  end
+  APITimeoutError = Dodopayments::Errors::APITimeoutError
 
-  class RateLimitError < Dodopayments::APIStatusError
-    HTTP_STATUS = 429
-  end
+  BadRequestError = Dodopayments::Errors::BadRequestError
 
-  class InternalServerError < Dodopayments::APIStatusError
-    HTTP_STATUS = (500..)
-  end
+  AuthenticationError = Dodopayments::Errors::AuthenticationError
+
+  PermissionDeniedError = Dodopayments::Errors::PermissionDeniedError
+
+  NotFoundError = Dodopayments::Errors::NotFoundError
+
+  ConflictError = Dodopayments::Errors::ConflictError
+
+  UnprocessableEntityError = Dodopayments::Errors::UnprocessableEntityError
+
+  RateLimitError = Dodopayments::Errors::RateLimitError
+
+  InternalServerError = Dodopayments::Errors::InternalServerError
 end

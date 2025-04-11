@@ -153,7 +153,7 @@ module Dodopayments
             end
           end
         rescue Timeout::Error
-          raise Dodopayments::APITimeoutError
+          raise Dodopayments::Errors::APITimeoutError
         end
 
         conn, _, response = enum.next

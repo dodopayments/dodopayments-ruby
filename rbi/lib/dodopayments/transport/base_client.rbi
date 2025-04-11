@@ -82,7 +82,7 @@ module Dodopayments
         # @api private
         sig do
           params(
-            status: T.any(Integer, Dodopayments::APIConnectionError),
+            status: T.any(Integer, Dodopayments::Errors::APIConnectionError),
             stream: T.nilable(T::Enumerable[String])
           )
             .void

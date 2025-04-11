@@ -1,99 +1,129 @@
 module Dodopayments
-  class Error < StandardError
-    attr_accessor cause: StandardError?
+  module Errors
+    class Error < StandardError
+      attr_accessor cause: StandardError?
+    end
+
+    class ConversionError < Dodopayments::Errors::Error
+    end
+
+    class APIError < Dodopayments::Errors::Error
+      attr_accessor url: URI::Generic
+
+      attr_accessor status: Integer?
+
+      attr_accessor body: top?
+
+      def initialize: (
+        url: URI::Generic,
+        ?status: Integer?,
+        ?body: Object?,
+        ?request: nil,
+        ?response: nil,
+        ?message: String?
+      ) -> void
+    end
+
+    class APIConnectionError < Dodopayments::Errors::APIError
+      def initialize: (
+        url: URI::Generic,
+        ?status: nil,
+        ?body: nil,
+        ?request: nil,
+        ?response: nil,
+        ?message: String?
+      ) -> void
+    end
+
+    class APITimeoutError < Dodopayments::Errors::APIConnectionError
+      def initialize: (
+        url: URI::Generic,
+        ?status: nil,
+        ?body: nil,
+        ?request: nil,
+        ?response: nil,
+        ?message: String?
+      ) -> void
+    end
+
+    class APIStatusError < Dodopayments::Errors::APIError
+      def self.for: (
+        url: URI::Generic,
+        status: Integer,
+        body: Object?,
+        request: nil,
+        response: nil,
+        ?message: String?
+      ) -> instance
+
+      def initialize: (
+        url: URI::Generic,
+        status: Integer,
+        body: Object?,
+        request: nil,
+        response: nil,
+        ?message: String?
+      ) -> void
+    end
+
+    class BadRequestError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS: 400
+    end
+
+    class AuthenticationError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS: 401
+    end
+
+    class PermissionDeniedError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS: 403
+    end
+
+    class NotFoundError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS: 404
+    end
+
+    class ConflictError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS: 409
+    end
+
+    class UnprocessableEntityError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS: 422
+    end
+
+    class RateLimitError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS: 429
+    end
+
+    class InternalServerError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS: Range[Integer]
+    end
   end
 
-  class ConversionError < Dodopayments::Error
-  end
+  class Error = Dodopayments::Errors::Error
 
-  class APIError < Dodopayments::Error
-    attr_accessor url: URI::Generic
+  class ConversionError = Dodopayments::Errors::ConversionError
 
-    attr_accessor status: Integer?
+  class APIError = Dodopayments::Errors::APIError
 
-    attr_accessor body: top?
+  class APIStatusError = Dodopayments::Errors::APIStatusError
 
-    def initialize: (
-      url: URI::Generic,
-      ?status: Integer?,
-      ?body: Object?,
-      ?request: nil,
-      ?response: nil,
-      ?message: String?
-    ) -> void
-  end
+  class APIConnectionError = Dodopayments::Errors::APIConnectionError
 
-  class APIConnectionError < Dodopayments::APIError
-    def initialize: (
-      url: URI::Generic,
-      ?status: nil,
-      ?body: nil,
-      ?request: nil,
-      ?response: nil,
-      ?message: String?
-    ) -> void
-  end
+  class APITimeoutError = Dodopayments::Errors::APITimeoutError
 
-  class APITimeoutError < Dodopayments::APIConnectionError
-    def initialize: (
-      url: URI::Generic,
-      ?status: nil,
-      ?body: nil,
-      ?request: nil,
-      ?response: nil,
-      ?message: String?
-    ) -> void
-  end
+  class BadRequestError = Dodopayments::Errors::BadRequestError
 
-  class APIStatusError < Dodopayments::APIError
-    def self.for: (
-      url: URI::Generic,
-      status: Integer,
-      body: Object?,
-      request: nil,
-      response: nil,
-      ?message: String?
-    ) -> instance
+  class AuthenticationError = Dodopayments::Errors::AuthenticationError
 
-    def initialize: (
-      url: URI::Generic,
-      status: Integer,
-      body: Object?,
-      request: nil,
-      response: nil,
-      ?message: String?
-    ) -> void
-  end
+  class PermissionDeniedError = Dodopayments::Errors::PermissionDeniedError
 
-  class BadRequestError < Dodopayments::APIStatusError
-    HTTP_STATUS: 400
-  end
+  class NotFoundError = Dodopayments::Errors::NotFoundError
 
-  class AuthenticationError < Dodopayments::APIStatusError
-    HTTP_STATUS: 401
-  end
+  class ConflictError = Dodopayments::Errors::ConflictError
 
-  class PermissionDeniedError < Dodopayments::APIStatusError
-    HTTP_STATUS: 403
-  end
+  class UnprocessableEntityError = Dodopayments::Errors::UnprocessableEntityError
 
-  class NotFoundError < Dodopayments::APIStatusError
-    HTTP_STATUS: 404
-  end
+  class RateLimitError = Dodopayments::Errors::RateLimitError
 
-  class ConflictError < Dodopayments::APIStatusError
-    HTTP_STATUS: 409
-  end
-
-  class UnprocessableEntityError < Dodopayments::APIStatusError
-    HTTP_STATUS: 422
-  end
-
-  class RateLimitError < Dodopayments::APIStatusError
-    HTTP_STATUS: 429
-  end
-
-  class InternalServerError < Dodopayments::APIStatusError
-    HTTP_STATUS: Range[Integer]
-  end
+  class InternalServerError = Dodopayments::Errors::InternalServerError
 end

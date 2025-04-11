@@ -1,60 +1,150 @@
 # typed: strong
 
 module Dodopayments
-  class Error < StandardError
-    sig { returns(T.nilable(StandardError)) }
-    def cause
+  module Errors
+    class Error < StandardError
+      sig { returns(T.nilable(StandardError)) }
+      attr_accessor :cause
     end
 
-    sig { params(_: T.nilable(StandardError)).returns(T.nilable(StandardError)) }
-    def cause=(_)
+    class ConversionError < Dodopayments::Errors::Error
+    end
+
+    class APIError < Dodopayments::Errors::Error
+      sig { returns(URI::Generic) }
+      attr_accessor :url
+
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :status
+
+      sig { returns(T.nilable(T.anything)) }
+      attr_accessor :body
+
+      # @api private
+      sig do
+        params(
+          url: URI::Generic,
+          status: T.nilable(Integer),
+          body: T.nilable(Object),
+          request: NilClass,
+          response: NilClass,
+          message: T.nilable(String)
+        )
+          .returns(T.attached_class)
+      end
+      def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: nil)
+      end
+    end
+
+    class APIConnectionError < Dodopayments::Errors::APIError
+      sig { void }
+      attr_accessor :status
+
+      sig { void }
+      attr_accessor :body
+
+      # @api private
+      sig do
+        params(
+          url: URI::Generic,
+          status: NilClass,
+          body: NilClass,
+          request: NilClass,
+          response: NilClass,
+          message: T.nilable(String)
+        )
+          .returns(T.attached_class)
+      end
+      def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Connection error.")
+      end
+    end
+
+    class APITimeoutError < Dodopayments::Errors::APIConnectionError
+      # @api private
+      sig do
+        params(
+          url: URI::Generic,
+          status: NilClass,
+          body: NilClass,
+          request: NilClass,
+          response: NilClass,
+          message: T.nilable(String)
+        )
+          .returns(T.attached_class)
+      end
+      def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Request timed out.")
+      end
+    end
+
+    class APIStatusError < Dodopayments::Errors::APIError
+      # @api private
+      sig do
+        params(
+          url: URI::Generic,
+          status: Integer,
+          body: T.nilable(Object),
+          request: NilClass,
+          response: NilClass,
+          message: T.nilable(String)
+        )
+          .returns(T.attached_class)
+      end
+      def self.for(url:, status:, body:, request:, response:, message: nil)
+      end
+
+      sig { returns(Integer) }
+      attr_accessor :status
+
+      # @api private
+      sig do
+        params(
+          url: URI::Generic,
+          status: Integer,
+          body: T.nilable(Object),
+          request: NilClass,
+          response: NilClass,
+          message: T.nilable(String)
+        )
+          .returns(T.attached_class)
+      end
+      def self.new(url:, status:, body:, request:, response:, message: nil)
+      end
+    end
+
+    class BadRequestError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS = 400
+    end
+
+    class AuthenticationError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS = 401
+    end
+
+    class PermissionDeniedError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS = 403
+    end
+
+    class NotFoundError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS = 404
+    end
+
+    class ConflictError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS = 409
+    end
+
+    class UnprocessableEntityError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS = 422
+    end
+
+    class RateLimitError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS = 429
+    end
+
+    class InternalServerError < Dodopayments::Errors::APIStatusError
+      HTTP_STATUS = T.let((500..), T::Range[Integer])
     end
   end
 
-  class ConversionError < Dodopayments::Error
-  end
-
-  class APIError < Dodopayments::Error
-    sig { returns(URI::Generic) }
-    def url
-    end
-
-    sig { params(_: URI::Generic).returns(URI::Generic) }
-    def url=(_)
-    end
-
-    sig { returns(T.nilable(Integer)) }
-    def status
-    end
-
-    sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-    def status=(_)
-    end
-
-    sig { returns(T.nilable(T.anything)) }
-    def body
-    end
-
-    sig { params(_: T.nilable(T.anything)).returns(T.nilable(T.anything)) }
-    def body=(_)
-    end
-
-    # @api private
-    sig do
-      params(
-        url: URI::Generic,
-        status: T.nilable(Integer),
-        body: T.nilable(Object),
-        request: NilClass,
-        response: NilClass,
-        message: T.nilable(String)
-      )
-        .returns(T.attached_class)
-    end
-    def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: nil)
-    end
-  end
-
+<<<<<<< HEAD
   class APIConnectionError < Dodopayments::APIError
     sig { void }
     def status
@@ -71,56 +161,19 @@ module Dodopayments
     sig { params(_: NilClass).void }
     def body=(_)
     end
+=======
+  Error = Dodopayments::Errors::Error
 
-    # @api private
-    sig do
-      params(
-        url: URI::Generic,
-        status: NilClass,
-        body: NilClass,
-        request: NilClass,
-        response: NilClass,
-        message: T.nilable(String)
-      )
-        .returns(T.attached_class)
-    end
-    def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Connection error.")
-    end
-  end
+  ConversionError = Dodopayments::Errors::ConversionError
+>>>>>>> origin/generated--merge-conflict
 
-  class APITimeoutError < Dodopayments::APIConnectionError
-    # @api private
-    sig do
-      params(
-        url: URI::Generic,
-        status: NilClass,
-        body: NilClass,
-        request: NilClass,
-        response: NilClass,
-        message: T.nilable(String)
-      )
-        .returns(T.attached_class)
-    end
-    def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Request timed out.")
-    end
-  end
+  APIError = Dodopayments::Errors::APIError
 
-  class APIStatusError < Dodopayments::APIError
-    # @api private
-    sig do
-      params(
-        url: URI::Generic,
-        status: Integer,
-        body: T.nilable(Object),
-        request: NilClass,
-        response: NilClass,
-        message: T.nilable(String)
-      )
-        .returns(T.attached_class)
-    end
-    def self.for(url:, status:, body:, request:, response:, message: nil)
-    end
+  APIStatusError = Dodopayments::Errors::APIStatusError
 
+  APIConnectionError = Dodopayments::Errors::APIConnectionError
+
+<<<<<<< HEAD
     sig { returns(Integer) }
     def status
     end
@@ -128,52 +181,23 @@ module Dodopayments
     sig { params(_: Integer).returns(Integer) }
     def status=(_)
     end
+=======
+  APITimeoutError = Dodopayments::Errors::APITimeoutError
+>>>>>>> origin/generated--merge-conflict
 
-    # @api private
-    sig do
-      params(
-        url: URI::Generic,
-        status: Integer,
-        body: T.nilable(Object),
-        request: NilClass,
-        response: NilClass,
-        message: T.nilable(String)
-      )
-        .returns(T.attached_class)
-    end
-    def self.new(url:, status:, body:, request:, response:, message: nil)
-    end
-  end
+  BadRequestError = Dodopayments::Errors::BadRequestError
 
-  class BadRequestError < Dodopayments::APIStatusError
-    HTTP_STATUS = 400
-  end
+  AuthenticationError = Dodopayments::Errors::AuthenticationError
 
-  class AuthenticationError < Dodopayments::APIStatusError
-    HTTP_STATUS = 401
-  end
+  PermissionDeniedError = Dodopayments::Errors::PermissionDeniedError
 
-  class PermissionDeniedError < Dodopayments::APIStatusError
-    HTTP_STATUS = 403
-  end
+  NotFoundError = Dodopayments::Errors::NotFoundError
 
-  class NotFoundError < Dodopayments::APIStatusError
-    HTTP_STATUS = 404
-  end
+  ConflictError = Dodopayments::Errors::ConflictError
 
-  class ConflictError < Dodopayments::APIStatusError
-    HTTP_STATUS = 409
-  end
+  UnprocessableEntityError = Dodopayments::Errors::UnprocessableEntityError
 
-  class UnprocessableEntityError < Dodopayments::APIStatusError
-    HTTP_STATUS = 422
-  end
+  RateLimitError = Dodopayments::Errors::RateLimitError
 
-  class RateLimitError < Dodopayments::APIStatusError
-    HTTP_STATUS = 429
-  end
-
-  class InternalServerError < Dodopayments::APIStatusError
-    HTTP_STATUS = T.let((500..), T::Range[Integer])
-  end
+  InternalServerError = Dodopayments::Errors::InternalServerError
 end

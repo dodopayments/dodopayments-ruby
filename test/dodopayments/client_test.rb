@@ -275,7 +275,7 @@ class DodopaymentsTest < Minitest::Test
     requester = MockRequester.new(307, {"location" => "/redirected"}, {})
     dodo_payments.requester = requester
 
-    assert_raises(Dodopayments::APIConnectionError) do
+    assert_raises(Dodopayments::Errors::APIConnectionError) do
       dodo_payments.payments.create(
         billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
         customer: {customer_id: "customer_id"},
@@ -299,7 +299,7 @@ class DodopaymentsTest < Minitest::Test
     requester = MockRequester.new(303, {"location" => "/redirected"}, {})
     dodo_payments.requester = requester
 
-    assert_raises(Dodopayments::APIConnectionError) do
+    assert_raises(Dodopayments::Errors::APIConnectionError) do
       dodo_payments.payments.create(
         billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
         customer: {customer_id: "customer_id"},
@@ -320,7 +320,7 @@ class DodopaymentsTest < Minitest::Test
     requester = MockRequester.new(307, {"location" => "/redirected"}, {})
     dodo_payments.requester = requester
 
-    assert_raises(Dodopayments::APIConnectionError) do
+    assert_raises(Dodopayments::Errors::APIConnectionError) do
       dodo_payments.payments.create(
         billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
         customer: {customer_id: "customer_id"},
@@ -341,7 +341,7 @@ class DodopaymentsTest < Minitest::Test
     requester = MockRequester.new(307, {"location" => "https://example.com/redirected"}, {})
     dodo_payments.requester = requester
 
-    assert_raises(Dodopayments::APIConnectionError) do
+    assert_raises(Dodopayments::Errors::APIConnectionError) do
       dodo_payments.payments.create(
         billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
         customer: {customer_id: "customer_id"},

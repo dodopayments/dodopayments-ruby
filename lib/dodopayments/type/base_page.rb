@@ -29,7 +29,7 @@ module Dodopayments
       # @return [Boolean]
       def next_page? = (raise NotImplementedError)
 
-      # @raise [Dodopayments::APIError]
+      # @raise [Dodopayments::Errors::APIError]
       # @return [Dodopayments::Type::BasePage]
       def next_page = (raise NotImplementedError)
 
