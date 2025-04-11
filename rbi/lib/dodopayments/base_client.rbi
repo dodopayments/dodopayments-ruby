@@ -83,14 +83,10 @@ module Dodopayments
       def reap_connection!(status, stream:)
       end
     end
-
-    sig { returns(T.anything) }
-    def requester
-    end
-
-    sig { params(_: T.anything).returns(T.anything) }
-    def requester=(_)
-    end
+    
+    # @api private
+    sig { returns(Dodopayments::PooledNetRequester) }
+    attr_accessor :requester
 
     # @api private
     sig do

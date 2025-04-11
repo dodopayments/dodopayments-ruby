@@ -36,7 +36,6 @@ require "connection_pool"
 # Package files.
 require_relative "dodopayments/version"
 require_relative "dodopayments/util"
-require_relative "dodopayments/extern"
 require_relative "dodopayments/base_model"
 require_relative "dodopayments/base_page"
 require_relative "dodopayments/request_options"

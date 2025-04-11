@@ -51,7 +51,7 @@ module Dodopayments
     ) -> void
 
     # @api private
-    attr_accessor requester: top
+    attr_accessor requester: Dodopayments::PooledNetRequester
 
     def initialize: (
       base_url: String,
