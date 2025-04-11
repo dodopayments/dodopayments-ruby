@@ -14,13 +14,11 @@ module Dodopayments
         )
           .returns(T::Array[Dodopayments::Models::CountryCode::TaggedSymbol])
       end
-      def list_supported_countries(request_options: {})
-      end
+      def list_supported_countries(request_options: {}); end
 
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:)
-      end
+      def self.new(client:); end
     end
   end
 end

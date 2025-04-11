@@ -7,34 +7,17 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       sig { returns(Dodopayments::Models::BillingAddress) }
-      def billing
-      end
+      attr_reader :billing
 
       sig { params(billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash)).void }
       attr_writer :billing
 
       sig { returns(T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer)) }
-      def customer
-      end
-
-      sig do
-        params(_: T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer))
-          .returns(T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer))
-      end
-      def customer=(_)
-      end
+      attr_accessor :customer
 
       # List of products in the cart. Must contain at least 1 and at most 100 items.
       sig { returns(T::Array[Dodopayments::Models::OneTimeProductCartItem]) }
-      def product_cart
-      end
-
-      sig do
-        params(_: T::Array[Dodopayments::Models::OneTimeProductCartItem])
-          .returns(T::Array[Dodopayments::Models::OneTimeProductCartItem])
-      end
-      def product_cart=(_)
-      end
+      attr_accessor :product_cart
 
       # List of payment methods allowed during checkout.
       #
@@ -47,58 +30,29 @@ module Dodopayments
           T.nilable(T::Array[Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol])
         )
       end
-      def allowed_payment_method_types
-      end
-
-      sig do
-        params(
-          _: T.nilable(T::Array[Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol])
-        )
-          .returns(
-            T.nilable(T::Array[Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol])
-          )
-      end
-      def allowed_payment_method_types=(_)
-      end
+      attr_accessor :allowed_payment_method_types
 
       sig { returns(T.nilable(Dodopayments::Models::PaymentCreateParams::BillingCurrency::OrSymbol)) }
       attr_accessor :billing_currency
 
       # Discount Code to apply to the transaction
       sig { returns(T.nilable(String)) }
-      def discount_code
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def discount_code=(_)
-      end
+      attr_accessor :discount_code
 
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
-      def metadata
-      end
+      attr_reader :metadata
 
-      sig { params(_: T::Hash[Symbol, String]).returns(T::Hash[Symbol, String]) }
-      def metadata=(_)
-      end
+      sig { params(metadata: T::Hash[Symbol, String]).void }
+      attr_writer :metadata
 
       # Whether to generate a payment link. Defaults to false if not specified.
       sig { returns(T.nilable(T::Boolean)) }
-      def payment_link
-      end
-
-      sig { params(_: T.nilable(T::Boolean)).returns(T.nilable(T::Boolean)) }
-      def payment_link=(_)
-      end
+      attr_accessor :payment_link
 
       # Optional URL to redirect the customer after payment. Must be a valid URL if
       #   provided.
       sig { returns(T.nilable(String)) }
-      def return_url
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def return_url=(_)
-      end
+      attr_accessor :return_url
 
       # Display saved payment methods of a returning customer False by default
       sig { returns(T.nilable(T::Boolean)) }
@@ -110,12 +64,7 @@ module Dodopayments
       # Tax ID in case the payment is B2B. If tax id validation fails the payment
       #   creation will fail
       sig { returns(T.nilable(String)) }
-      def tax_id
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def tax_id=(_)
-      end
+      attr_accessor :tax_id
 
       sig do
         params(
@@ -151,9 +100,7 @@ module Dodopayments
         show_saved_payment_methods: nil,
         tax_id: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         override
           .returns(
@@ -173,8 +120,7 @@ module Dodopayments
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       module AllowedPaymentMethodType
         extend Dodopayments::Internal::Type::Enum
@@ -214,14 +160,11 @@ module Dodopayments
         AMAZON_PAY =
           T.let(:amazon_pay, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
 
-        class << self
-          sig do
-            override
-              .returns(T::Array[Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol])
-          end
-          def values
-          end
+        sig do
+          override
+            .returns(T::Array[Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol])
         end
+        def self.values; end
       end
 
       module BillingCurrency
@@ -378,8 +321,7 @@ module Dodopayments
         ZMW = T.let(:ZMW, Dodopayments::Models::PaymentCreateParams::BillingCurrency::TaggedSymbol)
 
         sig { override.returns(T::Array[Dodopayments::Models::PaymentCreateParams::BillingCurrency::TaggedSymbol]) }
-        def self.values
-        end
+        def self.values; end
       end
     end
   end

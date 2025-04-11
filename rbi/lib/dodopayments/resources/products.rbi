@@ -45,9 +45,7 @@ module Dodopayments
         # Optional name of the product
         name: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           id: String,
@@ -59,9 +57,7 @@ module Dodopayments
         # Product Id
         id,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           id: String,
@@ -116,9 +112,7 @@ module Dodopayments
         #   and services.
         tax_category: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           archived: T::Boolean,
@@ -143,8 +137,15 @@ module Dodopayments
         #   - `null` or absent: Show both types of products
         recurring: nil,
         request_options: {}
-      )
+      ); end
+      sig do
+        params(
+          id: String,
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+        )
+          .void
       end
+      def delete(id, request_options: {}); end
 
       sig do
         params(
@@ -153,23 +154,11 @@ module Dodopayments
         )
           .void
       end
-      def delete(id, request_options: {})
-      end
-
-      sig do
-        params(
-          id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-        )
-          .void
-      end
-      def unarchive(id, request_options: {})
-      end
+      def unarchive(id, request_options: {}); end
 
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:)
-      end
+      def self.new(client:); end
     end
   end
 end

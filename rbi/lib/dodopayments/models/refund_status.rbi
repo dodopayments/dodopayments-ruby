@@ -13,11 +13,8 @@ module Dodopayments
       PENDING = T.let(:pending, Dodopayments::Models::RefundStatus::TaggedSymbol)
       REVIEW = T.let(:review, Dodopayments::Models::RefundStatus::TaggedSymbol)
 
-      class << self
-        sig { override.returns(T::Array[Dodopayments::Models::RefundStatus::TaggedSymbol]) }
-        def values
-        end
-      end
+      sig { override.returns(T::Array[Dodopayments::Models::RefundStatus::TaggedSymbol]) }
+      def self.values; end
     end
   end
 end

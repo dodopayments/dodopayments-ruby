@@ -23,12 +23,10 @@ module Dodopayments
       end
 
       sig { params(count: Integer, interval: Dodopayments::Models::TimeInterval::OrSymbol).returns(T.attached_class) }
-      def self.new(count:, interval:)
-      end
+      def self.new(count:, interval:); end
 
       sig { override.returns({count: Integer, interval: Dodopayments::Models::TimeInterval::OrSymbol}) }
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

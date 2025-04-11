@@ -5,171 +5,75 @@ module Dodopayments
     class Subscription < Dodopayments::Internal::Type::BaseModel
       # Timestamp when the subscription was created
       sig { returns(Time) }
-      def created_at
-      end
-
-      sig { params(_: Time).returns(Time) }
-      def created_at=(_)
-      end
+      attr_accessor :created_at
 
       sig { returns(Dodopayments::Models::Subscription::Currency::TaggedSymbol) }
-      def currency
-      end
-
-      sig do
-        params(_: Dodopayments::Models::Subscription::Currency::TaggedSymbol)
-          .returns(Dodopayments::Models::Subscription::Currency::TaggedSymbol)
-      end
-      def currency=(_)
-      end
+      attr_accessor :currency
 
       sig { returns(Dodopayments::Models::CustomerLimitedDetails) }
-      def customer
-      end
+      attr_reader :customer
 
-      sig { params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void }
+      sig do
+        params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void
+      end
       attr_writer :customer
 
       sig { returns(T::Hash[Symbol, String]) }
-      def metadata
-      end
-
-      sig { params(_: T::Hash[Symbol, String]).returns(T::Hash[Symbol, String]) }
-      def metadata=(_)
-      end
+      attr_accessor :metadata
 
       # Timestamp of the next scheduled billing
       sig { returns(Time) }
-      def next_billing_date
-      end
-
-      sig { params(_: Time).returns(Time) }
-      def next_billing_date=(_)
-      end
+      attr_accessor :next_billing_date
 
       # Number of payment frequency intervals
       sig { returns(Integer) }
-      def payment_frequency_count
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def payment_frequency_count=(_)
-      end
+      attr_accessor :payment_frequency_count
 
       sig { returns(Dodopayments::Models::TimeInterval::TaggedSymbol) }
-      def payment_frequency_interval
-      end
-
-      sig do
-        params(_: Dodopayments::Models::TimeInterval::TaggedSymbol)
-          .returns(Dodopayments::Models::TimeInterval::TaggedSymbol)
-      end
-      def payment_frequency_interval=(_)
-      end
+      attr_accessor :payment_frequency_interval
 
       # Identifier of the product associated with this subscription
       sig { returns(String) }
-      def product_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def product_id=(_)
-      end
+      attr_accessor :product_id
 
       # Number of units/items included in the subscription
       sig { returns(Integer) }
-      def quantity
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def quantity=(_)
-      end
+      attr_accessor :quantity
 
       # Amount charged before tax for each recurring payment in smallest currency unit
       #   (e.g. cents)
       sig { returns(Integer) }
-      def recurring_pre_tax_amount
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def recurring_pre_tax_amount=(_)
-      end
+      attr_accessor :recurring_pre_tax_amount
 
       sig { returns(Dodopayments::Models::SubscriptionStatus::TaggedSymbol) }
-      def status
-      end
-
-      sig do
-        params(_: Dodopayments::Models::SubscriptionStatus::TaggedSymbol)
-          .returns(Dodopayments::Models::SubscriptionStatus::TaggedSymbol)
-      end
-      def status=(_)
-      end
+      attr_accessor :status
 
       # Unique identifier for the subscription
       sig { returns(String) }
-      def subscription_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def subscription_id=(_)
-      end
+      attr_accessor :subscription_id
 
       # Number of subscription period intervals
       sig { returns(Integer) }
-      def subscription_period_count
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def subscription_period_count=(_)
-      end
+      attr_accessor :subscription_period_count
 
       sig { returns(Dodopayments::Models::TimeInterval::TaggedSymbol) }
-      def subscription_period_interval
-      end
-
-      sig do
-        params(_: Dodopayments::Models::TimeInterval::TaggedSymbol)
-          .returns(Dodopayments::Models::TimeInterval::TaggedSymbol)
-      end
-      def subscription_period_interval=(_)
-      end
+      attr_accessor :subscription_period_interval
 
       # Indicates if the recurring_pre_tax_amount is tax inclusive
       sig { returns(T::Boolean) }
-      def tax_inclusive
-      end
-
-      sig { params(_: T::Boolean).returns(T::Boolean) }
-      def tax_inclusive=(_)
-      end
+      attr_accessor :tax_inclusive
 
       # Number of days in the trial period (0 if no trial)
       sig { returns(Integer) }
-      def trial_period_days
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def trial_period_days=(_)
-      end
+      attr_accessor :trial_period_days
 
       # Cancelled timestamp if the subscription is cancelled
       sig { returns(T.nilable(Time)) }
-      def cancelled_at
-      end
-
-      sig { params(_: T.nilable(Time)).returns(T.nilable(Time)) }
-      def cancelled_at=(_)
-      end
+      attr_accessor :cancelled_at
 
       # The discount id if discount is applied
       sig { returns(T.nilable(String)) }
-      def discount_id
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def discount_id=(_)
-      end
+      attr_accessor :discount_id
 
       # Response struct representing subscription details
       sig do
@@ -180,14 +84,14 @@ module Dodopayments
           metadata: T::Hash[Symbol, String],
           next_billing_date: Time,
           payment_frequency_count: Integer,
-          payment_frequency_interval: Dodopayments::Models::TimeInterval::TaggedSymbol,
+          payment_frequency_interval: Dodopayments::Models::TimeInterval::OrSymbol,
           product_id: String,
           quantity: Integer,
           recurring_pre_tax_amount: Integer,
-          status: Dodopayments::Models::SubscriptionStatus::TaggedSymbol,
+          status: Dodopayments::Models::SubscriptionStatus::OrSymbol,
           subscription_id: String,
           subscription_period_count: Integer,
-          subscription_period_interval: Dodopayments::Models::TimeInterval::TaggedSymbol,
+          subscription_period_interval: Dodopayments::Models::TimeInterval::OrSymbol,
           tax_inclusive: T::Boolean,
           trial_period_days: Integer,
           cancelled_at: T.nilable(Time),
@@ -214,9 +118,7 @@ module Dodopayments
         trial_period_days:,
         cancelled_at: nil,
         discount_id: nil
-      )
-      end
-
+      ); end
       sig do
         override
           .returns(
@@ -242,8 +144,7 @@ module Dodopayments
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       module Currency
         extend Dodopayments::Internal::Type::Enum
@@ -398,11 +299,8 @@ module Dodopayments
         ZAR = T.let(:ZAR, Dodopayments::Models::Subscription::Currency::TaggedSymbol)
         ZMW = T.let(:ZMW, Dodopayments::Models::Subscription::Currency::TaggedSymbol)
 
-        class << self
-          sig { override.returns(T::Array[Dodopayments::Models::Subscription::Currency::TaggedSymbol]) }
-          def values
-          end
-        end
+        sig { override.returns(T::Array[Dodopayments::Models::Subscription::Currency::TaggedSymbol]) }
+        def self.values; end
       end
     end
   end

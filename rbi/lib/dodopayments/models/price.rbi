@@ -7,24 +7,11 @@ module Dodopayments
 
       class OneTimePrice < Dodopayments::Internal::Type::BaseModel
         sig { returns(Dodopayments::Models::Price::OneTimePrice::Currency::OrSymbol) }
-        def currency
-        end
-
-        sig do
-          params(_: Dodopayments::Models::Price::OneTimePrice::Currency::OrSymbol)
-            .returns(Dodopayments::Models::Price::OneTimePrice::Currency::OrSymbol)
-        end
-        def currency=(_)
-        end
+        attr_accessor :currency
 
         # Discount applied to the price, represented as a percentage (0 to 100).
         sig { returns(Float) }
-        def discount
-        end
-
-        sig { params(_: Float).returns(Float) }
-        def discount=(_)
-        end
+        attr_accessor :discount
 
         # The payment amount, in the smallest denomination of the currency (e.g., cents
         #   for USD). For example, to charge $1.00, pass `100`.
@@ -32,60 +19,33 @@ module Dodopayments
         #   If [`pay_what_you_want`](Self::pay_what_you_want) is set to `true`, this field
         #   represents the **minimum** amount the customer must pay.
         sig { returns(Integer) }
-        def price
-        end
-
-        sig { params(_: Integer).returns(Integer) }
-        def price=(_)
-        end
+        attr_accessor :price
 
         # Indicates if purchasing power parity adjustments are applied to the price.
         #   Purchasing power parity feature is not available as of now.
         sig { returns(T::Boolean) }
-        def purchasing_power_parity
-        end
-
-        sig { params(_: T::Boolean).returns(T::Boolean) }
-        def purchasing_power_parity=(_)
-        end
+        attr_accessor :purchasing_power_parity
 
         sig { returns(Symbol) }
-        def type
-        end
-
-        sig { params(_: Symbol).returns(Symbol) }
-        def type=(_)
-        end
+        attr_accessor :type
 
         # Indicates whether the customer can pay any amount they choose. If set to `true`,
         #   the [`price`](Self::price) field is the minimum amount.
         sig { returns(T.nilable(T::Boolean)) }
-        def pay_what_you_want
-        end
+        attr_reader :pay_what_you_want
 
-        sig { params(_: T::Boolean).returns(T::Boolean) }
-        def pay_what_you_want=(_)
-        end
+        sig { params(pay_what_you_want: T::Boolean).void }
+        attr_writer :pay_what_you_want
 
         # A suggested price for the user to pay. This value is only considered if
         #   [`pay_what_you_want`](Self::pay_what_you_want) is `true`. Otherwise, it is
         #   ignored.
         sig { returns(T.nilable(Integer)) }
-        def suggested_price
-        end
-
-        sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-        def suggested_price=(_)
-        end
+        attr_accessor :suggested_price
 
         # Indicates if the price is tax inclusive.
         sig { returns(T.nilable(T::Boolean)) }
-        def tax_inclusive
-        end
-
-        sig { params(_: T.nilable(T::Boolean)).returns(T.nilable(T::Boolean)) }
-        def tax_inclusive=(_)
-        end
+        attr_accessor :tax_inclusive
 
         sig do
           params(
@@ -109,9 +69,7 @@ module Dodopayments
           suggested_price: nil,
           tax_inclusive: nil,
           type: :one_time_price
-        )
-        end
-
+        ); end
         sig do
           override
             .returns(
@@ -127,8 +85,7 @@ module Dodopayments
               }
             )
         end
-        def to_hash
-        end
+        def to_hash; end
 
         module Currency
           extend Dodopayments::Internal::Type::Enum
@@ -283,122 +240,58 @@ module Dodopayments
           ZAR = T.let(:ZAR, Dodopayments::Models::Price::OneTimePrice::Currency::TaggedSymbol)
           ZMW = T.let(:ZMW, Dodopayments::Models::Price::OneTimePrice::Currency::TaggedSymbol)
 
-          class << self
-            sig { override.returns(T::Array[Dodopayments::Models::Price::OneTimePrice::Currency::TaggedSymbol]) }
-            def values
-            end
-          end
+          sig { override.returns(T::Array[Dodopayments::Models::Price::OneTimePrice::Currency::TaggedSymbol]) }
+          def self.values; end
         end
       end
 
       class RecurringPrice < Dodopayments::Internal::Type::BaseModel
         sig { returns(Dodopayments::Models::Price::RecurringPrice::Currency::OrSymbol) }
-        def currency
-        end
-
-        sig do
-          params(_: Dodopayments::Models::Price::RecurringPrice::Currency::OrSymbol)
-            .returns(Dodopayments::Models::Price::RecurringPrice::Currency::OrSymbol)
-        end
-        def currency=(_)
-        end
+        attr_accessor :currency
 
         # Discount applied to the price, represented as a percentage (0 to 100).
         sig { returns(Float) }
-        def discount
-        end
-
-        sig { params(_: Float).returns(Float) }
-        def discount=(_)
-        end
+        attr_accessor :discount
 
         # Number of units for the payment frequency. For example, a value of `1` with a
         #   `payment_frequency_interval` of `month` represents monthly payments.
         sig { returns(Integer) }
-        def payment_frequency_count
-        end
-
-        sig { params(_: Integer).returns(Integer) }
-        def payment_frequency_count=(_)
-        end
+        attr_accessor :payment_frequency_count
 
         sig { returns(Dodopayments::Models::TimeInterval::OrSymbol) }
-        def payment_frequency_interval
-        end
-
-        sig do
-          params(_: Dodopayments::Models::TimeInterval::OrSymbol)
-            .returns(Dodopayments::Models::TimeInterval::OrSymbol)
-        end
-        def payment_frequency_interval=(_)
-        end
+        attr_accessor :payment_frequency_interval
 
         # The payment amount. Represented in the lowest denomination of the currency
         #   (e.g., cents for USD). For example, to charge $1.00, pass `100`.
         sig { returns(Integer) }
-        def price
-        end
-
-        sig { params(_: Integer).returns(Integer) }
-        def price=(_)
-        end
+        attr_accessor :price
 
         # Indicates if purchasing power parity adjustments are applied to the price.
         #   Purchasing power parity feature is not available as of now
         sig { returns(T::Boolean) }
-        def purchasing_power_parity
-        end
-
-        sig { params(_: T::Boolean).returns(T::Boolean) }
-        def purchasing_power_parity=(_)
-        end
+        attr_accessor :purchasing_power_parity
 
         # Number of units for the subscription period. For example, a value of `12` with a
         #   `subscription_period_interval` of `month` represents a one-year subscription.
         sig { returns(Integer) }
-        def subscription_period_count
-        end
-
-        sig { params(_: Integer).returns(Integer) }
-        def subscription_period_count=(_)
-        end
+        attr_accessor :subscription_period_count
 
         sig { returns(Dodopayments::Models::TimeInterval::OrSymbol) }
-        def subscription_period_interval
-        end
-
-        sig do
-          params(_: Dodopayments::Models::TimeInterval::OrSymbol)
-            .returns(Dodopayments::Models::TimeInterval::OrSymbol)
-        end
-        def subscription_period_interval=(_)
-        end
+        attr_accessor :subscription_period_interval
 
         sig { returns(Symbol) }
-        def type
-        end
-
-        sig { params(_: Symbol).returns(Symbol) }
-        def type=(_)
-        end
+        attr_accessor :type
 
         # Indicates if the price is tax inclusive
         sig { returns(T.nilable(T::Boolean)) }
-        def tax_inclusive
-        end
-
-        sig { params(_: T.nilable(T::Boolean)).returns(T.nilable(T::Boolean)) }
-        def tax_inclusive=(_)
-        end
+        attr_accessor :tax_inclusive
 
         # Number of days for the trial period. A value of `0` indicates no trial period.
         sig { returns(T.nilable(Integer)) }
-        def trial_period_days
-        end
+        attr_reader :trial_period_days
 
-        sig { params(_: Integer).returns(Integer) }
-        def trial_period_days=(_)
-        end
+        sig { params(trial_period_days: Integer).void }
+        attr_writer :trial_period_days
 
         sig do
           params(
@@ -428,9 +321,7 @@ module Dodopayments
           tax_inclusive: nil,
           trial_period_days: nil,
           type: :recurring_price
-        )
-        end
-
+        ); end
         sig do
           override
             .returns(
@@ -449,8 +340,7 @@ module Dodopayments
               }
             )
         end
-        def to_hash
-        end
+        def to_hash; end
 
         module Currency
           extend Dodopayments::Internal::Type::Enum
@@ -605,19 +495,13 @@ module Dodopayments
           ZAR = T.let(:ZAR, Dodopayments::Models::Price::RecurringPrice::Currency::TaggedSymbol)
           ZMW = T.let(:ZMW, Dodopayments::Models::Price::RecurringPrice::Currency::TaggedSymbol)
 
-          class << self
-            sig { override.returns(T::Array[Dodopayments::Models::Price::RecurringPrice::Currency::TaggedSymbol]) }
-            def values
-            end
-          end
+          sig { override.returns(T::Array[Dodopayments::Models::Price::RecurringPrice::Currency::TaggedSymbol]) }
+          def self.values; end
         end
       end
 
-      class << self
-        sig { override.returns([Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]) }
-        def variants
-        end
-      end
+      sig { override.returns([Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]) }
+      def self.variants; end
     end
   end
 end

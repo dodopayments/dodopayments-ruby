@@ -4,89 +4,39 @@ module Dodopayments
   module Models
     class PaymentListResponse < Dodopayments::Internal::Type::BaseModel
       sig { returns(Time) }
-      def created_at
-      end
-
-      sig { params(_: Time).returns(Time) }
-      def created_at=(_)
-      end
+      attr_accessor :created_at
 
       sig { returns(Dodopayments::Models::PaymentListResponse::Currency::TaggedSymbol) }
-      def currency
-      end
-
-      sig do
-        params(_: Dodopayments::Models::PaymentListResponse::Currency::TaggedSymbol)
-          .returns(Dodopayments::Models::PaymentListResponse::Currency::TaggedSymbol)
-      end
-      def currency=(_)
-      end
+      attr_accessor :currency
 
       sig { returns(Dodopayments::Models::CustomerLimitedDetails) }
-      def customer
-      end
+      attr_reader :customer
 
-      sig { params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void }
+      sig do
+        params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void
+      end
       attr_writer :customer
 
       sig { returns(T::Hash[Symbol, String]) }
-      def metadata
-      end
-
-      sig { params(_: T::Hash[Symbol, String]).returns(T::Hash[Symbol, String]) }
-      def metadata=(_)
-      end
+      attr_accessor :metadata
 
       sig { returns(String) }
-      def payment_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def payment_id=(_)
-      end
+      attr_accessor :payment_id
 
       sig { returns(Integer) }
-      def total_amount
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def total_amount=(_)
-      end
+      attr_accessor :total_amount
 
       sig { returns(T.nilable(String)) }
-      def payment_method
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def payment_method=(_)
-      end
+      attr_accessor :payment_method
 
       sig { returns(T.nilable(String)) }
-      def payment_method_type
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def payment_method_type=(_)
-      end
+      attr_accessor :payment_method_type
 
       sig { returns(T.nilable(Dodopayments::Models::IntentStatus::TaggedSymbol)) }
-      def status
-      end
-
-      sig do
-        params(_: T.nilable(Dodopayments::Models::IntentStatus::TaggedSymbol))
-          .returns(T.nilable(Dodopayments::Models::IntentStatus::TaggedSymbol))
-      end
-      def status=(_)
-      end
+      attr_accessor :status
 
       sig { returns(T.nilable(String)) }
-      def subscription_id
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def subscription_id=(_)
-      end
+      attr_accessor :subscription_id
 
       sig do
         params(
@@ -98,7 +48,7 @@ module Dodopayments
           total_amount: Integer,
           payment_method: T.nilable(String),
           payment_method_type: T.nilable(String),
-          status: T.nilable(Dodopayments::Models::IntentStatus::TaggedSymbol),
+          status: T.nilable(Dodopayments::Models::IntentStatus::OrSymbol),
           subscription_id: T.nilable(String)
         )
           .returns(T.attached_class)
@@ -114,9 +64,7 @@ module Dodopayments
         payment_method_type: nil,
         status: nil,
         subscription_id: nil
-      )
-      end
-
+      ); end
       sig do
         override
           .returns(
@@ -134,8 +82,7 @@ module Dodopayments
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       module Currency
         extend Dodopayments::Internal::Type::Enum
@@ -290,11 +237,8 @@ module Dodopayments
         ZAR = T.let(:ZAR, Dodopayments::Models::PaymentListResponse::Currency::TaggedSymbol)
         ZMW = T.let(:ZMW, Dodopayments::Models::PaymentListResponse::Currency::TaggedSymbol)
 
-        class << self
-          sig { override.returns(T::Array[Dodopayments::Models::PaymentListResponse::Currency::TaggedSymbol]) }
-          def values
-          end
-        end
+        sig { override.returns(T::Array[Dodopayments::Models::PaymentListResponse::Currency::TaggedSymbol]) }
+        def self.values; end
       end
     end
   end

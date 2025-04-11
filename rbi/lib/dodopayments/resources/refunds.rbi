@@ -21,9 +21,7 @@ module Dodopayments
         # The reason for the refund, if any. Maximum length is 3000 characters. Optional.
         reason: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           refund_id: String,
@@ -35,9 +33,7 @@ module Dodopayments
         # Refund Id
         refund_id,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           created_at_gte: T.nilable(Time),
@@ -64,13 +60,10 @@ module Dodopayments
         # Filter by status
         status: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:)
-      end
+      def self.new(client:); end
     end
   end
 end

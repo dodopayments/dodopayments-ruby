@@ -12,11 +12,8 @@ module Dodopayments
       DISPUTE = T.let(:dispute, Dodopayments::Models::DisputeStage::TaggedSymbol)
       PRE_ARBITRATION = T.let(:pre_arbitration, Dodopayments::Models::DisputeStage::TaggedSymbol)
 
-      class << self
-        sig { override.returns(T::Array[Dodopayments::Models::DisputeStage::TaggedSymbol]) }
-        def values
-        end
-      end
+      sig { override.returns(T::Array[Dodopayments::Models::DisputeStage::TaggedSymbol]) }
+      def self.values; end
     end
   end
 end

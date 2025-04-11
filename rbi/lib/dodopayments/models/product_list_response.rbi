@@ -5,99 +5,43 @@ module Dodopayments
     class ProductListResponse < Dodopayments::Internal::Type::BaseModel
       # Unique identifier for the business to which the product belongs.
       sig { returns(String) }
-      def business_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def business_id=(_)
-      end
+      attr_accessor :business_id
 
       # Timestamp when the product was created.
       sig { returns(Time) }
-      def created_at
-      end
-
-      sig { params(_: Time).returns(Time) }
-      def created_at=(_)
-      end
+      attr_accessor :created_at
 
       # Indicates if the product is recurring (e.g., subscriptions).
       sig { returns(T::Boolean) }
-      def is_recurring
-      end
-
-      sig { params(_: T::Boolean).returns(T::Boolean) }
-      def is_recurring=(_)
-      end
+      attr_accessor :is_recurring
 
       # Unique identifier for the product.
       sig { returns(String) }
-      def product_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def product_id=(_)
-      end
+      attr_accessor :product_id
 
       # Represents the different categories of taxation applicable to various products
       #   and services.
       sig { returns(Dodopayments::Models::ProductListResponse::TaxCategory::TaggedSymbol) }
-      def tax_category
-      end
-
-      sig do
-        params(_: Dodopayments::Models::ProductListResponse::TaxCategory::TaggedSymbol)
-          .returns(Dodopayments::Models::ProductListResponse::TaxCategory::TaggedSymbol)
-      end
-      def tax_category=(_)
-      end
+      attr_accessor :tax_category
 
       # Timestamp when the product was last updated.
       sig { returns(Time) }
-      def updated_at
-      end
-
-      sig { params(_: Time).returns(Time) }
-      def updated_at=(_)
-      end
+      attr_accessor :updated_at
 
       sig { returns(T.nilable(Dodopayments::Models::ProductListResponse::Currency::TaggedSymbol)) }
-      def currency
-      end
-
-      sig do
-        params(_: T.nilable(Dodopayments::Models::ProductListResponse::Currency::TaggedSymbol))
-          .returns(T.nilable(Dodopayments::Models::ProductListResponse::Currency::TaggedSymbol))
-      end
-      def currency=(_)
-      end
+      attr_accessor :currency
 
       # Description of the product, optional.
       sig { returns(T.nilable(String)) }
-      def description
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def description=(_)
-      end
+      attr_accessor :description
 
       # URL of the product image, optional.
       sig { returns(T.nilable(String)) }
-      def image
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def image=(_)
-      end
+      attr_accessor :image
 
       # Name of the product, optional.
       sig { returns(T.nilable(String)) }
-      def name
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def name=(_)
-      end
+      attr_accessor :name
 
       # Price of the product, optional.
       #
@@ -110,40 +54,18 @@ module Dodopayments
       #
       #   This ensures precision and avoids floating-point rounding errors.
       sig { returns(T.nilable(Integer)) }
-      def price
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def price=(_)
-      end
+      attr_accessor :price
 
       sig do
         returns(
           T.nilable(T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice))
         )
       end
-      def price_detail
-      end
-
-      sig do
-        params(
-          _: T.nilable(T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice))
-        )
-          .returns(
-            T.nilable(T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice))
-          )
-      end
-      def price_detail=(_)
-      end
+      attr_accessor :price_detail
 
       # Indicates if the price is tax inclusive
       sig { returns(T.nilable(T::Boolean)) }
-      def tax_inclusive
-      end
-
-      sig { params(_: T.nilable(T::Boolean)).returns(T.nilable(T::Boolean)) }
-      def tax_inclusive=(_)
-      end
+      attr_accessor :tax_inclusive
 
       sig do
         params(
@@ -151,9 +73,9 @@ module Dodopayments
           created_at: Time,
           is_recurring: T::Boolean,
           product_id: String,
-          tax_category: Dodopayments::Models::ProductListResponse::TaxCategory::TaggedSymbol,
+          tax_category: Dodopayments::Models::ProductListResponse::TaxCategory::OrSymbol,
           updated_at: Time,
-          currency: T.nilable(Dodopayments::Models::ProductListResponse::Currency::TaggedSymbol),
+          currency: T.nilable(Dodopayments::Models::ProductListResponse::Currency::OrSymbol),
           description: T.nilable(String),
           image: T.nilable(String),
           name: T.nilable(String),
@@ -183,9 +105,7 @@ module Dodopayments
         price: nil,
         price_detail: nil,
         tax_inclusive: nil
-      )
-      end
-
+      ); end
       sig do
         override
           .returns(
@@ -206,8 +126,7 @@ module Dodopayments
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       # Represents the different categories of taxation applicable to various products
       #   and services.
@@ -224,11 +143,8 @@ module Dodopayments
         E_BOOK = T.let(:e_book, Dodopayments::Models::ProductListResponse::TaxCategory::TaggedSymbol)
         EDTECH = T.let(:edtech, Dodopayments::Models::ProductListResponse::TaxCategory::TaggedSymbol)
 
-        class << self
-          sig { override.returns(T::Array[Dodopayments::Models::ProductListResponse::TaxCategory::TaggedSymbol]) }
-          def values
-          end
-        end
+        sig { override.returns(T::Array[Dodopayments::Models::ProductListResponse::TaxCategory::TaggedSymbol]) }
+        def self.values; end
       end
 
       module Currency
@@ -384,11 +300,8 @@ module Dodopayments
         ZAR = T.let(:ZAR, Dodopayments::Models::ProductListResponse::Currency::TaggedSymbol)
         ZMW = T.let(:ZMW, Dodopayments::Models::ProductListResponse::Currency::TaggedSymbol)
 
-        class << self
-          sig { override.returns(T::Array[Dodopayments::Models::ProductListResponse::Currency::TaggedSymbol]) }
-          def values
-          end
-        end
+        sig { override.returns(T::Array[Dodopayments::Models::ProductListResponse::Currency::TaggedSymbol]) }
+        def self.values; end
       end
     end
   end

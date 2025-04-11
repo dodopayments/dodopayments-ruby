@@ -7,40 +7,21 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       sig { returns(Dodopayments::Models::BillingAddress) }
-      def billing
-      end
+      attr_reader :billing
 
       sig { params(billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash)).void }
       attr_writer :billing
 
       sig { returns(T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer)) }
-      def customer
-      end
-
-      sig do
-        params(_: T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer))
-          .returns(T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer))
-      end
-      def customer=(_)
-      end
+      attr_accessor :customer
 
       # Unique identifier of the product to subscribe to
       sig { returns(String) }
-      def product_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def product_id=(_)
-      end
+      attr_accessor :product_id
 
       # Number of units to subscribe for. Must be at least 1.
       sig { returns(Integer) }
-      def quantity
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def quantity=(_)
-      end
+      attr_accessor :quantity
 
       # List of payment methods allowed during checkout.
       #
@@ -53,43 +34,23 @@ module Dodopayments
           T.nilable(T::Array[Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType::OrSymbol])
         )
       end
-      def allowed_payment_method_types
-      end
-
-      sig do
-        params(
-          _: T.nilable(T::Array[Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType::OrSymbol])
-        )
-          .returns(
-            T.nilable(T::Array[Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType::OrSymbol])
-          )
-      end
-      def allowed_payment_method_types=(_)
-      end
+      attr_accessor :allowed_payment_method_types
 
       sig { returns(T.nilable(Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::OrSymbol)) }
       attr_accessor :billing_currency
 
       # Discount Code to apply to the subscription
       sig { returns(T.nilable(String)) }
-      def discount_code
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def discount_code=(_)
-      end
+      attr_accessor :discount_code
 
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
-      def metadata
-      end
+      attr_reader :metadata
 
-      sig { params(_: T::Hash[Symbol, String]).returns(T::Hash[Symbol, String]) }
-      def metadata=(_)
-      end
+      sig { params(metadata: T::Hash[Symbol, String]).void }
+      attr_writer :metadata
 
       sig { returns(T.nilable(Dodopayments::Models::SubscriptionCreateParams::OnDemand)) }
-      def on_demand
-      end
+      attr_reader :on_demand
 
       sig do
         params(
@@ -97,30 +58,17 @@ module Dodopayments
             T.any(Dodopayments::Models::SubscriptionCreateParams::OnDemand, Dodopayments::Internal::AnyHash)
           )
         )
-          .returns(
-            T.nilable(T.any(Dodopayments::Models::SubscriptionCreateParams::OnDemand, Dodopayments::Util::AnyHash))
-          )
+          .void
       end
-      def on_demand=(_)
-      end
+      attr_writer :on_demand
 
       # If true, generates a payment link. Defaults to false if not specified.
       sig { returns(T.nilable(T::Boolean)) }
-      def payment_link
-      end
-
-      sig { params(_: T.nilable(T::Boolean)).returns(T.nilable(T::Boolean)) }
-      def payment_link=(_)
-      end
+      attr_accessor :payment_link
 
       # Optional URL to redirect after successful subscription creation
       sig { returns(T.nilable(String)) }
-      def return_url
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def return_url=(_)
-      end
+      attr_accessor :return_url
 
       # Display saved payment methods of a returning customer False by default
       sig { returns(T.nilable(T::Boolean)) }
@@ -132,22 +80,12 @@ module Dodopayments
       # Tax ID in case the payment is B2B. If tax id validation fails the payment
       #   creation will fail
       sig { returns(T.nilable(String)) }
-      def tax_id
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def tax_id=(_)
-      end
+      attr_accessor :tax_id
 
       # Optional trial period in days If specified, this value overrides the trial
       #   period set in the product's price Must be between 0 and 10000 days
       sig { returns(T.nilable(Integer)) }
-      def trial_period_days
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def trial_period_days=(_)
-      end
+      attr_accessor :trial_period_days
 
       sig do
         params(
@@ -191,9 +129,7 @@ module Dodopayments
         tax_id: nil,
         trial_period_days: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         override
           .returns(
@@ -216,8 +152,7 @@ module Dodopayments
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       module AllowedPaymentMethodType
         extend Dodopayments::Internal::Type::Enum
@@ -272,14 +207,11 @@ module Dodopayments
         AMAZON_PAY =
           T.let(:amazon_pay, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol)
 
-        class << self
-          sig do
-            override
-              .returns(T::Array[Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol])
-          end
-          def values
-          end
+        sig do
+          override
+            .returns(T::Array[Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol])
         end
+        def self.values; end
       end
 
       module BillingCurrency
@@ -437,39 +369,26 @@ module Dodopayments
         ZMW = T.let(:ZMW, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
 
         sig { override.returns(T::Array[Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol]) }
-        def self.values
-        end
+        def self.values; end
       end
 
       class OnDemand < Dodopayments::Internal::Type::BaseModel
         # If set as True, does not perform any charge and only authorizes payment method
         #   details for future use.
         sig { returns(T::Boolean) }
-        def mandate_only
-        end
-
-        sig { params(_: T::Boolean).returns(T::Boolean) }
-        def mandate_only=(_)
-        end
+        attr_accessor :mandate_only
 
         # Product price for the initial charge to customer If not specified the stored
         #   price of the product will be used Represented in the lowest denomination of the
         #   currency (e.g., cents for USD). For example, to charge $1.00, pass `100`.
         sig { returns(T.nilable(Integer)) }
-        def product_price
-        end
-
-        sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-        def product_price=(_)
-        end
+        attr_accessor :product_price
 
         sig { params(mandate_only: T::Boolean, product_price: T.nilable(Integer)).returns(T.attached_class) }
-        def self.new(mandate_only:, product_price: nil)
-        end
+        def self.new(mandate_only:, product_price: nil); end
 
         sig { override.returns({mandate_only: T::Boolean, product_price: T.nilable(Integer)}) }
-        def to_hash
-        end
+        def to_hash; end
       end
     end
   end

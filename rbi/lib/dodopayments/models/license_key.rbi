@@ -144,9 +144,7 @@ module Dodopayments
         activations_limit: nil,
         expires_at: nil,
         subscription_id: nil
-      )
-      end
-
+      ); end
       sig do
         override
           .returns(
@@ -166,8 +164,7 @@ module Dodopayments
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

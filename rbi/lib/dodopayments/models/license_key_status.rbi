@@ -12,11 +12,8 @@ module Dodopayments
       EXPIRED = T.let(:expired, Dodopayments::Models::LicenseKeyStatus::TaggedSymbol)
       DISABLED = T.let(:disabled, Dodopayments::Models::LicenseKeyStatus::TaggedSymbol)
 
-      class << self
-        sig { override.returns(T::Array[Dodopayments::Models::LicenseKeyStatus::TaggedSymbol]) }
-        def values
-        end
-      end
+      sig { override.returns(T::Array[Dodopayments::Models::LicenseKeyStatus::TaggedSymbol]) }
+      def self.values; end
     end
   end
 end

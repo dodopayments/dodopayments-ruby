@@ -5,142 +5,61 @@ module Dodopayments
     class PayoutListResponse < Dodopayments::Internal::Type::BaseModel
       # The total amount of the payout.
       sig { returns(Integer) }
-      def amount
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def amount=(_)
-      end
+      attr_accessor :amount
 
       # The unique identifier of the business associated with the payout.
       sig { returns(String) }
-      def business_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def business_id=(_)
-      end
+      attr_accessor :business_id
 
       # The total value of chargebacks associated with the payout.
       sig { returns(Integer) }
-      def chargebacks
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def chargebacks=(_)
-      end
+      attr_accessor :chargebacks
 
       # The timestamp when the payout was created, in UTC.
       sig { returns(Time) }
-      def created_at
-      end
-
-      sig { params(_: Time).returns(Time) }
-      def created_at=(_)
-      end
+      attr_accessor :created_at
 
       sig { returns(Dodopayments::Models::PayoutListResponse::Currency::TaggedSymbol) }
-      def currency
-      end
-
-      sig do
-        params(_: Dodopayments::Models::PayoutListResponse::Currency::TaggedSymbol)
-          .returns(Dodopayments::Models::PayoutListResponse::Currency::TaggedSymbol)
-      end
-      def currency=(_)
-      end
+      attr_accessor :currency
 
       # The fee charged for processing the payout.
       sig { returns(Integer) }
-      def fee
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def fee=(_)
-      end
+      attr_accessor :fee
 
       # The payment method used for the payout (e.g., bank transfer, card, etc.).
       sig { returns(String) }
-      def payment_method
-      end
-
-      sig { params(_: String).returns(String) }
-      def payment_method=(_)
-      end
+      attr_accessor :payment_method
 
       # The unique identifier of the payout.
       sig { returns(String) }
-      def payout_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def payout_id=(_)
-      end
+      attr_accessor :payout_id
 
       # The total value of refunds associated with the payout.
       sig { returns(Integer) }
-      def refunds
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def refunds=(_)
-      end
+      attr_accessor :refunds
 
       sig { returns(Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol) }
-      def status
-      end
-
-      sig do
-        params(_: Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
-          .returns(Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
-      end
-      def status=(_)
-      end
+      attr_accessor :status
 
       # The tax applied to the payout.
       sig { returns(Integer) }
-      def tax
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def tax=(_)
-      end
+      attr_accessor :tax
 
       # The timestamp when the payout was last updated, in UTC.
       sig { returns(Time) }
-      def updated_at
-      end
-
-      sig { params(_: Time).returns(Time) }
-      def updated_at=(_)
-      end
+      attr_accessor :updated_at
 
       # The name of the payout recipient or purpose.
       sig { returns(T.nilable(String)) }
-      def name
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def name=(_)
-      end
+      attr_accessor :name
 
       # The URL of the document associated with the payout.
       sig { returns(T.nilable(String)) }
-      def payout_document_url
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def payout_document_url=(_)
-      end
+      attr_accessor :payout_document_url
 
       # Any additional remarks or notes associated with the payout.
       sig { returns(T.nilable(String)) }
-      def remarks
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def remarks=(_)
-      end
+      attr_accessor :remarks
 
       sig do
         params(
@@ -148,12 +67,12 @@ module Dodopayments
           business_id: String,
           chargebacks: Integer,
           created_at: Time,
-          currency: Dodopayments::Models::PayoutListResponse::Currency::TaggedSymbol,
+          currency: Dodopayments::Models::PayoutListResponse::Currency::OrSymbol,
           fee: Integer,
           payment_method: String,
           payout_id: String,
           refunds: Integer,
-          status: Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol,
+          status: Dodopayments::Models::PayoutListResponse::Status::OrSymbol,
           tax: Integer,
           updated_at: Time,
           name: T.nilable(String),
@@ -178,9 +97,7 @@ module Dodopayments
         name: nil,
         payout_document_url: nil,
         remarks: nil
-      )
-      end
-
+      ); end
       sig do
         override
           .returns(
@@ -203,8 +120,7 @@ module Dodopayments
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       module Currency
         extend Dodopayments::Internal::Type::Enum
@@ -359,11 +275,8 @@ module Dodopayments
         ZAR = T.let(:ZAR, Dodopayments::Models::PayoutListResponse::Currency::TaggedSymbol)
         ZMW = T.let(:ZMW, Dodopayments::Models::PayoutListResponse::Currency::TaggedSymbol)
 
-        class << self
-          sig { override.returns(T::Array[Dodopayments::Models::PayoutListResponse::Currency::TaggedSymbol]) }
-          def values
-          end
-        end
+        sig { override.returns(T::Array[Dodopayments::Models::PayoutListResponse::Currency::TaggedSymbol]) }
+        def self.values; end
       end
 
       module Status
@@ -379,11 +292,8 @@ module Dodopayments
         FAILED = T.let(:failed, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
         SUCCESS = T.let(:success, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
 
-        class << self
-          sig { override.returns(T::Array[Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol]) }
-          def values
-          end
-        end
+        sig { override.returns(T::Array[Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol]) }
+        def self.values; end
       end
     end
   end

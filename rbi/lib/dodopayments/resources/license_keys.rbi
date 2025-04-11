@@ -14,9 +14,7 @@ module Dodopayments
         # License key ID
         id,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           id: String,
@@ -40,9 +38,7 @@ module Dodopayments
         #   remove the expiration date, or omit this field to leave it unchanged.
         expires_at: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           customer_id: T.nilable(String),
@@ -66,13 +62,10 @@ module Dodopayments
         # Filter by license key status
         status: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:)
-      end
+      def self.new(client:); end
     end
   end
 end

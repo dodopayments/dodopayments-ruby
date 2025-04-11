@@ -12,12 +12,10 @@ module Dodopayments
       end
 
       sig { params(link: String).returns(T.attached_class) }
-      def self.new(link:)
-      end
+      def self.new(link:); end
 
       sig { override.returns({link: String}) }
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

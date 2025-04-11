@@ -47,8 +47,7 @@ module Dodopayments
         params(id: String, business_id: String, created_at: Time, license_key_id: String, name: String)
           .returns(T.attached_class)
       end
-      def self.new(id:, business_id:, created_at:, license_key_id:, name:)
-      end
+      def self.new(id:, business_id:, created_at:, license_key_id:, name:); end
 
       sig do
         override.returns(
@@ -61,8 +60,7 @@ module Dodopayments
           }
         )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

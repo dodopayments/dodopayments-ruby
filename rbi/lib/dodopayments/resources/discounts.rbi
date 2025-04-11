@@ -41,9 +41,7 @@ module Dodopayments
         # How many times this discount can be used (if any). Must be >= 1 if provided.
         usage_limit: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       # GET /discounts/{discount_id}
       sig do
         params(
@@ -56,9 +54,7 @@ module Dodopayments
         # Discount Id
         discount_id,
         request_options: {}
-      )
-      end
-
+      ); end
       # PATCH /discounts/{discount_id}
       sig do
         params(
@@ -95,9 +91,7 @@ module Dodopayments
         type: nil,
         usage_limit: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       # GET /discounts
       sig do
         params(
@@ -113,9 +107,7 @@ module Dodopayments
         # Page size (default = 10, max = 100).
         page_size: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       # DELETE /discounts/{discount_id}
       sig do
         params(
@@ -128,13 +120,10 @@ module Dodopayments
         # Discount Id
         discount_id,
         request_options: {}
-      )
-      end
-
+      ); end
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:)
-      end
+      def self.new(client:); end
     end
   end
 end

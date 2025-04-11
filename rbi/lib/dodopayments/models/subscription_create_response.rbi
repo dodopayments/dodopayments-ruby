@@ -7,7 +7,9 @@ module Dodopayments
       def customer
       end
 
-      sig { params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void }
+      sig do
+        params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void
+      end
       attr_writer :customer
 
       sig { returns(T::Hash[Symbol, String]) }
@@ -85,9 +87,7 @@ module Dodopayments
         client_secret: nil,
         discount_id: nil,
         payment_link: nil
-      )
-      end
-
+      ); end
       sig do
         override
           .returns(
@@ -102,8 +102,7 @@ module Dodopayments
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

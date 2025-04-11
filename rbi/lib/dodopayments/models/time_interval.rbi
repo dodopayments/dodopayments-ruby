@@ -13,11 +13,8 @@ module Dodopayments
       MONTH = T.let(:Month, Dodopayments::Models::TimeInterval::TaggedSymbol)
       YEAR = T.let(:Year, Dodopayments::Models::TimeInterval::TaggedSymbol)
 
-      class << self
-        sig { override.returns(T::Array[Dodopayments::Models::TimeInterval::TaggedSymbol]) }
-        def values
-        end
-      end
+      sig { override.returns(T::Array[Dodopayments::Models::TimeInterval::TaggedSymbol]) }
+      def self.values; end
     end
   end
 end

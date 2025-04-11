@@ -42,8 +42,7 @@ module Dodopayments
         params(email: String, name: String, create_new_customer: T::Boolean, phone_number: T.nilable(String))
           .returns(T.attached_class)
       end
-      def self.new(email:, name:, create_new_customer: nil, phone_number: nil)
-      end
+      def self.new(email:, name:, create_new_customer: nil, phone_number: nil); end
 
       sig do
         override
@@ -54,8 +53,7 @@ module Dodopayments
                      phone_number: T.nilable(String)
                    })
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

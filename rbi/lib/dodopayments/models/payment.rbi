@@ -5,179 +5,81 @@ module Dodopayments
     class Payment < Dodopayments::Internal::Type::BaseModel
       # Identifier of the business associated with the payment
       sig { returns(String) }
-      def business_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def business_id=(_)
-      end
+      attr_accessor :business_id
 
       # Timestamp when the payment was created
       sig { returns(Time) }
-      def created_at
-      end
-
-      sig { params(_: Time).returns(Time) }
-      def created_at=(_)
-      end
+      attr_accessor :created_at
 
       sig { returns(Dodopayments::Models::Payment::Currency::TaggedSymbol) }
-      def currency
-      end
-
-      sig do
-        params(_: Dodopayments::Models::Payment::Currency::TaggedSymbol)
-          .returns(Dodopayments::Models::Payment::Currency::TaggedSymbol)
-      end
-      def currency=(_)
-      end
+      attr_accessor :currency
 
       sig { returns(Dodopayments::Models::CustomerLimitedDetails) }
-      def customer
-      end
+      attr_reader :customer
 
-      sig { params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void }
+      sig do
+        params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void
+      end
       attr_writer :customer
 
       # List of disputes associated with this payment
       sig { returns(T::Array[Dodopayments::Models::Dispute]) }
-      def disputes
-      end
-
-      sig { params(_: T::Array[Dodopayments::Models::Dispute]).returns(T::Array[Dodopayments::Models::Dispute]) }
-      def disputes=(_)
-      end
+      attr_accessor :disputes
 
       sig { returns(T::Hash[Symbol, String]) }
-      def metadata
-      end
-
-      sig { params(_: T::Hash[Symbol, String]).returns(T::Hash[Symbol, String]) }
-      def metadata=(_)
-      end
+      attr_accessor :metadata
 
       # Unique identifier for the payment
       sig { returns(String) }
-      def payment_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def payment_id=(_)
-      end
+      attr_accessor :payment_id
 
       # List of refunds issued for this payment
       sig { returns(T::Array[Dodopayments::Models::Refund]) }
-      def refunds
-      end
-
-      sig { params(_: T::Array[Dodopayments::Models::Refund]).returns(T::Array[Dodopayments::Models::Refund]) }
-      def refunds=(_)
-      end
+      attr_accessor :refunds
 
       # Total amount charged to the customer including tax, in smallest currency unit
       #   (e.g. cents)
       sig { returns(Integer) }
-      def total_amount
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def total_amount=(_)
-      end
+      attr_accessor :total_amount
 
       # The discount id if discount is applied
       sig { returns(T.nilable(String)) }
-      def discount_id
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def discount_id=(_)
-      end
+      attr_accessor :discount_id
 
       # An error message if the payment failed
       sig { returns(T.nilable(String)) }
-      def error_message
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def error_message=(_)
-      end
+      attr_accessor :error_message
 
       # Checkout URL
       sig { returns(T.nilable(String)) }
-      def payment_link
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def payment_link=(_)
-      end
+      attr_accessor :payment_link
 
       # Payment method used by customer (e.g. "card", "bank_transfer")
       sig { returns(T.nilable(String)) }
-      def payment_method
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def payment_method=(_)
-      end
+      attr_accessor :payment_method
 
       # Specific type of payment method (e.g. "visa", "mastercard")
       sig { returns(T.nilable(String)) }
-      def payment_method_type
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def payment_method_type=(_)
-      end
+      attr_accessor :payment_method_type
 
       # List of products purchased in a one-time payment
       sig { returns(T.nilable(T::Array[Dodopayments::Models::Payment::ProductCart])) }
-      def product_cart
-      end
-
-      sig do
-        params(_: T.nilable(T::Array[Dodopayments::Models::Payment::ProductCart]))
-          .returns(T.nilable(T::Array[Dodopayments::Models::Payment::ProductCart]))
-      end
-      def product_cart=(_)
-      end
+      attr_accessor :product_cart
 
       sig { returns(T.nilable(Dodopayments::Models::IntentStatus::TaggedSymbol)) }
-      def status
-      end
-
-      sig do
-        params(_: T.nilable(Dodopayments::Models::IntentStatus::TaggedSymbol))
-          .returns(T.nilable(Dodopayments::Models::IntentStatus::TaggedSymbol))
-      end
-      def status=(_)
-      end
+      attr_accessor :status
 
       # Identifier of the subscription if payment is part of a subscription
       sig { returns(T.nilable(String)) }
-      def subscription_id
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def subscription_id=(_)
-      end
+      attr_accessor :subscription_id
 
       # Amount of tax collected in smallest currency unit (e.g. cents)
       sig { returns(T.nilable(Integer)) }
-      def tax
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def tax=(_)
-      end
+      attr_accessor :tax
 
       # Timestamp when the payment was last updated
       sig { returns(T.nilable(Time)) }
-      def updated_at
-      end
-
-      sig { params(_: T.nilable(Time)).returns(T.nilable(Time)) }
-      def updated_at=(_)
-      end
+      attr_accessor :updated_at
 
       sig do
         params(
@@ -223,9 +125,7 @@ module Dodopayments
         subscription_id: nil,
         tax: nil,
         updated_at: nil
-      )
-      end
-
+      ); end
       sig do
         override
           .returns(
@@ -252,8 +152,7 @@ module Dodopayments
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       module Currency
         extend Dodopayments::Internal::Type::Enum
@@ -407,37 +306,22 @@ module Dodopayments
         ZAR = T.let(:ZAR, Dodopayments::Models::Payment::Currency::TaggedSymbol)
         ZMW = T.let(:ZMW, Dodopayments::Models::Payment::Currency::TaggedSymbol)
 
-        class << self
-          sig { override.returns(T::Array[Dodopayments::Models::Payment::Currency::TaggedSymbol]) }
-          def values
-          end
-        end
+        sig { override.returns(T::Array[Dodopayments::Models::Payment::Currency::TaggedSymbol]) }
+        def self.values; end
       end
 
       class ProductCart < Dodopayments::Internal::Type::BaseModel
         sig { returns(String) }
-        def product_id
-        end
-
-        sig { params(_: String).returns(String) }
-        def product_id=(_)
-        end
+        attr_accessor :product_id
 
         sig { returns(Integer) }
-        def quantity
-        end
-
-        sig { params(_: Integer).returns(Integer) }
-        def quantity=(_)
-        end
+        attr_accessor :quantity
 
         sig { params(product_id: String, quantity: Integer).returns(T.attached_class) }
-        def self.new(product_id:, quantity:)
-        end
+        def self.new(product_id:, quantity:); end
 
         sig { override.returns({product_id: String, quantity: Integer}) }
-        def to_hash
-        end
+        def to_hash; end
       end
     end
   end

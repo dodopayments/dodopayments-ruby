@@ -11,8 +11,7 @@ module Dodopayments
       attr_accessor :items
 
       sig { returns(String) }
-      def inspect
-      end
+      def inspect; end
     end
   end
 end

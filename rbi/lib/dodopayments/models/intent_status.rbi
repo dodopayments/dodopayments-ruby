@@ -24,11 +24,8 @@ module Dodopayments
       PARTIALLY_CAPTURED_AND_CAPTURABLE =
         T.let(:partially_captured_and_capturable, Dodopayments::Models::IntentStatus::TaggedSymbol)
 
-      class << self
-        sig { override.returns(T::Array[Dodopayments::Models::IntentStatus::TaggedSymbol]) }
-        def values
-        end
-      end
+      sig { override.returns(T::Array[Dodopayments::Models::IntentStatus::TaggedSymbol]) }
+      def self.values; end
     end
   end
 end

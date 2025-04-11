@@ -23,12 +23,10 @@ module Dodopayments
         )
           .returns(T.attached_class)
       end
-      def self.new(product_price:, request_options: {})
-      end
+      def self.new(product_price:, request_options: {}); end
 
       sig { override.returns({product_price: Integer, request_options: Dodopayments::RequestOptions}) }
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

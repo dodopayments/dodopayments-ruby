@@ -11,13 +11,11 @@ module Dodopayments
           )
             .void
         end
-        def retrieve(payment_id, request_options: {})
-        end
+        def retrieve(payment_id, request_options: {}); end
 
         # @api private
         sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-        def self.new(client:)
-        end
+        def self.new(client:); end
       end
     end
   end

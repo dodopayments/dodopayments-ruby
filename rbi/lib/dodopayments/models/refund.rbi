@@ -5,79 +5,33 @@ module Dodopayments
     class Refund < Dodopayments::Internal::Type::BaseModel
       # The unique identifier of the business issuing the refund.
       sig { returns(String) }
-      def business_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def business_id=(_)
-      end
+      attr_accessor :business_id
 
       # The timestamp of when the refund was created in UTC.
       sig { returns(Time) }
-      def created_at
-      end
-
-      sig { params(_: Time).returns(Time) }
-      def created_at=(_)
-      end
+      attr_accessor :created_at
 
       # The unique identifier of the payment associated with the refund.
       sig { returns(String) }
-      def payment_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def payment_id=(_)
-      end
+      attr_accessor :payment_id
 
       # The unique identifier of the refund.
       sig { returns(String) }
-      def refund_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def refund_id=(_)
-      end
+      attr_accessor :refund_id
 
       sig { returns(Dodopayments::Models::RefundStatus::TaggedSymbol) }
-      def status
-      end
-
-      sig do
-        params(_: Dodopayments::Models::RefundStatus::TaggedSymbol)
-          .returns(Dodopayments::Models::RefundStatus::TaggedSymbol)
-      end
-      def status=(_)
-      end
+      attr_accessor :status
 
       # The refunded amount.
       sig { returns(T.nilable(Integer)) }
-      def amount
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def amount=(_)
-      end
+      attr_accessor :amount
 
       sig { returns(T.nilable(Dodopayments::Models::Refund::Currency::TaggedSymbol)) }
-      def currency
-      end
-
-      sig do
-        params(_: T.nilable(Dodopayments::Models::Refund::Currency::TaggedSymbol))
-          .returns(T.nilable(Dodopayments::Models::Refund::Currency::TaggedSymbol))
-      end
-      def currency=(_)
-      end
+      attr_accessor :currency
 
       # The reason provided for the refund, if any. Optional.
       sig { returns(T.nilable(String)) }
-      def reason
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def reason=(_)
-      end
+      attr_accessor :reason
 
       sig do
         params(
@@ -85,9 +39,9 @@ module Dodopayments
           created_at: Time,
           payment_id: String,
           refund_id: String,
-          status: Dodopayments::Models::RefundStatus::TaggedSymbol,
+          status: Dodopayments::Models::RefundStatus::OrSymbol,
           amount: T.nilable(Integer),
-          currency: T.nilable(Dodopayments::Models::Refund::Currency::TaggedSymbol),
+          currency: T.nilable(Dodopayments::Models::Refund::Currency::OrSymbol),
           reason: T.nilable(String)
         )
           .returns(T.attached_class)
@@ -119,8 +73,7 @@ module Dodopayments
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       module Currency
         extend Dodopayments::Internal::Type::Enum
@@ -274,11 +227,8 @@ module Dodopayments
         ZAR = T.let(:ZAR, Dodopayments::Models::Refund::Currency::TaggedSymbol)
         ZMW = T.let(:ZMW, Dodopayments::Models::Refund::Currency::TaggedSymbol)
 
-        class << self
-          sig { override.returns(T::Array[Dodopayments::Models::Refund::Currency::TaggedSymbol]) }
-          def values
-          end
-        end
+        sig { override.returns(T::Array[Dodopayments::Models::Refund::Currency::TaggedSymbol]) }
+        def self.values; end
       end
     end
   end

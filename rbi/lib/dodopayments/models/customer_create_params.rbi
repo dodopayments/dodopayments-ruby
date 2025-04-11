@@ -39,8 +39,7 @@ module Dodopayments
         )
           .returns(T.attached_class)
       end
-      def self.new(email:, name:, phone_number: nil, request_options: {})
-      end
+      def self.new(email:, name:, phone_number: nil, request_options: {}); end
 
       sig do
         override
@@ -53,8 +52,7 @@ module Dodopayments
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

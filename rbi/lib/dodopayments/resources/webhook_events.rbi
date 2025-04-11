@@ -10,8 +10,7 @@ module Dodopayments
         )
           .returns(Dodopayments::Models::WebhookEvent)
       end
-      def retrieve(webhook_event_id, request_options: {})
-      end
+      def retrieve(webhook_event_id, request_options: {}); end
 
       sig do
         params(
@@ -39,13 +38,10 @@ module Dodopayments
         # Page size default is 10 max is 100
         page_size: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:)
-      end
+      def self.new(client:); end
     end
   end
 end

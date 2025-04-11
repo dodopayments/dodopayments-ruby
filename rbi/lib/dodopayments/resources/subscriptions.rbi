@@ -61,9 +61,7 @@ module Dodopayments
         #   period set in the product's price Must be between 0 and 10000 days
         trial_period_days: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           subscription_id: String,
@@ -75,9 +73,7 @@ module Dodopayments
         # Subscription Id
         subscription_id,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           subscription_id: String,
@@ -93,9 +89,7 @@ module Dodopayments
         metadata: nil,
         status: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           created_at_gte: T.nilable(Time),
@@ -122,9 +116,7 @@ module Dodopayments
         # Filter by status
         status: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           subscription_id: String,
@@ -140,13 +132,10 @@ module Dodopayments
         #   cents for USD). For example, to charge $1.00, pass `100`.
         product_price:,
         request_options: {}
-      )
-      end
-
+      ); end
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:)
-      end
+      def self.new(client:); end
     end
   end
 end

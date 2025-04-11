@@ -22,8 +22,7 @@ module Dodopayments
           )
             .returns(T.attached_class)
         end
-        def self.new(force_update: nil, request_options: {})
-        end
+        def self.new(force_update: nil, request_options: {}); end
 
         sig do
           override.returns(
@@ -33,8 +32,7 @@ module Dodopayments
             }
           )
         end
-        def to_hash
-        end
+        def to_hash; end
       end
     end
   end

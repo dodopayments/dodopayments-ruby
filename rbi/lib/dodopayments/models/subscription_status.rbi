@@ -16,11 +16,8 @@ module Dodopayments
       FAILED = T.let(:failed, Dodopayments::Models::SubscriptionStatus::TaggedSymbol)
       EXPIRED = T.let(:expired, Dodopayments::Models::SubscriptionStatus::TaggedSymbol)
 
-      class << self
-        sig { override.returns(T::Array[Dodopayments::Models::SubscriptionStatus::TaggedSymbol]) }
-        def values
-        end
-      end
+      sig { override.returns(T::Array[Dodopayments::Models::SubscriptionStatus::TaggedSymbol]) }
+      def self.values; end
     end
   end
 end

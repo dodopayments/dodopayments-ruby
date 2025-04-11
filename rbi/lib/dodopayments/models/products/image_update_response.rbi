@@ -21,12 +21,10 @@ module Dodopayments
         end
 
         sig { params(url: String, image_id: T.nilable(String)).returns(T.attached_class) }
-        def self.new(url:, image_id: nil)
-        end
+        def self.new(url:, image_id: nil); end
 
         sig { override.returns({url: String, image_id: T.nilable(String)}) }
-        def to_hash
-        end
+        def to_hash; end
       end
     end
   end

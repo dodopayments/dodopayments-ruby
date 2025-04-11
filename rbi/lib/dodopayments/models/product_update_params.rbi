@@ -8,58 +8,32 @@ module Dodopayments
 
       # Available Addons for subscription products
       sig { returns(T.nilable(T::Array[String])) }
-      def addons
-      end
-
-      sig { params(_: T.nilable(T::Array[String])).returns(T.nilable(T::Array[String])) }
-      def addons=(_)
-      end
+      attr_accessor :addons
 
       # Description of the product, optional and must be at most 1000 characters.
       sig { returns(T.nilable(String)) }
-      def description
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def description=(_)
-      end
+      attr_accessor :description
 
       # Product image id after its uploaded to S3
       sig { returns(T.nilable(String)) }
-      def image_id
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def image_id=(_)
-      end
+      attr_accessor :image_id
 
       # Message sent to the customer upon license key activation.
       #
       #   Only applicable if `license_key_enabled` is `true`. This message contains
       #   instructions for activating the license key.
       sig { returns(T.nilable(String)) }
-      def license_key_activation_message
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def license_key_activation_message=(_)
-      end
+      attr_accessor :license_key_activation_message
 
       # Limit for the number of activations for the license key.
       #
       #   Only applicable if `license_key_enabled` is `true`. Represents the maximum
       #   number of times the license key can be activated.
       sig { returns(T.nilable(Integer)) }
-      def license_key_activations_limit
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def license_key_activations_limit=(_)
-      end
+      attr_accessor :license_key_activations_limit
 
       sig { returns(T.nilable(Dodopayments::Models::LicenseKeyDuration)) }
-      def license_key_duration
-      end
+      attr_reader :license_key_duration
 
       sig do
         params(
@@ -67,59 +41,30 @@ module Dodopayments
         )
           .void
       end
+      attr_writer :license_key_duration
 
       # Whether the product requires a license key.
       #
       #   If `true`, additional fields related to license key (duration, activations
       #   limit, activation message) become applicable.
       sig { returns(T.nilable(T::Boolean)) }
-      def license_key_enabled
-      end
-
-      sig { params(_: T.nilable(T::Boolean)).returns(T.nilable(T::Boolean)) }
-      def license_key_enabled=(_)
-      end
+      attr_accessor :license_key_enabled
 
       # Name of the product, optional and must be at most 100 characters.
       sig { returns(T.nilable(String)) }
-      def name
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def name=(_)
-      end
+      attr_accessor :name
 
       sig do
         returns(
           T.nilable(T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice))
         )
       end
-      def price
-      end
-
-      sig do
-        params(
-          _: T.nilable(T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice))
-        )
-          .returns(
-            T.nilable(T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice))
-          )
-      end
-      def price=(_)
-      end
+      attr_accessor :price
 
       # Represents the different categories of taxation applicable to various products
       #   and services.
       sig { returns(T.nilable(Dodopayments::Models::ProductUpdateParams::TaxCategory::OrSymbol)) }
-      def tax_category
-      end
-
-      sig do
-        params(_: T.nilable(Dodopayments::Models::ProductUpdateParams::TaxCategory::OrSymbol))
-          .returns(T.nilable(Dodopayments::Models::ProductUpdateParams::TaxCategory::OrSymbol))
-      end
-      def tax_category=(_)
-      end
+      attr_accessor :tax_category
 
       sig do
         params(
@@ -155,9 +100,7 @@ module Dodopayments
         price: nil,
         tax_category: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         override
           .returns(
@@ -176,8 +119,7 @@ module Dodopayments
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       # Represents the different categories of taxation applicable to various products
       #   and services.
@@ -194,11 +136,8 @@ module Dodopayments
         E_BOOK = T.let(:e_book, Dodopayments::Models::ProductUpdateParams::TaxCategory::TaggedSymbol)
         EDTECH = T.let(:edtech, Dodopayments::Models::ProductUpdateParams::TaxCategory::TaggedSymbol)
 
-        class << self
-          sig { override.returns(T::Array[Dodopayments::Models::ProductUpdateParams::TaxCategory::TaggedSymbol]) }
-          def values
-          end
-        end
+        sig { override.returns(T::Array[Dodopayments::Models::ProductUpdateParams::TaxCategory::TaggedSymbol]) }
+        def self.values; end
       end
     end
   end

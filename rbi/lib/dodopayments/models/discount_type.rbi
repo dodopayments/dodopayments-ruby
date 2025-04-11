@@ -10,11 +10,8 @@ module Dodopayments
 
       PERCENTAGE = T.let(:percentage, Dodopayments::Models::DiscountType::TaggedSymbol)
 
-      class << self
-        sig { override.returns(T::Array[Dodopayments::Models::DiscountType::TaggedSymbol]) }
-        def values
-        end
-      end
+      sig { override.returns(T::Array[Dodopayments::Models::DiscountType::TaggedSymbol]) }
+      def self.values; end
     end
   end
 end

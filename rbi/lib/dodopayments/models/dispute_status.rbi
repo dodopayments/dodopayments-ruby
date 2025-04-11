@@ -16,11 +16,8 @@ module Dodopayments
       DISPUTE_WON = T.let(:dispute_won, Dodopayments::Models::DisputeStatus::TaggedSymbol)
       DISPUTE_LOST = T.let(:dispute_lost, Dodopayments::Models::DisputeStatus::TaggedSymbol)
 
-      class << self
-        sig { override.returns(T::Array[Dodopayments::Models::DisputeStatus::TaggedSymbol]) }
-        def values
-        end
-      end
+      sig { override.returns(T::Array[Dodopayments::Models::DisputeStatus::TaggedSymbol]) }
+      def self.values; end
     end
   end
 end

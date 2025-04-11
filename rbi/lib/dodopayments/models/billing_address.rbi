@@ -60,8 +60,7 @@ module Dodopayments
         )
           .returns(T.attached_class)
       end
-      def self.new(city:, country:, state:, street:, zipcode:)
-      end
+      def self.new(city:, country:, state:, street:, zipcode:); end
 
       sig do
         override
@@ -69,8 +68,7 @@ module Dodopayments
             {city: String, country: Dodopayments::Models::CountryCode::OrSymbol, state: String, street: String, zipcode: String}
           )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

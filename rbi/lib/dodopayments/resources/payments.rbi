@@ -51,9 +51,7 @@ module Dodopayments
         #   creation will fail
         tax_id: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           payment_id: String,
@@ -65,9 +63,7 @@ module Dodopayments
         # Payment Id
         payment_id,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           created_at_gte: T.nilable(Time),
@@ -97,13 +93,10 @@ module Dodopayments
         # Filter by subscription id
         subscription_id: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:)
-      end
+      def self.new(client:); end
     end
   end
 end

@@ -259,11 +259,8 @@ module Dodopayments
       ZM = T.let(:ZM, Dodopayments::Models::CountryCode::TaggedSymbol)
       ZW = T.let(:ZW, Dodopayments::Models::CountryCode::TaggedSymbol)
 
-      class << self
-        sig { override.returns(T::Array[Dodopayments::Models::CountryCode::TaggedSymbol]) }
-        def values
-        end
-      end
+      sig { override.returns(T::Array[Dodopayments::Models::CountryCode::TaggedSymbol]) }
+      def self.values; end
     end
   end
 end

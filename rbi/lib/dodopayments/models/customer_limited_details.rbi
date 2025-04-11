@@ -31,12 +31,10 @@ module Dodopayments
       end
 
       sig { params(customer_id: String, email: String, name: String).returns(T.attached_class) }
-      def self.new(customer_id:, email:, name:)
-      end
+      def self.new(customer_id:, email:, name:); end
 
       sig { override.returns({customer_id: String, email: String, name: String}) }
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

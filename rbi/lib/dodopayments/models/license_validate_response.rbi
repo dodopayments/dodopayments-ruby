@@ -12,12 +12,10 @@ module Dodopayments
       end
 
       sig { params(valid: T::Boolean).returns(T.attached_class) }
-      def self.new(valid:)
-      end
+      def self.new(valid:); end
 
       sig { override.returns({valid: T::Boolean}) }
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

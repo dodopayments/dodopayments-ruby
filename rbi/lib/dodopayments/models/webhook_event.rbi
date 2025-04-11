@@ -89,9 +89,7 @@ module Dodopayments
         latest_attempted_at: nil,
         request: nil,
         response: nil
-      )
-      end
-
+      ); end
       sig do
         override
           .returns(
@@ -107,8 +105,7 @@ module Dodopayments
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

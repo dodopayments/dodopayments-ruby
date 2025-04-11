@@ -14,9 +14,7 @@ module Dodopayments
         # Dispute Id
         dispute_id,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           created_at_gte: T.nilable(Time),
@@ -46,13 +44,10 @@ module Dodopayments
         # Page size default is 10 max is 100
         page_size: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:)
-      end
+      def self.new(client:); end
     end
   end
 end

@@ -33,12 +33,10 @@ module Dodopayments
       sig do
         params(product_id: String, quantity: Integer, amount: T.nilable(Integer)).returns(T.attached_class)
       end
-      def self.new(product_id:, quantity:, amount: nil)
-      end
+      def self.new(product_id:, quantity:, amount: nil); end
 
       sig { override.returns({product_id: String, quantity: Integer, amount: T.nilable(Integer)}) }
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end
