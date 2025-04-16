@@ -5,50 +5,23 @@ module Dodopayments
     class BillingAddress < Dodopayments::Internal::Type::BaseModel
       # City name
       sig { returns(String) }
-      def city
-      end
-
-      sig { params(_: String).returns(String) }
-      def city=(_)
-      end
+      attr_accessor :city
 
       # ISO country code alpha2 variant
       sig { returns(Dodopayments::Models::CountryCode::OrSymbol) }
-      def country
-      end
-
-      sig do
-        params(_: Dodopayments::Models::CountryCode::OrSymbol).returns(Dodopayments::Models::CountryCode::OrSymbol)
-      end
-      def country=(_)
-      end
+      attr_accessor :country
 
       # State or province name
       sig { returns(String) }
-      def state
-      end
-
-      sig { params(_: String).returns(String) }
-      def state=(_)
-      end
+      attr_accessor :state
 
       # Street address including house number and unit/apartment if applicable
       sig { returns(String) }
-      def street
-      end
-
-      sig { params(_: String).returns(String) }
-      def street=(_)
-      end
+      attr_accessor :street
 
       # Postal code or ZIP code
       sig { returns(String) }
-      def zipcode
-      end
-
-      sig { params(_: String).returns(String) }
-      def zipcode=(_)
-      end
+      attr_accessor :zipcode
 
       sig do
         params(

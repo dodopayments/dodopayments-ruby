@@ -9,12 +9,7 @@ module Dodopayments
 
         # If true, will send link to user.
         sig { returns(T.nilable(T::Boolean)) }
-        def send_email
-        end
-
-        sig { params(_: T.nilable(T::Boolean)).returns(T.nilable(T::Boolean)) }
-        def send_email=(_)
-        end
+        attr_accessor :send_email
 
         sig do
           params(

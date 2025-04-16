@@ -21,6 +21,8 @@ module Dodopayments
           Symbol | top value,
           state: Dodopayments::Internal::Type::Converter::dump_state
         ) -> (Symbol | top)
+
+        def inspect: (?depth: Integer) -> String
       end
     end
   end

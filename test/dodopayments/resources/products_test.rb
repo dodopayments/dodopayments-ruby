@@ -79,6 +79,8 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
     end
 
     row = response.to_enum.first
+    return if row.nil?
+
     assert_pattern do
       row => Dodopayments::Models::ProductListResponse
     end

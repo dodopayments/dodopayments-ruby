@@ -62,9 +62,9 @@ module Dodopayments
         #
         # @return [Boolean]
         def ==(other)
-          # rubocop:disable Layout/LineLength
-          other.is_a?(Module) && other.singleton_class <= Dodopayments::Internal::Type::Enum && other.values.to_set == values.to_set
-          # rubocop:enable Layout/LineLength
+          # rubocop:disable Style/CaseEquality
+          Dodopayments::Internal::Type::Enum === other && other.values.to_set == values.to_set
+          # rubocop:enable Style/CaseEquality
         end
 
         # @api private
@@ -107,6 +107,22 @@ module Dodopayments
         #   #
         #   # @return [Symbol, Object]
         #   def dump(value, state:) = super
+
+        # @api private
+        #
+        # @param depth [Integer]
+        #
+        # @return [String]
+        def inspect(depth: 0)
+          if depth.positive?
+            return is_a?(Module) ? super() : self.class.name
+          end
+
+          members = values.map { Dodopayments::Internal::Type::Converter.inspect(_1, depth: depth.succ) }
+          prefix = is_a?(Module) ? name : self.class.name
+
+          "#{prefix}[#{members.join(' | ')}]"
+        end
       end
     end
   end

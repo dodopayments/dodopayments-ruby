@@ -86,6 +86,12 @@ Lint/MissingSuper:
 Lint/UnusedMethodArgument:
   AutoCorrect: false
 
+# This option is prone to causing accidental bugs.
+Lint/UselessAssignment:
+  AutoCorrect: false
+  Exclude:
+    - "examples/**/*.rb"
+
 Metrics/AbcSize:
   Enabled: false
 
@@ -238,6 +244,7 @@ Style/SafeNavigation:
 Style/SignalException:
   Exclude:
     - Rakefile
+    - "**/*.rake"
 
 # We use these sparingly, where we anticipate future branches for the
 # inner conditional.

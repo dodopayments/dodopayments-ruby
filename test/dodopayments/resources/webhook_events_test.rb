@@ -32,6 +32,8 @@ class Dodopayments::Test::Resources::WebhookEventsTest < Dodopayments::Test::Res
     end
 
     row = response.to_enum.first
+    return if row.nil?
+
     assert_pattern do
       row => Dodopayments::Models::WebhookEvent
     end

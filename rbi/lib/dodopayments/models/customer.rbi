@@ -4,52 +4,22 @@ module Dodopayments
   module Models
     class Customer < Dodopayments::Internal::Type::BaseModel
       sig { returns(String) }
-      def business_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def business_id=(_)
-      end
+      attr_accessor :business_id
 
       sig { returns(Time) }
-      def created_at
-      end
-
-      sig { params(_: Time).returns(Time) }
-      def created_at=(_)
-      end
+      attr_accessor :created_at
 
       sig { returns(String) }
-      def customer_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def customer_id=(_)
-      end
+      attr_accessor :customer_id
 
       sig { returns(String) }
-      def email
-      end
-
-      sig { params(_: String).returns(String) }
-      def email=(_)
-      end
+      attr_accessor :email
 
       sig { returns(String) }
-      def name
-      end
-
-      sig { params(_: String).returns(String) }
-      def name=(_)
-      end
+      attr_accessor :name
 
       sig { returns(T.nilable(String)) }
-      def phone_number
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def phone_number=(_)
-      end
+      attr_accessor :phone_number
 
       sig do
         params(

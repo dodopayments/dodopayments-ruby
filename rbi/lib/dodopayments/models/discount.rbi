@@ -9,104 +9,46 @@ module Dodopayments
       #   5.4%).
       # - Otherwise, this is **USD cents** (e.g., 100 => `$1.00`).
       sig { returns(Integer) }
-      def amount
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def amount=(_)
-      end
+      attr_accessor :amount
 
       # The business this discount belongs to.
       sig { returns(String) }
-      def business_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def business_id=(_)
-      end
+      attr_accessor :business_id
 
       # The discount code (up to 16 chars).
       sig { returns(String) }
-      def code
-      end
-
-      sig { params(_: String).returns(String) }
-      def code=(_)
-      end
+      attr_accessor :code
 
       # Timestamp when the discount is created
       sig { returns(Time) }
-      def created_at
-      end
-
-      sig { params(_: Time).returns(Time) }
-      def created_at=(_)
-      end
+      attr_accessor :created_at
 
       # The unique discount ID
       sig { returns(String) }
-      def discount_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def discount_id=(_)
-      end
+      attr_accessor :discount_id
 
       # List of product IDs to which this discount is restricted.
       sig { returns(T::Array[String]) }
-      def restricted_to
-      end
-
-      sig { params(_: T::Array[String]).returns(T::Array[String]) }
-      def restricted_to=(_)
-      end
+      attr_accessor :restricted_to
 
       # How many times this discount has been used.
       sig { returns(Integer) }
-      def times_used
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def times_used=(_)
-      end
+      attr_accessor :times_used
 
       sig { returns(Dodopayments::Models::DiscountType::TaggedSymbol) }
-      def type
-      end
-
-      sig do
-        params(_: Dodopayments::Models::DiscountType::TaggedSymbol)
-          .returns(Dodopayments::Models::DiscountType::TaggedSymbol)
-      end
-      def type=(_)
-      end
+      attr_accessor :type
 
       # Optional date/time after which discount is expired.
       sig { returns(T.nilable(Time)) }
-      def expires_at
-      end
-
-      sig { params(_: T.nilable(Time)).returns(T.nilable(Time)) }
-      def expires_at=(_)
-      end
+      attr_accessor :expires_at
 
       # Name for the Discount
       sig { returns(T.nilable(String)) }
-      def name
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def name=(_)
-      end
+      attr_accessor :name
 
       # Usage limit for this discount, if any.
       sig { returns(T.nilable(Integer)) }
-      def usage_limit
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def usage_limit=(_)
-      end
+      attr_accessor :usage_limit
 
       sig do
         params(
@@ -117,7 +59,7 @@ module Dodopayments
           discount_id: String,
           restricted_to: T::Array[String],
           times_used: Integer,
-          type: Dodopayments::Models::DiscountType::TaggedSymbol,
+          type: Dodopayments::Models::DiscountType::OrSymbol,
           expires_at: T.nilable(Time),
           name: T.nilable(String),
           usage_limit: T.nilable(Integer)

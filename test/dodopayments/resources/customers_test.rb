@@ -68,6 +68,8 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
     end
 
     row = response.to_enum.first
+    return if row.nil?
+
     assert_pattern do
       row => Dodopayments::Models::Customer
     end

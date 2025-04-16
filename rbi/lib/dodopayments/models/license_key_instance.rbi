@@ -4,44 +4,19 @@ module Dodopayments
   module Models
     class LicenseKeyInstance < Dodopayments::Internal::Type::BaseModel
       sig { returns(String) }
-      def id
-      end
-
-      sig { params(_: String).returns(String) }
-      def id=(_)
-      end
+      attr_accessor :id
 
       sig { returns(String) }
-      def business_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def business_id=(_)
-      end
+      attr_accessor :business_id
 
       sig { returns(Time) }
-      def created_at
-      end
-
-      sig { params(_: Time).returns(Time) }
-      def created_at=(_)
-      end
+      attr_accessor :created_at
 
       sig { returns(String) }
-      def license_key_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def license_key_id=(_)
-      end
+      attr_accessor :license_key_id
 
       sig { returns(String) }
-      def name
-      end
-
-      sig { params(_: String).returns(String) }
-      def name=(_)
-      end
+      attr_accessor :name
 
       sig do
         params(id: String, business_id: String, created_at: Time, license_key_id: String, name: String)

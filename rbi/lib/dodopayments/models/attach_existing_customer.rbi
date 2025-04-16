@@ -4,12 +4,7 @@ module Dodopayments
   module Models
     class AttachExistingCustomer < Dodopayments::Internal::Type::BaseModel
       sig { returns(String) }
-      def customer_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def customer_id=(_)
-      end
+      attr_accessor :customer_id
 
       sig { params(customer_id: String).returns(T.attached_class) }
       def self.new(customer_id:); end

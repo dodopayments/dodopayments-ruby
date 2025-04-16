@@ -8,57 +8,27 @@ module Dodopayments
 
       # Get events after this created time
       sig { returns(T.nilable(Time)) }
-      def created_at_gte
-      end
-
-      sig { params(_: T.nilable(Time)).returns(T.nilable(Time)) }
-      def created_at_gte=(_)
-      end
+      attr_accessor :created_at_gte
 
       # Get events created before this time
       sig { returns(T.nilable(Time)) }
-      def created_at_lte
-      end
-
-      sig { params(_: T.nilable(Time)).returns(T.nilable(Time)) }
-      def created_at_lte=(_)
-      end
+      attr_accessor :created_at_lte
 
       # Min : 1, Max : 100, default 10
       sig { returns(T.nilable(Integer)) }
-      def limit
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def limit=(_)
-      end
+      attr_accessor :limit
 
       # Get events history of a specific object like payment/subscription/refund/dispute
       sig { returns(T.nilable(String)) }
-      def object_id_
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def object_id_=(_)
-      end
+      attr_accessor :object_id_
 
       # Page number default is 0
       sig { returns(T.nilable(Integer)) }
-      def page_number
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def page_number=(_)
-      end
+      attr_accessor :page_number
 
       # Page size default is 10 max is 100
       sig { returns(T.nilable(Integer)) }
-      def page_size
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def page_size=(_)
-      end
+      attr_accessor :page_size
 
       sig do
         params(

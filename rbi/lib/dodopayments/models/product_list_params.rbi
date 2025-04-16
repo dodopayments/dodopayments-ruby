@@ -8,30 +8,18 @@ module Dodopayments
 
       # List archived products
       sig { returns(T.nilable(T::Boolean)) }
-      def archived
-      end
+      attr_reader :archived
 
-      sig { params(_: T::Boolean).returns(T::Boolean) }
-      def archived=(_)
-      end
+      sig { params(archived: T::Boolean).void }
+      attr_writer :archived
 
       # Page number default is 0
       sig { returns(T.nilable(Integer)) }
-      def page_number
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def page_number=(_)
-      end
+      attr_accessor :page_number
 
       # Page size default is 10 max is 100
       sig { returns(T.nilable(Integer)) }
-      def page_size
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def page_size=(_)
-      end
+      attr_accessor :page_size
 
       # Filter products by pricing type:
       #
@@ -39,12 +27,7 @@ module Dodopayments
       # - `false`: Show only one-time price products
       # - `null` or absent: Show both types of products
       sig { returns(T.nilable(T::Boolean)) }
-      def recurring
-      end
-
-      sig { params(_: T.nilable(T::Boolean)).returns(T.nilable(T::Boolean)) }
-      def recurring=(_)
-      end
+      attr_accessor :recurring
 
       sig do
         params(

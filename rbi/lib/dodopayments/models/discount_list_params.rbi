@@ -8,21 +8,11 @@ module Dodopayments
 
       # Page number (default = 0).
       sig { returns(T.nilable(Integer)) }
-      def page_number
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def page_number=(_)
-      end
+      attr_accessor :page_number
 
       # Page size (default = 10, max = 100).
       sig { returns(T.nilable(Integer)) }
-      def page_size
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def page_size=(_)
-      end
+      attr_accessor :page_size
 
       sig do
         params(

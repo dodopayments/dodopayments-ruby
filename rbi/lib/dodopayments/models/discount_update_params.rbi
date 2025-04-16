@@ -14,66 +14,28 @@ module Dodopayments
       #
       # Must be at least 1 if provided.
       sig { returns(T.nilable(Integer)) }
-      def amount
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def amount=(_)
-      end
+      attr_accessor :amount
 
       # If present, update the discount code (uppercase).
       sig { returns(T.nilable(String)) }
-      def code
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def code=(_)
-      end
+      attr_accessor :code
 
       sig { returns(T.nilable(Time)) }
-      def expires_at
-      end
-
-      sig { params(_: T.nilable(Time)).returns(T.nilable(Time)) }
-      def expires_at=(_)
-      end
+      attr_accessor :expires_at
 
       sig { returns(T.nilable(String)) }
-      def name
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def name=(_)
-      end
+      attr_accessor :name
 
       # If present, replaces all restricted product IDs with this new set. To remove all
       # restrictions, send empty array
       sig { returns(T.nilable(T::Array[String])) }
-      def restricted_to
-      end
-
-      sig { params(_: T.nilable(T::Array[String])).returns(T.nilable(T::Array[String])) }
-      def restricted_to=(_)
-      end
+      attr_accessor :restricted_to
 
       sig { returns(T.nilable(Dodopayments::Models::DiscountType::OrSymbol)) }
-      def type
-      end
-
-      sig do
-        params(_: T.nilable(Dodopayments::Models::DiscountType::OrSymbol))
-          .returns(T.nilable(Dodopayments::Models::DiscountType::OrSymbol))
-      end
-      def type=(_)
-      end
+      attr_accessor :type
 
       sig { returns(T.nilable(Integer)) }
-      def usage_limit
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def usage_limit=(_)
-      end
+      attr_accessor :usage_limit
 
       sig do
         params(

@@ -13,6 +13,10 @@ module Dodopayments
       class HashOf
         include Dodopayments::Internal::Type::Converter
 
+        private_class_method :new
+
+        # @overload [](type_info, spec = {})
+        #
         # @param type_info [Hash{Symbol=>Object}, Proc, Dodopayments::Internal::Type::Converter, Class]
         #
         # @param spec [Hash{Symbol=>Object}] .
@@ -24,7 +28,7 @@ module Dodopayments
         #   @option spec [Proc] :union
         #
         #   @option spec [Boolean] :"nil?"
-        def self.[](type_info, spec = {}) = new(type_info, spec)
+        def self.[](...) = new(...)
 
         # @param other [Object]
         #
@@ -140,7 +144,18 @@ module Dodopayments
         #   @option spec [Boolean] :"nil?"
         def initialize(type_info, spec = {})
           @item_type_fn = Dodopayments::Internal::Type::Converter.type_info(type_info || spec)
-          @nilable = spec[:nil?]
+          @nilable = spec.fetch(:nil?, false)
+        end
+
+        # @api private
+        #
+        # @param depth [Integer]
+        #
+        # @return [String]
+        def inspect(depth: 0)
+          items = Dodopayments::Internal::Type::Converter.inspect(item_type, depth: depth.succ)
+
+          "#{self.class}[#{[items, nilable? ? 'nil' : nil].compact.join(' | ')}]"
         end
       end
     end

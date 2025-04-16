@@ -121,9 +121,7 @@ module Dodopayments
         #
         # @return [Boolean]
         def ==(other)
-          # rubocop:disable Layout/LineLength
-          other.is_a?(Module) && other.singleton_class <= Dodopayments::Internal::Type::Union && other.derefed_variants == derefed_variants
-          # rubocop:enable Layout/LineLength
+          Dodopayments::Internal::Type::Union === other && other.derefed_variants == derefed_variants
         end
 
         # @api private
@@ -212,6 +210,22 @@ module Dodopayments
 
         # rubocop:enable Style/CaseEquality
         # rubocop:enable Style/HashEachMethods
+
+        # @api private
+        #
+        # @param depth [Integer]
+        #
+        # @return [String]
+        def inspect(depth: 0)
+          if depth.positive?
+            return is_a?(Module) ? super() : self.class.name
+          end
+
+          members = variants.map { Dodopayments::Internal::Type::Converter.inspect(_1, depth: depth.succ) }
+          prefix = is_a?(Module) ? name : self.class.name
+
+          "#{prefix}[#{members.join(' | ')}]"
+        end
       end
     end
   end

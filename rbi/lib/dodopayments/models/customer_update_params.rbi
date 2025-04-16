@@ -7,20 +7,10 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       sig { returns(T.nilable(String)) }
-      def name
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def name=(_)
-      end
+      attr_accessor :name
 
       sig { returns(T.nilable(String)) }
-      def phone_number
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def phone_number=(_)
-      end
+      attr_accessor :phone_number
 
       sig do
         params(

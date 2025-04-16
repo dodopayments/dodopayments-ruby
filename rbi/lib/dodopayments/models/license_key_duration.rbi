@@ -4,23 +4,10 @@ module Dodopayments
   module Models
     class LicenseKeyDuration < Dodopayments::Internal::Type::BaseModel
       sig { returns(Integer) }
-      def count
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def count=(_)
-      end
+      attr_accessor :count
 
       sig { returns(Dodopayments::Models::TimeInterval::OrSymbol) }
-      def interval
-      end
-
-      sig do
-        params(_: Dodopayments::Models::TimeInterval::OrSymbol)
-          .returns(Dodopayments::Models::TimeInterval::OrSymbol)
-      end
-      def interval=(_)
-      end
+      attr_accessor :interval
 
       sig { params(count: Integer, interval: Dodopayments::Models::TimeInterval::OrSymbol).returns(T.attached_class) }
       def self.new(count:, interval:); end

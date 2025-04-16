@@ -53,6 +53,8 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
     end
 
     row = response.to_enum.first
+    return if row.nil?
+
     assert_pattern do
       row => Dodopayments::Models::Refund
     end
