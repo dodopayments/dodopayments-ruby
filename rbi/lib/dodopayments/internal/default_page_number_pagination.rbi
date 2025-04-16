@@ -10,6 +10,7 @@ module Dodopayments
       sig { returns(T.nilable(T::Array[Elem])) }
       attr_accessor :items
 
+      # @api private
       sig { returns(String) }
       def inspect; end
     end

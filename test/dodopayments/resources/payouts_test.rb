@@ -11,6 +11,8 @@ class Dodopayments::Test::Resources::PayoutsTest < Dodopayments::Test::ResourceT
     end
 
     row = response.to_enum.first
+    return if row.nil?
+
     assert_pattern do
       row => Dodopayments::Models::PayoutListResponse
     end

@@ -16,23 +16,10 @@ module Dodopayments
       attr_writer :billing
 
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
-      def metadata
-      end
-
-      sig { params(_: T.nilable(T::Hash[Symbol, String])).returns(T.nilable(T::Hash[Symbol, String])) }
-      def metadata=(_)
-      end
+      attr_accessor :metadata
 
       sig { returns(T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol)) }
-      def status
-      end
-
-      sig do
-        params(_: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol))
-          .returns(T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol))
-      end
-      def status=(_)
-      end
+      attr_accessor :status
 
       sig { returns(T.nilable(String)) }
       attr_accessor :tax_id

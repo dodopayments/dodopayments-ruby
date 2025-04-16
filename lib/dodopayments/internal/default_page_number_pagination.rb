@@ -19,23 +19,6 @@ module Dodopayments
       # @return [Array<generic<Elem>>, nil]
       attr_accessor :items
 
-      # @api private
-      #
-      # @param client [Dodopayments::Internal::Transport::BaseClient]
-      # @param req [Hash{Symbol=>Object}]
-      # @param headers [Hash{String=>String}, Net::HTTPHeader]
-      # @param page_data [Hash{Symbol=>Object}]
-      def initialize(client:, req:, headers:, page_data:)
-        super
-        model = req.fetch(:model)
-
-        case page_data
-        in {items: Array | nil => items}
-          @items = items&.map { Dodopayments::Internal::Type::Converter.coerce(model, _1) }
-        else
-        end
-      end
-
       # @return [Boolean]
       def next_page?
         !items.to_a.empty?
@@ -69,17 +52,39 @@ module Dodopayments
         unless block_given?
           raise ArgumentError.new("A block must be given to ##{__method__}")
         end
+
         page = self
         loop do
-          page.items&.each { blk.call(_1) }
+          page.items&.each(&blk)
+
           break unless page.next_page?
           page = page.next_page
         end
       end
 
+      # @api private
+      #
+      # @param client [Dodopayments::Internal::Transport::BaseClient]
+      # @param req [Hash{Symbol=>Object}]
+      # @param headers [Hash{String=>String}, Net::HTTPHeader]
+      # @param page_data [Hash{Symbol=>Object}]
+      def initialize(client:, req:, headers:, page_data:)
+        super
+
+        case page_data
+        in {items: Array | nil => items}
+          @items = items&.map { Dodopayments::Internal::Type::Converter.coerce(@model, _1) }
+        else
+        end
+      end
+
+      # @api private
+      #
       # @return [String]
       def inspect
-        "#<#{self.class}:0x#{object_id.to_s(16)} items=#{items.inspect}>"
+        model = Dodopayments::Internal::Type::Converter.inspect(@model, depth: 1)
+
+        "#<#{self.class}[#{model}]:0x#{object_id.to_s(16)}>"
       end
     end
   end

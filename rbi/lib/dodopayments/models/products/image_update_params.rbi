@@ -8,12 +8,7 @@ module Dodopayments
         include Dodopayments::Internal::Type::RequestParameters
 
         sig { returns(T.nilable(T::Boolean)) }
-        def force_update
-        end
-
-        sig { params(_: T.nilable(T::Boolean)).returns(T.nilable(T::Boolean)) }
-        def force_update=(_)
-        end
+        attr_accessor :force_update
 
         sig do
           params(

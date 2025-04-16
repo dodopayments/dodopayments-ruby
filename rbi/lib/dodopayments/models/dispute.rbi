@@ -6,79 +6,33 @@ module Dodopayments
       # The amount involved in the dispute, represented as a string to accommodate
       # precision.
       sig { returns(String) }
-      def amount
-      end
-
-      sig { params(_: String).returns(String) }
-      def amount=(_)
-      end
+      attr_accessor :amount
 
       # The unique identifier of the business involved in the dispute.
       sig { returns(String) }
-      def business_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def business_id=(_)
-      end
+      attr_accessor :business_id
 
       # The timestamp of when the dispute was created, in UTC.
       sig { returns(Time) }
-      def created_at
-      end
-
-      sig { params(_: Time).returns(Time) }
-      def created_at=(_)
-      end
+      attr_accessor :created_at
 
       # The currency of the disputed amount, represented as an ISO 4217 currency code.
       sig { returns(String) }
-      def currency
-      end
-
-      sig { params(_: String).returns(String) }
-      def currency=(_)
-      end
+      attr_accessor :currency
 
       # The unique identifier of the dispute.
       sig { returns(String) }
-      def dispute_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def dispute_id=(_)
-      end
+      attr_accessor :dispute_id
 
       sig { returns(Dodopayments::Models::DisputeStage::TaggedSymbol) }
-      def dispute_stage
-      end
-
-      sig do
-        params(_: Dodopayments::Models::DisputeStage::TaggedSymbol)
-          .returns(Dodopayments::Models::DisputeStage::TaggedSymbol)
-      end
-      def dispute_stage=(_)
-      end
+      attr_accessor :dispute_stage
 
       sig { returns(Dodopayments::Models::DisputeStatus::TaggedSymbol) }
-      def dispute_status
-      end
-
-      sig do
-        params(_: Dodopayments::Models::DisputeStatus::TaggedSymbol)
-          .returns(Dodopayments::Models::DisputeStatus::TaggedSymbol)
-      end
-      def dispute_status=(_)
-      end
+      attr_accessor :dispute_status
 
       # The unique identifier of the payment associated with the dispute.
       sig { returns(String) }
-      def payment_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def payment_id=(_)
-      end
+      attr_accessor :payment_id
 
       sig do
         params(
@@ -87,8 +41,8 @@ module Dodopayments
           created_at: Time,
           currency: String,
           dispute_id: String,
-          dispute_stage: Dodopayments::Models::DisputeStage::TaggedSymbol,
-          dispute_status: Dodopayments::Models::DisputeStatus::TaggedSymbol,
+          dispute_stage: Dodopayments::Models::DisputeStage::OrSymbol,
+          dispute_status: Dodopayments::Models::DisputeStatus::OrSymbol,
           payment_id: String
         )
           .returns(T.attached_class)

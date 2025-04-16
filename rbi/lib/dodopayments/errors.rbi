@@ -140,32 +140,4 @@ module Dodopayments
       HTTP_STATUS = T.let((500..), T::Range[Integer])
     end
   end
-
-  Error = Dodopayments::Errors::Error
-
-  ConversionError = Dodopayments::Errors::ConversionError
-
-  APIError = Dodopayments::Errors::APIError
-
-  APIStatusError = Dodopayments::Errors::APIStatusError
-
-  APIConnectionError = Dodopayments::Errors::APIConnectionError
-
-  APITimeoutError = Dodopayments::Errors::APITimeoutError
-
-  BadRequestError = Dodopayments::Errors::BadRequestError
-
-  AuthenticationError = Dodopayments::Errors::AuthenticationError
-
-  PermissionDeniedError = Dodopayments::Errors::PermissionDeniedError
-
-  NotFoundError = Dodopayments::Errors::NotFoundError
-
-  ConflictError = Dodopayments::Errors::ConflictError
-
-  UnprocessableEntityError = Dodopayments::Errors::UnprocessableEntityError
-
-  RateLimitError = Dodopayments::Errors::RateLimitError
-
-  InternalServerError = Dodopayments::Errors::InternalServerError
 end

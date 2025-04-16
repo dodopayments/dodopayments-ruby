@@ -15,70 +15,32 @@ module Dodopayments
       #
       # Must be at least 1.
       sig { returns(Integer) }
-      def amount
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def amount=(_)
-      end
+      attr_accessor :amount
 
       sig { returns(Dodopayments::Models::DiscountType::OrSymbol) }
-      def type
-      end
-
-      sig do
-        params(_: Dodopayments::Models::DiscountType::OrSymbol)
-          .returns(Dodopayments::Models::DiscountType::OrSymbol)
-      end
-      def type=(_)
-      end
+      attr_accessor :type
 
       # Optionally supply a code (will be uppercased).
       #
       # - Must be at least 3 characters if provided.
       # - If omitted, a random 16-character code is generated.
       sig { returns(T.nilable(String)) }
-      def code
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def code=(_)
-      end
+      attr_accessor :code
 
       # When the discount expires, if ever.
       sig { returns(T.nilable(Time)) }
-      def expires_at
-      end
-
-      sig { params(_: T.nilable(Time)).returns(T.nilable(Time)) }
-      def expires_at=(_)
-      end
+      attr_accessor :expires_at
 
       sig { returns(T.nilable(String)) }
-      def name
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def name=(_)
-      end
+      attr_accessor :name
 
       # List of product IDs to restrict usage (if any).
       sig { returns(T.nilable(T::Array[String])) }
-      def restricted_to
-      end
-
-      sig { params(_: T.nilable(T::Array[String])).returns(T.nilable(T::Array[String])) }
-      def restricted_to=(_)
-      end
+      attr_accessor :restricted_to
 
       # How many times this discount can be used (if any). Must be >= 1 if provided.
       sig { returns(T.nilable(Integer)) }
-      def usage_limit
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def usage_limit=(_)
-      end
+      attr_accessor :usage_limit
 
       sig do
         params(

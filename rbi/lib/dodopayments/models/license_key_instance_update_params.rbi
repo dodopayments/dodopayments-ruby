@@ -7,12 +7,7 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       sig { returns(String) }
-      def name
-      end
-
-      sig { params(_: String).returns(String) }
-      def name=(_)
-      end
+      attr_accessor :name
 
       sig do
         params(

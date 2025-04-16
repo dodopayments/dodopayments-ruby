@@ -7,20 +7,10 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       sig { returns(String) }
-      def license_key
-      end
-
-      sig { params(_: String).returns(String) }
-      def license_key=(_)
-      end
+      attr_accessor :license_key
 
       sig { returns(String) }
-      def license_key_instance_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def license_key_instance_id=(_)
-      end
+      attr_accessor :license_key_instance_id
 
       sig do
         params(

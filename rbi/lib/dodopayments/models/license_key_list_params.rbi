@@ -8,51 +8,23 @@ module Dodopayments
 
       # Filter by customer ID
       sig { returns(T.nilable(String)) }
-      def customer_id
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def customer_id=(_)
-      end
+      attr_accessor :customer_id
 
       # Page number default is 0
       sig { returns(T.nilable(Integer)) }
-      def page_number
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def page_number=(_)
-      end
+      attr_accessor :page_number
 
       # Page size default is 10 max is 100
       sig { returns(T.nilable(Integer)) }
-      def page_size
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def page_size=(_)
-      end
+      attr_accessor :page_size
 
       # Filter by product ID
       sig { returns(T.nilable(String)) }
-      def product_id
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def product_id=(_)
-      end
+      attr_accessor :product_id
 
       # Filter by license key status
       sig { returns(T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol)) }
-      def status
-      end
-
-      sig do
-        params(_: T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol))
-          .returns(T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol))
-      end
-      def status=(_)
-      end
+      attr_accessor :status
 
       sig do
         params(
