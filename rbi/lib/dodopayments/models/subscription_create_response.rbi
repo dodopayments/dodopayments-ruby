@@ -4,8 +4,7 @@ module Dodopayments
   module Models
     class SubscriptionCreateResponse < Dodopayments::Internal::Type::BaseModel
       sig { returns(Dodopayments::Models::CustomerLimitedDetails) }
-      def customer
-      end
+      attr_reader :customer
 
       sig do
         params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void
@@ -13,59 +12,29 @@ module Dodopayments
       attr_writer :customer
 
       sig { returns(T::Hash[Symbol, String]) }
-      def metadata
-      end
-
-      sig { params(_: T::Hash[Symbol, String]).returns(T::Hash[Symbol, String]) }
-      def metadata=(_)
-      end
+      attr_accessor :metadata
 
       # Tax will be added to the amount and charged to the customer on each billing
       # cycle
       sig { returns(Integer) }
-      def recurring_pre_tax_amount
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def recurring_pre_tax_amount=(_)
-      end
+      attr_accessor :recurring_pre_tax_amount
 
       # Unique identifier for the subscription
       sig { returns(String) }
-      def subscription_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def subscription_id=(_)
-      end
+      attr_accessor :subscription_id
 
       # Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will be
       # coming soon
       sig { returns(T.nilable(String)) }
-      def client_secret
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def client_secret=(_)
-      end
+      attr_accessor :client_secret
 
       # The discount id if discount is applied
       sig { returns(T.nilable(String)) }
-      def discount_id
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def discount_id=(_)
-      end
+      attr_accessor :discount_id
 
       # URL to checkout page
       sig { returns(T.nilable(String)) }
-      def payment_link
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def payment_link=(_)
-      end
+      attr_accessor :payment_link
 
       sig do
         params(

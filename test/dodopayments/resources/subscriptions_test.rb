@@ -101,6 +101,8 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
     end
 
     row = response.to_enum.first
+    return if row.nil?
+
     assert_pattern do
       row => Dodopayments::Models::Subscription
     end

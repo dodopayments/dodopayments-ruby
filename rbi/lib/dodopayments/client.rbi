@@ -18,64 +18,49 @@ module Dodopayments
 
     # Bearer Token for API authentication
     sig { returns(String) }
-    def bearer_token
-    end
+    attr_reader :bearer_token
 
     sig { returns(Dodopayments::Resources::Payments) }
-    def payments
-    end
+    attr_reader :payments
 
     sig { returns(Dodopayments::Resources::Subscriptions) }
-    def subscriptions
-    end
+    attr_reader :subscriptions
 
     sig { returns(Dodopayments::Resources::Invoices) }
-    def invoices
-    end
+    attr_reader :invoices
 
     sig { returns(Dodopayments::Resources::Licenses) }
-    def licenses
-    end
+    attr_reader :licenses
 
     sig { returns(Dodopayments::Resources::LicenseKeys) }
-    def license_keys
-    end
+    attr_reader :license_keys
 
     sig { returns(Dodopayments::Resources::LicenseKeyInstances) }
-    def license_key_instances
-    end
+    attr_reader :license_key_instances
 
     sig { returns(Dodopayments::Resources::Customers) }
-    def customers
-    end
+    attr_reader :customers
 
     sig { returns(Dodopayments::Resources::Refunds) }
-    def refunds
-    end
+    attr_reader :refunds
 
     sig { returns(Dodopayments::Resources::Disputes) }
-    def disputes
-    end
+    attr_reader :disputes
 
     sig { returns(Dodopayments::Resources::Payouts) }
-    def payouts
-    end
+    attr_reader :payouts
 
     sig { returns(Dodopayments::Resources::WebhookEvents) }
-    def webhook_events
-    end
+    attr_reader :webhook_events
 
     sig { returns(Dodopayments::Resources::Products) }
-    def products
-    end
+    attr_reader :products
 
     sig { returns(Dodopayments::Resources::Misc) }
-    def misc
-    end
+    attr_reader :misc
 
     sig { returns(Dodopayments::Resources::Discounts) }
-    def discounts
-    end
+    attr_reader :discounts
 
     # @api private
     sig { override.returns(T::Hash[String, String]) }

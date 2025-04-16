@@ -4,68 +4,28 @@ module Dodopayments
   module Models
     class WebhookEvent < Dodopayments::Internal::Type::BaseModel
       sig { returns(String) }
-      def business_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def business_id=(_)
-      end
+      attr_accessor :business_id
 
       sig { returns(Time) }
-      def created_at
-      end
-
-      sig { params(_: Time).returns(Time) }
-      def created_at=(_)
-      end
+      attr_accessor :created_at
 
       sig { returns(String) }
-      def event_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def event_id=(_)
-      end
+      attr_accessor :event_id
 
       sig { returns(String) }
-      def event_type
-      end
-
-      sig { params(_: String).returns(String) }
-      def event_type=(_)
-      end
+      attr_accessor :event_type
 
       sig { returns(String) }
-      def object_id_
-      end
-
-      sig { params(_: String).returns(String) }
-      def object_id_=(_)
-      end
+      attr_accessor :object_id_
 
       sig { returns(T.nilable(Time)) }
-      def latest_attempted_at
-      end
-
-      sig { params(_: T.nilable(Time)).returns(T.nilable(Time)) }
-      def latest_attempted_at=(_)
-      end
+      attr_accessor :latest_attempted_at
 
       sig { returns(T.nilable(String)) }
-      def request
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def request=(_)
-      end
+      attr_accessor :request
 
       sig { returns(T.nilable(String)) }
-      def response
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def response=(_)
-      end
+      attr_accessor :response
 
       sig do
         params(

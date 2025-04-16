@@ -5,114 +5,51 @@ module Dodopayments
     class LicenseKey < Dodopayments::Internal::Type::BaseModel
       # The unique identifier of the license key.
       sig { returns(String) }
-      def id
-      end
-
-      sig { params(_: String).returns(String) }
-      def id=(_)
-      end
+      attr_accessor :id
 
       # The unique identifier of the business associated with the license key.
       sig { returns(String) }
-      def business_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def business_id=(_)
-      end
+      attr_accessor :business_id
 
       # The timestamp indicating when the license key was created, in UTC.
       sig { returns(Time) }
-      def created_at
-      end
-
-      sig { params(_: Time).returns(Time) }
-      def created_at=(_)
-      end
+      attr_accessor :created_at
 
       # The unique identifier of the customer associated with the license key.
       sig { returns(String) }
-      def customer_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def customer_id=(_)
-      end
+      attr_accessor :customer_id
 
       # The current number of instances activated for this license key.
       sig { returns(Integer) }
-      def instances_count
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def instances_count=(_)
-      end
+      attr_accessor :instances_count
 
       # The license key string.
       sig { returns(String) }
-      def key
-      end
-
-      sig { params(_: String).returns(String) }
-      def key=(_)
-      end
+      attr_accessor :key
 
       # The unique identifier of the payment associated with the license key.
       sig { returns(String) }
-      def payment_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def payment_id=(_)
-      end
+      attr_accessor :payment_id
 
       # The unique identifier of the product associated with the license key.
       sig { returns(String) }
-      def product_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def product_id=(_)
-      end
+      attr_accessor :product_id
 
       sig { returns(Dodopayments::Models::LicenseKeyStatus::TaggedSymbol) }
-      def status
-      end
-
-      sig do
-        params(_: Dodopayments::Models::LicenseKeyStatus::TaggedSymbol)
-          .returns(Dodopayments::Models::LicenseKeyStatus::TaggedSymbol)
-      end
-      def status=(_)
-      end
+      attr_accessor :status
 
       # The maximum number of activations allowed for this license key.
       sig { returns(T.nilable(Integer)) }
-      def activations_limit
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def activations_limit=(_)
-      end
+      attr_accessor :activations_limit
 
       # The timestamp indicating when the license key expires, in UTC.
       sig { returns(T.nilable(Time)) }
-      def expires_at
-      end
-
-      sig { params(_: T.nilable(Time)).returns(T.nilable(Time)) }
-      def expires_at=(_)
-      end
+      attr_accessor :expires_at
 
       # The unique identifier of the subscription associated with the license key, if
       # any.
       sig { returns(T.nilable(String)) }
-      def subscription_id
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def subscription_id=(_)
-      end
+      attr_accessor :subscription_id
 
       sig do
         params(
@@ -124,7 +61,7 @@ module Dodopayments
           key: String,
           payment_id: String,
           product_id: String,
-          status: Dodopayments::Models::LicenseKeyStatus::TaggedSymbol,
+          status: Dodopayments::Models::LicenseKeyStatus::OrSymbol,
           activations_limit: T.nilable(Integer),
           expires_at: T.nilable(Time),
           subscription_id: T.nilable(String)

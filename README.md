@@ -6,9 +6,9 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-Documentation for released of this gem can be found [on RubyDoc](https://gemdocs.org/gems/dodopayments).
+Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/dodopayments).
 
-The underlying REST API documentation can be found on [docs.dodopayments.com](https://docs.dodopayments.com).
+The REST API documentation can be found on [docs.dodopayments.com](https://docs.dodopayments.com).
 
 ## Installation
 
@@ -21,12 +21,6 @@ gem "dodopayments", "~> 0.0.1.pre.alpha.0"
 ```
 
 <!-- x-release-please-end -->
-
-To fetch an initial copy of the gem:
-
-```sh
-bundle install
-```
 
 ## Usage
 
@@ -65,7 +59,7 @@ end
 
 ### Errors
 
-When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Dodopayments::Error` will be thrown:
+When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Dodopayments::Errors::APIError` will be thrown:
 
 ```ruby
 begin
@@ -191,8 +185,7 @@ If you want to explicitly send an extra param, you can do so with the `extra_que
 To make requests to undocumented endpoints, you can make requests using `client.request`. Options on the client will be respected (such as retries) when making this request.
 
 ```ruby
-response =
-  client.request(
+response = client.request(
     method: :post,
     path: '/undocumented/endpoint',
     query: {"dog": "woof"},

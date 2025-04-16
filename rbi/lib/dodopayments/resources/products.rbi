@@ -4,8 +4,7 @@ module Dodopayments
   module Resources
     class Products
       sig { returns(Dodopayments::Resources::Products::Images) }
-      def images
-      end
+      attr_reader :images
 
       sig do
         params(

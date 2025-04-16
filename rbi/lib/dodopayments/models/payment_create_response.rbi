@@ -6,16 +6,10 @@ module Dodopayments
       # Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will be
       # coming soon
       sig { returns(String) }
-      def client_secret
-      end
-
-      sig { params(_: String).returns(String) }
-      def client_secret=(_)
-      end
+      attr_accessor :client_secret
 
       sig { returns(Dodopayments::Models::CustomerLimitedDetails) }
-      def customer
-      end
+      attr_reader :customer
 
       sig do
         params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void
@@ -23,60 +17,27 @@ module Dodopayments
       attr_writer :customer
 
       sig { returns(T::Hash[Symbol, String]) }
-      def metadata
-      end
-
-      sig { params(_: T::Hash[Symbol, String]).returns(T::Hash[Symbol, String]) }
-      def metadata=(_)
-      end
+      attr_accessor :metadata
 
       # Unique identifier for the payment
       sig { returns(String) }
-      def payment_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def payment_id=(_)
-      end
+      attr_accessor :payment_id
 
       # Total amount of the payment in smallest currency unit (e.g. cents)
       sig { returns(Integer) }
-      def total_amount
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def total_amount=(_)
-      end
+      attr_accessor :total_amount
 
       # The discount id if discount is applied
       sig { returns(T.nilable(String)) }
-      def discount_id
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def discount_id=(_)
-      end
+      attr_accessor :discount_id
 
       # Optional URL to a hosted payment page
       sig { returns(T.nilable(String)) }
-      def payment_link
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def payment_link=(_)
-      end
+      attr_accessor :payment_link
 
       # Optional list of products included in the payment
       sig { returns(T.nilable(T::Array[Dodopayments::Models::OneTimeProductCartItem])) }
-      def product_cart
-      end
-
-      sig do
-        params(_: T.nilable(T::Array[Dodopayments::Models::OneTimeProductCartItem]))
-          .returns(T.nilable(T::Array[Dodopayments::Models::OneTimeProductCartItem]))
-      end
-      def product_cart=(_)
-      end
+      attr_accessor :product_cart
 
       sig do
         params(

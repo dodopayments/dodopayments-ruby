@@ -4,8 +4,7 @@ module Dodopayments
   module Resources
     class Customers
       sig { returns(Dodopayments::Resources::Customers::CustomerPortal) }
-      def customer_portal
-      end
+      attr_reader :customer_portal
 
       sig do
         params(
