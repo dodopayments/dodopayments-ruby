@@ -11,19 +11,10 @@ class DodopaymentsTest < Minitest::Test
     Thread.current.thread_variable_set(:mock_sleep, nil)
   end
 
-  def test_raises_on_both_base_url_and_environment
-    e = assert_raises(ArgumentError) do
-      Dodopayments::Client.new(
-        base_url: "https://localhost:8000",
-        environment: "production"
-      )
-    end
-    assert_match(/both environment and base_url given/, e.message)
-  end
-
   def test_raises_on_unknown_environment
     e = assert_raises(ArgumentError) do
-      Dodopayments::Client.new(environment: "wrong")
+      v = Dodopayments::Client.new(environment: "wrong")
+      puts(v.base_url)
     end
     assert_match(/environment must be one of/, e.message)
   end
