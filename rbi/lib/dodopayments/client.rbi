@@ -89,8 +89,9 @@ module Dodopayments
       # - `live_mode` corresponds to `https://live.dodopayments.com`
       # - `test_mode` corresponds to `https://test.dodopayments.com`
       environment: nil,
-      # Override the default base URL for the API, e.g., `"https://api.example.com/v2/"`
-      base_url: nil,
+      # Override the default base URL for the API, e.g.,
+      # `"https://api.example.com/v2/"`. Defaults to `ENV["DODO_PAYMENTS_BASE_URL"]`
+      base_url: ENV["DODO_PAYMENTS_BASE_URL"],
       # Max number of retries to attempt after a failed retryable request.
       max_retries: DEFAULT_MAX_RETRIES,
       timeout: DEFAULT_TIMEOUT_IN_SECONDS,
