@@ -166,6 +166,7 @@ module Dodopayments
         SEPA = :sepa
         ACH = :ach
         AMAZON_PAY = :amazon_pay
+        AFTERPAY_CLEARPAY = :afterpay_clearpay
 
         finalize!
 
