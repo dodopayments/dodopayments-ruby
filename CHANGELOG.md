@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.16.1 (2025-04-18)
+
+Full Changelog: [v1.14.0...v1.16.1](https://github.com/dodopayments/dodopayments-ruby/compare/v1.14.0...v1.16.1)
+
+### Features
+
+* **api:** manual updates ([e2b23a9](https://github.com/dodopayments/dodopayments-ruby/commit/e2b23a9dd83f0c56039c71b49f23bccec9e1def6))
+
+
+### Bug Fixes
+
+* always send idempotency header when specified as a request option ([e666622](https://github.com/dodopayments/dodopayments-ruby/commit/e66662216d369a0553fe05943400645244270cbc))
+* **client:** send correct HTTP path ([45d2036](https://github.com/dodopayments/dodopayments-ruby/commit/45d20360d35db21f868479dbb2186fdd2c09dfe3))
+* restore ability to configure server environment as string during client construction ([684c1e2](https://github.com/dodopayments/dodopayments-ruby/commit/684c1e244a77b8af62ba1b47d9dd9511aa42be6c))
+
+
+### Chores
+
+* **internal:** contribute.md and contributor QoL improvements ([360a982](https://github.com/dodopayments/dodopayments-ruby/commit/360a982c582c253c26ecb4038c75d204e8afdd01))
+* refine `#inspect` and `#to_s` for model classes ([04244f9](https://github.com/dodopayments/dodopayments-ruby/commit/04244f9a079f650ab56b712cc4087c313cd52278))
+
 ## 1.14.0 (2025-04-17)
 
 Full Changelog: [v0.0.1-alpha.0...v1.14.0](https://github.com/dodopayments/dodopayments-ruby/compare/v0.0.1-alpha.0...v1.14.0)
