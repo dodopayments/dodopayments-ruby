@@ -105,8 +105,9 @@ module Dodopayments
       initial_retry_delay: DEFAULT_INITIAL_RETRY_DELAY,
       max_retry_delay: DEFAULT_MAX_RETRY_DELAY
     )
-      base_url ||= ENVIRONMENTS.fetch(environment || :production) do
-        raise ArgumentError.new("environment must be one of #{ENVIRONMENTS.keys}, got #{environment}")
+      base_url ||= Dodopayments::Client::ENVIRONMENTS.fetch(environment&.to_sym || :production) do
+        message = "environment must be one of #{Dodopayments::Client::ENVIRONMENTS.keys}, got #{environment}"
+        raise ArgumentError.new(message)
       end
 
       if bearer_token.nil?
