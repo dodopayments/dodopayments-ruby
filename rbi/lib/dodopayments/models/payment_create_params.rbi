@@ -159,6 +159,11 @@ module Dodopayments
         ACH = T.let(:ach, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
         AMAZON_PAY =
           T.let(:amazon_pay, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
+        AFTERPAY_CLEARPAY =
+          T.let(
+            :afterpay_clearpay,
+            Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
+          )
 
         sig do
           override
