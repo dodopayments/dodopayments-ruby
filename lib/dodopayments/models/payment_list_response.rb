@@ -54,35 +54,17 @@ module Dodopayments
       #   @return [String, nil]
       optional :subscription_id, String, nil?: true
 
-      # @!parse
-      #   # @param created_at [Time]
-      #   # @param currency [Symbol, Dodopayments::Models::PaymentListResponse::Currency]
-      #   # @param customer [Dodopayments::Models::CustomerLimitedDetails]
-      #   # @param metadata [Hash{Symbol=>String}]
-      #   # @param payment_id [String]
-      #   # @param total_amount [Integer]
-      #   # @param payment_method [String, nil]
-      #   # @param payment_method_type [String, nil]
-      #   # @param status [Symbol, Dodopayments::Models::IntentStatus, nil]
-      #   # @param subscription_id [String, nil]
-      #   #
-      #   def initialize(
-      #     created_at:,
-      #     currency:,
-      #     customer:,
-      #     metadata:,
-      #     payment_id:,
-      #     total_amount:,
-      #     payment_method: nil,
-      #     payment_method_type: nil,
-      #     status: nil,
-      #     subscription_id: nil,
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(created_at:, currency:, customer:, metadata:, payment_id:, total_amount:, payment_method: nil, payment_method_type: nil, status: nil, subscription_id: nil)
+      #   @param created_at [Time]
+      #   @param currency [Symbol, Dodopayments::Models::PaymentListResponse::Currency]
+      #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
+      #   @param metadata [Hash{Symbol=>String}]
+      #   @param payment_id [String]
+      #   @param total_amount [Integer]
+      #   @param payment_method [String, nil]
+      #   @param payment_method_type [String, nil]
+      #   @param status [Symbol, Dodopayments::Models::IntentStatus, nil]
+      #   @param subscription_id [String, nil]
 
       # @see Dodopayments::Models::PaymentListResponse#currency
       module Currency
@@ -234,11 +216,8 @@ module Dodopayments
         ZAR = :ZAR
         ZMW = :ZMW
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
   end

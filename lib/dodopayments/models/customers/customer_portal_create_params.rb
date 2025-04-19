@@ -15,13 +15,9 @@ module Dodopayments
         #   @return [Boolean, nil]
         optional :send_email, Dodopayments::Internal::Type::Boolean, nil?: true
 
-        # @!parse
-        #   # @param send_email [Boolean, nil]
-        #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-        #   #
-        #   def initialize(send_email: nil, request_options: {}, **) = super
-
-        # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+        # @!method initialize(send_email: nil, request_options: {})
+        #   @param send_email [Boolean, nil]
+        #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
       end
     end
   end

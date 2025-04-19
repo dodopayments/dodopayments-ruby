@@ -58,31 +58,15 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :usage_limit, Integer, nil?: true
 
-      # @!parse
-      #   # @param amount [Integer]
-      #   # @param type [Symbol, Dodopayments::Models::DiscountType]
-      #   # @param code [String, nil]
-      #   # @param expires_at [Time, nil]
-      #   # @param name [String, nil]
-      #   # @param restricted_to [Array<String>, nil]
-      #   # @param usage_limit [Integer, nil]
-      #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(
-      #     amount:,
-      #     type:,
-      #     code: nil,
-      #     expires_at: nil,
-      #     name: nil,
-      #     restricted_to: nil,
-      #     usage_limit: nil,
-      #     request_options: {},
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(amount:, type:, code: nil, expires_at: nil, name: nil, restricted_to: nil, usage_limit: nil, request_options: {})
+      #   @param amount [Integer]
+      #   @param type [Symbol, Dodopayments::Models::DiscountType]
+      #   @param code [String, nil]
+      #   @param expires_at [Time, nil]
+      #   @param name [String, nil]
+      #   @param restricted_to [Array<String>, nil]
+      #   @param usage_limit [Integer, nil]
+      #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end
 end

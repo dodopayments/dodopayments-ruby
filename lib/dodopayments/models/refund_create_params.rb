@@ -20,14 +20,10 @@ module Dodopayments
       #   @return [String, nil]
       optional :reason, String, nil?: true
 
-      # @!parse
-      #   # @param payment_id [String]
-      #   # @param reason [String, nil]
-      #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(payment_id:, reason: nil, request_options: {}, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(payment_id:, reason: nil, request_options: {})
+      #   @param payment_id [String]
+      #   @param reason [String, nil]
+      #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end
 end

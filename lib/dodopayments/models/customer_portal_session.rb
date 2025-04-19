@@ -8,12 +8,8 @@ module Dodopayments
       #   @return [String]
       required :link, String
 
-      # @!parse
-      #   # @param link [String]
-      #   #
-      #   def initialize(link:, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(link:)
+      #   @param link [String]
     end
   end
 end

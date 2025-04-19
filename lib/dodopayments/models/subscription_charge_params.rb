@@ -15,13 +15,9 @@ module Dodopayments
       #   @return [Integer]
       required :product_price, Integer
 
-      # @!parse
-      #   # @param product_price [Integer]
-      #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(product_price:, request_options: {}, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(product_price:, request_options: {})
+      #   @param product_price [Integer]
+      #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end
 end

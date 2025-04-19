@@ -76,39 +76,19 @@ module Dodopayments
       #   @return [String, nil]
       optional :subscription_id, String, nil?: true
 
-      # @!parse
-      #   # @param id [String]
-      #   # @param business_id [String]
-      #   # @param created_at [Time]
-      #   # @param customer_id [String]
-      #   # @param instances_count [Integer]
-      #   # @param key [String]
-      #   # @param payment_id [String]
-      #   # @param product_id [String]
-      #   # @param status [Symbol, Dodopayments::Models::LicenseKeyStatus]
-      #   # @param activations_limit [Integer, nil]
-      #   # @param expires_at [Time, nil]
-      #   # @param subscription_id [String, nil]
-      #   #
-      #   def initialize(
-      #     id:,
-      #     business_id:,
-      #     created_at:,
-      #     customer_id:,
-      #     instances_count:,
-      #     key:,
-      #     payment_id:,
-      #     product_id:,
-      #     status:,
-      #     activations_limit: nil,
-      #     expires_at: nil,
-      #     subscription_id: nil,
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(id:, business_id:, created_at:, customer_id:, instances_count:, key:, payment_id:, product_id:, status:, activations_limit: nil, expires_at: nil, subscription_id: nil)
+      #   @param id [String]
+      #   @param business_id [String]
+      #   @param created_at [Time]
+      #   @param customer_id [String]
+      #   @param instances_count [Integer]
+      #   @param key [String]
+      #   @param payment_id [String]
+      #   @param product_id [String]
+      #   @param status [Symbol, Dodopayments::Models::LicenseKeyStatus]
+      #   @param activations_limit [Integer, nil]
+      #   @param expires_at [Time, nil]
+      #   @param subscription_id [String, nil]
     end
   end
 end

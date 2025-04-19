@@ -18,14 +18,10 @@ module Dodopayments
       #   @return [String]
       required :name, String
 
-      # @!parse
-      #   # @param license_key [String]
-      #   # @param name [String]
-      #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(license_key:, name:, request_options: {}, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(license_key:, name:, request_options: {})
+      #   @param license_key [String]
+      #   @param name [String]
+      #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end
 end

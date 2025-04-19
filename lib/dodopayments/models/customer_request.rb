@@ -9,9 +9,8 @@ module Dodopayments
 
       variant -> { Dodopayments::Models::CreateNewCustomer }
 
-      # @!parse
-      #   # @return [Array(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer)]
-      #   def self.variants; end
+      # @!method self.variants
+      #   @return [Array(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer)]
     end
   end
 end

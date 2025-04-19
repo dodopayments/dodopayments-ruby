@@ -117,53 +117,26 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!parse
-      #   # @param business_id [String]
-      #   # @param created_at [Time]
-      #   # @param currency [Symbol, Dodopayments::Models::Payment::Currency]
-      #   # @param customer [Dodopayments::Models::CustomerLimitedDetails]
-      #   # @param disputes [Array<Dodopayments::Models::Dispute>]
-      #   # @param metadata [Hash{Symbol=>String}]
-      #   # @param payment_id [String]
-      #   # @param refunds [Array<Dodopayments::Models::Refund>]
-      #   # @param total_amount [Integer]
-      #   # @param discount_id [String, nil]
-      #   # @param error_message [String, nil]
-      #   # @param payment_link [String, nil]
-      #   # @param payment_method [String, nil]
-      #   # @param payment_method_type [String, nil]
-      #   # @param product_cart [Array<Dodopayments::Models::Payment::ProductCart>, nil]
-      #   # @param status [Symbol, Dodopayments::Models::IntentStatus, nil]
-      #   # @param subscription_id [String, nil]
-      #   # @param tax [Integer, nil]
-      #   # @param updated_at [Time, nil]
-      #   #
-      #   def initialize(
-      #     business_id:,
-      #     created_at:,
-      #     currency:,
-      #     customer:,
-      #     disputes:,
-      #     metadata:,
-      #     payment_id:,
-      #     refunds:,
-      #     total_amount:,
-      #     discount_id: nil,
-      #     error_message: nil,
-      #     payment_link: nil,
-      #     payment_method: nil,
-      #     payment_method_type: nil,
-      #     product_cart: nil,
-      #     status: nil,
-      #     subscription_id: nil,
-      #     tax: nil,
-      #     updated_at: nil,
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(business_id:, created_at:, currency:, customer:, disputes:, metadata:, payment_id:, refunds:, total_amount:, discount_id: nil, error_message: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      #   @param business_id [String]
+      #   @param created_at [Time]
+      #   @param currency [Symbol, Dodopayments::Models::Payment::Currency]
+      #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
+      #   @param disputes [Array<Dodopayments::Models::Dispute>]
+      #   @param metadata [Hash{Symbol=>String}]
+      #   @param payment_id [String]
+      #   @param refunds [Array<Dodopayments::Models::Refund>]
+      #   @param total_amount [Integer]
+      #   @param discount_id [String, nil]
+      #   @param error_message [String, nil]
+      #   @param payment_link [String, nil]
+      #   @param payment_method [String, nil]
+      #   @param payment_method_type [String, nil]
+      #   @param product_cart [Array<Dodopayments::Models::Payment::ProductCart>, nil]
+      #   @param status [Symbol, Dodopayments::Models::IntentStatus, nil]
+      #   @param subscription_id [String, nil]
+      #   @param tax [Integer, nil]
+      #   @param updated_at [Time, nil]
 
       # @see Dodopayments::Models::Payment#currency
       module Currency
@@ -315,11 +288,8 @@ module Dodopayments
         ZAR = :ZAR
         ZMW = :ZMW
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
 
       class ProductCart < Dodopayments::Internal::Type::BaseModel
@@ -333,13 +303,9 @@ module Dodopayments
         #   @return [Integer]
         required :quantity, Integer
 
-        # @!parse
-        #   # @param product_id [String]
-        #   # @param quantity [Integer]
-        #   #
-        #   def initialize(product_id:, quantity:, **) = super
-
-        # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+        # @!method initialize(product_id:, quantity:)
+        #   @param product_id [String]
+        #   @param quantity [Integer]
       end
     end
   end

@@ -112,55 +112,28 @@ module Dodopayments
       #   @return [String, nil]
       optional :discount_id, String, nil?: true
 
-      # @!parse
-      #   # Response struct representing subscription details
-      #   #
-      #   # @param billing [Dodopayments::Models::BillingAddress]
-      #   # @param created_at [Time]
-      #   # @param currency [Symbol, Dodopayments::Models::Subscription::Currency]
-      #   # @param customer [Dodopayments::Models::CustomerLimitedDetails]
-      #   # @param metadata [Hash{Symbol=>String}]
-      #   # @param next_billing_date [Time]
-      #   # @param payment_frequency_count [Integer]
-      #   # @param payment_frequency_interval [Symbol, Dodopayments::Models::TimeInterval]
-      #   # @param product_id [String]
-      #   # @param quantity [Integer]
-      #   # @param recurring_pre_tax_amount [Integer]
-      #   # @param status [Symbol, Dodopayments::Models::SubscriptionStatus]
-      #   # @param subscription_id [String]
-      #   # @param subscription_period_count [Integer]
-      #   # @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval]
-      #   # @param tax_inclusive [Boolean]
-      #   # @param trial_period_days [Integer]
-      #   # @param cancelled_at [Time, nil]
-      #   # @param discount_id [String, nil]
-      #   #
-      #   def initialize(
-      #     billing:,
-      #     created_at:,
-      #     currency:,
-      #     customer:,
-      #     metadata:,
-      #     next_billing_date:,
-      #     payment_frequency_count:,
-      #     payment_frequency_interval:,
-      #     product_id:,
-      #     quantity:,
-      #     recurring_pre_tax_amount:,
-      #     status:,
-      #     subscription_id:,
-      #     subscription_period_count:,
-      #     subscription_period_interval:,
-      #     tax_inclusive:,
-      #     trial_period_days:,
-      #     cancelled_at: nil,
-      #     discount_id: nil,
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(billing:, created_at:, currency:, customer:, metadata:, next_billing_date:, payment_frequency_count:, payment_frequency_interval:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, discount_id: nil)
+      #   Response struct representing subscription details
+      #
+      #   @param billing [Dodopayments::Models::BillingAddress]
+      #   @param created_at [Time]
+      #   @param currency [Symbol, Dodopayments::Models::Subscription::Currency]
+      #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
+      #   @param metadata [Hash{Symbol=>String}]
+      #   @param next_billing_date [Time]
+      #   @param payment_frequency_count [Integer]
+      #   @param payment_frequency_interval [Symbol, Dodopayments::Models::TimeInterval]
+      #   @param product_id [String]
+      #   @param quantity [Integer]
+      #   @param recurring_pre_tax_amount [Integer]
+      #   @param status [Symbol, Dodopayments::Models::SubscriptionStatus]
+      #   @param subscription_id [String]
+      #   @param subscription_period_count [Integer]
+      #   @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval]
+      #   @param tax_inclusive [Boolean]
+      #   @param trial_period_days [Integer]
+      #   @param cancelled_at [Time, nil]
+      #   @param discount_id [String, nil]
 
       # @see Dodopayments::Models::Subscription#currency
       module Currency
@@ -312,11 +285,8 @@ module Dodopayments
         ZAR = :ZAR
         ZMW = :ZMW
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
   end

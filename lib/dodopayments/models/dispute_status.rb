@@ -13,11 +13,8 @@ module Dodopayments
       DISPUTE_WON = :dispute_won
       DISPUTE_LOST = :dispute_lost
 
-      finalize!
-
-      # @!parse
-      #   # @return [Array<Symbol>]
-      #   def self.values; end
+      # @!method self.values
+      #   @return [Array<Symbol>]
     end
   end
 end

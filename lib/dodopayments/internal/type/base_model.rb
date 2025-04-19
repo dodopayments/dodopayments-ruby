@@ -342,6 +342,8 @@ module Dodopayments
         end
 
         class << self
+          # @api private
+          #
           # @param model [Dodopayments::Internal::Type::BaseModel]
           #
           # @return [Hash{Symbol=>Object}]

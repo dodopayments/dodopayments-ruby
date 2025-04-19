@@ -50,19 +50,15 @@ module Dodopayments
       #   @return [String, nil]
       optional :reason, String, nil?: true
 
-      # @!parse
-      #   # @param business_id [String]
-      #   # @param created_at [Time]
-      #   # @param payment_id [String]
-      #   # @param refund_id [String]
-      #   # @param status [Symbol, Dodopayments::Models::RefundStatus]
-      #   # @param amount [Integer, nil]
-      #   # @param currency [Symbol, Dodopayments::Models::Refund::Currency, nil]
-      #   # @param reason [String, nil]
-      #   #
-      #   def initialize(business_id:, created_at:, payment_id:, refund_id:, status:, amount: nil, currency: nil, reason: nil, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(business_id:, created_at:, payment_id:, refund_id:, status:, amount: nil, currency: nil, reason: nil)
+      #   @param business_id [String]
+      #   @param created_at [Time]
+      #   @param payment_id [String]
+      #   @param refund_id [String]
+      #   @param status [Symbol, Dodopayments::Models::RefundStatus]
+      #   @param amount [Integer, nil]
+      #   @param currency [Symbol, Dodopayments::Models::Refund::Currency, nil]
+      #   @param reason [String, nil]
 
       # @see Dodopayments::Models::Refund#currency
       module Currency
@@ -214,11 +210,8 @@ module Dodopayments
         ZAR = :ZAR
         ZMW = :ZMW
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
   end

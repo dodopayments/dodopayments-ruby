@@ -76,37 +76,18 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::ProductUpdateParams::TaxCategory, nil]
       optional :tax_category, enum: -> { Dodopayments::Models::ProductUpdateParams::TaxCategory }, nil?: true
 
-      # @!parse
-      #   # @param addons [Array<String>, nil]
-      #   # @param description [String, nil]
-      #   # @param image_id [String, nil]
-      #   # @param license_key_activation_message [String, nil]
-      #   # @param license_key_activations_limit [Integer, nil]
-      #   # @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil]
-      #   # @param license_key_enabled [Boolean, nil]
-      #   # @param name [String, nil]
-      #   # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil]
-      #   # @param tax_category [Symbol, Dodopayments::Models::ProductUpdateParams::TaxCategory, nil]
-      #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(
-      #     addons: nil,
-      #     description: nil,
-      #     image_id: nil,
-      #     license_key_activation_message: nil,
-      #     license_key_activations_limit: nil,
-      #     license_key_duration: nil,
-      #     license_key_enabled: nil,
-      #     name: nil,
-      #     price: nil,
-      #     tax_category: nil,
-      #     request_options: {},
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(addons: nil, description: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      #   @param addons [Array<String>, nil]
+      #   @param description [String, nil]
+      #   @param image_id [String, nil]
+      #   @param license_key_activation_message [String, nil]
+      #   @param license_key_activations_limit [Integer, nil]
+      #   @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil]
+      #   @param license_key_enabled [Boolean, nil]
+      #   @param name [String, nil]
+      #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil]
+      #   @param tax_category [Symbol, Dodopayments::Models::ProductUpdateParams::TaxCategory, nil]
+      #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 
       # Represents the different categories of taxation applicable to various products
       # and services.
@@ -118,11 +99,8 @@ module Dodopayments
         E_BOOK = :e_book
         EDTECH = :edtech
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
   end

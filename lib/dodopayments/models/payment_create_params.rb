@@ -90,39 +90,19 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!parse
-      #   # @param billing [Dodopayments::Models::BillingAddress]
-      #   # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
-      #   # @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>]
-      #   # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil]
-      #   # @param billing_currency [Symbol, Dodopayments::Models::PaymentCreateParams::BillingCurrency, nil]
-      #   # @param discount_code [String, nil]
-      #   # @param metadata [Hash{Symbol=>String}]
-      #   # @param payment_link [Boolean, nil]
-      #   # @param return_url [String, nil]
-      #   # @param show_saved_payment_methods [Boolean]
-      #   # @param tax_id [String, nil]
-      #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(
-      #     billing:,
-      #     customer:,
-      #     product_cart:,
-      #     allowed_payment_method_types: nil,
-      #     billing_currency: nil,
-      #     discount_code: nil,
-      #     metadata: nil,
-      #     payment_link: nil,
-      #     return_url: nil,
-      #     show_saved_payment_methods: nil,
-      #     tax_id: nil,
-      #     request_options: {},
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(billing:, customer:, product_cart:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, metadata: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
+      #   @param billing [Dodopayments::Models::BillingAddress]
+      #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
+      #   @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>]
+      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil]
+      #   @param billing_currency [Symbol, Dodopayments::Models::PaymentCreateParams::BillingCurrency, nil]
+      #   @param discount_code [String, nil]
+      #   @param metadata [Hash{Symbol=>String}]
+      #   @param payment_link [Boolean, nil]
+      #   @param return_url [String, nil]
+      #   @param show_saved_payment_methods [Boolean]
+      #   @param tax_id [String, nil]
+      #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 
       module AllowedPaymentMethodType
         extend Dodopayments::Internal::Type::Enum
@@ -146,11 +126,8 @@ module Dodopayments
         AMAZON_PAY = :amazon_pay
         AFTERPAY_CLEARPAY = :afterpay_clearpay
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
 
       module BillingCurrency
@@ -302,11 +279,8 @@ module Dodopayments
         ZAR = :ZAR
         ZMW = :ZMW
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
   end

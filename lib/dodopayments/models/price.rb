@@ -70,31 +70,15 @@ module Dodopayments
         #   @return [Boolean, nil]
         optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
-        # @!parse
-        #   # @param currency [Symbol, Dodopayments::Models::Price::OneTimePrice::Currency]
-        #   # @param discount [Float]
-        #   # @param price [Integer]
-        #   # @param purchasing_power_parity [Boolean]
-        #   # @param pay_what_you_want [Boolean]
-        #   # @param suggested_price [Integer, nil]
-        #   # @param tax_inclusive [Boolean, nil]
-        #   # @param type [Symbol, :one_time_price]
-        #   #
-        #   def initialize(
-        #     currency:,
-        #     discount:,
-        #     price:,
-        #     purchasing_power_parity:,
-        #     pay_what_you_want: nil,
-        #     suggested_price: nil,
-        #     tax_inclusive: nil,
-        #     type: :one_time_price,
-        #     **
-        #   )
-        #     super
-        #   end
-
-        # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+        # @!method initialize(currency:, discount:, price:, purchasing_power_parity:, pay_what_you_want: nil, suggested_price: nil, tax_inclusive: nil, type: :one_time_price)
+        #   @param currency [Symbol, Dodopayments::Models::Price::OneTimePrice::Currency]
+        #   @param discount [Float]
+        #   @param price [Integer]
+        #   @param purchasing_power_parity [Boolean]
+        #   @param pay_what_you_want [Boolean]
+        #   @param suggested_price [Integer, nil]
+        #   @param tax_inclusive [Boolean, nil]
+        #   @param type [Symbol, :one_time_price]
 
         # @see Dodopayments::Models::Price::OneTimePrice#currency
         module Currency
@@ -246,11 +230,8 @@ module Dodopayments
           ZAR = :ZAR
           ZMW = :ZMW
 
-          finalize!
-
-          # @!parse
-          #   # @return [Array<Symbol>]
-          #   def self.values; end
+          # @!method self.values
+          #   @return [Array<Symbol>]
         end
       end
 
@@ -325,37 +306,18 @@ module Dodopayments
         #   # @return [Integer]
         #   attr_writer :trial_period_days
 
-        # @!parse
-        #   # @param currency [Symbol, Dodopayments::Models::Price::RecurringPrice::Currency]
-        #   # @param discount [Float]
-        #   # @param payment_frequency_count [Integer]
-        #   # @param payment_frequency_interval [Symbol, Dodopayments::Models::TimeInterval]
-        #   # @param price [Integer]
-        #   # @param purchasing_power_parity [Boolean]
-        #   # @param subscription_period_count [Integer]
-        #   # @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval]
-        #   # @param tax_inclusive [Boolean, nil]
-        #   # @param trial_period_days [Integer]
-        #   # @param type [Symbol, :recurring_price]
-        #   #
-        #   def initialize(
-        #     currency:,
-        #     discount:,
-        #     payment_frequency_count:,
-        #     payment_frequency_interval:,
-        #     price:,
-        #     purchasing_power_parity:,
-        #     subscription_period_count:,
-        #     subscription_period_interval:,
-        #     tax_inclusive: nil,
-        #     trial_period_days: nil,
-        #     type: :recurring_price,
-        #     **
-        #   )
-        #     super
-        #   end
-
-        # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+        # @!method initialize(currency:, discount:, payment_frequency_count:, payment_frequency_interval:, price:, purchasing_power_parity:, subscription_period_count:, subscription_period_interval:, tax_inclusive: nil, trial_period_days: nil, type: :recurring_price)
+        #   @param currency [Symbol, Dodopayments::Models::Price::RecurringPrice::Currency]
+        #   @param discount [Float]
+        #   @param payment_frequency_count [Integer]
+        #   @param payment_frequency_interval [Symbol, Dodopayments::Models::TimeInterval]
+        #   @param price [Integer]
+        #   @param purchasing_power_parity [Boolean]
+        #   @param subscription_period_count [Integer]
+        #   @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval]
+        #   @param tax_inclusive [Boolean, nil]
+        #   @param trial_period_days [Integer]
+        #   @param type [Symbol, :recurring_price]
 
         # @see Dodopayments::Models::Price::RecurringPrice#currency
         module Currency
@@ -507,17 +469,13 @@ module Dodopayments
           ZAR = :ZAR
           ZMW = :ZMW
 
-          finalize!
-
-          # @!parse
-          #   # @return [Array<Symbol>]
-          #   def self.values; end
+          # @!method self.values
+          #   @return [Array<Symbol>]
         end
       end
 
-      # @!parse
-      #   # @return [Array(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice)]
-      #   def self.variants; end
+      # @!method self.variants
+      #   @return [Array(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice)]
     end
   end
 end

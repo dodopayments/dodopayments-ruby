@@ -50,31 +50,15 @@ module Dodopayments
       #   @return [String, nil]
       optional :subscription_id, String, nil?: true
 
-      # @!parse
-      #   # @param created_at_gte [Time, nil]
-      #   # @param created_at_lte [Time, nil]
-      #   # @param customer_id [String, nil]
-      #   # @param page_number [Integer, nil]
-      #   # @param page_size [Integer, nil]
-      #   # @param status [Symbol, Dodopayments::Models::IntentStatus, nil]
-      #   # @param subscription_id [String, nil]
-      #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(
-      #     created_at_gte: nil,
-      #     created_at_lte: nil,
-      #     customer_id: nil,
-      #     page_number: nil,
-      #     page_size: nil,
-      #     status: nil,
-      #     subscription_id: nil,
-      #     request_options: {},
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, subscription_id: nil, request_options: {})
+      #   @param created_at_gte [Time, nil]
+      #   @param created_at_lte [Time, nil]
+      #   @param customer_id [String, nil]
+      #   @param page_number [Integer, nil]
+      #   @param page_size [Integer, nil]
+      #   @param status [Symbol, Dodopayments::Models::IntentStatus, nil]
+      #   @param subscription_id [String, nil]
+      #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end
 end
