@@ -46,29 +46,14 @@ module Dodopayments
       #   @return [String, nil]
       optional :payment_link, String, nil?: true
 
-      # @!parse
-      #   # @param customer [Dodopayments::Models::CustomerLimitedDetails]
-      #   # @param metadata [Hash{Symbol=>String}]
-      #   # @param recurring_pre_tax_amount [Integer]
-      #   # @param subscription_id [String]
-      #   # @param client_secret [String, nil]
-      #   # @param discount_id [String, nil]
-      #   # @param payment_link [String, nil]
-      #   #
-      #   def initialize(
-      #     customer:,
-      #     metadata:,
-      #     recurring_pre_tax_amount:,
-      #     subscription_id:,
-      #     client_secret: nil,
-      #     discount_id: nil,
-      #     payment_link: nil,
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(customer:, metadata:, recurring_pre_tax_amount:, subscription_id:, client_secret: nil, discount_id: nil, payment_link: nil)
+      #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
+      #   @param metadata [Hash{Symbol=>String}]
+      #   @param recurring_pre_tax_amount [Integer]
+      #   @param subscription_id [String]
+      #   @param client_secret [String, nil]
+      #   @param discount_id [String, nil]
+      #   @param payment_link [String, nil]
     end
   end
 end

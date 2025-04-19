@@ -17,11 +17,8 @@ module Dodopayments
       PARTIALLY_CAPTURED = :partially_captured
       PARTIALLY_CAPTURED_AND_CAPTURABLE = :partially_captured_and_capturable
 
-      finalize!
-
-      # @!parse
-      #   # @return [Array<Symbol>]
-      #   def self.values; end
+      # @!method self.values
+      #   @return [Array<Symbol>]
     end
   end
 end

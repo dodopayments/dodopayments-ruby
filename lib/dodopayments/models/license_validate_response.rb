@@ -9,12 +9,8 @@ module Dodopayments
       #   @return [Boolean]
       required :valid, Dodopayments::Internal::Type::Boolean
 
-      # @!parse
-      #   # @param valid [Boolean]
-      #   #
-      #   def initialize(valid:, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(valid:)
+      #   @param valid [Boolean]
     end
   end
 end

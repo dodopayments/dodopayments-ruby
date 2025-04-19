@@ -14,13 +14,9 @@ module Dodopayments
         #   @return [Boolean, nil]
         optional :force_update, Dodopayments::Internal::Type::Boolean, nil?: true
 
-        # @!parse
-        #   # @param force_update [Boolean, nil]
-        #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-        #   #
-        #   def initialize(force_update: nil, request_options: {}, **) = super
-
-        # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+        # @!method initialize(force_update: nil, request_options: {})
+        #   @param force_update [Boolean, nil]
+        #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
       end
     end
   end

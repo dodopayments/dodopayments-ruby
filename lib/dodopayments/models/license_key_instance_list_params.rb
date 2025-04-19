@@ -26,15 +26,11 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :page_size, Integer, nil?: true
 
-      # @!parse
-      #   # @param license_key_id [String, nil]
-      #   # @param page_number [Integer, nil]
-      #   # @param page_size [Integer, nil]
-      #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(license_key_id: nil, page_number: nil, page_size: nil, request_options: {}, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(license_key_id: nil, page_number: nil, page_size: nil, request_options: {})
+      #   @param license_key_id [String, nil]
+      #   @param page_number [Integer, nil]
+      #   @param page_size [Integer, nil]
+      #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end
 end

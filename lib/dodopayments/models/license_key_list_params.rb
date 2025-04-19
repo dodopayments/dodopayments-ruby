@@ -38,17 +38,13 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::LicenseKeyStatus, nil]
       optional :status, enum: -> { Dodopayments::Models::LicenseKeyStatus }, nil?: true
 
-      # @!parse
-      #   # @param customer_id [String, nil]
-      #   # @param page_number [Integer, nil]
-      #   # @param page_size [Integer, nil]
-      #   # @param product_id [String, nil]
-      #   # @param status [Symbol, Dodopayments::Models::LicenseKeyStatus, nil]
-      #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {}, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
+      #   @param customer_id [String, nil]
+      #   @param page_number [Integer, nil]
+      #   @param page_size [Integer, nil]
+      #   @param product_id [String, nil]
+      #   @param status [Symbol, Dodopayments::Models::LicenseKeyStatus, nil]
+      #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end
 end

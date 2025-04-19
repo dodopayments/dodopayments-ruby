@@ -15,13 +15,9 @@ module Dodopayments
         #   @return [String, nil]
         optional :image_id, String, nil?: true
 
-        # @!parse
-        #   # @param url [String]
-        #   # @param image_id [String, nil]
-        #   #
-        #   def initialize(url:, image_id: nil, **) = super
-
-        # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+        # @!method initialize(url:, image_id: nil)
+        #   @param url [String]
+        #   @param image_id [String, nil]
       end
     end
   end

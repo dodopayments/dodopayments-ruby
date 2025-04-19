@@ -53,31 +53,15 @@ module Dodopayments
                -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::OneTimeProductCartItem] },
                nil?: true
 
-      # @!parse
-      #   # @param client_secret [String]
-      #   # @param customer [Dodopayments::Models::CustomerLimitedDetails]
-      #   # @param metadata [Hash{Symbol=>String}]
-      #   # @param payment_id [String]
-      #   # @param total_amount [Integer]
-      #   # @param discount_id [String, nil]
-      #   # @param payment_link [String, nil]
-      #   # @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil]
-      #   #
-      #   def initialize(
-      #     client_secret:,
-      #     customer:,
-      #     metadata:,
-      #     payment_id:,
-      #     total_amount:,
-      #     discount_id: nil,
-      #     payment_link: nil,
-      #     product_cart: nil,
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(client_secret:, customer:, metadata:, payment_id:, total_amount:, discount_id: nil, payment_link: nil, product_cart: nil)
+      #   @param client_secret [String]
+      #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
+      #   @param metadata [Hash{Symbol=>String}]
+      #   @param payment_id [String]
+      #   @param total_amount [Integer]
+      #   @param discount_id [String, nil]
+      #   @param payment_link [String, nil]
+      #   @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil]
     end
   end
 end

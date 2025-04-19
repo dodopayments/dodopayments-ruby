@@ -23,15 +23,11 @@ module Dodopayments
       #   @return [String, nil]
       optional :phone_number, String, nil?: true
 
-      # @!parse
-      #   # @param email [String]
-      #   # @param name [String]
-      #   # @param phone_number [String, nil]
-      #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(email:, name:, phone_number: nil, request_options: {}, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(email:, name:, phone_number: nil, request_options: {})
+      #   @param email [String]
+      #   @param name [String]
+      #   @param phone_number [String, nil]
+      #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end
 end

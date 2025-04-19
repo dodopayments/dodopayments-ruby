@@ -73,37 +73,18 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :usage_limit, Integer, nil?: true
 
-      # @!parse
-      #   # @param amount [Integer]
-      #   # @param business_id [String]
-      #   # @param code [String]
-      #   # @param created_at [Time]
-      #   # @param discount_id [String]
-      #   # @param restricted_to [Array<String>]
-      #   # @param times_used [Integer]
-      #   # @param type [Symbol, Dodopayments::Models::DiscountType]
-      #   # @param expires_at [Time, nil]
-      #   # @param name [String, nil]
-      #   # @param usage_limit [Integer, nil]
-      #   #
-      #   def initialize(
-      #     amount:,
-      #     business_id:,
-      #     code:,
-      #     created_at:,
-      #     discount_id:,
-      #     restricted_to:,
-      #     times_used:,
-      #     type:,
-      #     expires_at: nil,
-      #     name: nil,
-      #     usage_limit: nil,
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(amount:, business_id:, code:, created_at:, discount_id:, restricted_to:, times_used:, type:, expires_at: nil, name: nil, usage_limit: nil)
+      #   @param amount [Integer]
+      #   @param business_id [String]
+      #   @param code [String]
+      #   @param created_at [Time]
+      #   @param discount_id [String]
+      #   @param restricted_to [Array<String>]
+      #   @param times_used [Integer]
+      #   @param type [Symbol, Dodopayments::Models::DiscountType]
+      #   @param expires_at [Time, nil]
+      #   @param name [String, nil]
+      #   @param usage_limit [Integer, nil]
     end
   end
 end

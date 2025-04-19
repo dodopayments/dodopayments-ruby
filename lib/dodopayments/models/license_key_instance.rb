@@ -29,16 +29,12 @@ module Dodopayments
       #   @return [String]
       required :name, String
 
-      # @!parse
-      #   # @param id [String]
-      #   # @param business_id [String]
-      #   # @param created_at [Time]
-      #   # @param license_key_id [String]
-      #   # @param name [String]
-      #   #
-      #   def initialize(id:, business_id:, created_at:, license_key_id:, name:, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(id:, business_id:, created_at:, license_key_id:, name:)
+      #   @param id [String]
+      #   @param business_id [String]
+      #   @param created_at [Time]
+      #   @param license_key_id [String]
+      #   @param name [String]
     end
   end
 end
