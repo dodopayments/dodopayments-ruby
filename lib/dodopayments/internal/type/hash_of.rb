@@ -59,6 +59,9 @@ module Dodopayments
           # rubocop:enable Layout/LineLength
         end
 
+        # @return [Integer]
+        def hash = [self.class, item_type].hash
+
         # @api private
         #
         # @param value [Hash{Object=>Object}, Object]
