@@ -108,6 +108,8 @@ module Dodopayments
         # rubocop:disable Style/HashEachMethods
         # rubocop:disable Style/CaseEquality
 
+        # @api public
+        #
         # @param other [Object]
         #
         # @return [Boolean]
@@ -117,6 +119,8 @@ module Dodopayments
           end
         end
 
+        # @api public
+        #
         # @param other [Object]
         #
         # @return [Boolean]
@@ -124,6 +128,8 @@ module Dodopayments
           Dodopayments::Internal::Type::Union === other && other.derefed_variants == derefed_variants
         end
 
+        # @api public
+        #
         # @return [Integer]
         def hash = variants.hash
 
