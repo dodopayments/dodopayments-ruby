@@ -13,17 +13,13 @@ module Dodopayments
       #   @return [String]
       required :name, String
 
-      # @!attribute [r] create_new_customer
+      # @!attribute create_new_customer
       #   When false, the most recently created customer object with the given email is
       #   used if exists. When true, a new customer object is always created False by
       #   default
       #
       #   @return [Boolean, nil]
       optional :create_new_customer, Dodopayments::Internal::Type::Boolean
-
-      # @!parse
-      #   # @return [Boolean]
-      #   attr_writer :create_new_customer
 
       # @!attribute phone_number
       #
