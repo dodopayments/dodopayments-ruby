@@ -5,8 +5,7 @@ module Dodopayments
     module Invoices
       # @see Dodopayments::Resources::Invoices::Payments#retrieve
       class PaymentRetrieveParams < Dodopayments::Internal::Type::BaseModel
-        # @!parse
-        #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
         include Dodopayments::Internal::Type::RequestParameters
 
         # @!method initialize(request_options: {})

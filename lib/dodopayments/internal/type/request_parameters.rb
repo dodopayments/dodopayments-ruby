@@ -12,9 +12,8 @@ module Dodopayments
 
         # @param mod [Module]
         def self.included(mod)
-          return unless mod <= Dodopayments::Internal::Type::BaseModel
+          raise ArgumentError.new(mod) unless mod <= Dodopayments::Internal::Type::BaseModel
 
-          mod.extend(Dodopayments::Internal::Type::RequestParameters::Converter)
           mod.optional(:request_options, Dodopayments::RequestOptions)
         end
 

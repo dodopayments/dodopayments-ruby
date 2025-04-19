@@ -4,8 +4,7 @@ module Dodopayments
   module Models
     # @see Dodopayments::Resources::Subscriptions#create
     class SubscriptionCreateParams < Dodopayments::Internal::Type::BaseModel
-      # @!parse
-      #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute billing
@@ -56,14 +55,10 @@ module Dodopayments
       #   @return [String, nil]
       optional :discount_code, String, nil?: true
 
-      # @!attribute [r] metadata
+      # @!attribute metadata
       #
       #   @return [Hash{Symbol=>String}, nil]
       optional :metadata, Dodopayments::Internal::Type::HashOf[String]
-
-      # @!parse
-      #   # @return [Hash{Symbol=>String}]
-      #   attr_writer :metadata
 
       # @!attribute on_demand
       #
@@ -82,15 +77,11 @@ module Dodopayments
       #   @return [String, nil]
       optional :return_url, String, nil?: true
 
-      # @!attribute [r] show_saved_payment_methods
+      # @!attribute show_saved_payment_methods
       #   Display saved payment methods of a returning customer False by default
       #
       #   @return [Boolean, nil]
       optional :show_saved_payment_methods, Dodopayments::Internal::Type::Boolean
-
-      # @!parse
-      #   # @return [Boolean]
-      #   attr_writer :show_saved_payment_methods
 
       # @!attribute tax_id
       #   Tax ID in case the payment is B2B. If tax id validation fails the payment
