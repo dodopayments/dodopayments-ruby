@@ -7,7 +7,7 @@ module Dodopayments
       extend Dodopayments::Internal::Type::Enum
 
       TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::CountryCode) }
-      OrSymbol = T.type_alias { T.any(Symbol, String, Dodopayments::Models::CountryCode::TaggedSymbol) }
+      OrSymbol = T.type_alias { T.any(Symbol, String) }
 
       AF = T.let(:AF, Dodopayments::Models::CountryCode::TaggedSymbol)
       AX = T.let(:AX, Dodopayments::Models::CountryCode::TaggedSymbol)

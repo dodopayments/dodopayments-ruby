@@ -6,7 +6,7 @@ module Dodopayments
       extend Dodopayments::Internal::Type::Enum
 
       TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::DisputeStage) }
-      OrSymbol = T.type_alias { T.any(Symbol, String, Dodopayments::Models::DisputeStage::TaggedSymbol) }
+      OrSymbol = T.type_alias { T.any(Symbol, String) }
 
       PRE_DISPUTE = T.let(:pre_dispute, Dodopayments::Models::DisputeStage::TaggedSymbol)
       DISPUTE = T.let(:dispute, Dodopayments::Models::DisputeStage::TaggedSymbol)

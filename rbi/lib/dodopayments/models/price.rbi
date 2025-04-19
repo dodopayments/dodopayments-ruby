@@ -91,8 +91,7 @@ module Dodopayments
           extend Dodopayments::Internal::Type::Enum
 
           TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::Price::OneTimePrice::Currency) }
-          OrSymbol =
-            T.type_alias { T.any(Symbol, String, Dodopayments::Models::Price::OneTimePrice::Currency::TaggedSymbol) }
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
 
           AED = T.let(:AED, Dodopayments::Models::Price::OneTimePrice::Currency::TaggedSymbol)
           ALL = T.let(:ALL, Dodopayments::Models::Price::OneTimePrice::Currency::TaggedSymbol)
@@ -346,8 +345,7 @@ module Dodopayments
           extend Dodopayments::Internal::Type::Enum
 
           TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::Price::RecurringPrice::Currency) }
-          OrSymbol =
-            T.type_alias { T.any(Symbol, String, Dodopayments::Models::Price::RecurringPrice::Currency::TaggedSymbol) }
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
 
           AED = T.let(:AED, Dodopayments::Models::Price::RecurringPrice::Currency::TaggedSymbol)
           ALL = T.let(:ALL, Dodopayments::Models::Price::RecurringPrice::Currency::TaggedSymbol)
