@@ -33,16 +33,12 @@ module Dodopayments
       #   @return [String]
       required :zipcode, String
 
-      # @!parse
-      #   # @param city [String]
-      #   # @param country [Symbol, Dodopayments::Models::CountryCode]
-      #   # @param state [String]
-      #   # @param street [String]
-      #   # @param zipcode [String]
-      #   #
-      #   def initialize(city:, country:, state:, street:, zipcode:, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(city:, country:, state:, street:, zipcode:)
+      #   @param city [String]
+      #   @param country [Symbol, Dodopayments::Models::CountryCode]
+      #   @param state [String]
+      #   @param street [String]
+      #   @param zipcode [String]
     end
   end
 end

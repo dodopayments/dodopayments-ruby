@@ -44,29 +44,14 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :page_size, Integer, nil?: true
 
-      # @!parse
-      #   # @param created_at_gte [Time, nil]
-      #   # @param created_at_lte [Time, nil]
-      #   # @param limit [Integer, nil]
-      #   # @param object_id_ [String, nil]
-      #   # @param page_number [Integer, nil]
-      #   # @param page_size [Integer, nil]
-      #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(
-      #     created_at_gte: nil,
-      #     created_at_lte: nil,
-      #     limit: nil,
-      #     object_id_: nil,
-      #     page_number: nil,
-      #     page_size: nil,
-      #     request_options: {},
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(created_at_gte: nil, created_at_lte: nil, limit: nil, object_id_: nil, page_number: nil, page_size: nil, request_options: {})
+      #   @param created_at_gte [Time, nil]
+      #   @param created_at_lte [Time, nil]
+      #   @param limit [Integer, nil]
+      #   @param object_id_ [String, nil]
+      #   @param page_number [Integer, nil]
+      #   @param page_size [Integer, nil]
+      #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end
 end

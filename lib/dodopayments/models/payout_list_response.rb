@@ -92,45 +92,22 @@ module Dodopayments
       #   @return [String, nil]
       optional :remarks, String, nil?: true
 
-      # @!parse
-      #   # @param amount [Integer]
-      #   # @param business_id [String]
-      #   # @param chargebacks [Integer]
-      #   # @param created_at [Time]
-      #   # @param currency [Symbol, Dodopayments::Models::PayoutListResponse::Currency]
-      #   # @param fee [Integer]
-      #   # @param payment_method [String]
-      #   # @param payout_id [String]
-      #   # @param refunds [Integer]
-      #   # @param status [Symbol, Dodopayments::Models::PayoutListResponse::Status]
-      #   # @param tax [Integer]
-      #   # @param updated_at [Time]
-      #   # @param name [String, nil]
-      #   # @param payout_document_url [String, nil]
-      #   # @param remarks [String, nil]
-      #   #
-      #   def initialize(
-      #     amount:,
-      #     business_id:,
-      #     chargebacks:,
-      #     created_at:,
-      #     currency:,
-      #     fee:,
-      #     payment_method:,
-      #     payout_id:,
-      #     refunds:,
-      #     status:,
-      #     tax:,
-      #     updated_at:,
-      #     name: nil,
-      #     payout_document_url: nil,
-      #     remarks: nil,
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(amount:, business_id:, chargebacks:, created_at:, currency:, fee:, payment_method:, payout_id:, refunds:, status:, tax:, updated_at:, name: nil, payout_document_url: nil, remarks: nil)
+      #   @param amount [Integer]
+      #   @param business_id [String]
+      #   @param chargebacks [Integer]
+      #   @param created_at [Time]
+      #   @param currency [Symbol, Dodopayments::Models::PayoutListResponse::Currency]
+      #   @param fee [Integer]
+      #   @param payment_method [String]
+      #   @param payout_id [String]
+      #   @param refunds [Integer]
+      #   @param status [Symbol, Dodopayments::Models::PayoutListResponse::Status]
+      #   @param tax [Integer]
+      #   @param updated_at [Time]
+      #   @param name [String, nil]
+      #   @param payout_document_url [String, nil]
+      #   @param remarks [String, nil]
 
       # @see Dodopayments::Models::PayoutListResponse#currency
       module Currency
@@ -282,11 +259,8 @@ module Dodopayments
         ZAR = :ZAR
         ZMW = :ZMW
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
 
       # @see Dodopayments::Models::PayoutListResponse#status
@@ -299,11 +273,8 @@ module Dodopayments
         FAILED = :failed
         SUCCESS = :success
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
   end

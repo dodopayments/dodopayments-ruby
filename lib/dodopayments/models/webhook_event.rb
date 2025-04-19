@@ -44,31 +44,15 @@ module Dodopayments
       #   @return [String, nil]
       optional :response, String, nil?: true
 
-      # @!parse
-      #   # @param business_id [String]
-      #   # @param created_at [Time]
-      #   # @param event_id [String]
-      #   # @param event_type [String]
-      #   # @param object_id_ [String]
-      #   # @param latest_attempted_at [Time, nil]
-      #   # @param request [String, nil]
-      #   # @param response [String, nil]
-      #   #
-      #   def initialize(
-      #     business_id:,
-      #     created_at:,
-      #     event_id:,
-      #     event_type:,
-      #     object_id_:,
-      #     latest_attempted_at: nil,
-      #     request: nil,
-      #     response: nil,
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(business_id:, created_at:, event_id:, event_type:, object_id_:, latest_attempted_at: nil, request: nil, response: nil)
+      #   @param business_id [String]
+      #   @param created_at [Time]
+      #   @param event_id [String]
+      #   @param event_type [String]
+      #   @param object_id_ [String]
+      #   @param latest_attempted_at [Time, nil]
+      #   @param request [String, nil]
+      #   @param response [String, nil]
     end
   end
 end

@@ -179,6 +179,7 @@ module Dodopayments
         def deconstruct_keys(keys); end
 
         class << self
+          # @api private
           sig do
             params(model: Dodopayments::Internal::Type::BaseModel).returns(Dodopayments::Internal::AnyHash)
           end

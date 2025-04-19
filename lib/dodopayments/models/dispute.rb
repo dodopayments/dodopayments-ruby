@@ -51,31 +51,15 @@ module Dodopayments
       #   @return [String]
       required :payment_id, String
 
-      # @!parse
-      #   # @param amount [String]
-      #   # @param business_id [String]
-      #   # @param created_at [Time]
-      #   # @param currency [String]
-      #   # @param dispute_id [String]
-      #   # @param dispute_stage [Symbol, Dodopayments::Models::DisputeStage]
-      #   # @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus]
-      #   # @param payment_id [String]
-      #   #
-      #   def initialize(
-      #     amount:,
-      #     business_id:,
-      #     created_at:,
-      #     currency:,
-      #     dispute_id:,
-      #     dispute_stage:,
-      #     dispute_status:,
-      #     payment_id:,
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(amount:, business_id:, created_at:, currency:, dispute_id:, dispute_stage:, dispute_status:, payment_id:)
+      #   @param amount [String]
+      #   @param business_id [String]
+      #   @param created_at [Time]
+      #   @param currency [String]
+      #   @param dispute_id [String]
+      #   @param dispute_stage [Symbol, Dodopayments::Models::DisputeStage]
+      #   @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus]
+      #   @param payment_id [String]
     end
   end
 end

@@ -13,13 +13,9 @@ module Dodopayments
       #   @return [String]
       required :name, String
 
-      # @!parse
-      #   # @param name [String]
-      #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(name:, request_options: {}, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(name:, request_options: {})
+      #   @param name [String]
+      #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end
 end

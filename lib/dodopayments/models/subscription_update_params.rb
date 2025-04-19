@@ -28,16 +28,12 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!parse
-      #   # @param billing [Dodopayments::Models::BillingAddress, nil]
-      #   # @param metadata [Hash{Symbol=>String}, nil]
-      #   # @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
-      #   # @param tax_id [String, nil]
-      #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(billing: nil, metadata: nil, status: nil, tax_id: nil, request_options: {}, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(billing: nil, metadata: nil, status: nil, tax_id: nil, request_options: {})
+      #   @param billing [Dodopayments::Models::BillingAddress, nil]
+      #   @param metadata [Hash{Symbol=>String}, nil]
+      #   @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
+      #   @param tax_id [String, nil]
+      #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end
 end

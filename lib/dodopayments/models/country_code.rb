@@ -256,11 +256,8 @@ module Dodopayments
       ZM = :ZM
       ZW = :ZW
 
-      finalize!
-
-      # @!parse
-      #   # @return [Array<Symbol>]
-      #   def self.values; end
+      # @!method self.values
+      #   @return [Array<Symbol>]
     end
   end
 end

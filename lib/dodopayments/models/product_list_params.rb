@@ -40,16 +40,12 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :recurring, Dodopayments::Internal::Type::Boolean, nil?: true
 
-      # @!parse
-      #   # @param archived [Boolean]
-      #   # @param page_number [Integer, nil]
-      #   # @param page_size [Integer, nil]
-      #   # @param recurring [Boolean, nil]
-      #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(archived: nil, page_number: nil, page_size: nil, recurring: nil, request_options: {}, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(archived: nil, page_number: nil, page_size: nil, recurring: nil, request_options: {})
+      #   @param archived [Boolean]
+      #   @param page_number [Integer, nil]
+      #   @param page_size [Integer, nil]
+      #   @param recurring [Boolean, nil]
+      #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end
 end

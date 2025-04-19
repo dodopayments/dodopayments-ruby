@@ -90,41 +90,20 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
-      # @!parse
-      #   # @param business_id [String]
-      #   # @param created_at [Time]
-      #   # @param is_recurring [Boolean]
-      #   # @param product_id [String]
-      #   # @param tax_category [Symbol, Dodopayments::Models::ProductListResponse::TaxCategory]
-      #   # @param updated_at [Time]
-      #   # @param currency [Symbol, Dodopayments::Models::ProductListResponse::Currency, nil]
-      #   # @param description [String, nil]
-      #   # @param image [String, nil]
-      #   # @param name [String, nil]
-      #   # @param price [Integer, nil]
-      #   # @param price_detail [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil]
-      #   # @param tax_inclusive [Boolean, nil]
-      #   #
-      #   def initialize(
-      #     business_id:,
-      #     created_at:,
-      #     is_recurring:,
-      #     product_id:,
-      #     tax_category:,
-      #     updated_at:,
-      #     currency: nil,
-      #     description: nil,
-      #     image: nil,
-      #     name: nil,
-      #     price: nil,
-      #     price_detail: nil,
-      #     tax_inclusive: nil,
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(business_id:, created_at:, is_recurring:, product_id:, tax_category:, updated_at:, currency: nil, description: nil, image: nil, name: nil, price: nil, price_detail: nil, tax_inclusive: nil)
+      #   @param business_id [String]
+      #   @param created_at [Time]
+      #   @param is_recurring [Boolean]
+      #   @param product_id [String]
+      #   @param tax_category [Symbol, Dodopayments::Models::ProductListResponse::TaxCategory]
+      #   @param updated_at [Time]
+      #   @param currency [Symbol, Dodopayments::Models::ProductListResponse::Currency, nil]
+      #   @param description [String, nil]
+      #   @param image [String, nil]
+      #   @param name [String, nil]
+      #   @param price [Integer, nil]
+      #   @param price_detail [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil]
+      #   @param tax_inclusive [Boolean, nil]
 
       # Represents the different categories of taxation applicable to various products
       # and services.
@@ -138,11 +117,8 @@ module Dodopayments
         E_BOOK = :e_book
         EDTECH = :edtech
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
 
       # @see Dodopayments::Models::ProductListResponse#currency
@@ -295,11 +271,8 @@ module Dodopayments
         ZAR = :ZAR
         ZMW = :ZMW
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
   end

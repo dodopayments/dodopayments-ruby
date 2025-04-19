@@ -21,14 +21,10 @@ module Dodopayments
       #   @return [String]
       required :name, String
 
-      # @!parse
-      #   # @param customer_id [String]
-      #   # @param email [String]
-      #   # @param name [String]
-      #   #
-      #   def initialize(customer_id:, email:, name:, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(customer_id:, email:, name:)
+      #   @param customer_id [String]
+      #   @param email [String]
+      #   @param name [String]
     end
   end
 end

@@ -9,11 +9,8 @@ module Dodopayments
       DISPUTE = :dispute
       PRE_ARBITRATION = :pre_arbitration
 
-      finalize!
-
-      # @!parse
-      #   # @return [Array<Symbol>]
-      #   def self.values; end
+      # @!method self.values
+      #   @return [Array<Symbol>]
     end
   end
 end

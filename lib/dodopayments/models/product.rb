@@ -93,45 +93,22 @@ module Dodopayments
       #   @return [String, nil]
       optional :name, String, nil?: true
 
-      # @!parse
-      #   # @param business_id [String]
-      #   # @param created_at [Time]
-      #   # @param is_recurring [Boolean]
-      #   # @param license_key_enabled [Boolean]
-      #   # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
-      #   # @param product_id [String]
-      #   # @param tax_category [Symbol, Dodopayments::Models::Product::TaxCategory]
-      #   # @param updated_at [Time]
-      #   # @param addons [Array<String>, nil]
-      #   # @param description [String, nil]
-      #   # @param image [String, nil]
-      #   # @param license_key_activation_message [String, nil]
-      #   # @param license_key_activations_limit [Integer, nil]
-      #   # @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil]
-      #   # @param name [String, nil]
-      #   #
-      #   def initialize(
-      #     business_id:,
-      #     created_at:,
-      #     is_recurring:,
-      #     license_key_enabled:,
-      #     price:,
-      #     product_id:,
-      #     tax_category:,
-      #     updated_at:,
-      #     addons: nil,
-      #     description: nil,
-      #     image: nil,
-      #     license_key_activation_message: nil,
-      #     license_key_activations_limit: nil,
-      #     license_key_duration: nil,
-      #     name: nil,
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(business_id:, created_at:, is_recurring:, license_key_enabled:, price:, product_id:, tax_category:, updated_at:, addons: nil, description: nil, image: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, name: nil)
+      #   @param business_id [String]
+      #   @param created_at [Time]
+      #   @param is_recurring [Boolean]
+      #   @param license_key_enabled [Boolean]
+      #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
+      #   @param product_id [String]
+      #   @param tax_category [Symbol, Dodopayments::Models::Product::TaxCategory]
+      #   @param updated_at [Time]
+      #   @param addons [Array<String>, nil]
+      #   @param description [String, nil]
+      #   @param image [String, nil]
+      #   @param license_key_activation_message [String, nil]
+      #   @param license_key_activations_limit [Integer, nil]
+      #   @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil]
+      #   @param name [String, nil]
 
       # Represents the different categories of taxation applicable to various products
       # and services.
@@ -145,11 +122,8 @@ module Dodopayments
         E_BOOK = :e_book
         EDTECH = :edtech
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
   end

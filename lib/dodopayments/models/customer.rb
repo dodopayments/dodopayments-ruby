@@ -34,17 +34,13 @@ module Dodopayments
       #   @return [String, nil]
       optional :phone_number, String, nil?: true
 
-      # @!parse
-      #   # @param business_id [String]
-      #   # @param created_at [Time]
-      #   # @param customer_id [String]
-      #   # @param email [String]
-      #   # @param name [String]
-      #   # @param phone_number [String, nil]
-      #   #
-      #   def initialize(business_id:, created_at:, customer_id:, email:, name:, phone_number: nil, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(business_id:, created_at:, customer_id:, email:, name:, phone_number: nil)
+      #   @param business_id [String]
+      #   @param created_at [Time]
+      #   @param customer_id [String]
+      #   @param email [String]
+      #   @param name [String]
+      #   @param phone_number [String, nil]
     end
   end
 end

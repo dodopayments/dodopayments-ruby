@@ -29,15 +29,11 @@ module Dodopayments
       #   @return [Time, nil]
       optional :expires_at, Time, nil?: true
 
-      # @!parse
-      #   # @param activations_limit [Integer, nil]
-      #   # @param disabled [Boolean, nil]
-      #   # @param expires_at [Time, nil]
-      #   # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(activations_limit: nil, disabled: nil, expires_at: nil, request_options: {}, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(activations_limit: nil, disabled: nil, expires_at: nil, request_options: {})
+      #   @param activations_limit [Integer, nil]
+      #   @param disabled [Boolean, nil]
+      #   @param expires_at [Time, nil]
+      #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end
 end

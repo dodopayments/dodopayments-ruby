@@ -8,12 +8,8 @@ module Dodopayments
       #   @return [String]
       required :customer_id, String
 
-      # @!parse
-      #   # @param customer_id [String]
-      #   #
-      #   def initialize(customer_id:, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(customer_id:)
+      #   @param customer_id [String]
     end
   end
 end

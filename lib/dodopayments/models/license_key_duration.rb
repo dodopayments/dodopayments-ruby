@@ -13,13 +13,9 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::TimeInterval]
       required :interval, enum: -> { Dodopayments::Models::TimeInterval }
 
-      # @!parse
-      #   # @param count [Integer]
-      #   # @param interval [Symbol, Dodopayments::Models::TimeInterval]
-      #   #
-      #   def initialize(count:, interval:, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(count:, interval:)
+      #   @param count [Integer]
+      #   @param interval [Symbol, Dodopayments::Models::TimeInterval]
     end
   end
 end

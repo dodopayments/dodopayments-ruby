@@ -21,14 +21,10 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :amount, Integer, nil?: true
 
-      # @!parse
-      #   # @param product_id [String]
-      #   # @param quantity [Integer]
-      #   # @param amount [Integer, nil]
-      #   #
-      #   def initialize(product_id:, quantity:, amount: nil, **) = super
-
-      # def initialize: (Hash | Dodopayments::Internal::Type::BaseModel) -> void
+      # @!method initialize(product_id:, quantity:, amount: nil)
+      #   @param product_id [String]
+      #   @param quantity [Integer]
+      #   @param amount [Integer, nil]
     end
   end
 end
