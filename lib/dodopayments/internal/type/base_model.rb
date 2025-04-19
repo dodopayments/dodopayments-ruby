@@ -4,12 +4,6 @@ module Dodopayments
   module Internal
     module Type
       # @abstract
-      #
-      # @example
-      #   # `attach_existing_customer` is a `Dodopayments::Models::AttachExistingCustomer`
-      #   attach_existing_customer => {
-      #     customer_id: customer_id
-      #   }
       class BaseModel
         extend Dodopayments::Internal::Type::Converter
 
@@ -96,11 +90,13 @@ module Dodopayments
                   target, value, state: state
                 )
               end
-            rescue StandardError
+            rescue StandardError => e
               cls = self.class.name.split("::").last
-              # rubocop:disable Layout/LineLength
-              message = "Failed to parse #{cls}.#{__method__} from #{value.class} to #{target.inspect}. To get the unparsed API response, use #{cls}[:#{__method__}]."
-              # rubocop:enable Layout/LineLength
+              message = [
+                "Failed to parse #{cls}.#{__method__} from #{value.class} to #{target.inspect}.",
+                "To get the unparsed API response, use #{cls}[#{__method__.inspect}].",
+                "Cause: #{e.message}"
+              ].join(" ")
               raise Dodopayments::Errors::ConversionError.new(message)
             end
           end
@@ -174,12 +170,18 @@ module Dodopayments
           def ==(other)
             other.is_a?(Class) && other <= Dodopayments::Internal::Type::BaseModel && other.fields == fields
           end
+
+          # @return [Integer]
+          def hash = fields.hash
         end
 
         # @param other [Object]
         #
         # @return [Boolean]
         def ==(other) = self.class == other.class && @data == other.to_h
+
+        # @return [Integer]
+        def hash = [self.class, @data].hash
 
         class << self
           # @api private
