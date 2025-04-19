@@ -4,19 +4,14 @@ module Dodopayments
   module Models
     # @see Dodopayments::Resources::Products#list
     class ProductListParams < Dodopayments::Internal::Type::BaseModel
-      # @!parse
-      #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      # @!attribute [r] archived
+      # @!attribute archived
       #   List archived products
       #
       #   @return [Boolean, nil]
       optional :archived, Dodopayments::Internal::Type::Boolean
-
-      # @!parse
-      #   # @return [Boolean]
-      #   attr_writer :archived
 
       # @!attribute page_number
       #   Page number default is 0

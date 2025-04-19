@@ -5,8 +5,7 @@ module Dodopayments
     module Products
       # @see Dodopayments::Resources::Products::Images#update
       class ImageUpdateParams < Dodopayments::Internal::Type::BaseModel
-        # @!parse
-        #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
         include Dodopayments::Internal::Type::RequestParameters
 
         # @!attribute force_update

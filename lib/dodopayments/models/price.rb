@@ -45,16 +45,12 @@ module Dodopayments
         #   @return [Symbol, :one_time_price]
         required :type, const: :one_time_price
 
-        # @!attribute [r] pay_what_you_want
+        # @!attribute pay_what_you_want
         #   Indicates whether the customer can pay any amount they choose. If set to `true`,
         #   the [`price`](Self::price) field is the minimum amount.
         #
         #   @return [Boolean, nil]
         optional :pay_what_you_want, Dodopayments::Internal::Type::Boolean
-
-        # @!parse
-        #   # @return [Boolean]
-        #   attr_writer :pay_what_you_want
 
         # @!attribute suggested_price
         #   A suggested price for the user to pay. This value is only considered if
@@ -296,15 +292,11 @@ module Dodopayments
         #   @return [Boolean, nil]
         optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
-        # @!attribute [r] trial_period_days
+        # @!attribute trial_period_days
         #   Number of days for the trial period. A value of `0` indicates no trial period.
         #
         #   @return [Integer, nil]
         optional :trial_period_days, Integer
-
-        # @!parse
-        #   # @return [Integer]
-        #   attr_writer :trial_period_days
 
         # @!method initialize(currency:, discount:, payment_frequency_count:, payment_frequency_interval:, price:, purchasing_power_parity:, subscription_period_count:, subscription_period_interval:, tax_inclusive: nil, trial_period_days: nil, type: :recurring_price)
         #   @param currency [Symbol, Dodopayments::Models::Price::RecurringPrice::Currency]

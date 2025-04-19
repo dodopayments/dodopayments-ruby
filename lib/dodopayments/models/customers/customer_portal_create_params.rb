@@ -5,8 +5,7 @@ module Dodopayments
     module Customers
       # @see Dodopayments::Resources::Customers::CustomerPortal#create
       class CustomerPortalCreateParams < Dodopayments::Internal::Type::BaseModel
-        # @!parse
-        #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
         include Dodopayments::Internal::Type::RequestParameters
 
         # @!attribute send_email

@@ -4,8 +4,7 @@ module Dodopayments
   module Models
     # @see Dodopayments::Resources::Disputes#retrieve
     class DisputeRetrieveParams < Dodopayments::Internal::Type::BaseModel
-      # @!parse
-      #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
       # @!method initialize(request_options: {})

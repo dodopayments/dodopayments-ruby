@@ -4,8 +4,7 @@ module Dodopayments
   module Models
     # @see Dodopayments::Resources::LicenseKeys#list
     class LicenseKeyListParams < Dodopayments::Internal::Type::BaseModel
-      # @!parse
-      #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute customer_id

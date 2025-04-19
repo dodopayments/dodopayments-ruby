@@ -4,8 +4,7 @@ module Dodopayments
   module Models
     # @see Dodopayments::Resources::Subscriptions#list
     class SubscriptionListParams < Dodopayments::Internal::Type::BaseModel
-      # @!parse
-      #   extend Dodopayments::Internal::Type::RequestParameters::Converter
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute created_at_gte
