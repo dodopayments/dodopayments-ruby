@@ -19,7 +19,7 @@ module Dodopayments
         # @api public
         #
         # @raise [Dodopayments::Errors::APIError]
-        # @return [Dodopayments::Internal::Type::BasePage]
+        # @return [self]
         def next_page = (raise NotImplementedError)
 
         # @api public

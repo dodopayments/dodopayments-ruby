@@ -28,6 +28,8 @@ module Dodopayments
         #   @option spec [Proc] :union
         #
         #   @option spec [Boolean] :"nil?"
+        #
+        # @return [Dodopayments::Internal::Type::HashOf]
         def self.[](...) = new(...)
 
         # @api public
