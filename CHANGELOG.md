@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.17.0 (2025-04-22)
+
+Full Changelog: [v1.16.1...v1.17.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.16.1...v1.17.0)
+
+### Features
+
+* **api:** manual updates ([62a87c3](https://github.com/dodopayments/dodopayments-ruby/commit/62a87c3f8cdcfc59f5b93dc3dae02d0bb3712108))
+* implement `#hash` for data containers ([34c3553](https://github.com/dodopayments/dodopayments-ruby/commit/34c35538d611b8b829f6e058531bf9f9c16a08d4))
+
+
+### Chores
+
+* documentation improvements ([71c417b](https://github.com/dodopayments/dodopayments-ruby/commit/71c417bc885d00ab6e31067378e4a10ca1449aea))
+* explicitly mark apis public under `Internal` module ([b5c432b](https://github.com/dodopayments/dodopayments-ruby/commit/b5c432b32debc84016858af1c7f2ec88899410ab))
+* **internal:** minor type annotation improvements ([0356338](https://github.com/dodopayments/dodopayments-ruby/commit/0356338332f349cf9aaea6c7c309254af6bc96cc))
+* make sorbet enums easier to read ([2fb5092](https://github.com/dodopayments/dodopayments-ruby/commit/2fb509272af690159ad22df97abd1854b617af7f))
+* simplify yard annotations by removing most `@!parse` directives ([d54d094](https://github.com/dodopayments/dodopayments-ruby/commit/d54d094c00557b2730477cf86c9d835f2c256aee))
+* update README with recommended editor plugins ([b5f54c9](https://github.com/dodopayments/dodopayments-ruby/commit/b5f54c9799d10e1e8b6126bb9c91182f0e4db59d))
+* use `@!method` instead of `@!parse` for virtual method type definitions ([d890ce6](https://github.com/dodopayments/dodopayments-ruby/commit/d890ce641419ae2b7eaf32bf15e1b9a8990da53b))
+
 ## 1.16.1 (2025-04-18)
 
 Full Changelog: [v1.14.0...v1.16.1](https://github.com/dodopayments/dodopayments-ruby/compare/v1.14.0...v1.16.1)
