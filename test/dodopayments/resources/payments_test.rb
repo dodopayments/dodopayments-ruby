@@ -46,6 +46,8 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         payment_id: String,
         refunds: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::Refund]),
+        settlement_amount: Integer,
+        settlement_currency: Dodopayments::Models::Payment::SettlementCurrency,
         total_amount: Integer,
         discount_id: String | nil,
         error_message: String | nil,
