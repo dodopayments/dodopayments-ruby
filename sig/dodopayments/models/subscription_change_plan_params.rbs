@@ -1,0 +1,41 @@
+module Dodopayments
+  module Models
+    type subscription_change_plan_params =
+      {
+        product_id: String,
+        proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode,
+        quantity: Integer
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class SubscriptionChangePlanParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor product_id: String
+
+      attr_accessor proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode
+
+      attr_accessor quantity: Integer
+
+      def initialize: (
+        product_id: String,
+        proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode,
+        quantity: Integer,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> Dodopayments::Models::subscription_change_plan_params
+
+      type proration_billing_mode = :prorated_immediately
+
+      module ProrationBillingMode
+        extend Dodopayments::Internal::Type::Enum
+
+        PRORATED_IMMEDIATELY: :prorated_immediately
+
+        def self?.values: -> ::Array[Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode]
+      end
+    end
+  end
+end
