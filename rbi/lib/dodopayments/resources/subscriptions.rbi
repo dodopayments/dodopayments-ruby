@@ -124,6 +124,26 @@ module Dodopayments
       sig do
         params(
           subscription_id: String,
+          product_id: String,
+          proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode::OrSymbol,
+          quantity: Integer,
+          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+        )
+          .void
+      end
+      def change_plan(
+        # Subscription Id
+        subscription_id,
+        # Unique identifier of the product to subscribe to
+        product_id:,
+        proration_billing_mode:,
+        # Number of units to subscribe for. Must be at least 1.
+        quantity:,
+        request_options: {}
+      ); end
+      sig do
+        params(
+          subscription_id: String,
           product_price: Integer,
           request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
         )

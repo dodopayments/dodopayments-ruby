@@ -43,6 +43,14 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Subscription]
 
+      def change_plan: (
+        String subscription_id,
+        product_id: String,
+        proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode,
+        quantity: Integer,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
+
       def charge: (
         String subscription_id,
         product_price: Integer,
