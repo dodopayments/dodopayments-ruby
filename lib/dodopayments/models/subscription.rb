@@ -31,7 +31,8 @@ module Dodopayments
       required :metadata, Dodopayments::Internal::Type::HashOf[String]
 
       # @!attribute next_billing_date
-      #   Timestamp of the next scheduled billing
+      #   Timestamp of the next scheduled billing. Indicates the end of current billing
+      #   period
       #
       #   @return [Time]
       required :next_billing_date, Time
@@ -46,6 +47,12 @@ module Dodopayments
       #
       #   @return [Symbol, Dodopayments::Models::TimeInterval]
       required :payment_frequency_interval, enum: -> { Dodopayments::Models::TimeInterval }
+
+      # @!attribute previous_billing_date
+      #   Timestamp of the last payment. Indicates the start of current billing period
+      #
+      #   @return [Time]
+      required :previous_billing_date, Time
 
       # @!attribute product_id
       #   Identifier of the product associated with this subscription
@@ -112,7 +119,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :discount_id, String, nil?: true
 
-      # @!method initialize(billing:, created_at:, currency:, customer:, metadata:, next_billing_date:, payment_frequency_count:, payment_frequency_interval:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, discount_id: nil)
+      # @!method initialize(billing:, created_at:, currency:, customer:, metadata:, next_billing_date:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, discount_id: nil)
       #   Response struct representing subscription details
       #
       #   @param billing [Dodopayments::Models::BillingAddress]
@@ -123,6 +130,7 @@ module Dodopayments
       #   @param next_billing_date [Time]
       #   @param payment_frequency_count [Integer]
       #   @param payment_frequency_interval [Symbol, Dodopayments::Models::TimeInterval]
+      #   @param previous_billing_date [Time]
       #   @param product_id [String]
       #   @param quantity [Integer]
       #   @param recurring_pre_tax_amount [Integer]
