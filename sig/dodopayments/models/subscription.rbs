@@ -10,6 +10,7 @@ module Dodopayments
         next_billing_date: Time,
         payment_frequency_count: Integer,
         payment_frequency_interval: Dodopayments::Models::time_interval,
+        previous_billing_date: Time,
         product_id: String,
         quantity: Integer,
         recurring_pre_tax_amount: Integer,
@@ -39,6 +40,8 @@ module Dodopayments
       attr_accessor payment_frequency_count: Integer
 
       attr_accessor payment_frequency_interval: Dodopayments::Models::time_interval
+
+      attr_accessor previous_billing_date: Time
 
       attr_accessor product_id: String
 
@@ -71,6 +74,7 @@ module Dodopayments
         next_billing_date: Time,
         payment_frequency_count: Integer,
         payment_frequency_interval: Dodopayments::Models::time_interval,
+        previous_billing_date: Time,
         product_id: String,
         quantity: Integer,
         recurring_pre_tax_amount: Integer,
