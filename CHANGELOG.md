@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.18.0 (2025-04-23)
+
+Full Changelog: [v1.17.0...v1.18.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.17.0...v1.18.0)
+
+### Features
+
+* **api:** added change plan api ([fc2cff8](https://github.com/dodopayments/dodopayments-ruby/commit/fc2cff8003f8e95dcac370e321055f1e28527ce3))
+* **api:** manual updates ([166a9b4](https://github.com/dodopayments/dodopayments-ruby/commit/166a9b4ee8b5321673418e4a50c79e5c80d26295))
+
+
+### Chores
+
+* **ci:** add timeout thresholds for CI jobs ([2bf3878](https://github.com/dodopayments/dodopayments-ruby/commit/2bf3878e437abc08274ded07eff6050685a4bcfd))
+
 ## 1.17.0 (2025-04-22)
 
 Full Changelog: [v1.16.1...v1.17.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.16.1...v1.17.0)
