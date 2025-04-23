@@ -100,6 +100,28 @@ module Dodopayments
         )
       end
 
+      # @overload change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, request_options: {})
+      #
+      # @param subscription_id [String]
+      # @param product_id [String]
+      # @param proration_billing_mode [Symbol, Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode]
+      # @param quantity [Integer]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [nil]
+      #
+      # @see Dodopayments::Models::SubscriptionChangePlanParams
+      def change_plan(subscription_id, params)
+        parsed, options = Dodopayments::Models::SubscriptionChangePlanParams.dump_request(params)
+        @client.request(
+          method: :post,
+          path: ["subscriptions/%1$s/change-plan", subscription_id],
+          body: parsed,
+          model: NilClass,
+          options: options
+        )
+      end
+
       # @overload charge(subscription_id, product_price:, request_options: {})
       #
       # @param subscription_id [String]
