@@ -27,7 +27,8 @@ module Dodopayments
       sig { returns(T::Hash[Symbol, String]) }
       attr_accessor :metadata
 
-      # Timestamp of the next scheduled billing
+      # Timestamp of the next scheduled billing. Indicates the end of current billing
+      # period
       sig { returns(Time) }
       attr_accessor :next_billing_date
 
@@ -37,6 +38,10 @@ module Dodopayments
 
       sig { returns(Dodopayments::Models::TimeInterval::TaggedSymbol) }
       attr_accessor :payment_frequency_interval
+
+      # Timestamp of the last payment. Indicates the start of current billing period
+      sig { returns(Time) }
+      attr_accessor :previous_billing_date
 
       # Identifier of the product associated with this subscription
       sig { returns(String) }
@@ -92,6 +97,7 @@ module Dodopayments
           next_billing_date: Time,
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::TimeInterval::OrSymbol,
+          previous_billing_date: Time,
           product_id: String,
           quantity: Integer,
           recurring_pre_tax_amount: Integer,
@@ -115,6 +121,7 @@ module Dodopayments
         next_billing_date:,
         payment_frequency_count:,
         payment_frequency_interval:,
+        previous_billing_date:,
         product_id:,
         quantity:,
         recurring_pre_tax_amount:,
@@ -139,6 +146,7 @@ module Dodopayments
               next_billing_date: Time,
               payment_frequency_count: Integer,
               payment_frequency_interval: Dodopayments::Models::TimeInterval::TaggedSymbol,
+              previous_billing_date: Time,
               product_id: String,
               quantity: Integer,
               recurring_pre_tax_amount: Integer,
