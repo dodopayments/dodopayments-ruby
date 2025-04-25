@@ -5,7 +5,8 @@ module Dodopayments
     class LicenseKeyInstances
       # @overload retrieve(id, request_options: {})
       #
-      # @param id [String]
+      # @param id [String] License key instance ID
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::LicenseKeyInstance]
@@ -22,8 +23,10 @@ module Dodopayments
 
       # @overload update(id, name:, request_options: {})
       #
-      # @param id [String]
+      # @param id [String] License key instance ID
+      #
       # @param name [String]
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::LicenseKeyInstance]
@@ -42,9 +45,12 @@ module Dodopayments
 
       # @overload list(license_key_id: nil, page_number: nil, page_size: nil, request_options: {})
       #
-      # @param license_key_id [String, nil]
-      # @param page_number [Integer, nil]
-      # @param page_size [Integer, nil]
+      # @param license_key_id [String, nil] Filter by license key ID
+      #
+      # @param page_number [Integer, nil] Page number default is 0
+      #
+      # @param page_size [Integer, nil] Page size default is 10 max is 100
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::LicenseKeyInstance>]

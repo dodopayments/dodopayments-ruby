@@ -82,20 +82,33 @@ module Dodopayments
           .returns(T.attached_class)
       end
       def self.new(
+        # The total amount of the payout.
         amount:,
+        # The unique identifier of the business associated with the payout.
         business_id:,
+        # The total value of chargebacks associated with the payout.
         chargebacks:,
+        # The timestamp when the payout was created, in UTC.
         created_at:,
         currency:,
+        # The fee charged for processing the payout.
         fee:,
+        # The payment method used for the payout (e.g., bank transfer, card, etc.).
         payment_method:,
+        # The unique identifier of the payout.
         payout_id:,
+        # The total value of refunds associated with the payout.
         refunds:,
         status:,
+        # The tax applied to the payout.
         tax:,
+        # The timestamp when the payout was last updated, in UTC.
         updated_at:,
+        # The name of the payout recipient or purpose.
         name: nil,
+        # The URL of the document associated with the payout.
         payout_document_url: nil,
+        # Any additional remarks or notes associated with the payout.
         remarks: nil
       ); end
       sig do

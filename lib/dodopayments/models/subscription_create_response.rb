@@ -47,13 +47,23 @@ module Dodopayments
       optional :payment_link, String, nil?: true
 
       # @!method initialize(customer:, metadata:, recurring_pre_tax_amount:, subscription_id:, client_secret: nil, discount_id: nil, payment_link: nil)
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::SubscriptionCreateResponse} for more details.
+      #
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
+      #
       #   @param metadata [Hash{Symbol=>String}]
-      #   @param recurring_pre_tax_amount [Integer]
-      #   @param subscription_id [String]
-      #   @param client_secret [String, nil]
-      #   @param discount_id [String, nil]
-      #   @param payment_link [String, nil]
+      #
+      #   @param recurring_pre_tax_amount [Integer] Tax will be added to the amount and charged to the customer on each billing cycl
+      #   ...
+      #
+      #   @param subscription_id [String] Unique identifier for the subscription
+      #
+      #   @param client_secret [String, nil] Client secret used to load Dodo checkout SDK ...
+      #
+      #   @param discount_id [String, nil] The discount id if discount is applied
+      #
+      #   @param payment_link [String, nil] URL to checkout page
     end
   end
 end

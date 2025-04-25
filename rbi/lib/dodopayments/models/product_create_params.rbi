@@ -70,13 +70,21 @@ module Dodopayments
       end
       def self.new(
         price:,
+        # Represents the different categories of taxation applicable to various products
+        # and services.
         tax_category:,
+        # Addons available for subscription product
         addons: nil,
+        # Optional description of the product
         description: nil,
+        # Optional message displayed during license key activation
         license_key_activation_message: nil,
+        # The number of times the license key can be activated. Must be 0 or greater
         license_key_activations_limit: nil,
         license_key_duration: nil,
+        # When true, generates and sends a license key to your customer. Defaults to false
         license_key_enabled: nil,
+        # Optional name of the product
         name: nil,
         request_options: {}
       ); end

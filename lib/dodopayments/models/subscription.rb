@@ -120,28 +120,52 @@ module Dodopayments
       optional :discount_id, String, nil?: true
 
       # @!method initialize(billing:, created_at:, currency:, customer:, metadata:, next_billing_date:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, discount_id: nil)
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::Subscription} for more details.
+      #
       #   Response struct representing subscription details
       #
       #   @param billing [Dodopayments::Models::BillingAddress]
-      #   @param created_at [Time]
+      #
+      #   @param created_at [Time] Timestamp when the subscription was created
+      #
       #   @param currency [Symbol, Dodopayments::Models::Subscription::Currency]
+      #
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
+      #
       #   @param metadata [Hash{Symbol=>String}]
-      #   @param next_billing_date [Time]
-      #   @param payment_frequency_count [Integer]
+      #
+      #   @param next_billing_date [Time] Timestamp of the next scheduled billing. Indicates the end of current billing pe
+      #   ...
+      #
+      #   @param payment_frequency_count [Integer] Number of payment frequency intervals
+      #
       #   @param payment_frequency_interval [Symbol, Dodopayments::Models::TimeInterval]
-      #   @param previous_billing_date [Time]
-      #   @param product_id [String]
-      #   @param quantity [Integer]
-      #   @param recurring_pre_tax_amount [Integer]
+      #
+      #   @param previous_billing_date [Time] Timestamp of the last payment. Indicates the start of current billing period
+      #
+      #   @param product_id [String] Identifier of the product associated with this subscription
+      #
+      #   @param quantity [Integer] Number of units/items included in the subscription
+      #
+      #   @param recurring_pre_tax_amount [Integer] Amount charged before tax for each recurring payment in smallest currency unit (
+      #   ...
+      #
       #   @param status [Symbol, Dodopayments::Models::SubscriptionStatus]
-      #   @param subscription_id [String]
-      #   @param subscription_period_count [Integer]
+      #
+      #   @param subscription_id [String] Unique identifier for the subscription
+      #
+      #   @param subscription_period_count [Integer] Number of subscription period intervals
+      #
       #   @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval]
-      #   @param tax_inclusive [Boolean]
-      #   @param trial_period_days [Integer]
-      #   @param cancelled_at [Time, nil]
-      #   @param discount_id [String, nil]
+      #
+      #   @param tax_inclusive [Boolean] Indicates if the recurring_pre_tax_amount is tax inclusive
+      #
+      #   @param trial_period_days [Integer] Number of days in the trial period (0 if no trial)
+      #
+      #   @param cancelled_at [Time, nil] Cancelled timestamp if the subscription is cancelled
+      #
+      #   @param discount_id [String, nil] The discount id if discount is applied
 
       # @see Dodopayments::Models::Subscription#currency
       module Currency

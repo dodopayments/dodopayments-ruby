@@ -38,15 +38,18 @@ module Dodopayments
           .returns(T.attached_class)
       end
       def self.new(
+        # Filter by customer ID
         customer_id: nil,
+        # Page number default is 0
         page_number: nil,
+        # Page size default is 10 max is 100
         page_size: nil,
+        # Filter by product ID
         product_id: nil,
+        # Filter by license key status
         status: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         override
           .returns(

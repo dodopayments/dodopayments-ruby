@@ -15,7 +15,12 @@ module Dodopayments
       required :product_price, Integer
 
       # @!method initialize(product_price:, request_options: {})
-      #   @param product_price [Integer]
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::SubscriptionChargeParams} for more details.
+      #
+      #   @param product_price [Integer] The product price. Represented in the lowest denomination of the currency (e.g.,
+      #   ...
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end

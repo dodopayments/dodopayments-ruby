@@ -54,14 +54,24 @@ module Dodopayments
                nil?: true
 
       # @!method initialize(client_secret:, customer:, metadata:, payment_id:, total_amount:, discount_id: nil, payment_link: nil, product_cart: nil)
-      #   @param client_secret [String]
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::PaymentCreateResponse} for more details.
+      #
+      #   @param client_secret [String] Client secret used to load Dodo checkout SDK ...
+      #
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
+      #
       #   @param metadata [Hash{Symbol=>String}]
-      #   @param payment_id [String]
-      #   @param total_amount [Integer]
-      #   @param discount_id [String, nil]
-      #   @param payment_link [String, nil]
-      #   @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil]
+      #
+      #   @param payment_id [String] Unique identifier for the payment
+      #
+      #   @param total_amount [Integer] Total amount of the payment in smallest currency unit (e.g. cents)
+      #
+      #   @param discount_id [String, nil] The discount id if discount is applied
+      #
+      #   @param payment_link [String, nil] Optional URL to a hosted payment page
+      #
+      #   @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil] Optional list of products included in the payment
     end
   end
 end

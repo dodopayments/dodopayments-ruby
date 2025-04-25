@@ -117,26 +117,45 @@ module Dodopayments
           .returns(T.attached_class)
       end
       def self.new(
+        # Identifier of the business associated with the payment
         business_id:,
+        # Timestamp when the payment was created
         created_at:,
         currency:,
         customer:,
+        # List of disputes associated with this payment
         disputes:,
         metadata:,
+        # Unique identifier for the payment
         payment_id:,
+        # List of refunds issued for this payment
         refunds:,
+        # The amount that will be credited to your Dodo balance after currency conversion
+        # and processing. Especially relevant for adaptive pricing where the customer's
+        # payment currency differs from your settlement currency.
         settlement_amount:,
         settlement_currency:,
+        # Total amount charged to the customer including tax, in smallest currency unit
+        # (e.g. cents)
         total_amount:,
+        # The discount id if discount is applied
         discount_id: nil,
+        # An error message if the payment failed
         error_message: nil,
+        # Checkout URL
         payment_link: nil,
+        # Payment method used by customer (e.g. "card", "bank_transfer")
         payment_method: nil,
+        # Specific type of payment method (e.g. "visa", "mastercard")
         payment_method_type: nil,
+        # List of products purchased in a one-time payment
         product_cart: nil,
         status: nil,
+        # Identifier of the subscription if payment is part of a subscription
         subscription_id: nil,
+        # Amount of tax collected in smallest currency unit (e.g. cents)
         tax: nil,
+        # Timestamp when the payment was last updated
         updated_at: nil
       ); end
       sig do

@@ -74,17 +74,30 @@ module Dodopayments
       optional :usage_limit, Integer, nil?: true
 
       # @!method initialize(amount:, business_id:, code:, created_at:, discount_id:, restricted_to:, times_used:, type:, expires_at: nil, name: nil, usage_limit: nil)
-      #   @param amount [Integer]
-      #   @param business_id [String]
-      #   @param code [String]
-      #   @param created_at [Time]
-      #   @param discount_id [String]
-      #   @param restricted_to [Array<String>]
-      #   @param times_used [Integer]
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::Discount} for more details.
+      #
+      #   @param amount [Integer] The discount amount. ...
+      #
+      #   @param business_id [String] The business this discount belongs to.
+      #
+      #   @param code [String] The discount code (up to 16 chars).
+      #
+      #   @param created_at [Time] Timestamp when the discount is created
+      #
+      #   @param discount_id [String] The unique discount ID
+      #
+      #   @param restricted_to [Array<String>] List of product IDs to which this discount is restricted.
+      #
+      #   @param times_used [Integer] How many times this discount has been used.
+      #
       #   @param type [Symbol, Dodopayments::Models::DiscountType]
-      #   @param expires_at [Time, nil]
-      #   @param name [String, nil]
-      #   @param usage_limit [Integer, nil]
+      #
+      #   @param expires_at [Time, nil] Optional date/time after which discount is expired.
+      #
+      #   @param name [String, nil] Name for the Discount
+      #
+      #   @param usage_limit [Integer, nil] Usage limit for this discount, if any.
     end
   end
 end

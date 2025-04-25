@@ -53,13 +53,23 @@ module Dodopayments
       optional :usage_limit, Integer, nil?: true
 
       # @!method initialize(amount: nil, code: nil, expires_at: nil, name: nil, restricted_to: nil, type: nil, usage_limit: nil, request_options: {})
-      #   @param amount [Integer, nil]
-      #   @param code [String, nil]
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::DiscountUpdateParams} for more details.
+      #
+      #   @param amount [Integer, nil] If present, update the discount amount: ...
+      #
+      #   @param code [String, nil] If present, update the discount code (uppercase).
+      #
       #   @param expires_at [Time, nil]
+      #
       #   @param name [String, nil]
-      #   @param restricted_to [Array<String>, nil]
+      #
+      #   @param restricted_to [Array<String>, nil] If present, replaces all restricted product IDs with this new set. ...
+      #
       #   @param type [Symbol, Dodopayments::Models::DiscountType, nil]
+      #
       #   @param usage_limit [Integer, nil]
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end

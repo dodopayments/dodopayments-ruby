@@ -58,13 +58,23 @@ module Dodopayments
       optional :usage_limit, Integer, nil?: true
 
       # @!method initialize(amount:, type:, code: nil, expires_at: nil, name: nil, restricted_to: nil, usage_limit: nil, request_options: {})
-      #   @param amount [Integer]
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::DiscountCreateParams} for more details.
+      #
+      #   @param amount [Integer] The discount amount. ...
+      #
       #   @param type [Symbol, Dodopayments::Models::DiscountType]
-      #   @param code [String, nil]
-      #   @param expires_at [Time, nil]
+      #
+      #   @param code [String, nil] Optionally supply a code (will be uppercased). ...
+      #
+      #   @param expires_at [Time, nil] When the discount expires, if ever.
+      #
       #   @param name [String, nil]
-      #   @param restricted_to [Array<String>, nil]
-      #   @param usage_limit [Integer, nil]
+      #
+      #   @param restricted_to [Array<String>, nil] List of product IDs to restrict usage (if any).
+      #
+      #   @param usage_limit [Integer, nil] How many times this discount can be used (if any). ...
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end

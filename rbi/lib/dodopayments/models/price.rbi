@@ -62,11 +62,25 @@ module Dodopayments
         end
         def self.new(
           currency:,
+          # Discount applied to the price, represented as a percentage (0 to 100).
           discount:,
+          # The payment amount, in the smallest denomination of the currency (e.g., cents
+          # for USD). For example, to charge $1.00, pass `100`.
+          #
+          # If [`pay_what_you_want`](Self::pay_what_you_want) is set to `true`, this field
+          # represents the **minimum** amount the customer must pay.
           price:,
+          # Indicates if purchasing power parity adjustments are applied to the price.
+          # Purchasing power parity feature is not available as of now.
           purchasing_power_parity:,
+          # Indicates whether the customer can pay any amount they choose. If set to `true`,
+          # the [`price`](Self::price) field is the minimum amount.
           pay_what_you_want: nil,
+          # A suggested price for the user to pay. This value is only considered if
+          # [`pay_what_you_want`](Self::pay_what_you_want) is `true`. Otherwise, it is
+          # ignored.
           suggested_price: nil,
+          # Indicates if the price is tax inclusive.
           tax_inclusive: nil,
           type: :one_time_price
         ); end
@@ -310,14 +324,25 @@ module Dodopayments
         end
         def self.new(
           currency:,
+          # Discount applied to the price, represented as a percentage (0 to 100).
           discount:,
+          # Number of units for the payment frequency. For example, a value of `1` with a
+          # `payment_frequency_interval` of `month` represents monthly payments.
           payment_frequency_count:,
           payment_frequency_interval:,
+          # The payment amount. Represented in the lowest denomination of the currency
+          # (e.g., cents for USD). For example, to charge $1.00, pass `100`.
           price:,
+          # Indicates if purchasing power parity adjustments are applied to the price.
+          # Purchasing power parity feature is not available as of now
           purchasing_power_parity:,
+          # Number of units for the subscription period. For example, a value of `12` with a
+          # `subscription_period_interval` of `month` represents a one-year subscription.
           subscription_period_count:,
           subscription_period_interval:,
+          # Indicates if the price is tax inclusive
           tax_inclusive: nil,
+          # Number of days for the trial period. A value of `0` indicates no trial period.
           trial_period_days: nil,
           type: :recurring_price
         ); end

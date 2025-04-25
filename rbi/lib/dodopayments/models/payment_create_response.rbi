@@ -53,13 +53,20 @@ module Dodopayments
           .returns(T.attached_class)
       end
       def self.new(
+        # Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will be
+        # coming soon
         client_secret:,
         customer:,
         metadata:,
+        # Unique identifier for the payment
         payment_id:,
+        # Total amount of the payment in smallest currency unit (e.g. cents)
         total_amount:,
+        # The discount id if discount is applied
         discount_id: nil,
+        # Optional URL to a hosted payment page
         payment_link: nil,
+        # Optional list of products included in the payment
         product_cart: nil
       ); end
       sig do

@@ -3,22 +3,40 @@
 module Dodopayments
   module Resources
     class Subscriptions
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::SubscriptionCreateParams} for more details.
+      #
       # @overload create(billing:, customer:, product_id:, quantity:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, metadata: nil, on_demand: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
       #
       # @param billing [Dodopayments::Models::BillingAddress]
+      #
       # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
-      # @param product_id [String]
-      # @param quantity [Integer]
-      # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil]
+      #
+      # @param product_id [String] Unique identifier of the product to subscribe to
+      #
+      # @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
+      #
+      # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout. ...
+      #
       # @param billing_currency [Symbol, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency, nil]
-      # @param discount_code [String, nil]
+      #
+      # @param discount_code [String, nil] Discount Code to apply to the subscription
+      #
       # @param metadata [Hash{Symbol=>String}]
+      #
       # @param on_demand [Dodopayments::Models::SubscriptionCreateParams::OnDemand, nil]
-      # @param payment_link [Boolean, nil]
-      # @param return_url [String, nil]
-      # @param show_saved_payment_methods [Boolean]
-      # @param tax_id [String, nil]
-      # @param trial_period_days [Integer, nil]
+      #
+      # @param payment_link [Boolean, nil] If true, generates a payment link. ...
+      #
+      # @param return_url [String, nil] Optional URL to redirect after successful subscription creation
+      #
+      # @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer ...
+      #
+      # @param tax_id [String, nil] Tax ID in case the payment is B2B. If tax id validation fails the payment creati
+      # ...
+      #
+      # @param trial_period_days [Integer, nil] Optional trial period in days ...
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::SubscriptionCreateResponse]
@@ -37,7 +55,8 @@ module Dodopayments
 
       # @overload retrieve(subscription_id, request_options: {})
       #
-      # @param subscription_id [String]
+      # @param subscription_id [String] Subscription Id
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Subscription]
@@ -54,11 +73,16 @@ module Dodopayments
 
       # @overload update(subscription_id, billing: nil, metadata: nil, status: nil, tax_id: nil, request_options: {})
       #
-      # @param subscription_id [String]
+      # @param subscription_id [String] Subscription Id
+      #
       # @param billing [Dodopayments::Models::BillingAddress, nil]
+      #
       # @param metadata [Hash{Symbol=>String}, nil]
+      #
       # @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
+      #
       # @param tax_id [String, nil]
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Subscription]
@@ -77,12 +101,18 @@ module Dodopayments
 
       # @overload list(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, request_options: {})
       #
-      # @param created_at_gte [Time, nil]
-      # @param created_at_lte [Time, nil]
-      # @param customer_id [String, nil]
-      # @param page_number [Integer, nil]
-      # @param page_size [Integer, nil]
-      # @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
+      # @param created_at_gte [Time, nil] Get events after this created time
+      #
+      # @param created_at_lte [Time, nil] Get events created before this time
+      #
+      # @param customer_id [String, nil] Filter by customer id
+      #
+      # @param page_number [Integer, nil] Page number default is 0
+      #
+      # @param page_size [Integer, nil] Page size default is 10 max is 100
+      #
+      # @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil] Filter by status
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Subscription>]
@@ -102,10 +132,14 @@ module Dodopayments
 
       # @overload change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, request_options: {})
       #
-      # @param subscription_id [String]
-      # @param product_id [String]
+      # @param subscription_id [String] Subscription Id
+      #
+      # @param product_id [String] Unique identifier of the product to subscribe to
+      #
       # @param proration_billing_mode [Symbol, Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode]
-      # @param quantity [Integer]
+      #
+      # @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
@@ -122,10 +156,16 @@ module Dodopayments
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::SubscriptionChargeParams} for more details.
+      #
       # @overload charge(subscription_id, product_price:, request_options: {})
       #
-      # @param subscription_id [String]
-      # @param product_price [Integer]
+      # @param subscription_id [String] Subscription Id
+      #
+      # @param product_price [Integer] The product price. Represented in the lowest denomination of the currency (e.g.,
+      # ...
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::SubscriptionChargeResponse]

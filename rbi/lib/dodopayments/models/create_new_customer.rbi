@@ -25,8 +25,15 @@ module Dodopayments
         params(email: String, name: String, create_new_customer: T::Boolean, phone_number: T.nilable(String))
           .returns(T.attached_class)
       end
-      def self.new(email:, name:, create_new_customer: nil, phone_number: nil); end
-
+      def self.new(
+        email:,
+        name:,
+        # When false, the most recently created customer object with the given email is
+        # used if exists. When true, a new customer object is always created False by
+        # default
+        create_new_customer: nil,
+        phone_number: nil
+      ); end
       sig do
         override
           .returns({

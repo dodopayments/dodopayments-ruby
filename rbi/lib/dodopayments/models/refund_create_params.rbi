@@ -22,8 +22,13 @@ module Dodopayments
         )
           .returns(T.attached_class)
       end
-      def self.new(payment_id:, reason: nil, request_options: {}); end
-
+      def self.new(
+        # The unique identifier of the payment to be refunded.
+        payment_id:,
+        # The reason for the refund, if any. Maximum length is 3000 characters. Optional.
+        reason: nil,
+        request_options: {}
+      ); end
       sig do
         override
           .returns({

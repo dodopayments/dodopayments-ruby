@@ -61,15 +61,28 @@ module Dodopayments
       optional :name, String, nil?: true
 
       # @!method initialize(price:, tax_category:, addons: nil, description: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::ProductCreateParams} for more details.
+      #
       #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
-      #   @param tax_category [Symbol, Dodopayments::Models::ProductCreateParams::TaxCategory]
-      #   @param addons [Array<String>, nil]
-      #   @param description [String, nil]
-      #   @param license_key_activation_message [String, nil]
-      #   @param license_key_activations_limit [Integer, nil]
+      #
+      #   @param tax_category [Symbol, Dodopayments::Models::ProductCreateParams::TaxCategory] Represents the different categories of taxation applicable to various products a
+      #   ...
+      #
+      #   @param addons [Array<String>, nil] Addons available for subscription product
+      #
+      #   @param description [String, nil] Optional description of the product
+      #
+      #   @param license_key_activation_message [String, nil] Optional message displayed during license key activation
+      #
+      #   @param license_key_activations_limit [Integer, nil] The number of times the license key can be activated. ...
+      #
       #   @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil]
-      #   @param license_key_enabled [Boolean, nil]
-      #   @param name [String, nil]
+      #
+      #   @param license_key_enabled [Boolean, nil] When true, generates and sends a license key to your customer. ...
+      #
+      #   @param name [String, nil] Optional name of the product
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 
       # Represents the different categories of taxation applicable to various products

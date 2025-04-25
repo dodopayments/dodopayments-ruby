@@ -27,9 +27,16 @@ module Dodopayments
       optional :phone_number, String, nil?: true
 
       # @!method initialize(email:, name:, create_new_customer: nil, phone_number: nil)
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::CreateNewCustomer} for more details.
+      #
       #   @param email [String]
+      #
       #   @param name [String]
-      #   @param create_new_customer [Boolean]
+      #
+      #   @param create_new_customer [Boolean] When false, the most recently created customer object with the given email is us
+      #   ...
+      #
       #   @param phone_number [String, nil]
     end
   end

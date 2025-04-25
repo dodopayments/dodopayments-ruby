@@ -27,8 +27,15 @@ module Dodopayments
         )
           .returns(T.attached_class)
       end
-      def self.new(license_key_id: nil, page_number: nil, page_size: nil, request_options: {}); end
-
+      def self.new(
+        # Filter by license key ID
+        license_key_id: nil,
+        # Page number default is 0
+        page_number: nil,
+        # Page size default is 10 max is 100
+        page_size: nil,
+        request_options: {}
+      ); end
       sig do
         override
           .returns(

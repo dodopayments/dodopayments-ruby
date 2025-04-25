@@ -95,20 +95,34 @@ module Dodopayments
           .returns(T.attached_class)
       end
       def self.new(
+        # Unique identifier for the business to which the product belongs.
         business_id:,
+        # Timestamp when the product was created.
         created_at:,
+        # Indicates if the product is recurring (e.g., subscriptions).
         is_recurring:,
+        # Indicates whether the product requires a license key.
         license_key_enabled:,
         price:,
+        # Unique identifier for the product.
         product_id:,
+        # Represents the different categories of taxation applicable to various products
+        # and services.
         tax_category:,
+        # Timestamp when the product was last updated.
         updated_at:,
+        # Available Addons for subscription products
         addons: nil,
+        # Description of the product, optional.
         description: nil,
+        # URL of the product image, optional.
         image: nil,
+        # Message sent upon license key activation, if applicable.
         license_key_activation_message: nil,
+        # Limit on the number of activations for the license key, if enabled.
         license_key_activations_limit: nil,
         license_key_duration: nil,
+        # Name of the product, optional.
         name: nil
       ); end
       sig do

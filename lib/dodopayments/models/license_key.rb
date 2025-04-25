@@ -77,18 +77,33 @@ module Dodopayments
       optional :subscription_id, String, nil?: true
 
       # @!method initialize(id:, business_id:, created_at:, customer_id:, instances_count:, key:, payment_id:, product_id:, status:, activations_limit: nil, expires_at: nil, subscription_id: nil)
-      #   @param id [String]
-      #   @param business_id [String]
-      #   @param created_at [Time]
-      #   @param customer_id [String]
-      #   @param instances_count [Integer]
-      #   @param key [String]
-      #   @param payment_id [String]
-      #   @param product_id [String]
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::LicenseKey} for more details.
+      #
+      #   @param id [String] The unique identifier of the license key.
+      #
+      #   @param business_id [String] The unique identifier of the business associated with the license key.
+      #
+      #   @param created_at [Time] The timestamp indicating when the license key was created, in UTC.
+      #
+      #   @param customer_id [String] The unique identifier of the customer associated with the license key.
+      #
+      #   @param instances_count [Integer] The current number of instances activated for this license key.
+      #
+      #   @param key [String] The license key string.
+      #
+      #   @param payment_id [String] The unique identifier of the payment associated with the license key.
+      #
+      #   @param product_id [String] The unique identifier of the product associated with the license key.
+      #
       #   @param status [Symbol, Dodopayments::Models::LicenseKeyStatus]
-      #   @param activations_limit [Integer, nil]
-      #   @param expires_at [Time, nil]
-      #   @param subscription_id [String, nil]
+      #
+      #   @param activations_limit [Integer, nil] The maximum number of activations allowed for this license key.
+      #
+      #   @param expires_at [Time, nil] The timestamp indicating when the license key expires, in UTC.
+      #
+      #   @param subscription_id [String, nil] The unique identifier of the subscription associated with the license key, if an
+      #   ...
     end
   end
 end

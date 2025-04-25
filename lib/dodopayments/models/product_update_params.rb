@@ -76,16 +76,30 @@ module Dodopayments
       optional :tax_category, enum: -> { Dodopayments::Models::ProductUpdateParams::TaxCategory }, nil?: true
 
       # @!method initialize(addons: nil, description: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, price: nil, tax_category: nil, request_options: {})
-      #   @param addons [Array<String>, nil]
-      #   @param description [String, nil]
-      #   @param image_id [String, nil]
-      #   @param license_key_activation_message [String, nil]
-      #   @param license_key_activations_limit [Integer, nil]
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::ProductUpdateParams} for more details.
+      #
+      #   @param addons [Array<String>, nil] Available Addons for subscription products
+      #
+      #   @param description [String, nil] Description of the product, optional and must be at most 1000 characters.
+      #
+      #   @param image_id [String, nil] Product image id after its uploaded to S3
+      #
+      #   @param license_key_activation_message [String, nil] Message sent to the customer upon license key activation. ...
+      #
+      #   @param license_key_activations_limit [Integer, nil] Limit for the number of activations for the license key. ...
+      #
       #   @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil]
-      #   @param license_key_enabled [Boolean, nil]
-      #   @param name [String, nil]
+      #
+      #   @param license_key_enabled [Boolean, nil] Whether the product requires a license key. ...
+      #
+      #   @param name [String, nil] Name of the product, optional and must be at most 100 characters.
+      #
       #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil]
-      #   @param tax_category [Symbol, Dodopayments::Models::ProductUpdateParams::TaxCategory, nil]
+      #
+      #   @param tax_category [Symbol, Dodopayments::Models::ProductUpdateParams::TaxCategory, nil] Represents the different categories of taxation applicable to various products a
+      #   ...
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 
       # Represents the different categories of taxation applicable to various products
