@@ -38,11 +38,16 @@ module Dodopayments
       optional :status, enum: -> { Dodopayments::Models::LicenseKeyStatus }, nil?: true
 
       # @!method initialize(customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
-      #   @param customer_id [String, nil]
-      #   @param page_number [Integer, nil]
-      #   @param page_size [Integer, nil]
-      #   @param product_id [String, nil]
-      #   @param status [Symbol, Dodopayments::Models::LicenseKeyStatus, nil]
+      #   @param customer_id [String, nil] Filter by customer ID
+      #
+      #   @param page_number [Integer, nil] Page number default is 0
+      #
+      #   @param page_size [Integer, nil] Page size default is 10 max is 100
+      #
+      #   @param product_id [String, nil] Filter by product ID
+      #
+      #   @param status [Symbol, Dodopayments::Models::LicenseKeyStatus, nil] Filter by license key status
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end

@@ -6,8 +6,10 @@ module Dodopayments
       class Images
         # @overload update(id, force_update: nil, request_options: {})
         #
-        # @param id [String]
+        # @param id [String] Product Id
+        #
         # @param force_update [Boolean, nil]
+        #
         # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Dodopayments::Models::Products::ImageUpdateResponse]

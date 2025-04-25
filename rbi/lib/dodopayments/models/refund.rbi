@@ -47,17 +47,21 @@ module Dodopayments
           .returns(T.attached_class)
       end
       def self.new(
+        # The unique identifier of the business issuing the refund.
         business_id:,
+        # The timestamp of when the refund was created in UTC.
         created_at:,
+        # The unique identifier of the payment associated with the refund.
         payment_id:,
+        # The unique identifier of the refund.
         refund_id:,
         status:,
+        # The refunded amount.
         amount: nil,
         currency: nil,
+        # The reason provided for the refund, if any. Optional.
         reason: nil
-      )
-      end
-
+      ); end
       sig do
         override
           .returns(

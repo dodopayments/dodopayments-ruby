@@ -82,17 +82,32 @@ module Dodopayments
       optional :tax_id, String, nil?: true
 
       # @!method initialize(billing:, customer:, product_cart:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, metadata: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::PaymentCreateParams} for more details.
+      #
       #   @param billing [Dodopayments::Models::BillingAddress]
+      #
       #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
-      #   @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>]
-      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil]
+      #
+      #   @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>] List of products in the cart. Must contain at least 1 and at most 100 items.
+      #
+      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout. ...
+      #
       #   @param billing_currency [Symbol, Dodopayments::Models::PaymentCreateParams::BillingCurrency, nil]
-      #   @param discount_code [String, nil]
+      #
+      #   @param discount_code [String, nil] Discount Code to apply to the transaction
+      #
       #   @param metadata [Hash{Symbol=>String}]
-      #   @param payment_link [Boolean, nil]
-      #   @param return_url [String, nil]
-      #   @param show_saved_payment_methods [Boolean]
-      #   @param tax_id [String, nil]
+      #
+      #   @param payment_link [Boolean, nil] Whether to generate a payment link. Defaults to false if not specified.
+      #
+      #   @param return_url [String, nil] Optional URL to redirect the customer after payment. ...
+      #
+      #   @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer ...
+      #
+      #   @param tax_id [String, nil] Tax ID in case the payment is B2B. If tax id validation fails the payment creati
+      #   ...
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 
       module AllowedPaymentMethodType

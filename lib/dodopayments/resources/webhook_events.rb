@@ -20,14 +20,24 @@ module Dodopayments
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::WebhookEventListParams} for more details.
+      #
       # @overload list(created_at_gte: nil, created_at_lte: nil, limit: nil, object_id_: nil, page_number: nil, page_size: nil, request_options: {})
       #
-      # @param created_at_gte [Time, nil]
-      # @param created_at_lte [Time, nil]
-      # @param limit [Integer, nil]
-      # @param object_id_ [String, nil]
-      # @param page_number [Integer, nil]
-      # @param page_size [Integer, nil]
+      # @param created_at_gte [Time, nil] Get events after this created time
+      #
+      # @param created_at_lte [Time, nil] Get events created before this time
+      #
+      # @param limit [Integer, nil] Min : 1, Max : 100, default 10
+      #
+      # @param object_id_ [String, nil] Get events history of a specific object like payment/subscription/refund/dispute
+      # ...
+      #
+      # @param page_number [Integer, nil] Page number default is 0
+      #
+      # @param page_size [Integer, nil] Page size default is 10 max is 100
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::WebhookEvent>]

@@ -34,11 +34,15 @@ module Dodopayments
       required :zipcode, String
 
       # @!method initialize(city:, country:, state:, street:, zipcode:)
-      #   @param city [String]
-      #   @param country [Symbol, Dodopayments::Models::CountryCode]
-      #   @param state [String]
-      #   @param street [String]
-      #   @param zipcode [String]
+      #   @param city [String] City name
+      #
+      #   @param country [Symbol, Dodopayments::Models::CountryCode] ISO country code alpha2 variant
+      #
+      #   @param state [String] State or province name
+      #
+      #   @param street [String] Street address including house number and unit/apartment if applicable
+      #
+      #   @param zipcode [String] Postal code or ZIP code
     end
   end
 end

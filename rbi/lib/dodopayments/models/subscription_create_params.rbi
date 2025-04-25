@@ -116,17 +116,33 @@ module Dodopayments
       def self.new(
         billing:,
         customer:,
+        # Unique identifier of the product to subscribe to
         product_id:,
+        # Number of units to subscribe for. Must be at least 1.
         quantity:,
+        # List of payment methods allowed during checkout.
+        #
+        # Customers will **never** see payment methods that are **not** in this list.
+        # However, adding a method here **does not guarantee** customers will see it.
+        # Availability still depends on other factors (e.g., customer location, merchant
+        # settings).
         allowed_payment_method_types: nil,
         billing_currency: nil,
+        # Discount Code to apply to the subscription
         discount_code: nil,
         metadata: nil,
         on_demand: nil,
+        # If true, generates a payment link. Defaults to false if not specified.
         payment_link: nil,
+        # Optional URL to redirect after successful subscription creation
         return_url: nil,
+        # Display saved payment methods of a returning customer False by default
         show_saved_payment_methods: nil,
+        # Tax ID in case the payment is B2B. If tax id validation fails the payment
+        # creation will fail
         tax_id: nil,
+        # Optional trial period in days If specified, this value overrides the trial
+        # period set in the product's price Must be between 0 and 10000 days
         trial_period_days: nil,
         request_options: {}
       ); end
@@ -382,8 +398,15 @@ module Dodopayments
         attr_accessor :product_price
 
         sig { params(mandate_only: T::Boolean, product_price: T.nilable(Integer)).returns(T.attached_class) }
-        def self.new(mandate_only:, product_price: nil); end
-
+        def self.new(
+          # If set as True, does not perform any charge and only authorizes payment method
+          # details for future use.
+          mandate_only:,
+          # Product price for the initial charge to customer If not specified the stored
+          # price of the product will be used Represented in the lowest denomination of the
+          # currency (e.g., cents for USD). For example, to charge $1.00, pass `100`.
+          product_price: nil
+        ); end
         sig { override.returns({mandate_only: T::Boolean, product_price: T.nilable(Integer)}) }
         def to_hash; end
       end

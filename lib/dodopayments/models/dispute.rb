@@ -52,14 +52,25 @@ module Dodopayments
       required :payment_id, String
 
       # @!method initialize(amount:, business_id:, created_at:, currency:, dispute_id:, dispute_stage:, dispute_status:, payment_id:)
-      #   @param amount [String]
-      #   @param business_id [String]
-      #   @param created_at [Time]
-      #   @param currency [String]
-      #   @param dispute_id [String]
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::Dispute} for more details.
+      #
+      #   @param amount [String] The amount involved in the dispute, represented as a string to accommodate preci
+      #   ...
+      #
+      #   @param business_id [String] The unique identifier of the business involved in the dispute.
+      #
+      #   @param created_at [Time] The timestamp of when the dispute was created, in UTC.
+      #
+      #   @param currency [String] The currency of the disputed amount, represented as an ISO 4217 currency code.
+      #
+      #   @param dispute_id [String] The unique identifier of the dispute.
+      #
       #   @param dispute_stage [Symbol, Dodopayments::Models::DisputeStage]
+      #
       #   @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus]
-      #   @param payment_id [String]
+      #
+      #   @param payment_id [String] The unique identifier of the payment associated with the dispute.
     end
   end
 end

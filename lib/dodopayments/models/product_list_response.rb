@@ -91,19 +91,35 @@ module Dodopayments
       optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
       # @!method initialize(business_id:, created_at:, is_recurring:, product_id:, tax_category:, updated_at:, currency: nil, description: nil, image: nil, name: nil, price: nil, price_detail: nil, tax_inclusive: nil)
-      #   @param business_id [String]
-      #   @param created_at [Time]
-      #   @param is_recurring [Boolean]
-      #   @param product_id [String]
-      #   @param tax_category [Symbol, Dodopayments::Models::ProductListResponse::TaxCategory]
-      #   @param updated_at [Time]
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::ProductListResponse} for more details.
+      #
+      #   @param business_id [String] Unique identifier for the business to which the product belongs.
+      #
+      #   @param created_at [Time] Timestamp when the product was created.
+      #
+      #   @param is_recurring [Boolean] Indicates if the product is recurring (e.g., subscriptions).
+      #
+      #   @param product_id [String] Unique identifier for the product.
+      #
+      #   @param tax_category [Symbol, Dodopayments::Models::ProductListResponse::TaxCategory] Represents the different categories of taxation applicable to various products a
+      #   ...
+      #
+      #   @param updated_at [Time] Timestamp when the product was last updated.
+      #
       #   @param currency [Symbol, Dodopayments::Models::ProductListResponse::Currency, nil]
-      #   @param description [String, nil]
-      #   @param image [String, nil]
-      #   @param name [String, nil]
-      #   @param price [Integer, nil]
+      #
+      #   @param description [String, nil] Description of the product, optional.
+      #
+      #   @param image [String, nil] URL of the product image, optional.
+      #
+      #   @param name [String, nil] Name of the product, optional.
+      #
+      #   @param price [Integer, nil] Price of the product, optional. ...
+      #
       #   @param price_detail [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil]
-      #   @param tax_inclusive [Boolean, nil]
+      #
+      #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive
 
       # Represents the different categories of taxation applicable to various products
       # and services.

@@ -20,8 +20,10 @@ module Dodopayments
       optional :reason, String, nil?: true
 
       # @!method initialize(payment_id:, reason: nil, request_options: {})
-      #   @param payment_id [String]
-      #   @param reason [String, nil]
+      #   @param payment_id [String] The unique identifier of the payment to be refunded.
+      #
+      #   @param reason [String, nil] The reason for the refund, if any. Maximum length is 3000 characters. Optional.
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end

@@ -92,18 +92,39 @@ module Dodopayments
           .returns(T.attached_class)
       end
       def self.new(
+        # Unique identifier for the business to which the product belongs.
         business_id:,
+        # Timestamp when the product was created.
         created_at:,
+        # Indicates if the product is recurring (e.g., subscriptions).
         is_recurring:,
+        # Unique identifier for the product.
         product_id:,
+        # Represents the different categories of taxation applicable to various products
+        # and services.
         tax_category:,
+        # Timestamp when the product was last updated.
         updated_at:,
         currency: nil,
+        # Description of the product, optional.
         description: nil,
+        # URL of the product image, optional.
         image: nil,
+        # Name of the product, optional.
         name: nil,
+        # Price of the product, optional.
+        #
+        # The price is represented in the lowest denomination of the currency. For
+        # example:
+        #
+        # - In USD, a price of `$12.34` would be represented as `1234` (cents).
+        # - In JPY, a price of `¥1500` would be represented as `1500` (yen).
+        # - In INR, a price of `₹1234.56` would be represented as `123456` (paise).
+        #
+        # This ensures precision and avoids floating-point rounding errors.
         price: nil,
         price_detail: nil,
+        # Indicates if the price is tax inclusive
         tax_inclusive: nil
       ); end
       sig do

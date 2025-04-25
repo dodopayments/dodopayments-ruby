@@ -29,7 +29,8 @@ module Dodopayments
 
       # @overload retrieve(customer_id, request_options: {})
       #
-      # @param customer_id [String]
+      # @param customer_id [String] Customer Id
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Customer]
@@ -46,9 +47,12 @@ module Dodopayments
 
       # @overload update(customer_id, name: nil, phone_number: nil, request_options: {})
       #
-      # @param customer_id [String]
+      # @param customer_id [String] Customer Id
+      #
       # @param name [String, nil]
+      #
       # @param phone_number [String, nil]
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Customer]
@@ -67,8 +71,10 @@ module Dodopayments
 
       # @overload list(page_number: nil, page_size: nil, request_options: {})
       #
-      # @param page_number [Integer, nil]
-      # @param page_size [Integer, nil]
+      # @param page_number [Integer, nil] Page number default is 0
+      #
+      # @param page_size [Integer, nil] Page size default is 10 max is 100
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Customer>]

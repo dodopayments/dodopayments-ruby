@@ -69,17 +69,29 @@ module Dodopayments
           .returns(T.attached_class)
       end
       def self.new(
+        # The unique identifier of the license key.
         id:,
+        # The unique identifier of the business associated with the license key.
         business_id:,
+        # The timestamp indicating when the license key was created, in UTC.
         created_at:,
+        # The unique identifier of the customer associated with the license key.
         customer_id:,
+        # The current number of instances activated for this license key.
         instances_count:,
+        # The license key string.
         key:,
+        # The unique identifier of the payment associated with the license key.
         payment_id:,
+        # The unique identifier of the product associated with the license key.
         product_id:,
         status:,
+        # The maximum number of activations allowed for this license key.
         activations_limit: nil,
+        # The timestamp indicating when the license key expires, in UTC.
         expires_at: nil,
+        # The unique identifier of the subscription associated with the license key, if
+        # any.
         subscription_id: nil
       ); end
       sig do

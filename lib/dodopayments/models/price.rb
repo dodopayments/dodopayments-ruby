@@ -67,13 +67,24 @@ module Dodopayments
         optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
         # @!method initialize(currency:, discount:, price:, purchasing_power_parity:, pay_what_you_want: nil, suggested_price: nil, tax_inclusive: nil, type: :one_time_price)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::Price::OneTimePrice} for more details.
+        #
         #   @param currency [Symbol, Dodopayments::Models::Price::OneTimePrice::Currency]
-        #   @param discount [Float]
-        #   @param price [Integer]
-        #   @param purchasing_power_parity [Boolean]
-        #   @param pay_what_you_want [Boolean]
-        #   @param suggested_price [Integer, nil]
-        #   @param tax_inclusive [Boolean, nil]
+        #
+        #   @param discount [Float] Discount applied to the price, represented as a percentage (0 to 100).
+        #
+        #   @param price [Integer] The payment amount, in the smallest denomination of the currency (e.g., cents fo
+        #   ...
+        #
+        #   @param purchasing_power_parity [Boolean] Indicates if purchasing power parity adjustments are applied to the price. ...
+        #
+        #   @param pay_what_you_want [Boolean] Indicates whether the customer can pay any amount they choose. ...
+        #
+        #   @param suggested_price [Integer, nil] A suggested price for the user to pay. This value is only considered if ...
+        #
+        #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive.
+        #
         #   @param type [Symbol, :one_time_price]
 
         # @see Dodopayments::Models::Price::OneTimePrice#currency
@@ -299,16 +310,30 @@ module Dodopayments
         optional :trial_period_days, Integer
 
         # @!method initialize(currency:, discount:, payment_frequency_count:, payment_frequency_interval:, price:, purchasing_power_parity:, subscription_period_count:, subscription_period_interval:, tax_inclusive: nil, trial_period_days: nil, type: :recurring_price)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::Price::RecurringPrice} for more details.
+        #
         #   @param currency [Symbol, Dodopayments::Models::Price::RecurringPrice::Currency]
-        #   @param discount [Float]
-        #   @param payment_frequency_count [Integer]
+        #
+        #   @param discount [Float] Discount applied to the price, represented as a percentage (0 to 100).
+        #
+        #   @param payment_frequency_count [Integer] Number of units for the payment frequency. ...
+        #
         #   @param payment_frequency_interval [Symbol, Dodopayments::Models::TimeInterval]
-        #   @param price [Integer]
-        #   @param purchasing_power_parity [Boolean]
-        #   @param subscription_period_count [Integer]
+        #
+        #   @param price [Integer] The payment amount. Represented in the lowest denomination of the currency (e.g.
+        #   ...
+        #
+        #   @param purchasing_power_parity [Boolean] Indicates if purchasing power parity adjustments are applied to the price. ...
+        #
+        #   @param subscription_period_count [Integer] Number of units for the subscription period. ...
+        #
         #   @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval]
-        #   @param tax_inclusive [Boolean, nil]
-        #   @param trial_period_days [Integer]
+        #
+        #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive
+        #
+        #   @param trial_period_days [Integer] Number of days for the trial period. A value of `0` indicates no trial period.
+        #
         #   @param type [Symbol, :recurring_price]
 
         # @see Dodopayments::Models::Price::RecurringPrice#currency

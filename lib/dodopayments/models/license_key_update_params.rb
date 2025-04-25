@@ -29,9 +29,15 @@ module Dodopayments
       optional :expires_at, Time, nil?: true
 
       # @!method initialize(activations_limit: nil, disabled: nil, expires_at: nil, request_options: {})
-      #   @param activations_limit [Integer, nil]
-      #   @param disabled [Boolean, nil]
-      #   @param expires_at [Time, nil]
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::LicenseKeyUpdateParams} for more details.
+      #
+      #   @param activations_limit [Integer, nil] The updated activation limit for the license key. ...
+      #
+      #   @param disabled [Boolean, nil] Indicates whether the license key should be disabled. ...
+      #
+      #   @param expires_at [Time, nil] The updated expiration timestamp for the license key in UTC. ...
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end

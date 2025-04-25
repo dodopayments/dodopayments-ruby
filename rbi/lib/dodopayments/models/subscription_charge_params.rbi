@@ -18,8 +18,12 @@ module Dodopayments
         )
           .returns(T.attached_class)
       end
-      def self.new(product_price:, request_options: {}); end
-
+      def self.new(
+        # The product price. Represented in the lowest denomination of the currency (e.g.,
+        # cents for USD). For example, to charge $1.00, pass `100`.
+        product_price:,
+        request_options: {}
+      ); end
       sig { override.returns({product_price: Integer, request_options: Dodopayments::RequestOptions}) }
       def to_hash; end
     end

@@ -50,13 +50,20 @@ module Dodopayments
       optional :page_size, Integer, nil?: true
 
       # @!method initialize(created_at_gte: nil, created_at_lte: nil, customer_id: nil, dispute_stage: nil, dispute_status: nil, page_number: nil, page_size: nil, request_options: {})
-      #   @param created_at_gte [Time, nil]
-      #   @param created_at_lte [Time, nil]
-      #   @param customer_id [String, nil]
-      #   @param dispute_stage [Symbol, Dodopayments::Models::DisputeStage, nil]
-      #   @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus, nil]
-      #   @param page_number [Integer, nil]
-      #   @param page_size [Integer, nil]
+      #   @param created_at_gte [Time, nil] Get events after this created time
+      #
+      #   @param created_at_lte [Time, nil] Get events created before this time
+      #
+      #   @param customer_id [String, nil] Filter by customer_id
+      #
+      #   @param dispute_stage [Symbol, Dodopayments::Models::DisputeStage, nil] Filter by dispute stage
+      #
+      #   @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus, nil] Filter by dispute status
+      #
+      #   @param page_number [Integer, nil] Page number default is 0
+      #
+      #   @param page_size [Integer, nil] Page size default is 10 max is 100
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end

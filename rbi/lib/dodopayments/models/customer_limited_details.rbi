@@ -16,8 +16,14 @@ module Dodopayments
       attr_accessor :name
 
       sig { params(customer_id: String, email: String, name: String).returns(T.attached_class) }
-      def self.new(customer_id:, email:, name:); end
-
+      def self.new(
+        # Unique identifier for the customer
+        customer_id:,
+        # Email address of the customer
+        email:,
+        # Full name of the customer
+        name:
+      ); end
       sig { override.returns({customer_id: String, email: String, name: String}) }
       def to_hash; end
     end

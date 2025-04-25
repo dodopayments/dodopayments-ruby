@@ -33,8 +33,18 @@ module Dodopayments
         )
           .returns(T.attached_class)
       end
-      def self.new(city:, country:, state:, street:, zipcode:); end
-
+      def self.new(
+        # City name
+        city:,
+        # ISO country code alpha2 variant
+        country:,
+        # State or province name
+        state:,
+        # Street address including house number and unit/apartment if applicable
+        street:,
+        # Postal code or ZIP code
+        zipcode:
+      ); end
       sig do
         override
           .returns(

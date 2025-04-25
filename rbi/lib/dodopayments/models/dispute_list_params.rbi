@@ -48,12 +48,19 @@ module Dodopayments
           .returns(T.attached_class)
       end
       def self.new(
+        # Get events after this created time
         created_at_gte: nil,
+        # Get events created before this time
         created_at_lte: nil,
+        # Filter by customer_id
         customer_id: nil,
+        # Filter by dispute stage
         dispute_stage: nil,
+        # Filter by dispute status
         dispute_status: nil,
+        # Page number default is 0
         page_number: nil,
+        # Page size default is 10 max is 100
         page_size: nil,
         request_options: {}
       ); end

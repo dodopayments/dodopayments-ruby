@@ -22,8 +22,13 @@ module Dodopayments
         )
           .returns(T.attached_class)
       end
-      def self.new(page_number: nil, page_size: nil, request_options: {}); end
-
+      def self.new(
+        # Page number (default = 0).
+        page_number: nil,
+        # Page size (default = 10, max = 100).
+        page_size: nil,
+        request_options: {}
+      ); end
       sig do
         override
           .returns(

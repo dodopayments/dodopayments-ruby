@@ -114,24 +114,39 @@ module Dodopayments
       end
       def self.new(
         billing:,
+        # Timestamp when the subscription was created
         created_at:,
         currency:,
         customer:,
         metadata:,
+        # Timestamp of the next scheduled billing. Indicates the end of current billing
+        # period
         next_billing_date:,
+        # Number of payment frequency intervals
         payment_frequency_count:,
         payment_frequency_interval:,
+        # Timestamp of the last payment. Indicates the start of current billing period
         previous_billing_date:,
+        # Identifier of the product associated with this subscription
         product_id:,
+        # Number of units/items included in the subscription
         quantity:,
+        # Amount charged before tax for each recurring payment in smallest currency unit
+        # (e.g. cents)
         recurring_pre_tax_amount:,
         status:,
+        # Unique identifier for the subscription
         subscription_id:,
+        # Number of subscription period intervals
         subscription_period_count:,
         subscription_period_interval:,
+        # Indicates if the recurring_pre_tax_amount is tax inclusive
         tax_inclusive:,
+        # Number of days in the trial period (0 if no trial)
         trial_period_days:,
+        # Cancelled timestamp if the subscription is cancelled
         cancelled_at: nil,
+        # The discount id if discount is applied
         discount_id: nil
       ); end
       sig do

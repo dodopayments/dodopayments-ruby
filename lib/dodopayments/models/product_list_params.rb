@@ -36,10 +36,17 @@ module Dodopayments
       optional :recurring, Dodopayments::Internal::Type::Boolean, nil?: true
 
       # @!method initialize(archived: nil, page_number: nil, page_size: nil, recurring: nil, request_options: {})
-      #   @param archived [Boolean]
-      #   @param page_number [Integer, nil]
-      #   @param page_size [Integer, nil]
-      #   @param recurring [Boolean, nil]
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::ProductListParams} for more details.
+      #
+      #   @param archived [Boolean] List archived products
+      #
+      #   @param page_number [Integer, nil] Page number default is 0
+      #
+      #   @param page_size [Integer, nil] Page size default is 10 max is 100
+      #
+      #   @param recurring [Boolean, nil] Filter products by pricing type: ...
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end

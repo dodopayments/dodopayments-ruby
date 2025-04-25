@@ -98,20 +98,38 @@ module Dodopayments
       optional :trial_period_days, Integer, nil?: true
 
       # @!method initialize(billing:, customer:, product_id:, quantity:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, metadata: nil, on_demand: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::SubscriptionCreateParams} for more details.
+      #
       #   @param billing [Dodopayments::Models::BillingAddress]
+      #
       #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
-      #   @param product_id [String]
-      #   @param quantity [Integer]
-      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil]
+      #
+      #   @param product_id [String] Unique identifier of the product to subscribe to
+      #
+      #   @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
+      #
+      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout. ...
+      #
       #   @param billing_currency [Symbol, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency, nil]
-      #   @param discount_code [String, nil]
+      #
+      #   @param discount_code [String, nil] Discount Code to apply to the subscription
+      #
       #   @param metadata [Hash{Symbol=>String}]
+      #
       #   @param on_demand [Dodopayments::Models::SubscriptionCreateParams::OnDemand, nil]
-      #   @param payment_link [Boolean, nil]
-      #   @param return_url [String, nil]
-      #   @param show_saved_payment_methods [Boolean]
-      #   @param tax_id [String, nil]
-      #   @param trial_period_days [Integer, nil]
+      #
+      #   @param payment_link [Boolean, nil] If true, generates a payment link. ...
+      #
+      #   @param return_url [String, nil] Optional URL to redirect after successful subscription creation
+      #
+      #   @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer ...
+      #
+      #   @param tax_id [String, nil] Tax ID in case the payment is B2B. If tax id validation fails the payment creati
+      #   ...
+      #
+      #   @param trial_period_days [Integer, nil] Optional trial period in days ...
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 
       module AllowedPaymentMethodType
@@ -310,8 +328,13 @@ module Dodopayments
         optional :product_price, Integer, nil?: true
 
         # @!method initialize(mandate_only:, product_price: nil)
-        #   @param mandate_only [Boolean]
-        #   @param product_price [Integer, nil]
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::SubscriptionCreateParams::OnDemand} for more details.
+        #
+        #   @param mandate_only [Boolean] If set as True, does not perform any charge and only authorizes payment method d
+        #   ...
+        #
+        #   @param product_price [Integer, nil] Product price for the initial charge to customer ...
       end
     end
   end
