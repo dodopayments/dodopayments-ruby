@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.18.1 (2025-04-25)
+
+Full Changelog: [v1.18.0...v1.18.1](https://github.com/dodopayments/dodopayments-ruby/compare/v1.18.0...v1.18.1)
+
+### Features
+
+* support specifying content-type with FilePart class ([05ee21c](https://github.com/dodopayments/dodopayments-ruby/commit/05ee21c08e27593808a49a31d8a06b2aa9fdf1a9))
+* support webmock for testing ([aff42ca](https://github.com/dodopayments/dodopayments-ruby/commit/aff42ca9a2c889dadb9eb375948d36302d3504b0))
+
+
+### Chores
+
+* broadly detect json family of content-type headers ([826d222](https://github.com/dodopayments/dodopayments-ruby/commit/826d222ddeb13f2778a39d55534248e13be8f409))
+* **ci:** only use depot for staging repos ([bb8e176](https://github.com/dodopayments/dodopayments-ruby/commit/bb8e17605af188705dccc623554128e933180811))
+* **internal:** codegen related update ([e449407](https://github.com/dodopayments/dodopayments-ruby/commit/e4494070a75a27e9cc85bacc312c816fff999541))
+* **internal:** improve response envelope unwrap functionality ([6e7675c](https://github.com/dodopayments/dodopayments-ruby/commit/6e7675c0fb1ad1618fd2d1a2e44e0e7e67c56456))
+* show truncated parameter docs in yard ([904002a](https://github.com/dodopayments/dodopayments-ruby/commit/904002ac59c8008068ad27dd17c43e433f8d1a32))
+
 ## 1.18.0 (2025-04-23)
 
 Full Changelog: [v1.17.0...v1.18.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.17.0...v1.18.0)
