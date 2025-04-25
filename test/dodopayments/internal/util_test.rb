@@ -200,8 +200,12 @@ class Dodopayments::Test::UtilFormDataEncodingTest < Minitest::Test
     file = Pathname(__FILE__)
     headers = {"content-type" => "multipart/form-data"}
     cases = {
+      "abc" => "abc",
       StringIO.new("abc") => "abc",
-      file => /^class Dodopayments/
+      Dodopayments::FilePart.new("abc") => "abc",
+      Dodopayments::FilePart.new(StringIO.new("abc")) => "abc",
+      file => /^class Dodopayments/,
+      Dodopayments::FilePart.new(file) => /^class Dodopayments/
     }
     cases.each do |body, val|
       encoded = Dodopayments::Internal::Util.encode_content(headers, body)
@@ -219,7 +223,13 @@ class Dodopayments::Test::UtilFormDataEncodingTest < Minitest::Test
       {a: 2, b: nil} => {"a" => "2", "b" => "null"},
       {a: 2, b: [1, 2, 3]} => {"a" => "2", "b" => "1"},
       {strio: StringIO.new("a")} => {"strio" => "a"},
-      {pathname: Pathname(__FILE__)} => {"pathname" => -> { _1.read in /^class Dodopayments/ }}
+      {strio: Dodopayments::FilePart.new("a")} => {"strio" => "a"},
+      {pathname: Pathname(__FILE__)} => {"pathname" => -> { _1.read in /^class Dodopayments/ }},
+      {pathname: Dodopayments::FilePart.new(Pathname(__FILE__))} => {
+        "pathname" => -> {
+          _1.read in /^class Dodopayments/
+        }
+      }
     }
     cases.each do |body, testcase|
       encoded = Dodopayments::Internal::Util.encode_content(headers, body)
