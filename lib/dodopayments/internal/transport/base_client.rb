@@ -153,7 +153,7 @@ module Dodopayments
 
         # @api private
         # @return [Dodopayments::Internal::Transport::PooledNetRequester]
-        attr_accessor :requester
+        attr_reader :requester
 
         # @api private
         #
