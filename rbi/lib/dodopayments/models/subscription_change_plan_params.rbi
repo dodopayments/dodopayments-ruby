@@ -26,8 +26,14 @@ module Dodopayments
         )
           .returns(T.attached_class)
       end
-      def self.new(product_id:, proration_billing_mode:, quantity:, request_options: {}); end
-
+      def self.new(
+        # Unique identifier of the product to subscribe to
+        product_id:,
+        proration_billing_mode:,
+        # Number of units to subscribe for. Must be at least 1.
+        quantity:,
+        request_options: {}
+      ); end
       sig do
         override
           .returns(

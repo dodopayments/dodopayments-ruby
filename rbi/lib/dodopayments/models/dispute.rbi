@@ -48,17 +48,22 @@ module Dodopayments
           .returns(T.attached_class)
       end
       def self.new(
+        # The amount involved in the dispute, represented as a string to accommodate
+        # precision.
         amount:,
+        # The unique identifier of the business involved in the dispute.
         business_id:,
+        # The timestamp of when the dispute was created, in UTC.
         created_at:,
+        # The currency of the disputed amount, represented as an ISO 4217 currency code.
         currency:,
+        # The unique identifier of the dispute.
         dispute_id:,
         dispute_stage:,
         dispute_status:,
+        # The unique identifier of the payment associated with the dispute.
         payment_id:
-      )
-      end
-
+      ); end
       sig do
         override
           .returns(

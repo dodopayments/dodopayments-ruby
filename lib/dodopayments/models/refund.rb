@@ -51,14 +51,21 @@ module Dodopayments
       optional :reason, String, nil?: true
 
       # @!method initialize(business_id:, created_at:, payment_id:, refund_id:, status:, amount: nil, currency: nil, reason: nil)
-      #   @param business_id [String]
-      #   @param created_at [Time]
-      #   @param payment_id [String]
-      #   @param refund_id [String]
+      #   @param business_id [String] The unique identifier of the business issuing the refund.
+      #
+      #   @param created_at [Time] The timestamp of when the refund was created in UTC.
+      #
+      #   @param payment_id [String] The unique identifier of the payment associated with the refund.
+      #
+      #   @param refund_id [String] The unique identifier of the refund.
+      #
       #   @param status [Symbol, Dodopayments::Models::RefundStatus]
-      #   @param amount [Integer, nil]
+      #
+      #   @param amount [Integer, nil] The refunded amount.
+      #
       #   @param currency [Symbol, Dodopayments::Models::Refund::Currency, nil]
-      #   @param reason [String, nil]
+      #
+      #   @param reason [String, nil] The reason provided for the refund, if any. Optional.
 
       # @see Dodopayments::Models::Refund#currency
       module Currency

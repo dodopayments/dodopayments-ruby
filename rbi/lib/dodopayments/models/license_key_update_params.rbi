@@ -30,8 +30,18 @@ module Dodopayments
         )
           .returns(T.attached_class)
       end
-      def self.new(activations_limit: nil, disabled: nil, expires_at: nil, request_options: {}); end
-
+      def self.new(
+        # The updated activation limit for the license key. Use `null` to remove the
+        # limit, or omit this field to leave it unchanged.
+        activations_limit: nil,
+        # Indicates whether the license key should be disabled. A value of `true` disables
+        # the key, while `false` enables it. Omit this field to leave it unchanged.
+        disabled: nil,
+        # The updated expiration timestamp for the license key in UTC. Use `null` to
+        # remove the expiration date, or omit this field to leave it unchanged.
+        expires_at: nil,
+        request_options: {}
+      ); end
       sig do
         override
           .returns(

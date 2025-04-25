@@ -39,8 +39,21 @@ module Dodopayments
         )
           .returns(T.attached_class)
       end
-      def self.new(archived: nil, page_number: nil, page_size: nil, recurring: nil, request_options: {}); end
-
+      def self.new(
+        # List archived products
+        archived: nil,
+        # Page number default is 0
+        page_number: nil,
+        # Page size default is 10 max is 100
+        page_size: nil,
+        # Filter products by pricing type:
+        #
+        # - `true`: Show only recurring pricing products (e.g. subscriptions)
+        # - `false`: Show only one-time price products
+        # - `null` or absent: Show both types of products
+        recurring: nil,
+        request_options: {}
+      ); end
       sig do
         override
           .returns(

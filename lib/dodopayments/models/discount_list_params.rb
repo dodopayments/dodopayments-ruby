@@ -20,8 +20,10 @@ module Dodopayments
       optional :page_size, Integer, nil?: true
 
       # @!method initialize(page_number: nil, page_size: nil, request_options: {})
-      #   @param page_number [Integer, nil]
-      #   @param page_size [Integer, nil]
+      #   @param page_number [Integer, nil] Page number (default = 0).
+      #
+      #   @param page_size [Integer, nil] Page size (default = 10, max = 100).
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end

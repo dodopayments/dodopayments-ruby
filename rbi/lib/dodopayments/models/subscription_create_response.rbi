@@ -51,10 +51,17 @@ module Dodopayments
       def self.new(
         customer:,
         metadata:,
+        # Tax will be added to the amount and charged to the customer on each billing
+        # cycle
         recurring_pre_tax_amount:,
+        # Unique identifier for the subscription
         subscription_id:,
+        # Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will be
+        # coming soon
         client_secret: nil,
+        # The discount id if discount is applied
         discount_id: nil,
+        # URL to checkout page
         payment_link: nil
       ); end
       sig do

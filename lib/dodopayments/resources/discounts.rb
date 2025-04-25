@@ -3,17 +3,27 @@
 module Dodopayments
   module Resources
     class Discounts
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::DiscountCreateParams} for more details.
+      #
       # If `code` is omitted or empty, a random 16-char uppercase code is generated.
       #
       # @overload create(amount:, type:, code: nil, expires_at: nil, name: nil, restricted_to: nil, usage_limit: nil, request_options: {})
       #
-      # @param amount [Integer]
+      # @param amount [Integer] The discount amount. ...
+      #
       # @param type [Symbol, Dodopayments::Models::DiscountType]
-      # @param code [String, nil]
-      # @param expires_at [Time, nil]
+      #
+      # @param code [String, nil] Optionally supply a code (will be uppercased). ...
+      #
+      # @param expires_at [Time, nil] When the discount expires, if ever.
+      #
       # @param name [String, nil]
-      # @param restricted_to [Array<String>, nil]
-      # @param usage_limit [Integer, nil]
+      #
+      # @param restricted_to [Array<String>, nil] List of product IDs to restrict usage (if any).
+      #
+      # @param usage_limit [Integer, nil] How many times this discount can be used (if any). ...
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Discount]
@@ -34,7 +44,8 @@ module Dodopayments
       #
       # @overload retrieve(discount_id, request_options: {})
       #
-      # @param discount_id [String]
+      # @param discount_id [String] Discount Id
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Discount]
@@ -49,18 +60,29 @@ module Dodopayments
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::DiscountUpdateParams} for more details.
+      #
       # PATCH /discounts/{discount_id}
       #
       # @overload update(discount_id, amount: nil, code: nil, expires_at: nil, name: nil, restricted_to: nil, type: nil, usage_limit: nil, request_options: {})
       #
-      # @param discount_id [String]
-      # @param amount [Integer, nil]
-      # @param code [String, nil]
+      # @param discount_id [String] Discount Id
+      #
+      # @param amount [Integer, nil] If present, update the discount amount: ...
+      #
+      # @param code [String, nil] If present, update the discount code (uppercase).
+      #
       # @param expires_at [Time, nil]
+      #
       # @param name [String, nil]
-      # @param restricted_to [Array<String>, nil]
+      #
+      # @param restricted_to [Array<String>, nil] If present, replaces all restricted product IDs with this new set. ...
+      #
       # @param type [Symbol, Dodopayments::Models::DiscountType, nil]
+      #
       # @param usage_limit [Integer, nil]
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Discount]
@@ -81,8 +103,10 @@ module Dodopayments
       #
       # @overload list(page_number: nil, page_size: nil, request_options: {})
       #
-      # @param page_number [Integer, nil]
-      # @param page_size [Integer, nil]
+      # @param page_number [Integer, nil] Page number (default = 0).
+      #
+      # @param page_size [Integer, nil] Page size (default = 10, max = 100).
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Discount>]
@@ -104,7 +128,8 @@ module Dodopayments
       #
       # @overload delete(discount_id, request_options: {})
       #
-      # @param discount_id [String]
+      # @param discount_id [String] Discount Id
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]

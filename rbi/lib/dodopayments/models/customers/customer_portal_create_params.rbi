@@ -18,8 +18,11 @@ module Dodopayments
           )
             .returns(T.attached_class)
         end
-        def self.new(send_email: nil, request_options: {}); end
-
+        def self.new(
+          # If true, will send link to user.
+          send_email: nil,
+          request_options: {}
+        ); end
         sig do
           override.returns({send_email: T.nilable(T::Boolean), request_options: Dodopayments::RequestOptions})
         end

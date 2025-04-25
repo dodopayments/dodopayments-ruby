@@ -56,12 +56,27 @@ module Dodopayments
           .returns(T.attached_class)
       end
       def self.new(
+        # The discount amount.
+        #
+        # - If `discount_type` is **not** `percentage`, `amount` is in **USD cents**. For
+        #   example, `100` means `$1.00`. Only USD is allowed.
+        # - If `discount_type` **is** `percentage`, `amount` is in **basis points**. For
+        #   example, `540` means `5.4%`.
+        #
+        # Must be at least 1.
         amount:,
         type:,
+        # Optionally supply a code (will be uppercased).
+        #
+        # - Must be at least 3 characters if provided.
+        # - If omitted, a random 16-character code is generated.
         code: nil,
+        # When the discount expires, if ever.
         expires_at: nil,
         name: nil,
+        # List of product IDs to restrict usage (if any).
         restricted_to: nil,
+        # How many times this discount can be used (if any). Must be >= 1 if provided.
         usage_limit: nil,
         request_options: {}
       ); end

@@ -50,13 +50,20 @@ module Dodopayments
       optional :subscription_id, String, nil?: true
 
       # @!method initialize(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, subscription_id: nil, request_options: {})
-      #   @param created_at_gte [Time, nil]
-      #   @param created_at_lte [Time, nil]
-      #   @param customer_id [String, nil]
-      #   @param page_number [Integer, nil]
-      #   @param page_size [Integer, nil]
-      #   @param status [Symbol, Dodopayments::Models::IntentStatus, nil]
-      #   @param subscription_id [String, nil]
+      #   @param created_at_gte [Time, nil] Get events after this created time
+      #
+      #   @param created_at_lte [Time, nil] Get events created before this time
+      #
+      #   @param customer_id [String, nil] Filter by customer id
+      #
+      #   @param page_number [Integer, nil] Page number default is 0
+      #
+      #   @param page_size [Integer, nil] Page size default is 10 max is 100
+      #
+      #   @param status [Symbol, Dodopayments::Models::IntentStatus, nil] Filter by status
+      #
+      #   @param subscription_id [String, nil] Filter by subscription id
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end

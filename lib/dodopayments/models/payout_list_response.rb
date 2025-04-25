@@ -93,21 +93,35 @@ module Dodopayments
       optional :remarks, String, nil?: true
 
       # @!method initialize(amount:, business_id:, chargebacks:, created_at:, currency:, fee:, payment_method:, payout_id:, refunds:, status:, tax:, updated_at:, name: nil, payout_document_url: nil, remarks: nil)
-      #   @param amount [Integer]
-      #   @param business_id [String]
-      #   @param chargebacks [Integer]
-      #   @param created_at [Time]
+      #   @param amount [Integer] The total amount of the payout.
+      #
+      #   @param business_id [String] The unique identifier of the business associated with the payout.
+      #
+      #   @param chargebacks [Integer] The total value of chargebacks associated with the payout.
+      #
+      #   @param created_at [Time] The timestamp when the payout was created, in UTC.
+      #
       #   @param currency [Symbol, Dodopayments::Models::PayoutListResponse::Currency]
-      #   @param fee [Integer]
-      #   @param payment_method [String]
-      #   @param payout_id [String]
-      #   @param refunds [Integer]
+      #
+      #   @param fee [Integer] The fee charged for processing the payout.
+      #
+      #   @param payment_method [String] The payment method used for the payout (e.g., bank transfer, card, etc.).
+      #
+      #   @param payout_id [String] The unique identifier of the payout.
+      #
+      #   @param refunds [Integer] The total value of refunds associated with the payout.
+      #
       #   @param status [Symbol, Dodopayments::Models::PayoutListResponse::Status]
-      #   @param tax [Integer]
-      #   @param updated_at [Time]
-      #   @param name [String, nil]
-      #   @param payout_document_url [String, nil]
-      #   @param remarks [String, nil]
+      #
+      #   @param tax [Integer] The tax applied to the payout.
+      #
+      #   @param updated_at [Time] The timestamp when the payout was last updated, in UTC.
+      #
+      #   @param name [String, nil] The name of the payout recipient or purpose.
+      #
+      #   @param payout_document_url [String, nil] The URL of the document associated with the payout.
+      #
+      #   @param remarks [String, nil] Any additional remarks or notes associated with the payout.
 
       # @see Dodopayments::Models::PayoutListResponse#currency
       module Currency

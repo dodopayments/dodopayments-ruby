@@ -26,9 +26,12 @@ module Dodopayments
       required :quantity, Integer
 
       # @!method initialize(product_id:, proration_billing_mode:, quantity:, request_options: {})
-      #   @param product_id [String]
+      #   @param product_id [String] Unique identifier of the product to subscribe to
+      #
       #   @param proration_billing_mode [Symbol, Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode]
-      #   @param quantity [Integer]
+      #
+      #   @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 
       module ProrationBillingMode

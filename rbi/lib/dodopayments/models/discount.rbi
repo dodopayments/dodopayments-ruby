@@ -67,16 +67,30 @@ module Dodopayments
           .returns(T.attached_class)
       end
       def self.new(
+        # The discount amount.
+        #
+        # - If `discount_type` is `percentage`, this is in **basis points** (e.g., 540 =>
+        #   5.4%).
+        # - Otherwise, this is **USD cents** (e.g., 100 => `$1.00`).
         amount:,
+        # The business this discount belongs to.
         business_id:,
+        # The discount code (up to 16 chars).
         code:,
+        # Timestamp when the discount is created
         created_at:,
+        # The unique discount ID
         discount_id:,
+        # List of product IDs to which this discount is restricted.
         restricted_to:,
+        # How many times this discount has been used.
         times_used:,
         type:,
+        # Optional date/time after which discount is expired.
         expires_at: nil,
+        # Name for the Discount
         name: nil,
+        # Usage limit for this discount, if any.
         usage_limit: nil
       ); end
       sig do

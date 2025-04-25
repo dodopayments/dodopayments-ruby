@@ -131,27 +131,52 @@ module Dodopayments
       optional :updated_at, Time, nil?: true
 
       # @!method initialize(business_id:, created_at:, currency:, customer:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, discount_id: nil, error_message: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
-      #   @param business_id [String]
-      #   @param created_at [Time]
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::Payment} for more details.
+      #
+      #   @param business_id [String] Identifier of the business associated with the payment
+      #
+      #   @param created_at [Time] Timestamp when the payment was created
+      #
       #   @param currency [Symbol, Dodopayments::Models::Payment::Currency]
+      #
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
-      #   @param disputes [Array<Dodopayments::Models::Dispute>]
+      #
+      #   @param disputes [Array<Dodopayments::Models::Dispute>] List of disputes associated with this payment
+      #
       #   @param metadata [Hash{Symbol=>String}]
-      #   @param payment_id [String]
-      #   @param refunds [Array<Dodopayments::Models::Refund>]
-      #   @param settlement_amount [Integer]
+      #
+      #   @param payment_id [String] Unique identifier for the payment
+      #
+      #   @param refunds [Array<Dodopayments::Models::Refund>] List of refunds issued for this payment
+      #
+      #   @param settlement_amount [Integer] The amount that will be credited to your Dodo balance after currency conversion
+      #   ...
+      #
       #   @param settlement_currency [Symbol, Dodopayments::Models::Payment::SettlementCurrency]
-      #   @param total_amount [Integer]
-      #   @param discount_id [String, nil]
-      #   @param error_message [String, nil]
-      #   @param payment_link [String, nil]
-      #   @param payment_method [String, nil]
-      #   @param payment_method_type [String, nil]
-      #   @param product_cart [Array<Dodopayments::Models::Payment::ProductCart>, nil]
+      #
+      #   @param total_amount [Integer] Total amount charged to the customer including tax, in smallest currency unit (e
+      #   ...
+      #
+      #   @param discount_id [String, nil] The discount id if discount is applied
+      #
+      #   @param error_message [String, nil] An error message if the payment failed
+      #
+      #   @param payment_link [String, nil] Checkout URL
+      #
+      #   @param payment_method [String, nil] Payment method used by customer (e.g. "card", "bank_transfer")
+      #
+      #   @param payment_method_type [String, nil] Specific type of payment method (e.g. "visa", "mastercard")
+      #
+      #   @param product_cart [Array<Dodopayments::Models::Payment::ProductCart>, nil] List of products purchased in a one-time payment
+      #
       #   @param status [Symbol, Dodopayments::Models::IntentStatus, nil]
-      #   @param subscription_id [String, nil]
-      #   @param tax [Integer, nil]
-      #   @param updated_at [Time, nil]
+      #
+      #   @param subscription_id [String, nil] Identifier of the subscription if payment is part of a subscription
+      #
+      #   @param tax [Integer, nil] Amount of tax collected in smallest currency unit (e.g. cents)
+      #
+      #   @param updated_at [Time, nil] Timestamp when the payment was last updated
 
       # @see Dodopayments::Models::Payment#currency
       module Currency

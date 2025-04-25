@@ -22,9 +22,11 @@ module Dodopayments
       required :name, String
 
       # @!method initialize(customer_id:, email:, name:)
-      #   @param customer_id [String]
-      #   @param email [String]
-      #   @param name [String]
+      #   @param customer_id [String] Unique identifier for the customer
+      #
+      #   @param email [String] Email address of the customer
+      #
+      #   @param name [String] Full name of the customer
     end
   end
 end
