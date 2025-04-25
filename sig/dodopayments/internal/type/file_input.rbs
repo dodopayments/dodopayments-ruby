@@ -1,7 +1,7 @@
 module Dodopayments
   module Internal
     module Type
-      class IOLike
+      class FileInput
         extend Dodopayments::Internal::Type::Converter
 
         def self.===: (top other) -> bool

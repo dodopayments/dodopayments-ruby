@@ -43,7 +43,7 @@ module Dodopayments
             value.string
           in Pathname | IO
             state[:can_retry] = false if value.is_a?(IO)
-            Dodopayments::Internal::Util::SerializationAdapter.new(value)
+            Dodopayments::FilePart.new(value)
           else
             value
           end
