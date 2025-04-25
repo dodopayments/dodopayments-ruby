@@ -55,6 +55,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         payment_method: String | nil,
         payment_method_type: String | nil,
         product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::Payment::ProductCart]) | nil,
+        settlement_tax: Integer | nil,
         status: Dodopayments::Models::IntentStatus | nil,
         subscription_id: String | nil,
         tax: Integer | nil,

@@ -75,6 +75,12 @@ module Dodopayments
       sig { returns(T.nilable(T::Array[Dodopayments::Models::Payment::ProductCart])) }
       attr_accessor :product_cart
 
+      # This represents the portion of settlement_amount that corresponds to taxes
+      # collected. Especially relevant for adaptive pricing where the tax component must
+      # be tracked separately in your Dodo balance.
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :settlement_tax
+
       sig { returns(T.nilable(Dodopayments::Models::IntentStatus::TaggedSymbol)) }
       attr_accessor :status
 
@@ -109,6 +115,7 @@ module Dodopayments
           payment_method: T.nilable(String),
           payment_method_type: T.nilable(String),
           product_cart: T.nilable(T::Array[T.any(Dodopayments::Models::Payment::ProductCart, Dodopayments::Internal::AnyHash)]),
+          settlement_tax: T.nilable(Integer),
           status: T.nilable(Dodopayments::Models::IntentStatus::OrSymbol),
           subscription_id: T.nilable(String),
           tax: T.nilable(Integer),
@@ -150,6 +157,10 @@ module Dodopayments
         payment_method_type: nil,
         # List of products purchased in a one-time payment
         product_cart: nil,
+        # This represents the portion of settlement_amount that corresponds to taxes
+        # collected. Especially relevant for adaptive pricing where the tax component must
+        # be tracked separately in your Dodo balance.
+        settlement_tax: nil,
         status: nil,
         # Identifier of the subscription if payment is part of a subscription
         subscription_id: nil,
@@ -179,6 +190,7 @@ module Dodopayments
               payment_method: T.nilable(String),
               payment_method_type: T.nilable(String),
               product_cart: T.nilable(T::Array[Dodopayments::Models::Payment::ProductCart]),
+              settlement_tax: T.nilable(Integer),
               status: T.nilable(Dodopayments::Models::IntentStatus::TaggedSymbol),
               subscription_id: T.nilable(String),
               tax: T.nilable(Integer),

@@ -107,6 +107,14 @@ module Dodopayments
                -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::Payment::ProductCart] },
                nil?: true
 
+      # @!attribute settlement_tax
+      #   This represents the portion of settlement_amount that corresponds to taxes
+      #   collected. Especially relevant for adaptive pricing where the tax component must
+      #   be tracked separately in your Dodo balance.
+      #
+      #   @return [Integer, nil]
+      optional :settlement_tax, Integer, nil?: true
+
       # @!attribute status
       #
       #   @return [Symbol, Dodopayments::Models::IntentStatus, nil]
@@ -130,7 +138,7 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(business_id:, created_at:, currency:, customer:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, discount_id: nil, error_message: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(business_id:, created_at:, currency:, customer:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, discount_id: nil, error_message: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
@@ -169,6 +177,9 @@ module Dodopayments
       #   @param payment_method_type [String, nil] Specific type of payment method (e.g. "visa", "mastercard")
       #
       #   @param product_cart [Array<Dodopayments::Models::Payment::ProductCart>, nil] List of products purchased in a one-time payment
+      #
+      #   @param settlement_tax [Integer, nil] This represents the portion of settlement_amount that corresponds to taxes colle
+      #   ...
       #
       #   @param status [Symbol, Dodopayments::Models::IntentStatus, nil]
       #
