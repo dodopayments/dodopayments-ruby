@@ -19,6 +19,7 @@ module Dodopayments
         payment_method: String?,
         payment_method_type: String?,
         product_cart: ::Array[Dodopayments::Models::Payment::ProductCart]?,
+        settlement_tax: Integer?,
         status: Dodopayments::Models::intent_status?,
         subscription_id: String?,
         tax: Integer?,
@@ -60,6 +61,8 @@ module Dodopayments
 
       attr_accessor product_cart: ::Array[Dodopayments::Models::Payment::ProductCart]?
 
+      attr_accessor settlement_tax: Integer?
+
       attr_accessor status: Dodopayments::Models::intent_status?
 
       attr_accessor subscription_id: String?
@@ -86,6 +89,7 @@ module Dodopayments
         ?payment_method: String?,
         ?payment_method_type: String?,
         ?product_cart: ::Array[Dodopayments::Models::Payment::ProductCart]?,
+        ?settlement_tax: Integer?,
         ?status: Dodopayments::Models::intent_status?,
         ?subscription_id: String?,
         ?tax: Integer?,
