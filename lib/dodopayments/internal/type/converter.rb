@@ -44,6 +44,9 @@ module Dodopayments
           in Pathname | IO
             state[:can_retry] = false if value.is_a?(IO)
             Dodopayments::FilePart.new(value)
+          in Dodopayments::FilePart
+            state[:can_retry] = false if value.content.is_a?(IO)
+            value
           else
             value
           end
