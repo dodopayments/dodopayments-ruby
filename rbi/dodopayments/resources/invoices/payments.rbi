@@ -4,13 +4,7 @@ module Dodopayments
   module Resources
     class Invoices
       class Payments
-        sig do
-          params(
-            payment_id: String,
-            request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-          )
-            .void
-        end
+        sig { params(payment_id: String, request_options: Dodopayments::RequestOpts).void }
         def retrieve(payment_id, request_options: {}); end
 
         # @api private

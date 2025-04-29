@@ -4,10 +4,7 @@ module Dodopayments
   module Resources
     class Disputes
       sig do
-        params(
-          dispute_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-        )
+        params(dispute_id: String, request_options: Dodopayments::RequestOpts)
           .returns(Dodopayments::Models::Dispute)
       end
       def retrieve(
@@ -24,7 +21,7 @@ module Dodopayments
           dispute_status: T.nilable(Dodopayments::Models::DisputeStatus::OrSymbol),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Dispute])
       end

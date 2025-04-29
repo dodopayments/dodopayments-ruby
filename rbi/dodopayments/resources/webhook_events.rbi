@@ -4,10 +4,7 @@ module Dodopayments
   module Resources
     class WebhookEvents
       sig do
-        params(
-          webhook_event_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-        )
+        params(webhook_event_id: String, request_options: Dodopayments::RequestOpts)
           .returns(Dodopayments::Models::WebhookEvent)
       end
       def retrieve(webhook_event_id, request_options: {}); end
@@ -20,7 +17,7 @@ module Dodopayments
           object_id_: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::WebhookEvent])
       end

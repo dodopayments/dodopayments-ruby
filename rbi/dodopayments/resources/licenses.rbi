@@ -4,11 +4,7 @@ module Dodopayments
   module Resources
     class Licenses
       sig do
-        params(
-          license_key: String,
-          name: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-        )
+        params(license_key: String, name: String, request_options: Dodopayments::RequestOpts)
           .returns(Dodopayments::Models::LicenseKeyInstance)
       end
       def activate(license_key:, name:, request_options: {}); end
@@ -17,7 +13,7 @@ module Dodopayments
         params(
           license_key: String,
           license_key_instance_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .void
       end
@@ -27,7 +23,7 @@ module Dodopayments
         params(
           license_key: String,
           license_key_instance_id: T.nilable(String),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Models::LicenseValidateResponse)
       end

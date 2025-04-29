@@ -35,7 +35,7 @@ module Dodopayments
               page: T.nilable(T::Class[Dodopayments::Internal::Type::BasePage[Dodopayments::Internal::Type::BaseModel]]),
               stream: T.nilable(T::Class[T.anything]),
               model: T.nilable(Dodopayments::Internal::Type::Converter::Input),
-              options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+              options: T.nilable(Dodopayments::RequestOpts)
             }
           end
 
@@ -188,7 +188,7 @@ module Dodopayments
             page: T.nilable(T::Class[Dodopayments::Internal::Type::BasePage[Dodopayments::Internal::Type::BaseModel]]),
             stream: T.nilable(T::Class[T.anything]),
             model: T.nilable(Dodopayments::Internal::Type::Converter::Input),
-            options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+            options: T.nilable(Dodopayments::RequestOpts)
           )
             .returns(T.anything)
         end

@@ -13,7 +13,7 @@ module Dodopayments
           name: T.nilable(String),
           restricted_to: T.nilable(T::Array[String]),
           usage_limit: T.nilable(Integer),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Models::Discount)
       end
@@ -44,10 +44,7 @@ module Dodopayments
       ); end
       # GET /discounts/{discount_id}
       sig do
-        params(
-          discount_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-        )
+        params(discount_id: String, request_options: Dodopayments::RequestOpts)
           .returns(Dodopayments::Models::Discount)
       end
       def retrieve(
@@ -66,7 +63,7 @@ module Dodopayments
           restricted_to: T.nilable(T::Array[String]),
           type: T.nilable(Dodopayments::Models::DiscountType::OrSymbol),
           usage_limit: T.nilable(Integer),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Models::Discount)
       end
@@ -97,7 +94,7 @@ module Dodopayments
         params(
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Discount])
       end
@@ -109,13 +106,7 @@ module Dodopayments
         request_options: {}
       ); end
       # DELETE /discounts/{discount_id}
-      sig do
-        params(
-          discount_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-        )
-          .void
-      end
+      sig { params(discount_id: String, request_options: Dodopayments::RequestOpts).void }
       def delete(
         # Discount Id
         discount_id,
