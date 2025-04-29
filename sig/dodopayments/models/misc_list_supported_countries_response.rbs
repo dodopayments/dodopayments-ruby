@@ -3,6 +3,6 @@ module Dodopayments
     type misc_list_supported_countries_response =
       ::Array[Dodopayments::Models::country_code]
 
-    MiscListSupportedCountriesResponse: misc_list_supported_countries_response
+    MiscListSupportedCountriesResponse: Dodopayments::Internal::Type::Converter
   end
 end

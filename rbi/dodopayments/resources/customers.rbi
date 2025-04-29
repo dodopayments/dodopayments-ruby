@@ -11,17 +11,14 @@ module Dodopayments
           email: String,
           name: String,
           phone_number: T.nilable(String),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Models::Customer)
       end
       def create(email:, name:, phone_number: nil, request_options: {}); end
 
       sig do
-        params(
-          customer_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-        )
+        params(customer_id: String, request_options: Dodopayments::RequestOpts)
           .returns(Dodopayments::Models::Customer)
       end
       def retrieve(
@@ -34,7 +31,7 @@ module Dodopayments
           customer_id: String,
           name: T.nilable(String),
           phone_number: T.nilable(String),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Models::Customer)
       end
@@ -49,7 +46,7 @@ module Dodopayments
         params(
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Customer])
       end

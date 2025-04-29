@@ -3,13 +3,7 @@
 module Dodopayments
   module Resources
     class LicenseKeys
-      sig do
-        params(
-          id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-        )
-          .returns(Dodopayments::Models::LicenseKey)
-      end
+      sig { params(id: String, request_options: Dodopayments::RequestOpts).returns(Dodopayments::Models::LicenseKey) }
       def retrieve(
         # License key ID
         id,
@@ -21,7 +15,7 @@ module Dodopayments
           activations_limit: T.nilable(Integer),
           disabled: T.nilable(T::Boolean),
           expires_at: T.nilable(Time),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Models::LicenseKey)
       end
@@ -46,7 +40,7 @@ module Dodopayments
           page_size: T.nilable(Integer),
           product_id: T.nilable(String),
           status: T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::LicenseKey])
       end
