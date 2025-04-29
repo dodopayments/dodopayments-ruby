@@ -4,14 +4,7 @@ module Dodopayments
   module Resources
     class Misc
       sig do
-        params(
-          request_options: T.nilable(
-            T.any(
-              Dodopayments::RequestOptions,
-              Dodopayments::Internal::AnyHash
-            )
-          )
-        )
+        params(request_options: Dodopayments::RequestOpts)
           .returns(T::Array[Dodopayments::Models::CountryCode::TaggedSymbol])
       end
       def list_supported_countries(request_options: {}); end

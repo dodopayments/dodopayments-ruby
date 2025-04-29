@@ -4,11 +4,7 @@ module Dodopayments
   module Resources
     class Refunds
       sig do
-        params(
-          payment_id: String,
-          reason: T.nilable(String),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-        )
+        params(payment_id: String, reason: T.nilable(String), request_options: Dodopayments::RequestOpts)
           .returns(Dodopayments::Models::Refund)
       end
       def create(
@@ -19,11 +15,7 @@ module Dodopayments
         request_options: {}
       ); end
       sig do
-        params(
-          refund_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-        )
-          .returns(Dodopayments::Models::Refund)
+        params(refund_id: String, request_options: Dodopayments::RequestOpts).returns(Dodopayments::Models::Refund)
       end
       def retrieve(
         # Refund Id
@@ -38,7 +30,7 @@ module Dodopayments
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           status: T.nilable(Dodopayments::Models::RefundStatus::OrSymbol),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Refund])
       end

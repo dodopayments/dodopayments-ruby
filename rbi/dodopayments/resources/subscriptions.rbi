@@ -25,7 +25,7 @@ module Dodopayments
           show_saved_payment_methods: T::Boolean,
           tax_id: T.nilable(String),
           trial_period_days: T.nilable(Integer),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Models::SubscriptionCreateResponse)
       end
@@ -63,10 +63,7 @@ module Dodopayments
         request_options: {}
       ); end
       sig do
-        params(
-          subscription_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-        )
+        params(subscription_id: String, request_options: Dodopayments::RequestOpts)
           .returns(Dodopayments::Models::Subscription)
       end
       def retrieve(
@@ -81,7 +78,7 @@ module Dodopayments
           metadata: T.nilable(T::Hash[Symbol, String]),
           status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
           tax_id: T.nilable(String),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Models::Subscription)
       end
@@ -102,7 +99,7 @@ module Dodopayments
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Subscription])
       end
@@ -127,7 +124,7 @@ module Dodopayments
           product_id: String,
           proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode::OrSymbol,
           quantity: Integer,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .void
       end
@@ -142,11 +139,7 @@ module Dodopayments
         request_options: {}
       ); end
       sig do
-        params(
-          subscription_id: String,
-          product_price: Integer,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-        )
+        params(subscription_id: String, product_price: Integer, request_options: Dodopayments::RequestOpts)
           .returns(Dodopayments::Models::SubscriptionChargeResponse)
       end
       def charge(

@@ -6,7 +6,7 @@ module Dodopayments
       # @api private
       module RequestParameters
         # Options to specify HTTP behaviour for this request.
-        sig { returns(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)) }
+        sig { returns(Dodopayments::RequestOpts) }
         attr_accessor :request_options
 
         # @api private

@@ -20,7 +20,7 @@ module Dodopayments
           return_url: T.nilable(String),
           show_saved_payment_methods: T::Boolean,
           tax_id: T.nilable(String),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Models::PaymentCreateResponse)
       end
@@ -53,10 +53,7 @@ module Dodopayments
         request_options: {}
       ); end
       sig do
-        params(
-          payment_id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-        )
+        params(payment_id: String, request_options: Dodopayments::RequestOpts)
           .returns(Dodopayments::Models::Payment)
       end
       def retrieve(
@@ -73,7 +70,7 @@ module Dodopayments
           page_size: T.nilable(Integer),
           status: T.nilable(Dodopayments::Models::IntentStatus::OrSymbol),
           subscription_id: T.nilable(String),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::PaymentListResponse])
       end

@@ -21,7 +21,7 @@ module Dodopayments
           license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::AnyHash)),
           license_key_enabled: T.nilable(T::Boolean),
           name: T.nilable(String),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Models::Product)
       end
@@ -45,13 +45,7 @@ module Dodopayments
         name: nil,
         request_options: {}
       ); end
-      sig do
-        params(
-          id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-        )
-          .returns(Dodopayments::Models::Product)
-      end
+      sig { params(id: String, request_options: Dodopayments::RequestOpts).returns(Dodopayments::Models::Product) }
       def retrieve(
         # Product Id
         id,
@@ -76,7 +70,7 @@ module Dodopayments
             )
           ),
           tax_category: T.nilable(Dodopayments::Models::ProductUpdateParams::TaxCategory::OrSymbol),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .void
       end
@@ -118,7 +112,7 @@ module Dodopayments
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           recurring: T.nilable(T::Boolean),
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
+          request_options: Dodopayments::RequestOpts
         )
           .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::ProductListResponse])
       end
@@ -137,22 +131,10 @@ module Dodopayments
         recurring: nil,
         request_options: {}
       ); end
-      sig do
-        params(
-          id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-        )
-          .void
-      end
+      sig { params(id: String, request_options: Dodopayments::RequestOpts).void }
       def delete(id, request_options: {}); end
 
-      sig do
-        params(
-          id: String,
-          request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-        )
-          .void
-      end
+      sig { params(id: String, request_options: Dodopayments::RequestOpts).void }
       def unarchive(id, request_options: {}); end
 
       # @api private

@@ -5,11 +5,7 @@ module Dodopayments
     class Products
       class Images
         sig do
-          params(
-            id: String,
-            force_update: T.nilable(T::Boolean),
-            request_options: T.nilable(T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash))
-          )
+          params(id: String, force_update: T.nilable(T::Boolean), request_options: Dodopayments::RequestOpts)
             .returns(Dodopayments::Models::Products::ImageUpdateResponse)
         end
         def update(
