@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.19.0 (2025-04-30)
+
+Full Changelog: [v1.18.3...v1.19.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.18.3...v1.19.0)
+
+### Bug Fixes
+
+* ensure gem release is unaffected by renaming ([d134bf2](https://github.com/dodopayments/dodopayments-ruby/commit/d134bf2816ddc6c6de271b01dfe00251ec0ad429))
+* make a typo for `FilePart.content` ([e1b34c1](https://github.com/dodopayments/dodopayments-ruby/commit/e1b34c1896c629aad7f696511b4fa31e23c240ad))
+
+
+### Chores
+
+* add generator safe directory ([176120f](https://github.com/dodopayments/dodopayments-ruby/commit/176120f332f361f8c7b111925de0a6b9d95b472d))
+* **internal:** annotate request options with type aliases in sorbet ([4e29dc1](https://github.com/dodopayments/dodopayments-ruby/commit/4e29dc1213b30f2fe1b8aae34e9e86206b7d087a))
+* **internal:** mostly README touch ups ([d4fd618](https://github.com/dodopayments/dodopayments-ruby/commit/d4fd618c958e24432f76778b74c6c47e32c48d28))
+* **internal:** remove unnecessary `rbi/lib` folder ([0745897](https://github.com/dodopayments/dodopayments-ruby/commit/07458978bf5b06c8c1bafdce5ee3287091cad34b))
+* loosen rubocop rules that don't always make sense ([129618a](https://github.com/dodopayments/dodopayments-ruby/commit/129618aafdd550efaa6b8788b431b1739aa509e1))
+* more accurate type annotations and aliases ([433979e](https://github.com/dodopayments/dodopayments-ruby/commit/433979e298c9967438df5e92674b314f075ad4ea))
+
 ## 1.18.3 (2025-04-25)
 
 Full Changelog: [v1.18.1...v1.18.3](https://github.com/dodopayments/dodopayments-ruby/compare/v1.18.1...v1.18.3)
