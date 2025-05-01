@@ -1,0 +1,43 @@
+module Dodopayments
+  module Models
+    type addon_update_params =
+      {
+        currency: Dodopayments::Models::currency?,
+        description: String?,
+        image_id: String?,
+        name: String?,
+        price: Integer?,
+        tax_category: Dodopayments::Models::tax_category?
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class AddonUpdateParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor currency: Dodopayments::Models::currency?
+
+      attr_accessor description: String?
+
+      attr_accessor image_id: String?
+
+      attr_accessor name: String?
+
+      attr_accessor price: Integer?
+
+      attr_accessor tax_category: Dodopayments::Models::tax_category?
+
+      def initialize: (
+        ?currency: Dodopayments::Models::currency?,
+        ?description: String?,
+        ?image_id: String?,
+        ?name: String?,
+        ?price: Integer?,
+        ?tax_category: Dodopayments::Models::tax_category?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> Dodopayments::Models::addon_update_params
+    end
+  end
+end

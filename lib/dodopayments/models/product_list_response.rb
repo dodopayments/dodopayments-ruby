@@ -32,8 +32,8 @@ module Dodopayments
       #   Represents the different categories of taxation applicable to various products
       #   and services.
       #
-      #   @return [Symbol, Dodopayments::Models::ProductListResponse::TaxCategory]
-      required :tax_category, enum: -> { Dodopayments::Models::ProductListResponse::TaxCategory }
+      #   @return [Symbol, Dodopayments::Models::TaxCategory]
+      required :tax_category, enum: -> { Dodopayments::Models::TaxCategory }
 
       # @!attribute updated_at
       #   Timestamp when the product was last updated.
@@ -43,8 +43,8 @@ module Dodopayments
 
       # @!attribute currency
       #
-      #   @return [Symbol, Dodopayments::Models::ProductListResponse::Currency, nil]
-      optional :currency, enum: -> { Dodopayments::Models::ProductListResponse::Currency }, nil?: true
+      #   @return [Symbol, Dodopayments::Models::Currency, nil]
+      optional :currency, enum: -> { Dodopayments::Models::Currency }, nil?: true
 
       # @!attribute description
       #   Description of the product, optional.
@@ -102,12 +102,12 @@ module Dodopayments
       #
       #   @param product_id [String] Unique identifier for the product.
       #
-      #   @param tax_category [Symbol, Dodopayments::Models::ProductListResponse::TaxCategory] Represents the different categories of taxation applicable to various products a
+      #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Represents the different categories of taxation applicable to various products a
       #   ...
       #
       #   @param updated_at [Time] Timestamp when the product was last updated.
       #
-      #   @param currency [Symbol, Dodopayments::Models::ProductListResponse::Currency, nil]
+      #   @param currency [Symbol, Dodopayments::Models::Currency, nil]
       #
       #   @param description [String, nil] Description of the product, optional.
       #
@@ -120,176 +120,6 @@ module Dodopayments
       #   @param price_detail [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil]
       #
       #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive
-
-      # Represents the different categories of taxation applicable to various products
-      # and services.
-      #
-      # @see Dodopayments::Models::ProductListResponse#tax_category
-      module TaxCategory
-        extend Dodopayments::Internal::Type::Enum
-
-        DIGITAL_PRODUCTS = :digital_products
-        SAAS = :saas
-        E_BOOK = :e_book
-        EDTECH = :edtech
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
-
-      # @see Dodopayments::Models::ProductListResponse#currency
-      module Currency
-        extend Dodopayments::Internal::Type::Enum
-
-        AED = :AED
-        ALL = :ALL
-        AMD = :AMD
-        ANG = :ANG
-        AOA = :AOA
-        ARS = :ARS
-        AUD = :AUD
-        AWG = :AWG
-        AZN = :AZN
-        BAM = :BAM
-        BBD = :BBD
-        BDT = :BDT
-        BGN = :BGN
-        BHD = :BHD
-        BIF = :BIF
-        BMD = :BMD
-        BND = :BND
-        BOB = :BOB
-        BRL = :BRL
-        BSD = :BSD
-        BWP = :BWP
-        BYN = :BYN
-        BZD = :BZD
-        CAD = :CAD
-        CHF = :CHF
-        CLP = :CLP
-        CNY = :CNY
-        COP = :COP
-        CRC = :CRC
-        CUP = :CUP
-        CVE = :CVE
-        CZK = :CZK
-        DJF = :DJF
-        DKK = :DKK
-        DOP = :DOP
-        DZD = :DZD
-        EGP = :EGP
-        ETB = :ETB
-        EUR = :EUR
-        FJD = :FJD
-        FKP = :FKP
-        GBP = :GBP
-        GEL = :GEL
-        GHS = :GHS
-        GIP = :GIP
-        GMD = :GMD
-        GNF = :GNF
-        GTQ = :GTQ
-        GYD = :GYD
-        HKD = :HKD
-        HNL = :HNL
-        HRK = :HRK
-        HTG = :HTG
-        HUF = :HUF
-        IDR = :IDR
-        ILS = :ILS
-        INR = :INR
-        IQD = :IQD
-        JMD = :JMD
-        JOD = :JOD
-        JPY = :JPY
-        KES = :KES
-        KGS = :KGS
-        KHR = :KHR
-        KMF = :KMF
-        KRW = :KRW
-        KWD = :KWD
-        KYD = :KYD
-        KZT = :KZT
-        LAK = :LAK
-        LBP = :LBP
-        LKR = :LKR
-        LRD = :LRD
-        LSL = :LSL
-        LYD = :LYD
-        MAD = :MAD
-        MDL = :MDL
-        MGA = :MGA
-        MKD = :MKD
-        MMK = :MMK
-        MNT = :MNT
-        MOP = :MOP
-        MRU = :MRU
-        MUR = :MUR
-        MVR = :MVR
-        MWK = :MWK
-        MXN = :MXN
-        MYR = :MYR
-        MZN = :MZN
-        NAD = :NAD
-        NGN = :NGN
-        NIO = :NIO
-        NOK = :NOK
-        NPR = :NPR
-        NZD = :NZD
-        OMR = :OMR
-        PAB = :PAB
-        PEN = :PEN
-        PGK = :PGK
-        PHP = :PHP
-        PKR = :PKR
-        PLN = :PLN
-        PYG = :PYG
-        QAR = :QAR
-        RON = :RON
-        RSD = :RSD
-        RUB = :RUB
-        RWF = :RWF
-        SAR = :SAR
-        SBD = :SBD
-        SCR = :SCR
-        SEK = :SEK
-        SGD = :SGD
-        SHP = :SHP
-        SLE = :SLE
-        SLL = :SLL
-        SOS = :SOS
-        SRD = :SRD
-        SSP = :SSP
-        STN = :STN
-        SVC = :SVC
-        SZL = :SZL
-        THB = :THB
-        TND = :TND
-        TOP = :TOP
-        TRY = :TRY
-        TTD = :TTD
-        TWD = :TWD
-        TZS = :TZS
-        UAH = :UAH
-        UGX = :UGX
-        USD = :USD
-        UYU = :UYU
-        UZS = :UZS
-        VES = :VES
-        VND = :VND
-        VUV = :VUV
-        WST = :WST
-        XAF = :XAF
-        XCD = :XCD
-        XOF = :XOF
-        XPF = :XPF
-        YER = :YER
-        ZAR = :ZAR
-        ZMW = :ZMW
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
     end
   end
 end

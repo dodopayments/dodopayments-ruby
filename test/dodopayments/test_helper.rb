@@ -48,7 +48,7 @@ class Dodopayments::Test::SingletonClient < Dodopayments::Client
   TEST_API_BASE_URL = ENV.fetch("TEST_API_BASE_URL", "http://localhost:4010")
 
   def initialize
-    super(base_url: Dodopayments::Test::SingletonClient::TEST_API_BASE_URL, bearer_token: "My Bearer Token")
+    super(base_url: Dodopayments::Test::SingletonClient::TEST_API_BASE_URL, api_key: "My API Key")
   end
 end
 

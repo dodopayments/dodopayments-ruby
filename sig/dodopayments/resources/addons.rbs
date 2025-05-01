@@ -1,0 +1,43 @@
+module Dodopayments
+  module Resources
+    class Addons
+      def create: (
+        currency: Dodopayments::Models::currency,
+        name: String,
+        price: Integer,
+        tax_category: Dodopayments::Models::tax_category,
+        ?description: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::AddonResponse
+
+      def retrieve: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::AddonResponse
+
+      def update: (
+        String id,
+        ?currency: Dodopayments::Models::currency?,
+        ?description: String?,
+        ?image_id: String?,
+        ?name: String?,
+        ?price: Integer?,
+        ?tax_category: Dodopayments::Models::tax_category?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::AddonResponse
+
+      def list: (
+        ?page_number: Integer?,
+        ?page_size: Integer?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::AddonResponse]
+
+      def update_images: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::AddonUpdateImagesResponse
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

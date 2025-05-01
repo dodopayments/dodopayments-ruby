@@ -49,7 +49,7 @@ class DodopaymentsTest < Minitest::Test
   def test_client_default_request_default_retry_attempts
     stub_request(:post, "http://localhost/payments").to_return_json(status: 500, body: {})
 
-    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
+    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
@@ -66,7 +66,7 @@ class DodopaymentsTest < Minitest::Test
     stub_request(:post, "http://localhost/payments").to_return_json(status: 500, body: {})
 
     dodo_payments =
-      Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token", max_retries: 3)
+      Dodopayments::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 3)
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
@@ -82,7 +82,7 @@ class DodopaymentsTest < Minitest::Test
   def test_client_default_request_given_retry_attempts
     stub_request(:post, "http://localhost/payments").to_return_json(status: 500, body: {})
 
-    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
+    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
@@ -100,7 +100,7 @@ class DodopaymentsTest < Minitest::Test
     stub_request(:post, "http://localhost/payments").to_return_json(status: 500, body: {})
 
     dodo_payments =
-      Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token", max_retries: 3)
+      Dodopayments::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 3)
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
@@ -122,7 +122,7 @@ class DodopaymentsTest < Minitest::Test
     )
 
     dodo_payments =
-      Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token", max_retries: 1)
+      Dodopayments::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
@@ -144,7 +144,7 @@ class DodopaymentsTest < Minitest::Test
     )
 
     dodo_payments =
-      Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token", max_retries: 1)
+      Dodopayments::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
       Thread.current.thread_variable_set(:time_now, Time.now)
@@ -168,7 +168,7 @@ class DodopaymentsTest < Minitest::Test
     )
 
     dodo_payments =
-      Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token", max_retries: 1)
+      Dodopayments::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
@@ -185,7 +185,7 @@ class DodopaymentsTest < Minitest::Test
   def test_retry_count_header
     stub_request(:post, "http://localhost/payments").to_return_json(status: 500, body: {})
 
-    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
+    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
@@ -203,7 +203,7 @@ class DodopaymentsTest < Minitest::Test
   def test_omit_retry_count_header
     stub_request(:post, "http://localhost/payments").to_return_json(status: 500, body: {})
 
-    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
+    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
@@ -222,7 +222,7 @@ class DodopaymentsTest < Minitest::Test
   def test_overwrite_retry_count_header
     stub_request(:post, "http://localhost/payments").to_return_json(status: 500, body: {})
 
-    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
+    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
       dodo_payments.payments.create(
@@ -247,7 +247,7 @@ class DodopaymentsTest < Minitest::Test
       headers: {"location" => "/redirected"}
     )
 
-    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
+    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dodopayments::Errors::APIConnectionError) do
       dodo_payments.payments.create(
@@ -281,7 +281,7 @@ class DodopaymentsTest < Minitest::Test
       headers: {"location" => "/redirected"}
     )
 
-    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
+    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dodopayments::Errors::APIConnectionError) do
       dodo_payments.payments.create(
@@ -310,7 +310,7 @@ class DodopaymentsTest < Minitest::Test
       headers: {"location" => "/redirected"}
     )
 
-    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
+    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dodopayments::Errors::APIConnectionError) do
       dodo_payments.payments.create(
@@ -342,7 +342,7 @@ class DodopaymentsTest < Minitest::Test
       headers: {"location" => "https://example.com/redirected"}
     )
 
-    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
+    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dodopayments::Errors::APIConnectionError) do
       dodo_payments.payments.create(
@@ -362,7 +362,7 @@ class DodopaymentsTest < Minitest::Test
   def test_default_headers
     stub_request(:post, "http://localhost/payments").to_return_json(status: 200, body: {})
 
-    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
+    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     dodo_payments.payments.create(
       billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},

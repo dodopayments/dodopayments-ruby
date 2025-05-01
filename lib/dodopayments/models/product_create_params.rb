@@ -16,8 +16,8 @@ module Dodopayments
       #   Represents the different categories of taxation applicable to various products
       #   and services.
       #
-      #   @return [Symbol, Dodopayments::Models::ProductCreateParams::TaxCategory]
-      required :tax_category, enum: -> { Dodopayments::Models::ProductCreateParams::TaxCategory }
+      #   @return [Symbol, Dodopayments::Models::TaxCategory]
+      required :tax_category, enum: -> { Dodopayments::Models::TaxCategory }
 
       # @!attribute addons
       #   Addons available for subscription product
@@ -66,7 +66,7 @@ module Dodopayments
       #
       #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
       #
-      #   @param tax_category [Symbol, Dodopayments::Models::ProductCreateParams::TaxCategory] Represents the different categories of taxation applicable to various products a
+      #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Represents the different categories of taxation applicable to various products a
       #   ...
       #
       #   @param addons [Array<String>, nil] Addons available for subscription product
@@ -84,20 +84,6 @@ module Dodopayments
       #   @param name [String, nil] Optional name of the product
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-
-      # Represents the different categories of taxation applicable to various products
-      # and services.
-      module TaxCategory
-        extend Dodopayments::Internal::Type::Enum
-
-        DIGITAL_PRODUCTS = :digital_products
-        SAAS = :saas
-        E_BOOK = :e_book
-        EDTECH = :edtech
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
     end
   end
 end

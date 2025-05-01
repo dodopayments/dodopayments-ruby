@@ -4,6 +4,13 @@ module Dodopayments
   module Models
     # @see Dodopayments::Resources::Subscriptions#create
     class SubscriptionCreateResponse < Dodopayments::Internal::Type::BaseModel
+      # @!attribute addons
+      #   Addons associated with this subscription
+      #
+      #   @return [Array<Dodopayments::Models::AddonCartResponseItem>]
+      required :addons,
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::AddonCartResponseItem] }
+
       # @!attribute customer
       #
       #   @return [Dodopayments::Models::CustomerLimitedDetails]
@@ -46,9 +53,11 @@ module Dodopayments
       #   @return [String, nil]
       optional :payment_link, String, nil?: true
 
-      # @!method initialize(customer:, metadata:, recurring_pre_tax_amount:, subscription_id:, client_secret: nil, discount_id: nil, payment_link: nil)
+      # @!method initialize(addons:, customer:, metadata:, recurring_pre_tax_amount:, subscription_id:, client_secret: nil, discount_id: nil, payment_link: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionCreateResponse} for more details.
+      #
+      #   @param addons [Array<Dodopayments::Models::AddonCartResponseItem>] Addons associated with this subscription
       #
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
       #

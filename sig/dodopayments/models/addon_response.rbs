@@ -1,0 +1,54 @@
+module Dodopayments
+  module Models
+    type addon_response =
+      {
+        id: String,
+        business_id: String,
+        created_at: Time,
+        currency: Dodopayments::Models::currency,
+        name: String,
+        price: Integer,
+        tax_category: Dodopayments::Models::tax_category,
+        updated_at: Time,
+        description: String?,
+        image: String?
+      }
+
+    class AddonResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor business_id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor currency: Dodopayments::Models::currency
+
+      attr_accessor name: String
+
+      attr_accessor price: Integer
+
+      attr_accessor tax_category: Dodopayments::Models::tax_category
+
+      attr_accessor updated_at: Time
+
+      attr_accessor description: String?
+
+      attr_accessor image: String?
+
+      def initialize: (
+        id: String,
+        business_id: String,
+        created_at: Time,
+        currency: Dodopayments::Models::currency,
+        name: String,
+        price: Integer,
+        tax_category: Dodopayments::Models::tax_category,
+        updated_at: Time,
+        ?description: String?,
+        ?image: String?
+      ) -> void
+
+      def to_hash: -> Dodopayments::Models::addon_response
+    end
+  end
+end

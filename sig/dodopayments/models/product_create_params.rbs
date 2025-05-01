@@ -3,7 +3,7 @@ module Dodopayments
     type product_create_params =
       {
         price: Dodopayments::Models::price,
-        tax_category: Dodopayments::Models::ProductCreateParams::tax_category,
+        tax_category: Dodopayments::Models::tax_category,
         addons: ::Array[String]?,
         description: String?,
         license_key_activation_message: String?,
@@ -20,7 +20,7 @@ module Dodopayments
 
       attr_accessor price: Dodopayments::Models::price
 
-      attr_accessor tax_category: Dodopayments::Models::ProductCreateParams::tax_category
+      attr_accessor tax_category: Dodopayments::Models::tax_category
 
       attr_accessor addons: ::Array[String]?
 
@@ -38,7 +38,7 @@ module Dodopayments
 
       def initialize: (
         price: Dodopayments::Models::price,
-        tax_category: Dodopayments::Models::ProductCreateParams::tax_category,
+        tax_category: Dodopayments::Models::tax_category,
         ?addons: ::Array[String]?,
         ?description: String?,
         ?license_key_activation_message: String?,
@@ -50,19 +50,6 @@ module Dodopayments
       ) -> void
 
       def to_hash: -> Dodopayments::Models::product_create_params
-
-      type tax_category = :digital_products | :saas | :e_book | :edtech
-
-      module TaxCategory
-        extend Dodopayments::Internal::Type::Enum
-
-        DIGITAL_PRODUCTS: :digital_products
-        SAAS: :saas
-        E_BOOK: :e_book
-        EDTECH: :edtech
-
-        def self?.values: -> ::Array[Dodopayments::Models::ProductCreateParams::tax_category]
-      end
     end
   end
 end
