@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.20.0 (2025-05-01)
+
+Full Changelog: [v1.19.0...v1.20.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.19.0...v1.20.0)
+
+### Features
+
+* **api:** added addons ([b7ab9df](https://github.com/dodopayments/dodopayments-ruby/commit/b7ab9dfcffc9113bb89668fac0870241e68ec1f8))
+* **api:** updated readme example ([7ab77ac](https://github.com/dodopayments/dodopayments-ruby/commit/7ab77ac6b2f2349a0876996b2740d4baeca97f3f))
+* **api:** updated readme example ([9646785](https://github.com/dodopayments/dodopayments-ruby/commit/964678539575be673521723ef0b41c5b5af85f97))
+
+
+### Bug Fixes
+
+* re-exported array and map models should typecheck in steep ([443c685](https://github.com/dodopayments/dodopayments-ruby/commit/443c685afdddc50872c8eddbf7acf37d1bf65402))
+
+
+### Chores
+
+* migrate away from deprecated `JSON#fast_generate` ([11a01cc](https://github.com/dodopayments/dodopayments-ruby/commit/11a01ccc3ab39f47c6b13ff359bf4ec99378c40b))
+
+
+### Documentation
+
+* **readme:** fix typo ([32dda82](https://github.com/dodopayments/dodopayments-ruby/commit/32dda82d2b0fd01b6bc1c4b19a62a39ecc3f96c1))
+
 ## 1.19.0 (2025-04-30)
 
 Full Changelog: [v1.18.3...v1.19.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.18.3...v1.19.0)
