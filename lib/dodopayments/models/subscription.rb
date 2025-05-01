@@ -37,6 +37,12 @@ module Dodopayments
       #   @return [Time]
       required :next_billing_date, Time
 
+      # @!attribute on_demand
+      #   Wether the subscription is on-demand or not
+      #
+      #   @return [Boolean]
+      required :on_demand, Dodopayments::Internal::Type::Boolean
+
       # @!attribute payment_frequency_count
       #   Number of payment frequency intervals
       #
@@ -119,7 +125,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :discount_id, String, nil?: true
 
-      # @!method initialize(billing:, created_at:, currency:, customer:, metadata:, next_billing_date:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, discount_id: nil)
+      # @!method initialize(billing:, created_at:, currency:, customer:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, discount_id: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Subscription} for more details.
       #
@@ -137,6 +143,8 @@ module Dodopayments
       #
       #   @param next_billing_date [Time] Timestamp of the next scheduled billing. Indicates the end of current billing pe
       #   ...
+      #
+      #   @param on_demand [Boolean] Wether the subscription is on-demand or not
       #
       #   @param payment_frequency_count [Integer] Number of payment frequency intervals
       #
