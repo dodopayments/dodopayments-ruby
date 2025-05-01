@@ -33,9 +33,9 @@ dodo_payments = Dodopayments::Client.new(
   environment: "test_mode" # defaults to "live_mode"
 )
 
-payment = dodo_payments.payments.create
+subscription = dodo_payments.subscriptions.create
 
-puts(payment.payment_id)
+puts(subscription.subscription_id)
 ```
 
 ## Sorbet
@@ -45,7 +45,7 @@ This library is written with [Sorbet type definitions](https://sorbet.org/docs/r
 When using sorbet, it is recommended to use model classes as below. This provides stronger type checking and tooling integration.
 
 ```ruby
-dodo_payments.payments.create
+dodo_payments.subscriptions.create
 ```
 
 ### Pagination
@@ -141,7 +141,7 @@ In all places where a `BaseModel` type is specified, vanilla Ruby `Hash` can als
 
 ```ruby
 # This has tooling readability, for auto-completion, static analysis, and goto definition with supported language services
-params = Dodopayments::Models::PaymentCreateParams.new
+params = Dodopayments::Models::SubscriptionCreateParams.new
 
 # This also works
 params = {
@@ -205,8 +205,8 @@ end
 It is possible to pass a compatible model / parameter class to a method that expects keyword arguments by using the `**` splat operator.
 
 ```ruby
-params = Dodopayments::Models::PaymentCreateParams.new
-dodo_payments.payments.create(**params)
+params = Dodopayments::Models::SubscriptionCreateParams.new
+dodo_payments.subscriptions.create(**params)
 ```
 
 ## Versioning
