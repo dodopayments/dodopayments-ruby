@@ -32,6 +32,10 @@ module Dodopayments
       sig { returns(Time) }
       attr_accessor :next_billing_date
 
+      # Wether the subscription is on-demand or not
+      sig { returns(T::Boolean) }
+      attr_accessor :on_demand
+
       # Number of payment frequency intervals
       sig { returns(Integer) }
       attr_accessor :payment_frequency_count
@@ -95,6 +99,7 @@ module Dodopayments
           customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash),
           metadata: T::Hash[Symbol, String],
           next_billing_date: Time,
+          on_demand: T::Boolean,
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::TimeInterval::OrSymbol,
           previous_billing_date: Time,
@@ -122,6 +127,8 @@ module Dodopayments
         # Timestamp of the next scheduled billing. Indicates the end of current billing
         # period
         next_billing_date:,
+        # Wether the subscription is on-demand or not
+        on_demand:,
         # Number of payment frequency intervals
         payment_frequency_count:,
         payment_frequency_interval:,
@@ -159,6 +166,7 @@ module Dodopayments
               customer: Dodopayments::Models::CustomerLimitedDetails,
               metadata: T::Hash[Symbol, String],
               next_billing_date: Time,
+              on_demand: T::Boolean,
               payment_frequency_count: Integer,
               payment_frequency_interval: Dodopayments::Models::TimeInterval::TaggedSymbol,
               previous_billing_date: Time,

@@ -75,6 +75,9 @@ module Dodopayments
         params(
           subscription_id: String,
           billing: T.nilable(T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash)),
+          disable_on_demand: T.nilable(
+            T.any(Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, Dodopayments::Internal::AnyHash)
+          ),
           metadata: T.nilable(T::Hash[Symbol, String]),
           status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
           tax_id: T.nilable(String),
@@ -86,6 +89,7 @@ module Dodopayments
         # Subscription Id
         subscription_id,
         billing: nil,
+        disable_on_demand: nil,
         metadata: nil,
         status: nil,
         tax_id: nil,
