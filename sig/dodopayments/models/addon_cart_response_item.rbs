@@ -1,0 +1,15 @@
+module Dodopayments
+  module Models
+    type addon_cart_response_item = { addon_id: String, quantity: Integer }
+
+    class AddonCartResponseItem < Dodopayments::Internal::Type::BaseModel
+      attr_accessor addon_id: String
+
+      attr_accessor quantity: Integer
+
+      def initialize: (addon_id: String, quantity: Integer) -> void
+
+      def to_hash: -> Dodopayments::Models::addon_cart_response_item
+    end
+  end
+end

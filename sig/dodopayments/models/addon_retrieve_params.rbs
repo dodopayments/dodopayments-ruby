@@ -1,0 +1,15 @@
+module Dodopayments
+  module Models
+    type addon_retrieve_params =
+      {  } & Dodopayments::Internal::Type::request_parameters
+
+    class AddonRetrieveParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      def initialize: (?request_options: Dodopayments::request_opts) -> void
+
+      def to_hash: -> Dodopayments::Models::addon_retrieve_params
+    end
+  end
+end

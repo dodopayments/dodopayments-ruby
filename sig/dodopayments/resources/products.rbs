@@ -5,7 +5,7 @@ module Dodopayments
 
       def create: (
         price: Dodopayments::Models::price,
-        tax_category: Dodopayments::Models::ProductCreateParams::tax_category,
+        tax_category: Dodopayments::Models::tax_category,
         ?addons: ::Array[String]?,
         ?description: String?,
         ?license_key_activation_message: String?,
@@ -32,7 +32,7 @@ module Dodopayments
         ?license_key_enabled: bool?,
         ?name: String?,
         ?price: Dodopayments::Models::price?,
-        ?tax_category: Dodopayments::Models::ProductUpdateParams::tax_category?,
+        ?tax_category: Dodopayments::Models::tax_category?,
         ?request_options: Dodopayments::request_opts
       ) -> nil
 

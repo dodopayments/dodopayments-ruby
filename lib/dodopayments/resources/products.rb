@@ -13,7 +13,7 @@ module Dodopayments
       #
       # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
       #
-      # @param tax_category [Symbol, Dodopayments::Models::ProductCreateParams::TaxCategory] Represents the different categories of taxation applicable to various products a
+      # @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Represents the different categories of taxation applicable to various products a
       # ...
       #
       # @param addons [Array<String>, nil] Addons available for subscription product
@@ -89,7 +89,7 @@ module Dodopayments
       #
       # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil]
       #
-      # @param tax_category [Symbol, Dodopayments::Models::ProductUpdateParams::TaxCategory, nil] Represents the different categories of taxation applicable to various products a
+      # @param tax_category [Symbol, Dodopayments::Models::TaxCategory, nil] Represents the different categories of taxation applicable to various products a
       # ...
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]

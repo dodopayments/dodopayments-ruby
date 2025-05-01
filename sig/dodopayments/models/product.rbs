@@ -8,7 +8,7 @@ module Dodopayments
         license_key_enabled: bool,
         price: Dodopayments::Models::price,
         product_id: String,
-        tax_category: Dodopayments::Models::Product::tax_category,
+        tax_category: Dodopayments::Models::tax_category,
         updated_at: Time,
         addons: ::Array[String]?,
         description: String?,
@@ -32,7 +32,7 @@ module Dodopayments
 
       attr_accessor product_id: String
 
-      attr_accessor tax_category: Dodopayments::Models::Product::tax_category
+      attr_accessor tax_category: Dodopayments::Models::tax_category
 
       attr_accessor updated_at: Time
 
@@ -57,7 +57,7 @@ module Dodopayments
         license_key_enabled: bool,
         price: Dodopayments::Models::price,
         product_id: String,
-        tax_category: Dodopayments::Models::Product::tax_category,
+        tax_category: Dodopayments::Models::tax_category,
         updated_at: Time,
         ?addons: ::Array[String]?,
         ?description: String?,
@@ -69,19 +69,6 @@ module Dodopayments
       ) -> void
 
       def to_hash: -> Dodopayments::Models::product
-
-      type tax_category = :digital_products | :saas | :e_book | :edtech
-
-      module TaxCategory
-        extend Dodopayments::Internal::Type::Enum
-
-        DIGITAL_PRODUCTS: :digital_products
-        SAAS: :saas
-        E_BOOK: :e_book
-        EDTECH: :edtech
-
-        def self?.values: -> ::Array[Dodopayments::Models::Product::tax_category]
-      end
     end
   end
 end

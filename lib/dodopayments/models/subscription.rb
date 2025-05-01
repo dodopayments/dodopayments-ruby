@@ -4,6 +4,13 @@ module Dodopayments
   module Models
     # @see Dodopayments::Resources::Subscriptions#retrieve
     class Subscription < Dodopayments::Internal::Type::BaseModel
+      # @!attribute addons
+      #   Addons associated with this subscription
+      #
+      #   @return [Array<Dodopayments::Models::AddonCartResponseItem>]
+      required :addons,
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::AddonCartResponseItem] }
+
       # @!attribute billing
       #
       #   @return [Dodopayments::Models::BillingAddress]
@@ -17,8 +24,8 @@ module Dodopayments
 
       # @!attribute currency
       #
-      #   @return [Symbol, Dodopayments::Models::Subscription::Currency]
-      required :currency, enum: -> { Dodopayments::Models::Subscription::Currency }
+      #   @return [Symbol, Dodopayments::Models::Currency]
+      required :currency, enum: -> { Dodopayments::Models::Currency }
 
       # @!attribute customer
       #
@@ -125,17 +132,19 @@ module Dodopayments
       #   @return [String, nil]
       optional :discount_id, String, nil?: true
 
-      # @!method initialize(billing:, created_at:, currency:, customer:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, discount_id: nil)
+      # @!method initialize(addons:, billing:, created_at:, currency:, customer:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, discount_id: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Subscription} for more details.
       #
       #   Response struct representing subscription details
       #
+      #   @param addons [Array<Dodopayments::Models::AddonCartResponseItem>] Addons associated with this subscription
+      #
       #   @param billing [Dodopayments::Models::BillingAddress]
       #
       #   @param created_at [Time] Timestamp when the subscription was created
       #
-      #   @param currency [Symbol, Dodopayments::Models::Subscription::Currency]
+      #   @param currency [Symbol, Dodopayments::Models::Currency]
       #
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
       #
@@ -174,160 +183,6 @@ module Dodopayments
       #   @param cancelled_at [Time, nil] Cancelled timestamp if the subscription is cancelled
       #
       #   @param discount_id [String, nil] The discount id if discount is applied
-
-      # @see Dodopayments::Models::Subscription#currency
-      module Currency
-        extend Dodopayments::Internal::Type::Enum
-
-        AED = :AED
-        ALL = :ALL
-        AMD = :AMD
-        ANG = :ANG
-        AOA = :AOA
-        ARS = :ARS
-        AUD = :AUD
-        AWG = :AWG
-        AZN = :AZN
-        BAM = :BAM
-        BBD = :BBD
-        BDT = :BDT
-        BGN = :BGN
-        BHD = :BHD
-        BIF = :BIF
-        BMD = :BMD
-        BND = :BND
-        BOB = :BOB
-        BRL = :BRL
-        BSD = :BSD
-        BWP = :BWP
-        BYN = :BYN
-        BZD = :BZD
-        CAD = :CAD
-        CHF = :CHF
-        CLP = :CLP
-        CNY = :CNY
-        COP = :COP
-        CRC = :CRC
-        CUP = :CUP
-        CVE = :CVE
-        CZK = :CZK
-        DJF = :DJF
-        DKK = :DKK
-        DOP = :DOP
-        DZD = :DZD
-        EGP = :EGP
-        ETB = :ETB
-        EUR = :EUR
-        FJD = :FJD
-        FKP = :FKP
-        GBP = :GBP
-        GEL = :GEL
-        GHS = :GHS
-        GIP = :GIP
-        GMD = :GMD
-        GNF = :GNF
-        GTQ = :GTQ
-        GYD = :GYD
-        HKD = :HKD
-        HNL = :HNL
-        HRK = :HRK
-        HTG = :HTG
-        HUF = :HUF
-        IDR = :IDR
-        ILS = :ILS
-        INR = :INR
-        IQD = :IQD
-        JMD = :JMD
-        JOD = :JOD
-        JPY = :JPY
-        KES = :KES
-        KGS = :KGS
-        KHR = :KHR
-        KMF = :KMF
-        KRW = :KRW
-        KWD = :KWD
-        KYD = :KYD
-        KZT = :KZT
-        LAK = :LAK
-        LBP = :LBP
-        LKR = :LKR
-        LRD = :LRD
-        LSL = :LSL
-        LYD = :LYD
-        MAD = :MAD
-        MDL = :MDL
-        MGA = :MGA
-        MKD = :MKD
-        MMK = :MMK
-        MNT = :MNT
-        MOP = :MOP
-        MRU = :MRU
-        MUR = :MUR
-        MVR = :MVR
-        MWK = :MWK
-        MXN = :MXN
-        MYR = :MYR
-        MZN = :MZN
-        NAD = :NAD
-        NGN = :NGN
-        NIO = :NIO
-        NOK = :NOK
-        NPR = :NPR
-        NZD = :NZD
-        OMR = :OMR
-        PAB = :PAB
-        PEN = :PEN
-        PGK = :PGK
-        PHP = :PHP
-        PKR = :PKR
-        PLN = :PLN
-        PYG = :PYG
-        QAR = :QAR
-        RON = :RON
-        RSD = :RSD
-        RUB = :RUB
-        RWF = :RWF
-        SAR = :SAR
-        SBD = :SBD
-        SCR = :SCR
-        SEK = :SEK
-        SGD = :SGD
-        SHP = :SHP
-        SLE = :SLE
-        SLL = :SLL
-        SOS = :SOS
-        SRD = :SRD
-        SSP = :SSP
-        STN = :STN
-        SVC = :SVC
-        SZL = :SZL
-        THB = :THB
-        TND = :TND
-        TOP = :TOP
-        TRY = :TRY
-        TTD = :TTD
-        TWD = :TWD
-        TZS = :TZS
-        UAH = :UAH
-        UGX = :UGX
-        USD = :USD
-        UYU = :UYU
-        UZS = :UZS
-        VES = :VES
-        VND = :VND
-        VUV = :VUV
-        WST = :WST
-        XAF = :XAF
-        XCD = :XCD
-        XOF = :XOF
-        XPF = :XPF
-        YER = :YER
-        ZAR = :ZAR
-        ZMW = :ZMW
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
     end
   end
 end

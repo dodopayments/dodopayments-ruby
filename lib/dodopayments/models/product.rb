@@ -43,8 +43,8 @@ module Dodopayments
       #   Represents the different categories of taxation applicable to various products
       #   and services.
       #
-      #   @return [Symbol, Dodopayments::Models::Product::TaxCategory]
-      required :tax_category, enum: -> { Dodopayments::Models::Product::TaxCategory }
+      #   @return [Symbol, Dodopayments::Models::TaxCategory]
+      required :tax_category, enum: -> { Dodopayments::Models::TaxCategory }
 
       # @!attribute updated_at
       #   Timestamp when the product was last updated.
@@ -109,7 +109,7 @@ module Dodopayments
       #
       #   @param product_id [String] Unique identifier for the product.
       #
-      #   @param tax_category [Symbol, Dodopayments::Models::Product::TaxCategory] Represents the different categories of taxation applicable to various products a
+      #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Represents the different categories of taxation applicable to various products a
       #   ...
       #
       #   @param updated_at [Time] Timestamp when the product was last updated.
@@ -127,22 +127,6 @@ module Dodopayments
       #   @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil]
       #
       #   @param name [String, nil] Name of the product, optional.
-
-      # Represents the different categories of taxation applicable to various products
-      # and services.
-      #
-      # @see Dodopayments::Models::Product#tax_category
-      module TaxCategory
-        extend Dodopayments::Internal::Type::Enum
-
-        DIGITAL_PRODUCTS = :digital_products
-        SAAS = :saas
-        E_BOOK = :e_book
-        EDTECH = :edtech
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
     end
   end
 end

@@ -6,8 +6,9 @@ module Dodopayments
         customer: Dodopayments::Models::customer_request,
         product_id: String,
         quantity: Integer,
+        ?addons: ::Array[Dodopayments::Models::SubscriptionCreateParams::Addon]?,
         ?allowed_payment_method_types: ::Array[Dodopayments::Models::SubscriptionCreateParams::allowed_payment_method_type]?,
-        ?billing_currency: Dodopayments::Models::SubscriptionCreateParams::billing_currency?,
+        ?billing_currency: Dodopayments::Models::currency?,
         ?discount_code: String?,
         ?metadata: ::Hash[Symbol, String],
         ?on_demand: Dodopayments::Models::SubscriptionCreateParams::OnDemand?,
@@ -42,7 +43,7 @@ module Dodopayments
         ?page_size: Integer?,
         ?status: Dodopayments::Models::subscription_status?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Subscription]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::SubscriptionListResponse]
 
       def change_plan: (
         String subscription_id,

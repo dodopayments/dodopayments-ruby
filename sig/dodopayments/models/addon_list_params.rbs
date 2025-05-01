@@ -1,0 +1,24 @@
+module Dodopayments
+  module Models
+    type addon_list_params =
+      { page_number: Integer?, page_size: Integer? }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class AddonListParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor page_number: Integer?
+
+      attr_accessor page_size: Integer?
+
+      def initialize: (
+        ?page_number: Integer?,
+        ?page_size: Integer?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> Dodopayments::Models::addon_list_params
+    end
+  end
+end

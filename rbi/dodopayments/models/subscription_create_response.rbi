@@ -3,6 +3,10 @@
 module Dodopayments
   module Models
     class SubscriptionCreateResponse < Dodopayments::Internal::Type::BaseModel
+      # Addons associated with this subscription
+      sig { returns(T::Array[Dodopayments::Models::AddonCartResponseItem]) }
+      attr_accessor :addons
+
       sig { returns(Dodopayments::Models::CustomerLimitedDetails) }
       attr_reader :customer
 
@@ -38,6 +42,7 @@ module Dodopayments
 
       sig do
         params(
+          addons: T::Array[T.any(Dodopayments::Models::AddonCartResponseItem, Dodopayments::Internal::AnyHash)],
           customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash),
           metadata: T::Hash[Symbol, String],
           recurring_pre_tax_amount: Integer,
@@ -49,6 +54,8 @@ module Dodopayments
           .returns(T.attached_class)
       end
       def self.new(
+        # Addons associated with this subscription
+        addons:,
         customer:,
         metadata:,
         # Tax will be added to the amount and charged to the customer on each billing
@@ -68,6 +75,7 @@ module Dodopayments
         override
           .returns(
             {
+              addons: T::Array[Dodopayments::Models::AddonCartResponseItem],
               customer: Dodopayments::Models::CustomerLimitedDetails,
               metadata: T::Hash[Symbol, String],
               recurring_pre_tax_amount: Integer,
