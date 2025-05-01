@@ -38,6 +38,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
 
     assert_pattern do
       response => {
+        billing: Dodopayments::Models::BillingAddress,
         business_id: String,
         created_at: Time,
         currency: Dodopayments::Models::Payment::Currency,

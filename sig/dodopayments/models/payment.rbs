@@ -2,6 +2,7 @@ module Dodopayments
   module Models
     type payment =
       {
+        billing: Dodopayments::Models::BillingAddress,
         business_id: String,
         created_at: Time,
         currency: Dodopayments::Models::Payment::currency,
@@ -27,6 +28,8 @@ module Dodopayments
       }
 
     class Payment < Dodopayments::Internal::Type::BaseModel
+      attr_accessor billing: Dodopayments::Models::BillingAddress
+
       attr_accessor business_id: String
 
       attr_accessor created_at: Time
@@ -72,6 +75,7 @@ module Dodopayments
       attr_accessor updated_at: Time?
 
       def initialize: (
+        billing: Dodopayments::Models::BillingAddress,
         business_id: String,
         created_at: Time,
         currency: Dodopayments::Models::Payment::currency,

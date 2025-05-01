@@ -3,6 +3,12 @@
 module Dodopayments
   module Models
     class Payment < Dodopayments::Internal::Type::BaseModel
+      sig { returns(Dodopayments::Models::BillingAddress) }
+      attr_reader :billing
+
+      sig { params(billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash)).void }
+      attr_writer :billing
+
       # Identifier of the business associated with the payment
       sig { returns(String) }
       attr_accessor :business_id
@@ -98,6 +104,7 @@ module Dodopayments
 
       sig do
         params(
+          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash),
           business_id: String,
           created_at: Time,
           currency: Dodopayments::Models::Payment::Currency::OrSymbol,
@@ -124,6 +131,7 @@ module Dodopayments
           .returns(T.attached_class)
       end
       def self.new(
+        billing:,
         # Identifier of the business associated with the payment
         business_id:,
         # Timestamp when the payment was created
@@ -173,6 +181,7 @@ module Dodopayments
         override
           .returns(
             {
+              billing: Dodopayments::Models::BillingAddress,
               business_id: String,
               created_at: Time,
               currency: Dodopayments::Models::Payment::Currency::TaggedSymbol,

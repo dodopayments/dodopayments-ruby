@@ -4,6 +4,11 @@ module Dodopayments
   module Models
     # @see Dodopayments::Resources::Payments#retrieve
     class Payment < Dodopayments::Internal::Type::BaseModel
+      # @!attribute billing
+      #
+      #   @return [Dodopayments::Models::BillingAddress]
+      required :billing, -> { Dodopayments::Models::BillingAddress }
+
       # @!attribute business_id
       #   Identifier of the business associated with the payment
       #
@@ -138,9 +143,11 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(business_id:, created_at:, currency:, customer:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, discount_id: nil, error_message: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(billing:, business_id:, created_at:, currency:, customer:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, discount_id: nil, error_message: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
+      #
+      #   @param billing [Dodopayments::Models::BillingAddress]
       #
       #   @param business_id [String] Identifier of the business associated with the payment
       #

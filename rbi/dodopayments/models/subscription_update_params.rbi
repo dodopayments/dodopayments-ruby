@@ -15,6 +15,19 @@ module Dodopayments
       end
       attr_writer :billing
 
+      sig { returns(T.nilable(Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand)) }
+      attr_reader :disable_on_demand
+
+      sig do
+        params(
+          disable_on_demand: T.nilable(
+            T.any(Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, Dodopayments::Internal::AnyHash)
+          )
+        )
+          .void
+      end
+      attr_writer :disable_on_demand
+
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_accessor :metadata
 
@@ -27,6 +40,9 @@ module Dodopayments
       sig do
         params(
           billing: T.nilable(T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash)),
+          disable_on_demand: T.nilable(
+            T.any(Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, Dodopayments::Internal::AnyHash)
+          ),
           metadata: T.nilable(T::Hash[Symbol, String]),
           status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
           tax_id: T.nilable(String),
@@ -34,13 +50,22 @@ module Dodopayments
         )
           .returns(T.attached_class)
       end
-      def self.new(billing: nil, metadata: nil, status: nil, tax_id: nil, request_options: {}); end
+      def self.new(
+        billing: nil,
+        disable_on_demand: nil,
+        metadata: nil,
+        status: nil,
+        tax_id: nil,
+        request_options: {}
+      )
+      end
 
       sig do
         override
           .returns(
             {
               billing: T.nilable(Dodopayments::Models::BillingAddress),
+              disable_on_demand: T.nilable(Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand),
               metadata: T.nilable(T::Hash[Symbol, String]),
               status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
               tax_id: T.nilable(String),
@@ -49,6 +74,17 @@ module Dodopayments
           )
       end
       def to_hash; end
+
+      class DisableOnDemand < Dodopayments::Internal::Type::BaseModel
+        sig { returns(Time) }
+        attr_accessor :next_billing_date
+
+        sig { params(next_billing_date: Time).returns(T.attached_class) }
+        def self.new(next_billing_date:); end
+
+        sig { override.returns({next_billing_date: Time}) }
+        def to_hash; end
+      end
     end
   end
 end
