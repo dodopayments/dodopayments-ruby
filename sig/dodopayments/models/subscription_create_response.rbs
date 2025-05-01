@@ -2,6 +2,7 @@ module Dodopayments
   module Models
     type subscription_create_response =
       {
+        addons: ::Array[Dodopayments::Models::AddonCartResponseItem],
         customer: Dodopayments::Models::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
         recurring_pre_tax_amount: Integer,
@@ -12,6 +13,8 @@ module Dodopayments
       }
 
     class SubscriptionCreateResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor addons: ::Array[Dodopayments::Models::AddonCartResponseItem]
+
       attr_accessor customer: Dodopayments::Models::CustomerLimitedDetails
 
       attr_accessor metadata: ::Hash[Symbol, String]
@@ -27,6 +30,7 @@ module Dodopayments
       attr_accessor payment_link: String?
 
       def initialize: (
+        addons: ::Array[Dodopayments::Models::AddonCartResponseItem],
         customer: Dodopayments::Models::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
         recurring_pre_tax_amount: Integer,

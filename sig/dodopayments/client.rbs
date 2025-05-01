@@ -13,7 +13,7 @@ module Dodopayments
       test_mode: "https://test.dodopayments.com"
     }
 
-    attr_reader bearer_token: String
+    attr_reader api_key: String
 
     attr_reader payments: Dodopayments::Resources::Payments
 
@@ -43,10 +43,12 @@ module Dodopayments
 
     attr_reader discounts: Dodopayments::Resources::Discounts
 
+    attr_reader addons: Dodopayments::Resources::Addons
+
     private def auth_headers: -> ::Hash[String, String]
 
     def initialize: (
-      ?bearer_token: String?,
+      ?api_key: String?,
       ?environment: :live_mode | :test_mode | nil,
       ?base_url: String?,
       ?max_retries: Integer,

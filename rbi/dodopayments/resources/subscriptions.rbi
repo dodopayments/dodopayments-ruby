@@ -13,8 +13,11 @@ module Dodopayments
           ),
           product_id: String,
           quantity: Integer,
+          addons: T.nilable(
+            T::Array[T.any(Dodopayments::Models::SubscriptionCreateParams::Addon, Dodopayments::Internal::AnyHash)]
+          ),
           allowed_payment_method_types: T.nilable(T::Array[Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType::OrSymbol]),
-          billing_currency: T.nilable(Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::OrSymbol),
+          billing_currency: T.nilable(Dodopayments::Models::Currency::OrSymbol),
           discount_code: T.nilable(String),
           metadata: T::Hash[Symbol, String],
           on_demand: T.nilable(
@@ -36,6 +39,8 @@ module Dodopayments
         product_id:,
         # Number of units to subscribe for. Must be at least 1.
         quantity:,
+        # Attach addons to this subscription
+        addons: nil,
         # List of payment methods allowed during checkout.
         #
         # Customers will **never** see payment methods that are **not** in this list.
@@ -105,7 +110,9 @@ module Dodopayments
           status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
           request_options: Dodopayments::RequestOpts
         )
-          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Subscription])
+          .returns(
+            Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::SubscriptionListResponse]
+          )
       end
       def list(
         # Get events after this created time

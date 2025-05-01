@@ -11,7 +11,7 @@ module Dodopayments
 
       # Represents the different categories of taxation applicable to various products
       # and services.
-      sig { returns(Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol) }
+      sig { returns(Dodopayments::Models::TaxCategory::OrSymbol) }
       attr_accessor :tax_category
 
       # Addons available for subscription product
@@ -56,7 +56,7 @@ module Dodopayments
             Dodopayments::Internal::AnyHash,
             Dodopayments::Models::Price::RecurringPrice
           ),
-          tax_category: Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol,
+          tax_category: Dodopayments::Models::TaxCategory::OrSymbol,
           addons: T.nilable(T::Array[String]),
           description: T.nilable(String),
           license_key_activation_message: T.nilable(String),
@@ -93,7 +93,7 @@ module Dodopayments
           .returns(
             {
               price: T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice),
-              tax_category: Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol,
+              tax_category: Dodopayments::Models::TaxCategory::OrSymbol,
               addons: T.nilable(T::Array[String]),
               description: T.nilable(String),
               license_key_activation_message: T.nilable(String),
@@ -106,24 +106,6 @@ module Dodopayments
           )
       end
       def to_hash; end
-
-      # Represents the different categories of taxation applicable to various products
-      # and services.
-      module TaxCategory
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::ProductCreateParams::TaxCategory) }
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        DIGITAL_PRODUCTS =
-          T.let(:digital_products, Dodopayments::Models::ProductCreateParams::TaxCategory::TaggedSymbol)
-        SAAS = T.let(:saas, Dodopayments::Models::ProductCreateParams::TaxCategory::TaggedSymbol)
-        E_BOOK = T.let(:e_book, Dodopayments::Models::ProductCreateParams::TaxCategory::TaggedSymbol)
-        EDTECH = T.let(:edtech, Dodopayments::Models::ProductCreateParams::TaxCategory::TaggedSymbol)
-
-        sig { override.returns(T::Array[Dodopayments::Models::ProductCreateParams::TaxCategory::TaggedSymbol]) }
-        def self.values; end
-      end
     end
   end
 end

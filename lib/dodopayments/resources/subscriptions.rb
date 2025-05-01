@@ -6,7 +6,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionCreateParams} for more details.
       #
-      # @overload create(billing:, customer:, product_id:, quantity:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, metadata: nil, on_demand: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
+      # @overload create(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, metadata: nil, on_demand: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
       #
       # @param billing [Dodopayments::Models::BillingAddress]
       #
@@ -16,9 +16,11 @@ module Dodopayments
       #
       # @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
+      # @param addons [Array<Dodopayments::Models::SubscriptionCreateParams::Addon>, nil] Attach addons to this subscription
+      #
       # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout. ...
       #
-      # @param billing_currency [Symbol, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency, nil]
+      # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil]
       #
       # @param discount_code [String, nil] Discount Code to apply to the subscription
       #
@@ -117,7 +119,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Subscription>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::SubscriptionListResponse>]
       #
       # @see Dodopayments::Models::SubscriptionListParams
       def list(params = {})
@@ -127,7 +129,7 @@ module Dodopayments
           path: "subscriptions",
           query: parsed,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
-          model: Dodopayments::Models::Subscription,
+          model: Dodopayments::Models::SubscriptionListResponse,
           options: options
         )
       end

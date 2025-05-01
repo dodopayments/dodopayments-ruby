@@ -20,9 +20,8 @@ module Dodopayments
     ENVIRONMENTS = {live_mode: "https://live.dodopayments.com", test_mode: "https://test.dodopayments.com"}
     # rubocop:enable Style/MutableConstant
 
-    # Bearer Token for API authentication
     # @return [String]
-    attr_reader :bearer_token
+    attr_reader :api_key
 
     # @return [Dodopayments::Resources::Payments]
     attr_reader :payments
@@ -66,18 +65,21 @@ module Dodopayments
     # @return [Dodopayments::Resources::Discounts]
     attr_reader :discounts
 
+    # @return [Dodopayments::Resources::Addons]
+    attr_reader :addons
+
     # @api private
     #
     # @return [Hash{String=>String}]
     private def auth_headers
-      return {} if @bearer_token.nil?
+      return {} if @api_key.nil?
 
-      {"authorization" => "Bearer #{@bearer_token}"}
+      {"authorization" => "Bearer #{@api_key}"}
     end
 
     # Creates and returns a new client for interacting with the API.
     #
-    # @param bearer_token [String, nil] Bearer Token for API authentication Defaults to `ENV["DODO_PAYMENTS_API_KEY"]`
+    # @param api_key [String, nil] Defaults to `ENV["DODO_PAYMENTS_API_KEY"]`
     #
     # @param environment [:live_mode, :test_mode, nil] Specifies the environment to use for the API.
     #
@@ -97,7 +99,7 @@ module Dodopayments
     #
     # @param max_retry_delay [Float]
     def initialize(
-      bearer_token: ENV["DODO_PAYMENTS_API_KEY"],
+      api_key: ENV["DODO_PAYMENTS_API_KEY"],
       environment: nil,
       base_url: ENV["DODO_PAYMENTS_BASE_URL"],
       max_retries: Dodopayments::Client::DEFAULT_MAX_RETRIES,
@@ -110,11 +112,11 @@ module Dodopayments
         raise ArgumentError.new(message)
       end
 
-      if bearer_token.nil?
-        raise ArgumentError.new("bearer_token is required, and can be set via environ: \"DODO_PAYMENTS_API_KEY\"")
+      if api_key.nil?
+        raise ArgumentError.new("api_key is required, and can be set via environ: \"DODO_PAYMENTS_API_KEY\"")
       end
 
-      @bearer_token = bearer_token.to_s
+      @api_key = api_key.to_s
 
       super(
         base_url: base_url,
@@ -138,6 +140,7 @@ module Dodopayments
       @products = Dodopayments::Resources::Products.new(client: self)
       @misc = Dodopayments::Resources::Misc.new(client: self)
       @discounts = Dodopayments::Resources::Discounts.new(client: self)
+      @addons = Dodopayments::Resources::Addons.new(client: self)
     end
   end
 end

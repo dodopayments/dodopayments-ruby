@@ -13,7 +13,7 @@ module Dodopayments
             Dodopayments::Internal::AnyHash,
             Dodopayments::Models::Price::RecurringPrice
           ),
-          tax_category: Dodopayments::Models::ProductCreateParams::TaxCategory::OrSymbol,
+          tax_category: Dodopayments::Models::TaxCategory::OrSymbol,
           addons: T.nilable(T::Array[String]),
           description: T.nilable(String),
           license_key_activation_message: T.nilable(String),
@@ -69,7 +69,7 @@ module Dodopayments
               Dodopayments::Models::Price::RecurringPrice
             )
           ),
-          tax_category: T.nilable(Dodopayments::Models::ProductUpdateParams::TaxCategory::OrSymbol),
+          tax_category: T.nilable(Dodopayments::Models::TaxCategory::OrSymbol),
           request_options: Dodopayments::RequestOpts
         )
           .void

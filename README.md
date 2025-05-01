@@ -1,6 +1,6 @@
 # Dodo Payments Ruby API library
 
-The Dodo Payments Ruby library provides convenient access to the Dodo Payments REST API from any Ruby 3.1.0+ application.
+The Dodo Payments Ruby library provides convenient access to the Dodo Payments REST API from any Ruby 3.2.0+ application.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -29,7 +29,7 @@ require "bundler/setup"
 require "dodopayments"
 
 dodo_payments = Dodopayments::Client.new(
-  bearer_token: "My Bearer Token", # defaults to ENV["DODO_PAYMENTS_API_KEY"]
+  api_key: "My API Key", # defaults to ENV["DODO_PAYMENTS_API_KEY"]
   environment: "test_mode" # defaults to "live_mode"
 )
 
@@ -217,7 +217,7 @@ This package considers improvements to the (non-runtime) `*.rbi` and `*.rbs` typ
 
 ## Requirements
 
-Ruby 3.1.0 or higher.
+Ruby 3.2.0 or higher.
 
 ## Contributing
 

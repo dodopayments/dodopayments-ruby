@@ -18,6 +18,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
 
     assert_pattern do
       response => {
+        addons: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::AddonCartResponseItem]),
         customer: Dodopayments::Models::CustomerLimitedDetails,
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         recurring_pre_tax_amount: Integer,
@@ -38,9 +39,10 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
 
     assert_pattern do
       response => {
+        addons: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::AddonCartResponseItem]),
         billing: Dodopayments::Models::BillingAddress,
         created_at: Time,
-        currency: Dodopayments::Models::Subscription::Currency,
+        currency: Dodopayments::Models::Currency,
         customer: Dodopayments::Models::CustomerLimitedDetails,
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         next_billing_date: Time,
@@ -72,9 +74,10 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
 
     assert_pattern do
       response => {
+        addons: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::AddonCartResponseItem]),
         billing: Dodopayments::Models::BillingAddress,
         created_at: Time,
-        currency: Dodopayments::Models::Subscription::Currency,
+        currency: Dodopayments::Models::Currency,
         customer: Dodopayments::Models::CustomerLimitedDetails,
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         next_billing_date: Time,
@@ -108,14 +111,14 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
     return if row.nil?
 
     assert_pattern do
-      row => Dodopayments::Models::Subscription
+      row => Dodopayments::Models::SubscriptionListResponse
     end
 
     assert_pattern do
       row => {
         billing: Dodopayments::Models::BillingAddress,
         created_at: Time,
-        currency: Dodopayments::Models::Subscription::Currency,
+        currency: Dodopayments::Models::Currency,
         customer: Dodopayments::Models::CustomerLimitedDetails,
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         next_billing_date: Time,

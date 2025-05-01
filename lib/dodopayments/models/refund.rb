@@ -41,8 +41,8 @@ module Dodopayments
 
       # @!attribute currency
       #
-      #   @return [Symbol, Dodopayments::Models::Refund::Currency, nil]
-      optional :currency, enum: -> { Dodopayments::Models::Refund::Currency }, nil?: true
+      #   @return [Symbol, Dodopayments::Models::Currency, nil]
+      optional :currency, enum: -> { Dodopayments::Models::Currency }, nil?: true
 
       # @!attribute reason
       #   The reason provided for the refund, if any. Optional.
@@ -63,163 +63,9 @@ module Dodopayments
       #
       #   @param amount [Integer, nil] The refunded amount.
       #
-      #   @param currency [Symbol, Dodopayments::Models::Refund::Currency, nil]
+      #   @param currency [Symbol, Dodopayments::Models::Currency, nil]
       #
       #   @param reason [String, nil] The reason provided for the refund, if any. Optional.
-
-      # @see Dodopayments::Models::Refund#currency
-      module Currency
-        extend Dodopayments::Internal::Type::Enum
-
-        AED = :AED
-        ALL = :ALL
-        AMD = :AMD
-        ANG = :ANG
-        AOA = :AOA
-        ARS = :ARS
-        AUD = :AUD
-        AWG = :AWG
-        AZN = :AZN
-        BAM = :BAM
-        BBD = :BBD
-        BDT = :BDT
-        BGN = :BGN
-        BHD = :BHD
-        BIF = :BIF
-        BMD = :BMD
-        BND = :BND
-        BOB = :BOB
-        BRL = :BRL
-        BSD = :BSD
-        BWP = :BWP
-        BYN = :BYN
-        BZD = :BZD
-        CAD = :CAD
-        CHF = :CHF
-        CLP = :CLP
-        CNY = :CNY
-        COP = :COP
-        CRC = :CRC
-        CUP = :CUP
-        CVE = :CVE
-        CZK = :CZK
-        DJF = :DJF
-        DKK = :DKK
-        DOP = :DOP
-        DZD = :DZD
-        EGP = :EGP
-        ETB = :ETB
-        EUR = :EUR
-        FJD = :FJD
-        FKP = :FKP
-        GBP = :GBP
-        GEL = :GEL
-        GHS = :GHS
-        GIP = :GIP
-        GMD = :GMD
-        GNF = :GNF
-        GTQ = :GTQ
-        GYD = :GYD
-        HKD = :HKD
-        HNL = :HNL
-        HRK = :HRK
-        HTG = :HTG
-        HUF = :HUF
-        IDR = :IDR
-        ILS = :ILS
-        INR = :INR
-        IQD = :IQD
-        JMD = :JMD
-        JOD = :JOD
-        JPY = :JPY
-        KES = :KES
-        KGS = :KGS
-        KHR = :KHR
-        KMF = :KMF
-        KRW = :KRW
-        KWD = :KWD
-        KYD = :KYD
-        KZT = :KZT
-        LAK = :LAK
-        LBP = :LBP
-        LKR = :LKR
-        LRD = :LRD
-        LSL = :LSL
-        LYD = :LYD
-        MAD = :MAD
-        MDL = :MDL
-        MGA = :MGA
-        MKD = :MKD
-        MMK = :MMK
-        MNT = :MNT
-        MOP = :MOP
-        MRU = :MRU
-        MUR = :MUR
-        MVR = :MVR
-        MWK = :MWK
-        MXN = :MXN
-        MYR = :MYR
-        MZN = :MZN
-        NAD = :NAD
-        NGN = :NGN
-        NIO = :NIO
-        NOK = :NOK
-        NPR = :NPR
-        NZD = :NZD
-        OMR = :OMR
-        PAB = :PAB
-        PEN = :PEN
-        PGK = :PGK
-        PHP = :PHP
-        PKR = :PKR
-        PLN = :PLN
-        PYG = :PYG
-        QAR = :QAR
-        RON = :RON
-        RSD = :RSD
-        RUB = :RUB
-        RWF = :RWF
-        SAR = :SAR
-        SBD = :SBD
-        SCR = :SCR
-        SEK = :SEK
-        SGD = :SGD
-        SHP = :SHP
-        SLE = :SLE
-        SLL = :SLL
-        SOS = :SOS
-        SRD = :SRD
-        SSP = :SSP
-        STN = :STN
-        SVC = :SVC
-        SZL = :SZL
-        THB = :THB
-        TND = :TND
-        TOP = :TOP
-        TRY = :TRY
-        TTD = :TTD
-        TWD = :TWD
-        TZS = :TZS
-        UAH = :UAH
-        UGX = :UGX
-        USD = :USD
-        UYU = :UYU
-        UZS = :UZS
-        VES = :VES
-        VND = :VND
-        VUV = :VUV
-        WST = :WST
-        XAF = :XAF
-        XCD = :XCD
-        XOF = :XOF
-        XPF = :XPF
-        YER = :YER
-        ZAR = :ZAR
-        ZMW = :ZMW
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
     end
   end
 end

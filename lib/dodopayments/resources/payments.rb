@@ -16,7 +16,7 @@ module Dodopayments
       #
       # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout. ...
       #
-      # @param billing_currency [Symbol, Dodopayments::Models::PaymentCreateParams::BillingCurrency, nil]
+      # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil]
       #
       # @param discount_code [String, nil] Discount Code to apply to the transaction
       #

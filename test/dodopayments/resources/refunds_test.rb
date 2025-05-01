@@ -18,7 +18,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
         refund_id: String,
         status: Dodopayments::Models::RefundStatus,
         amount: Integer | nil,
-        currency: Dodopayments::Models::Refund::Currency | nil,
+        currency: Dodopayments::Models::Currency | nil,
         reason: String | nil
       }
     end
@@ -39,7 +39,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
         refund_id: String,
         status: Dodopayments::Models::RefundStatus,
         amount: Integer | nil,
-        currency: Dodopayments::Models::Refund::Currency | nil,
+        currency: Dodopayments::Models::Currency | nil,
         reason: String | nil
       }
     end
@@ -67,7 +67,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
         refund_id: String,
         status: Dodopayments::Models::RefundStatus,
         amount: Integer | nil,
-        currency: Dodopayments::Models::Refund::Currency | nil,
+        currency: Dodopayments::Models::Currency | nil,
         reason: String | nil
       }
     end

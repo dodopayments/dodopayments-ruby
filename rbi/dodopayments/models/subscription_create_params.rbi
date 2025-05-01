@@ -23,6 +23,10 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :quantity
 
+      # Attach addons to this subscription
+      sig { returns(T.nilable(T::Array[Dodopayments::Models::SubscriptionCreateParams::Addon])) }
+      attr_accessor :addons
+
       # List of payment methods allowed during checkout.
       #
       # Customers will **never** see payment methods that are **not** in this list.
@@ -36,7 +40,7 @@ module Dodopayments
       end
       attr_accessor :allowed_payment_method_types
 
-      sig { returns(T.nilable(Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::OrSymbol)) }
+      sig { returns(T.nilable(Dodopayments::Models::Currency::OrSymbol)) }
       attr_accessor :billing_currency
 
       # Discount Code to apply to the subscription
@@ -97,8 +101,11 @@ module Dodopayments
           ),
           product_id: String,
           quantity: Integer,
+          addons: T.nilable(
+            T::Array[T.any(Dodopayments::Models::SubscriptionCreateParams::Addon, Dodopayments::Internal::AnyHash)]
+          ),
           allowed_payment_method_types: T.nilable(T::Array[Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType::OrSymbol]),
-          billing_currency: T.nilable(Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::OrSymbol),
+          billing_currency: T.nilable(Dodopayments::Models::Currency::OrSymbol),
           discount_code: T.nilable(String),
           metadata: T::Hash[Symbol, String],
           on_demand: T.nilable(
@@ -120,6 +127,8 @@ module Dodopayments
         product_id:,
         # Number of units to subscribe for. Must be at least 1.
         quantity:,
+        # Attach addons to this subscription
+        addons: nil,
         # List of payment methods allowed during checkout.
         #
         # Customers will **never** see payment methods that are **not** in this list.
@@ -154,8 +163,9 @@ module Dodopayments
               customer: T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer),
               product_id: String,
               quantity: Integer,
+              addons: T.nilable(T::Array[Dodopayments::Models::SubscriptionCreateParams::Addon]),
               allowed_payment_method_types: T.nilable(T::Array[Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType::OrSymbol]),
-              billing_currency: T.nilable(Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::OrSymbol),
+              billing_currency: T.nilable(Dodopayments::Models::Currency::OrSymbol),
               discount_code: T.nilable(String),
               metadata: T::Hash[Symbol, String],
               on_demand: T.nilable(Dodopayments::Models::SubscriptionCreateParams::OnDemand),
@@ -169,6 +179,20 @@ module Dodopayments
           )
       end
       def to_hash; end
+
+      class Addon < Dodopayments::Internal::Type::BaseModel
+        sig { returns(String) }
+        attr_accessor :addon_id
+
+        sig { returns(Integer) }
+        attr_accessor :quantity
+
+        sig { params(addon_id: String, quantity: Integer).returns(T.attached_class) }
+        def self.new(addon_id:, quantity:); end
+
+        sig { override.returns({addon_id: String, quantity: Integer}) }
+        def to_hash; end
+      end
 
       module AllowedPaymentMethodType
         extend Dodopayments::Internal::Type::Enum
@@ -225,163 +249,6 @@ module Dodopayments
           override
             .returns(T::Array[Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol])
         end
-        def self.values; end
-      end
-
-      module BillingCurrency
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias { T.all(Symbol, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency) }
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        AED = T.let(:AED, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        ALL = T.let(:ALL, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        AMD = T.let(:AMD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        ANG = T.let(:ANG, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        AOA = T.let(:AOA, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        ARS = T.let(:ARS, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        AUD = T.let(:AUD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        AWG = T.let(:AWG, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        AZN = T.let(:AZN, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        BAM = T.let(:BAM, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        BBD = T.let(:BBD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        BDT = T.let(:BDT, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        BGN = T.let(:BGN, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        BHD = T.let(:BHD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        BIF = T.let(:BIF, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        BMD = T.let(:BMD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        BND = T.let(:BND, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        BOB = T.let(:BOB, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        BRL = T.let(:BRL, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        BSD = T.let(:BSD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        BWP = T.let(:BWP, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        BYN = T.let(:BYN, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        BZD = T.let(:BZD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        CAD = T.let(:CAD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        CHF = T.let(:CHF, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        CLP = T.let(:CLP, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        CNY = T.let(:CNY, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        COP = T.let(:COP, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        CRC = T.let(:CRC, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        CUP = T.let(:CUP, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        CVE = T.let(:CVE, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        CZK = T.let(:CZK, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        DJF = T.let(:DJF, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        DKK = T.let(:DKK, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        DOP = T.let(:DOP, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        DZD = T.let(:DZD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        EGP = T.let(:EGP, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        ETB = T.let(:ETB, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        EUR = T.let(:EUR, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        FJD = T.let(:FJD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        FKP = T.let(:FKP, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        GBP = T.let(:GBP, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        GEL = T.let(:GEL, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        GHS = T.let(:GHS, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        GIP = T.let(:GIP, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        GMD = T.let(:GMD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        GNF = T.let(:GNF, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        GTQ = T.let(:GTQ, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        GYD = T.let(:GYD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        HKD = T.let(:HKD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        HNL = T.let(:HNL, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        HRK = T.let(:HRK, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        HTG = T.let(:HTG, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        HUF = T.let(:HUF, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        IDR = T.let(:IDR, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        ILS = T.let(:ILS, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        INR = T.let(:INR, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        IQD = T.let(:IQD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        JMD = T.let(:JMD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        JOD = T.let(:JOD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        JPY = T.let(:JPY, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        KES = T.let(:KES, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        KGS = T.let(:KGS, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        KHR = T.let(:KHR, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        KMF = T.let(:KMF, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        KRW = T.let(:KRW, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        KWD = T.let(:KWD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        KYD = T.let(:KYD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        KZT = T.let(:KZT, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        LAK = T.let(:LAK, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        LBP = T.let(:LBP, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        LKR = T.let(:LKR, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        LRD = T.let(:LRD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        LSL = T.let(:LSL, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        LYD = T.let(:LYD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        MAD = T.let(:MAD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        MDL = T.let(:MDL, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        MGA = T.let(:MGA, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        MKD = T.let(:MKD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        MMK = T.let(:MMK, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        MNT = T.let(:MNT, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        MOP = T.let(:MOP, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        MRU = T.let(:MRU, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        MUR = T.let(:MUR, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        MVR = T.let(:MVR, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        MWK = T.let(:MWK, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        MXN = T.let(:MXN, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        MYR = T.let(:MYR, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        MZN = T.let(:MZN, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        NAD = T.let(:NAD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        NGN = T.let(:NGN, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        NIO = T.let(:NIO, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        NOK = T.let(:NOK, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        NPR = T.let(:NPR, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        NZD = T.let(:NZD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        OMR = T.let(:OMR, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        PAB = T.let(:PAB, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        PEN = T.let(:PEN, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        PGK = T.let(:PGK, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        PHP = T.let(:PHP, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        PKR = T.let(:PKR, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        PLN = T.let(:PLN, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        PYG = T.let(:PYG, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        QAR = T.let(:QAR, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        RON = T.let(:RON, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        RSD = T.let(:RSD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        RUB = T.let(:RUB, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        RWF = T.let(:RWF, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        SAR = T.let(:SAR, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        SBD = T.let(:SBD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        SCR = T.let(:SCR, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        SEK = T.let(:SEK, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        SGD = T.let(:SGD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        SHP = T.let(:SHP, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        SLE = T.let(:SLE, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        SLL = T.let(:SLL, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        SOS = T.let(:SOS, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        SRD = T.let(:SRD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        SSP = T.let(:SSP, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        STN = T.let(:STN, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        SVC = T.let(:SVC, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        SZL = T.let(:SZL, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        THB = T.let(:THB, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        TND = T.let(:TND, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        TOP = T.let(:TOP, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        TRY = T.let(:TRY, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        TTD = T.let(:TTD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        TWD = T.let(:TWD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        TZS = T.let(:TZS, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        UAH = T.let(:UAH, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        UGX = T.let(:UGX, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        USD = T.let(:USD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        UYU = T.let(:UYU, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        UZS = T.let(:UZS, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        VES = T.let(:VES, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        VND = T.let(:VND, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        VUV = T.let(:VUV, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        WST = T.let(:WST, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        XAF = T.let(:XAF, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        XCD = T.let(:XCD, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        XOF = T.let(:XOF, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        XPF = T.let(:XPF, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        YER = T.let(:YER, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        ZAR = T.let(:ZAR, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-        ZMW = T.let(:ZMW, Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol)
-
-        sig { override.returns(T::Array[Dodopayments::Models::SubscriptionCreateParams::BillingCurrency::TaggedSymbol]) }
         def self.values; end
       end
 

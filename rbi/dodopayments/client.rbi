@@ -16,9 +16,8 @@ module Dodopayments
         T::Hash[Symbol, String]
       )
 
-    # Bearer Token for API authentication
     sig { returns(String) }
-    attr_reader :bearer_token
+    attr_reader :api_key
 
     sig { returns(Dodopayments::Resources::Payments) }
     attr_reader :payments
@@ -62,6 +61,9 @@ module Dodopayments
     sig { returns(Dodopayments::Resources::Discounts) }
     attr_reader :discounts
 
+    sig { returns(Dodopayments::Resources::Addons) }
+    attr_reader :addons
+
     # @api private
     sig { override.returns(T::Hash[String, String]) }
     private def auth_headers; end
@@ -69,7 +71,7 @@ module Dodopayments
     # Creates and returns a new client for interacting with the API.
     sig do
       params(
-        bearer_token: T.nilable(String),
+        api_key: T.nilable(String),
         environment: NilClass,
         base_url: T.nilable(String),
         max_retries: Integer,
@@ -80,8 +82,8 @@ module Dodopayments
         .returns(T.attached_class)
     end
     def self.new(
-      # Bearer Token for API authentication Defaults to `ENV["DODO_PAYMENTS_API_KEY"]`
-      bearer_token: ENV["DODO_PAYMENTS_API_KEY"],
+      # Defaults to `ENV["DODO_PAYMENTS_API_KEY"]`
+      api_key: ENV["DODO_PAYMENTS_API_KEY"],
       # Specifies the environment to use for the API.
       #
       # Each environment maps to a different base URL:
