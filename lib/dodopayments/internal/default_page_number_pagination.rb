@@ -72,8 +72,8 @@ module Dodopayments
         super
 
         case page_data
-        in {items: Array | nil => items}
-          @items = items&.map { Dodopayments::Internal::Type::Converter.coerce(@model, _1) }
+        in {items: Array => items}
+          @items = items.map { Dodopayments::Internal::Type::Converter.coerce(@model, _1) }
         else
         end
       end
