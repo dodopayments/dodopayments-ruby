@@ -1,0 +1,165 @@
+module Dodopayments
+  class AddonCartResponseItem = Dodopayments::Models::AddonCartResponseItem
+
+  class AddonCreateParams = Dodopayments::Models::AddonCreateParams
+
+  class AddonListParams = Dodopayments::Models::AddonListParams
+
+  class AddonResponse = Dodopayments::Models::AddonResponse
+
+  class AddonRetrieveParams = Dodopayments::Models::AddonRetrieveParams
+
+  class AddonUpdateImagesParams = Dodopayments::Models::AddonUpdateImagesParams
+
+  class AddonUpdateParams = Dodopayments::Models::AddonUpdateParams
+
+  class AttachExistingCustomer = Dodopayments::Models::AttachExistingCustomer
+
+  class BillingAddress = Dodopayments::Models::BillingAddress
+
+  module CountryCode = Dodopayments::Models::CountryCode
+
+  class CreateNewCustomer = Dodopayments::Models::CreateNewCustomer
+
+  module Currency = Dodopayments::Models::Currency
+
+  class Customer = Dodopayments::Models::Customer
+
+  class CustomerCreateParams = Dodopayments::Models::CustomerCreateParams
+
+  class CustomerLimitedDetails = Dodopayments::Models::CustomerLimitedDetails
+
+  class CustomerListParams = Dodopayments::Models::CustomerListParams
+
+  class CustomerPortalSession = Dodopayments::Models::CustomerPortalSession
+
+  module CustomerRequest = Dodopayments::Models::CustomerRequest
+
+  class CustomerRetrieveParams = Dodopayments::Models::CustomerRetrieveParams
+
+  module Customers = Dodopayments::Models::Customers
+
+  class CustomerUpdateParams = Dodopayments::Models::CustomerUpdateParams
+
+  class Discount = Dodopayments::Models::Discount
+
+  class DiscountCreateParams = Dodopayments::Models::DiscountCreateParams
+
+  class DiscountDeleteParams = Dodopayments::Models::DiscountDeleteParams
+
+  class DiscountListParams = Dodopayments::Models::DiscountListParams
+
+  class DiscountRetrieveParams = Dodopayments::Models::DiscountRetrieveParams
+
+  module DiscountType = Dodopayments::Models::DiscountType
+
+  class DiscountUpdateParams = Dodopayments::Models::DiscountUpdateParams
+
+  class Dispute = Dodopayments::Models::Dispute
+
+  class DisputeListParams = Dodopayments::Models::DisputeListParams
+
+  class DisputeRetrieveParams = Dodopayments::Models::DisputeRetrieveParams
+
+  module DisputeStage = Dodopayments::Models::DisputeStage
+
+  module DisputeStatus = Dodopayments::Models::DisputeStatus
+
+  module IntentStatus = Dodopayments::Models::IntentStatus
+
+  module Invoices = Dodopayments::Models::Invoices
+
+  class LicenseActivateParams = Dodopayments::Models::LicenseActivateParams
+
+  class LicenseDeactivateParams = Dodopayments::Models::LicenseDeactivateParams
+
+  class LicenseKey = Dodopayments::Models::LicenseKey
+
+  class LicenseKeyDuration = Dodopayments::Models::LicenseKeyDuration
+
+  class LicenseKeyInstance = Dodopayments::Models::LicenseKeyInstance
+
+  class LicenseKeyInstanceListParams = Dodopayments::Models::LicenseKeyInstanceListParams
+
+  class LicenseKeyInstanceRetrieveParams = Dodopayments::Models::LicenseKeyInstanceRetrieveParams
+
+  class LicenseKeyInstanceUpdateParams = Dodopayments::Models::LicenseKeyInstanceUpdateParams
+
+  class LicenseKeyListParams = Dodopayments::Models::LicenseKeyListParams
+
+  class LicenseKeyRetrieveParams = Dodopayments::Models::LicenseKeyRetrieveParams
+
+  module LicenseKeyStatus = Dodopayments::Models::LicenseKeyStatus
+
+  class LicenseKeyUpdateParams = Dodopayments::Models::LicenseKeyUpdateParams
+
+  class LicenseValidateParams = Dodopayments::Models::LicenseValidateParams
+
+  class MiscListSupportedCountriesParams = Dodopayments::Models::MiscListSupportedCountriesParams
+
+  class OneTimeProductCartItem = Dodopayments::Models::OneTimeProductCartItem
+
+  class Payment = Dodopayments::Models::Payment
+
+  class PaymentCreateParams = Dodopayments::Models::PaymentCreateParams
+
+  class PaymentListParams = Dodopayments::Models::PaymentListParams
+
+  class PaymentRetrieveParams = Dodopayments::Models::PaymentRetrieveParams
+
+  class PayoutListParams = Dodopayments::Models::PayoutListParams
+
+  module Price = Dodopayments::Models::Price
+
+  class Product = Dodopayments::Models::Product
+
+  class ProductCreateParams = Dodopayments::Models::ProductCreateParams
+
+  class ProductDeleteParams = Dodopayments::Models::ProductDeleteParams
+
+  class ProductListParams = Dodopayments::Models::ProductListParams
+
+  class ProductRetrieveParams = Dodopayments::Models::ProductRetrieveParams
+
+  module Products = Dodopayments::Models::Products
+
+  class ProductUnarchiveParams = Dodopayments::Models::ProductUnarchiveParams
+
+  class ProductUpdateParams = Dodopayments::Models::ProductUpdateParams
+
+  class Refund = Dodopayments::Models::Refund
+
+  class RefundCreateParams = Dodopayments::Models::RefundCreateParams
+
+  class RefundListParams = Dodopayments::Models::RefundListParams
+
+  class RefundRetrieveParams = Dodopayments::Models::RefundRetrieveParams
+
+  module RefundStatus = Dodopayments::Models::RefundStatus
+
+  class Subscription = Dodopayments::Models::Subscription
+
+  class SubscriptionChangePlanParams = Dodopayments::Models::SubscriptionChangePlanParams
+
+  class SubscriptionChargeParams = Dodopayments::Models::SubscriptionChargeParams
+
+  class SubscriptionCreateParams = Dodopayments::Models::SubscriptionCreateParams
+
+  class SubscriptionListParams = Dodopayments::Models::SubscriptionListParams
+
+  class SubscriptionRetrieveParams = Dodopayments::Models::SubscriptionRetrieveParams
+
+  module SubscriptionStatus = Dodopayments::Models::SubscriptionStatus
+
+  class SubscriptionUpdateParams = Dodopayments::Models::SubscriptionUpdateParams
+
+  module TaxCategory = Dodopayments::Models::TaxCategory
+
+  module TimeInterval = Dodopayments::Models::TimeInterval
+
+  class WebhookEvent = Dodopayments::Models::WebhookEvent
+
+  class WebhookEventListParams = Dodopayments::Models::WebhookEventListParams
+
+  class WebhookEventRetrieveParams = Dodopayments::Models::WebhookEventRetrieveParams
+end
