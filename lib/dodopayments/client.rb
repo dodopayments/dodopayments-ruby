@@ -20,8 +20,9 @@ module Dodopayments
     ENVIRONMENTS = {live_mode: "https://live.dodopayments.com", test_mode: "https://test.dodopayments.com"}
     # rubocop:enable Style/MutableConstant
 
+    # Bearer Token for API authentication
     # @return [String]
-    attr_reader :api_key
+    attr_reader :bearer_token
 
     # @return [Dodopayments::Resources::Payments]
     attr_reader :payments
@@ -72,14 +73,14 @@ module Dodopayments
     #
     # @return [Hash{String=>String}]
     private def auth_headers
-      return {} if @api_key.nil?
+      return {} if @bearer_token.nil?
 
-      {"authorization" => "Bearer #{@api_key}"}
+      {"authorization" => "Bearer #{@bearer_token}"}
     end
 
     # Creates and returns a new client for interacting with the API.
     #
-    # @param api_key [String, nil] Defaults to `ENV["DODO_PAYMENTS_API_KEY"]`
+    # @param bearer_token [String, nil] Bearer Token for API authentication Defaults to `ENV["DODO_PAYMENTS_API_KEY"]`
     #
     # @param environment [:live_mode, :test_mode, nil] Specifies the environment to use for the API.
     #
@@ -99,7 +100,7 @@ module Dodopayments
     #
     # @param max_retry_delay [Float]
     def initialize(
-      api_key: ENV["DODO_PAYMENTS_API_KEY"],
+      bearer_token: ENV["DODO_PAYMENTS_API_KEY"],
       environment: nil,
       base_url: ENV["DODO_PAYMENTS_BASE_URL"],
       max_retries: Dodopayments::Client::DEFAULT_MAX_RETRIES,
@@ -112,11 +113,11 @@ module Dodopayments
         raise ArgumentError.new(message)
       end
 
-      if api_key.nil?
-        raise ArgumentError.new("api_key is required, and can be set via environ: \"DODO_PAYMENTS_API_KEY\"")
+      if bearer_token.nil?
+        raise ArgumentError.new("bearer_token is required, and can be set via environ: \"DODO_PAYMENTS_API_KEY\"")
       end
 
-      @api_key = api_key.to_s
+      @bearer_token = bearer_token.to_s
 
       super(
         base_url: base_url,

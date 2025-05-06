@@ -29,7 +29,7 @@ require "bundler/setup"
 require "dodopayments"
 
 dodo_payments = Dodopayments::Client.new(
-  api_key: ENV["DODO_PAYMENTS_API_KEY"], # This is the default and can be omitted
+  bearer_token: ENV["DODO_PAYMENTS_API_KEY"], # This is the default and can be omitted
   environment: "test_mode" # defaults to "live_mode"
 )
 
