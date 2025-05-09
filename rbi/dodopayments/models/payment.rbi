@@ -57,6 +57,22 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :total_amount
 
+      # ISO country code alpha2 variant
+      sig { returns(T.nilable(Dodopayments::Models::CountryCode::TaggedSymbol)) }
+      attr_accessor :card_issuing_country
+
+      # The last four digits of the card
+      sig { returns(T.nilable(String)) }
+      attr_accessor :card_last_four
+
+      # Card network like VISA, MASTERCARD etc.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :card_network
+
+      # The type of card DEBIT or CREDIT
+      sig { returns(T.nilable(String)) }
+      attr_accessor :card_type
+
       # The discount id if discount is applied
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_id
@@ -116,6 +132,10 @@ module Dodopayments
           settlement_amount: Integer,
           settlement_currency: Dodopayments::Models::Currency::OrSymbol,
           total_amount: Integer,
+          card_issuing_country: T.nilable(Dodopayments::Models::CountryCode::OrSymbol),
+          card_last_four: T.nilable(String),
+          card_network: T.nilable(String),
+          card_type: T.nilable(String),
           discount_id: T.nilable(String),
           error_message: T.nilable(String),
           payment_link: T.nilable(String),
@@ -153,6 +173,14 @@ module Dodopayments
         # Total amount charged to the customer including tax, in smallest currency unit
         # (e.g. cents)
         total_amount:,
+        # ISO country code alpha2 variant
+        card_issuing_country: nil,
+        # The last four digits of the card
+        card_last_four: nil,
+        # Card network like VISA, MASTERCARD etc.
+        card_network: nil,
+        # The type of card DEBIT or CREDIT
+        card_type: nil,
         # The discount id if discount is applied
         discount_id: nil,
         # An error message if the payment failed
@@ -193,6 +221,10 @@ module Dodopayments
               settlement_amount: Integer,
               settlement_currency: Dodopayments::Models::Currency::TaggedSymbol,
               total_amount: Integer,
+              card_issuing_country: T.nilable(Dodopayments::Models::CountryCode::TaggedSymbol),
+              card_last_four: T.nilable(String),
+              card_network: T.nilable(String),
+              card_type: T.nilable(String),
               discount_id: T.nilable(String),
               error_message: T.nilable(String),
               payment_link: T.nilable(String),

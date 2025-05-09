@@ -7,7 +7,7 @@ class Dodopayments::Test::Resources::DisputesTest < Dodopayments::Test::Resource
     response = @dodo_payments.disputes.retrieve("dispute_id")
 
     assert_pattern do
-      response => Dodopayments::Models::Dispute
+      response => Dodopayments::Models::DisputeRetrieveResponse
     end
 
     assert_pattern do
@@ -16,10 +16,13 @@ class Dodopayments::Test::Resources::DisputesTest < Dodopayments::Test::Resource
         business_id: String,
         created_at: Time,
         currency: String,
+        customer: Dodopayments::Models::CustomerLimitedDetails,
         dispute_id: String,
         dispute_stage: Dodopayments::Models::DisputeStage,
         dispute_status: Dodopayments::Models::DisputeStatus,
-        payment_id: String
+        payment_id: String,
+        reason: String | nil,
+        remarks: String | nil
       }
     end
   end
@@ -35,7 +38,7 @@ class Dodopayments::Test::Resources::DisputesTest < Dodopayments::Test::Resource
     return if row.nil?
 
     assert_pattern do
-      row => Dodopayments::Models::Dispute
+      row => Dodopayments::Models::DisputeListResponse
     end
 
     assert_pattern do

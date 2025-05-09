@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    class Dispute < Dodopayments::Internal::Type::BaseModel
+    class DisputeListResponse < Dodopayments::Internal::Type::BaseModel
       # The amount involved in the dispute, represented as a string to accommodate
       # precision.
       sig { returns(String) }
@@ -34,10 +34,6 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :payment_id
 
-      # Remarks
-      sig { returns(T.nilable(String)) }
-      attr_accessor :remarks
-
       sig do
         params(
           amount: String,
@@ -47,8 +43,7 @@ module Dodopayments
           dispute_id: String,
           dispute_stage: Dodopayments::Models::DisputeStage::OrSymbol,
           dispute_status: Dodopayments::Models::DisputeStatus::OrSymbol,
-          payment_id: String,
-          remarks: T.nilable(String)
+          payment_id: String
         )
           .returns(T.attached_class)
       end
@@ -67,9 +62,7 @@ module Dodopayments
         dispute_stage:,
         dispute_status:,
         # The unique identifier of the payment associated with the dispute.
-        payment_id:,
-        # Remarks
-        remarks: nil
+        payment_id:
       ); end
       sig do
         override
@@ -82,8 +75,7 @@ module Dodopayments
               dispute_id: String,
               dispute_stage: Dodopayments::Models::DisputeStage::TaggedSymbol,
               dispute_status: Dodopayments::Models::DisputeStatus::TaggedSymbol,
-              payment_id: String,
-              remarks: T.nilable(String)
+              payment_id: String
             }
           )
       end

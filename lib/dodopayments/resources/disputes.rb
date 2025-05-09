@@ -9,14 +9,14 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::Dispute]
+      # @return [Dodopayments::Models::DisputeRetrieveResponse]
       #
       # @see Dodopayments::Models::DisputeRetrieveParams
       def retrieve(dispute_id, params = {})
         @client.request(
           method: :get,
           path: ["disputes/%1$s", dispute_id],
-          model: Dodopayments::Models::Dispute,
+          model: Dodopayments::Models::DisputeRetrieveResponse,
           options: params[:request_options]
         )
       end
@@ -39,7 +39,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Dispute>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::DisputeListResponse>]
       #
       # @see Dodopayments::Models::DisputeListParams
       def list(params = {})
@@ -49,7 +49,7 @@ module Dodopayments
           path: "disputes",
           query: parsed,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
-          model: Dodopayments::Models::Dispute,
+          model: Dodopayments::Models::DisputeListResponse,
           options: options
         )
       end

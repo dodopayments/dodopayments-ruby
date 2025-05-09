@@ -50,6 +50,7 @@ module Dodopayments
         product_id: String,
         proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode,
         quantity: Integer,
+        ?addons: ::Array[Dodopayments::Models::SubscriptionChangePlanParams::Addon]?,
         ?request_options: Dodopayments::request_opts
       ) -> nil
 

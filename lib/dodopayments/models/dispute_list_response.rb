@@ -2,7 +2,8 @@
 
 module Dodopayments
   module Models
-    class Dispute < Dodopayments::Internal::Type::BaseModel
+    # @see Dodopayments::Resources::Disputes#list
+    class DisputeListResponse < Dodopayments::Internal::Type::BaseModel
       # @!attribute amount
       #   The amount involved in the dispute, represented as a string to accommodate
       #   precision.
@@ -50,15 +51,9 @@ module Dodopayments
       #   @return [String]
       required :payment_id, String
 
-      # @!attribute remarks
-      #   Remarks
-      #
-      #   @return [String, nil]
-      optional :remarks, String, nil?: true
-
-      # @!method initialize(amount:, business_id:, created_at:, currency:, dispute_id:, dispute_stage:, dispute_status:, payment_id:, remarks: nil)
+      # @!method initialize(amount:, business_id:, created_at:, currency:, dispute_id:, dispute_stage:, dispute_status:, payment_id:)
       #   Some parameter documentations has been truncated, see
-      #   {Dodopayments::Models::Dispute} for more details.
+      #   {Dodopayments::Models::DisputeListResponse} for more details.
       #
       #   @param amount [String] The amount involved in the dispute, represented as a string to accommodate preci
       #   ...
@@ -76,8 +71,6 @@ module Dodopayments
       #   @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus]
       #
       #   @param payment_id [String] The unique identifier of the payment associated with the dispute.
-      #
-      #   @param remarks [String, nil] Remarks
     end
   end
 end

@@ -134,7 +134,10 @@ module Dodopayments
         )
       end
 
-      # @overload change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, request_options: {})
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::SubscriptionChangePlanParams} for more details.
+      #
+      # @overload change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, addons: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -143,6 +146,8 @@ module Dodopayments
       # @param proration_billing_mode [Symbol, Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode]
       #
       # @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
+      #
+      # @param addons [Array<Dodopayments::Models::SubscriptionChangePlanParams::Addon>, nil] Addons for the new plan. ...
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
