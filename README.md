@@ -33,7 +33,11 @@ dodo_payments = Dodopayments::Client.new(
   environment: "test_mode" # defaults to "live_mode"
 )
 
-payment = dodo_payments.payments.create
+payment = dodo_payments.payments.create(
+  billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
+  customer: {customer_id: "customer_id"},
+  product_cart: [{product_id: "product_id", quantity: 0}]
+)
 
 puts(payment.payment_id)
 ```
@@ -45,7 +49,17 @@ This library is written with [Sorbet type definitions](https://sorbet.org/docs/r
 When using sorbet, it is recommended to use model classes as below. This provides stronger type checking and tooling integration.
 
 ```ruby
-dodo_payments.payments.create
+dodo_payments.payments.create(
+  billing: Dodopayments::BillingAddress.new(
+    city: "city",
+    country: "AF",
+    state: "state",
+    street: "street",
+    zipcode: "zipcode"
+  ),
+  customer: Dodopayments::AttachExistingCustomer.new(customer_id: "customer_id"),
+  product_cart: [Dodopayments::OneTimeProductCartItem.new(product_id: "product_id", quantity: 0)]
+)
 ```
 
 ### Pagination
@@ -73,7 +87,11 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```ruby
 begin
-  payment = dodo_payments.payments.create
+  payment = dodo_payments.payments.create(
+    billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
+    customer: {customer_id: "customer_id"},
+    product_cart: [{product_id: "product_id", quantity: 0}]
+  )
 rescue Dodopayments::Errors::APIError => e
   puts(e.status) # 400
 end
@@ -110,7 +128,12 @@ dodo_payments = Dodopayments::Client.new(
 )
 
 # Or, configure per-request:
-dodo_payments.payments.create(request_options: {max_retries: 5})
+dodo_payments.payments.create(
+  billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
+  customer: {customer_id: "customer_id"},
+  product_cart: [{product_id: "product_id", quantity: 0}],
+  request_options: {max_retries: 5}
+)
 ```
 
 ### Timeouts
@@ -128,7 +151,12 @@ dodo_payments = Dodopayments::Client.new(
 )
 
 # Or, configure per-request:
-dodo_payments.payments.create(request_options: {timeout: 5})
+dodo_payments.payments.create(
+  billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
+  customer: {customer_id: "customer_id"},
+  product_cart: [{product_id: "product_id", quantity: 0}],
+  request_options: {timeout: 5}
+)
 ```
 
 ## Model DSL
@@ -141,11 +169,23 @@ In all places where a `BaseModel` type is specified, vanilla Ruby `Hash` can als
 
 ```ruby
 # This has tooling readability, for auto-completion, static analysis, and goto definition with supported language services
-params = Dodopayments::Models::PaymentCreateParams.new
+params = Dodopayments::Models::PaymentCreateParams.new(
+  billing: Dodopayments::BillingAddress.new(
+    city: "city",
+    country: "AF",
+    state: "state",
+    street: "street",
+    zipcode: "zipcode"
+  ),
+  customer: Dodopayments::AttachExistingCustomer.new(customer_id: "customer_id"),
+  product_cart: [Dodopayments::OneTimeProductCartItem.new(product_id: "product_id", quantity: 0)]
+)
 
 # This also works
 params = {
-
+  billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
+  customer: {customer_id: "customer_id"},
+  product_cart: [{product_id: "product_id", quantity: 0}]
 }
 ```
 
@@ -205,7 +245,17 @@ end
 It is possible to pass a compatible model / parameter class to a method that expects keyword arguments by using the `**` splat operator.
 
 ```ruby
-params = Dodopayments::Models::PaymentCreateParams.new
+params = Dodopayments::Models::PaymentCreateParams.new(
+  billing: Dodopayments::BillingAddress.new(
+    city: "city",
+    country: "AF",
+    state: "state",
+    street: "street",
+    zipcode: "zipcode"
+  ),
+  customer: Dodopayments::AttachExistingCustomer.new(customer_id: "customer_id"),
+  product_cart: [Dodopayments::OneTimeProductCartItem.new(product_id: "product_id", quantity: 0)]
+)
 dodo_payments.payments.create(**params)
 ```
 
