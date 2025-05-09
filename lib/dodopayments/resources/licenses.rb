@@ -9,16 +9,16 @@ module Dodopayments
       # @param name [String]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::LicenseKeyInstance]
+      # @return [Dodopayments::LicenseKeyInstance]
       #
       # @see Dodopayments::Models::LicenseActivateParams
       def activate(params)
-        parsed, options = Dodopayments::Models::LicenseActivateParams.dump_request(params)
+        parsed, options = Dodopayments::LicenseActivateParams.dump_request(params)
         @client.request(
           method: :post,
           path: "licenses/activate",
           body: parsed,
-          model: Dodopayments::Models::LicenseKeyInstance,
+          model: Dodopayments::LicenseKeyInstance,
           options: options
         )
       end
@@ -33,7 +33,7 @@ module Dodopayments
       #
       # @see Dodopayments::Models::LicenseDeactivateParams
       def deactivate(params)
-        parsed, options = Dodopayments::Models::LicenseDeactivateParams.dump_request(params)
+        parsed, options = Dodopayments::LicenseDeactivateParams.dump_request(params)
         @client.request(
           method: :post,
           path: "licenses/deactivate",
@@ -53,7 +53,7 @@ module Dodopayments
       #
       # @see Dodopayments::Models::LicenseValidateParams
       def validate(params)
-        parsed, options = Dodopayments::Models::LicenseValidateParams.dump_request(params)
+        parsed, options = Dodopayments::LicenseValidateParams.dump_request(params)
         @client.request(
           method: :post,
           path: "licenses/validate",

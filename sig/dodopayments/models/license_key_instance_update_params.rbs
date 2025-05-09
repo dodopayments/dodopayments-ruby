@@ -13,8 +13,6 @@ module Dodopayments
         name: String,
         ?request_options: Dodopayments::request_opts
       ) -> void
-
-      def to_hash: -> Dodopayments::Models::license_key_instance_update_params
     end
   end
 end

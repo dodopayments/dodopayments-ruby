@@ -6,12 +6,22 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      sig { returns(T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice)) }
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
+      sig do
+        returns(
+          T.any(
+            Dodopayments::Price::OneTimePrice,
+            Dodopayments::Price::RecurringPrice
+          )
+        )
+      end
       attr_accessor :price
 
       # Represents the different categories of taxation applicable to various products
       # and services.
-      sig { returns(Dodopayments::Models::TaxCategory::OrSymbol) }
+      sig { returns(Dodopayments::TaxCategory::OrSymbol) }
       attr_accessor :tax_category
 
       # Addons available for subscription product
@@ -30,14 +40,14 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :license_key_activations_limit
 
-      sig { returns(T.nilable(Dodopayments::Models::LicenseKeyDuration)) }
+      sig { returns(T.nilable(Dodopayments::LicenseKeyDuration)) }
       attr_reader :license_key_duration
 
       sig do
         params(
-          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::AnyHash))
-        )
-          .void
+          license_key_duration:
+            T.nilable(Dodopayments::LicenseKeyDuration::OrHash)
+        ).void
       end
       attr_writer :license_key_duration
 
@@ -51,22 +61,22 @@ module Dodopayments
 
       sig do
         params(
-          price: T.any(
-            Dodopayments::Models::Price::OneTimePrice,
-            Dodopayments::Internal::AnyHash,
-            Dodopayments::Models::Price::RecurringPrice
-          ),
-          tax_category: Dodopayments::Models::TaxCategory::OrSymbol,
+          price:
+            T.any(
+              Dodopayments::Price::OneTimePrice::OrHash,
+              Dodopayments::Price::RecurringPrice::OrHash
+            ),
+          tax_category: Dodopayments::TaxCategory::OrSymbol,
           addons: T.nilable(T::Array[String]),
           description: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
-          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::AnyHash)),
+          license_key_duration:
+            T.nilable(Dodopayments::LicenseKeyDuration::OrHash),
           license_key_enabled: T.nilable(T::Boolean),
           name: T.nilable(String),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
       def self.new(
         price:,
@@ -87,25 +97,31 @@ module Dodopayments
         # Optional name of the product
         name: nil,
         request_options: {}
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              price: T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice),
-              tax_category: Dodopayments::Models::TaxCategory::OrSymbol,
-              addons: T.nilable(T::Array[String]),
-              description: T.nilable(String),
-              license_key_activation_message: T.nilable(String),
-              license_key_activations_limit: T.nilable(Integer),
-              license_key_duration: T.nilable(Dodopayments::Models::LicenseKeyDuration),
-              license_key_enabled: T.nilable(T::Boolean),
-              name: T.nilable(String),
-              request_options: Dodopayments::RequestOptions
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            price:
+              T.any(
+                Dodopayments::Price::OneTimePrice,
+                Dodopayments::Price::RecurringPrice
+              ),
+            tax_category: Dodopayments::TaxCategory::OrSymbol,
+            addons: T.nilable(T::Array[String]),
+            description: T.nilable(String),
+            license_key_activation_message: T.nilable(String),
+            license_key_activations_limit: T.nilable(Integer),
+            license_key_duration: T.nilable(Dodopayments::LicenseKeyDuration),
+            license_key_enabled: T.nilable(T::Boolean),
+            name: T.nilable(String),
+            request_options: Dodopayments::RequestOptions
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

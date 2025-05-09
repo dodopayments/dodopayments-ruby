@@ -7,7 +7,7 @@ module Dodopayments
         image_id: String?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
-        license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
+        license_key_duration: Dodopayments::LicenseKeyDuration?,
         license_key_enabled: bool?,
         name: String?,
         price: Dodopayments::Models::price?,
@@ -29,7 +29,7 @@ module Dodopayments
 
       attr_accessor license_key_activations_limit: Integer?
 
-      attr_accessor license_key_duration: Dodopayments::Models::LicenseKeyDuration?
+      attr_accessor license_key_duration: Dodopayments::LicenseKeyDuration?
 
       attr_accessor license_key_enabled: bool?
 
@@ -45,15 +45,13 @@ module Dodopayments
         ?image_id: String?,
         ?license_key_activation_message: String?,
         ?license_key_activations_limit: Integer?,
-        ?license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
+        ?license_key_duration: Dodopayments::LicenseKeyDuration?,
         ?license_key_enabled: bool?,
         ?name: String?,
         ?price: Dodopayments::Models::price?,
         ?tax_category: Dodopayments::Models::tax_category?,
         ?request_options: Dodopayments::request_opts
       ) -> void
-
-      def to_hash: -> Dodopayments::Models::product_update_params
     end
   end
 end

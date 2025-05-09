@@ -17,8 +17,6 @@ module Dodopayments
         license_key_instance_id: String,
         ?request_options: Dodopayments::request_opts
       ) -> void
-
-      def to_hash: -> Dodopayments::Models::license_deactivate_params
     end
   end
 end

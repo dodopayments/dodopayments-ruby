@@ -5,12 +5,12 @@ module Dodopayments
     module CustomerRequest
       extend Dodopayments::Internal::Type::Union
 
-      variant -> { Dodopayments::Models::AttachExistingCustomer }
+      variant -> { Dodopayments::AttachExistingCustomer }
 
-      variant -> { Dodopayments::Models::CreateNewCustomer }
+      variant -> { Dodopayments::CreateNewCustomer }
 
       # @!method self.variants
-      #   @return [Array(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer)]
+      #   @return [Array(Dodopayments::AttachExistingCustomer, Dodopayments::CreateNewCustomer)]
     end
   end
 end

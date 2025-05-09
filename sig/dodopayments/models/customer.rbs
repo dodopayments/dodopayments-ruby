@@ -31,8 +31,6 @@ module Dodopayments
         name: String,
         ?phone_number: String?
       ) -> void
-
-      def to_hash: -> Dodopayments::Models::customer
     end
   end
 end

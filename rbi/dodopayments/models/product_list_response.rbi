@@ -3,6 +3,9 @@
 module Dodopayments
   module Models
     class ProductListResponse < Dodopayments::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
       # Unique identifier for the business to which the product belongs.
       sig { returns(String) }
       attr_accessor :business_id
@@ -21,14 +24,14 @@ module Dodopayments
 
       # Represents the different categories of taxation applicable to various products
       # and services.
-      sig { returns(Dodopayments::Models::TaxCategory::TaggedSymbol) }
+      sig { returns(Dodopayments::TaxCategory::TaggedSymbol) }
       attr_accessor :tax_category
 
       # Timestamp when the product was last updated.
       sig { returns(Time) }
       attr_accessor :updated_at
 
-      sig { returns(T.nilable(Dodopayments::Models::Currency::TaggedSymbol)) }
+      sig { returns(T.nilable(Dodopayments::Currency::TaggedSymbol)) }
       attr_accessor :currency
 
       # Description of the product, optional.
@@ -58,7 +61,12 @@ module Dodopayments
 
       sig do
         returns(
-          T.nilable(T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice))
+          T.nilable(
+            T.any(
+              Dodopayments::Price::OneTimePrice,
+              Dodopayments::Price::RecurringPrice
+            )
+          )
         )
       end
       attr_accessor :price_detail
@@ -73,23 +81,22 @@ module Dodopayments
           created_at: Time,
           is_recurring: T::Boolean,
           product_id: String,
-          tax_category: Dodopayments::Models::TaxCategory::OrSymbol,
+          tax_category: Dodopayments::TaxCategory::OrSymbol,
           updated_at: Time,
-          currency: T.nilable(Dodopayments::Models::Currency::OrSymbol),
+          currency: T.nilable(Dodopayments::Currency::OrSymbol),
           description: T.nilable(String),
           image: T.nilable(String),
           name: T.nilable(String),
           price: T.nilable(Integer),
-          price_detail: T.nilable(
-            T.any(
-              Dodopayments::Models::Price::OneTimePrice,
-              Dodopayments::Internal::AnyHash,
-              Dodopayments::Models::Price::RecurringPrice
-            )
-          ),
+          price_detail:
+            T.nilable(
+              T.any(
+                Dodopayments::Price::OneTimePrice::OrHash,
+                Dodopayments::Price::RecurringPrice::OrHash
+              )
+            ),
           tax_inclusive: T.nilable(T::Boolean)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         # Unique identifier for the business to which the product belongs.
@@ -126,28 +133,36 @@ module Dodopayments
         price_detail: nil,
         # Indicates if the price is tax inclusive
         tax_inclusive: nil
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              business_id: String,
-              created_at: Time,
-              is_recurring: T::Boolean,
-              product_id: String,
-              tax_category: Dodopayments::Models::TaxCategory::TaggedSymbol,
-              updated_at: Time,
-              currency: T.nilable(Dodopayments::Models::Currency::TaggedSymbol),
-              description: T.nilable(String),
-              image: T.nilable(String),
-              name: T.nilable(String),
-              price: T.nilable(Integer),
-              price_detail: T.nilable(T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice)),
-              tax_inclusive: T.nilable(T::Boolean)
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            business_id: String,
+            created_at: Time,
+            is_recurring: T::Boolean,
+            product_id: String,
+            tax_category: Dodopayments::TaxCategory::TaggedSymbol,
+            updated_at: Time,
+            currency: T.nilable(Dodopayments::Currency::TaggedSymbol),
+            description: T.nilable(String),
+            image: T.nilable(String),
+            name: T.nilable(String),
+            price: T.nilable(Integer),
+            price_detail:
+              T.nilable(
+                T.any(
+                  Dodopayments::Price::OneTimePrice,
+                  Dodopayments::Price::RecurringPrice
+                )
+              ),
+            tax_inclusive: T.nilable(T::Boolean)
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

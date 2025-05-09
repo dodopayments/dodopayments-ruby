@@ -5,32 +5,36 @@ module Dodopayments
     class Subscriptions
       sig do
         params(
-          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash),
-          customer: T.any(
-            Dodopayments::Models::AttachExistingCustomer,
-            Dodopayments::Internal::AnyHash,
-            Dodopayments::Models::CreateNewCustomer
-          ),
+          billing: Dodopayments::BillingAddress::OrHash,
+          customer:
+            T.any(
+              Dodopayments::AttachExistingCustomer::OrHash,
+              Dodopayments::CreateNewCustomer::OrHash
+            ),
           product_id: String,
           quantity: Integer,
-          addons: T.nilable(
-            T::Array[T.any(Dodopayments::Models::SubscriptionCreateParams::Addon, Dodopayments::Internal::AnyHash)]
-          ),
-          allowed_payment_method_types: T.nilable(T::Array[Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType::OrSymbol]),
-          billing_currency: T.nilable(Dodopayments::Models::Currency::OrSymbol),
+          addons:
+            T.nilable(
+              T::Array[Dodopayments::SubscriptionCreateParams::Addon::OrHash]
+            ),
+          allowed_payment_method_types:
+            T.nilable(
+              T::Array[
+                Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::OrSymbol
+              ]
+            ),
+          billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           discount_code: T.nilable(String),
           metadata: T::Hash[Symbol, String],
-          on_demand: T.nilable(
-            T.any(Dodopayments::Models::SubscriptionCreateParams::OnDemand, Dodopayments::Internal::AnyHash)
-          ),
+          on_demand:
+            T.nilable(Dodopayments::SubscriptionCreateParams::OnDemand::OrHash),
           payment_link: T.nilable(T::Boolean),
           return_url: T.nilable(String),
           show_saved_payment_methods: T::Boolean,
           tax_id: T.nilable(String),
           trial_period_days: T.nilable(Integer),
-          request_options: Dodopayments::RequestOpts
-        )
-          .returns(Dodopayments::Models::SubscriptionCreateResponse)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Models::SubscriptionCreateResponse)
       end
       def create(
         billing:,
@@ -66,29 +70,35 @@ module Dodopayments
         # period set in the product's price Must be between 0 and 10000 days
         trial_period_days: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       sig do
-        params(subscription_id: String, request_options: Dodopayments::RequestOpts)
-          .returns(Dodopayments::Models::Subscription)
+        params(
+          subscription_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Subscription)
       end
       def retrieve(
         # Subscription Id
         subscription_id,
         request_options: {}
-      ); end
+      )
+      end
+
       sig do
         params(
           subscription_id: String,
-          billing: T.nilable(T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash)),
-          disable_on_demand: T.nilable(
-            T.any(Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, Dodopayments::Internal::AnyHash)
-          ),
+          billing: T.nilable(Dodopayments::BillingAddress::OrHash),
+          disable_on_demand:
+            T.nilable(
+              Dodopayments::SubscriptionUpdateParams::DisableOnDemand::OrHash
+            ),
           metadata: T.nilable(T::Hash[Symbol, String]),
-          status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
+          status: T.nilable(Dodopayments::SubscriptionStatus::OrSymbol),
           tax_id: T.nilable(String),
-          request_options: Dodopayments::RequestOpts
-        )
-          .returns(Dodopayments::Models::Subscription)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Subscription)
       end
       def update(
         # Subscription Id
@@ -99,7 +109,9 @@ module Dodopayments
         status: nil,
         tax_id: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       sig do
         params(
           created_at_gte: T.nilable(Time),
@@ -107,12 +119,13 @@ module Dodopayments
           customer_id: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
-          request_options: Dodopayments::RequestOpts
+          status: T.nilable(Dodopayments::SubscriptionStatus::OrSymbol),
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(
+          Dodopayments::Internal::DefaultPageNumberPagination[
+            Dodopayments::Models::SubscriptionListResponse
+          ]
         )
-          .returns(
-            Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::SubscriptionListResponse]
-          )
       end
       def list(
         # Get events after this created time
@@ -128,19 +141,24 @@ module Dodopayments
         # Filter by status
         status: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       sig do
         params(
           subscription_id: String,
           product_id: String,
-          proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode::OrSymbol,
+          proration_billing_mode:
+            Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::OrSymbol,
           quantity: Integer,
-          addons: T.nilable(
-            T::Array[T.any(Dodopayments::Models::SubscriptionChangePlanParams::Addon, Dodopayments::Internal::AnyHash)]
-          ),
-          request_options: Dodopayments::RequestOpts
-        )
-          .void
+          addons:
+            T.nilable(
+              T::Array[
+                Dodopayments::SubscriptionChangePlanParams::Addon::OrHash
+              ]
+            ),
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).void
       end
       def change_plan(
         # Subscription Id
@@ -154,10 +172,15 @@ module Dodopayments
         # addons
         addons: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       sig do
-        params(subscription_id: String, product_price: Integer, request_options: Dodopayments::RequestOpts)
-          .returns(Dodopayments::Models::SubscriptionChargeResponse)
+        params(
+          subscription_id: String,
+          product_price: Integer,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Models::SubscriptionChargeResponse)
       end
       def charge(
         # Subscription Id
@@ -166,10 +189,13 @@ module Dodopayments
         # cents for USD). For example, to charge $1.00, pass `100`.
         product_price:,
         request_options: {}
-      ); end
+      )
+      end
+
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:); end
+      def self.new(client:)
+      end
     end
   end
 end

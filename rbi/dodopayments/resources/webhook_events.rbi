@@ -4,10 +4,13 @@ module Dodopayments
   module Resources
     class WebhookEvents
       sig do
-        params(webhook_event_id: String, request_options: Dodopayments::RequestOpts)
-          .returns(Dodopayments::Models::WebhookEvent)
+        params(
+          webhook_event_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::WebhookEvent)
       end
-      def retrieve(webhook_event_id, request_options: {}); end
+      def retrieve(webhook_event_id, request_options: {})
+      end
 
       sig do
         params(
@@ -17,9 +20,12 @@ module Dodopayments
           object_id_: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: Dodopayments::RequestOpts
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(
+          Dodopayments::Internal::DefaultPageNumberPagination[
+            Dodopayments::WebhookEvent
+          ]
         )
-          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::WebhookEvent])
       end
       def list(
         # Get events after this created time
@@ -35,10 +41,13 @@ module Dodopayments
         # Page size default is 10 max is 100
         page_size: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:); end
+      def self.new(client:)
+      end
     end
   end
 end

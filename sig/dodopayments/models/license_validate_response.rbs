@@ -6,8 +6,6 @@ module Dodopayments
       attr_accessor valid: bool
 
       def initialize: (valid: bool) -> void
-
-      def to_hash: -> Dodopayments::Models::license_validate_response
     end
   end
 end

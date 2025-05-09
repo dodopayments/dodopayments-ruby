@@ -8,36 +8,35 @@ module Dodopayments
       #
       # @overload create(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, metadata: nil, on_demand: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
       #
-      # @param billing [Dodopayments::Models::BillingAddress]
+      # @param billing [Dodopayments::BillingAddress]
       #
-      # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
+      # @param customer [Dodopayments::AttachExistingCustomer, Dodopayments::CreateNewCustomer]
       #
       # @param product_id [String] Unique identifier of the product to subscribe to
       #
       # @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
-      # @param addons [Array<Dodopayments::Models::SubscriptionCreateParams::Addon>, nil] Attach addons to this subscription
+      # @param addons [Array<Dodopayments::SubscriptionCreateParams::Addon>, nil] Attach addons to this subscription
       #
-      # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout. ...
+      # @param allowed_payment_method_types [Array<Symbol, Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout.
       #
-      # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil]
+      # @param billing_currency [Symbol, Dodopayments::Currency, nil]
       #
       # @param discount_code [String, nil] Discount Code to apply to the subscription
       #
       # @param metadata [Hash{Symbol=>String}]
       #
-      # @param on_demand [Dodopayments::Models::SubscriptionCreateParams::OnDemand, nil]
+      # @param on_demand [Dodopayments::SubscriptionCreateParams::OnDemand, nil]
       #
-      # @param payment_link [Boolean, nil] If true, generates a payment link. ...
+      # @param payment_link [Boolean, nil] If true, generates a payment link.
       #
       # @param return_url [String, nil] Optional URL to redirect after successful subscription creation
       #
-      # @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer ...
+      # @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer
       #
       # @param tax_id [String, nil] Tax ID in case the payment is B2B. If tax id validation fails the payment creati
-      # ...
       #
-      # @param trial_period_days [Integer, nil] Optional trial period in days ...
+      # @param trial_period_days [Integer, nil] Optional trial period in days
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -45,7 +44,7 @@ module Dodopayments
       #
       # @see Dodopayments::Models::SubscriptionCreateParams
       def create(params)
-        parsed, options = Dodopayments::Models::SubscriptionCreateParams.dump_request(params)
+        parsed, options = Dodopayments::SubscriptionCreateParams.dump_request(params)
         @client.request(
           method: :post,
           path: "subscriptions",
@@ -61,14 +60,14 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::Subscription]
+      # @return [Dodopayments::Subscription]
       #
       # @see Dodopayments::Models::SubscriptionRetrieveParams
       def retrieve(subscription_id, params = {})
         @client.request(
           method: :get,
           path: ["subscriptions/%1$s", subscription_id],
-          model: Dodopayments::Models::Subscription,
+          model: Dodopayments::Subscription,
           options: params[:request_options]
         )
       end
@@ -77,28 +76,28 @@ module Dodopayments
       #
       # @param subscription_id [String] Subscription Id
       #
-      # @param billing [Dodopayments::Models::BillingAddress, nil]
+      # @param billing [Dodopayments::BillingAddress, nil]
       #
-      # @param disable_on_demand [Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, nil]
+      # @param disable_on_demand [Dodopayments::SubscriptionUpdateParams::DisableOnDemand, nil]
       #
       # @param metadata [Hash{Symbol=>String}, nil]
       #
-      # @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
+      # @param status [Symbol, Dodopayments::SubscriptionStatus, nil]
       #
       # @param tax_id [String, nil]
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::Subscription]
+      # @return [Dodopayments::Subscription]
       #
       # @see Dodopayments::Models::SubscriptionUpdateParams
       def update(subscription_id, params = {})
-        parsed, options = Dodopayments::Models::SubscriptionUpdateParams.dump_request(params)
+        parsed, options = Dodopayments::SubscriptionUpdateParams.dump_request(params)
         @client.request(
           method: :patch,
           path: ["subscriptions/%1$s", subscription_id],
           body: parsed,
-          model: Dodopayments::Models::Subscription,
+          model: Dodopayments::Subscription,
           options: options
         )
       end
@@ -115,7 +114,7 @@ module Dodopayments
       #
       # @param page_size [Integer, nil] Page size default is 10 max is 100
       #
-      # @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil] Filter by status
+      # @param status [Symbol, Dodopayments::SubscriptionStatus, nil] Filter by status
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -123,7 +122,7 @@ module Dodopayments
       #
       # @see Dodopayments::Models::SubscriptionListParams
       def list(params = {})
-        parsed, options = Dodopayments::Models::SubscriptionListParams.dump_request(params)
+        parsed, options = Dodopayments::SubscriptionListParams.dump_request(params)
         @client.request(
           method: :get,
           path: "subscriptions",
@@ -143,11 +142,11 @@ module Dodopayments
       #
       # @param product_id [String] Unique identifier of the product to subscribe to
       #
-      # @param proration_billing_mode [Symbol, Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode]
+      # @param proration_billing_mode [Symbol, Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode]
       #
       # @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
-      # @param addons [Array<Dodopayments::Models::SubscriptionChangePlanParams::Addon>, nil] Addons for the new plan. ...
+      # @param addons [Array<Dodopayments::SubscriptionChangePlanParams::Addon>, nil] Addons for the new plan.
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -155,7 +154,7 @@ module Dodopayments
       #
       # @see Dodopayments::Models::SubscriptionChangePlanParams
       def change_plan(subscription_id, params)
-        parsed, options = Dodopayments::Models::SubscriptionChangePlanParams.dump_request(params)
+        parsed, options = Dodopayments::SubscriptionChangePlanParams.dump_request(params)
         @client.request(
           method: :post,
           path: ["subscriptions/%1$s/change-plan", subscription_id],
@@ -173,7 +172,6 @@ module Dodopayments
       # @param subscription_id [String] Subscription Id
       #
       # @param product_price [Integer] The product price. Represented in the lowest denomination of the currency (e.g.,
-      # ...
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -181,7 +179,7 @@ module Dodopayments
       #
       # @see Dodopayments::Models::SubscriptionChargeParams
       def charge(subscription_id, params)
-        parsed, options = Dodopayments::Models::SubscriptionChargeParams.dump_request(params)
+        parsed, options = Dodopayments::SubscriptionChargeParams.dump_request(params)
         @client.request(
           method: :post,
           path: ["subscriptions/%1$s/charge", subscription_id],

@@ -27,8 +27,6 @@ module Dodopayments
         street: String,
         zipcode: String
       ) -> void
-
-      def to_hash: -> Dodopayments::Models::billing_address
     end
   end
 end

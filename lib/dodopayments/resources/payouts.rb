@@ -15,7 +15,7 @@ module Dodopayments
       #
       # @see Dodopayments::Models::PayoutListParams
       def list(params = {})
-        parsed, options = Dodopayments::Models::PayoutListParams.dump_request(params)
+        parsed, options = Dodopayments::PayoutListParams.dump_request(params)
         @client.request(
           method: :get,
           path: "payouts",

@@ -6,8 +6,6 @@ module Dodopayments
       attr_accessor link: String
 
       def initialize: (link: String) -> void
-
-      def to_hash: -> Dodopayments::Models::customer_portal_session
     end
   end
 end

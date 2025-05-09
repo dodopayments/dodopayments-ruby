@@ -4,8 +4,11 @@ module Dodopayments
   module Resources
     class Refunds
       sig do
-        params(payment_id: String, reason: T.nilable(String), request_options: Dodopayments::RequestOpts)
-          .returns(Dodopayments::Models::Refund)
+        params(
+          payment_id: String,
+          reason: T.nilable(String),
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Refund)
       end
       def create(
         # The unique identifier of the payment to be refunded.
@@ -13,15 +16,22 @@ module Dodopayments
         # The reason for the refund, if any. Maximum length is 3000 characters. Optional.
         reason: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       sig do
-        params(refund_id: String, request_options: Dodopayments::RequestOpts).returns(Dodopayments::Models::Refund)
+        params(
+          refund_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Refund)
       end
       def retrieve(
         # Refund Id
         refund_id,
         request_options: {}
-      ); end
+      )
+      end
+
       sig do
         params(
           created_at_gte: T.nilable(Time),
@@ -29,10 +39,13 @@ module Dodopayments
           customer_id: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          status: T.nilable(Dodopayments::Models::RefundStatus::OrSymbol),
-          request_options: Dodopayments::RequestOpts
+          status: T.nilable(Dodopayments::RefundStatus::OrSymbol),
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(
+          Dodopayments::Internal::DefaultPageNumberPagination[
+            Dodopayments::Refund
+          ]
         )
-          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Refund])
       end
       def list(
         # Get events after this created time
@@ -48,10 +61,13 @@ module Dodopayments
         # Filter by status
         status: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:); end
+      def self.new(client:)
+      end
     end
   end
 end

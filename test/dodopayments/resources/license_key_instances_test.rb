@@ -7,7 +7,7 @@ class Dodopayments::Test::Resources::LicenseKeyInstancesTest < Dodopayments::Tes
     response = @dodo_payments.license_key_instances.retrieve("id")
 
     assert_pattern do
-      response => Dodopayments::Models::LicenseKeyInstance
+      response => Dodopayments::LicenseKeyInstance
     end
 
     assert_pattern do
@@ -25,7 +25,7 @@ class Dodopayments::Test::Resources::LicenseKeyInstancesTest < Dodopayments::Tes
     response = @dodo_payments.license_key_instances.update("id", name: "name")
 
     assert_pattern do
-      response => Dodopayments::Models::LicenseKeyInstance
+      response => Dodopayments::LicenseKeyInstance
     end
 
     assert_pattern do
@@ -50,7 +50,7 @@ class Dodopayments::Test::Resources::LicenseKeyInstancesTest < Dodopayments::Tes
     return if row.nil?
 
     assert_pattern do
-      row => Dodopayments::Models::LicenseKeyInstance
+      row => Dodopayments::LicenseKeyInstance
     end
 
     assert_pattern do

@@ -5,8 +5,19 @@ module Dodopayments
     module CustomerRequest
       extend Dodopayments::Internal::Type::Union
 
-      sig { override.returns([Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]) }
-      def self.variants; end
+      Variants =
+        T.type_alias do
+          T.any(
+            Dodopayments::AttachExistingCustomer,
+            Dodopayments::CreateNewCustomer
+          )
+        end
+
+      sig do
+        override.returns(T::Array[Dodopayments::CustomerRequest::Variants])
+      end
+      def self.variants
+      end
     end
   end
 end

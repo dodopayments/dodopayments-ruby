@@ -3,6 +3,9 @@
 module Dodopayments
   module Models
     class WebhookEvent < Dodopayments::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
       sig { returns(String) }
       attr_accessor :business_id
 
@@ -37,8 +40,7 @@ module Dodopayments
           latest_attempted_at: T.nilable(Time),
           request: T.nilable(String),
           response: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         business_id:,
@@ -49,23 +51,25 @@ module Dodopayments
         latest_attempted_at: nil,
         request: nil,
         response: nil
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              business_id: String,
-              created_at: Time,
-              event_id: String,
-              event_type: String,
-              object_id_: String,
-              latest_attempted_at: T.nilable(Time),
-              request: T.nilable(String),
-              response: T.nilable(String)
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            business_id: String,
+            created_at: Time,
+            event_id: String,
+            event_type: String,
+            object_id_: String,
+            latest_attempted_at: T.nilable(Time),
+            request: T.nilable(String),
+            response: T.nilable(String)
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

@@ -5,18 +5,24 @@ module Dodopayments
     class Products
       class Images
         sig do
-          params(id: String, force_update: T.nilable(T::Boolean), request_options: Dodopayments::RequestOpts)
-            .returns(Dodopayments::Models::Products::ImageUpdateResponse)
+          params(
+            id: String,
+            force_update: T.nilable(T::Boolean),
+            request_options: Dodopayments::RequestOptions::OrHash
+          ).returns(Dodopayments::Models::Products::ImageUpdateResponse)
         end
         def update(
           # Product Id
           id,
           force_update: nil,
           request_options: {}
-        ); end
+        )
+        end
+
         # @api private
         sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-        def self.new(client:); end
+        def self.new(client:)
+        end
       end
     end
   end

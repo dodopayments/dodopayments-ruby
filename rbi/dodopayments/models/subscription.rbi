@@ -3,28 +3,31 @@
 module Dodopayments
   module Models
     class Subscription < Dodopayments::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
       # Addons associated with this subscription
-      sig { returns(T::Array[Dodopayments::Models::AddonCartResponseItem]) }
+      sig { returns(T::Array[Dodopayments::AddonCartResponseItem]) }
       attr_accessor :addons
 
-      sig { returns(Dodopayments::Models::BillingAddress) }
+      sig { returns(Dodopayments::BillingAddress) }
       attr_reader :billing
 
-      sig { params(billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash)).void }
+      sig { params(billing: Dodopayments::BillingAddress::OrHash).void }
       attr_writer :billing
 
       # Timestamp when the subscription was created
       sig { returns(Time) }
       attr_accessor :created_at
 
-      sig { returns(Dodopayments::Models::Currency::TaggedSymbol) }
+      sig { returns(Dodopayments::Currency::TaggedSymbol) }
       attr_accessor :currency
 
-      sig { returns(Dodopayments::Models::CustomerLimitedDetails) }
+      sig { returns(Dodopayments::CustomerLimitedDetails) }
       attr_reader :customer
 
       sig do
-        params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void
+        params(customer: Dodopayments::CustomerLimitedDetails::OrHash).void
       end
       attr_writer :customer
 
@@ -44,7 +47,7 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :payment_frequency_count
 
-      sig { returns(Dodopayments::Models::TimeInterval::TaggedSymbol) }
+      sig { returns(Dodopayments::TimeInterval::TaggedSymbol) }
       attr_accessor :payment_frequency_interval
 
       # Timestamp of the last payment. Indicates the start of current billing period
@@ -64,7 +67,7 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :recurring_pre_tax_amount
 
-      sig { returns(Dodopayments::Models::SubscriptionStatus::TaggedSymbol) }
+      sig { returns(Dodopayments::SubscriptionStatus::TaggedSymbol) }
       attr_accessor :status
 
       # Unique identifier for the subscription
@@ -75,7 +78,7 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :subscription_period_count
 
-      sig { returns(Dodopayments::Models::TimeInterval::TaggedSymbol) }
+      sig { returns(Dodopayments::TimeInterval::TaggedSymbol) }
       attr_accessor :subscription_period_interval
 
       # Indicates if the recurring_pre_tax_amount is tax inclusive
@@ -97,30 +100,29 @@ module Dodopayments
       # Response struct representing subscription details
       sig do
         params(
-          addons: T::Array[T.any(Dodopayments::Models::AddonCartResponseItem, Dodopayments::Internal::AnyHash)],
-          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash),
+          addons: T::Array[Dodopayments::AddonCartResponseItem::OrHash],
+          billing: Dodopayments::BillingAddress::OrHash,
           created_at: Time,
-          currency: Dodopayments::Models::Currency::OrSymbol,
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash),
+          currency: Dodopayments::Currency::OrSymbol,
+          customer: Dodopayments::CustomerLimitedDetails::OrHash,
           metadata: T::Hash[Symbol, String],
           next_billing_date: Time,
           on_demand: T::Boolean,
           payment_frequency_count: Integer,
-          payment_frequency_interval: Dodopayments::Models::TimeInterval::OrSymbol,
+          payment_frequency_interval: Dodopayments::TimeInterval::OrSymbol,
           previous_billing_date: Time,
           product_id: String,
           quantity: Integer,
           recurring_pre_tax_amount: Integer,
-          status: Dodopayments::Models::SubscriptionStatus::OrSymbol,
+          status: Dodopayments::SubscriptionStatus::OrSymbol,
           subscription_id: String,
           subscription_period_count: Integer,
-          subscription_period_interval: Dodopayments::Models::TimeInterval::OrSymbol,
+          subscription_period_interval: Dodopayments::TimeInterval::OrSymbol,
           tax_inclusive: T::Boolean,
           trial_period_days: Integer,
           cancelled_at: T.nilable(Time),
           discount_id: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         # Addons associated with this subscription
@@ -162,37 +164,41 @@ module Dodopayments
         cancelled_at: nil,
         # The discount id if discount is applied
         discount_id: nil
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              addons: T::Array[Dodopayments::Models::AddonCartResponseItem],
-              billing: Dodopayments::Models::BillingAddress,
-              created_at: Time,
-              currency: Dodopayments::Models::Currency::TaggedSymbol,
-              customer: Dodopayments::Models::CustomerLimitedDetails,
-              metadata: T::Hash[Symbol, String],
-              next_billing_date: Time,
-              on_demand: T::Boolean,
-              payment_frequency_count: Integer,
-              payment_frequency_interval: Dodopayments::Models::TimeInterval::TaggedSymbol,
-              previous_billing_date: Time,
-              product_id: String,
-              quantity: Integer,
-              recurring_pre_tax_amount: Integer,
-              status: Dodopayments::Models::SubscriptionStatus::TaggedSymbol,
-              subscription_id: String,
-              subscription_period_count: Integer,
-              subscription_period_interval: Dodopayments::Models::TimeInterval::TaggedSymbol,
-              tax_inclusive: T::Boolean,
-              trial_period_days: Integer,
-              cancelled_at: T.nilable(Time),
-              discount_id: T.nilable(String)
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            addons: T::Array[Dodopayments::AddonCartResponseItem],
+            billing: Dodopayments::BillingAddress,
+            created_at: Time,
+            currency: Dodopayments::Currency::TaggedSymbol,
+            customer: Dodopayments::CustomerLimitedDetails,
+            metadata: T::Hash[Symbol, String],
+            next_billing_date: Time,
+            on_demand: T::Boolean,
+            payment_frequency_count: Integer,
+            payment_frequency_interval:
+              Dodopayments::TimeInterval::TaggedSymbol,
+            previous_billing_date: Time,
+            product_id: String,
+            quantity: Integer,
+            recurring_pre_tax_amount: Integer,
+            status: Dodopayments::SubscriptionStatus::TaggedSymbol,
+            subscription_id: String,
+            subscription_period_count: Integer,
+            subscription_period_interval:
+              Dodopayments::TimeInterval::TaggedSymbol,
+            tax_inclusive: T::Boolean,
+            trial_period_days: Integer,
+            cancelled_at: T.nilable(Time),
+            discount_id: T.nilable(String)
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

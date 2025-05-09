@@ -11,7 +11,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
       )
 
     assert_pattern do
-      response => Dodopayments::Models::Product
+      response => Dodopayments::Product
     end
 
     assert_pattern do
@@ -20,16 +20,16 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         created_at: Time,
         is_recurring: Dodopayments::Internal::Type::Boolean,
         license_key_enabled: Dodopayments::Internal::Type::Boolean,
-        price: Dodopayments::Models::Price,
+        price: Dodopayments::Price,
         product_id: String,
-        tax_category: Dodopayments::Models::TaxCategory,
+        tax_category: Dodopayments::TaxCategory,
         updated_at: Time,
         addons: ^(Dodopayments::Internal::Type::ArrayOf[String]) | nil,
         description: String | nil,
         image: String | nil,
         license_key_activation_message: String | nil,
         license_key_activations_limit: Integer | nil,
-        license_key_duration: Dodopayments::Models::LicenseKeyDuration | nil,
+        license_key_duration: Dodopayments::LicenseKeyDuration | nil,
         name: String | nil
       }
     end
@@ -39,7 +39,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
     response = @dodo_payments.products.retrieve("id")
 
     assert_pattern do
-      response => Dodopayments::Models::Product
+      response => Dodopayments::Product
     end
 
     assert_pattern do
@@ -48,16 +48,16 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         created_at: Time,
         is_recurring: Dodopayments::Internal::Type::Boolean,
         license_key_enabled: Dodopayments::Internal::Type::Boolean,
-        price: Dodopayments::Models::Price,
+        price: Dodopayments::Price,
         product_id: String,
-        tax_category: Dodopayments::Models::TaxCategory,
+        tax_category: Dodopayments::TaxCategory,
         updated_at: Time,
         addons: ^(Dodopayments::Internal::Type::ArrayOf[String]) | nil,
         description: String | nil,
         image: String | nil,
         license_key_activation_message: String | nil,
         license_key_activations_limit: Integer | nil,
-        license_key_duration: Dodopayments::Models::LicenseKeyDuration | nil,
+        license_key_duration: Dodopayments::LicenseKeyDuration | nil,
         name: String | nil
       }
     end
@@ -91,14 +91,14 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         created_at: Time,
         is_recurring: Dodopayments::Internal::Type::Boolean,
         product_id: String,
-        tax_category: Dodopayments::Models::TaxCategory,
+        tax_category: Dodopayments::TaxCategory,
         updated_at: Time,
-        currency: Dodopayments::Models::Currency | nil,
+        currency: Dodopayments::Currency | nil,
         description: String | nil,
         image: String | nil,
         name: String | nil,
         price: Integer | nil,
-        price_detail: Dodopayments::Models::Price | nil,
+        price_detail: Dodopayments::Price | nil,
         tax_inclusive: Dodopayments::Internal::Type::Boolean | nil
       }
     end

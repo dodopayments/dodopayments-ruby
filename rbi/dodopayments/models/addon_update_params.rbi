@@ -6,7 +6,10 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      sig { returns(T.nilable(Dodopayments::Models::Currency::OrSymbol)) }
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
+      sig { returns(T.nilable(Dodopayments::Currency::OrSymbol)) }
       attr_accessor :currency
 
       # Description of the Addon, optional and must be at most 1000 characters.
@@ -27,20 +30,19 @@ module Dodopayments
 
       # Represents the different categories of taxation applicable to various products
       # and services.
-      sig { returns(T.nilable(Dodopayments::Models::TaxCategory::OrSymbol)) }
+      sig { returns(T.nilable(Dodopayments::TaxCategory::OrSymbol)) }
       attr_accessor :tax_category
 
       sig do
         params(
-          currency: T.nilable(Dodopayments::Models::Currency::OrSymbol),
+          currency: T.nilable(Dodopayments::Currency::OrSymbol),
           description: T.nilable(String),
           image_id: T.nilable(String),
           name: T.nilable(String),
           price: T.nilable(Integer),
-          tax_category: T.nilable(Dodopayments::Models::TaxCategory::OrSymbol),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          tax_category: T.nilable(Dodopayments::TaxCategory::OrSymbol),
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
       def self.new(
         currency: nil,
@@ -56,22 +58,24 @@ module Dodopayments
         # and services.
         tax_category: nil,
         request_options: {}
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              currency: T.nilable(Dodopayments::Models::Currency::OrSymbol),
-              description: T.nilable(String),
-              image_id: T.nilable(String),
-              name: T.nilable(String),
-              price: T.nilable(Integer),
-              tax_category: T.nilable(Dodopayments::Models::TaxCategory::OrSymbol),
-              request_options: Dodopayments::RequestOptions
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            currency: T.nilable(Dodopayments::Currency::OrSymbol),
+            description: T.nilable(String),
+            image_id: T.nilable(String),
+            name: T.nilable(String),
+            price: T.nilable(Integer),
+            tax_category: T.nilable(Dodopayments::TaxCategory::OrSymbol),
+            request_options: Dodopayments::RequestOptions
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

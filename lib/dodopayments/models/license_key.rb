@@ -54,8 +54,8 @@ module Dodopayments
 
       # @!attribute status
       #
-      #   @return [Symbol, Dodopayments::Models::LicenseKeyStatus]
-      required :status, enum: -> { Dodopayments::Models::LicenseKeyStatus }
+      #   @return [Symbol, Dodopayments::LicenseKeyStatus]
+      required :status, enum: -> { Dodopayments::LicenseKeyStatus }
 
       # @!attribute activations_limit
       #   The maximum number of activations allowed for this license key.
@@ -77,8 +77,8 @@ module Dodopayments
       optional :subscription_id, String, nil?: true
 
       # @!method initialize(id:, business_id:, created_at:, customer_id:, instances_count:, key:, payment_id:, product_id:, status:, activations_limit: nil, expires_at: nil, subscription_id: nil)
-      #   Some parameter documentations has been truncated, see
-      #   {Dodopayments::Models::LicenseKey} for more details.
+      #   Some parameter documentations has been truncated, see {Dodopayments::LicenseKey}
+      #   for more details.
       #
       #   @param id [String] The unique identifier of the license key.
       #
@@ -96,14 +96,13 @@ module Dodopayments
       #
       #   @param product_id [String] The unique identifier of the product associated with the license key.
       #
-      #   @param status [Symbol, Dodopayments::Models::LicenseKeyStatus]
+      #   @param status [Symbol, Dodopayments::LicenseKeyStatus]
       #
       #   @param activations_limit [Integer, nil] The maximum number of activations allowed for this license key.
       #
       #   @param expires_at [Time, nil] The timestamp indicating when the license key expires, in UTC.
       #
       #   @param subscription_id [String, nil] The unique identifier of the subscription associated with the license key, if an
-      #   ...
     end
   end
 end

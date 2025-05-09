@@ -30,8 +30,8 @@ module Dodopayments
 
       # @!attribute price
       #
-      #   @return [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
-      required :price, union: -> { Dodopayments::Models::Price }
+      #   @return [Dodopayments::Price::OneTimePrice, Dodopayments::Price::RecurringPrice]
+      required :price, union: -> { Dodopayments::Price }
 
       # @!attribute product_id
       #   Unique identifier for the product.
@@ -43,8 +43,8 @@ module Dodopayments
       #   Represents the different categories of taxation applicable to various products
       #   and services.
       #
-      #   @return [Symbol, Dodopayments::Models::TaxCategory]
-      required :tax_category, enum: -> { Dodopayments::Models::TaxCategory }
+      #   @return [Symbol, Dodopayments::TaxCategory]
+      required :tax_category, enum: -> { Dodopayments::TaxCategory }
 
       # @!attribute updated_at
       #   Timestamp when the product was last updated.
@@ -84,8 +84,8 @@ module Dodopayments
 
       # @!attribute license_key_duration
       #
-      #   @return [Dodopayments::Models::LicenseKeyDuration, nil]
-      optional :license_key_duration, -> { Dodopayments::Models::LicenseKeyDuration }, nil?: true
+      #   @return [Dodopayments::LicenseKeyDuration, nil]
+      optional :license_key_duration, -> { Dodopayments::LicenseKeyDuration }, nil?: true
 
       # @!attribute name
       #   Name of the product, optional.
@@ -94,8 +94,8 @@ module Dodopayments
       optional :name, String, nil?: true
 
       # @!method initialize(business_id:, created_at:, is_recurring:, license_key_enabled:, price:, product_id:, tax_category:, updated_at:, addons: nil, description: nil, image: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, name: nil)
-      #   Some parameter documentations has been truncated, see
-      #   {Dodopayments::Models::Product} for more details.
+      #   Some parameter documentations has been truncated, see {Dodopayments::Product}
+      #   for more details.
       #
       #   @param business_id [String] Unique identifier for the business to which the product belongs.
       #
@@ -105,12 +105,11 @@ module Dodopayments
       #
       #   @param license_key_enabled [Boolean] Indicates whether the product requires a license key.
       #
-      #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
+      #   @param price [Dodopayments::Price::OneTimePrice, Dodopayments::Price::RecurringPrice]
       #
       #   @param product_id [String] Unique identifier for the product.
       #
-      #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Represents the different categories of taxation applicable to various products a
-      #   ...
+      #   @param tax_category [Symbol, Dodopayments::TaxCategory] Represents the different categories of taxation applicable to various products a
       #
       #   @param updated_at [Time] Timestamp when the product was last updated.
       #
@@ -124,7 +123,7 @@ module Dodopayments
       #
       #   @param license_key_activations_limit [Integer, nil] Limit on the number of activations for the license key, if enabled.
       #
-      #   @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil]
+      #   @param license_key_duration [Dodopayments::LicenseKeyDuration, nil]
       #
       #   @param name [String, nil] Name of the product, optional.
     end

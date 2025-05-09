@@ -7,7 +7,7 @@ class Dodopayments::Test::Resources::WebhookEventsTest < Dodopayments::Test::Res
     response = @dodo_payments.webhook_events.retrieve("webhook_event_id")
 
     assert_pattern do
-      response => Dodopayments::Models::WebhookEvent
+      response => Dodopayments::WebhookEvent
     end
 
     assert_pattern do
@@ -35,7 +35,7 @@ class Dodopayments::Test::Resources::WebhookEventsTest < Dodopayments::Test::Res
     return if row.nil?
 
     assert_pattern do
-      row => Dodopayments::Models::WebhookEvent
+      row => Dodopayments::WebhookEvent
     end
 
     assert_pattern do

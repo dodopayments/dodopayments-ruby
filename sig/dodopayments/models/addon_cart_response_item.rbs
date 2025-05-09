@@ -8,8 +8,6 @@ module Dodopayments
       attr_accessor quantity: Integer
 
       def initialize: (addon_id: String, quantity: Integer) -> void
-
-      def to_hash: -> Dodopayments::Models::addon_cart_response_item
     end
   end
 end

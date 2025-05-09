@@ -8,12 +8,12 @@ module Dodopayments
         tax_category: Dodopayments::Models::tax_category,
         ?description: String?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::AddonResponse
+      ) -> Dodopayments::AddonResponse
 
       def retrieve: (
         String id,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::AddonResponse
+      ) -> Dodopayments::AddonResponse
 
       def update: (
         String id,
@@ -24,13 +24,13 @@ module Dodopayments
         ?price: Integer?,
         ?tax_category: Dodopayments::Models::tax_category?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::AddonResponse
+      ) -> Dodopayments::AddonResponse
 
       def list: (
         ?page_number: Integer?,
         ?page_size: Integer?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::AddonResponse]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::AddonResponse]
 
       def update_images: (
         String id,

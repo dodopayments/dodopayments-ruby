@@ -5,14 +5,13 @@ module Dodopayments
     class Addons
       sig do
         params(
-          currency: Dodopayments::Models::Currency::OrSymbol,
+          currency: Dodopayments::Currency::OrSymbol,
           name: String,
           price: Integer,
-          tax_category: Dodopayments::Models::TaxCategory::OrSymbol,
+          tax_category: Dodopayments::TaxCategory::OrSymbol,
           description: T.nilable(String),
-          request_options: Dodopayments::RequestOpts
-        )
-          .returns(Dodopayments::Models::AddonResponse)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::AddonResponse)
       end
       def create(
         currency:,
@@ -26,27 +25,33 @@ module Dodopayments
         # Optional description of the Addon
         description: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       sig do
-        params(id: String, request_options: Dodopayments::RequestOpts).returns(Dodopayments::Models::AddonResponse)
+        params(
+          id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::AddonResponse)
       end
       def retrieve(
         # Addon Id
         id,
         request_options: {}
-      ); end
+      )
+      end
+
       sig do
         params(
           id: String,
-          currency: T.nilable(Dodopayments::Models::Currency::OrSymbol),
+          currency: T.nilable(Dodopayments::Currency::OrSymbol),
           description: T.nilable(String),
           image_id: T.nilable(String),
           name: T.nilable(String),
           price: T.nilable(Integer),
-          tax_category: T.nilable(Dodopayments::Models::TaxCategory::OrSymbol),
-          request_options: Dodopayments::RequestOpts
-        )
-          .returns(Dodopayments::Models::AddonResponse)
+          tax_category: T.nilable(Dodopayments::TaxCategory::OrSymbol),
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::AddonResponse)
       end
       def update(
         # Addon Id
@@ -64,14 +69,19 @@ module Dodopayments
         # and services.
         tax_category: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       sig do
         params(
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: Dodopayments::RequestOpts
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(
+          Dodopayments::Internal::DefaultPageNumberPagination[
+            Dodopayments::AddonResponse
+          ]
         )
-          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::AddonResponse])
       end
       def list(
         # Page number default is 0
@@ -79,19 +89,26 @@ module Dodopayments
         # Page size default is 10 max is 100
         page_size: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       sig do
-        params(id: String, request_options: Dodopayments::RequestOpts)
-          .returns(Dodopayments::Models::AddonUpdateImagesResponse)
+        params(
+          id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Models::AddonUpdateImagesResponse)
       end
       def update_images(
         # Addon Id
         id,
         request_options: {}
-      ); end
+      )
+      end
+
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:); end
+      def self.new(client:)
+      end
     end
   end
 end

@@ -1,8 +1,7 @@
 module Dodopayments
   module Models
     type price =
-      Dodopayments::Models::Price::OneTimePrice
-      | Dodopayments::Models::Price::RecurringPrice
+      Dodopayments::Price::OneTimePrice | Dodopayments::Price::RecurringPrice
 
     module Price
       extend Dodopayments::Internal::Type::Union
@@ -48,8 +47,6 @@ module Dodopayments
           ?tax_inclusive: bool?,
           ?type: :one_time_price
         ) -> void
-
-        def to_hash: -> Dodopayments::Models::Price::one_time_price
       end
 
       type recurring_price =
@@ -105,11 +102,9 @@ module Dodopayments
           ?trial_period_days: Integer,
           ?type: :recurring_price
         ) -> void
-
-        def to_hash: -> Dodopayments::Models::Price::recurring_price
       end
 
-      def self?.variants: -> [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
+      def self?.variants: -> ::Array[Dodopayments::Models::price]
     end
   end
 end

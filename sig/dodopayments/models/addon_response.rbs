@@ -47,8 +47,6 @@ module Dodopayments
         ?description: String?,
         ?image: String?
       ) -> void
-
-      def to_hash: -> Dodopayments::Models::addon_response
     end
   end
 end
