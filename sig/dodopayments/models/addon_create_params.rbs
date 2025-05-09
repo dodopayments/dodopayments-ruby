@@ -32,8 +32,6 @@ module Dodopayments
         ?description: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
-
-      def to_hash: -> Dodopayments::Models::addon_create_params
     end
   end
 end

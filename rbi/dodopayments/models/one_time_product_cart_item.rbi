@@ -3,6 +3,9 @@
 module Dodopayments
   module Models
     class OneTimeProductCartItem < Dodopayments::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
       sig { returns(String) }
       attr_accessor :product_id
 
@@ -16,7 +19,11 @@ module Dodopayments
       attr_accessor :amount
 
       sig do
-        params(product_id: String, quantity: Integer, amount: T.nilable(Integer)).returns(T.attached_class)
+        params(
+          product_id: String,
+          quantity: Integer,
+          amount: T.nilable(Integer)
+        ).returns(T.attached_class)
       end
       def self.new(
         product_id:,
@@ -25,9 +32,16 @@ module Dodopayments
         # amount will be ignored Represented in the lowest denomination of the currency
         # (e.g., cents for USD). For example, to charge $1.00, pass `100`.
         amount: nil
-      ); end
-      sig { override.returns({product_id: String, quantity: Integer, amount: T.nilable(Integer)}) }
-      def to_hash; end
+      )
+      end
+
+      sig do
+        override.returns(
+          { product_id: String, quantity: Integer, amount: T.nilable(Integer) }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

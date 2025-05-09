@@ -55,8 +55,6 @@ module Dodopayments
         ?expires_at: Time?,
         ?subscription_id: String?
       ) -> void
-
-      def to_hash: -> Dodopayments::Models::license_key
     end
   end
 end

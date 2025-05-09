@@ -8,8 +8,6 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       def initialize: (?request_options: Dodopayments::request_opts) -> void
-
-      def to_hash: -> Dodopayments::Models::customer_retrieve_params
     end
   end
 end

@@ -6,11 +6,11 @@ module Dodopayments
       # @api private
       #
       # @example
-      #   # `price` is a `Dodopayments::Models::Price`
+      #   # `price` is a `Dodopayments::Price`
       #   case price
-      #   when Dodopayments::Models::Price::OneTimePrice
+      #   when Dodopayments::Price::OneTimePrice
       #     puts(price.currency)
-      #   when Dodopayments::Models::Price::RecurringPrice
+      #   when Dodopayments::Price::RecurringPrice
       #     puts(price.discount)
       #   else
       #     puts(price)

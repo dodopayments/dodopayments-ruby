@@ -81,11 +81,14 @@ module Dodopayments
 
   LicenseKeyInstance = Dodopayments::Models::LicenseKeyInstance
 
-  LicenseKeyInstanceListParams = Dodopayments::Models::LicenseKeyInstanceListParams
+  LicenseKeyInstanceListParams =
+    Dodopayments::Models::LicenseKeyInstanceListParams
 
-  LicenseKeyInstanceRetrieveParams = Dodopayments::Models::LicenseKeyInstanceRetrieveParams
+  LicenseKeyInstanceRetrieveParams =
+    Dodopayments::Models::LicenseKeyInstanceRetrieveParams
 
-  LicenseKeyInstanceUpdateParams = Dodopayments::Models::LicenseKeyInstanceUpdateParams
+  LicenseKeyInstanceUpdateParams =
+    Dodopayments::Models::LicenseKeyInstanceUpdateParams
 
   LicenseKeyListParams = Dodopayments::Models::LicenseKeyListParams
 
@@ -97,7 +100,8 @@ module Dodopayments
 
   LicenseValidateParams = Dodopayments::Models::LicenseValidateParams
 
-  MiscListSupportedCountriesParams = Dodopayments::Models::MiscListSupportedCountriesParams
+  MiscListSupportedCountriesParams =
+    Dodopayments::Models::MiscListSupportedCountriesParams
 
   OneTimeProductCartItem = Dodopayments::Models::OneTimeProductCartItem
 
@@ -141,7 +145,8 @@ module Dodopayments
 
   Subscription = Dodopayments::Models::Subscription
 
-  SubscriptionChangePlanParams = Dodopayments::Models::SubscriptionChangePlanParams
+  SubscriptionChangePlanParams =
+    Dodopayments::Models::SubscriptionChangePlanParams
 
   SubscriptionChargeParams = Dodopayments::Models::SubscriptionChargeParams
 

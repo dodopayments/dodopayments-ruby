@@ -6,7 +6,7 @@ module Dodopayments
           String customer_id,
           ?send_email: bool?,
           ?request_options: Dodopayments::request_opts
-        ) -> Dodopayments::Models::CustomerPortalSession
+        ) -> Dodopayments::CustomerPortalSession
 
         def initialize: (client: Dodopayments::Client) -> void
       end

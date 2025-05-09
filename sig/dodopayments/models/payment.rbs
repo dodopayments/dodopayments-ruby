@@ -2,15 +2,15 @@ module Dodopayments
   module Models
     type payment =
       {
-        billing: Dodopayments::Models::BillingAddress,
+        billing: Dodopayments::BillingAddress,
         business_id: String,
         created_at: Time,
         currency: Dodopayments::Models::currency,
-        customer: Dodopayments::Models::CustomerLimitedDetails,
-        disputes: ::Array[Dodopayments::Models::Dispute],
+        customer: Dodopayments::CustomerLimitedDetails,
+        disputes: ::Array[Dodopayments::Dispute],
         metadata: ::Hash[Symbol, String],
         payment_id: String,
-        refunds: ::Array[Dodopayments::Models::Refund],
+        refunds: ::Array[Dodopayments::Refund],
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Models::currency,
         total_amount: Integer,
@@ -23,7 +23,7 @@ module Dodopayments
         payment_link: String?,
         payment_method: String?,
         payment_method_type: String?,
-        product_cart: ::Array[Dodopayments::Models::Payment::ProductCart]?,
+        product_cart: ::Array[Dodopayments::Payment::ProductCart]?,
         settlement_tax: Integer?,
         status: Dodopayments::Models::intent_status?,
         subscription_id: String?,
@@ -32,7 +32,7 @@ module Dodopayments
       }
 
     class Payment < Dodopayments::Internal::Type::BaseModel
-      attr_accessor billing: Dodopayments::Models::BillingAddress
+      attr_accessor billing: Dodopayments::BillingAddress
 
       attr_accessor business_id: String
 
@@ -40,15 +40,15 @@ module Dodopayments
 
       attr_accessor currency: Dodopayments::Models::currency
 
-      attr_accessor customer: Dodopayments::Models::CustomerLimitedDetails
+      attr_accessor customer: Dodopayments::CustomerLimitedDetails
 
-      attr_accessor disputes: ::Array[Dodopayments::Models::Dispute]
+      attr_accessor disputes: ::Array[Dodopayments::Dispute]
 
       attr_accessor metadata: ::Hash[Symbol, String]
 
       attr_accessor payment_id: String
 
-      attr_accessor refunds: ::Array[Dodopayments::Models::Refund]
+      attr_accessor refunds: ::Array[Dodopayments::Refund]
 
       attr_accessor settlement_amount: Integer
 
@@ -74,7 +74,7 @@ module Dodopayments
 
       attr_accessor payment_method_type: String?
 
-      attr_accessor product_cart: ::Array[Dodopayments::Models::Payment::ProductCart]?
+      attr_accessor product_cart: ::Array[Dodopayments::Payment::ProductCart]?
 
       attr_accessor settlement_tax: Integer?
 
@@ -87,15 +87,15 @@ module Dodopayments
       attr_accessor updated_at: Time?
 
       def initialize: (
-        billing: Dodopayments::Models::BillingAddress,
+        billing: Dodopayments::BillingAddress,
         business_id: String,
         created_at: Time,
         currency: Dodopayments::Models::currency,
-        customer: Dodopayments::Models::CustomerLimitedDetails,
-        disputes: ::Array[Dodopayments::Models::Dispute],
+        customer: Dodopayments::CustomerLimitedDetails,
+        disputes: ::Array[Dodopayments::Dispute],
         metadata: ::Hash[Symbol, String],
         payment_id: String,
-        refunds: ::Array[Dodopayments::Models::Refund],
+        refunds: ::Array[Dodopayments::Refund],
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Models::currency,
         total_amount: Integer,
@@ -108,15 +108,13 @@ module Dodopayments
         ?payment_link: String?,
         ?payment_method: String?,
         ?payment_method_type: String?,
-        ?product_cart: ::Array[Dodopayments::Models::Payment::ProductCart]?,
+        ?product_cart: ::Array[Dodopayments::Payment::ProductCart]?,
         ?settlement_tax: Integer?,
         ?status: Dodopayments::Models::intent_status?,
         ?subscription_id: String?,
         ?tax: Integer?,
         ?updated_at: Time?
       ) -> void
-
-      def to_hash: -> Dodopayments::Models::payment
 
       type product_cart = { product_id: String, quantity: Integer }
 
@@ -126,8 +124,6 @@ module Dodopayments
         attr_accessor quantity: Integer
 
         def initialize: (product_id: String, quantity: Integer) -> void
-
-        def to_hash: -> Dodopayments::Models::Payment::product_cart
       end
     end
   end

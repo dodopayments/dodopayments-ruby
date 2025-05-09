@@ -10,12 +10,12 @@ module Dodopayments
 
       # @!attribute interval
       #
-      #   @return [Symbol, Dodopayments::Models::TimeInterval]
-      required :interval, enum: -> { Dodopayments::Models::TimeInterval }
+      #   @return [Symbol, Dodopayments::TimeInterval]
+      required :interval, enum: -> { Dodopayments::TimeInterval }
 
       # @!method initialize(count:, interval:)
       #   @param count [Integer]
-      #   @param interval [Symbol, Dodopayments::Models::TimeInterval]
+      #   @param interval [Symbol, Dodopayments::TimeInterval]
     end
   end
 end

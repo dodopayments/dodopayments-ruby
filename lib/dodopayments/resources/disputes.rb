@@ -29,9 +29,9 @@ module Dodopayments
       #
       # @param customer_id [String, nil] Filter by customer_id
       #
-      # @param dispute_stage [Symbol, Dodopayments::Models::DisputeStage, nil] Filter by dispute stage
+      # @param dispute_stage [Symbol, Dodopayments::DisputeStage, nil] Filter by dispute stage
       #
-      # @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus, nil] Filter by dispute status
+      # @param dispute_status [Symbol, Dodopayments::DisputeStatus, nil] Filter by dispute status
       #
       # @param page_number [Integer, nil] Page number default is 0
       #
@@ -43,7 +43,7 @@ module Dodopayments
       #
       # @see Dodopayments::Models::DisputeListParams
       def list(params = {})
-        parsed, options = Dodopayments::Models::DisputeListParams.dump_request(params)
+        parsed, options = Dodopayments::DisputeListParams.dump_request(params)
         @client.request(
           method: :get,
           path: "disputes",

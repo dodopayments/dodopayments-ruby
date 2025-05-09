@@ -36,8 +36,6 @@ module Dodopayments
         ?status: Dodopayments::Models::subscription_status?,
         ?request_options: Dodopayments::request_opts
       ) -> void
-
-      def to_hash: -> Dodopayments::Models::subscription_list_params
     end
   end
 end

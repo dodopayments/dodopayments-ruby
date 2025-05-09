@@ -14,8 +14,6 @@ module Dodopayments
           ?send_email: bool?,
           ?request_options: Dodopayments::request_opts
         ) -> void
-
-        def to_hash: -> Dodopayments::Models::Customers::customer_portal_create_params
       end
     end
   end

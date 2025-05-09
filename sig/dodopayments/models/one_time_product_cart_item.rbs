@@ -15,8 +15,6 @@ module Dodopayments
         quantity: Integer,
         ?amount: Integer?
       ) -> void
-
-      def to_hash: -> Dodopayments::Models::one_time_product_cart_item
     end
   end
 end

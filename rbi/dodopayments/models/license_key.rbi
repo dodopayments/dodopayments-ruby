@@ -3,6 +3,9 @@
 module Dodopayments
   module Models
     class LicenseKey < Dodopayments::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
       # The unique identifier of the license key.
       sig { returns(String) }
       attr_accessor :id
@@ -35,7 +38,7 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :product_id
 
-      sig { returns(Dodopayments::Models::LicenseKeyStatus::TaggedSymbol) }
+      sig { returns(Dodopayments::LicenseKeyStatus::TaggedSymbol) }
       attr_accessor :status
 
       # The maximum number of activations allowed for this license key.
@@ -61,12 +64,11 @@ module Dodopayments
           key: String,
           payment_id: String,
           product_id: String,
-          status: Dodopayments::Models::LicenseKeyStatus::OrSymbol,
+          status: Dodopayments::LicenseKeyStatus::OrSymbol,
           activations_limit: T.nilable(Integer),
           expires_at: T.nilable(Time),
           subscription_id: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         # The unique identifier of the license key.
@@ -93,27 +95,29 @@ module Dodopayments
         # The unique identifier of the subscription associated with the license key, if
         # any.
         subscription_id: nil
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              id: String,
-              business_id: String,
-              created_at: Time,
-              customer_id: String,
-              instances_count: Integer,
-              key: String,
-              payment_id: String,
-              product_id: String,
-              status: Dodopayments::Models::LicenseKeyStatus::TaggedSymbol,
-              activations_limit: T.nilable(Integer),
-              expires_at: T.nilable(Time),
-              subscription_id: T.nilable(String)
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            id: String,
+            business_id: String,
+            created_at: Time,
+            customer_id: String,
+            instances_count: Integer,
+            key: String,
+            payment_id: String,
+            product_id: String,
+            status: Dodopayments::LicenseKeyStatus::TaggedSymbol,
+            activations_limit: T.nilable(Integer),
+            expires_at: T.nilable(Time),
+            subscription_id: T.nilable(String)
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

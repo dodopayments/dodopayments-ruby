@@ -8,7 +8,7 @@ class Dodopayments::Test::Resources::AddonsTest < Dodopayments::Test::ResourceTe
       @dodo_payments.addons.create(currency: :AED, name: "name", price: 0, tax_category: :digital_products)
 
     assert_pattern do
-      response => Dodopayments::Models::AddonResponse
+      response => Dodopayments::AddonResponse
     end
 
     assert_pattern do
@@ -16,10 +16,10 @@ class Dodopayments::Test::Resources::AddonsTest < Dodopayments::Test::ResourceTe
         id: String,
         business_id: String,
         created_at: Time,
-        currency: Dodopayments::Models::Currency,
+        currency: Dodopayments::Currency,
         name: String,
         price: Integer,
-        tax_category: Dodopayments::Models::TaxCategory,
+        tax_category: Dodopayments::TaxCategory,
         updated_at: Time,
         description: String | nil,
         image: String | nil
@@ -31,7 +31,7 @@ class Dodopayments::Test::Resources::AddonsTest < Dodopayments::Test::ResourceTe
     response = @dodo_payments.addons.retrieve("id")
 
     assert_pattern do
-      response => Dodopayments::Models::AddonResponse
+      response => Dodopayments::AddonResponse
     end
 
     assert_pattern do
@@ -39,10 +39,10 @@ class Dodopayments::Test::Resources::AddonsTest < Dodopayments::Test::ResourceTe
         id: String,
         business_id: String,
         created_at: Time,
-        currency: Dodopayments::Models::Currency,
+        currency: Dodopayments::Currency,
         name: String,
         price: Integer,
-        tax_category: Dodopayments::Models::TaxCategory,
+        tax_category: Dodopayments::TaxCategory,
         updated_at: Time,
         description: String | nil,
         image: String | nil
@@ -54,7 +54,7 @@ class Dodopayments::Test::Resources::AddonsTest < Dodopayments::Test::ResourceTe
     response = @dodo_payments.addons.update("id")
 
     assert_pattern do
-      response => Dodopayments::Models::AddonResponse
+      response => Dodopayments::AddonResponse
     end
 
     assert_pattern do
@@ -62,10 +62,10 @@ class Dodopayments::Test::Resources::AddonsTest < Dodopayments::Test::ResourceTe
         id: String,
         business_id: String,
         created_at: Time,
-        currency: Dodopayments::Models::Currency,
+        currency: Dodopayments::Currency,
         name: String,
         price: Integer,
-        tax_category: Dodopayments::Models::TaxCategory,
+        tax_category: Dodopayments::TaxCategory,
         updated_at: Time,
         description: String | nil,
         image: String | nil
@@ -84,7 +84,7 @@ class Dodopayments::Test::Resources::AddonsTest < Dodopayments::Test::ResourceTe
     return if row.nil?
 
     assert_pattern do
-      row => Dodopayments::Models::AddonResponse
+      row => Dodopayments::AddonResponse
     end
 
     assert_pattern do
@@ -92,10 +92,10 @@ class Dodopayments::Test::Resources::AddonsTest < Dodopayments::Test::ResourceTe
         id: String,
         business_id: String,
         created_at: Time,
-        currency: Dodopayments::Models::Currency,
+        currency: Dodopayments::Currency,
         name: String,
         price: Integer,
-        tax_category: Dodopayments::Models::TaxCategory,
+        tax_category: Dodopayments::TaxCategory,
         updated_at: Time,
         description: String | nil,
         image: String | nil

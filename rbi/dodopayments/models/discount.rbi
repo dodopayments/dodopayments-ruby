@@ -3,6 +3,9 @@
 module Dodopayments
   module Models
     class Discount < Dodopayments::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
       # The discount amount.
       #
       # - If `discount_type` is `percentage`, this is in **basis points** (e.g., 540 =>
@@ -35,7 +38,7 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :times_used
 
-      sig { returns(Dodopayments::Models::DiscountType::TaggedSymbol) }
+      sig { returns(Dodopayments::DiscountType::TaggedSymbol) }
       attr_accessor :type
 
       # Optional date/time after which discount is expired.
@@ -59,12 +62,11 @@ module Dodopayments
           discount_id: String,
           restricted_to: T::Array[String],
           times_used: Integer,
-          type: Dodopayments::Models::DiscountType::OrSymbol,
+          type: Dodopayments::DiscountType::OrSymbol,
           expires_at: T.nilable(Time),
           name: T.nilable(String),
           usage_limit: T.nilable(Integer)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         # The discount amount.
@@ -92,26 +94,28 @@ module Dodopayments
         name: nil,
         # Usage limit for this discount, if any.
         usage_limit: nil
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              amount: Integer,
-              business_id: String,
-              code: String,
-              created_at: Time,
-              discount_id: String,
-              restricted_to: T::Array[String],
-              times_used: Integer,
-              type: Dodopayments::Models::DiscountType::TaggedSymbol,
-              expires_at: T.nilable(Time),
-              name: T.nilable(String),
-              usage_limit: T.nilable(Integer)
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            amount: Integer,
+            business_id: String,
+            code: String,
+            created_at: Time,
+            discount_id: String,
+            restricted_to: T::Array[String],
+            times_used: Integer,
+            type: Dodopayments::DiscountType::TaggedSymbol,
+            expires_at: T.nilable(Time),
+            name: T.nilable(String),
+            usage_limit: T.nilable(Integer)
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

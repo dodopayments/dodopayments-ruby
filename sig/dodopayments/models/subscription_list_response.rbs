@@ -2,10 +2,10 @@ module Dodopayments
   module Models
     type subscription_list_response =
       {
-        billing: Dodopayments::Models::BillingAddress,
+        billing: Dodopayments::BillingAddress,
         created_at: Time,
         currency: Dodopayments::Models::currency,
-        customer: Dodopayments::Models::CustomerLimitedDetails,
+        customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
         next_billing_date: Time,
         on_demand: bool,
@@ -26,13 +26,13 @@ module Dodopayments
       }
 
     class SubscriptionListResponse < Dodopayments::Internal::Type::BaseModel
-      attr_accessor billing: Dodopayments::Models::BillingAddress
+      attr_accessor billing: Dodopayments::BillingAddress
 
       attr_accessor created_at: Time
 
       attr_accessor currency: Dodopayments::Models::currency
 
-      attr_accessor customer: Dodopayments::Models::CustomerLimitedDetails
+      attr_accessor customer: Dodopayments::CustomerLimitedDetails
 
       attr_accessor metadata: ::Hash[Symbol, String]
 
@@ -69,10 +69,10 @@ module Dodopayments
       attr_accessor discount_id: String?
 
       def initialize: (
-        billing: Dodopayments::Models::BillingAddress,
+        billing: Dodopayments::BillingAddress,
         created_at: Time,
         currency: Dodopayments::Models::currency,
-        customer: Dodopayments::Models::CustomerLimitedDetails,
+        customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
         next_billing_date: Time,
         on_demand: bool,
@@ -91,8 +91,6 @@ module Dodopayments
         ?cancelled_at: Time?,
         ?discount_id: String?
       ) -> void
-
-      def to_hash: -> Dodopayments::Models::subscription_list_response
     end
   end
 end

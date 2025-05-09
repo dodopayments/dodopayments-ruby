@@ -18,13 +18,13 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
     assert_pattern do
       response => {
         client_secret: String,
-        customer: Dodopayments::Models::CustomerLimitedDetails,
+        customer: Dodopayments::CustomerLimitedDetails,
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         payment_id: String,
         total_amount: Integer,
         discount_id: String | nil,
         payment_link: String | nil,
-        product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::OneTimeProductCartItem]) | nil
+        product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem]) | nil
       }
     end
   end
@@ -33,24 +33,24 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
     response = @dodo_payments.payments.retrieve("payment_id")
 
     assert_pattern do
-      response => Dodopayments::Models::Payment
+      response => Dodopayments::Payment
     end
 
     assert_pattern do
       response => {
-        billing: Dodopayments::Models::BillingAddress,
+        billing: Dodopayments::BillingAddress,
         business_id: String,
         created_at: Time,
-        currency: Dodopayments::Models::Currency,
-        customer: Dodopayments::Models::CustomerLimitedDetails,
-        disputes: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::Dispute]),
+        currency: Dodopayments::Currency,
+        customer: Dodopayments::CustomerLimitedDetails,
+        disputes: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Dispute]),
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         payment_id: String,
-        refunds: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::Refund]),
+        refunds: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Refund]),
         settlement_amount: Integer,
-        settlement_currency: Dodopayments::Models::Currency,
+        settlement_currency: Dodopayments::Currency,
         total_amount: Integer,
-        card_issuing_country: Dodopayments::Models::CountryCode | nil,
+        card_issuing_country: Dodopayments::CountryCode | nil,
         card_last_four: String | nil,
         card_network: String | nil,
         card_type: String | nil,
@@ -59,9 +59,9 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         payment_link: String | nil,
         payment_method: String | nil,
         payment_method_type: String | nil,
-        product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::Payment::ProductCart]) | nil,
+        product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Payment::ProductCart]) | nil,
         settlement_tax: Integer | nil,
-        status: Dodopayments::Models::IntentStatus | nil,
+        status: Dodopayments::IntentStatus | nil,
         subscription_id: String | nil,
         tax: Integer | nil,
         updated_at: Time | nil
@@ -86,14 +86,14 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
     assert_pattern do
       row => {
         created_at: Time,
-        currency: Dodopayments::Models::Currency,
-        customer: Dodopayments::Models::CustomerLimitedDetails,
+        currency: Dodopayments::Currency,
+        customer: Dodopayments::CustomerLimitedDetails,
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         payment_id: String,
         total_amount: Integer,
         payment_method: String | nil,
         payment_method_type: String | nil,
-        status: Dodopayments::Models::IntentStatus | nil,
+        status: Dodopayments::IntentStatus | nil,
         subscription_id: String | nil
       }
     end

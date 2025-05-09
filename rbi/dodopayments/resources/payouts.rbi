@@ -7,9 +7,12 @@ module Dodopayments
         params(
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: Dodopayments::RequestOpts
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(
+          Dodopayments::Internal::DefaultPageNumberPagination[
+            Dodopayments::Models::PayoutListResponse
+          ]
         )
-          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::PayoutListResponse])
       end
       def list(
         # Page number default is 0
@@ -17,10 +20,13 @@ module Dodopayments
         # Page size default is 10 max is 100
         page_size: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:); end
+      def self.new(client:)
+      end
     end
   end
 end

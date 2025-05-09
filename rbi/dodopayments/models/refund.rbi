@@ -3,6 +3,9 @@
 module Dodopayments
   module Models
     class Refund < Dodopayments::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
       # The unique identifier of the business issuing the refund.
       sig { returns(String) }
       attr_accessor :business_id
@@ -19,14 +22,14 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :refund_id
 
-      sig { returns(Dodopayments::Models::RefundStatus::TaggedSymbol) }
+      sig { returns(Dodopayments::RefundStatus::TaggedSymbol) }
       attr_accessor :status
 
       # The refunded amount.
       sig { returns(T.nilable(Integer)) }
       attr_accessor :amount
 
-      sig { returns(T.nilable(Dodopayments::Models::Currency::TaggedSymbol)) }
+      sig { returns(T.nilable(Dodopayments::Currency::TaggedSymbol)) }
       attr_accessor :currency
 
       # The reason provided for the refund, if any. Optional.
@@ -39,12 +42,11 @@ module Dodopayments
           created_at: Time,
           payment_id: String,
           refund_id: String,
-          status: Dodopayments::Models::RefundStatus::OrSymbol,
+          status: Dodopayments::RefundStatus::OrSymbol,
           amount: T.nilable(Integer),
-          currency: T.nilable(Dodopayments::Models::Currency::OrSymbol),
+          currency: T.nilable(Dodopayments::Currency::OrSymbol),
           reason: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         # The unique identifier of the business issuing the refund.
@@ -61,23 +63,25 @@ module Dodopayments
         currency: nil,
         # The reason provided for the refund, if any. Optional.
         reason: nil
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              business_id: String,
-              created_at: Time,
-              payment_id: String,
-              refund_id: String,
-              status: Dodopayments::Models::RefundStatus::TaggedSymbol,
-              amount: T.nilable(Integer),
-              currency: T.nilable(Dodopayments::Models::Currency::TaggedSymbol),
-              reason: T.nilable(String)
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            business_id: String,
+            created_at: Time,
+            payment_id: String,
+            refund_id: String,
+            status: Dodopayments::RefundStatus::TaggedSymbol,
+            amount: T.nilable(Integer),
+            currency: T.nilable(Dodopayments::Currency::TaggedSymbol),
+            reason: T.nilable(String)
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

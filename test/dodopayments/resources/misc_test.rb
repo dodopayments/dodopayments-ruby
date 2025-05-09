@@ -7,7 +7,7 @@ class Dodopayments::Test::Resources::MiscTest < Dodopayments::Test::ResourceTest
     response = @dodo_payments.misc.list_supported_countries
 
     assert_pattern do
-      response => ^(Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::Models::CountryCode])
+      response => ^(Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::CountryCode])
     end
   end
 end

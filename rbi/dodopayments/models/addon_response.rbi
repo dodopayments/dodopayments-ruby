@@ -3,6 +3,9 @@
 module Dodopayments
   module Models
     class AddonResponse < Dodopayments::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
       # id of the Addon
       sig { returns(String) }
       attr_accessor :id
@@ -15,7 +18,7 @@ module Dodopayments
       sig { returns(Time) }
       attr_accessor :created_at
 
-      sig { returns(Dodopayments::Models::Currency::TaggedSymbol) }
+      sig { returns(Dodopayments::Currency::TaggedSymbol) }
       attr_accessor :currency
 
       # Name of the Addon
@@ -28,7 +31,7 @@ module Dodopayments
 
       # Represents the different categories of taxation applicable to various products
       # and services.
-      sig { returns(Dodopayments::Models::TaxCategory::TaggedSymbol) }
+      sig { returns(Dodopayments::TaxCategory::TaggedSymbol) }
       attr_accessor :tax_category
 
       # Updated time
@@ -48,15 +51,14 @@ module Dodopayments
           id: String,
           business_id: String,
           created_at: Time,
-          currency: Dodopayments::Models::Currency::OrSymbol,
+          currency: Dodopayments::Currency::OrSymbol,
           name: String,
           price: Integer,
-          tax_category: Dodopayments::Models::TaxCategory::OrSymbol,
+          tax_category: Dodopayments::TaxCategory::OrSymbol,
           updated_at: Time,
           description: T.nilable(String),
           image: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         # id of the Addon
@@ -79,25 +81,27 @@ module Dodopayments
         description: nil,
         # Image of the Addon
         image: nil
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              id: String,
-              business_id: String,
-              created_at: Time,
-              currency: Dodopayments::Models::Currency::TaggedSymbol,
-              name: String,
-              price: Integer,
-              tax_category: Dodopayments::Models::TaxCategory::TaggedSymbol,
-              updated_at: Time,
-              description: T.nilable(String),
-              image: T.nilable(String)
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            id: String,
+            business_id: String,
+            created_at: Time,
+            currency: Dodopayments::Currency::TaggedSymbol,
+            name: String,
+            price: Integer,
+            tax_category: Dodopayments::TaxCategory::TaggedSymbol,
+            updated_at: Time,
+            description: T.nilable(String),
+            image: T.nilable(String)
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

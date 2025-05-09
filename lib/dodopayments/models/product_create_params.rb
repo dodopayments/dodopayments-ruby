@@ -9,15 +9,15 @@ module Dodopayments
 
       # @!attribute price
       #
-      #   @return [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
-      required :price, union: -> { Dodopayments::Models::Price }
+      #   @return [Dodopayments::Price::OneTimePrice, Dodopayments::Price::RecurringPrice]
+      required :price, union: -> { Dodopayments::Price }
 
       # @!attribute tax_category
       #   Represents the different categories of taxation applicable to various products
       #   and services.
       #
-      #   @return [Symbol, Dodopayments::Models::TaxCategory]
-      required :tax_category, enum: -> { Dodopayments::Models::TaxCategory }
+      #   @return [Symbol, Dodopayments::TaxCategory]
+      required :tax_category, enum: -> { Dodopayments::TaxCategory }
 
       # @!attribute addons
       #   Addons available for subscription product
@@ -45,8 +45,8 @@ module Dodopayments
 
       # @!attribute license_key_duration
       #
-      #   @return [Dodopayments::Models::LicenseKeyDuration, nil]
-      optional :license_key_duration, -> { Dodopayments::Models::LicenseKeyDuration }, nil?: true
+      #   @return [Dodopayments::LicenseKeyDuration, nil]
+      optional :license_key_duration, -> { Dodopayments::LicenseKeyDuration }, nil?: true
 
       # @!attribute license_key_enabled
       #   When true, generates and sends a license key to your customer. Defaults to false
@@ -64,10 +64,9 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductCreateParams} for more details.
       #
-      #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
+      #   @param price [Dodopayments::Price::OneTimePrice, Dodopayments::Price::RecurringPrice]
       #
-      #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Represents the different categories of taxation applicable to various products a
-      #   ...
+      #   @param tax_category [Symbol, Dodopayments::TaxCategory] Represents the different categories of taxation applicable to various products a
       #
       #   @param addons [Array<String>, nil] Addons available for subscription product
       #
@@ -75,11 +74,11 @@ module Dodopayments
       #
       #   @param license_key_activation_message [String, nil] Optional message displayed during license key activation
       #
-      #   @param license_key_activations_limit [Integer, nil] The number of times the license key can be activated. ...
+      #   @param license_key_activations_limit [Integer, nil] The number of times the license key can be activated.
       #
-      #   @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil]
+      #   @param license_key_duration [Dodopayments::LicenseKeyDuration, nil]
       #
-      #   @param license_key_enabled [Boolean, nil] When true, generates and sends a license key to your customer. ...
+      #   @param license_key_enabled [Boolean, nil] When true, generates and sends a license key to your customer.
       #
       #   @param name [String, nil] Optional name of the product
       #

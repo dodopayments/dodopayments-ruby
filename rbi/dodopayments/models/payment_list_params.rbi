@@ -6,6 +6,9 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
       # Get events after this created time
       sig { returns(T.nilable(Time)) }
       attr_accessor :created_at_gte
@@ -27,7 +30,7 @@ module Dodopayments
       attr_accessor :page_size
 
       # Filter by status
-      sig { returns(T.nilable(Dodopayments::Models::IntentStatus::OrSymbol)) }
+      sig { returns(T.nilable(Dodopayments::IntentStatus::OrSymbol)) }
       attr_accessor :status
 
       # Filter by subscription id
@@ -41,11 +44,10 @@ module Dodopayments
           customer_id: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          status: T.nilable(Dodopayments::Models::IntentStatus::OrSymbol),
+          status: T.nilable(Dodopayments::IntentStatus::OrSymbol),
           subscription_id: T.nilable(String),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
       def self.new(
         # Get events after this created time
@@ -63,23 +65,25 @@ module Dodopayments
         # Filter by subscription id
         subscription_id: nil,
         request_options: {}
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              created_at_gte: T.nilable(Time),
-              created_at_lte: T.nilable(Time),
-              customer_id: T.nilable(String),
-              page_number: T.nilable(Integer),
-              page_size: T.nilable(Integer),
-              status: T.nilable(Dodopayments::Models::IntentStatus::OrSymbol),
-              subscription_id: T.nilable(String),
-              request_options: Dodopayments::RequestOptions
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            created_at_gte: T.nilable(Time),
+            created_at_lte: T.nilable(Time),
+            customer_id: T.nilable(String),
+            page_number: T.nilable(Integer),
+            page_size: T.nilable(Integer),
+            status: T.nilable(Dodopayments::IntentStatus::OrSymbol),
+            subscription_id: T.nilable(String),
+            request_options: Dodopayments::RequestOptions
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

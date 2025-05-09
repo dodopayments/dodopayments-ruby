@@ -19,7 +19,6 @@ module Dodopayments
       #   {Dodopayments::Models::SubscriptionChargeParams} for more details.
       #
       #   @param product_price [Integer] The product price. Represented in the lowest denomination of the currency (e.g.,
-      #   ...
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end

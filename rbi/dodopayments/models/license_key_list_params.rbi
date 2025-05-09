@@ -6,6 +6,9 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
       # Filter by customer ID
       sig { returns(T.nilable(String)) }
       attr_accessor :customer_id
@@ -23,7 +26,7 @@ module Dodopayments
       attr_accessor :product_id
 
       # Filter by license key status
-      sig { returns(T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol)) }
+      sig { returns(T.nilable(Dodopayments::LicenseKeyStatus::OrSymbol)) }
       attr_accessor :status
 
       sig do
@@ -32,10 +35,9 @@ module Dodopayments
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           product_id: T.nilable(String),
-          status: T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          status: T.nilable(Dodopayments::LicenseKeyStatus::OrSymbol),
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
       def self.new(
         # Filter by customer ID
@@ -49,21 +51,23 @@ module Dodopayments
         # Filter by license key status
         status: nil,
         request_options: {}
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              customer_id: T.nilable(String),
-              page_number: T.nilable(Integer),
-              page_size: T.nilable(Integer),
-              product_id: T.nilable(String),
-              status: T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol),
-              request_options: Dodopayments::RequestOptions
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            customer_id: T.nilable(String),
+            page_number: T.nilable(Integer),
+            page_size: T.nilable(Integer),
+            product_id: T.nilable(String),
+            status: T.nilable(Dodopayments::LicenseKeyStatus::OrSymbol),
+            request_options: Dodopayments::RequestOptions
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

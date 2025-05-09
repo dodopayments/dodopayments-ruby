@@ -8,29 +8,28 @@ module Dodopayments
       #
       # @overload create(currency:, name:, price:, tax_category:, description: nil, request_options: {})
       #
-      # @param currency [Symbol, Dodopayments::Models::Currency]
+      # @param currency [Symbol, Dodopayments::Currency]
       #
       # @param name [String] Name of the Addon
       #
       # @param price [Integer] Amount of the addon
       #
-      # @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Represents the different categories of taxation applicable to various products a
-      # ...
+      # @param tax_category [Symbol, Dodopayments::TaxCategory] Represents the different categories of taxation applicable to various products a
       #
       # @param description [String, nil] Optional description of the Addon
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::AddonResponse]
+      # @return [Dodopayments::AddonResponse]
       #
       # @see Dodopayments::Models::AddonCreateParams
       def create(params)
-        parsed, options = Dodopayments::Models::AddonCreateParams.dump_request(params)
+        parsed, options = Dodopayments::AddonCreateParams.dump_request(params)
         @client.request(
           method: :post,
           path: "addons",
           body: parsed,
-          model: Dodopayments::Models::AddonResponse,
+          model: Dodopayments::AddonResponse,
           options: options
         )
       end
@@ -41,14 +40,14 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::AddonResponse]
+      # @return [Dodopayments::AddonResponse]
       #
       # @see Dodopayments::Models::AddonRetrieveParams
       def retrieve(id, params = {})
         @client.request(
           method: :get,
           path: ["addons/%1$s", id],
-          model: Dodopayments::Models::AddonResponse,
+          model: Dodopayments::AddonResponse,
           options: params[:request_options]
         )
       end
@@ -60,7 +59,7 @@ module Dodopayments
       #
       # @param id [String] Addon Id
       #
-      # @param currency [Symbol, Dodopayments::Models::Currency, nil]
+      # @param currency [Symbol, Dodopayments::Currency, nil]
       #
       # @param description [String, nil] Description of the Addon, optional and must be at most 1000 characters.
       #
@@ -70,21 +69,20 @@ module Dodopayments
       #
       # @param price [Integer, nil] Amount of the addon
       #
-      # @param tax_category [Symbol, Dodopayments::Models::TaxCategory, nil] Represents the different categories of taxation applicable to various products a
-      # ...
+      # @param tax_category [Symbol, Dodopayments::TaxCategory, nil] Represents the different categories of taxation applicable to various products a
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::AddonResponse]
+      # @return [Dodopayments::AddonResponse]
       #
       # @see Dodopayments::Models::AddonUpdateParams
       def update(id, params = {})
-        parsed, options = Dodopayments::Models::AddonUpdateParams.dump_request(params)
+        parsed, options = Dodopayments::AddonUpdateParams.dump_request(params)
         @client.request(
           method: :patch,
           path: ["addons/%1$s", id],
           body: parsed,
-          model: Dodopayments::Models::AddonResponse,
+          model: Dodopayments::AddonResponse,
           options: options
         )
       end
@@ -97,17 +95,17 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::AddonResponse>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::AddonResponse>]
       #
       # @see Dodopayments::Models::AddonListParams
       def list(params = {})
-        parsed, options = Dodopayments::Models::AddonListParams.dump_request(params)
+        parsed, options = Dodopayments::AddonListParams.dump_request(params)
         @client.request(
           method: :get,
           path: "addons",
           query: parsed,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
-          model: Dodopayments::Models::AddonResponse,
+          model: Dodopayments::AddonResponse,
           options: options
         )
       end

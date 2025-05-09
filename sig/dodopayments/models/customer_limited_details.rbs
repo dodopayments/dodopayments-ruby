@@ -11,8 +11,6 @@ module Dodopayments
       attr_accessor name: String
 
       def initialize: (customer_id: String, email: String, name: String) -> void
-
-      def to_hash: -> Dodopayments::Models::customer_limited_details
     end
   end
 end

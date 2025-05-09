@@ -7,7 +7,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
     response = @dodo_payments.customers.create(email: "email", name: "name")
 
     assert_pattern do
-      response => Dodopayments::Models::Customer
+      response => Dodopayments::Customer
     end
 
     assert_pattern do
@@ -26,7 +26,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
     response = @dodo_payments.customers.retrieve("customer_id")
 
     assert_pattern do
-      response => Dodopayments::Models::Customer
+      response => Dodopayments::Customer
     end
 
     assert_pattern do
@@ -45,7 +45,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
     response = @dodo_payments.customers.update("customer_id")
 
     assert_pattern do
-      response => Dodopayments::Models::Customer
+      response => Dodopayments::Customer
     end
 
     assert_pattern do
@@ -71,7 +71,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
     return if row.nil?
 
     assert_pattern do
-      row => Dodopayments::Models::Customer
+      row => Dodopayments::Customer
     end
 
     assert_pattern do

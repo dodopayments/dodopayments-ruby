@@ -6,32 +6,38 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      sig { returns(T.nilable(Dodopayments::Models::BillingAddress)) }
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
+      sig { returns(T.nilable(Dodopayments::BillingAddress)) }
       attr_reader :billing
 
       sig do
-        params(billing: T.nilable(T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash)))
-          .void
+        params(billing: T.nilable(Dodopayments::BillingAddress::OrHash)).void
       end
       attr_writer :billing
 
-      sig { returns(T.nilable(Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand)) }
+      sig do
+        returns(
+          T.nilable(Dodopayments::SubscriptionUpdateParams::DisableOnDemand)
+        )
+      end
       attr_reader :disable_on_demand
 
       sig do
         params(
-          disable_on_demand: T.nilable(
-            T.any(Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, Dodopayments::Internal::AnyHash)
-          )
-        )
-          .void
+          disable_on_demand:
+            T.nilable(
+              Dodopayments::SubscriptionUpdateParams::DisableOnDemand::OrHash
+            )
+        ).void
       end
       attr_writer :disable_on_demand
 
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_accessor :metadata
 
-      sig { returns(T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol)) }
+      sig { returns(T.nilable(Dodopayments::SubscriptionStatus::OrSymbol)) }
       attr_accessor :status
 
       sig { returns(T.nilable(String)) }
@@ -39,16 +45,16 @@ module Dodopayments
 
       sig do
         params(
-          billing: T.nilable(T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash)),
-          disable_on_demand: T.nilable(
-            T.any(Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, Dodopayments::Internal::AnyHash)
-          ),
+          billing: T.nilable(Dodopayments::BillingAddress::OrHash),
+          disable_on_demand:
+            T.nilable(
+              Dodopayments::SubscriptionUpdateParams::DisableOnDemand::OrHash
+            ),
           metadata: T.nilable(T::Hash[Symbol, String]),
-          status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
+          status: T.nilable(Dodopayments::SubscriptionStatus::OrSymbol),
           tax_id: T.nilable(String),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
       def self.new(
         billing: nil,
@@ -61,29 +67,37 @@ module Dodopayments
       end
 
       sig do
-        override
-          .returns(
-            {
-              billing: T.nilable(Dodopayments::Models::BillingAddress),
-              disable_on_demand: T.nilable(Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand),
-              metadata: T.nilable(T::Hash[Symbol, String]),
-              status: T.nilable(Dodopayments::Models::SubscriptionStatus::OrSymbol),
-              tax_id: T.nilable(String),
-              request_options: Dodopayments::RequestOptions
-            }
-          )
+        override.returns(
+          {
+            billing: T.nilable(Dodopayments::BillingAddress),
+            disable_on_demand:
+              T.nilable(
+                Dodopayments::SubscriptionUpdateParams::DisableOnDemand
+              ),
+            metadata: T.nilable(T::Hash[Symbol, String]),
+            status: T.nilable(Dodopayments::SubscriptionStatus::OrSymbol),
+            tax_id: T.nilable(String),
+            request_options: Dodopayments::RequestOptions
+          }
+        )
       end
-      def to_hash; end
+      def to_hash
+      end
 
       class DisableOnDemand < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
         sig { returns(Time) }
         attr_accessor :next_billing_date
 
         sig { params(next_billing_date: Time).returns(T.attached_class) }
-        def self.new(next_billing_date:); end
+        def self.new(next_billing_date:)
+        end
 
-        sig { override.returns({next_billing_date: Time}) }
-        def to_hash; end
+        sig { override.returns({ next_billing_date: Time }) }
+        def to_hash
+        end
       end
     end
   end

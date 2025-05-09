@@ -9,20 +9,22 @@ module Dodopayments
 
       # @!attribute billing
       #
-      #   @return [Dodopayments::Models::BillingAddress]
-      required :billing, -> { Dodopayments::Models::BillingAddress }
+      #   @return [Dodopayments::BillingAddress]
+      required :billing, -> { Dodopayments::BillingAddress }
 
       # @!attribute customer
       #
-      #   @return [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
-      required :customer, union: -> { Dodopayments::Models::CustomerRequest }
+      #   @return [Dodopayments::AttachExistingCustomer, Dodopayments::CreateNewCustomer]
+      required :customer, union: -> { Dodopayments::CustomerRequest }
 
       # @!attribute product_cart
       #   List of products in the cart. Must contain at least 1 and at most 100 items.
       #
-      #   @return [Array<Dodopayments::Models::OneTimeProductCartItem>]
+      #   @return [Array<Dodopayments::OneTimeProductCartItem>]
       required :product_cart,
-               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::OneTimeProductCartItem] }
+               -> {
+                 Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem]
+               }
 
       # @!attribute allowed_payment_method_types
       #   List of payment methods allowed during checkout.
@@ -32,15 +34,17 @@ module Dodopayments
       #   Availability still depends on other factors (e.g., customer location, merchant
       #   settings).
       #
-      #   @return [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil]
+      #   @return [Array<Symbol, Dodopayments::PaymentCreateParams::AllowedPaymentMethodType>, nil]
       optional :allowed_payment_method_types,
-               -> { Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType] },
+               -> {
+                 Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::PaymentCreateParams::AllowedPaymentMethodType]
+               },
                nil?: true
 
       # @!attribute billing_currency
       #
-      #   @return [Symbol, Dodopayments::Models::Currency, nil]
-      optional :billing_currency, enum: -> { Dodopayments::Models::Currency }, nil?: true
+      #   @return [Symbol, Dodopayments::Currency, nil]
+      optional :billing_currency, enum: -> { Dodopayments::Currency }, nil?: true
 
       # @!attribute discount_code
       #   Discount Code to apply to the transaction
@@ -83,15 +87,15 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::PaymentCreateParams} for more details.
       #
-      #   @param billing [Dodopayments::Models::BillingAddress]
+      #   @param billing [Dodopayments::BillingAddress]
       #
-      #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
+      #   @param customer [Dodopayments::AttachExistingCustomer, Dodopayments::CreateNewCustomer]
       #
-      #   @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>] List of products in the cart. Must contain at least 1 and at most 100 items.
+      #   @param product_cart [Array<Dodopayments::OneTimeProductCartItem>] List of products in the cart. Must contain at least 1 and at most 100 items.
       #
-      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout. ...
+      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::PaymentCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout.
       #
-      #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil]
+      #   @param billing_currency [Symbol, Dodopayments::Currency, nil]
       #
       #   @param discount_code [String, nil] Discount Code to apply to the transaction
       #
@@ -99,12 +103,11 @@ module Dodopayments
       #
       #   @param payment_link [Boolean, nil] Whether to generate a payment link. Defaults to false if not specified.
       #
-      #   @param return_url [String, nil] Optional URL to redirect the customer after payment. ...
+      #   @param return_url [String, nil] Optional URL to redirect the customer after payment.
       #
-      #   @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer ...
+      #   @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer
       #
       #   @param tax_id [String, nil] Tax ID in case the payment is B2B. If tax id validation fails the payment creati
-      #   ...
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 

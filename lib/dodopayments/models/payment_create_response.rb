@@ -13,8 +13,8 @@ module Dodopayments
 
       # @!attribute customer
       #
-      #   @return [Dodopayments::Models::CustomerLimitedDetails]
-      required :customer, -> { Dodopayments::Models::CustomerLimitedDetails }
+      #   @return [Dodopayments::CustomerLimitedDetails]
+      required :customer, -> { Dodopayments::CustomerLimitedDetails }
 
       # @!attribute metadata
       #
@@ -48,18 +48,18 @@ module Dodopayments
       # @!attribute product_cart
       #   Optional list of products included in the payment
       #
-      #   @return [Array<Dodopayments::Models::OneTimeProductCartItem>, nil]
+      #   @return [Array<Dodopayments::OneTimeProductCartItem>, nil]
       optional :product_cart,
-               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::OneTimeProductCartItem] },
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem] },
                nil?: true
 
       # @!method initialize(client_secret:, customer:, metadata:, payment_id:, total_amount:, discount_id: nil, payment_link: nil, product_cart: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::PaymentCreateResponse} for more details.
       #
-      #   @param client_secret [String] Client secret used to load Dodo checkout SDK ...
+      #   @param client_secret [String] Client secret used to load Dodo checkout SDK
       #
-      #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
+      #   @param customer [Dodopayments::CustomerLimitedDetails]
       #
       #   @param metadata [Hash{Symbol=>String}]
       #
@@ -71,7 +71,7 @@ module Dodopayments
       #
       #   @param payment_link [String, nil] Optional URL to a hosted payment page
       #
-      #   @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil] Optional list of products included in the payment
+      #   @param product_cart [Array<Dodopayments::OneTimeProductCartItem>, nil] Optional list of products included in the payment
     end
   end
 end

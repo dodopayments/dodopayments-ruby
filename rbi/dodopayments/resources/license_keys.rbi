@@ -3,21 +3,27 @@
 module Dodopayments
   module Resources
     class LicenseKeys
-      sig { params(id: String, request_options: Dodopayments::RequestOpts).returns(Dodopayments::Models::LicenseKey) }
+      sig do
+        params(
+          id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::LicenseKey)
+      end
       def retrieve(
         # License key ID
         id,
         request_options: {}
-      ); end
+      )
+      end
+
       sig do
         params(
           id: String,
           activations_limit: T.nilable(Integer),
           disabled: T.nilable(T::Boolean),
           expires_at: T.nilable(Time),
-          request_options: Dodopayments::RequestOpts
-        )
-          .returns(Dodopayments::Models::LicenseKey)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::LicenseKey)
       end
       def update(
         # License key ID
@@ -32,17 +38,22 @@ module Dodopayments
         # remove the expiration date, or omit this field to leave it unchanged.
         expires_at: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       sig do
         params(
           customer_id: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           product_id: T.nilable(String),
-          status: T.nilable(Dodopayments::Models::LicenseKeyStatus::OrSymbol),
-          request_options: Dodopayments::RequestOpts
+          status: T.nilable(Dodopayments::LicenseKeyStatus::OrSymbol),
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(
+          Dodopayments::Internal::DefaultPageNumberPagination[
+            Dodopayments::LicenseKey
+          ]
         )
-          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::LicenseKey])
       end
       def list(
         # Filter by customer ID
@@ -56,10 +67,13 @@ module Dodopayments
         # Filter by license key status
         status: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:); end
+      def self.new(client:)
+      end
     end
   end
 end

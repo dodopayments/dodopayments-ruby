@@ -13,16 +13,16 @@ module Dodopayments
       # @param phone_number [String, nil]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::Customer]
+      # @return [Dodopayments::Customer]
       #
       # @see Dodopayments::Models::CustomerCreateParams
       def create(params)
-        parsed, options = Dodopayments::Models::CustomerCreateParams.dump_request(params)
+        parsed, options = Dodopayments::CustomerCreateParams.dump_request(params)
         @client.request(
           method: :post,
           path: "customers",
           body: parsed,
-          model: Dodopayments::Models::Customer,
+          model: Dodopayments::Customer,
           options: options
         )
       end
@@ -33,14 +33,14 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::Customer]
+      # @return [Dodopayments::Customer]
       #
       # @see Dodopayments::Models::CustomerRetrieveParams
       def retrieve(customer_id, params = {})
         @client.request(
           method: :get,
           path: ["customers/%1$s", customer_id],
-          model: Dodopayments::Models::Customer,
+          model: Dodopayments::Customer,
           options: params[:request_options]
         )
       end
@@ -55,16 +55,16 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::Customer]
+      # @return [Dodopayments::Customer]
       #
       # @see Dodopayments::Models::CustomerUpdateParams
       def update(customer_id, params = {})
-        parsed, options = Dodopayments::Models::CustomerUpdateParams.dump_request(params)
+        parsed, options = Dodopayments::CustomerUpdateParams.dump_request(params)
         @client.request(
           method: :patch,
           path: ["customers/%1$s", customer_id],
           body: parsed,
-          model: Dodopayments::Models::Customer,
+          model: Dodopayments::Customer,
           options: options
         )
       end
@@ -77,17 +77,17 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Customer>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Customer>]
       #
       # @see Dodopayments::Models::CustomerListParams
       def list(params = {})
-        parsed, options = Dodopayments::Models::CustomerListParams.dump_request(params)
+        parsed, options = Dodopayments::CustomerListParams.dump_request(params)
         @client.request(
           method: :get,
           path: "customers",
           query: parsed,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
-          model: Dodopayments::Models::Customer,
+          model: Dodopayments::Customer,
           options: options
         )
       end

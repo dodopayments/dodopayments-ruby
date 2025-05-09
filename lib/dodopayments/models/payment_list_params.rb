@@ -40,8 +40,8 @@ module Dodopayments
       # @!attribute status
       #   Filter by status
       #
-      #   @return [Symbol, Dodopayments::Models::IntentStatus, nil]
-      optional :status, enum: -> { Dodopayments::Models::IntentStatus }, nil?: true
+      #   @return [Symbol, Dodopayments::IntentStatus, nil]
+      optional :status, enum: -> { Dodopayments::IntentStatus }, nil?: true
 
       # @!attribute subscription_id
       #   Filter by subscription id
@@ -60,7 +60,7 @@ module Dodopayments
       #
       #   @param page_size [Integer, nil] Page size default is 10 max is 100
       #
-      #   @param status [Symbol, Dodopayments::Models::IntentStatus, nil] Filter by status
+      #   @param status [Symbol, Dodopayments::IntentStatus, nil] Filter by status
       #
       #   @param subscription_id [String, nil] Filter by subscription id
       #

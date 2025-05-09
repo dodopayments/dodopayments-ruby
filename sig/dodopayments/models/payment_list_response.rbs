@@ -4,7 +4,7 @@ module Dodopayments
       {
         created_at: Time,
         currency: Dodopayments::Models::currency,
-        customer: Dodopayments::Models::CustomerLimitedDetails,
+        customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,
@@ -19,7 +19,7 @@ module Dodopayments
 
       attr_accessor currency: Dodopayments::Models::currency
 
-      attr_accessor customer: Dodopayments::Models::CustomerLimitedDetails
+      attr_accessor customer: Dodopayments::CustomerLimitedDetails
 
       attr_accessor metadata: ::Hash[Symbol, String]
 
@@ -38,7 +38,7 @@ module Dodopayments
       def initialize: (
         created_at: Time,
         currency: Dodopayments::Models::currency,
-        customer: Dodopayments::Models::CustomerLimitedDetails,
+        customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,
@@ -47,8 +47,6 @@ module Dodopayments
         ?status: Dodopayments::Models::intent_status?,
         ?subscription_id: String?
       ) -> void
-
-      def to_hash: -> Dodopayments::Models::payment_list_response
     end
   end
 end

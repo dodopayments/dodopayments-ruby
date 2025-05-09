@@ -59,8 +59,6 @@ module Dodopayments
         ?price_detail: Dodopayments::Models::price?,
         ?tax_inclusive: bool?
       ) -> void
-
-      def to_hash: -> Dodopayments::Models::product_list_response
     end
   end
 end

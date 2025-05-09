@@ -9,14 +9,14 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::LicenseKeyInstance]
+      # @return [Dodopayments::LicenseKeyInstance]
       #
       # @see Dodopayments::Models::LicenseKeyInstanceRetrieveParams
       def retrieve(id, params = {})
         @client.request(
           method: :get,
           path: ["license_key_instances/%1$s", id],
-          model: Dodopayments::Models::LicenseKeyInstance,
+          model: Dodopayments::LicenseKeyInstance,
           options: params[:request_options]
         )
       end
@@ -29,16 +29,16 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::LicenseKeyInstance]
+      # @return [Dodopayments::LicenseKeyInstance]
       #
       # @see Dodopayments::Models::LicenseKeyInstanceUpdateParams
       def update(id, params)
-        parsed, options = Dodopayments::Models::LicenseKeyInstanceUpdateParams.dump_request(params)
+        parsed, options = Dodopayments::LicenseKeyInstanceUpdateParams.dump_request(params)
         @client.request(
           method: :patch,
           path: ["license_key_instances/%1$s", id],
           body: parsed,
-          model: Dodopayments::Models::LicenseKeyInstance,
+          model: Dodopayments::LicenseKeyInstance,
           options: options
         )
       end
@@ -53,17 +53,17 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::LicenseKeyInstance>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::LicenseKeyInstance>]
       #
       # @see Dodopayments::Models::LicenseKeyInstanceListParams
       def list(params = {})
-        parsed, options = Dodopayments::Models::LicenseKeyInstanceListParams.dump_request(params)
+        parsed, options = Dodopayments::LicenseKeyInstanceListParams.dump_request(params)
         @client.request(
           method: :get,
           path: "license_key_instances",
           query: parsed,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
-          model: Dodopayments::Models::LicenseKeyInstance,
+          model: Dodopayments::LicenseKeyInstance,
           options: options
         )
       end

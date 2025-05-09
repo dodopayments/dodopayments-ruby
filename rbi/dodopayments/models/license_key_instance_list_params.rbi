@@ -6,6 +6,9 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
       # Filter by license key ID
       sig { returns(T.nilable(String)) }
       attr_accessor :license_key_id
@@ -23,9 +26,8 @@ module Dodopayments
           license_key_id: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
       def self.new(
         # Filter by license key ID
@@ -35,19 +37,21 @@ module Dodopayments
         # Page size default is 10 max is 100
         page_size: nil,
         request_options: {}
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              license_key_id: T.nilable(String),
-              page_number: T.nilable(Integer),
-              page_size: T.nilable(Integer),
-              request_options: Dodopayments::RequestOptions
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            license_key_id: T.nilable(String),
+            page_number: T.nilable(Integer),
+            page_size: T.nilable(Integer),
+            request_options: Dodopayments::RequestOptions
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

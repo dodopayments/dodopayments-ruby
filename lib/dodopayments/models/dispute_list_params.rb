@@ -28,14 +28,14 @@ module Dodopayments
       # @!attribute dispute_stage
       #   Filter by dispute stage
       #
-      #   @return [Symbol, Dodopayments::Models::DisputeStage, nil]
-      optional :dispute_stage, enum: -> { Dodopayments::Models::DisputeStage }, nil?: true
+      #   @return [Symbol, Dodopayments::DisputeStage, nil]
+      optional :dispute_stage, enum: -> { Dodopayments::DisputeStage }, nil?: true
 
       # @!attribute dispute_status
       #   Filter by dispute status
       #
-      #   @return [Symbol, Dodopayments::Models::DisputeStatus, nil]
-      optional :dispute_status, enum: -> { Dodopayments::Models::DisputeStatus }, nil?: true
+      #   @return [Symbol, Dodopayments::DisputeStatus, nil]
+      optional :dispute_status, enum: -> { Dodopayments::DisputeStatus }, nil?: true
 
       # @!attribute page_number
       #   Page number default is 0
@@ -56,9 +56,9 @@ module Dodopayments
       #
       #   @param customer_id [String, nil] Filter by customer_id
       #
-      #   @param dispute_stage [Symbol, Dodopayments::Models::DisputeStage, nil] Filter by dispute stage
+      #   @param dispute_stage [Symbol, Dodopayments::DisputeStage, nil] Filter by dispute stage
       #
-      #   @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus, nil] Filter by dispute status
+      #   @param dispute_status [Symbol, Dodopayments::DisputeStatus, nil] Filter by dispute status
       #
       #   @param page_number [Integer, nil] Page number default is 0
       #

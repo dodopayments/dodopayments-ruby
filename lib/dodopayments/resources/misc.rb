@@ -7,14 +7,14 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Array<Symbol, Dodopayments::Models::CountryCode>]
+      # @return [Array<Symbol, Dodopayments::CountryCode>]
       #
       # @see Dodopayments::Models::MiscListSupportedCountriesParams
       def list_supported_countries(params = {})
         @client.request(
           method: :get,
           path: "checkout/supported_countries",
-          model: Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::Models::CountryCode],
+          model: Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::CountryCode],
           options: params[:request_options]
         )
       end

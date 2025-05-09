@@ -51,8 +51,6 @@ module Dodopayments
         ?name: String?,
         ?usage_limit: Integer?
       ) -> void
-
-      def to_hash: -> Dodopayments::Models::discount
     end
   end
 end

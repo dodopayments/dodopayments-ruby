@@ -3,6 +3,9 @@
 module Dodopayments
   module Models
     class DisputeRetrieveResponse < Dodopayments::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
       # The amount involved in the dispute, represented as a string to accommodate
       # precision.
       sig { returns(String) }
@@ -20,11 +23,11 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :currency
 
-      sig { returns(Dodopayments::Models::CustomerLimitedDetails) }
+      sig { returns(Dodopayments::CustomerLimitedDetails) }
       attr_reader :customer
 
       sig do
-        params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void
+        params(customer: Dodopayments::CustomerLimitedDetails::OrHash).void
       end
       attr_writer :customer
 
@@ -32,10 +35,10 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :dispute_id
 
-      sig { returns(Dodopayments::Models::DisputeStage::TaggedSymbol) }
+      sig { returns(Dodopayments::DisputeStage::TaggedSymbol) }
       attr_accessor :dispute_stage
 
-      sig { returns(Dodopayments::Models::DisputeStatus::TaggedSymbol) }
+      sig { returns(Dodopayments::DisputeStatus::TaggedSymbol) }
       attr_accessor :dispute_status
 
       # The unique identifier of the payment associated with the dispute.
@@ -56,15 +59,14 @@ module Dodopayments
           business_id: String,
           created_at: Time,
           currency: String,
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash),
+          customer: Dodopayments::CustomerLimitedDetails::OrHash,
           dispute_id: String,
-          dispute_stage: Dodopayments::Models::DisputeStage::OrSymbol,
-          dispute_status: Dodopayments::Models::DisputeStatus::OrSymbol,
+          dispute_stage: Dodopayments::DisputeStage::OrSymbol,
+          dispute_status: Dodopayments::DisputeStatus::OrSymbol,
           payment_id: String,
           reason: T.nilable(String),
           remarks: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         # The amount involved in the dispute, represented as a string to accommodate
@@ -87,26 +89,28 @@ module Dodopayments
         reason: nil,
         # Remarks
         remarks: nil
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              amount: String,
-              business_id: String,
-              created_at: Time,
-              currency: String,
-              customer: Dodopayments::Models::CustomerLimitedDetails,
-              dispute_id: String,
-              dispute_stage: Dodopayments::Models::DisputeStage::TaggedSymbol,
-              dispute_status: Dodopayments::Models::DisputeStatus::TaggedSymbol,
-              payment_id: String,
-              reason: T.nilable(String),
-              remarks: T.nilable(String)
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            amount: String,
+            business_id: String,
+            created_at: Time,
+            currency: String,
+            customer: Dodopayments::CustomerLimitedDetails,
+            dispute_id: String,
+            dispute_stage: Dodopayments::DisputeStage::TaggedSymbol,
+            dispute_status: Dodopayments::DisputeStatus::TaggedSymbol,
+            payment_id: String,
+            reason: T.nilable(String),
+            remarks: T.nilable(String)
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

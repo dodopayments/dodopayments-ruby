@@ -6,6 +6,9 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
       # Page number (default = 0).
       sig { returns(T.nilable(Integer)) }
       attr_accessor :page_number
@@ -18,9 +21,8 @@ module Dodopayments
         params(
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
       def self.new(
         # Page number (default = 0).
@@ -28,18 +30,20 @@ module Dodopayments
         # Page size (default = 10, max = 100).
         page_size: nil,
         request_options: {}
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              page_number: T.nilable(Integer),
-              page_size: T.nilable(Integer),
-              request_options: Dodopayments::RequestOptions
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            page_number: T.nilable(Integer),
+            page_size: T.nilable(Integer),
+            request_options: Dodopayments::RequestOptions
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

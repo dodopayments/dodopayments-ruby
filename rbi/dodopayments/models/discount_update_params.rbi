@@ -6,6 +6,9 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
       # If present, update the discount amount:
       #
       # - If `discount_type` is `percentage`, this represents **basis points** (e.g.,
@@ -31,7 +34,7 @@ module Dodopayments
       sig { returns(T.nilable(T::Array[String])) }
       attr_accessor :restricted_to
 
-      sig { returns(T.nilable(Dodopayments::Models::DiscountType::OrSymbol)) }
+      sig { returns(T.nilable(Dodopayments::DiscountType::OrSymbol)) }
       attr_accessor :type
 
       sig { returns(T.nilable(Integer)) }
@@ -44,11 +47,10 @@ module Dodopayments
           expires_at: T.nilable(Time),
           name: T.nilable(String),
           restricted_to: T.nilable(T::Array[String]),
-          type: T.nilable(Dodopayments::Models::DiscountType::OrSymbol),
+          type: T.nilable(Dodopayments::DiscountType::OrSymbol),
           usage_limit: T.nilable(Integer),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
       def self.new(
         # If present, update the discount amount:
@@ -69,23 +71,25 @@ module Dodopayments
         type: nil,
         usage_limit: nil,
         request_options: {}
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              amount: T.nilable(Integer),
-              code: T.nilable(String),
-              expires_at: T.nilable(Time),
-              name: T.nilable(String),
-              restricted_to: T.nilable(T::Array[String]),
-              type: T.nilable(Dodopayments::Models::DiscountType::OrSymbol),
-              usage_limit: T.nilable(Integer),
-              request_options: Dodopayments::RequestOptions
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            amount: T.nilable(Integer),
+            code: T.nilable(String),
+            expires_at: T.nilable(Time),
+            name: T.nilable(String),
+            restricted_to: T.nilable(T::Array[String]),
+            type: T.nilable(Dodopayments::DiscountType::OrSymbol),
+            usage_limit: T.nilable(Integer),
+            request_options: Dodopayments::RequestOptions
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

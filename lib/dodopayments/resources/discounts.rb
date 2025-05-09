@@ -10,11 +10,11 @@ module Dodopayments
       #
       # @overload create(amount:, type:, code: nil, expires_at: nil, name: nil, restricted_to: nil, usage_limit: nil, request_options: {})
       #
-      # @param amount [Integer] The discount amount. ...
+      # @param amount [Integer] The discount amount.
       #
-      # @param type [Symbol, Dodopayments::Models::DiscountType]
+      # @param type [Symbol, Dodopayments::DiscountType]
       #
-      # @param code [String, nil] Optionally supply a code (will be uppercased). ...
+      # @param code [String, nil] Optionally supply a code (will be uppercased).
       #
       # @param expires_at [Time, nil] When the discount expires, if ever.
       #
@@ -22,20 +22,20 @@ module Dodopayments
       #
       # @param restricted_to [Array<String>, nil] List of product IDs to restrict usage (if any).
       #
-      # @param usage_limit [Integer, nil] How many times this discount can be used (if any). ...
+      # @param usage_limit [Integer, nil] How many times this discount can be used (if any).
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::Discount]
+      # @return [Dodopayments::Discount]
       #
       # @see Dodopayments::Models::DiscountCreateParams
       def create(params)
-        parsed, options = Dodopayments::Models::DiscountCreateParams.dump_request(params)
+        parsed, options = Dodopayments::DiscountCreateParams.dump_request(params)
         @client.request(
           method: :post,
           path: "discounts",
           body: parsed,
-          model: Dodopayments::Models::Discount,
+          model: Dodopayments::Discount,
           options: options
         )
       end
@@ -48,14 +48,14 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::Discount]
+      # @return [Dodopayments::Discount]
       #
       # @see Dodopayments::Models::DiscountRetrieveParams
       def retrieve(discount_id, params = {})
         @client.request(
           method: :get,
           path: ["discounts/%1$s", discount_id],
-          model: Dodopayments::Models::Discount,
+          model: Dodopayments::Discount,
           options: params[:request_options]
         )
       end
@@ -69,7 +69,7 @@ module Dodopayments
       #
       # @param discount_id [String] Discount Id
       #
-      # @param amount [Integer, nil] If present, update the discount amount: ...
+      # @param amount [Integer, nil] If present, update the discount amount:
       #
       # @param code [String, nil] If present, update the discount code (uppercase).
       #
@@ -77,24 +77,24 @@ module Dodopayments
       #
       # @param name [String, nil]
       #
-      # @param restricted_to [Array<String>, nil] If present, replaces all restricted product IDs with this new set. ...
+      # @param restricted_to [Array<String>, nil] If present, replaces all restricted product IDs with this new set.
       #
-      # @param type [Symbol, Dodopayments::Models::DiscountType, nil]
+      # @param type [Symbol, Dodopayments::DiscountType, nil]
       #
       # @param usage_limit [Integer, nil]
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::Discount]
+      # @return [Dodopayments::Discount]
       #
       # @see Dodopayments::Models::DiscountUpdateParams
       def update(discount_id, params = {})
-        parsed, options = Dodopayments::Models::DiscountUpdateParams.dump_request(params)
+        parsed, options = Dodopayments::DiscountUpdateParams.dump_request(params)
         @client.request(
           method: :patch,
           path: ["discounts/%1$s", discount_id],
           body: parsed,
-          model: Dodopayments::Models::Discount,
+          model: Dodopayments::Discount,
           options: options
         )
       end
@@ -109,17 +109,17 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Discount>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Discount>]
       #
       # @see Dodopayments::Models::DiscountListParams
       def list(params = {})
-        parsed, options = Dodopayments::Models::DiscountListParams.dump_request(params)
+        parsed, options = Dodopayments::DiscountListParams.dump_request(params)
         @client.request(
           method: :get,
           path: "discounts",
           query: parsed,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
-          model: Dodopayments::Models::Discount,
+          model: Dodopayments::Discount,
           options: options
         )
       end

@@ -6,6 +6,9 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      OrHash =
+        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+
       # List archived products
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :archived
@@ -35,9 +38,8 @@ module Dodopayments
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           recurring: T.nilable(T::Boolean),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
       def self.new(
         # List archived products
@@ -53,20 +55,22 @@ module Dodopayments
         # - `null` or absent: Show both types of products
         recurring: nil,
         request_options: {}
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              archived: T::Boolean,
-              page_number: T.nilable(Integer),
-              page_size: T.nilable(Integer),
-              recurring: T.nilable(T::Boolean),
-              request_options: Dodopayments::RequestOptions
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            archived: T::Boolean,
+            page_number: T.nilable(Integer),
+            page_size: T.nilable(Integer),
+            recurring: T.nilable(T::Boolean),
+            request_options: Dodopayments::RequestOptions
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

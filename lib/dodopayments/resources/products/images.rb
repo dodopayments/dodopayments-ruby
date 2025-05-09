@@ -16,7 +16,7 @@ module Dodopayments
         #
         # @see Dodopayments::Models::Products::ImageUpdateParams
         def update(id, params = {})
-          parsed, options = Dodopayments::Models::Products::ImageUpdateParams.dump_request(params)
+          parsed, options = Dodopayments::Products::ImageUpdateParams.dump_request(params)
           @client.request(
             method: :put,
             path: ["products/%1$s/images", id],

@@ -40,8 +40,6 @@ module Dodopayments
         ?usage_limit: Integer?,
         ?request_options: Dodopayments::request_opts
       ) -> void
-
-      def to_hash: -> Dodopayments::Models::discount_create_params
     end
   end
 end
