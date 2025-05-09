@@ -2,7 +2,8 @@
 
 module Dodopayments
   module Models
-    class Dispute < Dodopayments::Internal::Type::BaseModel
+    # @see Dodopayments::Resources::Disputes#retrieve
+    class DisputeRetrieveResponse < Dodopayments::Internal::Type::BaseModel
       # @!attribute amount
       #   The amount involved in the dispute, represented as a string to accommodate
       #   precision.
@@ -28,6 +29,11 @@ module Dodopayments
       #   @return [String]
       required :currency, String
 
+      # @!attribute customer
+      #
+      #   @return [Dodopayments::Models::CustomerLimitedDetails]
+      required :customer, -> { Dodopayments::Models::CustomerLimitedDetails }
+
       # @!attribute dispute_id
       #   The unique identifier of the dispute.
       #
@@ -50,15 +56,21 @@ module Dodopayments
       #   @return [String]
       required :payment_id, String
 
+      # @!attribute reason
+      #   Reason for the dispute
+      #
+      #   @return [String, nil]
+      optional :reason, String, nil?: true
+
       # @!attribute remarks
       #   Remarks
       #
       #   @return [String, nil]
       optional :remarks, String, nil?: true
 
-      # @!method initialize(amount:, business_id:, created_at:, currency:, dispute_id:, dispute_stage:, dispute_status:, payment_id:, remarks: nil)
+      # @!method initialize(amount:, business_id:, created_at:, currency:, customer:, dispute_id:, dispute_stage:, dispute_status:, payment_id:, reason: nil, remarks: nil)
       #   Some parameter documentations has been truncated, see
-      #   {Dodopayments::Models::Dispute} for more details.
+      #   {Dodopayments::Models::DisputeRetrieveResponse} for more details.
       #
       #   @param amount [String] The amount involved in the dispute, represented as a string to accommodate preci
       #   ...
@@ -69,6 +81,8 @@ module Dodopayments
       #
       #   @param currency [String] The currency of the disputed amount, represented as an ISO 4217 currency code.
       #
+      #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
+      #
       #   @param dispute_id [String] The unique identifier of the dispute.
       #
       #   @param dispute_stage [Symbol, Dodopayments::Models::DisputeStage]
@@ -76,6 +90,8 @@ module Dodopayments
       #   @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus]
       #
       #   @param payment_id [String] The unique identifier of the payment associated with the dispute.
+      #
+      #   @param reason [String, nil] Reason for the dispute
       #
       #   @param remarks [String, nil] Remarks
     end

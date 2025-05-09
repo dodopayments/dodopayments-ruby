@@ -135,6 +135,9 @@ module Dodopayments
           product_id: String,
           proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode::OrSymbol,
           quantity: Integer,
+          addons: T.nilable(
+            T::Array[T.any(Dodopayments::Models::SubscriptionChangePlanParams::Addon, Dodopayments::Internal::AnyHash)]
+          ),
           request_options: Dodopayments::RequestOpts
         )
           .void
@@ -147,6 +150,9 @@ module Dodopayments
         proration_billing_mode:,
         # Number of units to subscribe for. Must be at least 1.
         quantity:,
+        # Addons for the new plan. Note : Leaving this empty would remove any existing
+        # addons
+        addons: nil,
         request_options: {}
       ); end
       sig do

@@ -5,7 +5,7 @@ module Dodopayments
     class Disputes
       sig do
         params(dispute_id: String, request_options: Dodopayments::RequestOpts)
-          .returns(Dodopayments::Models::Dispute)
+          .returns(Dodopayments::Models::DisputeRetrieveResponse)
       end
       def retrieve(
         # Dispute Id
@@ -23,7 +23,7 @@ module Dodopayments
           page_size: T.nilable(Integer),
           request_options: Dodopayments::RequestOpts
         )
-          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Dispute])
+          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::DisputeListResponse])
       end
       def list(
         # Get events after this created time

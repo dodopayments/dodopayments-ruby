@@ -4,7 +4,7 @@ module Dodopayments
   module Resources
     class Invoices
       class Payments
-        sig { params(payment_id: String, request_options: Dodopayments::RequestOpts).void }
+        sig { params(payment_id: String, request_options: Dodopayments::RequestOpts).returns(StringIO) }
         def retrieve(payment_id, request_options: {}); end
 
         # @api private

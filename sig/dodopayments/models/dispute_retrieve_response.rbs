@@ -1,19 +1,21 @@
 module Dodopayments
   module Models
-    type dispute =
+    type dispute_retrieve_response =
       {
         amount: String,
         business_id: String,
         created_at: Time,
         currency: String,
+        customer: Dodopayments::Models::CustomerLimitedDetails,
         dispute_id: String,
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
         payment_id: String,
+        reason: String?,
         remarks: String?
       }
 
-    class Dispute < Dodopayments::Internal::Type::BaseModel
+    class DisputeRetrieveResponse < Dodopayments::Internal::Type::BaseModel
       attr_accessor amount: String
 
       attr_accessor business_id: String
@@ -21,6 +23,8 @@ module Dodopayments
       attr_accessor created_at: Time
 
       attr_accessor currency: String
+
+      attr_accessor customer: Dodopayments::Models::CustomerLimitedDetails
 
       attr_accessor dispute_id: String
 
@@ -30,6 +34,8 @@ module Dodopayments
 
       attr_accessor payment_id: String
 
+      attr_accessor reason: String?
+
       attr_accessor remarks: String?
 
       def initialize: (
@@ -37,14 +43,16 @@ module Dodopayments
         business_id: String,
         created_at: Time,
         currency: String,
+        customer: Dodopayments::Models::CustomerLimitedDetails,
         dispute_id: String,
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
         payment_id: String,
+        ?reason: String?,
         ?remarks: String?
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::dispute
+      def to_hash: -> Dodopayments::Models::dispute_retrieve_response
     end
   end
 end

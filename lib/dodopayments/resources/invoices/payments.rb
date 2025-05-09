@@ -9,14 +9,15 @@ module Dodopayments
         # @param payment_id [String]
         # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [nil]
+        # @return [StringIO]
         #
         # @see Dodopayments::Models::Invoices::PaymentRetrieveParams
         def retrieve(payment_id, params = {})
           @client.request(
             method: :get,
             path: ["invoices/payments/%1$s", payment_id],
-            model: NilClass,
+            headers: {"accept" => "application/pdf"},
+            model: StringIO,
             options: params[:request_options]
           )
         end
