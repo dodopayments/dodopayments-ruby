@@ -63,8 +63,6 @@ Layout/MultilineMethodParameterLineBreaks:
 # Prefer compact hash literals.
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
-  Exclude:
-    - "**/*.rbi"
 
 Lint/BooleanSymbol:
   Enabled: false
@@ -89,10 +87,6 @@ Lint/MissingCopEnableDirective:
     - "examples/**/*.rb"
 
 Lint/MissingSuper:
-  Exclude:
-    - "**/*.rbi"
-
-Lint/SymbolConversion:
   Exclude:
     - "**/*.rbi"
 
@@ -247,10 +241,6 @@ Style/RedundantException:
   Enabled: false
 
 Style/RedundantInitialize:
-  Exclude:
-    - "**/*.rbi"
-
-Style/RedundantParentheses:
   Exclude:
     - "**/*.rbi"
 

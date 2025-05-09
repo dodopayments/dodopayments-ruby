@@ -36,13 +36,13 @@ module Dodopayments
 
       # @!attribute dispute_stage
       #
-      #   @return [Symbol, Dodopayments::DisputeStage]
-      required :dispute_stage, enum: -> { Dodopayments::DisputeStage }
+      #   @return [Symbol, Dodopayments::Models::DisputeStage]
+      required :dispute_stage, enum: -> { Dodopayments::Models::DisputeStage }
 
       # @!attribute dispute_status
       #
-      #   @return [Symbol, Dodopayments::DisputeStatus]
-      required :dispute_status, enum: -> { Dodopayments::DisputeStatus }
+      #   @return [Symbol, Dodopayments::Models::DisputeStatus]
+      required :dispute_status, enum: -> { Dodopayments::Models::DisputeStatus }
 
       # @!attribute payment_id
       #   The unique identifier of the payment associated with the dispute.
@@ -57,10 +57,11 @@ module Dodopayments
       optional :remarks, String, nil?: true
 
       # @!method initialize(amount:, business_id:, created_at:, currency:, dispute_id:, dispute_stage:, dispute_status:, payment_id:, remarks: nil)
-      #   Some parameter documentations has been truncated, see {Dodopayments::Dispute}
-      #   for more details.
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::Dispute} for more details.
       #
       #   @param amount [String] The amount involved in the dispute, represented as a string to accommodate preci
+      #   ...
       #
       #   @param business_id [String] The unique identifier of the business involved in the dispute.
       #
@@ -70,9 +71,9 @@ module Dodopayments
       #
       #   @param dispute_id [String] The unique identifier of the dispute.
       #
-      #   @param dispute_stage [Symbol, Dodopayments::DisputeStage]
+      #   @param dispute_stage [Symbol, Dodopayments::Models::DisputeStage]
       #
-      #   @param dispute_status [Symbol, Dodopayments::DisputeStatus]
+      #   @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus]
       #
       #   @param payment_id [String] The unique identifier of the payment associated with the dispute.
       #

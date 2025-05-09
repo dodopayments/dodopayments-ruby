@@ -10,16 +10,16 @@ module Dodopayments
         ?description: String?,
         ?license_key_activation_message: String?,
         ?license_key_activations_limit: Integer?,
-        ?license_key_duration: Dodopayments::LicenseKeyDuration?,
+        ?license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
         ?license_key_enabled: bool?,
         ?name: String?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Product
+      ) -> Dodopayments::Models::Product
 
       def retrieve: (
         String id,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Product
+      ) -> Dodopayments::Models::Product
 
       def update: (
         String id,
@@ -28,7 +28,7 @@ module Dodopayments
         ?image_id: String?,
         ?license_key_activation_message: String?,
         ?license_key_activations_limit: Integer?,
-        ?license_key_duration: Dodopayments::LicenseKeyDuration?,
+        ?license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
         ?license_key_enabled: bool?,
         ?name: String?,
         ?price: Dodopayments::Models::price?,

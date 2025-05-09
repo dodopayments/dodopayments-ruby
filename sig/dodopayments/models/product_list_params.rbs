@@ -30,6 +30,8 @@ module Dodopayments
         ?recurring: bool?,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> Dodopayments::Models::product_list_params
     end
   end
 end

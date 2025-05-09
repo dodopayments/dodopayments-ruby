@@ -17,6 +17,8 @@ module Dodopayments
         ?phone_number: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> Dodopayments::Models::customer_update_params
     end
   end
 end

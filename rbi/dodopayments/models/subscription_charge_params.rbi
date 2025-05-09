@@ -6,9 +6,6 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
-
       # The product price. Represented in the lowest denomination of the currency (e.g.,
       # cents for USD). For example, to charge $1.00, pass `100`.
       sig { returns(Integer) }
@@ -17,27 +14,18 @@ module Dodopayments
       sig do
         params(
           product_price: Integer,
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(T.attached_class)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
+        )
+          .returns(T.attached_class)
       end
       def self.new(
         # The product price. Represented in the lowest denomination of the currency (e.g.,
         # cents for USD). For example, to charge $1.00, pass `100`.
         product_price:,
         request_options: {}
-      )
-      end
-
-      sig do
-        override.returns(
-          {
-            product_price: Integer,
-            request_options: Dodopayments::RequestOptions
-          }
-        )
-      end
-      def to_hash
-      end
+      ); end
+      sig { override.returns({product_price: Integer, request_options: Dodopayments::RequestOptions}) }
+      def to_hash; end
     end
   end
 end

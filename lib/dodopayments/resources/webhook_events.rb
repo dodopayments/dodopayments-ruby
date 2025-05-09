@@ -8,14 +8,14 @@ module Dodopayments
       # @param webhook_event_id [String]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::WebhookEvent]
+      # @return [Dodopayments::Models::WebhookEvent]
       #
       # @see Dodopayments::Models::WebhookEventRetrieveParams
       def retrieve(webhook_event_id, params = {})
         @client.request(
           method: :get,
           path: ["webhook_events/%1$s", webhook_event_id],
-          model: Dodopayments::WebhookEvent,
+          model: Dodopayments::Models::WebhookEvent,
           options: params[:request_options]
         )
       end
@@ -32,6 +32,7 @@ module Dodopayments
       # @param limit [Integer, nil] Min : 1, Max : 100, default 10
       #
       # @param object_id_ [String, nil] Get events history of a specific object like payment/subscription/refund/dispute
+      # ...
       #
       # @param page_number [Integer, nil] Page number default is 0
       #
@@ -39,17 +40,17 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::WebhookEvent>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::WebhookEvent>]
       #
       # @see Dodopayments::Models::WebhookEventListParams
       def list(params = {})
-        parsed, options = Dodopayments::WebhookEventListParams.dump_request(params)
+        parsed, options = Dodopayments::Models::WebhookEventListParams.dump_request(params)
         @client.request(
           method: :get,
           path: "webhook_events",
           query: parsed.transform_keys(object_id_: "object_id"),
           page: Dodopayments::Internal::DefaultPageNumberPagination,
-          model: Dodopayments::WebhookEvent,
+          model: Dodopayments::Models::WebhookEvent,
           options: options
         )
       end

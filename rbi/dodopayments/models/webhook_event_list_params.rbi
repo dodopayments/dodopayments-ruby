@@ -6,9 +6,6 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
-
       # Get events after this created time
       sig { returns(T.nilable(Time)) }
       attr_accessor :created_at_gte
@@ -41,8 +38,9 @@ module Dodopayments
           object_id_: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(T.attached_class)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
+        )
+          .returns(T.attached_class)
       end
       def self.new(
         # Get events after this created time
@@ -58,24 +56,22 @@ module Dodopayments
         # Page size default is 10 max is 100
         page_size: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
-        override.returns(
-          {
-            created_at_gte: T.nilable(Time),
-            created_at_lte: T.nilable(Time),
-            limit: T.nilable(Integer),
-            object_id_: T.nilable(String),
-            page_number: T.nilable(Integer),
-            page_size: T.nilable(Integer),
-            request_options: Dodopayments::RequestOptions
-          }
-        )
+        override
+          .returns(
+            {
+              created_at_gte: T.nilable(Time),
+              created_at_lte: T.nilable(Time),
+              limit: T.nilable(Integer),
+              object_id_: T.nilable(String),
+              page_number: T.nilable(Integer),
+              page_size: T.nilable(Integer),
+              request_options: Dodopayments::RequestOptions
+            }
+          )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

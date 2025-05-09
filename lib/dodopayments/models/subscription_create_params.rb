@@ -9,13 +9,13 @@ module Dodopayments
 
       # @!attribute billing
       #
-      #   @return [Dodopayments::BillingAddress]
-      required :billing, -> { Dodopayments::BillingAddress }
+      #   @return [Dodopayments::Models::BillingAddress]
+      required :billing, -> { Dodopayments::Models::BillingAddress }
 
       # @!attribute customer
       #
-      #   @return [Dodopayments::AttachExistingCustomer, Dodopayments::CreateNewCustomer]
-      required :customer, union: -> { Dodopayments::CustomerRequest }
+      #   @return [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
+      required :customer, union: -> { Dodopayments::Models::CustomerRequest }
 
       # @!attribute product_id
       #   Unique identifier of the product to subscribe to
@@ -32,9 +32,9 @@ module Dodopayments
       # @!attribute addons
       #   Attach addons to this subscription
       #
-      #   @return [Array<Dodopayments::SubscriptionCreateParams::Addon>, nil]
+      #   @return [Array<Dodopayments::Models::SubscriptionCreateParams::Addon>, nil]
       optional :addons,
-               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::SubscriptionCreateParams::Addon] },
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::SubscriptionCreateParams::Addon] },
                nil?: true
 
       # @!attribute allowed_payment_method_types
@@ -45,17 +45,15 @@ module Dodopayments
       #   Availability still depends on other factors (e.g., customer location, merchant
       #   settings).
       #
-      #   @return [Array<Symbol, Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType>, nil]
+      #   @return [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil]
       optional :allowed_payment_method_types,
-               -> {
-                 Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType]
-               },
+               -> { Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType] },
                nil?: true
 
       # @!attribute billing_currency
       #
-      #   @return [Symbol, Dodopayments::Currency, nil]
-      optional :billing_currency, enum: -> { Dodopayments::Currency }, nil?: true
+      #   @return [Symbol, Dodopayments::Models::Currency, nil]
+      optional :billing_currency, enum: -> { Dodopayments::Models::Currency }, nil?: true
 
       # @!attribute discount_code
       #   Discount Code to apply to the subscription
@@ -70,8 +68,8 @@ module Dodopayments
 
       # @!attribute on_demand
       #
-      #   @return [Dodopayments::SubscriptionCreateParams::OnDemand, nil]
-      optional :on_demand, -> { Dodopayments::SubscriptionCreateParams::OnDemand }, nil?: true
+      #   @return [Dodopayments::Models::SubscriptionCreateParams::OnDemand, nil]
+      optional :on_demand, -> { Dodopayments::Models::SubscriptionCreateParams::OnDemand }, nil?: true
 
       # @!attribute payment_link
       #   If true, generates a payment link. Defaults to false if not specified.
@@ -109,35 +107,36 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionCreateParams} for more details.
       #
-      #   @param billing [Dodopayments::BillingAddress]
+      #   @param billing [Dodopayments::Models::BillingAddress]
       #
-      #   @param customer [Dodopayments::AttachExistingCustomer, Dodopayments::CreateNewCustomer]
+      #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
       #
       #   @param product_id [String] Unique identifier of the product to subscribe to
       #
       #   @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
-      #   @param addons [Array<Dodopayments::SubscriptionCreateParams::Addon>, nil] Attach addons to this subscription
+      #   @param addons [Array<Dodopayments::Models::SubscriptionCreateParams::Addon>, nil] Attach addons to this subscription
       #
-      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout.
+      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout. ...
       #
-      #   @param billing_currency [Symbol, Dodopayments::Currency, nil]
+      #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil]
       #
       #   @param discount_code [String, nil] Discount Code to apply to the subscription
       #
       #   @param metadata [Hash{Symbol=>String}]
       #
-      #   @param on_demand [Dodopayments::SubscriptionCreateParams::OnDemand, nil]
+      #   @param on_demand [Dodopayments::Models::SubscriptionCreateParams::OnDemand, nil]
       #
-      #   @param payment_link [Boolean, nil] If true, generates a payment link.
+      #   @param payment_link [Boolean, nil] If true, generates a payment link. ...
       #
       #   @param return_url [String, nil] Optional URL to redirect after successful subscription creation
       #
-      #   @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer
+      #   @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer ...
       #
       #   @param tax_id [String, nil] Tax ID in case the payment is B2B. If tax id validation fails the payment creati
+      #   ...
       #
-      #   @param trial_period_days [Integer, nil] Optional trial period in days
+      #   @param trial_period_days [Integer, nil] Optional trial period in days ...
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 
@@ -201,11 +200,12 @@ module Dodopayments
 
         # @!method initialize(mandate_only:, product_price: nil)
         #   Some parameter documentations has been truncated, see
-        #   {Dodopayments::SubscriptionCreateParams::OnDemand} for more details.
+        #   {Dodopayments::Models::SubscriptionCreateParams::OnDemand} for more details.
         #
         #   @param mandate_only [Boolean] If set as True, does not perform any charge and only authorizes payment method d
+        #   ...
         #
-        #   @param product_price [Integer, nil] Product price for the initial charge to customer
+        #   @param product_price [Integer, nil] Product price for the initial charge to customer ...
       end
     end
   end

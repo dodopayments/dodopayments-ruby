@@ -3,19 +3,19 @@ module Dodopayments
     type payment_create_response =
       {
         client_secret: String,
-        customer: Dodopayments::CustomerLimitedDetails,
+        customer: Dodopayments::Models::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,
         discount_id: String?,
         payment_link: String?,
-        product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?
+        product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]?
       }
 
     class PaymentCreateResponse < Dodopayments::Internal::Type::BaseModel
       attr_accessor client_secret: String
 
-      attr_accessor customer: Dodopayments::CustomerLimitedDetails
+      attr_accessor customer: Dodopayments::Models::CustomerLimitedDetails
 
       attr_accessor metadata: ::Hash[Symbol, String]
 
@@ -27,18 +27,20 @@ module Dodopayments
 
       attr_accessor payment_link: String?
 
-      attr_accessor product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?
+      attr_accessor product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]?
 
       def initialize: (
         client_secret: String,
-        customer: Dodopayments::CustomerLimitedDetails,
+        customer: Dodopayments::Models::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,
         ?discount_id: String?,
         ?payment_link: String?,
-        ?product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?
+        ?product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]?
       ) -> void
+
+      def to_hash: -> Dodopayments::Models::payment_create_response
     end
   end
 end

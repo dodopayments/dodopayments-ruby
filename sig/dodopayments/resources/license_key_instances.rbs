@@ -4,20 +4,20 @@ module Dodopayments
       def retrieve: (
         String id,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::LicenseKeyInstance
+      ) -> Dodopayments::Models::LicenseKeyInstance
 
       def update: (
         String id,
         name: String,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::LicenseKeyInstance
+      ) -> Dodopayments::Models::LicenseKeyInstance
 
       def list: (
         ?license_key_id: String?,
         ?page_number: Integer?,
         ?page_size: Integer?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::LicenseKeyInstance]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::LicenseKeyInstance]
 
       def initialize: (client: Dodopayments::Client) -> void
     end

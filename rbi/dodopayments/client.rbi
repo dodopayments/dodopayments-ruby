@@ -12,10 +12,7 @@ module Dodopayments
 
     ENVIRONMENTS =
       T.let(
-        {
-          live_mode: "https://live.dodopayments.com",
-          test_mode: "https://test.dodopayments.com"
-        },
+        {live_mode: "https://live.dodopayments.com", test_mode: "https://test.dodopayments.com"},
         T::Hash[Symbol, String]
       )
 
@@ -70,8 +67,7 @@ module Dodopayments
 
     # @api private
     sig { override.returns(T::Hash[String, String]) }
-    private def auth_headers
-    end
+    private def auth_headers; end
 
     # Creates and returns a new client for interacting with the API.
     sig do
@@ -83,7 +79,8 @@ module Dodopayments
         timeout: Float,
         initial_retry_delay: Float,
         max_retry_delay: Float
-      ).returns(T.attached_class)
+      )
+        .returns(T.attached_class)
     end
     def self.new(
       # Bearer Token for API authentication Defaults to `ENV["DODO_PAYMENTS_API_KEY"]`
@@ -103,7 +100,6 @@ module Dodopayments
       timeout: Dodopayments::Client::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: Dodopayments::Client::DEFAULT_INITIAL_RETRY_DELAY,
       max_retry_delay: Dodopayments::Client::DEFAULT_MAX_RETRY_DELAY
-    )
-    end
+    ); end
   end
 end

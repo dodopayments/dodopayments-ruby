@@ -40,6 +40,8 @@ module Dodopayments
         ?subscription_id: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> Dodopayments::Models::payment_list_params
     end
   end
 end

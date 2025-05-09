@@ -8,25 +8,25 @@ module Dodopayments
         name: String,
         ?phone_number: String?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Customer
+      ) -> Dodopayments::Models::Customer
 
       def retrieve: (
         String customer_id,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Customer
+      ) -> Dodopayments::Models::Customer
 
       def update: (
         String customer_id,
         ?name: String?,
         ?phone_number: String?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Customer
+      ) -> Dodopayments::Models::Customer
 
       def list: (
         ?page_number: Integer?,
         ?page_size: Integer?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Customer]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Customer]
 
       def initialize: (client: Dodopayments::Client) -> void
     end

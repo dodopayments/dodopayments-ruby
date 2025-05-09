@@ -22,8 +22,8 @@ module Dodopayments
 
       # @!attribute type
       #
-      #   @return [Symbol, Dodopayments::DiscountType]
-      required :type, enum: -> { Dodopayments::DiscountType }
+      #   @return [Symbol, Dodopayments::Models::DiscountType]
+      required :type, enum: -> { Dodopayments::Models::DiscountType }
 
       # @!attribute code
       #   Optionally supply a code (will be uppercased).
@@ -61,11 +61,11 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::DiscountCreateParams} for more details.
       #
-      #   @param amount [Integer] The discount amount.
+      #   @param amount [Integer] The discount amount. ...
       #
-      #   @param type [Symbol, Dodopayments::DiscountType]
+      #   @param type [Symbol, Dodopayments::Models::DiscountType]
       #
-      #   @param code [String, nil] Optionally supply a code (will be uppercased).
+      #   @param code [String, nil] Optionally supply a code (will be uppercased). ...
       #
       #   @param expires_at [Time, nil] When the discount expires, if ever.
       #
@@ -73,7 +73,7 @@ module Dodopayments
       #
       #   @param restricted_to [Array<String>, nil] List of product IDs to restrict usage (if any).
       #
-      #   @param usage_limit [Integer, nil] How many times this discount can be used (if any).
+      #   @param usage_limit [Integer, nil] How many times this discount can be used (if any). ...
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end

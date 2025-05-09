@@ -17,13 +17,13 @@ module Dodopayments
       # values safely.
       #
       # @example
-      #   # `intent_status` is a `Dodopayments::IntentStatus`
+      #   # `intent_status` is a `Dodopayments::Models::IntentStatus`
       #   case intent_status
-      #   when Dodopayments::IntentStatus::SUCCEEDED
+      #   when Dodopayments::Models::IntentStatus::SUCCEEDED
       #     # ...
-      #   when Dodopayments::IntentStatus::FAILED
+      #   when Dodopayments::Models::IntentStatus::FAILED
       #     # ...
-      #   when Dodopayments::IntentStatus::CANCELLED
+      #   when Dodopayments::Models::IntentStatus::CANCELLED
       #     # ...
       #   else
       #     puts(intent_status)

@@ -6,8 +6,8 @@ module Dodopayments
     class SubscriptionListResponse < Dodopayments::Internal::Type::BaseModel
       # @!attribute billing
       #
-      #   @return [Dodopayments::BillingAddress]
-      required :billing, -> { Dodopayments::BillingAddress }
+      #   @return [Dodopayments::Models::BillingAddress]
+      required :billing, -> { Dodopayments::Models::BillingAddress }
 
       # @!attribute created_at
       #   Timestamp when the subscription was created
@@ -17,13 +17,13 @@ module Dodopayments
 
       # @!attribute currency
       #
-      #   @return [Symbol, Dodopayments::Currency]
-      required :currency, enum: -> { Dodopayments::Currency }
+      #   @return [Symbol, Dodopayments::Models::Currency]
+      required :currency, enum: -> { Dodopayments::Models::Currency }
 
       # @!attribute customer
       #
-      #   @return [Dodopayments::CustomerLimitedDetails]
-      required :customer, -> { Dodopayments::CustomerLimitedDetails }
+      #   @return [Dodopayments::Models::CustomerLimitedDetails]
+      required :customer, -> { Dodopayments::Models::CustomerLimitedDetails }
 
       # @!attribute metadata
       #
@@ -51,8 +51,8 @@ module Dodopayments
 
       # @!attribute payment_frequency_interval
       #
-      #   @return [Symbol, Dodopayments::TimeInterval]
-      required :payment_frequency_interval, enum: -> { Dodopayments::TimeInterval }
+      #   @return [Symbol, Dodopayments::Models::TimeInterval]
+      required :payment_frequency_interval, enum: -> { Dodopayments::Models::TimeInterval }
 
       # @!attribute previous_billing_date
       #   Timestamp of the last payment. Indicates the start of current billing period
@@ -81,8 +81,8 @@ module Dodopayments
 
       # @!attribute status
       #
-      #   @return [Symbol, Dodopayments::SubscriptionStatus]
-      required :status, enum: -> { Dodopayments::SubscriptionStatus }
+      #   @return [Symbol, Dodopayments::Models::SubscriptionStatus]
+      required :status, enum: -> { Dodopayments::Models::SubscriptionStatus }
 
       # @!attribute subscription_id
       #   Unique identifier for the subscription
@@ -98,8 +98,8 @@ module Dodopayments
 
       # @!attribute subscription_period_interval
       #
-      #   @return [Symbol, Dodopayments::TimeInterval]
-      required :subscription_period_interval, enum: -> { Dodopayments::TimeInterval }
+      #   @return [Symbol, Dodopayments::Models::TimeInterval]
+      required :subscription_period_interval, enum: -> { Dodopayments::Models::TimeInterval }
 
       # @!attribute tax_inclusive
       #   Indicates if the recurring_pre_tax_amount is tax inclusive
@@ -131,23 +131,24 @@ module Dodopayments
       #
       #   Response struct representing subscription details
       #
-      #   @param billing [Dodopayments::BillingAddress]
+      #   @param billing [Dodopayments::Models::BillingAddress]
       #
       #   @param created_at [Time] Timestamp when the subscription was created
       #
-      #   @param currency [Symbol, Dodopayments::Currency]
+      #   @param currency [Symbol, Dodopayments::Models::Currency]
       #
-      #   @param customer [Dodopayments::CustomerLimitedDetails]
+      #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
       #
       #   @param metadata [Hash{Symbol=>String}]
       #
       #   @param next_billing_date [Time] Timestamp of the next scheduled billing. Indicates the end of current billing pe
+      #   ...
       #
       #   @param on_demand [Boolean] Wether the subscription is on-demand or not
       #
       #   @param payment_frequency_count [Integer] Number of payment frequency intervals
       #
-      #   @param payment_frequency_interval [Symbol, Dodopayments::TimeInterval]
+      #   @param payment_frequency_interval [Symbol, Dodopayments::Models::TimeInterval]
       #
       #   @param previous_billing_date [Time] Timestamp of the last payment. Indicates the start of current billing period
       #
@@ -156,14 +157,15 @@ module Dodopayments
       #   @param quantity [Integer] Number of units/items included in the subscription
       #
       #   @param recurring_pre_tax_amount [Integer] Amount charged before tax for each recurring payment in smallest currency unit (
+      #   ...
       #
-      #   @param status [Symbol, Dodopayments::SubscriptionStatus]
+      #   @param status [Symbol, Dodopayments::Models::SubscriptionStatus]
       #
       #   @param subscription_id [String] Unique identifier for the subscription
       #
       #   @param subscription_period_count [Integer] Number of subscription period intervals
       #
-      #   @param subscription_period_interval [Symbol, Dodopayments::TimeInterval]
+      #   @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval]
       #
       #   @param tax_inclusive [Boolean] Indicates if the recurring_pre_tax_amount is tax inclusive
       #

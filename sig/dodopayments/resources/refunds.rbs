@@ -5,12 +5,12 @@ module Dodopayments
         payment_id: String,
         ?reason: String?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Refund
+      ) -> Dodopayments::Models::Refund
 
       def retrieve: (
         String refund_id,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Refund
+      ) -> Dodopayments::Models::Refund
 
       def list: (
         ?created_at_gte: Time?,
@@ -20,7 +20,7 @@ module Dodopayments
         ?page_size: Integer?,
         ?status: Dodopayments::Models::refund_status?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Refund]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Refund]
 
       def initialize: (client: Dodopayments::Client) -> void
     end

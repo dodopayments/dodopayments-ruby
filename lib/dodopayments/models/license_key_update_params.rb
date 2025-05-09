@@ -32,11 +32,11 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::LicenseKeyUpdateParams} for more details.
       #
-      #   @param activations_limit [Integer, nil] The updated activation limit for the license key.
+      #   @param activations_limit [Integer, nil] The updated activation limit for the license key. ...
       #
-      #   @param disabled [Boolean, nil] Indicates whether the license key should be disabled.
+      #   @param disabled [Boolean, nil] Indicates whether the license key should be disabled. ...
       #
-      #   @param expires_at [Time, nil] The updated expiration timestamp for the license key in UTC.
+      #   @param expires_at [Time, nil] The updated expiration timestamp for the license key in UTC. ...
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end

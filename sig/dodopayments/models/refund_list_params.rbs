@@ -36,6 +36,8 @@ module Dodopayments
         ?status: Dodopayments::Models::refund_status?,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> Dodopayments::Models::refund_list_params
     end
   end
 end

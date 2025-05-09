@@ -43,6 +43,8 @@ module Dodopayments
         payment_id: String,
         ?remarks: String?
       ) -> void
+
+      def to_hash: -> Dodopayments::Models::dispute
     end
   end
 end

@@ -8,22 +8,22 @@ module Dodopayments
 
       sig do
         params(
-          price:
-            T.any(
-              Dodopayments::Price::OneTimePrice::OrHash,
-              Dodopayments::Price::RecurringPrice::OrHash
-            ),
-          tax_category: Dodopayments::TaxCategory::OrSymbol,
+          price: T.any(
+            Dodopayments::Models::Price::OneTimePrice,
+            Dodopayments::Internal::AnyHash,
+            Dodopayments::Models::Price::RecurringPrice
+          ),
+          tax_category: Dodopayments::Models::TaxCategory::OrSymbol,
           addons: T.nilable(T::Array[String]),
           description: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
-          license_key_duration:
-            T.nilable(Dodopayments::LicenseKeyDuration::OrHash),
+          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::AnyHash)),
           license_key_enabled: T.nilable(T::Boolean),
           name: T.nilable(String),
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Product)
+          request_options: Dodopayments::RequestOpts
+        )
+          .returns(Dodopayments::Models::Product)
       end
       def create(
         price:,
@@ -44,22 +44,13 @@ module Dodopayments
         # Optional name of the product
         name: nil,
         request_options: {}
-      )
-      end
-
-      sig do
-        params(
-          id: String,
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Product)
-      end
+      ); end
+      sig { params(id: String, request_options: Dodopayments::RequestOpts).returns(Dodopayments::Models::Product) }
       def retrieve(
         # Product Id
         id,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           id: String,
@@ -68,20 +59,20 @@ module Dodopayments
           image_id: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
-          license_key_duration:
-            T.nilable(Dodopayments::LicenseKeyDuration::OrHash),
+          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::AnyHash)),
           license_key_enabled: T.nilable(T::Boolean),
           name: T.nilable(String),
-          price:
-            T.nilable(
-              T.any(
-                Dodopayments::Price::OneTimePrice::OrHash,
-                Dodopayments::Price::RecurringPrice::OrHash
-              )
-            ),
-          tax_category: T.nilable(Dodopayments::TaxCategory::OrSymbol),
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).void
+          price: T.nilable(
+            T.any(
+              Dodopayments::Models::Price::OneTimePrice,
+              Dodopayments::Internal::AnyHash,
+              Dodopayments::Models::Price::RecurringPrice
+            )
+          ),
+          tax_category: T.nilable(Dodopayments::Models::TaxCategory::OrSymbol),
+          request_options: Dodopayments::RequestOpts
+        )
+          .void
       end
       def update(
         id,
@@ -114,21 +105,16 @@ module Dodopayments
         # and services.
         tax_category: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           archived: T::Boolean,
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           recurring: T.nilable(T::Boolean),
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(
-          Dodopayments::Internal::DefaultPageNumberPagination[
-            Dodopayments::Models::ProductListResponse
-          ]
+          request_options: Dodopayments::RequestOpts
         )
+          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::ProductListResponse])
       end
       def list(
         # List archived products
@@ -144,31 +130,16 @@ module Dodopayments
         # - `null` or absent: Show both types of products
         recurring: nil,
         request_options: {}
-      )
-      end
+      ); end
+      sig { params(id: String, request_options: Dodopayments::RequestOpts).void }
+      def delete(id, request_options: {}); end
 
-      sig do
-        params(
-          id: String,
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).void
-      end
-      def delete(id, request_options: {})
-      end
-
-      sig do
-        params(
-          id: String,
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).void
-      end
-      def unarchive(id, request_options: {})
-      end
+      sig { params(id: String, request_options: Dodopayments::RequestOpts).void }
+      def unarchive(id, request_options: {}); end
 
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:)
-      end
+      def self.new(client:); end
     end
   end
 end

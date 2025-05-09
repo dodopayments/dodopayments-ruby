@@ -6,9 +6,6 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
-
       # Get events after this created time
       sig { returns(T.nilable(Time)) }
       attr_accessor :created_at_gte
@@ -22,11 +19,11 @@ module Dodopayments
       attr_accessor :customer_id
 
       # Filter by dispute stage
-      sig { returns(T.nilable(Dodopayments::DisputeStage::OrSymbol)) }
+      sig { returns(T.nilable(Dodopayments::Models::DisputeStage::OrSymbol)) }
       attr_accessor :dispute_stage
 
       # Filter by dispute status
-      sig { returns(T.nilable(Dodopayments::DisputeStatus::OrSymbol)) }
+      sig { returns(T.nilable(Dodopayments::Models::DisputeStatus::OrSymbol)) }
       attr_accessor :dispute_status
 
       # Page number default is 0
@@ -42,12 +39,13 @@ module Dodopayments
           created_at_gte: T.nilable(Time),
           created_at_lte: T.nilable(Time),
           customer_id: T.nilable(String),
-          dispute_stage: T.nilable(Dodopayments::DisputeStage::OrSymbol),
-          dispute_status: T.nilable(Dodopayments::DisputeStatus::OrSymbol),
+          dispute_stage: T.nilable(Dodopayments::Models::DisputeStage::OrSymbol),
+          dispute_status: T.nilable(Dodopayments::Models::DisputeStatus::OrSymbol),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(T.attached_class)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
+        )
+          .returns(T.attached_class)
       end
       def self.new(
         # Get events after this created time
@@ -65,25 +63,23 @@ module Dodopayments
         # Page size default is 10 max is 100
         page_size: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
-        override.returns(
-          {
-            created_at_gte: T.nilable(Time),
-            created_at_lte: T.nilable(Time),
-            customer_id: T.nilable(String),
-            dispute_stage: T.nilable(Dodopayments::DisputeStage::OrSymbol),
-            dispute_status: T.nilable(Dodopayments::DisputeStatus::OrSymbol),
-            page_number: T.nilable(Integer),
-            page_size: T.nilable(Integer),
-            request_options: Dodopayments::RequestOptions
-          }
-        )
+        override
+          .returns(
+            {
+              created_at_gte: T.nilable(Time),
+              created_at_lte: T.nilable(Time),
+              customer_id: T.nilable(String),
+              dispute_stage: T.nilable(Dodopayments::Models::DisputeStage::OrSymbol),
+              dispute_status: T.nilable(Dodopayments::Models::DisputeStatus::OrSymbol),
+              page_number: T.nilable(Integer),
+              page_size: T.nilable(Integer),
+              request_options: Dodopayments::RequestOptions
+            }
+          )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

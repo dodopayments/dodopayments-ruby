@@ -24,8 +24,8 @@ module Dodopayments
 
       # @!attribute currency
       #
-      #   @return [Symbol, Dodopayments::Currency]
-      required :currency, enum: -> { Dodopayments::Currency }
+      #   @return [Symbol, Dodopayments::Models::Currency]
+      required :currency, enum: -> { Dodopayments::Models::Currency }
 
       # @!attribute name
       #   Name of the Addon
@@ -43,8 +43,8 @@ module Dodopayments
       #   Represents the different categories of taxation applicable to various products
       #   and services.
       #
-      #   @return [Symbol, Dodopayments::TaxCategory]
-      required :tax_category, enum: -> { Dodopayments::TaxCategory }
+      #   @return [Symbol, Dodopayments::Models::TaxCategory]
+      required :tax_category, enum: -> { Dodopayments::Models::TaxCategory }
 
       # @!attribute updated_at
       #   Updated time
@@ -66,7 +66,7 @@ module Dodopayments
 
       # @!method initialize(id:, business_id:, created_at:, currency:, name:, price:, tax_category:, updated_at:, description: nil, image: nil)
       #   Some parameter documentations has been truncated, see
-      #   {Dodopayments::AddonResponse} for more details.
+      #   {Dodopayments::Models::AddonResponse} for more details.
       #
       #   @param id [String] id of the Addon
       #
@@ -74,13 +74,14 @@ module Dodopayments
       #
       #   @param created_at [Time] Created time
       #
-      #   @param currency [Symbol, Dodopayments::Currency]
+      #   @param currency [Symbol, Dodopayments::Models::Currency]
       #
       #   @param name [String] Name of the Addon
       #
       #   @param price [Integer] Amount of the addon
       #
-      #   @param tax_category [Symbol, Dodopayments::TaxCategory] Represents the different categories of taxation applicable to various products a
+      #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Represents the different categories of taxation applicable to various products a
+      #   ...
       #
       #   @param updated_at [Time] Updated time
       #

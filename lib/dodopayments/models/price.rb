@@ -7,15 +7,15 @@ module Dodopayments
 
       discriminator :type
 
-      variant :one_time_price, -> { Dodopayments::Price::OneTimePrice }
+      variant :one_time_price, -> { Dodopayments::Models::Price::OneTimePrice }
 
-      variant :recurring_price, -> { Dodopayments::Price::RecurringPrice }
+      variant :recurring_price, -> { Dodopayments::Models::Price::RecurringPrice }
 
       class OneTimePrice < Dodopayments::Internal::Type::BaseModel
         # @!attribute currency
         #
-        #   @return [Symbol, Dodopayments::Currency]
-        required :currency, enum: -> { Dodopayments::Currency }
+        #   @return [Symbol, Dodopayments::Models::Currency]
+        required :currency, enum: -> { Dodopayments::Models::Currency }
 
         # @!attribute discount
         #   Discount applied to the price, represented as a percentage (0 to 100).
@@ -68,19 +68,20 @@ module Dodopayments
 
         # @!method initialize(currency:, discount:, price:, purchasing_power_parity:, pay_what_you_want: nil, suggested_price: nil, tax_inclusive: nil, type: :one_time_price)
         #   Some parameter documentations has been truncated, see
-        #   {Dodopayments::Price::OneTimePrice} for more details.
+        #   {Dodopayments::Models::Price::OneTimePrice} for more details.
         #
-        #   @param currency [Symbol, Dodopayments::Currency]
+        #   @param currency [Symbol, Dodopayments::Models::Currency]
         #
         #   @param discount [Float] Discount applied to the price, represented as a percentage (0 to 100).
         #
         #   @param price [Integer] The payment amount, in the smallest denomination of the currency (e.g., cents fo
+        #   ...
         #
-        #   @param purchasing_power_parity [Boolean] Indicates if purchasing power parity adjustments are applied to the price.
+        #   @param purchasing_power_parity [Boolean] Indicates if purchasing power parity adjustments are applied to the price. ...
         #
-        #   @param pay_what_you_want [Boolean] Indicates whether the customer can pay any amount they choose.
+        #   @param pay_what_you_want [Boolean] Indicates whether the customer can pay any amount they choose. ...
         #
-        #   @param suggested_price [Integer, nil] A suggested price for the user to pay. This value is only considered if
+        #   @param suggested_price [Integer, nil] A suggested price for the user to pay. This value is only considered if ...
         #
         #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive.
         #
@@ -90,8 +91,8 @@ module Dodopayments
       class RecurringPrice < Dodopayments::Internal::Type::BaseModel
         # @!attribute currency
         #
-        #   @return [Symbol, Dodopayments::Currency]
-        required :currency, enum: -> { Dodopayments::Currency }
+        #   @return [Symbol, Dodopayments::Models::Currency]
+        required :currency, enum: -> { Dodopayments::Models::Currency }
 
         # @!attribute discount
         #   Discount applied to the price, represented as a percentage (0 to 100).
@@ -108,8 +109,8 @@ module Dodopayments
 
         # @!attribute payment_frequency_interval
         #
-        #   @return [Symbol, Dodopayments::TimeInterval]
-        required :payment_frequency_interval, enum: -> { Dodopayments::TimeInterval }
+        #   @return [Symbol, Dodopayments::Models::TimeInterval]
+        required :payment_frequency_interval, enum: -> { Dodopayments::Models::TimeInterval }
 
         # @!attribute price
         #   The payment amount. Represented in the lowest denomination of the currency
@@ -134,8 +135,8 @@ module Dodopayments
 
         # @!attribute subscription_period_interval
         #
-        #   @return [Symbol, Dodopayments::TimeInterval]
-        required :subscription_period_interval, enum: -> { Dodopayments::TimeInterval }
+        #   @return [Symbol, Dodopayments::Models::TimeInterval]
+        required :subscription_period_interval, enum: -> { Dodopayments::Models::TimeInterval }
 
         # @!attribute type
         #
@@ -156,23 +157,24 @@ module Dodopayments
 
         # @!method initialize(currency:, discount:, payment_frequency_count:, payment_frequency_interval:, price:, purchasing_power_parity:, subscription_period_count:, subscription_period_interval:, tax_inclusive: nil, trial_period_days: nil, type: :recurring_price)
         #   Some parameter documentations has been truncated, see
-        #   {Dodopayments::Price::RecurringPrice} for more details.
+        #   {Dodopayments::Models::Price::RecurringPrice} for more details.
         #
-        #   @param currency [Symbol, Dodopayments::Currency]
+        #   @param currency [Symbol, Dodopayments::Models::Currency]
         #
         #   @param discount [Float] Discount applied to the price, represented as a percentage (0 to 100).
         #
-        #   @param payment_frequency_count [Integer] Number of units for the payment frequency.
+        #   @param payment_frequency_count [Integer] Number of units for the payment frequency. ...
         #
-        #   @param payment_frequency_interval [Symbol, Dodopayments::TimeInterval]
+        #   @param payment_frequency_interval [Symbol, Dodopayments::Models::TimeInterval]
         #
         #   @param price [Integer] The payment amount. Represented in the lowest denomination of the currency (e.g.
+        #   ...
         #
-        #   @param purchasing_power_parity [Boolean] Indicates if purchasing power parity adjustments are applied to the price.
+        #   @param purchasing_power_parity [Boolean] Indicates if purchasing power parity adjustments are applied to the price. ...
         #
-        #   @param subscription_period_count [Integer] Number of units for the subscription period.
+        #   @param subscription_period_count [Integer] Number of units for the subscription period. ...
         #
-        #   @param subscription_period_interval [Symbol, Dodopayments::TimeInterval]
+        #   @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval]
         #
         #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive
         #
@@ -182,7 +184,7 @@ module Dodopayments
       end
 
       # @!method self.variants
-      #   @return [Array(Dodopayments::Price::OneTimePrice, Dodopayments::Price::RecurringPrice)]
+      #   @return [Array(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice)]
     end
   end
 end

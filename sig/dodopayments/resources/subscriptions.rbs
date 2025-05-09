@@ -2,16 +2,16 @@ module Dodopayments
   module Resources
     class Subscriptions
       def create: (
-        billing: Dodopayments::BillingAddress,
+        billing: Dodopayments::Models::BillingAddress,
         customer: Dodopayments::Models::customer_request,
         product_id: String,
         quantity: Integer,
-        ?addons: ::Array[Dodopayments::SubscriptionCreateParams::Addon]?,
-        ?allowed_payment_method_types: ::Array[Dodopayments::SubscriptionCreateParams::allowed_payment_method_type]?,
+        ?addons: ::Array[Dodopayments::Models::SubscriptionCreateParams::Addon]?,
+        ?allowed_payment_method_types: ::Array[Dodopayments::Models::SubscriptionCreateParams::allowed_payment_method_type]?,
         ?billing_currency: Dodopayments::Models::currency?,
         ?discount_code: String?,
         ?metadata: ::Hash[Symbol, String],
-        ?on_demand: Dodopayments::SubscriptionCreateParams::OnDemand?,
+        ?on_demand: Dodopayments::Models::SubscriptionCreateParams::OnDemand?,
         ?payment_link: bool?,
         ?return_url: String?,
         ?show_saved_payment_methods: bool,
@@ -23,17 +23,17 @@ module Dodopayments
       def retrieve: (
         String subscription_id,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Subscription
+      ) -> Dodopayments::Models::Subscription
 
       def update: (
         String subscription_id,
-        ?billing: Dodopayments::BillingAddress?,
-        ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
+        ?billing: Dodopayments::Models::BillingAddress?,
+        ?disable_on_demand: Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand?,
         ?metadata: ::Hash[Symbol, String]?,
         ?status: Dodopayments::Models::subscription_status?,
         ?tax_id: String?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Subscription
+      ) -> Dodopayments::Models::Subscription
 
       def list: (
         ?created_at_gte: Time?,
@@ -50,7 +50,7 @@ module Dodopayments
         product_id: String,
         proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode,
         quantity: Integer,
-        ?addons: ::Array[Dodopayments::SubscriptionChangePlanParams::Addon]?,
+        ?addons: ::Array[Dodopayments::Models::SubscriptionChangePlanParams::Addon]?,
         ?request_options: Dodopayments::request_opts
       ) -> nil
 

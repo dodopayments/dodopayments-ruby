@@ -4,33 +4,26 @@ module Dodopayments
   module Resources
     class Disputes
       sig do
-        params(
-          dispute_id: String,
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Models::DisputeRetrieveResponse)
+        params(dispute_id: String, request_options: Dodopayments::RequestOpts)
+          .returns(Dodopayments::Models::DisputeRetrieveResponse)
       end
       def retrieve(
         # Dispute Id
         dispute_id,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           created_at_gte: T.nilable(Time),
           created_at_lte: T.nilable(Time),
           customer_id: T.nilable(String),
-          dispute_stage: T.nilable(Dodopayments::DisputeStage::OrSymbol),
-          dispute_status: T.nilable(Dodopayments::DisputeStatus::OrSymbol),
+          dispute_stage: T.nilable(Dodopayments::Models::DisputeStage::OrSymbol),
+          dispute_status: T.nilable(Dodopayments::Models::DisputeStatus::OrSymbol),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(
-          Dodopayments::Internal::DefaultPageNumberPagination[
-            Dodopayments::Models::DisputeListResponse
-          ]
+          request_options: Dodopayments::RequestOpts
         )
+          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::DisputeListResponse])
       end
       def list(
         # Get events after this created time
@@ -48,13 +41,10 @@ module Dodopayments
         # Page size default is 10 max is 100
         page_size: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:)
-      end
+      def self.new(client:); end
     end
   end
 end

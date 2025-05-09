@@ -7,7 +7,7 @@ class Dodopayments::Test::Resources::Customers::CustomerPortalTest < Dodopayment
     response = @dodo_payments.customers.customer_portal.create("customer_id")
 
     assert_pattern do
-      response => Dodopayments::CustomerPortalSession
+      response => Dodopayments::Models::CustomerPortalSession
     end
 
     assert_pattern do

@@ -3,9 +3,6 @@
 module Dodopayments
   module Models
     class Product < Dodopayments::Internal::Type::BaseModel
-      OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
-
       # Unique identifier for the business to which the product belongs.
       sig { returns(String) }
       attr_accessor :business_id
@@ -22,14 +19,7 @@ module Dodopayments
       sig { returns(T::Boolean) }
       attr_accessor :license_key_enabled
 
-      sig do
-        returns(
-          T.any(
-            Dodopayments::Price::OneTimePrice,
-            Dodopayments::Price::RecurringPrice
-          )
-        )
-      end
+      sig { returns(T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice)) }
       attr_accessor :price
 
       # Unique identifier for the product.
@@ -38,7 +28,7 @@ module Dodopayments
 
       # Represents the different categories of taxation applicable to various products
       # and services.
-      sig { returns(Dodopayments::TaxCategory::TaggedSymbol) }
+      sig { returns(Dodopayments::Models::TaxCategory::TaggedSymbol) }
       attr_accessor :tax_category
 
       # Timestamp when the product was last updated.
@@ -65,14 +55,14 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :license_key_activations_limit
 
-      sig { returns(T.nilable(Dodopayments::LicenseKeyDuration)) }
+      sig { returns(T.nilable(Dodopayments::Models::LicenseKeyDuration)) }
       attr_reader :license_key_duration
 
       sig do
         params(
-          license_key_duration:
-            T.nilable(Dodopayments::LicenseKeyDuration::OrHash)
-        ).void
+          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::AnyHash))
+        )
+          .void
       end
       attr_writer :license_key_duration
 
@@ -86,23 +76,23 @@ module Dodopayments
           created_at: Time,
           is_recurring: T::Boolean,
           license_key_enabled: T::Boolean,
-          price:
-            T.any(
-              Dodopayments::Price::OneTimePrice::OrHash,
-              Dodopayments::Price::RecurringPrice::OrHash
-            ),
+          price: T.any(
+            Dodopayments::Models::Price::OneTimePrice,
+            Dodopayments::Internal::AnyHash,
+            Dodopayments::Models::Price::RecurringPrice
+          ),
           product_id: String,
-          tax_category: Dodopayments::TaxCategory::OrSymbol,
+          tax_category: Dodopayments::Models::TaxCategory::OrSymbol,
           updated_at: Time,
           addons: T.nilable(T::Array[String]),
           description: T.nilable(String),
           image: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
-          license_key_duration:
-            T.nilable(Dodopayments::LicenseKeyDuration::OrHash),
+          license_key_duration: T.nilable(T.any(Dodopayments::Models::LicenseKeyDuration, Dodopayments::Internal::AnyHash)),
           name: T.nilable(String)
-        ).returns(T.attached_class)
+        )
+          .returns(T.attached_class)
       end
       def self.new(
         # Unique identifier for the business to which the product belongs.
@@ -134,36 +124,30 @@ module Dodopayments
         license_key_duration: nil,
         # Name of the product, optional.
         name: nil
-      )
-      end
-
+      ); end
       sig do
-        override.returns(
-          {
-            business_id: String,
-            created_at: Time,
-            is_recurring: T::Boolean,
-            license_key_enabled: T::Boolean,
-            price:
-              T.any(
-                Dodopayments::Price::OneTimePrice,
-                Dodopayments::Price::RecurringPrice
-              ),
-            product_id: String,
-            tax_category: Dodopayments::TaxCategory::TaggedSymbol,
-            updated_at: Time,
-            addons: T.nilable(T::Array[String]),
-            description: T.nilable(String),
-            image: T.nilable(String),
-            license_key_activation_message: T.nilable(String),
-            license_key_activations_limit: T.nilable(Integer),
-            license_key_duration: T.nilable(Dodopayments::LicenseKeyDuration),
-            name: T.nilable(String)
-          }
-        )
+        override
+          .returns(
+            {
+              business_id: String,
+              created_at: Time,
+              is_recurring: T::Boolean,
+              license_key_enabled: T::Boolean,
+              price: T.any(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice),
+              product_id: String,
+              tax_category: Dodopayments::Models::TaxCategory::TaggedSymbol,
+              updated_at: Time,
+              addons: T.nilable(T::Array[String]),
+              description: T.nilable(String),
+              image: T.nilable(String),
+              license_key_activation_message: T.nilable(String),
+              license_key_activations_limit: T.nilable(Integer),
+              license_key_duration: T.nilable(Dodopayments::Models::LicenseKeyDuration),
+              name: T.nilable(String)
+            }
+          )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

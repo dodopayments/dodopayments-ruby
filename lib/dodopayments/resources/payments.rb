@@ -8,15 +8,15 @@ module Dodopayments
       #
       # @overload create(billing:, customer:, product_cart:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, metadata: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
       #
-      # @param billing [Dodopayments::BillingAddress]
+      # @param billing [Dodopayments::Models::BillingAddress]
       #
-      # @param customer [Dodopayments::AttachExistingCustomer, Dodopayments::CreateNewCustomer]
+      # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
       #
-      # @param product_cart [Array<Dodopayments::OneTimeProductCartItem>] List of products in the cart. Must contain at least 1 and at most 100 items.
+      # @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>] List of products in the cart. Must contain at least 1 and at most 100 items.
       #
-      # @param allowed_payment_method_types [Array<Symbol, Dodopayments::PaymentCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout.
+      # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout. ...
       #
-      # @param billing_currency [Symbol, Dodopayments::Currency, nil]
+      # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil]
       #
       # @param discount_code [String, nil] Discount Code to apply to the transaction
       #
@@ -24,11 +24,12 @@ module Dodopayments
       #
       # @param payment_link [Boolean, nil] Whether to generate a payment link. Defaults to false if not specified.
       #
-      # @param return_url [String, nil] Optional URL to redirect the customer after payment.
+      # @param return_url [String, nil] Optional URL to redirect the customer after payment. ...
       #
-      # @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer
+      # @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer ...
       #
       # @param tax_id [String, nil] Tax ID in case the payment is B2B. If tax id validation fails the payment creati
+      # ...
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -36,7 +37,7 @@ module Dodopayments
       #
       # @see Dodopayments::Models::PaymentCreateParams
       def create(params)
-        parsed, options = Dodopayments::PaymentCreateParams.dump_request(params)
+        parsed, options = Dodopayments::Models::PaymentCreateParams.dump_request(params)
         @client.request(
           method: :post,
           path: "payments",
@@ -52,14 +53,14 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Payment]
+      # @return [Dodopayments::Models::Payment]
       #
       # @see Dodopayments::Models::PaymentRetrieveParams
       def retrieve(payment_id, params = {})
         @client.request(
           method: :get,
           path: ["payments/%1$s", payment_id],
-          model: Dodopayments::Payment,
+          model: Dodopayments::Models::Payment,
           options: params[:request_options]
         )
       end
@@ -76,7 +77,7 @@ module Dodopayments
       #
       # @param page_size [Integer, nil] Page size default is 10 max is 100
       #
-      # @param status [Symbol, Dodopayments::IntentStatus, nil] Filter by status
+      # @param status [Symbol, Dodopayments::Models::IntentStatus, nil] Filter by status
       #
       # @param subscription_id [String, nil] Filter by subscription id
       #
@@ -86,7 +87,7 @@ module Dodopayments
       #
       # @see Dodopayments::Models::PaymentListParams
       def list(params = {})
-        parsed, options = Dodopayments::PaymentListParams.dump_request(params)
+        parsed, options = Dodopayments::Models::PaymentListParams.dump_request(params)
         @client.request(
           method: :get,
           path: "payments",

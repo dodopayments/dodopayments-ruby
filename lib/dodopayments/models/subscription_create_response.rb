@@ -7,13 +7,14 @@ module Dodopayments
       # @!attribute addons
       #   Addons associated with this subscription
       #
-      #   @return [Array<Dodopayments::AddonCartResponseItem>]
-      required :addons, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::AddonCartResponseItem] }
+      #   @return [Array<Dodopayments::Models::AddonCartResponseItem>]
+      required :addons,
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::AddonCartResponseItem] }
 
       # @!attribute customer
       #
-      #   @return [Dodopayments::CustomerLimitedDetails]
-      required :customer, -> { Dodopayments::CustomerLimitedDetails }
+      #   @return [Dodopayments::Models::CustomerLimitedDetails]
+      required :customer, -> { Dodopayments::Models::CustomerLimitedDetails }
 
       # @!attribute metadata
       #
@@ -56,17 +57,18 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionCreateResponse} for more details.
       #
-      #   @param addons [Array<Dodopayments::AddonCartResponseItem>] Addons associated with this subscription
+      #   @param addons [Array<Dodopayments::Models::AddonCartResponseItem>] Addons associated with this subscription
       #
-      #   @param customer [Dodopayments::CustomerLimitedDetails]
+      #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
       #
       #   @param metadata [Hash{Symbol=>String}]
       #
       #   @param recurring_pre_tax_amount [Integer] Tax will be added to the amount and charged to the customer on each billing cycl
+      #   ...
       #
       #   @param subscription_id [String] Unique identifier for the subscription
       #
-      #   @param client_secret [String, nil] Client secret used to load Dodo checkout SDK
+      #   @param client_secret [String, nil] Client secret used to load Dodo checkout SDK ...
       #
       #   @param discount_id [String, nil] The discount id if discount is applied
       #

@@ -20,6 +20,8 @@ module Dodopayments
         ?expires_at: Time?,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> Dodopayments::Models::license_key_update_params
     end
   end
 end

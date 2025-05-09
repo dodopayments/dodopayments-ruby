@@ -54,6 +54,7 @@ module Dodopayments
       #   @param limit [Integer, nil] Min : 1, Max : 100, default 10
       #
       #   @param object_id_ [String, nil] Get events history of a specific object like payment/subscription/refund/dispute
+      #   ...
       #
       #   @param page_number [Integer, nil] Page number default is 0
       #

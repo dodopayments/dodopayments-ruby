@@ -39,6 +39,8 @@ module Dodopayments
         ?currency: Dodopayments::Models::currency?,
         ?reason: String?
       ) -> void
+
+      def to_hash: -> Dodopayments::Models::refund
     end
   end
 end

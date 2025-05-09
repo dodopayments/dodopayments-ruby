@@ -25,6 +25,8 @@ module Dodopayments
         ?create_new_customer: bool,
         ?phone_number: String?
       ) -> void
+
+      def to_hash: -> Dodopayments::Models::create_new_customer
     end
   end
 end

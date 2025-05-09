@@ -34,13 +34,11 @@ multitask(:test) do
   ruby(*%w[-w -e], rb, verbose: false) { fail unless _1 }
 end
 
+rubo_find = %w[find ./lib ./test ./rbi -type f -and ( -name *.rb -or -name *.rbi ) -print0]
 xargs = %w[xargs --no-run-if-empty --null --max-procs=0 --max-args=300 --]
-locale = {"LC_ALL" => "C.UTF-8"}
 
 desc("Lint `*.rb(i)`")
 multitask(:"lint:rubocop") do
-  find = %w[find ./lib ./test ./rbi -type f -and ( -name *.rb -or -name *.rbi ) -print0]
-
   rubocop = %w[rubocop --fail-level E]
   rubocop += %w[--format github] if ENV.key?("CI")
 
@@ -48,26 +46,17 @@ multitask(:"lint:rubocop") do
   rubocop += %w[--except Lint/RedundantCopDisableDirective,Layout/LineLength]
 
   lint = xargs + rubocop
-  sh("#{find.shelljoin} | #{lint.shelljoin}")
+  sh("#{rubo_find.shelljoin} | #{lint.shelljoin}")
 end
 
-desc("Format `*.rb`")
-multitask(:"format:rb") do
-  # while `syntax_tree` is much faster than `rubocop`, `rubocop` is the only formatter with full syntax support
-  find = %w[find ./lib ./test -type f -and -name *.rb -print0]
+desc("Format `*.rb(i)`")
+multitask(:"format:rubocop") do
   fmt = xargs + %w[rubocop --fail-level F --autocorrect --format simple --]
-  sh("#{find.shelljoin} | #{fmt.shelljoin}")
-end
-
-desc("Format `*.rbi`")
-multitask(:"format:rbi") do
-  find = %w[find ./rbi -type f -and -name *.rbi -print0]
-  fmt = xargs + %w[stree write --]
-  sh(locale, "#{find.shelljoin} | #{fmt.shelljoin}")
+  sh("#{rubo_find.shelljoin} | #{fmt.shelljoin}")
 end
 
 desc("Format `*.rbs`")
-multitask(:"format:rbs") do
+multitask(:"format:syntax_tree") do
   find = %w[find ./sig -type f -name *.rbs -print0]
   inplace = /darwin|bsd/ =~ RUBY_PLATFORM ? ["-i", ""] : %w[-i]
   uuid = SecureRandom.uuid
@@ -99,7 +88,7 @@ multitask(:"format:rbs") do
   # transform class aliases to type aliases, which syntax tree has no trouble with
   sh("#{find.shelljoin} | #{pre.shelljoin}")
   # run syntax tree to format `*.rbs` files
-  sh(locale, "#{find.shelljoin} | #{fmt.shelljoin}") do
+  sh("#{find.shelljoin} | #{fmt.shelljoin}") do
     success = _1
   end
   # transform type aliases back to class aliases
@@ -110,7 +99,7 @@ multitask(:"format:rbs") do
 end
 
 desc("Format everything")
-multitask(format: [:"format:rb", :"format:rbi", :"format:rbs"])
+multitask(format: [:"format:rubocop", :"format:syntax_tree"])
 
 desc("Typecheck `*.rbs`")
 multitask(:"typecheck:steep") do

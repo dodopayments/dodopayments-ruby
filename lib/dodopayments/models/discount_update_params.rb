@@ -44,8 +44,8 @@ module Dodopayments
 
       # @!attribute type
       #
-      #   @return [Symbol, Dodopayments::DiscountType, nil]
-      optional :type, enum: -> { Dodopayments::DiscountType }, nil?: true
+      #   @return [Symbol, Dodopayments::Models::DiscountType, nil]
+      optional :type, enum: -> { Dodopayments::Models::DiscountType }, nil?: true
 
       # @!attribute usage_limit
       #
@@ -56,7 +56,7 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::DiscountUpdateParams} for more details.
       #
-      #   @param amount [Integer, nil] If present, update the discount amount:
+      #   @param amount [Integer, nil] If present, update the discount amount: ...
       #
       #   @param code [String, nil] If present, update the discount code (uppercase).
       #
@@ -64,9 +64,9 @@ module Dodopayments
       #
       #   @param name [String, nil]
       #
-      #   @param restricted_to [Array<String>, nil] If present, replaces all restricted product IDs with this new set.
+      #   @param restricted_to [Array<String>, nil] If present, replaces all restricted product IDs with this new set. ...
       #
-      #   @param type [Symbol, Dodopayments::DiscountType, nil]
+      #   @param type [Symbol, Dodopayments::Models::DiscountType, nil]
       #
       #   @param usage_limit [Integer, nil]
       #

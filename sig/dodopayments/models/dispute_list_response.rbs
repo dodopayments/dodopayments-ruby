@@ -39,6 +39,8 @@ module Dodopayments
         dispute_status: Dodopayments::Models::dispute_status,
         payment_id: String
       ) -> void
+
+      def to_hash: -> Dodopayments::Models::dispute_list_response
     end
   end
 end

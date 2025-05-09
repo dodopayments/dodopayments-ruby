@@ -14,6 +14,8 @@ module Dodopayments
         product_price: Integer,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> Dodopayments::Models::subscription_charge_params
     end
   end
 end

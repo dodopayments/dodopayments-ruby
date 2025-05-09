@@ -3,15 +3,12 @@
 module Dodopayments
   module Models
     class BillingAddress < Dodopayments::Internal::Type::BaseModel
-      OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
-
       # City name
       sig { returns(String) }
       attr_accessor :city
 
       # ISO country code alpha2 variant
-      sig { returns(Dodopayments::CountryCode::OrSymbol) }
+      sig { returns(Dodopayments::Models::CountryCode::OrSymbol) }
       attr_accessor :country
 
       # State or province name
@@ -29,11 +26,12 @@ module Dodopayments
       sig do
         params(
           city: String,
-          country: Dodopayments::CountryCode::OrSymbol,
+          country: Dodopayments::Models::CountryCode::OrSymbol,
           state: String,
           street: String,
           zipcode: String
-        ).returns(T.attached_class)
+        )
+          .returns(T.attached_class)
       end
       def self.new(
         # City name
@@ -46,22 +44,14 @@ module Dodopayments
         street:,
         # Postal code or ZIP code
         zipcode:
-      )
-      end
-
+      ); end
       sig do
-        override.returns(
-          {
-            city: String,
-            country: Dodopayments::CountryCode::OrSymbol,
-            state: String,
-            street: String,
-            zipcode: String
-          }
-        )
+        override
+          .returns(
+            {city: String, country: Dodopayments::Models::CountryCode::OrSymbol, state: String, street: String, zipcode: String}
+          )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

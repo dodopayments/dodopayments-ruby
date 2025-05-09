@@ -3,9 +3,6 @@
 module Dodopayments
   module Models
     class PayoutListResponse < Dodopayments::Internal::Type::BaseModel
-      OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
-
       # The total amount of the payout.
       sig { returns(Integer) }
       attr_accessor :amount
@@ -22,7 +19,7 @@ module Dodopayments
       sig { returns(Time) }
       attr_accessor :created_at
 
-      sig { returns(Dodopayments::Currency::TaggedSymbol) }
+      sig { returns(Dodopayments::Models::Currency::TaggedSymbol) }
       attr_accessor :currency
 
       # The fee charged for processing the payout.
@@ -41,9 +38,7 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :refunds
 
-      sig do
-        returns(Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
-      end
+      sig { returns(Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol) }
       attr_accessor :status
 
       # The tax applied to the payout.
@@ -72,7 +67,7 @@ module Dodopayments
           business_id: String,
           chargebacks: Integer,
           created_at: Time,
-          currency: Dodopayments::Currency::OrSymbol,
+          currency: Dodopayments::Models::Currency::OrSymbol,
           fee: Integer,
           payment_method: String,
           payout_id: String,
@@ -83,7 +78,8 @@ module Dodopayments
           name: T.nilable(String),
           payout_document_url: T.nilable(String),
           remarks: T.nilable(String)
-        ).returns(T.attached_class)
+        )
+          .returns(T.attached_class)
       end
       def self.new(
         # The total amount of the payout.
@@ -114,78 +110,45 @@ module Dodopayments
         payout_document_url: nil,
         # Any additional remarks or notes associated with the payout.
         remarks: nil
-      )
-      end
-
+      ); end
       sig do
-        override.returns(
-          {
-            amount: Integer,
-            business_id: String,
-            chargebacks: Integer,
-            created_at: Time,
-            currency: Dodopayments::Currency::TaggedSymbol,
-            fee: Integer,
-            payment_method: String,
-            payout_id: String,
-            refunds: Integer,
-            status:
-              Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol,
-            tax: Integer,
-            updated_at: Time,
-            name: T.nilable(String),
-            payout_document_url: T.nilable(String),
-            remarks: T.nilable(String)
-          }
-        )
+        override
+          .returns(
+            {
+              amount: Integer,
+              business_id: String,
+              chargebacks: Integer,
+              created_at: Time,
+              currency: Dodopayments::Models::Currency::TaggedSymbol,
+              fee: Integer,
+              payment_method: String,
+              payout_id: String,
+              refunds: Integer,
+              status: Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol,
+              tax: Integer,
+              updated_at: Time,
+              name: T.nilable(String),
+              payout_document_url: T.nilable(String),
+              remarks: T.nilable(String)
+            }
+          )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       module Status
         extend Dodopayments::Internal::Type::Enum
 
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, Dodopayments::Models::PayoutListResponse::Status)
-          end
+        TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::PayoutListResponse::Status) }
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-        NOT_INITIATED =
-          T.let(
-            :not_initiated,
-            Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol
-          )
-        IN_PROGRESS =
-          T.let(
-            :in_progress,
-            Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol
-          )
-        ON_HOLD =
-          T.let(
-            :on_hold,
-            Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol
-          )
-        FAILED =
-          T.let(
-            :failed,
-            Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol
-          )
-        SUCCESS =
-          T.let(
-            :success,
-            Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol
-          )
+        NOT_INITIATED = T.let(:not_initiated, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
+        IN_PROGRESS = T.let(:in_progress, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
+        ON_HOLD = T.let(:on_hold, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
+        FAILED = T.let(:failed, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
+        SUCCESS = T.let(:success, Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
 
-        sig do
-          override.returns(
-            T::Array[
-              Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
+        sig { override.returns(T::Array[Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol]) }
+        def self.values; end
       end
     end
   end

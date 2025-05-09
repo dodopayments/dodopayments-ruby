@@ -7,7 +7,7 @@ class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::Resou
     response = @dodo_payments.license_keys.retrieve("id")
 
     assert_pattern do
-      response => Dodopayments::LicenseKey
+      response => Dodopayments::Models::LicenseKey
     end
 
     assert_pattern do
@@ -20,7 +20,7 @@ class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::Resou
         key: String,
         payment_id: String,
         product_id: String,
-        status: Dodopayments::LicenseKeyStatus,
+        status: Dodopayments::Models::LicenseKeyStatus,
         activations_limit: Integer | nil,
         expires_at: Time | nil,
         subscription_id: String | nil
@@ -32,7 +32,7 @@ class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::Resou
     response = @dodo_payments.license_keys.update("id")
 
     assert_pattern do
-      response => Dodopayments::LicenseKey
+      response => Dodopayments::Models::LicenseKey
     end
 
     assert_pattern do
@@ -45,7 +45,7 @@ class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::Resou
         key: String,
         payment_id: String,
         product_id: String,
-        status: Dodopayments::LicenseKeyStatus,
+        status: Dodopayments::Models::LicenseKeyStatus,
         activations_limit: Integer | nil,
         expires_at: Time | nil,
         subscription_id: String | nil
@@ -64,7 +64,7 @@ class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::Resou
     return if row.nil?
 
     assert_pattern do
-      row => Dodopayments::LicenseKey
+      row => Dodopayments::Models::LicenseKey
     end
 
     assert_pattern do
@@ -77,7 +77,7 @@ class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::Resou
         key: String,
         payment_id: String,
         product_id: String,
-        status: Dodopayments::LicenseKeyStatus,
+        status: Dodopayments::Models::LicenseKeyStatus,
         activations_limit: Integer | nil,
         expires_at: Time | nil,
         subscription_id: String | nil

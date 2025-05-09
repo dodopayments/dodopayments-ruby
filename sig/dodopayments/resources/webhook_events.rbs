@@ -4,7 +4,7 @@ module Dodopayments
       def retrieve: (
         String webhook_event_id,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::WebhookEvent
+      ) -> Dodopayments::Models::WebhookEvent
 
       def list: (
         ?created_at_gte: Time?,
@@ -14,7 +14,7 @@ module Dodopayments
         ?page_number: Integer?,
         ?page_size: Integer?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::WebhookEvent]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::WebhookEvent]
 
       def initialize: (client: Dodopayments::Client) -> void
     end

@@ -68,6 +68,8 @@ module Dodopayments
         ?remarks: String?
       ) -> void
 
+      def to_hash: -> Dodopayments::Models::payout_list_response
+
       type status =
         :not_initiated | :in_progress | :on_hold | :failed | :success
 

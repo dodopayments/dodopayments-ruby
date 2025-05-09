@@ -15,9 +15,9 @@ module Dodopayments
 
       # @!attribute proration_billing_mode
       #
-      #   @return [Symbol, Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode]
+      #   @return [Symbol, Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode]
       required :proration_billing_mode,
-               enum: -> { Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode }
+               enum: -> { Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode }
 
       # @!attribute quantity
       #   Number of units to subscribe for. Must be at least 1.
@@ -29,11 +29,9 @@ module Dodopayments
       #   Addons for the new plan. Note : Leaving this empty would remove any existing
       #   addons
       #
-      #   @return [Array<Dodopayments::SubscriptionChangePlanParams::Addon>, nil]
+      #   @return [Array<Dodopayments::Models::SubscriptionChangePlanParams::Addon>, nil]
       optional :addons,
-               -> {
-                 Dodopayments::Internal::Type::ArrayOf[Dodopayments::SubscriptionChangePlanParams::Addon]
-               },
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::SubscriptionChangePlanParams::Addon] },
                nil?: true
 
       # @!method initialize(product_id:, proration_billing_mode:, quantity:, addons: nil, request_options: {})
@@ -42,11 +40,11 @@ module Dodopayments
       #
       #   @param product_id [String] Unique identifier of the product to subscribe to
       #
-      #   @param proration_billing_mode [Symbol, Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode]
+      #   @param proration_billing_mode [Symbol, Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode]
       #
       #   @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
-      #   @param addons [Array<Dodopayments::SubscriptionChangePlanParams::Addon>, nil] Addons for the new plan.
+      #   @param addons [Array<Dodopayments::Models::SubscriptionChangePlanParams::Addon>, nil] Addons for the new plan. ...
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 

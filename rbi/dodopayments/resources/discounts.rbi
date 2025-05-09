@@ -7,14 +7,15 @@ module Dodopayments
       sig do
         params(
           amount: Integer,
-          type: Dodopayments::DiscountType::OrSymbol,
+          type: Dodopayments::Models::DiscountType::OrSymbol,
           code: T.nilable(String),
           expires_at: T.nilable(Time),
           name: T.nilable(String),
           restricted_to: T.nilable(T::Array[String]),
           usage_limit: T.nilable(Integer),
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Discount)
+          request_options: Dodopayments::RequestOpts
+        )
+          .returns(Dodopayments::Models::Discount)
       end
       def create(
         # The discount amount.
@@ -40,23 +41,17 @@ module Dodopayments
         # How many times this discount can be used (if any). Must be >= 1 if provided.
         usage_limit: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       # GET /discounts/{discount_id}
       sig do
-        params(
-          discount_id: String,
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Discount)
+        params(discount_id: String, request_options: Dodopayments::RequestOpts)
+          .returns(Dodopayments::Models::Discount)
       end
       def retrieve(
         # Discount Id
         discount_id,
         request_options: {}
-      )
-      end
-
+      ); end
       # PATCH /discounts/{discount_id}
       sig do
         params(
@@ -66,10 +61,11 @@ module Dodopayments
           expires_at: T.nilable(Time),
           name: T.nilable(String),
           restricted_to: T.nilable(T::Array[String]),
-          type: T.nilable(Dodopayments::DiscountType::OrSymbol),
+          type: T.nilable(Dodopayments::Models::DiscountType::OrSymbol),
           usage_limit: T.nilable(Integer),
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Discount)
+          request_options: Dodopayments::RequestOpts
+        )
+          .returns(Dodopayments::Models::Discount)
       end
       def update(
         # Discount Id
@@ -92,20 +88,15 @@ module Dodopayments
         type: nil,
         usage_limit: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       # GET /discounts
       sig do
         params(
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(
-          Dodopayments::Internal::DefaultPageNumberPagination[
-            Dodopayments::Discount
-          ]
+          request_options: Dodopayments::RequestOpts
         )
+          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Discount])
       end
       def list(
         # Page number (default = 0).
@@ -113,27 +104,17 @@ module Dodopayments
         # Page size (default = 10, max = 100).
         page_size: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       # DELETE /discounts/{discount_id}
-      sig do
-        params(
-          discount_id: String,
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).void
-      end
+      sig { params(discount_id: String, request_options: Dodopayments::RequestOpts).void }
       def delete(
         # Discount Id
         discount_id,
         request_options: {}
-      )
-      end
-
+      ); end
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:)
-      end
+      def self.new(client:); end
     end
   end
 end

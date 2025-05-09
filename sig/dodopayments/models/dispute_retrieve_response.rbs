@@ -6,7 +6,7 @@ module Dodopayments
         business_id: String,
         created_at: Time,
         currency: String,
-        customer: Dodopayments::CustomerLimitedDetails,
+        customer: Dodopayments::Models::CustomerLimitedDetails,
         dispute_id: String,
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
@@ -24,7 +24,7 @@ module Dodopayments
 
       attr_accessor currency: String
 
-      attr_accessor customer: Dodopayments::CustomerLimitedDetails
+      attr_accessor customer: Dodopayments::Models::CustomerLimitedDetails
 
       attr_accessor dispute_id: String
 
@@ -43,7 +43,7 @@ module Dodopayments
         business_id: String,
         created_at: Time,
         currency: String,
-        customer: Dodopayments::CustomerLimitedDetails,
+        customer: Dodopayments::Models::CustomerLimitedDetails,
         dispute_id: String,
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
@@ -51,6 +51,8 @@ module Dodopayments
         ?reason: String?,
         ?remarks: String?
       ) -> void
+
+      def to_hash: -> Dodopayments::Models::dispute_retrieve_response
     end
   end
 end

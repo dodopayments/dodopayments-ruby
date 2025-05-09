@@ -3,19 +3,16 @@
 module Dodopayments
   module Models
     class PaymentCreateResponse < Dodopayments::Internal::Type::BaseModel
-      OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
-
       # Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will be
       # coming soon
       sig { returns(String) }
       attr_accessor :client_secret
 
-      sig { returns(Dodopayments::CustomerLimitedDetails) }
+      sig { returns(Dodopayments::Models::CustomerLimitedDetails) }
       attr_reader :customer
 
       sig do
-        params(customer: Dodopayments::CustomerLimitedDetails::OrHash).void
+        params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void
       end
       attr_writer :customer
 
@@ -39,21 +36,21 @@ module Dodopayments
       attr_accessor :payment_link
 
       # Optional list of products included in the payment
-      sig { returns(T.nilable(T::Array[Dodopayments::OneTimeProductCartItem])) }
+      sig { returns(T.nilable(T::Array[Dodopayments::Models::OneTimeProductCartItem])) }
       attr_accessor :product_cart
 
       sig do
         params(
           client_secret: String,
-          customer: Dodopayments::CustomerLimitedDetails::OrHash,
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash),
           metadata: T::Hash[Symbol, String],
           payment_id: String,
           total_amount: Integer,
           discount_id: T.nilable(String),
           payment_link: T.nilable(String),
-          product_cart:
-            T.nilable(T::Array[Dodopayments::OneTimeProductCartItem::OrHash])
-        ).returns(T.attached_class)
+          product_cart: T.nilable(T::Array[T.any(Dodopayments::Models::OneTimeProductCartItem, Dodopayments::Internal::AnyHash)])
+        )
+          .returns(T.attached_class)
       end
       def self.new(
         # Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will be
@@ -71,26 +68,23 @@ module Dodopayments
         payment_link: nil,
         # Optional list of products included in the payment
         product_cart: nil
-      )
-      end
-
+      ); end
       sig do
-        override.returns(
-          {
-            client_secret: String,
-            customer: Dodopayments::CustomerLimitedDetails,
-            metadata: T::Hash[Symbol, String],
-            payment_id: String,
-            total_amount: Integer,
-            discount_id: T.nilable(String),
-            payment_link: T.nilable(String),
-            product_cart:
-              T.nilable(T::Array[Dodopayments::OneTimeProductCartItem])
-          }
-        )
+        override
+          .returns(
+            {
+              client_secret: String,
+              customer: Dodopayments::Models::CustomerLimitedDetails,
+              metadata: T::Hash[Symbol, String],
+              payment_id: String,
+              total_amount: Integer,
+              discount_id: T.nilable(String),
+              payment_link: T.nilable(String),
+              product_cart: T.nilable(T::Array[Dodopayments::Models::OneTimeProductCartItem])
+            }
+          )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

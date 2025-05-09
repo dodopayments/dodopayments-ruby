@@ -3,9 +3,6 @@
 module Dodopayments
   module Models
     class LicenseKeyInstance < Dodopayments::Internal::Type::BaseModel
-      OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
-
       sig { returns(String) }
       attr_accessor :id
 
@@ -22,16 +19,10 @@ module Dodopayments
       attr_accessor :name
 
       sig do
-        params(
-          id: String,
-          business_id: String,
-          created_at: Time,
-          license_key_id: String,
-          name: String
-        ).returns(T.attached_class)
+        params(id: String, business_id: String, created_at: Time, license_key_id: String, name: String)
+          .returns(T.attached_class)
       end
-      def self.new(id:, business_id:, created_at:, license_key_id:, name:)
-      end
+      def self.new(id:, business_id:, created_at:, license_key_id:, name:); end
 
       sig do
         override.returns(
@@ -44,8 +35,7 @@ module Dodopayments
           }
         )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

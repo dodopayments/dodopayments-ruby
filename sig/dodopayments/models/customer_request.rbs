@@ -1,12 +1,13 @@
 module Dodopayments
   module Models
     type customer_request =
-      Dodopayments::AttachExistingCustomer | Dodopayments::CreateNewCustomer
+      Dodopayments::Models::AttachExistingCustomer
+      | Dodopayments::Models::CreateNewCustomer
 
     module CustomerRequest
       extend Dodopayments::Internal::Type::Union
 
-      def self?.variants: -> ::Array[Dodopayments::Models::customer_request]
+      def self?.variants: -> [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
     end
   end
 end

@@ -45,7 +45,7 @@ module Dodopayments
       #
       #   @param page_size [Integer, nil] Page size default is 10 max is 100
       #
-      #   @param recurring [Boolean, nil] Filter products by pricing type:
+      #   @param recurring [Boolean, nil] Filter products by pricing type: ...
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end

@@ -39,6 +39,8 @@ module Dodopayments
         ?request: String?,
         ?response: String?
       ) -> void
+
+      def to_hash: -> Dodopayments::Models::webhook_event
     end
   end
 end

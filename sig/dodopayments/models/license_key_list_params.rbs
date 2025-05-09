@@ -32,6 +32,8 @@ module Dodopayments
         ?status: Dodopayments::Models::license_key_status?,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> Dodopayments::Models::license_key_list_params
     end
   end
 end

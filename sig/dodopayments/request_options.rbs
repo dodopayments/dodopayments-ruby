@@ -15,7 +15,7 @@ module Dodopayments
     }
 
   class RequestOptions < Dodopayments::Internal::Type::BaseModel
-    def self.validate!: (Dodopayments::request_opts opts) -> void
+    def self.validate!: (self | ::Hash[Symbol, top] opts) -> void
 
     attr_accessor idempotency_key: String?
 

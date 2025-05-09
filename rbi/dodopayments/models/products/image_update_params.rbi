@@ -7,20 +7,17 @@ module Dodopayments
         extend Dodopayments::Internal::Type::RequestParameters::Converter
         include Dodopayments::Internal::Type::RequestParameters
 
-        OrHash =
-          T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
-
         sig { returns(T.nilable(T::Boolean)) }
         attr_accessor :force_update
 
         sig do
           params(
             force_update: T.nilable(T::Boolean),
-            request_options: Dodopayments::RequestOptions::OrHash
-          ).returns(T.attached_class)
+            request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
+          )
+            .returns(T.attached_class)
         end
-        def self.new(force_update: nil, request_options: {})
-        end
+        def self.new(force_update: nil, request_options: {}); end
 
         sig do
           override.returns(
@@ -30,8 +27,7 @@ module Dodopayments
             }
           )
         end
-        def to_hash
-        end
+        def to_hash; end
       end
     end
   end

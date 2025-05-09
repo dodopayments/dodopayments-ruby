@@ -5,28 +5,24 @@ module Dodopayments
     class Payments
       sig do
         params(
-          billing: Dodopayments::BillingAddress::OrHash,
-          customer:
-            T.any(
-              Dodopayments::AttachExistingCustomer::OrHash,
-              Dodopayments::CreateNewCustomer::OrHash
-            ),
-          product_cart: T::Array[Dodopayments::OneTimeProductCartItem::OrHash],
-          allowed_payment_method_types:
-            T.nilable(
-              T::Array[
-                Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol
-              ]
-            ),
-          billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
+          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash),
+          customer: T.any(
+            Dodopayments::Models::AttachExistingCustomer,
+            Dodopayments::Internal::AnyHash,
+            Dodopayments::Models::CreateNewCustomer
+          ),
+          product_cart: T::Array[T.any(Dodopayments::Models::OneTimeProductCartItem, Dodopayments::Internal::AnyHash)],
+          allowed_payment_method_types: T.nilable(T::Array[Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol]),
+          billing_currency: T.nilable(Dodopayments::Models::Currency::OrSymbol),
           discount_code: T.nilable(String),
           metadata: T::Hash[Symbol, String],
           payment_link: T.nilable(T::Boolean),
           return_url: T.nilable(String),
           show_saved_payment_methods: T::Boolean,
           tax_id: T.nilable(String),
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Models::PaymentCreateResponse)
+          request_options: Dodopayments::RequestOpts
+        )
+          .returns(Dodopayments::Models::PaymentCreateResponse)
       end
       def create(
         billing:,
@@ -55,22 +51,16 @@ module Dodopayments
         # creation will fail
         tax_id: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
-        params(
-          payment_id: String,
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Payment)
+        params(payment_id: String, request_options: Dodopayments::RequestOpts)
+          .returns(Dodopayments::Models::Payment)
       end
       def retrieve(
         # Payment Id
         payment_id,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         params(
           created_at_gte: T.nilable(Time),
@@ -78,14 +68,11 @@ module Dodopayments
           customer_id: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
-          status: T.nilable(Dodopayments::IntentStatus::OrSymbol),
+          status: T.nilable(Dodopayments::Models::IntentStatus::OrSymbol),
           subscription_id: T.nilable(String),
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(
-          Dodopayments::Internal::DefaultPageNumberPagination[
-            Dodopayments::Models::PaymentListResponse
-          ]
+          request_options: Dodopayments::RequestOpts
         )
+          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::PaymentListResponse])
       end
       def list(
         # Get events after this created time
@@ -103,13 +90,10 @@ module Dodopayments
         # Filter by subscription id
         subscription_id: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:)
-      end
+      def self.new(client:); end
     end
   end
 end

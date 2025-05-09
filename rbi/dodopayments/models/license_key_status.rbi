@@ -5,19 +5,15 @@ module Dodopayments
     module LicenseKeyStatus
       extend Dodopayments::Internal::Type::Enum
 
-      TaggedSymbol =
-        T.type_alias { T.all(Symbol, Dodopayments::LicenseKeyStatus) }
+      TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::LicenseKeyStatus) }
       OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-      ACTIVE = T.let(:active, Dodopayments::LicenseKeyStatus::TaggedSymbol)
-      EXPIRED = T.let(:expired, Dodopayments::LicenseKeyStatus::TaggedSymbol)
-      DISABLED = T.let(:disabled, Dodopayments::LicenseKeyStatus::TaggedSymbol)
+      ACTIVE = T.let(:active, Dodopayments::Models::LicenseKeyStatus::TaggedSymbol)
+      EXPIRED = T.let(:expired, Dodopayments::Models::LicenseKeyStatus::TaggedSymbol)
+      DISABLED = T.let(:disabled, Dodopayments::Models::LicenseKeyStatus::TaggedSymbol)
 
-      sig do
-        override.returns(T::Array[Dodopayments::LicenseKeyStatus::TaggedSymbol])
-      end
-      def self.values
-      end
+      sig { override.returns(T::Array[Dodopayments::Models::LicenseKeyStatus::TaggedSymbol]) }
+      def self.values; end
     end
   end
 end

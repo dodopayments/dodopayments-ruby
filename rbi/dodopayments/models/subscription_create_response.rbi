@@ -3,18 +3,15 @@
 module Dodopayments
   module Models
     class SubscriptionCreateResponse < Dodopayments::Internal::Type::BaseModel
-      OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
-
       # Addons associated with this subscription
-      sig { returns(T::Array[Dodopayments::AddonCartResponseItem]) }
+      sig { returns(T::Array[Dodopayments::Models::AddonCartResponseItem]) }
       attr_accessor :addons
 
-      sig { returns(Dodopayments::CustomerLimitedDetails) }
+      sig { returns(Dodopayments::Models::CustomerLimitedDetails) }
       attr_reader :customer
 
       sig do
-        params(customer: Dodopayments::CustomerLimitedDetails::OrHash).void
+        params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void
       end
       attr_writer :customer
 
@@ -45,15 +42,16 @@ module Dodopayments
 
       sig do
         params(
-          addons: T::Array[Dodopayments::AddonCartResponseItem::OrHash],
-          customer: Dodopayments::CustomerLimitedDetails::OrHash,
+          addons: T::Array[T.any(Dodopayments::Models::AddonCartResponseItem, Dodopayments::Internal::AnyHash)],
+          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash),
           metadata: T::Hash[Symbol, String],
           recurring_pre_tax_amount: Integer,
           subscription_id: String,
           client_secret: T.nilable(String),
           discount_id: T.nilable(String),
           payment_link: T.nilable(String)
-        ).returns(T.attached_class)
+        )
+          .returns(T.attached_class)
       end
       def self.new(
         # Addons associated with this subscription
@@ -72,25 +70,23 @@ module Dodopayments
         discount_id: nil,
         # URL to checkout page
         payment_link: nil
-      )
-      end
-
+      ); end
       sig do
-        override.returns(
-          {
-            addons: T::Array[Dodopayments::AddonCartResponseItem],
-            customer: Dodopayments::CustomerLimitedDetails,
-            metadata: T::Hash[Symbol, String],
-            recurring_pre_tax_amount: Integer,
-            subscription_id: String,
-            client_secret: T.nilable(String),
-            discount_id: T.nilable(String),
-            payment_link: T.nilable(String)
-          }
-        )
+        override
+          .returns(
+            {
+              addons: T::Array[Dodopayments::Models::AddonCartResponseItem],
+              customer: Dodopayments::Models::CustomerLimitedDetails,
+              metadata: T::Hash[Symbol, String],
+              recurring_pre_tax_amount: Integer,
+              subscription_id: String,
+              client_secret: T.nilable(String),
+              discount_id: T.nilable(String),
+              payment_link: T.nilable(String)
+            }
+          )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

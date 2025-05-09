@@ -23,7 +23,7 @@ class Dodopayments::Test::Resources::PayoutsTest < Dodopayments::Test::ResourceT
         business_id: String,
         chargebacks: Integer,
         created_at: Time,
-        currency: Dodopayments::Currency,
+        currency: Dodopayments::Models::Currency,
         fee: Integer,
         payment_method: String,
         payout_id: String,

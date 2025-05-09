@@ -6,9 +6,6 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
-
       # The unique identifier of the payment to be refunded.
       sig { returns(String) }
       attr_accessor :payment_id
@@ -21,8 +18,9 @@ module Dodopayments
         params(
           payment_id: String,
           reason: T.nilable(String),
-          request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(T.attached_class)
+          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
+        )
+          .returns(T.attached_class)
       end
       def self.new(
         # The unique identifier of the payment to be refunded.
@@ -30,20 +28,16 @@ module Dodopayments
         # The reason for the refund, if any. Maximum length is 3000 characters. Optional.
         reason: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
-        override.returns(
-          {
-            payment_id: String,
-            reason: T.nilable(String),
-            request_options: Dodopayments::RequestOptions
-          }
-        )
+        override
+          .returns({
+                     payment_id: String,
+                     reason: T.nilable(String),
+                     request_options: Dodopayments::RequestOptions
+                   })
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

@@ -7,7 +7,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
     response = @dodo_payments.refunds.create(payment_id: "payment_id")
 
     assert_pattern do
-      response => Dodopayments::Refund
+      response => Dodopayments::Models::Refund
     end
 
     assert_pattern do
@@ -16,9 +16,9 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
         created_at: Time,
         payment_id: String,
         refund_id: String,
-        status: Dodopayments::RefundStatus,
+        status: Dodopayments::Models::RefundStatus,
         amount: Integer | nil,
-        currency: Dodopayments::Currency | nil,
+        currency: Dodopayments::Models::Currency | nil,
         reason: String | nil
       }
     end
@@ -28,7 +28,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
     response = @dodo_payments.refunds.retrieve("refund_id")
 
     assert_pattern do
-      response => Dodopayments::Refund
+      response => Dodopayments::Models::Refund
     end
 
     assert_pattern do
@@ -37,9 +37,9 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
         created_at: Time,
         payment_id: String,
         refund_id: String,
-        status: Dodopayments::RefundStatus,
+        status: Dodopayments::Models::RefundStatus,
         amount: Integer | nil,
-        currency: Dodopayments::Currency | nil,
+        currency: Dodopayments::Models::Currency | nil,
         reason: String | nil
       }
     end
@@ -56,7 +56,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
     return if row.nil?
 
     assert_pattern do
-      row => Dodopayments::Refund
+      row => Dodopayments::Models::Refund
     end
 
     assert_pattern do
@@ -65,9 +65,9 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
         created_at: Time,
         payment_id: String,
         refund_id: String,
-        status: Dodopayments::RefundStatus,
+        status: Dodopayments::Models::RefundStatus,
         amount: Integer | nil,
-        currency: Dodopayments::Currency | nil,
+        currency: Dodopayments::Models::Currency | nil,
         reason: String | nil
       }
     end
