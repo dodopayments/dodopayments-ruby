@@ -14,6 +14,10 @@ module Dodopayments
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Models::currency,
         total_amount: Integer,
+        card_issuing_country: Dodopayments::Models::country_code?,
+        card_last_four: String?,
+        card_network: String?,
+        card_type: String?,
         discount_id: String?,
         error_message: String?,
         payment_link: String?,
@@ -52,6 +56,14 @@ module Dodopayments
 
       attr_accessor total_amount: Integer
 
+      attr_accessor card_issuing_country: Dodopayments::Models::country_code?
+
+      attr_accessor card_last_four: String?
+
+      attr_accessor card_network: String?
+
+      attr_accessor card_type: String?
+
       attr_accessor discount_id: String?
 
       attr_accessor error_message: String?
@@ -87,6 +99,10 @@ module Dodopayments
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Models::currency,
         total_amount: Integer,
+        ?card_issuing_country: Dodopayments::Models::country_code?,
+        ?card_last_four: String?,
+        ?card_network: String?,
+        ?card_type: String?,
         ?discount_id: String?,
         ?error_message: String?,
         ?payment_link: String?,

@@ -5,7 +5,7 @@ module Dodopayments
         def retrieve: (
           String payment_id,
           ?request_options: Dodopayments::request_opts
-        ) -> nil
+        ) -> StringIO
 
         def initialize: (client: Dodopayments::Client) -> void
       end
