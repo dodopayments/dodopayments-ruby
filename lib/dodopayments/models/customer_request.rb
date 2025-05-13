@@ -11,6 +11,10 @@ module Dodopayments
 
       # @!method self.variants
       #   @return [Array(Dodopayments::AttachExistingCustomer, Dodopayments::CreateNewCustomer)]
+
+      define_sorbet_constant!(:Variants) do
+        T.type_alias { T.any(Dodopayments::AttachExistingCustomer, Dodopayments::CreateNewCustomer) }
+      end
     end
   end
 end

@@ -4,7 +4,12 @@ module Dodopayments
   module Models
     class LicenseKeyDuration < Dodopayments::Internal::Type::BaseModel
       OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+        T.type_alias do
+          T.any(
+            Dodopayments::LicenseKeyDuration,
+            Dodopayments::Internal::AnyHash
+          )
+        end
 
       sig { returns(Integer) }
       attr_accessor :count

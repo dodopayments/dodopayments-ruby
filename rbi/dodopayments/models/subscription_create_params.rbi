@@ -7,7 +7,12 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+        T.type_alias do
+          T.any(
+            Dodopayments::SubscriptionCreateParams,
+            Dodopayments::Internal::AnyHash
+          )
+        end
 
       sig { returns(Dodopayments::BillingAddress) }
       attr_reader :billing
@@ -219,7 +224,12 @@ module Dodopayments
 
       class Addon < Dodopayments::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Dodopayments::SubscriptionCreateParams::Addon,
+              Dodopayments::Internal::AnyHash
+            )
+          end
 
         sig { returns(String) }
         attr_accessor :addon_id
@@ -354,7 +364,12 @@ module Dodopayments
 
       class OnDemand < Dodopayments::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Dodopayments::SubscriptionCreateParams::OnDemand,
+              Dodopayments::Internal::AnyHash
+            )
+          end
 
         # If set as True, does not perform any charge and only authorizes payment method
         # details for future use.

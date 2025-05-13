@@ -8,7 +8,12 @@ module Dodopayments
         include Dodopayments::Internal::Type::RequestParameters
 
         OrHash =
-          T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Dodopayments::Customers::CustomerPortalCreateParams,
+              Dodopayments::Internal::AnyHash
+            )
+          end
 
         # If true, will send link to user.
         sig { returns(T.nilable(T::Boolean)) }

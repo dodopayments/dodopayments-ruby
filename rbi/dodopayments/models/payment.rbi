@@ -4,7 +4,9 @@ module Dodopayments
   module Models
     class Payment < Dodopayments::Internal::Type::BaseModel
       OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+        T.type_alias do
+          T.any(Dodopayments::Payment, Dodopayments::Internal::AnyHash)
+        end
 
       sig { returns(Dodopayments::BillingAddress) }
       attr_reader :billing
@@ -250,7 +252,12 @@ module Dodopayments
 
       class ProductCart < Dodopayments::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Dodopayments::Payment::ProductCart,
+              Dodopayments::Internal::AnyHash
+            )
+          end
 
         sig { returns(String) }
         attr_accessor :product_id

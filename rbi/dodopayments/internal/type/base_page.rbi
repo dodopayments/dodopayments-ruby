@@ -30,7 +30,7 @@ module Dodopayments
           params(
             client: Dodopayments::Internal::Transport::BaseClient,
             req:
-              Dodopayments::Internal::Transport::BaseClient::RequestComponentsShape,
+              Dodopayments::Internal::Transport::BaseClient::RequestComponents,
             headers: T.any(T::Hash[String, String], Net::HTTPHeader),
             page_data: T.anything
           ).void

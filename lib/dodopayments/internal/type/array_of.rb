@@ -29,7 +29,7 @@ module Dodopayments
         #
         #   @option spec [Boolean] :"nil?"
         #
-        # @return [Dodopayments::Internal::Type::ArrayOf]
+        # @return [self]
         def self.[](...) = new(...)
 
         # @api public

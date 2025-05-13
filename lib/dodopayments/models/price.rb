@@ -183,6 +183,10 @@ module Dodopayments
 
       # @!method self.variants
       #   @return [Array(Dodopayments::Price::OneTimePrice, Dodopayments::Price::RecurringPrice)]
+
+      define_sorbet_constant!(:Variants) do
+        T.type_alias { T.any(Dodopayments::Price::OneTimePrice, Dodopayments::Price::RecurringPrice) }
+      end
     end
   end
 end

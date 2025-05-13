@@ -7,7 +7,12 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+        T.type_alias do
+          T.any(
+            Dodopayments::SubscriptionChargeParams,
+            Dodopayments::Internal::AnyHash
+          )
+        end
 
       # The product price. Represented in the lowest denomination of the currency (e.g.,
       # cents for USD). For example, to charge $1.00, pass `100`.

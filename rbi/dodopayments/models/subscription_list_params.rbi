@@ -7,7 +7,12 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+        T.type_alias do
+          T.any(
+            Dodopayments::SubscriptionListParams,
+            Dodopayments::Internal::AnyHash
+          )
+        end
 
       # Get events after this created time
       sig { returns(T.nilable(Time)) }

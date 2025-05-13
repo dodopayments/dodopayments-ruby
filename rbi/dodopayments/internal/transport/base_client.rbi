@@ -5,9 +5,11 @@ module Dodopayments
     module Transport
       # @api private
       class BaseClient
+        extend Dodopayments::Internal::Util::SorbetRuntimeSupport
+
         abstract!
 
-        RequestComponentsShape =
+        RequestComponents =
           T.type_alias do
             {
               method: Symbol,
@@ -53,7 +55,7 @@ module Dodopayments
             }
           end
 
-        RequestInputShape =
+        RequestInput =
           T.type_alias do
             {
               method: Symbol,
@@ -75,7 +77,7 @@ module Dodopayments
           sig do
             params(
               req:
-                Dodopayments::Internal::Transport::BaseClient::RequestComponentsShape
+                Dodopayments::Internal::Transport::BaseClient::RequestComponents
             ).void
           end
           def validate!(req)
@@ -95,11 +97,11 @@ module Dodopayments
           sig do
             params(
               request:
-                Dodopayments::Internal::Transport::BaseClient::RequestInputShape,
+                Dodopayments::Internal::Transport::BaseClient::RequestInput,
               status: Integer,
               response_headers: T.any(T::Hash[String, String], Net::HTTPHeader)
             ).returns(
-              Dodopayments::Internal::Transport::BaseClient::RequestInputShape
+              Dodopayments::Internal::Transport::BaseClient::RequestInput
             )
           end
           def follow_redirect(request, status:, response_headers:)
@@ -168,11 +170,11 @@ module Dodopayments
           overridable
             .params(
               req:
-                Dodopayments::Internal::Transport::BaseClient::RequestComponentsShape,
+                Dodopayments::Internal::Transport::BaseClient::RequestComponents,
               opts: Dodopayments::Internal::AnyHash
             )
             .returns(
-              Dodopayments::Internal::Transport::BaseClient::RequestInputShape
+              Dodopayments::Internal::Transport::BaseClient::RequestInput
             )
         end
         private def build_request(req, opts)
@@ -192,7 +194,7 @@ module Dodopayments
         sig do
           params(
             request:
-              Dodopayments::Internal::Transport::BaseClient::RequestInputShape,
+              Dodopayments::Internal::Transport::BaseClient::RequestInput,
             redirect_count: Integer,
             retry_count: Integer,
             send_retry_header: T::Boolean

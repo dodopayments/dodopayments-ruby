@@ -4,7 +4,9 @@ module Dodopayments
   module Models
     class Refund < Dodopayments::Internal::Type::BaseModel
       OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+        T.type_alias do
+          T.any(Dodopayments::Refund, Dodopayments::Internal::AnyHash)
+        end
 
       # The unique identifier of the business issuing the refund.
       sig { returns(String) }

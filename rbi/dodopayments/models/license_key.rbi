@@ -4,7 +4,9 @@ module Dodopayments
   module Models
     class LicenseKey < Dodopayments::Internal::Type::BaseModel
       OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+        T.type_alias do
+          T.any(Dodopayments::LicenseKey, Dodopayments::Internal::AnyHash)
+        end
 
       # The unique identifier of the license key.
       sig { returns(String) }

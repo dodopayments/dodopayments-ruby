@@ -4,7 +4,12 @@ module Dodopayments
   module Models
     class PaymentCreateResponse < Dodopayments::Internal::Type::BaseModel
       OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+        T.type_alias do
+          T.any(
+            Dodopayments::Models::PaymentCreateResponse,
+            Dodopayments::Internal::AnyHash
+          )
+        end
 
       # Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will be
       # coming soon

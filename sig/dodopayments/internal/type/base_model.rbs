@@ -3,9 +3,12 @@ module Dodopayments
     module Type
       class BaseModel
         extend Dodopayments::Internal::Type::Converter
+        extend Dodopayments::Internal::Util::SorbetRuntimeSupport
 
         type known_field =
           { mode: (:coerce | :dump)?, required: bool, nilable: bool }
+
+        def self.inherited: (self child) -> void
 
         def self.known_fields: -> ::Hash[Symbol, (Dodopayments::Internal::Type::BaseModel::known_field
         & { type_fn: (^-> Dodopayments::Internal::Type::Converter::input) })]
@@ -60,10 +63,10 @@ module Dodopayments
           | ::Hash[top, top]
           | top value,
           state: Dodopayments::Internal::Type::Converter::coerce_state
-        ) -> (instance | top)
+        ) -> (self | top)
 
         def self.dump: (
-          instance | top value,
+          self | top value,
           state: Dodopayments::Internal::Type::Converter::dump_state
         ) -> (::Hash[top, top] | top)
 

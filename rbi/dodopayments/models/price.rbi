@@ -15,7 +15,12 @@ module Dodopayments
 
       class OneTimePrice < Dodopayments::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Dodopayments::Price::OneTimePrice,
+              Dodopayments::Internal::AnyHash
+            )
+          end
 
         sig { returns(Dodopayments::Currency::OrSymbol) }
         attr_accessor :currency
@@ -116,7 +121,12 @@ module Dodopayments
 
       class RecurringPrice < Dodopayments::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Dodopayments::Price::RecurringPrice,
+              Dodopayments::Internal::AnyHash
+            )
+          end
 
         sig { returns(Dodopayments::Currency::OrSymbol) }
         attr_accessor :currency

@@ -4,7 +4,12 @@ module Dodopayments
   module Models
     class ProductListResponse < Dodopayments::Internal::Type::BaseModel
       OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+        T.type_alias do
+          T.any(
+            Dodopayments::Models::ProductListResponse,
+            Dodopayments::Internal::AnyHash
+          )
+        end
 
       # Unique identifier for the business to which the product belongs.
       sig { returns(String) }

@@ -42,6 +42,7 @@ module Dodopayments
       #   end
       module Enum
         include Dodopayments::Internal::Type::Converter
+        include Dodopayments::Internal::Util::SorbetRuntimeSupport
 
         # All of the valid Symbol values for this enum.
         #

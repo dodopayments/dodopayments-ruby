@@ -5,6 +5,8 @@ module Dodopayments
     module Type
       # @api private
       module Converter
+        extend Dodopayments::Internal::Util::SorbetRuntimeSupport
+
         Input =
           T.type_alias do
             T.any(Dodopayments::Internal::Type::Converter, T::Class[T.anything])

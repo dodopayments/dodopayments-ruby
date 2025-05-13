@@ -3,6 +3,7 @@ module Dodopayments
     module Type
       module Union
         include Dodopayments::Internal::Type::Converter
+        include Dodopayments::Internal::Util::SorbetRuntimeSupport
 
         private def self.known_variants: -> ::Array[[Symbol?, (^-> Dodopayments::Internal::Type::Converter::input)]]
 

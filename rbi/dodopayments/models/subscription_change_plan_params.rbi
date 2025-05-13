@@ -7,7 +7,12 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+        T.type_alias do
+          T.any(
+            Dodopayments::SubscriptionChangePlanParams,
+            Dodopayments::Internal::AnyHash
+          )
+        end
 
       # Unique identifier of the product to subscribe to
       sig { returns(String) }
@@ -110,7 +115,12 @@ module Dodopayments
 
       class Addon < Dodopayments::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Dodopayments::SubscriptionChangePlanParams::Addon,
+              Dodopayments::Internal::AnyHash
+            )
+          end
 
         sig { returns(String) }
         attr_accessor :addon_id

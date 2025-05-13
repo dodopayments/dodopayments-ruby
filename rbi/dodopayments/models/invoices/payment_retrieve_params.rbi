@@ -8,7 +8,12 @@ module Dodopayments
         include Dodopayments::Internal::Type::RequestParameters
 
         OrHash =
-          T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Dodopayments::Invoices::PaymentRetrieveParams,
+              Dodopayments::Internal::AnyHash
+            )
+          end
 
         sig do
           params(request_options: Dodopayments::RequestOptions::OrHash).returns(

@@ -4,7 +4,9 @@ module Dodopayments
   module Models
     class Dispute < Dodopayments::Internal::Type::BaseModel
       OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+        T.type_alias do
+          T.any(Dodopayments::Dispute, Dodopayments::Internal::AnyHash)
+        end
 
       # The amount involved in the dispute, represented as a string to accommodate
       # precision.

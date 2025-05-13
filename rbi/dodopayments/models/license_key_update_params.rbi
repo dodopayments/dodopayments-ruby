@@ -7,7 +7,12 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+        T.type_alias do
+          T.any(
+            Dodopayments::LicenseKeyUpdateParams,
+            Dodopayments::Internal::AnyHash
+          )
+        end
 
       # The updated activation limit for the license key. Use `null` to remove the
       # limit, or omit this field to leave it unchanged.

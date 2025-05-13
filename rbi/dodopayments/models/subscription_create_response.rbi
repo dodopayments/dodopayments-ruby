@@ -4,7 +4,12 @@ module Dodopayments
   module Models
     class SubscriptionCreateResponse < Dodopayments::Internal::Type::BaseModel
       OrHash =
-        T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+        T.type_alias do
+          T.any(
+            Dodopayments::Models::SubscriptionCreateResponse,
+            Dodopayments::Internal::AnyHash
+          )
+        end
 
       # Addons associated with this subscription
       sig { returns(T::Array[Dodopayments::AddonCartResponseItem]) }

@@ -2,6 +2,8 @@ module Dodopayments
   module Internal
     module Type
       module Converter
+        extend Dodopayments::Internal::Util::SorbetRuntimeSupport
+
         type input = Dodopayments::Internal::Type::Converter | Class
 
         type coerce_state =

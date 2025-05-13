@@ -8,7 +8,9 @@ module Dodopayments
   # simply pass a Hash with symbol keys matching the attributes on this class.
   class RequestOptions < Dodopayments::Internal::Type::BaseModel
     OrHash =
-      T.type_alias { T.any(T.self_type, Dodopayments::Internal::AnyHash) }
+      T.type_alias do
+        T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
+      end
 
     # @api private
     sig { params(opts: Dodopayments::RequestOptions::OrHash).void }

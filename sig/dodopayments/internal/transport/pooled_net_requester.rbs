@@ -2,6 +2,8 @@ module Dodopayments
   module Internal
     module Transport
       class PooledNetRequester
+        extend Dodopayments::Internal::Util::SorbetRuntimeSupport
+
         type request =
           {
             method: Symbol,

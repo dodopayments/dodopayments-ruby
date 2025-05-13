@@ -5,7 +5,9 @@ module Dodopayments
     module Transport
       # @api private
       class PooledNetRequester
-        RequestShape =
+        extend Dodopayments::Internal::Util::SorbetRuntimeSupport
+
+        Request =
           T.type_alias do
             {
               method: Symbol,
@@ -35,7 +37,7 @@ module Dodopayments
           sig do
             params(
               request:
-                Dodopayments::Internal::Transport::PooledNetRequester::RequestShape,
+                Dodopayments::Internal::Transport::PooledNetRequester::Request,
               blk: T.proc.params(arg0: String).void
             ).returns([Net::HTTPGenericRequest, T.proc.void])
           end
@@ -58,7 +60,7 @@ module Dodopayments
         sig do
           params(
             request:
-              Dodopayments::Internal::Transport::PooledNetRequester::RequestShape
+              Dodopayments::Internal::Transport::PooledNetRequester::Request
           ).returns([Integer, Net::HTTPResponse, T::Enumerable[String]])
         end
         def execute(request)

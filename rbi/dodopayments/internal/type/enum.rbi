@@ -17,6 +17,7 @@ module Dodopayments
       # values safely.
       module Enum
         include Dodopayments::Internal::Type::Converter
+        include Dodopayments::Internal::Util::SorbetRuntimeSupport
 
         # All of the valid Symbol values for this enum.
         sig do

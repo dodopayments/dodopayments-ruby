@@ -27,6 +27,7 @@ module Dodopayments
       #   end
       module Union
         include Dodopayments::Internal::Type::Converter
+        include Dodopayments::Internal::Util::SorbetRuntimeSupport
 
         # @api private
         #

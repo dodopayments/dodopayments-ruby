@@ -9,7 +9,7 @@ module Dodopayments
           | ^-> Dodopayments::Internal::Type::Converter::input
           | Dodopayments::Internal::Type::Converter::input type_info,
           ?::Hash[Symbol, top] spec
-        ) -> instance
+        ) -> self
 
         def ===: (top other) -> bool
 
