@@ -391,6 +391,12 @@ module Dodopayments
         # @param keys [Array<Symbol>, nil]
         #
         # @return [Hash{Symbol=>Object}]
+        #
+        # @example
+        #   # `attach_existing_customer` is a `Dodopayments::AttachExistingCustomer`
+        #   attach_existing_customer => {
+        #     customer_id: customer_id
+        #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)
             .filter_map do |k|
