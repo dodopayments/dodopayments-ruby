@@ -103,10 +103,10 @@ module Dodopayments
       bearer_token: ENV["DODO_PAYMENTS_API_KEY"],
       environment: nil,
       base_url: ENV["DODO_PAYMENTS_BASE_URL"],
-      max_retries: Dodopayments::Client::DEFAULT_MAX_RETRIES,
-      timeout: Dodopayments::Client::DEFAULT_TIMEOUT_IN_SECONDS,
-      initial_retry_delay: Dodopayments::Client::DEFAULT_INITIAL_RETRY_DELAY,
-      max_retry_delay: Dodopayments::Client::DEFAULT_MAX_RETRY_DELAY
+      max_retries: self.class::DEFAULT_MAX_RETRIES,
+      timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
+      initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
+      max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY
     )
       base_url ||= Dodopayments::Client::ENVIRONMENTS.fetch(environment&.to_sym || :production) do
         message = "environment must be one of #{Dodopayments::Client::ENVIRONMENTS.keys}, got #{environment}"
