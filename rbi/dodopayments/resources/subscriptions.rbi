@@ -179,6 +179,7 @@ module Dodopayments
         params(
           subscription_id: String,
           product_price: Integer,
+          metadata: T.nilable(T::Hash[Symbol, String]),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Models::SubscriptionChargeResponse)
       end
@@ -188,6 +189,7 @@ module Dodopayments
         # The product price. Represented in the lowest denomination of the currency (e.g.,
         # cents for USD). For example, to charge $1.00, pass `100`.
         product_price:,
+        metadata: nil,
         request_options: {}
       )
       end

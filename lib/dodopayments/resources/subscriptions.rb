@@ -167,11 +167,13 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionChargeParams} for more details.
       #
-      # @overload charge(subscription_id, product_price:, request_options: {})
+      # @overload charge(subscription_id, product_price:, metadata: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
       # @param product_price [Integer] The product price. Represented in the lowest denomination of the currency (e.g.,
+      #
+      # @param metadata [Hash{Symbol=>String}, nil]
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

@@ -1,7 +1,7 @@
 module Dodopayments
   module Models
     type subscription_charge_params =
-      { product_price: Integer }
+      { product_price: Integer, metadata: ::Hash[Symbol, String]? }
       & Dodopayments::Internal::Type::request_parameters
 
     class SubscriptionChargeParams < Dodopayments::Internal::Type::BaseModel
@@ -10,8 +10,11 @@ module Dodopayments
 
       attr_accessor product_price: Integer
 
+      attr_accessor metadata: ::Hash[Symbol, String]?
+
       def initialize: (
         product_price: Integer,
+        ?metadata: ::Hash[Symbol, String]?,
         ?request_options: Dodopayments::request_opts
       ) -> void
     end

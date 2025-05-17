@@ -57,6 +57,7 @@ module Dodopayments
       def charge: (
         String subscription_id,
         product_price: Integer,
+        ?metadata: ::Hash[Symbol, String]?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::SubscriptionChargeResponse
 
