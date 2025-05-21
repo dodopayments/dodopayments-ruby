@@ -25,6 +25,7 @@ class Dodopayments::Test::SorbetRuntimeSupportTest < Minitest::Test
     err = Dodopayments::Internal::Util::SorbetRuntimeSupport::MissingSorbetRuntimeError
 
     assert_raises(err) { Dodopayments::Internal::AnyHash }
+    assert_raises(err) { Dodopayments::Internal::FileInput }
     assert_raises(err) { Dodopayments::Internal::Type::Converter::Input }
     assert_raises(err) { Dodopayments::Internal::Type::Converter::CoerceState }
     assert_raises(err) { Dodopayments::Internal::Type::Converter::DumpState }
