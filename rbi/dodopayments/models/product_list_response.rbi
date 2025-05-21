@@ -64,16 +64,7 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :price
 
-      sig do
-        returns(
-          T.nilable(
-            T.any(
-              Dodopayments::Price::OneTimePrice,
-              Dodopayments::Price::RecurringPrice
-            )
-          )
-        )
-      end
+      sig { returns(T.nilable(Dodopayments::Price::Variants)) }
       attr_accessor :price_detail
 
       # Indicates if the price is tax inclusive
@@ -155,13 +146,7 @@ module Dodopayments
             image: T.nilable(String),
             name: T.nilable(String),
             price: T.nilable(Integer),
-            price_detail:
-              T.nilable(
-                T.any(
-                  Dodopayments::Price::OneTimePrice,
-                  Dodopayments::Price::RecurringPrice
-                )
-              ),
+            price_detail: T.nilable(Dodopayments::Price::Variants),
             tax_inclusive: T.nilable(T::Boolean)
           }
         )

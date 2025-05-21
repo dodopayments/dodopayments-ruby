@@ -24,14 +24,7 @@ module Dodopayments
       sig { returns(T::Boolean) }
       attr_accessor :license_key_enabled
 
-      sig do
-        returns(
-          T.any(
-            Dodopayments::Price::OneTimePrice,
-            Dodopayments::Price::RecurringPrice
-          )
-        )
-      end
+      sig { returns(Dodopayments::Price::Variants) }
       attr_accessor :price
 
       # Unique identifier for the product.
@@ -146,11 +139,7 @@ module Dodopayments
             created_at: Time,
             is_recurring: T::Boolean,
             license_key_enabled: T::Boolean,
-            price:
-              T.any(
-                Dodopayments::Price::OneTimePrice,
-                Dodopayments::Price::RecurringPrice
-              ),
+            price: Dodopayments::Price::Variants,
             product_id: String,
             tax_category: Dodopayments::TaxCategory::TaggedSymbol,
             updated_at: Time,
