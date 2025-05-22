@@ -30,7 +30,7 @@ module Dodopayments
 
       # @!attribute currency
       #
-      #   @return [Symbol, Dodopayments::Currency]
+      #   @return [Symbol, Dodopayments::Models::Currency]
       required :currency, enum: -> { Dodopayments::Currency }
 
       # @!attribute fee
@@ -101,7 +101,7 @@ module Dodopayments
       #
       #   @param created_at [Time] The timestamp when the payout was created, in UTC.
       #
-      #   @param currency [Symbol, Dodopayments::Currency]
+      #   @param currency [Symbol, Dodopayments::Models::Currency]
       #
       #   @param fee [Integer] The fee charged for processing the payout.
       #

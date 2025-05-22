@@ -32,6 +32,15 @@ module Dodopayments
         ?description: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> {
+        currency: Dodopayments::Models::currency,
+        name: String,
+        price: Integer,
+        tax_category: Dodopayments::Models::tax_category,
+        description: String?,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

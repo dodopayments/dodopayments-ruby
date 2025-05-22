@@ -9,7 +9,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::LicenseKey]
+      # @return [Dodopayments::Models::LicenseKey]
       #
       # @see Dodopayments::Models::LicenseKeyRetrieveParams
       def retrieve(id, params = {})
@@ -36,7 +36,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::LicenseKey]
+      # @return [Dodopayments::Models::LicenseKey]
       #
       # @see Dodopayments::Models::LicenseKeyUpdateParams
       def update(id, params = {})
@@ -60,11 +60,11 @@ module Dodopayments
       #
       # @param product_id [String, nil] Filter by product ID
       #
-      # @param status [Symbol, Dodopayments::LicenseKeyStatus, nil] Filter by license key status
+      # @param status [Symbol, Dodopayments::Models::LicenseKeyStatus, nil] Filter by license key status
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::LicenseKey>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::LicenseKey>]
       #
       # @see Dodopayments::Models::LicenseKeyListParams
       def list(params = {})

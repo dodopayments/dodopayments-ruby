@@ -91,6 +91,30 @@ module Dodopayments
         ?cancelled_at: Time?,
         ?discount_id: String?
       ) -> void
+
+      def to_hash: -> {
+        billing: Dodopayments::BillingAddress,
+        created_at: Time,
+        currency: Dodopayments::Models::currency,
+        customer: Dodopayments::CustomerLimitedDetails,
+        metadata: ::Hash[Symbol, String],
+        next_billing_date: Time,
+        on_demand: bool,
+        payment_frequency_count: Integer,
+        payment_frequency_interval: Dodopayments::Models::time_interval,
+        previous_billing_date: Time,
+        product_id: String,
+        quantity: Integer,
+        recurring_pre_tax_amount: Integer,
+        status: Dodopayments::Models::subscription_status,
+        subscription_id: String,
+        subscription_period_count: Integer,
+        subscription_period_interval: Dodopayments::Models::time_interval,
+        tax_inclusive: bool,
+        trial_period_days: Integer,
+        cancelled_at: Time?,
+        discount_id: String?
+      }
     end
   end
 end

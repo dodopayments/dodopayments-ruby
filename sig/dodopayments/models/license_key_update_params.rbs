@@ -20,6 +20,13 @@ module Dodopayments
         ?expires_at: Time?,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> {
+        activations_limit: Integer?,
+        disabled: bool?,
+        expires_at: Time?,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

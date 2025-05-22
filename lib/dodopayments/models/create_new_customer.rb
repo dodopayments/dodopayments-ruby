@@ -28,7 +28,7 @@ module Dodopayments
 
       # @!method initialize(email:, name:, create_new_customer: nil, phone_number: nil)
       #   Some parameter documentations has been truncated, see
-      #   {Dodopayments::CreateNewCustomer} for more details.
+      #   {Dodopayments::Models::CreateNewCustomer} for more details.
       #
       #   @param email [String]
       #

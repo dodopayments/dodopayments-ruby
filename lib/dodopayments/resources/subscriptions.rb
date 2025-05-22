@@ -8,25 +8,25 @@ module Dodopayments
       #
       # @overload create(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, metadata: nil, on_demand: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
       #
-      # @param billing [Dodopayments::BillingAddress]
+      # @param billing [Dodopayments::Models::BillingAddress]
       #
-      # @param customer [Dodopayments::AttachExistingCustomer, Dodopayments::CreateNewCustomer]
+      # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
       #
       # @param product_id [String] Unique identifier of the product to subscribe to
       #
       # @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
-      # @param addons [Array<Dodopayments::SubscriptionCreateParams::Addon>, nil] Attach addons to this subscription
+      # @param addons [Array<Dodopayments::Models::SubscriptionCreateParams::Addon>, nil] Attach addons to this subscription
       #
-      # @param allowed_payment_method_types [Array<Symbol, Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout.
+      # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout.
       #
-      # @param billing_currency [Symbol, Dodopayments::Currency, nil]
+      # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil]
       #
       # @param discount_code [String, nil] Discount Code to apply to the subscription
       #
       # @param metadata [Hash{Symbol=>String}]
       #
-      # @param on_demand [Dodopayments::SubscriptionCreateParams::OnDemand, nil]
+      # @param on_demand [Dodopayments::Models::SubscriptionCreateParams::OnDemand, nil]
       #
       # @param payment_link [Boolean, nil] If true, generates a payment link.
       #
@@ -60,7 +60,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Subscription]
+      # @return [Dodopayments::Models::Subscription]
       #
       # @see Dodopayments::Models::SubscriptionRetrieveParams
       def retrieve(subscription_id, params = {})
@@ -76,19 +76,19 @@ module Dodopayments
       #
       # @param subscription_id [String] Subscription Id
       #
-      # @param billing [Dodopayments::BillingAddress, nil]
+      # @param billing [Dodopayments::Models::BillingAddress, nil]
       #
-      # @param disable_on_demand [Dodopayments::SubscriptionUpdateParams::DisableOnDemand, nil]
+      # @param disable_on_demand [Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, nil]
       #
       # @param metadata [Hash{Symbol=>String}, nil]
       #
-      # @param status [Symbol, Dodopayments::SubscriptionStatus, nil]
+      # @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
       #
       # @param tax_id [String, nil]
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Subscription]
+      # @return [Dodopayments::Models::Subscription]
       #
       # @see Dodopayments::Models::SubscriptionUpdateParams
       def update(subscription_id, params = {})
@@ -114,7 +114,7 @@ module Dodopayments
       #
       # @param page_size [Integer, nil] Page size default is 10 max is 100
       #
-      # @param status [Symbol, Dodopayments::SubscriptionStatus, nil] Filter by status
+      # @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil] Filter by status
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -142,11 +142,11 @@ module Dodopayments
       #
       # @param product_id [String] Unique identifier of the product to subscribe to
       #
-      # @param proration_billing_mode [Symbol, Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode]
+      # @param proration_billing_mode [Symbol, Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode]
       #
       # @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
-      # @param addons [Array<Dodopayments::SubscriptionChangePlanParams::Addon>, nil] Addons for the new plan.
+      # @param addons [Array<Dodopayments::Models::SubscriptionChangePlanParams::Addon>, nil] Addons for the new plan.
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

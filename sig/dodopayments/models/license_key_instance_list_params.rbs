@@ -20,6 +20,13 @@ module Dodopayments
         ?page_size: Integer?,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> {
+        license_key_id: String?,
+        page_number: Integer?,
+        page_size: Integer?,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

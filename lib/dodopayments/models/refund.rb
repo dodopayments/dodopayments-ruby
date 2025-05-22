@@ -30,7 +30,7 @@ module Dodopayments
 
       # @!attribute status
       #
-      #   @return [Symbol, Dodopayments::RefundStatus]
+      #   @return [Symbol, Dodopayments::Models::RefundStatus]
       required :status, enum: -> { Dodopayments::RefundStatus }
 
       # @!attribute amount
@@ -41,7 +41,7 @@ module Dodopayments
 
       # @!attribute currency
       #
-      #   @return [Symbol, Dodopayments::Currency, nil]
+      #   @return [Symbol, Dodopayments::Models::Currency, nil]
       optional :currency, enum: -> { Dodopayments::Currency }, nil?: true
 
       # @!attribute reason
@@ -59,11 +59,11 @@ module Dodopayments
       #
       #   @param refund_id [String] The unique identifier of the refund.
       #
-      #   @param status [Symbol, Dodopayments::RefundStatus]
+      #   @param status [Symbol, Dodopayments::Models::RefundStatus]
       #
       #   @param amount [Integer, nil] The refunded amount.
       #
-      #   @param currency [Symbol, Dodopayments::Currency, nil]
+      #   @param currency [Symbol, Dodopayments::Models::Currency, nil]
       #
       #   @param reason [String, nil] The reason provided for the refund, if any. Optional.
     end

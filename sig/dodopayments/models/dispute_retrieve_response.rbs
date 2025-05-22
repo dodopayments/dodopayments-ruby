@@ -51,6 +51,20 @@ module Dodopayments
         ?reason: String?,
         ?remarks: String?
       ) -> void
+
+      def to_hash: -> {
+        amount: String,
+        business_id: String,
+        created_at: Time,
+        currency: String,
+        customer: Dodopayments::CustomerLimitedDetails,
+        dispute_id: String,
+        dispute_stage: Dodopayments::Models::dispute_stage,
+        dispute_status: Dodopayments::Models::dispute_status,
+        payment_id: String,
+        reason: String?,
+        remarks: String?
+      }
     end
   end
 end

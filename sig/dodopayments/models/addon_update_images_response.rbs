@@ -8,6 +8,8 @@ module Dodopayments
       attr_accessor url: String
 
       def initialize: (image_id: String, url: String) -> void
+
+      def to_hash: -> { image_id: String, url: String }
     end
   end
 end

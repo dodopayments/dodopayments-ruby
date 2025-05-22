@@ -39,6 +39,17 @@ module Dodopayments
         ?discount_id: String?,
         ?payment_link: String?
       ) -> void
+
+      def to_hash: -> {
+        addons: ::Array[Dodopayments::AddonCartResponseItem],
+        customer: Dodopayments::CustomerLimitedDetails,
+        metadata: ::Hash[Symbol, String],
+        recurring_pre_tax_amount: Integer,
+        subscription_id: String,
+        client_secret: String?,
+        discount_id: String?,
+        payment_link: String?
+      }
     end
   end
 end

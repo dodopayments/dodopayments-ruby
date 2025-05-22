@@ -8,7 +8,7 @@ module Dodopayments
       # @param webhook_event_id [String]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::WebhookEvent]
+      # @return [Dodopayments::Models::WebhookEvent]
       #
       # @see Dodopayments::Models::WebhookEventRetrieveParams
       def retrieve(webhook_event_id, params = {})
@@ -39,7 +39,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::WebhookEvent>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::WebhookEvent>]
       #
       # @see Dodopayments::Models::WebhookEventListParams
       def list(params = {})

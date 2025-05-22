@@ -47,6 +47,19 @@ module Dodopayments
         ?status: Dodopayments::Models::intent_status?,
         ?subscription_id: String?
       ) -> void
+
+      def to_hash: -> {
+        created_at: Time,
+        currency: Dodopayments::Models::currency,
+        customer: Dodopayments::CustomerLimitedDetails,
+        metadata: ::Hash[Symbol, String],
+        payment_id: String,
+        total_amount: Integer,
+        payment_method: String?,
+        payment_method_type: String?,
+        status: Dodopayments::Models::intent_status?,
+        subscription_id: String?
+      }
     end
   end
 end

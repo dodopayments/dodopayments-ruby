@@ -33,12 +33,23 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> void
 
+      def to_hash: -> {
+        billing: Dodopayments::BillingAddress?,
+        disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
+        metadata: ::Hash[Symbol, String]?,
+        status: Dodopayments::Models::subscription_status?,
+        tax_id: String?,
+        request_options: Dodopayments::RequestOptions
+      }
+
       type disable_on_demand = { next_billing_date: Time }
 
       class DisableOnDemand < Dodopayments::Internal::Type::BaseModel
         attr_accessor next_billing_date: Time
 
         def initialize: (next_billing_date: Time) -> void
+
+        def to_hash: -> { next_billing_date: Time }
       end
     end
   end

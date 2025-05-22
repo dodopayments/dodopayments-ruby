@@ -52,7 +52,7 @@ module Dodopayments
 
       # @!attribute type
       #
-      #   @return [Symbol, Dodopayments::DiscountType]
+      #   @return [Symbol, Dodopayments::Models::DiscountType]
       required :type, enum: -> { Dodopayments::DiscountType }
 
       # @!attribute expires_at
@@ -74,8 +74,8 @@ module Dodopayments
       optional :usage_limit, Integer, nil?: true
 
       # @!method initialize(amount:, business_id:, code:, created_at:, discount_id:, restricted_to:, times_used:, type:, expires_at: nil, name: nil, usage_limit: nil)
-      #   Some parameter documentations has been truncated, see {Dodopayments::Discount}
-      #   for more details.
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::Discount} for more details.
       #
       #   @param amount [Integer] The discount amount.
       #
@@ -91,7 +91,7 @@ module Dodopayments
       #
       #   @param times_used [Integer] How many times this discount has been used.
       #
-      #   @param type [Symbol, Dodopayments::DiscountType]
+      #   @param type [Symbol, Dodopayments::Models::DiscountType]
       #
       #   @param expires_at [Time, nil] Optional date/time after which discount is expired.
       #

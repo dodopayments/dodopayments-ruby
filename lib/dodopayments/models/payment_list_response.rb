@@ -11,12 +11,12 @@ module Dodopayments
 
       # @!attribute currency
       #
-      #   @return [Symbol, Dodopayments::Currency]
+      #   @return [Symbol, Dodopayments::Models::Currency]
       required :currency, enum: -> { Dodopayments::Currency }
 
       # @!attribute customer
       #
-      #   @return [Dodopayments::CustomerLimitedDetails]
+      #   @return [Dodopayments::Models::CustomerLimitedDetails]
       required :customer, -> { Dodopayments::CustomerLimitedDetails }
 
       # @!attribute metadata
@@ -46,7 +46,7 @@ module Dodopayments
 
       # @!attribute status
       #
-      #   @return [Symbol, Dodopayments::IntentStatus, nil]
+      #   @return [Symbol, Dodopayments::Models::IntentStatus, nil]
       optional :status, enum: -> { Dodopayments::IntentStatus }, nil?: true
 
       # @!attribute subscription_id
@@ -56,14 +56,14 @@ module Dodopayments
 
       # @!method initialize(created_at:, currency:, customer:, metadata:, payment_id:, total_amount:, payment_method: nil, payment_method_type: nil, status: nil, subscription_id: nil)
       #   @param created_at [Time]
-      #   @param currency [Symbol, Dodopayments::Currency]
-      #   @param customer [Dodopayments::CustomerLimitedDetails]
+      #   @param currency [Symbol, Dodopayments::Models::Currency]
+      #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
       #   @param metadata [Hash{Symbol=>String}]
       #   @param payment_id [String]
       #   @param total_amount [Integer]
       #   @param payment_method [String, nil]
       #   @param payment_method_type [String, nil]
-      #   @param status [Symbol, Dodopayments::IntentStatus, nil]
+      #   @param status [Symbol, Dodopayments::Models::IntentStatus, nil]
       #   @param subscription_id [String, nil]
     end
   end

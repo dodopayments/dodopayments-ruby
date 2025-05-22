@@ -32,6 +32,15 @@ module Dodopayments
         ?status: Dodopayments::Models::license_key_status?,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> {
+        customer_id: String?,
+        page_number: Integer?,
+        page_size: Integer?,
+        product_id: String?,
+        status: Dodopayments::Models::license_key_status?,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

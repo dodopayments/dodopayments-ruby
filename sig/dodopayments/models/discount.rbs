@@ -51,6 +51,20 @@ module Dodopayments
         ?name: String?,
         ?usage_limit: Integer?
       ) -> void
+
+      def to_hash: -> {
+        amount: Integer,
+        business_id: String,
+        code: String,
+        created_at: Time,
+        discount_id: String,
+        restricted_to: ::Array[String],
+        times_used: Integer,
+        type: Dodopayments::Models::discount_type,
+        expires_at: Time?,
+        name: String?,
+        usage_limit: Integer?
+      }
     end
   end
 end

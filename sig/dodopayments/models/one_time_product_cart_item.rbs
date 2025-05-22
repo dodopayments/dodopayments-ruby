@@ -15,6 +15,12 @@ module Dodopayments
         quantity: Integer,
         ?amount: Integer?
       ) -> void
+
+      def to_hash: -> {
+        product_id: String,
+        quantity: Integer,
+        amount: Integer?
+      }
     end
   end
 end

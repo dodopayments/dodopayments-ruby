@@ -39,6 +39,17 @@ module Dodopayments
         ?payment_link: String?,
         ?product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?
       ) -> void
+
+      def to_hash: -> {
+        client_secret: String,
+        customer: Dodopayments::CustomerLimitedDetails,
+        metadata: ::Hash[Symbol, String],
+        payment_id: String,
+        total_amount: Integer,
+        discount_id: String?,
+        payment_link: String?,
+        product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?
+      }
     end
   end
 end

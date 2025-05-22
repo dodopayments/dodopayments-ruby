@@ -7,7 +7,7 @@ module Dodopayments
         product_id: String,
         quantity: Integer,
         addons: ::Array[Dodopayments::SubscriptionCreateParams::Addon]?,
-        allowed_payment_method_types: ::Array[Dodopayments::SubscriptionCreateParams::allowed_payment_method_type]?,
+        allowed_payment_method_types: ::Array[Dodopayments::Models::SubscriptionCreateParams::allowed_payment_method_type]?,
         billing_currency: Dodopayments::Models::currency?,
         discount_code: String?,
         metadata: ::Hash[Symbol, String],
@@ -34,7 +34,7 @@ module Dodopayments
 
       attr_accessor addons: ::Array[Dodopayments::SubscriptionCreateParams::Addon]?
 
-      attr_accessor allowed_payment_method_types: ::Array[Dodopayments::SubscriptionCreateParams::allowed_payment_method_type]?
+      attr_accessor allowed_payment_method_types: ::Array[Dodopayments::Models::SubscriptionCreateParams::allowed_payment_method_type]?
 
       attr_accessor billing_currency: Dodopayments::Models::currency?
 
@@ -64,7 +64,7 @@ module Dodopayments
         product_id: String,
         quantity: Integer,
         ?addons: ::Array[Dodopayments::SubscriptionCreateParams::Addon]?,
-        ?allowed_payment_method_types: ::Array[Dodopayments::SubscriptionCreateParams::allowed_payment_method_type]?,
+        ?allowed_payment_method_types: ::Array[Dodopayments::Models::SubscriptionCreateParams::allowed_payment_method_type]?,
         ?billing_currency: Dodopayments::Models::currency?,
         ?discount_code: String?,
         ?metadata: ::Hash[Symbol, String],
@@ -77,6 +77,25 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> void
 
+      def to_hash: -> {
+        billing: Dodopayments::BillingAddress,
+        customer: Dodopayments::Models::customer_request,
+        product_id: String,
+        quantity: Integer,
+        addons: ::Array[Dodopayments::SubscriptionCreateParams::Addon]?,
+        allowed_payment_method_types: ::Array[Dodopayments::Models::SubscriptionCreateParams::allowed_payment_method_type]?,
+        billing_currency: Dodopayments::Models::currency?,
+        discount_code: String?,
+        metadata: ::Hash[Symbol, String],
+        on_demand: Dodopayments::SubscriptionCreateParams::OnDemand?,
+        payment_link: bool?,
+        return_url: String?,
+        show_saved_payment_methods: bool,
+        tax_id: String?,
+        trial_period_days: Integer?,
+        request_options: Dodopayments::RequestOptions
+      }
+
       type addon = { addon_id: String, quantity: Integer }
 
       class Addon < Dodopayments::Internal::Type::BaseModel
@@ -85,6 +104,8 @@ module Dodopayments
         attr_accessor quantity: Integer
 
         def initialize: (addon_id: String, quantity: Integer) -> void
+
+        def to_hash: -> { addon_id: String, quantity: Integer }
       end
 
       type allowed_payment_method_type =
@@ -129,7 +150,7 @@ module Dodopayments
         AMAZON_PAY: :amazon_pay
         AFTERPAY_CLEARPAY: :afterpay_clearpay
 
-        def self?.values: -> ::Array[Dodopayments::SubscriptionCreateParams::allowed_payment_method_type]
+        def self?.values: -> ::Array[Dodopayments::Models::SubscriptionCreateParams::allowed_payment_method_type]
       end
 
       type on_demand = { mandate_only: bool, product_price: Integer? }
@@ -140,6 +161,8 @@ module Dodopayments
         attr_accessor product_price: Integer?
 
         def initialize: (mandate_only: bool, ?product_price: Integer?) -> void
+
+        def to_hash: -> { mandate_only: bool, product_price: Integer? }
       end
     end
   end

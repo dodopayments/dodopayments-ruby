@@ -11,6 +11,8 @@ module Dodopayments
       attr_accessor name: String
 
       def initialize: (customer_id: String, email: String, name: String) -> void
+
+      def to_hash: -> { customer_id: String, email: String, name: String }
     end
   end
 end

@@ -34,7 +34,7 @@ module Dodopayments
       # @!attribute status
       #   Filter by license key status
       #
-      #   @return [Symbol, Dodopayments::LicenseKeyStatus, nil]
+      #   @return [Symbol, Dodopayments::Models::LicenseKeyStatus, nil]
       optional :status, enum: -> { Dodopayments::LicenseKeyStatus }, nil?: true
 
       # @!method initialize(customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
@@ -46,7 +46,7 @@ module Dodopayments
       #
       #   @param product_id [String, nil] Filter by product ID
       #
-      #   @param status [Symbol, Dodopayments::LicenseKeyStatus, nil] Filter by license key status
+      #   @param status [Symbol, Dodopayments::Models::LicenseKeyStatus, nil] Filter by license key status
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end

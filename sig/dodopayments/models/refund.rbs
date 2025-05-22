@@ -39,6 +39,17 @@ module Dodopayments
         ?currency: Dodopayments::Models::currency?,
         ?reason: String?
       ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        created_at: Time,
+        payment_id: String,
+        refund_id: String,
+        status: Dodopayments::Models::refund_status,
+        amount: Integer?,
+        currency: Dodopayments::Models::currency?,
+        reason: String?
+      }
     end
   end
 end

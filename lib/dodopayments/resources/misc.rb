@@ -7,7 +7,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Array<Symbol, Dodopayments::CountryCode>]
+      # @return [Array<Symbol, Dodopayments::Models::CountryCode>]
       #
       # @see Dodopayments::Models::MiscListSupportedCountriesParams
       def list_supported_countries(params = {})

@@ -32,7 +32,7 @@ module Dodopayments
       #   Represents the different categories of taxation applicable to various products
       #   and services.
       #
-      #   @return [Symbol, Dodopayments::TaxCategory]
+      #   @return [Symbol, Dodopayments::Models::TaxCategory]
       required :tax_category, enum: -> { Dodopayments::TaxCategory }
 
       # @!attribute updated_at
@@ -43,7 +43,7 @@ module Dodopayments
 
       # @!attribute currency
       #
-      #   @return [Symbol, Dodopayments::Currency, nil]
+      #   @return [Symbol, Dodopayments::Models::Currency, nil]
       optional :currency, enum: -> { Dodopayments::Currency }, nil?: true
 
       # @!attribute description
@@ -81,7 +81,7 @@ module Dodopayments
 
       # @!attribute price_detail
       #
-      #   @return [Dodopayments::Price::OneTimePrice, Dodopayments::Price::RecurringPrice, nil]
+      #   @return [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil]
       optional :price_detail, union: -> { Dodopayments::Price }, nil?: true
 
       # @!attribute tax_inclusive
@@ -102,11 +102,11 @@ module Dodopayments
       #
       #   @param product_id [String] Unique identifier for the product.
       #
-      #   @param tax_category [Symbol, Dodopayments::TaxCategory] Represents the different categories of taxation applicable to various products a
+      #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Represents the different categories of taxation applicable to various products a
       #
       #   @param updated_at [Time] Timestamp when the product was last updated.
       #
-      #   @param currency [Symbol, Dodopayments::Currency, nil]
+      #   @param currency [Symbol, Dodopayments::Models::Currency, nil]
       #
       #   @param description [String, nil] Description of the product, optional.
       #
@@ -116,7 +116,7 @@ module Dodopayments
       #
       #   @param price [Integer, nil] Price of the product, optional.
       #
-      #   @param price_detail [Dodopayments::Price::OneTimePrice, Dodopayments::Price::RecurringPrice, nil]
+      #   @param price_detail [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil]
       #
       #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive
     end

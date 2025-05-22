@@ -23,7 +23,7 @@ module Dodopayments
 
       # @!method initialize(product_id:, quantity:, amount: nil)
       #   Some parameter documentations has been truncated, see
-      #   {Dodopayments::OneTimeProductCartItem} for more details.
+      #   {Dodopayments::Models::OneTimeProductCartItem} for more details.
       #
       #   @param product_id [String]
       #

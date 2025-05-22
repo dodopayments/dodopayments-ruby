@@ -6,6 +6,8 @@ module Dodopayments
       attr_accessor link: String
 
       def initialize: (link: String) -> void
+
+      def to_hash: -> { link: String }
     end
   end
 end

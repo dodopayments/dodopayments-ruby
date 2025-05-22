@@ -8,15 +8,15 @@ module Dodopayments
       #
       # @overload create(billing:, customer:, product_cart:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, metadata: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
       #
-      # @param billing [Dodopayments::BillingAddress]
+      # @param billing [Dodopayments::Models::BillingAddress]
       #
-      # @param customer [Dodopayments::AttachExistingCustomer, Dodopayments::CreateNewCustomer]
+      # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
       #
-      # @param product_cart [Array<Dodopayments::OneTimeProductCartItem>] List of products in the cart. Must contain at least 1 and at most 100 items.
+      # @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>] List of products in the cart. Must contain at least 1 and at most 100 items.
       #
-      # @param allowed_payment_method_types [Array<Symbol, Dodopayments::PaymentCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout.
+      # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout.
       #
-      # @param billing_currency [Symbol, Dodopayments::Currency, nil]
+      # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil]
       #
       # @param discount_code [String, nil] Discount Code to apply to the transaction
       #
@@ -52,7 +52,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Payment]
+      # @return [Dodopayments::Models::Payment]
       #
       # @see Dodopayments::Models::PaymentRetrieveParams
       def retrieve(payment_id, params = {})
@@ -76,7 +76,7 @@ module Dodopayments
       #
       # @param page_size [Integer, nil] Page size default is 10 max is 100
       #
-      # @param status [Symbol, Dodopayments::IntentStatus, nil] Filter by status
+      # @param status [Symbol, Dodopayments::Models::IntentStatus, nil] Filter by status
       #
       # @param subscription_id [String, nil] Filter by subscription id
       #

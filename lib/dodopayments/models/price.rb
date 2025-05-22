@@ -14,7 +14,7 @@ module Dodopayments
       class OneTimePrice < Dodopayments::Internal::Type::BaseModel
         # @!attribute currency
         #
-        #   @return [Symbol, Dodopayments::Currency]
+        #   @return [Symbol, Dodopayments::Models::Currency]
         required :currency, enum: -> { Dodopayments::Currency }
 
         # @!attribute discount
@@ -68,9 +68,9 @@ module Dodopayments
 
         # @!method initialize(currency:, discount:, price:, purchasing_power_parity:, pay_what_you_want: nil, suggested_price: nil, tax_inclusive: nil, type: :one_time_price)
         #   Some parameter documentations has been truncated, see
-        #   {Dodopayments::Price::OneTimePrice} for more details.
+        #   {Dodopayments::Models::Price::OneTimePrice} for more details.
         #
-        #   @param currency [Symbol, Dodopayments::Currency]
+        #   @param currency [Symbol, Dodopayments::Models::Currency]
         #
         #   @param discount [Float] Discount applied to the price, represented as a percentage (0 to 100).
         #
@@ -90,7 +90,7 @@ module Dodopayments
       class RecurringPrice < Dodopayments::Internal::Type::BaseModel
         # @!attribute currency
         #
-        #   @return [Symbol, Dodopayments::Currency]
+        #   @return [Symbol, Dodopayments::Models::Currency]
         required :currency, enum: -> { Dodopayments::Currency }
 
         # @!attribute discount
@@ -108,7 +108,7 @@ module Dodopayments
 
         # @!attribute payment_frequency_interval
         #
-        #   @return [Symbol, Dodopayments::TimeInterval]
+        #   @return [Symbol, Dodopayments::Models::TimeInterval]
         required :payment_frequency_interval, enum: -> { Dodopayments::TimeInterval }
 
         # @!attribute price
@@ -134,7 +134,7 @@ module Dodopayments
 
         # @!attribute subscription_period_interval
         #
-        #   @return [Symbol, Dodopayments::TimeInterval]
+        #   @return [Symbol, Dodopayments::Models::TimeInterval]
         required :subscription_period_interval, enum: -> { Dodopayments::TimeInterval }
 
         # @!attribute type
@@ -156,15 +156,15 @@ module Dodopayments
 
         # @!method initialize(currency:, discount:, payment_frequency_count:, payment_frequency_interval:, price:, purchasing_power_parity:, subscription_period_count:, subscription_period_interval:, tax_inclusive: nil, trial_period_days: nil, type: :recurring_price)
         #   Some parameter documentations has been truncated, see
-        #   {Dodopayments::Price::RecurringPrice} for more details.
+        #   {Dodopayments::Models::Price::RecurringPrice} for more details.
         #
-        #   @param currency [Symbol, Dodopayments::Currency]
+        #   @param currency [Symbol, Dodopayments::Models::Currency]
         #
         #   @param discount [Float] Discount applied to the price, represented as a percentage (0 to 100).
         #
         #   @param payment_frequency_count [Integer] Number of units for the payment frequency.
         #
-        #   @param payment_frequency_interval [Symbol, Dodopayments::TimeInterval]
+        #   @param payment_frequency_interval [Symbol, Dodopayments::Models::TimeInterval]
         #
         #   @param price [Integer] The payment amount. Represented in the lowest denomination of the currency (e.g.
         #
@@ -172,7 +172,7 @@ module Dodopayments
         #
         #   @param subscription_period_count [Integer] Number of units for the subscription period.
         #
-        #   @param subscription_period_interval [Symbol, Dodopayments::TimeInterval]
+        #   @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval]
         #
         #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive
         #
@@ -182,7 +182,7 @@ module Dodopayments
       end
 
       # @!method self.variants
-      #   @return [Array(Dodopayments::Price::OneTimePrice, Dodopayments::Price::RecurringPrice)]
+      #   @return [Array(Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice)]
     end
   end
 end

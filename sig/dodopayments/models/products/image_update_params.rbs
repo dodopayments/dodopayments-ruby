@@ -15,6 +15,11 @@ module Dodopayments
           ?force_update: bool?,
           ?request_options: Dodopayments::request_opts
         ) -> void
+
+        def to_hash: -> {
+          force_update: bool?,
+          request_options: Dodopayments::RequestOptions
+        }
       end
     end
   end

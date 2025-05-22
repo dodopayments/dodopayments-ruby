@@ -6,6 +6,8 @@ module Dodopayments
       attr_accessor payment_id: String
 
       def initialize: (payment_id: String) -> void
+
+      def to_hash: -> { payment_id: String }
     end
   end
 end

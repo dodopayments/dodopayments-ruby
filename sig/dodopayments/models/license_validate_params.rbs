@@ -17,6 +17,12 @@ module Dodopayments
         ?license_key_instance_id: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> {
+        license_key: String,
+        license_key_instance_id: String?,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

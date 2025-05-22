@@ -48,6 +48,19 @@ module Dodopayments
         ?name: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> {
+        price: Dodopayments::Models::price,
+        tax_category: Dodopayments::Models::tax_category,
+        addons: ::Array[String]?,
+        description: String?,
+        license_key_activation_message: String?,
+        license_key_activations_limit: Integer?,
+        license_key_duration: Dodopayments::LicenseKeyDuration?,
+        license_key_enabled: bool?,
+        name: String?,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

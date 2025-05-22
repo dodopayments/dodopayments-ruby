@@ -17,6 +17,12 @@ module Dodopayments
         ?phone_number: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> {
+        name: String?,
+        phone_number: String?,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

@@ -13,7 +13,7 @@ module Dodopayments
       # @param phone_number [String, nil]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Customer]
+      # @return [Dodopayments::Models::Customer]
       #
       # @see Dodopayments::Models::CustomerCreateParams
       def create(params)
@@ -33,7 +33,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Customer]
+      # @return [Dodopayments::Models::Customer]
       #
       # @see Dodopayments::Models::CustomerRetrieveParams
       def retrieve(customer_id, params = {})
@@ -55,7 +55,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Customer]
+      # @return [Dodopayments::Models::Customer]
       #
       # @see Dodopayments::Models::CustomerUpdateParams
       def update(customer_id, params = {})
@@ -77,7 +77,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Customer>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Customer>]
       #
       # @see Dodopayments::Models::CustomerListParams
       def list(params = {})

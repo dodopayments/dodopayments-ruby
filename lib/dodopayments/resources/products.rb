@@ -11,9 +11,9 @@ module Dodopayments
       #
       # @overload create(price:, tax_category:, addons: nil, description: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, request_options: {})
       #
-      # @param price [Dodopayments::Price::OneTimePrice, Dodopayments::Price::RecurringPrice]
+      # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
       #
-      # @param tax_category [Symbol, Dodopayments::TaxCategory] Represents the different categories of taxation applicable to various products a
+      # @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Represents the different categories of taxation applicable to various products a
       #
       # @param addons [Array<String>, nil] Addons available for subscription product
       #
@@ -23,7 +23,7 @@ module Dodopayments
       #
       # @param license_key_activations_limit [Integer, nil] The number of times the license key can be activated.
       #
-      # @param license_key_duration [Dodopayments::LicenseKeyDuration, nil]
+      # @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil]
       #
       # @param license_key_enabled [Boolean, nil] When true, generates and sends a license key to your customer.
       #
@@ -31,7 +31,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Product]
+      # @return [Dodopayments::Models::Product]
       #
       # @see Dodopayments::Models::ProductCreateParams
       def create(params)
@@ -51,7 +51,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Product]
+      # @return [Dodopayments::Models::Product]
       #
       # @see Dodopayments::Models::ProductRetrieveParams
       def retrieve(id, params = {})
@@ -80,15 +80,15 @@ module Dodopayments
       #
       # @param license_key_activations_limit [Integer, nil] Limit for the number of activations for the license key.
       #
-      # @param license_key_duration [Dodopayments::LicenseKeyDuration, nil]
+      # @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil]
       #
       # @param license_key_enabled [Boolean, nil] Whether the product requires a license key.
       #
       # @param name [String, nil] Name of the product, optional and must be at most 100 characters.
       #
-      # @param price [Dodopayments::Price::OneTimePrice, Dodopayments::Price::RecurringPrice, nil]
+      # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil]
       #
-      # @param tax_category [Symbol, Dodopayments::TaxCategory, nil] Represents the different categories of taxation applicable to various products a
+      # @param tax_category [Symbol, Dodopayments::Models::TaxCategory, nil] Represents the different categories of taxation applicable to various products a
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

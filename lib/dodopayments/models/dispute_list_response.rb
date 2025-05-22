@@ -37,12 +37,12 @@ module Dodopayments
 
       # @!attribute dispute_stage
       #
-      #   @return [Symbol, Dodopayments::DisputeStage]
+      #   @return [Symbol, Dodopayments::Models::DisputeStage]
       required :dispute_stage, enum: -> { Dodopayments::DisputeStage }
 
       # @!attribute dispute_status
       #
-      #   @return [Symbol, Dodopayments::DisputeStatus]
+      #   @return [Symbol, Dodopayments::Models::DisputeStatus]
       required :dispute_status, enum: -> { Dodopayments::DisputeStatus }
 
       # @!attribute payment_id
@@ -65,9 +65,9 @@ module Dodopayments
       #
       #   @param dispute_id [String] The unique identifier of the dispute.
       #
-      #   @param dispute_stage [Symbol, Dodopayments::DisputeStage]
+      #   @param dispute_stage [Symbol, Dodopayments::Models::DisputeStage]
       #
-      #   @param dispute_status [Symbol, Dodopayments::DisputeStatus]
+      #   @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus]
       #
       #   @param payment_id [String] The unique identifier of the payment associated with the dispute.
     end

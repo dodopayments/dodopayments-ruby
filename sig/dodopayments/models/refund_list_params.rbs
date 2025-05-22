@@ -36,6 +36,16 @@ module Dodopayments
         ?status: Dodopayments::Models::refund_status?,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> {
+        created_at_gte: Time?,
+        created_at_lte: Time?,
+        customer_id: String?,
+        page_number: Integer?,
+        page_size: Integer?,
+        status: Dodopayments::Models::refund_status?,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

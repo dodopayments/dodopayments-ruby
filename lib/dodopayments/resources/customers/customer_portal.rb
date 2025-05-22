@@ -12,7 +12,7 @@ module Dodopayments
         #
         # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Dodopayments::CustomerPortalSession]
+        # @return [Dodopayments::Models::CustomerPortalSession]
         #
         # @see Dodopayments::Models::Customers::CustomerPortalCreateParams
         def create(customer_id, params = {})

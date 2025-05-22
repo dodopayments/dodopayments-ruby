@@ -40,7 +40,7 @@ module Dodopayments
       # @!attribute status
       #   Filter by status
       #
-      #   @return [Symbol, Dodopayments::SubscriptionStatus, nil]
+      #   @return [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
       optional :status, enum: -> { Dodopayments::SubscriptionStatus }, nil?: true
 
       # @!method initialize(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, request_options: {})
@@ -54,7 +54,7 @@ module Dodopayments
       #
       #   @param page_size [Integer, nil] Page size default is 10 max is 100
       #
-      #   @param status [Symbol, Dodopayments::SubscriptionStatus, nil] Filter by status
+      #   @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil] Filter by status
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end

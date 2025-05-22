@@ -12,6 +12,11 @@ module Dodopayments
         count: Integer,
         interval: Dodopayments::Models::time_interval
       ) -> void
+
+      def to_hash: -> {
+        count: Integer,
+        interval: Dodopayments::Models::time_interval
+      }
     end
   end
 end

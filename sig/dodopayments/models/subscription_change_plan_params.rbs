@@ -29,6 +29,14 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> void
 
+      def to_hash: -> {
+        product_id: String,
+        proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode,
+        quantity: Integer,
+        addons: ::Array[Dodopayments::SubscriptionChangePlanParams::Addon]?,
+        request_options: Dodopayments::RequestOptions
+      }
+
       type proration_billing_mode = :prorated_immediately
 
       module ProrationBillingMode
@@ -47,6 +55,8 @@ module Dodopayments
         attr_accessor quantity: Integer
 
         def initialize: (addon_id: String, quantity: Integer) -> void
+
+        def to_hash: -> { addon_id: String, quantity: Integer }
       end
     end
   end

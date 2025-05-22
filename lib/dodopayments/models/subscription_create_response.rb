@@ -7,12 +7,12 @@ module Dodopayments
       # @!attribute addons
       #   Addons associated with this subscription
       #
-      #   @return [Array<Dodopayments::AddonCartResponseItem>]
+      #   @return [Array<Dodopayments::Models::AddonCartResponseItem>]
       required :addons, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::AddonCartResponseItem] }
 
       # @!attribute customer
       #
-      #   @return [Dodopayments::CustomerLimitedDetails]
+      #   @return [Dodopayments::Models::CustomerLimitedDetails]
       required :customer, -> { Dodopayments::CustomerLimitedDetails }
 
       # @!attribute metadata
@@ -56,9 +56,9 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionCreateResponse} for more details.
       #
-      #   @param addons [Array<Dodopayments::AddonCartResponseItem>] Addons associated with this subscription
+      #   @param addons [Array<Dodopayments::Models::AddonCartResponseItem>] Addons associated with this subscription
       #
-      #   @param customer [Dodopayments::CustomerLimitedDetails]
+      #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
       #
       #   @param metadata [Hash{Symbol=>String}]
       #

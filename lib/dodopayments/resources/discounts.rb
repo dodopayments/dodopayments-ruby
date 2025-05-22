@@ -12,7 +12,7 @@ module Dodopayments
       #
       # @param amount [Integer] The discount amount.
       #
-      # @param type [Symbol, Dodopayments::DiscountType]
+      # @param type [Symbol, Dodopayments::Models::DiscountType]
       #
       # @param code [String, nil] Optionally supply a code (will be uppercased).
       #
@@ -26,7 +26,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Discount]
+      # @return [Dodopayments::Models::Discount]
       #
       # @see Dodopayments::Models::DiscountCreateParams
       def create(params)
@@ -48,7 +48,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Discount]
+      # @return [Dodopayments::Models::Discount]
       #
       # @see Dodopayments::Models::DiscountRetrieveParams
       def retrieve(discount_id, params = {})
@@ -79,13 +79,13 @@ module Dodopayments
       #
       # @param restricted_to [Array<String>, nil] If present, replaces all restricted product IDs with this new set.
       #
-      # @param type [Symbol, Dodopayments::DiscountType, nil]
+      # @param type [Symbol, Dodopayments::Models::DiscountType, nil]
       #
       # @param usage_limit [Integer, nil]
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Discount]
+      # @return [Dodopayments::Models::Discount]
       #
       # @see Dodopayments::Models::DiscountUpdateParams
       def update(discount_id, params = {})
@@ -109,7 +109,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Discount>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Discount>]
       #
       # @see Dodopayments::Models::DiscountListParams
       def list(params = {})

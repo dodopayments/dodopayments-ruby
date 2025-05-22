@@ -40,6 +40,17 @@ module Dodopayments
         ?usage_limit: Integer?,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> {
+        amount: Integer?,
+        code: String?,
+        expires_at: Time?,
+        name: String?,
+        restricted_to: ::Array[String]?,
+        type: Dodopayments::Models::discount_type?,
+        usage_limit: Integer?,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

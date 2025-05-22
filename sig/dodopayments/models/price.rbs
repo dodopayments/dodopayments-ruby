@@ -47,6 +47,17 @@ module Dodopayments
           ?tax_inclusive: bool?,
           ?type: :one_time_price
         ) -> void
+
+        def to_hash: -> {
+          currency: Dodopayments::Models::currency,
+          discount: Float,
+          price: Integer,
+          purchasing_power_parity: bool,
+          type: :one_time_price,
+          pay_what_you_want: bool,
+          suggested_price: Integer?,
+          tax_inclusive: bool?
+        }
       end
 
       type recurring_price =
@@ -102,6 +113,20 @@ module Dodopayments
           ?trial_period_days: Integer,
           ?type: :recurring_price
         ) -> void
+
+        def to_hash: -> {
+          currency: Dodopayments::Models::currency,
+          discount: Float,
+          payment_frequency_count: Integer,
+          payment_frequency_interval: Dodopayments::Models::time_interval,
+          price: Integer,
+          purchasing_power_parity: bool,
+          subscription_period_count: Integer,
+          subscription_period_interval: Dodopayments::Models::time_interval,
+          type: :recurring_price,
+          tax_inclusive: bool?,
+          trial_period_days: Integer
+        }
       end
 
       def self?.variants: -> ::Array[Dodopayments::Models::price]

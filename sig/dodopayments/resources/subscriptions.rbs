@@ -7,7 +7,7 @@ module Dodopayments
         product_id: String,
         quantity: Integer,
         ?addons: ::Array[Dodopayments::SubscriptionCreateParams::Addon]?,
-        ?allowed_payment_method_types: ::Array[Dodopayments::SubscriptionCreateParams::allowed_payment_method_type]?,
+        ?allowed_payment_method_types: ::Array[Dodopayments::Models::SubscriptionCreateParams::allowed_payment_method_type]?,
         ?billing_currency: Dodopayments::Models::currency?,
         ?discount_code: String?,
         ?metadata: ::Hash[Symbol, String],

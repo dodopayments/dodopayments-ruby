@@ -22,7 +22,7 @@ module Dodopayments
 
       # @!attribute type
       #
-      #   @return [Symbol, Dodopayments::DiscountType]
+      #   @return [Symbol, Dodopayments::Models::DiscountType]
       required :type, enum: -> { Dodopayments::DiscountType }
 
       # @!attribute code
@@ -63,7 +63,7 @@ module Dodopayments
       #
       #   @param amount [Integer] The discount amount.
       #
-      #   @param type [Symbol, Dodopayments::DiscountType]
+      #   @param type [Symbol, Dodopayments::Models::DiscountType]
       #
       #   @param code [String, nil] Optionally supply a code (will be uppercased).
       #

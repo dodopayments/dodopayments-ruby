@@ -17,6 +17,12 @@ module Dodopayments
         ?reason: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
+
+      def to_hash: -> {
+        payment_id: String,
+        reason: String?,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

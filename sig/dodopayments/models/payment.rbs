@@ -116,6 +116,36 @@ module Dodopayments
         ?updated_at: Time?
       ) -> void
 
+      def to_hash: -> {
+        billing: Dodopayments::BillingAddress,
+        business_id: String,
+        created_at: Time,
+        currency: Dodopayments::Models::currency,
+        customer: Dodopayments::CustomerLimitedDetails,
+        disputes: ::Array[Dodopayments::Dispute],
+        metadata: ::Hash[Symbol, String],
+        payment_id: String,
+        refunds: ::Array[Dodopayments::Refund],
+        settlement_amount: Integer,
+        settlement_currency: Dodopayments::Models::currency,
+        total_amount: Integer,
+        card_issuing_country: Dodopayments::Models::country_code?,
+        card_last_four: String?,
+        card_network: String?,
+        card_type: String?,
+        discount_id: String?,
+        error_message: String?,
+        payment_link: String?,
+        payment_method: String?,
+        payment_method_type: String?,
+        product_cart: ::Array[Dodopayments::Payment::ProductCart]?,
+        settlement_tax: Integer?,
+        status: Dodopayments::Models::intent_status?,
+        subscription_id: String?,
+        tax: Integer?,
+        updated_at: Time?
+      }
+
       type product_cart = { product_id: String, quantity: Integer }
 
       class ProductCart < Dodopayments::Internal::Type::BaseModel
@@ -124,6 +154,8 @@ module Dodopayments
         attr_accessor quantity: Integer
 
         def initialize: (product_id: String, quantity: Integer) -> void
+
+        def to_hash: -> { product_id: String, quantity: Integer }
       end
     end
   end

@@ -9,7 +9,7 @@ module Dodopayments
       # @param name [String]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::LicenseKeyInstance]
+      # @return [Dodopayments::Models::LicenseKeyInstance]
       #
       # @see Dodopayments::Models::LicenseActivateParams
       def activate(params)

@@ -11,7 +11,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Refund]
+      # @return [Dodopayments::Models::Refund]
       #
       # @see Dodopayments::Models::RefundCreateParams
       def create(params)
@@ -31,7 +31,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Refund]
+      # @return [Dodopayments::Models::Refund]
       #
       # @see Dodopayments::Models::RefundRetrieveParams
       def retrieve(refund_id, params = {})
@@ -55,11 +55,11 @@ module Dodopayments
       #
       # @param page_size [Integer, nil] Page size default is 10 max is 100
       #
-      # @param status [Symbol, Dodopayments::RefundStatus, nil] Filter by status
+      # @param status [Symbol, Dodopayments::Models::RefundStatus, nil] Filter by status
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Refund>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Refund>]
       #
       # @see Dodopayments::Models::RefundListParams
       def list(params = {})

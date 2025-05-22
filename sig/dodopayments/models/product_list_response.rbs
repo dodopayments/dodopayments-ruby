@@ -59,6 +59,22 @@ module Dodopayments
         ?price_detail: Dodopayments::Models::price?,
         ?tax_inclusive: bool?
       ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        created_at: Time,
+        is_recurring: bool,
+        product_id: String,
+        tax_category: Dodopayments::Models::tax_category,
+        updated_at: Time,
+        currency: Dodopayments::Models::currency?,
+        description: String?,
+        image: String?,
+        name: String?,
+        price: Integer?,
+        price_detail: Dodopayments::Models::price?,
+        tax_inclusive: bool?
+      }
     end
   end
 end
