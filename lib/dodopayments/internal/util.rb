@@ -600,11 +600,13 @@ module Dodopayments
         #
         # @return [Object]
         def encode_content(headers, body)
+          # rubocop:disable Style/CaseEquality
+          # rubocop:disable Layout/LineLength
           content_type = headers["content-type"]
           case [content_type, body]
           in [Dodopayments::Internal::Util::JSON_CONTENT, Hash | Array | -> { primitive?(_1) }]
             [headers, JSON.generate(body)]
-          in [Dodopayments::Internal::Util::JSONL_CONTENT, Enumerable] unless body.is_a?(Dodopayments::Internal::Type::FileInput)
+          in [Dodopayments::Internal::Util::JSONL_CONTENT, Enumerable] unless Dodopayments::Internal::Type::FileInput === body
             [headers, body.lazy.map { JSON.generate(_1) }]
           in [%r{^multipart/form-data}, Hash | Dodopayments::Internal::Type::FileInput]
             boundary, strio = encode_multipart_streaming(body)
@@ -619,6 +621,8 @@ module Dodopayments
           else
             [headers, body]
           end
+          # rubocop:enable Layout/LineLength
+          # rubocop:enable Style/CaseEquality
         end
 
         # @api private
