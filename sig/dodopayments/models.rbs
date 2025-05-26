@@ -17,6 +17,16 @@ module Dodopayments
 
   class BillingAddress = Dodopayments::Models::BillingAddress
 
+  class BrandCreateParams = Dodopayments::Models::BrandCreateParams
+
+  class BrandListParams = Dodopayments::Models::BrandListParams
+
+  class BrandRetrieveParams = Dodopayments::Models::BrandRetrieveParams
+
+  class BrandUpdateImagesParams = Dodopayments::Models::BrandUpdateImagesParams
+
+  class BrandUpdateParams = Dodopayments::Models::BrandUpdateParams
+
   module CountryCode = Dodopayments::Models::CountryCode
 
   class CreateNewCustomer = Dodopayments::Models::CreateNewCustomer

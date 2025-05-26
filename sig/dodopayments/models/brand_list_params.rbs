@@ -1,0 +1,15 @@
+module Dodopayments
+  module Models
+    type brand_list_params =
+      {  } & Dodopayments::Internal::Type::request_parameters
+
+    class BrandListParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      def initialize: (?request_options: Dodopayments::request_opts) -> void
+
+      def to_hash: -> { request_options: Dodopayments::RequestOptions }
+    end
+  end
+end

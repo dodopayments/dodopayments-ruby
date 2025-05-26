@@ -68,6 +68,9 @@ module Dodopayments
     sig { returns(Dodopayments::Resources::Addons) }
     attr_reader :addons
 
+    sig { returns(Dodopayments::Resources::Brands) }
+    attr_reader :brands
+
     # @api private
     sig { override.returns(T::Hash[String, String]) }
     private def auth_headers
