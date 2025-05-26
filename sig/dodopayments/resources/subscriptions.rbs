@@ -36,6 +36,7 @@ module Dodopayments
       ) -> Dodopayments::Subscription
 
       def list: (
+        ?brand_id: String?,
         ?created_at_gte: Time?,
         ?created_at_lte: Time?,
         ?customer_id: String?,

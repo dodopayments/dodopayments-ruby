@@ -111,6 +111,9 @@ module Dodopayments
 
   PaymentListParams = Dodopayments::Models::PaymentListParams
 
+  PaymentRetrieveLineItemsParams =
+    Dodopayments::Models::PaymentRetrieveLineItemsParams
+
   PaymentRetrieveParams = Dodopayments::Models::PaymentRetrieveParams
 
   PayoutListParams = Dodopayments::Models::PayoutListParams

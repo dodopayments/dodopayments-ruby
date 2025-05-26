@@ -3,6 +3,7 @@ module Dodopayments
     type product_list_params =
       {
         archived: bool,
+        brand_id: String?,
         page_number: Integer?,
         page_size: Integer?,
         recurring: bool?
@@ -17,6 +18,8 @@ module Dodopayments
 
       def archived=: (bool) -> bool
 
+      attr_accessor brand_id: String?
+
       attr_accessor page_number: Integer?
 
       attr_accessor page_size: Integer?
@@ -25,6 +28,7 @@ module Dodopayments
 
       def initialize: (
         ?archived: bool,
+        ?brand_id: String?,
         ?page_number: Integer?,
         ?page_size: Integer?,
         ?recurring: bool?,
@@ -33,6 +37,7 @@ module Dodopayments
 
       def to_hash: -> {
         archived: bool,
+        brand_id: String?,
         page_number: Integer?,
         page_size: Integer?,
         recurring: bool?,

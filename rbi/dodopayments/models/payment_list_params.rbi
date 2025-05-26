@@ -14,6 +14,10 @@ module Dodopayments
           )
         end
 
+      # filter by Brand id
+      sig { returns(T.nilable(String)) }
+      attr_accessor :brand_id
+
       # Get events after this created time
       sig { returns(T.nilable(Time)) }
       attr_accessor :created_at_gte
@@ -44,6 +48,7 @@ module Dodopayments
 
       sig do
         params(
+          brand_id: T.nilable(String),
           created_at_gte: T.nilable(Time),
           created_at_lte: T.nilable(Time),
           customer_id: T.nilable(String),
@@ -55,6 +60,8 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        # filter by Brand id
+        brand_id: nil,
         # Get events after this created time
         created_at_gte: nil,
         # Get events created before this time
@@ -76,6 +83,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            brand_id: T.nilable(String),
             created_at_gte: T.nilable(Time),
             created_at_lte: T.nilable(Time),
             customer_id: T.nilable(String),

@@ -25,6 +25,12 @@ module Dodopayments
       #   @return [Array<String>, nil]
       optional :addons, Dodopayments::Internal::Type::ArrayOf[String], nil?: true
 
+      # @!attribute brand_id
+      #   Brand id for the product, if not provided will default to primary brand
+      #
+      #   @return [String, nil]
+      optional :brand_id, String, nil?: true
+
       # @!attribute description
       #   Optional description of the product
       #
@@ -60,7 +66,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :name, String, nil?: true
 
-      # @!method initialize(price:, tax_category:, addons: nil, description: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, request_options: {})
+      # @!method initialize(price:, tax_category:, addons: nil, brand_id: nil, description: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductCreateParams} for more details.
       #
@@ -69,6 +75,8 @@ module Dodopayments
       #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Represents the different categories of taxation applicable to various products a
       #
       #   @param addons [Array<String>, nil] Addons available for subscription product
+      #
+      #   @param brand_id [String, nil] Brand id for the product, if not provided will default to primary brand
       #
       #   @param description [String, nil] Optional description of the product
       #

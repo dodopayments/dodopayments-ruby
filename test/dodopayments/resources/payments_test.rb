@@ -39,6 +39,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
     assert_pattern do
       response => {
         billing: Dodopayments::BillingAddress,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         currency: Dodopayments::Currency,
@@ -85,6 +86,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
 
     assert_pattern do
       row => {
+        brand_id: String,
         created_at: Time,
         currency: Dodopayments::Currency,
         customer: Dodopayments::CustomerLimitedDetails,
@@ -95,6 +97,21 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         payment_method_type: String | nil,
         status: Dodopayments::IntentStatus | nil,
         subscription_id: String | nil
+      }
+    end
+  end
+
+  def test_retrieve_line_items
+    response = @dodo_payments.payments.retrieve_line_items("payment_id")
+
+    assert_pattern do
+      response => Dodopayments::Models::PaymentRetrieveLineItemsResponse
+    end
+
+    assert_pattern do
+      response => {
+        currency: Dodopayments::Currency,
+        items: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item])
       }
     end
   end

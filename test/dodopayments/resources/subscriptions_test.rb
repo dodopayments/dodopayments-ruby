@@ -21,6 +21,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         addons: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::AddonCartResponseItem]),
         customer: Dodopayments::CustomerLimitedDetails,
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
+        payment_id: String,
         recurring_pre_tax_amount: Integer,
         subscription_id: String,
         client_secret: String | nil,

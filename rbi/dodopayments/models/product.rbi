@@ -8,6 +8,9 @@ module Dodopayments
           T.any(Dodopayments::Product, Dodopayments::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :brand_id
+
       # Unique identifier for the business to which the product belongs.
       sig { returns(String) }
       attr_accessor :business_id
@@ -77,6 +80,7 @@ module Dodopayments
 
       sig do
         params(
+          brand_id: String,
           business_id: String,
           created_at: Time,
           is_recurring: T::Boolean,
@@ -100,6 +104,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        brand_id:,
         # Unique identifier for the business to which the product belongs.
         business_id:,
         # Timestamp when the product was created.
@@ -135,6 +140,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            brand_id: String,
             business_id: String,
             created_at: Time,
             is_recurring: T::Boolean,

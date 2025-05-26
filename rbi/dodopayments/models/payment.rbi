@@ -14,6 +14,10 @@ module Dodopayments
       sig { params(billing: Dodopayments::BillingAddress::OrHash).void }
       attr_writer :billing
 
+      # brand id this payment belongs to
+      sig { returns(String) }
+      attr_accessor :brand_id
+
       # Identifier of the business associated with the payment
       sig { returns(String) }
       attr_accessor :business_id
@@ -126,6 +130,7 @@ module Dodopayments
       sig do
         params(
           billing: Dodopayments::BillingAddress::OrHash,
+          brand_id: String,
           business_id: String,
           created_at: Time,
           currency: Dodopayments::Currency::OrSymbol,
@@ -157,6 +162,8 @@ module Dodopayments
       end
       def self.new(
         billing:,
+        # brand id this payment belongs to
+        brand_id:,
         # Identifier of the business associated with the payment
         business_id:,
         # Timestamp when the payment was created
@@ -216,6 +223,7 @@ module Dodopayments
         override.returns(
           {
             billing: Dodopayments::BillingAddress,
+            brand_id: String,
             business_id: String,
             created_at: Time,
             currency: Dodopayments::Currency::TaggedSymbol,

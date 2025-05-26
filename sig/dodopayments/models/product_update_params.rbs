@@ -3,6 +3,7 @@ module Dodopayments
     type product_update_params =
       {
         addons: ::Array[String]?,
+        brand_id: String?,
         description: String?,
         image_id: String?,
         license_key_activation_message: String?,
@@ -20,6 +21,8 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       attr_accessor addons: ::Array[String]?
+
+      attr_accessor brand_id: String?
 
       attr_accessor description: String?
 
@@ -41,6 +44,7 @@ module Dodopayments
 
       def initialize: (
         ?addons: ::Array[String]?,
+        ?brand_id: String?,
         ?description: String?,
         ?image_id: String?,
         ?license_key_activation_message: String?,
@@ -55,6 +59,7 @@ module Dodopayments
 
       def to_hash: -> {
         addons: ::Array[String]?,
+        brand_id: String?,
         description: String?,
         image_id: String?,
         license_key_activation_message: String?,

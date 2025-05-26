@@ -33,6 +33,10 @@ module Dodopayments
       sig { returns(T.nilable(T::Array[String])) }
       attr_accessor :addons
 
+      # Brand id for the product, if not provided will default to primary brand
+      sig { returns(T.nilable(String)) }
+      attr_accessor :brand_id
+
       # Optional description of the product
       sig { returns(T.nilable(String)) }
       attr_accessor :description
@@ -73,6 +77,7 @@ module Dodopayments
             ),
           tax_category: Dodopayments::TaxCategory::OrSymbol,
           addons: T.nilable(T::Array[String]),
+          brand_id: T.nilable(String),
           description: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
@@ -90,6 +95,8 @@ module Dodopayments
         tax_category:,
         # Addons available for subscription product
         addons: nil,
+        # Brand id for the product, if not provided will default to primary brand
+        brand_id: nil,
         # Optional description of the product
         description: nil,
         # Optional message displayed during license key activation
@@ -115,6 +122,7 @@ module Dodopayments
               ),
             tax_category: Dodopayments::TaxCategory::OrSymbol,
             addons: T.nilable(T::Array[String]),
+            brand_id: T.nilable(String),
             description: T.nilable(String),
             license_key_activation_message: T.nilable(String),
             license_key_activations_limit: T.nilable(Integer),

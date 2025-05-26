@@ -2,6 +2,7 @@ module Dodopayments
   module Models
     type payment_list_response =
       {
+        brand_id: String,
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
@@ -15,6 +16,8 @@ module Dodopayments
       }
 
     class PaymentListResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor brand_id: String
+
       attr_accessor created_at: Time
 
       attr_accessor currency: Dodopayments::Models::currency
@@ -36,6 +39,7 @@ module Dodopayments
       attr_accessor subscription_id: String?
 
       def initialize: (
+        brand_id: String,
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
@@ -49,6 +53,7 @@ module Dodopayments
       ) -> void
 
       def to_hash: -> {
+        brand_id: String,
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,

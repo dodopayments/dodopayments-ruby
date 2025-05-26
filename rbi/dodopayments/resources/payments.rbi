@@ -73,6 +73,7 @@ module Dodopayments
 
       sig do
         params(
+          brand_id: T.nilable(String),
           created_at_gte: T.nilable(Time),
           created_at_lte: T.nilable(Time),
           customer_id: T.nilable(String),
@@ -88,6 +89,8 @@ module Dodopayments
         )
       end
       def list(
+        # filter by Brand id
+        brand_id: nil,
         # Get events after this created time
         created_at_gte: nil,
         # Get events created before this time
@@ -102,6 +105,19 @@ module Dodopayments
         status: nil,
         # Filter by subscription id
         subscription_id: nil,
+        request_options: {}
+      )
+      end
+
+      sig do
+        params(
+          payment_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Models::PaymentRetrieveLineItemsResponse)
+      end
+      def retrieve_line_items(
+        # Payment Id
+        payment_id,
         request_options: {}
       )
       end

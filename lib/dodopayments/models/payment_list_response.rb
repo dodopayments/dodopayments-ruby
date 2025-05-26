@@ -4,6 +4,11 @@ module Dodopayments
   module Models
     # @see Dodopayments::Resources::Payments#list
     class PaymentListResponse < Dodopayments::Internal::Type::BaseModel
+      # @!attribute brand_id
+      #
+      #   @return [String]
+      required :brand_id, String
+
       # @!attribute created_at
       #
       #   @return [Time]
@@ -54,7 +59,8 @@ module Dodopayments
       #   @return [String, nil]
       optional :subscription_id, String, nil?: true
 
-      # @!method initialize(created_at:, currency:, customer:, metadata:, payment_id:, total_amount:, payment_method: nil, payment_method_type: nil, status: nil, subscription_id: nil)
+      # @!method initialize(brand_id:, created_at:, currency:, customer:, metadata:, payment_id:, total_amount:, payment_method: nil, payment_method_type: nil, status: nil, subscription_id: nil)
+      #   @param brand_id [String]
       #   @param created_at [Time]
       #   @param currency [Symbol, Dodopayments::Models::Currency]
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails]

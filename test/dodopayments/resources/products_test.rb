@@ -16,6 +16,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
 
     assert_pattern do
       response => {
+        brand_id: String,
         business_id: String,
         created_at: Time,
         is_recurring: Dodopayments::Internal::Type::Boolean,
@@ -44,6 +45,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
 
     assert_pattern do
       response => {
+        brand_id: String,
         business_id: String,
         created_at: Time,
         is_recurring: Dodopayments::Internal::Type::Boolean,

@@ -18,6 +18,9 @@ module Dodopayments
       sig { returns(T.nilable(T::Array[String])) }
       attr_accessor :addons
 
+      sig { returns(T.nilable(String)) }
+      attr_accessor :brand_id
+
       # Description of the product, optional and must be at most 1000 characters.
       sig { returns(T.nilable(String)) }
       attr_accessor :description
@@ -82,6 +85,7 @@ module Dodopayments
       sig do
         params(
           addons: T.nilable(T::Array[String]),
+          brand_id: T.nilable(String),
           description: T.nilable(String),
           image_id: T.nilable(String),
           license_key_activation_message: T.nilable(String),
@@ -104,6 +108,7 @@ module Dodopayments
       def self.new(
         # Available Addons for subscription products
         addons: nil,
+        brand_id: nil,
         # Description of the product, optional and must be at most 1000 characters.
         description: nil,
         # Product image id after its uploaded to S3
@@ -138,6 +143,7 @@ module Dodopayments
         override.returns(
           {
             addons: T.nilable(T::Array[String]),
+            brand_id: T.nilable(String),
             description: T.nilable(String),
             image_id: T.nilable(String),
             license_key_activation_message: T.nilable(String),

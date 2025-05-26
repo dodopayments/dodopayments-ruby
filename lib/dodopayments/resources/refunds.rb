@@ -3,9 +3,11 @@
 module Dodopayments
   module Resources
     class Refunds
-      # @overload create(payment_id:, reason: nil, request_options: {})
+      # @overload create(payment_id:, items: nil, reason: nil, request_options: {})
       #
       # @param payment_id [String] The unique identifier of the payment to be refunded.
+      #
+      # @param items [Array<Dodopayments::Models::RefundCreateParams::Item>, nil] Partially Refund an Individual Item
       #
       # @param reason [String, nil] The reason for the refund, if any. Maximum length is 3000 characters. Optional.
       #

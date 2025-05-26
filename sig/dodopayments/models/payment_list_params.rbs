@@ -2,6 +2,7 @@ module Dodopayments
   module Models
     type payment_list_params =
       {
+        brand_id: String?,
         created_at_gte: Time?,
         created_at_lte: Time?,
         customer_id: String?,
@@ -15,6 +16,8 @@ module Dodopayments
     class PaymentListParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor brand_id: String?
 
       attr_accessor created_at_gte: Time?
 
@@ -31,6 +34,7 @@ module Dodopayments
       attr_accessor subscription_id: String?
 
       def initialize: (
+        ?brand_id: String?,
         ?created_at_gte: Time?,
         ?created_at_lte: Time?,
         ?customer_id: String?,
@@ -42,6 +46,7 @@ module Dodopayments
       ) -> void
 
       def to_hash: -> {
+        brand_id: String?,
         created_at_gte: Time?,
         created_at_lte: Time?,
         customer_id: String?,

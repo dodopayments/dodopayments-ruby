@@ -16,6 +16,12 @@ module Dodopayments
       #   @return [Time]
       required :created_at, Time
 
+      # @!attribute is_partial
+      #   If true the refund is a partial refund
+      #
+      #   @return [Boolean]
+      required :is_partial, Dodopayments::Internal::Type::Boolean
+
       # @!attribute payment_id
       #   The unique identifier of the payment associated with the refund.
       #
@@ -50,10 +56,12 @@ module Dodopayments
       #   @return [String, nil]
       optional :reason, String, nil?: true
 
-      # @!method initialize(business_id:, created_at:, payment_id:, refund_id:, status:, amount: nil, currency: nil, reason: nil)
+      # @!method initialize(business_id:, created_at:, is_partial:, payment_id:, refund_id:, status:, amount: nil, currency: nil, reason: nil)
       #   @param business_id [String] The unique identifier of the business issuing the refund.
       #
       #   @param created_at [Time] The timestamp of when the refund was created in UTC.
+      #
+      #   @param is_partial [Boolean] If true the refund is a partial refund
       #
       #   @param payment_id [String] The unique identifier of the payment associated with the refund.
       #

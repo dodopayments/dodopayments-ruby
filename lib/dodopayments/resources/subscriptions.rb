@@ -102,7 +102,9 @@ module Dodopayments
         )
       end
 
-      # @overload list(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, request_options: {})
+      # @overload list(brand_id: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, request_options: {})
+      #
+      # @param brand_id [String, nil] filter by Brand id
       #
       # @param created_at_gte [Time, nil] Get events after this created time
       #

@@ -13,6 +13,11 @@ module Dodopayments
       #   @return [Array<String>, nil]
       optional :addons, Dodopayments::Internal::Type::ArrayOf[String], nil?: true
 
+      # @!attribute brand_id
+      #
+      #   @return [String, nil]
+      optional :brand_id, String, nil?: true
+
       # @!attribute description
       #   Description of the product, optional and must be at most 1000 characters.
       #
@@ -75,11 +80,13 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::TaxCategory, nil]
       optional :tax_category, enum: -> { Dodopayments::TaxCategory }, nil?: true
 
-      # @!method initialize(addons: nil, description: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      # @!method initialize(addons: nil, brand_id: nil, description: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, price: nil, tax_category: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductUpdateParams} for more details.
       #
       #   @param addons [Array<String>, nil] Available Addons for subscription products
+      #
+      #   @param brand_id [String, nil]
       #
       #   @param description [String, nil] Description of the product, optional and must be at most 1000 characters.
       #

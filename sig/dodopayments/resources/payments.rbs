@@ -22,6 +22,7 @@ module Dodopayments
       ) -> Dodopayments::Payment
 
       def list: (
+        ?brand_id: String?,
         ?created_at_gte: Time?,
         ?created_at_lte: Time?,
         ?customer_id: String?,
@@ -31,6 +32,11 @@ module Dodopayments
         ?subscription_id: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::PaymentListResponse]
+
+      def retrieve_line_items: (
+        String payment_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::PaymentRetrieveLineItemsResponse
 
       def initialize: (client: Dodopayments::Client) -> void
     end

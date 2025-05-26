@@ -20,6 +20,12 @@ module Dodopayments
       #   @return [Hash{Symbol=>String}]
       required :metadata, Dodopayments::Internal::Type::HashOf[String]
 
+      # @!attribute payment_id
+      #   First payment id for the subscription
+      #
+      #   @return [String]
+      required :payment_id, String
+
       # @!attribute recurring_pre_tax_amount
       #   Tax will be added to the amount and charged to the customer on each billing
       #   cycle
@@ -52,7 +58,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :payment_link, String, nil?: true
 
-      # @!method initialize(addons:, customer:, metadata:, recurring_pre_tax_amount:, subscription_id:, client_secret: nil, discount_id: nil, payment_link: nil)
+      # @!method initialize(addons:, customer:, metadata:, payment_id:, recurring_pre_tax_amount:, subscription_id:, client_secret: nil, discount_id: nil, payment_link: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionCreateResponse} for more details.
       #
@@ -61,6 +67,8 @@ module Dodopayments
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
       #
       #   @param metadata [Hash{Symbol=>String}]
+      #
+      #   @param payment_id [String] First payment id for the subscription
       #
       #   @param recurring_pre_tax_amount [Integer] Tax will be added to the amount and charged to the customer on each billing cycl
       #

@@ -64,7 +64,9 @@ module Dodopayments
         )
       end
 
-      # @overload list(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, subscription_id: nil, request_options: {})
+      # @overload list(brand_id: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, subscription_id: nil, request_options: {})
+      #
+      # @param brand_id [String, nil] filter by Brand id
       #
       # @param created_at_gte [Time, nil] Get events after this created time
       #
@@ -94,6 +96,24 @@ module Dodopayments
           page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Models::PaymentListResponse,
           options: options
+        )
+      end
+
+      # @overload retrieve_line_items(payment_id, request_options: {})
+      #
+      # @param payment_id [String] Payment Id
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Models::PaymentRetrieveLineItemsResponse]
+      #
+      # @see Dodopayments::Models::PaymentRetrieveLineItemsParams
+      def retrieve_line_items(payment_id, params = {})
+        @client.request(
+          method: :get,
+          path: ["payments/%1$s/line-items", payment_id],
+          model: Dodopayments::Models::PaymentRetrieveLineItemsResponse,
+          options: params[:request_options]
         )
       end
 

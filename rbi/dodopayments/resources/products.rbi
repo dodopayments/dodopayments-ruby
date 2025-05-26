@@ -15,6 +15,7 @@ module Dodopayments
             ),
           tax_category: Dodopayments::TaxCategory::OrSymbol,
           addons: T.nilable(T::Array[String]),
+          brand_id: T.nilable(String),
           description: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
@@ -32,6 +33,8 @@ module Dodopayments
         tax_category:,
         # Addons available for subscription product
         addons: nil,
+        # Brand id for the product, if not provided will default to primary brand
+        brand_id: nil,
         # Optional description of the product
         description: nil,
         # Optional message displayed during license key activation
@@ -64,6 +67,7 @@ module Dodopayments
         params(
           id: String,
           addons: T.nilable(T::Array[String]),
+          brand_id: T.nilable(String),
           description: T.nilable(String),
           image_id: T.nilable(String),
           license_key_activation_message: T.nilable(String),
@@ -87,6 +91,7 @@ module Dodopayments
         id,
         # Available Addons for subscription products
         addons: nil,
+        brand_id: nil,
         # Description of the product, optional and must be at most 1000 characters.
         description: nil,
         # Product image id after its uploaded to S3
@@ -120,6 +125,7 @@ module Dodopayments
       sig do
         params(
           archived: T::Boolean,
+          brand_id: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           recurring: T.nilable(T::Boolean),
@@ -133,6 +139,8 @@ module Dodopayments
       def list(
         # List archived products
         archived: nil,
+        # filter by Brand id
+        brand_id: nil,
         # Page number default is 0
         page_number: nil,
         # Page size default is 10 max is 100

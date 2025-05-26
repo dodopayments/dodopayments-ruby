@@ -11,6 +11,9 @@ module Dodopayments
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :brand_id
+
       sig { returns(Time) }
       attr_accessor :created_at
 
@@ -48,6 +51,7 @@ module Dodopayments
 
       sig do
         params(
+          brand_id: String,
           created_at: Time,
           currency: Dodopayments::Currency::OrSymbol,
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
@@ -61,6 +65,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        brand_id:,
         created_at:,
         currency:,
         customer:,
@@ -77,6 +82,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            brand_id: String,
             created_at: Time,
             currency: Dodopayments::Currency::TaggedSymbol,
             customer: Dodopayments::CustomerLimitedDetails,

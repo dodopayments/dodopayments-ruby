@@ -5,6 +5,7 @@ module Dodopayments
         price: Dodopayments::Models::price,
         tax_category: Dodopayments::Models::tax_category,
         addons: ::Array[String]?,
+        brand_id: String?,
         description: String?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
@@ -24,6 +25,8 @@ module Dodopayments
 
       attr_accessor addons: ::Array[String]?
 
+      attr_accessor brand_id: String?
+
       attr_accessor description: String?
 
       attr_accessor license_key_activation_message: String?
@@ -40,6 +43,7 @@ module Dodopayments
         price: Dodopayments::Models::price,
         tax_category: Dodopayments::Models::tax_category,
         ?addons: ::Array[String]?,
+        ?brand_id: String?,
         ?description: String?,
         ?license_key_activation_message: String?,
         ?license_key_activations_limit: Integer?,
@@ -53,6 +57,7 @@ module Dodopayments
         price: Dodopayments::Models::price,
         tax_category: Dodopayments::Models::tax_category,
         addons: ::Array[String]?,
+        brand_id: String?,
         description: String?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,

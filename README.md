@@ -53,11 +53,11 @@ page = dodo_payments.payments.list
 
 # Fetch single item from page.
 payment = page.items[0]
-puts(payment.payment_id)
+puts(payment.brand_id)
 
 # Automatically fetches more pages as needed.
 page.auto_paging_each do |payment|
-  puts(payment.payment_id)
+  puts(payment.brand_id)
 end
 ```
 
@@ -66,7 +66,7 @@ Alternatively, you can use the `#next_page?` and `#next_page` methods for more g
 ```ruby
 if page.next_page?
   new_page = page.next_page
-  puts(new_page.items[0].payment_id)
+  puts(new_page.items[0].brand_id)
 end
 ```
 

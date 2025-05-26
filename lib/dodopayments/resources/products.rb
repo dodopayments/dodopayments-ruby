@@ -9,13 +9,15 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductCreateParams} for more details.
       #
-      # @overload create(price:, tax_category:, addons: nil, description: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, request_options: {})
+      # @overload create(price:, tax_category:, addons: nil, brand_id: nil, description: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, request_options: {})
       #
       # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
       #
       # @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Represents the different categories of taxation applicable to various products a
       #
       # @param addons [Array<String>, nil] Addons available for subscription product
+      #
+      # @param brand_id [String, nil] Brand id for the product, if not provided will default to primary brand
       #
       # @param description [String, nil] Optional description of the product
       #
@@ -66,11 +68,13 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductUpdateParams} for more details.
       #
-      # @overload update(id, addons: nil, description: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      # @overload update(id, addons: nil, brand_id: nil, description: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, price: nil, tax_category: nil, request_options: {})
       #
       # @param id [String]
       #
       # @param addons [Array<String>, nil] Available Addons for subscription products
+      #
+      # @param brand_id [String, nil]
       #
       # @param description [String, nil] Description of the product, optional and must be at most 1000 characters.
       #
@@ -109,9 +113,11 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductListParams} for more details.
       #
-      # @overload list(archived: nil, page_number: nil, page_size: nil, recurring: nil, request_options: {})
+      # @overload list(archived: nil, brand_id: nil, page_number: nil, page_size: nil, recurring: nil, request_options: {})
       #
       # @param archived [Boolean] List archived products
+      #
+      # @param brand_id [String, nil] filter by Brand id
       #
       # @param page_number [Integer, nil] Page number default is 0
       #

@@ -13,6 +13,12 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :archived, Dodopayments::Internal::Type::Boolean
 
+      # @!attribute brand_id
+      #   filter by Brand id
+      #
+      #   @return [String, nil]
+      optional :brand_id, String, nil?: true
+
       # @!attribute page_number
       #   Page number default is 0
       #
@@ -35,11 +41,13 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :recurring, Dodopayments::Internal::Type::Boolean, nil?: true
 
-      # @!method initialize(archived: nil, page_number: nil, page_size: nil, recurring: nil, request_options: {})
+      # @!method initialize(archived: nil, brand_id: nil, page_number: nil, page_size: nil, recurring: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductListParams} for more details.
       #
       #   @param archived [Boolean] List archived products
+      #
+      #   @param brand_id [String, nil] filter by Brand id
       #
       #   @param page_number [Integer, nil] Page number default is 0
       #

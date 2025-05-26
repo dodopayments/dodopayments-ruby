@@ -7,6 +7,12 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      # @!attribute brand_id
+      #   filter by Brand id
+      #
+      #   @return [String, nil]
+      optional :brand_id, String, nil?: true
+
       # @!attribute created_at_gte
       #   Get events after this created time
       #
@@ -43,7 +49,9 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
       optional :status, enum: -> { Dodopayments::SubscriptionStatus }, nil?: true
 
-      # @!method initialize(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, request_options: {})
+      # @!method initialize(brand_id: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, request_options: {})
+      #   @param brand_id [String, nil] filter by Brand id
+      #
       #   @param created_at_gte [Time, nil] Get events after this created time
       #
       #   @param created_at_lte [Time, nil] Get events created before this time

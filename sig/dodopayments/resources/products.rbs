@@ -7,6 +7,7 @@ module Dodopayments
         price: Dodopayments::Models::price,
         tax_category: Dodopayments::Models::tax_category,
         ?addons: ::Array[String]?,
+        ?brand_id: String?,
         ?description: String?,
         ?license_key_activation_message: String?,
         ?license_key_activations_limit: Integer?,
@@ -24,6 +25,7 @@ module Dodopayments
       def update: (
         String id,
         ?addons: ::Array[String]?,
+        ?brand_id: String?,
         ?description: String?,
         ?image_id: String?,
         ?license_key_activation_message: String?,
@@ -38,6 +40,7 @@ module Dodopayments
 
       def list: (
         ?archived: bool,
+        ?brand_id: String?,
         ?page_number: Integer?,
         ?page_size: Integer?,
         ?recurring: bool?,

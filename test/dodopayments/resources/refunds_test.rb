@@ -14,6 +14,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
       response => {
         business_id: String,
         created_at: Time,
+        is_partial: Dodopayments::Internal::Type::Boolean,
         payment_id: String,
         refund_id: String,
         status: Dodopayments::RefundStatus,
@@ -35,6 +36,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
       response => {
         business_id: String,
         created_at: Time,
+        is_partial: Dodopayments::Internal::Type::Boolean,
         payment_id: String,
         refund_id: String,
         status: Dodopayments::RefundStatus,
@@ -63,6 +65,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
       row => {
         business_id: String,
         created_at: Time,
+        is_partial: Dodopayments::Internal::Type::Boolean,
         payment_id: String,
         refund_id: String,
         status: Dodopayments::RefundStatus,

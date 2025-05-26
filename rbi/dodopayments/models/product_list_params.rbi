@@ -21,6 +21,10 @@ module Dodopayments
       sig { params(archived: T::Boolean).void }
       attr_writer :archived
 
+      # filter by Brand id
+      sig { returns(T.nilable(String)) }
+      attr_accessor :brand_id
+
       # Page number default is 0
       sig { returns(T.nilable(Integer)) }
       attr_accessor :page_number
@@ -40,6 +44,7 @@ module Dodopayments
       sig do
         params(
           archived: T::Boolean,
+          brand_id: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
           recurring: T.nilable(T::Boolean),
@@ -49,6 +54,8 @@ module Dodopayments
       def self.new(
         # List archived products
         archived: nil,
+        # filter by Brand id
+        brand_id: nil,
         # Page number default is 0
         page_number: nil,
         # Page size default is 10 max is 100
@@ -67,6 +74,7 @@ module Dodopayments
         override.returns(
           {
             archived: T::Boolean,
+            brand_id: T.nilable(String),
             page_number: T.nilable(Integer),
             page_size: T.nilable(Integer),
             recurring: T.nilable(T::Boolean),

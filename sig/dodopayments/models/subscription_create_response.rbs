@@ -5,6 +5,7 @@ module Dodopayments
         addons: ::Array[Dodopayments::AddonCartResponseItem],
         customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
+        payment_id: String,
         recurring_pre_tax_amount: Integer,
         subscription_id: String,
         client_secret: String?,
@@ -18,6 +19,8 @@ module Dodopayments
       attr_accessor customer: Dodopayments::CustomerLimitedDetails
 
       attr_accessor metadata: ::Hash[Symbol, String]
+
+      attr_accessor payment_id: String
 
       attr_accessor recurring_pre_tax_amount: Integer
 
@@ -33,6 +36,7 @@ module Dodopayments
         addons: ::Array[Dodopayments::AddonCartResponseItem],
         customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
+        payment_id: String,
         recurring_pre_tax_amount: Integer,
         subscription_id: String,
         ?client_secret: String?,
@@ -44,6 +48,7 @@ module Dodopayments
         addons: ::Array[Dodopayments::AddonCartResponseItem],
         customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
+        payment_id: String,
         recurring_pre_tax_amount: Integer,
         subscription_id: String,
         client_secret: String?,

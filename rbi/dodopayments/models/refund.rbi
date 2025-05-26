@@ -16,6 +16,10 @@ module Dodopayments
       sig { returns(Time) }
       attr_accessor :created_at
 
+      # If true the refund is a partial refund
+      sig { returns(T::Boolean) }
+      attr_accessor :is_partial
+
       # The unique identifier of the payment associated with the refund.
       sig { returns(String) }
       attr_accessor :payment_id
@@ -42,6 +46,7 @@ module Dodopayments
         params(
           business_id: String,
           created_at: Time,
+          is_partial: T::Boolean,
           payment_id: String,
           refund_id: String,
           status: Dodopayments::RefundStatus::OrSymbol,
@@ -55,6 +60,8 @@ module Dodopayments
         business_id:,
         # The timestamp of when the refund was created in UTC.
         created_at:,
+        # If true the refund is a partial refund
+        is_partial:,
         # The unique identifier of the payment associated with the refund.
         payment_id:,
         # The unique identifier of the refund.
@@ -73,6 +80,7 @@ module Dodopayments
           {
             business_id: String,
             created_at: Time,
+            is_partial: T::Boolean,
             payment_id: String,
             refund_id: String,
             status: Dodopayments::RefundStatus::TaggedSymbol,

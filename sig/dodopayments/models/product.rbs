@@ -2,6 +2,7 @@ module Dodopayments
   module Models
     type product =
       {
+        brand_id: String,
         business_id: String,
         created_at: Time,
         is_recurring: bool,
@@ -20,6 +21,8 @@ module Dodopayments
       }
 
     class Product < Dodopayments::Internal::Type::BaseModel
+      attr_accessor brand_id: String
+
       attr_accessor business_id: String
 
       attr_accessor created_at: Time
@@ -51,6 +54,7 @@ module Dodopayments
       attr_accessor name: String?
 
       def initialize: (
+        brand_id: String,
         business_id: String,
         created_at: Time,
         is_recurring: bool,
@@ -69,6 +73,7 @@ module Dodopayments
       ) -> void
 
       def to_hash: -> {
+        brand_id: String,
         business_id: String,
         created_at: Time,
         is_recurring: bool,

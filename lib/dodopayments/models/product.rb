@@ -4,6 +4,11 @@ module Dodopayments
   module Models
     # @see Dodopayments::Resources::Products#create
     class Product < Dodopayments::Internal::Type::BaseModel
+      # @!attribute brand_id
+      #
+      #   @return [String]
+      required :brand_id, String
+
       # @!attribute business_id
       #   Unique identifier for the business to which the product belongs.
       #
@@ -93,9 +98,11 @@ module Dodopayments
       #   @return [String, nil]
       optional :name, String, nil?: true
 
-      # @!method initialize(business_id:, created_at:, is_recurring:, license_key_enabled:, price:, product_id:, tax_category:, updated_at:, addons: nil, description: nil, image: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, name: nil)
+      # @!method initialize(brand_id:, business_id:, created_at:, is_recurring:, license_key_enabled:, price:, product_id:, tax_category:, updated_at:, addons: nil, description: nil, image: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, name: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Product} for more details.
+      #
+      #   @param brand_id [String]
       #
       #   @param business_id [String] Unique identifier for the business to which the product belongs.
       #

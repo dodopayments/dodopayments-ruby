@@ -9,6 +9,12 @@ module Dodopayments
       #   @return [Dodopayments::Models::BillingAddress]
       required :billing, -> { Dodopayments::BillingAddress }
 
+      # @!attribute brand_id
+      #   brand id this payment belongs to
+      #
+      #   @return [String]
+      required :brand_id, String
+
       # @!attribute business_id
       #   Identifier of the business associated with the payment
       #
@@ -167,11 +173,13 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(billing:, business_id:, created_at:, currency:, customer:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, discount_id: nil, error_message: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, discount_id: nil, error_message: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
       #   @param billing [Dodopayments::Models::BillingAddress]
+      #
+      #   @param brand_id [String] brand id this payment belongs to
       #
       #   @param business_id [String] Identifier of the business associated with the payment
       #

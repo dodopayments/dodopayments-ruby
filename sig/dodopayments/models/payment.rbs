@@ -3,6 +3,7 @@ module Dodopayments
     type payment =
       {
         billing: Dodopayments::BillingAddress,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         currency: Dodopayments::Models::currency,
@@ -33,6 +34,8 @@ module Dodopayments
 
     class Payment < Dodopayments::Internal::Type::BaseModel
       attr_accessor billing: Dodopayments::BillingAddress
+
+      attr_accessor brand_id: String
 
       attr_accessor business_id: String
 
@@ -88,6 +91,7 @@ module Dodopayments
 
       def initialize: (
         billing: Dodopayments::BillingAddress,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         currency: Dodopayments::Models::currency,
@@ -118,6 +122,7 @@ module Dodopayments
 
       def to_hash: -> {
         billing: Dodopayments::BillingAddress,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         currency: Dodopayments::Models::currency,

@@ -26,6 +26,10 @@ module Dodopayments
       sig { returns(T::Hash[Symbol, String]) }
       attr_accessor :metadata
 
+      # First payment id for the subscription
+      sig { returns(String) }
+      attr_accessor :payment_id
+
       # Tax will be added to the amount and charged to the customer on each billing
       # cycle
       sig { returns(Integer) }
@@ -53,6 +57,7 @@ module Dodopayments
           addons: T::Array[Dodopayments::AddonCartResponseItem::OrHash],
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
           metadata: T::Hash[Symbol, String],
+          payment_id: String,
           recurring_pre_tax_amount: Integer,
           subscription_id: String,
           client_secret: T.nilable(String),
@@ -65,6 +70,8 @@ module Dodopayments
         addons:,
         customer:,
         metadata:,
+        # First payment id for the subscription
+        payment_id:,
         # Tax will be added to the amount and charged to the customer on each billing
         # cycle
         recurring_pre_tax_amount:,
@@ -86,6 +93,7 @@ module Dodopayments
             addons: T::Array[Dodopayments::AddonCartResponseItem],
             customer: Dodopayments::CustomerLimitedDetails,
             metadata: T::Hash[Symbol, String],
+            payment_id: String,
             recurring_pre_tax_amount: Integer,
             subscription_id: String,
             client_secret: T.nilable(String),
