@@ -33,16 +33,12 @@ module Dodopayments
       sig do
         params(
           customer_id: String,
-          name: T.nilable(String),
-          phone_number: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Customer)
       end
       def update(
         # Customer Id
         customer_id,
-        name: nil,
-        phone_number: nil,
         request_options: {}
       )
       end

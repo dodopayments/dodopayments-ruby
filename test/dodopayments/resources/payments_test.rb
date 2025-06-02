@@ -56,6 +56,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         card_network: String | nil,
         card_type: String | nil,
         discount_id: String | nil,
+        error_code: String | nil,
         error_message: String | nil,
         payment_link: String | nil,
         payment_method: String | nil,

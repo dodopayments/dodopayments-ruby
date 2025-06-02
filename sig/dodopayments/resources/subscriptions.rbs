@@ -48,10 +48,6 @@ module Dodopayments
 
       def change_plan: (
         String subscription_id,
-        product_id: String,
-        proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode,
-        quantity: Integer,
-        ?addons: ::Array[Dodopayments::SubscriptionChangePlanParams::Addon]?,
         ?request_options: Dodopayments::request_opts
       ) -> nil
 

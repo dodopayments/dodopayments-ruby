@@ -86,6 +86,10 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_id
 
+      # An error code if the payment failed
+      sig { returns(T.nilable(String)) }
+      attr_accessor :error_code
+
       # An error message if the payment failed
       sig { returns(T.nilable(String)) }
       attr_accessor :error_message
@@ -147,6 +151,7 @@ module Dodopayments
           card_network: T.nilable(String),
           card_type: T.nilable(String),
           discount_id: T.nilable(String),
+          error_code: T.nilable(String),
           error_message: T.nilable(String),
           payment_link: T.nilable(String),
           payment_method: T.nilable(String),
@@ -195,6 +200,8 @@ module Dodopayments
         card_type: nil,
         # The discount id if discount is applied
         discount_id: nil,
+        # An error code if the payment failed
+        error_code: nil,
         # An error message if the payment failed
         error_message: nil,
         # Checkout URL
@@ -241,6 +248,7 @@ module Dodopayments
             card_network: T.nilable(String),
             card_type: T.nilable(String),
             discount_id: T.nilable(String),
+            error_code: T.nilable(String),
             error_message: T.nilable(String),
             payment_link: T.nilable(String),
             payment_method: T.nilable(String),
