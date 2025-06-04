@@ -45,9 +45,13 @@ module Dodopayments
         )
       end
 
-      # @overload update(customer_id, request_options: {})
+      # @overload update(customer_id, name: nil, phone_number: nil, request_options: {})
       #
       # @param customer_id [String] Customer Id
+      #
+      # @param name [String, nil]
+      #
+      # @param phone_number [String, nil]
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -55,11 +59,13 @@ module Dodopayments
       #
       # @see Dodopayments::Models::CustomerUpdateParams
       def update(customer_id, params = {})
+        parsed, options = Dodopayments::CustomerUpdateParams.dump_request(params)
         @client.request(
           method: :patch,
           path: ["customers/%1$s", customer_id],
+          body: parsed,
           model: Dodopayments::Customer,
-          options: params[:request_options]
+          options: options
         )
       end
 

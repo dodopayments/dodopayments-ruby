@@ -142,8 +142,14 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
     end
   end
 
-  def test_change_plan
-    response = @dodo_payments.subscriptions.change_plan("subscription_id")
+  def test_change_plan_required_params
+    response =
+      @dodo_payments.subscriptions.change_plan(
+        "subscription_id",
+        product_id: "product_id",
+        proration_billing_mode: :prorated_immediately,
+        quantity: 0
+      )
 
     assert_pattern do
       response => nil

@@ -14,18 +14,129 @@ module Dodopayments
           )
         end
 
+      # Unique identifier of the product to subscribe to
+      sig { returns(String) }
+      attr_accessor :product_id
+
       sig do
-        params(request_options: Dodopayments::RequestOptions::OrHash).returns(
-          T.attached_class
+        returns(
+          Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::OrSymbol
         )
       end
-      def self.new(request_options: {})
+      attr_accessor :proration_billing_mode
+
+      # Number of units to subscribe for. Must be at least 1.
+      sig { returns(Integer) }
+      attr_accessor :quantity
+
+      # Addons for the new plan. Note : Leaving this empty would remove any existing
+      # addons
+      sig do
+        returns(
+          T.nilable(T::Array[Dodopayments::SubscriptionChangePlanParams::Addon])
+        )
+      end
+      attr_accessor :addons
+
+      sig do
+        params(
+          product_id: String,
+          proration_billing_mode:
+            Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::OrSymbol,
+          quantity: Integer,
+          addons:
+            T.nilable(
+              T::Array[
+                Dodopayments::SubscriptionChangePlanParams::Addon::OrHash
+              ]
+            ),
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
+      end
+      def self.new(
+        # Unique identifier of the product to subscribe to
+        product_id:,
+        proration_billing_mode:,
+        # Number of units to subscribe for. Must be at least 1.
+        quantity:,
+        # Addons for the new plan. Note : Leaving this empty would remove any existing
+        # addons
+        addons: nil,
+        request_options: {}
+      )
       end
 
       sig do
-        override.returns({ request_options: Dodopayments::RequestOptions })
+        override.returns(
+          {
+            product_id: String,
+            proration_billing_mode:
+              Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::OrSymbol,
+            quantity: Integer,
+            addons:
+              T.nilable(
+                T::Array[Dodopayments::SubscriptionChangePlanParams::Addon]
+              ),
+            request_options: Dodopayments::RequestOptions
+          }
+        )
       end
       def to_hash
+      end
+
+      module ProrationBillingMode
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(
+              Symbol,
+              Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode
+            )
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        PRORATED_IMMEDIATELY =
+          T.let(
+            :prorated_immediately,
+            Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
+      end
+
+      class Addon < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::SubscriptionChangePlanParams::Addon,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        sig { returns(String) }
+        attr_accessor :addon_id
+
+        sig { returns(Integer) }
+        attr_accessor :quantity
+
+        sig do
+          params(addon_id: String, quantity: Integer).returns(T.attached_class)
+        end
+        def self.new(addon_id:, quantity:)
+        end
+
+        sig { override.returns({ addon_id: String, quantity: Integer }) }
+        def to_hash
+        end
       end
     end
   end

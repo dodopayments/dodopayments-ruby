@@ -1,15 +1,28 @@
 module Dodopayments
   module Models
     type customer_update_params =
-      {  } & Dodopayments::Internal::Type::request_parameters
+      { name: String?, phone_number: String? }
+      & Dodopayments::Internal::Type::request_parameters
 
     class CustomerUpdateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      def initialize: (?request_options: Dodopayments::request_opts) -> void
+      attr_accessor name: String?
 
-      def to_hash: -> { request_options: Dodopayments::RequestOptions }
+      attr_accessor phone_number: String?
+
+      def initialize: (
+        ?name: String?,
+        ?phone_number: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        name: String?,
+        phone_number: String?,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

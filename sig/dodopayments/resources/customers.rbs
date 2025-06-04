@@ -17,6 +17,8 @@ module Dodopayments
 
       def update: (
         String customer_id,
+        ?name: String?,
+        ?phone_number: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Customer
 
