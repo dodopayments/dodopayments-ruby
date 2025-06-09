@@ -12,6 +12,11 @@ module Dodopayments
       #   @return [Dodopayments::Models::BillingAddress, nil]
       optional :billing, -> { Dodopayments::BillingAddress }, nil?: true
 
+      # @!attribute cancel_at_next_billing_date
+      #
+      #   @return [Boolean, nil]
+      optional :cancel_at_next_billing_date, Dodopayments::Internal::Type::Boolean, nil?: true
+
       # @!attribute disable_on_demand
       #
       #   @return [Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, nil]
@@ -32,8 +37,9 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(billing: nil, disable_on_demand: nil, metadata: nil, status: nil, tax_id: nil, request_options: {})
+      # @!method initialize(billing: nil, cancel_at_next_billing_date: nil, disable_on_demand: nil, metadata: nil, status: nil, tax_id: nil, request_options: {})
       #   @param billing [Dodopayments::Models::BillingAddress, nil]
+      #   @param cancel_at_next_billing_date [Boolean, nil]
       #   @param disable_on_demand [Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, nil]
       #   @param metadata [Hash{Symbol=>String}, nil]
       #   @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil]

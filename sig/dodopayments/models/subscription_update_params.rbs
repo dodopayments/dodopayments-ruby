@@ -3,6 +3,7 @@ module Dodopayments
     type subscription_update_params =
       {
         billing: Dodopayments::BillingAddress?,
+        cancel_at_next_billing_date: bool?,
         disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         metadata: ::Hash[Symbol, String]?,
         status: Dodopayments::Models::subscription_status?,
@@ -16,6 +17,8 @@ module Dodopayments
 
       attr_accessor billing: Dodopayments::BillingAddress?
 
+      attr_accessor cancel_at_next_billing_date: bool?
+
       attr_accessor disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?
 
       attr_accessor metadata: ::Hash[Symbol, String]?
@@ -26,6 +29,7 @@ module Dodopayments
 
       def initialize: (
         ?billing: Dodopayments::BillingAddress?,
+        ?cancel_at_next_billing_date: bool?,
         ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         ?metadata: ::Hash[Symbol, String]?,
         ?status: Dodopayments::Models::subscription_status?,
@@ -35,6 +39,7 @@ module Dodopayments
 
       def to_hash: -> {
         billing: Dodopayments::BillingAddress?,
+        cancel_at_next_billing_date: bool?,
         disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         metadata: ::Hash[Symbol, String]?,
         status: Dodopayments::Models::subscription_status?,

@@ -72,11 +72,13 @@ module Dodopayments
         )
       end
 
-      # @overload update(subscription_id, billing: nil, disable_on_demand: nil, metadata: nil, status: nil, tax_id: nil, request_options: {})
+      # @overload update(subscription_id, billing: nil, cancel_at_next_billing_date: nil, disable_on_demand: nil, metadata: nil, status: nil, tax_id: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
       # @param billing [Dodopayments::Models::BillingAddress, nil]
+      #
+      # @param cancel_at_next_billing_date [Boolean, nil]
       #
       # @param disable_on_demand [Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, nil]
       #

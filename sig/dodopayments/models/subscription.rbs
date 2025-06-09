@@ -4,6 +4,7 @@ module Dodopayments
       {
         addons: ::Array[Dodopayments::AddonCartResponseItem],
         billing: Dodopayments::BillingAddress,
+        cancel_at_next_billing_date: bool,
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
@@ -30,6 +31,8 @@ module Dodopayments
       attr_accessor addons: ::Array[Dodopayments::AddonCartResponseItem]
 
       attr_accessor billing: Dodopayments::BillingAddress
+
+      attr_accessor cancel_at_next_billing_date: bool
 
       attr_accessor created_at: Time
 
@@ -74,6 +77,7 @@ module Dodopayments
       def initialize: (
         addons: ::Array[Dodopayments::AddonCartResponseItem],
         billing: Dodopayments::BillingAddress,
+        cancel_at_next_billing_date: bool,
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
@@ -99,6 +103,7 @@ module Dodopayments
       def to_hash: -> {
         addons: ::Array[Dodopayments::AddonCartResponseItem],
         billing: Dodopayments::BillingAddress,
+        cancel_at_next_billing_date: bool,
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,

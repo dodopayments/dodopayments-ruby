@@ -43,7 +43,13 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :page_size, Integer, nil?: true
 
-      # @!method initialize(created_at_gte: nil, created_at_lte: nil, limit: nil, object_id_: nil, page_number: nil, page_size: nil, request_options: {})
+      # @!attribute webhook_id
+      #   Filter by webhook destination
+      #
+      #   @return [String, nil]
+      optional :webhook_id, String, nil?: true
+
+      # @!method initialize(created_at_gte: nil, created_at_lte: nil, limit: nil, object_id_: nil, page_number: nil, page_size: nil, webhook_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::WebhookEventListParams} for more details.
       #
@@ -58,6 +64,8 @@ module Dodopayments
       #   @param page_number [Integer, nil] Page number default is 0
       #
       #   @param page_size [Integer, nil] Page size default is 10 max is 100
+      #
+      #   @param webhook_id [String, nil] Filter by webhook destination
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end

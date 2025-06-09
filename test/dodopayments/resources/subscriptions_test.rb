@@ -42,6 +42,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
       response => {
         addons: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::AddonCartResponseItem]),
         billing: Dodopayments::BillingAddress,
+        cancel_at_next_billing_date: Dodopayments::Internal::Type::Boolean,
         created_at: Time,
         currency: Dodopayments::Currency,
         customer: Dodopayments::CustomerLimitedDetails,
@@ -77,6 +78,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
       response => {
         addons: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::AddonCartResponseItem]),
         billing: Dodopayments::BillingAddress,
+        cancel_at_next_billing_date: Dodopayments::Internal::Type::Boolean,
         created_at: Time,
         currency: Dodopayments::Currency,
         customer: Dodopayments::CustomerLimitedDetails,
@@ -118,6 +120,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
     assert_pattern do
       row => {
         billing: Dodopayments::BillingAddress,
+        cancel_at_next_billing_date: Dodopayments::Internal::Type::Boolean,
         created_at: Time,
         currency: Dodopayments::Currency,
         customer: Dodopayments::CustomerLimitedDetails,

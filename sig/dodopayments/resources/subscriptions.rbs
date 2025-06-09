@@ -28,6 +28,7 @@ module Dodopayments
       def update: (
         String subscription_id,
         ?billing: Dodopayments::BillingAddress?,
+        ?cancel_at_next_billing_date: bool?,
         ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         ?metadata: ::Hash[Symbol, String]?,
         ?status: Dodopayments::Models::subscription_status?,

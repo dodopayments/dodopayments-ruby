@@ -7,7 +7,8 @@ module Dodopayments
         limit: Integer?,
         object_id_: String?,
         page_number: Integer?,
-        page_size: Integer?
+        page_size: Integer?,
+        webhook_id: String?
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -27,6 +28,8 @@ module Dodopayments
 
       attr_accessor page_size: Integer?
 
+      attr_accessor webhook_id: String?
+
       def initialize: (
         ?created_at_gte: Time?,
         ?created_at_lte: Time?,
@@ -34,6 +37,7 @@ module Dodopayments
         ?object_id_: String?,
         ?page_number: Integer?,
         ?page_size: Integer?,
+        ?webhook_id: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
@@ -44,6 +48,7 @@ module Dodopayments
         object_id_: String?,
         page_number: Integer?,
         page_size: Integer?,
+        webhook_id: String?,
         request_options: Dodopayments::RequestOptions
       }
     end

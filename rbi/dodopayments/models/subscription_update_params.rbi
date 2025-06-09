@@ -22,6 +22,9 @@ module Dodopayments
       end
       attr_writer :billing
 
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_accessor :cancel_at_next_billing_date
+
       sig do
         returns(
           T.nilable(Dodopayments::SubscriptionUpdateParams::DisableOnDemand)
@@ -51,6 +54,7 @@ module Dodopayments
       sig do
         params(
           billing: T.nilable(Dodopayments::BillingAddress::OrHash),
+          cancel_at_next_billing_date: T.nilable(T::Boolean),
           disable_on_demand:
             T.nilable(
               Dodopayments::SubscriptionUpdateParams::DisableOnDemand::OrHash
@@ -63,6 +67,7 @@ module Dodopayments
       end
       def self.new(
         billing: nil,
+        cancel_at_next_billing_date: nil,
         disable_on_demand: nil,
         metadata: nil,
         status: nil,
@@ -75,6 +80,7 @@ module Dodopayments
         override.returns(
           {
             billing: T.nilable(Dodopayments::BillingAddress),
+            cancel_at_next_billing_date: T.nilable(T::Boolean),
             disable_on_demand:
               T.nilable(
                 Dodopayments::SubscriptionUpdateParams::DisableOnDemand

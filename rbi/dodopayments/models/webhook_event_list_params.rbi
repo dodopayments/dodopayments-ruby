@@ -38,6 +38,10 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :page_size
 
+      # Filter by webhook destination
+      sig { returns(T.nilable(String)) }
+      attr_accessor :webhook_id
+
       sig do
         params(
           created_at_gte: T.nilable(Time),
@@ -46,6 +50,7 @@ module Dodopayments
           object_id_: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
+          webhook_id: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -62,6 +67,8 @@ module Dodopayments
         page_number: nil,
         # Page size default is 10 max is 100
         page_size: nil,
+        # Filter by webhook destination
+        webhook_id: nil,
         request_options: {}
       )
       end
@@ -75,6 +82,7 @@ module Dodopayments
             object_id_: T.nilable(String),
             page_number: T.nilable(Integer),
             page_size: T.nilable(Integer),
+            webhook_id: T.nilable(String),
             request_options: Dodopayments::RequestOptions
           }
         )

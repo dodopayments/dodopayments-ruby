@@ -17,6 +17,10 @@ module Dodopayments
       sig { params(billing: Dodopayments::BillingAddress::OrHash).void }
       attr_writer :billing
 
+      # Indicates if the subscription will cancel at the next billing date
+      sig { returns(T::Boolean) }
+      attr_accessor :cancel_at_next_billing_date
+
       # Timestamp when the subscription was created
       sig { returns(Time) }
       attr_accessor :created_at
@@ -102,6 +106,7 @@ module Dodopayments
       sig do
         params(
           billing: Dodopayments::BillingAddress::OrHash,
+          cancel_at_next_billing_date: T::Boolean,
           created_at: Time,
           currency: Dodopayments::Currency::OrSymbol,
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
@@ -126,6 +131,8 @@ module Dodopayments
       end
       def self.new(
         billing:,
+        # Indicates if the subscription will cancel at the next billing date
+        cancel_at_next_billing_date:,
         # Timestamp when the subscription was created
         created_at:,
         currency:,
@@ -169,6 +176,7 @@ module Dodopayments
         override.returns(
           {
             billing: Dodopayments::BillingAddress,
+            cancel_at_next_billing_date: T::Boolean,
             created_at: Time,
             currency: Dodopayments::Currency::TaggedSymbol,
             customer: Dodopayments::CustomerLimitedDetails,

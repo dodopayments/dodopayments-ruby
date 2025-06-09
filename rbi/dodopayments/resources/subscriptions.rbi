@@ -90,6 +90,7 @@ module Dodopayments
         params(
           subscription_id: String,
           billing: T.nilable(Dodopayments::BillingAddress::OrHash),
+          cancel_at_next_billing_date: T.nilable(T::Boolean),
           disable_on_demand:
             T.nilable(
               Dodopayments::SubscriptionUpdateParams::DisableOnDemand::OrHash
@@ -104,6 +105,7 @@ module Dodopayments
         # Subscription Id
         subscription_id,
         billing: nil,
+        cancel_at_next_billing_date: nil,
         disable_on_demand: nil,
         metadata: nil,
         status: nil,

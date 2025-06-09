@@ -3,6 +3,7 @@ module Dodopayments
     type subscription_list_response =
       {
         billing: Dodopayments::BillingAddress,
+        cancel_at_next_billing_date: bool,
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
@@ -27,6 +28,8 @@ module Dodopayments
 
     class SubscriptionListResponse < Dodopayments::Internal::Type::BaseModel
       attr_accessor billing: Dodopayments::BillingAddress
+
+      attr_accessor cancel_at_next_billing_date: bool
 
       attr_accessor created_at: Time
 
@@ -70,6 +73,7 @@ module Dodopayments
 
       def initialize: (
         billing: Dodopayments::BillingAddress,
+        cancel_at_next_billing_date: bool,
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
@@ -94,6 +98,7 @@ module Dodopayments
 
       def to_hash: -> {
         billing: Dodopayments::BillingAddress,
+        cancel_at_next_billing_date: bool,
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,

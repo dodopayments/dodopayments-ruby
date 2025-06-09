@@ -20,6 +20,7 @@ module Dodopayments
           object_id_: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
+          webhook_id: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::DefaultPageNumberPagination[
@@ -40,6 +41,8 @@ module Dodopayments
         page_number: nil,
         # Page size default is 10 max is 100
         page_size: nil,
+        # Filter by webhook destination
+        webhook_id: nil,
         request_options: {}
       )
       end
