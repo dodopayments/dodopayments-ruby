@@ -54,6 +54,7 @@ module Dodopayments
         extend Dodopayments::Internal::Type::Enum
 
         PRORATED_IMMEDIATELY = :prorated_immediately
+        FULL_IMMEDIATELY = :full_immediately
 
         # @!method self.values
         #   @return [Array<Symbol>]

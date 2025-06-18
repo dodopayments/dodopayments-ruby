@@ -137,6 +137,8 @@ module Dodopayments
 
   class ProductUnarchiveParams = Dodopayments::Models::ProductUnarchiveParams
 
+  class ProductUpdateFilesParams = Dodopayments::Models::ProductUpdateFilesParams
+
   class ProductUpdateParams = Dodopayments::Models::ProductUpdateParams
 
   class Refund = Dodopayments::Models::Refund

@@ -51,6 +51,17 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :description
 
+      sig { returns(T.nilable(Dodopayments::Product::DigitalProductDelivery)) }
+      attr_reader :digital_product_delivery
+
+      sig do
+        params(
+          digital_product_delivery:
+            T.nilable(Dodopayments::Product::DigitalProductDelivery::OrHash)
+        ).void
+      end
+      attr_writer :digital_product_delivery
+
       # URL of the product image, optional.
       sig { returns(T.nilable(String)) }
       attr_accessor :image
@@ -95,6 +106,8 @@ module Dodopayments
           updated_at: Time,
           addons: T.nilable(T::Array[String]),
           description: T.nilable(String),
+          digital_product_delivery:
+            T.nilable(Dodopayments::Product::DigitalProductDelivery::OrHash),
           image: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
@@ -125,6 +138,7 @@ module Dodopayments
         addons: nil,
         # Description of the product, optional.
         description: nil,
+        digital_product_delivery: nil,
         # URL of the product image, optional.
         image: nil,
         # Message sent upon license key activation, if applicable.
@@ -151,6 +165,8 @@ module Dodopayments
             updated_at: Time,
             addons: T.nilable(T::Array[String]),
             description: T.nilable(String),
+            digital_product_delivery:
+              T.nilable(Dodopayments::Product::DigitalProductDelivery),
             image: T.nilable(String),
             license_key_activation_message: T.nilable(String),
             license_key_activations_limit: T.nilable(Integer),
@@ -160,6 +176,106 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      class DigitalProductDelivery < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::Product::DigitalProductDelivery,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        # External URL to digital product
+        sig { returns(T.nilable(String)) }
+        attr_accessor :external_url
+
+        # Uploaded files ids of digital product
+        sig do
+          returns(
+            T.nilable(
+              T::Array[Dodopayments::Product::DigitalProductDelivery::File]
+            )
+          )
+        end
+        attr_accessor :files
+
+        # Instructions to download and use the digital product
+        sig { returns(T.nilable(String)) }
+        attr_accessor :instructions
+
+        sig do
+          params(
+            external_url: T.nilable(String),
+            files:
+              T.nilable(
+                T::Array[
+                  Dodopayments::Product::DigitalProductDelivery::File::OrHash
+                ]
+              ),
+            instructions: T.nilable(String)
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # External URL to digital product
+          external_url: nil,
+          # Uploaded files ids of digital product
+          files: nil,
+          # Instructions to download and use the digital product
+          instructions: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              external_url: T.nilable(String),
+              files:
+                T.nilable(
+                  T::Array[Dodopayments::Product::DigitalProductDelivery::File]
+                ),
+              instructions: T.nilable(String)
+            }
+          )
+        end
+        def to_hash
+        end
+
+        class File < Dodopayments::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Dodopayments::Product::DigitalProductDelivery::File,
+                Dodopayments::Internal::AnyHash
+              )
+            end
+
+          sig { returns(String) }
+          attr_accessor :file_id
+
+          sig { returns(String) }
+          attr_accessor :file_name
+
+          sig { returns(String) }
+          attr_accessor :url
+
+          sig do
+            params(file_id: String, file_name: String, url: String).returns(
+              T.attached_class
+            )
+          end
+          def self.new(file_id:, file_name:, url:)
+          end
+
+          sig do
+            override.returns(
+              { file_id: String, file_name: String, url: String }
+            )
+          end
+          def to_hash
+          end
+        end
       end
     end
   end

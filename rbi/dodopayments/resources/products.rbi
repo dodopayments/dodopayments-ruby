@@ -17,6 +17,10 @@ module Dodopayments
           addons: T.nilable(T::Array[String]),
           brand_id: T.nilable(String),
           description: T.nilable(String),
+          digital_product_delivery:
+            T.nilable(
+              Dodopayments::ProductCreateParams::DigitalProductDelivery::OrHash
+            ),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
           license_key_duration:
@@ -37,6 +41,7 @@ module Dodopayments
         brand_id: nil,
         # Optional description of the product
         description: nil,
+        digital_product_delivery: nil,
         # Optional message displayed during license key activation
         license_key_activation_message: nil,
         # The number of times the license key can be activated. Must be 0 or greater
@@ -69,6 +74,10 @@ module Dodopayments
           addons: T.nilable(T::Array[String]),
           brand_id: T.nilable(String),
           description: T.nilable(String),
+          digital_product_delivery:
+            T.nilable(
+              Dodopayments::ProductUpdateParams::DigitalProductDelivery::OrHash
+            ),
           image_id: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
@@ -94,6 +103,7 @@ module Dodopayments
         brand_id: nil,
         # Description of the product, optional and must be at most 1000 characters.
         description: nil,
+        digital_product_delivery: nil,
         # Product image id after its uploaded to S3
         image_id: nil,
         # Message sent to the customer upon license key activation.
@@ -171,6 +181,21 @@ module Dodopayments
         ).void
       end
       def unarchive(id, request_options: {})
+      end
+
+      sig do
+        params(
+          id: String,
+          file_name: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Models::ProductUpdateFilesResponse)
+      end
+      def update_files(
+        # Product Id
+        id,
+        file_name:,
+        request_options: {}
+      )
       end
 
       # @api private

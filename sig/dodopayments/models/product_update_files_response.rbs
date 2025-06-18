@@ -1,0 +1,15 @@
+module Dodopayments
+  module Models
+    type product_update_files_response = { file_id: String, url: String }
+
+    class ProductUpdateFilesResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor file_id: String
+
+      attr_accessor url: String
+
+      def initialize: (file_id: String, url: String) -> void
+
+      def to_hash: -> { file_id: String, url: String }
+    end
+  end
+end

@@ -101,6 +101,11 @@ module Dodopayments
             :prorated_immediately,
             Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::TaggedSymbol
           )
+        FULL_IMMEDIATELY =
+          T.let(
+            :full_immediately,
+            Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::TaggedSymbol
+          )
 
         sig do
           override.returns(

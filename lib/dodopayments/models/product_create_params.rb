@@ -37,6 +37,13 @@ module Dodopayments
       #   @return [String, nil]
       optional :description, String, nil?: true
 
+      # @!attribute digital_product_delivery
+      #
+      #   @return [Dodopayments::Models::ProductCreateParams::DigitalProductDelivery, nil]
+      optional :digital_product_delivery,
+               -> { Dodopayments::ProductCreateParams::DigitalProductDelivery },
+               nil?: true
+
       # @!attribute license_key_activation_message
       #   Optional message displayed during license key activation
       #
@@ -66,7 +73,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :name, String, nil?: true
 
-      # @!method initialize(price:, tax_category:, addons: nil, brand_id: nil, description: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, request_options: {})
+      # @!method initialize(price:, tax_category:, addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductCreateParams} for more details.
       #
@@ -80,6 +87,8 @@ module Dodopayments
       #
       #   @param description [String, nil] Optional description of the product
       #
+      #   @param digital_product_delivery [Dodopayments::Models::ProductCreateParams::DigitalProductDelivery, nil]
+      #
       #   @param license_key_activation_message [String, nil] Optional message displayed during license key activation
       #
       #   @param license_key_activations_limit [Integer, nil] The number of times the license key can be activated.
@@ -91,6 +100,25 @@ module Dodopayments
       #   @param name [String, nil] Optional name of the product
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
+
+      class DigitalProductDelivery < Dodopayments::Internal::Type::BaseModel
+        # @!attribute external_url
+        #   External URL to digital product
+        #
+        #   @return [String, nil]
+        optional :external_url, String, nil?: true
+
+        # @!attribute instructions
+        #   Instructions to download and use the digital product
+        #
+        #   @return [String, nil]
+        optional :instructions, String, nil?: true
+
+        # @!method initialize(external_url: nil, instructions: nil)
+        #   @param external_url [String, nil] External URL to digital product
+        #
+        #   @param instructions [String, nil] Instructions to download and use the digital product
+      end
     end
   end
 end

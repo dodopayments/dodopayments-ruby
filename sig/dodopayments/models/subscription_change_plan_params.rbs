@@ -37,12 +37,13 @@ module Dodopayments
         request_options: Dodopayments::RequestOptions
       }
 
-      type proration_billing_mode = :prorated_immediately
+      type proration_billing_mode = :prorated_immediately | :full_immediately
 
       module ProrationBillingMode
         extend Dodopayments::Internal::Type::Enum
 
         PRORATED_IMMEDIATELY: :prorated_immediately
+        FULL_IMMEDIATELY: :full_immediately
 
         def self?.values: -> ::Array[Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode]
       end

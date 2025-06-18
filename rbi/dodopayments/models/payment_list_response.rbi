@@ -28,6 +28,9 @@ module Dodopayments
       end
       attr_writer :customer
 
+      sig { returns(T::Boolean) }
+      attr_accessor :digital_products_delivered
+
       sig { returns(T::Hash[Symbol, String]) }
       attr_accessor :metadata
 
@@ -55,6 +58,7 @@ module Dodopayments
           created_at: Time,
           currency: Dodopayments::Currency::OrSymbol,
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
+          digital_products_delivered: T::Boolean,
           metadata: T::Hash[Symbol, String],
           payment_id: String,
           total_amount: Integer,
@@ -69,6 +73,7 @@ module Dodopayments
         created_at:,
         currency:,
         customer:,
+        digital_products_delivered:,
         metadata:,
         payment_id:,
         total_amount:,
@@ -86,6 +91,7 @@ module Dodopayments
             created_at: Time,
             currency: Dodopayments::Currency::TaggedSymbol,
             customer: Dodopayments::CustomerLimitedDetails,
+            digital_products_delivered: T::Boolean,
             metadata: T::Hash[Symbol, String],
             payment_id: String,
             total_amount: Integer,

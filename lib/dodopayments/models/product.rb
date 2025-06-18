@@ -69,6 +69,11 @@ module Dodopayments
       #   @return [String, nil]
       optional :description, String, nil?: true
 
+      # @!attribute digital_product_delivery
+      #
+      #   @return [Dodopayments::Models::Product::DigitalProductDelivery, nil]
+      optional :digital_product_delivery, -> { Dodopayments::Product::DigitalProductDelivery }, nil?: true
+
       # @!attribute image
       #   URL of the product image, optional.
       #
@@ -98,7 +103,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :name, String, nil?: true
 
-      # @!method initialize(brand_id:, business_id:, created_at:, is_recurring:, license_key_enabled:, price:, product_id:, tax_category:, updated_at:, addons: nil, description: nil, image: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, name: nil)
+      # @!method initialize(brand_id:, business_id:, created_at:, is_recurring:, license_key_enabled:, price:, product_id:, tax_category:, updated_at:, addons: nil, description: nil, digital_product_delivery: nil, image: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, name: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Product} for more details.
       #
@@ -124,6 +129,8 @@ module Dodopayments
       #
       #   @param description [String, nil] Description of the product, optional.
       #
+      #   @param digital_product_delivery [Dodopayments::Models::Product::DigitalProductDelivery, nil]
+      #
       #   @param image [String, nil] URL of the product image, optional.
       #
       #   @param license_key_activation_message [String, nil] Message sent upon license key activation, if applicable.
@@ -133,6 +140,60 @@ module Dodopayments
       #   @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil]
       #
       #   @param name [String, nil] Name of the product, optional.
+
+      # @see Dodopayments::Models::Product#digital_product_delivery
+      class DigitalProductDelivery < Dodopayments::Internal::Type::BaseModel
+        # @!attribute external_url
+        #   External URL to digital product
+        #
+        #   @return [String, nil]
+        optional :external_url, String, nil?: true
+
+        # @!attribute files
+        #   Uploaded files ids of digital product
+        #
+        #   @return [Array<Dodopayments::Models::Product::DigitalProductDelivery::File>, nil]
+        optional :files,
+                 -> {
+                   Dodopayments::Internal::Type::ArrayOf[Dodopayments::Product::DigitalProductDelivery::File]
+                 },
+                 nil?: true
+
+        # @!attribute instructions
+        #   Instructions to download and use the digital product
+        #
+        #   @return [String, nil]
+        optional :instructions, String, nil?: true
+
+        # @!method initialize(external_url: nil, files: nil, instructions: nil)
+        #   @param external_url [String, nil] External URL to digital product
+        #
+        #   @param files [Array<Dodopayments::Models::Product::DigitalProductDelivery::File>, nil] Uploaded files ids of digital product
+        #
+        #   @param instructions [String, nil] Instructions to download and use the digital product
+
+        class File < Dodopayments::Internal::Type::BaseModel
+          # @!attribute file_id
+          #
+          #   @return [String]
+          required :file_id, String
+
+          # @!attribute file_name
+          #
+          #   @return [String]
+          required :file_name, String
+
+          # @!attribute url
+          #
+          #   @return [String]
+          required :url, String
+
+          # @!method initialize(file_id:, file_name:, url:)
+          #   @param file_id [String]
+          #   @param file_name [String]
+          #   @param url [String]
+        end
+      end
     end
   end
 end

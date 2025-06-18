@@ -24,6 +24,13 @@ module Dodopayments
       #   @return [String, nil]
       optional :description, String, nil?: true
 
+      # @!attribute digital_product_delivery
+      #
+      #   @return [Dodopayments::Models::ProductUpdateParams::DigitalProductDelivery, nil]
+      optional :digital_product_delivery,
+               -> { Dodopayments::ProductUpdateParams::DigitalProductDelivery },
+               nil?: true
+
       # @!attribute image_id
       #   Product image id after its uploaded to S3
       #
@@ -80,7 +87,7 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::TaxCategory, nil]
       optional :tax_category, enum: -> { Dodopayments::TaxCategory }, nil?: true
 
-      # @!method initialize(addons: nil, brand_id: nil, description: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      # @!method initialize(addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, price: nil, tax_category: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductUpdateParams} for more details.
       #
@@ -89,6 +96,8 @@ module Dodopayments
       #   @param brand_id [String, nil]
       #
       #   @param description [String, nil] Description of the product, optional and must be at most 1000 characters.
+      #
+      #   @param digital_product_delivery [Dodopayments::Models::ProductUpdateParams::DigitalProductDelivery, nil]
       #
       #   @param image_id [String, nil] Product image id after its uploaded to S3
       #
@@ -107,6 +116,33 @@ module Dodopayments
       #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory, nil] Represents the different categories of taxation applicable to various products a
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
+
+      class DigitalProductDelivery < Dodopayments::Internal::Type::BaseModel
+        # @!attribute external_url
+        #   External URL to digital product
+        #
+        #   @return [String, nil]
+        optional :external_url, String, nil?: true
+
+        # @!attribute files
+        #   Uploaded files ids of digital product
+        #
+        #   @return [Array<String>, nil]
+        optional :files, Dodopayments::Internal::Type::ArrayOf[String], nil?: true
+
+        # @!attribute instructions
+        #   Instructions to download and use the digital product
+        #
+        #   @return [String, nil]
+        optional :instructions, String, nil?: true
+
+        # @!method initialize(external_url: nil, files: nil, instructions: nil)
+        #   @param external_url [String, nil] External URL to digital product
+        #
+        #   @param files [Array<String>, nil] Uploaded files ids of digital product
+        #
+        #   @param instructions [String, nil] Instructions to download and use the digital product
+      end
     end
   end
 end

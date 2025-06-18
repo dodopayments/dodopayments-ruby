@@ -5,6 +5,7 @@ module Dodopayments
         addons: ::Array[String]?,
         brand_id: String?,
         description: String?,
+        digital_product_delivery: Dodopayments::ProductUpdateParams::DigitalProductDelivery?,
         image_id: String?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
@@ -26,6 +27,8 @@ module Dodopayments
 
       attr_accessor description: String?
 
+      attr_accessor digital_product_delivery: Dodopayments::ProductUpdateParams::DigitalProductDelivery?
+
       attr_accessor image_id: String?
 
       attr_accessor license_key_activation_message: String?
@@ -46,6 +49,7 @@ module Dodopayments
         ?addons: ::Array[String]?,
         ?brand_id: String?,
         ?description: String?,
+        ?digital_product_delivery: Dodopayments::ProductUpdateParams::DigitalProductDelivery?,
         ?image_id: String?,
         ?license_key_activation_message: String?,
         ?license_key_activations_limit: Integer?,
@@ -61,6 +65,7 @@ module Dodopayments
         addons: ::Array[String]?,
         brand_id: String?,
         description: String?,
+        digital_product_delivery: Dodopayments::ProductUpdateParams::DigitalProductDelivery?,
         image_id: String?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
@@ -71,6 +76,33 @@ module Dodopayments
         tax_category: Dodopayments::Models::tax_category?,
         request_options: Dodopayments::RequestOptions
       }
+
+      type digital_product_delivery =
+        {
+          external_url: String?,
+          files: ::Array[String]?,
+          instructions: String?
+        }
+
+      class DigitalProductDelivery < Dodopayments::Internal::Type::BaseModel
+        attr_accessor external_url: String?
+
+        attr_accessor files: ::Array[String]?
+
+        attr_accessor instructions: String?
+
+        def initialize: (
+          ?external_url: String?,
+          ?files: ::Array[String]?,
+          ?instructions: String?
+        ) -> void
+
+        def to_hash: -> {
+          external_url: String?,
+          files: ::Array[String]?,
+          instructions: String?
+        }
+      end
     end
   end
 end

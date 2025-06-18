@@ -13,6 +13,7 @@ module Dodopayments
         updated_at: Time,
         addons: ::Array[String]?,
         description: String?,
+        digital_product_delivery: Dodopayments::Product::DigitalProductDelivery?,
         image: String?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
@@ -43,6 +44,8 @@ module Dodopayments
 
       attr_accessor description: String?
 
+      attr_accessor digital_product_delivery: Dodopayments::Product::DigitalProductDelivery?
+
       attr_accessor image: String?
 
       attr_accessor license_key_activation_message: String?
@@ -65,6 +68,7 @@ module Dodopayments
         updated_at: Time,
         ?addons: ::Array[String]?,
         ?description: String?,
+        ?digital_product_delivery: Dodopayments::Product::DigitalProductDelivery?,
         ?image: String?,
         ?license_key_activation_message: String?,
         ?license_key_activations_limit: Integer?,
@@ -84,12 +88,58 @@ module Dodopayments
         updated_at: Time,
         addons: ::Array[String]?,
         description: String?,
+        digital_product_delivery: Dodopayments::Product::DigitalProductDelivery?,
         image: String?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
         license_key_duration: Dodopayments::LicenseKeyDuration?,
         name: String?
       }
+
+      type digital_product_delivery =
+        {
+          external_url: String?,
+          files: ::Array[Dodopayments::Product::DigitalProductDelivery::File]?,
+          instructions: String?
+        }
+
+      class DigitalProductDelivery < Dodopayments::Internal::Type::BaseModel
+        attr_accessor external_url: String?
+
+        attr_accessor files: ::Array[Dodopayments::Product::DigitalProductDelivery::File]?
+
+        attr_accessor instructions: String?
+
+        def initialize: (
+          ?external_url: String?,
+          ?files: ::Array[Dodopayments::Product::DigitalProductDelivery::File]?,
+          ?instructions: String?
+        ) -> void
+
+        def to_hash: -> {
+          external_url: String?,
+          files: ::Array[Dodopayments::Product::DigitalProductDelivery::File]?,
+          instructions: String?
+        }
+
+        type file = { file_id: String, file_name: String, url: String }
+
+        class File < Dodopayments::Internal::Type::BaseModel
+          attr_accessor file_id: String
+
+          attr_accessor file_name: String
+
+          attr_accessor url: String
+
+          def initialize: (
+            file_id: String,
+            file_name: String,
+            url: String
+          ) -> void
+
+          def to_hash: -> { file_id: String, file_name: String, url: String }
+        end
+      end
     end
   end
 end

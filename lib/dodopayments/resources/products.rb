@@ -9,7 +9,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductCreateParams} for more details.
       #
-      # @overload create(price:, tax_category:, addons: nil, brand_id: nil, description: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, request_options: {})
+      # @overload create(price:, tax_category:, addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, request_options: {})
       #
       # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
       #
@@ -20,6 +20,8 @@ module Dodopayments
       # @param brand_id [String, nil] Brand id for the product, if not provided will default to primary brand
       #
       # @param description [String, nil] Optional description of the product
+      #
+      # @param digital_product_delivery [Dodopayments::Models::ProductCreateParams::DigitalProductDelivery, nil]
       #
       # @param license_key_activation_message [String, nil] Optional message displayed during license key activation
       #
@@ -68,7 +70,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductUpdateParams} for more details.
       #
-      # @overload update(id, addons: nil, brand_id: nil, description: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      # @overload update(id, addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, price: nil, tax_category: nil, request_options: {})
       #
       # @param id [String]
       #
@@ -77,6 +79,8 @@ module Dodopayments
       # @param brand_id [String, nil]
       #
       # @param description [String, nil] Description of the product, optional and must be at most 1000 characters.
+      #
+      # @param digital_product_delivery [Dodopayments::Models::ProductUpdateParams::DigitalProductDelivery, nil]
       #
       # @param image_id [String, nil] Product image id after its uploaded to S3
       #
@@ -173,6 +177,28 @@ module Dodopayments
           path: ["products/%1$s/unarchive", id],
           model: NilClass,
           options: params[:request_options]
+        )
+      end
+
+      # @overload update_files(id, file_name:, request_options: {})
+      #
+      # @param id [String] Product Id
+      #
+      # @param file_name [String]
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Models::ProductUpdateFilesResponse]
+      #
+      # @see Dodopayments::Models::ProductUpdateFilesParams
+      def update_files(id, params)
+        parsed, options = Dodopayments::ProductUpdateFilesParams.dump_request(params)
+        @client.request(
+          method: :put,
+          path: ["products/%1$s/files", id],
+          body: parsed,
+          model: Dodopayments::Models::ProductUpdateFilesResponse,
+          options: options
         )
       end
 

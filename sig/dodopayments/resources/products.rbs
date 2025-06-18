@@ -9,6 +9,7 @@ module Dodopayments
         ?addons: ::Array[String]?,
         ?brand_id: String?,
         ?description: String?,
+        ?digital_product_delivery: Dodopayments::ProductCreateParams::DigitalProductDelivery?,
         ?license_key_activation_message: String?,
         ?license_key_activations_limit: Integer?,
         ?license_key_duration: Dodopayments::LicenseKeyDuration?,
@@ -27,6 +28,7 @@ module Dodopayments
         ?addons: ::Array[String]?,
         ?brand_id: String?,
         ?description: String?,
+        ?digital_product_delivery: Dodopayments::ProductUpdateParams::DigitalProductDelivery?,
         ?image_id: String?,
         ?license_key_activation_message: String?,
         ?license_key_activations_limit: Integer?,
@@ -56,6 +58,12 @@ module Dodopayments
         String id,
         ?request_options: Dodopayments::request_opts
       ) -> nil
+
+      def update_files: (
+        String id,
+        file_name: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::ProductUpdateFilesResponse
 
       def initialize: (client: Dodopayments::Client) -> void
     end

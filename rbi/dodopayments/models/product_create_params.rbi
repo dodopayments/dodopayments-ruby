@@ -41,6 +41,23 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :description
 
+      sig do
+        returns(
+          T.nilable(Dodopayments::ProductCreateParams::DigitalProductDelivery)
+        )
+      end
+      attr_reader :digital_product_delivery
+
+      sig do
+        params(
+          digital_product_delivery:
+            T.nilable(
+              Dodopayments::ProductCreateParams::DigitalProductDelivery::OrHash
+            )
+        ).void
+      end
+      attr_writer :digital_product_delivery
+
       # Optional message displayed during license key activation
       sig { returns(T.nilable(String)) }
       attr_accessor :license_key_activation_message
@@ -79,6 +96,10 @@ module Dodopayments
           addons: T.nilable(T::Array[String]),
           brand_id: T.nilable(String),
           description: T.nilable(String),
+          digital_product_delivery:
+            T.nilable(
+              Dodopayments::ProductCreateParams::DigitalProductDelivery::OrHash
+            ),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
           license_key_duration:
@@ -99,6 +120,7 @@ module Dodopayments
         brand_id: nil,
         # Optional description of the product
         description: nil,
+        digital_product_delivery: nil,
         # Optional message displayed during license key activation
         license_key_activation_message: nil,
         # The number of times the license key can be activated. Must be 0 or greater
@@ -124,6 +146,10 @@ module Dodopayments
             addons: T.nilable(T::Array[String]),
             brand_id: T.nilable(String),
             description: T.nilable(String),
+            digital_product_delivery:
+              T.nilable(
+                Dodopayments::ProductCreateParams::DigitalProductDelivery
+              ),
             license_key_activation_message: T.nilable(String),
             license_key_activations_limit: T.nilable(Integer),
             license_key_duration: T.nilable(Dodopayments::LicenseKeyDuration),
@@ -134,6 +160,46 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      class DigitalProductDelivery < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::ProductCreateParams::DigitalProductDelivery,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        # External URL to digital product
+        sig { returns(T.nilable(String)) }
+        attr_accessor :external_url
+
+        # Instructions to download and use the digital product
+        sig { returns(T.nilable(String)) }
+        attr_accessor :instructions
+
+        sig do
+          params(
+            external_url: T.nilable(String),
+            instructions: T.nilable(String)
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # External URL to digital product
+          external_url: nil,
+          # Instructions to download and use the digital product
+          instructions: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            { external_url: T.nilable(String), instructions: T.nilable(String) }
+          )
+        end
+        def to_hash
+        end
       end
     end
   end

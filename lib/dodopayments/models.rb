@@ -177,6 +177,8 @@ module Dodopayments
 
   ProductUnarchiveParams = Dodopayments::Models::ProductUnarchiveParams
 
+  ProductUpdateFilesParams = Dodopayments::Models::ProductUpdateFilesParams
+
   ProductUpdateParams = Dodopayments::Models::ProductUpdateParams
 
   Refund = Dodopayments::Models::Refund

@@ -27,6 +27,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         updated_at: Time,
         addons: ^(Dodopayments::Internal::Type::ArrayOf[String]) | nil,
         description: String | nil,
+        digital_product_delivery: Dodopayments::Product::DigitalProductDelivery | nil,
         image: String | nil,
         license_key_activation_message: String | nil,
         license_key_activations_limit: Integer | nil,
@@ -56,6 +57,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         updated_at: Time,
         addons: ^(Dodopayments::Internal::Type::ArrayOf[String]) | nil,
         description: String | nil,
+        digital_product_delivery: Dodopayments::Product::DigitalProductDelivery | nil,
         image: String | nil,
         license_key_activation_message: String | nil,
         license_key_activations_limit: Integer | nil,
@@ -119,6 +121,21 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
 
     assert_pattern do
       response => nil
+    end
+  end
+
+  def test_update_files_required_params
+    response = @dodo_payments.products.update_files("id", file_name: "file_name")
+
+    assert_pattern do
+      response => Dodopayments::Models::ProductUpdateFilesResponse
+    end
+
+    assert_pattern do
+      response => {
+        file_id: String,
+        url: String
+      }
     end
   end
 end

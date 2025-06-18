@@ -6,6 +6,7 @@ module Dodopayments
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
+        digital_products_delivered: bool,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,
@@ -23,6 +24,8 @@ module Dodopayments
       attr_accessor currency: Dodopayments::Models::currency
 
       attr_accessor customer: Dodopayments::CustomerLimitedDetails
+
+      attr_accessor digital_products_delivered: bool
 
       attr_accessor metadata: ::Hash[Symbol, String]
 
@@ -43,6 +46,7 @@ module Dodopayments
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
+        digital_products_delivered: bool,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,
@@ -57,6 +61,7 @@ module Dodopayments
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
+        digital_products_delivered: bool,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,

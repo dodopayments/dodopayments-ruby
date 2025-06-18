@@ -37,6 +37,12 @@ module Dodopayments
       #   @return [Dodopayments::Models::CustomerLimitedDetails]
       required :customer, -> { Dodopayments::CustomerLimitedDetails }
 
+      # @!attribute digital_products_delivered
+      #   brand id this payment belongs to
+      #
+      #   @return [Boolean]
+      required :digital_products_delivered, Dodopayments::Internal::Type::Boolean
+
       # @!attribute disputes
       #   List of disputes associated with this payment
       #
@@ -179,7 +185,7 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, discount_id: nil, error_code: nil, error_message: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, discount_id: nil, error_code: nil, error_message: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
@@ -194,6 +200,8 @@ module Dodopayments
       #   @param currency [Symbol, Dodopayments::Models::Currency]
       #
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
+      #
+      #   @param digital_products_delivered [Boolean] brand id this payment belongs to
       #
       #   @param disputes [Array<Dodopayments::Models::Dispute>] List of disputes associated with this payment
       #

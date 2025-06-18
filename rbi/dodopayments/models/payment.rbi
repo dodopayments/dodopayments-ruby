@@ -37,6 +37,10 @@ module Dodopayments
       end
       attr_writer :customer
 
+      # brand id this payment belongs to
+      sig { returns(T::Boolean) }
+      attr_accessor :digital_products_delivered
+
       # List of disputes associated with this payment
       sig { returns(T::Array[Dodopayments::Dispute]) }
       attr_accessor :disputes
@@ -139,6 +143,7 @@ module Dodopayments
           created_at: Time,
           currency: Dodopayments::Currency::OrSymbol,
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
+          digital_products_delivered: T::Boolean,
           disputes: T::Array[Dodopayments::Dispute::OrHash],
           metadata: T::Hash[Symbol, String],
           payment_id: String,
@@ -175,6 +180,8 @@ module Dodopayments
         created_at:,
         currency:,
         customer:,
+        # brand id this payment belongs to
+        digital_products_delivered:,
         # List of disputes associated with this payment
         disputes:,
         metadata:,
@@ -235,6 +242,7 @@ module Dodopayments
             created_at: Time,
             currency: Dodopayments::Currency::TaggedSymbol,
             customer: Dodopayments::CustomerLimitedDetails,
+            digital_products_delivered: T::Boolean,
             disputes: T::Array[Dodopayments::Dispute],
             metadata: T::Hash[Symbol, String],
             payment_id: String,

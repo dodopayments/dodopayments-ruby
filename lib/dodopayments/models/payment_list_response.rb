@@ -24,6 +24,11 @@ module Dodopayments
       #   @return [Dodopayments::Models::CustomerLimitedDetails]
       required :customer, -> { Dodopayments::CustomerLimitedDetails }
 
+      # @!attribute digital_products_delivered
+      #
+      #   @return [Boolean]
+      required :digital_products_delivered, Dodopayments::Internal::Type::Boolean
+
       # @!attribute metadata
       #
       #   @return [Hash{Symbol=>String}]
@@ -59,11 +64,12 @@ module Dodopayments
       #   @return [String, nil]
       optional :subscription_id, String, nil?: true
 
-      # @!method initialize(brand_id:, created_at:, currency:, customer:, metadata:, payment_id:, total_amount:, payment_method: nil, payment_method_type: nil, status: nil, subscription_id: nil)
+      # @!method initialize(brand_id:, created_at:, currency:, customer:, digital_products_delivered:, metadata:, payment_id:, total_amount:, payment_method: nil, payment_method_type: nil, status: nil, subscription_id: nil)
       #   @param brand_id [String]
       #   @param created_at [Time]
       #   @param currency [Symbol, Dodopayments::Models::Currency]
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
+      #   @param digital_products_delivered [Boolean]
       #   @param metadata [Hash{Symbol=>String}]
       #   @param payment_id [String]
       #   @param total_amount [Integer]

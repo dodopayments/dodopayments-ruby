@@ -8,6 +8,7 @@ module Dodopayments
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
+        digital_products_delivered: bool,
         disputes: ::Array[Dodopayments::Dispute],
         metadata: ::Hash[Symbol, String],
         payment_id: String,
@@ -45,6 +46,8 @@ module Dodopayments
       attr_accessor currency: Dodopayments::Models::currency
 
       attr_accessor customer: Dodopayments::CustomerLimitedDetails
+
+      attr_accessor digital_products_delivered: bool
 
       attr_accessor disputes: ::Array[Dodopayments::Dispute]
 
@@ -99,6 +102,7 @@ module Dodopayments
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
+        digital_products_delivered: bool,
         disputes: ::Array[Dodopayments::Dispute],
         metadata: ::Hash[Symbol, String],
         payment_id: String,
@@ -131,6 +135,7 @@ module Dodopayments
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
+        digital_products_delivered: bool,
         disputes: ::Array[Dodopayments::Dispute],
         metadata: ::Hash[Symbol, String],
         payment_id: String,

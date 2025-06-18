@@ -25,6 +25,23 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :description
 
+      sig do
+        returns(
+          T.nilable(Dodopayments::ProductUpdateParams::DigitalProductDelivery)
+        )
+      end
+      attr_reader :digital_product_delivery
+
+      sig do
+        params(
+          digital_product_delivery:
+            T.nilable(
+              Dodopayments::ProductUpdateParams::DigitalProductDelivery::OrHash
+            )
+        ).void
+      end
+      attr_writer :digital_product_delivery
+
       # Product image id after its uploaded to S3
       sig { returns(T.nilable(String)) }
       attr_accessor :image_id
@@ -87,6 +104,10 @@ module Dodopayments
           addons: T.nilable(T::Array[String]),
           brand_id: T.nilable(String),
           description: T.nilable(String),
+          digital_product_delivery:
+            T.nilable(
+              Dodopayments::ProductUpdateParams::DigitalProductDelivery::OrHash
+            ),
           image_id: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
@@ -111,6 +132,7 @@ module Dodopayments
         brand_id: nil,
         # Description of the product, optional and must be at most 1000 characters.
         description: nil,
+        digital_product_delivery: nil,
         # Product image id after its uploaded to S3
         image_id: nil,
         # Message sent to the customer upon license key activation.
@@ -145,6 +167,10 @@ module Dodopayments
             addons: T.nilable(T::Array[String]),
             brand_id: T.nilable(String),
             description: T.nilable(String),
+            digital_product_delivery:
+              T.nilable(
+                Dodopayments::ProductUpdateParams::DigitalProductDelivery
+              ),
             image_id: T.nilable(String),
             license_key_activation_message: T.nilable(String),
             license_key_activations_limit: T.nilable(Integer),
@@ -164,6 +190,57 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      class DigitalProductDelivery < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::ProductUpdateParams::DigitalProductDelivery,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        # External URL to digital product
+        sig { returns(T.nilable(String)) }
+        attr_accessor :external_url
+
+        # Uploaded files ids of digital product
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_accessor :files
+
+        # Instructions to download and use the digital product
+        sig { returns(T.nilable(String)) }
+        attr_accessor :instructions
+
+        sig do
+          params(
+            external_url: T.nilable(String),
+            files: T.nilable(T::Array[String]),
+            instructions: T.nilable(String)
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # External URL to digital product
+          external_url: nil,
+          # Uploaded files ids of digital product
+          files: nil,
+          # Instructions to download and use the digital product
+          instructions: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              external_url: T.nilable(String),
+              files: T.nilable(T::Array[String]),
+              instructions: T.nilable(String)
+            }
+          )
+        end
+        def to_hash
+        end
       end
     end
   end
