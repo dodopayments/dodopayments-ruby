@@ -14,6 +14,7 @@ module Dodopayments
       required :product_id, String
 
       # @!attribute proration_billing_mode
+      #   Proration Billing Mode
       #
       #   @return [Symbol, Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode]
       required :proration_billing_mode,
@@ -42,7 +43,7 @@ module Dodopayments
       #
       #   @param product_id [String] Unique identifier of the product to subscribe to
       #
-      #   @param proration_billing_mode [Symbol, Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode]
+      #   @param proration_billing_mode [Symbol, Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode] Proration Billing Mode
       #
       #   @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
@@ -50,6 +51,7 @@ module Dodopayments
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 
+      # Proration Billing Mode
       module ProrationBillingMode
         extend Dodopayments::Internal::Type::Enum
 

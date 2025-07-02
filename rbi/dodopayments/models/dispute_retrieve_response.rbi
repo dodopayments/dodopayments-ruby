@@ -28,6 +28,7 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :currency
 
+      # The customer who filed the dispute
       sig { returns(Dodopayments::CustomerLimitedDetails) }
       attr_reader :customer
 
@@ -40,9 +41,11 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :dispute_id
 
+      # The current stage of the dispute process.
       sig { returns(Dodopayments::DisputeStage::TaggedSymbol) }
       attr_accessor :dispute_stage
 
+      # The current status of the dispute.
       sig { returns(Dodopayments::DisputeStatus::TaggedSymbol) }
       attr_accessor :dispute_status
 
@@ -83,10 +86,13 @@ module Dodopayments
         created_at:,
         # The currency of the disputed amount, represented as an ISO 4217 currency code.
         currency:,
+        # The customer who filed the dispute
         customer:,
         # The unique identifier of the dispute.
         dispute_id:,
+        # The current stage of the dispute process.
         dispute_stage:,
+        # The current status of the dispute.
         dispute_status:,
         # The unique identifier of the payment associated with the dispute.
         payment_id:,

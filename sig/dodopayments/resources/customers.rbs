@@ -23,8 +23,9 @@ module Dodopayments
       ) -> Dodopayments::Customer
 
       def list: (
-        ?page_number: Integer?,
-        ?page_size: Integer?,
+        ?email: String,
+        ?page_number: Integer,
+        ?page_size: Integer,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Customer]
 

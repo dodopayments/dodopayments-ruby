@@ -16,11 +16,14 @@ module Dodopayments
           end
 
         sig { returns(T.nilable(T::Boolean)) }
-        attr_accessor :force_update
+        attr_reader :force_update
+
+        sig { params(force_update: T::Boolean).void }
+        attr_writer :force_update
 
         sig do
           params(
-            force_update: T.nilable(T::Boolean),
+            force_update: T::Boolean,
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -30,7 +33,7 @@ module Dodopayments
         sig do
           override.returns(
             {
-              force_update: T.nilable(T::Boolean),
+              force_update: T::Boolean,
               request_options: Dodopayments::RequestOptions
             }
           )

@@ -8,19 +8,19 @@ module Dodopayments
       #
       # @overload create(billing:, customer:, product_cart:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, metadata: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
       #
-      # @param billing [Dodopayments::Models::BillingAddress]
+      # @param billing [Dodopayments::Models::BillingAddress] Billing address details for the payment
       #
-      # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
+      # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer] Customer information for the payment
       #
       # @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>] List of products in the cart. Must contain at least 1 and at most 100 items.
       #
       # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout.
       #
-      # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil]
+      # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Fix the currency in which the end customer is billed.
       #
       # @param discount_code [String, nil] Discount Code to apply to the transaction
       #
-      # @param metadata [Hash{Symbol=>String}]
+      # @param metadata [Hash{Symbol=>String}] Additional metadata associated with the payment.
       #
       # @param payment_link [Boolean, nil] Whether to generate a payment link. Defaults to false if not specified.
       #
@@ -66,21 +66,21 @@ module Dodopayments
 
       # @overload list(brand_id: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, subscription_id: nil, request_options: {})
       #
-      # @param brand_id [String, nil] filter by Brand id
+      # @param brand_id [String] filter by Brand id
       #
-      # @param created_at_gte [Time, nil] Get events after this created time
+      # @param created_at_gte [Time] Get events after this created time
       #
-      # @param created_at_lte [Time, nil] Get events created before this time
+      # @param created_at_lte [Time] Get events created before this time
       #
-      # @param customer_id [String, nil] Filter by customer id
+      # @param customer_id [String] Filter by customer id
       #
-      # @param page_number [Integer, nil] Page number default is 0
+      # @param page_number [Integer] Page number default is 0
       #
-      # @param page_size [Integer, nil] Page size default is 10 max is 100
+      # @param page_size [Integer] Page size default is 10 max is 100
       #
-      # @param status [Symbol, Dodopayments::Models::IntentStatus, nil] Filter by status
+      # @param status [Symbol, Dodopayments::Models::PaymentListParams::Status] Filter by status
       #
-      # @param subscription_id [String, nil] Filter by subscription id
+      # @param subscription_id [String] Filter by subscription id
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

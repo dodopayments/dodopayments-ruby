@@ -7,13 +7,13 @@ module Dodopayments
       ) -> Dodopayments::Models::DisputeRetrieveResponse
 
       def list: (
-        ?created_at_gte: Time?,
-        ?created_at_lte: Time?,
-        ?customer_id: String?,
-        ?dispute_stage: Dodopayments::Models::dispute_stage?,
-        ?dispute_status: Dodopayments::Models::dispute_status?,
-        ?page_number: Integer?,
-        ?page_size: Integer?,
+        ?created_at_gte: Time,
+        ?created_at_lte: Time,
+        ?customer_id: String,
+        ?dispute_stage: Dodopayments::Models::DisputeListParams::dispute_stage,
+        ?dispute_status: Dodopayments::Models::DisputeListParams::dispute_status,
+        ?page_number: Integer,
+        ?page_size: Integer,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::DisputeListResponse]
 

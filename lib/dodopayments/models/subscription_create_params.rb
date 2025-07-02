@@ -8,11 +8,13 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute billing
+      #   Billing address information for the subscription
       #
       #   @return [Dodopayments::Models::BillingAddress]
       required :billing, -> { Dodopayments::BillingAddress }
 
       # @!attribute customer
+      #   Customer details for the subscription
       #
       #   @return [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
       required :customer, union: -> { Dodopayments::CustomerRequest }
@@ -53,6 +55,8 @@ module Dodopayments
                nil?: true
 
       # @!attribute billing_currency
+      #   Fix the currency in which the end customer is billed. If Dodo Payments cannot
+      #   support that currency for this transaction, it will not proceed
       #
       #   @return [Symbol, Dodopayments::Models::Currency, nil]
       optional :billing_currency, enum: -> { Dodopayments::Currency }, nil?: true
@@ -64,6 +68,7 @@ module Dodopayments
       optional :discount_code, String, nil?: true
 
       # @!attribute metadata
+      #   Additional metadata for the subscription Defaults to empty if not specified
       #
       #   @return [Hash{Symbol=>String}, nil]
       optional :metadata, Dodopayments::Internal::Type::HashOf[String]
@@ -109,9 +114,9 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionCreateParams} for more details.
       #
-      #   @param billing [Dodopayments::Models::BillingAddress]
+      #   @param billing [Dodopayments::Models::BillingAddress] Billing address information for the subscription
       #
-      #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
+      #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer] Customer details for the subscription
       #
       #   @param product_id [String] Unique identifier of the product to subscribe to
       #
@@ -121,11 +126,11 @@ module Dodopayments
       #
       #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout.
       #
-      #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil]
+      #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Fix the currency in which the end customer is billed.
       #
       #   @param discount_code [String, nil] Discount Code to apply to the subscription
       #
-      #   @param metadata [Hash{Symbol=>String}]
+      #   @param metadata [Hash{Symbol=>String}] Additional metadata for the subscription
       #
       #   @param on_demand [Dodopayments::Models::SubscriptionCreateParams::OnDemand, nil]
       #

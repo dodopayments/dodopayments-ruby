@@ -27,6 +27,7 @@ module Dodopayments
       sig { returns(Time) }
       attr_accessor :created_at
 
+      # The currency of the payout, represented as an ISO 4217 currency code.
       sig { returns(Dodopayments::Currency::TaggedSymbol) }
       attr_accessor :currency
 
@@ -46,6 +47,7 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :refunds
 
+      # The current status of the payout.
       sig do
         returns(Dodopayments::Models::PayoutListResponse::Status::TaggedSymbol)
       end
@@ -99,6 +101,7 @@ module Dodopayments
         chargebacks:,
         # The timestamp when the payout was created, in UTC.
         created_at:,
+        # The currency of the payout, represented as an ISO 4217 currency code.
         currency:,
         # The fee charged for processing the payout.
         fee:,
@@ -108,6 +111,7 @@ module Dodopayments
         payout_id:,
         # The total value of refunds associated with the payout.
         refunds:,
+        # The current status of the payout.
         status:,
         # The tax applied to the payout.
         tax:,
@@ -147,6 +151,7 @@ module Dodopayments
       def to_hash
       end
 
+      # The current status of the payout.
       module Status
         extend Dodopayments::Internal::Type::Enum
 

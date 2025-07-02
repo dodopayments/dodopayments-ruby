@@ -10,6 +10,7 @@ module Dodopayments
         subscription_id: String,
         client_secret: String?,
         discount_id: String?,
+        expires_on: Time?,
         payment_link: String?
       }
 
@@ -30,6 +31,8 @@ module Dodopayments
 
       attr_accessor discount_id: String?
 
+      attr_accessor expires_on: Time?
+
       attr_accessor payment_link: String?
 
       def initialize: (
@@ -41,6 +44,7 @@ module Dodopayments
         subscription_id: String,
         ?client_secret: String?,
         ?discount_id: String?,
+        ?expires_on: Time?,
         ?payment_link: String?
       ) -> void
 
@@ -53,6 +57,7 @@ module Dodopayments
         subscription_id: String,
         client_secret: String?,
         discount_id: String?,
+        expires_on: Time?,
         payment_link: String?
       }
     end

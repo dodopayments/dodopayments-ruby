@@ -22,14 +22,14 @@ module Dodopayments
       ) -> Dodopayments::Payment
 
       def list: (
-        ?brand_id: String?,
-        ?created_at_gte: Time?,
-        ?created_at_lte: Time?,
-        ?customer_id: String?,
-        ?page_number: Integer?,
-        ?page_size: Integer?,
-        ?status: Dodopayments::Models::intent_status?,
-        ?subscription_id: String?,
+        ?brand_id: String,
+        ?created_at_gte: Time,
+        ?created_at_lte: Time,
+        ?customer_id: String,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?status: Dodopayments::Models::PaymentListParams::status,
+        ?subscription_id: String,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::PaymentListResponse]
 

@@ -15,6 +15,7 @@ module Dodopayments
       sig { returns(T::Array[Dodopayments::AddonCartResponseItem]) }
       attr_accessor :addons
 
+      # Customer details associated with this subscription
       sig { returns(Dodopayments::CustomerLimitedDetails) }
       attr_reader :customer
 
@@ -23,6 +24,7 @@ module Dodopayments
       end
       attr_writer :customer
 
+      # Additional metadata associated with the subscription
       sig { returns(T::Hash[Symbol, String]) }
       attr_accessor :metadata
 
@@ -48,6 +50,10 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_id
 
+      # Expiry timestamp of the payment link
+      sig { returns(T.nilable(Time)) }
+      attr_accessor :expires_on
+
       # URL to checkout page
       sig { returns(T.nilable(String)) }
       attr_accessor :payment_link
@@ -62,13 +68,16 @@ module Dodopayments
           subscription_id: String,
           client_secret: T.nilable(String),
           discount_id: T.nilable(String),
+          expires_on: T.nilable(Time),
           payment_link: T.nilable(String)
         ).returns(T.attached_class)
       end
       def self.new(
         # Addons associated with this subscription
         addons:,
+        # Customer details associated with this subscription
         customer:,
+        # Additional metadata associated with the subscription
         metadata:,
         # First payment id for the subscription
         payment_id:,
@@ -82,6 +91,8 @@ module Dodopayments
         client_secret: nil,
         # The discount id if discount is applied
         discount_id: nil,
+        # Expiry timestamp of the payment link
+        expires_on: nil,
         # URL to checkout page
         payment_link: nil
       )
@@ -98,6 +109,7 @@ module Dodopayments
             subscription_id: String,
             client_secret: T.nilable(String),
             discount_id: T.nilable(String),
+            expires_on: T.nilable(Time),
             payment_link: T.nilable(String)
           }
         )

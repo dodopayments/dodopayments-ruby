@@ -53,6 +53,7 @@ module Dodopayments
       required :product_id, String
 
       # @!attribute status
+      #   The current status of the license key (e.g., active, inactive, expired).
       #
       #   @return [Symbol, Dodopayments::Models::LicenseKeyStatus]
       required :status, enum: -> { Dodopayments::LicenseKeyStatus }
@@ -96,7 +97,7 @@ module Dodopayments
       #
       #   @param product_id [String] The unique identifier of the product associated with the license key.
       #
-      #   @param status [Symbol, Dodopayments::Models::LicenseKeyStatus]
+      #   @param status [Symbol, Dodopayments::Models::LicenseKeyStatus] The current status of the license key (e.g., active, inactive, expired).
       #
       #   @param activations_limit [Integer, nil] The maximum number of activations allowed for this license key.
       #

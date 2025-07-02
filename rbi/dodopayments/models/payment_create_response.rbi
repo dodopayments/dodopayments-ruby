@@ -16,6 +16,7 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :client_secret
 
+      # Limited details about the customer making the payment
       sig { returns(Dodopayments::CustomerLimitedDetails) }
       attr_reader :customer
 
@@ -24,6 +25,7 @@ module Dodopayments
       end
       attr_writer :customer
 
+      # Additional metadata associated with the payment
       sig { returns(T::Hash[Symbol, String]) }
       attr_accessor :metadata
 
@@ -38,6 +40,10 @@ module Dodopayments
       # The discount id if discount is applied
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_id
+
+      # Expiry timestamp of the payment link
+      sig { returns(T.nilable(Time)) }
+      attr_accessor :expires_on
 
       # Optional URL to a hosted payment page
       sig { returns(T.nilable(String)) }
@@ -55,6 +61,7 @@ module Dodopayments
           payment_id: String,
           total_amount: Integer,
           discount_id: T.nilable(String),
+          expires_on: T.nilable(Time),
           payment_link: T.nilable(String),
           product_cart:
             T.nilable(T::Array[Dodopayments::OneTimeProductCartItem::OrHash])
@@ -64,7 +71,9 @@ module Dodopayments
         # Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will be
         # coming soon
         client_secret:,
+        # Limited details about the customer making the payment
         customer:,
+        # Additional metadata associated with the payment
         metadata:,
         # Unique identifier for the payment
         payment_id:,
@@ -72,6 +81,8 @@ module Dodopayments
         total_amount:,
         # The discount id if discount is applied
         discount_id: nil,
+        # Expiry timestamp of the payment link
+        expires_on: nil,
         # Optional URL to a hosted payment page
         payment_link: nil,
         # Optional list of products included in the payment
@@ -88,6 +99,7 @@ module Dodopayments
             payment_id: String,
             total_amount: Integer,
             discount_id: T.nilable(String),
+            expires_on: T.nilable(Time),
             payment_link: T.nilable(String),
             product_cart:
               T.nilable(T::Array[Dodopayments::OneTimeProductCartItem])

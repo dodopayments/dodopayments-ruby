@@ -14,6 +14,7 @@ module Dodopayments
           )
         end
 
+      # Price configuration for the product
       sig do
         returns(
           T.any(
@@ -24,8 +25,7 @@ module Dodopayments
       end
       attr_accessor :price
 
-      # Represents the different categories of taxation applicable to various products
-      # and services.
+      # Tax category applied to this product
       sig { returns(Dodopayments::TaxCategory::OrSymbol) }
       attr_accessor :tax_category
 
@@ -41,6 +41,7 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :description
 
+      # Choose how you would like you digital product delivered
       sig do
         returns(
           T.nilable(Dodopayments::ProductCreateParams::DigitalProductDelivery)
@@ -66,6 +67,9 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :license_key_activations_limit
 
+      # Duration configuration for the license key. Set to null if you don't want the
+      # license key to expire. For subscriptions, the lifetime of the license key is
+      # tied to the subscription period
       sig { returns(T.nilable(Dodopayments::LicenseKeyDuration)) }
       attr_reader :license_key_duration
 
@@ -110,9 +114,9 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        # Price configuration for the product
         price:,
-        # Represents the different categories of taxation applicable to various products
-        # and services.
+        # Tax category applied to this product
         tax_category:,
         # Addons available for subscription product
         addons: nil,
@@ -120,11 +124,15 @@ module Dodopayments
         brand_id: nil,
         # Optional description of the product
         description: nil,
+        # Choose how you would like you digital product delivered
         digital_product_delivery: nil,
         # Optional message displayed during license key activation
         license_key_activation_message: nil,
         # The number of times the license key can be activated. Must be 0 or greater
         license_key_activations_limit: nil,
+        # Duration configuration for the license key. Set to null if you don't want the
+        # license key to expire. For subscriptions, the lifetime of the license key is
+        # tied to the subscription period
         license_key_duration: nil,
         # When true, generates and sends a license key to your customer. Defaults to false
         license_key_enabled: nil,
@@ -179,6 +187,7 @@ module Dodopayments
         sig { returns(T.nilable(String)) }
         attr_accessor :instructions
 
+        # Choose how you would like you digital product delivered
         sig do
           params(
             external_url: T.nilable(String),

@@ -6,13 +6,14 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::DiscountCreateParams} for more details.
       #
-      # If `code` is omitted or empty, a random 16-char uppercase code is generated.
+      # POST /discounts If `code` is omitted or empty, a random 16-char uppercase code
+      # is generated.
       #
       # @overload create(amount:, type:, code: nil, expires_at: nil, name: nil, restricted_to: nil, usage_limit: nil, request_options: {})
       #
       # @param amount [Integer] The discount amount.
       #
-      # @param type [Symbol, Dodopayments::Models::DiscountType]
+      # @param type [Symbol, Dodopayments::Models::DiscountType] The discount type (e.g. `percentage`, `flat`, or `flat_per_unit`).
       #
       # @param code [String, nil] Optionally supply a code (will be uppercased).
       #
@@ -79,7 +80,7 @@ module Dodopayments
       #
       # @param restricted_to [Array<String>, nil] If present, replaces all restricted product IDs with this new set.
       #
-      # @param type [Symbol, Dodopayments::Models::DiscountType, nil]
+      # @param type [Symbol, Dodopayments::Models::DiscountType, nil] If present, update the discount type.
       #
       # @param usage_limit [Integer, nil]
       #
@@ -103,9 +104,9 @@ module Dodopayments
       #
       # @overload list(page_number: nil, page_size: nil, request_options: {})
       #
-      # @param page_number [Integer, nil] Page number (default = 0).
+      # @param page_number [Integer] Page number (default = 0).
       #
-      # @param page_size [Integer, nil] Page size (default = 10, max = 100).
+      # @param page_size [Integer] Page size (default = 10, max = 100).
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

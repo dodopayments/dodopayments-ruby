@@ -69,11 +69,13 @@ module Dodopayments
         )
       end
 
-      # @overload list(page_number: nil, page_size: nil, request_options: {})
+      # @overload list(email: nil, page_number: nil, page_size: nil, request_options: {})
       #
-      # @param page_number [Integer, nil] Page number default is 0
+      # @param email [String] Filter by customer email
       #
-      # @param page_size [Integer, nil] Page size default is 10 max is 100
+      # @param page_number [Integer] Page number default is 0
+      #
+      # @param page_size [Integer] Page size default is 10 max is 100
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

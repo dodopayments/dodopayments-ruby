@@ -40,6 +40,7 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :product_id
 
+      # The current status of the license key (e.g., active, inactive, expired).
       sig { returns(Dodopayments::LicenseKeyStatus::TaggedSymbol) }
       attr_accessor :status
 
@@ -89,6 +90,7 @@ module Dodopayments
         payment_id:,
         # The unique identifier of the product associated with the license key.
         product_id:,
+        # The current status of the license key (e.g., active, inactive, expired).
         status:,
         # The maximum number of activations allowed for this license key.
         activations_limit: nil,

@@ -43,11 +43,11 @@ module Dodopayments
 
       sig do
         params(
-          customer_id: T.nilable(String),
-          page_number: T.nilable(Integer),
-          page_size: T.nilable(Integer),
-          product_id: T.nilable(String),
-          status: T.nilable(Dodopayments::LicenseKeyStatus::OrSymbol),
+          customer_id: String,
+          page_number: Integer,
+          page_size: Integer,
+          product_id: String,
+          status: Dodopayments::LicenseKeyListParams::Status::OrSymbol,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::DefaultPageNumberPagination[

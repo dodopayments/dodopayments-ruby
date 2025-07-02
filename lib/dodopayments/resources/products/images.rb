@@ -8,7 +8,7 @@ module Dodopayments
         #
         # @param id [String] Product Id
         #
-        # @param force_update [Boolean, nil]
+        # @param force_update [Boolean]
         #
         # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
         #

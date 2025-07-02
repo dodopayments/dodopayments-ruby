@@ -14,12 +14,12 @@ module Dodopayments
       ) -> Dodopayments::Refund
 
       def list: (
-        ?created_at_gte: Time?,
-        ?created_at_lte: Time?,
-        ?customer_id: String?,
-        ?page_number: Integer?,
-        ?page_size: Integer?,
-        ?status: Dodopayments::Models::refund_status?,
+        ?created_at_gte: Time,
+        ?created_at_lte: Time,
+        ?customer_id: String,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?status: Dodopayments::Models::RefundListParams::status,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Refund]
 

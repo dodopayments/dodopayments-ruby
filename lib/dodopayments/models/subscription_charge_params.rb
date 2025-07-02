@@ -15,6 +15,8 @@ module Dodopayments
       required :product_price, Integer
 
       # @!attribute metadata
+      #   Metadata for the payment. If not passed, the metadata of the subscription will
+      #   be taken
       #
       #   @return [Hash{Symbol=>String}, nil]
       optional :metadata, Dodopayments::Internal::Type::HashOf[String], nil?: true
@@ -25,7 +27,7 @@ module Dodopayments
       #
       #   @param product_price [Integer] The product price. Represented in the lowest denomination of the currency (e.g.,
       #
-      #   @param metadata [Hash{Symbol=>String}, nil]
+      #   @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end

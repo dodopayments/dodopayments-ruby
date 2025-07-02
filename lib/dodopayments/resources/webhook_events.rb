@@ -3,6 +3,8 @@
 module Dodopayments
   module Resources
     class WebhookEvents
+      # @deprecated
+      #
       # @overload retrieve(webhook_event_id, request_options: {})
       #
       # @param webhook_event_id [String]
@@ -23,21 +25,23 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::WebhookEventListParams} for more details.
       #
-      # @overload list(created_at_gte: nil, created_at_lte: nil, limit: nil, object_id_: nil, page_number: nil, page_size: nil, webhook_id: nil, request_options: {})
+      # @overload list(created_at_gte: nil, created_at_lte: nil, limit: nil, object_id_: nil, page_number: nil, page_size: nil, webhook_event_id: nil, webhook_id: nil, request_options: {})
       #
-      # @param created_at_gte [Time, nil] Get events after this created time
+      # @param created_at_gte [Time] Get events after this created time
       #
-      # @param created_at_lte [Time, nil] Get events created before this time
+      # @param created_at_lte [Time] Get events created before this time
       #
-      # @param limit [Integer, nil] Min : 1, Max : 100, default 10
+      # @param limit [Integer] Min : 1, Max : 100, default 10
       #
-      # @param object_id_ [String, nil] Get events history of a specific object like payment/subscription/refund/dispute
+      # @param object_id_ [String] Get events history of a specific object like payment/subscription/refund/dispute
       #
-      # @param page_number [Integer, nil] Page number default is 0
+      # @param page_number [Integer] Page number default is 0
       #
-      # @param page_size [Integer, nil] Page size default is 10 max is 100
+      # @param page_size [Integer] Page size default is 10 max is 100
       #
-      # @param webhook_id [String, nil] Filter by webhook destination
+      # @param webhook_event_id [String] Filter by webhook event id
+      #
+      # @param webhook_id [String] Filter by webhook destination
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

@@ -25,6 +25,7 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :description
 
+      # Choose how you would like you digital product delivered
       sig do
         returns(
           T.nilable(Dodopayments::ProductUpdateParams::DigitalProductDelivery)
@@ -60,6 +61,10 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :license_key_activations_limit
 
+      # Duration of the license key if enabled.
+      #
+      # Only applicable if `license_key_enabled` is `true`. Represents the duration in
+      # days for which the license key is valid.
       sig { returns(T.nilable(Dodopayments::LicenseKeyDuration)) }
       attr_reader :license_key_duration
 
@@ -82,6 +87,7 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :name
 
+      # Price details of the product.
       sig do
         returns(
           T.nilable(
@@ -94,8 +100,7 @@ module Dodopayments
       end
       attr_accessor :price
 
-      # Represents the different categories of taxation applicable to various products
-      # and services.
+      # Tax category of the product.
       sig { returns(T.nilable(Dodopayments::TaxCategory::OrSymbol)) }
       attr_accessor :tax_category
 
@@ -132,6 +137,7 @@ module Dodopayments
         brand_id: nil,
         # Description of the product, optional and must be at most 1000 characters.
         description: nil,
+        # Choose how you would like you digital product delivered
         digital_product_delivery: nil,
         # Product image id after its uploaded to S3
         image_id: nil,
@@ -145,6 +151,10 @@ module Dodopayments
         # Only applicable if `license_key_enabled` is `true`. Represents the maximum
         # number of times the license key can be activated.
         license_key_activations_limit: nil,
+        # Duration of the license key if enabled.
+        #
+        # Only applicable if `license_key_enabled` is `true`. Represents the duration in
+        # days for which the license key is valid.
         license_key_duration: nil,
         # Whether the product requires a license key.
         #
@@ -153,9 +163,9 @@ module Dodopayments
         license_key_enabled: nil,
         # Name of the product, optional and must be at most 100 characters.
         name: nil,
+        # Price details of the product.
         price: nil,
-        # Represents the different categories of taxation applicable to various products
-        # and services.
+        # Tax category of the product.
         tax_category: nil,
         request_options: {}
       )
@@ -213,6 +223,7 @@ module Dodopayments
         sig { returns(T.nilable(String)) }
         attr_accessor :instructions
 
+        # Choose how you would like you digital product delivered
         sig do
           params(
             external_url: T.nilable(String),

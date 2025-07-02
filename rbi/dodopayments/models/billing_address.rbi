@@ -12,7 +12,7 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :city
 
-      # ISO country code alpha2 variant
+      # Two-letter ISO country code (ISO 3166-1 alpha-2)
       sig { returns(Dodopayments::CountryCode::OrSymbol) }
       attr_accessor :country
 
@@ -40,7 +40,7 @@ module Dodopayments
       def self.new(
         # City name
         city:,
-        # ISO country code alpha2 variant
+        # Two-letter ISO country code (ISO 3166-1 alpha-2)
         country:,
         # State or province name
         state:,

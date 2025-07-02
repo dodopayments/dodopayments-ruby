@@ -14,13 +14,14 @@ module Dodopayments
 
       sig do
         params(
-          created_at_gte: T.nilable(Time),
-          created_at_lte: T.nilable(Time),
-          limit: T.nilable(Integer),
-          object_id_: T.nilable(String),
-          page_number: T.nilable(Integer),
-          page_size: T.nilable(Integer),
-          webhook_id: T.nilable(String),
+          created_at_gte: Time,
+          created_at_lte: Time,
+          limit: Integer,
+          object_id_: String,
+          page_number: Integer,
+          page_size: Integer,
+          webhook_event_id: String,
+          webhook_id: String,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::DefaultPageNumberPagination[
@@ -41,6 +42,8 @@ module Dodopayments
         page_number: nil,
         # Page size default is 10 max is 100
         page_size: nil,
+        # Filter by webhook event id
+        webhook_event_id: nil,
         # Filter by webhook destination
         webhook_id: nil,
         request_options: {}

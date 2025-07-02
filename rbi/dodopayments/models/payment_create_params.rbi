@@ -14,12 +14,14 @@ module Dodopayments
           )
         end
 
+      # Billing address details for the payment
       sig { returns(Dodopayments::BillingAddress) }
       attr_reader :billing
 
       sig { params(billing: Dodopayments::BillingAddress::OrHash).void }
       attr_writer :billing
 
+      # Customer information for the payment
       sig do
         returns(
           T.any(
@@ -51,6 +53,8 @@ module Dodopayments
       end
       attr_accessor :allowed_payment_method_types
 
+      # Fix the currency in which the end customer is billed. If Dodo Payments cannot
+      # support that currency for this transaction, it will not proceed
       sig { returns(T.nilable(Dodopayments::Currency::OrSymbol)) }
       attr_accessor :billing_currency
 
@@ -58,6 +62,8 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_code
 
+      # Additional metadata associated with the payment. Defaults to empty if not
+      # provided.
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_reader :metadata
 
@@ -111,7 +117,9 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        # Billing address details for the payment
         billing:,
+        # Customer information for the payment
         customer:,
         # List of products in the cart. Must contain at least 1 and at most 100 items.
         product_cart:,
@@ -122,9 +130,13 @@ module Dodopayments
         # Availability still depends on other factors (e.g., customer location, merchant
         # settings).
         allowed_payment_method_types: nil,
+        # Fix the currency in which the end customer is billed. If Dodo Payments cannot
+        # support that currency for this transaction, it will not proceed
         billing_currency: nil,
         # Discount Code to apply to the transaction
         discount_code: nil,
+        # Additional metadata associated with the payment. Defaults to empty if not
+        # provided.
         metadata: nil,
         # Whether to generate a payment link. Defaults to false if not specified.
         payment_link: nil,

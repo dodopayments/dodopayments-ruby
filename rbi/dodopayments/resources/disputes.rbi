@@ -18,13 +18,15 @@ module Dodopayments
 
       sig do
         params(
-          created_at_gte: T.nilable(Time),
-          created_at_lte: T.nilable(Time),
-          customer_id: T.nilable(String),
-          dispute_stage: T.nilable(Dodopayments::DisputeStage::OrSymbol),
-          dispute_status: T.nilable(Dodopayments::DisputeStatus::OrSymbol),
-          page_number: T.nilable(Integer),
-          page_size: T.nilable(Integer),
+          created_at_gte: Time,
+          created_at_lte: Time,
+          customer_id: String,
+          dispute_stage:
+            Dodopayments::DisputeListParams::DisputeStage::OrSymbol,
+          dispute_status:
+            Dodopayments::DisputeListParams::DisputeStatus::OrSymbol,
+          page_number: Integer,
+          page_size: Integer,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::DefaultPageNumberPagination[

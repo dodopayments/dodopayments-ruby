@@ -38,12 +38,12 @@ module Dodopayments
 
       sig do
         params(
-          created_at_gte: T.nilable(Time),
-          created_at_lte: T.nilable(Time),
-          customer_id: T.nilable(String),
-          page_number: T.nilable(Integer),
-          page_size: T.nilable(Integer),
-          status: T.nilable(Dodopayments::RefundStatus::OrSymbol),
+          created_at_gte: Time,
+          created_at_lte: Time,
+          customer_id: String,
+          page_number: Integer,
+          page_size: Integer,
+          status: Dodopayments::RefundListParams::Status::OrSymbol,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::DefaultPageNumberPagination[

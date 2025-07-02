@@ -23,15 +23,24 @@ module Dodopayments
 
       # filter by Brand id
       sig { returns(T.nilable(String)) }
-      attr_accessor :brand_id
+      attr_reader :brand_id
+
+      sig { params(brand_id: String).void }
+      attr_writer :brand_id
 
       # Page number default is 0
       sig { returns(T.nilable(Integer)) }
-      attr_accessor :page_number
+      attr_reader :page_number
+
+      sig { params(page_number: Integer).void }
+      attr_writer :page_number
 
       # Page size default is 10 max is 100
       sig { returns(T.nilable(Integer)) }
-      attr_accessor :page_size
+      attr_reader :page_size
+
+      sig { params(page_size: Integer).void }
+      attr_writer :page_size
 
       # Filter products by pricing type:
       #
@@ -39,15 +48,18 @@ module Dodopayments
       # - `false`: Show only one-time price products
       # - `null` or absent: Show both types of products
       sig { returns(T.nilable(T::Boolean)) }
-      attr_accessor :recurring
+      attr_reader :recurring
+
+      sig { params(recurring: T::Boolean).void }
+      attr_writer :recurring
 
       sig do
         params(
           archived: T::Boolean,
-          brand_id: T.nilable(String),
-          page_number: T.nilable(Integer),
-          page_size: T.nilable(Integer),
-          recurring: T.nilable(T::Boolean),
+          brand_id: String,
+          page_number: Integer,
+          page_size: Integer,
+          recurring: T::Boolean,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -74,10 +86,10 @@ module Dodopayments
         override.returns(
           {
             archived: T::Boolean,
-            brand_id: T.nilable(String),
-            page_number: T.nilable(Integer),
-            page_size: T.nilable(Integer),
-            recurring: T.nilable(T::Boolean),
+            brand_id: String,
+            page_number: Integer,
+            page_size: Integer,
+            recurring: T::Boolean,
             request_options: Dodopayments::RequestOptions
           }
         )

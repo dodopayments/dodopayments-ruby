@@ -37,7 +37,9 @@ module Dodopayments
         ).returns(Dodopayments::Models::SubscriptionCreateResponse)
       end
       def create(
+        # Billing address information for the subscription
         billing:,
+        # Customer details for the subscription
         customer:,
         # Unique identifier of the product to subscribe to
         product_id:,
@@ -52,9 +54,12 @@ module Dodopayments
         # Availability still depends on other factors (e.g., customer location, merchant
         # settings).
         allowed_payment_method_types: nil,
+        # Fix the currency in which the end customer is billed. If Dodo Payments cannot
+        # support that currency for this transaction, it will not proceed
         billing_currency: nil,
         # Discount Code to apply to the subscription
         discount_code: nil,
+        # Additional metadata for the subscription Defaults to empty if not specified
         metadata: nil,
         on_demand: nil,
         # If true, generates a payment link. Defaults to false if not specified.
@@ -116,13 +121,13 @@ module Dodopayments
 
       sig do
         params(
-          brand_id: T.nilable(String),
-          created_at_gte: T.nilable(Time),
-          created_at_lte: T.nilable(Time),
-          customer_id: T.nilable(String),
-          page_number: T.nilable(Integer),
-          page_size: T.nilable(Integer),
-          status: T.nilable(Dodopayments::SubscriptionStatus::OrSymbol),
+          brand_id: String,
+          created_at_gte: Time,
+          created_at_lte: Time,
+          customer_id: String,
+          page_number: Integer,
+          page_size: Integer,
+          status: Dodopayments::SubscriptionListParams::Status::OrSymbol,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::DefaultPageNumberPagination[
@@ -170,6 +175,7 @@ module Dodopayments
         subscription_id,
         # Unique identifier of the product to subscribe to
         product_id:,
+        # Proration Billing Mode
         proration_billing_mode:,
         # Number of units to subscribe for. Must be at least 1.
         quantity:,
@@ -194,6 +200,8 @@ module Dodopayments
         # The product price. Represented in the lowest denomination of the currency (e.g.,
         # cents for USD). For example, to charge $1.00, pass `100`.
         product_price:,
+        # Metadata for the payment. If not passed, the metadata of the subscription will
+        # be taken
         metadata: nil,
         request_options: {}
       )

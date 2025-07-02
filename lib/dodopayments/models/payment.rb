@@ -5,6 +5,7 @@ module Dodopayments
     # @see Dodopayments::Resources::Payments#retrieve
     class Payment < Dodopayments::Internal::Type::BaseModel
       # @!attribute billing
+      #   Billing address details for payments
       #
       #   @return [Dodopayments::Models::BillingAddress]
       required :billing, -> { Dodopayments::BillingAddress }
@@ -28,11 +29,13 @@ module Dodopayments
       required :created_at, Time
 
       # @!attribute currency
+      #   Currency used for the payment
       #
       #   @return [Symbol, Dodopayments::Models::Currency]
       required :currency, enum: -> { Dodopayments::Currency }
 
       # @!attribute customer
+      #   Details about the customer who made the payment
       #
       #   @return [Dodopayments::Models::CustomerLimitedDetails]
       required :customer, -> { Dodopayments::CustomerLimitedDetails }
@@ -50,6 +53,7 @@ module Dodopayments
       required :disputes, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Dispute] }
 
       # @!attribute metadata
+      #   Additional custom data associated with the payment
       #
       #   @return [Hash{Symbol=>String}]
       required :metadata, Dodopayments::Internal::Type::HashOf[String]
@@ -75,6 +79,9 @@ module Dodopayments
       required :settlement_amount, Integer
 
       # @!attribute settlement_currency
+      #   The currency in which the settlement_amount will be credited to your Dodo
+      #   balance. This may differ from the customer's payment currency in adaptive
+      #   pricing scenarios.
       #
       #   @return [Symbol, Dodopayments::Models::Currency]
       required :settlement_currency, enum: -> { Dodopayments::Currency }
@@ -87,7 +94,7 @@ module Dodopayments
       required :total_amount, Integer
 
       # @!attribute card_issuing_country
-      #   ISO country code alpha2 variant
+      #   ISO2 country code of the card
       #
       #   @return [Symbol, Dodopayments::Models::CountryCode, nil]
       optional :card_issuing_country, enum: -> { Dodopayments::CountryCode }, nil?: true
@@ -163,6 +170,7 @@ module Dodopayments
       optional :settlement_tax, Integer, nil?: true
 
       # @!attribute status
+      #   Current status of the payment intent
       #
       #   @return [Symbol, Dodopayments::Models::IntentStatus, nil]
       optional :status, enum: -> { Dodopayments::IntentStatus }, nil?: true
@@ -189,7 +197,7 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
-      #   @param billing [Dodopayments::Models::BillingAddress]
+      #   @param billing [Dodopayments::Models::BillingAddress] Billing address details for payments
       #
       #   @param brand_id [String] brand id this payment belongs to
       #
@@ -197,15 +205,15 @@ module Dodopayments
       #
       #   @param created_at [Time] Timestamp when the payment was created
       #
-      #   @param currency [Symbol, Dodopayments::Models::Currency]
+      #   @param currency [Symbol, Dodopayments::Models::Currency] Currency used for the payment
       #
-      #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
+      #   @param customer [Dodopayments::Models::CustomerLimitedDetails] Details about the customer who made the payment
       #
       #   @param digital_products_delivered [Boolean] brand id this payment belongs to
       #
       #   @param disputes [Array<Dodopayments::Models::Dispute>] List of disputes associated with this payment
       #
-      #   @param metadata [Hash{Symbol=>String}]
+      #   @param metadata [Hash{Symbol=>String}] Additional custom data associated with the payment
       #
       #   @param payment_id [String] Unique identifier for the payment
       #
@@ -213,11 +221,11 @@ module Dodopayments
       #
       #   @param settlement_amount [Integer] The amount that will be credited to your Dodo balance after currency conversion
       #
-      #   @param settlement_currency [Symbol, Dodopayments::Models::Currency]
+      #   @param settlement_currency [Symbol, Dodopayments::Models::Currency] The currency in which the settlement_amount will be credited to your Dodo balanc
       #
       #   @param total_amount [Integer] Total amount charged to the customer including tax, in smallest currency unit (e
       #
-      #   @param card_issuing_country [Symbol, Dodopayments::Models::CountryCode, nil] ISO country code alpha2 variant
+      #   @param card_issuing_country [Symbol, Dodopayments::Models::CountryCode, nil] ISO2 country code of the card
       #
       #   @param card_last_four [String, nil] The last four digits of the card
       #
@@ -241,7 +249,7 @@ module Dodopayments
       #
       #   @param settlement_tax [Integer, nil] This represents the portion of settlement_amount that corresponds to taxes colle
       #
-      #   @param status [Symbol, Dodopayments::Models::IntentStatus, nil]
+      #   @param status [Symbol, Dodopayments::Models::IntentStatus, nil] Current status of the payment intent
       #
       #   @param subscription_id [String, nil] Identifier of the subscription if payment is part of a subscription
       #

@@ -2,13 +2,14 @@ module Dodopayments
   module Models
     type webhook_event_list_params =
       {
-        created_at_gte: Time?,
-        created_at_lte: Time?,
-        limit: Integer?,
-        object_id_: String?,
-        page_number: Integer?,
-        page_size: Integer?,
-        webhook_id: String?
+        created_at_gte: Time,
+        created_at_lte: Time,
+        limit: Integer,
+        object_id_: String,
+        page_number: Integer,
+        page_size: Integer,
+        webhook_event_id: String,
+        webhook_id: String
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -16,39 +17,59 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      attr_accessor created_at_gte: Time?
+      attr_reader created_at_gte: Time?
 
-      attr_accessor created_at_lte: Time?
+      def created_at_gte=: (Time) -> Time
 
-      attr_accessor limit: Integer?
+      attr_reader created_at_lte: Time?
 
-      attr_accessor object_id_: String?
+      def created_at_lte=: (Time) -> Time
 
-      attr_accessor page_number: Integer?
+      attr_reader limit: Integer?
 
-      attr_accessor page_size: Integer?
+      def limit=: (Integer) -> Integer
 
-      attr_accessor webhook_id: String?
+      attr_reader object_id_: String?
+
+      def object_id_=: (String) -> String
+
+      attr_reader page_number: Integer?
+
+      def page_number=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
+
+      attr_reader webhook_event_id: String?
+
+      def webhook_event_id=: (String) -> String
+
+      attr_reader webhook_id: String?
+
+      def webhook_id=: (String) -> String
 
       def initialize: (
-        ?created_at_gte: Time?,
-        ?created_at_lte: Time?,
-        ?limit: Integer?,
-        ?object_id_: String?,
-        ?page_number: Integer?,
-        ?page_size: Integer?,
-        ?webhook_id: String?,
+        ?created_at_gte: Time,
+        ?created_at_lte: Time,
+        ?limit: Integer,
+        ?object_id_: String,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?webhook_event_id: String,
+        ?webhook_id: String,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
       def to_hash: -> {
-        created_at_gte: Time?,
-        created_at_lte: Time?,
-        limit: Integer?,
-        object_id_: String?,
-        page_number: Integer?,
-        page_size: Integer?,
-        webhook_id: String?,
+        created_at_gte: Time,
+        created_at_lte: Time,
+        limit: Integer,
+        object_id_: String,
+        page_number: Integer,
+        page_size: Integer,
+        webhook_event_id: String,
+        webhook_id: String,
         request_options: Dodopayments::RequestOptions
       }
     end

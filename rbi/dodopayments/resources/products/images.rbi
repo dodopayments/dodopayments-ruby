@@ -7,7 +7,7 @@ module Dodopayments
         sig do
           params(
             id: String,
-            force_update: T.nilable(T::Boolean),
+            force_update: T::Boolean,
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(Dodopayments::Models::Products::ImageUpdateResponse)
         end

@@ -21,6 +21,7 @@ module Dodopayments
       required :amount, Integer
 
       # @!attribute type
+      #   The discount type (e.g. `percentage`, `flat`, or `flat_per_unit`).
       #
       #   @return [Symbol, Dodopayments::Models::DiscountType]
       required :type, enum: -> { Dodopayments::DiscountType }
@@ -63,7 +64,7 @@ module Dodopayments
       #
       #   @param amount [Integer] The discount amount.
       #
-      #   @param type [Symbol, Dodopayments::Models::DiscountType]
+      #   @param type [Symbol, Dodopayments::Models::DiscountType] The discount type (e.g. `percentage`, `flat`, or `flat_per_unit`).
       #
       #   @param code [String, nil] Optionally supply a code (will be uppercased).
       #

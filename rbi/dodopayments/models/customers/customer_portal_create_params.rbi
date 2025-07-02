@@ -17,11 +17,14 @@ module Dodopayments
 
         # If true, will send link to user.
         sig { returns(T.nilable(T::Boolean)) }
-        attr_accessor :send_email
+        attr_reader :send_email
+
+        sig { params(send_email: T::Boolean).void }
+        attr_writer :send_email
 
         sig do
           params(
-            send_email: T.nilable(T::Boolean),
+            send_email: T::Boolean,
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -35,7 +38,7 @@ module Dodopayments
         sig do
           override.returns(
             {
-              send_email: T.nilable(T::Boolean),
+              send_email: T::Boolean,
               request_options: Dodopayments::RequestOptions
             }
           )

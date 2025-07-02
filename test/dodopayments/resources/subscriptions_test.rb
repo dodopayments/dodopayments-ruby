@@ -26,6 +26,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         subscription_id: String,
         client_secret: String | nil,
         discount_id: String | nil,
+        expires_on: Time | nil,
         payment_link: String | nil
       }
     end

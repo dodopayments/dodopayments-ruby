@@ -18,6 +18,7 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :product_id
 
+      # Proration Billing Mode
       sig do
         returns(
           Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::OrSymbol
@@ -56,6 +57,7 @@ module Dodopayments
       def self.new(
         # Unique identifier of the product to subscribe to
         product_id:,
+        # Proration Billing Mode
         proration_billing_mode:,
         # Number of units to subscribe for. Must be at least 1.
         quantity:,
@@ -84,6 +86,7 @@ module Dodopayments
       def to_hash
       end
 
+      # Proration Billing Mode
       module ProrationBillingMode
         extend Dodopayments::Internal::Type::Enum
 

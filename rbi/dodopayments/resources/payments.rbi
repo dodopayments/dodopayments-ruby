@@ -29,7 +29,9 @@ module Dodopayments
         ).returns(Dodopayments::Models::PaymentCreateResponse)
       end
       def create(
+        # Billing address details for the payment
         billing:,
+        # Customer information for the payment
         customer:,
         # List of products in the cart. Must contain at least 1 and at most 100 items.
         product_cart:,
@@ -40,9 +42,13 @@ module Dodopayments
         # Availability still depends on other factors (e.g., customer location, merchant
         # settings).
         allowed_payment_method_types: nil,
+        # Fix the currency in which the end customer is billed. If Dodo Payments cannot
+        # support that currency for this transaction, it will not proceed
         billing_currency: nil,
         # Discount Code to apply to the transaction
         discount_code: nil,
+        # Additional metadata associated with the payment. Defaults to empty if not
+        # provided.
         metadata: nil,
         # Whether to generate a payment link. Defaults to false if not specified.
         payment_link: nil,
@@ -73,14 +79,14 @@ module Dodopayments
 
       sig do
         params(
-          brand_id: T.nilable(String),
-          created_at_gte: T.nilable(Time),
-          created_at_lte: T.nilable(Time),
-          customer_id: T.nilable(String),
-          page_number: T.nilable(Integer),
-          page_size: T.nilable(Integer),
-          status: T.nilable(Dodopayments::IntentStatus::OrSymbol),
-          subscription_id: T.nilable(String),
+          brand_id: String,
+          created_at_gte: Time,
+          created_at_lte: Time,
+          customer_id: String,
+          page_number: Integer,
+          page_size: Integer,
+          status: Dodopayments::PaymentListParams::Status::OrSymbol,
+          subscription_id: String,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::DefaultPageNumberPagination[

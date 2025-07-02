@@ -40,6 +40,7 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :times_used
 
+      # The type of discount, e.g. `percentage`, `flat`, or `flat_per_unit`.
       sig { returns(Dodopayments::DiscountType::TaggedSymbol) }
       attr_accessor :type
 
@@ -89,6 +90,7 @@ module Dodopayments
         restricted_to:,
         # How many times this discount has been used.
         times_used:,
+        # The type of discount, e.g. `percentage`, `flat`, or `flat_per_unit`.
         type:,
         # Optional date/time after which discount is expired.
         expires_at: nil,

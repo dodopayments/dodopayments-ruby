@@ -14,12 +14,14 @@ module Dodopayments
           )
         end
 
+      # Billing address information for the subscription
       sig { returns(Dodopayments::BillingAddress) }
       attr_reader :billing
 
       sig { params(billing: Dodopayments::BillingAddress::OrHash).void }
       attr_writer :billing
 
+      # Customer details for the subscription
       sig do
         returns(
           T.any(
@@ -63,6 +65,8 @@ module Dodopayments
       end
       attr_accessor :allowed_payment_method_types
 
+      # Fix the currency in which the end customer is billed. If Dodo Payments cannot
+      # support that currency for this transaction, it will not proceed
       sig { returns(T.nilable(Dodopayments::Currency::OrSymbol)) }
       attr_accessor :billing_currency
 
@@ -70,6 +74,7 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_code
 
+      # Additional metadata for the subscription Defaults to empty if not specified
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_reader :metadata
 
@@ -148,7 +153,9 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        # Billing address information for the subscription
         billing:,
+        # Customer details for the subscription
         customer:,
         # Unique identifier of the product to subscribe to
         product_id:,
@@ -163,9 +170,12 @@ module Dodopayments
         # Availability still depends on other factors (e.g., customer location, merchant
         # settings).
         allowed_payment_method_types: nil,
+        # Fix the currency in which the end customer is billed. If Dodo Payments cannot
+        # support that currency for this transaction, it will not proceed
         billing_currency: nil,
         # Discount Code to apply to the subscription
         discount_code: nil,
+        # Additional metadata for the subscription Defaults to empty if not specified
         metadata: nil,
         on_demand: nil,
         # If true, generates a payment link. Defaults to false if not specified.

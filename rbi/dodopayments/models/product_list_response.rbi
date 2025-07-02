@@ -27,8 +27,7 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :product_id
 
-      # Represents the different categories of taxation applicable to various products
-      # and services.
+      # Tax category associated with the product.
       sig { returns(Dodopayments::TaxCategory::TaggedSymbol) }
       attr_accessor :tax_category
 
@@ -36,6 +35,7 @@ module Dodopayments
       sig { returns(Time) }
       attr_accessor :updated_at
 
+      # Currency of the price
       sig { returns(T.nilable(Dodopayments::Currency::TaggedSymbol)) }
       attr_accessor :currency
 
@@ -64,6 +64,7 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :price
 
+      # Details of the price
       sig { returns(T.nilable(Dodopayments::Price::Variants)) }
       attr_accessor :price_detail
 
@@ -103,11 +104,11 @@ module Dodopayments
         is_recurring:,
         # Unique identifier for the product.
         product_id:,
-        # Represents the different categories of taxation applicable to various products
-        # and services.
+        # Tax category associated with the product.
         tax_category:,
         # Timestamp when the product was last updated.
         updated_at:,
+        # Currency of the price
         currency: nil,
         # Description of the product, optional.
         description: nil,
@@ -126,6 +127,7 @@ module Dodopayments
         #
         # This ensures precision and avoids floating-point rounding errors.
         price: nil,
+        # Details of the price
         price_detail: nil,
         # Indicates if the price is tax inclusive
         tax_inclusive: nil

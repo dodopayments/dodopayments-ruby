@@ -6,24 +6,14 @@ module Dodopayments
       # @api private
       #
       # @example
-      #   # `price` is a `Dodopayments::Price`
-      #   case price
-      #   when Dodopayments::Price::OneTimePrice
-      #     puts(price.currency)
-      #   when Dodopayments::Price::RecurringPrice
-      #     puts(price.discount)
+      #   # `customer_request` is a `Dodopayments::CustomerRequest`
+      #   case customer_request
+      #   when Dodopayments::AttachExistingCustomer
+      #     puts(customer_request.customer_id)
+      #   when Dodopayments::CreateNewCustomer
+      #     puts(customer_request.email)
       #   else
-      #     puts(price)
-      #   end
-      #
-      # @example
-      #   case price
-      #   in {type: :one_time_price, currency: currency, discount: discount, price: price}
-      #     puts(currency)
-      #   in {type: :recurring_price, currency: currency, discount: discount, payment_frequency_count: payment_frequency_count}
-      #     puts(discount)
-      #   else
-      #     puts(price)
+      #     puts(customer_request)
       #   end
       module Union
         include Dodopayments::Internal::Type::Converter

@@ -19,6 +19,8 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :product_price
 
+      # Metadata for the payment. If not passed, the metadata of the subscription will
+      # be taken
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_accessor :metadata
 
@@ -33,6 +35,8 @@ module Dodopayments
         # The product price. Represented in the lowest denomination of the currency (e.g.,
         # cents for USD). For example, to charge $1.00, pass `100`.
         product_price:,
+        # Metadata for the payment. If not passed, the metadata of the subscription will
+        # be taken
         metadata: nil,
         request_options: {}
       )

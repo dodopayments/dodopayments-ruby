@@ -16,16 +16,22 @@ module Dodopayments
 
       # Page number (default = 0).
       sig { returns(T.nilable(Integer)) }
-      attr_accessor :page_number
+      attr_reader :page_number
+
+      sig { params(page_number: Integer).void }
+      attr_writer :page_number
 
       # Page size (default = 10, max = 100).
       sig { returns(T.nilable(Integer)) }
-      attr_accessor :page_size
+      attr_reader :page_size
+
+      sig { params(page_size: Integer).void }
+      attr_writer :page_size
 
       sig do
         params(
-          page_number: T.nilable(Integer),
-          page_size: T.nilable(Integer),
+          page_number: Integer,
+          page_size: Integer,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -41,8 +47,8 @@ module Dodopayments
       sig do
         override.returns(
           {
-            page_number: T.nilable(Integer),
-            page_size: T.nilable(Integer),
+            page_number: Integer,
+            page_size: Integer,
             request_options: Dodopayments::RequestOptions
           }
         )

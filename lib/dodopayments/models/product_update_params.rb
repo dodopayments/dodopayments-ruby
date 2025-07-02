@@ -25,6 +25,7 @@ module Dodopayments
       optional :description, String, nil?: true
 
       # @!attribute digital_product_delivery
+      #   Choose how you would like you digital product delivered
       #
       #   @return [Dodopayments::Models::ProductUpdateParams::DigitalProductDelivery, nil]
       optional :digital_product_delivery,
@@ -56,6 +57,10 @@ module Dodopayments
       optional :license_key_activations_limit, Integer, nil?: true
 
       # @!attribute license_key_duration
+      #   Duration of the license key if enabled.
+      #
+      #   Only applicable if `license_key_enabled` is `true`. Represents the duration in
+      #   days for which the license key is valid.
       #
       #   @return [Dodopayments::Models::LicenseKeyDuration, nil]
       optional :license_key_duration, -> { Dodopayments::LicenseKeyDuration }, nil?: true
@@ -76,13 +81,13 @@ module Dodopayments
       optional :name, String, nil?: true
 
       # @!attribute price
+      #   Price details of the product.
       #
       #   @return [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil]
       optional :price, union: -> { Dodopayments::Price }, nil?: true
 
       # @!attribute tax_category
-      #   Represents the different categories of taxation applicable to various products
-      #   and services.
+      #   Tax category of the product.
       #
       #   @return [Symbol, Dodopayments::Models::TaxCategory, nil]
       optional :tax_category, enum: -> { Dodopayments::TaxCategory }, nil?: true
@@ -97,7 +102,7 @@ module Dodopayments
       #
       #   @param description [String, nil] Description of the product, optional and must be at most 1000 characters.
       #
-      #   @param digital_product_delivery [Dodopayments::Models::ProductUpdateParams::DigitalProductDelivery, nil]
+      #   @param digital_product_delivery [Dodopayments::Models::ProductUpdateParams::DigitalProductDelivery, nil] Choose how you would like you digital product delivered
       #
       #   @param image_id [String, nil] Product image id after its uploaded to S3
       #
@@ -105,15 +110,15 @@ module Dodopayments
       #
       #   @param license_key_activations_limit [Integer, nil] Limit for the number of activations for the license key.
       #
-      #   @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil]
+      #   @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil] Duration of the license key if enabled.
       #
       #   @param license_key_enabled [Boolean, nil] Whether the product requires a license key.
       #
       #   @param name [String, nil] Name of the product, optional and must be at most 100 characters.
       #
-      #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil]
+      #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil] Price details of the product.
       #
-      #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory, nil] Represents the different categories of taxation applicable to various products a
+      #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory, nil] Tax category of the product.
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 
@@ -137,6 +142,8 @@ module Dodopayments
         optional :instructions, String, nil?: true
 
         # @!method initialize(external_url: nil, files: nil, instructions: nil)
+        #   Choose how you would like you digital product delivered
+        #
         #   @param external_url [String, nil] External URL to digital product
         #
         #   @param files [Array<String>, nil] Uploaded files ids of digital product

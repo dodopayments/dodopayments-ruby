@@ -3,18 +3,15 @@
 module Dodopayments
   module Resources
     class Addons
-      # Some parameter documentations has been truncated, see
-      # {Dodopayments::Models::AddonCreateParams} for more details.
-      #
       # @overload create(currency:, name:, price:, tax_category:, description: nil, request_options: {})
       #
-      # @param currency [Symbol, Dodopayments::Models::Currency]
+      # @param currency [Symbol, Dodopayments::Models::Currency] The currency of the Addon
       #
       # @param name [String] Name of the Addon
       #
       # @param price [Integer] Amount of the addon
       #
-      # @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Represents the different categories of taxation applicable to various products a
+      # @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Tax category applied to this Addon
       #
       # @param description [String, nil] Optional description of the Addon
       #
@@ -52,14 +49,11 @@ module Dodopayments
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {Dodopayments::Models::AddonUpdateParams} for more details.
-      #
       # @overload update(id, currency: nil, description: nil, image_id: nil, name: nil, price: nil, tax_category: nil, request_options: {})
       #
       # @param id [String] Addon Id
       #
-      # @param currency [Symbol, Dodopayments::Models::Currency, nil]
+      # @param currency [Symbol, Dodopayments::Models::Currency, nil] The currency of the Addon
       #
       # @param description [String, nil] Description of the Addon, optional and must be at most 1000 characters.
       #
@@ -69,7 +63,7 @@ module Dodopayments
       #
       # @param price [Integer, nil] Amount of the addon
       #
-      # @param tax_category [Symbol, Dodopayments::Models::TaxCategory, nil] Represents the different categories of taxation applicable to various products a
+      # @param tax_category [Symbol, Dodopayments::Models::TaxCategory, nil] Tax category of the Addon.
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -89,9 +83,9 @@ module Dodopayments
 
       # @overload list(page_number: nil, page_size: nil, request_options: {})
       #
-      # @param page_number [Integer, nil] Page number default is 0
+      # @param page_number [Integer] Page number default is 0
       #
-      # @param page_size [Integer, nil] Page size default is 10 max is 100
+      # @param page_size [Integer] Page size default is 10 max is 100
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

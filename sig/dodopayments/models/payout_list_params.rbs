@@ -1,26 +1,30 @@
 module Dodopayments
   module Models
     type payout_list_params =
-      { page_number: Integer?, page_size: Integer? }
+      { page_number: Integer, page_size: Integer }
       & Dodopayments::Internal::Type::request_parameters
 
     class PayoutListParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      attr_accessor page_number: Integer?
+      attr_reader page_number: Integer?
 
-      attr_accessor page_size: Integer?
+      def page_number=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
 
       def initialize: (
-        ?page_number: Integer?,
-        ?page_size: Integer?,
+        ?page_number: Integer,
+        ?page_size: Integer,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
       def to_hash: -> {
-        page_number: Integer?,
-        page_size: Integer?,
+        page_number: Integer,
+        page_size: Integer,
         request_options: Dodopayments::RequestOptions
       }
     end

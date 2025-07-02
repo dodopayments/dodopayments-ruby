@@ -2,13 +2,13 @@ module Dodopayments
   module Models
     type subscription_list_params =
       {
-        brand_id: String?,
-        created_at_gte: Time?,
-        created_at_lte: Time?,
-        customer_id: String?,
-        page_number: Integer?,
-        page_size: Integer?,
-        status: Dodopayments::Models::subscription_status?
+        brand_id: String,
+        created_at_gte: Time,
+        created_at_lte: Time,
+        customer_id: String,
+        page_number: Integer,
+        page_size: Integer,
+        status: Dodopayments::Models::SubscriptionListParams::status
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -16,41 +16,80 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      attr_accessor brand_id: String?
+      attr_reader brand_id: String?
 
-      attr_accessor created_at_gte: Time?
+      def brand_id=: (String) -> String
 
-      attr_accessor created_at_lte: Time?
+      attr_reader created_at_gte: Time?
 
-      attr_accessor customer_id: String?
+      def created_at_gte=: (Time) -> Time
 
-      attr_accessor page_number: Integer?
+      attr_reader created_at_lte: Time?
 
-      attr_accessor page_size: Integer?
+      def created_at_lte=: (Time) -> Time
 
-      attr_accessor status: Dodopayments::Models::subscription_status?
+      attr_reader customer_id: String?
+
+      def customer_id=: (String) -> String
+
+      attr_reader page_number: Integer?
+
+      def page_number=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
+
+      attr_reader status: Dodopayments::Models::SubscriptionListParams::status?
+
+      def status=: (
+        Dodopayments::Models::SubscriptionListParams::status
+      ) -> Dodopayments::Models::SubscriptionListParams::status
 
       def initialize: (
-        ?brand_id: String?,
-        ?created_at_gte: Time?,
-        ?created_at_lte: Time?,
-        ?customer_id: String?,
-        ?page_number: Integer?,
-        ?page_size: Integer?,
-        ?status: Dodopayments::Models::subscription_status?,
+        ?brand_id: String,
+        ?created_at_gte: Time,
+        ?created_at_lte: Time,
+        ?customer_id: String,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?status: Dodopayments::Models::SubscriptionListParams::status,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
       def to_hash: -> {
-        brand_id: String?,
-        created_at_gte: Time?,
-        created_at_lte: Time?,
-        customer_id: String?,
-        page_number: Integer?,
-        page_size: Integer?,
-        status: Dodopayments::Models::subscription_status?,
+        brand_id: String,
+        created_at_gte: Time,
+        created_at_lte: Time,
+        customer_id: String,
+        page_number: Integer,
+        page_size: Integer,
+        status: Dodopayments::Models::SubscriptionListParams::status,
         request_options: Dodopayments::RequestOptions
       }
+
+      type status =
+        :pending
+        | :active
+        | :on_hold
+        | :paused
+        | :cancelled
+        | :failed
+        | :expired
+
+      module Status
+        extend Dodopayments::Internal::Type::Enum
+
+        PENDING: :pending
+        ACTIVE: :active
+        ON_HOLD: :on_hold
+        PAUSED: :paused
+        CANCELLED: :cancelled
+        FAILED: :failed
+        EXPIRED: :expired
+
+        def self?.values: -> ::Array[Dodopayments::Models::SubscriptionListParams::status]
+      end
     end
   end
 end

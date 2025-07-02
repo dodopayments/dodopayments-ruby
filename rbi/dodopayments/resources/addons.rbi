@@ -14,13 +14,13 @@ module Dodopayments
         ).returns(Dodopayments::AddonResponse)
       end
       def create(
+        # The currency of the Addon
         currency:,
         # Name of the Addon
         name:,
         # Amount of the addon
         price:,
-        # Represents the different categories of taxation applicable to various products
-        # and services.
+        # Tax category applied to this Addon
         tax_category:,
         # Optional description of the Addon
         description: nil,
@@ -56,6 +56,7 @@ module Dodopayments
       def update(
         # Addon Id
         id,
+        # The currency of the Addon
         currency: nil,
         # Description of the Addon, optional and must be at most 1000 characters.
         description: nil,
@@ -65,8 +66,7 @@ module Dodopayments
         name: nil,
         # Amount of the addon
         price: nil,
-        # Represents the different categories of taxation applicable to various products
-        # and services.
+        # Tax category of the Addon.
         tax_category: nil,
         request_options: {}
       )
@@ -74,8 +74,8 @@ module Dodopayments
 
       sig do
         params(
-          page_number: T.nilable(Integer),
-          page_size: T.nilable(Integer),
+          page_number: Integer,
+          page_size: Integer,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::DefaultPageNumberPagination[

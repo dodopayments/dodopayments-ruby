@@ -7,7 +7,7 @@ module Dodopayments
         sig do
           params(
             customer_id: String,
-            send_email: T.nilable(T::Boolean),
+            send_email: T::Boolean,
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(Dodopayments::CustomerPortalSession)
         end

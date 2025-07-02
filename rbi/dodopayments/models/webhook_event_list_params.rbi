@@ -16,41 +16,70 @@ module Dodopayments
 
       # Get events after this created time
       sig { returns(T.nilable(Time)) }
-      attr_accessor :created_at_gte
+      attr_reader :created_at_gte
+
+      sig { params(created_at_gte: Time).void }
+      attr_writer :created_at_gte
 
       # Get events created before this time
       sig { returns(T.nilable(Time)) }
-      attr_accessor :created_at_lte
+      attr_reader :created_at_lte
+
+      sig { params(created_at_lte: Time).void }
+      attr_writer :created_at_lte
 
       # Min : 1, Max : 100, default 10
       sig { returns(T.nilable(Integer)) }
-      attr_accessor :limit
+      attr_reader :limit
+
+      sig { params(limit: Integer).void }
+      attr_writer :limit
 
       # Get events history of a specific object like payment/subscription/refund/dispute
       sig { returns(T.nilable(String)) }
-      attr_accessor :object_id_
+      attr_reader :object_id_
+
+      sig { params(object_id_: String).void }
+      attr_writer :object_id_
 
       # Page number default is 0
       sig { returns(T.nilable(Integer)) }
-      attr_accessor :page_number
+      attr_reader :page_number
+
+      sig { params(page_number: Integer).void }
+      attr_writer :page_number
 
       # Page size default is 10 max is 100
       sig { returns(T.nilable(Integer)) }
-      attr_accessor :page_size
+      attr_reader :page_size
+
+      sig { params(page_size: Integer).void }
+      attr_writer :page_size
+
+      # Filter by webhook event id
+      sig { returns(T.nilable(String)) }
+      attr_reader :webhook_event_id
+
+      sig { params(webhook_event_id: String).void }
+      attr_writer :webhook_event_id
 
       # Filter by webhook destination
       sig { returns(T.nilable(String)) }
-      attr_accessor :webhook_id
+      attr_reader :webhook_id
+
+      sig { params(webhook_id: String).void }
+      attr_writer :webhook_id
 
       sig do
         params(
-          created_at_gte: T.nilable(Time),
-          created_at_lte: T.nilable(Time),
-          limit: T.nilable(Integer),
-          object_id_: T.nilable(String),
-          page_number: T.nilable(Integer),
-          page_size: T.nilable(Integer),
-          webhook_id: T.nilable(String),
+          created_at_gte: Time,
+          created_at_lte: Time,
+          limit: Integer,
+          object_id_: String,
+          page_number: Integer,
+          page_size: Integer,
+          webhook_event_id: String,
+          webhook_id: String,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -67,6 +96,8 @@ module Dodopayments
         page_number: nil,
         # Page size default is 10 max is 100
         page_size: nil,
+        # Filter by webhook event id
+        webhook_event_id: nil,
         # Filter by webhook destination
         webhook_id: nil,
         request_options: {}
@@ -76,13 +107,14 @@ module Dodopayments
       sig do
         override.returns(
           {
-            created_at_gte: T.nilable(Time),
-            created_at_lte: T.nilable(Time),
-            limit: T.nilable(Integer),
-            object_id_: T.nilable(String),
-            page_number: T.nilable(Integer),
-            page_size: T.nilable(Integer),
-            webhook_id: T.nilable(String),
+            created_at_gte: Time,
+            created_at_lte: Time,
+            limit: Integer,
+            object_id_: String,
+            page_number: Integer,
+            page_size: Integer,
+            webhook_event_id: String,
+            webhook_id: String,
             request_options: Dodopayments::RequestOptions
           }
         )

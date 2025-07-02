@@ -25,6 +25,7 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :amount
 
+      # The discount type (e.g. `percentage`, `flat`, or `flat_per_unit`).
       sig { returns(Dodopayments::DiscountType::OrSymbol) }
       attr_accessor :type
 
@@ -72,6 +73,7 @@ module Dodopayments
         #
         # Must be at least 1.
         amount:,
+        # The discount type (e.g. `percentage`, `flat`, or `flat_per_unit`).
         type:,
         # Optionally supply a code (will be uppercased).
         #

@@ -42,10 +42,10 @@ module Dodopayments
 
       def list: (
         ?archived: bool,
-        ?brand_id: String?,
-        ?page_number: Integer?,
-        ?page_size: Integer?,
-        ?recurring: bool?,
+        ?brand_id: String,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?recurring: bool,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::ProductListResponse]
 

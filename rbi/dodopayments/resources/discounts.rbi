@@ -3,7 +3,8 @@
 module Dodopayments
   module Resources
     class Discounts
-      # If `code` is omitted or empty, a random 16-char uppercase code is generated.
+      # POST /discounts If `code` is omitted or empty, a random 16-char uppercase code
+      # is generated.
       sig do
         params(
           amount: Integer,
@@ -26,6 +27,7 @@ module Dodopayments
         #
         # Must be at least 1.
         amount:,
+        # The discount type (e.g. `percentage`, `flat`, or `flat_per_unit`).
         type:,
         # Optionally supply a code (will be uppercased).
         #
@@ -89,6 +91,7 @@ module Dodopayments
         # If present, replaces all restricted product IDs with this new set. To remove all
         # restrictions, send empty array
         restricted_to: nil,
+        # If present, update the discount type.
         type: nil,
         usage_limit: nil,
         request_options: {}
@@ -98,8 +101,8 @@ module Dodopayments
       # GET /discounts
       sig do
         params(
-          page_number: T.nilable(Integer),
-          page_size: T.nilable(Integer),
+          page_number: Integer,
+          page_size: Integer,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::DefaultPageNumberPagination[

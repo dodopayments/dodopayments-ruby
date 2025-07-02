@@ -49,8 +49,9 @@ module Dodopayments
 
       sig do
         params(
-          page_number: T.nilable(Integer),
-          page_size: T.nilable(Integer),
+          email: String,
+          page_number: Integer,
+          page_size: Integer,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::DefaultPageNumberPagination[
@@ -59,6 +60,8 @@ module Dodopayments
         )
       end
       def list(
+        # Filter by customer email
+        email: nil,
         # Page number default is 0
         page_number: nil,
         # Page size default is 10 max is 100

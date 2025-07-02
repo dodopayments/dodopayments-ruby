@@ -10,7 +10,7 @@ module Dodopayments
       required :city, String
 
       # @!attribute country
-      #   ISO country code alpha2 variant
+      #   Two-letter ISO country code (ISO 3166-1 alpha-2)
       #
       #   @return [Symbol, Dodopayments::Models::CountryCode]
       required :country, enum: -> { Dodopayments::CountryCode }
@@ -36,7 +36,7 @@ module Dodopayments
       # @!method initialize(city:, country:, state:, street:, zipcode:)
       #   @param city [String] City name
       #
-      #   @param country [Symbol, Dodopayments::Models::CountryCode] ISO country code alpha2 variant
+      #   @param country [Symbol, Dodopayments::Models::CountryCode] Two-letter ISO country code (ISO 3166-1 alpha-2)
       #
       #   @param state [String] State or province name
       #

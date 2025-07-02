@@ -8,11 +8,13 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute billing
+      #   Billing address details for the payment
       #
       #   @return [Dodopayments::Models::BillingAddress]
       required :billing, -> { Dodopayments::BillingAddress }
 
       # @!attribute customer
+      #   Customer information for the payment
       #
       #   @return [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
       required :customer, union: -> { Dodopayments::CustomerRequest }
@@ -42,6 +44,8 @@ module Dodopayments
                nil?: true
 
       # @!attribute billing_currency
+      #   Fix the currency in which the end customer is billed. If Dodo Payments cannot
+      #   support that currency for this transaction, it will not proceed
       #
       #   @return [Symbol, Dodopayments::Models::Currency, nil]
       optional :billing_currency, enum: -> { Dodopayments::Currency }, nil?: true
@@ -53,6 +57,8 @@ module Dodopayments
       optional :discount_code, String, nil?: true
 
       # @!attribute metadata
+      #   Additional metadata associated with the payment. Defaults to empty if not
+      #   provided.
       #
       #   @return [Hash{Symbol=>String}, nil]
       optional :metadata, Dodopayments::Internal::Type::HashOf[String]
@@ -87,19 +93,19 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::PaymentCreateParams} for more details.
       #
-      #   @param billing [Dodopayments::Models::BillingAddress]
+      #   @param billing [Dodopayments::Models::BillingAddress] Billing address details for the payment
       #
-      #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
+      #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer] Customer information for the payment
       #
       #   @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>] List of products in the cart. Must contain at least 1 and at most 100 items.
       #
       #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout.
       #
-      #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil]
+      #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Fix the currency in which the end customer is billed.
       #
       #   @param discount_code [String, nil] Discount Code to apply to the transaction
       #
-      #   @param metadata [Hash{Symbol=>String}]
+      #   @param metadata [Hash{Symbol=>String}] Additional metadata associated with the payment.
       #
       #   @param payment_link [Boolean, nil] Whether to generate a payment link. Defaults to false if not specified.
       #

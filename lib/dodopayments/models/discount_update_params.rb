@@ -43,6 +43,7 @@ module Dodopayments
       optional :restricted_to, Dodopayments::Internal::Type::ArrayOf[String], nil?: true
 
       # @!attribute type
+      #   If present, update the discount type.
       #
       #   @return [Symbol, Dodopayments::Models::DiscountType, nil]
       optional :type, enum: -> { Dodopayments::DiscountType }, nil?: true
@@ -66,7 +67,7 @@ module Dodopayments
       #
       #   @param restricted_to [Array<String>, nil] If present, replaces all restricted product IDs with this new set.
       #
-      #   @param type [Symbol, Dodopayments::Models::DiscountType, nil]
+      #   @param type [Symbol, Dodopayments::Models::DiscountType, nil] If present, update the discount type.
       #
       #   @param usage_limit [Integer, nil]
       #

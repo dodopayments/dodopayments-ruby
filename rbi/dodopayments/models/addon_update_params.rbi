@@ -14,6 +14,7 @@ module Dodopayments
           )
         end
 
+      # The currency of the Addon
       sig { returns(T.nilable(Dodopayments::Currency::OrSymbol)) }
       attr_accessor :currency
 
@@ -33,8 +34,7 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :price
 
-      # Represents the different categories of taxation applicable to various products
-      # and services.
+      # Tax category of the Addon.
       sig { returns(T.nilable(Dodopayments::TaxCategory::OrSymbol)) }
       attr_accessor :tax_category
 
@@ -50,6 +50,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        # The currency of the Addon
         currency: nil,
         # Description of the Addon, optional and must be at most 1000 characters.
         description: nil,
@@ -59,8 +60,7 @@ module Dodopayments
         name: nil,
         # Amount of the addon
         price: nil,
-        # Represents the different categories of taxation applicable to various products
-        # and services.
+        # Tax category of the Addon.
         tax_category: nil,
         request_options: {}
       )

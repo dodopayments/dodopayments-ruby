@@ -27,6 +27,7 @@ module Dodopayments
       sig { returns(T::Boolean) }
       attr_accessor :license_key_enabled
 
+      # Pricing information for the product.
       sig { returns(Dodopayments::Price::Variants) }
       attr_accessor :price
 
@@ -34,8 +35,7 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :product_id
 
-      # Represents the different categories of taxation applicable to various products
-      # and services.
+      # Tax category associated with the product.
       sig { returns(Dodopayments::TaxCategory::TaggedSymbol) }
       attr_accessor :tax_category
 
@@ -74,6 +74,7 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :license_key_activations_limit
 
+      # Duration of the license key validity, if enabled.
       sig { returns(T.nilable(Dodopayments::LicenseKeyDuration)) }
       attr_reader :license_key_duration
 
@@ -126,11 +127,11 @@ module Dodopayments
         is_recurring:,
         # Indicates whether the product requires a license key.
         license_key_enabled:,
+        # Pricing information for the product.
         price:,
         # Unique identifier for the product.
         product_id:,
-        # Represents the different categories of taxation applicable to various products
-        # and services.
+        # Tax category associated with the product.
         tax_category:,
         # Timestamp when the product was last updated.
         updated_at:,
@@ -145,6 +146,7 @@ module Dodopayments
         license_key_activation_message: nil,
         # Limit on the number of activations for the license key, if enabled.
         license_key_activations_limit: nil,
+        # Duration of the license key validity, if enabled.
         license_key_duration: nil,
         # Name of the product, optional.
         name: nil

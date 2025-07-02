@@ -5,8 +5,8 @@ module Dodopayments
     class Payouts
       sig do
         params(
-          page_number: T.nilable(Integer),
-          page_size: T.nilable(Integer),
+          page_number: Integer,
+          page_size: Integer,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::DefaultPageNumberPagination[

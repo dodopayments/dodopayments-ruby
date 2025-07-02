@@ -28,6 +28,7 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :refund_id
 
+      # The current status of the refund.
       sig { returns(Dodopayments::RefundStatus::TaggedSymbol) }
       attr_accessor :status
 
@@ -35,6 +36,7 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :amount
 
+      # The currency of the refund, represented as an ISO 4217 currency code.
       sig { returns(T.nilable(Dodopayments::Currency::TaggedSymbol)) }
       attr_accessor :currency
 
@@ -66,9 +68,11 @@ module Dodopayments
         payment_id:,
         # The unique identifier of the refund.
         refund_id:,
+        # The current status of the refund.
         status:,
         # The refunded amount.
         amount: nil,
+        # The currency of the refund, represented as an ISO 4217 currency code.
         currency: nil,
         # The reason provided for the refund, if any. Optional.
         reason: nil

@@ -39,6 +39,7 @@ module Dodopayments
       sig { returns(T.nilable(T::Array[String])) }
       attr_accessor :restricted_to
 
+      # If present, update the discount type.
       sig { returns(T.nilable(Dodopayments::DiscountType::OrSymbol)) }
       attr_accessor :type
 
@@ -73,6 +74,7 @@ module Dodopayments
         # If present, replaces all restricted product IDs with this new set. To remove all
         # restrictions, send empty array
         restricted_to: nil,
+        # If present, update the discount type.
         type: nil,
         usage_limit: nil,
         request_options: {}

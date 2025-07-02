@@ -8,7 +8,7 @@ module Dodopayments
         #
         # @param customer_id [String] Customer Id
         #
-        # @param send_email [Boolean, nil] If true, will send link to user.
+        # @param send_email [Boolean] If true, will send link to user.
         #
         # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
         #

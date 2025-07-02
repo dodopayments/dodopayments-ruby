@@ -51,6 +51,7 @@ module Dodopayments
       required :times_used, Integer
 
       # @!attribute type
+      #   The type of discount, e.g. `percentage`, `flat`, or `flat_per_unit`.
       #
       #   @return [Symbol, Dodopayments::Models::DiscountType]
       required :type, enum: -> { Dodopayments::DiscountType }
@@ -91,7 +92,7 @@ module Dodopayments
       #
       #   @param times_used [Integer] How many times this discount has been used.
       #
-      #   @param type [Symbol, Dodopayments::Models::DiscountType]
+      #   @param type [Symbol, Dodopayments::Models::DiscountType] The type of discount, e.g. `percentage`, `flat`, or `flat_per_unit`.
       #
       #   @param expires_at [Time, nil] Optional date/time after which discount is expired.
       #

@@ -31,9 +31,9 @@ module Dodopayments
         ).returns(Dodopayments::Product)
       end
       def create(
+        # Price configuration for the product
         price:,
-        # Represents the different categories of taxation applicable to various products
-        # and services.
+        # Tax category applied to this product
         tax_category:,
         # Addons available for subscription product
         addons: nil,
@@ -41,11 +41,15 @@ module Dodopayments
         brand_id: nil,
         # Optional description of the product
         description: nil,
+        # Choose how you would like you digital product delivered
         digital_product_delivery: nil,
         # Optional message displayed during license key activation
         license_key_activation_message: nil,
         # The number of times the license key can be activated. Must be 0 or greater
         license_key_activations_limit: nil,
+        # Duration configuration for the license key. Set to null if you don't want the
+        # license key to expire. For subscriptions, the lifetime of the license key is
+        # tied to the subscription period
         license_key_duration: nil,
         # When true, generates and sends a license key to your customer. Defaults to false
         license_key_enabled: nil,
@@ -103,6 +107,7 @@ module Dodopayments
         brand_id: nil,
         # Description of the product, optional and must be at most 1000 characters.
         description: nil,
+        # Choose how you would like you digital product delivered
         digital_product_delivery: nil,
         # Product image id after its uploaded to S3
         image_id: nil,
@@ -116,6 +121,10 @@ module Dodopayments
         # Only applicable if `license_key_enabled` is `true`. Represents the maximum
         # number of times the license key can be activated.
         license_key_activations_limit: nil,
+        # Duration of the license key if enabled.
+        #
+        # Only applicable if `license_key_enabled` is `true`. Represents the duration in
+        # days for which the license key is valid.
         license_key_duration: nil,
         # Whether the product requires a license key.
         #
@@ -124,9 +133,9 @@ module Dodopayments
         license_key_enabled: nil,
         # Name of the product, optional and must be at most 100 characters.
         name: nil,
+        # Price details of the product.
         price: nil,
-        # Represents the different categories of taxation applicable to various products
-        # and services.
+        # Tax category of the product.
         tax_category: nil,
         request_options: {}
       )
@@ -135,10 +144,10 @@ module Dodopayments
       sig do
         params(
           archived: T::Boolean,
-          brand_id: T.nilable(String),
-          page_number: T.nilable(Integer),
-          page_size: T.nilable(Integer),
-          recurring: T.nilable(T::Boolean),
+          brand_id: String,
+          page_number: Integer,
+          page_size: Integer,
+          recurring: T::Boolean,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::DefaultPageNumberPagination[

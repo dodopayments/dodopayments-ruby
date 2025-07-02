@@ -47,17 +47,17 @@ module Dodopayments
 
       # @overload list(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, request_options: {})
       #
-      # @param created_at_gte [Time, nil] Get events after this created time
+      # @param created_at_gte [Time] Get events after this created time
       #
-      # @param created_at_lte [Time, nil] Get events created before this time
+      # @param created_at_lte [Time] Get events created before this time
       #
-      # @param customer_id [String, nil] Filter by customer_id
+      # @param customer_id [String] Filter by customer_id
       #
-      # @param page_number [Integer, nil] Page number default is 0
+      # @param page_number [Integer] Page number default is 0
       #
-      # @param page_size [Integer, nil] Page size default is 10 max is 100
+      # @param page_size [Integer] Page size default is 10 max is 100
       #
-      # @param status [Symbol, Dodopayments::Models::RefundStatus, nil] Filter by status
+      # @param status [Symbol, Dodopayments::Models::RefundListParams::Status] Filter by status
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

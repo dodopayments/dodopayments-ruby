@@ -12,6 +12,7 @@ module Dodopayments
       sig { returns(T::Array[Dodopayments::AddonCartResponseItem]) }
       attr_accessor :addons
 
+      # Billing address details for payments
       sig { returns(Dodopayments::BillingAddress) }
       attr_reader :billing
 
@@ -26,9 +27,11 @@ module Dodopayments
       sig { returns(Time) }
       attr_accessor :created_at
 
+      # Currency used for the subscription payments
       sig { returns(Dodopayments::Currency::TaggedSymbol) }
       attr_accessor :currency
 
+      # Customer details associated with the subscription
       sig { returns(Dodopayments::CustomerLimitedDetails) }
       attr_reader :customer
 
@@ -37,6 +40,7 @@ module Dodopayments
       end
       attr_writer :customer
 
+      # Additional custom data associated with the subscription
       sig { returns(T::Hash[Symbol, String]) }
       attr_accessor :metadata
 
@@ -53,6 +57,7 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :payment_frequency_count
 
+      # Time interval for payment frequency (e.g. month, year)
       sig { returns(Dodopayments::TimeInterval::TaggedSymbol) }
       attr_accessor :payment_frequency_interval
 
@@ -73,6 +78,7 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :recurring_pre_tax_amount
 
+      # Current status of the subscription
       sig { returns(Dodopayments::SubscriptionStatus::TaggedSymbol) }
       attr_accessor :status
 
@@ -84,6 +90,7 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :subscription_period_count
 
+      # Time interval for the subscription period (e.g. month, year)
       sig { returns(Dodopayments::TimeInterval::TaggedSymbol) }
       attr_accessor :subscription_period_interval
 
@@ -134,13 +141,17 @@ module Dodopayments
       def self.new(
         # Addons associated with this subscription
         addons:,
+        # Billing address details for payments
         billing:,
         # Indicates if the subscription will cancel at the next billing date
         cancel_at_next_billing_date:,
         # Timestamp when the subscription was created
         created_at:,
+        # Currency used for the subscription payments
         currency:,
+        # Customer details associated with the subscription
         customer:,
+        # Additional custom data associated with the subscription
         metadata:,
         # Timestamp of the next scheduled billing. Indicates the end of current billing
         # period
@@ -149,6 +160,7 @@ module Dodopayments
         on_demand:,
         # Number of payment frequency intervals
         payment_frequency_count:,
+        # Time interval for payment frequency (e.g. month, year)
         payment_frequency_interval:,
         # Timestamp of the last payment. Indicates the start of current billing period
         previous_billing_date:,
@@ -159,11 +171,13 @@ module Dodopayments
         # Amount charged before tax for each recurring payment in smallest currency unit
         # (e.g. cents)
         recurring_pre_tax_amount:,
+        # Current status of the subscription
         status:,
         # Unique identifier for the subscription
         subscription_id:,
         # Number of subscription period intervals
         subscription_period_count:,
+        # Time interval for the subscription period (e.g. month, year)
         subscription_period_interval:,
         # Indicates if the recurring_pre_tax_amount is tax inclusive
         tax_inclusive:,

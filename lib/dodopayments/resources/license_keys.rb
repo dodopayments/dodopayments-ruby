@@ -52,15 +52,15 @@ module Dodopayments
 
       # @overload list(customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
       #
-      # @param customer_id [String, nil] Filter by customer ID
+      # @param customer_id [String] Filter by customer ID
       #
-      # @param page_number [Integer, nil] Page number default is 0
+      # @param page_number [Integer] Page number default is 0
       #
-      # @param page_size [Integer, nil] Page size default is 10 max is 100
+      # @param page_size [Integer] Page size default is 10 max is 100
       #
-      # @param product_id [String, nil] Filter by product ID
+      # @param product_id [String] Filter by product ID
       #
-      # @param status [Symbol, Dodopayments::Models::LicenseKeyStatus, nil] Filter by license key status
+      # @param status [Symbol, Dodopayments::Models::LicenseKeyListParams::Status] Filter by license key status
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

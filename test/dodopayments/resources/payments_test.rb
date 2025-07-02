@@ -23,6 +23,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         payment_id: String,
         total_amount: Integer,
         discount_id: String | nil,
+        expires_on: Time | nil,
         payment_link: String | nil,
         product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem]) | nil
       }

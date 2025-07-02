@@ -30,6 +30,7 @@ module Dodopayments
       required :currency, String
 
       # @!attribute customer
+      #   The customer who filed the dispute
       #
       #   @return [Dodopayments::Models::CustomerLimitedDetails]
       required :customer, -> { Dodopayments::CustomerLimitedDetails }
@@ -41,11 +42,13 @@ module Dodopayments
       required :dispute_id, String
 
       # @!attribute dispute_stage
+      #   The current stage of the dispute process.
       #
       #   @return [Symbol, Dodopayments::Models::DisputeStage]
       required :dispute_stage, enum: -> { Dodopayments::DisputeStage }
 
       # @!attribute dispute_status
+      #   The current status of the dispute.
       #
       #   @return [Symbol, Dodopayments::Models::DisputeStatus]
       required :dispute_status, enum: -> { Dodopayments::DisputeStatus }
@@ -80,13 +83,13 @@ module Dodopayments
       #
       #   @param currency [String] The currency of the disputed amount, represented as an ISO 4217 currency code.
       #
-      #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
+      #   @param customer [Dodopayments::Models::CustomerLimitedDetails] The customer who filed the dispute
       #
       #   @param dispute_id [String] The unique identifier of the dispute.
       #
-      #   @param dispute_stage [Symbol, Dodopayments::Models::DisputeStage]
+      #   @param dispute_stage [Symbol, Dodopayments::Models::DisputeStage] The current stage of the dispute process.
       #
-      #   @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus]
+      #   @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus] The current status of the dispute.
       #
       #   @param payment_id [String] The unique identifier of the payment associated with the dispute.
       #

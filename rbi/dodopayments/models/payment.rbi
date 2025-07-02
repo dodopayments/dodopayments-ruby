@@ -8,6 +8,7 @@ module Dodopayments
           T.any(Dodopayments::Payment, Dodopayments::Internal::AnyHash)
         end
 
+      # Billing address details for payments
       sig { returns(Dodopayments::BillingAddress) }
       attr_reader :billing
 
@@ -26,9 +27,11 @@ module Dodopayments
       sig { returns(Time) }
       attr_accessor :created_at
 
+      # Currency used for the payment
       sig { returns(Dodopayments::Currency::TaggedSymbol) }
       attr_accessor :currency
 
+      # Details about the customer who made the payment
       sig { returns(Dodopayments::CustomerLimitedDetails) }
       attr_reader :customer
 
@@ -45,6 +48,7 @@ module Dodopayments
       sig { returns(T::Array[Dodopayments::Dispute]) }
       attr_accessor :disputes
 
+      # Additional custom data associated with the payment
       sig { returns(T::Hash[Symbol, String]) }
       attr_accessor :metadata
 
@@ -62,6 +66,9 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :settlement_amount
 
+      # The currency in which the settlement_amount will be credited to your Dodo
+      # balance. This may differ from the customer's payment currency in adaptive
+      # pricing scenarios.
       sig { returns(Dodopayments::Currency::TaggedSymbol) }
       attr_accessor :settlement_currency
 
@@ -70,7 +77,7 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :total_amount
 
-      # ISO country code alpha2 variant
+      # ISO2 country code of the card
       sig { returns(T.nilable(Dodopayments::CountryCode::TaggedSymbol)) }
       attr_accessor :card_issuing_country
 
@@ -120,6 +127,7 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :settlement_tax
 
+      # Current status of the payment intent
       sig { returns(T.nilable(Dodopayments::IntentStatus::TaggedSymbol)) }
       attr_accessor :status
 
@@ -171,6 +179,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        # Billing address details for payments
         billing:,
         # brand id this payment belongs to
         brand_id:,
@@ -178,12 +187,15 @@ module Dodopayments
         business_id:,
         # Timestamp when the payment was created
         created_at:,
+        # Currency used for the payment
         currency:,
+        # Details about the customer who made the payment
         customer:,
         # brand id this payment belongs to
         digital_products_delivered:,
         # List of disputes associated with this payment
         disputes:,
+        # Additional custom data associated with the payment
         metadata:,
         # Unique identifier for the payment
         payment_id:,
@@ -193,11 +205,14 @@ module Dodopayments
         # and processing. Especially relevant for adaptive pricing where the customer's
         # payment currency differs from your settlement currency.
         settlement_amount:,
+        # The currency in which the settlement_amount will be credited to your Dodo
+        # balance. This may differ from the customer's payment currency in adaptive
+        # pricing scenarios.
         settlement_currency:,
         # Total amount charged to the customer including tax, in smallest currency unit
         # (e.g. cents)
         total_amount:,
-        # ISO country code alpha2 variant
+        # ISO2 country code of the card
         card_issuing_country: nil,
         # The last four digits of the card
         card_last_four: nil,
@@ -223,6 +238,7 @@ module Dodopayments
         # collected. Especially relevant for adaptive pricing where the tax component must
         # be tracked separately in your Dodo balance.
         settlement_tax: nil,
+        # Current status of the payment intent
         status: nil,
         # Identifier of the subscription if payment is part of a subscription
         subscription_id: nil,
