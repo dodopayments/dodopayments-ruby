@@ -176,4 +176,6 @@ module Dodopayments
   class WebhookEventListParams = Dodopayments::Models::WebhookEventListParams
 
   class WebhookEventRetrieveParams = Dodopayments::Models::WebhookEventRetrieveParams
+
+  class WebhookPayload = Dodopayments::Models::WebhookPayload
 end
