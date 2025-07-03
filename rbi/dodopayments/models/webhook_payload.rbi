@@ -31,7 +31,7 @@ module Dodopayments
       attr_accessor :timestamp
 
       # Event types for Dodo events
-      sig { returns(Dodopayments::WebhookPayload::Type::OrSymbol) }
+      sig { returns(Dodopayments::WebhookEventType::OrSymbol) }
       attr_accessor :type
 
       sig do
@@ -46,7 +46,7 @@ module Dodopayments
               Dodopayments::WebhookPayload::Data::LicenseKey::OrHash
             ),
           timestamp: Time,
-          type: Dodopayments::WebhookPayload::Type::OrSymbol
+          type: Dodopayments::WebhookEventType::OrSymbol
         ).returns(T.attached_class)
       end
       def self.new(
@@ -74,7 +74,7 @@ module Dodopayments
                 Dodopayments::WebhookPayload::Data::LicenseKey
               ),
             timestamp: Time,
-            type: Dodopayments::WebhookPayload::Type::OrSymbol
+            type: Dodopayments::WebhookEventType::OrSymbol
           }
         )
       end
@@ -530,134 +530,6 @@ module Dodopayments
           )
         end
         def self.variants
-        end
-      end
-
-      # Event types for Dodo events
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias { T.all(Symbol, Dodopayments::WebhookPayload::Type) }
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        PAYMENT_SUCCEEDED =
-          T.let(
-            :"payment.succeeded",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        PAYMENT_FAILED =
-          T.let(
-            :"payment.failed",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        PAYMENT_PROCESSING =
-          T.let(
-            :"payment.processing",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        PAYMENT_CANCELLED =
-          T.let(
-            :"payment.cancelled",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        REFUND_SUCCEEDED =
-          T.let(
-            :"refund.succeeded",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        REFUND_FAILED =
-          T.let(
-            :"refund.failed",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        DISPUTE_OPENED =
-          T.let(
-            :"dispute.opened",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        DISPUTE_EXPIRED =
-          T.let(
-            :"dispute.expired",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        DISPUTE_ACCEPTED =
-          T.let(
-            :"dispute.accepted",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        DISPUTE_CANCELLED =
-          T.let(
-            :"dispute.cancelled",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        DISPUTE_CHALLENGED =
-          T.let(
-            :"dispute.challenged",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        DISPUTE_WON =
-          T.let(
-            :"dispute.won",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        DISPUTE_LOST =
-          T.let(
-            :"dispute.lost",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        SUBSCRIPTION_ACTIVE =
-          T.let(
-            :"subscription.active",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        SUBSCRIPTION_RENEWED =
-          T.let(
-            :"subscription.renewed",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        SUBSCRIPTION_ON_HOLD =
-          T.let(
-            :"subscription.on_hold",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        SUBSCRIPTION_PAUSED =
-          T.let(
-            :"subscription.paused",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        SUBSCRIPTION_CANCELLED =
-          T.let(
-            :"subscription.cancelled",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        SUBSCRIPTION_FAILED =
-          T.let(
-            :"subscription.failed",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        SUBSCRIPTION_EXPIRED =
-          T.let(
-            :"subscription.expired",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        SUBSCRIPTION_PLAN_CHANGED =
-          T.let(
-            :"subscription.plan_changed",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-        LICENSE_KEY_CREATED =
-          T.let(
-            :"license_key.created",
-            Dodopayments::WebhookPayload::Type::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[Dodopayments::WebhookPayload::Type::TaggedSymbol]
-          )
-        end
-        def self.values
         end
       end
     end

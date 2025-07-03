@@ -5,7 +5,7 @@ module Dodopayments
         business_id: String,
         data: Dodopayments::Models::WebhookPayload::data,
         timestamp: Time,
-        type: Dodopayments::Models::WebhookPayload::type_
+        type: Dodopayments::Models::webhook_event_type
       }
 
     class WebhookPayload < Dodopayments::Internal::Type::BaseModel
@@ -15,20 +15,20 @@ module Dodopayments
 
       attr_accessor timestamp: Time
 
-      attr_accessor type: Dodopayments::Models::WebhookPayload::type_
+      attr_accessor type: Dodopayments::Models::webhook_event_type
 
       def initialize: (
         business_id: String,
         data: Dodopayments::Models::WebhookPayload::data,
         timestamp: Time,
-        type: Dodopayments::Models::WebhookPayload::type_
+        type: Dodopayments::Models::webhook_event_type
       ) -> void
 
       def to_hash: -> {
         business_id: String,
         data: Dodopayments::Models::WebhookPayload::data,
         timestamp: Time,
-        type: Dodopayments::Models::WebhookPayload::type_
+        type: Dodopayments::Models::webhook_event_type
       }
 
       type data =
@@ -248,59 +248,6 @@ module Dodopayments
         end
 
         def self?.variants: -> ::Array[Dodopayments::Models::WebhookPayload::data]
-      end
-
-      type type_ =
-        :"payment.succeeded"
-        | :"payment.failed"
-        | :"payment.processing"
-        | :"payment.cancelled"
-        | :"refund.succeeded"
-        | :"refund.failed"
-        | :"dispute.opened"
-        | :"dispute.expired"
-        | :"dispute.accepted"
-        | :"dispute.cancelled"
-        | :"dispute.challenged"
-        | :"dispute.won"
-        | :"dispute.lost"
-        | :"subscription.active"
-        | :"subscription.renewed"
-        | :"subscription.on_hold"
-        | :"subscription.paused"
-        | :"subscription.cancelled"
-        | :"subscription.failed"
-        | :"subscription.expired"
-        | :"subscription.plan_changed"
-        | :"license_key.created"
-
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        PAYMENT_SUCCEEDED: :"payment.succeeded"
-        PAYMENT_FAILED: :"payment.failed"
-        PAYMENT_PROCESSING: :"payment.processing"
-        PAYMENT_CANCELLED: :"payment.cancelled"
-        REFUND_SUCCEEDED: :"refund.succeeded"
-        REFUND_FAILED: :"refund.failed"
-        DISPUTE_OPENED: :"dispute.opened"
-        DISPUTE_EXPIRED: :"dispute.expired"
-        DISPUTE_ACCEPTED: :"dispute.accepted"
-        DISPUTE_CANCELLED: :"dispute.cancelled"
-        DISPUTE_CHALLENGED: :"dispute.challenged"
-        DISPUTE_WON: :"dispute.won"
-        DISPUTE_LOST: :"dispute.lost"
-        SUBSCRIPTION_ACTIVE: :"subscription.active"
-        SUBSCRIPTION_RENEWED: :"subscription.renewed"
-        SUBSCRIPTION_ON_HOLD: :"subscription.on_hold"
-        SUBSCRIPTION_PAUSED: :"subscription.paused"
-        SUBSCRIPTION_CANCELLED: :"subscription.cancelled"
-        SUBSCRIPTION_FAILED: :"subscription.failed"
-        SUBSCRIPTION_EXPIRED: :"subscription.expired"
-        SUBSCRIPTION_PLAN_CHANGED: :"subscription.plan_changed"
-        LICENSE_KEY_CREATED: :"license_key.created"
-
-        def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::type_]
       end
     end
   end

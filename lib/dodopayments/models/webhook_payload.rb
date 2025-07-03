@@ -24,8 +24,8 @@ module Dodopayments
       # @!attribute type
       #   Event types for Dodo events
       #
-      #   @return [Symbol, Dodopayments::Models::WebhookPayload::Type]
-      required :type, enum: -> { Dodopayments::WebhookPayload::Type }
+      #   @return [Symbol, Dodopayments::Models::WebhookEventType]
+      required :type, enum: -> { Dodopayments::WebhookEventType }
 
       # @!method initialize(business_id:, data:, timestamp:, type:)
       #   Some parameter documentations has been truncated, see
@@ -37,7 +37,7 @@ module Dodopayments
       #
       #   @param timestamp [Time] The timestamp of when the event occurred (not necessarily the same of when it wa
       #
-      #   @param type [Symbol, Dodopayments::Models::WebhookPayload::Type] Event types for Dodo events
+      #   @param type [Symbol, Dodopayments::Models::WebhookEventType] Event types for Dodo events
 
       # The latest data at the time of delivery attempt
       #
@@ -248,39 +248,6 @@ module Dodopayments
 
         # @!method self.variants
         #   @return [Array(Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey)]
-      end
-
-      # Event types for Dodo events
-      #
-      # @see Dodopayments::Models::WebhookPayload#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        PAYMENT_SUCCEEDED = :"payment.succeeded"
-        PAYMENT_FAILED = :"payment.failed"
-        PAYMENT_PROCESSING = :"payment.processing"
-        PAYMENT_CANCELLED = :"payment.cancelled"
-        REFUND_SUCCEEDED = :"refund.succeeded"
-        REFUND_FAILED = :"refund.failed"
-        DISPUTE_OPENED = :"dispute.opened"
-        DISPUTE_EXPIRED = :"dispute.expired"
-        DISPUTE_ACCEPTED = :"dispute.accepted"
-        DISPUTE_CANCELLED = :"dispute.cancelled"
-        DISPUTE_CHALLENGED = :"dispute.challenged"
-        DISPUTE_WON = :"dispute.won"
-        DISPUTE_LOST = :"dispute.lost"
-        SUBSCRIPTION_ACTIVE = :"subscription.active"
-        SUBSCRIPTION_RENEWED = :"subscription.renewed"
-        SUBSCRIPTION_ON_HOLD = :"subscription.on_hold"
-        SUBSCRIPTION_PAUSED = :"subscription.paused"
-        SUBSCRIPTION_CANCELLED = :"subscription.cancelled"
-        SUBSCRIPTION_FAILED = :"subscription.failed"
-        SUBSCRIPTION_EXPIRED = :"subscription.expired"
-        SUBSCRIPTION_PLAN_CHANGED = :"subscription.plan_changed"
-        LICENSE_KEY_CREATED = :"license_key.created"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
       end
     end
   end
