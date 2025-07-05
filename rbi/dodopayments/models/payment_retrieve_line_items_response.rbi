@@ -63,6 +63,9 @@ module Dodopayments
         attr_accessor :items_id
 
         sig { returns(Integer) }
+        attr_accessor :refundable_amount
+
+        sig { returns(Integer) }
         attr_accessor :tax
 
         sig { returns(T.nilable(String)) }
@@ -75,12 +78,20 @@ module Dodopayments
           params(
             amount: Integer,
             items_id: String,
+            refundable_amount: Integer,
             tax: Integer,
             description: T.nilable(String),
             name: T.nilable(String)
           ).returns(T.attached_class)
         end
-        def self.new(amount:, items_id:, tax:, description: nil, name: nil)
+        def self.new(
+          amount:,
+          items_id:,
+          refundable_amount:,
+          tax:,
+          description: nil,
+          name: nil
+        )
         end
 
         sig do
@@ -88,6 +99,7 @@ module Dodopayments
             {
               amount: Integer,
               items_id: String,
+              refundable_amount: Integer,
               tax: Integer,
               description: T.nilable(String),
               name: T.nilable(String)

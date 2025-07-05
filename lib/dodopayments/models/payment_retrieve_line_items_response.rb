@@ -30,6 +30,11 @@ module Dodopayments
         #   @return [String]
         required :items_id, String
 
+        # @!attribute refundable_amount
+        #
+        #   @return [Integer]
+        required :refundable_amount, Integer
+
         # @!attribute tax
         #
         #   @return [Integer]
@@ -45,9 +50,10 @@ module Dodopayments
         #   @return [String, nil]
         optional :name, String, nil?: true
 
-        # @!method initialize(amount:, items_id:, tax:, description: nil, name: nil)
+        # @!method initialize(amount:, items_id:, refundable_amount:, tax:, description: nil, name: nil)
         #   @param amount [Integer]
         #   @param items_id [String]
+        #   @param refundable_amount [Integer]
         #   @param tax [Integer]
         #   @param description [String, nil]
         #   @param name [String, nil]
