@@ -190,7 +190,9 @@ module Dodopayments
         params(
           subscription_id: String,
           product_price: Integer,
+          adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
           metadata: T.nilable(T::Hash[Symbol, String]),
+          product_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Models::SubscriptionChargeResponse)
       end
@@ -200,9 +202,16 @@ module Dodopayments
         # The product price. Represented in the lowest denomination of the currency (e.g.,
         # cents for USD). For example, to charge $1.00, pass `100`.
         product_price:,
+        # Whether adaptive currency fees should be included in the product_price (true) or
+        # added on top (false). This field is ignored if adaptive pricing is not enabled
+        # for the business.
+        adaptive_currency_fees_inclusive: nil,
         # Metadata for the payment. If not passed, the metadata of the subscription will
         # be taken
         metadata: nil,
+        # Optional currency of the product price. If not specified, defaults to the
+        # currency of the product.
+        product_currency: nil,
         request_options: {}
       )
       end

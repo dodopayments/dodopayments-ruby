@@ -59,7 +59,9 @@ module Dodopayments
       def charge: (
         String subscription_id,
         product_price: Integer,
+        ?adaptive_currency_fees_inclusive: bool?,
         ?metadata: ::Hash[Symbol, String]?,
+        ?product_currency: Dodopayments::Models::currency?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::SubscriptionChargeResponse
 
