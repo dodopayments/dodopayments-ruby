@@ -35,12 +35,18 @@ module Dodopayments
       sig { returns(T.nilable(Dodopayments::Currency::OrSymbol)) }
       attr_accessor :product_currency
 
+      # Optional product description override for billing and line items. If not
+      # specified, the stored description of the product will be used.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :product_description
+
       sig do
         params(
           product_price: Integer,
           adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
           metadata: T.nilable(T::Hash[Symbol, String]),
           product_currency: T.nilable(Dodopayments::Currency::OrSymbol),
+          product_description: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -58,6 +64,9 @@ module Dodopayments
         # Optional currency of the product price. If not specified, defaults to the
         # currency of the product.
         product_currency: nil,
+        # Optional product description override for billing and line items. If not
+        # specified, the stored description of the product will be used.
+        product_description: nil,
         request_options: {}
       )
       end
@@ -69,6 +78,7 @@ module Dodopayments
             adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
             metadata: T.nilable(T::Hash[Symbol, String]),
             product_currency: T.nilable(Dodopayments::Currency::OrSymbol),
+            product_description: T.nilable(String),
             request_options: Dodopayments::RequestOptions
           }
         )

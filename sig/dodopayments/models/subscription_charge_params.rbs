@@ -5,7 +5,8 @@ module Dodopayments
         product_price: Integer,
         adaptive_currency_fees_inclusive: bool?,
         metadata: ::Hash[Symbol, String]?,
-        product_currency: Dodopayments::Models::currency?
+        product_currency: Dodopayments::Models::currency?,
+        product_description: String?
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -21,11 +22,14 @@ module Dodopayments
 
       attr_accessor product_currency: Dodopayments::Models::currency?
 
+      attr_accessor product_description: String?
+
       def initialize: (
         product_price: Integer,
         ?adaptive_currency_fees_inclusive: bool?,
         ?metadata: ::Hash[Symbol, String]?,
         ?product_currency: Dodopayments::Models::currency?,
+        ?product_description: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
@@ -34,6 +38,7 @@ module Dodopayments
         adaptive_currency_fees_inclusive: bool?,
         metadata: ::Hash[Symbol, String]?,
         product_currency: Dodopayments::Models::currency?,
+        product_description: String?,
         request_options: Dodopayments::RequestOptions
       }
     end

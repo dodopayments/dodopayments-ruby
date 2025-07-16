@@ -36,7 +36,14 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::Currency, nil]
       optional :product_currency, enum: -> { Dodopayments::Currency }, nil?: true
 
-      # @!method initialize(product_price:, adaptive_currency_fees_inclusive: nil, metadata: nil, product_currency: nil, request_options: {})
+      # @!attribute product_description
+      #   Optional product description override for billing and line items. If not
+      #   specified, the stored description of the product will be used.
+      #
+      #   @return [String, nil]
+      optional :product_description, String, nil?: true
+
+      # @!method initialize(product_price:, adaptive_currency_fees_inclusive: nil, metadata: nil, product_currency: nil, product_description: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionChargeParams} for more details.
       #
@@ -47,6 +54,8 @@ module Dodopayments
       #   @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
       #   @param product_currency [Symbol, Dodopayments::Models::Currency, nil] Optional currency of the product price. If not specified, defaults to the curren
+      #
+      #   @param product_description [String, nil] Optional product description override for billing and line items.
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end

@@ -171,7 +171,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionChargeParams} for more details.
       #
-      # @overload charge(subscription_id, product_price:, adaptive_currency_fees_inclusive: nil, metadata: nil, product_currency: nil, request_options: {})
+      # @overload charge(subscription_id, product_price:, adaptive_currency_fees_inclusive: nil, metadata: nil, product_currency: nil, product_description: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -182,6 +182,8 @@ module Dodopayments
       # @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
       # @param product_currency [Symbol, Dodopayments::Models::Currency, nil] Optional currency of the product price. If not specified, defaults to the curren
+      #
+      # @param product_description [String, nil] Optional product description override for billing and line items.
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

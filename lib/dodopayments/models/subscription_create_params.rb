@@ -211,6 +211,13 @@ module Dodopayments
         #   @return [Symbol, Dodopayments::Models::Currency, nil]
         optional :product_currency, enum: -> { Dodopayments::Currency }, nil?: true
 
+        # @!attribute product_description
+        #   Optional product description override for billing and line items. If not
+        #   specified, the stored description of the product will be used.
+        #
+        #   @return [String, nil]
+        optional :product_description, String, nil?: true
+
         # @!attribute product_price
         #   Product price for the initial charge to customer If not specified the stored
         #   price of the product will be used Represented in the lowest denomination of the
@@ -219,7 +226,7 @@ module Dodopayments
         #   @return [Integer, nil]
         optional :product_price, Integer, nil?: true
 
-        # @!method initialize(mandate_only:, adaptive_currency_fees_inclusive: nil, product_currency: nil, product_price: nil)
+        # @!method initialize(mandate_only:, adaptive_currency_fees_inclusive: nil, product_currency: nil, product_description: nil, product_price: nil)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::SubscriptionCreateParams::OnDemand} for more details.
         #
@@ -228,6 +235,8 @@ module Dodopayments
         #   @param adaptive_currency_fees_inclusive [Boolean, nil] Whether adaptive currency fees should be included in the product_price (true) or
         #
         #   @param product_currency [Symbol, Dodopayments::Models::Currency, nil] Optional currency of the product price. If not specified, defaults to the curren
+        #
+        #   @param product_description [String, nil] Optional product description override for billing and line items.
         #
         #   @param product_price [Integer, nil] Product price for the initial charge to customer
       end

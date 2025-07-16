@@ -158,6 +158,7 @@ module Dodopayments
           mandate_only: bool,
           adaptive_currency_fees_inclusive: bool?,
           product_currency: Dodopayments::Models::currency?,
+          product_description: String?,
           product_price: Integer?
         }
 
@@ -168,12 +169,15 @@ module Dodopayments
 
         attr_accessor product_currency: Dodopayments::Models::currency?
 
+        attr_accessor product_description: String?
+
         attr_accessor product_price: Integer?
 
         def initialize: (
           mandate_only: bool,
           ?adaptive_currency_fees_inclusive: bool?,
           ?product_currency: Dodopayments::Models::currency?,
+          ?product_description: String?,
           ?product_price: Integer?
         ) -> void
 
@@ -181,6 +185,7 @@ module Dodopayments
           mandate_only: bool,
           adaptive_currency_fees_inclusive: bool?,
           product_currency: Dodopayments::Models::currency?,
+          product_description: String?,
           product_price: Integer?
         }
       end

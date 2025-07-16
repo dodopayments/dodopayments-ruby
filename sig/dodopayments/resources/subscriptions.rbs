@@ -62,6 +62,7 @@ module Dodopayments
         ?adaptive_currency_fees_inclusive: bool?,
         ?metadata: ::Hash[Symbol, String]?,
         ?product_currency: Dodopayments::Models::currency?,
+        ?product_description: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::SubscriptionChargeResponse
 
