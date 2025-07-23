@@ -6,8 +6,8 @@ module Dodopayments
         customer: Dodopayments::Models::customer_request,
         product_id: String,
         quantity: Integer,
-        ?addons: ::Array[Dodopayments::SubscriptionCreateParams::Addon]?,
-        ?allowed_payment_method_types: ::Array[Dodopayments::Models::SubscriptionCreateParams::allowed_payment_method_type]?,
+        ?addons: ::Array[Dodopayments::AttachAddon]?,
+        ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
         ?billing_currency: Dodopayments::Models::currency?,
         ?discount_code: String?,
         ?metadata: ::Hash[Symbol, String],
@@ -52,7 +52,7 @@ module Dodopayments
         product_id: String,
         proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode,
         quantity: Integer,
-        ?addons: ::Array[Dodopayments::SubscriptionChangePlanParams::Addon]?,
+        ?addons: ::Array[Dodopayments::AttachAddon]?,
         ?request_options: Dodopayments::request_opts
       ) -> nil
 

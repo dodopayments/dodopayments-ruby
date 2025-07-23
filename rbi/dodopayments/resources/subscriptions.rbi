@@ -13,16 +13,9 @@ module Dodopayments
             ),
           product_id: String,
           quantity: Integer,
-          addons:
-            T.nilable(
-              T::Array[Dodopayments::SubscriptionCreateParams::Addon::OrHash]
-            ),
+          addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           allowed_payment_method_types:
-            T.nilable(
-              T::Array[
-                Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::OrSymbol
-              ]
-            ),
+            T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           discount_code: T.nilable(String),
           metadata: T::Hash[Symbol, String],
@@ -161,12 +154,7 @@ module Dodopayments
           proration_billing_mode:
             Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::OrSymbol,
           quantity: Integer,
-          addons:
-            T.nilable(
-              T::Array[
-                Dodopayments::SubscriptionChangePlanParams::Addon::OrHash
-              ]
-            ),
+          addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           request_options: Dodopayments::RequestOptions::OrHash
         ).void
       end

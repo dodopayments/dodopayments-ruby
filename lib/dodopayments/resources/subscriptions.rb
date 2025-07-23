@@ -16,9 +16,9 @@ module Dodopayments
       #
       # @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
-      # @param addons [Array<Dodopayments::Models::SubscriptionCreateParams::Addon>, nil] Attach addons to this subscription
+      # @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Attach addons to this subscription
       #
-      # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout.
+      # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil] List of payment methods allowed during checkout.
       #
       # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Fix the currency in which the end customer is billed.
       #
@@ -150,7 +150,7 @@ module Dodopayments
       #
       # @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
-      # @param addons [Array<Dodopayments::Models::SubscriptionChangePlanParams::Addon>, nil] Addons for the new plan.
+      # @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

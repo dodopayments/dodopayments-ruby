@@ -8,12 +8,12 @@ module Dodopayments
         ?support_email: String?,
         ?url: String?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::BrandCreateResponse
+      ) -> Dodopayments::Brand
 
       def retrieve: (
         String id,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::BrandRetrieveResponse
+      ) -> Dodopayments::Brand
 
       def update: (
         String id,
@@ -22,7 +22,7 @@ module Dodopayments
         ?statement_descriptor: String?,
         ?support_email: String?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::BrandUpdateResponse
+      ) -> Dodopayments::Brand
 
       def list: (
         ?request_options: Dodopayments::request_opts

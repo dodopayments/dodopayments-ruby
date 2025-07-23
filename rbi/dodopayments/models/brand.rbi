@@ -2,13 +2,10 @@
 
 module Dodopayments
   module Models
-    class BrandUpdateResponse < Dodopayments::Internal::Type::BaseModel
+    class Brand < Dodopayments::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
-          T.any(
-            Dodopayments::Models::BrandUpdateResponse,
-            Dodopayments::Internal::AnyHash
-          )
+          T.any(Dodopayments::Brand, Dodopayments::Internal::AnyHash)
         end
 
       sig { returns(String) }
@@ -26,11 +23,7 @@ module Dodopayments
       sig { returns(T::Boolean) }
       attr_accessor :verification_enabled
 
-      sig do
-        returns(
-          Dodopayments::Models::BrandUpdateResponse::VerificationStatus::TaggedSymbol
-        )
-      end
+      sig { returns(Dodopayments::Brand::VerificationStatus::TaggedSymbol) }
       attr_accessor :verification_status
 
       sig { returns(T.nilable(String)) }
@@ -60,7 +53,7 @@ module Dodopayments
           statement_descriptor: String,
           verification_enabled: T::Boolean,
           verification_status:
-            Dodopayments::Models::BrandUpdateResponse::VerificationStatus::OrSymbol,
+            Dodopayments::Brand::VerificationStatus::OrSymbol,
           description: T.nilable(String),
           image: T.nilable(String),
           name: T.nilable(String),
@@ -95,7 +88,7 @@ module Dodopayments
             statement_descriptor: String,
             verification_enabled: T::Boolean,
             verification_status:
-              Dodopayments::Models::BrandUpdateResponse::VerificationStatus::TaggedSymbol,
+              Dodopayments::Brand::VerificationStatus::TaggedSymbol,
             description: T.nilable(String),
             image: T.nilable(String),
             name: T.nilable(String),
@@ -113,39 +106,22 @@ module Dodopayments
 
         TaggedSymbol =
           T.type_alias do
-            T.all(
-              Symbol,
-              Dodopayments::Models::BrandUpdateResponse::VerificationStatus
-            )
+            T.all(Symbol, Dodopayments::Brand::VerificationStatus)
           end
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
         SUCCESS =
-          T.let(
-            :Success,
-            Dodopayments::Models::BrandUpdateResponse::VerificationStatus::TaggedSymbol
-          )
+          T.let(:Success, Dodopayments::Brand::VerificationStatus::TaggedSymbol)
         FAIL =
-          T.let(
-            :Fail,
-            Dodopayments::Models::BrandUpdateResponse::VerificationStatus::TaggedSymbol
-          )
+          T.let(:Fail, Dodopayments::Brand::VerificationStatus::TaggedSymbol)
         REVIEW =
-          T.let(
-            :Review,
-            Dodopayments::Models::BrandUpdateResponse::VerificationStatus::TaggedSymbol
-          )
+          T.let(:Review, Dodopayments::Brand::VerificationStatus::TaggedSymbol)
         HOLD =
-          T.let(
-            :Hold,
-            Dodopayments::Models::BrandUpdateResponse::VerificationStatus::TaggedSymbol
-          )
+          T.let(:Hold, Dodopayments::Brand::VerificationStatus::TaggedSymbol)
 
         sig do
           override.returns(
-            T::Array[
-              Dodopayments::Models::BrandUpdateResponse::VerificationStatus::TaggedSymbol
-            ]
+            T::Array[Dodopayments::Brand::VerificationStatus::TaggedSymbol]
           )
         end
         def self.values

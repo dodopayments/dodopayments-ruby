@@ -11,7 +11,7 @@ module Dodopayments
           support_email: T.nilable(String),
           url: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Models::BrandCreateResponse)
+        ).returns(Dodopayments::Brand)
       end
       def create(
         description: nil,
@@ -28,7 +28,7 @@ module Dodopayments
         params(
           id: String,
           request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Models::BrandRetrieveResponse)
+        ).returns(Dodopayments::Brand)
       end
       def retrieve(
         # Brand Id
@@ -45,7 +45,7 @@ module Dodopayments
           statement_descriptor: T.nilable(String),
           support_email: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Models::BrandUpdateResponse)
+        ).returns(Dodopayments::Brand)
       end
       def update(
         # Brand Id

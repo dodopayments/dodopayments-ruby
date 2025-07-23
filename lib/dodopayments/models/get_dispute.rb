@@ -3,7 +3,7 @@
 module Dodopayments
   module Models
     # @see Dodopayments::Resources::Disputes#retrieve
-    class DisputeRetrieveResponse < Dodopayments::Internal::Type::BaseModel
+    class GetDispute < Dodopayments::Internal::Type::BaseModel
       # @!attribute amount
       #   The amount involved in the dispute, represented as a string to accommodate
       #   precision.
@@ -73,7 +73,7 @@ module Dodopayments
 
       # @!method initialize(amount:, business_id:, created_at:, currency:, customer:, dispute_id:, dispute_stage:, dispute_status:, payment_id:, reason: nil, remarks: nil)
       #   Some parameter documentations has been truncated, see
-      #   {Dodopayments::Models::DisputeRetrieveResponse} for more details.
+      #   {Dodopayments::Models::GetDispute} for more details.
       #
       #   @param amount [String] The amount involved in the dispute, represented as a string to accommodate preci
       #

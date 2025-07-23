@@ -32,11 +32,7 @@ module Dodopayments
 
       # Addons for the new plan. Note : Leaving this empty would remove any existing
       # addons
-      sig do
-        returns(
-          T.nilable(T::Array[Dodopayments::SubscriptionChangePlanParams::Addon])
-        )
-      end
+      sig { returns(T.nilable(T::Array[Dodopayments::AttachAddon])) }
       attr_accessor :addons
 
       sig do
@@ -45,12 +41,7 @@ module Dodopayments
           proration_billing_mode:
             Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::OrSymbol,
           quantity: Integer,
-          addons:
-            T.nilable(
-              T::Array[
-                Dodopayments::SubscriptionChangePlanParams::Addon::OrHash
-              ]
-            ),
+          addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -75,10 +66,7 @@ module Dodopayments
             proration_billing_mode:
               Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::OrSymbol,
             quantity: Integer,
-            addons:
-              T.nilable(
-                T::Array[Dodopayments::SubscriptionChangePlanParams::Addon]
-              ),
+            addons: T.nilable(T::Array[Dodopayments::AttachAddon]),
             request_options: Dodopayments::RequestOptions
           }
         )
@@ -118,32 +106,6 @@ module Dodopayments
           )
         end
         def self.values
-        end
-      end
-
-      class Addon < Dodopayments::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Dodopayments::SubscriptionChangePlanParams::Addon,
-              Dodopayments::Internal::AnyHash
-            )
-          end
-
-        sig { returns(String) }
-        attr_accessor :addon_id
-
-        sig { returns(Integer) }
-        attr_accessor :quantity
-
-        sig do
-          params(addon_id: String, quantity: Integer).returns(T.attached_class)
-        end
-        def self.new(addon_id:, quantity:)
-        end
-
-        sig { override.returns({ addon_id: String, quantity: Integer }) }
-        def to_hash
         end
       end
     end

@@ -1,13 +1,13 @@
 module Dodopayments
   module Models
-    type brand_create_response =
+    type brand =
       {
         brand_id: String,
         business_id: String,
         enabled: bool,
         statement_descriptor: String,
         verification_enabled: bool,
-        verification_status: Dodopayments::Models::BrandCreateResponse::verification_status,
+        verification_status: Dodopayments::Models::Brand::verification_status,
         description: String?,
         image: String?,
         name: String?,
@@ -16,7 +16,7 @@ module Dodopayments
         url: String?
       }
 
-    class BrandCreateResponse < Dodopayments::Internal::Type::BaseModel
+    class Brand < Dodopayments::Internal::Type::BaseModel
       attr_accessor brand_id: String
 
       attr_accessor business_id: String
@@ -27,7 +27,7 @@ module Dodopayments
 
       attr_accessor verification_enabled: bool
 
-      attr_accessor verification_status: Dodopayments::Models::BrandCreateResponse::verification_status
+      attr_accessor verification_status: Dodopayments::Models::Brand::verification_status
 
       attr_accessor description: String?
 
@@ -47,7 +47,7 @@ module Dodopayments
         enabled: bool,
         statement_descriptor: String,
         verification_enabled: bool,
-        verification_status: Dodopayments::Models::BrandCreateResponse::verification_status,
+        verification_status: Dodopayments::Models::Brand::verification_status,
         ?description: String?,
         ?image: String?,
         ?name: String?,
@@ -62,7 +62,7 @@ module Dodopayments
         enabled: bool,
         statement_descriptor: String,
         verification_enabled: bool,
-        verification_status: Dodopayments::Models::BrandCreateResponse::verification_status,
+        verification_status: Dodopayments::Models::Brand::verification_status,
         description: String?,
         image: String?,
         name: String?,
@@ -81,7 +81,7 @@ module Dodopayments
         REVIEW: :Review
         HOLD: :Hold
 
-        def self?.values: -> ::Array[Dodopayments::Models::BrandCreateResponse::verification_status]
+        def self?.values: -> ::Array[Dodopayments::Models::Brand::verification_status]
       end
     end
   end

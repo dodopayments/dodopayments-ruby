@@ -1,103 +1,13 @@
 module Dodopayments
   module Models
-    type brand_list_response =
-      { items: ::Array[Dodopayments::Models::BrandListResponse::Item] }
+    type brand_list_response = { items: ::Array[Dodopayments::Brand] }
 
     class BrandListResponse < Dodopayments::Internal::Type::BaseModel
-      attr_accessor items: ::Array[Dodopayments::Models::BrandListResponse::Item]
+      attr_accessor items: ::Array[Dodopayments::Brand]
 
-      def initialize: (
-        items: ::Array[Dodopayments::Models::BrandListResponse::Item]
-      ) -> void
+      def initialize: (items: ::Array[Dodopayments::Brand]) -> void
 
-      def to_hash: -> {
-        items: ::Array[Dodopayments::Models::BrandListResponse::Item]
-      }
-
-      type item =
-        {
-          brand_id: String,
-          business_id: String,
-          enabled: bool,
-          statement_descriptor: String,
-          verification_enabled: bool,
-          verification_status: Dodopayments::Models::BrandListResponse::Item::verification_status,
-          description: String?,
-          image: String?,
-          name: String?,
-          reason_for_hold: String?,
-          support_email: String?,
-          url: String?
-        }
-
-      class Item < Dodopayments::Internal::Type::BaseModel
-        attr_accessor brand_id: String
-
-        attr_accessor business_id: String
-
-        attr_accessor enabled: bool
-
-        attr_accessor statement_descriptor: String
-
-        attr_accessor verification_enabled: bool
-
-        attr_accessor verification_status: Dodopayments::Models::BrandListResponse::Item::verification_status
-
-        attr_accessor description: String?
-
-        attr_accessor image: String?
-
-        attr_accessor name: String?
-
-        attr_accessor reason_for_hold: String?
-
-        attr_accessor support_email: String?
-
-        attr_accessor url: String?
-
-        def initialize: (
-          brand_id: String,
-          business_id: String,
-          enabled: bool,
-          statement_descriptor: String,
-          verification_enabled: bool,
-          verification_status: Dodopayments::Models::BrandListResponse::Item::verification_status,
-          ?description: String?,
-          ?image: String?,
-          ?name: String?,
-          ?reason_for_hold: String?,
-          ?support_email: String?,
-          ?url: String?
-        ) -> void
-
-        def to_hash: -> {
-          brand_id: String,
-          business_id: String,
-          enabled: bool,
-          statement_descriptor: String,
-          verification_enabled: bool,
-          verification_status: Dodopayments::Models::BrandListResponse::Item::verification_status,
-          description: String?,
-          image: String?,
-          name: String?,
-          reason_for_hold: String?,
-          support_email: String?,
-          url: String?
-        }
-
-        type verification_status = :Success | :Fail | :Review | :Hold
-
-        module VerificationStatus
-          extend Dodopayments::Internal::Type::Enum
-
-          SUCCESS: :Success
-          FAIL: :Fail
-          REVIEW: :Review
-          HOLD: :Hold
-
-          def self?.values: -> ::Array[Dodopayments::Models::BrandListResponse::Item::verification_status]
-        end
-      end
+      def to_hash: -> { items: ::Array[Dodopayments::Brand] }
     end
   end
 end

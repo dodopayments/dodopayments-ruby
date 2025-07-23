@@ -7,7 +7,7 @@ class Dodopayments::Test::Resources::BrandsTest < Dodopayments::Test::ResourceTe
     response = @dodo_payments.brands.create
 
     assert_pattern do
-      response => Dodopayments::Models::BrandCreateResponse
+      response => Dodopayments::Brand
     end
 
     assert_pattern do
@@ -17,7 +17,7 @@ class Dodopayments::Test::Resources::BrandsTest < Dodopayments::Test::ResourceTe
         enabled: Dodopayments::Internal::Type::Boolean,
         statement_descriptor: String,
         verification_enabled: Dodopayments::Internal::Type::Boolean,
-        verification_status: Dodopayments::Models::BrandCreateResponse::VerificationStatus,
+        verification_status: Dodopayments::Brand::VerificationStatus,
         description: String | nil,
         image: String | nil,
         name: String | nil,
@@ -32,7 +32,7 @@ class Dodopayments::Test::Resources::BrandsTest < Dodopayments::Test::ResourceTe
     response = @dodo_payments.brands.retrieve("id")
 
     assert_pattern do
-      response => Dodopayments::Models::BrandRetrieveResponse
+      response => Dodopayments::Brand
     end
 
     assert_pattern do
@@ -42,7 +42,7 @@ class Dodopayments::Test::Resources::BrandsTest < Dodopayments::Test::ResourceTe
         enabled: Dodopayments::Internal::Type::Boolean,
         statement_descriptor: String,
         verification_enabled: Dodopayments::Internal::Type::Boolean,
-        verification_status: Dodopayments::Models::BrandRetrieveResponse::VerificationStatus,
+        verification_status: Dodopayments::Brand::VerificationStatus,
         description: String | nil,
         image: String | nil,
         name: String | nil,
@@ -57,7 +57,7 @@ class Dodopayments::Test::Resources::BrandsTest < Dodopayments::Test::ResourceTe
     response = @dodo_payments.brands.update("id")
 
     assert_pattern do
-      response => Dodopayments::Models::BrandUpdateResponse
+      response => Dodopayments::Brand
     end
 
     assert_pattern do
@@ -67,7 +67,7 @@ class Dodopayments::Test::Resources::BrandsTest < Dodopayments::Test::ResourceTe
         enabled: Dodopayments::Internal::Type::Boolean,
         statement_descriptor: String,
         verification_enabled: Dodopayments::Internal::Type::Boolean,
-        verification_status: Dodopayments::Models::BrandUpdateResponse::VerificationStatus,
+        verification_status: Dodopayments::Brand::VerificationStatus,
         description: String | nil,
         image: String | nil,
         name: String | nil,
@@ -87,7 +87,7 @@ class Dodopayments::Test::Resources::BrandsTest < Dodopayments::Test::ResourceTe
 
     assert_pattern do
       response => {
-        items: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::BrandListResponse::Item])
+        items: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Brand])
       }
     end
   end

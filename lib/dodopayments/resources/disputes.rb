@@ -9,14 +9,14 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::DisputeRetrieveResponse]
+      # @return [Dodopayments::Models::GetDispute]
       #
       # @see Dodopayments::Models::DisputeRetrieveParams
       def retrieve(dispute_id, params = {})
         @client.request(
           method: :get,
           path: ["disputes/%1$s", dispute_id],
-          model: Dodopayments::Models::DisputeRetrieveResponse,
+          model: Dodopayments::GetDispute,
           options: params[:request_options]
         )
       end

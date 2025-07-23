@@ -13,9 +13,13 @@ module Dodopayments
 
   class AddonUpdateParams = Dodopayments::Models::AddonUpdateParams
 
+  class AttachAddon = Dodopayments::Models::AttachAddon
+
   class AttachExistingCustomer = Dodopayments::Models::AttachExistingCustomer
 
   class BillingAddress = Dodopayments::Models::BillingAddress
+
+  class Brand = Dodopayments::Models::Brand
 
   class BrandCreateParams = Dodopayments::Models::BrandCreateParams
 
@@ -75,6 +79,8 @@ module Dodopayments
 
   module DisputeStatus = Dodopayments::Models::DisputeStatus
 
+  class GetDispute = Dodopayments::Models::GetDispute
+
   module IntentStatus = Dodopayments::Models::IntentStatus
 
   module Invoices = Dodopayments::Models::Invoices
@@ -114,6 +120,8 @@ module Dodopayments
   class PaymentCreateParams = Dodopayments::Models::PaymentCreateParams
 
   class PaymentListParams = Dodopayments::Models::PaymentListParams
+
+  module PaymentMethodTypes = Dodopayments::Models::PaymentMethodTypes
 
   class PaymentRetrieveLineItemsParams = Dodopayments::Models::PaymentRetrieveLineItemsParams
 

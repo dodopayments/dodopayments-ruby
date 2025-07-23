@@ -12,7 +12,7 @@ module Dodopayments
       # @param url [String, nil]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::BrandCreateResponse]
+      # @return [Dodopayments::Models::Brand]
       #
       # @see Dodopayments::Models::BrandCreateParams
       def create(params = {})
@@ -21,7 +21,7 @@ module Dodopayments
           method: :post,
           path: "brands",
           body: parsed,
-          model: Dodopayments::Models::BrandCreateResponse,
+          model: Dodopayments::Brand,
           options: options
         )
       end
@@ -34,14 +34,14 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::BrandRetrieveResponse]
+      # @return [Dodopayments::Models::Brand]
       #
       # @see Dodopayments::Models::BrandRetrieveParams
       def retrieve(id, params = {})
         @client.request(
           method: :get,
           path: ["brands/%1$s", id],
-          model: Dodopayments::Models::BrandRetrieveResponse,
+          model: Dodopayments::Brand,
           options: params[:request_options]
         )
       end
@@ -60,7 +60,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::BrandUpdateResponse]
+      # @return [Dodopayments::Models::Brand]
       #
       # @see Dodopayments::Models::BrandUpdateParams
       def update(id, params = {})
@@ -69,7 +69,7 @@ module Dodopayments
           method: :patch,
           path: ["brands/%1$s", id],
           body: parsed,
-          model: Dodopayments::Models::BrandUpdateResponse,
+          model: Dodopayments::Brand,
           options: options
         )
       end

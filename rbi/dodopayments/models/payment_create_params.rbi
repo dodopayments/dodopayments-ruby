@@ -43,13 +43,7 @@ module Dodopayments
       # Availability still depends on other factors (e.g., customer location, merchant
       # settings).
       sig do
-        returns(
-          T.nilable(
-            T::Array[
-              Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol
-            ]
-          )
-        )
+        returns(T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]))
       end
       attr_accessor :allowed_payment_method_types
 
@@ -101,11 +95,7 @@ module Dodopayments
             ),
           product_cart: T::Array[Dodopayments::OneTimeProductCartItem::OrHash],
           allowed_payment_method_types:
-            T.nilable(
-              T::Array[
-                Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol
-              ]
-            ),
+            T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           discount_code: T.nilable(String),
           metadata: T::Hash[Symbol, String],
@@ -163,11 +153,7 @@ module Dodopayments
               ),
             product_cart: T::Array[Dodopayments::OneTimeProductCartItem],
             allowed_payment_method_types:
-              T.nilable(
-                T::Array[
-                  Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol
-                ]
-              ),
+              T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
             billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
             discount_code: T.nilable(String),
             metadata: T::Hash[Symbol, String],
@@ -180,120 +166,6 @@ module Dodopayments
         )
       end
       def to_hash
-      end
-
-      module AllowedPaymentMethodType
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(
-              Symbol,
-              Dodopayments::PaymentCreateParams::AllowedPaymentMethodType
-            )
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        CREDIT =
-          T.let(
-            :credit,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        DEBIT =
-          T.let(
-            :debit,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        UPI_COLLECT =
-          T.let(
-            :upi_collect,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        UPI_INTENT =
-          T.let(
-            :upi_intent,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        APPLE_PAY =
-          T.let(
-            :apple_pay,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        CASHAPP =
-          T.let(
-            :cashapp,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        GOOGLE_PAY =
-          T.let(
-            :google_pay,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        MULTIBANCO =
-          T.let(
-            :multibanco,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        BANCONTACT_CARD =
-          T.let(
-            :bancontact_card,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        EPS =
-          T.let(
-            :eps,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        IDEAL =
-          T.let(
-            :ideal,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        PRZELEWY24 =
-          T.let(
-            :przelewy24,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        AFFIRM =
-          T.let(
-            :affirm,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        KLARNA =
-          T.let(
-            :klarna,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        SEPA =
-          T.let(
-            :sepa,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        ACH =
-          T.let(
-            :ach,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        AMAZON_PAY =
-          T.let(
-            :amazon_pay,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        AFTERPAY_CLEARPAY =
-          T.let(
-            :afterpay_clearpay,
-            Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
       end
     end
   end

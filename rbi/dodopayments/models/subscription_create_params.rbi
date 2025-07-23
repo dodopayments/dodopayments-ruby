@@ -41,11 +41,7 @@ module Dodopayments
       attr_accessor :quantity
 
       # Attach addons to this subscription
-      sig do
-        returns(
-          T.nilable(T::Array[Dodopayments::SubscriptionCreateParams::Addon])
-        )
-      end
+      sig { returns(T.nilable(T::Array[Dodopayments::AttachAddon])) }
       attr_accessor :addons
 
       # List of payment methods allowed during checkout.
@@ -55,13 +51,7 @@ module Dodopayments
       # Availability still depends on other factors (e.g., customer location, merchant
       # settings).
       sig do
-        returns(
-          T.nilable(
-            T::Array[
-              Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::OrSymbol
-            ]
-          )
-        )
+        returns(T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]))
       end
       attr_accessor :allowed_payment_method_types
 
@@ -129,16 +119,9 @@ module Dodopayments
             ),
           product_id: String,
           quantity: Integer,
-          addons:
-            T.nilable(
-              T::Array[Dodopayments::SubscriptionCreateParams::Addon::OrHash]
-            ),
+          addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           allowed_payment_method_types:
-            T.nilable(
-              T::Array[
-                Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::OrSymbol
-              ]
-            ),
+            T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           discount_code: T.nilable(String),
           metadata: T::Hash[Symbol, String],
@@ -205,16 +188,9 @@ module Dodopayments
               ),
             product_id: String,
             quantity: Integer,
-            addons:
-              T.nilable(
-                T::Array[Dodopayments::SubscriptionCreateParams::Addon]
-              ),
+            addons: T.nilable(T::Array[Dodopayments::AttachAddon]),
             allowed_payment_method_types:
-              T.nilable(
-                T::Array[
-                  Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::OrSymbol
-                ]
-              ),
+              T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
             billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
             discount_code: T.nilable(String),
             metadata: T::Hash[Symbol, String],
@@ -230,146 +206,6 @@ module Dodopayments
         )
       end
       def to_hash
-      end
-
-      class Addon < Dodopayments::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Dodopayments::SubscriptionCreateParams::Addon,
-              Dodopayments::Internal::AnyHash
-            )
-          end
-
-        sig { returns(String) }
-        attr_accessor :addon_id
-
-        sig { returns(Integer) }
-        attr_accessor :quantity
-
-        sig do
-          params(addon_id: String, quantity: Integer).returns(T.attached_class)
-        end
-        def self.new(addon_id:, quantity:)
-        end
-
-        sig { override.returns({ addon_id: String, quantity: Integer }) }
-        def to_hash
-        end
-      end
-
-      module AllowedPaymentMethodType
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(
-              Symbol,
-              Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType
-            )
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        CREDIT =
-          T.let(
-            :credit,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        DEBIT =
-          T.let(
-            :debit,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        UPI_COLLECT =
-          T.let(
-            :upi_collect,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        UPI_INTENT =
-          T.let(
-            :upi_intent,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        APPLE_PAY =
-          T.let(
-            :apple_pay,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        CASHAPP =
-          T.let(
-            :cashapp,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        GOOGLE_PAY =
-          T.let(
-            :google_pay,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        MULTIBANCO =
-          T.let(
-            :multibanco,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        BANCONTACT_CARD =
-          T.let(
-            :bancontact_card,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        EPS =
-          T.let(
-            :eps,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        IDEAL =
-          T.let(
-            :ideal,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        PRZELEWY24 =
-          T.let(
-            :przelewy24,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        AFFIRM =
-          T.let(
-            :affirm,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        KLARNA =
-          T.let(
-            :klarna,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        SEPA =
-          T.let(
-            :sepa,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        ACH =
-          T.let(
-            :ach,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        AMAZON_PAY =
-          T.let(
-            :amazon_pay,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-        AFTERPAY_CLEARPAY =
-          T.let(
-            :afterpay_clearpay,
-            Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
       end
 
       class OnDemand < Dodopayments::Internal::Type::BaseModel

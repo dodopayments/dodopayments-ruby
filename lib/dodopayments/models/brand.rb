@@ -2,8 +2,8 @@
 
 module Dodopayments
   module Models
-    # @see Dodopayments::Resources::Brands#retrieve
-    class BrandRetrieveResponse < Dodopayments::Internal::Type::BaseModel
+    # @see Dodopayments::Resources::Brands#create
+    class Brand < Dodopayments::Internal::Type::BaseModel
       # @!attribute brand_id
       #
       #   @return [String]
@@ -31,9 +31,8 @@ module Dodopayments
 
       # @!attribute verification_status
       #
-      #   @return [Symbol, Dodopayments::Models::BrandRetrieveResponse::VerificationStatus]
-      required :verification_status,
-               enum: -> { Dodopayments::Models::BrandRetrieveResponse::VerificationStatus }
+      #   @return [Symbol, Dodopayments::Models::Brand::VerificationStatus]
+      required :verification_status, enum: -> { Dodopayments::Brand::VerificationStatus }
 
       # @!attribute description
       #
@@ -77,7 +76,7 @@ module Dodopayments
       #
       #   @param verification_enabled [Boolean]
       #
-      #   @param verification_status [Symbol, Dodopayments::Models::BrandRetrieveResponse::VerificationStatus]
+      #   @param verification_status [Symbol, Dodopayments::Models::Brand::VerificationStatus]
       #
       #   @param description [String, nil]
       #
@@ -91,7 +90,7 @@ module Dodopayments
       #
       #   @param url [String, nil]
 
-      # @see Dodopayments::Models::BrandRetrieveResponse#verification_status
+      # @see Dodopayments::Models::Brand#verification_status
       module VerificationStatus
         extend Dodopayments::Internal::Type::Enum
 

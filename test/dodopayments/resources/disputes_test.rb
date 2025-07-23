@@ -7,7 +7,7 @@ class Dodopayments::Test::Resources::DisputesTest < Dodopayments::Test::Resource
     response = @dodo_payments.disputes.retrieve("dispute_id")
 
     assert_pattern do
-      response => Dodopayments::Models::DisputeRetrieveResponse
+      response => Dodopayments::GetDispute
     end
 
     assert_pattern do

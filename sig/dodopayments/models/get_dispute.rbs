@@ -1,6 +1,6 @@
 module Dodopayments
   module Models
-    type dispute_retrieve_response =
+    type get_dispute =
       {
         amount: String,
         business_id: String,
@@ -15,7 +15,7 @@ module Dodopayments
         remarks: String?
       }
 
-    class DisputeRetrieveResponse < Dodopayments::Internal::Type::BaseModel
+    class GetDispute < Dodopayments::Internal::Type::BaseModel
       attr_accessor amount: String
 
       attr_accessor business_id: String

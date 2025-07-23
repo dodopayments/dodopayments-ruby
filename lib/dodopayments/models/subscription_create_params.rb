@@ -34,10 +34,8 @@ module Dodopayments
       # @!attribute addons
       #   Attach addons to this subscription
       #
-      #   @return [Array<Dodopayments::Models::SubscriptionCreateParams::Addon>, nil]
-      optional :addons,
-               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::SubscriptionCreateParams::Addon] },
-               nil?: true
+      #   @return [Array<Dodopayments::Models::AttachAddon>, nil]
+      optional :addons, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::AttachAddon] }, nil?: true
 
       # @!attribute allowed_payment_method_types
       #   List of payment methods allowed during checkout.
@@ -47,11 +45,9 @@ module Dodopayments
       #   Availability still depends on other factors (e.g., customer location, merchant
       #   settings).
       #
-      #   @return [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil]
+      #   @return [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil]
       optional :allowed_payment_method_types,
-               -> {
-                 Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::SubscriptionCreateParams::AllowedPaymentMethodType]
-               },
+               -> { Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::PaymentMethodTypes] },
                nil?: true
 
       # @!attribute billing_currency
@@ -122,9 +118,9 @@ module Dodopayments
       #
       #   @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
-      #   @param addons [Array<Dodopayments::Models::SubscriptionCreateParams::Addon>, nil] Attach addons to this subscription
+      #   @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Attach addons to this subscription
       #
-      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout.
+      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil] List of payment methods allowed during checkout.
       #
       #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Fix the currency in which the end customer is billed.
       #
@@ -145,48 +141,6 @@ module Dodopayments
       #   @param trial_period_days [Integer, nil] Optional trial period in days
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-
-      class Addon < Dodopayments::Internal::Type::BaseModel
-        # @!attribute addon_id
-        #
-        #   @return [String]
-        required :addon_id, String
-
-        # @!attribute quantity
-        #
-        #   @return [Integer]
-        required :quantity, Integer
-
-        # @!method initialize(addon_id:, quantity:)
-        #   @param addon_id [String]
-        #   @param quantity [Integer]
-      end
-
-      module AllowedPaymentMethodType
-        extend Dodopayments::Internal::Type::Enum
-
-        CREDIT = :credit
-        DEBIT = :debit
-        UPI_COLLECT = :upi_collect
-        UPI_INTENT = :upi_intent
-        APPLE_PAY = :apple_pay
-        CASHAPP = :cashapp
-        GOOGLE_PAY = :google_pay
-        MULTIBANCO = :multibanco
-        BANCONTACT_CARD = :bancontact_card
-        EPS = :eps
-        IDEAL = :ideal
-        PRZELEWY24 = :przelewy24
-        AFFIRM = :affirm
-        KLARNA = :klarna
-        SEPA = :sepa
-        ACH = :ach
-        AMAZON_PAY = :amazon_pay
-        AFTERPAY_CLEARPAY = :afterpay_clearpay
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
 
       class OnDemand < Dodopayments::Internal::Type::BaseModel
         # @!attribute mandate_only

@@ -36,11 +36,9 @@ module Dodopayments
       #   Availability still depends on other factors (e.g., customer location, merchant
       #   settings).
       #
-      #   @return [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil]
+      #   @return [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil]
       optional :allowed_payment_method_types,
-               -> {
-                 Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::PaymentCreateParams::AllowedPaymentMethodType]
-               },
+               -> { Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::PaymentMethodTypes] },
                nil?: true
 
       # @!attribute billing_currency
@@ -99,7 +97,7 @@ module Dodopayments
       #
       #   @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>] List of products in the cart. Must contain at least 1 and at most 100 items.
       #
-      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout.
+      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil] List of payment methods allowed during checkout.
       #
       #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Fix the currency in which the end customer is billed.
       #
@@ -116,32 +114,6 @@ module Dodopayments
       #   @param tax_id [String, nil] Tax ID in case the payment is B2B. If tax id validation fails the payment creati
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-
-      module AllowedPaymentMethodType
-        extend Dodopayments::Internal::Type::Enum
-
-        CREDIT = :credit
-        DEBIT = :debit
-        UPI_COLLECT = :upi_collect
-        UPI_INTENT = :upi_intent
-        APPLE_PAY = :apple_pay
-        CASHAPP = :cashapp
-        GOOGLE_PAY = :google_pay
-        MULTIBANCO = :multibanco
-        BANCONTACT_CARD = :bancontact_card
-        EPS = :eps
-        IDEAL = :ideal
-        PRZELEWY24 = :przelewy24
-        AFFIRM = :affirm
-        KLARNA = :klarna
-        SEPA = :sepa
-        ACH = :ach
-        AMAZON_PAY = :amazon_pay
-        AFTERPAY_CLEARPAY = :afterpay_clearpay
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
     end
   end
 end

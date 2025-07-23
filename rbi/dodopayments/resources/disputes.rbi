@@ -7,7 +7,7 @@ module Dodopayments
         params(
           dispute_id: String,
           request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Models::DisputeRetrieveResponse)
+        ).returns(Dodopayments::GetDispute)
       end
       def retrieve(
         # Dispute Id

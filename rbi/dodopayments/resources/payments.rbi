@@ -13,11 +13,7 @@ module Dodopayments
             ),
           product_cart: T::Array[Dodopayments::OneTimeProductCartItem::OrHash],
           allowed_payment_method_types:
-            T.nilable(
-              T::Array[
-                Dodopayments::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol
-              ]
-            ),
+            T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           discount_code: T.nilable(String),
           metadata: T::Hash[Symbol, String],
