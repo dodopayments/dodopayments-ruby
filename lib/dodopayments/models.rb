@@ -219,12 +219,6 @@ module Dodopayments
 
   TimeInterval = Dodopayments::Models::TimeInterval
 
-  WebhookEvent = Dodopayments::Models::WebhookEvent
-
-  WebhookEventListParams = Dodopayments::Models::WebhookEventListParams
-
-  WebhookEventRetrieveParams = Dodopayments::Models::WebhookEventRetrieveParams
-
   WebhookEventType = Dodopayments::Models::WebhookEventType
 
   WebhookPayload = Dodopayments::Models::WebhookPayload

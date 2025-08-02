@@ -97,6 +97,11 @@ module Dodopayments
             :full_immediately,
             Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::TaggedSymbol
           )
+        DIFFERENCE_IMMEDIATELY =
+          T.let(
+            :difference_immediately,
+            Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::TaggedSymbol
+          )
 
         sig do
           override.returns(

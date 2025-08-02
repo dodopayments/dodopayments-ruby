@@ -66,11 +66,6 @@ module Dodopayments
           :"subscription.on_hold",
           Dodopayments::WebhookEventType::TaggedSymbol
         )
-      SUBSCRIPTION_PAUSED =
-        T.let(
-          :"subscription.paused",
-          Dodopayments::WebhookEventType::TaggedSymbol
-        )
       SUBSCRIPTION_CANCELLED =
         T.let(
           :"subscription.cancelled",

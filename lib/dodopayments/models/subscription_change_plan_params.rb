@@ -53,6 +53,7 @@ module Dodopayments
 
         PRORATED_IMMEDIATELY = :prorated_immediately
         FULL_IMMEDIATELY = :full_immediately
+        DIFFERENCE_IMMEDIATELY = :difference_immediately
 
         # @!method self.values
         #   @return [Array<Symbol>]

@@ -12,7 +12,6 @@ module Dodopayments
       PENDING = T.let(:pending, Dodopayments::SubscriptionStatus::TaggedSymbol)
       ACTIVE = T.let(:active, Dodopayments::SubscriptionStatus::TaggedSymbol)
       ON_HOLD = T.let(:on_hold, Dodopayments::SubscriptionStatus::TaggedSymbol)
-      PAUSED = T.let(:paused, Dodopayments::SubscriptionStatus::TaggedSymbol)
       CANCELLED =
         T.let(:cancelled, Dodopayments::SubscriptionStatus::TaggedSymbol)
       FAILED = T.let(:failed, Dodopayments::SubscriptionStatus::TaggedSymbol)
