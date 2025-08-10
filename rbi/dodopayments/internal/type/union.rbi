@@ -16,7 +16,8 @@ module Dodopayments
             T::Array[
               [
                 T.nilable(Symbol),
-                T.proc.returns(Dodopayments::Internal::Type::Converter::Input)
+                T.proc.returns(Dodopayments::Internal::Type::Converter::Input),
+                Dodopayments::Internal::AnyHash
               ]
             ]
           )
@@ -25,7 +26,13 @@ module Dodopayments
         end
 
         # @api private
-        sig { returns(T::Array[[T.nilable(Symbol), T.anything]]) }
+        sig do
+          returns(
+            T::Array[
+              [T.nilable(Symbol), T.anything, Dodopayments::Internal::AnyHash]
+            ]
+          )
+        end
         protected def derefed_variants
         end
 
