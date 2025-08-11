@@ -71,6 +71,12 @@ module Dodopayments
     sig { returns(Dodopayments::Resources::Brands) }
     attr_reader :brands
 
+    sig { returns(Dodopayments::Resources::Webhooks) }
+    attr_reader :webhooks
+
+    sig { returns(Dodopayments::Resources::YourWebhookURL) }
+    attr_reader :your_webhook_url
+
     # @api private
     sig { override.returns(T::Hash[String, String]) }
     private def auth_headers

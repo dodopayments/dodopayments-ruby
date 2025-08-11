@@ -12,6 +12,7 @@ module Dodopayments
         type: Dodopayments::Models::discount_type,
         expires_at: Time?,
         name: String?,
+        subscription_cycles: Integer?,
         usage_limit: Integer?
       }
 
@@ -36,6 +37,8 @@ module Dodopayments
 
       attr_accessor name: String?
 
+      attr_accessor subscription_cycles: Integer?
+
       attr_accessor usage_limit: Integer?
 
       def initialize: (
@@ -49,6 +52,7 @@ module Dodopayments
         type: Dodopayments::Models::discount_type,
         ?expires_at: Time?,
         ?name: String?,
+        ?subscription_cycles: Integer?,
         ?usage_limit: Integer?
       ) -> void
 
@@ -63,6 +67,7 @@ module Dodopayments
         type: Dodopayments::Models::discount_type,
         expires_at: Time?,
         name: String?,
+        subscription_cycles: Integer?,
         usage_limit: Integer?
       }
     end

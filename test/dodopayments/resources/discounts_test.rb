@@ -22,6 +22,7 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
         type: Dodopayments::DiscountType,
         expires_at: Time | nil,
         name: String | nil,
+        subscription_cycles: Integer | nil,
         usage_limit: Integer | nil
       }
     end
@@ -46,6 +47,7 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
         type: Dodopayments::DiscountType,
         expires_at: Time | nil,
         name: String | nil,
+        subscription_cycles: Integer | nil,
         usage_limit: Integer | nil
       }
     end
@@ -70,6 +72,7 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
         type: Dodopayments::DiscountType,
         expires_at: Time | nil,
         name: String | nil,
+        subscription_cycles: Integer | nil,
         usage_limit: Integer | nil
       }
     end
@@ -101,6 +104,7 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
         type: Dodopayments::DiscountType,
         expires_at: Time | nil,
         name: String | nil,
+        subscription_cycles: Integer | nil,
         usage_limit: Integer | nil
       }
     end

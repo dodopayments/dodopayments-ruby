@@ -1,0 +1,20 @@
+module Dodopayments
+  module Resources
+    class Webhooks
+      class Headers
+        def retrieve: (
+          String webhook_id,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::Webhooks::HeaderRetrieveResponse
+
+        def update: (
+          String webhook_id,
+          headers: ::Hash[Symbol, String],
+          ?request_options: Dodopayments::request_opts
+        ) -> nil
+
+        def initialize: (client: Dodopayments::Client) -> void
+      end
+    end
+  end
+end

@@ -52,6 +52,12 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :name
 
+      # Number of subscription billing cycles this discount is valid for. If not
+      # provided, the discount will be applied indefinitely to all recurring payments
+      # related to the subscription.
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :subscription_cycles
+
       # Usage limit for this discount, if any.
       sig { returns(T.nilable(Integer)) }
       attr_accessor :usage_limit
@@ -68,6 +74,7 @@ module Dodopayments
           type: Dodopayments::DiscountType::OrSymbol,
           expires_at: T.nilable(Time),
           name: T.nilable(String),
+          subscription_cycles: T.nilable(Integer),
           usage_limit: T.nilable(Integer)
         ).returns(T.attached_class)
       end
@@ -96,6 +103,10 @@ module Dodopayments
         expires_at: nil,
         # Name for the Discount
         name: nil,
+        # Number of subscription billing cycles this discount is valid for. If not
+        # provided, the discount will be applied indefinitely to all recurring payments
+        # related to the subscription.
+        subscription_cycles: nil,
         # Usage limit for this discount, if any.
         usage_limit: nil
       )
@@ -114,6 +125,7 @@ module Dodopayments
             type: Dodopayments::DiscountType::TaggedSymbol,
             expires_at: T.nilable(Time),
             name: T.nilable(String),
+            subscription_cycles: T.nilable(Integer),
             usage_limit: T.nilable(Integer)
           }
         )

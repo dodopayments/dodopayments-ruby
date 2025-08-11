@@ -1,0 +1,24 @@
+module Dodopayments
+  module Models
+    module Webhooks
+      type header_retrieve_response =
+        { headers: ::Hash[Symbol, String], sensitive: ::Array[String] }
+
+      class HeaderRetrieveResponse < Dodopayments::Internal::Type::BaseModel
+        attr_accessor headers: ::Hash[Symbol, String]
+
+        attr_accessor sensitive: ::Array[String]
+
+        def initialize: (
+          headers: ::Hash[Symbol, String],
+          sensitive: ::Array[String]
+        ) -> void
+
+        def to_hash: -> {
+          headers: ::Hash[Symbol, String],
+          sensitive: ::Array[String]
+        }
+      end
+    end
+  end
+end

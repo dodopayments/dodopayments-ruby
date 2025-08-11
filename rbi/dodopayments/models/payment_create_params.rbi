@@ -24,10 +24,7 @@ module Dodopayments
       # Customer information for the payment
       sig do
         returns(
-          T.any(
-            Dodopayments::AttachExistingCustomer,
-            Dodopayments::CreateNewCustomer
-          )
+          T.any(Dodopayments::AttachExistingCustomer, Dodopayments::NewCustomer)
         )
       end
       attr_accessor :customer
@@ -91,7 +88,7 @@ module Dodopayments
           customer:
             T.any(
               Dodopayments::AttachExistingCustomer::OrHash,
-              Dodopayments::CreateNewCustomer::OrHash
+              Dodopayments::NewCustomer::OrHash
             ),
           product_cart: T::Array[Dodopayments::OneTimeProductCartItem::OrHash],
           allowed_payment_method_types:
@@ -149,7 +146,7 @@ module Dodopayments
             customer:
               T.any(
                 Dodopayments::AttachExistingCustomer,
-                Dodopayments::CreateNewCustomer
+                Dodopayments::NewCustomer
               ),
             product_cart: T::Array[Dodopayments::OneTimeProductCartItem],
             allowed_payment_method_types:

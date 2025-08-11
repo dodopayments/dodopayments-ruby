@@ -33,6 +33,12 @@ module Dodopayments
       #   @return [Boolean]
       required :license_key_enabled, Dodopayments::Internal::Type::Boolean
 
+      # @!attribute metadata
+      #   Additional custom data associated with the product
+      #
+      #   @return [Hash{Symbol=>String}]
+      required :metadata, Dodopayments::Internal::Type::HashOf[String]
+
       # @!attribute price
       #   Pricing information for the product.
       #
@@ -104,7 +110,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :name, String, nil?: true
 
-      # @!method initialize(brand_id:, business_id:, created_at:, is_recurring:, license_key_enabled:, price:, product_id:, tax_category:, updated_at:, addons: nil, description: nil, digital_product_delivery: nil, image: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, name: nil)
+      # @!method initialize(brand_id:, business_id:, created_at:, is_recurring:, license_key_enabled:, metadata:, price:, product_id:, tax_category:, updated_at:, addons: nil, description: nil, digital_product_delivery: nil, image: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, name: nil)
       #   @param brand_id [String]
       #
       #   @param business_id [String] Unique identifier for the business to which the product belongs.
@@ -114,6 +120,8 @@ module Dodopayments
       #   @param is_recurring [Boolean] Indicates if the product is recurring (e.g., subscriptions).
       #
       #   @param license_key_enabled [Boolean] Indicates whether the product requires a license key.
+      #
+      #   @param metadata [Hash{Symbol=>String}] Additional custom data associated with the product
       #
       #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice] Pricing information for the product.
       #

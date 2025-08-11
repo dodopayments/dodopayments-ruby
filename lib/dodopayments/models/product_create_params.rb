@@ -71,13 +71,19 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :license_key_enabled, Dodopayments::Internal::Type::Boolean, nil?: true
 
+      # @!attribute metadata
+      #   Additional metadata for the product
+      #
+      #   @return [Hash{Symbol=>String}, nil]
+      optional :metadata, Dodopayments::Internal::Type::HashOf[String]
+
       # @!attribute name
       #   Optional name of the product
       #
       #   @return [String, nil]
       optional :name, String, nil?: true
 
-      # @!method initialize(price:, tax_category:, addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, request_options: {})
+      # @!method initialize(price:, tax_category:, addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductCreateParams} for more details.
       #
@@ -100,6 +106,8 @@ module Dodopayments
       #   @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil] Duration configuration for the license key.
       #
       #   @param license_key_enabled [Boolean, nil] When true, generates and sends a license key to your customer.
+      #
+      #   @param metadata [Hash{Symbol=>String}] Additional metadata for the product
       #
       #   @param name [String, nil] Optional name of the product
       #

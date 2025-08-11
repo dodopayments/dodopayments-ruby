@@ -24,10 +24,7 @@ module Dodopayments
       # Customer details for the subscription
       sig do
         returns(
-          T.any(
-            Dodopayments::AttachExistingCustomer,
-            Dodopayments::CreateNewCustomer
-          )
+          T.any(Dodopayments::AttachExistingCustomer, Dodopayments::NewCustomer)
         )
       end
       attr_accessor :customer
@@ -115,7 +112,7 @@ module Dodopayments
           customer:
             T.any(
               Dodopayments::AttachExistingCustomer::OrHash,
-              Dodopayments::CreateNewCustomer::OrHash
+              Dodopayments::NewCustomer::OrHash
             ),
           product_id: String,
           quantity: Integer,
@@ -184,7 +181,7 @@ module Dodopayments
             customer:
               T.any(
                 Dodopayments::AttachExistingCustomer,
-                Dodopayments::CreateNewCustomer
+                Dodopayments::NewCustomer
               ),
             product_id: String,
             quantity: Integer,

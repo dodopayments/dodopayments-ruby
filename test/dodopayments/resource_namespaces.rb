@@ -11,6 +11,9 @@ module Dodopayments
 
       module Products
       end
+
+      module Webhooks
+      end
     end
   end
 end

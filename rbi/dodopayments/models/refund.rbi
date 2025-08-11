@@ -29,7 +29,7 @@ module Dodopayments
       attr_accessor :refund_id
 
       # The current status of the refund.
-      sig { returns(Dodopayments::RefundStatus::TaggedSymbol) }
+      sig { returns(Dodopayments::RefundStatus::OrSymbol) }
       attr_accessor :status
 
       # The refunded amount.
@@ -37,7 +37,7 @@ module Dodopayments
       attr_accessor :amount
 
       # The currency of the refund, represented as an ISO 4217 currency code.
-      sig { returns(T.nilable(Dodopayments::Currency::TaggedSymbol)) }
+      sig { returns(T.nilable(Dodopayments::Currency::OrSymbol)) }
       attr_accessor :currency
 
       # The reason provided for the refund, if any. Optional.
@@ -87,9 +87,9 @@ module Dodopayments
             is_partial: T::Boolean,
             payment_id: String,
             refund_id: String,
-            status: Dodopayments::RefundStatus::TaggedSymbol,
+            status: Dodopayments::RefundStatus::OrSymbol,
             amount: T.nilable(Integer),
-            currency: T.nilable(Dodopayments::Currency::TaggedSymbol),
+            currency: T.nilable(Dodopayments::Currency::OrSymbol),
             reason: T.nilable(String)
           }
         )

@@ -26,6 +26,7 @@ module Dodopayments
           license_key_duration:
             T.nilable(Dodopayments::LicenseKeyDuration::OrHash),
           license_key_enabled: T.nilable(T::Boolean),
+          metadata: T::Hash[Symbol, String],
           name: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Product)
@@ -53,6 +54,8 @@ module Dodopayments
         license_key_duration: nil,
         # When true, generates and sends a license key to your customer. Defaults to false
         license_key_enabled: nil,
+        # Additional metadata for the product
+        metadata: nil,
         # Optional name of the product
         name: nil,
         request_options: {}
@@ -88,6 +91,7 @@ module Dodopayments
           license_key_duration:
             T.nilable(Dodopayments::LicenseKeyDuration::OrHash),
           license_key_enabled: T.nilable(T::Boolean),
+          metadata: T.nilable(T::Hash[Symbol, String]),
           name: T.nilable(String),
           price:
             T.nilable(
@@ -131,6 +135,8 @@ module Dodopayments
         # If `true`, additional fields related to license key (duration, activations
         # limit, activation message) become applicable.
         license_key_enabled: nil,
+        # Additional metadata for the product
+        metadata: nil,
         # Name of the product, optional and must be at most 100 characters.
         name: nil,
         # Price details of the product.

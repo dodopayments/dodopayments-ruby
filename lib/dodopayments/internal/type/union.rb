@@ -10,7 +10,7 @@ module Dodopayments
       #   case customer_request
       #   when Dodopayments::AttachExistingCustomer
       #     puts(customer_request.customer_id)
-      #   when Dodopayments::CreateNewCustomer
+      #   when Dodopayments::NewCustomer
       #     puts(customer_request.email)
       #   else
       #     puts(customer_request)

@@ -1,0 +1,60 @@
+module Dodopayments
+  module Models
+    type webhook_retrieve_response =
+      {
+        id: String,
+        created_at: String,
+        description: String,
+        metadata: ::Hash[Symbol, String],
+        updated_at: String,
+        url: String,
+        disabled: bool?,
+        filter_types: ::Array[String]?,
+        rate_limit: Integer?
+      }
+
+    class WebhookRetrieveResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor created_at: String
+
+      attr_accessor description: String
+
+      attr_accessor metadata: ::Hash[Symbol, String]
+
+      attr_accessor updated_at: String
+
+      attr_accessor url: String
+
+      attr_accessor disabled: bool?
+
+      attr_accessor filter_types: ::Array[String]?
+
+      attr_accessor rate_limit: Integer?
+
+      def initialize: (
+        id: String,
+        created_at: String,
+        description: String,
+        metadata: ::Hash[Symbol, String],
+        updated_at: String,
+        url: String,
+        ?disabled: bool?,
+        ?filter_types: ::Array[String]?,
+        ?rate_limit: Integer?
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        created_at: String,
+        description: String,
+        metadata: ::Hash[Symbol, String],
+        updated_at: String,
+        url: String,
+        disabled: bool?,
+        filter_types: ::Array[String]?,
+        rate_limit: Integer?
+      }
+    end
+  end
+end

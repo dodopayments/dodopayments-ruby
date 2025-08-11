@@ -28,7 +28,7 @@ module Dodopayments
       attr_accessor :created_at
 
       # Currency used for the payment
-      sig { returns(Dodopayments::Currency::TaggedSymbol) }
+      sig { returns(Dodopayments::Currency::OrSymbol) }
       attr_accessor :currency
 
       # Details about the customer who made the payment
@@ -69,7 +69,7 @@ module Dodopayments
       # The currency in which the settlement_amount will be credited to your Dodo
       # balance. This may differ from the customer's payment currency in adaptive
       # pricing scenarios.
-      sig { returns(Dodopayments::Currency::TaggedSymbol) }
+      sig { returns(Dodopayments::Currency::OrSymbol) }
       attr_accessor :settlement_currency
 
       # Total amount charged to the customer including tax, in smallest currency unit
@@ -78,7 +78,7 @@ module Dodopayments
       attr_accessor :total_amount
 
       # ISO2 country code of the card
-      sig { returns(T.nilable(Dodopayments::CountryCode::TaggedSymbol)) }
+      sig { returns(T.nilable(Dodopayments::CountryCode::OrSymbol)) }
       attr_accessor :card_issuing_country
 
       # The last four digits of the card
@@ -128,7 +128,7 @@ module Dodopayments
       attr_accessor :settlement_tax
 
       # Current status of the payment intent
-      sig { returns(T.nilable(Dodopayments::IntentStatus::TaggedSymbol)) }
+      sig { returns(T.nilable(Dodopayments::IntentStatus::OrSymbol)) }
       attr_accessor :status
 
       # Identifier of the subscription if payment is part of a subscription
@@ -256,7 +256,7 @@ module Dodopayments
             brand_id: String,
             business_id: String,
             created_at: Time,
-            currency: Dodopayments::Currency::TaggedSymbol,
+            currency: Dodopayments::Currency::OrSymbol,
             customer: Dodopayments::CustomerLimitedDetails,
             digital_products_delivered: T::Boolean,
             disputes: T::Array[Dodopayments::Dispute],
@@ -264,10 +264,10 @@ module Dodopayments
             payment_id: String,
             refunds: T::Array[Dodopayments::Refund],
             settlement_amount: Integer,
-            settlement_currency: Dodopayments::Currency::TaggedSymbol,
+            settlement_currency: Dodopayments::Currency::OrSymbol,
             total_amount: Integer,
             card_issuing_country:
-              T.nilable(Dodopayments::CountryCode::TaggedSymbol),
+              T.nilable(Dodopayments::CountryCode::OrSymbol),
             card_last_four: T.nilable(String),
             card_network: T.nilable(String),
             card_type: T.nilable(String),
@@ -280,7 +280,7 @@ module Dodopayments
             product_cart:
               T.nilable(T::Array[Dodopayments::Payment::ProductCart]),
             settlement_tax: T.nilable(Integer),
-            status: T.nilable(Dodopayments::IntentStatus::TaggedSymbol),
+            status: T.nilable(Dodopayments::IntentStatus::OrSymbol),
             subscription_id: T.nilable(String),
             tax: T.nilable(Integer),
             updated_at: T.nilable(Time)

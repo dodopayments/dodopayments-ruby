@@ -9,7 +9,7 @@ module Dodopayments
           customer:
             T.any(
               Dodopayments::AttachExistingCustomer::OrHash,
-              Dodopayments::CreateNewCustomer::OrHash
+              Dodopayments::NewCustomer::OrHash
             ),
           product_cart: T::Array[Dodopayments::OneTimeProductCartItem::OrHash],
           allowed_payment_method_types:

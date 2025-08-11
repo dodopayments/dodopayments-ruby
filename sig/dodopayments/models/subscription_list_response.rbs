@@ -23,6 +23,7 @@ module Dodopayments
         tax_inclusive: bool,
         trial_period_days: Integer,
         cancelled_at: Time?,
+        discount_cycles_remaining: Integer?,
         discount_id: String?
       }
 
@@ -69,6 +70,8 @@ module Dodopayments
 
       attr_accessor cancelled_at: Time?
 
+      attr_accessor discount_cycles_remaining: Integer?
+
       attr_accessor discount_id: String?
 
       def initialize: (
@@ -93,6 +96,7 @@ module Dodopayments
         tax_inclusive: bool,
         trial_period_days: Integer,
         ?cancelled_at: Time?,
+        ?discount_cycles_remaining: Integer?,
         ?discount_id: String?
       ) -> void
 
@@ -118,6 +122,7 @@ module Dodopayments
         tax_inclusive: bool,
         trial_period_days: Integer,
         cancelled_at: Time?,
+        discount_cycles_remaining: Integer?,
         discount_id: String?
       }
     end

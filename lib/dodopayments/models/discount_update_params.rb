@@ -42,6 +42,14 @@ module Dodopayments
       #   @return [Array<String>, nil]
       optional :restricted_to, Dodopayments::Internal::Type::ArrayOf[String], nil?: true
 
+      # @!attribute subscription_cycles
+      #   Number of subscription billing cycles this discount is valid for. If not
+      #   provided, the discount will be applied indefinitely to all recurring payments
+      #   related to the subscription.
+      #
+      #   @return [Integer, nil]
+      optional :subscription_cycles, Integer, nil?: true
+
       # @!attribute type
       #   If present, update the discount type.
       #
@@ -53,7 +61,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :usage_limit, Integer, nil?: true
 
-      # @!method initialize(amount: nil, code: nil, expires_at: nil, name: nil, restricted_to: nil, type: nil, usage_limit: nil, request_options: {})
+      # @!method initialize(amount: nil, code: nil, expires_at: nil, name: nil, restricted_to: nil, subscription_cycles: nil, type: nil, usage_limit: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::DiscountUpdateParams} for more details.
       #
@@ -66,6 +74,8 @@ module Dodopayments
       #   @param name [String, nil]
       #
       #   @param restricted_to [Array<String>, nil] If present, replaces all restricted product IDs with this new set.
+      #
+      #   @param subscription_cycles [Integer, nil] Number of subscription billing cycles this discount is valid for.
       #
       #   @param type [Symbol, Dodopayments::Models::DiscountType, nil] If present, update the discount type.
       #

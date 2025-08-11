@@ -1,0 +1,28 @@
+module Dodopayments
+  module Models
+    type webhook_list_params =
+      { iterator: String?, limit: Integer? }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class WebhookListParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor iterator: String?
+
+      attr_accessor limit: Integer?
+
+      def initialize: (
+        ?iterator: String?,
+        ?limit: Integer?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        iterator: String?,
+        limit: Integer?,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

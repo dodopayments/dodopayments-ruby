@@ -28,7 +28,7 @@ module Dodopayments
       attr_accessor :created_at
 
       # Currency used for the subscription payments
-      sig { returns(Dodopayments::Currency::TaggedSymbol) }
+      sig { returns(Dodopayments::Currency::OrSymbol) }
       attr_accessor :currency
 
       # Customer details associated with the subscription
@@ -58,7 +58,7 @@ module Dodopayments
       attr_accessor :payment_frequency_count
 
       # Time interval for payment frequency (e.g. month, year)
-      sig { returns(Dodopayments::TimeInterval::TaggedSymbol) }
+      sig { returns(Dodopayments::TimeInterval::OrSymbol) }
       attr_accessor :payment_frequency_interval
 
       # Timestamp of the last payment. Indicates the start of current billing period
@@ -79,7 +79,7 @@ module Dodopayments
       attr_accessor :recurring_pre_tax_amount
 
       # Current status of the subscription
-      sig { returns(Dodopayments::SubscriptionStatus::TaggedSymbol) }
+      sig { returns(Dodopayments::SubscriptionStatus::OrSymbol) }
       attr_accessor :status
 
       # Unique identifier for the subscription
@@ -91,7 +91,7 @@ module Dodopayments
       attr_accessor :subscription_period_count
 
       # Time interval for the subscription period (e.g. month, year)
-      sig { returns(Dodopayments::TimeInterval::TaggedSymbol) }
+      sig { returns(Dodopayments::TimeInterval::OrSymbol) }
       attr_accessor :subscription_period_interval
 
       # Indicates if the recurring_pre_tax_amount is tax inclusive
@@ -105,6 +105,10 @@ module Dodopayments
       # Cancelled timestamp if the subscription is cancelled
       sig { returns(T.nilable(Time)) }
       attr_accessor :cancelled_at
+
+      # Number of remaining discount cycles if discount is applied
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :discount_cycles_remaining
 
       # The discount id if discount is applied
       sig { returns(T.nilable(String)) }
@@ -135,6 +139,7 @@ module Dodopayments
           tax_inclusive: T::Boolean,
           trial_period_days: Integer,
           cancelled_at: T.nilable(Time),
+          discount_cycles_remaining: T.nilable(Integer),
           discount_id: T.nilable(String)
         ).returns(T.attached_class)
       end
@@ -185,6 +190,8 @@ module Dodopayments
         trial_period_days:,
         # Cancelled timestamp if the subscription is cancelled
         cancelled_at: nil,
+        # Number of remaining discount cycles if discount is applied
+        discount_cycles_remaining: nil,
         # The discount id if discount is applied
         discount_id: nil
       )
@@ -197,26 +204,25 @@ module Dodopayments
             billing: Dodopayments::BillingAddress,
             cancel_at_next_billing_date: T::Boolean,
             created_at: Time,
-            currency: Dodopayments::Currency::TaggedSymbol,
+            currency: Dodopayments::Currency::OrSymbol,
             customer: Dodopayments::CustomerLimitedDetails,
             metadata: T::Hash[Symbol, String],
             next_billing_date: Time,
             on_demand: T::Boolean,
             payment_frequency_count: Integer,
-            payment_frequency_interval:
-              Dodopayments::TimeInterval::TaggedSymbol,
+            payment_frequency_interval: Dodopayments::TimeInterval::OrSymbol,
             previous_billing_date: Time,
             product_id: String,
             quantity: Integer,
             recurring_pre_tax_amount: Integer,
-            status: Dodopayments::SubscriptionStatus::TaggedSymbol,
+            status: Dodopayments::SubscriptionStatus::OrSymbol,
             subscription_id: String,
             subscription_period_count: Integer,
-            subscription_period_interval:
-              Dodopayments::TimeInterval::TaggedSymbol,
+            subscription_period_interval: Dodopayments::TimeInterval::OrSymbol,
             tax_inclusive: T::Boolean,
             trial_period_days: Integer,
             cancelled_at: T.nilable(Time),
+            discount_cycles_remaining: T.nilable(Integer),
             discount_id: T.nilable(String)
           }
         )

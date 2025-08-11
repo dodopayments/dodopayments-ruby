@@ -119,6 +119,8 @@ module Dodopayments
   MiscListSupportedCountriesParams =
     Dodopayments::Models::MiscListSupportedCountriesParams
 
+  NewCustomer = Dodopayments::Models::NewCustomer
+
   OneTimeProductCartItem = Dodopayments::Models::OneTimeProductCartItem
 
   Payment = Dodopayments::Models::Payment
@@ -187,7 +189,21 @@ module Dodopayments
 
   TimeInterval = Dodopayments::Models::TimeInterval
 
+  WebhookCreateParams = Dodopayments::Models::WebhookCreateParams
+
+  WebhookDeleteParams = Dodopayments::Models::WebhookDeleteParams
+
   WebhookEventType = Dodopayments::Models::WebhookEventType
 
+  WebhookListParams = Dodopayments::Models::WebhookListParams
+
   WebhookPayload = Dodopayments::Models::WebhookPayload
+
+  WebhookRetrieveParams = Dodopayments::Models::WebhookRetrieveParams
+
+  Webhooks = Dodopayments::Models::Webhooks
+
+  WebhookUpdateParams = Dodopayments::Models::WebhookUpdateParams
+
+  YourWebhookURLCreateParams = Dodopayments::Models::YourWebhookURLCreateParams
 end

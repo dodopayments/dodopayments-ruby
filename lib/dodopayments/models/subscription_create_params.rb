@@ -16,7 +16,7 @@ module Dodopayments
       # @!attribute customer
       #   Customer details for the subscription
       #
-      #   @return [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
+      #   @return [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer]
       required :customer, union: -> { Dodopayments::CustomerRequest }
 
       # @!attribute product_id
@@ -112,7 +112,7 @@ module Dodopayments
       #
       #   @param billing [Dodopayments::Models::BillingAddress] Billing address information for the subscription
       #
-      #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer] Customer details for the subscription
+      #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer] Customer details for the subscription
       #
       #   @param product_id [String] Unique identifier of the product to subscribe to
       #

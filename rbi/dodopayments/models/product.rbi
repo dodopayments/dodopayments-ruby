@@ -27,6 +27,10 @@ module Dodopayments
       sig { returns(T::Boolean) }
       attr_accessor :license_key_enabled
 
+      # Additional custom data associated with the product
+      sig { returns(T::Hash[Symbol, String]) }
+      attr_accessor :metadata
+
       # Pricing information for the product.
       sig { returns(Dodopayments::Price::Variants) }
       attr_accessor :price
@@ -97,6 +101,7 @@ module Dodopayments
           created_at: Time,
           is_recurring: T::Boolean,
           license_key_enabled: T::Boolean,
+          metadata: T::Hash[Symbol, String],
           price:
             T.any(
               Dodopayments::Price::OneTimePrice::OrHash,
@@ -127,6 +132,8 @@ module Dodopayments
         is_recurring:,
         # Indicates whether the product requires a license key.
         license_key_enabled:,
+        # Additional custom data associated with the product
+        metadata:,
         # Pricing information for the product.
         price:,
         # Unique identifier for the product.
@@ -161,6 +168,7 @@ module Dodopayments
             created_at: Time,
             is_recurring: T::Boolean,
             license_key_enabled: T::Boolean,
+            metadata: T::Hash[Symbol, String],
             price: Dodopayments::Price::Variants,
             product_id: String,
             tax_category: Dodopayments::TaxCategory::TaggedSymbol,

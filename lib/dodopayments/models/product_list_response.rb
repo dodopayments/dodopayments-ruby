@@ -22,6 +22,12 @@ module Dodopayments
       #   @return [Boolean]
       required :is_recurring, Dodopayments::Internal::Type::Boolean
 
+      # @!attribute metadata
+      #   Additional custom data associated with the product
+      #
+      #   @return [Hash{Symbol=>String}]
+      required :metadata, Dodopayments::Internal::Type::HashOf[String]
+
       # @!attribute product_id
       #   Unique identifier for the product.
       #
@@ -91,7 +97,7 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
-      # @!method initialize(business_id:, created_at:, is_recurring:, product_id:, tax_category:, updated_at:, currency: nil, description: nil, image: nil, name: nil, price: nil, price_detail: nil, tax_inclusive: nil)
+      # @!method initialize(business_id:, created_at:, is_recurring:, metadata:, product_id:, tax_category:, updated_at:, currency: nil, description: nil, image: nil, name: nil, price: nil, price_detail: nil, tax_inclusive: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductListResponse} for more details.
       #
@@ -100,6 +106,8 @@ module Dodopayments
       #   @param created_at [Time] Timestamp when the product was created.
       #
       #   @param is_recurring [Boolean] Indicates if the product is recurring (e.g., subscriptions).
+      #
+      #   @param metadata [Hash{Symbol=>String}] Additional custom data associated with the product
       #
       #   @param product_id [String] Unique identifier for the product.
       #

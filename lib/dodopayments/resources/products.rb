@@ -9,7 +9,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductCreateParams} for more details.
       #
-      # @overload create(price:, tax_category:, addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, request_options: {})
+      # @overload create(price:, tax_category:, addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, request_options: {})
       #
       # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice] Price configuration for the product
       #
@@ -30,6 +30,8 @@ module Dodopayments
       # @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil] Duration configuration for the license key.
       #
       # @param license_key_enabled [Boolean, nil] When true, generates and sends a license key to your customer.
+      #
+      # @param metadata [Hash{Symbol=>String}] Additional metadata for the product
       #
       # @param name [String, nil] Optional name of the product
       #
@@ -70,7 +72,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductUpdateParams} for more details.
       #
-      # @overload update(id, addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      # @overload update(id, addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, price: nil, tax_category: nil, request_options: {})
       #
       # @param id [String]
       #
@@ -91,6 +93,8 @@ module Dodopayments
       # @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil] Duration of the license key if enabled.
       #
       # @param license_key_enabled [Boolean, nil] Whether the product requires a license key.
+      #
+      # @param metadata [Hash{Symbol=>String}, nil] Additional metadata for the product
       #
       # @param name [String, nil] Name of the product, optional and must be at most 100 characters.
       #

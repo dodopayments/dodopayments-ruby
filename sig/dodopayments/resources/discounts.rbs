@@ -8,6 +8,7 @@ module Dodopayments
         ?expires_at: Time?,
         ?name: String?,
         ?restricted_to: ::Array[String]?,
+        ?subscription_cycles: Integer?,
         ?usage_limit: Integer?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Discount
@@ -24,6 +25,7 @@ module Dodopayments
         ?expires_at: Time?,
         ?name: String?,
         ?restricted_to: ::Array[String]?,
+        ?subscription_cycles: Integer?,
         ?type: Dodopayments::Models::discount_type?,
         ?usage_limit: Integer?,
         ?request_options: Dodopayments::request_opts

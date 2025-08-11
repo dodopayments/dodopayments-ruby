@@ -7,10 +7,7 @@ module Dodopayments
 
       Variants =
         T.type_alias do
-          T.any(
-            Dodopayments::AttachExistingCustomer,
-            Dodopayments::CreateNewCustomer
-          )
+          T.any(Dodopayments::AttachExistingCustomer, Dodopayments::NewCustomer)
         end
 
       sig do

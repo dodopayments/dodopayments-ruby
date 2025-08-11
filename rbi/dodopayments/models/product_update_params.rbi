@@ -83,6 +83,10 @@ module Dodopayments
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :license_key_enabled
 
+      # Additional metadata for the product
+      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      attr_accessor :metadata
+
       # Name of the product, optional and must be at most 100 characters.
       sig { returns(T.nilable(String)) }
       attr_accessor :name
@@ -119,6 +123,7 @@ module Dodopayments
           license_key_duration:
             T.nilable(Dodopayments::LicenseKeyDuration::OrHash),
           license_key_enabled: T.nilable(T::Boolean),
+          metadata: T.nilable(T::Hash[Symbol, String]),
           name: T.nilable(String),
           price:
             T.nilable(
@@ -161,6 +166,8 @@ module Dodopayments
         # If `true`, additional fields related to license key (duration, activations
         # limit, activation message) become applicable.
         license_key_enabled: nil,
+        # Additional metadata for the product
+        metadata: nil,
         # Name of the product, optional and must be at most 100 characters.
         name: nil,
         # Price details of the product.
@@ -186,6 +193,7 @@ module Dodopayments
             license_key_activations_limit: T.nilable(Integer),
             license_key_duration: T.nilable(Dodopayments::LicenseKeyDuration),
             license_key_enabled: T.nilable(T::Boolean),
+            metadata: T.nilable(T::Hash[Symbol, String]),
             name: T.nilable(String),
             price:
               T.nilable(

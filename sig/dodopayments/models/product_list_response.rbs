@@ -5,6 +5,7 @@ module Dodopayments
         business_id: String,
         created_at: Time,
         is_recurring: bool,
+        metadata: ::Hash[Symbol, String],
         product_id: String,
         tax_category: Dodopayments::Models::tax_category,
         updated_at: Time,
@@ -23,6 +24,8 @@ module Dodopayments
       attr_accessor created_at: Time
 
       attr_accessor is_recurring: bool
+
+      attr_accessor metadata: ::Hash[Symbol, String]
 
       attr_accessor product_id: String
 
@@ -48,6 +51,7 @@ module Dodopayments
         business_id: String,
         created_at: Time,
         is_recurring: bool,
+        metadata: ::Hash[Symbol, String],
         product_id: String,
         tax_category: Dodopayments::Models::tax_category,
         updated_at: Time,
@@ -64,6 +68,7 @@ module Dodopayments
         business_id: String,
         created_at: Time,
         is_recurring: bool,
+        metadata: ::Hash[Symbol, String],
         product_id: String,
         tax_category: Dodopayments::Models::tax_category,
         updated_at: Time,

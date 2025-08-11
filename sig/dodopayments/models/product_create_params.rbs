@@ -12,6 +12,7 @@ module Dodopayments
         license_key_activations_limit: Integer?,
         license_key_duration: Dodopayments::LicenseKeyDuration?,
         license_key_enabled: bool?,
+        metadata: ::Hash[Symbol, String],
         name: String?
       }
       & Dodopayments::Internal::Type::request_parameters
@@ -40,6 +41,10 @@ module Dodopayments
 
       attr_accessor license_key_enabled: bool?
 
+      attr_reader metadata: ::Hash[Symbol, String]?
+
+      def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
       attr_accessor name: String?
 
       def initialize: (
@@ -53,6 +58,7 @@ module Dodopayments
         ?license_key_activations_limit: Integer?,
         ?license_key_duration: Dodopayments::LicenseKeyDuration?,
         ?license_key_enabled: bool?,
+        ?metadata: ::Hash[Symbol, String],
         ?name: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
@@ -68,6 +74,7 @@ module Dodopayments
         license_key_activations_limit: Integer?,
         license_key_duration: Dodopayments::LicenseKeyDuration?,
         license_key_enabled: bool?,
+        metadata: ::Hash[Symbol, String],
         name: String?,
         request_options: Dodopayments::RequestOptions
       }

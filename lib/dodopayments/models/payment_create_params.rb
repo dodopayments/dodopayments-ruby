@@ -16,7 +16,7 @@ module Dodopayments
       # @!attribute customer
       #   Customer information for the payment
       #
-      #   @return [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
+      #   @return [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer]
       required :customer, union: -> { Dodopayments::CustomerRequest }
 
       # @!attribute product_cart
@@ -93,7 +93,7 @@ module Dodopayments
       #
       #   @param billing [Dodopayments::Models::BillingAddress] Billing address details for the payment
       #
-      #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer] Customer information for the payment
+      #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer] Customer information for the payment
       #
       #   @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>] List of products in the cart. Must contain at least 1 and at most 100 items.
       #

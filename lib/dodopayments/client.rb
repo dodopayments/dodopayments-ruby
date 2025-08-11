@@ -72,6 +72,12 @@ module Dodopayments
     # @return [Dodopayments::Resources::Brands]
     attr_reader :brands
 
+    # @return [Dodopayments::Resources::Webhooks]
+    attr_reader :webhooks
+
+    # @return [Dodopayments::Resources::YourWebhookURL]
+    attr_reader :your_webhook_url
+
     # @api private
     #
     # @return [Hash{String=>String}]
@@ -146,6 +152,8 @@ module Dodopayments
       @discounts = Dodopayments::Resources::Discounts.new(client: self)
       @addons = Dodopayments::Resources::Addons.new(client: self)
       @brands = Dodopayments::Resources::Brands.new(client: self)
+      @webhooks = Dodopayments::Resources::Webhooks.new(client: self)
+      @your_webhook_url = Dodopayments::Resources::YourWebhookURL.new(client: self)
     end
   end
 end

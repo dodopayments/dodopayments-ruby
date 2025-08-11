@@ -9,7 +9,7 @@ module Dodopayments
       # POST /discounts If `code` is omitted or empty, a random 16-char uppercase code
       # is generated.
       #
-      # @overload create(amount:, type:, code: nil, expires_at: nil, name: nil, restricted_to: nil, usage_limit: nil, request_options: {})
+      # @overload create(amount:, type:, code: nil, expires_at: nil, name: nil, restricted_to: nil, subscription_cycles: nil, usage_limit: nil, request_options: {})
       #
       # @param amount [Integer] The discount amount.
       #
@@ -22,6 +22,8 @@ module Dodopayments
       # @param name [String, nil]
       #
       # @param restricted_to [Array<String>, nil] List of product IDs to restrict usage (if any).
+      #
+      # @param subscription_cycles [Integer, nil] Number of subscription billing cycles this discount is valid for.
       #
       # @param usage_limit [Integer, nil] How many times this discount can be used (if any).
       #
@@ -66,7 +68,7 @@ module Dodopayments
       #
       # PATCH /discounts/{discount_id}
       #
-      # @overload update(discount_id, amount: nil, code: nil, expires_at: nil, name: nil, restricted_to: nil, type: nil, usage_limit: nil, request_options: {})
+      # @overload update(discount_id, amount: nil, code: nil, expires_at: nil, name: nil, restricted_to: nil, subscription_cycles: nil, type: nil, usage_limit: nil, request_options: {})
       #
       # @param discount_id [String] Discount Id
       #
@@ -79,6 +81,8 @@ module Dodopayments
       # @param name [String, nil]
       #
       # @param restricted_to [Array<String>, nil] If present, replaces all restricted product IDs with this new set.
+      #
+      # @param subscription_cycles [Integer, nil] Number of subscription billing cycles this discount is valid for.
       #
       # @param type [Symbol, Dodopayments::Models::DiscountType, nil] If present, update the discount type.
       #

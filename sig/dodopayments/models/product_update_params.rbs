@@ -11,6 +11,7 @@ module Dodopayments
         license_key_activations_limit: Integer?,
         license_key_duration: Dodopayments::LicenseKeyDuration?,
         license_key_enabled: bool?,
+        metadata: ::Hash[Symbol, String]?,
         name: String?,
         price: Dodopayments::Models::price?,
         tax_category: Dodopayments::Models::tax_category?
@@ -39,6 +40,8 @@ module Dodopayments
 
       attr_accessor license_key_enabled: bool?
 
+      attr_accessor metadata: ::Hash[Symbol, String]?
+
       attr_accessor name: String?
 
       attr_accessor price: Dodopayments::Models::price?
@@ -55,6 +58,7 @@ module Dodopayments
         ?license_key_activations_limit: Integer?,
         ?license_key_duration: Dodopayments::LicenseKeyDuration?,
         ?license_key_enabled: bool?,
+        ?metadata: ::Hash[Symbol, String]?,
         ?name: String?,
         ?price: Dodopayments::Models::price?,
         ?tax_category: Dodopayments::Models::tax_category?,
@@ -71,6 +75,7 @@ module Dodopayments
         license_key_activations_limit: Integer?,
         license_key_duration: Dodopayments::LicenseKeyDuration?,
         license_key_enabled: bool?,
+        metadata: ::Hash[Symbol, String]?,
         name: String?,
         price: Dodopayments::Models::price?,
         tax_category: Dodopayments::Models::tax_category?,

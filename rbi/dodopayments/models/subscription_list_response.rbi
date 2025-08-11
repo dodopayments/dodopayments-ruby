@@ -105,6 +105,10 @@ module Dodopayments
       sig { returns(T.nilable(Time)) }
       attr_accessor :cancelled_at
 
+      # Number of remaining discount cycles if discount is applied
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :discount_cycles_remaining
+
       # The discount id if discount is applied
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_id
@@ -133,6 +137,7 @@ module Dodopayments
           tax_inclusive: T::Boolean,
           trial_period_days: Integer,
           cancelled_at: T.nilable(Time),
+          discount_cycles_remaining: T.nilable(Integer),
           discount_id: T.nilable(String)
         ).returns(T.attached_class)
       end
@@ -181,6 +186,8 @@ module Dodopayments
         trial_period_days:,
         # Cancelled timestamp if the subscription is cancelled
         cancelled_at: nil,
+        # Number of remaining discount cycles if discount is applied
+        discount_cycles_remaining: nil,
         # The discount id if discount is applied
         discount_id: nil
       )
@@ -212,6 +219,7 @@ module Dodopayments
             tax_inclusive: T::Boolean,
             trial_period_days: Integer,
             cancelled_at: T.nilable(Time),
+            discount_cycles_remaining: T.nilable(Integer),
             discount_id: T.nilable(String)
           }
         )

@@ -13,6 +13,7 @@ module Dodopayments
           expires_at: T.nilable(Time),
           name: T.nilable(String),
           restricted_to: T.nilable(T::Array[String]),
+          subscription_cycles: T.nilable(Integer),
           usage_limit: T.nilable(Integer),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Discount)
@@ -39,6 +40,10 @@ module Dodopayments
         name: nil,
         # List of product IDs to restrict usage (if any).
         restricted_to: nil,
+        # Number of subscription billing cycles this discount is valid for. If not
+        # provided, the discount will be applied indefinitely to all recurring payments
+        # related to the subscription.
+        subscription_cycles: nil,
         # How many times this discount can be used (if any). Must be >= 1 if provided.
         usage_limit: nil,
         request_options: {}
@@ -68,6 +73,7 @@ module Dodopayments
           expires_at: T.nilable(Time),
           name: T.nilable(String),
           restricted_to: T.nilable(T::Array[String]),
+          subscription_cycles: T.nilable(Integer),
           type: T.nilable(Dodopayments::DiscountType::OrSymbol),
           usage_limit: T.nilable(Integer),
           request_options: Dodopayments::RequestOptions::OrHash
@@ -91,6 +97,10 @@ module Dodopayments
         # If present, replaces all restricted product IDs with this new set. To remove all
         # restrictions, send empty array
         restricted_to: nil,
+        # Number of subscription billing cycles this discount is valid for. If not
+        # provided, the discount will be applied indefinitely to all recurring payments
+        # related to the subscription.
+        subscription_cycles: nil,
         # If present, update the discount type.
         type: nil,
         usage_limit: nil,

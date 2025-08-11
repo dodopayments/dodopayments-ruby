@@ -74,6 +74,12 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :license_key_enabled, Dodopayments::Internal::Type::Boolean, nil?: true
 
+      # @!attribute metadata
+      #   Additional metadata for the product
+      #
+      #   @return [Hash{Symbol=>String}, nil]
+      optional :metadata, Dodopayments::Internal::Type::HashOf[String], nil?: true
+
       # @!attribute name
       #   Name of the product, optional and must be at most 100 characters.
       #
@@ -92,7 +98,7 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::TaxCategory, nil]
       optional :tax_category, enum: -> { Dodopayments::TaxCategory }, nil?: true
 
-      # @!method initialize(addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      # @!method initialize(addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, price: nil, tax_category: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductUpdateParams} for more details.
       #
@@ -113,6 +119,8 @@ module Dodopayments
       #   @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil] Duration of the license key if enabled.
       #
       #   @param license_key_enabled [Boolean, nil] Whether the product requires a license key.
+      #
+      #   @param metadata [Hash{Symbol=>String}, nil] Additional metadata for the product
       #
       #   @param name [String, nil] Name of the product, optional and must be at most 100 characters.
       #

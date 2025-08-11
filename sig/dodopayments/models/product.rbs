@@ -7,6 +7,7 @@ module Dodopayments
         created_at: Time,
         is_recurring: bool,
         license_key_enabled: bool,
+        metadata: ::Hash[Symbol, String],
         price: Dodopayments::Models::price,
         product_id: String,
         tax_category: Dodopayments::Models::tax_category,
@@ -31,6 +32,8 @@ module Dodopayments
       attr_accessor is_recurring: bool
 
       attr_accessor license_key_enabled: bool
+
+      attr_accessor metadata: ::Hash[Symbol, String]
 
       attr_accessor price: Dodopayments::Models::price
 
@@ -62,6 +65,7 @@ module Dodopayments
         created_at: Time,
         is_recurring: bool,
         license_key_enabled: bool,
+        metadata: ::Hash[Symbol, String],
         price: Dodopayments::Models::price,
         product_id: String,
         tax_category: Dodopayments::Models::tax_category,
@@ -82,6 +86,7 @@ module Dodopayments
         created_at: Time,
         is_recurring: bool,
         license_key_enabled: bool,
+        metadata: ::Hash[Symbol, String],
         price: Dodopayments::Models::price,
         product_id: String,
         tax_category: Dodopayments::Models::tax_category,

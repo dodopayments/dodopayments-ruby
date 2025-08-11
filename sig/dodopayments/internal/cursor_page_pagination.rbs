@@ -1,0 +1,15 @@
+module Dodopayments
+  module Internal
+    class CursorPagePagination[Elem]
+      include Dodopayments::Internal::Type::BasePage[Elem]
+
+      attr_accessor data: ::Array[Elem]?
+
+      attr_accessor iterator: String
+
+      attr_accessor done: bool
+
+      def inspect: -> String
+    end
+  end
+end
