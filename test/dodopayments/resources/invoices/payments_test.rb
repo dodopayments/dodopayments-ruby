@@ -4,7 +4,7 @@ require_relative "../../test_helper"
 
 class Dodopayments::Test::Resources::Invoices::PaymentsTest < Dodopayments::Test::ResourceTest
   def test_retrieve
-    skip("skipped: test server currently has no support for method content-type")
+    skip("Prism doesn't support application/pdf responses")
 
     response = @dodo_payments.invoices.payments.retrieve("payment_id")
 
