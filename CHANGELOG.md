@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.47.0 (2025-08-13)
+
+Full Changelog: [v1.22.0...v1.47.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.22.0...v1.47.0)
+
+### Features
+
+* **api:** manual updates ([983773e](https://github.com/dodopayments/dodopayments-ruby/commit/983773e4c578f0ed96f540e3f045834c10554143))
+
+
+### Chores
+
+* sync repo ([db17fcd](https://github.com/dodopayments/dodopayments-ruby/commit/db17fcde07de41be8514f3a310def3322718a388))
+
 ## 1.22.0 (2025-05-09)
 
 Full Changelog: [v1.20.0...v1.22.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.20.0...v1.22.0)
