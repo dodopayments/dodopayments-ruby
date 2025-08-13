@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.49.0 (2025-08-13)
+
+Full Changelog: [v1.47.0...v1.49.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.47.0...v1.49.0)
+
+### Features
+
+* **api:** manual updates ([f9127c5](https://github.com/dodopayments/dodopayments-ruby/commit/f9127c578fca2e4304bcf47a394f9fa8b778f4a3))
+* **api:** manual updates ([84efbc4](https://github.com/dodopayments/dodopayments-ruby/commit/84efbc4d2c7daceafb7db5232283025e0711908b))
+* **api:** updated code for v1.49.0 ([9290571](https://github.com/dodopayments/dodopayments-ruby/commit/9290571193e4a5dee306b847d2a007529f46cd50))
+
 ## 1.47.0 (2025-08-13)
 
 Full Changelog: [v1.22.0...v1.47.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.22.0...v1.47.0)
