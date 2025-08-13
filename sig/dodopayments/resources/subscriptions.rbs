@@ -31,6 +31,7 @@ module Dodopayments
         ?cancel_at_next_billing_date: bool?,
         ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         ?metadata: ::Hash[Symbol, String]?,
+        ?next_billing_date: Time?,
         ?status: Dodopayments::Models::subscription_status?,
         ?tax_id: String?,
         ?request_options: Dodopayments::request_opts
