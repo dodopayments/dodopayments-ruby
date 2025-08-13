@@ -49,7 +49,11 @@ module Dodopayments
           product_id: String,
           status: Dodopayments::LicenseKeyListParams::Status::OrSymbol,
           request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(T::Array[Dodopayments::Models::LicenseKeyListResponseItem])
+        ).returns(
+          Dodopayments::Internal::DefaultPageNumberPagination[
+            Dodopayments::LicenseKey
+          ]
+        )
       end
       def list(
         # Filter by customer ID

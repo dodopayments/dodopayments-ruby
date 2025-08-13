@@ -43,7 +43,24 @@ class Dodopayments::Test::Resources::LicenseKeyInstancesTest < Dodopayments::Tes
     response = @dodo_payments.license_key_instances.list
 
     assert_pattern do
-      response => ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::LicenseKeyInstanceListResponseItem])
+      response => Dodopayments::Internal::DefaultPageNumberPagination
+    end
+
+    row = response.to_enum.first
+    return if row.nil?
+
+    assert_pattern do
+      row => Dodopayments::LicenseKeyInstance
+    end
+
+    assert_pattern do
+      row => {
+        id: String,
+        business_id: String,
+        created_at: Time,
+        license_key_id: String,
+        name: String
+      }
     end
   end
 end
