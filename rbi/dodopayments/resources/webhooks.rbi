@@ -118,6 +118,16 @@ module Dodopayments
       def delete(webhook_id, request_options: {})
       end
 
+      # Get webhook secret by id
+      sig do
+        params(
+          webhook_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Models::WebhookRetrieveSecretResponse)
+      end
+      def retrieve_secret(webhook_id, request_options: {})
+      end
+
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
       def self.new(client:)

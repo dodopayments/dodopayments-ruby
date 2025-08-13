@@ -201,6 +201,9 @@ module Dodopayments
 
   WebhookRetrieveParams = Dodopayments::Models::WebhookRetrieveParams
 
+  WebhookRetrieveSecretParams =
+    Dodopayments::Models::WebhookRetrieveSecretParams
+
   Webhooks = Dodopayments::Models::Webhooks
 
   WebhookUpdateParams = Dodopayments::Models::WebhookUpdateParams
