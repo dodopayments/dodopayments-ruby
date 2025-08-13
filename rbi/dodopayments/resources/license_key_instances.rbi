@@ -38,7 +38,9 @@ module Dodopayments
           page_size: T.nilable(Integer),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
-          T::Array[Dodopayments::Models::LicenseKeyInstanceListResponseItem]
+          Dodopayments::Internal::DefaultPageNumberPagination[
+            Dodopayments::LicenseKeyInstance
+          ]
         )
       end
       def list(

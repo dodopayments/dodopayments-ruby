@@ -17,7 +17,7 @@ module Dodopayments
         ?page_number: Integer?,
         ?page_size: Integer?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::license_key_instance_list_response
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::LicenseKeyInstance]
 
       def initialize: (client: Dodopayments::Client) -> void
     end
