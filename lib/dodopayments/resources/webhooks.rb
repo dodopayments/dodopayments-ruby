@@ -15,11 +15,11 @@ module Dodopayments
       #
       # @param url [String] Url of the webhook
       #
-      # @param description [String, nil] Filter events to the webhook.
+      # @param description [String, nil]
       #
       # @param disabled [Boolean, nil] Create the webhook in a disabled state.
       #
-      # @param filter_types [Array<Symbol, Dodopayments::Models::WebhookEventType>]
+      # @param filter_types [Array<Symbol, Dodopayments::Models::WebhookEventType>] Filter events to the webhook.
       #
       # @param headers [Hash{Symbol=>String}, nil] Custom headers to be passed
       #
