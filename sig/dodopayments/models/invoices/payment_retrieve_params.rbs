@@ -10,7 +10,7 @@ module Dodopayments
 
         def initialize: (?request_options: Dodopayments::request_opts) -> void
 
-        def to_hash: -> Dodopayments::Models::Invoices::payment_retrieve_params
+        def to_hash: -> { request_options: Dodopayments::RequestOptions }
       end
     end
   end

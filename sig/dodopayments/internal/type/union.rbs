@@ -3,10 +3,11 @@ module Dodopayments
     module Type
       module Union
         include Dodopayments::Internal::Type::Converter
+        include Dodopayments::Internal::Util::SorbetRuntimeSupport
 
-        private def self.known_variants: -> ::Array[[Symbol?, (^-> Dodopayments::Internal::Type::Converter::input)]]
+        private def self.known_variants: -> ::Array[[Symbol?, (^-> Dodopayments::Internal::Type::Converter::input), ::Hash[Symbol, top]]]
 
-        def self.derefed_variants: -> ::Array[[Symbol?, top]]
+        def self.derefed_variants: -> ::Array[[Symbol?, top, ::Hash[Symbol, top]]]
 
         def self.variants: -> ::Array[top]
 
@@ -41,6 +42,8 @@ module Dodopayments
           top value,
           state: Dodopayments::Internal::Type::Converter::dump_state
         ) -> top
+
+        def to_sorbet_type: -> top
 
         def inspect: (?depth: Integer) -> String
       end

@@ -11,10 +11,10 @@ module Dodopayments
         # @!attribute force_update
         #
         #   @return [Boolean, nil]
-        optional :force_update, Dodopayments::Internal::Type::Boolean, nil?: true
+        optional :force_update, Dodopayments::Internal::Type::Boolean
 
         # @!method initialize(force_update: nil, request_options: {})
-        #   @param force_update [Boolean, nil]
+        #   @param force_update [Boolean]
         #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
       end
     end

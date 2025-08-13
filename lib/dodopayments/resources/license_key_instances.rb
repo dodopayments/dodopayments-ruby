@@ -16,7 +16,7 @@ module Dodopayments
         @client.request(
           method: :get,
           path: ["license_key_instances/%1$s", id],
-          model: Dodopayments::Models::LicenseKeyInstance,
+          model: Dodopayments::LicenseKeyInstance,
           options: params[:request_options]
         )
       end
@@ -33,12 +33,12 @@ module Dodopayments
       #
       # @see Dodopayments::Models::LicenseKeyInstanceUpdateParams
       def update(id, params)
-        parsed, options = Dodopayments::Models::LicenseKeyInstanceUpdateParams.dump_request(params)
+        parsed, options = Dodopayments::LicenseKeyInstanceUpdateParams.dump_request(params)
         @client.request(
           method: :patch,
           path: ["license_key_instances/%1$s", id],
           body: parsed,
-          model: Dodopayments::Models::LicenseKeyInstance,
+          model: Dodopayments::LicenseKeyInstance,
           options: options
         )
       end
@@ -57,13 +57,13 @@ module Dodopayments
       #
       # @see Dodopayments::Models::LicenseKeyInstanceListParams
       def list(params = {})
-        parsed, options = Dodopayments::Models::LicenseKeyInstanceListParams.dump_request(params)
+        parsed, options = Dodopayments::LicenseKeyInstanceListParams.dump_request(params)
         @client.request(
           method: :get,
           path: "license_key_instances",
           query: parsed,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
-          model: Dodopayments::Models::LicenseKeyInstance,
+          model: Dodopayments::LicenseKeyInstance,
           options: options
         )
       end

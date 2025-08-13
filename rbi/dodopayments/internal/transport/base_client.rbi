@@ -5,41 +5,57 @@ module Dodopayments
     module Transport
       # @api private
       class BaseClient
+        extend Dodopayments::Internal::Util::SorbetRuntimeSupport
+
         abstract!
 
-        RequestComponentsShape =
+        RequestComponents =
           T.type_alias do
             {
               method: Symbol,
               path: T.any(String, T::Array[String]),
-              query: T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))]),
-              headers: T.nilable(
-                T::Hash[String,
-                        T.nilable(
-                          T.any(
-                            String,
-                            Integer,
-                            T::Array[T.nilable(T.any(String, Integer))]
-                          )
-                        )]
-              ),
+              query:
+                T.nilable(
+                  T::Hash[String, T.nilable(T.any(T::Array[String], String))]
+                ),
+              headers:
+                T.nilable(
+                  T::Hash[
+                    String,
+                    T.nilable(
+                      T.any(
+                        String,
+                        Integer,
+                        T::Array[T.nilable(T.any(String, Integer))]
+                      )
+                    )
+                  ]
+                ),
               body: T.nilable(T.anything),
-              unwrap: T.nilable(
-                T.any(
-                  Symbol,
-                  Integer,
-                  T::Array[T.any(Symbol, Integer)],
-                  T.proc.params(arg0: T.anything).returns(T.anything)
-                )
-              ),
-              page: T.nilable(T::Class[Dodopayments::Internal::Type::BasePage[Dodopayments::Internal::Type::BaseModel]]),
+              unwrap:
+                T.nilable(
+                  T.any(
+                    Symbol,
+                    Integer,
+                    T::Array[T.any(Symbol, Integer)],
+                    T.proc.params(arg0: T.anything).returns(T.anything)
+                  )
+                ),
+              page:
+                T.nilable(
+                  T::Class[
+                    Dodopayments::Internal::Type::BasePage[
+                      Dodopayments::Internal::Type::BaseModel
+                    ]
+                  ]
+                ),
               stream: T.nilable(T::Class[T.anything]),
               model: T.nilable(Dodopayments::Internal::Type::Converter::Input),
-              options: T.nilable(Dodopayments::RequestOpts)
+              options: T.nilable(Dodopayments::RequestOptions::OrHash)
             }
           end
 
-        RequestInputShape =
+        RequestInput =
           T.type_alias do
             {
               method: Symbol,
@@ -58,42 +74,70 @@ module Dodopayments
 
         class << self
           # @api private
-          sig { params(req: Dodopayments::Internal::Transport::BaseClient::RequestComponentsShape).void }
-          def validate!(req); end
+          sig do
+            params(
+              req:
+                Dodopayments::Internal::Transport::BaseClient::RequestComponents
+            ).void
+          end
+          def validate!(req)
+          end
 
           # @api private
           sig do
             params(
               status: Integer,
-              headers: T.any(
-                T::Hash[String, String],
-                Net::HTTPHeader
-              )
+              headers: T.any(T::Hash[String, String], Net::HTTPHeader)
             ).returns(T::Boolean)
           end
-          def should_retry?(status, headers:); end
+          def should_retry?(status, headers:)
+          end
 
           # @api private
           sig do
             params(
-              request: Dodopayments::Internal::Transport::BaseClient::RequestInputShape,
+              request:
+                Dodopayments::Internal::Transport::BaseClient::RequestInput,
               status: Integer,
               response_headers: T.any(T::Hash[String, String], Net::HTTPHeader)
+            ).returns(
+              Dodopayments::Internal::Transport::BaseClient::RequestInput
             )
-              .returns(Dodopayments::Internal::Transport::BaseClient::RequestInputShape)
           end
-          def follow_redirect(request, status:, response_headers:); end
+          def follow_redirect(request, status:, response_headers:)
+          end
 
           # @api private
           sig do
             params(
               status: T.any(Integer, Dodopayments::Errors::APIConnectionError),
               stream: T.nilable(T::Enumerable[String])
-            )
-              .void
+            ).void
           end
-          def reap_connection!(status, stream:); end
+          def reap_connection!(status, stream:)
+          end
         end
+
+        sig { returns(URI::Generic) }
+        attr_reader :base_url
+
+        sig { returns(Float) }
+        attr_reader :timeout
+
+        sig { returns(Integer) }
+        attr_reader :max_retries
+
+        sig { returns(Float) }
+        attr_reader :initial_retry_delay
+
+        sig { returns(Float) }
+        attr_reader :max_retry_delay
+
+        sig { returns(T::Hash[String, String]) }
+        attr_reader :headers
+
+        sig { returns(T.nilable(String)) }
+        attr_reader :idempotency_header
 
         # @api private
         sig { returns(Dodopayments::Internal::Transport::PooledNetRequester) }
@@ -107,11 +151,19 @@ module Dodopayments
             max_retries: Integer,
             initial_retry_delay: Float,
             max_retry_delay: Float,
-            headers: T::Hash[String,
-                             T.nilable(T.any(String, Integer, T::Array[T.nilable(T.any(String, Integer))]))],
+            headers:
+              T::Hash[
+                String,
+                T.nilable(
+                  T.any(
+                    String,
+                    Integer,
+                    T::Array[T.nilable(T.any(String, Integer))]
+                  )
+                )
+              ],
             idempotency_header: T.nilable(String)
-          )
-            .returns(T.attached_class)
+          ).returns(T.attached_class)
         end
         def self.new(
           base_url:,
@@ -121,41 +173,61 @@ module Dodopayments
           max_retry_delay: 0.0,
           headers: {},
           idempotency_header: nil
-        ); end
+        )
+        end
+
         # @api private
         sig { overridable.returns(T::Hash[String, String]) }
-        private def auth_headers; end
+        private def auth_headers
+        end
 
         # @api private
         sig { returns(String) }
-        private def generate_idempotency_key; end
+        private def generate_idempotency_key
+        end
 
         # @api private
         sig do
           overridable
             .params(
-              req: Dodopayments::Internal::Transport::BaseClient::RequestComponentsShape,
+              req:
+                Dodopayments::Internal::Transport::BaseClient::RequestComponents,
               opts: Dodopayments::Internal::AnyHash
             )
-            .returns(Dodopayments::Internal::Transport::BaseClient::RequestInputShape)
+            .returns(
+              Dodopayments::Internal::Transport::BaseClient::RequestInput
+            )
         end
-        private def build_request(req, opts); end
-
-        # @api private
-        sig { params(headers: T::Hash[String, String], retry_count: Integer).returns(Float) }
-        private def retry_delay(headers, retry_count:); end
+        private def build_request(req, opts)
+        end
 
         # @api private
         sig do
           params(
-            request: Dodopayments::Internal::Transport::BaseClient::RequestInputShape,
+            headers: T::Hash[String, String],
+            retry_count: Integer
+          ).returns(Float)
+        end
+        private def retry_delay(headers, retry_count:)
+        end
+
+        # @api private
+        sig do
+          params(
+            request:
+              Dodopayments::Internal::Transport::BaseClient::RequestInput,
             redirect_count: Integer,
             retry_count: Integer,
             send_retry_header: T::Boolean
-          )
-            .returns([Integer, Net::HTTPResponse, T::Enumerable[String]])
+          ).returns([Integer, Net::HTTPResponse, T::Enumerable[String]])
         end
-        private def send_request(request, redirect_count:, retry_count:, send_retry_header:); end
+        def send_request(
+          request,
+          redirect_count:,
+          retry_count:,
+          send_retry_header:
+        )
+        end
 
         # Execute the request specified by `req`. This is the method that all resource
         # methods call into.
@@ -165,32 +237,45 @@ module Dodopayments
           params(
             method: Symbol,
             path: T.any(String, T::Array[String]),
-            query: T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))]),
-            headers: T.nilable(
-              T::Hash[String,
-                      T.nilable(
-                        T.any(
-                          String,
-                          Integer,
-                          T::Array[T.nilable(T.any(String, Integer))]
-                        )
-                      )]
-            ),
+            query:
+              T.nilable(
+                T::Hash[String, T.nilable(T.any(T::Array[String], String))]
+              ),
+            headers:
+              T.nilable(
+                T::Hash[
+                  String,
+                  T.nilable(
+                    T.any(
+                      String,
+                      Integer,
+                      T::Array[T.nilable(T.any(String, Integer))]
+                    )
+                  )
+                ]
+              ),
             body: T.nilable(T.anything),
-            unwrap: T.nilable(
-              T.any(
-                Symbol,
-                Integer,
-                T::Array[T.any(Symbol, Integer)],
-                T.proc.params(arg0: T.anything).returns(T.anything)
-              )
-            ),
-            page: T.nilable(T::Class[Dodopayments::Internal::Type::BasePage[Dodopayments::Internal::Type::BaseModel]]),
+            unwrap:
+              T.nilable(
+                T.any(
+                  Symbol,
+                  Integer,
+                  T::Array[T.any(Symbol, Integer)],
+                  T.proc.params(arg0: T.anything).returns(T.anything)
+                )
+              ),
+            page:
+              T.nilable(
+                T::Class[
+                  Dodopayments::Internal::Type::BasePage[
+                    Dodopayments::Internal::Type::BaseModel
+                  ]
+                ]
+              ),
             stream: T.nilable(T::Class[T.anything]),
             model: T.nilable(Dodopayments::Internal::Type::Converter::Input),
-            options: T.nilable(Dodopayments::RequestOpts)
-          )
-            .returns(T.anything)
+            options: T.nilable(Dodopayments::RequestOptions::OrHash)
+          ).returns(T.anything)
         end
         def request(
           method,
@@ -203,10 +288,13 @@ module Dodopayments
           stream: nil,
           model: Dodopayments::Internal::Type::Unknown,
           options: {}
-        ); end
+        )
+        end
+
         # @api private
         sig { returns(String) }
-        def inspect; end
+        def inspect
+        end
       end
     end
   end

@@ -11,29 +11,32 @@ module Dodopayments
           email: String,
           name: String,
           phone_number: T.nilable(String),
-          request_options: Dodopayments::RequestOpts
-        )
-          .returns(Dodopayments::Models::Customer)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Customer)
       end
-      def create(email:, name:, phone_number: nil, request_options: {}); end
+      def create(email:, name:, phone_number: nil, request_options: {})
+      end
 
       sig do
-        params(customer_id: String, request_options: Dodopayments::RequestOpts)
-          .returns(Dodopayments::Models::Customer)
+        params(
+          customer_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Customer)
       end
       def retrieve(
         # Customer Id
         customer_id,
         request_options: {}
-      ); end
+      )
+      end
+
       sig do
         params(
           customer_id: String,
           name: T.nilable(String),
           phone_number: T.nilable(String),
-          request_options: Dodopayments::RequestOpts
-        )
-          .returns(Dodopayments::Models::Customer)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Customer)
       end
       def update(
         # Customer Id
@@ -41,25 +44,36 @@ module Dodopayments
         name: nil,
         phone_number: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       sig do
         params(
-          page_number: T.nilable(Integer),
-          page_size: T.nilable(Integer),
-          request_options: Dodopayments::RequestOpts
+          email: String,
+          page_number: Integer,
+          page_size: Integer,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(
+          Dodopayments::Internal::DefaultPageNumberPagination[
+            Dodopayments::Customer
+          ]
         )
-          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Customer])
       end
       def list(
+        # Filter by customer email
+        email: nil,
         # Page number default is 0
         page_number: nil,
         # Page size default is 10 max is 100
         page_size: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:); end
+      def self.new(client:)
+      end
     end
   end
 end

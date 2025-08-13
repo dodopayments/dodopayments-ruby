@@ -1,6 +1,44 @@
 # frozen_string_literal: true
 
 module Dodopayments
+  [Dodopayments::Internal::Type::BaseModel, *Dodopayments::Internal::Type::BaseModel.subclasses].each do |cls|
+    cls.define_sorbet_constant!(:OrHash) { T.type_alias { T.any(cls, Dodopayments::Internal::AnyHash) } }
+  end
+
+  Dodopayments::Internal::Util.walk_namespaces(Dodopayments::Models).each do |mod|
+    case mod
+    in Dodopayments::Internal::Type::Enum | Dodopayments::Internal::Type::Union
+      mod.constants.each do |name|
+        case mod.const_get(name)
+        in true | false
+          mod.define_sorbet_constant!(:TaggedBoolean) { T.type_alias { T::Boolean } }
+          mod.define_sorbet_constant!(:OrBoolean) { T.type_alias { T::Boolean } }
+        in Integer
+          mod.define_sorbet_constant!(:TaggedInteger) { T.type_alias { Integer } }
+          mod.define_sorbet_constant!(:OrInteger) { T.type_alias { Integer } }
+        in Float
+          mod.define_sorbet_constant!(:TaggedFloat) { T.type_alias { Float } }
+          mod.define_sorbet_constant!(:OrFloat) { T.type_alias { Float } }
+        in Symbol
+          mod.define_sorbet_constant!(:TaggedSymbol) { T.type_alias { Symbol } }
+          mod.define_sorbet_constant!(:OrSymbol) { T.type_alias { T.any(Symbol, String) } }
+        else
+        end
+      end
+    else
+    end
+  end
+
+  Dodopayments::Internal::Util.walk_namespaces(Dodopayments::Models)
+                              .lazy
+                              .grep(Dodopayments::Internal::Type::Union)
+                              .each do |mod|
+    const = :Variants
+    next if mod.sorbet_constant_defined?(const)
+
+    mod.define_sorbet_constant!(const) { T.type_alias { mod.to_sorbet_type } }
+  end
+
   AddonCartResponseItem = Dodopayments::Models::AddonCartResponseItem
 
   AddonCreateParams = Dodopayments::Models::AddonCreateParams
@@ -15,9 +53,23 @@ module Dodopayments
 
   AddonUpdateParams = Dodopayments::Models::AddonUpdateParams
 
+  AttachAddon = Dodopayments::Models::AttachAddon
+
   AttachExistingCustomer = Dodopayments::Models::AttachExistingCustomer
 
   BillingAddress = Dodopayments::Models::BillingAddress
+
+  Brand = Dodopayments::Models::Brand
+
+  BrandCreateParams = Dodopayments::Models::BrandCreateParams
+
+  BrandListParams = Dodopayments::Models::BrandListParams
+
+  BrandRetrieveParams = Dodopayments::Models::BrandRetrieveParams
+
+  BrandUpdateImagesParams = Dodopayments::Models::BrandUpdateImagesParams
+
+  BrandUpdateParams = Dodopayments::Models::BrandUpdateParams
 
   CountryCode = Dodopayments::Models::CountryCode
 
@@ -67,6 +119,8 @@ module Dodopayments
 
   DisputeStatus = Dodopayments::Models::DisputeStatus
 
+  GetDispute = Dodopayments::Models::GetDispute
+
   IntentStatus = Dodopayments::Models::IntentStatus
 
   Invoices = Dodopayments::Models::Invoices
@@ -99,6 +153,8 @@ module Dodopayments
 
   MiscListSupportedCountriesParams = Dodopayments::Models::MiscListSupportedCountriesParams
 
+  NewCustomer = Dodopayments::Models::NewCustomer
+
   OneTimeProductCartItem = Dodopayments::Models::OneTimeProductCartItem
 
   Payment = Dodopayments::Models::Payment
@@ -106,6 +162,10 @@ module Dodopayments
   PaymentCreateParams = Dodopayments::Models::PaymentCreateParams
 
   PaymentListParams = Dodopayments::Models::PaymentListParams
+
+  PaymentMethodTypes = Dodopayments::Models::PaymentMethodTypes
+
+  PaymentRetrieveLineItemsParams = Dodopayments::Models::PaymentRetrieveLineItemsParams
 
   PaymentRetrieveParams = Dodopayments::Models::PaymentRetrieveParams
 
@@ -126,6 +186,8 @@ module Dodopayments
   Products = Dodopayments::Models::Products
 
   ProductUnarchiveParams = Dodopayments::Models::ProductUnarchiveParams
+
+  ProductUpdateFilesParams = Dodopayments::Models::ProductUpdateFilesParams
 
   ProductUpdateParams = Dodopayments::Models::ProductUpdateParams
 
@@ -159,9 +221,21 @@ module Dodopayments
 
   TimeInterval = Dodopayments::Models::TimeInterval
 
-  WebhookEvent = Dodopayments::Models::WebhookEvent
+  WebhookCreateParams = Dodopayments::Models::WebhookCreateParams
 
-  WebhookEventListParams = Dodopayments::Models::WebhookEventListParams
+  WebhookDeleteParams = Dodopayments::Models::WebhookDeleteParams
 
-  WebhookEventRetrieveParams = Dodopayments::Models::WebhookEventRetrieveParams
+  WebhookEventType = Dodopayments::Models::WebhookEventType
+
+  WebhookListParams = Dodopayments::Models::WebhookListParams
+
+  WebhookPayload = Dodopayments::Models::WebhookPayload
+
+  WebhookRetrieveParams = Dodopayments::Models::WebhookRetrieveParams
+
+  Webhooks = Dodopayments::Models::Webhooks
+
+  WebhookUpdateParams = Dodopayments::Models::WebhookUpdateParams
+
+  YourWebhookURLCreateParams = Dodopayments::Models::YourWebhookURLCreateParams
 end

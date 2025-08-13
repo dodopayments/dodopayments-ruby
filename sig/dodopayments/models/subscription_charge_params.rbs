@@ -1,7 +1,13 @@
 module Dodopayments
   module Models
     type subscription_charge_params =
-      { product_price: Integer }
+      {
+        product_price: Integer,
+        adaptive_currency_fees_inclusive: bool?,
+        metadata: ::Hash[Symbol, String]?,
+        product_currency: Dodopayments::Models::currency?,
+        product_description: String?
+      }
       & Dodopayments::Internal::Type::request_parameters
 
     class SubscriptionChargeParams < Dodopayments::Internal::Type::BaseModel
@@ -10,12 +16,31 @@ module Dodopayments
 
       attr_accessor product_price: Integer
 
+      attr_accessor adaptive_currency_fees_inclusive: bool?
+
+      attr_accessor metadata: ::Hash[Symbol, String]?
+
+      attr_accessor product_currency: Dodopayments::Models::currency?
+
+      attr_accessor product_description: String?
+
       def initialize: (
         product_price: Integer,
+        ?adaptive_currency_fees_inclusive: bool?,
+        ?metadata: ::Hash[Symbol, String]?,
+        ?product_currency: Dodopayments::Models::currency?,
+        ?product_description: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::subscription_charge_params
+      def to_hash: -> {
+        product_price: Integer,
+        adaptive_currency_fees_inclusive: bool?,
+        metadata: ::Hash[Symbol, String]?,
+        product_currency: Dodopayments::Models::currency?,
+        product_description: String?,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

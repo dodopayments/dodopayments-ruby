@@ -11,25 +11,28 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
       )
 
     assert_pattern do
-      response => Dodopayments::Models::Product
+      response => Dodopayments::Product
     end
 
     assert_pattern do
       response => {
+        brand_id: String,
         business_id: String,
         created_at: Time,
         is_recurring: Dodopayments::Internal::Type::Boolean,
         license_key_enabled: Dodopayments::Internal::Type::Boolean,
-        price: Dodopayments::Models::Price,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
+        price: Dodopayments::Price,
         product_id: String,
-        tax_category: Dodopayments::Models::TaxCategory,
+        tax_category: Dodopayments::TaxCategory,
         updated_at: Time,
         addons: ^(Dodopayments::Internal::Type::ArrayOf[String]) | nil,
         description: String | nil,
+        digital_product_delivery: Dodopayments::Product::DigitalProductDelivery | nil,
         image: String | nil,
         license_key_activation_message: String | nil,
         license_key_activations_limit: Integer | nil,
-        license_key_duration: Dodopayments::Models::LicenseKeyDuration | nil,
+        license_key_duration: Dodopayments::LicenseKeyDuration | nil,
         name: String | nil
       }
     end
@@ -39,25 +42,28 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
     response = @dodo_payments.products.retrieve("id")
 
     assert_pattern do
-      response => Dodopayments::Models::Product
+      response => Dodopayments::Product
     end
 
     assert_pattern do
       response => {
+        brand_id: String,
         business_id: String,
         created_at: Time,
         is_recurring: Dodopayments::Internal::Type::Boolean,
         license_key_enabled: Dodopayments::Internal::Type::Boolean,
-        price: Dodopayments::Models::Price,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
+        price: Dodopayments::Price,
         product_id: String,
-        tax_category: Dodopayments::Models::TaxCategory,
+        tax_category: Dodopayments::TaxCategory,
         updated_at: Time,
         addons: ^(Dodopayments::Internal::Type::ArrayOf[String]) | nil,
         description: String | nil,
+        digital_product_delivery: Dodopayments::Product::DigitalProductDelivery | nil,
         image: String | nil,
         license_key_activation_message: String | nil,
         license_key_activations_limit: Integer | nil,
-        license_key_duration: Dodopayments::Models::LicenseKeyDuration | nil,
+        license_key_duration: Dodopayments::LicenseKeyDuration | nil,
         name: String | nil
       }
     end
@@ -90,15 +96,16 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         business_id: String,
         created_at: Time,
         is_recurring: Dodopayments::Internal::Type::Boolean,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         product_id: String,
-        tax_category: Dodopayments::Models::TaxCategory,
+        tax_category: Dodopayments::TaxCategory,
         updated_at: Time,
-        currency: Dodopayments::Models::Currency | nil,
+        currency: Dodopayments::Currency | nil,
         description: String | nil,
         image: String | nil,
         name: String | nil,
         price: Integer | nil,
-        price_detail: Dodopayments::Models::Price | nil,
+        price_detail: Dodopayments::Price | nil,
         tax_inclusive: Dodopayments::Internal::Type::Boolean | nil
       }
     end
@@ -117,6 +124,21 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
 
     assert_pattern do
       response => nil
+    end
+  end
+
+  def test_update_files_required_params
+    response = @dodo_payments.products.update_files("id", file_name: "file_name")
+
+    assert_pattern do
+      response => Dodopayments::Models::ProductUpdateFilesResponse
+    end
+
+    assert_pattern do
+      response => {
+        file_id: String,
+        url: String
+      }
     end
   end
 end

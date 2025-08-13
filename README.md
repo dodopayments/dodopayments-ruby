@@ -1,6 +1,6 @@
 # Dodo Payments Ruby API library
 
-The Dodo Payments Ruby library provides convenient access to the Dodo Payments REST API from any Ruby 3.2.0+ application.
+The Dodo Payments Ruby library provides convenient access to the Dodo Payments REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/dodopayments/dodopayments-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "dodopayments", "~> 1.22.0"
+gem "dodopayments", "~> 1.20.0"
 ```
 
 <!-- x-release-please-end -->
@@ -33,19 +33,13 @@ dodo_payments = Dodopayments::Client.new(
   environment: "test_mode" # defaults to "live_mode"
 )
 
-payment = dodo_payments.payments.create
+payment = dodo_payments.payments.create(
+  billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
+  customer: {customer_id: "customer_id"},
+  product_cart: [{product_id: "product_id", quantity: 0}]
+)
 
 puts(payment.payment_id)
-```
-
-## Sorbet
-
-This library is written with [Sorbet type definitions](https://sorbet.org/docs/rbi). However, there is no runtime dependency on the `sorbet-runtime`.
-
-When using sorbet, it is recommended to use model classes as below. This provides stronger type checking and tooling integration.
-
-```ruby
-dodo_payments.payments.create
 ```
 
 ### Pagination
@@ -59,23 +53,42 @@ page = dodo_payments.payments.list
 
 # Fetch single item from page.
 payment = page.items[0]
-puts(payment.payment_id)
+puts(payment.brand_id)
 
 # Automatically fetches more pages as needed.
 page.auto_paging_each do |payment|
-  puts(payment.payment_id)
+  puts(payment.brand_id)
 end
 ```
 
-### Errors
+Alternatively, you can use the `#next_page?` and `#next_page` methods for more granular control working with pages.
+
+```ruby
+if page.next_page?
+  new_page = page.next_page
+  puts(new_page.items[0].brand_id)
+end
+```
+
+### Handling errors
 
 When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Dodopayments::Errors::APIError` will be thrown:
 
 ```ruby
 begin
-  payment = dodo_payments.payments.create
-rescue Dodopayments::Errors::APIError => e
-  puts(e.status) # 400
+  payment = dodo_payments.payments.create(
+    billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
+    customer: {customer_id: "customer_id"},
+    product_cart: [{product_id: "product_id", quantity: 0}]
+  )
+rescue Dodopayments::Errors::APIConnectionError => e
+  puts("The server could not be reached")
+  puts(e.cause)  # an underlying Exception, likely raised within `net/http`
+rescue Dodopayments::Errors::RateLimitError => e
+  puts("A 429 status code was received; we should back off a bit.")
+rescue Dodopayments::Errors::APIStatusError => e
+  puts("Another non-200-range status code was received")
+  puts(e.status)
 end
 ```
 
@@ -110,16 +123,17 @@ dodo_payments = Dodopayments::Client.new(
 )
 
 # Or, configure per-request:
-dodo_payments.payments.create(request_options: {max_retries: 5})
+dodo_payments.payments.create(
+  billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
+  customer: {customer_id: "customer_id"},
+  product_cart: [{product_id: "product_id", quantity: 0}],
+  request_options: {max_retries: 5}
+)
 ```
 
 ### Timeouts
 
-By default, requests will time out after 60 seconds.
-
-Timeouts are applied separately to the initial connection and the overall request time, so in some cases a request could wait 2\*timeout seconds before it fails.
-
-You can use the `timeout` option to configure or disable this:
+By default, requests will time out after 60 seconds. You can use the timeout option to configure or disable this:
 
 ```ruby
 # Configure the default for all requests:
@@ -128,42 +142,63 @@ dodo_payments = Dodopayments::Client.new(
 )
 
 # Or, configure per-request:
-dodo_payments.payments.create(request_options: {timeout: 5})
+dodo_payments.payments.create(
+  billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
+  customer: {customer_id: "customer_id"},
+  product_cart: [{product_id: "product_id", quantity: 0}],
+  request_options: {timeout: 5}
+)
 ```
 
-## Model DSL
+On timeout, `Dodopayments::Errors::APITimeoutError` is raised.
 
-This library uses a simple DSL to represent request parameters and response shapes in `lib/dodopayments/models`.
-
-With the right [editor plugins](https://shopify.github.io/ruby-lsp), you can ctrl-click on elements of the DSL to navigate around and explore the library.
-
-In all places where a `BaseModel` type is specified, vanilla Ruby `Hash` can also be used. For example, the following are interchangeable as arguments:
-
-```ruby
-# This has tooling readability, for auto-completion, static analysis, and goto definition with supported language services
-params = Dodopayments::Models::PaymentCreateParams.new
-
-# This also works
-params = {
-
-}
-```
-
-## Editor support
-
-A combination of [Shopify LSP](https://shopify.github.io/ruby-lsp) and [Solargraph](https://solargraph.org/) is recommended for non-[Sorbet](https://sorbet.org) users. The former is especially good at go to definition, while the latter has much better auto-completion support.
+Note that requests that time out are retried by default.
 
 ## Advanced concepts
 
-### Making custom/undocumented requests
+### BaseModel
+
+All parameter and response objects inherit from `Dodopayments::Internal::Type::BaseModel`, which provides several conveniences, including:
+
+1. All fields, including unknown ones, are accessible with `obj[:prop]` syntax, and can be destructured with `obj => {prop: prop}` or pattern-matching syntax.
+
+2. Structural equivalence for equality; if two API calls return the same values, comparing the responses with == will return true.
+
+3. Both instances and the classes themselves can be pretty-printed.
+
+4. Helpers such as `#to_h`, `#deep_to_h`, `#to_json`, and `#to_yaml`.
+
+### Making custom or undocumented requests
+
+#### Undocumented properties
+
+You can send undocumented parameters to any endpoint, and read undocumented response properties, like so:
+
+Note: the `extra_` parameters of the same name overrides the documented parameters.
+
+```ruby
+payment =
+  dodo_payments.payments.create(
+    billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
+    customer: {customer_id: "customer_id"},
+    product_cart: [{product_id: "product_id", quantity: 0}],
+    request_options: {
+      extra_query: {my_query_parameter: value},
+      extra_body: {my_body_parameter: value},
+      extra_headers: {"my-header": value}
+    }
+  )
+
+puts(payment[:my_undocumented_property])
+```
 
 #### Undocumented request params
 
-If you want to explicitly send an extra param, you can do so with the `extra_query`, `extra_body`, and `extra_headers` under the `request_options:` parameter when making a requests as seen in examples above.
+If you want to explicitly send an extra param, you can do so with the `extra_query`, `extra_body`, and `extra_headers` under the `request_options:` parameter when making a request, as seen in the examples above.
 
 #### Undocumented endpoints
 
-To make requests to undocumented endpoints, you can make requests using `client.request`. Options on the client will be respected (such as retries) when making this request.
+To make requests to undocumented endpoints while retaining the benefit of auth, retries, and so on, you can make requests using `client.request`, like so:
 
 ```ruby
 response = client.request(
@@ -171,42 +206,91 @@ response = client.request(
   path: '/undocumented/endpoint',
   query: {"dog": "woof"},
   headers: {"useful-header": "interesting-value"},
-  body: {"he": "llo"},
+  body: {"hello": "world"}
 )
 ```
 
 ### Concurrency & connection pooling
 
-The `Dodopayments::Client` instances are thread-safe, and should be re-used across multiple threads. By default, each `Client` have their own HTTP connection pool, with a maximum number of connections equal to thread count.
+The `Dodopayments::Client` instances are threadsafe, but are only are fork-safe when there are no in-flight HTTP requests.
 
-When the maximum number of connections has been checked out from the connection pool, the `Client` will wait for an in use connection to become available. The queue time for this mechanism is accounted for by the per-request timeout.
+Each instance of `Dodopayments::Client` has its own HTTP connection pool with a default size of 99. As such, we recommend instantiating the client once per application in most settings.
+
+When all available connections from the pool are checked out, requests wait for a new connection to become available, with queue time counting towards the request timeout.
 
 Unless otherwise specified, other classes in the SDK do not have locks protecting their underlying data structure.
 
-Currently, `Dodopayments::Client` instances are only fork-safe if there are no in-flight HTTP requests.
+## Sorbet
 
-### Sorbet
+This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitions, and has no dependency on sorbet-runtime.
 
-#### Enums
-
-Sorbet's typed enums require sub-classing of the [`T::Enum` class](https://sorbet.org/docs/tenum) from the `sorbet-runtime` gem.
-
-Since this library does not depend on `sorbet-runtime`, it uses a [`T.all` intersection type](https://sorbet.org/docs/intersection-types) with a ruby primitive type to construct a "tagged alias" instead.
+You can provide typesafe request parameters like so:
 
 ```ruby
-module Dodopayments::Models::IntentStatus
-  # This alias aids language service driven navigation.
-  TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::Models::IntentStatus) }
-end
+dodo_payments.payments.create(
+  billing: Dodopayments::BillingAddress.new(
+    city: "city",
+    country: "AF",
+    state: "state",
+    street: "street",
+    zipcode: "zipcode"
+  ),
+  customer: Dodopayments::AttachExistingCustomer.new(customer_id: "customer_id"),
+  product_cart: [Dodopayments::OneTimeProductCartItem.new(product_id: "product_id", quantity: 0)]
+)
 ```
 
-#### Argument passing trick
-
-It is possible to pass a compatible model / parameter class to a method that expects keyword arguments by using the `**` splat operator.
+Or, equivalently:
 
 ```ruby
-params = Dodopayments::Models::PaymentCreateParams.new
+# Hashes work, but are not typesafe:
+dodo_payments.payments.create(
+  billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
+  customer: {customer_id: "customer_id"},
+  product_cart: [{product_id: "product_id", quantity: 0}]
+)
+
+# You can also splat a full Params class:
+params = Dodopayments::PaymentCreateParams.new(
+  billing: Dodopayments::BillingAddress.new(
+    city: "city",
+    country: "AF",
+    state: "state",
+    street: "street",
+    zipcode: "zipcode"
+  ),
+  customer: Dodopayments::AttachExistingCustomer.new(customer_id: "customer_id"),
+  product_cart: [Dodopayments::OneTimeProductCartItem.new(product_id: "product_id", quantity: 0)]
+)
 dodo_payments.payments.create(**params)
+```
+
+### Enums
+
+Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
+
+```ruby
+# :AED
+puts(Dodopayments::Currency::AED)
+
+# Revealed type: `T.all(Dodopayments::Currency, Symbol)`
+T.reveal_type(Dodopayments::Currency::AED)
+```
+
+Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
+
+```ruby
+# Using the enum constants preserves the tagged type information:
+dodo_payments.payments.create(
+  billing_currency: Dodopayments::Currency::AED,
+  # …
+)
+
+# Literal values are also permissible:
+dodo_payments.payments.create(
+  billing_currency: :AED,
+  # …
+)
 ```
 
 ## Versioning

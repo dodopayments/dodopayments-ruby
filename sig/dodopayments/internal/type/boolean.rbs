@@ -3,6 +3,7 @@ module Dodopayments
     module Type
       class Boolean
         extend Dodopayments::Internal::Type::Converter
+        extend Dodopayments::Internal::Util::SorbetRuntimeSupport
 
         def self.===: (top other) -> bool
 
@@ -17,6 +18,8 @@ module Dodopayments
           bool | top value,
           state: Dodopayments::Internal::Type::Converter::dump_state
         ) -> (bool | top)
+
+        def self.to_sorbet_type: -> top
       end
     end
   end

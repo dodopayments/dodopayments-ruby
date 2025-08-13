@@ -5,56 +5,159 @@ module Dodopayments
     module Type
       # @api private
       module Converter
-        Input = T.type_alias { T.any(Dodopayments::Internal::Type::Converter, T::Class[T.anything]) }
+        extend Dodopayments::Internal::Util::SorbetRuntimeSupport
+
+        Input =
+          T.type_alias do
+            T.any(Dodopayments::Internal::Type::Converter, T::Class[T.anything])
+          end
 
         CoerceState =
           T.type_alias do
             {
-              strictness: T.any(T::Boolean, Symbol),
-              exactness: {yes: Integer, no: Integer, maybe: Integer},
+              translate_names: T::Boolean,
+              strictness: T::Boolean,
+              exactness: {
+                yes: Integer,
+                no: Integer,
+                maybe: Integer
+              },
+              error: T::Class[StandardError],
               branched: Integer
             }
           end
 
-        DumpState = T.type_alias { {can_retry: T::Boolean} }
+        DumpState = T.type_alias { { can_retry: T::Boolean } }
 
         # @api private
         sig do
           overridable
-            .params(value: T.anything, state: Dodopayments::Internal::Type::Converter::CoerceState)
+            .params(
+              value: T.anything,
+              state: Dodopayments::Internal::Type::Converter::CoerceState
+            )
             .returns(T.anything)
         end
-        def coerce(value, state:); end
+        def coerce(value, state:)
+        end
 
         # @api private
         sig do
           overridable
-            .params(value: T.anything, state: Dodopayments::Internal::Type::Converter::DumpState)
+            .params(
+              value: T.anything,
+              state: Dodopayments::Internal::Type::Converter::DumpState
+            )
             .returns(T.anything)
         end
-        def dump(value, state:); end
+        def dump(value, state:)
+        end
 
         # @api private
         sig { params(depth: Integer).returns(String) }
-        def inspect(depth: 0); end
+        def inspect(depth: 0)
+        end
 
         class << self
           # @api private
           sig do
             params(
-              spec: T.any(
-                {
-                  const: T.nilable(T.any(NilClass, T::Boolean, Integer, Float, Symbol)),
-                  enum: T.nilable(T.proc.returns(Dodopayments::Internal::Type::Converter::Input)),
-                  union: T.nilable(T.proc.returns(Dodopayments::Internal::Type::Converter::Input))
-                },
-                T.proc.returns(Dodopayments::Internal::Type::Converter::Input),
-                Dodopayments::Internal::Type::Converter::Input
-              )
-            )
-              .returns(T.proc.returns(T.anything))
+              spec:
+                T.any(
+                  {
+                    const:
+                      T.nilable(
+                        T.any(NilClass, T::Boolean, Integer, Float, Symbol)
+                      ),
+                    enum:
+                      T.nilable(
+                        T.proc.returns(
+                          Dodopayments::Internal::Type::Converter::Input
+                        )
+                      ),
+                    union:
+                      T.nilable(
+                        T.proc.returns(
+                          Dodopayments::Internal::Type::Converter::Input
+                        )
+                      )
+                  },
+                  T.proc.returns(
+                    Dodopayments::Internal::Type::Converter::Input
+                  ),
+                  Dodopayments::Internal::Type::Converter::Input
+                )
+            ).returns(T.proc.returns(T.anything))
           end
-          def self.type_info(spec); end
+          def self.type_info(spec)
+          end
+
+          # @api private
+          sig do
+            params(
+              type_info:
+                T.any(
+                  {
+                    const:
+                      T.nilable(
+                        T.any(NilClass, T::Boolean, Integer, Float, Symbol)
+                      ),
+                    enum:
+                      T.nilable(
+                        T.proc.returns(
+                          Dodopayments::Internal::Type::Converter::Input
+                        )
+                      ),
+                    union:
+                      T.nilable(
+                        T.proc.returns(
+                          Dodopayments::Internal::Type::Converter::Input
+                        )
+                      )
+                  },
+                  T.proc.returns(
+                    Dodopayments::Internal::Type::Converter::Input
+                  ),
+                  Dodopayments::Internal::Type::Converter::Input
+                ),
+              spec:
+                T.any(
+                  {
+                    const:
+                      T.nilable(
+                        T.any(NilClass, T::Boolean, Integer, Float, Symbol)
+                      ),
+                    enum:
+                      T.nilable(
+                        T.proc.returns(
+                          Dodopayments::Internal::Type::Converter::Input
+                        )
+                      ),
+                    union:
+                      T.nilable(
+                        T.proc.returns(
+                          Dodopayments::Internal::Type::Converter::Input
+                        )
+                      )
+                  },
+                  T.proc.returns(
+                    Dodopayments::Internal::Type::Converter::Input
+                  ),
+                  Dodopayments::Internal::Type::Converter::Input
+                )
+            ).returns(Dodopayments::Internal::AnyHash)
+          end
+          def self.meta_info(type_info, spec)
+          end
+
+          # @api private
+          sig do
+            params(translate_names: T::Boolean).returns(
+              Dodopayments::Internal::Type::Converter::CoerceState
+            )
+          end
+          def self.new_coerce_state(translate_names: true)
+          end
 
           # @api private
           #
@@ -72,20 +175,16 @@ module Dodopayments
               target: Dodopayments::Internal::Type::Converter::Input,
               value: T.anything,
               state: Dodopayments::Internal::Type::Converter::CoerceState
-            )
-              .returns(T.anything)
+            ).returns(T.anything)
           end
           def self.coerce(
             target,
             value,
-            # The `strictness` is one of `true`, `false`, or `:strong`. This informs the
-            # coercion strategy when we have to decide between multiple possible conversion
-            # targets:
+            # The `strictness` is one of `true`, `false`. This informs the coercion strategy
+            # when we have to decide between multiple possible conversion targets:
             #
             # - `true`: the conversion must be exact, with minimum coercion.
             # - `false`: the conversion can be approximate, with some coercion.
-            # - `:strong`: the conversion must be exact, with no coercion, and raise an error
-            #   if not possible.
             #
             # The `exactness` is `Hash` with keys being one of `yes`, `no`, or `maybe`. For
             # any given conversion attempt, the exactness will be updated based on how closely
@@ -97,22 +196,25 @@ module Dodopayments
             # - `no`: the value cannot be converted to the target type.
             #
             # See implementation below for more details.
-            state: {strictness: true, exactness: {yes: 0, no: 0, maybe: 0}, branched: 0}
-          ); end
+            state: Dodopayments::Internal::Type::Converter.new_coerce_state
+          )
+          end
+
           # @api private
           sig do
             params(
               target: Dodopayments::Internal::Type::Converter::Input,
               value: T.anything,
               state: Dodopayments::Internal::Type::Converter::DumpState
-            )
-              .returns(T.anything)
+            ).returns(T.anything)
           end
-          def self.dump(target, value, state: {can_retry: true}); end
+          def self.dump(target, value, state: { can_retry: true })
+          end
 
           # @api private
           sig { params(target: T.anything, depth: Integer).returns(String) }
-          def self.inspect(target, depth:); end
+          def self.inspect(target, depth:)
+          end
         end
       end
     end

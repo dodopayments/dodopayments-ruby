@@ -1,0 +1,13 @@
+module Dodopayments
+  module Models
+    type brand_list_response = { items: ::Array[Dodopayments::Brand] }
+
+    class BrandListResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor items: ::Array[Dodopayments::Brand]
+
+      def initialize: (items: ::Array[Dodopayments::Brand]) -> void
+
+      def to_hash: -> { items: ::Array[Dodopayments::Brand] }
+    end
+  end
+end

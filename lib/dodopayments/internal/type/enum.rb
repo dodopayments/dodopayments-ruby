@@ -17,13 +17,13 @@ module Dodopayments
       # values safely.
       #
       # @example
-      #   # `intent_status` is a `Dodopayments::Models::IntentStatus`
+      #   # `intent_status` is a `Dodopayments::IntentStatus`
       #   case intent_status
-      #   when Dodopayments::Models::IntentStatus::SUCCEEDED
+      #   when Dodopayments::IntentStatus::SUCCEEDED
       #     # ...
-      #   when Dodopayments::Models::IntentStatus::FAILED
+      #   when Dodopayments::IntentStatus::FAILED
       #     # ...
-      #   when Dodopayments::Models::IntentStatus::CANCELLED
+      #   when Dodopayments::IntentStatus::CANCELLED
       #     # ...
       #   else
       #     puts(intent_status)
@@ -42,6 +42,7 @@ module Dodopayments
       #   end
       module Enum
         include Dodopayments::Internal::Type::Converter
+        include Dodopayments::Internal::Util::SorbetRuntimeSupport
 
         # All of the valid Symbol values for this enum.
         #
@@ -80,9 +81,13 @@ module Dodopayments
         #
         # @param state [Hash{Symbol=>Object}] .
         #
-        #   @option state [Boolean, :strong] :strictness
+        #   @option state [Boolean] :translate_names
+        #
+        #   @option state [Boolean] :strictness
         #
         #   @option state [Hash{Symbol=>Object}] :exactness
+        #
+        #   @option state [Class<StandardError>] :error
         #
         #   @option state [Integer] :branched
         #
@@ -94,8 +99,12 @@ module Dodopayments
           if values.include?(val)
             exactness[:yes] += 1
             val
+          elsif values.first&.class == val.class
+            exactness[:maybe] += 1
+            value
           else
-            exactness[values.first&.class == val.class ? :maybe : :no] += 1
+            exactness[:no] += 1
+            state[:error] = TypeError.new("#{value.class} can't be coerced into #{self}")
             value
           end
         end
@@ -110,6 +119,21 @@ module Dodopayments
         #     @option state [Boolean] :can_retry
         #
         #   @return [Symbol, Object]
+
+        # @api private
+        #
+        # @return [Object]
+        def to_sorbet_type
+          types = values.map { Dodopayments::Internal::Util::SorbetRuntimeSupport.to_sorbet_type(_1) }.uniq
+          case types
+          in []
+            T.noreturn
+          in [type]
+            type
+          else
+            T.any(*types)
+          end
+        end
 
         # @api private
         #

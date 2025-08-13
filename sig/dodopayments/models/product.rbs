@@ -2,24 +2,29 @@ module Dodopayments
   module Models
     type product =
       {
+        brand_id: String,
         business_id: String,
         created_at: Time,
         is_recurring: bool,
         license_key_enabled: bool,
+        metadata: ::Hash[Symbol, String],
         price: Dodopayments::Models::price,
         product_id: String,
         tax_category: Dodopayments::Models::tax_category,
         updated_at: Time,
         addons: ::Array[String]?,
         description: String?,
+        digital_product_delivery: Dodopayments::Product::DigitalProductDelivery?,
         image: String?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
-        license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
+        license_key_duration: Dodopayments::LicenseKeyDuration?,
         name: String?
       }
 
     class Product < Dodopayments::Internal::Type::BaseModel
+      attr_accessor brand_id: String
+
       attr_accessor business_id: String
 
       attr_accessor created_at: Time
@@ -27,6 +32,8 @@ module Dodopayments
       attr_accessor is_recurring: bool
 
       attr_accessor license_key_enabled: bool
+
+      attr_accessor metadata: ::Hash[Symbol, String]
 
       attr_accessor price: Dodopayments::Models::price
 
@@ -40,35 +47,104 @@ module Dodopayments
 
       attr_accessor description: String?
 
+      attr_accessor digital_product_delivery: Dodopayments::Product::DigitalProductDelivery?
+
       attr_accessor image: String?
 
       attr_accessor license_key_activation_message: String?
 
       attr_accessor license_key_activations_limit: Integer?
 
-      attr_accessor license_key_duration: Dodopayments::Models::LicenseKeyDuration?
+      attr_accessor license_key_duration: Dodopayments::LicenseKeyDuration?
 
       attr_accessor name: String?
 
       def initialize: (
+        brand_id: String,
         business_id: String,
         created_at: Time,
         is_recurring: bool,
         license_key_enabled: bool,
+        metadata: ::Hash[Symbol, String],
         price: Dodopayments::Models::price,
         product_id: String,
         tax_category: Dodopayments::Models::tax_category,
         updated_at: Time,
         ?addons: ::Array[String]?,
         ?description: String?,
+        ?digital_product_delivery: Dodopayments::Product::DigitalProductDelivery?,
         ?image: String?,
         ?license_key_activation_message: String?,
         ?license_key_activations_limit: Integer?,
-        ?license_key_duration: Dodopayments::Models::LicenseKeyDuration?,
+        ?license_key_duration: Dodopayments::LicenseKeyDuration?,
         ?name: String?
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::product
+      def to_hash: -> {
+        brand_id: String,
+        business_id: String,
+        created_at: Time,
+        is_recurring: bool,
+        license_key_enabled: bool,
+        metadata: ::Hash[Symbol, String],
+        price: Dodopayments::Models::price,
+        product_id: String,
+        tax_category: Dodopayments::Models::tax_category,
+        updated_at: Time,
+        addons: ::Array[String]?,
+        description: String?,
+        digital_product_delivery: Dodopayments::Product::DigitalProductDelivery?,
+        image: String?,
+        license_key_activation_message: String?,
+        license_key_activations_limit: Integer?,
+        license_key_duration: Dodopayments::LicenseKeyDuration?,
+        name: String?
+      }
+
+      type digital_product_delivery =
+        {
+          external_url: String?,
+          files: ::Array[Dodopayments::Product::DigitalProductDelivery::File]?,
+          instructions: String?
+        }
+
+      class DigitalProductDelivery < Dodopayments::Internal::Type::BaseModel
+        attr_accessor external_url: String?
+
+        attr_accessor files: ::Array[Dodopayments::Product::DigitalProductDelivery::File]?
+
+        attr_accessor instructions: String?
+
+        def initialize: (
+          ?external_url: String?,
+          ?files: ::Array[Dodopayments::Product::DigitalProductDelivery::File]?,
+          ?instructions: String?
+        ) -> void
+
+        def to_hash: -> {
+          external_url: String?,
+          files: ::Array[Dodopayments::Product::DigitalProductDelivery::File]?,
+          instructions: String?
+        }
+
+        type file = { file_id: String, file_name: String, url: String }
+
+        class File < Dodopayments::Internal::Type::BaseModel
+          attr_accessor file_id: String
+
+          attr_accessor file_name: String
+
+          attr_accessor url: String
+
+          def initialize: (
+            file_id: String,
+            file_name: String,
+            url: String
+          ) -> void
+
+          def to_hash: -> { file_id: String, file_name: String, url: String }
+        end
+      end
     end
   end
 end

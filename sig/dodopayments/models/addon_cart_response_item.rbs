@@ -9,7 +9,7 @@ module Dodopayments
 
       def initialize: (addon_id: String, quantity: Integer) -> void
 
-      def to_hash: -> Dodopayments::Models::addon_cart_response_item
+      def to_hash: -> { addon_id: String, quantity: Integer }
     end
   end
 end

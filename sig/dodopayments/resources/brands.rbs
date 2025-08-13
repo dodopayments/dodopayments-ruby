@@ -1,0 +1,39 @@
+module Dodopayments
+  module Resources
+    class Brands
+      def create: (
+        ?description: String?,
+        ?name: String?,
+        ?statement_descriptor: String?,
+        ?support_email: String?,
+        ?url: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Brand
+
+      def retrieve: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Brand
+
+      def update: (
+        String id,
+        ?image_id: String?,
+        ?name: String?,
+        ?statement_descriptor: String?,
+        ?support_email: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Brand
+
+      def list: (
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::BrandListResponse
+
+      def update_images: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::BrandUpdateImagesResponse
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

@@ -12,11 +12,13 @@ module Dodopayments
       required :client_secret, String
 
       # @!attribute customer
+      #   Limited details about the customer making the payment
       #
       #   @return [Dodopayments::Models::CustomerLimitedDetails]
-      required :customer, -> { Dodopayments::Models::CustomerLimitedDetails }
+      required :customer, -> { Dodopayments::CustomerLimitedDetails }
 
       # @!attribute metadata
+      #   Additional metadata associated with the payment
       #
       #   @return [Hash{Symbol=>String}]
       required :metadata, Dodopayments::Internal::Type::HashOf[String]
@@ -39,6 +41,12 @@ module Dodopayments
       #   @return [String, nil]
       optional :discount_id, String, nil?: true
 
+      # @!attribute expires_on
+      #   Expiry timestamp of the payment link
+      #
+      #   @return [Time, nil]
+      optional :expires_on, Time, nil?: true
+
       # @!attribute payment_link
       #   Optional URL to a hosted payment page
       #
@@ -50,24 +58,26 @@ module Dodopayments
       #
       #   @return [Array<Dodopayments::Models::OneTimeProductCartItem>, nil]
       optional :product_cart,
-               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::OneTimeProductCartItem] },
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem] },
                nil?: true
 
-      # @!method initialize(client_secret:, customer:, metadata:, payment_id:, total_amount:, discount_id: nil, payment_link: nil, product_cart: nil)
+      # @!method initialize(client_secret:, customer:, metadata:, payment_id:, total_amount:, discount_id: nil, expires_on: nil, payment_link: nil, product_cart: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::PaymentCreateResponse} for more details.
       #
-      #   @param client_secret [String] Client secret used to load Dodo checkout SDK ...
+      #   @param client_secret [String] Client secret used to load Dodo checkout SDK
       #
-      #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
+      #   @param customer [Dodopayments::Models::CustomerLimitedDetails] Limited details about the customer making the payment
       #
-      #   @param metadata [Hash{Symbol=>String}]
+      #   @param metadata [Hash{Symbol=>String}] Additional metadata associated with the payment
       #
       #   @param payment_id [String] Unique identifier for the payment
       #
       #   @param total_amount [Integer] Total amount of the payment in smallest currency unit (e.g. cents)
       #
       #   @param discount_id [String, nil] The discount id if discount is applied
+      #
+      #   @param expires_on [Time, nil] Expiry timestamp of the payment link
       #
       #   @param payment_link [String, nil] Optional URL to a hosted payment page
       #

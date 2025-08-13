@@ -2,6 +2,8 @@ module Dodopayments
   module Internal
     module Transport
       class BaseClient
+        extend Dodopayments::Internal::Util::SorbetRuntimeSupport
+
         type request_components =
           {
             method: Symbol,
@@ -20,7 +22,6 @@ module Dodopayments
             model: Dodopayments::Internal::Type::Converter::input?,
             options: Dodopayments::request_opts?
           }
-
         type request_input =
           {
             method: Symbol,
@@ -55,6 +56,20 @@ module Dodopayments
           stream: Enumerable[String]?
         ) -> void
 
+        attr_reader base_url: URI::Generic
+
+        attr_reader timeout: Float
+
+        attr_reader max_retries: Integer
+
+        attr_reader initial_retry_delay: Float
+
+        attr_reader max_retry_delay: Float
+
+        attr_reader headers: ::Hash[String, String]
+
+        attr_reader idempotency_header: String?
+
         # @api private
         attr_reader requester: Dodopayments::Internal::Transport::PooledNetRequester
 
@@ -84,7 +99,7 @@ module Dodopayments
           retry_count: Integer
         ) -> Float
 
-        private def send_request: (
+        def send_request: (
           Dodopayments::Internal::Transport::BaseClient::request_input request,
           redirect_count: Integer,
           retry_count: Integer,

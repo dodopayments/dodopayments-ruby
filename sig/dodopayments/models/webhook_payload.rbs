@@ -1,0 +1,203 @@
+module Dodopayments
+  module Models
+    type webhook_payload =
+      {
+        business_id: String,
+        data: Dodopayments::Models::WebhookPayload::data,
+        timestamp: Time,
+        type: Dodopayments::Models::webhook_event_type
+      }
+
+    class WebhookPayload < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::Models::WebhookPayload::data
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: Dodopayments::Models::webhook_event_type
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::Models::WebhookPayload::data,
+        timestamp: Time,
+        type: Dodopayments::Models::webhook_event_type
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::Models::WebhookPayload::data,
+        timestamp: Time,
+        type: Dodopayments::Models::webhook_event_type
+      }
+
+      type data =
+        Dodopayments::WebhookPayload::Data::Payment
+        | Dodopayments::WebhookPayload::Data::Subscription
+        | Dodopayments::WebhookPayload::Data::Refund
+        | Dodopayments::WebhookPayload::Data::Dispute
+        | Dodopayments::WebhookPayload::Data::LicenseKey
+
+      module Data
+        extend Dodopayments::Internal::Type::Union
+
+        type payment =
+          {
+            payload_type: Dodopayments::Models::WebhookPayload::Data::Payment::payload_type
+          }
+
+        class Payment < Dodopayments::Models::Payment
+          def payload_type: -> Dodopayments::Models::WebhookPayload::Data::Payment::payload_type
+
+          def payload_type=: (
+            Dodopayments::Models::WebhookPayload::Data::Payment::payload_type _
+          ) -> Dodopayments::Models::WebhookPayload::Data::Payment::payload_type
+
+          def initialize: (
+            payload_type: Dodopayments::Models::WebhookPayload::Data::Payment::payload_type
+          ) -> void
+
+          def to_hash: -> {
+            payload_type: Dodopayments::Models::WebhookPayload::Data::Payment::payload_type
+          }
+
+          type payload_type = :Payment
+
+          module PayloadType
+            extend Dodopayments::Internal::Type::Enum
+
+            PAYMENT: :Payment
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::Payment::payload_type]
+          end
+        end
+
+        type subscription =
+          {
+            payload_type: Dodopayments::Models::WebhookPayload::Data::Subscription::payload_type
+          }
+
+        class Subscription < Dodopayments::Models::Subscription
+          def payload_type: -> Dodopayments::Models::WebhookPayload::Data::Subscription::payload_type
+
+          def payload_type=: (
+            Dodopayments::Models::WebhookPayload::Data::Subscription::payload_type _
+          ) -> Dodopayments::Models::WebhookPayload::Data::Subscription::payload_type
+
+          def initialize: (
+            payload_type: Dodopayments::Models::WebhookPayload::Data::Subscription::payload_type
+          ) -> void
+
+          def to_hash: -> {
+            payload_type: Dodopayments::Models::WebhookPayload::Data::Subscription::payload_type
+          }
+
+          type payload_type = :Subscription
+
+          module PayloadType
+            extend Dodopayments::Internal::Type::Enum
+
+            SUBSCRIPTION: :Subscription
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::Subscription::payload_type]
+          end
+        end
+
+        type refund =
+          {
+            payload_type: Dodopayments::Models::WebhookPayload::Data::Refund::payload_type
+          }
+
+        class Refund < Dodopayments::Models::Refund
+          def payload_type: -> Dodopayments::Models::WebhookPayload::Data::Refund::payload_type
+
+          def payload_type=: (
+            Dodopayments::Models::WebhookPayload::Data::Refund::payload_type _
+          ) -> Dodopayments::Models::WebhookPayload::Data::Refund::payload_type
+
+          def initialize: (
+            payload_type: Dodopayments::Models::WebhookPayload::Data::Refund::payload_type
+          ) -> void
+
+          def to_hash: -> {
+            payload_type: Dodopayments::Models::WebhookPayload::Data::Refund::payload_type
+          }
+
+          type payload_type = :Refund
+
+          module PayloadType
+            extend Dodopayments::Internal::Type::Enum
+
+            REFUND: :Refund
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::Refund::payload_type]
+          end
+        end
+
+        type dispute =
+          {
+            payload_type: Dodopayments::Models::WebhookPayload::Data::Dispute::payload_type
+          }
+
+        class Dispute < Dodopayments::Models::GetDispute
+          def payload_type: -> Dodopayments::Models::WebhookPayload::Data::Dispute::payload_type
+
+          def payload_type=: (
+            Dodopayments::Models::WebhookPayload::Data::Dispute::payload_type _
+          ) -> Dodopayments::Models::WebhookPayload::Data::Dispute::payload_type
+
+          def initialize: (
+            payload_type: Dodopayments::Models::WebhookPayload::Data::Dispute::payload_type
+          ) -> void
+
+          def to_hash: -> {
+            payload_type: Dodopayments::Models::WebhookPayload::Data::Dispute::payload_type
+          }
+
+          type payload_type = :Dispute
+
+          module PayloadType
+            extend Dodopayments::Internal::Type::Enum
+
+            DISPUTE: :Dispute
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::Dispute::payload_type]
+          end
+        end
+
+        type license_key =
+          {
+            payload_type: Dodopayments::Models::WebhookPayload::Data::LicenseKey::payload_type
+          }
+
+        class LicenseKey < Dodopayments::Models::LicenseKey
+          def payload_type: -> Dodopayments::Models::WebhookPayload::Data::LicenseKey::payload_type
+
+          def payload_type=: (
+            Dodopayments::Models::WebhookPayload::Data::LicenseKey::payload_type _
+          ) -> Dodopayments::Models::WebhookPayload::Data::LicenseKey::payload_type
+
+          def initialize: (
+            payload_type: Dodopayments::Models::WebhookPayload::Data::LicenseKey::payload_type
+          ) -> void
+
+          def to_hash: -> {
+            payload_type: Dodopayments::Models::WebhookPayload::Data::LicenseKey::payload_type
+          }
+
+          type payload_type = :LicenseKey
+
+          module PayloadType
+            extend Dodopayments::Internal::Type::Enum
+
+            LICENSE_KEY: :LicenseKey
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::LicenseKey::payload_type]
+          end
+        end
+
+        def self?.variants: -> ::Array[Dodopayments::Models::WebhookPayload::data]
+      end
+    end
+  end
+end

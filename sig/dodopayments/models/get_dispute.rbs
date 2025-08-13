@@ -1,0 +1,70 @@
+module Dodopayments
+  module Models
+    type get_dispute =
+      {
+        amount: String,
+        business_id: String,
+        created_at: Time,
+        currency: String,
+        customer: Dodopayments::CustomerLimitedDetails,
+        dispute_id: String,
+        dispute_stage: Dodopayments::Models::dispute_stage,
+        dispute_status: Dodopayments::Models::dispute_status,
+        payment_id: String,
+        reason: String?,
+        remarks: String?
+      }
+
+    class GetDispute < Dodopayments::Internal::Type::BaseModel
+      attr_accessor amount: String
+
+      attr_accessor business_id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor currency: String
+
+      attr_accessor customer: Dodopayments::CustomerLimitedDetails
+
+      attr_accessor dispute_id: String
+
+      attr_accessor dispute_stage: Dodopayments::Models::dispute_stage
+
+      attr_accessor dispute_status: Dodopayments::Models::dispute_status
+
+      attr_accessor payment_id: String
+
+      attr_accessor reason: String?
+
+      attr_accessor remarks: String?
+
+      def initialize: (
+        amount: String,
+        business_id: String,
+        created_at: Time,
+        currency: String,
+        customer: Dodopayments::CustomerLimitedDetails,
+        dispute_id: String,
+        dispute_stage: Dodopayments::Models::dispute_stage,
+        dispute_status: Dodopayments::Models::dispute_status,
+        payment_id: String,
+        ?reason: String?,
+        ?remarks: String?
+      ) -> void
+
+      def to_hash: -> {
+        amount: String,
+        business_id: String,
+        created_at: Time,
+        currency: String,
+        customer: Dodopayments::CustomerLimitedDetails,
+        dispute_id: String,
+        dispute_stage: Dodopayments::Models::dispute_stage,
+        dispute_status: Dodopayments::Models::dispute_status,
+        payment_id: String,
+        reason: String?,
+        remarks: String?
+      }
+    end
+  end
+end

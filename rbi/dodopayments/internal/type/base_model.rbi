@@ -5,30 +5,35 @@ module Dodopayments
     module Type
       class BaseModel
         extend Dodopayments::Internal::Type::Converter
+        extend Dodopayments::Internal::Util::SorbetRuntimeSupport
 
         abstract!
 
-        KnownFieldShape = T.type_alias do
-          {mode: T.nilable(Symbol), required: T::Boolean, nilable: T::Boolean}
-        end
+        KnownField =
+          T.type_alias do
+            {
+              mode: T.nilable(Symbol),
+              required: T::Boolean,
+              nilable: T::Boolean
+            }
+          end
+
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::Internal::Type::BaseModel,
+              Dodopayments::Internal::AnyHash
+            )
+          end
 
         class << self
           # @api private
           #
           # Assumes superclass fields are totally defined before fields are accessed /
           # defined on subclasses.
-          sig do
-            returns(
-              T::Hash[
-                Symbol,
-                T.all(
-                  Dodopayments::Internal::Type::BaseModel::KnownFieldShape,
-                  {type_fn: T.proc.returns(Dodopayments::Internal::Type::Converter::Input)}
-                )
-              ]
-            )
+          sig { params(child: T.self_type).void }
+          def inherited(child)
           end
-          def known_fields; end
 
           # @api private
           sig do
@@ -36,107 +41,158 @@ module Dodopayments
               T::Hash[
                 Symbol,
                 T.all(
-                  Dodopayments::Internal::Type::BaseModel::KnownFieldShape,
-                  {type: Dodopayments::Internal::Type::Converter::Input}
+                  Dodopayments::Internal::Type::BaseModel::KnownField,
+                  {
+                    type_fn:
+                      T.proc.returns(
+                        Dodopayments::Internal::Type::Converter::Input
+                      )
+                  }
                 )
               ]
             )
           end
-          def fields; end
+          def known_fields
+          end
+
+          # @api private
+          sig do
+            returns(
+              T::Hash[
+                Symbol,
+                T.all(
+                  Dodopayments::Internal::Type::BaseModel::KnownField,
+                  { type: Dodopayments::Internal::Type::Converter::Input }
+                )
+              ]
+            )
+          end
+          def fields
+          end
 
           # @api private
           sig do
             params(
               name_sym: Symbol,
               required: T::Boolean,
-              type_info: T.any(
-                {
-                  const: T.nilable(T.any(NilClass, T::Boolean, Integer, Float, Symbol)),
-                  enum: T.nilable(T.proc.returns(Dodopayments::Internal::Type::Converter::Input)),
-                  union: T.nilable(T.proc.returns(Dodopayments::Internal::Type::Converter::Input)),
-                  api_name: Symbol,
-                  nil?: T::Boolean
-                },
-                T.proc.returns(Dodopayments::Internal::Type::Converter::Input),
-                Dodopayments::Internal::Type::Converter::Input
-              ),
+              type_info:
+                T.any(
+                  {
+                    const:
+                      T.nilable(
+                        T.any(NilClass, T::Boolean, Integer, Float, Symbol)
+                      ),
+                    enum:
+                      T.nilable(
+                        T.proc.returns(
+                          Dodopayments::Internal::Type::Converter::Input
+                        )
+                      ),
+                    union:
+                      T.nilable(
+                        T.proc.returns(
+                          Dodopayments::Internal::Type::Converter::Input
+                        )
+                      ),
+                    api_name: Symbol,
+                    nil?: T::Boolean
+                  },
+                  T.proc.returns(
+                    Dodopayments::Internal::Type::Converter::Input
+                  ),
+                  Dodopayments::Internal::Type::Converter::Input
+                ),
               spec: Dodopayments::Internal::AnyHash
-            )
-              .void
+            ).void
           end
-          private def add_field(name_sym, required:, type_info:, spec:); end
+          private def add_field(name_sym, required:, type_info:, spec:)
+          end
 
           # @api private
           sig do
             params(
               name_sym: Symbol,
-              type_info: T.any(
-                Dodopayments::Internal::AnyHash,
-                T.proc.returns(Dodopayments::Internal::Type::Converter::Input),
-                Dodopayments::Internal::Type::Converter::Input
-              ),
+              type_info:
+                T.any(
+                  Dodopayments::Internal::AnyHash,
+                  T.proc.returns(
+                    Dodopayments::Internal::Type::Converter::Input
+                  ),
+                  Dodopayments::Internal::Type::Converter::Input
+                ),
               spec: Dodopayments::Internal::AnyHash
-            )
-              .void
+            ).void
           end
-          def required(name_sym, type_info, spec = {}); end
+          def required(name_sym, type_info, spec = {})
+          end
 
           # @api private
           sig do
             params(
               name_sym: Symbol,
-              type_info: T.any(
-                Dodopayments::Internal::AnyHash,
-                T.proc.returns(Dodopayments::Internal::Type::Converter::Input),
-                Dodopayments::Internal::Type::Converter::Input
-              ),
+              type_info:
+                T.any(
+                  Dodopayments::Internal::AnyHash,
+                  T.proc.returns(
+                    Dodopayments::Internal::Type::Converter::Input
+                  ),
+                  Dodopayments::Internal::Type::Converter::Input
+                ),
               spec: Dodopayments::Internal::AnyHash
-            )
-              .void
+            ).void
           end
-          def optional(name_sym, type_info, spec = {}); end
+          def optional(name_sym, type_info, spec = {})
+          end
 
           # @api private
           #
           # `request_only` attributes not excluded from `.#coerce` when receiving responses
           # even if well behaved servers should not send them
           sig { params(blk: T.proc.void).void }
-          private def request_only(&blk); end
+          private def request_only(&blk)
+          end
 
           # @api private
           #
           # `response_only` attributes are omitted from `.#dump` when making requests
           sig { params(blk: T.proc.void).void }
-          private def response_only(&blk); end
+          private def response_only(&blk)
+          end
 
           sig { params(other: T.anything).returns(T::Boolean) }
-          def ==(other); end
+          def ==(other)
+          end
 
           sig { returns(Integer) }
-          def hash; end
+          def hash
+          end
         end
 
         sig { params(other: T.anything).returns(T::Boolean) }
-        def ==(other); end
+        def ==(other)
+        end
 
         sig { returns(Integer) }
-        def hash; end
+        def hash
+        end
 
         class << self
           # @api private
           sig do
             override
               .params(
-                value: T.any(
-                  Dodopayments::Internal::Type::BaseModel,
-                  T::Hash[T.anything, T.anything],
-                  T.anything
-                ),
+                value:
+                  T.any(
+                    Dodopayments::Internal::Type::BaseModel,
+                    T::Hash[T.anything, T.anything],
+                    T.anything
+                  ),
                 state: Dodopayments::Internal::Type::Converter::CoerceState
               )
               .returns(T.any(T.attached_class, T.anything))
           end
-          def coerce(value, state:); end
+          def coerce(value, state:)
+          end
 
           # @api private
           sig do
@@ -147,7 +203,25 @@ module Dodopayments
               )
               .returns(T.any(T::Hash[T.anything, T.anything], T.anything))
           end
-          def dump(value, state:); end
+          def dump(value, state:)
+          end
+
+          # @api private
+          sig { returns(T.anything) }
+          def to_sorbet_type
+          end
+        end
+
+        class << self
+          # @api private
+          sig do
+            params(
+              model: Dodopayments::Internal::Type::BaseModel,
+              convert: T::Boolean
+            ).returns(Dodopayments::Internal::AnyHash)
+          end
+          def recursively_to_h(model, convert:)
+          end
         end
 
         # Returns the raw value associated with the given key, if found. Otherwise, nil is
@@ -157,7 +231,8 @@ module Dodopayments
         # undocumented features. This method does not parse response data into
         # higher-level types. Lookup by anything other than a Symbol is an ArgumentError.
         sig { params(key: Symbol).returns(T.nilable(T.anything)) }
-        def [](key); end
+        def [](key)
+        end
 
         # Returns a Hash of the data underlying this object. O(1)
         #
@@ -168,7 +243,8 @@ module Dodopayments
         # This method is not recursive. The returned value is shared by the object, so it
         # should not be mutated.
         sig { overridable.returns(Dodopayments::Internal::AnyHash) }
-        def to_h; end
+        def to_h
+        end
 
         # Returns a Hash of the data underlying this object. O(1)
         #
@@ -179,41 +255,55 @@ module Dodopayments
         # This method is not recursive. The returned value is shared by the object, so it
         # should not be mutated.
         sig { overridable.returns(Dodopayments::Internal::AnyHash) }
-        def to_hash; end
+        def to_hash
+        end
 
-        sig { params(keys: T.nilable(T::Array[Symbol])).returns(Dodopayments::Internal::AnyHash) }
-        def deconstruct_keys(keys); end
+        # In addition to the behaviour of `#to_h`, this method will recursively call
+        # `#to_h` on nested models.
+        sig { overridable.returns(Dodopayments::Internal::AnyHash) }
+        def deep_to_h
+        end
 
-        class << self
-          # @api private
-          sig do
-            params(model: Dodopayments::Internal::Type::BaseModel).returns(Dodopayments::Internal::AnyHash)
-          end
-          def walk(model); end
+        sig do
+          params(keys: T.nilable(T::Array[Symbol])).returns(
+            Dodopayments::Internal::AnyHash
+          )
+        end
+        def deconstruct_keys(keys)
         end
 
         sig { params(a: T.anything).returns(String) }
-        def to_json(*a); end
+        def to_json(*a)
+        end
 
         sig { params(a: T.anything).returns(String) }
-        def to_yaml(*a); end
+        def to_yaml(*a)
+        end
 
         # Create a new instance of a model.
-        sig { params(data: T.any(T::Hash[Symbol, T.anything], T.self_type)).returns(T.attached_class) }
-        def self.new(data = {}); end
+        sig do
+          params(data: T.any(T::Hash[Symbol, T.anything], T.self_type)).returns(
+            T.attached_class
+          )
+        end
+        def self.new(data = {})
+        end
 
         class << self
           # @api private
           sig { params(depth: Integer).returns(String) }
-          def inspect(depth: 0); end
+          def inspect(depth: 0)
+          end
         end
 
         sig { returns(String) }
-        def to_s; end
+        def to_s
+        end
 
         # @api private
         sig { returns(String) }
-        def inspect; end
+        def inspect
+        end
       end
     end
   end

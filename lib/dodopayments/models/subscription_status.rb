@@ -8,7 +8,6 @@ module Dodopayments
       PENDING = :pending
       ACTIVE = :active
       ON_HOLD = :on_hold
-      PAUSED = :paused
       CANCELLED = :cancelled
       FAILED = :failed
       EXPIRED = :expired

@@ -30,7 +30,6 @@ module Dodopayments
       #   @param quantity [Integer]
       #
       #   @param amount [Integer, nil] Amount the customer pays if pay_what_you_want is enabled. If disabled then amoun
-      #   ...
     end
   end
 end

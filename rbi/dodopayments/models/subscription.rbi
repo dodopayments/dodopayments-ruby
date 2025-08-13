@@ -3,31 +3,44 @@
 module Dodopayments
   module Models
     class Subscription < Dodopayments::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias do
+          T.any(Dodopayments::Subscription, Dodopayments::Internal::AnyHash)
+        end
+
       # Addons associated with this subscription
-      sig { returns(T::Array[Dodopayments::Models::AddonCartResponseItem]) }
+      sig { returns(T::Array[Dodopayments::AddonCartResponseItem]) }
       attr_accessor :addons
 
-      sig { returns(Dodopayments::Models::BillingAddress) }
+      # Billing address details for payments
+      sig { returns(Dodopayments::BillingAddress) }
       attr_reader :billing
 
-      sig { params(billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash)).void }
+      sig { params(billing: Dodopayments::BillingAddress::OrHash).void }
       attr_writer :billing
+
+      # Indicates if the subscription will cancel at the next billing date
+      sig { returns(T::Boolean) }
+      attr_accessor :cancel_at_next_billing_date
 
       # Timestamp when the subscription was created
       sig { returns(Time) }
       attr_accessor :created_at
 
-      sig { returns(Dodopayments::Models::Currency::TaggedSymbol) }
+      # Currency used for the subscription payments
+      sig { returns(Dodopayments::Currency::OrSymbol) }
       attr_accessor :currency
 
-      sig { returns(Dodopayments::Models::CustomerLimitedDetails) }
+      # Customer details associated with the subscription
+      sig { returns(Dodopayments::CustomerLimitedDetails) }
       attr_reader :customer
 
       sig do
-        params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void
+        params(customer: Dodopayments::CustomerLimitedDetails::OrHash).void
       end
       attr_writer :customer
 
+      # Additional custom data associated with the subscription
       sig { returns(T::Hash[Symbol, String]) }
       attr_accessor :metadata
 
@@ -44,7 +57,8 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :payment_frequency_count
 
-      sig { returns(Dodopayments::Models::TimeInterval::TaggedSymbol) }
+      # Time interval for payment frequency (e.g. month, year)
+      sig { returns(Dodopayments::TimeInterval::OrSymbol) }
       attr_accessor :payment_frequency_interval
 
       # Timestamp of the last payment. Indicates the start of current billing period
@@ -64,7 +78,8 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :recurring_pre_tax_amount
 
-      sig { returns(Dodopayments::Models::SubscriptionStatus::TaggedSymbol) }
+      # Current status of the subscription
+      sig { returns(Dodopayments::SubscriptionStatus::OrSymbol) }
       attr_accessor :status
 
       # Unique identifier for the subscription
@@ -75,7 +90,8 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :subscription_period_count
 
-      sig { returns(Dodopayments::Models::TimeInterval::TaggedSymbol) }
+      # Time interval for the subscription period (e.g. month, year)
+      sig { returns(Dodopayments::TimeInterval::OrSymbol) }
       attr_accessor :subscription_period_interval
 
       # Indicates if the recurring_pre_tax_amount is tax inclusive
@@ -90,6 +106,10 @@ module Dodopayments
       sig { returns(T.nilable(Time)) }
       attr_accessor :cancelled_at
 
+      # Number of remaining discount cycles if discount is applied
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :discount_cycles_remaining
+
       # The discount id if discount is applied
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_id
@@ -97,39 +117,46 @@ module Dodopayments
       # Response struct representing subscription details
       sig do
         params(
-          addons: T::Array[T.any(Dodopayments::Models::AddonCartResponseItem, Dodopayments::Internal::AnyHash)],
-          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash),
+          addons: T::Array[Dodopayments::AddonCartResponseItem::OrHash],
+          billing: Dodopayments::BillingAddress::OrHash,
+          cancel_at_next_billing_date: T::Boolean,
           created_at: Time,
-          currency: Dodopayments::Models::Currency::OrSymbol,
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash),
+          currency: Dodopayments::Currency::OrSymbol,
+          customer: Dodopayments::CustomerLimitedDetails::OrHash,
           metadata: T::Hash[Symbol, String],
           next_billing_date: Time,
           on_demand: T::Boolean,
           payment_frequency_count: Integer,
-          payment_frequency_interval: Dodopayments::Models::TimeInterval::OrSymbol,
+          payment_frequency_interval: Dodopayments::TimeInterval::OrSymbol,
           previous_billing_date: Time,
           product_id: String,
           quantity: Integer,
           recurring_pre_tax_amount: Integer,
-          status: Dodopayments::Models::SubscriptionStatus::OrSymbol,
+          status: Dodopayments::SubscriptionStatus::OrSymbol,
           subscription_id: String,
           subscription_period_count: Integer,
-          subscription_period_interval: Dodopayments::Models::TimeInterval::OrSymbol,
+          subscription_period_interval: Dodopayments::TimeInterval::OrSymbol,
           tax_inclusive: T::Boolean,
           trial_period_days: Integer,
           cancelled_at: T.nilable(Time),
+          discount_cycles_remaining: T.nilable(Integer),
           discount_id: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         # Addons associated with this subscription
         addons:,
+        # Billing address details for payments
         billing:,
+        # Indicates if the subscription will cancel at the next billing date
+        cancel_at_next_billing_date:,
         # Timestamp when the subscription was created
         created_at:,
+        # Currency used for the subscription payments
         currency:,
+        # Customer details associated with the subscription
         customer:,
+        # Additional custom data associated with the subscription
         metadata:,
         # Timestamp of the next scheduled billing. Indicates the end of current billing
         # period
@@ -138,6 +165,7 @@ module Dodopayments
         on_demand:,
         # Number of payment frequency intervals
         payment_frequency_count:,
+        # Time interval for payment frequency (e.g. month, year)
         payment_frequency_interval:,
         # Timestamp of the last payment. Indicates the start of current billing period
         previous_billing_date:,
@@ -148,11 +176,13 @@ module Dodopayments
         # Amount charged before tax for each recurring payment in smallest currency unit
         # (e.g. cents)
         recurring_pre_tax_amount:,
+        # Current status of the subscription
         status:,
         # Unique identifier for the subscription
         subscription_id:,
         # Number of subscription period intervals
         subscription_period_count:,
+        # Time interval for the subscription period (e.g. month, year)
         subscription_period_interval:,
         # Indicates if the recurring_pre_tax_amount is tax inclusive
         tax_inclusive:,
@@ -160,39 +190,45 @@ module Dodopayments
         trial_period_days:,
         # Cancelled timestamp if the subscription is cancelled
         cancelled_at: nil,
+        # Number of remaining discount cycles if discount is applied
+        discount_cycles_remaining: nil,
         # The discount id if discount is applied
         discount_id: nil
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              addons: T::Array[Dodopayments::Models::AddonCartResponseItem],
-              billing: Dodopayments::Models::BillingAddress,
-              created_at: Time,
-              currency: Dodopayments::Models::Currency::TaggedSymbol,
-              customer: Dodopayments::Models::CustomerLimitedDetails,
-              metadata: T::Hash[Symbol, String],
-              next_billing_date: Time,
-              on_demand: T::Boolean,
-              payment_frequency_count: Integer,
-              payment_frequency_interval: Dodopayments::Models::TimeInterval::TaggedSymbol,
-              previous_billing_date: Time,
-              product_id: String,
-              quantity: Integer,
-              recurring_pre_tax_amount: Integer,
-              status: Dodopayments::Models::SubscriptionStatus::TaggedSymbol,
-              subscription_id: String,
-              subscription_period_count: Integer,
-              subscription_period_interval: Dodopayments::Models::TimeInterval::TaggedSymbol,
-              tax_inclusive: T::Boolean,
-              trial_period_days: Integer,
-              cancelled_at: T.nilable(Time),
-              discount_id: T.nilable(String)
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            addons: T::Array[Dodopayments::AddonCartResponseItem],
+            billing: Dodopayments::BillingAddress,
+            cancel_at_next_billing_date: T::Boolean,
+            created_at: Time,
+            currency: Dodopayments::Currency::OrSymbol,
+            customer: Dodopayments::CustomerLimitedDetails,
+            metadata: T::Hash[Symbol, String],
+            next_billing_date: Time,
+            on_demand: T::Boolean,
+            payment_frequency_count: Integer,
+            payment_frequency_interval: Dodopayments::TimeInterval::OrSymbol,
+            previous_billing_date: Time,
+            product_id: String,
+            quantity: Integer,
+            recurring_pre_tax_amount: Integer,
+            status: Dodopayments::SubscriptionStatus::OrSymbol,
+            subscription_id: String,
+            subscription_period_count: Integer,
+            subscription_period_interval: Dodopayments::TimeInterval::OrSymbol,
+            tax_inclusive: T::Boolean,
+            trial_period_days: Integer,
+            cancelled_at: T.nilable(Time),
+            discount_cycles_remaining: T.nilable(Integer),
+            discount_id: T.nilable(String)
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

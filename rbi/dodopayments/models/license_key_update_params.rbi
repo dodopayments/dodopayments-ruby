@@ -6,6 +6,14 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      OrHash =
+        T.type_alias do
+          T.any(
+            Dodopayments::LicenseKeyUpdateParams,
+            Dodopayments::Internal::AnyHash
+          )
+        end
+
       # The updated activation limit for the license key. Use `null` to remove the
       # limit, or omit this field to leave it unchanged.
       sig { returns(T.nilable(Integer)) }
@@ -26,9 +34,8 @@ module Dodopayments
           activations_limit: T.nilable(Integer),
           disabled: T.nilable(T::Boolean),
           expires_at: T.nilable(Time),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
       def self.new(
         # The updated activation limit for the license key. Use `null` to remove the
@@ -41,19 +48,21 @@ module Dodopayments
         # remove the expiration date, or omit this field to leave it unchanged.
         expires_at: nil,
         request_options: {}
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              activations_limit: T.nilable(Integer),
-              disabled: T.nilable(T::Boolean),
-              expires_at: T.nilable(Time),
-              request_options: Dodopayments::RequestOptions
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            activations_limit: T.nilable(Integer),
+            disabled: T.nilable(T::Boolean),
+            expires_at: T.nilable(Time),
+            request_options: Dodopayments::RequestOptions
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

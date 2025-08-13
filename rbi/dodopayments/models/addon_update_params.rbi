@@ -6,7 +6,16 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      sig { returns(T.nilable(Dodopayments::Models::Currency::OrSymbol)) }
+      OrHash =
+        T.type_alias do
+          T.any(
+            Dodopayments::AddonUpdateParams,
+            Dodopayments::Internal::AnyHash
+          )
+        end
+
+      # The currency of the Addon
+      sig { returns(T.nilable(Dodopayments::Currency::OrSymbol)) }
       attr_accessor :currency
 
       # Description of the Addon, optional and must be at most 1000 characters.
@@ -25,24 +34,23 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :price
 
-      # Represents the different categories of taxation applicable to various products
-      # and services.
-      sig { returns(T.nilable(Dodopayments::Models::TaxCategory::OrSymbol)) }
+      # Tax category of the Addon.
+      sig { returns(T.nilable(Dodopayments::TaxCategory::OrSymbol)) }
       attr_accessor :tax_category
 
       sig do
         params(
-          currency: T.nilable(Dodopayments::Models::Currency::OrSymbol),
+          currency: T.nilable(Dodopayments::Currency::OrSymbol),
           description: T.nilable(String),
           image_id: T.nilable(String),
           name: T.nilable(String),
           price: T.nilable(Integer),
-          tax_category: T.nilable(Dodopayments::Models::TaxCategory::OrSymbol),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          tax_category: T.nilable(Dodopayments::TaxCategory::OrSymbol),
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
       def self.new(
+        # The currency of the Addon
         currency: nil,
         # Description of the Addon, optional and must be at most 1000 characters.
         description: nil,
@@ -52,26 +60,27 @@ module Dodopayments
         name: nil,
         # Amount of the addon
         price: nil,
-        # Represents the different categories of taxation applicable to various products
-        # and services.
+        # Tax category of the Addon.
         tax_category: nil,
         request_options: {}
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              currency: T.nilable(Dodopayments::Models::Currency::OrSymbol),
-              description: T.nilable(String),
-              image_id: T.nilable(String),
-              name: T.nilable(String),
-              price: T.nilable(Integer),
-              tax_category: T.nilable(Dodopayments::Models::TaxCategory::OrSymbol),
-              request_options: Dodopayments::RequestOptions
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            currency: T.nilable(Dodopayments::Currency::OrSymbol),
+            description: T.nilable(String),
+            image_id: T.nilable(String),
+            name: T.nilable(String),
+            price: T.nilable(Integer),
+            tax_category: T.nilable(Dodopayments::TaxCategory::OrSymbol),
+            request_options: Dodopayments::RequestOptions
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

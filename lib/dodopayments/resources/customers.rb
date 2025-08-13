@@ -17,12 +17,12 @@ module Dodopayments
       #
       # @see Dodopayments::Models::CustomerCreateParams
       def create(params)
-        parsed, options = Dodopayments::Models::CustomerCreateParams.dump_request(params)
+        parsed, options = Dodopayments::CustomerCreateParams.dump_request(params)
         @client.request(
           method: :post,
           path: "customers",
           body: parsed,
-          model: Dodopayments::Models::Customer,
+          model: Dodopayments::Customer,
           options: options
         )
       end
@@ -40,7 +40,7 @@ module Dodopayments
         @client.request(
           method: :get,
           path: ["customers/%1$s", customer_id],
-          model: Dodopayments::Models::Customer,
+          model: Dodopayments::Customer,
           options: params[:request_options]
         )
       end
@@ -59,21 +59,23 @@ module Dodopayments
       #
       # @see Dodopayments::Models::CustomerUpdateParams
       def update(customer_id, params = {})
-        parsed, options = Dodopayments::Models::CustomerUpdateParams.dump_request(params)
+        parsed, options = Dodopayments::CustomerUpdateParams.dump_request(params)
         @client.request(
           method: :patch,
           path: ["customers/%1$s", customer_id],
           body: parsed,
-          model: Dodopayments::Models::Customer,
+          model: Dodopayments::Customer,
           options: options
         )
       end
 
-      # @overload list(page_number: nil, page_size: nil, request_options: {})
+      # @overload list(email: nil, page_number: nil, page_size: nil, request_options: {})
       #
-      # @param page_number [Integer, nil] Page number default is 0
+      # @param email [String] Filter by customer email
       #
-      # @param page_size [Integer, nil] Page size default is 10 max is 100
+      # @param page_number [Integer] Page number default is 0
+      #
+      # @param page_size [Integer] Page size default is 10 max is 100
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -81,13 +83,13 @@ module Dodopayments
       #
       # @see Dodopayments::Models::CustomerListParams
       def list(params = {})
-        parsed, options = Dodopayments::Models::CustomerListParams.dump_request(params)
+        parsed, options = Dodopayments::CustomerListParams.dump_request(params)
         @client.request(
           method: :get,
           path: "customers",
           query: parsed,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
-          model: Dodopayments::Models::Customer,
+          model: Dodopayments::Customer,
           options: options
         )
       end

@@ -3,19 +3,20 @@ module Dodopayments
     type payment_create_response =
       {
         client_secret: String,
-        customer: Dodopayments::Models::CustomerLimitedDetails,
+        customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,
         discount_id: String?,
+        expires_on: Time?,
         payment_link: String?,
-        product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]?
+        product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?
       }
 
     class PaymentCreateResponse < Dodopayments::Internal::Type::BaseModel
       attr_accessor client_secret: String
 
-      attr_accessor customer: Dodopayments::Models::CustomerLimitedDetails
+      attr_accessor customer: Dodopayments::CustomerLimitedDetails
 
       attr_accessor metadata: ::Hash[Symbol, String]
 
@@ -25,22 +26,35 @@ module Dodopayments
 
       attr_accessor discount_id: String?
 
+      attr_accessor expires_on: Time?
+
       attr_accessor payment_link: String?
 
-      attr_accessor product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]?
+      attr_accessor product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?
 
       def initialize: (
         client_secret: String,
-        customer: Dodopayments::Models::CustomerLimitedDetails,
+        customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,
         ?discount_id: String?,
+        ?expires_on: Time?,
         ?payment_link: String?,
-        ?product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]?
+        ?product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::payment_create_response
+      def to_hash: -> {
+        client_secret: String,
+        customer: Dodopayments::CustomerLimitedDetails,
+        metadata: ::Hash[Symbol, String],
+        payment_id: String,
+        total_amount: Integer,
+        discount_id: String?,
+        expires_on: Time?,
+        payment_link: String?,
+        product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?
+      }
     end
   end
 end

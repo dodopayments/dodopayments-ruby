@@ -37,7 +37,15 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::addon_update_params
+      def to_hash: -> {
+        currency: Dodopayments::Models::currency?,
+        description: String?,
+        image_id: String?,
+        name: String?,
+        price: Integer?,
+        tax_category: Dodopayments::Models::tax_category?,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

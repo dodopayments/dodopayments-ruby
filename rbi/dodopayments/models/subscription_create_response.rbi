@@ -3,20 +3,34 @@
 module Dodopayments
   module Models
     class SubscriptionCreateResponse < Dodopayments::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias do
+          T.any(
+            Dodopayments::Models::SubscriptionCreateResponse,
+            Dodopayments::Internal::AnyHash
+          )
+        end
+
       # Addons associated with this subscription
-      sig { returns(T::Array[Dodopayments::Models::AddonCartResponseItem]) }
+      sig { returns(T::Array[Dodopayments::AddonCartResponseItem]) }
       attr_accessor :addons
 
-      sig { returns(Dodopayments::Models::CustomerLimitedDetails) }
+      # Customer details associated with this subscription
+      sig { returns(Dodopayments::CustomerLimitedDetails) }
       attr_reader :customer
 
       sig do
-        params(customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash)).void
+        params(customer: Dodopayments::CustomerLimitedDetails::OrHash).void
       end
       attr_writer :customer
 
+      # Additional metadata associated with the subscription
       sig { returns(T::Hash[Symbol, String]) }
       attr_accessor :metadata
+
+      # First payment id for the subscription
+      sig { returns(String) }
+      attr_accessor :payment_id
 
       # Tax will be added to the amount and charged to the customer on each billing
       # cycle
@@ -36,28 +50,37 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_id
 
+      # Expiry timestamp of the payment link
+      sig { returns(T.nilable(Time)) }
+      attr_accessor :expires_on
+
       # URL to checkout page
       sig { returns(T.nilable(String)) }
       attr_accessor :payment_link
 
       sig do
         params(
-          addons: T::Array[T.any(Dodopayments::Models::AddonCartResponseItem, Dodopayments::Internal::AnyHash)],
-          customer: T.any(Dodopayments::Models::CustomerLimitedDetails, Dodopayments::Internal::AnyHash),
+          addons: T::Array[Dodopayments::AddonCartResponseItem::OrHash],
+          customer: Dodopayments::CustomerLimitedDetails::OrHash,
           metadata: T::Hash[Symbol, String],
+          payment_id: String,
           recurring_pre_tax_amount: Integer,
           subscription_id: String,
           client_secret: T.nilable(String),
           discount_id: T.nilable(String),
+          expires_on: T.nilable(Time),
           payment_link: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         # Addons associated with this subscription
         addons:,
+        # Customer details associated with this subscription
         customer:,
+        # Additional metadata associated with the subscription
         metadata:,
+        # First payment id for the subscription
+        payment_id:,
         # Tax will be added to the amount and charged to the customer on each billing
         # cycle
         recurring_pre_tax_amount:,
@@ -68,25 +91,31 @@ module Dodopayments
         client_secret: nil,
         # The discount id if discount is applied
         discount_id: nil,
+        # Expiry timestamp of the payment link
+        expires_on: nil,
         # URL to checkout page
         payment_link: nil
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              addons: T::Array[Dodopayments::Models::AddonCartResponseItem],
-              customer: Dodopayments::Models::CustomerLimitedDetails,
-              metadata: T::Hash[Symbol, String],
-              recurring_pre_tax_amount: Integer,
-              subscription_id: String,
-              client_secret: T.nilable(String),
-              discount_id: T.nilable(String),
-              payment_link: T.nilable(String)
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            addons: T::Array[Dodopayments::AddonCartResponseItem],
+            customer: Dodopayments::CustomerLimitedDetails,
+            metadata: T::Hash[Symbol, String],
+            payment_id: String,
+            recurring_pre_tax_amount: Integer,
+            subscription_id: String,
+            client_secret: T.nilable(String),
+            discount_id: T.nilable(String),
+            expires_on: T.nilable(Time),
+            payment_link: T.nilable(String)
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

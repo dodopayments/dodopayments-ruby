@@ -3,6 +3,11 @@
 module Dodopayments
   module Models
     class AddonResponse < Dodopayments::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias do
+          T.any(Dodopayments::AddonResponse, Dodopayments::Internal::AnyHash)
+        end
+
       # id of the Addon
       sig { returns(String) }
       attr_accessor :id
@@ -15,7 +20,8 @@ module Dodopayments
       sig { returns(Time) }
       attr_accessor :created_at
 
-      sig { returns(Dodopayments::Models::Currency::TaggedSymbol) }
+      # Currency of the Addon
+      sig { returns(Dodopayments::Currency::TaggedSymbol) }
       attr_accessor :currency
 
       # Name of the Addon
@@ -26,9 +32,8 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :price
 
-      # Represents the different categories of taxation applicable to various products
-      # and services.
-      sig { returns(Dodopayments::Models::TaxCategory::TaggedSymbol) }
+      # Tax category applied to this Addon
+      sig { returns(Dodopayments::TaxCategory::TaggedSymbol) }
       attr_accessor :tax_category
 
       # Updated time
@@ -48,15 +53,14 @@ module Dodopayments
           id: String,
           business_id: String,
           created_at: Time,
-          currency: Dodopayments::Models::Currency::OrSymbol,
+          currency: Dodopayments::Currency::OrSymbol,
           name: String,
           price: Integer,
-          tax_category: Dodopayments::Models::TaxCategory::OrSymbol,
+          tax_category: Dodopayments::TaxCategory::OrSymbol,
           updated_at: Time,
           description: T.nilable(String),
           image: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         # id of the Addon
@@ -65,13 +69,13 @@ module Dodopayments
         business_id:,
         # Created time
         created_at:,
+        # Currency of the Addon
         currency:,
         # Name of the Addon
         name:,
         # Amount of the addon
         price:,
-        # Represents the different categories of taxation applicable to various products
-        # and services.
+        # Tax category applied to this Addon
         tax_category:,
         # Updated time
         updated_at:,
@@ -79,25 +83,27 @@ module Dodopayments
         description: nil,
         # Image of the Addon
         image: nil
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              id: String,
-              business_id: String,
-              created_at: Time,
-              currency: Dodopayments::Models::Currency::TaggedSymbol,
-              name: String,
-              price: Integer,
-              tax_category: Dodopayments::Models::TaxCategory::TaggedSymbol,
-              updated_at: Time,
-              description: T.nilable(String),
-              image: T.nilable(String)
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            id: String,
+            business_id: String,
+            created_at: Time,
+            currency: Dodopayments::Currency::TaggedSymbol,
+            name: String,
+            price: Integer,
+            tax_category: Dodopayments::TaxCategory::TaggedSymbol,
+            updated_at: Time,
+            description: T.nilable(String),
+            image: T.nilable(String)
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

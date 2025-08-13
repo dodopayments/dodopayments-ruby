@@ -2,11 +2,12 @@ module Dodopayments
   module Models
     type subscription =
       {
-        addons: ::Array[Dodopayments::Models::AddonCartResponseItem],
-        billing: Dodopayments::Models::BillingAddress,
+        addons: ::Array[Dodopayments::AddonCartResponseItem],
+        billing: Dodopayments::BillingAddress,
+        cancel_at_next_billing_date: bool,
         created_at: Time,
         currency: Dodopayments::Models::currency,
-        customer: Dodopayments::Models::CustomerLimitedDetails,
+        customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
         next_billing_date: Time,
         on_demand: bool,
@@ -23,19 +24,22 @@ module Dodopayments
         tax_inclusive: bool,
         trial_period_days: Integer,
         cancelled_at: Time?,
+        discount_cycles_remaining: Integer?,
         discount_id: String?
       }
 
     class Subscription < Dodopayments::Internal::Type::BaseModel
-      attr_accessor addons: ::Array[Dodopayments::Models::AddonCartResponseItem]
+      attr_accessor addons: ::Array[Dodopayments::AddonCartResponseItem]
 
-      attr_accessor billing: Dodopayments::Models::BillingAddress
+      attr_accessor billing: Dodopayments::BillingAddress
+
+      attr_accessor cancel_at_next_billing_date: bool
 
       attr_accessor created_at: Time
 
       attr_accessor currency: Dodopayments::Models::currency
 
-      attr_accessor customer: Dodopayments::Models::CustomerLimitedDetails
+      attr_accessor customer: Dodopayments::CustomerLimitedDetails
 
       attr_accessor metadata: ::Hash[Symbol, String]
 
@@ -69,14 +73,17 @@ module Dodopayments
 
       attr_accessor cancelled_at: Time?
 
+      attr_accessor discount_cycles_remaining: Integer?
+
       attr_accessor discount_id: String?
 
       def initialize: (
-        addons: ::Array[Dodopayments::Models::AddonCartResponseItem],
-        billing: Dodopayments::Models::BillingAddress,
+        addons: ::Array[Dodopayments::AddonCartResponseItem],
+        billing: Dodopayments::BillingAddress,
+        cancel_at_next_billing_date: bool,
         created_at: Time,
         currency: Dodopayments::Models::currency,
-        customer: Dodopayments::Models::CustomerLimitedDetails,
+        customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
         next_billing_date: Time,
         on_demand: bool,
@@ -93,10 +100,36 @@ module Dodopayments
         tax_inclusive: bool,
         trial_period_days: Integer,
         ?cancelled_at: Time?,
+        ?discount_cycles_remaining: Integer?,
         ?discount_id: String?
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::subscription
+      def to_hash: -> {
+        addons: ::Array[Dodopayments::AddonCartResponseItem],
+        billing: Dodopayments::BillingAddress,
+        cancel_at_next_billing_date: bool,
+        created_at: Time,
+        currency: Dodopayments::Models::currency,
+        customer: Dodopayments::CustomerLimitedDetails,
+        metadata: ::Hash[Symbol, String],
+        next_billing_date: Time,
+        on_demand: bool,
+        payment_frequency_count: Integer,
+        payment_frequency_interval: Dodopayments::Models::time_interval,
+        previous_billing_date: Time,
+        product_id: String,
+        quantity: Integer,
+        recurring_pre_tax_amount: Integer,
+        status: Dodopayments::Models::subscription_status,
+        subscription_id: String,
+        subscription_period_count: Integer,
+        subscription_period_interval: Dodopayments::Models::time_interval,
+        tax_inclusive: bool,
+        trial_period_days: Integer,
+        cancelled_at: Time?,
+        discount_cycles_remaining: Integer?,
+        discount_id: String?
+      }
     end
   end
 end

@@ -1,0 +1,65 @@
+module Dodopayments
+  module Models
+    type webhook_create_params =
+      {
+        url: String,
+        description: String?,
+        disabled: bool?,
+        filter_types: ::Array[Dodopayments::Models::webhook_event_type],
+        headers: ::Hash[Symbol, String]?,
+        idempotency_key: String?,
+        metadata: ::Hash[Symbol, String]?,
+        rate_limit: Integer?
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class WebhookCreateParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor url: String
+
+      attr_accessor description: String?
+
+      attr_accessor disabled: bool?
+
+      attr_reader filter_types: ::Array[Dodopayments::Models::webhook_event_type]?
+
+      def filter_types=: (
+        ::Array[Dodopayments::Models::webhook_event_type]
+      ) -> ::Array[Dodopayments::Models::webhook_event_type]
+
+      attr_accessor headers: ::Hash[Symbol, String]?
+
+      attr_accessor idempotency_key: String?
+
+      attr_accessor metadata: ::Hash[Symbol, String]?
+
+      attr_accessor rate_limit: Integer?
+
+      def initialize: (
+        url: String,
+        ?description: String?,
+        ?disabled: bool?,
+        ?filter_types: ::Array[Dodopayments::Models::webhook_event_type],
+        ?headers: ::Hash[Symbol, String]?,
+        ?idempotency_key: String?,
+        ?metadata: ::Hash[Symbol, String]?,
+        ?rate_limit: Integer?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        url: String,
+        description: String?,
+        disabled: bool?,
+        filter_types: ::Array[Dodopayments::Models::webhook_event_type],
+        headers: ::Hash[Symbol, String]?,
+        idempotency_key: String?,
+        metadata: ::Hash[Symbol, String]?,
+        rate_limit: Integer?,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

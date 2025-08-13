@@ -51,9 +51,10 @@ module Dodopayments
       required :times_used, Integer
 
       # @!attribute type
+      #   The type of discount, e.g. `percentage`, `flat`, or `flat_per_unit`.
       #
       #   @return [Symbol, Dodopayments::Models::DiscountType]
-      required :type, enum: -> { Dodopayments::Models::DiscountType }
+      required :type, enum: -> { Dodopayments::DiscountType }
 
       # @!attribute expires_at
       #   Optional date/time after which discount is expired.
@@ -67,17 +68,25 @@ module Dodopayments
       #   @return [String, nil]
       optional :name, String, nil?: true
 
+      # @!attribute subscription_cycles
+      #   Number of subscription billing cycles this discount is valid for. If not
+      #   provided, the discount will be applied indefinitely to all recurring payments
+      #   related to the subscription.
+      #
+      #   @return [Integer, nil]
+      optional :subscription_cycles, Integer, nil?: true
+
       # @!attribute usage_limit
       #   Usage limit for this discount, if any.
       #
       #   @return [Integer, nil]
       optional :usage_limit, Integer, nil?: true
 
-      # @!method initialize(amount:, business_id:, code:, created_at:, discount_id:, restricted_to:, times_used:, type:, expires_at: nil, name: nil, usage_limit: nil)
+      # @!method initialize(amount:, business_id:, code:, created_at:, discount_id:, restricted_to:, times_used:, type:, expires_at: nil, name: nil, subscription_cycles: nil, usage_limit: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Discount} for more details.
       #
-      #   @param amount [Integer] The discount amount. ...
+      #   @param amount [Integer] The discount amount.
       #
       #   @param business_id [String] The business this discount belongs to.
       #
@@ -91,11 +100,13 @@ module Dodopayments
       #
       #   @param times_used [Integer] How many times this discount has been used.
       #
-      #   @param type [Symbol, Dodopayments::Models::DiscountType]
+      #   @param type [Symbol, Dodopayments::Models::DiscountType] The type of discount, e.g. `percentage`, `flat`, or `flat_per_unit`.
       #
       #   @param expires_at [Time, nil] Optional date/time after which discount is expired.
       #
       #   @param name [String, nil] Name for the Discount
+      #
+      #   @param subscription_cycles [Integer, nil] Number of subscription billing cycles this discount is valid for.
       #
       #   @param usage_limit [Integer, nil] Usage limit for this discount, if any.
     end

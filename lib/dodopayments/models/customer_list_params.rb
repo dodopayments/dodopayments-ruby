@@ -7,22 +7,30 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      # @!attribute email
+      #   Filter by customer email
+      #
+      #   @return [String, nil]
+      optional :email, String
+
       # @!attribute page_number
       #   Page number default is 0
       #
       #   @return [Integer, nil]
-      optional :page_number, Integer, nil?: true
+      optional :page_number, Integer
 
       # @!attribute page_size
       #   Page size default is 10 max is 100
       #
       #   @return [Integer, nil]
-      optional :page_size, Integer, nil?: true
+      optional :page_size, Integer
 
-      # @!method initialize(page_number: nil, page_size: nil, request_options: {})
-      #   @param page_number [Integer, nil] Page number default is 0
+      # @!method initialize(email: nil, page_number: nil, page_size: nil, request_options: {})
+      #   @param email [String] Filter by customer email
       #
-      #   @param page_size [Integer, nil] Page size default is 10 max is 100
+      #   @param page_number [Integer] Page number default is 0
+      #
+      #   @param page_size [Integer] Page size default is 10 max is 100
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end

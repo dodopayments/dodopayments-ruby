@@ -6,17 +6,31 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      sig { returns(Dodopayments::Models::BillingAddress) }
+      OrHash =
+        T.type_alias do
+          T.any(
+            Dodopayments::PaymentCreateParams,
+            Dodopayments::Internal::AnyHash
+          )
+        end
+
+      # Billing address details for the payment
+      sig { returns(Dodopayments::BillingAddress) }
       attr_reader :billing
 
-      sig { params(billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash)).void }
+      sig { params(billing: Dodopayments::BillingAddress::OrHash).void }
       attr_writer :billing
 
-      sig { returns(T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer)) }
+      # Customer information for the payment
+      sig do
+        returns(
+          T.any(Dodopayments::AttachExistingCustomer, Dodopayments::NewCustomer)
+        )
+      end
       attr_accessor :customer
 
       # List of products in the cart. Must contain at least 1 and at most 100 items.
-      sig { returns(T::Array[Dodopayments::Models::OneTimeProductCartItem]) }
+      sig { returns(T::Array[Dodopayments::OneTimeProductCartItem]) }
       attr_accessor :product_cart
 
       # List of payment methods allowed during checkout.
@@ -26,19 +40,21 @@ module Dodopayments
       # Availability still depends on other factors (e.g., customer location, merchant
       # settings).
       sig do
-        returns(
-          T.nilable(T::Array[Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol])
-        )
+        returns(T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]))
       end
       attr_accessor :allowed_payment_method_types
 
-      sig { returns(T.nilable(Dodopayments::Models::Currency::OrSymbol)) }
+      # Fix the currency in which the end customer is billed. If Dodo Payments cannot
+      # support that currency for this transaction, it will not proceed
+      sig { returns(T.nilable(Dodopayments::Currency::OrSymbol)) }
       attr_accessor :billing_currency
 
       # Discount Code to apply to the transaction
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_code
 
+      # Additional metadata associated with the payment. Defaults to empty if not
+      # provided.
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_reader :metadata
 
@@ -68,27 +84,29 @@ module Dodopayments
 
       sig do
         params(
-          billing: T.any(Dodopayments::Models::BillingAddress, Dodopayments::Internal::AnyHash),
-          customer: T.any(
-            Dodopayments::Models::AttachExistingCustomer,
-            Dodopayments::Internal::AnyHash,
-            Dodopayments::Models::CreateNewCustomer
-          ),
-          product_cart: T::Array[T.any(Dodopayments::Models::OneTimeProductCartItem, Dodopayments::Internal::AnyHash)],
-          allowed_payment_method_types: T.nilable(T::Array[Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol]),
-          billing_currency: T.nilable(Dodopayments::Models::Currency::OrSymbol),
+          billing: Dodopayments::BillingAddress::OrHash,
+          customer:
+            T.any(
+              Dodopayments::AttachExistingCustomer::OrHash,
+              Dodopayments::NewCustomer::OrHash
+            ),
+          product_cart: T::Array[Dodopayments::OneTimeProductCartItem::OrHash],
+          allowed_payment_method_types:
+            T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
+          billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           discount_code: T.nilable(String),
           metadata: T::Hash[Symbol, String],
           payment_link: T.nilable(T::Boolean),
           return_url: T.nilable(String),
           show_saved_payment_methods: T::Boolean,
           tax_id: T.nilable(String),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
       def self.new(
+        # Billing address details for the payment
         billing:,
+        # Customer information for the payment
         customer:,
         # List of products in the cart. Must contain at least 1 and at most 100 items.
         product_cart:,
@@ -99,9 +117,13 @@ module Dodopayments
         # Availability still depends on other factors (e.g., customer location, merchant
         # settings).
         allowed_payment_method_types: nil,
+        # Fix the currency in which the end customer is billed. If Dodo Payments cannot
+        # support that currency for this transaction, it will not proceed
         billing_currency: nil,
         # Discount Code to apply to the transaction
         discount_code: nil,
+        # Additional metadata associated with the payment. Defaults to empty if not
+        # provided.
         metadata: nil,
         # Whether to generate a payment link. Defaults to false if not specified.
         payment_link: nil,
@@ -114,75 +136,33 @@ module Dodopayments
         # creation will fail
         tax_id: nil,
         request_options: {}
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              billing: Dodopayments::Models::BillingAddress,
-              customer: T.any(Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer),
-              product_cart: T::Array[Dodopayments::Models::OneTimeProductCartItem],
-              allowed_payment_method_types: T.nilable(T::Array[Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::OrSymbol]),
-              billing_currency: T.nilable(Dodopayments::Models::Currency::OrSymbol),
-              discount_code: T.nilable(String),
-              metadata: T::Hash[Symbol, String],
-              payment_link: T.nilable(T::Boolean),
-              return_url: T.nilable(String),
-              show_saved_payment_methods: T::Boolean,
-              tax_id: T.nilable(String),
-              request_options: Dodopayments::RequestOptions
-            }
-          )
+      )
       end
-      def to_hash; end
 
-      module AllowedPaymentMethodType
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias { T.all(Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType) }
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        CREDIT =
-          T.let(:credit, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        DEBIT = T.let(:debit, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        UPI_COLLECT =
-          T.let(:upi_collect, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        UPI_INTENT =
-          T.let(:upi_intent, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        APPLE_PAY =
-          T.let(:apple_pay, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        CASHAPP =
-          T.let(:cashapp, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        GOOGLE_PAY =
-          T.let(:google_pay, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        MULTIBANCO =
-          T.let(:multibanco, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        BANCONTACT_CARD =
-          T.let(:bancontact_card, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        EPS = T.let(:eps, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        IDEAL = T.let(:ideal, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        PRZELEWY24 =
-          T.let(:przelewy24, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        AFFIRM =
-          T.let(:affirm, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        KLARNA =
-          T.let(:klarna, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        SEPA = T.let(:sepa, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        ACH = T.let(:ach, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        AMAZON_PAY =
-          T.let(:amazon_pay, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol)
-        AFTERPAY_CLEARPAY =
-          T.let(
-            :afterpay_clearpay,
-            Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol
-          )
-
-        sig do
-          override
-            .returns(T::Array[Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType::TaggedSymbol])
-        end
-        def self.values; end
+      sig do
+        override.returns(
+          {
+            billing: Dodopayments::BillingAddress,
+            customer:
+              T.any(
+                Dodopayments::AttachExistingCustomer,
+                Dodopayments::NewCustomer
+              ),
+            product_cart: T::Array[Dodopayments::OneTimeProductCartItem],
+            allowed_payment_method_types:
+              T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
+            billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
+            discount_code: T.nilable(String),
+            metadata: T::Hash[Symbol, String],
+            payment_link: T.nilable(T::Boolean),
+            return_url: T.nilable(String),
+            show_saved_payment_methods: T::Boolean,
+            tax_id: T.nilable(String),
+            request_options: Dodopayments::RequestOptions
+          }
+        )
+      end
+      def to_hash
       end
     end
   end

@@ -1,0 +1,51 @@
+module Dodopayments
+  module Models
+    type webhook_update_params =
+      {
+        description: String?,
+        disabled: bool?,
+        filter_types: ::Array[Dodopayments::Models::webhook_event_type]?,
+        metadata: ::Hash[Symbol, String]?,
+        rate_limit: Integer?,
+        url: String?
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class WebhookUpdateParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor description: String?
+
+      attr_accessor disabled: bool?
+
+      attr_accessor filter_types: ::Array[Dodopayments::Models::webhook_event_type]?
+
+      attr_accessor metadata: ::Hash[Symbol, String]?
+
+      attr_accessor rate_limit: Integer?
+
+      attr_accessor url: String?
+
+      def initialize: (
+        ?description: String?,
+        ?disabled: bool?,
+        ?filter_types: ::Array[Dodopayments::Models::webhook_event_type]?,
+        ?metadata: ::Hash[Symbol, String]?,
+        ?rate_limit: Integer?,
+        ?url: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        description: String?,
+        disabled: bool?,
+        filter_types: ::Array[Dodopayments::Models::webhook_event_type]?,
+        metadata: ::Hash[Symbol, String]?,
+        rate_limit: Integer?,
+        url: String?,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

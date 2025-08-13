@@ -2,11 +2,11 @@ module Dodopayments
   module Models
     type license_key_list_params =
       {
-        customer_id: String?,
-        page_number: Integer?,
-        page_size: Integer?,
-        product_id: String?,
-        status: Dodopayments::Models::license_key_status?
+        customer_id: String,
+        page_number: Integer,
+        page_size: Integer,
+        product_id: String,
+        status: Dodopayments::Models::LicenseKeyListParams::status
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -14,26 +14,57 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      attr_accessor customer_id: String?
+      attr_reader customer_id: String?
 
-      attr_accessor page_number: Integer?
+      def customer_id=: (String) -> String
 
-      attr_accessor page_size: Integer?
+      attr_reader page_number: Integer?
 
-      attr_accessor product_id: String?
+      def page_number=: (Integer) -> Integer
 
-      attr_accessor status: Dodopayments::Models::license_key_status?
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
+
+      attr_reader product_id: String?
+
+      def product_id=: (String) -> String
+
+      attr_reader status: Dodopayments::Models::LicenseKeyListParams::status?
+
+      def status=: (
+        Dodopayments::Models::LicenseKeyListParams::status
+      ) -> Dodopayments::Models::LicenseKeyListParams::status
 
       def initialize: (
-        ?customer_id: String?,
-        ?page_number: Integer?,
-        ?page_size: Integer?,
-        ?product_id: String?,
-        ?status: Dodopayments::Models::license_key_status?,
+        ?customer_id: String,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?product_id: String,
+        ?status: Dodopayments::Models::LicenseKeyListParams::status,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::license_key_list_params
+      def to_hash: -> {
+        customer_id: String,
+        page_number: Integer,
+        page_size: Integer,
+        product_id: String,
+        status: Dodopayments::Models::LicenseKeyListParams::status,
+        request_options: Dodopayments::RequestOptions
+      }
+
+      type status = :active | :expired | :disabled
+
+      module Status
+        extend Dodopayments::Internal::Type::Enum
+
+        ACTIVE: :active
+        EXPIRED: :expired
+        DISABLED: :disabled
+
+        def self?.values: -> ::Array[Dodopayments::Models::LicenseKeyListParams::status]
+      end
     end
   end
 end

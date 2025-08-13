@@ -23,9 +23,10 @@ module Dodopayments
       required :created_at, Time
 
       # @!attribute currency
+      #   Currency of the Addon
       #
       #   @return [Symbol, Dodopayments::Models::Currency]
-      required :currency, enum: -> { Dodopayments::Models::Currency }
+      required :currency, enum: -> { Dodopayments::Currency }
 
       # @!attribute name
       #   Name of the Addon
@@ -40,11 +41,10 @@ module Dodopayments
       required :price, Integer
 
       # @!attribute tax_category
-      #   Represents the different categories of taxation applicable to various products
-      #   and services.
+      #   Tax category applied to this Addon
       #
       #   @return [Symbol, Dodopayments::Models::TaxCategory]
-      required :tax_category, enum: -> { Dodopayments::Models::TaxCategory }
+      required :tax_category, enum: -> { Dodopayments::TaxCategory }
 
       # @!attribute updated_at
       #   Updated time
@@ -65,23 +65,19 @@ module Dodopayments
       optional :image, String, nil?: true
 
       # @!method initialize(id:, business_id:, created_at:, currency:, name:, price:, tax_category:, updated_at:, description: nil, image: nil)
-      #   Some parameter documentations has been truncated, see
-      #   {Dodopayments::Models::AddonResponse} for more details.
-      #
       #   @param id [String] id of the Addon
       #
       #   @param business_id [String] Unique identifier for the business to which the addon belongs.
       #
       #   @param created_at [Time] Created time
       #
-      #   @param currency [Symbol, Dodopayments::Models::Currency]
+      #   @param currency [Symbol, Dodopayments::Models::Currency] Currency of the Addon
       #
       #   @param name [String] Name of the Addon
       #
       #   @param price [Integer] Amount of the addon
       #
-      #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Represents the different categories of taxation applicable to various products a
-      #   ...
+      #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Tax category applied to this Addon
       #
       #   @param updated_at [Time] Updated time
       #

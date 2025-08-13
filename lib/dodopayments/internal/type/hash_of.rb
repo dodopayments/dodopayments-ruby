@@ -12,6 +12,7 @@ module Dodopayments
       # Hash of items of a given type.
       class HashOf
         include Dodopayments::Internal::Type::Converter
+        include Dodopayments::Internal::Util::SorbetRuntimeSupport
 
         private_class_method :new
 
@@ -29,7 +30,7 @@ module Dodopayments
         #
         #   @option spec [Boolean] :"nil?"
         #
-        # @return [Dodopayments::Internal::Type::HashOf]
+        # @return [self]
         def self.[](...) = new(...)
 
         # @api public
@@ -76,9 +77,13 @@ module Dodopayments
         #
         # @param state [Hash{Symbol=>Object}] .
         #
-        #   @option state [Boolean, :strong] :strictness
+        #   @option state [Boolean] :translate_names
+        #
+        #   @option state [Boolean] :strictness
         #
         #   @option state [Hash{Symbol=>Object}] :exactness
+        #
+        #   @option state [Class<StandardError>] :error
         #
         #   @option state [Integer] :branched
         #
@@ -88,6 +93,7 @@ module Dodopayments
 
           unless value.is_a?(Hash)
             exactness[:no] += 1
+            state[:error] = TypeError.new("#{value.class} can't be coerced into #{Hash}")
             return value
           end
 
@@ -132,6 +138,13 @@ module Dodopayments
 
         # @api private
         #
+        # @return [Object]
+        def to_sorbet_type
+          T::Hash[Dodopayments::Internal::Util::SorbetRuntimeSupport.to_sorbet_type(item_type)]
+        end
+
+        # @api private
+        #
         # @return [generic<Elem>]
         protected def item_type = @item_type_fn.call
 
@@ -155,6 +168,7 @@ module Dodopayments
         #   @option spec [Boolean] :"nil?"
         def initialize(type_info, spec = {})
           @item_type_fn = Dodopayments::Internal::Type::Converter.type_info(type_info || spec)
+          @meta = Dodopayments::Internal::Type::Converter.meta_info(type_info, spec)
           @nilable = spec.fetch(:nil?, false)
         end
 

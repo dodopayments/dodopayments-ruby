@@ -3,6 +3,14 @@
 module Dodopayments
   module Models
     class DisputeListResponse < Dodopayments::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias do
+          T.any(
+            Dodopayments::Models::DisputeListResponse,
+            Dodopayments::Internal::AnyHash
+          )
+        end
+
       # The amount involved in the dispute, represented as a string to accommodate
       # precision.
       sig { returns(String) }
@@ -24,10 +32,12 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :dispute_id
 
-      sig { returns(Dodopayments::Models::DisputeStage::TaggedSymbol) }
+      # The current stage of the dispute process.
+      sig { returns(Dodopayments::DisputeStage::TaggedSymbol) }
       attr_accessor :dispute_stage
 
-      sig { returns(Dodopayments::Models::DisputeStatus::TaggedSymbol) }
+      # The current status of the dispute.
+      sig { returns(Dodopayments::DisputeStatus::TaggedSymbol) }
       attr_accessor :dispute_status
 
       # The unique identifier of the payment associated with the dispute.
@@ -41,11 +51,10 @@ module Dodopayments
           created_at: Time,
           currency: String,
           dispute_id: String,
-          dispute_stage: Dodopayments::Models::DisputeStage::OrSymbol,
-          dispute_status: Dodopayments::Models::DisputeStatus::OrSymbol,
+          dispute_stage: Dodopayments::DisputeStage::OrSymbol,
+          dispute_status: Dodopayments::DisputeStatus::OrSymbol,
           payment_id: String
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         # The amount involved in the dispute, represented as a string to accommodate
@@ -59,27 +68,31 @@ module Dodopayments
         currency:,
         # The unique identifier of the dispute.
         dispute_id:,
+        # The current stage of the dispute process.
         dispute_stage:,
+        # The current status of the dispute.
         dispute_status:,
         # The unique identifier of the payment associated with the dispute.
         payment_id:
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              amount: String,
-              business_id: String,
-              created_at: Time,
-              currency: String,
-              dispute_id: String,
-              dispute_stage: Dodopayments::Models::DisputeStage::TaggedSymbol,
-              dispute_status: Dodopayments::Models::DisputeStatus::TaggedSymbol,
-              payment_id: String
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            amount: String,
+            business_id: String,
+            created_at: Time,
+            currency: String,
+            dispute_id: String,
+            dispute_stage: Dodopayments::DisputeStage::TaggedSymbol,
+            dispute_status: Dodopayments::DisputeStatus::TaggedSymbol,
+            payment_id: String
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

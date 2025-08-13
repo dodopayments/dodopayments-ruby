@@ -9,7 +9,7 @@ module Dodopayments
 
       def initialize: (?request_options: Dodopayments::request_opts) -> void
 
-      def to_hash: -> Dodopayments::Models::misc_list_supported_countries_params
+      def to_hash: -> { request_options: Dodopayments::RequestOptions }
     end
   end
 end

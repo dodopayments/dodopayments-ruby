@@ -12,7 +12,10 @@ module Dodopayments
 
     ENVIRONMENTS =
       T.let(
-        {live_mode: "https://live.dodopayments.com", test_mode: "https://test.dodopayments.com"},
+        {
+          live_mode: "https://live.dodopayments.com",
+          test_mode: "https://test.dodopayments.com"
+        },
         T::Hash[Symbol, String]
       )
 
@@ -65,22 +68,31 @@ module Dodopayments
     sig { returns(Dodopayments::Resources::Addons) }
     attr_reader :addons
 
+    sig { returns(Dodopayments::Resources::Brands) }
+    attr_reader :brands
+
+    sig { returns(Dodopayments::Resources::Webhooks) }
+    attr_reader :webhooks
+
+    sig { returns(Dodopayments::Resources::YourWebhookURL) }
+    attr_reader :your_webhook_url
+
     # @api private
     sig { override.returns(T::Hash[String, String]) }
-    private def auth_headers; end
+    private def auth_headers
+    end
 
     # Creates and returns a new client for interacting with the API.
     sig do
       params(
         bearer_token: T.nilable(String),
-        environment: NilClass,
+        environment: T.nilable(T.any(Symbol, String)),
         base_url: T.nilable(String),
         max_retries: Integer,
         timeout: Float,
         initial_retry_delay: Float,
         max_retry_delay: Float
-      )
-        .returns(T.attached_class)
+      ).returns(T.attached_class)
     end
     def self.new(
       # Bearer Token for API authentication Defaults to `ENV["DODO_PAYMENTS_API_KEY"]`
@@ -100,6 +112,7 @@ module Dodopayments
       timeout: Dodopayments::Client::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: Dodopayments::Client::DEFAULT_INITIAL_RETRY_DELAY,
       max_retry_delay: Dodopayments::Client::DEFAULT_MAX_RETRY_DELAY
-    ); end
+    )
+    end
   end
 end

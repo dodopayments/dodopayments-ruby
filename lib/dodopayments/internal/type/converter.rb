@@ -5,6 +5,8 @@ module Dodopayments
     module Type
       # @api private
       module Converter
+        extend Dodopayments::Internal::Util::SorbetRuntimeSupport
+
         # rubocop:disable Lint/UnusedMethodArgument
 
         # @api private
@@ -13,9 +15,13 @@ module Dodopayments
         #
         # @param state [Hash{Symbol=>Object}] .
         #
-        #   @option state [Boolean, :strong] :strictness
+        #   @option state [Boolean] :translate_names
+        #
+        #   @option state [Boolean] :strictness
         #
         #   @option state [Hash{Symbol=>Object}] :exactness
+        #
+        #   @option state [Class<StandardError>] :error
         #
         #   @option state [Integer] :branched
         #
@@ -94,6 +100,48 @@ module Dodopayments
 
           # @api private
           #
+          # @param type_info [Hash{Symbol=>Object}, Proc, Dodopayments::Internal::Type::Converter, Class] .
+          #
+          #   @option type_info [NilClass, TrueClass, FalseClass, Integer, Float, Symbol] :const
+          #
+          #   @option type_info [Proc] :enum
+          #
+          #   @option type_info [Proc] :union
+          #
+          #   @option type_info [Boolean] :"nil?"
+          #
+          # @param spec [Hash{Symbol=>Object}, Proc, Dodopayments::Internal::Type::Converter, Class] .
+          #
+          #   @option spec [NilClass, TrueClass, FalseClass, Integer, Float, Symbol] :const
+          #
+          #   @option spec [Proc] :enum
+          #
+          #   @option spec [Proc] :union
+          #
+          #   @option spec [Boolean] :"nil?"
+          #
+          # @return [Hash{Symbol=>Object}]
+          def meta_info(type_info, spec)
+            [spec, type_info].grep(Hash).first.to_h.except(:const, :enum, :union, :nil?)
+          end
+
+          # @api private
+          #
+          # @param translate_names [Boolean]
+          #
+          # @return [Hash{Symbol=>Object}]
+          def new_coerce_state(translate_names: true)
+            {
+              translate_names: translate_names,
+              strictness: true,
+              exactness: {yes: 0, no: 0, maybe: 0},
+              error: nil,
+              branched: 0
+            }
+          end
+
+          # @api private
+          #
           # Based on `target`, transform `value` into `target`, to the extent possible:
           #
           # 1. if the given `value` conforms to `target` already, return the given `value`
@@ -108,14 +156,11 @@ module Dodopayments
           #
           # @param value [Object]
           #
-          # @param state [Hash{Symbol=>Object}] The `strictness` is one of `true`, `false`, or `:strong`. This informs the
-          # coercion strategy when we have to decide between multiple possible conversion
-          # targets:
+          # @param state [Hash{Symbol=>Object}] The `strictness` is one of `true`, `false`. This informs the coercion strategy
+          # when we have to decide between multiple possible conversion targets:
           #
           # - `true`: the conversion must be exact, with minimum coercion.
           # - `false`: the conversion can be approximate, with some coercion.
-          # - `:strong`: the conversion must be exact, with no coercion, and raise an error
-          #   if not possible.
           #
           # The `exactness` is `Hash` with keys being one of `yes`, `no`, or `maybe`. For
           # any given conversion attempt, the exactness will be updated based on how closely
@@ -128,21 +173,20 @@ module Dodopayments
           #
           # See implementation below for more details.
           #
-          #   @option state [Boolean, :strong] :strictness
+          #   @option state [Boolean] :translate_names
+          #
+          #   @option state [Boolean] :strictness
           #
           #   @option state [Hash{Symbol=>Object}] :exactness
+          #
+          #   @option state [Class<StandardError>] :error
           #
           #   @option state [Integer] :branched
           #
           # @return [Object]
-          def coerce(
-            target,
-            value,
-            state: {strictness: true, exactness: {yes: 0, no: 0, maybe: 0}, branched: 0}
-          )
-            # rubocop:disable Lint/SuppressedException
+          def coerce(target, value, state: Dodopayments::Internal::Type::Converter.new_coerce_state)
             # rubocop:disable Metrics/BlockNesting
-            strictness, exactness = state.fetch_values(:strictness, :exactness)
+            exactness = state.fetch(:exactness)
 
             case target
             in Dodopayments::Internal::Type::Converter
@@ -158,29 +202,26 @@ module Dodopayments
                 exactness[value.nil? ? :yes : :maybe] += 1
                 return nil
               in -> { _1 <= Integer }
-                if value.is_a?(Integer)
+                case value
+                in Integer
                   exactness[:yes] += 1
                   return value
-                elsif strictness == :strong && Integer(value, exception: false) != value
-                  message = "no implicit conversion of #{value.class} into #{target.inspect}"
-                  raise value.is_a?(Numeric) ? ArgumentError.new(message) : TypeError.new(message)
                 else
                   Kernel.then do
                     return Integer(value).tap { exactness[:maybe] += 1 }
-                  rescue ArgumentError, TypeError
+                  rescue ArgumentError, TypeError => e
+                    state[:error] = e
                   end
                 end
               in -> { _1 <= Float }
                 if value.is_a?(Numeric)
                   exactness[:yes] += 1
                   return Float(value)
-                elsif strictness == :strong
-                  message = "no implicit conversion of #{value.class} into #{target.inspect}"
-                  raise TypeError.new(message)
                 else
                   Kernel.then do
                     return Float(value).tap { exactness[:maybe] += 1 }
-                  rescue ArgumentError, TypeError
+                  rescue ArgumentError, TypeError => e
+                    state[:error] = e
                   end
                 end
               in -> { _1 <= String }
@@ -192,16 +233,13 @@ module Dodopayments
                   exactness[:yes] += 1
                   return value.string
                 else
-                  if strictness == :strong
-                    message = "no implicit conversion of #{value.class} into #{target.inspect}"
-                    raise TypeError.new(message)
-                  end
+                  state[:error] = TypeError.new("#{value.class} can't be coerced into #{String}")
                 end
               in -> { _1 <= Date || _1 <= Time }
                 Kernel.then do
                   return target.parse(value).tap { exactness[:yes] += 1 }
                 rescue ArgumentError, TypeError => e
-                  raise e if strictness == :strong
+                  state[:error] = e
                 end
               in -> { _1 <= StringIO } if value.is_a?(String)
                 exactness[:yes] += 1
@@ -219,10 +257,8 @@ module Dodopayments
                   return value
                 end
               else
-                if strictness == :strong
-                  message = "cannot convert non-matching #{value.class} into #{target.inspect}"
-                  raise ArgumentError.new(message)
-                end
+                message = "cannot convert non-matching #{value.class} into #{target.inspect}"
+                state[:error] = ArgumentError.new(message)
               end
             else
             end
@@ -230,7 +266,6 @@ module Dodopayments
             exactness[:no] += 1
             value
             # rubocop:enable Metrics/BlockNesting
-            # rubocop:enable Lint/SuppressedException
           end
 
           # @api private
@@ -267,6 +302,24 @@ module Dodopayments
               target.inspect
             end
           end
+        end
+
+        define_sorbet_constant!(:Input) do
+          T.type_alias { T.any(Dodopayments::Internal::Type::Converter, T::Class[T.anything]) }
+        end
+        define_sorbet_constant!(:CoerceState) do
+          T.type_alias do
+            {
+              translate_names: T::Boolean,
+              strictness: T::Boolean,
+              exactness: {yes: Integer, no: Integer, maybe: Integer},
+              error: T::Class[StandardError],
+              branched: Integer
+            }
+          end
+        end
+        define_sorbet_constant!(:DumpState) do
+          T.type_alias { {can_retry: T::Boolean} }
         end
       end
     end

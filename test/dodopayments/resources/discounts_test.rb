@@ -7,7 +7,7 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
     response = @dodo_payments.discounts.create(amount: 0, type: :percentage)
 
     assert_pattern do
-      response => Dodopayments::Models::Discount
+      response => Dodopayments::Discount
     end
 
     assert_pattern do
@@ -19,9 +19,10 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
         discount_id: String,
         restricted_to: ^(Dodopayments::Internal::Type::ArrayOf[String]),
         times_used: Integer,
-        type: Dodopayments::Models::DiscountType,
+        type: Dodopayments::DiscountType,
         expires_at: Time | nil,
         name: String | nil,
+        subscription_cycles: Integer | nil,
         usage_limit: Integer | nil
       }
     end
@@ -31,7 +32,7 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
     response = @dodo_payments.discounts.retrieve("discount_id")
 
     assert_pattern do
-      response => Dodopayments::Models::Discount
+      response => Dodopayments::Discount
     end
 
     assert_pattern do
@@ -43,9 +44,10 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
         discount_id: String,
         restricted_to: ^(Dodopayments::Internal::Type::ArrayOf[String]),
         times_used: Integer,
-        type: Dodopayments::Models::DiscountType,
+        type: Dodopayments::DiscountType,
         expires_at: Time | nil,
         name: String | nil,
+        subscription_cycles: Integer | nil,
         usage_limit: Integer | nil
       }
     end
@@ -55,7 +57,7 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
     response = @dodo_payments.discounts.update("discount_id")
 
     assert_pattern do
-      response => Dodopayments::Models::Discount
+      response => Dodopayments::Discount
     end
 
     assert_pattern do
@@ -67,9 +69,10 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
         discount_id: String,
         restricted_to: ^(Dodopayments::Internal::Type::ArrayOf[String]),
         times_used: Integer,
-        type: Dodopayments::Models::DiscountType,
+        type: Dodopayments::DiscountType,
         expires_at: Time | nil,
         name: String | nil,
+        subscription_cycles: Integer | nil,
         usage_limit: Integer | nil
       }
     end
@@ -86,7 +89,7 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
     return if row.nil?
 
     assert_pattern do
-      row => Dodopayments::Models::Discount
+      row => Dodopayments::Discount
     end
 
     assert_pattern do
@@ -98,9 +101,10 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
         discount_id: String,
         restricted_to: ^(Dodopayments::Internal::Type::ArrayOf[String]),
         times_used: Integer,
-        type: Dodopayments::Models::DiscountType,
+        type: Dodopayments::DiscountType,
         expires_at: Time | nil,
         name: String | nil,
+        subscription_cycles: Integer | nil,
         usage_limit: Integer | nil
       }
     end

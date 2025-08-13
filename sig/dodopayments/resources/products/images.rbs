@@ -4,7 +4,7 @@ module Dodopayments
       class Images
         def update: (
           String id,
-          ?force_update: bool?,
+          ?force_update: bool,
           ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::Models::Products::ImageUpdateResponse
 

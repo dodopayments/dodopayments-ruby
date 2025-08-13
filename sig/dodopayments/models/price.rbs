@@ -1,8 +1,7 @@
 module Dodopayments
   module Models
     type price =
-      Dodopayments::Models::Price::OneTimePrice
-      | Dodopayments::Models::Price::RecurringPrice
+      Dodopayments::Price::OneTimePrice | Dodopayments::Price::RecurringPrice
 
     module Price
       extend Dodopayments::Internal::Type::Union
@@ -13,7 +12,7 @@ module Dodopayments
           discount: Float,
           price: Integer,
           purchasing_power_parity: bool,
-          type: :one_time_price,
+          type: Dodopayments::Models::Price::OneTimePrice::type_,
           pay_what_you_want: bool,
           suggested_price: Integer?,
           tax_inclusive: bool?
@@ -28,7 +27,7 @@ module Dodopayments
 
         attr_accessor purchasing_power_parity: bool
 
-        attr_accessor type: :one_time_price
+        attr_accessor type: Dodopayments::Models::Price::OneTimePrice::type_
 
         attr_reader pay_what_you_want: bool?
 
@@ -43,13 +42,32 @@ module Dodopayments
           discount: Float,
           price: Integer,
           purchasing_power_parity: bool,
+          type: Dodopayments::Models::Price::OneTimePrice::type_,
           ?pay_what_you_want: bool,
           ?suggested_price: Integer?,
-          ?tax_inclusive: bool?,
-          ?type: :one_time_price
+          ?tax_inclusive: bool?
         ) -> void
 
-        def to_hash: -> Dodopayments::Models::Price::one_time_price
+        def to_hash: -> {
+          currency: Dodopayments::Models::currency,
+          discount: Float,
+          price: Integer,
+          purchasing_power_parity: bool,
+          type: Dodopayments::Models::Price::OneTimePrice::type_,
+          pay_what_you_want: bool,
+          suggested_price: Integer?,
+          tax_inclusive: bool?
+        }
+
+        type type_ = :one_time_price
+
+        module Type
+          extend Dodopayments::Internal::Type::Enum
+
+          ONE_TIME_PRICE: :one_time_price
+
+          def self?.values: -> ::Array[Dodopayments::Models::Price::OneTimePrice::type_]
+        end
       end
 
       type recurring_price =
@@ -62,7 +80,7 @@ module Dodopayments
           purchasing_power_parity: bool,
           subscription_period_count: Integer,
           subscription_period_interval: Dodopayments::Models::time_interval,
-          type: :recurring_price,
+          type: Dodopayments::Models::Price::RecurringPrice::type_,
           tax_inclusive: bool?,
           trial_period_days: Integer
         }
@@ -84,7 +102,7 @@ module Dodopayments
 
         attr_accessor subscription_period_interval: Dodopayments::Models::time_interval
 
-        attr_accessor type: :recurring_price
+        attr_accessor type: Dodopayments::Models::Price::RecurringPrice::type_
 
         attr_accessor tax_inclusive: bool?
 
@@ -101,15 +119,37 @@ module Dodopayments
           purchasing_power_parity: bool,
           subscription_period_count: Integer,
           subscription_period_interval: Dodopayments::Models::time_interval,
+          type: Dodopayments::Models::Price::RecurringPrice::type_,
           ?tax_inclusive: bool?,
-          ?trial_period_days: Integer,
-          ?type: :recurring_price
+          ?trial_period_days: Integer
         ) -> void
 
-        def to_hash: -> Dodopayments::Models::Price::recurring_price
+        def to_hash: -> {
+          currency: Dodopayments::Models::currency,
+          discount: Float,
+          payment_frequency_count: Integer,
+          payment_frequency_interval: Dodopayments::Models::time_interval,
+          price: Integer,
+          purchasing_power_parity: bool,
+          subscription_period_count: Integer,
+          subscription_period_interval: Dodopayments::Models::time_interval,
+          type: Dodopayments::Models::Price::RecurringPrice::type_,
+          tax_inclusive: bool?,
+          trial_period_days: Integer
+        }
+
+        type type_ = :recurring_price
+
+        module Type
+          extend Dodopayments::Internal::Type::Enum
+
+          RECURRING_PRICE: :recurring_price
+
+          def self?.values: -> ::Array[Dodopayments::Models::Price::RecurringPrice::type_]
+        end
       end
 
-      def self?.variants: -> [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
+      def self?.variants: -> ::Array[Dodopayments::Models::price]
     end
   end
 end

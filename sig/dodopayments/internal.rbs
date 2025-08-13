@@ -1,5 +1,9 @@
 module Dodopayments
   module Internal
+    extend Dodopayments::Internal::Util::SorbetRuntimeSupport
+
+    type file_input = Pathname | StringIO | IO | String | Dodopayments::FilePart
+
     OMIT: Object
   end
 end

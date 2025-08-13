@@ -2,12 +2,16 @@ module Dodopayments
   module Internal
     module Type
       module Converter
+        extend Dodopayments::Internal::Util::SorbetRuntimeSupport
+
         type input = Dodopayments::Internal::Type::Converter | Class
 
         type coerce_state =
           {
-            strictness: bool | :strong,
+            translate_names: bool,
+            strictness: bool,
             exactness: { yes: Integer, no: Integer, maybe: Integer },
+            error: Class,
             branched: Integer
           }
 
@@ -34,6 +38,27 @@ module Dodopayments
           | ^-> Dodopayments::Internal::Type::Converter::input
           | Dodopayments::Internal::Type::Converter::input spec
         ) -> (^-> top)
+
+        def self.meta_info: (
+          {
+            const: (nil | bool | Integer | Float | Symbol)?,
+            enum: ^-> Dodopayments::Internal::Type::Converter::input?,
+            union: ^-> Dodopayments::Internal::Type::Converter::input?
+          }
+          | ^-> Dodopayments::Internal::Type::Converter::input
+          | Dodopayments::Internal::Type::Converter::input type_info,
+          {
+            const: (nil | bool | Integer | Float | Symbol)?,
+            enum: ^-> Dodopayments::Internal::Type::Converter::input?,
+            union: ^-> Dodopayments::Internal::Type::Converter::input?
+          }
+          | ^-> Dodopayments::Internal::Type::Converter::input
+          | Dodopayments::Internal::Type::Converter::input spec
+        ) -> ::Hash[Symbol, top]
+
+        def self.new_coerce_state: (
+          ?translate_names: bool
+        ) -> Dodopayments::Internal::Type::Converter::coerce_state
 
         def self.coerce: (
           Dodopayments::Internal::Type::Converter::input target,

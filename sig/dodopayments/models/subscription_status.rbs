@@ -1,7 +1,7 @@
 module Dodopayments
   module Models
     type subscription_status =
-      :pending | :active | :on_hold | :paused | :cancelled | :failed | :expired
+      :pending | :active | :on_hold | :cancelled | :failed | :expired
 
     module SubscriptionStatus
       extend Dodopayments::Internal::Type::Enum
@@ -9,7 +9,6 @@ module Dodopayments
       PENDING: :pending
       ACTIVE: :active
       ON_HOLD: :on_hold
-      PAUSED: :paused
       CANCELLED: :cancelled
       FAILED: :failed
       EXPIRED: :expired

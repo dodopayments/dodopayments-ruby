@@ -7,7 +7,7 @@ module Dodopayments
 
       def initialize: (customer_id: String) -> void
 
-      def to_hash: -> Dodopayments::Models::attach_existing_customer
+      def to_hash: -> { customer_id: String }
     end
   end
 end

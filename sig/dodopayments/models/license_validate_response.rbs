@@ -7,7 +7,7 @@ module Dodopayments
 
       def initialize: (valid: bool) -> void
 
-      def to_hash: -> Dodopayments::Models::license_validate_response
+      def to_hash: -> { valid: bool }
     end
   end
 end

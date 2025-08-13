@@ -69,5 +69,9 @@ module Dodopayments
     #   Returns a new instance of RequestOptions.
     #
     #   @param values [Hash{Symbol=>Object}]
+
+    define_sorbet_constant!(:OrHash) do
+      T.type_alias { T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash) }
+    end
   end
 end

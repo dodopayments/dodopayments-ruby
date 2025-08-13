@@ -8,21 +8,25 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute billing
+      #   Billing address details for the payment
       #
       #   @return [Dodopayments::Models::BillingAddress]
-      required :billing, -> { Dodopayments::Models::BillingAddress }
+      required :billing, -> { Dodopayments::BillingAddress }
 
       # @!attribute customer
+      #   Customer information for the payment
       #
-      #   @return [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
-      required :customer, union: -> { Dodopayments::Models::CustomerRequest }
+      #   @return [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer]
+      required :customer, union: -> { Dodopayments::CustomerRequest }
 
       # @!attribute product_cart
       #   List of products in the cart. Must contain at least 1 and at most 100 items.
       #
       #   @return [Array<Dodopayments::Models::OneTimeProductCartItem>]
       required :product_cart,
-               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::OneTimeProductCartItem] }
+               -> {
+                 Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem]
+               }
 
       # @!attribute allowed_payment_method_types
       #   List of payment methods allowed during checkout.
@@ -32,15 +36,17 @@ module Dodopayments
       #   Availability still depends on other factors (e.g., customer location, merchant
       #   settings).
       #
-      #   @return [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil]
+      #   @return [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil]
       optional :allowed_payment_method_types,
-               -> { Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType] },
+               -> { Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::PaymentMethodTypes] },
                nil?: true
 
       # @!attribute billing_currency
+      #   Fix the currency in which the end customer is billed. If Dodo Payments cannot
+      #   support that currency for this transaction, it will not proceed
       #
       #   @return [Symbol, Dodopayments::Models::Currency, nil]
-      optional :billing_currency, enum: -> { Dodopayments::Models::Currency }, nil?: true
+      optional :billing_currency, enum: -> { Dodopayments::Currency }, nil?: true
 
       # @!attribute discount_code
       #   Discount Code to apply to the transaction
@@ -49,6 +55,8 @@ module Dodopayments
       optional :discount_code, String, nil?: true
 
       # @!attribute metadata
+      #   Additional metadata associated with the payment. Defaults to empty if not
+      #   provided.
       #
       #   @return [Hash{Symbol=>String}, nil]
       optional :metadata, Dodopayments::Internal::Type::HashOf[String]
@@ -83,56 +91,29 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::PaymentCreateParams} for more details.
       #
-      #   @param billing [Dodopayments::Models::BillingAddress]
+      #   @param billing [Dodopayments::Models::BillingAddress] Billing address details for the payment
       #
-      #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
+      #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer] Customer information for the payment
       #
       #   @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>] List of products in the cart. Must contain at least 1 and at most 100 items.
       #
-      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout. ...
+      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil] List of payment methods allowed during checkout.
       #
-      #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil]
+      #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Fix the currency in which the end customer is billed.
       #
       #   @param discount_code [String, nil] Discount Code to apply to the transaction
       #
-      #   @param metadata [Hash{Symbol=>String}]
+      #   @param metadata [Hash{Symbol=>String}] Additional metadata associated with the payment.
       #
       #   @param payment_link [Boolean, nil] Whether to generate a payment link. Defaults to false if not specified.
       #
-      #   @param return_url [String, nil] Optional URL to redirect the customer after payment. ...
+      #   @param return_url [String, nil] Optional URL to redirect the customer after payment.
       #
-      #   @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer ...
+      #   @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer
       #
       #   @param tax_id [String, nil] Tax ID in case the payment is B2B. If tax id validation fails the payment creati
-      #   ...
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-
-      module AllowedPaymentMethodType
-        extend Dodopayments::Internal::Type::Enum
-
-        CREDIT = :credit
-        DEBIT = :debit
-        UPI_COLLECT = :upi_collect
-        UPI_INTENT = :upi_intent
-        APPLE_PAY = :apple_pay
-        CASHAPP = :cashapp
-        GOOGLE_PAY = :google_pay
-        MULTIBANCO = :multibanco
-        BANCONTACT_CARD = :bancontact_card
-        EPS = :eps
-        IDEAL = :ideal
-        PRZELEWY24 = :przelewy24
-        AFFIRM = :affirm
-        KLARNA = :klarna
-        SEPA = :sepa
-        ACH = :ach
-        AMAZON_PAY = :amazon_pay
-        AFTERPAY_CLEARPAY = :afterpay_clearpay
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
     end
   end
 end

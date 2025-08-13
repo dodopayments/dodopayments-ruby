@@ -7,6 +7,7 @@ module Dodopayments
         expires_at: Time?,
         name: String?,
         restricted_to: ::Array[String]?,
+        subscription_cycles: Integer?,
         type: Dodopayments::Models::discount_type?,
         usage_limit: Integer?
       }
@@ -26,6 +27,8 @@ module Dodopayments
 
       attr_accessor restricted_to: ::Array[String]?
 
+      attr_accessor subscription_cycles: Integer?
+
       attr_accessor type: Dodopayments::Models::discount_type?
 
       attr_accessor usage_limit: Integer?
@@ -36,12 +39,23 @@ module Dodopayments
         ?expires_at: Time?,
         ?name: String?,
         ?restricted_to: ::Array[String]?,
+        ?subscription_cycles: Integer?,
         ?type: Dodopayments::Models::discount_type?,
         ?usage_limit: Integer?,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::discount_update_params
+      def to_hash: -> {
+        amount: Integer?,
+        code: String?,
+        expires_at: Time?,
+        name: String?,
+        restricted_to: ::Array[String]?,
+        subscription_cycles: Integer?,
+        type: Dodopayments::Models::discount_type?,
+        usage_limit: Integer?,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end
