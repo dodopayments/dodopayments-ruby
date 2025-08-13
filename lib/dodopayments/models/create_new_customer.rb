@@ -35,7 +35,6 @@ module Dodopayments
       #   @param name [String]
       #
       #   @param create_new_customer [Boolean] When false, the most recently created customer object with the given email is us
-      #   ...
       #
       #   @param phone_number [String, nil]
     end

@@ -3,6 +3,11 @@
 module Dodopayments
   module Models
     class Discount < Dodopayments::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias do
+          T.any(Dodopayments::Discount, Dodopayments::Internal::AnyHash)
+        end
+
       # The discount amount.
       #
       # - If `discount_type` is `percentage`, this is in **basis points** (e.g., 540 =>
@@ -35,7 +40,8 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :times_used
 
-      sig { returns(Dodopayments::Models::DiscountType::TaggedSymbol) }
+      # The type of discount, e.g. `percentage`, `flat`, or `flat_per_unit`.
+      sig { returns(Dodopayments::DiscountType::TaggedSymbol) }
       attr_accessor :type
 
       # Optional date/time after which discount is expired.
@@ -45,6 +51,12 @@ module Dodopayments
       # Name for the Discount
       sig { returns(T.nilable(String)) }
       attr_accessor :name
+
+      # Number of subscription billing cycles this discount is valid for. If not
+      # provided, the discount will be applied indefinitely to all recurring payments
+      # related to the subscription.
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :subscription_cycles
 
       # Usage limit for this discount, if any.
       sig { returns(T.nilable(Integer)) }
@@ -59,12 +71,12 @@ module Dodopayments
           discount_id: String,
           restricted_to: T::Array[String],
           times_used: Integer,
-          type: Dodopayments::Models::DiscountType::OrSymbol,
+          type: Dodopayments::DiscountType::OrSymbol,
           expires_at: T.nilable(Time),
           name: T.nilable(String),
+          subscription_cycles: T.nilable(Integer),
           usage_limit: T.nilable(Integer)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         # The discount amount.
@@ -85,33 +97,41 @@ module Dodopayments
         restricted_to:,
         # How many times this discount has been used.
         times_used:,
+        # The type of discount, e.g. `percentage`, `flat`, or `flat_per_unit`.
         type:,
         # Optional date/time after which discount is expired.
         expires_at: nil,
         # Name for the Discount
         name: nil,
+        # Number of subscription billing cycles this discount is valid for. If not
+        # provided, the discount will be applied indefinitely to all recurring payments
+        # related to the subscription.
+        subscription_cycles: nil,
         # Usage limit for this discount, if any.
         usage_limit: nil
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              amount: Integer,
-              business_id: String,
-              code: String,
-              created_at: Time,
-              discount_id: String,
-              restricted_to: T::Array[String],
-              times_used: Integer,
-              type: Dodopayments::Models::DiscountType::TaggedSymbol,
-              expires_at: T.nilable(Time),
-              name: T.nilable(String),
-              usage_limit: T.nilable(Integer)
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            amount: Integer,
+            business_id: String,
+            code: String,
+            created_at: Time,
+            discount_id: String,
+            restricted_to: T::Array[String],
+            times_used: Integer,
+            type: Dodopayments::DiscountType::TaggedSymbol,
+            expires_at: T.nilable(Time),
+            name: T.nilable(String),
+            subscription_cycles: T.nilable(Integer),
+            usage_limit: T.nilable(Integer)
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

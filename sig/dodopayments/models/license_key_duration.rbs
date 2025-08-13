@@ -13,7 +13,10 @@ module Dodopayments
         interval: Dodopayments::Models::time_interval
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::license_key_duration
+      def to_hash: -> {
+        count: Integer,
+        interval: Dodopayments::Models::time_interval
+      }
     end
   end
 end

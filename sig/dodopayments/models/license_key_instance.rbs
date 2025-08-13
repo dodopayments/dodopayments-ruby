@@ -28,7 +28,13 @@ module Dodopayments
         name: String
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::license_key_instance
+      def to_hash: -> {
+        id: String,
+        business_id: String,
+        created_at: Time,
+        license_key_id: String,
+        name: String
+      }
     end
   end
 end

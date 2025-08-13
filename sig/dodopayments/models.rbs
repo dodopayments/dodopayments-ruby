@@ -13,9 +13,23 @@ module Dodopayments
 
   class AddonUpdateParams = Dodopayments::Models::AddonUpdateParams
 
+  class AttachAddon = Dodopayments::Models::AttachAddon
+
   class AttachExistingCustomer = Dodopayments::Models::AttachExistingCustomer
 
   class BillingAddress = Dodopayments::Models::BillingAddress
+
+  class Brand = Dodopayments::Models::Brand
+
+  class BrandCreateParams = Dodopayments::Models::BrandCreateParams
+
+  class BrandListParams = Dodopayments::Models::BrandListParams
+
+  class BrandRetrieveParams = Dodopayments::Models::BrandRetrieveParams
+
+  class BrandUpdateImagesParams = Dodopayments::Models::BrandUpdateImagesParams
+
+  class BrandUpdateParams = Dodopayments::Models::BrandUpdateParams
 
   module CountryCode = Dodopayments::Models::CountryCode
 
@@ -65,6 +79,8 @@ module Dodopayments
 
   module DisputeStatus = Dodopayments::Models::DisputeStatus
 
+  class GetDispute = Dodopayments::Models::GetDispute
+
   module IntentStatus = Dodopayments::Models::IntentStatus
 
   module Invoices = Dodopayments::Models::Invoices
@@ -97,6 +113,8 @@ module Dodopayments
 
   class MiscListSupportedCountriesParams = Dodopayments::Models::MiscListSupportedCountriesParams
 
+  class NewCustomer = Dodopayments::Models::NewCustomer
+
   class OneTimeProductCartItem = Dodopayments::Models::OneTimeProductCartItem
 
   class Payment = Dodopayments::Models::Payment
@@ -104,6 +122,10 @@ module Dodopayments
   class PaymentCreateParams = Dodopayments::Models::PaymentCreateParams
 
   class PaymentListParams = Dodopayments::Models::PaymentListParams
+
+  module PaymentMethodTypes = Dodopayments::Models::PaymentMethodTypes
+
+  class PaymentRetrieveLineItemsParams = Dodopayments::Models::PaymentRetrieveLineItemsParams
 
   class PaymentRetrieveParams = Dodopayments::Models::PaymentRetrieveParams
 
@@ -124,6 +146,8 @@ module Dodopayments
   module Products = Dodopayments::Models::Products
 
   class ProductUnarchiveParams = Dodopayments::Models::ProductUnarchiveParams
+
+  class ProductUpdateFilesParams = Dodopayments::Models::ProductUpdateFilesParams
 
   class ProductUpdateParams = Dodopayments::Models::ProductUpdateParams
 
@@ -157,9 +181,21 @@ module Dodopayments
 
   module TimeInterval = Dodopayments::Models::TimeInterval
 
-  class WebhookEvent = Dodopayments::Models::WebhookEvent
+  class WebhookCreateParams = Dodopayments::Models::WebhookCreateParams
 
-  class WebhookEventListParams = Dodopayments::Models::WebhookEventListParams
+  class WebhookDeleteParams = Dodopayments::Models::WebhookDeleteParams
 
-  class WebhookEventRetrieveParams = Dodopayments::Models::WebhookEventRetrieveParams
+  module WebhookEventType = Dodopayments::Models::WebhookEventType
+
+  class WebhookListParams = Dodopayments::Models::WebhookListParams
+
+  class WebhookPayload = Dodopayments::Models::WebhookPayload
+
+  class WebhookRetrieveParams = Dodopayments::Models::WebhookRetrieveParams
+
+  module Webhooks = Dodopayments::Models::Webhooks
+
+  class WebhookUpdateParams = Dodopayments::Models::WebhookUpdateParams
+
+  class YourWebhookURLCreateParams = Dodopayments::Models::YourWebhookURLCreateParams
 end

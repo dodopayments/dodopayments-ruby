@@ -12,6 +12,7 @@ module Dodopayments
         type: Dodopayments::Models::discount_type,
         expires_at: Time?,
         name: String?,
+        subscription_cycles: Integer?,
         usage_limit: Integer?
       }
 
@@ -36,6 +37,8 @@ module Dodopayments
 
       attr_accessor name: String?
 
+      attr_accessor subscription_cycles: Integer?
+
       attr_accessor usage_limit: Integer?
 
       def initialize: (
@@ -49,10 +52,24 @@ module Dodopayments
         type: Dodopayments::Models::discount_type,
         ?expires_at: Time?,
         ?name: String?,
+        ?subscription_cycles: Integer?,
         ?usage_limit: Integer?
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::discount
+      def to_hash: -> {
+        amount: Integer,
+        business_id: String,
+        code: String,
+        created_at: Time,
+        discount_id: String,
+        restricted_to: ::Array[String],
+        times_used: Integer,
+        type: Dodopayments::Models::discount_type,
+        expires_at: Time?,
+        name: String?,
+        subscription_cycles: Integer?,
+        usage_limit: Integer?
+      }
     end
   end
 end

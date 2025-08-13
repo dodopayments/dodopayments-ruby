@@ -1,0 +1,48 @@
+module Dodopayments
+  module Resources
+    class Webhooks
+      attr_reader headers: Dodopayments::Resources::Webhooks::Headers
+
+      def create: (
+        url: String,
+        ?description: String?,
+        ?disabled: bool?,
+        ?filter_types: ::Array[Dodopayments::Models::webhook_event_type],
+        ?headers: ::Hash[Symbol, String]?,
+        ?idempotency_key: String?,
+        ?metadata: ::Hash[Symbol, String]?,
+        ?rate_limit: Integer?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::WebhookCreateResponse
+
+      def retrieve: (
+        String webhook_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::WebhookRetrieveResponse
+
+      def update: (
+        String webhook_id,
+        ?description: String?,
+        ?disabled: bool?,
+        ?filter_types: ::Array[Dodopayments::Models::webhook_event_type]?,
+        ?metadata: ::Hash[Symbol, String]?,
+        ?rate_limit: Integer?,
+        ?url: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::WebhookUpdateResponse
+
+      def list: (
+        ?iterator: String?,
+        ?limit: Integer?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Internal::CursorPagePagination[Dodopayments::Models::WebhookListResponse]
+
+      def delete: (
+        String webhook_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

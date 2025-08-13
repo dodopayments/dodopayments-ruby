@@ -7,7 +7,7 @@ module Dodopayments
 
       def initialize: (payment_id: String) -> void
 
-      def to_hash: -> Dodopayments::Models::subscription_charge_response
+      def to_hash: -> { payment_id: String }
     end
   end
 end

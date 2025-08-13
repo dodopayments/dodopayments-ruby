@@ -1,37 +1,5 @@
 # Changelog
 
-## 1.22.0 (2025-05-09)
-
-Full Changelog: [v1.20.0...v1.22.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.20.0...v1.22.0)
-
-### Features
-
-* **api:** fixed api key schema to bearer ([06d3549](https://github.com/dodopayments/dodopayments-ruby/commit/06d354910a3eb15c036d35f68cfb5393c5a20c62))
-* **api:** manual updates ([eae9353](https://github.com/dodopayments/dodopayments-ruby/commit/eae935376b239dc03bc8ad8ed201e9ca9c2eeaa4))
-* **api:** updated openapi spec ([c369261](https://github.com/dodopayments/dodopayments-ruby/commit/c369261442be58e8b31890f0362fba1536bb9593))
-
-
-### Bug Fixes
-
-* **internal:** fix formatting script for macos ([8abfc9c](https://github.com/dodopayments/dodopayments-ruby/commit/8abfc9c2b3921e5fb3e5903612111e02a87e92d1))
-
-
-### Chores
-
-* accept all nd-json mimetype variants ([b0dd5d6](https://github.com/dodopayments/dodopayments-ruby/commit/b0dd5d644ce5ebbcd0259dca5f9113befa548b54))
-* always check if current page is empty in `next_page?` ([45b817d](https://github.com/dodopayments/dodopayments-ruby/commit/45b817d504e3c4cbc17b328c53ab9a310d038b22))
-* **internal:** codegen related update ([e3ce1b3](https://github.com/dodopayments/dodopayments-ruby/commit/e3ce1b36a1ea8dba0fbd2915a6deadc01820d280))
-* **internal:** codegen related update ([2cd0f3e](https://github.com/dodopayments/dodopayments-ruby/commit/2cd0f3e089a67097c26e9abef90b55cecfaa014c))
-* re-export top level models under library namespace ([bbc82df](https://github.com/dodopayments/dodopayments-ruby/commit/bbc82df831d64038e9169ff0912401d2e333082b))
-* remove Gemfile.lock during bootstrap ([a484914](https://github.com/dodopayments/dodopayments-ruby/commit/a48491445f25a274883dd8068913efcd9e68c32d))
-* revert ignoring Gemfile.lock ([8ba5e6a](https://github.com/dodopayments/dodopayments-ruby/commit/8ba5e6a4f876f0823b33eb92443ebd5d97c2139f))
-* validate request option coercion correctness ([1ac286c](https://github.com/dodopayments/dodopayments-ruby/commit/1ac286ccf79b674d312bf50fa29bb8a1f7e37176))
-
-
-### Documentation
-
-* illustrate environmental defaults for auth variables ([520d6cf](https://github.com/dodopayments/dodopayments-ruby/commit/520d6cf3692d5aeaf3faee980160521d81bd3867))
-
 ## 1.20.0 (2025-05-01)
 
 Full Changelog: [v1.19.0...v1.20.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.19.0...v1.20.0)

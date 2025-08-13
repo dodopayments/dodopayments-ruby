@@ -2,13 +2,14 @@ module Dodopayments
   module Models
     type payment_list_params =
       {
-        created_at_gte: Time?,
-        created_at_lte: Time?,
-        customer_id: String?,
-        page_number: Integer?,
-        page_size: Integer?,
-        status: Dodopayments::Models::intent_status?,
-        subscription_id: String?
+        brand_id: String,
+        created_at_gte: Time,
+        created_at_lte: Time,
+        customer_id: String,
+        page_number: Integer,
+        page_size: Integer,
+        status: Dodopayments::Models::PaymentListParams::status,
+        subscription_id: String
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -16,32 +17,94 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      attr_accessor created_at_gte: Time?
+      attr_reader brand_id: String?
 
-      attr_accessor created_at_lte: Time?
+      def brand_id=: (String) -> String
 
-      attr_accessor customer_id: String?
+      attr_reader created_at_gte: Time?
 
-      attr_accessor page_number: Integer?
+      def created_at_gte=: (Time) -> Time
 
-      attr_accessor page_size: Integer?
+      attr_reader created_at_lte: Time?
 
-      attr_accessor status: Dodopayments::Models::intent_status?
+      def created_at_lte=: (Time) -> Time
 
-      attr_accessor subscription_id: String?
+      attr_reader customer_id: String?
+
+      def customer_id=: (String) -> String
+
+      attr_reader page_number: Integer?
+
+      def page_number=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
+
+      attr_reader status: Dodopayments::Models::PaymentListParams::status?
+
+      def status=: (
+        Dodopayments::Models::PaymentListParams::status
+      ) -> Dodopayments::Models::PaymentListParams::status
+
+      attr_reader subscription_id: String?
+
+      def subscription_id=: (String) -> String
 
       def initialize: (
-        ?created_at_gte: Time?,
-        ?created_at_lte: Time?,
-        ?customer_id: String?,
-        ?page_number: Integer?,
-        ?page_size: Integer?,
-        ?status: Dodopayments::Models::intent_status?,
-        ?subscription_id: String?,
+        ?brand_id: String,
+        ?created_at_gte: Time,
+        ?created_at_lte: Time,
+        ?customer_id: String,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?status: Dodopayments::Models::PaymentListParams::status,
+        ?subscription_id: String,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::payment_list_params
+      def to_hash: -> {
+        brand_id: String,
+        created_at_gte: Time,
+        created_at_lte: Time,
+        customer_id: String,
+        page_number: Integer,
+        page_size: Integer,
+        status: Dodopayments::Models::PaymentListParams::status,
+        subscription_id: String,
+        request_options: Dodopayments::RequestOptions
+      }
+
+      type status =
+        :succeeded
+        | :failed
+        | :cancelled
+        | :processing
+        | :requires_customer_action
+        | :requires_merchant_action
+        | :requires_payment_method
+        | :requires_confirmation
+        | :requires_capture
+        | :partially_captured
+        | :partially_captured_and_capturable
+
+      module Status
+        extend Dodopayments::Internal::Type::Enum
+
+        SUCCEEDED: :succeeded
+        FAILED: :failed
+        CANCELLED: :cancelled
+        PROCESSING: :processing
+        REQUIRES_CUSTOMER_ACTION: :requires_customer_action
+        REQUIRES_MERCHANT_ACTION: :requires_merchant_action
+        REQUIRES_PAYMENT_METHOD: :requires_payment_method
+        REQUIRES_CONFIRMATION: :requires_confirmation
+        REQUIRES_CAPTURE: :requires_capture
+        PARTIALLY_CAPTURED: :partially_captured
+        PARTIALLY_CAPTURED_AND_CAPTURABLE: :partially_captured_and_capturable
+
+        def self?.values: -> ::Array[Dodopayments::Models::PaymentListParams::status]
+      end
     end
   end
 end

@@ -15,9 +15,23 @@ module Dodopayments
 
   AddonUpdateParams = Dodopayments::Models::AddonUpdateParams
 
+  AttachAddon = Dodopayments::Models::AttachAddon
+
   AttachExistingCustomer = Dodopayments::Models::AttachExistingCustomer
 
   BillingAddress = Dodopayments::Models::BillingAddress
+
+  Brand = Dodopayments::Models::Brand
+
+  BrandCreateParams = Dodopayments::Models::BrandCreateParams
+
+  BrandListParams = Dodopayments::Models::BrandListParams
+
+  BrandRetrieveParams = Dodopayments::Models::BrandRetrieveParams
+
+  BrandUpdateImagesParams = Dodopayments::Models::BrandUpdateImagesParams
+
+  BrandUpdateParams = Dodopayments::Models::BrandUpdateParams
 
   CountryCode = Dodopayments::Models::CountryCode
 
@@ -67,6 +81,8 @@ module Dodopayments
 
   DisputeStatus = Dodopayments::Models::DisputeStatus
 
+  GetDispute = Dodopayments::Models::GetDispute
+
   IntentStatus = Dodopayments::Models::IntentStatus
 
   Invoices = Dodopayments::Models::Invoices
@@ -81,11 +97,14 @@ module Dodopayments
 
   LicenseKeyInstance = Dodopayments::Models::LicenseKeyInstance
 
-  LicenseKeyInstanceListParams = Dodopayments::Models::LicenseKeyInstanceListParams
+  LicenseKeyInstanceListParams =
+    Dodopayments::Models::LicenseKeyInstanceListParams
 
-  LicenseKeyInstanceRetrieveParams = Dodopayments::Models::LicenseKeyInstanceRetrieveParams
+  LicenseKeyInstanceRetrieveParams =
+    Dodopayments::Models::LicenseKeyInstanceRetrieveParams
 
-  LicenseKeyInstanceUpdateParams = Dodopayments::Models::LicenseKeyInstanceUpdateParams
+  LicenseKeyInstanceUpdateParams =
+    Dodopayments::Models::LicenseKeyInstanceUpdateParams
 
   LicenseKeyListParams = Dodopayments::Models::LicenseKeyListParams
 
@@ -97,7 +116,10 @@ module Dodopayments
 
   LicenseValidateParams = Dodopayments::Models::LicenseValidateParams
 
-  MiscListSupportedCountriesParams = Dodopayments::Models::MiscListSupportedCountriesParams
+  MiscListSupportedCountriesParams =
+    Dodopayments::Models::MiscListSupportedCountriesParams
+
+  NewCustomer = Dodopayments::Models::NewCustomer
 
   OneTimeProductCartItem = Dodopayments::Models::OneTimeProductCartItem
 
@@ -106,6 +128,11 @@ module Dodopayments
   PaymentCreateParams = Dodopayments::Models::PaymentCreateParams
 
   PaymentListParams = Dodopayments::Models::PaymentListParams
+
+  PaymentMethodTypes = Dodopayments::Models::PaymentMethodTypes
+
+  PaymentRetrieveLineItemsParams =
+    Dodopayments::Models::PaymentRetrieveLineItemsParams
 
   PaymentRetrieveParams = Dodopayments::Models::PaymentRetrieveParams
 
@@ -127,6 +154,8 @@ module Dodopayments
 
   ProductUnarchiveParams = Dodopayments::Models::ProductUnarchiveParams
 
+  ProductUpdateFilesParams = Dodopayments::Models::ProductUpdateFilesParams
+
   ProductUpdateParams = Dodopayments::Models::ProductUpdateParams
 
   Refund = Dodopayments::Models::Refund
@@ -141,7 +170,8 @@ module Dodopayments
 
   Subscription = Dodopayments::Models::Subscription
 
-  SubscriptionChangePlanParams = Dodopayments::Models::SubscriptionChangePlanParams
+  SubscriptionChangePlanParams =
+    Dodopayments::Models::SubscriptionChangePlanParams
 
   SubscriptionChargeParams = Dodopayments::Models::SubscriptionChargeParams
 
@@ -159,9 +189,21 @@ module Dodopayments
 
   TimeInterval = Dodopayments::Models::TimeInterval
 
-  WebhookEvent = Dodopayments::Models::WebhookEvent
+  WebhookCreateParams = Dodopayments::Models::WebhookCreateParams
 
-  WebhookEventListParams = Dodopayments::Models::WebhookEventListParams
+  WebhookDeleteParams = Dodopayments::Models::WebhookDeleteParams
 
-  WebhookEventRetrieveParams = Dodopayments::Models::WebhookEventRetrieveParams
+  WebhookEventType = Dodopayments::Models::WebhookEventType
+
+  WebhookListParams = Dodopayments::Models::WebhookListParams
+
+  WebhookPayload = Dodopayments::Models::WebhookPayload
+
+  WebhookRetrieveParams = Dodopayments::Models::WebhookRetrieveParams
+
+  Webhooks = Dodopayments::Models::Webhooks
+
+  WebhookUpdateParams = Dodopayments::Models::WebhookUpdateParams
+
+  YourWebhookURLCreateParams = Dodopayments::Models::YourWebhookURLCreateParams
 end

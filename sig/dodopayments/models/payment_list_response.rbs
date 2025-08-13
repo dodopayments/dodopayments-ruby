@@ -2,9 +2,11 @@ module Dodopayments
   module Models
     type payment_list_response =
       {
+        brand_id: String,
         created_at: Time,
         currency: Dodopayments::Models::currency,
-        customer: Dodopayments::Models::CustomerLimitedDetails,
+        customer: Dodopayments::CustomerLimitedDetails,
+        digital_products_delivered: bool,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,
@@ -15,11 +17,15 @@ module Dodopayments
       }
 
     class PaymentListResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor brand_id: String
+
       attr_accessor created_at: Time
 
       attr_accessor currency: Dodopayments::Models::currency
 
-      attr_accessor customer: Dodopayments::Models::CustomerLimitedDetails
+      attr_accessor customer: Dodopayments::CustomerLimitedDetails
+
+      attr_accessor digital_products_delivered: bool
 
       attr_accessor metadata: ::Hash[Symbol, String]
 
@@ -36,9 +42,11 @@ module Dodopayments
       attr_accessor subscription_id: String?
 
       def initialize: (
+        brand_id: String,
         created_at: Time,
         currency: Dodopayments::Models::currency,
-        customer: Dodopayments::Models::CustomerLimitedDetails,
+        customer: Dodopayments::CustomerLimitedDetails,
+        digital_products_delivered: bool,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,
@@ -48,7 +56,20 @@ module Dodopayments
         ?subscription_id: String?
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::payment_list_response
+      def to_hash: -> {
+        brand_id: String,
+        created_at: Time,
+        currency: Dodopayments::Models::currency,
+        customer: Dodopayments::CustomerLimitedDetails,
+        digital_products_delivered: bool,
+        metadata: ::Hash[Symbol, String],
+        payment_id: String,
+        total_amount: Integer,
+        payment_method: String?,
+        payment_method_type: String?,
+        status: Dodopayments::Models::intent_status?,
+        subscription_id: String?
+      }
     end
   end
 end

@@ -3,19 +3,20 @@
 module Dodopayments
   module Resources
     class Discounts
-      # If `code` is omitted or empty, a random 16-char uppercase code is generated.
+      # POST /discounts If `code` is omitted or empty, a random 16-char uppercase code
+      # is generated.
       sig do
         params(
           amount: Integer,
-          type: Dodopayments::Models::DiscountType::OrSymbol,
+          type: Dodopayments::DiscountType::OrSymbol,
           code: T.nilable(String),
           expires_at: T.nilable(Time),
           name: T.nilable(String),
           restricted_to: T.nilable(T::Array[String]),
+          subscription_cycles: T.nilable(Integer),
           usage_limit: T.nilable(Integer),
-          request_options: Dodopayments::RequestOpts
-        )
-          .returns(Dodopayments::Models::Discount)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Discount)
       end
       def create(
         # The discount amount.
@@ -27,6 +28,7 @@ module Dodopayments
         #
         # Must be at least 1.
         amount:,
+        # The discount type (e.g. `percentage`, `flat`, or `flat_per_unit`).
         type:,
         # Optionally supply a code (will be uppercased).
         #
@@ -38,20 +40,30 @@ module Dodopayments
         name: nil,
         # List of product IDs to restrict usage (if any).
         restricted_to: nil,
+        # Number of subscription billing cycles this discount is valid for. If not
+        # provided, the discount will be applied indefinitely to all recurring payments
+        # related to the subscription.
+        subscription_cycles: nil,
         # How many times this discount can be used (if any). Must be >= 1 if provided.
         usage_limit: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       # GET /discounts/{discount_id}
       sig do
-        params(discount_id: String, request_options: Dodopayments::RequestOpts)
-          .returns(Dodopayments::Models::Discount)
+        params(
+          discount_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Discount)
       end
       def retrieve(
         # Discount Id
         discount_id,
         request_options: {}
-      ); end
+      )
+      end
+
       # PATCH /discounts/{discount_id}
       sig do
         params(
@@ -61,11 +73,11 @@ module Dodopayments
           expires_at: T.nilable(Time),
           name: T.nilable(String),
           restricted_to: T.nilable(T::Array[String]),
-          type: T.nilable(Dodopayments::Models::DiscountType::OrSymbol),
+          subscription_cycles: T.nilable(Integer),
+          type: T.nilable(Dodopayments::DiscountType::OrSymbol),
           usage_limit: T.nilable(Integer),
-          request_options: Dodopayments::RequestOpts
-        )
-          .returns(Dodopayments::Models::Discount)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Discount)
       end
       def update(
         # Discount Id
@@ -85,18 +97,28 @@ module Dodopayments
         # If present, replaces all restricted product IDs with this new set. To remove all
         # restrictions, send empty array
         restricted_to: nil,
+        # Number of subscription billing cycles this discount is valid for. If not
+        # provided, the discount will be applied indefinitely to all recurring payments
+        # related to the subscription.
+        subscription_cycles: nil,
+        # If present, update the discount type.
         type: nil,
         usage_limit: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       # GET /discounts
       sig do
         params(
-          page_number: T.nilable(Integer),
-          page_size: T.nilable(Integer),
-          request_options: Dodopayments::RequestOpts
+          page_number: Integer,
+          page_size: Integer,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(
+          Dodopayments::Internal::DefaultPageNumberPagination[
+            Dodopayments::Discount
+          ]
         )
-          .returns(Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Discount])
       end
       def list(
         # Page number (default = 0).
@@ -104,17 +126,27 @@ module Dodopayments
         # Page size (default = 10, max = 100).
         page_size: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       # DELETE /discounts/{discount_id}
-      sig { params(discount_id: String, request_options: Dodopayments::RequestOpts).void }
+      sig do
+        params(
+          discount_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).void
+      end
       def delete(
         # Discount Id
         discount_id,
         request_options: {}
-      ); end
+      )
+      end
+
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-      def self.new(client:); end
+      def self.new(client:)
+      end
     end
   end
 end

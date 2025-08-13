@@ -6,46 +6,37 @@ module Dodopayments
       # @api private
       #
       # @example
-      #   # `price` is a `Dodopayments::Models::Price`
-      #   case price
-      #   when Dodopayments::Models::Price::OneTimePrice
-      #     puts(price.currency)
-      #   when Dodopayments::Models::Price::RecurringPrice
-      #     puts(price.discount)
+      #   # `customer_request` is a `Dodopayments::CustomerRequest`
+      #   case customer_request
+      #   when Dodopayments::AttachExistingCustomer
+      #     puts(customer_request.customer_id)
+      #   when Dodopayments::NewCustomer
+      #     puts(customer_request.email)
       #   else
-      #     puts(price)
-      #   end
-      #
-      # @example
-      #   case price
-      #   in {type: :one_time_price, currency: currency, discount: discount, price: price}
-      #     puts(currency)
-      #   in {type: :recurring_price, currency: currency, discount: discount, payment_frequency_count: payment_frequency_count}
-      #     puts(discount)
-      #   else
-      #     puts(price)
+      #     puts(customer_request)
       #   end
       module Union
         include Dodopayments::Internal::Type::Converter
+        include Dodopayments::Internal::Util::SorbetRuntimeSupport
 
         # @api private
         #
         # All of the specified variant info for this union.
         #
-        # @return [Array<Array(Symbol, Proc)>]
+        # @return [Array<Array(Symbol, Proc, Hash{Symbol=>Object})>]
         private def known_variants = (@known_variants ||= [])
 
         # @api private
         #
-        # @return [Array<Array(Symbol, Object)>]
+        # @return [Array<Array(Symbol, Object, Hash{Symbol=>Object})>]
         protected def derefed_variants
-          known_variants.map { |key, variant_fn| [key, variant_fn.call] }
+          known_variants.map { |key, variant_fn, meta| [key, variant_fn.call, meta] }
         end
 
         # All of the specified variants for this union.
         #
         # @return [Array<Object>]
-        def variants = derefed_variants.map(&:last)
+        def variants = derefed_variants.map { _2 }
 
         # @api private
         #
@@ -71,12 +62,13 @@ module Dodopayments
         #
         #   @option spec [Boolean] :"nil?"
         private def variant(key, spec = nil)
+          meta = Dodopayments::Internal::Type::Converter.meta_info(nil, spec)
           variant_info =
             case key
             in Symbol
-              [key, Dodopayments::Internal::Type::Converter.type_info(spec)]
+              [key, Dodopayments::Internal::Type::Converter.type_info(spec), meta]
             in Proc | Dodopayments::Internal::Type::Converter | Class | Hash
-              [nil, Dodopayments::Internal::Type::Converter.type_info(key)]
+              [nil, Dodopayments::Internal::Type::Converter.type_info(key), meta]
             end
 
           known_variants << variant_info
@@ -99,7 +91,8 @@ module Dodopayments
             return nil if key == Dodopayments::Internal::OMIT
 
             key = key.to_sym if key.is_a?(String)
-            known_variants.find { |k,| k == key }&.last&.call
+            _, found = known_variants.find { |k,| k == key }
+            found&.call
           else
             nil
           end
@@ -135,13 +128,22 @@ module Dodopayments
 
         # @api private
         #
+        # Tries to efficiently coerce the given value to one of the known variants.
+        #
+        # If the value cannot match any of the known variants, the coercion is considered
+        # non-viable and returns the original value.
+        #
         # @param value [Object]
         #
         # @param state [Hash{Symbol=>Object}] .
         #
-        #   @option state [Boolean, :strong] :strictness
+        #   @option state [Boolean] :translate_names
+        #
+        #   @option state [Boolean] :strictness
         #
         #   @option state [Hash{Symbol=>Object}] :exactness
+        #
+        #   @option state [Class<StandardError>] :error
         #
         #   @option state [Integer] :branched
         #
@@ -153,7 +155,6 @@ module Dodopayments
 
           strictness = state.fetch(:strictness)
           exactness = state.fetch(:exactness)
-          state[:strictness] = strictness == :strong ? true : strictness
 
           alternatives = []
           known_variants.each do |_, variant_fn|
@@ -172,13 +173,10 @@ module Dodopayments
             end
           end
 
-          case alternatives.sort_by(&:first)
+          case alternatives.sort_by!(&:first)
           in []
             exactness[:no] += 1
-            if strictness == :strong
-              message = "no possible conversion of #{value.class} into a variant of #{target.inspect}"
-              raise ArgumentError.new(message)
-            end
+            state[:error] = ArgumentError.new("no matching variant for #{value.inspect}")
             value
           in [[_, exact, coerced], *]
             exact.each { exactness[_1] += _2 }
@@ -215,6 +213,21 @@ module Dodopayments
           end
 
           super
+        end
+
+        # @api private
+        #
+        # @return [Object]
+        def to_sorbet_type
+          types = variants.map { Dodopayments::Internal::Util::SorbetRuntimeSupport.to_sorbet_type(_1) }.uniq
+          case types
+          in []
+            T.noreturn
+          in [type]
+            type
+          else
+            T.any(*types)
+          end
         end
 
         # rubocop:enable Style/CaseEquality

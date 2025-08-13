@@ -7,10 +7,9 @@ module Dodopayments
         sig do
           params(
             customer_id: String,
-            send_email: T.nilable(T::Boolean),
-            request_options: Dodopayments::RequestOpts
-          )
-            .returns(Dodopayments::Models::CustomerPortalSession)
+            send_email: T::Boolean,
+            request_options: Dodopayments::RequestOptions::OrHash
+          ).returns(Dodopayments::CustomerPortalSession)
         end
         def create(
           # Customer Id
@@ -18,10 +17,13 @@ module Dodopayments
           # If true, will send link to user.
           send_email: nil,
           request_options: {}
-        ); end
+        )
+        end
+
         # @api private
         sig { params(client: Dodopayments::Client).returns(T.attached_class) }
-        def self.new(client:); end
+        def self.new(client:)
+        end
       end
     end
   end

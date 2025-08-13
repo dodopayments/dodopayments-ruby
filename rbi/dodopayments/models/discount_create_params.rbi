@@ -6,6 +6,14 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      OrHash =
+        T.type_alias do
+          T.any(
+            Dodopayments::DiscountCreateParams,
+            Dodopayments::Internal::AnyHash
+          )
+        end
+
       # The discount amount.
       #
       # - If `discount_type` is **not** `percentage`, `amount` is in **USD cents**. For
@@ -17,7 +25,8 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :amount
 
-      sig { returns(Dodopayments::Models::DiscountType::OrSymbol) }
+      # The discount type (e.g. `percentage`, `flat`, or `flat_per_unit`).
+      sig { returns(Dodopayments::DiscountType::OrSymbol) }
       attr_accessor :type
 
       # Optionally supply a code (will be uppercased).
@@ -38,6 +47,12 @@ module Dodopayments
       sig { returns(T.nilable(T::Array[String])) }
       attr_accessor :restricted_to
 
+      # Number of subscription billing cycles this discount is valid for. If not
+      # provided, the discount will be applied indefinitely to all recurring payments
+      # related to the subscription.
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :subscription_cycles
+
       # How many times this discount can be used (if any). Must be >= 1 if provided.
       sig { returns(T.nilable(Integer)) }
       attr_accessor :usage_limit
@@ -45,15 +60,15 @@ module Dodopayments
       sig do
         params(
           amount: Integer,
-          type: Dodopayments::Models::DiscountType::OrSymbol,
+          type: Dodopayments::DiscountType::OrSymbol,
           code: T.nilable(String),
           expires_at: T.nilable(Time),
           name: T.nilable(String),
           restricted_to: T.nilable(T::Array[String]),
+          subscription_cycles: T.nilable(Integer),
           usage_limit: T.nilable(Integer),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
       def self.new(
         # The discount amount.
@@ -65,6 +80,7 @@ module Dodopayments
         #
         # Must be at least 1.
         amount:,
+        # The discount type (e.g. `percentage`, `flat`, or `flat_per_unit`).
         type:,
         # Optionally supply a code (will be uppercased).
         #
@@ -76,26 +92,33 @@ module Dodopayments
         name: nil,
         # List of product IDs to restrict usage (if any).
         restricted_to: nil,
+        # Number of subscription billing cycles this discount is valid for. If not
+        # provided, the discount will be applied indefinitely to all recurring payments
+        # related to the subscription.
+        subscription_cycles: nil,
         # How many times this discount can be used (if any). Must be >= 1 if provided.
         usage_limit: nil,
         request_options: {}
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              amount: Integer,
-              type: Dodopayments::Models::DiscountType::OrSymbol,
-              code: T.nilable(String),
-              expires_at: T.nilable(Time),
-              name: T.nilable(String),
-              restricted_to: T.nilable(T::Array[String]),
-              usage_limit: T.nilable(Integer),
-              request_options: Dodopayments::RequestOptions
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            amount: Integer,
+            type: Dodopayments::DiscountType::OrSymbol,
+            code: T.nilable(String),
+            expires_at: T.nilable(Time),
+            name: T.nilable(String),
+            restricted_to: T.nilable(T::Array[String]),
+            subscription_cycles: T.nilable(Integer),
+            usage_limit: T.nilable(Integer),
+            request_options: Dodopayments::RequestOptions
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

@@ -4,7 +4,7 @@ module Dodopayments
       def retrieve: (
         String id,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::LicenseKey
+      ) -> Dodopayments::LicenseKey
 
       def update: (
         String id,
@@ -12,16 +12,16 @@ module Dodopayments
         ?disabled: bool?,
         ?expires_at: Time?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::LicenseKey
+      ) -> Dodopayments::LicenseKey
 
       def list: (
-        ?customer_id: String?,
-        ?page_number: Integer?,
-        ?page_size: Integer?,
-        ?product_id: String?,
-        ?status: Dodopayments::Models::license_key_status?,
+        ?customer_id: String,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?product_id: String,
+        ?status: Dodopayments::Models::LicenseKeyListParams::status,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::LicenseKey]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::LicenseKey]
 
       def initialize: (client: Dodopayments::Client) -> void
     end

@@ -8,14 +8,16 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute billing
+      #   Billing address information for the subscription
       #
       #   @return [Dodopayments::Models::BillingAddress]
-      required :billing, -> { Dodopayments::Models::BillingAddress }
+      required :billing, -> { Dodopayments::BillingAddress }
 
       # @!attribute customer
+      #   Customer details for the subscription
       #
-      #   @return [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
-      required :customer, union: -> { Dodopayments::Models::CustomerRequest }
+      #   @return [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer]
+      required :customer, union: -> { Dodopayments::CustomerRequest }
 
       # @!attribute product_id
       #   Unique identifier of the product to subscribe to
@@ -32,10 +34,8 @@ module Dodopayments
       # @!attribute addons
       #   Attach addons to this subscription
       #
-      #   @return [Array<Dodopayments::Models::SubscriptionCreateParams::Addon>, nil]
-      optional :addons,
-               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::SubscriptionCreateParams::Addon] },
-               nil?: true
+      #   @return [Array<Dodopayments::Models::AttachAddon>, nil]
+      optional :addons, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::AttachAddon] }, nil?: true
 
       # @!attribute allowed_payment_method_types
       #   List of payment methods allowed during checkout.
@@ -45,15 +45,17 @@ module Dodopayments
       #   Availability still depends on other factors (e.g., customer location, merchant
       #   settings).
       #
-      #   @return [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil]
+      #   @return [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil]
       optional :allowed_payment_method_types,
-               -> { Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType] },
+               -> { Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::PaymentMethodTypes] },
                nil?: true
 
       # @!attribute billing_currency
+      #   Fix the currency in which the end customer is billed. If Dodo Payments cannot
+      #   support that currency for this transaction, it will not proceed
       #
       #   @return [Symbol, Dodopayments::Models::Currency, nil]
-      optional :billing_currency, enum: -> { Dodopayments::Models::Currency }, nil?: true
+      optional :billing_currency, enum: -> { Dodopayments::Currency }, nil?: true
 
       # @!attribute discount_code
       #   Discount Code to apply to the subscription
@@ -62,6 +64,7 @@ module Dodopayments
       optional :discount_code, String, nil?: true
 
       # @!attribute metadata
+      #   Additional metadata for the subscription Defaults to empty if not specified
       #
       #   @return [Hash{Symbol=>String}, nil]
       optional :metadata, Dodopayments::Internal::Type::HashOf[String]
@@ -69,7 +72,7 @@ module Dodopayments
       # @!attribute on_demand
       #
       #   @return [Dodopayments::Models::SubscriptionCreateParams::OnDemand, nil]
-      optional :on_demand, -> { Dodopayments::Models::SubscriptionCreateParams::OnDemand }, nil?: true
+      optional :on_demand, -> { Dodopayments::SubscriptionCreateParams::OnDemand }, nil?: true
 
       # @!attribute payment_link
       #   If true, generates a payment link. Defaults to false if not specified.
@@ -107,80 +110,37 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionCreateParams} for more details.
       #
-      #   @param billing [Dodopayments::Models::BillingAddress]
+      #   @param billing [Dodopayments::Models::BillingAddress] Billing address information for the subscription
       #
-      #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::CreateNewCustomer]
+      #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer] Customer details for the subscription
       #
       #   @param product_id [String] Unique identifier of the product to subscribe to
       #
       #   @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
-      #   @param addons [Array<Dodopayments::Models::SubscriptionCreateParams::Addon>, nil] Attach addons to this subscription
+      #   @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Attach addons to this subscription
       #
-      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::SubscriptionCreateParams::AllowedPaymentMethodType>, nil] List of payment methods allowed during checkout. ...
+      #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil] List of payment methods allowed during checkout.
       #
-      #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil]
+      #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Fix the currency in which the end customer is billed.
       #
       #   @param discount_code [String, nil] Discount Code to apply to the subscription
       #
-      #   @param metadata [Hash{Symbol=>String}]
+      #   @param metadata [Hash{Symbol=>String}] Additional metadata for the subscription
       #
       #   @param on_demand [Dodopayments::Models::SubscriptionCreateParams::OnDemand, nil]
       #
-      #   @param payment_link [Boolean, nil] If true, generates a payment link. ...
+      #   @param payment_link [Boolean, nil] If true, generates a payment link.
       #
       #   @param return_url [String, nil] Optional URL to redirect after successful subscription creation
       #
-      #   @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer ...
+      #   @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer
       #
       #   @param tax_id [String, nil] Tax ID in case the payment is B2B. If tax id validation fails the payment creati
-      #   ...
       #
-      #   @param trial_period_days [Integer, nil] Optional trial period in days ...
+      #   @param trial_period_days [Integer, nil] Optional trial period in days
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-
-      class Addon < Dodopayments::Internal::Type::BaseModel
-        # @!attribute addon_id
-        #
-        #   @return [String]
-        required :addon_id, String
-
-        # @!attribute quantity
-        #
-        #   @return [Integer]
-        required :quantity, Integer
-
-        # @!method initialize(addon_id:, quantity:)
-        #   @param addon_id [String]
-        #   @param quantity [Integer]
-      end
-
-      module AllowedPaymentMethodType
-        extend Dodopayments::Internal::Type::Enum
-
-        CREDIT = :credit
-        DEBIT = :debit
-        UPI_COLLECT = :upi_collect
-        UPI_INTENT = :upi_intent
-        APPLE_PAY = :apple_pay
-        CASHAPP = :cashapp
-        GOOGLE_PAY = :google_pay
-        MULTIBANCO = :multibanco
-        BANCONTACT_CARD = :bancontact_card
-        EPS = :eps
-        IDEAL = :ideal
-        PRZELEWY24 = :przelewy24
-        AFFIRM = :affirm
-        KLARNA = :klarna
-        SEPA = :sepa
-        ACH = :ach
-        AMAZON_PAY = :amazon_pay
-        AFTERPAY_CLEARPAY = :afterpay_clearpay
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
 
       class OnDemand < Dodopayments::Internal::Type::BaseModel
         # @!attribute mandate_only
@@ -190,6 +150,28 @@ module Dodopayments
         #   @return [Boolean]
         required :mandate_only, Dodopayments::Internal::Type::Boolean
 
+        # @!attribute adaptive_currency_fees_inclusive
+        #   Whether adaptive currency fees should be included in the product_price (true) or
+        #   added on top (false). This field is ignored if adaptive pricing is not enabled
+        #   for the business.
+        #
+        #   @return [Boolean, nil]
+        optional :adaptive_currency_fees_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
+
+        # @!attribute product_currency
+        #   Optional currency of the product price. If not specified, defaults to the
+        #   currency of the product.
+        #
+        #   @return [Symbol, Dodopayments::Models::Currency, nil]
+        optional :product_currency, enum: -> { Dodopayments::Currency }, nil?: true
+
+        # @!attribute product_description
+        #   Optional product description override for billing and line items. If not
+        #   specified, the stored description of the product will be used.
+        #
+        #   @return [String, nil]
+        optional :product_description, String, nil?: true
+
         # @!attribute product_price
         #   Product price for the initial charge to customer If not specified the stored
         #   price of the product will be used Represented in the lowest denomination of the
@@ -198,14 +180,19 @@ module Dodopayments
         #   @return [Integer, nil]
         optional :product_price, Integer, nil?: true
 
-        # @!method initialize(mandate_only:, product_price: nil)
+        # @!method initialize(mandate_only:, adaptive_currency_fees_inclusive: nil, product_currency: nil, product_description: nil, product_price: nil)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::SubscriptionCreateParams::OnDemand} for more details.
         #
         #   @param mandate_only [Boolean] If set as True, does not perform any charge and only authorizes payment method d
-        #   ...
         #
-        #   @param product_price [Integer, nil] Product price for the initial charge to customer ...
+        #   @param adaptive_currency_fees_inclusive [Boolean, nil] Whether adaptive currency fees should be included in the product_price (true) or
+        #
+        #   @param product_currency [Symbol, Dodopayments::Models::Currency, nil] Optional currency of the product price. If not specified, defaults to the curren
+        #
+        #   @param product_description [String, nil] Optional product description override for billing and line items.
+        #
+        #   @param product_price [Integer, nil] Product price for the initial charge to customer
       end
     end
   end

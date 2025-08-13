@@ -3,6 +3,11 @@
 module Dodopayments
   module Models
     class Customer < Dodopayments::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias do
+          T.any(Dodopayments::Customer, Dodopayments::Internal::AnyHash)
+        end
+
       sig { returns(String) }
       attr_accessor :business_id
 
@@ -29,25 +34,32 @@ module Dodopayments
           email: String,
           name: String,
           phone_number: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.new(business_id:, created_at:, customer_id:, email:, name:, phone_number: nil); end
+      def self.new(
+        business_id:,
+        created_at:,
+        customer_id:,
+        email:,
+        name:,
+        phone_number: nil
+      )
+      end
 
       sig do
-        override
-          .returns(
-            {
-              business_id: String,
-              created_at: Time,
-              customer_id: String,
-              email: String,
-              name: String,
-              phone_number: T.nilable(String)
-            }
-          )
+        override.returns(
+          {
+            business_id: String,
+            created_at: Time,
+            customer_id: String,
+            email: String,
+            name: String,
+            phone_number: T.nilable(String)
+          }
+        )
       end
-      def to_hash; end
+      def to_hash
+      end
     end
   end
 end

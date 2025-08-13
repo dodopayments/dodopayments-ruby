@@ -48,7 +48,18 @@ module Dodopayments
         ?image: String?
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::addon_response
+      def to_hash: -> {
+        id: String,
+        business_id: String,
+        created_at: Time,
+        currency: Dodopayments::Models::currency,
+        name: String,
+        price: Integer,
+        tax_category: Dodopayments::Models::tax_category,
+        updated_at: Time,
+        description: String?,
+        image: String?
+      }
     end
   end
 end

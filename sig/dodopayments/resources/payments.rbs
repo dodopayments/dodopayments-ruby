@@ -2,10 +2,10 @@ module Dodopayments
   module Resources
     class Payments
       def create: (
-        billing: Dodopayments::Models::BillingAddress,
+        billing: Dodopayments::BillingAddress,
         customer: Dodopayments::Models::customer_request,
-        product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem],
-        ?allowed_payment_method_types: ::Array[Dodopayments::Models::PaymentCreateParams::allowed_payment_method_type]?,
+        product_cart: ::Array[Dodopayments::OneTimeProductCartItem],
+        ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
         ?billing_currency: Dodopayments::Models::currency?,
         ?discount_code: String?,
         ?metadata: ::Hash[Symbol, String],
@@ -19,18 +19,24 @@ module Dodopayments
       def retrieve: (
         String payment_id,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::Payment
+      ) -> Dodopayments::Payment
 
       def list: (
-        ?created_at_gte: Time?,
-        ?created_at_lte: Time?,
-        ?customer_id: String?,
-        ?page_number: Integer?,
-        ?page_size: Integer?,
-        ?status: Dodopayments::Models::intent_status?,
-        ?subscription_id: String?,
+        ?brand_id: String,
+        ?created_at_gte: Time,
+        ?created_at_lte: Time,
+        ?customer_id: String,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?status: Dodopayments::Models::PaymentListParams::status,
+        ?subscription_id: String,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::PaymentListResponse]
+
+      def retrieve_line_items: (
+        String payment_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::PaymentRetrieveLineItemsResponse
 
       def initialize: (client: Dodopayments::Client) -> void
     end

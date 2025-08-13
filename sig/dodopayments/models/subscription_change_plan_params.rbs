@@ -5,7 +5,7 @@ module Dodopayments
         product_id: String,
         proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode,
         quantity: Integer,
-        addons: ::Array[Dodopayments::Models::SubscriptionChangePlanParams::Addon]?
+        addons: ::Array[Dodopayments::AttachAddon]?
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -19,38 +19,35 @@ module Dodopayments
 
       attr_accessor quantity: Integer
 
-      attr_accessor addons: ::Array[Dodopayments::Models::SubscriptionChangePlanParams::Addon]?
+      attr_accessor addons: ::Array[Dodopayments::AttachAddon]?
 
       def initialize: (
         product_id: String,
         proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode,
         quantity: Integer,
-        ?addons: ::Array[Dodopayments::Models::SubscriptionChangePlanParams::Addon]?,
+        ?addons: ::Array[Dodopayments::AttachAddon]?,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::subscription_change_plan_params
+      def to_hash: -> {
+        product_id: String,
+        proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode,
+        quantity: Integer,
+        addons: ::Array[Dodopayments::AttachAddon]?,
+        request_options: Dodopayments::RequestOptions
+      }
 
-      type proration_billing_mode = :prorated_immediately
+      type proration_billing_mode =
+        :prorated_immediately | :full_immediately | :difference_immediately
 
       module ProrationBillingMode
         extend Dodopayments::Internal::Type::Enum
 
         PRORATED_IMMEDIATELY: :prorated_immediately
+        FULL_IMMEDIATELY: :full_immediately
+        DIFFERENCE_IMMEDIATELY: :difference_immediately
 
         def self?.values: -> ::Array[Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode]
-      end
-
-      type addon = { addon_id: String, quantity: Integer }
-
-      class Addon < Dodopayments::Internal::Type::BaseModel
-        attr_accessor addon_id: String
-
-        attr_accessor quantity: Integer
-
-        def initialize: (addon_id: String, quantity: Integer) -> void
-
-        def to_hash: -> Dodopayments::Models::SubscriptionChangePlanParams::addon
       end
     end
   end

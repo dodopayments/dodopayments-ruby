@@ -10,6 +10,7 @@ module Dodopayments
       # Ruby has no Boolean class; this is something for models to refer to.
       class Boolean
         extend Dodopayments::Internal::Type::Converter
+        extend Dodopayments::Internal::Util::SorbetRuntimeSupport
 
         private_class_method :new
 
@@ -30,13 +31,19 @@ module Dodopayments
         class << self
           # @api private
           #
+          # Coerce value to Boolean if possible, otherwise return the original value.
+          #
           # @param value [Boolean, Object]
           #
           # @param state [Hash{Symbol=>Object}] .
           #
-          #   @option state [Boolean, :strong] :strictness
+          #   @option state [Boolean] :translate_names
+          #
+          #   @option state [Boolean] :strictness
           #
           #   @option state [Hash{Symbol=>Object}] :exactness
+          #
+          #   @option state [Class<StandardError>] :error
           #
           #   @option state [Integer] :branched
           #
@@ -56,6 +63,13 @@ module Dodopayments
           #     @option state [Boolean] :can_retry
           #
           #   @return [Boolean, Object]
+
+          # @api private
+          #
+          # @return [Object]
+          def to_sorbet_type
+            T::Boolean
+          end
         end
       end
     end

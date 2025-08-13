@@ -12,10 +12,10 @@ module Dodopayments
         #   If true, will send link to user.
         #
         #   @return [Boolean, nil]
-        optional :send_email, Dodopayments::Internal::Type::Boolean, nil?: true
+        optional :send_email, Dodopayments::Internal::Type::Boolean
 
         # @!method initialize(send_email: nil, request_options: {})
-        #   @param send_email [Boolean, nil] If true, will send link to user.
+        #   @param send_email [Boolean] If true, will send link to user.
         #
         #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
       end

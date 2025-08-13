@@ -2,22 +2,26 @@ module Dodopayments
   module Models
     type subscription_create_response =
       {
-        addons: ::Array[Dodopayments::Models::AddonCartResponseItem],
-        customer: Dodopayments::Models::CustomerLimitedDetails,
+        addons: ::Array[Dodopayments::AddonCartResponseItem],
+        customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
+        payment_id: String,
         recurring_pre_tax_amount: Integer,
         subscription_id: String,
         client_secret: String?,
         discount_id: String?,
+        expires_on: Time?,
         payment_link: String?
       }
 
     class SubscriptionCreateResponse < Dodopayments::Internal::Type::BaseModel
-      attr_accessor addons: ::Array[Dodopayments::Models::AddonCartResponseItem]
+      attr_accessor addons: ::Array[Dodopayments::AddonCartResponseItem]
 
-      attr_accessor customer: Dodopayments::Models::CustomerLimitedDetails
+      attr_accessor customer: Dodopayments::CustomerLimitedDetails
 
       attr_accessor metadata: ::Hash[Symbol, String]
+
+      attr_accessor payment_id: String
 
       attr_accessor recurring_pre_tax_amount: Integer
 
@@ -27,20 +31,35 @@ module Dodopayments
 
       attr_accessor discount_id: String?
 
+      attr_accessor expires_on: Time?
+
       attr_accessor payment_link: String?
 
       def initialize: (
-        addons: ::Array[Dodopayments::Models::AddonCartResponseItem],
-        customer: Dodopayments::Models::CustomerLimitedDetails,
+        addons: ::Array[Dodopayments::AddonCartResponseItem],
+        customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
+        payment_id: String,
         recurring_pre_tax_amount: Integer,
         subscription_id: String,
         ?client_secret: String?,
         ?discount_id: String?,
+        ?expires_on: Time?,
         ?payment_link: String?
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::subscription_create_response
+      def to_hash: -> {
+        addons: ::Array[Dodopayments::AddonCartResponseItem],
+        customer: Dodopayments::CustomerLimitedDetails,
+        metadata: ::Hash[Symbol, String],
+        payment_id: String,
+        recurring_pre_tax_amount: Integer,
+        subscription_id: String,
+        client_secret: String?,
+        discount_id: String?,
+        expires_on: Time?,
+        payment_link: String?
+      }
     end
   end
 end

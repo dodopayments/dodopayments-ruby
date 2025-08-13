@@ -29,9 +29,10 @@ module Dodopayments
       required :created_at, Time
 
       # @!attribute currency
+      #   The currency of the payout, represented as an ISO 4217 currency code.
       #
       #   @return [Symbol, Dodopayments::Models::Currency]
-      required :currency, enum: -> { Dodopayments::Models::Currency }
+      required :currency, enum: -> { Dodopayments::Currency }
 
       # @!attribute fee
       #   The fee charged for processing the payout.
@@ -58,6 +59,7 @@ module Dodopayments
       required :refunds, Integer
 
       # @!attribute status
+      #   The current status of the payout.
       #
       #   @return [Symbol, Dodopayments::Models::PayoutListResponse::Status]
       required :status, enum: -> { Dodopayments::Models::PayoutListResponse::Status }
@@ -101,7 +103,7 @@ module Dodopayments
       #
       #   @param created_at [Time] The timestamp when the payout was created, in UTC.
       #
-      #   @param currency [Symbol, Dodopayments::Models::Currency]
+      #   @param currency [Symbol, Dodopayments::Models::Currency] The currency of the payout, represented as an ISO 4217 currency code.
       #
       #   @param fee [Integer] The fee charged for processing the payout.
       #
@@ -111,7 +113,7 @@ module Dodopayments
       #
       #   @param refunds [Integer] The total value of refunds associated with the payout.
       #
-      #   @param status [Symbol, Dodopayments::Models::PayoutListResponse::Status]
+      #   @param status [Symbol, Dodopayments::Models::PayoutListResponse::Status] The current status of the payout.
       #
       #   @param tax [Integer] The tax applied to the payout.
       #
@@ -123,6 +125,8 @@ module Dodopayments
       #
       #   @param remarks [String, nil] Any additional remarks or notes associated with the payout.
 
+      # The current status of the payout.
+      #
       # @see Dodopayments::Models::PayoutListResponse#status
       module Status
         extend Dodopayments::Internal::Type::Enum

@@ -7,7 +7,7 @@ class Dodopayments::Test::Resources::LicensesTest < Dodopayments::Test::Resource
     response = @dodo_payments.licenses.activate(license_key: "license_key", name: "name")
 
     assert_pattern do
-      response => Dodopayments::Models::LicenseKeyInstance
+      response => Dodopayments::LicenseKeyInstance
     end
 
     assert_pattern do

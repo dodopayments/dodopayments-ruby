@@ -8,6 +8,22 @@ module Dodopayments
     end
 
     class ConversionError < Dodopayments::Errors::Error
+      sig { returns(T.nilable(StandardError)) }
+      def cause
+      end
+
+      # @api private
+      sig do
+        params(
+          on: T::Class[StandardError],
+          method: Symbol,
+          target: T.anything,
+          value: T.anything,
+          cause: T.nilable(StandardError)
+        ).returns(T.attached_class)
+      end
+      def self.new(on:, method:, target:, value:, cause: nil)
+      end
     end
 
     class APIError < Dodopayments::Errors::Error
@@ -29,10 +45,17 @@ module Dodopayments
           request: NilClass,
           response: NilClass,
           message: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: nil); end
+      def self.new(
+        url:,
+        status: nil,
+        body: nil,
+        request: nil,
+        response: nil,
+        message: nil
+      )
+      end
     end
 
     class APIConnectionError < Dodopayments::Errors::APIError
@@ -51,10 +74,16 @@ module Dodopayments
           request: NilClass,
           response: NilClass,
           message: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Connection error.")
+      def self.new(
+        url:,
+        status: nil,
+        body: nil,
+        request: nil,
+        response: nil,
+        message: "Connection error."
+      )
       end
     end
 
@@ -68,10 +97,16 @@ module Dodopayments
           request: NilClass,
           response: NilClass,
           message: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Request timed out.")
+      def self.new(
+        url:,
+        status: nil,
+        body: nil,
+        request: nil,
+        response: nil,
+        message: "Request timed out."
+      )
       end
     end
 
@@ -85,10 +120,10 @@ module Dodopayments
           request: NilClass,
           response: NilClass,
           message: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.for(url:, status:, body:, request:, response:, message: nil); end
+      def self.for(url:, status:, body:, request:, response:, message: nil)
+      end
 
       sig { returns(Integer) }
       attr_accessor :status
@@ -102,10 +137,10 @@ module Dodopayments
           request: NilClass,
           response: NilClass,
           message: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.new(url:, status:, body:, request:, response:, message: nil); end
+      def self.new(url:, status:, body:, request:, response:, message: nil)
+      end
     end
 
     class BadRequestError < Dodopayments::Errors::APIStatusError
@@ -137,7 +172,7 @@ module Dodopayments
     end
 
     class InternalServerError < Dodopayments::Errors::APIStatusError
-      HTTP_STATUS = T.let(500.., T::Range[Integer])
+      HTTP_STATUS = T.let((500..), T::Range[Integer])
     end
   end
 end

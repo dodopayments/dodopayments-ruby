@@ -8,14 +8,15 @@ module Dodopayments
         ?expires_at: Time?,
         ?name: String?,
         ?restricted_to: ::Array[String]?,
+        ?subscription_cycles: Integer?,
         ?usage_limit: Integer?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::Discount
+      ) -> Dodopayments::Discount
 
       def retrieve: (
         String discount_id,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::Discount
+      ) -> Dodopayments::Discount
 
       def update: (
         String discount_id,
@@ -24,16 +25,17 @@ module Dodopayments
         ?expires_at: Time?,
         ?name: String?,
         ?restricted_to: ::Array[String]?,
+        ?subscription_cycles: Integer?,
         ?type: Dodopayments::Models::discount_type?,
         ?usage_limit: Integer?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::Discount
+      ) -> Dodopayments::Discount
 
       def list: (
-        ?page_number: Integer?,
-        ?page_size: Integer?,
+        ?page_number: Integer,
+        ?page_size: Integer,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Discount]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Discount]
 
       def delete: (
         String discount_id,

@@ -2,8 +2,9 @@ module Dodopayments
   module Models
     type subscription_update_params =
       {
-        billing: Dodopayments::Models::BillingAddress?,
-        disable_on_demand: Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand?,
+        billing: Dodopayments::BillingAddress?,
+        cancel_at_next_billing_date: bool?,
+        disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         metadata: ::Hash[Symbol, String]?,
         status: Dodopayments::Models::subscription_status?,
         tax_id: String?
@@ -14,9 +15,11 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      attr_accessor billing: Dodopayments::Models::BillingAddress?
+      attr_accessor billing: Dodopayments::BillingAddress?
 
-      attr_accessor disable_on_demand: Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand?
+      attr_accessor cancel_at_next_billing_date: bool?
+
+      attr_accessor disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?
 
       attr_accessor metadata: ::Hash[Symbol, String]?
 
@@ -25,15 +28,24 @@ module Dodopayments
       attr_accessor tax_id: String?
 
       def initialize: (
-        ?billing: Dodopayments::Models::BillingAddress?,
-        ?disable_on_demand: Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand?,
+        ?billing: Dodopayments::BillingAddress?,
+        ?cancel_at_next_billing_date: bool?,
+        ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         ?metadata: ::Hash[Symbol, String]?,
         ?status: Dodopayments::Models::subscription_status?,
         ?tax_id: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::subscription_update_params
+      def to_hash: -> {
+        billing: Dodopayments::BillingAddress?,
+        cancel_at_next_billing_date: bool?,
+        disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
+        metadata: ::Hash[Symbol, String]?,
+        status: Dodopayments::Models::subscription_status?,
+        tax_id: String?,
+        request_options: Dodopayments::RequestOptions
+      }
 
       type disable_on_demand = { next_billing_date: Time }
 
@@ -42,7 +54,7 @@ module Dodopayments
 
         def initialize: (next_billing_date: Time) -> void
 
-        def to_hash: -> Dodopayments::Models::SubscriptionUpdateParams::disable_on_demand
+        def to_hash: -> { next_billing_date: Time }
       end
     end
   end

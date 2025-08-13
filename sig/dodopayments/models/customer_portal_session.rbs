@@ -7,7 +7,7 @@ module Dodopayments
 
       def initialize: (link: String) -> void
 
-      def to_hash: -> Dodopayments::Models::customer_portal_session
+      def to_hash: -> { link: String }
     end
   end
 end

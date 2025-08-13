@@ -8,7 +8,7 @@ AllCops:
     - "bin/*"
   NewCops: enable
   SuggestExtensions: false
-  TargetRubyVersion: 3.1.0
+  TargetRubyVersion: 3.2.0
 
 # Whether MFA is required or not should be left to the token configuration.
 Gemspec/RequireMFA:
@@ -63,6 +63,8 @@ Layout/MultilineMethodParameterLineBreaks:
 # Prefer compact hash literals.
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
+  Exclude:
+    - "**/*.rbi"
 
 Lint/BooleanSymbol:
   Enabled: false
@@ -90,6 +92,10 @@ Lint/MissingSuper:
   Exclude:
     - "**/*.rbi"
 
+Lint/SymbolConversion:
+  Exclude:
+    - "**/*.rbi"
+
 # Disabled for safety reasons, this option changes code semantics.
 Lint/UnusedMethodArgument:
   AutoCorrect: false
@@ -106,6 +112,8 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   AllowedPatterns:
     - assert_pattern
+    - type_alias
+    - define_sorbet_constant!
   Exclude:
     - "**/*.rbi"
 
@@ -176,6 +184,9 @@ Style/ClassAndModuleChildren:
   Exclude:
     - "test/**/*"
 
+Style/CommentAnnotation:
+  Enabled: false
+
 # We should go back and add these docs, but ignore for now.
 Style/Documentation:
   Enabled: false
@@ -241,6 +252,10 @@ Style/RedundantException:
   Enabled: false
 
 Style/RedundantInitialize:
+  Exclude:
+    - "**/*.rbi"
+
+Style/RedundantParentheses:
   Exclude:
     - "**/*.rbi"
 

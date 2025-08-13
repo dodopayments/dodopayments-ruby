@@ -8,9 +8,10 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute currency
+      #   The currency of the Addon
       #
       #   @return [Symbol, Dodopayments::Models::Currency]
-      required :currency, enum: -> { Dodopayments::Models::Currency }
+      required :currency, enum: -> { Dodopayments::Currency }
 
       # @!attribute name
       #   Name of the Addon
@@ -25,11 +26,10 @@ module Dodopayments
       required :price, Integer
 
       # @!attribute tax_category
-      #   Represents the different categories of taxation applicable to various products
-      #   and services.
+      #   Tax category applied to this Addon
       #
       #   @return [Symbol, Dodopayments::Models::TaxCategory]
-      required :tax_category, enum: -> { Dodopayments::Models::TaxCategory }
+      required :tax_category, enum: -> { Dodopayments::TaxCategory }
 
       # @!attribute description
       #   Optional description of the Addon
@@ -38,17 +38,13 @@ module Dodopayments
       optional :description, String, nil?: true
 
       # @!method initialize(currency:, name:, price:, tax_category:, description: nil, request_options: {})
-      #   Some parameter documentations has been truncated, see
-      #   {Dodopayments::Models::AddonCreateParams} for more details.
-      #
-      #   @param currency [Symbol, Dodopayments::Models::Currency]
+      #   @param currency [Symbol, Dodopayments::Models::Currency] The currency of the Addon
       #
       #   @param name [String] Name of the Addon
       #
       #   @param price [Integer] Amount of the addon
       #
-      #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Represents the different categories of taxation applicable to various products a
-      #   ...
+      #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Tax category applied to this Addon
       #
       #   @param description [String, nil] Optional description of the Addon
       #

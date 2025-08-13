@@ -10,7 +10,7 @@ module Dodopayments
 
         def initialize: (url: String, ?image_id: String?) -> void
 
-        def to_hash: -> Dodopayments::Models::Products::image_update_response
+        def to_hash: -> { url: String, image_id: String? }
       end
     end
   end

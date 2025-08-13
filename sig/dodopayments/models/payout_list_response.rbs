@@ -68,7 +68,23 @@ module Dodopayments
         ?remarks: String?
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::payout_list_response
+      def to_hash: -> {
+        amount: Integer,
+        business_id: String,
+        chargebacks: Integer,
+        created_at: Time,
+        currency: Dodopayments::Models::currency,
+        fee: Integer,
+        payment_method: String,
+        payout_id: String,
+        refunds: Integer,
+        status: Dodopayments::Models::PayoutListResponse::status,
+        tax: Integer,
+        updated_at: Time,
+        name: String?,
+        payout_document_url: String?,
+        remarks: String?
+      }
 
       type status =
         :not_initiated | :in_progress | :on_hold | :failed | :success

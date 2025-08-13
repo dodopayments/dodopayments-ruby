@@ -3,6 +3,7 @@ module Dodopayments
     module Type
       class HashOf[Elem]
         include Dodopayments::Internal::Type::Converter
+        include Dodopayments::Internal::Util::SorbetRuntimeSupport
 
         def self.[]: (
           ::Hash[Symbol, top]
@@ -26,6 +27,8 @@ module Dodopayments
           ::Hash[top, top] | top value,
           state: Dodopayments::Internal::Type::Converter::dump_state
         ) -> (::Hash[Symbol, top] | top)
+
+        def to_sorbet_type: -> top
 
         def item_type: -> Elem
 

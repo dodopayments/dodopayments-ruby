@@ -45,6 +45,12 @@ module Dodopayments
 
     attr_reader addons: Dodopayments::Resources::Addons
 
+    attr_reader brands: Dodopayments::Resources::Brands
+
+    attr_reader webhooks: Dodopayments::Resources::Webhooks
+
+    attr_reader your_webhook_url: Dodopayments::Resources::YourWebhookURL
+
     private def auth_headers: -> ::Hash[String, String]
 
     def initialize: (

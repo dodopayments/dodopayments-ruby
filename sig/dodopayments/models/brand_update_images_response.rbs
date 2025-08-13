@@ -1,0 +1,15 @@
+module Dodopayments
+  module Models
+    type brand_update_images_response = { image_id: String, url: String }
+
+    class BrandUpdateImagesResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor image_id: String
+
+      attr_accessor url: String
+
+      def initialize: (image_id: String, url: String) -> void
+
+      def to_hash: -> { image_id: String, url: String }
+    end
+  end
+end

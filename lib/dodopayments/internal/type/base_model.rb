@@ -6,6 +6,7 @@ module Dodopayments
       # @abstract
       class BaseModel
         extend Dodopayments::Internal::Type::Converter
+        extend Dodopayments::Internal::Util::SorbetRuntimeSupport
 
         class << self
           # @api private
@@ -13,10 +14,16 @@ module Dodopayments
           # Assumes superclass fields are totally defined before fields are accessed /
           # defined on subclasses.
           #
-          # @return [Hash{Symbol=>Hash{Symbol=>Object}}]
-          def known_fields
-            @known_fields ||= (self < Dodopayments::Internal::Type::BaseModel ? superclass.known_fields.dup : {})
+          # @param child [Class<Dodopayments::Internal::Type::BaseModel>]
+          def inherited(child)
+            super
+            child.known_fields.replace(known_fields.dup)
           end
+
+          # @api private
+          #
+          # @return [Hash{Symbol=>Hash{Symbol=>Object}}]
+          def known_fields = @known_fields ||= {}
 
           # @api private
           #
@@ -45,6 +52,7 @@ module Dodopayments
           #
           #   @option spec [Boolean] :"nil?"
           private def add_field(name_sym, required:, type_info:, spec:)
+            meta = Dodopayments::Internal::Type::Converter.meta_info(type_info, spec)
             type_fn, info =
               case type_info
               in Proc | Dodopayments::Internal::Type::Converter | Class
@@ -53,7 +61,7 @@ module Dodopayments
                 [Dodopayments::Internal::Type::Converter.type_info(type_info), type_info]
               end
 
-            setter = "#{name_sym}="
+            setter = :"#{name_sym}="
             api_name = info.fetch(:api_name, name_sym)
             nilable = info.fetch(:nil?, false)
             const = if required && !nilable
@@ -74,31 +82,65 @@ module Dodopayments
                 required: required,
                 nilable: nilable,
                 const: const,
-                type_fn: type_fn
+                type_fn: type_fn,
+                meta: meta
               }
 
-            define_method(setter) { @data.store(name_sym, _1) }
+            define_method(setter) do |value|
+              target = type_fn.call
+              state = Dodopayments::Internal::Type::Converter.new_coerce_state(translate_names: false)
+              coerced = Dodopayments::Internal::Type::Converter.coerce(target, value, state: state)
+              status = @coerced.store(name_sym, state.fetch(:error) || true)
+              stored =
+                case [target, status]
+                in [Dodopayments::Internal::Type::Converter | Symbol, true]
+                  coerced
+                else
+                  value
+                end
+              @data.store(name_sym, stored)
+            end
 
+            # rubocop:disable Style/CaseEquality
+            # rubocop:disable Metrics/BlockLength
             define_method(name_sym) do
               target = type_fn.call
-              value = @data.fetch(name_sym) { const == Dodopayments::Internal::OMIT ? nil : const }
-              state = {strictness: :strong, exactness: {yes: 0, no: 0, maybe: 0}, branched: 0}
-              if (nilable || !required) && value.nil?
-                nil
-              else
-                Dodopayments::Internal::Type::Converter.coerce(
-                  target, value, state: state
+
+              case @coerced[name_sym]
+              in true | false if Dodopayments::Internal::Type::Converter === target
+                @data.fetch(name_sym)
+              in ::StandardError => e
+                raise Dodopayments::Errors::ConversionError.new(
+                  on: self.class,
+                  method: __method__,
+                  target: target,
+                  value: @data.fetch(name_sym),
+                  cause: e
                 )
+              else
+                Kernel.then do
+                  value = @data.fetch(name_sym) { const == Dodopayments::Internal::OMIT ? nil : const }
+                  state = Dodopayments::Internal::Type::Converter.new_coerce_state(translate_names: false)
+                  if (nilable || !required) && value.nil?
+                    nil
+                  else
+                    Dodopayments::Internal::Type::Converter.coerce(
+                      target, value, state: state
+                    )
+                  end
+                rescue StandardError => e
+                  raise Dodopayments::Errors::ConversionError.new(
+                    on: self.class,
+                    method: __method__,
+                    target: target,
+                    value: value,
+                    cause: e
+                  )
+                end
               end
-            rescue StandardError => e
-              cls = self.class.name.split("::").last
-              message = [
-                "Failed to parse #{cls}.#{__method__} from #{value.class} to #{target.inspect}.",
-                "To get the unparsed API response, use #{cls}[#{__method__.inspect}].",
-                "Cause: #{e.message}"
-              ].join(" ")
-              raise Dodopayments::Errors::ConversionError.new(message)
             end
+            # rubocop:enable Metrics/BlockLength
+            # rubocop:enable Style/CaseEquality
           end
 
           # @api private
@@ -198,23 +240,28 @@ module Dodopayments
           #
           # @param state [Hash{Symbol=>Object}] .
           #
-          #   @option state [Boolean, :strong] :strictness
+          #   @option state [Boolean] :translate_names
+          #
+          #   @option state [Boolean] :strictness
           #
           #   @option state [Hash{Symbol=>Object}] :exactness
           #
+          #   @option state [Class<StandardError>] :error
+          #
           #   @option state [Integer] :branched
           #
-          # @return [Dodopayments::Internal::Type::BaseModel, Object]
+          # @return [self, Object]
           def coerce(value, state:)
             exactness = state.fetch(:exactness)
 
-            if value.is_a?(self.class)
+            if value.is_a?(self)
               exactness[:yes] += 1
               return value
             end
 
             unless (val = Dodopayments::Internal::Util.coerce_hash(value)).is_a?(Hash)
               exactness[:no] += 1
+              state[:error] = TypeError.new("#{value.class} can't be coerced into #{Hash}")
               return value
             end
             exactness[:yes] += 1
@@ -222,13 +269,15 @@ module Dodopayments
             keys = val.keys.to_set
             instance = new
             data = instance.to_h
+            status = instance.instance_variable_get(:@coerced)
 
             # rubocop:disable Metrics/BlockLength
             fields.each do |name, field|
               mode, required, target = field.fetch_values(:mode, :required, :type)
               api_name, nilable, const = field.fetch_values(:api_name, :nilable, :const)
+              src_name = state.fetch(:translate_names) ? api_name : name
 
-              unless val.key?(api_name)
+              unless val.key?(src_name)
                 if required && mode != :dump && const == Dodopayments::Internal::OMIT
                   exactness[nilable ? :maybe : :no] += 1
                 else
@@ -237,9 +286,10 @@ module Dodopayments
                 next
               end
 
-              item = val.fetch(api_name)
-              keys.delete(api_name)
+              item = val.fetch(src_name)
+              keys.delete(src_name)
 
+              state[:error] = nil
               converted =
                 if item.nil? && (nilable || !required)
                   exactness[nilable ? :yes : :maybe] += 1
@@ -253,6 +303,8 @@ module Dodopayments
                     item
                   end
                 end
+
+              status.store(name, state.fetch(:error) || true)
               data.store(name, converted)
             end
             # rubocop:enable Metrics/BlockLength
@@ -263,7 +315,7 @@ module Dodopayments
 
           # @api private
           #
-          # @param value [Dodopayments::Internal::Type::BaseModel, Object]
+          # @param value [self, Object]
           #
           # @param state [Hash{Symbol=>Object}] .
           #
@@ -301,6 +353,46 @@ module Dodopayments
             end
 
             acc
+          end
+
+          # @api private
+          #
+          # @return [Object]
+          def to_sorbet_type
+            self
+          end
+        end
+
+        class << self
+          # @api private
+          #
+          # @param model [Dodopayments::Internal::Type::BaseModel]
+          # @param convert [Boolean]
+          #
+          # @return [Hash{Symbol=>Object}]
+          def recursively_to_h(model, convert:)
+            rec = ->(x) do
+              case x
+              in Dodopayments::Internal::Type::BaseModel
+                if convert
+                  fields = x.class.known_fields
+                  x.to_h.to_h do |key, val|
+                    [key, rec.call(fields.key?(key) ? x.public_send(key) : val)]
+                  rescue Dodopayments::Errors::ConversionError
+                    [key, rec.call(val)]
+                  end
+                else
+                  rec.call(x.to_h)
+                end
+              in Hash
+                x.transform_values(&rec)
+              in Array
+                x.map(&rec)
+              else
+                x
+              end
+            end
+            rec.call(model)
           end
         end
 
@@ -340,9 +432,23 @@ module Dodopayments
 
         alias_method :to_hash, :to_h
 
+        # @api public
+        #
+        # In addition to the behaviour of `#to_h`, this method will recursively call
+        # `#to_h` on nested models.
+        #
+        # @return [Hash{Symbol=>Object}]
+        def deep_to_h = self.class.recursively_to_h(@data, convert: false)
+
         # @param keys [Array<Symbol>, nil]
         #
         # @return [Hash{Symbol=>Object}]
+        #
+        # @example
+        #   # `attach_existing_customer` is a `Dodopayments::AttachExistingCustomer`
+        #   attach_existing_customer => {
+        #     customer_id: customer_id
+        #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)
             .filter_map do |k|
@@ -353,29 +459,6 @@ module Dodopayments
               [k, public_send(k)]
             end
             .to_h
-        end
-
-        class << self
-          # @api private
-          #
-          # @param model [Dodopayments::Internal::Type::BaseModel]
-          #
-          # @return [Hash{Symbol=>Object}]
-          def walk(model)
-            walk = ->(x) do
-              case x
-              in Dodopayments::Internal::Type::BaseModel
-                walk.call(x.to_h)
-              in Hash
-                x.transform_values(&walk)
-              in Array
-                x.map(&walk)
-              else
-                x
-              end
-            end
-            walk.call(model)
-          end
         end
 
         # @api public
@@ -395,7 +478,18 @@ module Dodopayments
         # Create a new instance of a model.
         #
         # @param data [Hash{Symbol=>Object}, self]
-        def initialize(data = {}) = (@data = Dodopayments::Internal::Util.coerce_hash!(data).to_h)
+        def initialize(data = {})
+          @data = {}
+          @coerced = {}
+          Dodopayments::Internal::Util.coerce_hash!(data).each do
+            if self.class.known_fields.key?(_1)
+              public_send(:"#{_1}=", _2)
+            else
+              @data.store(_1, _2)
+              @coerced.store(_1, false)
+            end
+          end
+        end
 
         class << self
           # @api private
@@ -423,12 +517,19 @@ module Dodopayments
         # @api public
         #
         # @return [String]
-        def to_s = self.class.walk(@data).to_s
+        def to_s = deep_to_h.to_s
 
         # @api private
         #
         # @return [String]
-        def inspect = "#<#{self.class}:0x#{object_id.to_s(16)} #{self}>"
+        def inspect
+          converted = self.class.recursively_to_h(self, convert: true)
+          "#<#{self.class}:0x#{object_id.to_s(16)} #{converted}>"
+        end
+
+        define_sorbet_constant!(:KnownField) do
+          T.type_alias { {mode: T.nilable(Symbol), required: T::Boolean, nilable: T::Boolean} }
+        end
       end
     end
   end

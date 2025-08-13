@@ -1,0 +1,67 @@
+module Dodopayments
+  module Models
+    type payment_retrieve_line_items_response =
+      {
+        currency: Dodopayments::Models::currency,
+        items: ::Array[Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item]
+      }
+
+    class PaymentRetrieveLineItemsResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor currency: Dodopayments::Models::currency
+
+      attr_accessor items: ::Array[Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item]
+
+      def initialize: (
+        currency: Dodopayments::Models::currency,
+        items: ::Array[Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item]
+      ) -> void
+
+      def to_hash: -> {
+        currency: Dodopayments::Models::currency,
+        items: ::Array[Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item]
+      }
+
+      type item =
+        {
+          amount: Integer,
+          items_id: String,
+          refundable_amount: Integer,
+          tax: Integer,
+          description: String?,
+          name: String?
+        }
+
+      class Item < Dodopayments::Internal::Type::BaseModel
+        attr_accessor amount: Integer
+
+        attr_accessor items_id: String
+
+        attr_accessor refundable_amount: Integer
+
+        attr_accessor tax: Integer
+
+        attr_accessor description: String?
+
+        attr_accessor name: String?
+
+        def initialize: (
+          amount: Integer,
+          items_id: String,
+          refundable_amount: Integer,
+          tax: Integer,
+          ?description: String?,
+          ?name: String?
+        ) -> void
+
+        def to_hash: -> {
+          amount: Integer,
+          items_id: String,
+          refundable_amount: Integer,
+          tax: Integer,
+          description: String?,
+          name: String?
+        }
+      end
+    end
+  end
+end

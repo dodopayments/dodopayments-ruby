@@ -6,6 +6,14 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      OrHash =
+        T.type_alias do
+          T.any(
+            Dodopayments::CustomerCreateParams,
+            Dodopayments::Internal::AnyHash
+          )
+        end
+
       sig { returns(String) }
       attr_accessor :email
 
@@ -20,24 +28,24 @@ module Dodopayments
           email: String,
           name: String,
           phone_number: T.nilable(String),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
-      def self.new(email:, name:, phone_number: nil, request_options: {}); end
+      def self.new(email:, name:, phone_number: nil, request_options: {})
+      end
 
       sig do
-        override
-          .returns(
-            {
-              email: String,
-              name: String,
-              phone_number: T.nilable(String),
-              request_options: Dodopayments::RequestOptions
-            }
-          )
+        override.returns(
+          {
+            email: String,
+            name: String,
+            phone_number: T.nilable(String),
+            request_options: Dodopayments::RequestOptions
+          }
+        )
       end
-      def to_hash; end
+      def to_hash
+      end
     end
   end
 end

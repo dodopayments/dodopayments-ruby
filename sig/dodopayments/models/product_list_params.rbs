@@ -3,9 +3,10 @@ module Dodopayments
     type product_list_params =
       {
         archived: bool,
-        page_number: Integer?,
-        page_size: Integer?,
-        recurring: bool?
+        brand_id: String,
+        page_number: Integer,
+        page_size: Integer,
+        recurring: bool
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -17,21 +18,39 @@ module Dodopayments
 
       def archived=: (bool) -> bool
 
-      attr_accessor page_number: Integer?
+      attr_reader brand_id: String?
 
-      attr_accessor page_size: Integer?
+      def brand_id=: (String) -> String
 
-      attr_accessor recurring: bool?
+      attr_reader page_number: Integer?
+
+      def page_number=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
+
+      attr_reader recurring: bool?
+
+      def recurring=: (bool) -> bool
 
       def initialize: (
         ?archived: bool,
-        ?page_number: Integer?,
-        ?page_size: Integer?,
-        ?recurring: bool?,
+        ?brand_id: String,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?recurring: bool,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::product_list_params
+      def to_hash: -> {
+        archived: bool,
+        brand_id: String,
+        page_number: Integer,
+        page_size: Integer,
+        recurring: bool,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

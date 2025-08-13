@@ -1,7 +1,11 @@
 module Dodopayments
   module Models
     type refund_create_params =
-      { payment_id: String, reason: String? }
+      {
+        payment_id: String,
+        items: ::Array[Dodopayments::RefundCreateParams::Item]?,
+        reason: String?
+      }
       & Dodopayments::Internal::Type::request_parameters
 
     class RefundCreateParams < Dodopayments::Internal::Type::BaseModel
@@ -10,15 +14,47 @@ module Dodopayments
 
       attr_accessor payment_id: String
 
+      attr_accessor items: ::Array[Dodopayments::RefundCreateParams::Item]?
+
       attr_accessor reason: String?
 
       def initialize: (
         payment_id: String,
+        ?items: ::Array[Dodopayments::RefundCreateParams::Item]?,
         ?reason: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::refund_create_params
+      def to_hash: -> {
+        payment_id: String,
+        items: ::Array[Dodopayments::RefundCreateParams::Item]?,
+        reason: String?,
+        request_options: Dodopayments::RequestOptions
+      }
+
+      type item = { item_id: String, amount: Integer?, tax_inclusive: bool }
+
+      class Item < Dodopayments::Internal::Type::BaseModel
+        attr_accessor item_id: String
+
+        attr_accessor amount: Integer?
+
+        attr_reader tax_inclusive: bool?
+
+        def tax_inclusive=: (bool) -> bool
+
+        def initialize: (
+          item_id: String,
+          ?amount: Integer?,
+          ?tax_inclusive: bool
+        ) -> void
+
+        def to_hash: -> {
+          item_id: String,
+          amount: Integer?,
+          tax_inclusive: bool
+        }
+      end
     end
   end
 end

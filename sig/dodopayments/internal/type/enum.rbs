@@ -3,6 +3,7 @@ module Dodopayments
     module Type
       module Enum
         include Dodopayments::Internal::Type::Converter
+        include Dodopayments::Internal::Util::SorbetRuntimeSupport
 
         def self.values: -> ::Array[(nil | bool | Integer | Float | Symbol)]
 
@@ -21,6 +22,8 @@ module Dodopayments
           Symbol | top value,
           state: Dodopayments::Internal::Type::Converter::dump_state
         ) -> (Symbol | top)
+
+        def to_sorbet_type: -> top
 
         def inspect: (?depth: Integer) -> String
       end

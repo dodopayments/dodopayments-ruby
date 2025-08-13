@@ -6,6 +6,14 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      OrHash =
+        T.type_alias do
+          T.any(
+            Dodopayments::DiscountUpdateParams,
+            Dodopayments::Internal::AnyHash
+          )
+        end
+
       # If present, update the discount amount:
       #
       # - If `discount_type` is `percentage`, this represents **basis points** (e.g.,
@@ -31,7 +39,14 @@ module Dodopayments
       sig { returns(T.nilable(T::Array[String])) }
       attr_accessor :restricted_to
 
-      sig { returns(T.nilable(Dodopayments::Models::DiscountType::OrSymbol)) }
+      # Number of subscription billing cycles this discount is valid for. If not
+      # provided, the discount will be applied indefinitely to all recurring payments
+      # related to the subscription.
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :subscription_cycles
+
+      # If present, update the discount type.
+      sig { returns(T.nilable(Dodopayments::DiscountType::OrSymbol)) }
       attr_accessor :type
 
       sig { returns(T.nilable(Integer)) }
@@ -44,11 +59,11 @@ module Dodopayments
           expires_at: T.nilable(Time),
           name: T.nilable(String),
           restricted_to: T.nilable(T::Array[String]),
-          type: T.nilable(Dodopayments::Models::DiscountType::OrSymbol),
+          subscription_cycles: T.nilable(Integer),
+          type: T.nilable(Dodopayments::DiscountType::OrSymbol),
           usage_limit: T.nilable(Integer),
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
       def self.new(
         # If present, update the discount amount:
@@ -66,26 +81,34 @@ module Dodopayments
         # If present, replaces all restricted product IDs with this new set. To remove all
         # restrictions, send empty array
         restricted_to: nil,
+        # Number of subscription billing cycles this discount is valid for. If not
+        # provided, the discount will be applied indefinitely to all recurring payments
+        # related to the subscription.
+        subscription_cycles: nil,
+        # If present, update the discount type.
         type: nil,
         usage_limit: nil,
         request_options: {}
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              amount: T.nilable(Integer),
-              code: T.nilable(String),
-              expires_at: T.nilable(Time),
-              name: T.nilable(String),
-              restricted_to: T.nilable(T::Array[String]),
-              type: T.nilable(Dodopayments::Models::DiscountType::OrSymbol),
-              usage_limit: T.nilable(Integer),
-              request_options: Dodopayments::RequestOptions
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            amount: T.nilable(Integer),
+            code: T.nilable(String),
+            expires_at: T.nilable(Time),
+            name: T.nilable(String),
+            restricted_to: T.nilable(T::Array[String]),
+            subscription_cycles: T.nilable(Integer),
+            type: T.nilable(Dodopayments::DiscountType::OrSymbol),
+            usage_limit: T.nilable(Integer),
+            request_options: Dodopayments::RequestOptions
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

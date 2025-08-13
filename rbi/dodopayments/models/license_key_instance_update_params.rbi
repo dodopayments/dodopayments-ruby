@@ -6,20 +6,33 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      OrHash =
+        T.type_alias do
+          T.any(
+            Dodopayments::LicenseKeyInstanceUpdateParams,
+            Dodopayments::Internal::AnyHash
+          )
+        end
+
       sig { returns(String) }
       attr_accessor :name
 
       sig do
         params(
           name: String,
-          request_options: T.any(Dodopayments::RequestOptions, Dodopayments::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
-      def self.new(name:, request_options: {}); end
+      def self.new(name:, request_options: {})
+      end
 
-      sig { override.returns({name: String, request_options: Dodopayments::RequestOptions}) }
-      def to_hash; end
+      sig do
+        override.returns(
+          { name: String, request_options: Dodopayments::RequestOptions }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

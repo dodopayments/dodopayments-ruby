@@ -2,10 +2,10 @@ module Dodopayments
   module Models
     type payment_create_params =
       {
-        billing: Dodopayments::Models::BillingAddress,
+        billing: Dodopayments::BillingAddress,
         customer: Dodopayments::Models::customer_request,
-        product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem],
-        allowed_payment_method_types: ::Array[Dodopayments::Models::PaymentCreateParams::allowed_payment_method_type]?,
+        product_cart: ::Array[Dodopayments::OneTimeProductCartItem],
+        allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
         billing_currency: Dodopayments::Models::currency?,
         discount_code: String?,
         metadata: ::Hash[Symbol, String],
@@ -20,13 +20,13 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      attr_accessor billing: Dodopayments::Models::BillingAddress
+      attr_accessor billing: Dodopayments::BillingAddress
 
       attr_accessor customer: Dodopayments::Models::customer_request
 
-      attr_accessor product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem]
+      attr_accessor product_cart: ::Array[Dodopayments::OneTimeProductCartItem]
 
-      attr_accessor allowed_payment_method_types: ::Array[Dodopayments::Models::PaymentCreateParams::allowed_payment_method_type]?
+      attr_accessor allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?
 
       attr_accessor billing_currency: Dodopayments::Models::currency?
 
@@ -47,10 +47,10 @@ module Dodopayments
       attr_accessor tax_id: String?
 
       def initialize: (
-        billing: Dodopayments::Models::BillingAddress,
+        billing: Dodopayments::BillingAddress,
         customer: Dodopayments::Models::customer_request,
-        product_cart: ::Array[Dodopayments::Models::OneTimeProductCartItem],
-        ?allowed_payment_method_types: ::Array[Dodopayments::Models::PaymentCreateParams::allowed_payment_method_type]?,
+        product_cart: ::Array[Dodopayments::OneTimeProductCartItem],
+        ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
         ?billing_currency: Dodopayments::Models::currency?,
         ?discount_code: String?,
         ?metadata: ::Hash[Symbol, String],
@@ -61,52 +61,20 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::payment_create_params
-
-      type allowed_payment_method_type =
-        :credit
-        | :debit
-        | :upi_collect
-        | :upi_intent
-        | :apple_pay
-        | :cashapp
-        | :google_pay
-        | :multibanco
-        | :bancontact_card
-        | :eps
-        | :ideal
-        | :przelewy24
-        | :affirm
-        | :klarna
-        | :sepa
-        | :ach
-        | :amazon_pay
-        | :afterpay_clearpay
-
-      module AllowedPaymentMethodType
-        extend Dodopayments::Internal::Type::Enum
-
-        CREDIT: :credit
-        DEBIT: :debit
-        UPI_COLLECT: :upi_collect
-        UPI_INTENT: :upi_intent
-        APPLE_PAY: :apple_pay
-        CASHAPP: :cashapp
-        GOOGLE_PAY: :google_pay
-        MULTIBANCO: :multibanco
-        BANCONTACT_CARD: :bancontact_card
-        EPS: :eps
-        IDEAL: :ideal
-        PRZELEWY24: :przelewy24
-        AFFIRM: :affirm
-        KLARNA: :klarna
-        SEPA: :sepa
-        ACH: :ach
-        AMAZON_PAY: :amazon_pay
-        AFTERPAY_CLEARPAY: :afterpay_clearpay
-
-        def self?.values: -> ::Array[Dodopayments::Models::PaymentCreateParams::allowed_payment_method_type]
-      end
+      def to_hash: -> {
+        billing: Dodopayments::BillingAddress,
+        customer: Dodopayments::Models::customer_request,
+        product_cart: ::Array[Dodopayments::OneTimeProductCartItem],
+        allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
+        billing_currency: Dodopayments::Models::currency?,
+        discount_code: String?,
+        metadata: ::Hash[Symbol, String],
+        payment_link: bool?,
+        return_url: String?,
+        show_saved_payment_methods: bool,
+        tax_id: String?,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

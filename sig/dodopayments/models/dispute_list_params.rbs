@@ -2,13 +2,13 @@ module Dodopayments
   module Models
     type dispute_list_params =
       {
-        created_at_gte: Time?,
-        created_at_lte: Time?,
-        customer_id: String?,
-        dispute_stage: Dodopayments::Models::dispute_stage?,
-        dispute_status: Dodopayments::Models::dispute_status?,
-        page_number: Integer?,
-        page_size: Integer?
+        created_at_gte: Time,
+        created_at_lte: Time,
+        customer_id: String,
+        dispute_stage: Dodopayments::Models::DisputeListParams::dispute_stage,
+        dispute_status: Dodopayments::Models::DisputeListParams::dispute_status,
+        page_number: Integer,
+        page_size: Integer
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -16,32 +16,94 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      attr_accessor created_at_gte: Time?
+      attr_reader created_at_gte: Time?
 
-      attr_accessor created_at_lte: Time?
+      def created_at_gte=: (Time) -> Time
 
-      attr_accessor customer_id: String?
+      attr_reader created_at_lte: Time?
 
-      attr_accessor dispute_stage: Dodopayments::Models::dispute_stage?
+      def created_at_lte=: (Time) -> Time
 
-      attr_accessor dispute_status: Dodopayments::Models::dispute_status?
+      attr_reader customer_id: String?
 
-      attr_accessor page_number: Integer?
+      def customer_id=: (String) -> String
 
-      attr_accessor page_size: Integer?
+      attr_reader dispute_stage: Dodopayments::Models::DisputeListParams::dispute_stage?
+
+      def dispute_stage=: (
+        Dodopayments::Models::DisputeListParams::dispute_stage
+      ) -> Dodopayments::Models::DisputeListParams::dispute_stage
+
+      attr_reader dispute_status: Dodopayments::Models::DisputeListParams::dispute_status?
+
+      def dispute_status=: (
+        Dodopayments::Models::DisputeListParams::dispute_status
+      ) -> Dodopayments::Models::DisputeListParams::dispute_status
+
+      attr_reader page_number: Integer?
+
+      def page_number=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
 
       def initialize: (
-        ?created_at_gte: Time?,
-        ?created_at_lte: Time?,
-        ?customer_id: String?,
-        ?dispute_stage: Dodopayments::Models::dispute_stage?,
-        ?dispute_status: Dodopayments::Models::dispute_status?,
-        ?page_number: Integer?,
-        ?page_size: Integer?,
+        ?created_at_gte: Time,
+        ?created_at_lte: Time,
+        ?customer_id: String,
+        ?dispute_stage: Dodopayments::Models::DisputeListParams::dispute_stage,
+        ?dispute_status: Dodopayments::Models::DisputeListParams::dispute_status,
+        ?page_number: Integer,
+        ?page_size: Integer,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::dispute_list_params
+      def to_hash: -> {
+        created_at_gte: Time,
+        created_at_lte: Time,
+        customer_id: String,
+        dispute_stage: Dodopayments::Models::DisputeListParams::dispute_stage,
+        dispute_status: Dodopayments::Models::DisputeListParams::dispute_status,
+        page_number: Integer,
+        page_size: Integer,
+        request_options: Dodopayments::RequestOptions
+      }
+
+      type dispute_stage = :pre_dispute | :dispute | :pre_arbitration
+
+      module DisputeStage
+        extend Dodopayments::Internal::Type::Enum
+
+        PRE_DISPUTE: :pre_dispute
+        DISPUTE: :dispute
+        PRE_ARBITRATION: :pre_arbitration
+
+        def self?.values: -> ::Array[Dodopayments::Models::DisputeListParams::dispute_stage]
+      end
+
+      type dispute_status =
+        :dispute_opened
+        | :dispute_expired
+        | :dispute_accepted
+        | :dispute_cancelled
+        | :dispute_challenged
+        | :dispute_won
+        | :dispute_lost
+
+      module DisputeStatus
+        extend Dodopayments::Internal::Type::Enum
+
+        DISPUTE_OPENED: :dispute_opened
+        DISPUTE_EXPIRED: :dispute_expired
+        DISPUTE_ACCEPTED: :dispute_accepted
+        DISPUTE_CANCELLED: :dispute_cancelled
+        DISPUTE_CHALLENGED: :dispute_challenged
+        DISPUTE_WON: :dispute_won
+        DISPUTE_LOST: :dispute_lost
+
+        def self?.values: -> ::Array[Dodopayments::Models::DisputeListParams::dispute_status]
+      end
     end
   end
 end

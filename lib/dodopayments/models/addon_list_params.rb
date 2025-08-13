@@ -11,18 +11,18 @@ module Dodopayments
       #   Page number default is 0
       #
       #   @return [Integer, nil]
-      optional :page_number, Integer, nil?: true
+      optional :page_number, Integer
 
       # @!attribute page_size
       #   Page size default is 10 max is 100
       #
       #   @return [Integer, nil]
-      optional :page_size, Integer, nil?: true
+      optional :page_size, Integer
 
       # @!method initialize(page_number: nil, page_size: nil, request_options: {})
-      #   @param page_number [Integer, nil] Page number default is 0
+      #   @param page_number [Integer] Page number default is 0
       #
-      #   @param page_size [Integer, nil] Page size default is 10 max is 100
+      #   @param page_size [Integer] Page size default is 10 max is 100
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end

@@ -7,6 +7,8 @@ module Dodopayments
       #
       # @abstract
       class BaseClient
+        extend Dodopayments::Internal::Util::SorbetRuntimeSupport
+
         # from whatwg fetch spec
         MAX_REDIRECTS = 20
 
@@ -151,6 +153,27 @@ module Dodopayments
           end
         end
 
+        # @return [URI::Generic]
+        attr_reader :base_url
+
+        # @return [Float]
+        attr_reader :timeout
+
+        # @return [Integer]
+        attr_reader :max_retries
+
+        # @return [Float]
+        attr_reader :initial_retry_delay
+
+        # @return [Float]
+        attr_reader :max_retry_delay
+
+        # @return [Hash{String=>String}]
+        attr_reader :headers
+
+        # @return [String, nil]
+        attr_reader :idempotency_header
+
         # @api private
         # @return [Dodopayments::Internal::Transport::PooledNetRequester]
         attr_reader :requester
@@ -182,10 +205,11 @@ module Dodopayments
             },
             headers
           )
-          @base_url = Dodopayments::Internal::Util.parse_uri(base_url)
+          @base_url_components = Dodopayments::Internal::Util.parse_uri(base_url)
+          @base_url = Dodopayments::Internal::Util.unparse_uri(@base_url_components)
           @idempotency_header = idempotency_header&.to_s&.downcase
-          @max_retries = max_retries
           @timeout = timeout
+          @max_retries = max_retries
           @initial_retry_delay = initial_retry_delay
           @max_retry_delay = max_retry_delay
         end
@@ -276,10 +300,14 @@ module Dodopayments
               Dodopayments::Internal::Util.deep_merge(*[req[:body], opts[:extra_body]].compact)
             end
 
+          url = Dodopayments::Internal::Util.join_parsed_uri(
+            @base_url_components,
+            {**req, path: path, query: query}
+          )
           headers, encoded = Dodopayments::Internal::Util.encode_content(headers, body)
           {
             method: method,
-            url: Dodopayments::Internal::Util.join_parsed_uri(@base_url, {**req, path: path, query: query}),
+            url: url,
             headers: headers,
             body: encoded,
             max_retries: opts.fetch(:max_retries, @max_retries),
@@ -337,7 +365,7 @@ module Dodopayments
         #
         # @raise [Dodopayments::Errors::APIError]
         # @return [Array(Integer, Net::HTTPResponse, Enumerable<String>)]
-        private def send_request(request, redirect_count:, retry_count:, send_retry_header:)
+        def send_request(request, redirect_count:, retry_count:, send_retry_header:)
           url, headers, max_retries, timeout = request.fetch_values(:url, :headers, :max_retries, :timeout)
           input = {
             **request.except(:timeout),
@@ -446,6 +474,7 @@ module Dodopayments
           self.class.validate!(req)
           model = req.fetch(:model) { Dodopayments::Internal::Type::Unknown }
           opts = req[:options].to_h
+          unwrap = req[:unwrap]
           Dodopayments::RequestOptions.validate!(opts)
           request = build_request(req.except(:options), opts)
           url = request.fetch(:url)
@@ -462,11 +491,18 @@ module Dodopayments
           decoded = Dodopayments::Internal::Util.decode_content(response, stream: stream)
           case req
           in {stream: Class => st}
-            st.new(model: model, url: url, status: status, response: response, stream: decoded)
+            st.new(
+              model: model,
+              url: url,
+              status: status,
+              response: response,
+              unwrap: unwrap,
+              stream: decoded
+            )
           in {page: Class => page}
             page.new(client: self, req: req, headers: response, page_data: decoded)
           else
-            unwrapped = Dodopayments::Internal::Util.dig(decoded, req[:unwrap])
+            unwrapped = Dodopayments::Internal::Util.dig(decoded, unwrap)
             Dodopayments::Internal::Type::Converter.coerce(model, unwrapped)
           end
         end
@@ -476,9 +512,53 @@ module Dodopayments
         # @return [String]
         def inspect
           # rubocop:disable Layout/LineLength
-          base_url = Dodopayments::Internal::Util.unparse_uri(@base_url)
-          "#<#{self.class.name}:0x#{object_id.to_s(16)} base_url=#{base_url} max_retries=#{@max_retries} timeout=#{@timeout}>"
+          "#<#{self.class.name}:0x#{object_id.to_s(16)} base_url=#{@base_url} max_retries=#{@max_retries} timeout=#{@timeout}>"
           # rubocop:enable Layout/LineLength
+        end
+
+        define_sorbet_constant!(:RequestComponents) do
+          T.type_alias do
+            {
+              method: Symbol,
+              path: T.any(String, T::Array[String]),
+              query: T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))]),
+              headers: T.nilable(
+                T::Hash[String,
+                        T.nilable(
+                          T.any(
+                            String,
+                            Integer,
+                            T::Array[T.nilable(T.any(String, Integer))]
+                          )
+                        )]
+              ),
+              body: T.nilable(T.anything),
+              unwrap: T.nilable(
+                T.any(
+                  Symbol,
+                  Integer,
+                  T::Array[T.any(Symbol, Integer)],
+                  T.proc.params(arg0: T.anything).returns(T.anything)
+                )
+              ),
+              page: T.nilable(T::Class[Dodopayments::Internal::Type::BasePage[Dodopayments::Internal::Type::BaseModel]]),
+              stream: T.nilable(T::Class[T.anything]),
+              model: T.nilable(Dodopayments::Internal::Type::Converter::Input),
+              options: T.nilable(Dodopayments::RequestOptions::OrHash)
+            }
+          end
+        end
+        define_sorbet_constant!(:RequestInput) do
+          T.type_alias do
+            {
+              method: Symbol,
+              url: URI::Generic,
+              headers: T::Hash[String, String],
+              body: T.anything,
+              max_retries: Integer,
+              timeout: Float
+            }
+          end
         end
       end
     end

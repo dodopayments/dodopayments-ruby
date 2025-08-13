@@ -8,6 +8,7 @@ module Dodopayments
         expires_at: Time?,
         name: String?,
         restricted_to: ::Array[String]?,
+        subscription_cycles: Integer?,
         usage_limit: Integer?
       }
       & Dodopayments::Internal::Type::request_parameters
@@ -28,6 +29,8 @@ module Dodopayments
 
       attr_accessor restricted_to: ::Array[String]?
 
+      attr_accessor subscription_cycles: Integer?
+
       attr_accessor usage_limit: Integer?
 
       def initialize: (
@@ -37,11 +40,22 @@ module Dodopayments
         ?expires_at: Time?,
         ?name: String?,
         ?restricted_to: ::Array[String]?,
+        ?subscription_cycles: Integer?,
         ?usage_limit: Integer?,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
-      def to_hash: -> Dodopayments::Models::discount_create_params
+      def to_hash: -> {
+        amount: Integer,
+        type: Dodopayments::Models::discount_type,
+        code: String?,
+        expires_at: Time?,
+        name: String?,
+        restricted_to: ::Array[String]?,
+        subscription_cycles: Integer?,
+        usage_limit: Integer?,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

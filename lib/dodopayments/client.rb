@@ -69,6 +69,15 @@ module Dodopayments
     # @return [Dodopayments::Resources::Addons]
     attr_reader :addons
 
+    # @return [Dodopayments::Resources::Brands]
+    attr_reader :brands
+
+    # @return [Dodopayments::Resources::Webhooks]
+    attr_reader :webhooks
+
+    # @return [Dodopayments::Resources::YourWebhookURL]
+    attr_reader :your_webhook_url
+
     # @api private
     #
     # @return [Hash{String=>String}]
@@ -103,10 +112,10 @@ module Dodopayments
       bearer_token: ENV["DODO_PAYMENTS_API_KEY"],
       environment: nil,
       base_url: ENV["DODO_PAYMENTS_BASE_URL"],
-      max_retries: Dodopayments::Client::DEFAULT_MAX_RETRIES,
-      timeout: Dodopayments::Client::DEFAULT_TIMEOUT_IN_SECONDS,
-      initial_retry_delay: Dodopayments::Client::DEFAULT_INITIAL_RETRY_DELAY,
-      max_retry_delay: Dodopayments::Client::DEFAULT_MAX_RETRY_DELAY
+      max_retries: self.class::DEFAULT_MAX_RETRIES,
+      timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
+      initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
+      max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY
     )
       base_url ||= Dodopayments::Client::ENVIRONMENTS.fetch(environment&.to_sym || :production) do
         message = "environment must be one of #{Dodopayments::Client::ENVIRONMENTS.keys}, got #{environment}"
@@ -142,6 +151,9 @@ module Dodopayments
       @misc = Dodopayments::Resources::Misc.new(client: self)
       @discounts = Dodopayments::Resources::Discounts.new(client: self)
       @addons = Dodopayments::Resources::Addons.new(client: self)
+      @brands = Dodopayments::Resources::Brands.new(client: self)
+      @webhooks = Dodopayments::Resources::Webhooks.new(client: self)
+      @your_webhook_url = Dodopayments::Resources::YourWebhookURL.new(client: self)
     end
   end
 end
