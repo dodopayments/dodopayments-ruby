@@ -18,9 +18,6 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :url
 
-      # Filter events to the webhook.
-      #
-      # Webhook event will only be sent for events in the list.
       sig { returns(T.nilable(String)) }
       attr_accessor :description
 
@@ -30,6 +27,9 @@ module Dodopayments
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :disabled
 
+      # Filter events to the webhook.
+      #
+      # Webhook event will only be sent for events in the list.
       sig do
         returns(T.nilable(T::Array[Dodopayments::WebhookEventType::OrSymbol]))
       end
@@ -73,14 +73,14 @@ module Dodopayments
       def self.new(
         # Url of the webhook
         url:,
-        # Filter events to the webhook.
-        #
-        # Webhook event will only be sent for events in the list.
         description: nil,
         # Create the webhook in a disabled state.
         #
         # Default is false
         disabled: nil,
+        # Filter events to the webhook.
+        #
+        # Webhook event will only be sent for events in the list.
         filter_types: nil,
         # Custom headers to be passed
         headers: nil,

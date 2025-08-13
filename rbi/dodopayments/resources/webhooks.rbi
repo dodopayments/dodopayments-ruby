@@ -23,14 +23,14 @@ module Dodopayments
       def create(
         # Url of the webhook
         url:,
-        # Filter events to the webhook.
-        #
-        # Webhook event will only be sent for events in the list.
         description: nil,
         # Create the webhook in a disabled state.
         #
         # Default is false
         disabled: nil,
+        # Filter events to the webhook.
+        #
+        # Webhook event will only be sent for events in the list.
         filter_types: nil,
         # Custom headers to be passed
         headers: nil,

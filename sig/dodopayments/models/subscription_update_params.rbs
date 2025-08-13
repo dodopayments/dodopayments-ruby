@@ -6,6 +6,7 @@ module Dodopayments
         cancel_at_next_billing_date: bool?,
         disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         metadata: ::Hash[Symbol, String]?,
+        next_billing_date: Time?,
         status: Dodopayments::Models::subscription_status?,
         tax_id: String?
       }
@@ -23,6 +24,8 @@ module Dodopayments
 
       attr_accessor metadata: ::Hash[Symbol, String]?
 
+      attr_accessor next_billing_date: Time?
+
       attr_accessor status: Dodopayments::Models::subscription_status?
 
       attr_accessor tax_id: String?
@@ -32,6 +35,7 @@ module Dodopayments
         ?cancel_at_next_billing_date: bool?,
         ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         ?metadata: ::Hash[Symbol, String]?,
+        ?next_billing_date: Time?,
         ?status: Dodopayments::Models::subscription_status?,
         ?tax_id: String?,
         ?request_options: Dodopayments::request_opts
@@ -42,6 +46,7 @@ module Dodopayments
         cancel_at_next_billing_date: bool?,
         disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         metadata: ::Hash[Symbol, String]?,
+        next_billing_date: Time?,
         status: Dodopayments::Models::subscription_status?,
         tax_id: String?,
         request_options: Dodopayments::RequestOptions

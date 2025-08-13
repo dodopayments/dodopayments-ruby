@@ -27,6 +27,11 @@ module Dodopayments
       #   @return [Hash{Symbol=>String}, nil]
       optional :metadata, Dodopayments::Internal::Type::HashOf[String], nil?: true
 
+      # @!attribute next_billing_date
+      #
+      #   @return [Time, nil]
+      optional :next_billing_date, Time, nil?: true
+
       # @!attribute status
       #
       #   @return [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
@@ -37,11 +42,12 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(billing: nil, cancel_at_next_billing_date: nil, disable_on_demand: nil, metadata: nil, status: nil, tax_id: nil, request_options: {})
+      # @!method initialize(billing: nil, cancel_at_next_billing_date: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
       #   @param billing [Dodopayments::Models::BillingAddress, nil]
       #   @param cancel_at_next_billing_date [Boolean, nil]
       #   @param disable_on_demand [Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, nil]
       #   @param metadata [Hash{Symbol=>String}, nil]
+      #   @param next_billing_date [Time, nil]
       #   @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
       #   @param tax_id [String, nil]
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]

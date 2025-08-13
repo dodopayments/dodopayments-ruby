@@ -14,9 +14,6 @@ module Dodopayments
       required :url, String
 
       # @!attribute description
-      #   Filter events to the webhook.
-      #
-      #   Webhook event will only be sent for events in the list.
       #
       #   @return [String, nil]
       optional :description, String, nil?: true
@@ -30,6 +27,9 @@ module Dodopayments
       optional :disabled, Dodopayments::Internal::Type::Boolean, nil?: true
 
       # @!attribute filter_types
+      #   Filter events to the webhook.
+      #
+      #   Webhook event will only be sent for events in the list.
       #
       #   @return [Array<Symbol, Dodopayments::Models::WebhookEventType>, nil]
       optional :filter_types,
@@ -66,11 +66,11 @@ module Dodopayments
       #
       #   @param url [String] Url of the webhook
       #
-      #   @param description [String, nil] Filter events to the webhook.
+      #   @param description [String, nil]
       #
       #   @param disabled [Boolean, nil] Create the webhook in a disabled state.
       #
-      #   @param filter_types [Array<Symbol, Dodopayments::Models::WebhookEventType>]
+      #   @param filter_types [Array<Symbol, Dodopayments::Models::WebhookEventType>] Filter events to the webhook.
       #
       #   @param headers [Hash{Symbol=>String}, nil] Custom headers to be passed
       #

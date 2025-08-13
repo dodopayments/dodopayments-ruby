@@ -45,6 +45,9 @@ module Dodopayments
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_accessor :metadata
 
+      sig { returns(T.nilable(Time)) }
+      attr_accessor :next_billing_date
+
       sig { returns(T.nilable(Dodopayments::SubscriptionStatus::OrSymbol)) }
       attr_accessor :status
 
@@ -60,6 +63,7 @@ module Dodopayments
               Dodopayments::SubscriptionUpdateParams::DisableOnDemand::OrHash
             ),
           metadata: T.nilable(T::Hash[Symbol, String]),
+          next_billing_date: T.nilable(Time),
           status: T.nilable(Dodopayments::SubscriptionStatus::OrSymbol),
           tax_id: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
@@ -70,6 +74,7 @@ module Dodopayments
         cancel_at_next_billing_date: nil,
         disable_on_demand: nil,
         metadata: nil,
+        next_billing_date: nil,
         status: nil,
         tax_id: nil,
         request_options: {}
@@ -86,6 +91,7 @@ module Dodopayments
                 Dodopayments::SubscriptionUpdateParams::DisableOnDemand
               ),
             metadata: T.nilable(T::Hash[Symbol, String]),
+            next_billing_date: T.nilable(Time),
             status: T.nilable(Dodopayments::SubscriptionStatus::OrSymbol),
             tax_id: T.nilable(String),
             request_options: Dodopayments::RequestOptions
