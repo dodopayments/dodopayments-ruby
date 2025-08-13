@@ -105,4 +105,18 @@ class Dodopayments::Test::Resources::WebhooksTest < Dodopayments::Test::Resource
       response => nil
     end
   end
+
+  def test_retrieve_secret
+    response = @dodo_payments.webhooks.retrieve_secret("webhook_id")
+
+    assert_pattern do
+      response => Dodopayments::Models::WebhookRetrieveSecretResponse
+    end
+
+    assert_pattern do
+      response => {
+        secret: String
+      }
+    end
+  end
 end
