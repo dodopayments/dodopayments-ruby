@@ -145,6 +145,25 @@ module Dodopayments
         )
       end
 
+      # Get webhook secret by id
+      #
+      # @overload retrieve_secret(webhook_id, request_options: {})
+      #
+      # @param webhook_id [String]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Models::WebhookRetrieveSecretResponse]
+      #
+      # @see Dodopayments::Models::WebhookRetrieveSecretParams
+      def retrieve_secret(webhook_id, params = {})
+        @client.request(
+          method: :get,
+          path: ["webhooks/%1$s/secret", webhook_id],
+          model: Dodopayments::Models::WebhookRetrieveSecretResponse,
+          options: params[:request_options]
+        )
+      end
+
       # @api private
       #
       # @param client [Dodopayments::Client]

@@ -193,6 +193,8 @@ module Dodopayments
 
   class WebhookRetrieveParams = Dodopayments::Models::WebhookRetrieveParams
 
+  class WebhookRetrieveSecretParams = Dodopayments::Models::WebhookRetrieveSecretParams
+
   module Webhooks = Dodopayments::Models::Webhooks
 
   class WebhookUpdateParams = Dodopayments::Models::WebhookUpdateParams

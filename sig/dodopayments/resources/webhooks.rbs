@@ -42,6 +42,11 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> nil
 
+      def retrieve_secret: (
+        String webhook_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::WebhookRetrieveSecretResponse
+
       def initialize: (client: Dodopayments::Client) -> void
     end
   end
