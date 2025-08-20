@@ -32,10 +32,7 @@ module Dodopayments
       #   Webhook event will only be sent for events in the list.
       #
       #   @return [Array<Symbol, Dodopayments::Models::WebhookEventType>, nil]
-      optional :filter_types,
-               -> {
-                 Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::WebhookEventType]
-               }
+      optional :filter_types, -> { Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::WebhookEventType] }
 
       # @!attribute headers
       #   Custom headers to be passed
