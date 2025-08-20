@@ -23,10 +23,7 @@ module Dodopayments
       #   List of products in the cart. Must contain at least 1 and at most 100 items.
       #
       #   @return [Array<Dodopayments::Models::OneTimeProductCartItem>]
-      required :product_cart,
-               -> {
-                 Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem]
-               }
+      required :product_cart, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem] }
 
       # @!attribute allowed_payment_method_types
       #   List of payment methods allowed during checkout.
