@@ -19,8 +19,7 @@ module Dodopayments
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           discount_code: T.nilable(String),
           metadata: T::Hash[Symbol, String],
-          on_demand:
-            T.nilable(Dodopayments::SubscriptionCreateParams::OnDemand::OrHash),
+          on_demand: T.nilable(Dodopayments::OnDemandSubscription::OrHash),
           payment_link: T.nilable(T::Boolean),
           return_url: T.nilable(String),
           show_saved_payment_methods: T::Boolean,
@@ -104,6 +103,7 @@ module Dodopayments
         # Subscription Id
         subscription_id,
         billing: nil,
+        # When set, the subscription will remain active until the end of billing period
         cancel_at_next_billing_date: nil,
         disable_on_demand: nil,
         metadata: nil,

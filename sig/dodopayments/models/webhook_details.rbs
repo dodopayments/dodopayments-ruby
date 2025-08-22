@@ -1,6 +1,6 @@
 module Dodopayments
   module Models
-    type webhook_retrieve_response =
+    type webhook_details =
       {
         id: String,
         created_at: String,
@@ -13,7 +13,7 @@ module Dodopayments
         rate_limit: Integer?
       }
 
-    class WebhookRetrieveResponse < Dodopayments::Internal::Type::BaseModel
+    class WebhookDetails < Dodopayments::Internal::Type::BaseModel
       attr_accessor id: String
 
       attr_accessor created_at: String

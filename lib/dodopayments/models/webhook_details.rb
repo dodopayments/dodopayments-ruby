@@ -2,8 +2,8 @@
 
 module Dodopayments
   module Models
-    # @see Dodopayments::Resources::Webhooks#retrieve
-    class WebhookRetrieveResponse < Dodopayments::Internal::Type::BaseModel
+    # @see Dodopayments::Resources::Webhooks#create
+    class WebhookDetails < Dodopayments::Internal::Type::BaseModel
       # @!attribute id
       #   The webhook's ID.
       #
@@ -64,7 +64,7 @@ module Dodopayments
 
       # @!method initialize(id:, created_at:, description:, metadata:, updated_at:, url:, disabled: nil, filter_types: nil, rate_limit: nil)
       #   Some parameter documentations has been truncated, see
-      #   {Dodopayments::Models::WebhookRetrieveResponse} for more details.
+      #   {Dodopayments::Models::WebhookDetails} for more details.
       #
       #   @param id [String] The webhook's ID.
       #

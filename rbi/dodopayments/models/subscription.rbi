@@ -28,7 +28,7 @@ module Dodopayments
       attr_accessor :created_at
 
       # Currency used for the subscription payments
-      sig { returns(Dodopayments::Currency::OrSymbol) }
+      sig { returns(Dodopayments::Currency::TaggedSymbol) }
       attr_accessor :currency
 
       # Customer details associated with the subscription
@@ -58,7 +58,7 @@ module Dodopayments
       attr_accessor :payment_frequency_count
 
       # Time interval for payment frequency (e.g. month, year)
-      sig { returns(Dodopayments::TimeInterval::OrSymbol) }
+      sig { returns(Dodopayments::TimeInterval::TaggedSymbol) }
       attr_accessor :payment_frequency_interval
 
       # Timestamp of the last payment. Indicates the start of current billing period
@@ -79,7 +79,7 @@ module Dodopayments
       attr_accessor :recurring_pre_tax_amount
 
       # Current status of the subscription
-      sig { returns(Dodopayments::SubscriptionStatus::OrSymbol) }
+      sig { returns(Dodopayments::SubscriptionStatus::TaggedSymbol) }
       attr_accessor :status
 
       # Unique identifier for the subscription
@@ -91,7 +91,7 @@ module Dodopayments
       attr_accessor :subscription_period_count
 
       # Time interval for the subscription period (e.g. month, year)
-      sig { returns(Dodopayments::TimeInterval::OrSymbol) }
+      sig { returns(Dodopayments::TimeInterval::TaggedSymbol) }
       attr_accessor :subscription_period_interval
 
       # Indicates if the recurring_pre_tax_amount is tax inclusive
@@ -113,6 +113,10 @@ module Dodopayments
       # The discount id if discount is applied
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_id
+
+      # Timestamp when the subscription will expire
+      sig { returns(T.nilable(Time)) }
+      attr_accessor :expires_at
 
       # Response struct representing subscription details
       sig do
@@ -140,7 +144,8 @@ module Dodopayments
           trial_period_days: Integer,
           cancelled_at: T.nilable(Time),
           discount_cycles_remaining: T.nilable(Integer),
-          discount_id: T.nilable(String)
+          discount_id: T.nilable(String),
+          expires_at: T.nilable(Time)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -193,7 +198,9 @@ module Dodopayments
         # Number of remaining discount cycles if discount is applied
         discount_cycles_remaining: nil,
         # The discount id if discount is applied
-        discount_id: nil
+        discount_id: nil,
+        # Timestamp when the subscription will expire
+        expires_at: nil
       )
       end
 
@@ -204,26 +211,29 @@ module Dodopayments
             billing: Dodopayments::BillingAddress,
             cancel_at_next_billing_date: T::Boolean,
             created_at: Time,
-            currency: Dodopayments::Currency::OrSymbol,
+            currency: Dodopayments::Currency::TaggedSymbol,
             customer: Dodopayments::CustomerLimitedDetails,
             metadata: T::Hash[Symbol, String],
             next_billing_date: Time,
             on_demand: T::Boolean,
             payment_frequency_count: Integer,
-            payment_frequency_interval: Dodopayments::TimeInterval::OrSymbol,
+            payment_frequency_interval:
+              Dodopayments::TimeInterval::TaggedSymbol,
             previous_billing_date: Time,
             product_id: String,
             quantity: Integer,
             recurring_pre_tax_amount: Integer,
-            status: Dodopayments::SubscriptionStatus::OrSymbol,
+            status: Dodopayments::SubscriptionStatus::TaggedSymbol,
             subscription_id: String,
             subscription_period_count: Integer,
-            subscription_period_interval: Dodopayments::TimeInterval::OrSymbol,
+            subscription_period_interval:
+              Dodopayments::TimeInterval::TaggedSymbol,
             tax_inclusive: T::Boolean,
             trial_period_days: Integer,
             cancelled_at: T.nilable(Time),
             discount_cycles_remaining: T.nilable(Integer),
-            discount_id: T.nilable(String)
+            discount_id: T.nilable(String),
+            expires_at: T.nilable(Time)
           }
         )
       end

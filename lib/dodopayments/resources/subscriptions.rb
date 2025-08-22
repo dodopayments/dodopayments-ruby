@@ -26,7 +26,7 @@ module Dodopayments
       #
       # @param metadata [Hash{Symbol=>String}] Additional metadata for the subscription
       #
-      # @param on_demand [Dodopayments::Models::SubscriptionCreateParams::OnDemand, nil]
+      # @param on_demand [Dodopayments::Models::OnDemandSubscription, nil]
       #
       # @param payment_link [Boolean, nil] If true, generates a payment link.
       #
@@ -78,7 +78,7 @@ module Dodopayments
       #
       # @param billing [Dodopayments::Models::BillingAddress, nil]
       #
-      # @param cancel_at_next_billing_date [Boolean, nil]
+      # @param cancel_at_next_billing_date [Boolean, nil] When set, the subscription will remain active until the end of billing period
       #
       # @param disable_on_demand [Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, nil]
       #

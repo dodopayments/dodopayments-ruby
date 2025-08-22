@@ -18,7 +18,7 @@ module Dodopayments
           metadata: T.nilable(T::Hash[Symbol, String]),
           rate_limit: T.nilable(Integer),
           request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Models::WebhookCreateResponse)
+        ).returns(Dodopayments::WebhookDetails)
       end
       def create(
         # Url of the webhook
@@ -48,7 +48,7 @@ module Dodopayments
         params(
           webhook_id: String,
           request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Models::WebhookRetrieveResponse)
+        ).returns(Dodopayments::WebhookDetails)
       end
       def retrieve(webhook_id, request_options: {})
       end
@@ -65,7 +65,7 @@ module Dodopayments
           rate_limit: T.nilable(Integer),
           url: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Models::WebhookUpdateResponse)
+        ).returns(Dodopayments::WebhookDetails)
       end
       def update(
         webhook_id,
@@ -95,7 +95,7 @@ module Dodopayments
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::CursorPagePagination[
-            Dodopayments::Models::WebhookListResponse
+            Dodopayments::WebhookDetails
           ]
         )
       end

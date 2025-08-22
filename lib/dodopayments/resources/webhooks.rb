@@ -31,7 +31,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::WebhookCreateResponse]
+      # @return [Dodopayments::Models::WebhookDetails]
       #
       # @see Dodopayments::Models::WebhookCreateParams
       def create(params)
@@ -40,7 +40,7 @@ module Dodopayments
           method: :post,
           path: "webhooks",
           body: parsed,
-          model: Dodopayments::Models::WebhookCreateResponse,
+          model: Dodopayments::WebhookDetails,
           options: options
         )
       end
@@ -52,14 +52,14 @@ module Dodopayments
       # @param webhook_id [String]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::WebhookRetrieveResponse]
+      # @return [Dodopayments::Models::WebhookDetails]
       #
       # @see Dodopayments::Models::WebhookRetrieveParams
       def retrieve(webhook_id, params = {})
         @client.request(
           method: :get,
           path: ["webhooks/%1$s", webhook_id],
-          model: Dodopayments::Models::WebhookRetrieveResponse,
+          model: Dodopayments::WebhookDetails,
           options: params[:request_options]
         )
       end
@@ -87,7 +87,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::WebhookUpdateResponse]
+      # @return [Dodopayments::Models::WebhookDetails]
       #
       # @see Dodopayments::Models::WebhookUpdateParams
       def update(webhook_id, params = {})
@@ -96,7 +96,7 @@ module Dodopayments
           method: :patch,
           path: ["webhooks/%1$s", webhook_id],
           body: parsed,
-          model: Dodopayments::Models::WebhookUpdateResponse,
+          model: Dodopayments::WebhookDetails,
           options: options
         )
       end
@@ -111,7 +111,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Internal::CursorPagePagination<Dodopayments::Models::WebhookListResponse>]
+      # @return [Dodopayments::Internal::CursorPagePagination<Dodopayments::Models::WebhookDetails>]
       #
       # @see Dodopayments::Models::WebhookListParams
       def list(params = {})
@@ -121,7 +121,7 @@ module Dodopayments
           path: "webhooks",
           query: parsed,
           page: Dodopayments::Internal::CursorPagePagination,
-          model: Dodopayments::Models::WebhookListResponse,
+          model: Dodopayments::WebhookDetails,
           options: options
         )
       end

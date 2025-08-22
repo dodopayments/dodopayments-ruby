@@ -24,6 +24,9 @@ module Dodopayments
     # @return [String]
     attr_reader :bearer_token
 
+    # @return [Dodopayments::Resources::CheckoutSessions]
+    attr_reader :checkout_sessions
+
     # @return [Dodopayments::Resources::Payments]
     attr_reader :payments
 
@@ -74,9 +77,6 @@ module Dodopayments
 
     # @return [Dodopayments::Resources::Webhooks]
     attr_reader :webhooks
-
-    # @return [Dodopayments::Resources::YourWebhookURL]
-    attr_reader :your_webhook_url
 
     # @api private
     #
@@ -136,6 +136,7 @@ module Dodopayments
         max_retry_delay: max_retry_delay
       )
 
+      @checkout_sessions = Dodopayments::Resources::CheckoutSessions.new(client: self)
       @payments = Dodopayments::Resources::Payments.new(client: self)
       @subscriptions = Dodopayments::Resources::Subscriptions.new(client: self)
       @invoices = Dodopayments::Resources::Invoices.new(client: self)
@@ -153,7 +154,6 @@ module Dodopayments
       @addons = Dodopayments::Resources::Addons.new(client: self)
       @brands = Dodopayments::Resources::Brands.new(client: self)
       @webhooks = Dodopayments::Resources::Webhooks.new(client: self)
-      @your_webhook_url = Dodopayments::Resources::YourWebhookURL.new(client: self)
     end
   end
 end

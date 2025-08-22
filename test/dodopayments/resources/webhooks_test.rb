@@ -7,7 +7,7 @@ class Dodopayments::Test::Resources::WebhooksTest < Dodopayments::Test::Resource
     response = @dodo_payments.webhooks.create(url: "url")
 
     assert_pattern do
-      response => Dodopayments::Models::WebhookCreateResponse
+      response => Dodopayments::WebhookDetails
     end
 
     assert_pattern do
@@ -29,7 +29,7 @@ class Dodopayments::Test::Resources::WebhooksTest < Dodopayments::Test::Resource
     response = @dodo_payments.webhooks.retrieve("webhook_id")
 
     assert_pattern do
-      response => Dodopayments::Models::WebhookRetrieveResponse
+      response => Dodopayments::WebhookDetails
     end
 
     assert_pattern do
@@ -51,7 +51,7 @@ class Dodopayments::Test::Resources::WebhooksTest < Dodopayments::Test::Resource
     response = @dodo_payments.webhooks.update("webhook_id")
 
     assert_pattern do
-      response => Dodopayments::Models::WebhookUpdateResponse
+      response => Dodopayments::WebhookDetails
     end
 
     assert_pattern do
@@ -80,7 +80,7 @@ class Dodopayments::Test::Resources::WebhooksTest < Dodopayments::Test::Resource
     return if row.nil?
 
     assert_pattern do
-      row => Dodopayments::Models::WebhookListResponse
+      row => Dodopayments::WebhookDetails
     end
 
     assert_pattern do

@@ -11,7 +11,7 @@ module Dodopayments
         billing_currency: Dodopayments::Models::currency?,
         discount_code: String?,
         metadata: ::Hash[Symbol, String],
-        on_demand: Dodopayments::SubscriptionCreateParams::OnDemand?,
+        on_demand: Dodopayments::OnDemandSubscription?,
         payment_link: bool?,
         return_url: String?,
         show_saved_payment_methods: bool,
@@ -44,7 +44,7 @@ module Dodopayments
 
       def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
-      attr_accessor on_demand: Dodopayments::SubscriptionCreateParams::OnDemand?
+      attr_accessor on_demand: Dodopayments::OnDemandSubscription?
 
       attr_accessor payment_link: bool?
 
@@ -68,7 +68,7 @@ module Dodopayments
         ?billing_currency: Dodopayments::Models::currency?,
         ?discount_code: String?,
         ?metadata: ::Hash[Symbol, String],
-        ?on_demand: Dodopayments::SubscriptionCreateParams::OnDemand?,
+        ?on_demand: Dodopayments::OnDemandSubscription?,
         ?payment_link: bool?,
         ?return_url: String?,
         ?show_saved_payment_methods: bool,
@@ -87,7 +87,7 @@ module Dodopayments
         billing_currency: Dodopayments::Models::currency?,
         discount_code: String?,
         metadata: ::Hash[Symbol, String],
-        on_demand: Dodopayments::SubscriptionCreateParams::OnDemand?,
+        on_demand: Dodopayments::OnDemandSubscription?,
         payment_link: bool?,
         return_url: String?,
         show_saved_payment_methods: bool,
@@ -95,43 +95,6 @@ module Dodopayments
         trial_period_days: Integer?,
         request_options: Dodopayments::RequestOptions
       }
-
-      type on_demand =
-        {
-          mandate_only: bool,
-          adaptive_currency_fees_inclusive: bool?,
-          product_currency: Dodopayments::Models::currency?,
-          product_description: String?,
-          product_price: Integer?
-        }
-
-      class OnDemand < Dodopayments::Internal::Type::BaseModel
-        attr_accessor mandate_only: bool
-
-        attr_accessor adaptive_currency_fees_inclusive: bool?
-
-        attr_accessor product_currency: Dodopayments::Models::currency?
-
-        attr_accessor product_description: String?
-
-        attr_accessor product_price: Integer?
-
-        def initialize: (
-          mandate_only: bool,
-          ?adaptive_currency_fees_inclusive: bool?,
-          ?product_currency: Dodopayments::Models::currency?,
-          ?product_description: String?,
-          ?product_price: Integer?
-        ) -> void
-
-        def to_hash: -> {
-          mandate_only: bool,
-          adaptive_currency_fees_inclusive: bool?,
-          product_currency: Dodopayments::Models::currency?,
-          product_description: String?,
-          product_price: Integer?
-        }
-      end
     end
   end
 end

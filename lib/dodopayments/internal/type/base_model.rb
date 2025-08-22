@@ -438,9 +438,11 @@ module Dodopayments
         # @return [Hash{Symbol=>Object}]
         #
         # @example
-        #   # `attach_existing_customer` is a `Dodopayments::AttachExistingCustomer`
-        #   attach_existing_customer => {
-        #     customer_id: customer_id
+        #   # `checkout_session_request` is a `Dodopayments::CheckoutSessionRequest`
+        #   checkout_session_request => {
+        #     product_cart: product_cart,
+        #     allowed_payment_method_types: allowed_payment_method_types,
+        #     billing_address: billing_address
         #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)

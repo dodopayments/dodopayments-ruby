@@ -11,7 +11,7 @@ module Dodopayments
         ?billing_currency: Dodopayments::Models::currency?,
         ?discount_code: String?,
         ?metadata: ::Hash[Symbol, String],
-        ?on_demand: Dodopayments::SubscriptionCreateParams::OnDemand?,
+        ?on_demand: Dodopayments::OnDemandSubscription?,
         ?payment_link: bool?,
         ?return_url: String?,
         ?show_saved_payment_methods: bool,
