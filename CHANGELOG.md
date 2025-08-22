@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.51.0 (2025-08-22)
+
+Full Changelog: [v1.49.0...v1.51.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.49.0...v1.51.0)
+
+### Features
+
+* **api:** updated example ([69716fa](https://github.com/dodopayments/dodopayments-ruby/commit/69716fa0a72aed7d3b725fbe8ec395a0174c992e))
+* **api:** updated openapi spec to v1.51.0 and added checkout sessions ([5704e81](https://github.com/dodopayments/dodopayments-ruby/commit/5704e81025036b184d5fec8a9958fcd07ed11a3d))
+
+
+### Bug Fixes
+
+* bump sorbet version and fix new type errors from the breaking change ([16a3d4d](https://github.com/dodopayments/dodopayments-ruby/commit/16a3d4d2aea39fd0b8b4fef79b5abb8ac5e5a7d6))
+
 ## 1.49.0 (2025-08-13)
 
 Full Changelog: [v1.47.0...v1.49.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.47.0...v1.49.0)
