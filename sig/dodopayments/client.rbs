@@ -15,6 +15,8 @@ module Dodopayments
 
     attr_reader bearer_token: String
 
+    attr_reader checkout_sessions: Dodopayments::Resources::CheckoutSessions
+
     attr_reader payments: Dodopayments::Resources::Payments
 
     attr_reader subscriptions: Dodopayments::Resources::Subscriptions
@@ -48,8 +50,6 @@ module Dodopayments
     attr_reader brands: Dodopayments::Resources::Brands
 
     attr_reader webhooks: Dodopayments::Resources::Webhooks
-
-    attr_reader your_webhook_url: Dodopayments::Resources::YourWebhookURL
 
     private def auth_headers: -> ::Hash[String, String]
 

@@ -281,13 +281,13 @@ Enum parameters have a "relaxed" type, so you can either pass in enum constants 
 
 ```ruby
 # Using the enum constants preserves the tagged type information:
-dodo_payments.payments.create(
+dodo_payments.checkout_sessions.create(
   billing_currency: Dodopayments::Currency::AED,
   # …
 )
 
 # Literal values are also permissible:
-dodo_payments.payments.create(
+dodo_payments.checkout_sessions.create(
   billing_currency: :AED,
   # …
 )

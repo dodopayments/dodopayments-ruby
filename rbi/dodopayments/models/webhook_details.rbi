@@ -2,13 +2,10 @@
 
 module Dodopayments
   module Models
-    class WebhookUpdateResponse < Dodopayments::Internal::Type::BaseModel
+    class WebhookDetails < Dodopayments::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
-          T.any(
-            Dodopayments::Models::WebhookUpdateResponse,
-            Dodopayments::Internal::AnyHash
-          )
+          T.any(Dodopayments::WebhookDetails, Dodopayments::Internal::AnyHash)
         end
 
       # The webhook's ID.
