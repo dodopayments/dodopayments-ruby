@@ -33,13 +33,9 @@ dodo_payments = Dodopayments::Client.new(
   environment: "test_mode" # defaults to "live_mode"
 )
 
-payment = dodo_payments.payments.create(
-  billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
-  customer: {customer_id: "customer_id"},
-  product_cart: [{product_id: "product_id", quantity: 0}]
-)
+checkout_session_response = dodo_payments.checkout_sessions.create(product_cart: [{product_id: "product_id", quantity: 0}])
 
-puts(payment.payment_id)
+puts(checkout_session_response.session_id)
 ```
 
 ### Pagination
@@ -76,11 +72,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```ruby
 begin
-  payment = dodo_payments.payments.create(
-    billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
-    customer: {customer_id: "customer_id"},
-    product_cart: [{product_id: "product_id", quantity: 0}]
-  )
+  checkout_session = dodo_payments.checkout_sessions.create(product_cart: [{product_id: "product_id", quantity: 0}])
 rescue Dodopayments::Errors::APIConnectionError => e
   puts("The server could not be reached")
   puts(e.cause)  # an underlying Exception, likely raised within `net/http`
@@ -123,9 +115,7 @@ dodo_payments = Dodopayments::Client.new(
 )
 
 # Or, configure per-request:
-dodo_payments.payments.create(
-  billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
-  customer: {customer_id: "customer_id"},
+dodo_payments.checkout_sessions.create(
   product_cart: [{product_id: "product_id", quantity: 0}],
   request_options: {max_retries: 5}
 )
@@ -142,9 +132,7 @@ dodo_payments = Dodopayments::Client.new(
 )
 
 # Or, configure per-request:
-dodo_payments.payments.create(
-  billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
-  customer: {customer_id: "customer_id"},
+dodo_payments.checkout_sessions.create(
   product_cart: [{product_id: "product_id", quantity: 0}],
   request_options: {timeout: 5}
 )
@@ -177,10 +165,8 @@ You can send undocumented parameters to any endpoint, and read undocumented resp
 Note: the `extra_` parameters of the same name overrides the documented parameters.
 
 ```ruby
-payment =
-  dodo_payments.payments.create(
-    billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
-    customer: {customer_id: "customer_id"},
+checkout_session_response =
+  dodo_payments.checkout_sessions.create(
     product_cart: [{product_id: "product_id", quantity: 0}],
     request_options: {
       extra_query: {my_query_parameter: value},
@@ -189,7 +175,7 @@ payment =
     }
   )
 
-puts(payment[:my_undocumented_property])
+puts(checkout_session_response[:my_undocumented_property])
 ```
 
 #### Undocumented request params
@@ -227,16 +213,8 @@ This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitio
 You can provide typesafe request parameters like so:
 
 ```ruby
-dodo_payments.payments.create(
-  billing: Dodopayments::BillingAddress.new(
-    city: "city",
-    country: "AF",
-    state: "state",
-    street: "street",
-    zipcode: "zipcode"
-  ),
-  customer: Dodopayments::AttachExistingCustomer.new(customer_id: "customer_id"),
-  product_cart: [Dodopayments::OneTimeProductCartItem.new(product_id: "product_id", quantity: 0)]
+dodo_payments.checkout_sessions.create(
+  product_cart: [Dodopayments::CheckoutSessionRequest::ProductCart.new(product_id: "product_id", quantity: 0)]
 )
 ```
 
@@ -244,25 +222,13 @@ Or, equivalently:
 
 ```ruby
 # Hashes work, but are not typesafe:
-dodo_payments.payments.create(
-  billing: {city: "city", country: "AF", state: "state", street: "street", zipcode: "zipcode"},
-  customer: {customer_id: "customer_id"},
-  product_cart: [{product_id: "product_id", quantity: 0}]
-)
+dodo_payments.checkout_sessions.create(product_cart: [{product_id: "product_id", quantity: 0}])
 
 # You can also splat a full Params class:
-params = Dodopayments::PaymentCreateParams.new(
-  billing: Dodopayments::BillingAddress.new(
-    city: "city",
-    country: "AF",
-    state: "state",
-    street: "street",
-    zipcode: "zipcode"
-  ),
-  customer: Dodopayments::AttachExistingCustomer.new(customer_id: "customer_id"),
-  product_cart: [Dodopayments::OneTimeProductCartItem.new(product_id: "product_id", quantity: 0)]
+params = Dodopayments::CheckoutSessionCreateParams.new(
+  product_cart: [Dodopayments::CheckoutSessionRequest::ProductCart.new(product_id: "product_id", quantity: 0)]
 )
-dodo_payments.payments.create(**params)
+dodo_payments.checkout_sessions.create(**params)
 ```
 
 ### Enums

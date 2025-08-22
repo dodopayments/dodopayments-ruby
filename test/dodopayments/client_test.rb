@@ -42,47 +42,37 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_default_request_default_retry_attempts
-    stub_request(:post, "http://localhost/payments").to_return_json(status: 500, body: {})
+    stub_request(:post, "http://localhost/checkouts").to_return_json(status: 500, body: {})
 
     dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
-      dodo_payments.payments.create(
-        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-        customer: {customer_id: "customer_id"},
-        product_cart: [{product_id: "product_id", quantity: 0}]
-      )
+      dodo_payments.checkout_sessions.create(product_cart: [{product_id: "product_id", quantity: 0}])
     end
 
     assert_requested(:any, /./, times: 3)
   end
 
   def test_client_given_request_default_retry_attempts
-    stub_request(:post, "http://localhost/payments").to_return_json(status: 500, body: {})
+    stub_request(:post, "http://localhost/checkouts").to_return_json(status: 500, body: {})
 
     dodo_payments =
       Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token", max_retries: 3)
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
-      dodo_payments.payments.create(
-        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-        customer: {customer_id: "customer_id"},
-        product_cart: [{product_id: "product_id", quantity: 0}]
-      )
+      dodo_payments.checkout_sessions.create(product_cart: [{product_id: "product_id", quantity: 0}])
     end
 
     assert_requested(:any, /./, times: 4)
   end
 
   def test_client_default_request_given_retry_attempts
-    stub_request(:post, "http://localhost/payments").to_return_json(status: 500, body: {})
+    stub_request(:post, "http://localhost/checkouts").to_return_json(status: 500, body: {})
 
     dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
-      dodo_payments.payments.create(
-        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-        customer: {customer_id: "customer_id"},
+      dodo_payments.checkout_sessions.create(
         product_cart: [{product_id: "product_id", quantity: 0}],
         request_options: {max_retries: 3}
       )
@@ -92,15 +82,13 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_given_request_given_retry_attempts
-    stub_request(:post, "http://localhost/payments").to_return_json(status: 500, body: {})
+    stub_request(:post, "http://localhost/checkouts").to_return_json(status: 500, body: {})
 
     dodo_payments =
       Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token", max_retries: 3)
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
-      dodo_payments.payments.create(
-        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-        customer: {customer_id: "customer_id"},
+      dodo_payments.checkout_sessions.create(
         product_cart: [{product_id: "product_id", quantity: 0}],
         request_options: {max_retries: 4}
       )
@@ -110,7 +98,7 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_retry_after_seconds
-    stub_request(:post, "http://localhost/payments").to_return_json(
+    stub_request(:post, "http://localhost/checkouts").to_return_json(
       status: 500,
       headers: {"retry-after" => "1.3"},
       body: {}
@@ -120,11 +108,7 @@ class DodopaymentsTest < Minitest::Test
       Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token", max_retries: 1)
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
-      dodo_payments.payments.create(
-        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-        customer: {customer_id: "customer_id"},
-        product_cart: [{product_id: "product_id", quantity: 0}]
-      )
+      dodo_payments.checkout_sessions.create(product_cart: [{product_id: "product_id", quantity: 0}])
     end
 
     assert_requested(:any, /./, times: 2)
@@ -132,7 +116,7 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_retry_after_date
-    stub_request(:post, "http://localhost/payments").to_return_json(
+    stub_request(:post, "http://localhost/checkouts").to_return_json(
       status: 500,
       headers: {"retry-after" => (Time.now + 10).httpdate},
       body: {}
@@ -143,11 +127,7 @@ class DodopaymentsTest < Minitest::Test
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
       Thread.current.thread_variable_set(:time_now, Time.now)
-      dodo_payments.payments.create(
-        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-        customer: {customer_id: "customer_id"},
-        product_cart: [{product_id: "product_id", quantity: 0}]
-      )
+      dodo_payments.checkout_sessions.create(product_cart: [{product_id: "product_id", quantity: 0}])
       Thread.current.thread_variable_set(:time_now, nil)
     end
 
@@ -156,7 +136,7 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_retry_after_ms
-    stub_request(:post, "http://localhost/payments").to_return_json(
+    stub_request(:post, "http://localhost/checkouts").to_return_json(
       status: 500,
       headers: {"retry-after-ms" => "1300"},
       body: {}
@@ -166,11 +146,7 @@ class DodopaymentsTest < Minitest::Test
       Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token", max_retries: 1)
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
-      dodo_payments.payments.create(
-        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-        customer: {customer_id: "customer_id"},
-        product_cart: [{product_id: "product_id", quantity: 0}]
-      )
+      dodo_payments.checkout_sessions.create(product_cart: [{product_id: "product_id", quantity: 0}])
     end
 
     assert_requested(:any, /./, times: 2)
@@ -178,16 +154,12 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_retry_count_header
-    stub_request(:post, "http://localhost/payments").to_return_json(status: 500, body: {})
+    stub_request(:post, "http://localhost/checkouts").to_return_json(status: 500, body: {})
 
     dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
-      dodo_payments.payments.create(
-        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-        customer: {customer_id: "customer_id"},
-        product_cart: [{product_id: "product_id", quantity: 0}]
-      )
+      dodo_payments.checkout_sessions.create(product_cart: [{product_id: "product_id", quantity: 0}])
     end
 
     3.times do
@@ -196,14 +168,12 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_omit_retry_count_header
-    stub_request(:post, "http://localhost/payments").to_return_json(status: 500, body: {})
+    stub_request(:post, "http://localhost/checkouts").to_return_json(status: 500, body: {})
 
     dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
-      dodo_payments.payments.create(
-        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-        customer: {customer_id: "customer_id"},
+      dodo_payments.checkout_sessions.create(
         product_cart: [{product_id: "product_id", quantity: 0}],
         request_options: {extra_headers: {"x-stainless-retry-count" => nil}}
       )
@@ -215,14 +185,12 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_overwrite_retry_count_header
-    stub_request(:post, "http://localhost/payments").to_return_json(status: 500, body: {})
+    stub_request(:post, "http://localhost/checkouts").to_return_json(status: 500, body: {})
 
     dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
 
     assert_raises(Dodopayments::Errors::InternalServerError) do
-      dodo_payments.payments.create(
-        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-        customer: {customer_id: "customer_id"},
+      dodo_payments.checkout_sessions.create(
         product_cart: [{product_id: "product_id", quantity: 0}],
         request_options: {extra_headers: {"x-stainless-retry-count" => "42"}}
       )
@@ -232,7 +200,7 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_redirect_307
-    stub_request(:post, "http://localhost/payments").to_return_json(
+    stub_request(:post, "http://localhost/checkouts").to_return_json(
       status: 307,
       headers: {"location" => "/redirected"},
       body: {}
@@ -245,9 +213,7 @@ class DodopaymentsTest < Minitest::Test
     dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
 
     assert_raises(Dodopayments::Errors::APIConnectionError) do
-      dodo_payments.payments.create(
-        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-        customer: {customer_id: "customer_id"},
+      dodo_payments.checkout_sessions.create(
         product_cart: [{product_id: "product_id", quantity: 0}],
         request_options: {extra_headers: {}}
       )
@@ -266,7 +232,7 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_redirect_303
-    stub_request(:post, "http://localhost/payments").to_return_json(
+    stub_request(:post, "http://localhost/checkouts").to_return_json(
       status: 303,
       headers: {"location" => "/redirected"},
       body: {}
@@ -279,9 +245,7 @@ class DodopaymentsTest < Minitest::Test
     dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
 
     assert_raises(Dodopayments::Errors::APIConnectionError) do
-      dodo_payments.payments.create(
-        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-        customer: {customer_id: "customer_id"},
+      dodo_payments.checkout_sessions.create(
         product_cart: [{product_id: "product_id", quantity: 0}],
         request_options: {extra_headers: {}}
       )
@@ -295,7 +259,7 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_redirect_auth_keep_same_origin
-    stub_request(:post, "http://localhost/payments").to_return_json(
+    stub_request(:post, "http://localhost/checkouts").to_return_json(
       status: 307,
       headers: {"location" => "/redirected"},
       body: {}
@@ -308,9 +272,7 @@ class DodopaymentsTest < Minitest::Test
     dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
 
     assert_raises(Dodopayments::Errors::APIConnectionError) do
-      dodo_payments.payments.create(
-        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-        customer: {customer_id: "customer_id"},
+      dodo_payments.checkout_sessions.create(
         product_cart: [{product_id: "product_id", quantity: 0}],
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
       )
@@ -327,7 +289,7 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_client_redirect_auth_strip_cross_origin
-    stub_request(:post, "http://localhost/payments").to_return_json(
+    stub_request(:post, "http://localhost/checkouts").to_return_json(
       status: 307,
       headers: {"location" => "https://example.com/redirected"},
       body: {}
@@ -340,9 +302,7 @@ class DodopaymentsTest < Minitest::Test
     dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
 
     assert_raises(Dodopayments::Errors::APIConnectionError) do
-      dodo_payments.payments.create(
-        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-        customer: {customer_id: "customer_id"},
+      dodo_payments.checkout_sessions.create(
         product_cart: [{product_id: "product_id", quantity: 0}],
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
       )
@@ -355,15 +315,11 @@ class DodopaymentsTest < Minitest::Test
   end
 
   def test_default_headers
-    stub_request(:post, "http://localhost/payments").to_return_json(status: 200, body: {})
+    stub_request(:post, "http://localhost/checkouts").to_return_json(status: 200, body: {})
 
     dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
 
-    dodo_payments.payments.create(
-      billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
-      customer: {customer_id: "customer_id"},
-      product_cart: [{product_id: "product_id", quantity: 0}]
-    )
+    dodo_payments.checkout_sessions.create(product_cart: [{product_id: "product_id", quantity: 0}])
 
     assert_requested(:any, /./) do |req|
       headers = req.headers.transform_keys(&:downcase).fetch_values("accept", "content-type")
