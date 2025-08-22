@@ -25,7 +25,8 @@ module Dodopayments
         trial_period_days: Integer,
         cancelled_at: Time?,
         discount_cycles_remaining: Integer?,
-        discount_id: String?
+        discount_id: String?,
+        expires_at: Time?
       }
 
     class Subscription < Dodopayments::Internal::Type::BaseModel
@@ -77,6 +78,8 @@ module Dodopayments
 
       attr_accessor discount_id: String?
 
+      attr_accessor expires_at: Time?
+
       def initialize: (
         addons: ::Array[Dodopayments::AddonCartResponseItem],
         billing: Dodopayments::BillingAddress,
@@ -101,7 +104,8 @@ module Dodopayments
         trial_period_days: Integer,
         ?cancelled_at: Time?,
         ?discount_cycles_remaining: Integer?,
-        ?discount_id: String?
+        ?discount_id: String?,
+        ?expires_at: Time?
       ) -> void
 
       def to_hash: -> {
@@ -128,7 +132,8 @@ module Dodopayments
         trial_period_days: Integer,
         cancelled_at: Time?,
         discount_cycles_remaining: Integer?,
-        discount_id: String?
+        discount_id: String?,
+        expires_at: Time?
       }
     end
   end

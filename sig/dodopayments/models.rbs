@@ -31,6 +31,12 @@ module Dodopayments
 
   class BrandUpdateParams = Dodopayments::Models::BrandUpdateParams
 
+  class CheckoutSessionCreateParams = Dodopayments::Models::CheckoutSessionCreateParams
+
+  class CheckoutSessionRequest = Dodopayments::Models::CheckoutSessionRequest
+
+  class CheckoutSessionResponse = Dodopayments::Models::CheckoutSessionResponse
+
   module CountryCode = Dodopayments::Models::CountryCode
 
   class CreateNewCustomer = Dodopayments::Models::CreateNewCustomer
@@ -115,6 +121,8 @@ module Dodopayments
 
   class NewCustomer = Dodopayments::Models::NewCustomer
 
+  class OnDemandSubscription = Dodopayments::Models::OnDemandSubscription
+
   class OneTimeProductCartItem = Dodopayments::Models::OneTimeProductCartItem
 
   class Payment = Dodopayments::Models::Payment
@@ -185,6 +193,8 @@ module Dodopayments
 
   class WebhookDeleteParams = Dodopayments::Models::WebhookDeleteParams
 
+  class WebhookDetails = Dodopayments::Models::WebhookDetails
+
   module WebhookEventType = Dodopayments::Models::WebhookEventType
 
   class WebhookListParams = Dodopayments::Models::WebhookListParams
@@ -198,6 +208,4 @@ module Dodopayments
   module Webhooks = Dodopayments::Models::Webhooks
 
   class WebhookUpdateParams = Dodopayments::Models::WebhookUpdateParams
-
-  class YourWebhookURLCreateParams = Dodopayments::Models::YourWebhookURLCreateParams
 end

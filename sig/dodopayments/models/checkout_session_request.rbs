@@ -1,0 +1,277 @@
+module Dodopayments
+  module Models
+    type checkout_session_request =
+      {
+        product_cart: ::Array[Dodopayments::CheckoutSessionRequest::ProductCart],
+        allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
+        billing_address: Dodopayments::CheckoutSessionRequest::BillingAddress?,
+        billing_currency: Dodopayments::Models::currency?,
+        confirm: bool,
+        customer: Dodopayments::Models::customer_request?,
+        customization: Dodopayments::CheckoutSessionRequest::Customization,
+        discount_code: String?,
+        feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
+        metadata: ::Hash[Symbol, String]?,
+        return_url: String?,
+        show_saved_payment_methods: bool,
+        subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?
+      }
+
+    class CheckoutSessionRequest < Dodopayments::Internal::Type::BaseModel
+      attr_accessor product_cart: ::Array[Dodopayments::CheckoutSessionRequest::ProductCart]
+
+      attr_accessor allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?
+
+      attr_accessor billing_address: Dodopayments::CheckoutSessionRequest::BillingAddress?
+
+      attr_accessor billing_currency: Dodopayments::Models::currency?
+
+      attr_reader confirm: bool?
+
+      def confirm=: (bool) -> bool
+
+      attr_accessor customer: Dodopayments::Models::customer_request?
+
+      attr_reader customization: Dodopayments::CheckoutSessionRequest::Customization?
+
+      def customization=: (
+        Dodopayments::CheckoutSessionRequest::Customization
+      ) -> Dodopayments::CheckoutSessionRequest::Customization
+
+      attr_accessor discount_code: String?
+
+      attr_reader feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags?
+
+      def feature_flags=: (
+        Dodopayments::CheckoutSessionRequest::FeatureFlags
+      ) -> Dodopayments::CheckoutSessionRequest::FeatureFlags
+
+      attr_accessor metadata: ::Hash[Symbol, String]?
+
+      attr_accessor return_url: String?
+
+      attr_reader show_saved_payment_methods: bool?
+
+      def show_saved_payment_methods=: (bool) -> bool
+
+      attr_accessor subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?
+
+      def initialize: (
+        product_cart: ::Array[Dodopayments::CheckoutSessionRequest::ProductCart],
+        ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
+        ?billing_address: Dodopayments::CheckoutSessionRequest::BillingAddress?,
+        ?billing_currency: Dodopayments::Models::currency?,
+        ?confirm: bool,
+        ?customer: Dodopayments::Models::customer_request?,
+        ?customization: Dodopayments::CheckoutSessionRequest::Customization,
+        ?discount_code: String?,
+        ?feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
+        ?metadata: ::Hash[Symbol, String]?,
+        ?return_url: String?,
+        ?show_saved_payment_methods: bool,
+        ?subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?
+      ) -> void
+
+      def to_hash: -> {
+        product_cart: ::Array[Dodopayments::CheckoutSessionRequest::ProductCart],
+        allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
+        billing_address: Dodopayments::CheckoutSessionRequest::BillingAddress?,
+        billing_currency: Dodopayments::Models::currency?,
+        confirm: bool,
+        customer: Dodopayments::Models::customer_request?,
+        customization: Dodopayments::CheckoutSessionRequest::Customization,
+        discount_code: String?,
+        feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
+        metadata: ::Hash[Symbol, String]?,
+        return_url: String?,
+        show_saved_payment_methods: bool,
+        subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?
+      }
+
+      type product_cart =
+        {
+          product_id: String,
+          quantity: Integer,
+          addons: ::Array[Dodopayments::AttachAddon]?,
+          amount: Integer?
+        }
+
+      class ProductCart < Dodopayments::Internal::Type::BaseModel
+        attr_accessor product_id: String
+
+        attr_accessor quantity: Integer
+
+        attr_accessor addons: ::Array[Dodopayments::AttachAddon]?
+
+        attr_accessor amount: Integer?
+
+        def initialize: (
+          product_id: String,
+          quantity: Integer,
+          ?addons: ::Array[Dodopayments::AttachAddon]?,
+          ?amount: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          product_id: String,
+          quantity: Integer,
+          addons: ::Array[Dodopayments::AttachAddon]?,
+          amount: Integer?
+        }
+      end
+
+      type billing_address =
+        {
+          country: Dodopayments::Models::country_code,
+          city: String?,
+          state: String?,
+          street: String?,
+          zipcode: String?
+        }
+
+      class BillingAddress < Dodopayments::Internal::Type::BaseModel
+        attr_accessor country: Dodopayments::Models::country_code
+
+        attr_accessor city: String?
+
+        attr_accessor state: String?
+
+        attr_accessor street: String?
+
+        attr_accessor zipcode: String?
+
+        def initialize: (
+          country: Dodopayments::Models::country_code,
+          ?city: String?,
+          ?state: String?,
+          ?street: String?,
+          ?zipcode: String?
+        ) -> void
+
+        def to_hash: -> {
+          country: Dodopayments::Models::country_code,
+          city: String?,
+          state: String?,
+          street: String?,
+          zipcode: String?
+        }
+      end
+
+      type customization =
+        {
+          show_on_demand_tag: bool,
+          show_order_details: bool,
+          theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme
+        }
+
+      class Customization < Dodopayments::Internal::Type::BaseModel
+        attr_reader show_on_demand_tag: bool?
+
+        def show_on_demand_tag=: (bool) -> bool
+
+        attr_reader show_order_details: bool?
+
+        def show_order_details=: (bool) -> bool
+
+        attr_reader theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme?
+
+        def theme=: (
+          Dodopayments::Models::CheckoutSessionRequest::Customization::theme
+        ) -> Dodopayments::Models::CheckoutSessionRequest::Customization::theme
+
+        def initialize: (
+          ?show_on_demand_tag: bool,
+          ?show_order_details: bool,
+          ?theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme
+        ) -> void
+
+        def to_hash: -> {
+          show_on_demand_tag: bool,
+          show_order_details: bool,
+          theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme
+        }
+
+        type theme = :dark | :light | :system
+
+        module Theme
+          extend Dodopayments::Internal::Type::Enum
+
+          DARK: :dark
+          LIGHT: :light
+          SYSTEM: :system
+
+          def self?.values: -> ::Array[Dodopayments::Models::CheckoutSessionRequest::Customization::theme]
+        end
+      end
+
+      type feature_flags =
+        {
+          allow_currency_selection: bool,
+          allow_discount_code: bool,
+          allow_phone_number_collection: bool,
+          allow_tax_id: bool,
+          always_create_new_customer: bool
+        }
+
+      class FeatureFlags < Dodopayments::Internal::Type::BaseModel
+        attr_reader allow_currency_selection: bool?
+
+        def allow_currency_selection=: (bool) -> bool
+
+        attr_reader allow_discount_code: bool?
+
+        def allow_discount_code=: (bool) -> bool
+
+        attr_reader allow_phone_number_collection: bool?
+
+        def allow_phone_number_collection=: (bool) -> bool
+
+        attr_reader allow_tax_id: bool?
+
+        def allow_tax_id=: (bool) -> bool
+
+        attr_reader always_create_new_customer: bool?
+
+        def always_create_new_customer=: (bool) -> bool
+
+        def initialize: (
+          ?allow_currency_selection: bool,
+          ?allow_discount_code: bool,
+          ?allow_phone_number_collection: bool,
+          ?allow_tax_id: bool,
+          ?always_create_new_customer: bool
+        ) -> void
+
+        def to_hash: -> {
+          allow_currency_selection: bool,
+          allow_discount_code: bool,
+          allow_phone_number_collection: bool,
+          allow_tax_id: bool,
+          always_create_new_customer: bool
+        }
+      end
+
+      type subscription_data =
+        {
+          on_demand: Dodopayments::OnDemandSubscription?,
+          trial_period_days: Integer?
+        }
+
+      class SubscriptionData < Dodopayments::Internal::Type::BaseModel
+        attr_accessor on_demand: Dodopayments::OnDemandSubscription?
+
+        attr_accessor trial_period_days: Integer?
+
+        def initialize: (
+          ?on_demand: Dodopayments::OnDemandSubscription?,
+          ?trial_period_days: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          on_demand: Dodopayments::OnDemandSubscription?,
+          trial_period_days: Integer?
+        }
+      end
+    end
+  end
+end

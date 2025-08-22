@@ -1,0 +1,24 @@
+module Dodopayments
+  module Resources
+    class CheckoutSessions
+      def create: (
+        product_cart: ::Array[Dodopayments::CheckoutSessionRequest::ProductCart],
+        ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
+        ?billing_address: Dodopayments::CheckoutSessionRequest::BillingAddress?,
+        ?billing_currency: Dodopayments::Models::currency?,
+        ?confirm: bool,
+        ?customer: Dodopayments::Models::customer_request?,
+        ?customization: Dodopayments::CheckoutSessionRequest::Customization,
+        ?discount_code: String?,
+        ?feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
+        ?metadata: ::Hash[Symbol, String]?,
+        ?return_url: String?,
+        ?show_saved_payment_methods: bool,
+        ?subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::CheckoutSessionResponse
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

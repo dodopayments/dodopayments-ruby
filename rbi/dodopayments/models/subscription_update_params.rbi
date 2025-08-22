@@ -22,6 +22,7 @@ module Dodopayments
       end
       attr_writer :billing
 
+      # When set, the subscription will remain active until the end of billing period
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :cancel_at_next_billing_date
 
@@ -71,6 +72,7 @@ module Dodopayments
       end
       def self.new(
         billing: nil,
+        # When set, the subscription will remain active until the end of billing period
         cancel_at_next_billing_date: nil,
         disable_on_demand: nil,
         metadata: nil,

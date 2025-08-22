@@ -150,7 +150,13 @@ module Dodopayments
       #   @return [String, nil]
       optional :discount_id, String, nil?: true
 
-      # @!method initialize(addons:, billing:, cancel_at_next_billing_date:, created_at:, currency:, customer:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, discount_cycles_remaining: nil, discount_id: nil)
+      # @!attribute expires_at
+      #   Timestamp when the subscription will expire
+      #
+      #   @return [Time, nil]
+      optional :expires_at, Time, nil?: true
+
+      # @!method initialize(addons:, billing:, cancel_at_next_billing_date:, created_at:, currency:, customer:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, discount_cycles_remaining: nil, discount_id: nil, expires_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Subscription} for more details.
       #
@@ -203,6 +209,8 @@ module Dodopayments
       #   @param discount_cycles_remaining [Integer, nil] Number of remaining discount cycles if discount is applied
       #
       #   @param discount_id [String, nil] The discount id if discount is applied
+      #
+      #   @param expires_at [Time, nil] Timestamp when the subscription will expire
     end
   end
 end

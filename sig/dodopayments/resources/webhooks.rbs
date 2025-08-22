@@ -13,12 +13,12 @@ module Dodopayments
         ?metadata: ::Hash[Symbol, String]?,
         ?rate_limit: Integer?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::WebhookCreateResponse
+      ) -> Dodopayments::WebhookDetails
 
       def retrieve: (
         String webhook_id,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::WebhookRetrieveResponse
+      ) -> Dodopayments::WebhookDetails
 
       def update: (
         String webhook_id,
@@ -29,13 +29,13 @@ module Dodopayments
         ?rate_limit: Integer?,
         ?url: String?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::WebhookUpdateResponse
+      ) -> Dodopayments::WebhookDetails
 
       def list: (
         ?iterator: String?,
         ?limit: Integer?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Internal::CursorPagePagination[Dodopayments::Models::WebhookListResponse]
+      ) -> Dodopayments::Internal::CursorPagePagination[Dodopayments::WebhookDetails]
 
       def delete: (
         String webhook_id,
