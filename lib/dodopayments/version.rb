@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module Dodopayments
-  VERSION = "1.51.0"
+  VERSION = "1.51.1"
 end
