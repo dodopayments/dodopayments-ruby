@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.51.1 (2025-08-25)
+
+Full Changelog: [v1.51.0...v1.51.1](https://github.com/dodopayments/dodopayments-ruby/compare/v1.51.0...v1.51.1)
+
+### Chores
+
+* add json schema comment for rubocop.yml ([86dcdab](https://github.com/dodopayments/dodopayments-ruby/commit/86dcdab494c5262fed8d513ded57ea81fa486885))
+
 ## 1.51.0 (2025-08-22)
 
 Full Changelog: [v1.49.0...v1.51.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.49.0...v1.51.0)
