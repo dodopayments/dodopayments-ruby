@@ -2,14 +2,14 @@
 
 module Dodopayments
   module Models
-    class ProductDeleteParams < Dodopayments::Internal::Type::BaseModel
+    class ProductArchiveParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
       OrHash =
         T.type_alias do
           T.any(
-            Dodopayments::ProductDeleteParams,
+            Dodopayments::ProductArchiveParams,
             Dodopayments::Internal::AnyHash
           )
         end

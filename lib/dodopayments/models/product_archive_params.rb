@@ -2,8 +2,8 @@
 
 module Dodopayments
   module Models
-    # @see Dodopayments::Resources::Products#delete
-    class ProductDeleteParams < Dodopayments::Internal::Type::BaseModel
+    # @see Dodopayments::Resources::Products#archive
+    class ProductArchiveParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

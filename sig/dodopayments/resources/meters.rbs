@@ -23,7 +23,7 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Meter]
 
-      def delete: (
+      def archive: (
         String id,
         ?request_options: Dodopayments::request_opts
       ) -> nil

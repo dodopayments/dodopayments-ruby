@@ -150,15 +150,15 @@ module Dodopayments
         )
       end
 
-      # @overload delete(id, request_options: {})
+      # @overload archive(id, request_options: {})
       #
       # @param id [String]
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
       #
-      # @see Dodopayments::Models::ProductDeleteParams
-      def delete(id, params = {})
+      # @see Dodopayments::Models::ProductArchiveParams
+      def archive(id, params = {})
         @client.request(
           method: :delete,
           path: ["products/%1$s", id],
