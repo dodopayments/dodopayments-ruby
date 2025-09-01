@@ -1,0 +1,45 @@
+module Dodopayments
+  module Models
+    type add_meter_to_price =
+      {
+        meter_id: String,
+        price_per_unit: String,
+        description: String?,
+        free_threshold: Integer?,
+        measurement_unit: String?,
+        name: String?
+      }
+
+    class AddMeterToPrice < Dodopayments::Internal::Type::BaseModel
+      attr_accessor meter_id: String
+
+      attr_accessor price_per_unit: String
+
+      attr_accessor description: String?
+
+      attr_accessor free_threshold: Integer?
+
+      attr_accessor measurement_unit: String?
+
+      attr_accessor name: String?
+
+      def initialize: (
+        meter_id: String,
+        price_per_unit: String,
+        ?description: String?,
+        ?free_threshold: Integer?,
+        ?measurement_unit: String?,
+        ?name: String?
+      ) -> void
+
+      def to_hash: -> {
+        meter_id: String,
+        price_per_unit: String,
+        description: String?,
+        free_threshold: Integer?,
+        measurement_unit: String?,
+        name: String?
+      }
+    end
+  end
+end

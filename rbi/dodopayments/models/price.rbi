@@ -10,7 +10,8 @@ module Dodopayments
         T.type_alias do
           T.any(
             Dodopayments::Price::OneTimePrice,
-            Dodopayments::Price::RecurringPrice
+            Dodopayments::Price::RecurringPrice,
+            Dodopayments::Price::UsageBasedPrice
           )
         end
 
@@ -28,7 +29,7 @@ module Dodopayments
         attr_accessor :currency
 
         # Discount applied to the price, represented as a percentage (0 to 100).
-        sig { returns(Float) }
+        sig { returns(Integer) }
         attr_accessor :discount
 
         # The payment amount, in the smallest denomination of the currency (e.g., cents
@@ -69,7 +70,7 @@ module Dodopayments
         sig do
           params(
             currency: Dodopayments::Currency::OrSymbol,
-            discount: Float,
+            discount: Integer,
             price: Integer,
             purchasing_power_parity: T::Boolean,
             type: Dodopayments::Price::OneTimePrice::Type::OrSymbol,
@@ -109,7 +110,7 @@ module Dodopayments
           override.returns(
             {
               currency: Dodopayments::Currency::OrSymbol,
-              discount: Float,
+              discount: Integer,
               price: Integer,
               purchasing_power_parity: T::Boolean,
               type: Dodopayments::Price::OneTimePrice::Type::OrSymbol,
@@ -161,7 +162,7 @@ module Dodopayments
         attr_accessor :currency
 
         # Discount applied to the price, represented as a percentage (0 to 100).
-        sig { returns(Float) }
+        sig { returns(Integer) }
         attr_accessor :discount
 
         # Number of units for the payment frequency. For example, a value of `1` with a
@@ -210,7 +211,7 @@ module Dodopayments
         sig do
           params(
             currency: Dodopayments::Currency::OrSymbol,
-            discount: Float,
+            discount: Integer,
             payment_frequency_count: Integer,
             payment_frequency_interval: Dodopayments::TimeInterval::OrSymbol,
             price: Integer,
@@ -255,7 +256,7 @@ module Dodopayments
           override.returns(
             {
               currency: Dodopayments::Currency::OrSymbol,
-              discount: Float,
+              discount: Integer,
               payment_frequency_count: Integer,
               payment_frequency_interval: Dodopayments::TimeInterval::OrSymbol,
               price: Integer,
@@ -290,6 +291,151 @@ module Dodopayments
           sig do
             override.returns(
               T::Array[Dodopayments::Price::RecurringPrice::Type::TaggedSymbol]
+            )
+          end
+          def self.values
+          end
+        end
+      end
+
+      class UsageBasedPrice < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::Price::UsageBasedPrice,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        # The currency in which the payment is made.
+        sig { returns(Dodopayments::Currency::OrSymbol) }
+        attr_accessor :currency
+
+        # Discount applied to the price, represented as a percentage (0 to 100).
+        sig { returns(Integer) }
+        attr_accessor :discount
+
+        # The fixed payment amount. Represented in the lowest denomination of the currency
+        # (e.g., cents for USD). For example, to charge $1.00, pass `100`.
+        sig { returns(Integer) }
+        attr_accessor :fixed_price
+
+        # Number of units for the payment frequency. For example, a value of `1` with a
+        # `payment_frequency_interval` of `month` represents monthly payments.
+        sig { returns(Integer) }
+        attr_accessor :payment_frequency_count
+
+        # The time interval for the payment frequency (e.g., day, month, year).
+        sig { returns(Dodopayments::TimeInterval::OrSymbol) }
+        attr_accessor :payment_frequency_interval
+
+        # Indicates if purchasing power parity adjustments are applied to the price.
+        # Purchasing power parity feature is not available as of now
+        sig { returns(T::Boolean) }
+        attr_accessor :purchasing_power_parity
+
+        # Number of units for the subscription period. For example, a value of `12` with a
+        # `subscription_period_interval` of `month` represents a one-year subscription.
+        sig { returns(Integer) }
+        attr_accessor :subscription_period_count
+
+        # The time interval for the subscription period (e.g., day, month, year).
+        sig { returns(Dodopayments::TimeInterval::OrSymbol) }
+        attr_accessor :subscription_period_interval
+
+        sig { returns(Dodopayments::Price::UsageBasedPrice::Type::OrSymbol) }
+        attr_accessor :type
+
+        sig { returns(T.nilable(T::Array[Dodopayments::AddMeterToPrice])) }
+        attr_accessor :meters
+
+        # Indicates if the price is tax inclusive
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_accessor :tax_inclusive
+
+        # Usage Based price details.
+        sig do
+          params(
+            currency: Dodopayments::Currency::OrSymbol,
+            discount: Integer,
+            fixed_price: Integer,
+            payment_frequency_count: Integer,
+            payment_frequency_interval: Dodopayments::TimeInterval::OrSymbol,
+            purchasing_power_parity: T::Boolean,
+            subscription_period_count: Integer,
+            subscription_period_interval: Dodopayments::TimeInterval::OrSymbol,
+            type: Dodopayments::Price::UsageBasedPrice::Type::OrSymbol,
+            meters: T.nilable(T::Array[Dodopayments::AddMeterToPrice::OrHash]),
+            tax_inclusive: T.nilable(T::Boolean)
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # The currency in which the payment is made.
+          currency:,
+          # Discount applied to the price, represented as a percentage (0 to 100).
+          discount:,
+          # The fixed payment amount. Represented in the lowest denomination of the currency
+          # (e.g., cents for USD). For example, to charge $1.00, pass `100`.
+          fixed_price:,
+          # Number of units for the payment frequency. For example, a value of `1` with a
+          # `payment_frequency_interval` of `month` represents monthly payments.
+          payment_frequency_count:,
+          # The time interval for the payment frequency (e.g., day, month, year).
+          payment_frequency_interval:,
+          # Indicates if purchasing power parity adjustments are applied to the price.
+          # Purchasing power parity feature is not available as of now
+          purchasing_power_parity:,
+          # Number of units for the subscription period. For example, a value of `12` with a
+          # `subscription_period_interval` of `month` represents a one-year subscription.
+          subscription_period_count:,
+          # The time interval for the subscription period (e.g., day, month, year).
+          subscription_period_interval:,
+          type:,
+          meters: nil,
+          # Indicates if the price is tax inclusive
+          tax_inclusive: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              currency: Dodopayments::Currency::OrSymbol,
+              discount: Integer,
+              fixed_price: Integer,
+              payment_frequency_count: Integer,
+              payment_frequency_interval: Dodopayments::TimeInterval::OrSymbol,
+              purchasing_power_parity: T::Boolean,
+              subscription_period_count: Integer,
+              subscription_period_interval:
+                Dodopayments::TimeInterval::OrSymbol,
+              type: Dodopayments::Price::UsageBasedPrice::Type::OrSymbol,
+              meters: T.nilable(T::Array[Dodopayments::AddMeterToPrice]),
+              tax_inclusive: T.nilable(T::Boolean)
+            }
+          )
+        end
+        def to_hash
+        end
+
+        module Type
+          extend Dodopayments::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Dodopayments::Price::UsageBasedPrice::Type)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          USAGE_BASED_PRICE =
+            T.let(
+              :usage_based_price,
+              Dodopayments::Price::UsageBasedPrice::Type::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[Dodopayments::Price::UsageBasedPrice::Type::TaggedSymbol]
             )
           end
           def self.values

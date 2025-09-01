@@ -1,0 +1,70 @@
+module Dodopayments
+  module Models
+    type usage_event_list_params =
+      {
+        customer_id: String,
+        end_: Time,
+        event_name: String,
+        meter_id: String,
+        page_number: Integer,
+        page_size: Integer,
+        start: Time
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class UsageEventListParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_reader customer_id: String?
+
+      def customer_id=: (String) -> String
+
+      attr_reader end_: Time?
+
+      def end_=: (Time) -> Time
+
+      attr_reader event_name: String?
+
+      def event_name=: (String) -> String
+
+      attr_reader meter_id: String?
+
+      def meter_id=: (String) -> String
+
+      attr_reader page_number: Integer?
+
+      def page_number=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
+
+      attr_reader start: Time?
+
+      def start=: (Time) -> Time
+
+      def initialize: (
+        ?customer_id: String,
+        ?end_: Time,
+        ?event_name: String,
+        ?meter_id: String,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?start: Time,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        customer_id: String,
+        end_: Time,
+        event_name: String,
+        meter_id: String,
+        page_number: Integer,
+        page_size: Integer,
+        start: Time,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

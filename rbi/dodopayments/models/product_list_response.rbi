@@ -94,7 +94,8 @@ module Dodopayments
             T.nilable(
               T.any(
                 Dodopayments::Price::OneTimePrice::OrHash,
-                Dodopayments::Price::RecurringPrice::OrHash
+                Dodopayments::Price::RecurringPrice::OrHash,
+                Dodopayments::Price::UsageBasedPrice::OrHash
               )
             ),
           tax_inclusive: T.nilable(T::Boolean)

@@ -1,0 +1,39 @@
+module Dodopayments
+  module Resources
+    class Meters
+      def create: (
+        aggregation: Dodopayments::MeterAggregation,
+        event_name: String,
+        measurement_unit: String,
+        name: String,
+        ?description: String?,
+        ?filter: Dodopayments::MeterFilter?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Meter
+
+      def retrieve: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Meter
+
+      def list: (
+        ?archived: bool,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Meter]
+
+      def delete: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
+
+      def unarchive: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

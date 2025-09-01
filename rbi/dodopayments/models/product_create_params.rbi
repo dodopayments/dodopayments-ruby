@@ -19,7 +19,8 @@ module Dodopayments
         returns(
           T.any(
             Dodopayments::Price::OneTimePrice,
-            Dodopayments::Price::RecurringPrice
+            Dodopayments::Price::RecurringPrice,
+            Dodopayments::Price::UsageBasedPrice
           )
         )
       end
@@ -101,7 +102,8 @@ module Dodopayments
           price:
             T.any(
               Dodopayments::Price::OneTimePrice::OrHash,
-              Dodopayments::Price::RecurringPrice::OrHash
+              Dodopayments::Price::RecurringPrice::OrHash,
+              Dodopayments::Price::UsageBasedPrice::OrHash
             ),
           tax_category: Dodopayments::TaxCategory::OrSymbol,
           addons: T.nilable(T::Array[String]),
@@ -158,7 +160,8 @@ module Dodopayments
             price:
               T.any(
                 Dodopayments::Price::OneTimePrice,
-                Dodopayments::Price::RecurringPrice
+                Dodopayments::Price::RecurringPrice,
+                Dodopayments::Price::UsageBasedPrice
               ),
             tax_category: Dodopayments::TaxCategory::OrSymbol,
             addons: T.nilable(T::Array[String]),

@@ -88,7 +88,7 @@ module Dodopayments
       # @!attribute price_detail
       #   Details of the price
       #
-      #   @return [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil]
+      #   @return [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice, nil]
       optional :price_detail, union: -> { Dodopayments::Price }, nil?: true
 
       # @!attribute tax_inclusive
@@ -125,7 +125,7 @@ module Dodopayments
       #
       #   @param price [Integer, nil] Price of the product, optional.
       #
-      #   @param price_detail [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil] Details of the price
+      #   @param price_detail [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice, nil] Details of the price
       #
       #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive
     end

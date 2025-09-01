@@ -1,0 +1,36 @@
+module Dodopayments
+  module Models
+    type meter_aggregation =
+      { type: Dodopayments::Models::MeterAggregation::type_, key: String? }
+
+    class MeterAggregation < Dodopayments::Internal::Type::BaseModel
+      attr_accessor type: Dodopayments::Models::MeterAggregation::type_
+
+      attr_accessor key: String?
+
+      def initialize: (
+        type: Dodopayments::Models::MeterAggregation::type_,
+        ?key: String?
+      ) -> void
+
+      def to_hash: -> {
+        type: Dodopayments::Models::MeterAggregation::type_,
+        key: String?
+      }
+
+      type type_ = :count | :sum | :unique_count | :max | :last
+
+      module Type
+        extend Dodopayments::Internal::Type::Enum
+
+        COUNT: :count
+        SUM: :sum
+        UNIQUE_COUNT: :unique_count
+        MAX: :max
+        LAST: :last
+
+        def self?.values: -> ::Array[Dodopayments::Models::MeterAggregation::type_]
+      end
+    end
+  end
+end

@@ -1,4 +1,6 @@
 module Dodopayments
+  class AddMeterToPrice = Dodopayments::Models::AddMeterToPrice
+
   class AddonCartResponseItem = Dodopayments::Models::AddonCartResponseItem
 
   class AddonCreateParams = Dodopayments::Models::AddonCreateParams
@@ -85,6 +87,10 @@ module Dodopayments
 
   module DisputeStatus = Dodopayments::Models::DisputeStatus
 
+  class Event = Dodopayments::Models::Event
+
+  class EventInput = Dodopayments::Models::EventInput
+
   class GetDispute = Dodopayments::Models::GetDispute
 
   module IntentStatus = Dodopayments::Models::IntentStatus
@@ -116,6 +122,22 @@ module Dodopayments
   class LicenseKeyUpdateParams = Dodopayments::Models::LicenseKeyUpdateParams
 
   class LicenseValidateParams = Dodopayments::Models::LicenseValidateParams
+
+  class Meter = Dodopayments::Models::Meter
+
+  class MeterAggregation = Dodopayments::Models::MeterAggregation
+
+  class MeterCreateParams = Dodopayments::Models::MeterCreateParams
+
+  class MeterDeleteParams = Dodopayments::Models::MeterDeleteParams
+
+  class MeterFilter = Dodopayments::Models::MeterFilter
+
+  class MeterListParams = Dodopayments::Models::MeterListParams
+
+  class MeterRetrieveParams = Dodopayments::Models::MeterRetrieveParams
+
+  class MeterUnarchiveParams = Dodopayments::Models::MeterUnarchiveParams
 
   class MiscListSupportedCountriesParams = Dodopayments::Models::MiscListSupportedCountriesParams
 
@@ -181,6 +203,8 @@ module Dodopayments
 
   class SubscriptionRetrieveParams = Dodopayments::Models::SubscriptionRetrieveParams
 
+  class SubscriptionRetrieveUsageHistoryParams = Dodopayments::Models::SubscriptionRetrieveUsageHistoryParams
+
   module SubscriptionStatus = Dodopayments::Models::SubscriptionStatus
 
   class SubscriptionUpdateParams = Dodopayments::Models::SubscriptionUpdateParams
@@ -188,6 +212,12 @@ module Dodopayments
   module TaxCategory = Dodopayments::Models::TaxCategory
 
   module TimeInterval = Dodopayments::Models::TimeInterval
+
+  class UsageEventIngestParams = Dodopayments::Models::UsageEventIngestParams
+
+  class UsageEventListParams = Dodopayments::Models::UsageEventListParams
+
+  class UsageEventRetrieveParams = Dodopayments::Models::UsageEventRetrieveParams
 
   class WebhookCreateParams = Dodopayments::Models::WebhookCreateParams
 

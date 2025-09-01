@@ -10,7 +10,7 @@ module Dodopayments
       # @!attribute price
       #   Price configuration for the product
       #
-      #   @return [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
+      #   @return [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice]
       required :price, union: -> { Dodopayments::Price }
 
       # @!attribute tax_category
@@ -87,7 +87,7 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductCreateParams} for more details.
       #
-      #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice] Price configuration for the product
+      #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice] Price configuration for the product
       #
       #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Tax category applied to this product
       #
