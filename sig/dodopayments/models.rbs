@@ -127,9 +127,9 @@ module Dodopayments
 
   class MeterAggregation = Dodopayments::Models::MeterAggregation
 
-  class MeterCreateParams = Dodopayments::Models::MeterCreateParams
+  class MeterArchiveParams = Dodopayments::Models::MeterArchiveParams
 
-  class MeterDeleteParams = Dodopayments::Models::MeterDeleteParams
+  class MeterCreateParams = Dodopayments::Models::MeterCreateParams
 
   class MeterFilter = Dodopayments::Models::MeterFilter
 
@@ -165,9 +165,9 @@ module Dodopayments
 
   class Product = Dodopayments::Models::Product
 
-  class ProductCreateParams = Dodopayments::Models::ProductCreateParams
+  class ProductArchiveParams = Dodopayments::Models::ProductArchiveParams
 
-  class ProductDeleteParams = Dodopayments::Models::ProductDeleteParams
+  class ProductCreateParams = Dodopayments::Models::ProductCreateParams
 
   class ProductListParams = Dodopayments::Models::ProductListParams
 

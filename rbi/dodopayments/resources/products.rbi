@@ -188,7 +188,7 @@ module Dodopayments
           request_options: Dodopayments::RequestOptions::OrHash
         ).void
       end
-      def delete(id, request_options: {})
+      def archive(id, request_options: {})
       end
 
       sig do

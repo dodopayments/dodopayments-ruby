@@ -73,7 +73,7 @@ module Dodopayments
           request_options: Dodopayments::RequestOptions::OrHash
         ).void
       end
-      def delete(
+      def archive(
         # Meter ID
         id,
         request_options: {}

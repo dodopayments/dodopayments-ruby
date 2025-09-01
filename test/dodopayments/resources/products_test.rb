@@ -111,8 +111,8 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
     end
   end
 
-  def test_delete
-    response = @dodo_payments.products.delete("id")
+  def test_archive
+    response = @dodo_payments.products.archive("id")
 
     assert_pattern do
       response => nil
