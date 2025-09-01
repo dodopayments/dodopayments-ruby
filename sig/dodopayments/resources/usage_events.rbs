@@ -1,0 +1,28 @@
+module Dodopayments
+  module Resources
+    class UsageEvents
+      def retrieve: (
+        String event_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Event
+
+      def list: (
+        ?customer_id: String,
+        ?end_: Time,
+        ?event_name: String,
+        ?meter_id: String,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?start: Time,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Event]
+
+      def ingest: (
+        events: ::Array[Dodopayments::EventInput],
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::UsageEventIngestResponse
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

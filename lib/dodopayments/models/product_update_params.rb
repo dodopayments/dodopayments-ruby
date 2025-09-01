@@ -89,7 +89,7 @@ module Dodopayments
       # @!attribute price
       #   Price details of the product.
       #
-      #   @return [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil]
+      #   @return [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice, nil]
       optional :price, union: -> { Dodopayments::Price }, nil?: true
 
       # @!attribute tax_category
@@ -124,7 +124,7 @@ module Dodopayments
       #
       #   @param name [String, nil] Name of the product, optional and must be at most 100 characters.
       #
-      #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil] Price details of the product.
+      #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice, nil] Price details of the product.
       #
       #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory, nil] Tax category of the product.
       #

@@ -105,7 +105,8 @@ module Dodopayments
           price:
             T.any(
               Dodopayments::Price::OneTimePrice::OrHash,
-              Dodopayments::Price::RecurringPrice::OrHash
+              Dodopayments::Price::RecurringPrice::OrHash,
+              Dodopayments::Price::UsageBasedPrice::OrHash
             ),
           product_id: String,
           tax_category: Dodopayments::TaxCategory::OrSymbol,

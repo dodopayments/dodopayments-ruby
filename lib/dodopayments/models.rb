@@ -39,6 +39,8 @@ module Dodopayments
     mod.define_sorbet_constant!(const) { T.type_alias { mod.to_sorbet_type } }
   end
 
+  AddMeterToPrice = Dodopayments::Models::AddMeterToPrice
+
   AddonCartResponseItem = Dodopayments::Models::AddonCartResponseItem
 
   AddonCreateParams = Dodopayments::Models::AddonCreateParams
@@ -125,6 +127,10 @@ module Dodopayments
 
   DisputeStatus = Dodopayments::Models::DisputeStatus
 
+  Event = Dodopayments::Models::Event
+
+  EventInput = Dodopayments::Models::EventInput
+
   GetDispute = Dodopayments::Models::GetDispute
 
   IntentStatus = Dodopayments::Models::IntentStatus
@@ -156,6 +162,22 @@ module Dodopayments
   LicenseKeyUpdateParams = Dodopayments::Models::LicenseKeyUpdateParams
 
   LicenseValidateParams = Dodopayments::Models::LicenseValidateParams
+
+  Meter = Dodopayments::Models::Meter
+
+  MeterAggregation = Dodopayments::Models::MeterAggregation
+
+  MeterCreateParams = Dodopayments::Models::MeterCreateParams
+
+  MeterDeleteParams = Dodopayments::Models::MeterDeleteParams
+
+  MeterFilter = Dodopayments::Models::MeterFilter
+
+  MeterListParams = Dodopayments::Models::MeterListParams
+
+  MeterRetrieveParams = Dodopayments::Models::MeterRetrieveParams
+
+  MeterUnarchiveParams = Dodopayments::Models::MeterUnarchiveParams
 
   MiscListSupportedCountriesParams = Dodopayments::Models::MiscListSupportedCountriesParams
 
@@ -221,6 +243,8 @@ module Dodopayments
 
   SubscriptionRetrieveParams = Dodopayments::Models::SubscriptionRetrieveParams
 
+  SubscriptionRetrieveUsageHistoryParams = Dodopayments::Models::SubscriptionRetrieveUsageHistoryParams
+
   SubscriptionStatus = Dodopayments::Models::SubscriptionStatus
 
   SubscriptionUpdateParams = Dodopayments::Models::SubscriptionUpdateParams
@@ -228,6 +252,12 @@ module Dodopayments
   TaxCategory = Dodopayments::Models::TaxCategory
 
   TimeInterval = Dodopayments::Models::TimeInterval
+
+  UsageEventIngestParams = Dodopayments::Models::UsageEventIngestParams
+
+  UsageEventListParams = Dodopayments::Models::UsageEventListParams
+
+  UsageEventRetrieveParams = Dodopayments::Models::UsageEventRetrieveParams
 
   WebhookCreateParams = Dodopayments::Models::WebhookCreateParams
 

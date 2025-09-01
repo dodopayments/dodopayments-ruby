@@ -42,7 +42,7 @@ module Dodopayments
       # @!attribute price
       #   Pricing information for the product.
       #
-      #   @return [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice]
+      #   @return [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice]
       required :price, union: -> { Dodopayments::Price }
 
       # @!attribute product_id
@@ -123,7 +123,7 @@ module Dodopayments
       #
       #   @param metadata [Hash{Symbol=>String}] Additional custom data associated with the product
       #
-      #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice] Pricing information for the product.
+      #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice] Pricing information for the product.
       #
       #   @param product_id [String] Unique identifier for the product.
       #

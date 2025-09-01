@@ -77,6 +77,12 @@ module Dodopayments
     sig { returns(Dodopayments::Resources::Webhooks) }
     attr_reader :webhooks
 
+    sig { returns(Dodopayments::Resources::UsageEvents) }
+    attr_reader :usage_events
+
+    sig { returns(Dodopayments::Resources::Meters) }
+    attr_reader :meters
+
     # @api private
     sig { override.returns(T::Hash[String, String]) }
     private def auth_headers

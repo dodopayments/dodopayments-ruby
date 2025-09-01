@@ -1,0 +1,24 @@
+module Dodopayments
+  module Models
+    type usage_event_ingest_params =
+      { events: ::Array[Dodopayments::EventInput] }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class UsageEventIngestParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor events: ::Array[Dodopayments::EventInput]
+
+      def initialize: (
+        events: ::Array[Dodopayments::EventInput],
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        events: ::Array[Dodopayments::EventInput],
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

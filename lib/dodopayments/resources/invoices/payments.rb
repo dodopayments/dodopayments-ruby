@@ -22,6 +22,24 @@ module Dodopayments
           )
         end
 
+        # @overload retrieve_refund(refund_id, request_options: {})
+        #
+        # @param refund_id [String]
+        # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [StringIO]
+        #
+        # @see Dodopayments::Models::Invoices::PaymentRetrieveRefundParams
+        def retrieve_refund(refund_id, params = {})
+          @client.request(
+            method: :get,
+            path: ["invoices/refunds/%1$s", refund_id],
+            headers: {"accept" => "application/pdf"},
+            model: StringIO,
+            options: params[:request_options]
+          )
+        end
+
         # @api private
         #
         # @param client [Dodopayments::Client]

@@ -11,7 +11,7 @@ module Dodopayments
       #
       # @overload create(price:, tax_category:, addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, request_options: {})
       #
-      # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice] Price configuration for the product
+      # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice] Price configuration for the product
       #
       # @param tax_category [Symbol, Dodopayments::Models::TaxCategory] Tax category applied to this product
       #
@@ -98,7 +98,7 @@ module Dodopayments
       #
       # @param name [String, nil] Name of the product, optional and must be at most 100 characters.
       #
-      # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, nil] Price details of the product.
+      # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice, nil] Price details of the product.
       #
       # @param tax_category [Symbol, Dodopayments::Models::TaxCategory, nil] Tax category of the product.
       #

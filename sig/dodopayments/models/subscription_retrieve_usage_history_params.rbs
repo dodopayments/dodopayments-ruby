@@ -1,0 +1,46 @@
+module Dodopayments
+  module Models
+    type subscription_retrieve_usage_history_params =
+      {
+        end_date: Time?,
+        meter_id: String?,
+        page_number: Integer?,
+        page_size: Integer?,
+        start_date: Time?
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class SubscriptionRetrieveUsageHistoryParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor end_date: Time?
+
+      attr_accessor meter_id: String?
+
+      attr_accessor page_number: Integer?
+
+      attr_accessor page_size: Integer?
+
+      attr_accessor start_date: Time?
+
+      def initialize: (
+        ?end_date: Time?,
+        ?meter_id: String?,
+        ?page_number: Integer?,
+        ?page_size: Integer?,
+        ?start_date: Time?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        end_date: Time?,
+        meter_id: String?,
+        page_number: Integer?,
+        page_size: Integer?,
+        start_date: Time?,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end
