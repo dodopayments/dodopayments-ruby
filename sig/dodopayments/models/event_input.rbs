@@ -1,0 +1,40 @@
+module Dodopayments
+  module Models
+    type event_input =
+      {
+        customer_id: String,
+        event_id: String,
+        event_name: String,
+        metadata: ::Hash[Symbol, top]?,
+        timestamp: Time?
+      }
+
+    class EventInput < Dodopayments::Internal::Type::BaseModel
+      attr_accessor customer_id: String
+
+      attr_accessor event_id: String
+
+      attr_accessor event_name: String
+
+      attr_accessor metadata: ::Hash[Symbol, top]?
+
+      attr_accessor timestamp: Time?
+
+      def initialize: (
+        customer_id: String,
+        event_id: String,
+        event_name: String,
+        ?metadata: ::Hash[Symbol, top]?,
+        ?timestamp: Time?
+      ) -> void
+
+      def to_hash: -> {
+        customer_id: String,
+        event_id: String,
+        event_name: String,
+        metadata: ::Hash[Symbol, top]?,
+        timestamp: Time?
+      }
+    end
+  end
+end

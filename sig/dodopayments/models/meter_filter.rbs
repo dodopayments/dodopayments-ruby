@@ -1,0 +1,417 @@
+module Dodopayments
+  module Models
+    type meter_filter =
+      {
+        clauses: Dodopayments::Models::MeterFilter::clauses,
+        conjunction: Dodopayments::Models::MeterFilter::conjunction
+      }
+
+    class MeterFilter < Dodopayments::Internal::Type::BaseModel
+      attr_accessor clauses: Dodopayments::Models::MeterFilter::clauses
+
+      attr_accessor conjunction: Dodopayments::Models::MeterFilter::conjunction
+
+      def initialize: (
+        clauses: Dodopayments::Models::MeterFilter::clauses,
+        conjunction: Dodopayments::Models::MeterFilter::conjunction
+      ) -> void
+
+      def to_hash: -> {
+        clauses: Dodopayments::Models::MeterFilter::clauses,
+        conjunction: Dodopayments::Models::MeterFilter::conjunction
+      }
+
+      type clauses =
+        ::Array[Dodopayments::MeterFilter::Clauses::DirectFilterCondition]
+        | ::Array[Dodopayments::MeterFilter::Clauses::NestedMeterFilter]
+
+      module Clauses
+        extend Dodopayments::Internal::Type::Union
+
+        type direct_filter_condition =
+          {
+            key: String,
+            operator: Dodopayments::Models::MeterFilter::Clauses::DirectFilterCondition::operator,
+            value: Dodopayments::Models::MeterFilter::Clauses::DirectFilterCondition::value
+          }
+
+        class DirectFilterCondition < Dodopayments::Internal::Type::BaseModel
+          attr_accessor key: String
+
+          attr_accessor operator: Dodopayments::Models::MeterFilter::Clauses::DirectFilterCondition::operator
+
+          attr_accessor value: Dodopayments::Models::MeterFilter::Clauses::DirectFilterCondition::value
+
+          def initialize: (
+            key: String,
+            operator: Dodopayments::Models::MeterFilter::Clauses::DirectFilterCondition::operator,
+            value: Dodopayments::Models::MeterFilter::Clauses::DirectFilterCondition::value
+          ) -> void
+
+          def to_hash: -> {
+            key: String,
+            operator: Dodopayments::Models::MeterFilter::Clauses::DirectFilterCondition::operator,
+            value: Dodopayments::Models::MeterFilter::Clauses::DirectFilterCondition::value
+          }
+
+          type operator =
+            :equals
+            | :not_equals
+            | :greater_than
+            | :greater_than_or_equals
+            | :less_than
+            | :less_than_or_equals
+            | :contains
+            | :does_not_contain
+
+          module Operator
+            extend Dodopayments::Internal::Type::Enum
+
+            EQUALS: :equals
+            NOT_EQUALS: :not_equals
+            GREATER_THAN: :greater_than
+            GREATER_THAN_OR_EQUALS: :greater_than_or_equals
+            LESS_THAN: :less_than
+            LESS_THAN_OR_EQUALS: :less_than_or_equals
+            CONTAINS: :contains
+            DOES_NOT_CONTAIN: :does_not_contain
+
+            def self?.values: -> ::Array[Dodopayments::Models::MeterFilter::Clauses::DirectFilterCondition::operator]
+          end
+
+          type value = String | Float | bool
+
+          module Value
+            extend Dodopayments::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Dodopayments::Models::MeterFilter::Clauses::DirectFilterCondition::value]
+          end
+        end
+
+        type nested_meter_filter =
+          {
+            clauses: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::clauses,
+            conjunction: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::conjunction
+          }
+
+        class NestedMeterFilter < Dodopayments::Internal::Type::BaseModel
+          attr_accessor clauses: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::clauses
+
+          attr_accessor conjunction: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::conjunction
+
+          def initialize: (
+            clauses: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::clauses,
+            conjunction: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::conjunction
+          ) -> void
+
+          def to_hash: -> {
+            clauses: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::clauses,
+            conjunction: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::conjunction
+          }
+
+          type clauses =
+            ::Array[Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition]
+            | ::Array[Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter]
+
+          module Clauses
+            extend Dodopayments::Internal::Type::Union
+
+            type level1_filter_condition =
+              {
+                key: String,
+                operator: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::operator,
+                value: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::value
+              }
+
+            class Level1FilterCondition < Dodopayments::Internal::Type::BaseModel
+              attr_accessor key: String
+
+              attr_accessor operator: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::operator
+
+              attr_accessor value: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::value
+
+              def initialize: (
+                key: String,
+                operator: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::operator,
+                value: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::value
+              ) -> void
+
+              def to_hash: -> {
+                key: String,
+                operator: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::operator,
+                value: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::value
+              }
+
+              type operator =
+                :equals
+                | :not_equals
+                | :greater_than
+                | :greater_than_or_equals
+                | :less_than
+                | :less_than_or_equals
+                | :contains
+                | :does_not_contain
+
+              module Operator
+                extend Dodopayments::Internal::Type::Enum
+
+                EQUALS: :equals
+                NOT_EQUALS: :not_equals
+                GREATER_THAN: :greater_than
+                GREATER_THAN_OR_EQUALS: :greater_than_or_equals
+                LESS_THAN: :less_than
+                LESS_THAN_OR_EQUALS: :less_than_or_equals
+                CONTAINS: :contains
+                DOES_NOT_CONTAIN: :does_not_contain
+
+                def self?.values: -> ::Array[Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::operator]
+              end
+
+              type value = String | Float | bool
+
+              module Value
+                extend Dodopayments::Internal::Type::Union
+
+                def self?.variants: -> ::Array[Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::value]
+              end
+            end
+
+            type level1_nested_filter =
+              {
+                clauses: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::clauses,
+                conjunction: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::conjunction
+              }
+
+            class Level1NestedFilter < Dodopayments::Internal::Type::BaseModel
+              attr_accessor clauses: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::clauses
+
+              attr_accessor conjunction: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::conjunction
+
+              def initialize: (
+                clauses: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::clauses,
+                conjunction: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::conjunction
+              ) -> void
+
+              def to_hash: -> {
+                clauses: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::clauses,
+                conjunction: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::conjunction
+              }
+
+              type clauses =
+                ::Array[Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition]
+                | ::Array[Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter]
+
+              module Clauses
+                extend Dodopayments::Internal::Type::Union
+
+                type level2_filter_condition =
+                  {
+                    key: String,
+                    operator: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::operator,
+                    value: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::value
+                  }
+
+                class Level2FilterCondition < Dodopayments::Internal::Type::BaseModel
+                  attr_accessor key: String
+
+                  attr_accessor operator: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::operator
+
+                  attr_accessor value: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::value
+
+                  def initialize: (
+                    key: String,
+                    operator: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::operator,
+                    value: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::value
+                  ) -> void
+
+                  def to_hash: -> {
+                    key: String,
+                    operator: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::operator,
+                    value: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::value
+                  }
+
+                  type operator =
+                    :equals
+                    | :not_equals
+                    | :greater_than
+                    | :greater_than_or_equals
+                    | :less_than
+                    | :less_than_or_equals
+                    | :contains
+                    | :does_not_contain
+
+                  module Operator
+                    extend Dodopayments::Internal::Type::Enum
+
+                    EQUALS: :equals
+                    NOT_EQUALS: :not_equals
+                    GREATER_THAN: :greater_than
+                    GREATER_THAN_OR_EQUALS: :greater_than_or_equals
+                    LESS_THAN: :less_than
+                    LESS_THAN_OR_EQUALS: :less_than_or_equals
+                    CONTAINS: :contains
+                    DOES_NOT_CONTAIN: :does_not_contain
+
+                    def self?.values: -> ::Array[Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::operator]
+                  end
+
+                  type value = String | Float | bool
+
+                  module Value
+                    extend Dodopayments::Internal::Type::Union
+
+                    def self?.variants: -> ::Array[Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::value]
+                  end
+                end
+
+                type level2_nested_filter =
+                  {
+                    clauses: ::Array[Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause],
+                    conjunction: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::conjunction
+                  }
+
+                class Level2NestedFilter < Dodopayments::Internal::Type::BaseModel
+                  attr_accessor clauses: ::Array[Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause]
+
+                  attr_accessor conjunction: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::conjunction
+
+                  def initialize: (
+                    clauses: ::Array[Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause],
+                    conjunction: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::conjunction
+                  ) -> void
+
+                  def to_hash: -> {
+                    clauses: ::Array[Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause],
+                    conjunction: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::conjunction
+                  }
+
+                  type clause =
+                    {
+                      key: String,
+                      operator: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::operator,
+                      value: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::value
+                    }
+
+                  class Clause < Dodopayments::Internal::Type::BaseModel
+                    attr_accessor key: String
+
+                    attr_accessor operator: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::operator
+
+                    attr_accessor value: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::value
+
+                    def initialize: (
+                      key: String,
+                      operator: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::operator,
+                      value: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::value
+                    ) -> void
+
+                    def to_hash: -> {
+                      key: String,
+                      operator: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::operator,
+                      value: Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::value
+                    }
+
+                    type operator =
+                      :equals
+                      | :not_equals
+                      | :greater_than
+                      | :greater_than_or_equals
+                      | :less_than
+                      | :less_than_or_equals
+                      | :contains
+                      | :does_not_contain
+
+                    module Operator
+                      extend Dodopayments::Internal::Type::Enum
+
+                      EQUALS: :equals
+                      NOT_EQUALS: :not_equals
+                      GREATER_THAN: :greater_than
+                      GREATER_THAN_OR_EQUALS: :greater_than_or_equals
+                      LESS_THAN: :less_than
+                      LESS_THAN_OR_EQUALS: :less_than_or_equals
+                      CONTAINS: :contains
+                      DOES_NOT_CONTAIN: :does_not_contain
+
+                      def self?.values: -> ::Array[Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::operator]
+                    end
+
+                    type value = String | Float | bool
+
+                    module Value
+                      extend Dodopayments::Internal::Type::Union
+
+                      def self?.variants: -> ::Array[Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::value]
+                    end
+                  end
+
+                  type conjunction = :and | :or
+
+                  module Conjunction
+                    extend Dodopayments::Internal::Type::Enum
+
+                    AND: :and
+                    OR: :or
+
+                    def self?.values: -> ::Array[Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::conjunction]
+                  end
+                end
+
+                def self?.variants: -> ::Array[Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::clauses]
+
+                Level2FilterConditionArray: Dodopayments::Internal::Type::Converter
+
+                Level2NestedFilterArray: Dodopayments::Internal::Type::Converter
+              end
+
+              type conjunction = :and | :or
+
+              module Conjunction
+                extend Dodopayments::Internal::Type::Enum
+
+                AND: :and
+                OR: :or
+
+                def self?.values: -> ::Array[Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::conjunction]
+              end
+            end
+
+            def self?.variants: -> ::Array[Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::clauses]
+
+            Level1FilterConditionArray: Dodopayments::Internal::Type::Converter
+
+            Level1NestedFilterArray: Dodopayments::Internal::Type::Converter
+          end
+
+          type conjunction = :and | :or
+
+          module Conjunction
+            extend Dodopayments::Internal::Type::Enum
+
+            AND: :and
+            OR: :or
+
+            def self?.values: -> ::Array[Dodopayments::Models::MeterFilter::Clauses::NestedMeterFilter::conjunction]
+          end
+        end
+
+        def self?.variants: -> ::Array[Dodopayments::Models::MeterFilter::clauses]
+
+        DirectFilterConditionArray: Dodopayments::Internal::Type::Converter
+
+        NestedMeterFilterArray: Dodopayments::Internal::Type::Converter
+      end
+
+      type conjunction = :and | :or
+
+      module Conjunction
+        extend Dodopayments::Internal::Type::Enum
+
+        AND: :and
+        OR: :or
+
+        def self?.values: -> ::Array[Dodopayments::Models::MeterFilter::conjunction]
+      end
+    end
+  end
+end

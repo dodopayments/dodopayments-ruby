@@ -67,6 +67,16 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::SubscriptionChargeResponse
 
+      def retrieve_usage_history: (
+        String subscription_id,
+        ?end_date: Time?,
+        ?meter_id: String?,
+        ?page_number: Integer?,
+        ?page_size: Integer?,
+        ?start_date: Time?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::SubscriptionRetrieveUsageHistoryResponse]
+
       def initialize: (client: Dodopayments::Client) -> void
     end
   end

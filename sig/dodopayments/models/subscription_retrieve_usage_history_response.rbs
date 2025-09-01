@@ -1,0 +1,82 @@
+module Dodopayments
+  module Models
+    type subscription_retrieve_usage_history_response =
+      {
+        end_date: Time,
+        meters: ::Array[Dodopayments::Models::SubscriptionRetrieveUsageHistoryResponse::Meter],
+        start_date: Time
+      }
+
+    class SubscriptionRetrieveUsageHistoryResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor end_date: Time
+
+      attr_accessor meters: ::Array[Dodopayments::Models::SubscriptionRetrieveUsageHistoryResponse::Meter]
+
+      attr_accessor start_date: Time
+
+      def initialize: (
+        end_date: Time,
+        meters: ::Array[Dodopayments::Models::SubscriptionRetrieveUsageHistoryResponse::Meter],
+        start_date: Time
+      ) -> void
+
+      def to_hash: -> {
+        end_date: Time,
+        meters: ::Array[Dodopayments::Models::SubscriptionRetrieveUsageHistoryResponse::Meter],
+        start_date: Time
+      }
+
+      type meter =
+        {
+          id: String,
+          chargeable_units: String,
+          consumed_units: String,
+          currency: Dodopayments::Models::currency,
+          free_threshold: Integer,
+          name: String,
+          price_per_unit: String,
+          total_price: Integer
+        }
+
+      class Meter < Dodopayments::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor chargeable_units: String
+
+        attr_accessor consumed_units: String
+
+        attr_accessor currency: Dodopayments::Models::currency
+
+        attr_accessor free_threshold: Integer
+
+        attr_accessor name: String
+
+        attr_accessor price_per_unit: String
+
+        attr_accessor total_price: Integer
+
+        def initialize: (
+          id: String,
+          chargeable_units: String,
+          consumed_units: String,
+          currency: Dodopayments::Models::currency,
+          free_threshold: Integer,
+          name: String,
+          price_per_unit: String,
+          total_price: Integer
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          chargeable_units: String,
+          consumed_units: String,
+          currency: Dodopayments::Models::currency,
+          free_threshold: Integer,
+          name: String,
+          price_per_unit: String,
+          total_price: Integer
+        }
+      end
+    end
+  end
+end

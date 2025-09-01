@@ -178,4 +178,27 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
       }
     end
   end
+
+  def test_retrieve_usage_history
+    response = @dodo_payments.subscriptions.retrieve_usage_history("subscription_id")
+
+    assert_pattern do
+      response => Dodopayments::Internal::DefaultPageNumberPagination
+    end
+
+    row = response.to_enum.first
+    return if row.nil?
+
+    assert_pattern do
+      row => Dodopayments::Models::SubscriptionRetrieveUsageHistoryResponse
+    end
+
+    assert_pattern do
+      row => {
+        end_date: Time,
+        meters: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::SubscriptionRetrieveUsageHistoryResponse::Meter]),
+        start_date: Time
+      }
+    end
+  end
 end

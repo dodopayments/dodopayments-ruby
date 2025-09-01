@@ -1,0 +1,13 @@
+module Dodopayments
+  module Models
+    type usage_event_ingest_response = { ingested_count: Integer }
+
+    class UsageEventIngestResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor ingested_count: Integer
+
+      def initialize: (ingested_count: Integer) -> void
+
+      def to_hash: -> { ingested_count: Integer }
+    end
+  end
+end

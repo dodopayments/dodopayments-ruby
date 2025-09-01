@@ -1,0 +1,65 @@
+module Dodopayments
+  module Models
+    type meter =
+      {
+        id: String,
+        aggregation: Dodopayments::MeterAggregation,
+        business_id: String,
+        created_at: Time,
+        event_name: String,
+        measurement_unit: String,
+        name: String,
+        updated_at: Time,
+        description: String?,
+        filter: Dodopayments::MeterFilter?
+      }
+
+    class Meter < Dodopayments::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor aggregation: Dodopayments::MeterAggregation
+
+      attr_accessor business_id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor event_name: String
+
+      attr_accessor measurement_unit: String
+
+      attr_accessor name: String
+
+      attr_accessor updated_at: Time
+
+      attr_accessor description: String?
+
+      attr_accessor filter: Dodopayments::MeterFilter?
+
+      def initialize: (
+        id: String,
+        aggregation: Dodopayments::MeterAggregation,
+        business_id: String,
+        created_at: Time,
+        event_name: String,
+        measurement_unit: String,
+        name: String,
+        updated_at: Time,
+        ?description: String?,
+        ?filter: Dodopayments::MeterFilter?
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        aggregation: Dodopayments::MeterAggregation,
+        business_id: String,
+        created_at: Time,
+        event_name: String,
+        measurement_unit: String,
+        name: String,
+        updated_at: Time,
+        description: String?,
+        filter: Dodopayments::MeterFilter?
+      }
+    end
+  end
+end

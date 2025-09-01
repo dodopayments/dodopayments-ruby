@@ -97,7 +97,8 @@ module Dodopayments
           T.nilable(
             T.any(
               Dodopayments::Price::OneTimePrice,
-              Dodopayments::Price::RecurringPrice
+              Dodopayments::Price::RecurringPrice,
+              Dodopayments::Price::UsageBasedPrice
             )
           )
         )
@@ -129,7 +130,8 @@ module Dodopayments
             T.nilable(
               T.any(
                 Dodopayments::Price::OneTimePrice::OrHash,
-                Dodopayments::Price::RecurringPrice::OrHash
+                Dodopayments::Price::RecurringPrice::OrHash,
+                Dodopayments::Price::UsageBasedPrice::OrHash
               )
             ),
           tax_category: T.nilable(Dodopayments::TaxCategory::OrSymbol),
@@ -199,7 +201,8 @@ module Dodopayments
               T.nilable(
                 T.any(
                   Dodopayments::Price::OneTimePrice,
-                  Dodopayments::Price::RecurringPrice
+                  Dodopayments::Price::RecurringPrice,
+                  Dodopayments::Price::UsageBasedPrice
                 )
               ),
             tax_category: T.nilable(Dodopayments::TaxCategory::OrSymbol),

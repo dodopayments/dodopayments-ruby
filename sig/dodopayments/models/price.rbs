@@ -1,7 +1,9 @@
 module Dodopayments
   module Models
     type price =
-      Dodopayments::Price::OneTimePrice | Dodopayments::Price::RecurringPrice
+      Dodopayments::Price::OneTimePrice
+      | Dodopayments::Price::RecurringPrice
+      | Dodopayments::Price::UsageBasedPrice
 
     module Price
       extend Dodopayments::Internal::Type::Union
@@ -9,7 +11,7 @@ module Dodopayments
       type one_time_price =
         {
           currency: Dodopayments::Models::currency,
-          discount: Float,
+          discount: Integer,
           price: Integer,
           purchasing_power_parity: bool,
           type: Dodopayments::Models::Price::OneTimePrice::type_,
@@ -21,7 +23,7 @@ module Dodopayments
       class OneTimePrice < Dodopayments::Internal::Type::BaseModel
         attr_accessor currency: Dodopayments::Models::currency
 
-        attr_accessor discount: Float
+        attr_accessor discount: Integer
 
         attr_accessor price: Integer
 
@@ -39,7 +41,7 @@ module Dodopayments
 
         def initialize: (
           currency: Dodopayments::Models::currency,
-          discount: Float,
+          discount: Integer,
           price: Integer,
           purchasing_power_parity: bool,
           type: Dodopayments::Models::Price::OneTimePrice::type_,
@@ -50,7 +52,7 @@ module Dodopayments
 
         def to_hash: -> {
           currency: Dodopayments::Models::currency,
-          discount: Float,
+          discount: Integer,
           price: Integer,
           purchasing_power_parity: bool,
           type: Dodopayments::Models::Price::OneTimePrice::type_,
@@ -73,7 +75,7 @@ module Dodopayments
       type recurring_price =
         {
           currency: Dodopayments::Models::currency,
-          discount: Float,
+          discount: Integer,
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::time_interval,
           price: Integer,
@@ -88,7 +90,7 @@ module Dodopayments
       class RecurringPrice < Dodopayments::Internal::Type::BaseModel
         attr_accessor currency: Dodopayments::Models::currency
 
-        attr_accessor discount: Float
+        attr_accessor discount: Integer
 
         attr_accessor payment_frequency_count: Integer
 
@@ -112,7 +114,7 @@ module Dodopayments
 
         def initialize: (
           currency: Dodopayments::Models::currency,
-          discount: Float,
+          discount: Integer,
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::time_interval,
           price: Integer,
@@ -126,7 +128,7 @@ module Dodopayments
 
         def to_hash: -> {
           currency: Dodopayments::Models::currency,
-          discount: Float,
+          discount: Integer,
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::time_interval,
           price: Integer,
@@ -146,6 +148,83 @@ module Dodopayments
           RECURRING_PRICE: :recurring_price
 
           def self?.values: -> ::Array[Dodopayments::Models::Price::RecurringPrice::type_]
+        end
+      end
+
+      type usage_based_price =
+        {
+          currency: Dodopayments::Models::currency,
+          discount: Integer,
+          fixed_price: Integer,
+          payment_frequency_count: Integer,
+          payment_frequency_interval: Dodopayments::Models::time_interval,
+          purchasing_power_parity: bool,
+          subscription_period_count: Integer,
+          subscription_period_interval: Dodopayments::Models::time_interval,
+          type: Dodopayments::Models::Price::UsageBasedPrice::type_,
+          meters: ::Array[Dodopayments::AddMeterToPrice]?,
+          tax_inclusive: bool?
+        }
+
+      class UsageBasedPrice < Dodopayments::Internal::Type::BaseModel
+        attr_accessor currency: Dodopayments::Models::currency
+
+        attr_accessor discount: Integer
+
+        attr_accessor fixed_price: Integer
+
+        attr_accessor payment_frequency_count: Integer
+
+        attr_accessor payment_frequency_interval: Dodopayments::Models::time_interval
+
+        attr_accessor purchasing_power_parity: bool
+
+        attr_accessor subscription_period_count: Integer
+
+        attr_accessor subscription_period_interval: Dodopayments::Models::time_interval
+
+        attr_accessor type: Dodopayments::Models::Price::UsageBasedPrice::type_
+
+        attr_accessor meters: ::Array[Dodopayments::AddMeterToPrice]?
+
+        attr_accessor tax_inclusive: bool?
+
+        def initialize: (
+          currency: Dodopayments::Models::currency,
+          discount: Integer,
+          fixed_price: Integer,
+          payment_frequency_count: Integer,
+          payment_frequency_interval: Dodopayments::Models::time_interval,
+          purchasing_power_parity: bool,
+          subscription_period_count: Integer,
+          subscription_period_interval: Dodopayments::Models::time_interval,
+          type: Dodopayments::Models::Price::UsageBasedPrice::type_,
+          ?meters: ::Array[Dodopayments::AddMeterToPrice]?,
+          ?tax_inclusive: bool?
+        ) -> void
+
+        def to_hash: -> {
+          currency: Dodopayments::Models::currency,
+          discount: Integer,
+          fixed_price: Integer,
+          payment_frequency_count: Integer,
+          payment_frequency_interval: Dodopayments::Models::time_interval,
+          purchasing_power_parity: bool,
+          subscription_period_count: Integer,
+          subscription_period_interval: Dodopayments::Models::time_interval,
+          type: Dodopayments::Models::Price::UsageBasedPrice::type_,
+          meters: ::Array[Dodopayments::AddMeterToPrice]?,
+          tax_inclusive: bool?
+        }
+
+        type type_ = :usage_based_price
+
+        module Type
+          extend Dodopayments::Internal::Type::Enum
+
+          USAGE_BASED_PRICE: :usage_based_price
+
+          def self?.values: -> ::Array[Dodopayments::Models::Price::UsageBasedPrice::type_]
         end
       end
 
