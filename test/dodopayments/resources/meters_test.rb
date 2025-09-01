@@ -85,8 +85,8 @@ class Dodopayments::Test::Resources::MetersTest < Dodopayments::Test::ResourceTe
     end
   end
 
-  def test_delete
-    response = @dodo_payments.meters.delete("id")
+  def test_archive
+    response = @dodo_payments.meters.archive("id")
 
     assert_pattern do
       response => nil

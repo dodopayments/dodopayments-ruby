@@ -76,7 +76,7 @@ module Dodopayments
         )
       end
 
-      # @overload delete(id, request_options: {})
+      # @overload archive(id, request_options: {})
       #
       # @param id [String] Meter ID
       #
@@ -84,8 +84,8 @@ module Dodopayments
       #
       # @return [nil]
       #
-      # @see Dodopayments::Models::MeterDeleteParams
-      def delete(id, params = {})
+      # @see Dodopayments::Models::MeterArchiveParams
+      def archive(id, params = {})
         @client.request(
           method: :delete,
           path: ["meters/%1$s", id],

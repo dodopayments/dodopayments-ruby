@@ -51,7 +51,7 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::ProductListResponse]
 
-      def delete: (
+      def archive: (
         String id,
         ?request_options: Dodopayments::request_opts
       ) -> nil

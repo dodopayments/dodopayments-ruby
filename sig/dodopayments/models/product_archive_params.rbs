@@ -1,9 +1,9 @@
 module Dodopayments
   module Models
-    type meter_delete_params =
+    type product_archive_params =
       {  } & Dodopayments::Internal::Type::request_parameters
 
-    class MeterDeleteParams < Dodopayments::Internal::Type::BaseModel
+    class ProductArchiveParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 

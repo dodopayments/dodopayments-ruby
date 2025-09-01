@@ -2,8 +2,8 @@
 
 module Dodopayments
   module Models
-    # @see Dodopayments::Resources::Meters#delete
-    class MeterDeleteParams < Dodopayments::Internal::Type::BaseModel
+    # @see Dodopayments::Resources::Meters#archive
+    class MeterArchiveParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
