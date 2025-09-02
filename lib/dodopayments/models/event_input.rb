@@ -26,9 +26,9 @@ module Dodopayments
       #   Custom metadata. Only key value pairs are accepted, objects or arrays submitted
       #   will be rejected.
       #
-      #   @return [Hash{Symbol=>Object}, nil]
+      #   @return [Hash{Symbol=>String, Float, Boolean}, nil]
       optional :metadata,
-               Dodopayments::Internal::Type::HashOf[Dodopayments::Internal::Type::Unknown],
+               -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::EventInput::Metadata] },
                nil?: true
 
       # @!attribute timestamp
@@ -48,9 +48,23 @@ module Dodopayments
       #
       #   @param event_name [String] Name of the event
       #
-      #   @param metadata [Hash{Symbol=>Object}, nil] Custom metadata. Only key value pairs are accepted, objects or arrays submitted
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Custom metadata. Only key value pairs are accepted, objects or arrays submitted
       #
       #   @param timestamp [Time, nil] Custom Timestamp. Defaults to current timestamp in UTC.
+
+      # Metadata value can be a string, integer, number, or boolean
+      module Metadata
+        extend Dodopayments::Internal::Type::Union
+
+        variant String
+
+        variant Float
+
+        variant Dodopayments::Internal::Type::Boolean
+
+        # @!method self.variants
+        #   @return [Array(String, Float, Boolean)]
+      end
     end
   end
 end

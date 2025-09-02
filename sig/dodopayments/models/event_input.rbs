@@ -5,7 +5,7 @@ module Dodopayments
         customer_id: String,
         event_id: String,
         event_name: String,
-        metadata: ::Hash[Symbol, top]?,
+        metadata: ::Hash[Symbol, Dodopayments::Models::EventInput::metadata]?,
         timestamp: Time?
       }
 
@@ -16,7 +16,7 @@ module Dodopayments
 
       attr_accessor event_name: String
 
-      attr_accessor metadata: ::Hash[Symbol, top]?
+      attr_accessor metadata: ::Hash[Symbol, Dodopayments::Models::EventInput::metadata]?
 
       attr_accessor timestamp: Time?
 
@@ -24,7 +24,7 @@ module Dodopayments
         customer_id: String,
         event_id: String,
         event_name: String,
-        ?metadata: ::Hash[Symbol, top]?,
+        ?metadata: ::Hash[Symbol, Dodopayments::Models::EventInput::metadata]?,
         ?timestamp: Time?
       ) -> void
 
@@ -32,9 +32,17 @@ module Dodopayments
         customer_id: String,
         event_id: String,
         event_name: String,
-        metadata: ::Hash[Symbol, top]?,
+        metadata: ::Hash[Symbol, Dodopayments::Models::EventInput::metadata]?,
         timestamp: Time?
       }
+
+      type metadata = String | Float | bool
+
+      module Metadata
+        extend Dodopayments::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Dodopayments::Models::EventInput::metadata]
+      end
     end
   end
 end
