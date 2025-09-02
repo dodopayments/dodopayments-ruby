@@ -17,7 +17,7 @@ class Dodopayments::Test::Resources::UsageEventsTest < Dodopayments::Test::Resou
         event_id: String,
         event_name: String,
         timestamp: Time,
-        metadata: ^(Dodopayments::Internal::Type::HashOf[Dodopayments::Internal::Type::Unknown]) | nil
+        metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::Event::Metadata]) | nil
       }
     end
   end
@@ -43,7 +43,7 @@ class Dodopayments::Test::Resources::UsageEventsTest < Dodopayments::Test::Resou
         event_id: String,
         event_name: String,
         timestamp: Time,
-        metadata: ^(Dodopayments::Internal::Type::HashOf[Dodopayments::Internal::Type::Unknown]) | nil
+        metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::Event::Metadata]) | nil
       }
     end
   end

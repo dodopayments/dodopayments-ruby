@@ -7,7 +7,7 @@ module Dodopayments
         event_id: String,
         event_name: String,
         timestamp: Time,
-        metadata: ::Hash[Symbol, top]?
+        metadata: ::Hash[Symbol, Dodopayments::Models::Event::metadata]?
       }
 
     class Event < Dodopayments::Internal::Type::BaseModel
@@ -21,7 +21,7 @@ module Dodopayments
 
       attr_accessor timestamp: Time
 
-      attr_accessor metadata: ::Hash[Symbol, top]?
+      attr_accessor metadata: ::Hash[Symbol, Dodopayments::Models::Event::metadata]?
 
       def initialize: (
         business_id: String,
@@ -29,7 +29,7 @@ module Dodopayments
         event_id: String,
         event_name: String,
         timestamp: Time,
-        ?metadata: ::Hash[Symbol, top]?
+        ?metadata: ::Hash[Symbol, Dodopayments::Models::Event::metadata]?
       ) -> void
 
       def to_hash: -> {
@@ -38,8 +38,16 @@ module Dodopayments
         event_id: String,
         event_name: String,
         timestamp: Time,
-        metadata: ::Hash[Symbol, top]?
+        metadata: ::Hash[Symbol, Dodopayments::Models::Event::metadata]?
       }
+
+      type metadata = String | Float | bool
+
+      module Metadata
+        extend Dodopayments::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Dodopayments::Models::Event::metadata]
+      end
     end
   end
 end
