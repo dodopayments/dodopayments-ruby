@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.52.4 (2025-09-03)
+
+Full Changelog: [v1.51.1...v1.52.4](https://github.com/dodopayments/dodopayments-ruby/compare/v1.51.1...v1.52.4)
+
+### Features
+
+* **api:** manual updates ([0dd3323](https://github.com/dodopayments/dodopayments-ruby/commit/0dd3323b773634410a377238bf3d3d7fadac0d12))
+* **api:** updated openapi spec ([c338d93](https://github.com/dodopayments/dodopayments-ruby/commit/c338d93bcded89768cc1b92410496b7acf6db609))
+* updated openapi spec and added model and API functions for Usage Based Billing ([54d898a](https://github.com/dodopayments/dodopayments-ruby/commit/54d898a1cd82cb37a2877dfb2838f6f9e5209943))
+
 ## 1.51.1 (2025-08-25)
 
 Full Changelog: [v1.51.0...v1.51.1](https://github.com/dodopayments/dodopayments-ruby/compare/v1.51.0...v1.51.1)
