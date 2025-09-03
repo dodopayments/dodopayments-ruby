@@ -117,6 +117,13 @@ module Dodopayments
       #   @return [String, nil]
       optional :card_type, String, nil?: true
 
+      # @!attribute checkout_session_id
+      #   If payment is made using a checkout session, this field is set to the id of the
+      #   session.
+      #
+      #   @return [String, nil]
+      optional :checkout_session_id, String, nil?: true
+
       # @!attribute discount_id
       #   The discount id if discount is applied
       #
@@ -193,7 +200,7 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, discount_id: nil, error_code: nil, error_message: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, discount_id: nil, error_code: nil, error_message: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
@@ -232,6 +239,8 @@ module Dodopayments
       #   @param card_network [String, nil] Card network like VISA, MASTERCARD etc.
       #
       #   @param card_type [String, nil] The type of card DEBIT or CREDIT
+      #
+      #   @param checkout_session_id [String, nil] If payment is made using a checkout session,
       #
       #   @param discount_id [String, nil] The discount id if discount is applied
       #

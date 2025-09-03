@@ -44,6 +44,10 @@ module Dodopayments
       sig { returns(T::Hash[Symbol, String]) }
       attr_accessor :metadata
 
+      # Meters associated with this subscription (for usage-based billing)
+      sig { returns(T::Array[Dodopayments::Subscription::Meter]) }
+      attr_accessor :meters
+
       # Timestamp of the next scheduled billing. Indicates the end of current billing
       # period
       sig { returns(Time) }
@@ -128,6 +132,7 @@ module Dodopayments
           currency: Dodopayments::Currency::OrSymbol,
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
           metadata: T::Hash[Symbol, String],
+          meters: T::Array[Dodopayments::Subscription::Meter::OrHash],
           next_billing_date: Time,
           on_demand: T::Boolean,
           payment_frequency_count: Integer,
@@ -163,6 +168,8 @@ module Dodopayments
         customer:,
         # Additional custom data associated with the subscription
         metadata:,
+        # Meters associated with this subscription (for usage-based billing)
+        meters:,
         # Timestamp of the next scheduled billing. Indicates the end of current billing
         # period
         next_billing_date:,
@@ -214,6 +221,7 @@ module Dodopayments
             currency: Dodopayments::Currency::TaggedSymbol,
             customer: Dodopayments::CustomerLimitedDetails,
             metadata: T::Hash[Symbol, String],
+            meters: T::Array[Dodopayments::Subscription::Meter],
             next_billing_date: Time,
             on_demand: T::Boolean,
             payment_frequency_count: Integer,
@@ -238,6 +246,76 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      class Meter < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::Subscription::Meter,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        sig { returns(Dodopayments::Currency::TaggedSymbol) }
+        attr_accessor :currency
+
+        sig { returns(Integer) }
+        attr_accessor :free_threshold
+
+        sig { returns(String) }
+        attr_accessor :measurement_unit
+
+        sig { returns(String) }
+        attr_accessor :meter_id
+
+        sig { returns(String) }
+        attr_accessor :name
+
+        sig { returns(String) }
+        attr_accessor :price_per_unit
+
+        sig { returns(T.nilable(String)) }
+        attr_accessor :description
+
+        # Response struct representing usage-based meter cart details for a subscription
+        sig do
+          params(
+            currency: Dodopayments::Currency::OrSymbol,
+            free_threshold: Integer,
+            measurement_unit: String,
+            meter_id: String,
+            name: String,
+            price_per_unit: String,
+            description: T.nilable(String)
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          currency:,
+          free_threshold:,
+          measurement_unit:,
+          meter_id:,
+          name:,
+          price_per_unit:,
+          description: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              currency: Dodopayments::Currency::TaggedSymbol,
+              free_threshold: Integer,
+              measurement_unit: String,
+              meter_id: String,
+              name: String,
+              price_per_unit: String,
+              description: T.nilable(String)
+            }
+          )
+        end
+        def to_hash
+        end
       end
     end
   end

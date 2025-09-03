@@ -20,6 +20,7 @@ module Dodopayments
         card_last_four: String?,
         card_network: String?,
         card_type: String?,
+        checkout_session_id: String?,
         discount_id: String?,
         error_code: String?,
         error_message: String?,
@@ -71,6 +72,8 @@ module Dodopayments
 
       attr_accessor card_type: String?
 
+      attr_accessor checkout_session_id: String?
+
       attr_accessor discount_id: String?
 
       attr_accessor error_code: String?
@@ -114,6 +117,7 @@ module Dodopayments
         ?card_last_four: String?,
         ?card_network: String?,
         ?card_type: String?,
+        ?checkout_session_id: String?,
         ?discount_id: String?,
         ?error_code: String?,
         ?error_message: String?,
@@ -147,6 +151,7 @@ module Dodopayments
         card_last_four: String?,
         card_network: String?,
         card_type: String?,
+        checkout_session_id: String?,
         discount_id: String?,
         error_code: String?,
         error_message: String?,

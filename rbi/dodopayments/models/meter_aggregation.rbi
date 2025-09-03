@@ -52,11 +52,6 @@ module Dodopayments
         COUNT =
           T.let(:count, Dodopayments::MeterAggregation::Type::TaggedSymbol)
         SUM = T.let(:sum, Dodopayments::MeterAggregation::Type::TaggedSymbol)
-        UNIQUE_COUNT =
-          T.let(
-            :unique_count,
-            Dodopayments::MeterAggregation::Type::TaggedSymbol
-          )
         MAX = T.let(:max, Dodopayments::MeterAggregation::Type::TaggedSymbol)
         LAST = T.let(:last, Dodopayments::MeterAggregation::Type::TaggedSymbol)
 

@@ -18,14 +18,13 @@ module Dodopayments
         key: String?
       }
 
-      type type_ = :count | :sum | :unique_count | :max | :last
+      type type_ = :count | :sum | :max | :last
 
       module Type
         extend Dodopayments::Internal::Type::Enum
 
         COUNT: :count
         SUM: :sum
-        UNIQUE_COUNT: :unique_count
         MAX: :max
         LAST: :last
 
