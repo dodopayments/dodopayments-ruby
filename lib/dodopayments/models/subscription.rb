@@ -46,6 +46,12 @@ module Dodopayments
       #   @return [Hash{Symbol=>String}]
       required :metadata, Dodopayments::Internal::Type::HashOf[String]
 
+      # @!attribute meters
+      #   Meters associated with this subscription (for usage-based billing)
+      #
+      #   @return [Array<Dodopayments::Models::Subscription::Meter>]
+      required :meters, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Subscription::Meter] }
+
       # @!attribute next_billing_date
       #   Timestamp of the next scheduled billing. Indicates the end of current billing
       #   period
@@ -156,7 +162,7 @@ module Dodopayments
       #   @return [Time, nil]
       optional :expires_at, Time, nil?: true
 
-      # @!method initialize(addons:, billing:, cancel_at_next_billing_date:, created_at:, currency:, customer:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, discount_cycles_remaining: nil, discount_id: nil, expires_at: nil)
+      # @!method initialize(addons:, billing:, cancel_at_next_billing_date:, created_at:, currency:, customer:, metadata:, meters:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, discount_cycles_remaining: nil, discount_id: nil, expires_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Subscription} for more details.
       #
@@ -175,6 +181,8 @@ module Dodopayments
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails] Customer details associated with the subscription
       #
       #   @param metadata [Hash{Symbol=>String}] Additional custom data associated with the subscription
+      #
+      #   @param meters [Array<Dodopayments::Models::Subscription::Meter>] Meters associated with this subscription (for usage-based billing)
       #
       #   @param next_billing_date [Time] Timestamp of the next scheduled billing. Indicates the end of current billing pe
       #
@@ -211,6 +219,54 @@ module Dodopayments
       #   @param discount_id [String, nil] The discount id if discount is applied
       #
       #   @param expires_at [Time, nil] Timestamp when the subscription will expire
+
+      class Meter < Dodopayments::Internal::Type::BaseModel
+        # @!attribute currency
+        #
+        #   @return [Symbol, Dodopayments::Models::Currency]
+        required :currency, enum: -> { Dodopayments::Currency }
+
+        # @!attribute free_threshold
+        #
+        #   @return [Integer]
+        required :free_threshold, Integer
+
+        # @!attribute measurement_unit
+        #
+        #   @return [String]
+        required :measurement_unit, String
+
+        # @!attribute meter_id
+        #
+        #   @return [String]
+        required :meter_id, String
+
+        # @!attribute name
+        #
+        #   @return [String]
+        required :name, String
+
+        # @!attribute price_per_unit
+        #
+        #   @return [String]
+        required :price_per_unit, String
+
+        # @!attribute description
+        #
+        #   @return [String, nil]
+        optional :description, String, nil?: true
+
+        # @!method initialize(currency:, free_threshold:, measurement_unit:, meter_id:, name:, price_per_unit:, description: nil)
+        #   Response struct representing usage-based meter cart details for a subscription
+        #
+        #   @param currency [Symbol, Dodopayments::Models::Currency]
+        #   @param free_threshold [Integer]
+        #   @param measurement_unit [String]
+        #   @param meter_id [String]
+        #   @param name [String]
+        #   @param price_per_unit [String]
+        #   @param description [String, nil]
+      end
     end
   end
 end

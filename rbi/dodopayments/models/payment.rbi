@@ -93,6 +93,11 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :card_type
 
+      # If payment is made using a checkout session, this field is set to the id of the
+      # session.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :checkout_session_id
+
       # The discount id if discount is applied
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_id
@@ -163,6 +168,7 @@ module Dodopayments
           card_last_four: T.nilable(String),
           card_network: T.nilable(String),
           card_type: T.nilable(String),
+          checkout_session_id: T.nilable(String),
           discount_id: T.nilable(String),
           error_code: T.nilable(String),
           error_message: T.nilable(String),
@@ -220,6 +226,9 @@ module Dodopayments
         card_network: nil,
         # The type of card DEBIT or CREDIT
         card_type: nil,
+        # If payment is made using a checkout session, this field is set to the id of the
+        # session.
+        checkout_session_id: nil,
         # The discount id if discount is applied
         discount_id: nil,
         # An error code if the payment failed
@@ -271,6 +280,7 @@ module Dodopayments
             card_last_four: T.nilable(String),
             card_network: T.nilable(String),
             card_type: T.nilable(String),
+            checkout_session_id: T.nilable(String),
             discount_id: T.nilable(String),
             error_code: T.nilable(String),
             error_message: T.nilable(String),

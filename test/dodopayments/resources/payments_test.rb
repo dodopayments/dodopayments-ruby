@@ -57,6 +57,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         card_last_four: String | nil,
         card_network: String | nil,
         card_type: String | nil,
+        checkout_session_id: String | nil,
         discount_id: String | nil,
         error_code: String | nil,
         error_message: String | nil,

@@ -28,7 +28,6 @@ module Dodopayments
 
         COUNT = :count
         SUM = :sum
-        UNIQUE_COUNT = :unique_count
         MAX = :max
         LAST = :last
 
