@@ -9,6 +9,7 @@ module Dodopayments
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
+        meters: ::Array[Dodopayments::Subscription::Meter],
         next_billing_date: Time,
         on_demand: bool,
         payment_frequency_count: Integer,
@@ -43,6 +44,8 @@ module Dodopayments
       attr_accessor customer: Dodopayments::CustomerLimitedDetails
 
       attr_accessor metadata: ::Hash[Symbol, String]
+
+      attr_accessor meters: ::Array[Dodopayments::Subscription::Meter]
 
       attr_accessor next_billing_date: Time
 
@@ -88,6 +91,7 @@ module Dodopayments
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
+        meters: ::Array[Dodopayments::Subscription::Meter],
         next_billing_date: Time,
         on_demand: bool,
         payment_frequency_count: Integer,
@@ -116,6 +120,7 @@ module Dodopayments
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
+        meters: ::Array[Dodopayments::Subscription::Meter],
         next_billing_date: Time,
         on_demand: bool,
         payment_frequency_count: Integer,
@@ -135,6 +140,53 @@ module Dodopayments
         discount_id: String?,
         expires_at: Time?
       }
+
+      type meter =
+        {
+          currency: Dodopayments::Models::currency,
+          free_threshold: Integer,
+          measurement_unit: String,
+          meter_id: String,
+          name: String,
+          price_per_unit: String,
+          description: String?
+        }
+
+      class Meter < Dodopayments::Internal::Type::BaseModel
+        attr_accessor currency: Dodopayments::Models::currency
+
+        attr_accessor free_threshold: Integer
+
+        attr_accessor measurement_unit: String
+
+        attr_accessor meter_id: String
+
+        attr_accessor name: String
+
+        attr_accessor price_per_unit: String
+
+        attr_accessor description: String?
+
+        def initialize: (
+          currency: Dodopayments::Models::currency,
+          free_threshold: Integer,
+          measurement_unit: String,
+          meter_id: String,
+          name: String,
+          price_per_unit: String,
+          ?description: String?
+        ) -> void
+
+        def to_hash: -> {
+          currency: Dodopayments::Models::currency,
+          free_threshold: Integer,
+          measurement_unit: String,
+          meter_id: String,
+          name: String,
+          price_per_unit: String,
+          description: String?
+        }
+      end
     end
   end
 end
