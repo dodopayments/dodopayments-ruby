@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "dodopayments", "~> 1.52.5"
+gem "dodopayments", "~> 1.53.2"
 ```
 
 <!-- x-release-please-end -->
