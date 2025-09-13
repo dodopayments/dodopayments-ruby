@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.53.3 (2025-09-13)
+
+Full Changelog: [v1.53.2...v1.53.3](https://github.com/dodopayments/dodopayments-ruby/compare/v1.53.2...v1.53.3)
+
+### Features
+
+* **api:** added typescript sdk for migration and updated org info ([d99ecd9](https://github.com/dodopayments/dodopayments-ruby/commit/d99ecd9f38597de768471dea17b7a9e4a960a844))
+* **api:** manual updates ([2674ef9](https://github.com/dodopayments/dodopayments-ruby/commit/2674ef983999791b8d9df719054b07b2b369b3e2))
+
 ## 1.53.2 (2025-09-13)
 
 Full Changelog: [v1.52.5...v1.53.2](https://github.com/dodopayments/dodopayments-ruby/compare/v1.52.5...v1.53.2)
