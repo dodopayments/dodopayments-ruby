@@ -16,6 +16,15 @@ module Dodopayments
       sig { returns(Time) }
       attr_accessor :created_at
 
+      # Details about the customer for this refund (from the associated payment)
+      sig { returns(Dodopayments::CustomerLimitedDetails) }
+      attr_reader :customer
+
+      sig do
+        params(customer: Dodopayments::CustomerLimitedDetails::OrHash).void
+      end
+      attr_writer :customer
+
       # If true the refund is a partial refund
       sig { returns(T::Boolean) }
       attr_accessor :is_partial
@@ -48,6 +57,7 @@ module Dodopayments
         params(
           business_id: String,
           created_at: Time,
+          customer: Dodopayments::CustomerLimitedDetails::OrHash,
           is_partial: T::Boolean,
           payment_id: String,
           refund_id: String,
@@ -62,6 +72,8 @@ module Dodopayments
         business_id:,
         # The timestamp of when the refund was created in UTC.
         created_at:,
+        # Details about the customer for this refund (from the associated payment)
+        customer:,
         # If true the refund is a partial refund
         is_partial:,
         # The unique identifier of the payment associated with the refund.
@@ -84,6 +96,7 @@ module Dodopayments
           {
             business_id: String,
             created_at: Time,
+            customer: Dodopayments::CustomerLimitedDetails,
             is_partial: T::Boolean,
             payment_id: String,
             refund_id: String,

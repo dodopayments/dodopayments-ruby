@@ -181,6 +181,10 @@ module Dodopayments
           subscription_id: String,
           product_price: Integer,
           adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
+          customer_balance_config:
+            T.nilable(
+              Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig::OrHash
+            ),
           metadata: T.nilable(T::Hash[Symbol, String]),
           product_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           product_description: T.nilable(String),
@@ -197,6 +201,8 @@ module Dodopayments
         # added on top (false). This field is ignored if adaptive pricing is not enabled
         # for the business.
         adaptive_currency_fees_inclusive: nil,
+        # Specify how customer balance is used for the payment
+        customer_balance_config: nil,
         # Metadata for the payment. If not passed, the metadata of the subscription will
         # be taken
         metadata: nil,

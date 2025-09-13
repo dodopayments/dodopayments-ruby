@@ -6,6 +6,9 @@ module Dodopayments
       # @return [Dodopayments::Resources::Customers::CustomerPortal]
       attr_reader :customer_portal
 
+      # @return [Dodopayments::Resources::Customers::Wallets]
+      attr_reader :wallets
+
       # @overload create(email:, name:, phone_number: nil, request_options: {})
       #
       # @param email [String]
@@ -100,6 +103,7 @@ module Dodopayments
       def initialize(client:)
         @client = client
         @customer_portal = Dodopayments::Resources::Customers::CustomerPortal.new(client: client)
+        @wallets = Dodopayments::Resources::Customers::Wallets.new(client: client)
       end
     end
   end

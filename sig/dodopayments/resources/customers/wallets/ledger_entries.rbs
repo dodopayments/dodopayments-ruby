@@ -1,0 +1,29 @@
+module Dodopayments
+  module Resources
+    class Customers
+      class Wallets
+        class LedgerEntries
+          def create: (
+            String customer_id,
+            amount: Integer,
+            currency: Dodopayments::Models::currency,
+            entry_type: Dodopayments::Models::Customers::Wallets::LedgerEntryCreateParams::entry_type,
+            ?idempotency_key: String?,
+            ?reason: String?,
+            ?request_options: Dodopayments::request_opts
+          ) -> Dodopayments::Customers::CustomerWallet
+
+          def list: (
+            String customer_id,
+            ?currency: Dodopayments::Models::currency,
+            ?page_number: Integer,
+            ?page_size: Integer,
+            ?request_options: Dodopayments::request_opts
+          ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Customers::Wallets::CustomerWalletTransaction]
+
+          def initialize: (client: Dodopayments::Client) -> void
+        end
+      end
+    end
+  end
+end

@@ -8,7 +8,7 @@ module Dodopayments
           license_key: String,
           name: String,
           request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::LicenseKeyInstance)
+        ).returns(Dodopayments::Models::LicenseActivateResponse)
       end
       def activate(license_key:, name:, request_options: {})
       end

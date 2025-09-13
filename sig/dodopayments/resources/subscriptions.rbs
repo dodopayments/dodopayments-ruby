@@ -61,6 +61,7 @@ module Dodopayments
         String subscription_id,
         product_price: Integer,
         ?adaptive_currency_fees_inclusive: bool?,
+        ?customer_balance_config: Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig?,
         ?metadata: ::Hash[Symbol, String]?,
         ?product_currency: Dodopayments::Models::currency?,
         ?product_description: String?,

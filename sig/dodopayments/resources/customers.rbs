@@ -3,6 +3,8 @@ module Dodopayments
     class Customers
       attr_reader customer_portal: Dodopayments::Resources::Customers::CustomerPortal
 
+      attr_reader wallets: Dodopayments::Resources::Customers::Wallets
+
       def create: (
         email: String,
         name: String,

@@ -1,0 +1,60 @@
+module Dodopayments
+  module Models
+    type refund_list_response =
+      {
+        business_id: String,
+        created_at: Time,
+        is_partial: bool,
+        payment_id: String,
+        refund_id: String,
+        status: Dodopayments::Models::refund_status,
+        amount: Integer?,
+        currency: Dodopayments::Models::currency?,
+        reason: String?
+      }
+
+    class RefundListResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor is_partial: bool
+
+      attr_accessor payment_id: String
+
+      attr_accessor refund_id: String
+
+      attr_accessor status: Dodopayments::Models::refund_status
+
+      attr_accessor amount: Integer?
+
+      attr_accessor currency: Dodopayments::Models::currency?
+
+      attr_accessor reason: String?
+
+      def initialize: (
+        business_id: String,
+        created_at: Time,
+        is_partial: bool,
+        payment_id: String,
+        refund_id: String,
+        status: Dodopayments::Models::refund_status,
+        ?amount: Integer?,
+        ?currency: Dodopayments::Models::currency?,
+        ?reason: String?
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        created_at: Time,
+        is_partial: bool,
+        payment_id: String,
+        refund_id: String,
+        status: Dodopayments::Models::refund_status,
+        amount: Integer?,
+        currency: Dodopayments::Models::currency?,
+        reason: String?
+      }
+    end
+  end
+end

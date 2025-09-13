@@ -1,0 +1,27 @@
+module Dodopayments
+  module Models
+    module Customers
+      type wallet_list_response =
+        {
+          items: ::Array[Dodopayments::Customers::CustomerWallet],
+          total_balance_usd: Integer
+        }
+
+      class WalletListResponse < Dodopayments::Internal::Type::BaseModel
+        attr_accessor items: ::Array[Dodopayments::Customers::CustomerWallet]
+
+        attr_accessor total_balance_usd: Integer
+
+        def initialize: (
+          items: ::Array[Dodopayments::Customers::CustomerWallet],
+          total_balance_usd: Integer
+        ) -> void
+
+        def to_hash: -> {
+          items: ::Array[Dodopayments::Customers::CustomerWallet],
+          total_balance_usd: Integer
+        }
+      end
+    end
+  end
+end

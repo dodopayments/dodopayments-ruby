@@ -5,7 +5,7 @@ module Dodopayments
         license_key: String,
         name: String,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::LicenseKeyInstance
+      ) -> Dodopayments::Models::LicenseActivateResponse
 
       def deactivate: (
         license_key: String,

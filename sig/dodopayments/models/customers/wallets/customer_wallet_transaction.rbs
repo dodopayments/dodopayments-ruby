@@ -1,0 +1,102 @@
+module Dodopayments
+  module Models
+    module Customers
+      module Wallets
+        type customer_wallet_transaction =
+          {
+            id: String,
+            after_balance: Integer,
+            amount: Integer,
+            before_balance: Integer,
+            business_id: String,
+            created_at: Time,
+            currency: Dodopayments::Models::currency,
+            customer_id: String,
+            event_type: Dodopayments::Models::Customers::Wallets::CustomerWalletTransaction::event_type,
+            is_credit: bool,
+            reason: String?,
+            reference_object_id: String?
+          }
+
+        class CustomerWalletTransaction < Dodopayments::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor after_balance: Integer
+
+          attr_accessor amount: Integer
+
+          attr_accessor before_balance: Integer
+
+          attr_accessor business_id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor currency: Dodopayments::Models::currency
+
+          attr_accessor customer_id: String
+
+          attr_accessor event_type: Dodopayments::Models::Customers::Wallets::CustomerWalletTransaction::event_type
+
+          attr_accessor is_credit: bool
+
+          attr_accessor reason: String?
+
+          attr_accessor reference_object_id: String?
+
+          def initialize: (
+            id: String,
+            after_balance: Integer,
+            amount: Integer,
+            before_balance: Integer,
+            business_id: String,
+            created_at: Time,
+            currency: Dodopayments::Models::currency,
+            customer_id: String,
+            event_type: Dodopayments::Models::Customers::Wallets::CustomerWalletTransaction::event_type,
+            is_credit: bool,
+            ?reason: String?,
+            ?reference_object_id: String?
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            after_balance: Integer,
+            amount: Integer,
+            before_balance: Integer,
+            business_id: String,
+            created_at: Time,
+            currency: Dodopayments::Models::currency,
+            customer_id: String,
+            event_type: Dodopayments::Models::Customers::Wallets::CustomerWalletTransaction::event_type,
+            is_credit: bool,
+            reason: String?,
+            reference_object_id: String?
+          }
+
+          type event_type =
+            :payment
+            | :payment_reversal
+            | :refund
+            | :refund_reversal
+            | :dispute
+            | :dispute_reversal
+            | :merchant_adjustment
+
+          module EventType
+            extend Dodopayments::Internal::Type::Enum
+
+            PAYMENT: :payment
+            PAYMENT_REVERSAL: :payment_reversal
+            REFUND: :refund
+            REFUND_REVERSAL: :refund_reversal
+            DISPUTE: :dispute
+            DISPUTE_REVERSAL: :dispute_reversal
+            MERCHANT_ADJUSTMENT: :merchant_adjustment
+
+            def self?.values: -> ::Array[Dodopayments::Models::Customers::Wallets::CustomerWalletTransaction::event_type]
+          end
+        end
+      end
+    end
+  end
+end

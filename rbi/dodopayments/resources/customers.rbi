@@ -6,6 +6,9 @@ module Dodopayments
       sig { returns(Dodopayments::Resources::Customers::CustomerPortal) }
       attr_reader :customer_portal
 
+      sig { returns(Dodopayments::Resources::Customers::Wallets) }
+      attr_reader :wallets
+
       sig do
         params(
           email: String,

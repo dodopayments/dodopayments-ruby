@@ -4,6 +4,7 @@ module Dodopayments
       {
         product_price: Integer,
         adaptive_currency_fees_inclusive: bool?,
+        customer_balance_config: Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig?,
         metadata: ::Hash[Symbol, String]?,
         product_currency: Dodopayments::Models::currency?,
         product_description: String?
@@ -18,6 +19,8 @@ module Dodopayments
 
       attr_accessor adaptive_currency_fees_inclusive: bool?
 
+      attr_accessor customer_balance_config: Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig?
+
       attr_accessor metadata: ::Hash[Symbol, String]?
 
       attr_accessor product_currency: Dodopayments::Models::currency?
@@ -27,6 +30,7 @@ module Dodopayments
       def initialize: (
         product_price: Integer,
         ?adaptive_currency_fees_inclusive: bool?,
+        ?customer_balance_config: Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig?,
         ?metadata: ::Hash[Symbol, String]?,
         ?product_currency: Dodopayments::Models::currency?,
         ?product_description: String?,
@@ -36,11 +40,34 @@ module Dodopayments
       def to_hash: -> {
         product_price: Integer,
         adaptive_currency_fees_inclusive: bool?,
+        customer_balance_config: Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig?,
         metadata: ::Hash[Symbol, String]?,
         product_currency: Dodopayments::Models::currency?,
         product_description: String?,
         request_options: Dodopayments::RequestOptions
       }
+
+      type customer_balance_config =
+        {
+          allow_customer_credits_purchase: bool?,
+          allow_customer_credits_usage: bool?
+        }
+
+      class CustomerBalanceConfig < Dodopayments::Internal::Type::BaseModel
+        attr_accessor allow_customer_credits_purchase: bool?
+
+        attr_accessor allow_customer_credits_usage: bool?
+
+        def initialize: (
+          ?allow_customer_credits_purchase: bool?,
+          ?allow_customer_credits_usage: bool?
+        ) -> void
+
+        def to_hash: -> {
+          allow_customer_credits_purchase: bool?,
+          allow_customer_credits_usage: bool?
+        }
+      end
     end
   end
 end

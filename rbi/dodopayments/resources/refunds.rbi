@@ -47,7 +47,7 @@ module Dodopayments
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::DefaultPageNumberPagination[
-            Dodopayments::Refund
+            Dodopayments::Models::RefundListResponse
           ]
         )
       end
