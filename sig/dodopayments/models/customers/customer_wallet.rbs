@@ -1,0 +1,44 @@
+module Dodopayments
+  module Models
+    class CustomerWallet = Customers::CustomerWallet
+
+    module Customers
+      type customer_wallet =
+        {
+          balance: Integer,
+          created_at: Time,
+          currency: Dodopayments::Models::currency,
+          customer_id: String,
+          updated_at: Time
+        }
+
+      class CustomerWallet < Dodopayments::Internal::Type::BaseModel
+        attr_accessor balance: Integer
+
+        attr_accessor created_at: Time
+
+        attr_accessor currency: Dodopayments::Models::currency
+
+        attr_accessor customer_id: String
+
+        attr_accessor updated_at: Time
+
+        def initialize: (
+          balance: Integer,
+          created_at: Time,
+          currency: Dodopayments::Models::currency,
+          customer_id: String,
+          updated_at: Time
+        ) -> void
+
+        def to_hash: -> {
+          balance: Integer,
+          created_at: Time,
+          currency: Dodopayments::Models::currency,
+          customer_id: String,
+          updated_at: Time
+        }
+      end
+    end
+  end
+end

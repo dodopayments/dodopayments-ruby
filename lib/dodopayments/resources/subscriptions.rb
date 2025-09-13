@@ -173,13 +173,15 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionChargeParams} for more details.
       #
-      # @overload charge(subscription_id, product_price:, adaptive_currency_fees_inclusive: nil, metadata: nil, product_currency: nil, product_description: nil, request_options: {})
+      # @overload charge(subscription_id, product_price:, adaptive_currency_fees_inclusive: nil, customer_balance_config: nil, metadata: nil, product_currency: nil, product_description: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
       # @param product_price [Integer] The product price. Represented in the lowest denomination of the currency (e.g.,
       #
       # @param adaptive_currency_fees_inclusive [Boolean, nil] Whether adaptive currency fees should be included in the product_price (true) or
+      #
+      # @param customer_balance_config [Dodopayments::Models::SubscriptionChargeParams::CustomerBalanceConfig, nil] Specify how customer balance is used for the payment
       #
       # @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #

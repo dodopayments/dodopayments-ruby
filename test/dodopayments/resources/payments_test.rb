@@ -49,7 +49,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         disputes: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Dispute]),
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         payment_id: String,
-        refunds: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Refund]),
+        refunds: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Payment::Refund]),
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Currency,
         total_amount: Integer,

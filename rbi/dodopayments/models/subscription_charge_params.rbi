@@ -25,6 +25,26 @@ module Dodopayments
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :adaptive_currency_fees_inclusive
 
+      # Specify how customer balance is used for the payment
+      sig do
+        returns(
+          T.nilable(
+            Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig
+          )
+        )
+      end
+      attr_reader :customer_balance_config
+
+      sig do
+        params(
+          customer_balance_config:
+            T.nilable(
+              Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig::OrHash
+            )
+        ).void
+      end
+      attr_writer :customer_balance_config
+
       # Metadata for the payment. If not passed, the metadata of the subscription will
       # be taken
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
@@ -44,6 +64,10 @@ module Dodopayments
         params(
           product_price: Integer,
           adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
+          customer_balance_config:
+            T.nilable(
+              Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig::OrHash
+            ),
           metadata: T.nilable(T::Hash[Symbol, String]),
           product_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           product_description: T.nilable(String),
@@ -58,6 +82,8 @@ module Dodopayments
         # added on top (false). This field is ignored if adaptive pricing is not enabled
         # for the business.
         adaptive_currency_fees_inclusive: nil,
+        # Specify how customer balance is used for the payment
+        customer_balance_config: nil,
         # Metadata for the payment. If not passed, the metadata of the subscription will
         # be taken
         metadata: nil,
@@ -76,6 +102,10 @@ module Dodopayments
           {
             product_price: Integer,
             adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
+            customer_balance_config:
+              T.nilable(
+                Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig
+              ),
             metadata: T.nilable(T::Hash[Symbol, String]),
             product_currency: T.nilable(Dodopayments::Currency::OrSymbol),
             product_description: T.nilable(String),
@@ -84,6 +114,50 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      class CustomerBalanceConfig < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        # Allows Customer Credit to be purchased to settle payments
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_accessor :allow_customer_credits_purchase
+
+        # Allows Customer Credit Balance to be used to settle payments
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_accessor :allow_customer_credits_usage
+
+        # Specify how customer balance is used for the payment
+        sig do
+          params(
+            allow_customer_credits_purchase: T.nilable(T::Boolean),
+            allow_customer_credits_usage: T.nilable(T::Boolean)
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Allows Customer Credit to be purchased to settle payments
+          allow_customer_credits_purchase: nil,
+          # Allows Customer Credit Balance to be used to settle payments
+          allow_customer_credits_usage: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              allow_customer_credits_purchase: T.nilable(T::Boolean),
+              allow_customer_credits_usage: T.nilable(T::Boolean)
+            }
+          )
+        end
+        def to_hash
+        end
       end
     end
   end
