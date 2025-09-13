@@ -1,0 +1,48 @@
+module Dodopayments
+  module Models
+    module Customers
+      module Wallets
+        type ledger_entry_list_params =
+          {
+            currency: Dodopayments::Models::currency,
+            page_number: Integer,
+            page_size: Integer
+          }
+          & Dodopayments::Internal::Type::request_parameters
+
+        class LedgerEntryListParams < Dodopayments::Internal::Type::BaseModel
+          extend Dodopayments::Internal::Type::RequestParameters::Converter
+          include Dodopayments::Internal::Type::RequestParameters
+
+          attr_reader currency: Dodopayments::Models::currency?
+
+          def currency=: (
+            Dodopayments::Models::currency
+          ) -> Dodopayments::Models::currency
+
+          attr_reader page_number: Integer?
+
+          def page_number=: (Integer) -> Integer
+
+          attr_reader page_size: Integer?
+
+          def page_size=: (Integer) -> Integer
+
+          def initialize: (
+            ?currency: Dodopayments::Models::currency,
+            ?page_number: Integer,
+            ?page_size: Integer,
+            ?request_options: Dodopayments::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            currency: Dodopayments::Models::currency,
+            page_number: Integer,
+            page_size: Integer,
+            request_options: Dodopayments::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

@@ -22,6 +22,14 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :adaptive_currency_fees_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
+      # @!attribute customer_balance_config
+      #   Specify how customer balance is used for the payment
+      #
+      #   @return [Dodopayments::Models::SubscriptionChargeParams::CustomerBalanceConfig, nil]
+      optional :customer_balance_config,
+               -> { Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig },
+               nil?: true
+
       # @!attribute metadata
       #   Metadata for the payment. If not passed, the metadata of the subscription will
       #   be taken
@@ -43,13 +51,15 @@ module Dodopayments
       #   @return [String, nil]
       optional :product_description, String, nil?: true
 
-      # @!method initialize(product_price:, adaptive_currency_fees_inclusive: nil, metadata: nil, product_currency: nil, product_description: nil, request_options: {})
+      # @!method initialize(product_price:, adaptive_currency_fees_inclusive: nil, customer_balance_config: nil, metadata: nil, product_currency: nil, product_description: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionChargeParams} for more details.
       #
       #   @param product_price [Integer] The product price. Represented in the lowest denomination of the currency (e.g.,
       #
       #   @param adaptive_currency_fees_inclusive [Boolean, nil] Whether adaptive currency fees should be included in the product_price (true) or
+      #
+      #   @param customer_balance_config [Dodopayments::Models::SubscriptionChargeParams::CustomerBalanceConfig, nil] Specify how customer balance is used for the payment
       #
       #   @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
@@ -58,6 +68,27 @@ module Dodopayments
       #   @param product_description [String, nil] Optional product description override for billing and line items.
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
+
+      class CustomerBalanceConfig < Dodopayments::Internal::Type::BaseModel
+        # @!attribute allow_customer_credits_purchase
+        #   Allows Customer Credit to be purchased to settle payments
+        #
+        #   @return [Boolean, nil]
+        optional :allow_customer_credits_purchase, Dodopayments::Internal::Type::Boolean, nil?: true
+
+        # @!attribute allow_customer_credits_usage
+        #   Allows Customer Credit Balance to be used to settle payments
+        #
+        #   @return [Boolean, nil]
+        optional :allow_customer_credits_usage, Dodopayments::Internal::Type::Boolean, nil?: true
+
+        # @!method initialize(allow_customer_credits_purchase: nil, allow_customer_credits_usage: nil)
+        #   Specify how customer balance is used for the payment
+        #
+        #   @param allow_customer_credits_purchase [Boolean, nil] Allows Customer Credit to be purchased to settle payments
+        #
+        #   @param allow_customer_credits_usage [Boolean, nil] Allows Customer Credit Balance to be used to settle payments
+      end
     end
   end
 end

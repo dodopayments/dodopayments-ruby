@@ -16,6 +16,12 @@ module Dodopayments
       #   @return [Time]
       required :created_at, Time
 
+      # @!attribute customer
+      #   Details about the customer for this refund (from the associated payment)
+      #
+      #   @return [Dodopayments::Models::CustomerLimitedDetails]
+      required :customer, -> { Dodopayments::CustomerLimitedDetails }
+
       # @!attribute is_partial
       #   If true the refund is a partial refund
       #
@@ -58,10 +64,12 @@ module Dodopayments
       #   @return [String, nil]
       optional :reason, String, nil?: true
 
-      # @!method initialize(business_id:, created_at:, is_partial:, payment_id:, refund_id:, status:, amount: nil, currency: nil, reason: nil)
+      # @!method initialize(business_id:, created_at:, customer:, is_partial:, payment_id:, refund_id:, status:, amount: nil, currency: nil, reason: nil)
       #   @param business_id [String] The unique identifier of the business issuing the refund.
       #
       #   @param created_at [Time] The timestamp of when the refund was created in UTC.
+      #
+      #   @param customer [Dodopayments::Models::CustomerLimitedDetails] Details about the customer for this refund (from the associated payment)
       #
       #   @param is_partial [Boolean] If true the refund is a partial refund
       #

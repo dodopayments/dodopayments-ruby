@@ -4,6 +4,7 @@ module Dodopayments
       {
         business_id: String,
         created_at: Time,
+        customer: Dodopayments::CustomerLimitedDetails,
         is_partial: bool,
         payment_id: String,
         refund_id: String,
@@ -17,6 +18,8 @@ module Dodopayments
       attr_accessor business_id: String
 
       attr_accessor created_at: Time
+
+      attr_accessor customer: Dodopayments::CustomerLimitedDetails
 
       attr_accessor is_partial: bool
 
@@ -35,6 +38,7 @@ module Dodopayments
       def initialize: (
         business_id: String,
         created_at: Time,
+        customer: Dodopayments::CustomerLimitedDetails,
         is_partial: bool,
         payment_id: String,
         refund_id: String,
@@ -47,6 +51,7 @@ module Dodopayments
       def to_hash: -> {
         business_id: String,
         created_at: Time,
+        customer: Dodopayments::CustomerLimitedDetails,
         is_partial: bool,
         payment_id: String,
         refund_id: String,

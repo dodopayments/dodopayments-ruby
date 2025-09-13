@@ -1,0 +1,16 @@
+module Dodopayments
+  module Resources
+    class Customers
+      class Wallets
+        attr_reader ledger_entries: Dodopayments::Resources::Customers::Wallets::LedgerEntries
+
+        def list: (
+          String customer_id,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::Customers::WalletListResponse
+
+        def initialize: (client: Dodopayments::Client) -> void
+      end
+    end
+  end
+end

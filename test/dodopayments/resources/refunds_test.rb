@@ -14,6 +14,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
       response => {
         business_id: String,
         created_at: Time,
+        customer: Dodopayments::CustomerLimitedDetails,
         is_partial: Dodopayments::Internal::Type::Boolean,
         payment_id: String,
         refund_id: String,
@@ -36,6 +37,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
       response => {
         business_id: String,
         created_at: Time,
+        customer: Dodopayments::CustomerLimitedDetails,
         is_partial: Dodopayments::Internal::Type::Boolean,
         payment_id: String,
         refund_id: String,
@@ -58,7 +60,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
     return if row.nil?
 
     assert_pattern do
-      row => Dodopayments::Refund
+      row => Dodopayments::Models::RefundListResponse
     end
 
     assert_pattern do

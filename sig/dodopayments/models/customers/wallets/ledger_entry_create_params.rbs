@@ -1,0 +1,61 @@
+module Dodopayments
+  module Models
+    module Customers
+      module Wallets
+        type ledger_entry_create_params =
+          {
+            amount: Integer,
+            currency: Dodopayments::Models::currency,
+            entry_type: Dodopayments::Models::Customers::Wallets::LedgerEntryCreateParams::entry_type,
+            idempotency_key: String?,
+            reason: String?
+          }
+          & Dodopayments::Internal::Type::request_parameters
+
+        class LedgerEntryCreateParams < Dodopayments::Internal::Type::BaseModel
+          extend Dodopayments::Internal::Type::RequestParameters::Converter
+          include Dodopayments::Internal::Type::RequestParameters
+
+          attr_accessor amount: Integer
+
+          attr_accessor currency: Dodopayments::Models::currency
+
+          attr_accessor entry_type: Dodopayments::Models::Customers::Wallets::LedgerEntryCreateParams::entry_type
+
+          attr_accessor idempotency_key: String?
+
+          attr_accessor reason: String?
+
+          def initialize: (
+            amount: Integer,
+            currency: Dodopayments::Models::currency,
+            entry_type: Dodopayments::Models::Customers::Wallets::LedgerEntryCreateParams::entry_type,
+            ?idempotency_key: String?,
+            ?reason: String?,
+            ?request_options: Dodopayments::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            amount: Integer,
+            currency: Dodopayments::Models::currency,
+            entry_type: Dodopayments::Models::Customers::Wallets::LedgerEntryCreateParams::entry_type,
+            idempotency_key: String?,
+            reason: String?,
+            request_options: Dodopayments::RequestOptions
+          }
+
+          type entry_type = :credit | :debit
+
+          module EntryType
+            extend Dodopayments::Internal::Type::Enum
+
+            CREDIT: :credit
+            DEBIT: :debit
+
+            def self?.values: -> ::Array[Dodopayments::Models::Customers::Wallets::LedgerEntryCreateParams::entry_type]
+          end
+        end
+      end
+    end
+  end
+end

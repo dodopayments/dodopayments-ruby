@@ -1,0 +1,62 @@
+module Dodopayments
+  module Models
+    type license_activate_response =
+      {
+        id: String,
+        business_id: String,
+        created_at: Time,
+        customer: Dodopayments::CustomerLimitedDetails,
+        license_key_id: String,
+        name: String,
+        product: Dodopayments::Models::LicenseActivateResponse::Product
+      }
+
+    class LicenseActivateResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor business_id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor customer: Dodopayments::CustomerLimitedDetails
+
+      attr_accessor license_key_id: String
+
+      attr_accessor name: String
+
+      attr_accessor product: Dodopayments::Models::LicenseActivateResponse::Product
+
+      def initialize: (
+        id: String,
+        business_id: String,
+        created_at: Time,
+        customer: Dodopayments::CustomerLimitedDetails,
+        license_key_id: String,
+        name: String,
+        product: Dodopayments::Models::LicenseActivateResponse::Product
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        business_id: String,
+        created_at: Time,
+        customer: Dodopayments::CustomerLimitedDetails,
+        license_key_id: String,
+        name: String,
+        product: Dodopayments::Models::LicenseActivateResponse::Product
+      }
+
+      type product = { product_id: String, name: String? }
+
+      class Product < Dodopayments::Internal::Type::BaseModel
+        attr_accessor product_id: String
+
+        attr_accessor name: String?
+
+        def initialize: (product_id: String, ?name: String?) -> void
+
+        def to_hash: -> { product_id: String, name: String? }
+      end
+    end
+  end
+end
