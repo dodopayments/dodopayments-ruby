@@ -8,7 +8,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/dodopayments).
 
-The REST API documentation can be found on [docs.dodopayments.com](https://docs.dodopayments.com).
+The REST API documentation can be found on [docs.dodopayments.com](https://docs.dodopayments.com/api-reference/introduction).
 
 ## Installation
 
