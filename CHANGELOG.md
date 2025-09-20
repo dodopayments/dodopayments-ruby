@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.54.0 (2025-09-20)
+
+Full Changelog: [v1.53.3...v1.54.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.53.3...v1.54.0)
+
+### Features
+
+* expose response headers for both streams and errors ([2826198](https://github.com/dodopayments/dodopayments-ruby/commit/2826198fd9296c989871232f5f8d4fd4c2b3b4fc))
+
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([dec959f](https://github.com/dodopayments/dodopayments-ruby/commit/dec959fffb799e354d8910bdea436673b9834105))
+
 ## 1.53.3 (2025-09-13)
 
 Full Changelog: [v1.53.2...v1.53.3](https://github.com/dodopayments/dodopayments-ruby/compare/v1.53.2...v1.53.3)
