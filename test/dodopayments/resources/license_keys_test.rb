@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::ResourceTest
   def test_retrieve
-    response = @dodo_payments.license_keys.retrieve("id")
+    response = @dodo_payments.license_keys.retrieve("lic_123")
 
     assert_pattern do
       response => Dodopayments::LicenseKey
@@ -29,7 +29,7 @@ class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::Resou
   end
 
   def test_update
-    response = @dodo_payments.license_keys.update("id")
+    response = @dodo_payments.license_keys.update("lic_123")
 
     assert_pattern do
       response => Dodopayments::LicenseKey
