@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class Dodopayments::Test::Resources::LicenseKeyInstancesTest < Dodopayments::Test::ResourceTest
   def test_retrieve
-    response = @dodo_payments.license_key_instances.retrieve("id")
+    response = @dodo_payments.license_key_instances.retrieve("lki_123")
 
     assert_pattern do
       response => Dodopayments::LicenseKeyInstance
@@ -22,7 +22,7 @@ class Dodopayments::Test::Resources::LicenseKeyInstancesTest < Dodopayments::Tes
   end
 
   def test_update_required_params
-    response = @dodo_payments.license_key_instances.update("id", name: "name")
+    response = @dodo_payments.license_key_instances.update("lki_123", name: "name")
 
     assert_pattern do
       response => Dodopayments::LicenseKeyInstance
