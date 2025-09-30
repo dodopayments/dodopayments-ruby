@@ -227,20 +227,24 @@ class Dodopayments::Test::UtilFormDataEncodingTest < Minitest::Test
 
   def test_file_encode
     file = Pathname(__FILE__)
+    fileinput = Dodopayments::Internal::Type::Converter.dump(Dodopayments::Internal::Type::FileInput, "abc")
     headers = {"content-type" => "multipart/form-data"}
     cases = {
-      "abc" => "abc",
-      StringIO.new("abc") => "abc",
-      Dodopayments::FilePart.new("abc") => "abc",
-      Dodopayments::FilePart.new(StringIO.new("abc")) => "abc",
-      file => /^class Dodopayments/,
-      Dodopayments::FilePart.new(file) => /^class Dodopayments/
+      "abc" => ["", "abc"],
+      StringIO.new("abc") => ["", "abc"],
+      fileinput => %w[upload abc],
+      Dodopayments::FilePart.new(StringIO.new("abc")) => ["", "abc"],
+      file => [file.basename.to_path, /^class Dodopayments/],
+      Dodopayments::FilePart.new(file, filename: "d o g") => ["d%20o%20g", /^class Dodopayments/]
     }
-    cases.each do |body, val|
+    cases.each do |body, testcase|
+      filename, val = testcase
       encoded = Dodopayments::Internal::Util.encode_content(headers, body)
       cgi = FakeCGI.new(*encoded)
+      io = cgi[""]
       assert_pattern do
-        cgi[""].read => ^val
+        io.original_filename => ^filename
+        io.read => ^val
       end
     end
   end
@@ -261,7 +265,14 @@ class Dodopayments::Test::UtilFormDataEncodingTest < Minitest::Test
       cgi = FakeCGI.new(*encoded)
       testcase.each do |key, val|
         assert_pattern do
-          cgi[key] => ^val
+          parsed =
+            case (p = cgi[key])
+            in StringIO
+              p.read
+            else
+              p
+            end
+          parsed => ^val
         end
       end
     end
