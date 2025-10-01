@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.53.5 (2025-10-01)
+
+Full Changelog: [v1.53.4...v1.53.5](https://github.com/dodopayments/dodopayments-ruby/compare/v1.53.4...v1.53.5)
+
+### Bug Fixes
+
+* always send `filename=...` for multipart requests where a file is expected ([2521920](https://github.com/dodopayments/dodopayments-ruby/commit/25219203e67ac52d02c0464ddbe2a1edfa584b55))
+* coroutine leaks from connection pool ([105ced3](https://github.com/dodopayments/dodopayments-ruby/commit/105ced3287dc953a6bb13cc6442ab74f5b72d852))
+* shorten multipart boundary sep to less than RFC specificed max length ([66ffab7](https://github.com/dodopayments/dodopayments-ruby/commit/66ffab71b6a77267df14a90fd5bde12d22ad4bee))
+
+
+### Performance Improvements
+
+* faster code formatting ([5e92807](https://github.com/dodopayments/dodopayments-ruby/commit/5e9280755725f1420ca9e0d87ca7fa3965db4331))
+
+
+### Chores
+
+* allow fast-format to use bsd sed as well ([5addb87](https://github.com/dodopayments/dodopayments-ruby/commit/5addb871c35167235fd876217b802fcb21897ae2))
+* **internal:** codegen related update ([66cddcb](https://github.com/dodopayments/dodopayments-ruby/commit/66cddcbfa5be3de026313de045736ec56ecb4c27))
+
 ## 1.53.4 (2025-09-24)
 
 Full Changelog: [v1.53.3...v1.53.4](https://github.com/dodopayments/dodopayments-ruby/compare/v1.53.3...v1.53.4)
