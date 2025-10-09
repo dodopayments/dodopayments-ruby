@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.53.6 (2025-10-09)
+
+Full Changelog: [v1.53.5...v1.53.6](https://github.com/dodopayments/dodopayments-ruby/compare/v1.53.5...v1.53.6)
+
+### Chores
+
+* ignore linter error for tests having large collections ([28e86ee](https://github.com/dodopayments/dodopayments-ruby/commit/28e86ee01088492878c56d50a3a57d8bf9001aa3))
+
 ## 1.53.5 (2025-10-01)
 
 Full Changelog: [v1.53.4...v1.53.5](https://github.com/dodopayments/dodopayments-ruby/compare/v1.53.4...v1.53.5)
