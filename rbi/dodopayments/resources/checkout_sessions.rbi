@@ -27,6 +27,7 @@ module Dodopayments
           discount_code: T.nilable(String),
           feature_flags:
             Dodopayments::CheckoutSessionRequest::FeatureFlags::OrHash,
+          force_3ds: T.nilable(T::Boolean),
           metadata: T.nilable(T::Hash[Symbol, String]),
           return_url: T.nilable(String),
           show_saved_payment_methods: T::Boolean,
@@ -59,6 +60,8 @@ module Dodopayments
         customization: nil,
         discount_code: nil,
         feature_flags: nil,
+        # Override merchant default 3DS behaviour for this session
+        force_3ds: nil,
         # Additional metadata associated with the payment. Defaults to empty if not
         # provided.
         metadata: nil,

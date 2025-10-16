@@ -113,6 +113,10 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_id
 
+      # Tax identifier provided for this subscription (if applicable)
+      sig { returns(T.nilable(String)) }
+      attr_accessor :tax_id
+
       # Response struct representing subscription details
       sig do
         params(
@@ -138,7 +142,8 @@ module Dodopayments
           trial_period_days: Integer,
           cancelled_at: T.nilable(Time),
           discount_cycles_remaining: T.nilable(Integer),
-          discount_id: T.nilable(String)
+          discount_id: T.nilable(String),
+          tax_id: T.nilable(String)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -189,7 +194,9 @@ module Dodopayments
         # Number of remaining discount cycles if discount is applied
         discount_cycles_remaining: nil,
         # The discount id if discount is applied
-        discount_id: nil
+        discount_id: nil,
+        # Tax identifier provided for this subscription (if applicable)
+        tax_id: nil
       )
       end
 
@@ -220,7 +227,8 @@ module Dodopayments
             trial_period_days: Integer,
             cancelled_at: T.nilable(Time),
             discount_cycles_remaining: T.nilable(Integer),
-            discount_id: T.nilable(String)
+            discount_id: T.nilable(String),
+            tax_id: T.nilable(String)
           }
         )
       end

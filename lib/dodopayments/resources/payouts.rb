@@ -3,7 +3,11 @@
 module Dodopayments
   module Resources
     class Payouts
-      # @overload list(page_number: nil, page_size: nil, request_options: {})
+      # @overload list(created_at_gte: nil, created_at_lte: nil, page_number: nil, page_size: nil, request_options: {})
+      #
+      # @param created_at_gte [Time] Get payouts created after this time (inclusive)
+      #
+      # @param created_at_lte [Time] Get payouts created before this time (inclusive)
       #
       # @param page_number [Integer] Page number default is 0
       #

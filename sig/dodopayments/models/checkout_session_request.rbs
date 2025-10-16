@@ -11,6 +11,7 @@ module Dodopayments
         customization: Dodopayments::CheckoutSessionRequest::Customization,
         discount_code: String?,
         feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
+        :force_3ds => bool?,
         metadata: ::Hash[Symbol, String]?,
         return_url: String?,
         show_saved_payment_methods: bool,
@@ -46,6 +47,8 @@ module Dodopayments
         Dodopayments::CheckoutSessionRequest::FeatureFlags
       ) -> Dodopayments::CheckoutSessionRequest::FeatureFlags
 
+      attr_accessor force_3ds: bool?
+
       attr_accessor metadata: ::Hash[Symbol, String]?
 
       attr_accessor return_url: String?
@@ -66,6 +69,7 @@ module Dodopayments
         ?customization: Dodopayments::CheckoutSessionRequest::Customization,
         ?discount_code: String?,
         ?feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
+        ?force_3ds: bool?,
         ?metadata: ::Hash[Symbol, String]?,
         ?return_url: String?,
         ?show_saved_payment_methods: bool,
@@ -82,6 +86,7 @@ module Dodopayments
         customization: Dodopayments::CheckoutSessionRequest::Customization,
         discount_code: String?,
         feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
+        :force_3ds => bool?,
         metadata: ::Hash[Symbol, String]?,
         return_url: String?,
         show_saved_payment_methods: bool,
@@ -159,12 +164,15 @@ module Dodopayments
 
       type customization =
         {
+          force_language: String?,
           show_on_demand_tag: bool,
           show_order_details: bool,
           theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme
         }
 
       class Customization < Dodopayments::Internal::Type::BaseModel
+        attr_accessor force_language: String?
+
         attr_reader show_on_demand_tag: bool?
 
         def show_on_demand_tag=: (bool) -> bool
@@ -180,12 +188,14 @@ module Dodopayments
         ) -> Dodopayments::Models::CheckoutSessionRequest::Customization::theme
 
         def initialize: (
+          ?force_language: String?,
           ?show_on_demand_tag: bool,
           ?show_order_details: bool,
           ?theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme
         ) -> void
 
         def to_hash: -> {
+          force_language: String?,
           show_on_demand_tag: bool,
           show_order_details: bool,
           theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme

@@ -18,6 +18,7 @@ module Dodopayments
             T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           discount_code: T.nilable(String),
+          force_3ds: T.nilable(T::Boolean),
           metadata: T::Hash[Symbol, String],
           on_demand: T.nilable(Dodopayments::OnDemandSubscription::OrHash),
           payment_link: T.nilable(T::Boolean),
@@ -51,6 +52,8 @@ module Dodopayments
         billing_currency: nil,
         # Discount Code to apply to the subscription
         discount_code: nil,
+        # Override merchant default 3DS behaviour for this subscription
+        force_3ds: nil,
         # Additional metadata for the subscription Defaults to empty if not specified
         metadata: nil,
         on_demand: nil,
