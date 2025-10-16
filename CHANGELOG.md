@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.54.0 (2025-10-16)
+
+Full Changelog: [v1.53.5...v1.54.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.53.5...v1.54.0)
+
+### Features
+
+* **api:** updated openapi spec to v1.55.0 ([4bb71ad](https://github.com/dodopayments/dodopayments-ruby/commit/4bb71ad9b3cebdec22722b969684c4dd266035c9))
+
+
+### Bug Fixes
+
+* absolutely qualified uris should always override the default ([0a9a011](https://github.com/dodopayments/dodopayments-ruby/commit/0a9a011c532bfba6f37d29ebab9fb08589941c6b))
+* should not reuse buffers for `IO.copy_stream` interop ([780663d](https://github.com/dodopayments/dodopayments-ruby/commit/780663d4dad0150f25766d54af480058f31bd57e))
+
+
+### Chores
+
+* ignore linter error for tests having large collections ([28e86ee](https://github.com/dodopayments/dodopayments-ruby/commit/28e86ee01088492878c56d50a3a57d8bf9001aa3))
+
 ## 1.53.5 (2025-10-01)
 
 Full Changelog: [v1.53.4...v1.53.5](https://github.com/dodopayments/dodopayments-ruby/compare/v1.53.4...v1.53.5)
