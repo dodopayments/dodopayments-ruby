@@ -63,6 +63,12 @@ module Dodopayments
       #   @return [Dodopayments::Models::CheckoutSessionRequest::FeatureFlags, nil]
       optional :feature_flags, -> { Dodopayments::CheckoutSessionRequest::FeatureFlags }
 
+      # @!attribute force_3ds
+      #   Override merchant default 3DS behaviour for this session
+      #
+      #   @return [Boolean, nil]
+      optional :force_3ds, Dodopayments::Internal::Type::Boolean, nil?: true
+
       # @!attribute metadata
       #   Additional metadata associated with the payment. Defaults to empty if not
       #   provided.
@@ -87,7 +93,7 @@ module Dodopayments
       #   @return [Dodopayments::Models::CheckoutSessionRequest::SubscriptionData, nil]
       optional :subscription_data, -> { Dodopayments::CheckoutSessionRequest::SubscriptionData }, nil?: true
 
-      # @!method initialize(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, metadata: nil, return_url: nil, show_saved_payment_methods: nil, subscription_data: nil)
+      # @!method initialize(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, return_url: nil, show_saved_payment_methods: nil, subscription_data: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionRequest} for more details.
       #
@@ -108,6 +114,8 @@ module Dodopayments
       #   @param discount_code [String, nil]
       #
       #   @param feature_flags [Dodopayments::Models::CheckoutSessionRequest::FeatureFlags]
+      #
+      #   @param force_3ds [Boolean, nil] Override merchant default 3DS behaviour for this session
       #
       #   @param metadata [Hash{Symbol=>String}, nil] Additional metadata associated with the payment. Defaults to empty if not provid
       #
@@ -208,6 +216,12 @@ module Dodopayments
 
       # @see Dodopayments::Models::CheckoutSessionRequest#customization
       class Customization < Dodopayments::Internal::Type::BaseModel
+        # @!attribute force_language
+        #   Force the checkout interface to render in a specific language (e.g. `en`, `es`)
+        #
+        #   @return [String, nil]
+        optional :force_language, String, nil?: true
+
         # @!attribute show_on_demand_tag
         #   Show on demand tag
         #
@@ -232,11 +246,13 @@ module Dodopayments
         #   @return [Symbol, Dodopayments::Models::CheckoutSessionRequest::Customization::Theme, nil]
         optional :theme, enum: -> { Dodopayments::CheckoutSessionRequest::Customization::Theme }
 
-        # @!method initialize(show_on_demand_tag: nil, show_order_details: nil, theme: nil)
+        # @!method initialize(force_language: nil, show_on_demand_tag: nil, show_order_details: nil, theme: nil)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::CheckoutSessionRequest::Customization} for more details.
         #
         #   Customization for the checkout session page
+        #
+        #   @param force_language [String, nil] Force the checkout interface to render in a specific language (e.g. `en`, `es`)
         #
         #   @param show_on_demand_tag [Boolean] Show on demand tag
         #

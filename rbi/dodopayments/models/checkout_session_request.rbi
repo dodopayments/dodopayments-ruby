@@ -98,6 +98,10 @@ module Dodopayments
       end
       attr_writer :feature_flags
 
+      # Override merchant default 3DS behaviour for this session
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_accessor :force_3ds
+
       # Additional metadata associated with the payment. Defaults to empty if not
       # provided.
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
@@ -155,6 +159,7 @@ module Dodopayments
           discount_code: T.nilable(String),
           feature_flags:
             Dodopayments::CheckoutSessionRequest::FeatureFlags::OrHash,
+          force_3ds: T.nilable(T::Boolean),
           metadata: T.nilable(T::Hash[Symbol, String]),
           return_url: T.nilable(String),
           show_saved_payment_methods: T::Boolean,
@@ -186,6 +191,8 @@ module Dodopayments
         customization: nil,
         discount_code: nil,
         feature_flags: nil,
+        # Override merchant default 3DS behaviour for this session
+        force_3ds: nil,
         # Additional metadata associated with the payment. Defaults to empty if not
         # provided.
         metadata: nil,
@@ -218,6 +225,7 @@ module Dodopayments
             customization: Dodopayments::CheckoutSessionRequest::Customization,
             discount_code: T.nilable(String),
             feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
+            force_3ds: T.nilable(T::Boolean),
             metadata: T.nilable(T::Hash[Symbol, String]),
             return_url: T.nilable(String),
             show_saved_payment_methods: T::Boolean,
@@ -375,6 +383,10 @@ module Dodopayments
             )
           end
 
+        # Force the checkout interface to render in a specific language (e.g. `en`, `es`)
+        sig { returns(T.nilable(String)) }
+        attr_accessor :force_language
+
         # Show on demand tag
         #
         # Default is true
@@ -416,6 +428,7 @@ module Dodopayments
         # Customization for the checkout session page
         sig do
           params(
+            force_language: T.nilable(String),
             show_on_demand_tag: T::Boolean,
             show_order_details: T::Boolean,
             theme:
@@ -423,6 +436,8 @@ module Dodopayments
           ).returns(T.attached_class)
         end
         def self.new(
+          # Force the checkout interface to render in a specific language (e.g. `en`, `es`)
+          force_language: nil,
           # Show on demand tag
           #
           # Default is true
@@ -441,6 +456,7 @@ module Dodopayments
         sig do
           override.returns(
             {
+              force_language: T.nilable(String),
               show_on_demand_tag: T::Boolean,
               show_order_details: T::Boolean,
               theme:

@@ -6,7 +6,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::PaymentCreateParams} for more details.
       #
-      # @overload create(billing:, customer:, product_cart:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, metadata: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
+      # @overload create(billing:, customer:, product_cart:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
       #
       # @param billing [Dodopayments::Models::BillingAddress] Billing address details for the payment
       #
@@ -19,6 +19,8 @@ module Dodopayments
       # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Fix the currency in which the end customer is billed.
       #
       # @param discount_code [String, nil] Discount Code to apply to the transaction
+      #
+      # @param force_3ds [Boolean, nil] Override merchant default 3DS behaviour for this payment
       #
       # @param metadata [Hash{Symbol=>String}] Additional metadata associated with the payment.
       #

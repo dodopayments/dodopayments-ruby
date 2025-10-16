@@ -61,6 +61,10 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_code
 
+      # Override merchant default 3DS behaviour for this subscription
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_accessor :force_3ds
+
       # Additional metadata for the subscription Defaults to empty if not specified
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_reader :metadata
@@ -118,6 +122,7 @@ module Dodopayments
             T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           discount_code: T.nilable(String),
+          force_3ds: T.nilable(T::Boolean),
           metadata: T::Hash[Symbol, String],
           on_demand: T.nilable(Dodopayments::OnDemandSubscription::OrHash),
           payment_link: T.nilable(T::Boolean),
@@ -151,6 +156,8 @@ module Dodopayments
         billing_currency: nil,
         # Discount Code to apply to the subscription
         discount_code: nil,
+        # Override merchant default 3DS behaviour for this subscription
+        force_3ds: nil,
         # Additional metadata for the subscription Defaults to empty if not specified
         metadata: nil,
         on_demand: nil,
@@ -186,6 +193,7 @@ module Dodopayments
               T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
             billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
             discount_code: T.nilable(String),
+            force_3ds: T.nilable(T::Boolean),
             metadata: T::Hash[Symbol, String],
             on_demand: T.nilable(Dodopayments::OnDemandSubscription),
             payment_link: T.nilable(T::Boolean),

@@ -23,10 +23,17 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :name
 
+      # Phone number of the customer
+      sig { returns(T.nilable(String)) }
+      attr_accessor :phone_number
+
       sig do
-        params(customer_id: String, email: String, name: String).returns(
-          T.attached_class
-        )
+        params(
+          customer_id: String,
+          email: String,
+          name: String,
+          phone_number: T.nilable(String)
+        ).returns(T.attached_class)
       end
       def self.new(
         # Unique identifier for the customer
@@ -34,12 +41,21 @@ module Dodopayments
         # Email address of the customer
         email:,
         # Full name of the customer
-        name:
+        name:,
+        # Phone number of the customer
+        phone_number: nil
       )
       end
 
       sig do
-        override.returns({ customer_id: String, email: String, name: String })
+        override.returns(
+          {
+            customer_id: String,
+            email: String,
+            name: String,
+            phone_number: T.nilable(String)
+          }
+        )
       end
       def to_hash
       end

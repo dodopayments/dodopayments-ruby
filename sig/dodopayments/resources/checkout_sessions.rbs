@@ -11,6 +11,7 @@ module Dodopayments
         ?customization: Dodopayments::CheckoutSessionRequest::Customization,
         ?discount_code: String?,
         ?feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
+        ?force_3ds: bool?,
         ?metadata: ::Hash[Symbol, String]?,
         ?return_url: String?,
         ?show_saved_payment_methods: bool,

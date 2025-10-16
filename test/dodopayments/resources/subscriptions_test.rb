@@ -66,7 +66,8 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         cancelled_at: Time | nil,
         discount_cycles_remaining: Integer | nil,
         discount_id: String | nil,
-        expires_at: Time | nil
+        expires_at: Time | nil,
+        tax_id: String | nil
       }
     end
   end
@@ -105,7 +106,8 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         cancelled_at: Time | nil,
         discount_cycles_remaining: Integer | nil,
         discount_id: String | nil,
-        expires_at: Time | nil
+        expires_at: Time | nil,
+        tax_id: String | nil
       }
     end
   end
@@ -148,7 +150,8 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         trial_period_days: Integer,
         cancelled_at: Time | nil,
         discount_cycles_remaining: Integer | nil,
-        discount_id: String | nil
+        discount_id: String | nil,
+        tax_id: String | nil
       }
     end
   end
