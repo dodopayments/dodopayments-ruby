@@ -27,7 +27,8 @@ module Dodopayments
         cancelled_at: Time?,
         discount_cycles_remaining: Integer?,
         discount_id: String?,
-        expires_at: Time?
+        expires_at: Time?,
+        tax_id: String?
       }
 
     class Subscription < Dodopayments::Internal::Type::BaseModel
@@ -83,6 +84,8 @@ module Dodopayments
 
       attr_accessor expires_at: Time?
 
+      attr_accessor tax_id: String?
+
       def initialize: (
         addons: ::Array[Dodopayments::AddonCartResponseItem],
         billing: Dodopayments::BillingAddress,
@@ -109,7 +112,8 @@ module Dodopayments
         ?cancelled_at: Time?,
         ?discount_cycles_remaining: Integer?,
         ?discount_id: String?,
-        ?expires_at: Time?
+        ?expires_at: Time?,
+        ?tax_id: String?
       ) -> void
 
       def to_hash: -> {
@@ -138,7 +142,8 @@ module Dodopayments
         cancelled_at: Time?,
         discount_cycles_remaining: Integer?,
         discount_id: String?,
-        expires_at: Time?
+        expires_at: Time?,
+        tax_id: String?
       }
 
       type meter =

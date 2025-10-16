@@ -8,6 +8,7 @@ module Dodopayments
         ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
         ?billing_currency: Dodopayments::Models::currency?,
         ?discount_code: String?,
+        ?force_3ds: bool?,
         ?metadata: ::Hash[Symbol, String],
         ?payment_link: bool?,
         ?return_url: String?,

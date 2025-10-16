@@ -6,7 +6,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionCreateParams} for more details.
       #
-      # @overload create(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, metadata: nil, on_demand: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
+      # @overload create(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, on_demand: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
       #
       # @param billing [Dodopayments::Models::BillingAddress] Billing address information for the subscription
       #
@@ -23,6 +23,8 @@ module Dodopayments
       # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Fix the currency in which the end customer is billed.
       #
       # @param discount_code [String, nil] Discount Code to apply to the subscription
+      #
+      # @param force_3ds [Boolean, nil] Override merchant default 3DS behaviour for this subscription
       #
       # @param metadata [Hash{Symbol=>String}] Additional metadata for the subscription
       #

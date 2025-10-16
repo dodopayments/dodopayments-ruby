@@ -53,6 +53,10 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_code
 
+      # Override merchant default 3DS behaviour for this payment
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_accessor :force_3ds
+
       # Additional metadata associated with the payment. Defaults to empty if not
       # provided.
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
@@ -95,6 +99,7 @@ module Dodopayments
             T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           discount_code: T.nilable(String),
+          force_3ds: T.nilable(T::Boolean),
           metadata: T::Hash[Symbol, String],
           payment_link: T.nilable(T::Boolean),
           return_url: T.nilable(String),
@@ -122,6 +127,8 @@ module Dodopayments
         billing_currency: nil,
         # Discount Code to apply to the transaction
         discount_code: nil,
+        # Override merchant default 3DS behaviour for this payment
+        force_3ds: nil,
         # Additional metadata associated with the payment. Defaults to empty if not
         # provided.
         metadata: nil,
@@ -153,6 +160,7 @@ module Dodopayments
               T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
             billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
             discount_code: T.nilable(String),
+            force_3ds: T.nilable(T::Boolean),
             metadata: T::Hash[Symbol, String],
             payment_link: T.nilable(T::Boolean),
             return_url: T.nilable(String),

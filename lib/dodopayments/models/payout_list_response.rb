@@ -17,6 +17,8 @@ module Dodopayments
       required :business_id, String
 
       # @!attribute chargebacks
+      #   @deprecated
+      #
       #   The total value of chargebacks associated with the payout.
       #
       #   @return [Integer]
@@ -53,6 +55,8 @@ module Dodopayments
       required :payout_id, String
 
       # @!attribute refunds
+      #   @deprecated
+      #
       #   The total value of refunds associated with the payout.
       #
       #   @return [Integer]
@@ -65,6 +69,8 @@ module Dodopayments
       required :status, enum: -> { Dodopayments::Models::PayoutListResponse::Status }
 
       # @!attribute tax
+      #   @deprecated
+      #
       #   The tax applied to the payout.
       #
       #   @return [Integer]

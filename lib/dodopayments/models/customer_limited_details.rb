@@ -21,12 +21,20 @@ module Dodopayments
       #   @return [String]
       required :name, String
 
-      # @!method initialize(customer_id:, email:, name:)
+      # @!attribute phone_number
+      #   Phone number of the customer
+      #
+      #   @return [String, nil]
+      optional :phone_number, String, nil?: true
+
+      # @!method initialize(customer_id:, email:, name:, phone_number: nil)
       #   @param customer_id [String] Unique identifier for the customer
       #
       #   @param email [String] Email address of the customer
       #
       #   @param name [String] Full name of the customer
+      #
+      #   @param phone_number [String, nil] Phone number of the customer
     end
   end
 end

@@ -122,6 +122,10 @@ module Dodopayments
       sig { returns(T.nilable(Time)) }
       attr_accessor :expires_at
 
+      # Tax identifier provided for this subscription (if applicable)
+      sig { returns(T.nilable(String)) }
+      attr_accessor :tax_id
+
       # Response struct representing subscription details
       sig do
         params(
@@ -150,7 +154,8 @@ module Dodopayments
           cancelled_at: T.nilable(Time),
           discount_cycles_remaining: T.nilable(Integer),
           discount_id: T.nilable(String),
-          expires_at: T.nilable(Time)
+          expires_at: T.nilable(Time),
+          tax_id: T.nilable(String)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -207,7 +212,9 @@ module Dodopayments
         # The discount id if discount is applied
         discount_id: nil,
         # Timestamp when the subscription will expire
-        expires_at: nil
+        expires_at: nil,
+        # Tax identifier provided for this subscription (if applicable)
+        tax_id: nil
       )
       end
 
@@ -241,7 +248,8 @@ module Dodopayments
             cancelled_at: T.nilable(Time),
             discount_cycles_remaining: T.nilable(Integer),
             discount_id: T.nilable(String),
-            expires_at: T.nilable(Time)
+            expires_at: T.nilable(Time),
+            tax_id: T.nilable(String)
           }
         )
       end
