@@ -1,21 +1,21 @@
 module Dodopayments
   module Models
-    type new_customer = { email: String, name: String, phone_number: String? }
+    type new_customer = { email: String, name: String?, phone_number: String? }
 
     class NewCustomer < Dodopayments::Internal::Type::BaseModel
       attr_accessor email: String
 
-      attr_accessor name: String
+      attr_accessor name: String?
 
       attr_accessor phone_number: String?
 
       def initialize: (
         email: String,
-        name: String,
+        ?name: String?,
         ?phone_number: String?
       ) -> void
 
-      def to_hash: -> { email: String, name: String, phone_number: String? }
+      def to_hash: -> { email: String, name: String?, phone_number: String? }
     end
   end
 end
