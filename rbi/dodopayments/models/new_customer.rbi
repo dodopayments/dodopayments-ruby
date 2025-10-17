@@ -8,10 +8,14 @@ module Dodopayments
           T.any(Dodopayments::NewCustomer, Dodopayments::Internal::AnyHash)
         end
 
+      # Email is required for creating a new customer
       sig { returns(String) }
       attr_accessor :email
 
-      sig { returns(String) }
+      # Optional full name of the customer. If provided during session creation, it is
+      # persisted and becomes immutable for the session. If omitted here, it can be
+      # provided later via the confirm API.
+      sig { returns(T.nilable(String)) }
       attr_accessor :name
 
       sig { returns(T.nilable(String)) }
@@ -20,16 +24,28 @@ module Dodopayments
       sig do
         params(
           email: String,
-          name: String,
+          name: T.nilable(String),
           phone_number: T.nilable(String)
         ).returns(T.attached_class)
       end
-      def self.new(email:, name:, phone_number: nil)
+      def self.new(
+        # Email is required for creating a new customer
+        email:,
+        # Optional full name of the customer. If provided during session creation, it is
+        # persisted and becomes immutable for the session. If omitted here, it can be
+        # provided later via the confirm API.
+        name: nil,
+        phone_number: nil
+      )
       end
 
       sig do
         override.returns(
-          { email: String, name: String, phone_number: T.nilable(String) }
+          {
+            email: String,
+            name: T.nilable(String),
+            phone_number: T.nilable(String)
+          }
         )
       end
       def to_hash
