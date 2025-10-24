@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.55.8 (2025-10-24)
+
+Full Changelog: [v1.55.7...v1.55.8](https://github.com/dodopayments/dodopayments-ruby/compare/v1.55.7...v1.55.8)
+
+### Features
+
+* handle thread interrupts in the core HTTP client ([704ad81](https://github.com/dodopayments/dodopayments-ruby/commit/704ad81101e265fcf099bc397643a650476672ce))
+
 ## 1.55.7 (2025-10-17)
 
 Full Changelog: [v1.54.0...v1.55.7](https://github.com/dodopayments/dodopayments-ruby/compare/v1.54.0...v1.55.7)
