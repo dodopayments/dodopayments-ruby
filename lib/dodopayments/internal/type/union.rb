@@ -6,14 +6,16 @@ module Dodopayments
       # @api private
       #
       # @example
-      #   # `customer_request` is a `Dodopayments::CustomerRequest`
-      #   case customer_request
-      #   when Dodopayments::AttachExistingCustomer
-      #     puts(customer_request.customer_id)
-      #   when Dodopayments::NewCustomer
-      #     puts(customer_request.email)
+      #   # `unsafe_unwrap_webhook_event` is a `Dodopayments::UnsafeUnwrapWebhookEvent`
+      #   case unsafe_unwrap_webhook_event
+      #   when Dodopayments::DisputeAcceptedWebhookEvent
+      #     puts(unsafe_unwrap_webhook_event.business_id)
+      #   when Dodopayments::DisputeCancelledWebhookEvent
+      #     puts(unsafe_unwrap_webhook_event.data)
+      #   when Dodopayments::DisputeChallengedWebhookEvent
+      #     puts(unsafe_unwrap_webhook_event.timestamp)
       #   else
-      #     puts(customer_request)
+      #     puts(unsafe_unwrap_webhook_event)
       #   end
       module Union
         include Dodopayments::Internal::Type::Converter

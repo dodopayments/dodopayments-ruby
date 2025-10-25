@@ -128,6 +128,72 @@ module Dodopayments
       def retrieve_secret(webhook_id, request_options: {})
       end
 
+      sig do
+        params(payload: String).returns(
+          T.any(
+            Dodopayments::DisputeAcceptedWebhookEvent,
+            Dodopayments::DisputeCancelledWebhookEvent,
+            Dodopayments::DisputeChallengedWebhookEvent,
+            Dodopayments::DisputeExpiredWebhookEvent,
+            Dodopayments::DisputeLostWebhookEvent,
+            Dodopayments::DisputeOpenedWebhookEvent,
+            Dodopayments::DisputeWonWebhookEvent,
+            Dodopayments::LicenseKeyCreatedWebhookEvent,
+            Dodopayments::PaymentCancelledWebhookEvent,
+            Dodopayments::PaymentFailedWebhookEvent,
+            Dodopayments::PaymentProcessingWebhookEvent,
+            Dodopayments::PaymentSucceededWebhookEvent,
+            Dodopayments::RefundFailedWebhookEvent,
+            Dodopayments::RefundSucceededWebhookEvent,
+            Dodopayments::SubscriptionActiveWebhookEvent,
+            Dodopayments::SubscriptionCancelledWebhookEvent,
+            Dodopayments::SubscriptionExpiredWebhookEvent,
+            Dodopayments::SubscriptionFailedWebhookEvent,
+            Dodopayments::SubscriptionOnHoldWebhookEvent,
+            Dodopayments::SubscriptionPlanChangedWebhookEvent,
+            Dodopayments::SubscriptionRenewedWebhookEvent
+          )
+        )
+      end
+      def unsafe_unwrap(
+        # The raw webhook payload as a string
+        payload
+      )
+      end
+
+      sig do
+        params(payload: String).returns(
+          T.any(
+            Dodopayments::DisputeAcceptedWebhookEvent,
+            Dodopayments::DisputeCancelledWebhookEvent,
+            Dodopayments::DisputeChallengedWebhookEvent,
+            Dodopayments::DisputeExpiredWebhookEvent,
+            Dodopayments::DisputeLostWebhookEvent,
+            Dodopayments::DisputeOpenedWebhookEvent,
+            Dodopayments::DisputeWonWebhookEvent,
+            Dodopayments::LicenseKeyCreatedWebhookEvent,
+            Dodopayments::PaymentCancelledWebhookEvent,
+            Dodopayments::PaymentFailedWebhookEvent,
+            Dodopayments::PaymentProcessingWebhookEvent,
+            Dodopayments::PaymentSucceededWebhookEvent,
+            Dodopayments::RefundFailedWebhookEvent,
+            Dodopayments::RefundSucceededWebhookEvent,
+            Dodopayments::SubscriptionActiveWebhookEvent,
+            Dodopayments::SubscriptionCancelledWebhookEvent,
+            Dodopayments::SubscriptionExpiredWebhookEvent,
+            Dodopayments::SubscriptionFailedWebhookEvent,
+            Dodopayments::SubscriptionOnHoldWebhookEvent,
+            Dodopayments::SubscriptionPlanChangedWebhookEvent,
+            Dodopayments::SubscriptionRenewedWebhookEvent
+          )
+        )
+      end
+      def unwrap(
+        # The raw webhook payload as a string
+        payload
+      )
+      end
+
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
       def self.new(client:)

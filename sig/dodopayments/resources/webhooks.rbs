@@ -47,6 +47,54 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::WebhookRetrieveSecretResponse
 
+      def unsafe_unwrap: (
+        String payload
+      ) -> (Dodopayments::DisputeAcceptedWebhookEvent
+      | Dodopayments::DisputeCancelledWebhookEvent
+      | Dodopayments::DisputeChallengedWebhookEvent
+      | Dodopayments::DisputeExpiredWebhookEvent
+      | Dodopayments::DisputeLostWebhookEvent
+      | Dodopayments::DisputeOpenedWebhookEvent
+      | Dodopayments::DisputeWonWebhookEvent
+      | Dodopayments::LicenseKeyCreatedWebhookEvent
+      | Dodopayments::PaymentCancelledWebhookEvent
+      | Dodopayments::PaymentFailedWebhookEvent
+      | Dodopayments::PaymentProcessingWebhookEvent
+      | Dodopayments::PaymentSucceededWebhookEvent
+      | Dodopayments::RefundFailedWebhookEvent
+      | Dodopayments::RefundSucceededWebhookEvent
+      | Dodopayments::SubscriptionActiveWebhookEvent
+      | Dodopayments::SubscriptionCancelledWebhookEvent
+      | Dodopayments::SubscriptionExpiredWebhookEvent
+      | Dodopayments::SubscriptionFailedWebhookEvent
+      | Dodopayments::SubscriptionOnHoldWebhookEvent
+      | Dodopayments::SubscriptionPlanChangedWebhookEvent
+      | Dodopayments::SubscriptionRenewedWebhookEvent)
+
+      def unwrap: (
+        String payload
+      ) -> (Dodopayments::DisputeAcceptedWebhookEvent
+      | Dodopayments::DisputeCancelledWebhookEvent
+      | Dodopayments::DisputeChallengedWebhookEvent
+      | Dodopayments::DisputeExpiredWebhookEvent
+      | Dodopayments::DisputeLostWebhookEvent
+      | Dodopayments::DisputeOpenedWebhookEvent
+      | Dodopayments::DisputeWonWebhookEvent
+      | Dodopayments::LicenseKeyCreatedWebhookEvent
+      | Dodopayments::PaymentCancelledWebhookEvent
+      | Dodopayments::PaymentFailedWebhookEvent
+      | Dodopayments::PaymentProcessingWebhookEvent
+      | Dodopayments::PaymentSucceededWebhookEvent
+      | Dodopayments::RefundFailedWebhookEvent
+      | Dodopayments::RefundSucceededWebhookEvent
+      | Dodopayments::SubscriptionActiveWebhookEvent
+      | Dodopayments::SubscriptionCancelledWebhookEvent
+      | Dodopayments::SubscriptionExpiredWebhookEvent
+      | Dodopayments::SubscriptionFailedWebhookEvent
+      | Dodopayments::SubscriptionOnHoldWebhookEvent
+      | Dodopayments::SubscriptionPlanChangedWebhookEvent
+      | Dodopayments::SubscriptionRenewedWebhookEvent)
+
       def initialize: (client: Dodopayments::Client) -> void
     end
   end

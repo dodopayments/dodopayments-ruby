@@ -37,8 +37,6 @@ module Dodopayments
 
     attr_reader payouts: Dodopayments::Resources::Payouts
 
-    attr_reader webhook_events: Dodopayments::Resources::WebhookEvents
-
     attr_reader products: Dodopayments::Resources::Products
 
     attr_reader misc: Dodopayments::Resources::Misc
@@ -50,6 +48,8 @@ module Dodopayments
     attr_reader brands: Dodopayments::Resources::Brands
 
     attr_reader webhooks: Dodopayments::Resources::Webhooks
+
+    attr_reader webhook_events: Dodopayments::Resources::WebhookEvents
 
     attr_reader usage_events: Dodopayments::Resources::UsageEvents
 
