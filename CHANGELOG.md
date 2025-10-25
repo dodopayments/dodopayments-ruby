@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.56.0 (2025-10-25)
+
+Full Changelog: [v1.55.8...v1.56.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.55.8...v1.56.0)
+
+### Features
+
+* **api:** added unwrap functions for webhooks ([3aab01b](https://github.com/dodopayments/dodopayments-ruby/commit/3aab01bd934c029ae0d533b2b28aec933f1c58bf))
+
 ## 1.55.8 (2025-10-24)
 
 Full Changelog: [v1.55.7...v1.55.8](https://github.com/dodopayments/dodopayments-ruby/compare/v1.55.7...v1.55.8)
