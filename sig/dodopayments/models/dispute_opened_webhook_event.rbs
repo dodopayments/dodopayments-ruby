@@ -1,0 +1,76 @@
+module Dodopayments
+  module Models
+    type dispute_opened_webhook_event =
+      {
+        business_id: String,
+        data: Dodopayments::DisputeOpenedWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::DisputeOpenedWebhookEvent::type_
+      }
+
+    class DisputeOpenedWebhookEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::DisputeOpenedWebhookEvent::Data
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: Dodopayments::Models::DisputeOpenedWebhookEvent::type_
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::DisputeOpenedWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::DisputeOpenedWebhookEvent::type_
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::DisputeOpenedWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::DisputeOpenedWebhookEvent::type_
+      }
+
+      type data =
+        {
+          payload_type: Dodopayments::Models::DisputeOpenedWebhookEvent::Data::payload_type
+        }
+
+      class Data < Dodopayments::Models::Dispute
+        def payload_type: -> Dodopayments::Models::DisputeOpenedWebhookEvent::Data::payload_type?
+
+        def payload_type=: (
+          Dodopayments::Models::DisputeOpenedWebhookEvent::Data::payload_type _
+        ) -> Dodopayments::Models::DisputeOpenedWebhookEvent::Data::payload_type
+
+        def initialize: (
+          ?payload_type: Dodopayments::Models::DisputeOpenedWebhookEvent::Data::payload_type
+        ) -> void
+
+        def to_hash: -> {
+          payload_type: Dodopayments::Models::DisputeOpenedWebhookEvent::Data::payload_type
+        }
+
+        type payload_type = :Dispute
+
+        module PayloadType
+          extend Dodopayments::Internal::Type::Enum
+
+          DISPUTE: :Dispute
+
+          def self?.values: -> ::Array[Dodopayments::Models::DisputeOpenedWebhookEvent::Data::payload_type]
+        end
+      end
+
+      type type_ = :"dispute.opened"
+
+      module Type
+        extend Dodopayments::Internal::Type::Enum
+
+        DISPUTE_OPENED: :"dispute.opened"
+
+        def self?.values: -> ::Array[Dodopayments::Models::DisputeOpenedWebhookEvent::type_]
+      end
+    end
+  end
+end

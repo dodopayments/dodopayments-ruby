@@ -56,9 +56,6 @@ module Dodopayments
     sig { returns(Dodopayments::Resources::Payouts) }
     attr_reader :payouts
 
-    sig { returns(Dodopayments::Resources::WebhookEvents) }
-    attr_reader :webhook_events
-
     sig { returns(Dodopayments::Resources::Products) }
     attr_reader :products
 
@@ -76,6 +73,9 @@ module Dodopayments
 
     sig { returns(Dodopayments::Resources::Webhooks) }
     attr_reader :webhooks
+
+    sig { returns(Dodopayments::Resources::WebhookEvents) }
+    attr_reader :webhook_events
 
     sig { returns(Dodopayments::Resources::UsageEvents) }
     attr_reader :usage_events
