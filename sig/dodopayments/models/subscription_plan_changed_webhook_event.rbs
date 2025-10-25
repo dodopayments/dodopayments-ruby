@@ -1,0 +1,76 @@
+module Dodopayments
+  module Models
+    type subscription_plan_changed_webhook_event =
+      {
+        business_id: String,
+        data: Dodopayments::SubscriptionPlanChangedWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::type_
+      }
+
+    class SubscriptionPlanChangedWebhookEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::SubscriptionPlanChangedWebhookEvent::Data
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::type_
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::SubscriptionPlanChangedWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::type_
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::SubscriptionPlanChangedWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::type_
+      }
+
+      type data =
+        {
+          payload_type: Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::Data::payload_type
+        }
+
+      class Data < Dodopayments::Models::Subscription
+        def payload_type: -> Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::Data::payload_type?
+
+        def payload_type=: (
+          Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::Data::payload_type _
+        ) -> Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::Data::payload_type
+
+        def initialize: (
+          ?payload_type: Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::Data::payload_type
+        ) -> void
+
+        def to_hash: -> {
+          payload_type: Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::Data::payload_type
+        }
+
+        type payload_type = :Subscription
+
+        module PayloadType
+          extend Dodopayments::Internal::Type::Enum
+
+          SUBSCRIPTION: :Subscription
+
+          def self?.values: -> ::Array[Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::Data::payload_type]
+        end
+      end
+
+      type type_ = :"subscription.plan_changed"
+
+      module Type
+        extend Dodopayments::Internal::Type::Enum
+
+        SUBSCRIPTION_PLAN_CHANGED: :"subscription.plan_changed"
+
+        def self?.values: -> ::Array[Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::type_]
+      end
+    end
+  end
+end

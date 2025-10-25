@@ -119,13 +119,27 @@ module Dodopayments
 
   Dispute = Dodopayments::Models::Dispute
 
+  DisputeAcceptedWebhookEvent = Dodopayments::Models::DisputeAcceptedWebhookEvent
+
+  DisputeCancelledWebhookEvent = Dodopayments::Models::DisputeCancelledWebhookEvent
+
+  DisputeChallengedWebhookEvent = Dodopayments::Models::DisputeChallengedWebhookEvent
+
+  DisputeExpiredWebhookEvent = Dodopayments::Models::DisputeExpiredWebhookEvent
+
   DisputeListParams = Dodopayments::Models::DisputeListParams
+
+  DisputeLostWebhookEvent = Dodopayments::Models::DisputeLostWebhookEvent
+
+  DisputeOpenedWebhookEvent = Dodopayments::Models::DisputeOpenedWebhookEvent
 
   DisputeRetrieveParams = Dodopayments::Models::DisputeRetrieveParams
 
   DisputeStage = Dodopayments::Models::DisputeStage
 
   DisputeStatus = Dodopayments::Models::DisputeStatus
+
+  DisputeWonWebhookEvent = Dodopayments::Models::DisputeWonWebhookEvent
 
   Event = Dodopayments::Models::Event
 
@@ -142,6 +156,8 @@ module Dodopayments
   LicenseDeactivateParams = Dodopayments::Models::LicenseDeactivateParams
 
   LicenseKey = Dodopayments::Models::LicenseKey
+
+  LicenseKeyCreatedWebhookEvent = Dodopayments::Models::LicenseKeyCreatedWebhookEvent
 
   LicenseKeyDuration = Dodopayments::Models::LicenseKeyDuration
 
@@ -189,15 +205,23 @@ module Dodopayments
 
   Payment = Dodopayments::Models::Payment
 
+  PaymentCancelledWebhookEvent = Dodopayments::Models::PaymentCancelledWebhookEvent
+
   PaymentCreateParams = Dodopayments::Models::PaymentCreateParams
+
+  PaymentFailedWebhookEvent = Dodopayments::Models::PaymentFailedWebhookEvent
 
   PaymentListParams = Dodopayments::Models::PaymentListParams
 
   PaymentMethodTypes = Dodopayments::Models::PaymentMethodTypes
 
+  PaymentProcessingWebhookEvent = Dodopayments::Models::PaymentProcessingWebhookEvent
+
   PaymentRetrieveLineItemsParams = Dodopayments::Models::PaymentRetrieveLineItemsParams
 
   PaymentRetrieveParams = Dodopayments::Models::PaymentRetrieveParams
+
+  PaymentSucceededWebhookEvent = Dodopayments::Models::PaymentSucceededWebhookEvent
 
   PayoutListParams = Dodopayments::Models::PayoutListParams
 
@@ -225,13 +249,21 @@ module Dodopayments
 
   RefundCreateParams = Dodopayments::Models::RefundCreateParams
 
+  RefundFailedWebhookEvent = Dodopayments::Models::RefundFailedWebhookEvent
+
   RefundListParams = Dodopayments::Models::RefundListParams
 
   RefundRetrieveParams = Dodopayments::Models::RefundRetrieveParams
 
   RefundStatus = Dodopayments::Models::RefundStatus
 
+  RefundSucceededWebhookEvent = Dodopayments::Models::RefundSucceededWebhookEvent
+
   Subscription = Dodopayments::Models::Subscription
+
+  SubscriptionActiveWebhookEvent = Dodopayments::Models::SubscriptionActiveWebhookEvent
+
+  SubscriptionCancelledWebhookEvent = Dodopayments::Models::SubscriptionCancelledWebhookEvent
 
   SubscriptionChangePlanParams = Dodopayments::Models::SubscriptionChangePlanParams
 
@@ -239,7 +271,17 @@ module Dodopayments
 
   SubscriptionCreateParams = Dodopayments::Models::SubscriptionCreateParams
 
+  SubscriptionExpiredWebhookEvent = Dodopayments::Models::SubscriptionExpiredWebhookEvent
+
+  SubscriptionFailedWebhookEvent = Dodopayments::Models::SubscriptionFailedWebhookEvent
+
   SubscriptionListParams = Dodopayments::Models::SubscriptionListParams
+
+  SubscriptionOnHoldWebhookEvent = Dodopayments::Models::SubscriptionOnHoldWebhookEvent
+
+  SubscriptionPlanChangedWebhookEvent = Dodopayments::Models::SubscriptionPlanChangedWebhookEvent
+
+  SubscriptionRenewedWebhookEvent = Dodopayments::Models::SubscriptionRenewedWebhookEvent
 
   SubscriptionRetrieveParams = Dodopayments::Models::SubscriptionRetrieveParams
 
@@ -252,6 +294,10 @@ module Dodopayments
   TaxCategory = Dodopayments::Models::TaxCategory
 
   TimeInterval = Dodopayments::Models::TimeInterval
+
+  UnsafeUnwrapWebhookEvent = Dodopayments::Models::UnsafeUnwrapWebhookEvent
+
+  UnwrapWebhookEvent = Dodopayments::Models::UnwrapWebhookEvent
 
   UsageEventIngestParams = Dodopayments::Models::UsageEventIngestParams
 
@@ -276,6 +322,10 @@ module Dodopayments
   WebhookRetrieveSecretParams = Dodopayments::Models::WebhookRetrieveSecretParams
 
   Webhooks = Dodopayments::Models::Webhooks
+
+  WebhookUnsafeUnwrapParams = Dodopayments::Models::WebhookUnsafeUnwrapParams
+
+  WebhookUnwrapParams = Dodopayments::Models::WebhookUnwrapParams
 
   WebhookUpdateParams = Dodopayments::Models::WebhookUpdateParams
 end

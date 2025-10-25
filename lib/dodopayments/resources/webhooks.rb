@@ -164,6 +164,22 @@ module Dodopayments
         )
       end
 
+      # @param payload [String] The raw webhook payload as a string
+      #
+      # @return [Dodopayments::Models::DisputeAcceptedWebhookEvent, Dodopayments::Models::DisputeCancelledWebhookEvent, Dodopayments::Models::DisputeChallengedWebhookEvent, Dodopayments::Models::DisputeExpiredWebhookEvent, Dodopayments::Models::DisputeLostWebhookEvent, Dodopayments::Models::DisputeOpenedWebhookEvent, Dodopayments::Models::DisputeWonWebhookEvent, Dodopayments::Models::LicenseKeyCreatedWebhookEvent, Dodopayments::Models::PaymentCancelledWebhookEvent, Dodopayments::Models::PaymentFailedWebhookEvent, Dodopayments::Models::PaymentProcessingWebhookEvent, Dodopayments::Models::PaymentSucceededWebhookEvent, Dodopayments::Models::RefundFailedWebhookEvent, Dodopayments::Models::RefundSucceededWebhookEvent, Dodopayments::Models::SubscriptionActiveWebhookEvent, Dodopayments::Models::SubscriptionCancelledWebhookEvent, Dodopayments::Models::SubscriptionExpiredWebhookEvent, Dodopayments::Models::SubscriptionFailedWebhookEvent, Dodopayments::Models::SubscriptionOnHoldWebhookEvent, Dodopayments::Models::SubscriptionPlanChangedWebhookEvent, Dodopayments::Models::SubscriptionRenewedWebhookEvent]
+      def unsafe_unwrap(payload)
+        parsed = JSON.parse(payload, symbolize_names: true)
+        Dodopayments::Internal::Type::Converter.coerce(Dodopayments::Models::UnsafeUnwrapWebhookEvent, parsed)
+      end
+
+      # @param payload [String] The raw webhook payload as a string
+      #
+      # @return [Dodopayments::Models::DisputeAcceptedWebhookEvent, Dodopayments::Models::DisputeCancelledWebhookEvent, Dodopayments::Models::DisputeChallengedWebhookEvent, Dodopayments::Models::DisputeExpiredWebhookEvent, Dodopayments::Models::DisputeLostWebhookEvent, Dodopayments::Models::DisputeOpenedWebhookEvent, Dodopayments::Models::DisputeWonWebhookEvent, Dodopayments::Models::LicenseKeyCreatedWebhookEvent, Dodopayments::Models::PaymentCancelledWebhookEvent, Dodopayments::Models::PaymentFailedWebhookEvent, Dodopayments::Models::PaymentProcessingWebhookEvent, Dodopayments::Models::PaymentSucceededWebhookEvent, Dodopayments::Models::RefundFailedWebhookEvent, Dodopayments::Models::RefundSucceededWebhookEvent, Dodopayments::Models::SubscriptionActiveWebhookEvent, Dodopayments::Models::SubscriptionCancelledWebhookEvent, Dodopayments::Models::SubscriptionExpiredWebhookEvent, Dodopayments::Models::SubscriptionFailedWebhookEvent, Dodopayments::Models::SubscriptionOnHoldWebhookEvent, Dodopayments::Models::SubscriptionPlanChangedWebhookEvent, Dodopayments::Models::SubscriptionRenewedWebhookEvent]
+      def unwrap(payload)
+        parsed = JSON.parse(payload, symbolize_names: true)
+        Dodopayments::Internal::Type::Converter.coerce(Dodopayments::Models::UnwrapWebhookEvent, parsed)
+      end
+
       # @api private
       #
       # @param client [Dodopayments::Client]

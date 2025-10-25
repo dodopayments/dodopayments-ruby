@@ -57,9 +57,6 @@ module Dodopayments
     # @return [Dodopayments::Resources::Payouts]
     attr_reader :payouts
 
-    # @return [Dodopayments::Resources::WebhookEvents]
-    attr_reader :webhook_events
-
     # @return [Dodopayments::Resources::Products]
     attr_reader :products
 
@@ -77,6 +74,9 @@ module Dodopayments
 
     # @return [Dodopayments::Resources::Webhooks]
     attr_reader :webhooks
+
+    # @return [Dodopayments::Resources::WebhookEvents]
+    attr_reader :webhook_events
 
     # @return [Dodopayments::Resources::UsageEvents]
     attr_reader :usage_events
@@ -153,13 +153,13 @@ module Dodopayments
       @refunds = Dodopayments::Resources::Refunds.new(client: self)
       @disputes = Dodopayments::Resources::Disputes.new(client: self)
       @payouts = Dodopayments::Resources::Payouts.new(client: self)
-      @webhook_events = Dodopayments::Resources::WebhookEvents.new(client: self)
       @products = Dodopayments::Resources::Products.new(client: self)
       @misc = Dodopayments::Resources::Misc.new(client: self)
       @discounts = Dodopayments::Resources::Discounts.new(client: self)
       @addons = Dodopayments::Resources::Addons.new(client: self)
       @brands = Dodopayments::Resources::Brands.new(client: self)
       @webhooks = Dodopayments::Resources::Webhooks.new(client: self)
+      @webhook_events = Dodopayments::Resources::WebhookEvents.new(client: self)
       @usage_events = Dodopayments::Resources::UsageEvents.new(client: self)
       @meters = Dodopayments::Resources::Meters.new(client: self)
     end

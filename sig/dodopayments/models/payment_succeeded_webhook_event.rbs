@@ -1,0 +1,76 @@
+module Dodopayments
+  module Models
+    type payment_succeeded_webhook_event =
+      {
+        business_id: String,
+        data: Dodopayments::PaymentSucceededWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::PaymentSucceededWebhookEvent::type_
+      }
+
+    class PaymentSucceededWebhookEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::PaymentSucceededWebhookEvent::Data
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: Dodopayments::Models::PaymentSucceededWebhookEvent::type_
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::PaymentSucceededWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::PaymentSucceededWebhookEvent::type_
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::PaymentSucceededWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::PaymentSucceededWebhookEvent::type_
+      }
+
+      type data =
+        {
+          payload_type: Dodopayments::Models::PaymentSucceededWebhookEvent::Data::payload_type
+        }
+
+      class Data < Dodopayments::Models::Payment
+        def payload_type: -> Dodopayments::Models::PaymentSucceededWebhookEvent::Data::payload_type?
+
+        def payload_type=: (
+          Dodopayments::Models::PaymentSucceededWebhookEvent::Data::payload_type _
+        ) -> Dodopayments::Models::PaymentSucceededWebhookEvent::Data::payload_type
+
+        def initialize: (
+          ?payload_type: Dodopayments::Models::PaymentSucceededWebhookEvent::Data::payload_type
+        ) -> void
+
+        def to_hash: -> {
+          payload_type: Dodopayments::Models::PaymentSucceededWebhookEvent::Data::payload_type
+        }
+
+        type payload_type = :Payment
+
+        module PayloadType
+          extend Dodopayments::Internal::Type::Enum
+
+          PAYMENT: :Payment
+
+          def self?.values: -> ::Array[Dodopayments::Models::PaymentSucceededWebhookEvent::Data::payload_type]
+        end
+      end
+
+      type type_ = :"payment.succeeded"
+
+      module Type
+        extend Dodopayments::Internal::Type::Enum
+
+        PAYMENT_SUCCEEDED: :"payment.succeeded"
+
+        def self?.values: -> ::Array[Dodopayments::Models::PaymentSucceededWebhookEvent::type_]
+      end
+    end
+  end
+end

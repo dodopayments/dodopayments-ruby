@@ -1,0 +1,32 @@
+module Dodopayments
+  module Models
+    type unsafe_unwrap_webhook_event =
+      Dodopayments::DisputeAcceptedWebhookEvent
+      | Dodopayments::DisputeCancelledWebhookEvent
+      | Dodopayments::DisputeChallengedWebhookEvent
+      | Dodopayments::DisputeExpiredWebhookEvent
+      | Dodopayments::DisputeLostWebhookEvent
+      | Dodopayments::DisputeOpenedWebhookEvent
+      | Dodopayments::DisputeWonWebhookEvent
+      | Dodopayments::LicenseKeyCreatedWebhookEvent
+      | Dodopayments::PaymentCancelledWebhookEvent
+      | Dodopayments::PaymentFailedWebhookEvent
+      | Dodopayments::PaymentProcessingWebhookEvent
+      | Dodopayments::PaymentSucceededWebhookEvent
+      | Dodopayments::RefundFailedWebhookEvent
+      | Dodopayments::RefundSucceededWebhookEvent
+      | Dodopayments::SubscriptionActiveWebhookEvent
+      | Dodopayments::SubscriptionCancelledWebhookEvent
+      | Dodopayments::SubscriptionExpiredWebhookEvent
+      | Dodopayments::SubscriptionFailedWebhookEvent
+      | Dodopayments::SubscriptionOnHoldWebhookEvent
+      | Dodopayments::SubscriptionPlanChangedWebhookEvent
+      | Dodopayments::SubscriptionRenewedWebhookEvent
+
+    module UnsafeUnwrapWebhookEvent
+      extend Dodopayments::Internal::Type::Union
+
+      def self?.variants: -> ::Array[Dodopayments::Models::unsafe_unwrap_webhook_event]
+    end
+  end
+end
