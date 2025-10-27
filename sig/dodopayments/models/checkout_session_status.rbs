@@ -1,0 +1,45 @@
+module Dodopayments
+  module Models
+    type checkout_session_status =
+      {
+        id: String,
+        created_at: Time,
+        customer_email: String?,
+        customer_name: String?,
+        payment_id: String?,
+        payment_status: Dodopayments::Models::intent_status?
+      }
+
+    class CheckoutSessionStatus < Dodopayments::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor customer_email: String?
+
+      attr_accessor customer_name: String?
+
+      attr_accessor payment_id: String?
+
+      attr_accessor payment_status: Dodopayments::Models::intent_status?
+
+      def initialize: (
+        id: String,
+        created_at: Time,
+        ?customer_email: String?,
+        ?customer_name: String?,
+        ?payment_id: String?,
+        ?payment_status: Dodopayments::Models::intent_status?
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        created_at: Time,
+        customer_email: String?,
+        customer_name: String?,
+        payment_id: String?,
+        payment_status: Dodopayments::Models::intent_status?
+      }
+    end
+  end
+end

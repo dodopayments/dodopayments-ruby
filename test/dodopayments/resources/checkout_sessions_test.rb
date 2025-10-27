@@ -18,4 +18,23 @@ class Dodopayments::Test::Resources::CheckoutSessionsTest < Dodopayments::Test::
       }
     end
   end
+
+  def test_retrieve
+    response = @dodo_payments.checkout_sessions.retrieve("id")
+
+    assert_pattern do
+      response => Dodopayments::CheckoutSessionStatus
+    end
+
+    assert_pattern do
+      response => {
+        id: String,
+        created_at: Time,
+        customer_email: String | nil,
+        customer_name: String | nil,
+        payment_id: String | nil,
+        payment_status: Dodopayments::IntentStatus | nil
+      }
+    end
+  end
 end

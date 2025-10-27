@@ -30,6 +30,7 @@ module Dodopayments
         String subscription_id,
         ?billing: Dodopayments::BillingAddress?,
         ?cancel_at_next_billing_date: bool?,
+        ?customer_name: String?,
         ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         ?metadata: ::Hash[Symbol, String]?,
         ?next_billing_date: Time?,

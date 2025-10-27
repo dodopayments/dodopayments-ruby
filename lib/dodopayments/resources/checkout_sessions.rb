@@ -52,6 +52,23 @@ module Dodopayments
         )
       end
 
+      # @overload retrieve(id, request_options: {})
+      #
+      # @param id [String]
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Models::CheckoutSessionStatus]
+      #
+      # @see Dodopayments::Models::CheckoutSessionRetrieveParams
+      def retrieve(id, params = {})
+        @client.request(
+          method: :get,
+          path: ["checkouts/%1$s", id],
+          model: Dodopayments::CheckoutSessionStatus,
+          options: params[:request_options]
+        )
+      end
+
       # @api private
       #
       # @param client [Dodopayments::Client]
