@@ -18,6 +18,11 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :cancel_at_next_billing_date, Dodopayments::Internal::Type::Boolean, nil?: true
 
+      # @!attribute customer_name
+      #
+      #   @return [String, nil]
+      optional :customer_name, String, nil?: true
+
       # @!attribute disable_on_demand
       #
       #   @return [Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, nil]
@@ -43,10 +48,12 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(billing: nil, cancel_at_next_billing_date: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
+      # @!method initialize(billing: nil, cancel_at_next_billing_date: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
       #   @param billing [Dodopayments::Models::BillingAddress, nil]
       #
       #   @param cancel_at_next_billing_date [Boolean, nil] When set, the subscription will remain active until the end of billing period
+      #
+      #   @param customer_name [String, nil]
       #
       #   @param disable_on_demand [Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, nil]
       #

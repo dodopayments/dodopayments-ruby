@@ -39,6 +39,10 @@ module Dodopayments
 
   class CheckoutSessionResponse = Dodopayments::Models::CheckoutSessionResponse
 
+  class CheckoutSessionRetrieveParams = Dodopayments::Models::CheckoutSessionRetrieveParams
+
+  class CheckoutSessionStatus = Dodopayments::Models::CheckoutSessionStatus
+
   module CountryCode = Dodopayments::Models::CountryCode
 
   class CreateNewCustomer = Dodopayments::Models::CreateNewCustomer

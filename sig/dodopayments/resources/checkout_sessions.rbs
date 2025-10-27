@@ -19,6 +19,11 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::CheckoutSessionResponse
 
+      def retrieve: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::CheckoutSessionStatus
+
       def initialize: (client: Dodopayments::Client) -> void
     end
   end
