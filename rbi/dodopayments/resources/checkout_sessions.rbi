@@ -74,6 +74,15 @@ module Dodopayments
       )
       end
 
+      sig do
+        params(
+          id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::CheckoutSessionStatus)
+      end
+      def retrieve(id, request_options: {})
+      end
+
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
       def self.new(client:)

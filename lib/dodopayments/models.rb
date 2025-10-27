@@ -79,6 +79,10 @@ module Dodopayments
 
   CheckoutSessionResponse = Dodopayments::Models::CheckoutSessionResponse
 
+  CheckoutSessionRetrieveParams = Dodopayments::Models::CheckoutSessionRetrieveParams
+
+  CheckoutSessionStatus = Dodopayments::Models::CheckoutSessionStatus
+
   CountryCode = Dodopayments::Models::CountryCode
 
   CreateNewCustomer = Dodopayments::Models::CreateNewCustomer

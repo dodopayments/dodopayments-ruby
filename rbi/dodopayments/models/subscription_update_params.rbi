@@ -26,6 +26,9 @@ module Dodopayments
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :cancel_at_next_billing_date
 
+      sig { returns(T.nilable(String)) }
+      attr_accessor :customer_name
+
       sig do
         returns(
           T.nilable(Dodopayments::SubscriptionUpdateParams::DisableOnDemand)
@@ -59,6 +62,7 @@ module Dodopayments
         params(
           billing: T.nilable(Dodopayments::BillingAddress::OrHash),
           cancel_at_next_billing_date: T.nilable(T::Boolean),
+          customer_name: T.nilable(String),
           disable_on_demand:
             T.nilable(
               Dodopayments::SubscriptionUpdateParams::DisableOnDemand::OrHash
@@ -74,6 +78,7 @@ module Dodopayments
         billing: nil,
         # When set, the subscription will remain active until the end of billing period
         cancel_at_next_billing_date: nil,
+        customer_name: nil,
         disable_on_demand: nil,
         metadata: nil,
         next_billing_date: nil,
@@ -88,6 +93,7 @@ module Dodopayments
           {
             billing: T.nilable(Dodopayments::BillingAddress),
             cancel_at_next_billing_date: T.nilable(T::Boolean),
+            customer_name: T.nilable(String),
             disable_on_demand:
               T.nilable(
                 Dodopayments::SubscriptionUpdateParams::DisableOnDemand
