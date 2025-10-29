@@ -8,6 +8,7 @@ module Dodopayments
           payment_id: String,
           items:
             T.nilable(T::Array[Dodopayments::RefundCreateParams::Item::OrHash]),
+          metadata: T::Hash[Symbol, String],
           reason: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Refund)
@@ -17,6 +18,8 @@ module Dodopayments
         payment_id:,
         # Partially Refund an Individual Item
         items: nil,
+        # Additional metadata associated with the refund.
+        metadata: nil,
         # The reason for the refund, if any. Maximum length is 3000 characters. Optional.
         reason: nil,
         request_options: {}

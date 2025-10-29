@@ -28,6 +28,7 @@ module Dodopayments
       IDEAL = T.let(:ideal, Dodopayments::PaymentMethodTypes::TaggedSymbol)
       PRZELEWY24 =
         T.let(:przelewy24, Dodopayments::PaymentMethodTypes::TaggedSymbol)
+      PAYPAL = T.let(:paypal, Dodopayments::PaymentMethodTypes::TaggedSymbol)
       AFFIRM = T.let(:affirm, Dodopayments::PaymentMethodTypes::TaggedSymbol)
       KLARNA = T.let(:klarna, Dodopayments::PaymentMethodTypes::TaggedSymbol)
       SEPA = T.let(:sepa, Dodopayments::PaymentMethodTypes::TaggedSymbol)

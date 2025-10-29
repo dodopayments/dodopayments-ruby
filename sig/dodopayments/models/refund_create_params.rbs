@@ -4,6 +4,7 @@ module Dodopayments
       {
         payment_id: String,
         items: ::Array[Dodopayments::RefundCreateParams::Item]?,
+        metadata: ::Hash[Symbol, String],
         reason: String?
       }
       & Dodopayments::Internal::Type::request_parameters
@@ -16,11 +17,16 @@ module Dodopayments
 
       attr_accessor items: ::Array[Dodopayments::RefundCreateParams::Item]?
 
+      attr_reader metadata: ::Hash[Symbol, String]?
+
+      def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
       attr_accessor reason: String?
 
       def initialize: (
         payment_id: String,
         ?items: ::Array[Dodopayments::RefundCreateParams::Item]?,
+        ?metadata: ::Hash[Symbol, String],
         ?reason: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
@@ -28,6 +34,7 @@ module Dodopayments
       def to_hash: -> {
         payment_id: String,
         items: ::Array[Dodopayments::RefundCreateParams::Item]?,
+        metadata: ::Hash[Symbol, String],
         reason: String?,
         request_options: Dodopayments::RequestOptions
       }
