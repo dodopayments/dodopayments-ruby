@@ -21,16 +21,24 @@ module Dodopayments
                -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::RefundCreateParams::Item] },
                nil?: true
 
+      # @!attribute metadata
+      #   Additional metadata associated with the refund.
+      #
+      #   @return [Hash{Symbol=>String}, nil]
+      optional :metadata, Dodopayments::Internal::Type::HashOf[String]
+
       # @!attribute reason
       #   The reason for the refund, if any. Maximum length is 3000 characters. Optional.
       #
       #   @return [String, nil]
       optional :reason, String, nil?: true
 
-      # @!method initialize(payment_id:, items: nil, reason: nil, request_options: {})
+      # @!method initialize(payment_id:, items: nil, metadata: nil, reason: nil, request_options: {})
       #   @param payment_id [String] The unique identifier of the payment to be refunded.
       #
       #   @param items [Array<Dodopayments::Models::RefundCreateParams::Item>, nil] Partially Refund an Individual Item
+      #
+      #   @param metadata [Hash{Symbol=>String}] Additional metadata associated with the refund.
       #
       #   @param reason [String, nil] The reason for the refund, if any. Maximum length is 3000 characters. Optional.
       #

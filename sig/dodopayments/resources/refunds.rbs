@@ -4,6 +4,7 @@ module Dodopayments
       def create: (
         payment_id: String,
         ?items: ::Array[Dodopayments::RefundCreateParams::Item]?,
+        ?metadata: ::Hash[Symbol, String],
         ?reason: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Refund

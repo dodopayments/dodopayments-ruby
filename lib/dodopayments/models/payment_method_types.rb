@@ -17,6 +17,7 @@ module Dodopayments
       EPS = :eps
       IDEAL = :ideal
       PRZELEWY24 = :przelewy24
+      PAYPAL = :paypal
       AFFIRM = :affirm
       KLARNA = :klarna
       SEPA = :sepa
