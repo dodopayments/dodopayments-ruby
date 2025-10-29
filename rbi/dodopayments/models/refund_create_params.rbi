@@ -24,6 +24,13 @@ module Dodopayments
       end
       attr_accessor :items
 
+      # Additional metadata associated with the refund.
+      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      attr_reader :metadata
+
+      sig { params(metadata: T::Hash[Symbol, String]).void }
+      attr_writer :metadata
+
       # The reason for the refund, if any. Maximum length is 3000 characters. Optional.
       sig { returns(T.nilable(String)) }
       attr_accessor :reason
@@ -33,6 +40,7 @@ module Dodopayments
           payment_id: String,
           items:
             T.nilable(T::Array[Dodopayments::RefundCreateParams::Item::OrHash]),
+          metadata: T::Hash[Symbol, String],
           reason: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -42,6 +50,8 @@ module Dodopayments
         payment_id:,
         # Partially Refund an Individual Item
         items: nil,
+        # Additional metadata associated with the refund.
+        metadata: nil,
         # The reason for the refund, if any. Maximum length is 3000 characters. Optional.
         reason: nil,
         request_options: {}
@@ -53,6 +63,7 @@ module Dodopayments
           {
             payment_id: String,
             items: T.nilable(T::Array[Dodopayments::RefundCreateParams::Item]),
+            metadata: T::Hash[Symbol, String],
             reason: T.nilable(String),
             request_options: Dodopayments::RequestOptions
           }

@@ -29,6 +29,10 @@ module Dodopayments
       sig { returns(T::Boolean) }
       attr_accessor :is_partial
 
+      # Additional metadata stored with the refund.
+      sig { returns(T::Hash[Symbol, String]) }
+      attr_accessor :metadata
+
       # The unique identifier of the payment associated with the refund.
       sig { returns(String) }
       attr_accessor :payment_id
@@ -59,6 +63,7 @@ module Dodopayments
           created_at: Time,
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
           is_partial: T::Boolean,
+          metadata: T::Hash[Symbol, String],
           payment_id: String,
           refund_id: String,
           status: Dodopayments::RefundStatus::OrSymbol,
@@ -76,6 +81,8 @@ module Dodopayments
         customer:,
         # If true the refund is a partial refund
         is_partial:,
+        # Additional metadata stored with the refund.
+        metadata:,
         # The unique identifier of the payment associated with the refund.
         payment_id:,
         # The unique identifier of the refund.
@@ -98,6 +105,7 @@ module Dodopayments
             created_at: Time,
             customer: Dodopayments::CustomerLimitedDetails,
             is_partial: T::Boolean,
+            metadata: T::Hash[Symbol, String],
             payment_id: String,
             refund_id: String,
             status: Dodopayments::RefundStatus::TaggedSymbol,
