@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.56.4 (2025-11-05)
+
+Full Changelog: [v1.56.3...v1.56.4](https://github.com/dodopayments/dodopayments-ruby/compare/v1.56.3...v1.56.4)
+
+### Bug Fixes
+
+* better thread safety via early initializing SSL store during HTTP client creation ([931e1ee](https://github.com/dodopayments/dodopayments-ruby/commit/931e1eeb8a5cda3c0359ca8dd58621ac10f2aa5a))
+
+
+### Chores
+
+* bump dependency version and update sorbet types ([af5f49a](https://github.com/dodopayments/dodopayments-ruby/commit/af5f49a7f1d0ed6de5f230e6a9c93ef9ea0d6a38))
+
 ## 1.56.3 (2025-10-29)
 
 Full Changelog: [v1.56.2...v1.56.3](https://github.com/dodopayments/dodopayments-ruby/compare/v1.56.2...v1.56.3)
