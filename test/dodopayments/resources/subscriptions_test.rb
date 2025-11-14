@@ -67,6 +67,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         discount_cycles_remaining: Integer | nil,
         discount_id: String | nil,
         expires_at: Time | nil,
+        payment_method_id: String | nil,
         tax_id: String | nil
       }
     end
@@ -107,6 +108,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         discount_cycles_remaining: Integer | nil,
         discount_id: String | nil,
         expires_at: Time | nil,
+        payment_method_id: String | nil,
         tax_id: String | nil
       }
     end
@@ -151,6 +153,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         cancelled_at: Time | nil,
         discount_cycles_remaining: Integer | nil,
         discount_id: String | nil,
+        payment_method_id: String | nil,
         tax_id: String | nil
       }
     end
@@ -203,6 +206,28 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         end_date: Time,
         meters: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::SubscriptionRetrieveUsageHistoryResponse::Meter]),
         start_date: Time
+      }
+    end
+  end
+
+  def test_update_payment_method_required_params
+    response =
+      @dodo_payments.subscriptions.update_payment_method(
+        "subscription_id",
+        payment_method_id: "payment_method_id",
+        type: :existing
+      )
+
+    assert_pattern do
+      response => Dodopayments::Models::SubscriptionUpdatePaymentMethodResponse
+    end
+
+    assert_pattern do
+      response => {
+        client_secret: String | nil,
+        expires_on: Time | nil,
+        payment_id: String | nil,
+        payment_link: String | nil
       }
     end
   end

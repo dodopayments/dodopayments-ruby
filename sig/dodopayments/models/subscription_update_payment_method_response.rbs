@@ -1,0 +1,35 @@
+module Dodopayments
+  module Models
+    type subscription_update_payment_method_response =
+      {
+        client_secret: String?,
+        expires_on: Time?,
+        payment_id: String?,
+        payment_link: String?
+      }
+
+    class SubscriptionUpdatePaymentMethodResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor client_secret: String?
+
+      attr_accessor expires_on: Time?
+
+      attr_accessor payment_id: String?
+
+      attr_accessor payment_link: String?
+
+      def initialize: (
+        ?client_secret: String?,
+        ?expires_on: Time?,
+        ?payment_id: String?,
+        ?payment_link: String?
+      ) -> void
+
+      def to_hash: -> {
+        client_secret: String?,
+        expires_on: Time?,
+        payment_id: String?,
+        payment_link: String?
+      }
+    end
+  end
+end

@@ -28,6 +28,7 @@ module Dodopayments
         discount_cycles_remaining: Integer?,
         discount_id: String?,
         expires_at: Time?,
+        payment_method_id: String?,
         tax_id: String?
       }
 
@@ -84,6 +85,8 @@ module Dodopayments
 
       attr_accessor expires_at: Time?
 
+      attr_accessor payment_method_id: String?
+
       attr_accessor tax_id: String?
 
       def initialize: (
@@ -113,6 +116,7 @@ module Dodopayments
         ?discount_cycles_remaining: Integer?,
         ?discount_id: String?,
         ?expires_at: Time?,
+        ?payment_method_id: String?,
         ?tax_id: String?
       ) -> void
 
@@ -143,6 +147,7 @@ module Dodopayments
         discount_cycles_remaining: Integer?,
         discount_id: String?,
         expires_at: Time?,
+        payment_method_id: String?,
         tax_id: String?
       }
 

@@ -67,6 +67,9 @@ module Dodopayments
 
   CustomerRetrieveParams = Dodopayments::Models::CustomerRetrieveParams
 
+  CustomerRetrievePaymentMethodsParams =
+    Dodopayments::Models::CustomerRetrievePaymentMethodsParams
+
   Customers = Dodopayments::Models::Customers
 
   CustomerUpdateParams = Dodopayments::Models::CustomerUpdateParams
@@ -280,6 +283,9 @@ module Dodopayments
   SubscriptionStatus = Dodopayments::Models::SubscriptionStatus
 
   SubscriptionUpdateParams = Dodopayments::Models::SubscriptionUpdateParams
+
+  SubscriptionUpdatePaymentMethodParams =
+    Dodopayments::Models::SubscriptionUpdatePaymentMethodParams
 
   TaxCategory = Dodopayments::Models::TaxCategory
 

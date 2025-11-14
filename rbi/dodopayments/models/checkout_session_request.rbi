@@ -528,6 +528,48 @@ module Dodopayments
         sig { params(allow_currency_selection: T::Boolean).void }
         attr_writer :allow_currency_selection
 
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :allow_customer_editing_city
+
+        sig { params(allow_customer_editing_city: T::Boolean).void }
+        attr_writer :allow_customer_editing_city
+
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :allow_customer_editing_country
+
+        sig { params(allow_customer_editing_country: T::Boolean).void }
+        attr_writer :allow_customer_editing_country
+
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :allow_customer_editing_email
+
+        sig { params(allow_customer_editing_email: T::Boolean).void }
+        attr_writer :allow_customer_editing_email
+
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :allow_customer_editing_name
+
+        sig { params(allow_customer_editing_name: T::Boolean).void }
+        attr_writer :allow_customer_editing_name
+
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :allow_customer_editing_state
+
+        sig { params(allow_customer_editing_state: T::Boolean).void }
+        attr_writer :allow_customer_editing_state
+
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :allow_customer_editing_street
+
+        sig { params(allow_customer_editing_street: T::Boolean).void }
+        attr_writer :allow_customer_editing_street
+
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :allow_customer_editing_zipcode
+
+        sig { params(allow_customer_editing_zipcode: T::Boolean).void }
+        attr_writer :allow_customer_editing_zipcode
+
         # If the customer is allowed to apply discount code, set it to true.
         #
         # Default is true
@@ -568,6 +610,13 @@ module Dodopayments
         sig do
           params(
             allow_currency_selection: T::Boolean,
+            allow_customer_editing_city: T::Boolean,
+            allow_customer_editing_country: T::Boolean,
+            allow_customer_editing_email: T::Boolean,
+            allow_customer_editing_name: T::Boolean,
+            allow_customer_editing_state: T::Boolean,
+            allow_customer_editing_street: T::Boolean,
+            allow_customer_editing_zipcode: T::Boolean,
             allow_discount_code: T::Boolean,
             allow_phone_number_collection: T::Boolean,
             allow_tax_id: T::Boolean,
@@ -579,6 +628,13 @@ module Dodopayments
           #
           # Default is true
           allow_currency_selection: nil,
+          allow_customer_editing_city: nil,
+          allow_customer_editing_country: nil,
+          allow_customer_editing_email: nil,
+          allow_customer_editing_name: nil,
+          allow_customer_editing_state: nil,
+          allow_customer_editing_street: nil,
+          allow_customer_editing_zipcode: nil,
           # If the customer is allowed to apply discount code, set it to true.
           #
           # Default is true
@@ -603,6 +659,13 @@ module Dodopayments
           override.returns(
             {
               allow_currency_selection: T::Boolean,
+              allow_customer_editing_city: T::Boolean,
+              allow_customer_editing_country: T::Boolean,
+              allow_customer_editing_email: T::Boolean,
+              allow_customer_editing_name: T::Boolean,
+              allow_customer_editing_state: T::Boolean,
+              allow_customer_editing_street: T::Boolean,
+              allow_customer_editing_zipcode: T::Boolean,
               allow_discount_code: T::Boolean,
               allow_phone_number_collection: T::Boolean,
               allow_tax_id: T::Boolean,

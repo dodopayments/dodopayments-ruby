@@ -14,6 +14,10 @@ module Dodopayments
           )
         end
 
+      # Name of the product
+      sig { returns(String) }
+      attr_accessor :name
+
       # Price configuration for the product
       sig do
         returns(
@@ -93,12 +97,9 @@ module Dodopayments
       sig { params(metadata: T::Hash[Symbol, String]).void }
       attr_writer :metadata
 
-      # Optional name of the product
-      sig { returns(T.nilable(String)) }
-      attr_accessor :name
-
       sig do
         params(
+          name: String,
           price:
             T.any(
               Dodopayments::Price::OneTimePrice::OrHash,
@@ -119,11 +120,12 @@ module Dodopayments
             T.nilable(Dodopayments::LicenseKeyDuration::OrHash),
           license_key_enabled: T.nilable(T::Boolean),
           metadata: T::Hash[Symbol, String],
-          name: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
+        # Name of the product
+        name:,
         # Price configuration for the product
         price:,
         # Tax category applied to this product
@@ -148,8 +150,6 @@ module Dodopayments
         license_key_enabled: nil,
         # Additional metadata for the product
         metadata: nil,
-        # Optional name of the product
-        name: nil,
         request_options: {}
       )
       end
@@ -157,6 +157,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            name: String,
             price:
               T.any(
                 Dodopayments::Price::OneTimePrice,
@@ -176,7 +177,6 @@ module Dodopayments
             license_key_duration: T.nilable(Dodopayments::LicenseKeyDuration),
             license_key_enabled: T.nilable(T::Boolean),
             metadata: T::Hash[Symbol, String],
-            name: T.nilable(String),
             request_options: Dodopayments::RequestOptions
           }
         )

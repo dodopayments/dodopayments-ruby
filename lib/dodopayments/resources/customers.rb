@@ -9,11 +9,16 @@ module Dodopayments
       # @return [Dodopayments::Resources::Customers::Wallets]
       attr_reader :wallets
 
-      # @overload create(email:, name:, phone_number: nil, request_options: {})
+      # @overload create(email:, name:, metadata: nil, phone_number: nil, request_options: {})
       #
       # @param email [String]
+      #
       # @param name [String]
+      #
+      # @param metadata [Hash{Symbol=>String}] Additional metadata for the customer
+      #
       # @param phone_number [String, nil]
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::Customer]
@@ -48,9 +53,11 @@ module Dodopayments
         )
       end
 
-      # @overload update(customer_id, name: nil, phone_number: nil, request_options: {})
+      # @overload update(customer_id, metadata: nil, name: nil, phone_number: nil, request_options: {})
       #
       # @param customer_id [String] Customer Id
+      #
+      # @param metadata [Hash{Symbol=>String}, nil] Additional metadata for the customer
       #
       # @param name [String, nil]
       #
@@ -94,6 +101,24 @@ module Dodopayments
           page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Customer,
           options: options
+        )
+      end
+
+      # @overload retrieve_payment_methods(customer_id, request_options: {})
+      #
+      # @param customer_id [String] Customer Id
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Models::CustomerRetrievePaymentMethodsResponse]
+      #
+      # @see Dodopayments::Models::CustomerRetrievePaymentMethodsParams
+      def retrieve_payment_methods(customer_id, params = {})
+        @client.request(
+          method: :get,
+          path: ["customers/%1$s/payment-methods", customer_id],
+          model: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse,
+          options: params[:request_options]
         )
       end
 

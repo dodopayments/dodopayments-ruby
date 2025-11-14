@@ -144,13 +144,19 @@ module Dodopayments
       #   @return [String, nil]
       optional :discount_id, String, nil?: true
 
+      # @!attribute payment_method_id
+      #   Saved payment method id used for recurring charges
+      #
+      #   @return [String, nil]
+      optional :payment_method_id, String, nil?: true
+
       # @!attribute tax_id
       #   Tax identifier provided for this subscription (if applicable)
       #
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(billing:, cancel_at_next_billing_date:, created_at:, currency:, customer:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, discount_cycles_remaining: nil, discount_id: nil, tax_id: nil)
+      # @!method initialize(billing:, cancel_at_next_billing_date:, created_at:, currency:, customer:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, discount_cycles_remaining: nil, discount_id: nil, payment_method_id: nil, tax_id: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionListResponse} for more details.
       #
@@ -201,6 +207,8 @@ module Dodopayments
       #   @param discount_cycles_remaining [Integer, nil] Number of remaining discount cycles if discount is applied
       #
       #   @param discount_id [String, nil] The discount id if discount is applied
+      #
+      #   @param payment_method_id [String, nil] Saved payment method id used for recurring charges
       #
       #   @param tax_id [String, nil] Tax identifier provided for this subscription (if applicable)
     end

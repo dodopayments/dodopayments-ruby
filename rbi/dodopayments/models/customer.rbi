@@ -23,6 +23,13 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :name
 
+      # Additional metadata for the customer
+      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      attr_reader :metadata
+
+      sig { params(metadata: T::Hash[Symbol, String]).void }
+      attr_writer :metadata
+
       sig { returns(T.nilable(String)) }
       attr_accessor :phone_number
 
@@ -33,6 +40,7 @@ module Dodopayments
           customer_id: String,
           email: String,
           name: String,
+          metadata: T::Hash[Symbol, String],
           phone_number: T.nilable(String)
         ).returns(T.attached_class)
       end
@@ -42,6 +50,8 @@ module Dodopayments
         customer_id:,
         email:,
         name:,
+        # Additional metadata for the customer
+        metadata: nil,
         phone_number: nil
       )
       end
@@ -54,6 +64,7 @@ module Dodopayments
             customer_id: String,
             email: String,
             name: String,
+            metadata: T::Hash[Symbol, String],
             phone_number: T.nilable(String)
           }
         )

@@ -1,0 +1,180 @@
+module Dodopayments
+  module Models
+    type customer_retrieve_payment_methods_response =
+      {
+        items: ::Array[Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item]
+      }
+
+    class CustomerRetrievePaymentMethodsResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor items: ::Array[Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item]
+
+      def initialize: (
+        items: ::Array[Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item]
+      ) -> void
+
+      def to_hash: -> {
+        items: ::Array[Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item]
+      }
+
+      type item =
+        {
+          connector_payment_methods: ::Hash[Symbol, Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::ConnectorPaymentMethod],
+          payment_method: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::payment_method,
+          payment_method_id: String,
+          profile_map: ::Hash[Symbol, String],
+          card: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::Card?,
+          last_used_at: Time?,
+          recurring_enabled: bool?
+        }
+
+      class Item < Dodopayments::Internal::Type::BaseModel
+        attr_accessor connector_payment_methods: ::Hash[Symbol, Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::ConnectorPaymentMethod]
+
+        attr_accessor payment_method: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::payment_method
+
+        attr_accessor payment_method_id: String
+
+        attr_accessor profile_map: ::Hash[Symbol, String]
+
+        attr_accessor card: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::Card?
+
+        attr_accessor last_used_at: Time?
+
+        attr_accessor recurring_enabled: bool?
+
+        def initialize: (
+          connector_payment_methods: ::Hash[Symbol, Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::ConnectorPaymentMethod],
+          payment_method: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::payment_method,
+          payment_method_id: String,
+          profile_map: ::Hash[Symbol, String],
+          ?card: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::Card?,
+          ?last_used_at: Time?,
+          ?recurring_enabled: bool?
+        ) -> void
+
+        def to_hash: -> {
+          connector_payment_methods: ::Hash[Symbol, Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::ConnectorPaymentMethod],
+          payment_method: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::payment_method,
+          payment_method_id: String,
+          profile_map: ::Hash[Symbol, String],
+          card: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::Card?,
+          last_used_at: Time?,
+          recurring_enabled: bool?
+        }
+
+        type connector_payment_method =
+          {
+            connector_mandate_id: String,
+            original_payment_authorized_amount: Integer,
+            original_payment_authorized_currency: Dodopayments::Models::currency,
+            payment_method_type: Dodopayments::Models::payment_method_types?
+          }
+
+        class ConnectorPaymentMethod < Dodopayments::Internal::Type::BaseModel
+          attr_accessor connector_mandate_id: String
+
+          attr_accessor original_payment_authorized_amount: Integer
+
+          attr_accessor original_payment_authorized_currency: Dodopayments::Models::currency
+
+          attr_accessor payment_method_type: Dodopayments::Models::payment_method_types?
+
+          def initialize: (
+            connector_mandate_id: String,
+            original_payment_authorized_amount: Integer,
+            original_payment_authorized_currency: Dodopayments::Models::currency,
+            ?payment_method_type: Dodopayments::Models::payment_method_types?
+          ) -> void
+
+          def to_hash: -> {
+            connector_mandate_id: String,
+            original_payment_authorized_amount: Integer,
+            original_payment_authorized_currency: Dodopayments::Models::currency,
+            payment_method_type: Dodopayments::Models::payment_method_types?
+          }
+        end
+
+        type payment_method =
+          :card
+          | :card_redirect
+          | :pay_later
+          | :wallet
+          | :bank_redirect
+          | :bank_transfer
+          | :crypto
+          | :bank_debit
+          | :reward
+          | :real_time_payment
+          | :upi
+          | :voucher
+          | :gift_card
+          | :open_banking
+          | :mobile_payment
+
+        module PaymentMethod
+          extend Dodopayments::Internal::Type::Enum
+
+          CARD: :card
+          CARD_REDIRECT: :card_redirect
+          PAY_LATER: :pay_later
+          WALLET: :wallet
+          BANK_REDIRECT: :bank_redirect
+          BANK_TRANSFER: :bank_transfer
+          CRYPTO: :crypto
+          BANK_DEBIT: :bank_debit
+          REWARD: :reward
+          REAL_TIME_PAYMENT: :real_time_payment
+          UPI: :upi
+          VOUCHER: :voucher
+          GIFT_CARD: :gift_card
+          OPEN_BANKING: :open_banking
+          MOBILE_PAYMENT: :mobile_payment
+
+          def self?.values: -> ::Array[Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::payment_method]
+        end
+
+        type card =
+          {
+            card_issuing_country: Dodopayments::Models::country_code?,
+            card_network: String?,
+            card_type: String?,
+            expiry_month: String?,
+            expiry_year: String?,
+            :last4_digits => String?
+          }
+
+        class Card < Dodopayments::Internal::Type::BaseModel
+          attr_accessor card_issuing_country: Dodopayments::Models::country_code?
+
+          attr_accessor card_network: String?
+
+          attr_accessor card_type: String?
+
+          attr_accessor expiry_month: String?
+
+          attr_accessor expiry_year: String?
+
+          attr_accessor last4_digits: String?
+
+          def initialize: (
+            ?card_issuing_country: Dodopayments::Models::country_code?,
+            ?card_network: String?,
+            ?card_type: String?,
+            ?expiry_month: String?,
+            ?expiry_year: String?,
+            ?last4_digits: String?
+          ) -> void
+
+          def to_hash: -> {
+            card_issuing_country: Dodopayments::Models::country_code?,
+            card_network: String?,
+            card_type: String?,
+            expiry_month: String?,
+            expiry_year: String?,
+            :last4_digits => String?
+          }
+        end
+      end
+    end
+  end
+end

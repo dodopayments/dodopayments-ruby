@@ -287,6 +287,41 @@ module Dodopayments
         #   @return [Boolean, nil]
         optional :allow_currency_selection, Dodopayments::Internal::Type::Boolean
 
+        # @!attribute allow_customer_editing_city
+        #
+        #   @return [Boolean, nil]
+        optional :allow_customer_editing_city, Dodopayments::Internal::Type::Boolean
+
+        # @!attribute allow_customer_editing_country
+        #
+        #   @return [Boolean, nil]
+        optional :allow_customer_editing_country, Dodopayments::Internal::Type::Boolean
+
+        # @!attribute allow_customer_editing_email
+        #
+        #   @return [Boolean, nil]
+        optional :allow_customer_editing_email, Dodopayments::Internal::Type::Boolean
+
+        # @!attribute allow_customer_editing_name
+        #
+        #   @return [Boolean, nil]
+        optional :allow_customer_editing_name, Dodopayments::Internal::Type::Boolean
+
+        # @!attribute allow_customer_editing_state
+        #
+        #   @return [Boolean, nil]
+        optional :allow_customer_editing_state, Dodopayments::Internal::Type::Boolean
+
+        # @!attribute allow_customer_editing_street
+        #
+        #   @return [Boolean, nil]
+        optional :allow_customer_editing_street, Dodopayments::Internal::Type::Boolean
+
+        # @!attribute allow_customer_editing_zipcode
+        #
+        #   @return [Boolean, nil]
+        optional :allow_customer_editing_zipcode, Dodopayments::Internal::Type::Boolean
+
         # @!attribute allow_discount_code
         #   If the customer is allowed to apply discount code, set it to true.
         #
@@ -320,11 +355,25 @@ module Dodopayments
         #   @return [Boolean, nil]
         optional :always_create_new_customer, Dodopayments::Internal::Type::Boolean
 
-        # @!method initialize(allow_currency_selection: nil, allow_discount_code: nil, allow_phone_number_collection: nil, allow_tax_id: nil, always_create_new_customer: nil)
+        # @!method initialize(allow_currency_selection: nil, allow_customer_editing_city: nil, allow_customer_editing_country: nil, allow_customer_editing_email: nil, allow_customer_editing_name: nil, allow_customer_editing_state: nil, allow_customer_editing_street: nil, allow_customer_editing_zipcode: nil, allow_discount_code: nil, allow_phone_number_collection: nil, allow_tax_id: nil, always_create_new_customer: nil)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::CheckoutSessionRequest::FeatureFlags} for more details.
         #
         #   @param allow_currency_selection [Boolean] if customer is allowed to change currency, set it to true
+        #
+        #   @param allow_customer_editing_city [Boolean]
+        #
+        #   @param allow_customer_editing_country [Boolean]
+        #
+        #   @param allow_customer_editing_email [Boolean]
+        #
+        #   @param allow_customer_editing_name [Boolean]
+        #
+        #   @param allow_customer_editing_state [Boolean]
+        #
+        #   @param allow_customer_editing_street [Boolean]
+        #
+        #   @param allow_customer_editing_zipcode [Boolean]
         #
         #   @param allow_discount_code [Boolean] If the customer is allowed to apply discount code, set it to true.
         #
