@@ -17,6 +17,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         customer_id: String,
         email: String,
         name: String,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]) | nil,
         phone_number: String | nil
       }
     end
@@ -36,6 +37,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         customer_id: String,
         email: String,
         name: String,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]) | nil,
         phone_number: String | nil
       }
     end
@@ -55,6 +57,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         customer_id: String,
         email: String,
         name: String,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]) | nil,
         phone_number: String | nil
       }
     end
@@ -81,7 +84,22 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         customer_id: String,
         email: String,
         name: String,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]) | nil,
         phone_number: String | nil
+      }
+    end
+  end
+
+  def test_retrieve_payment_methods
+    response = @dodo_payments.customers.retrieve_payment_methods("customer_id")
+
+    assert_pattern do
+      response => Dodopayments::Models::CustomerRetrievePaymentMethodsResponse
+    end
+
+    assert_pattern do
+      response => {
+        items: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item])
       }
     end
   end

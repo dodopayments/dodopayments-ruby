@@ -8,6 +8,7 @@ module Dodopayments
 
       sig do
         params(
+          name: String,
           price:
             T.any(
               Dodopayments::Price::OneTimePrice::OrHash,
@@ -28,11 +29,12 @@ module Dodopayments
             T.nilable(Dodopayments::LicenseKeyDuration::OrHash),
           license_key_enabled: T.nilable(T::Boolean),
           metadata: T::Hash[Symbol, String],
-          name: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Product)
       end
       def create(
+        # Name of the product
+        name:,
         # Price configuration for the product
         price:,
         # Tax category applied to this product
@@ -57,8 +59,6 @@ module Dodopayments
         license_key_enabled: nil,
         # Additional metadata for the product
         metadata: nil,
-        # Optional name of the product
-        name: nil,
         request_options: {}
       )
       end

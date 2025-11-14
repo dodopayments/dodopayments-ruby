@@ -13,11 +13,19 @@ module Dodopayments
         params(
           email: String,
           name: String,
+          metadata: T::Hash[Symbol, String],
           phone_number: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Customer)
       end
-      def create(email:, name:, phone_number: nil, request_options: {})
+      def create(
+        email:,
+        name:,
+        # Additional metadata for the customer
+        metadata: nil,
+        phone_number: nil,
+        request_options: {}
+      )
       end
 
       sig do
@@ -36,6 +44,7 @@ module Dodopayments
       sig do
         params(
           customer_id: String,
+          metadata: T.nilable(T::Hash[Symbol, String]),
           name: T.nilable(String),
           phone_number: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
@@ -44,6 +53,8 @@ module Dodopayments
       def update(
         # Customer Id
         customer_id,
+        # Additional metadata for the customer
+        metadata: nil,
         name: nil,
         phone_number: nil,
         request_options: {}
@@ -69,6 +80,19 @@ module Dodopayments
         page_number: nil,
         # Page size default is 10 max is 100
         page_size: nil,
+        request_options: {}
+      )
+      end
+
+      sig do
+        params(
+          customer_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Models::CustomerRetrievePaymentMethodsResponse)
+      end
+      def retrieve_payment_methods(
+        # Customer Id
+        customer_id,
         request_options: {}
       )
       end

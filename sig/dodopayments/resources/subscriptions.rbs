@@ -80,6 +80,14 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::SubscriptionRetrieveUsageHistoryResponse]
 
+      def update_payment_method: (
+        String subscription_id,
+        type: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::type_,
+        payment_method_id: String,
+        ?return_url: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::SubscriptionUpdatePaymentMethodResponse
+
       def initialize: (client: Dodopayments::Client) -> void
     end
   end

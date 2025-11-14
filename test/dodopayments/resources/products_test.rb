@@ -6,6 +6,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
   def test_create_required_params
     response =
       @dodo_payments.products.create(
+        name: "name",
         price: {currency: :AED, discount: 0, price: 0, purchasing_power_parity: true, type: :one_time_price},
         tax_category: :digital_products
       )

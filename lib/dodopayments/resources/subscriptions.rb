@@ -283,6 +283,32 @@ module Dodopayments
         )
       end
 
+      # @overload update_payment_method(subscription_id, type:, payment_method_id:, return_url: nil, request_options: {})
+      #
+      # @param subscription_id [String] Subscription Id
+      #
+      # @param type [Symbol, Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Type]
+      #
+      # @param payment_method_id [String]
+      #
+      # @param return_url [String, nil]
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Models::SubscriptionUpdatePaymentMethodResponse]
+      #
+      # @see Dodopayments::Models::SubscriptionUpdatePaymentMethodParams
+      def update_payment_method(subscription_id, params)
+        parsed, options = Dodopayments::SubscriptionUpdatePaymentMethodParams.dump_request(params)
+        @client.request(
+          method: :post,
+          path: ["subscriptions/%1$s/update-payment-method", subscription_id],
+          body: parsed,
+          model: Dodopayments::Models::SubscriptionUpdatePaymentMethodResponse,
+          options: options
+        )
+      end
+
       # @api private
       #
       # @param client [Dodopayments::Client]
