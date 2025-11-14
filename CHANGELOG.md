@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.60.0 (2025-11-14)
+
+Full Changelog: [v1.56.4...v1.60.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.56.4...v1.60.0)
+
+### Features
+
+* **api:** added update payment method and updated openapi spec to v1.60.0 ([b81478b](https://github.com/dodopayments/dodopayments-ruby/commit/b81478b3e319f4ce09de51766a37688e0cc24b08))
+
 ## 1.56.4 (2025-11-05)
 
 Full Changelog: [v1.56.3...v1.56.4](https://github.com/dodopayments/dodopayments-ruby/compare/v1.56.3...v1.56.4)
