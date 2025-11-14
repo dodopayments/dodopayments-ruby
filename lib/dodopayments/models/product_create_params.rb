@@ -7,6 +7,12 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      # @!attribute name
+      #   Name of the product
+      #
+      #   @return [String]
+      required :name, String
+
       # @!attribute price
       #   Price configuration for the product
       #
@@ -77,15 +83,11 @@ module Dodopayments
       #   @return [Hash{Symbol=>String}, nil]
       optional :metadata, Dodopayments::Internal::Type::HashOf[String]
 
-      # @!attribute name
-      #   Optional name of the product
-      #
-      #   @return [String, nil]
-      optional :name, String, nil?: true
-
-      # @!method initialize(price:, tax_category:, addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, request_options: {})
+      # @!method initialize(name:, price:, tax_category:, addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductCreateParams} for more details.
+      #
+      #   @param name [String] Name of the product
       #
       #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice] Price configuration for the product
       #
@@ -108,8 +110,6 @@ module Dodopayments
       #   @param license_key_enabled [Boolean, nil] When true, generates and sends a license key to your customer.
       #
       #   @param metadata [Hash{Symbol=>String}] Additional metadata for the product
-      #
-      #   @param name [String, nil] Optional name of the product
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 

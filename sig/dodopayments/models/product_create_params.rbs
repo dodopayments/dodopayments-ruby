@@ -2,6 +2,7 @@ module Dodopayments
   module Models
     type product_create_params =
       {
+        name: String,
         price: Dodopayments::Models::price,
         tax_category: Dodopayments::Models::tax_category,
         addons: ::Array[String]?,
@@ -12,14 +13,15 @@ module Dodopayments
         license_key_activations_limit: Integer?,
         license_key_duration: Dodopayments::LicenseKeyDuration?,
         license_key_enabled: bool?,
-        metadata: ::Hash[Symbol, String],
-        name: String?
+        metadata: ::Hash[Symbol, String]
       }
       & Dodopayments::Internal::Type::request_parameters
 
     class ProductCreateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor name: String
 
       attr_accessor price: Dodopayments::Models::price
 
@@ -45,9 +47,8 @@ module Dodopayments
 
       def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
-      attr_accessor name: String?
-
       def initialize: (
+        name: String,
         price: Dodopayments::Models::price,
         tax_category: Dodopayments::Models::tax_category,
         ?addons: ::Array[String]?,
@@ -59,11 +60,11 @@ module Dodopayments
         ?license_key_duration: Dodopayments::LicenseKeyDuration?,
         ?license_key_enabled: bool?,
         ?metadata: ::Hash[Symbol, String],
-        ?name: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
       def to_hash: -> {
+        name: String,
         price: Dodopayments::Models::price,
         tax_category: Dodopayments::Models::tax_category,
         addons: ::Array[String]?,
@@ -75,7 +76,6 @@ module Dodopayments
         license_key_duration: Dodopayments::LicenseKeyDuration?,
         license_key_enabled: bool?,
         metadata: ::Hash[Symbol, String],
-        name: String?,
         request_options: Dodopayments::RequestOptions
       }
 

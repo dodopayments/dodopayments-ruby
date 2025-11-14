@@ -9,7 +9,9 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductCreateParams} for more details.
       #
-      # @overload create(price:, tax_category:, addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, request_options: {})
+      # @overload create(name:, price:, tax_category:, addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, request_options: {})
+      #
+      # @param name [String] Name of the product
       #
       # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice] Price configuration for the product
       #
@@ -32,8 +34,6 @@ module Dodopayments
       # @param license_key_enabled [Boolean, nil] When true, generates and sends a license key to your customer.
       #
       # @param metadata [Hash{Symbol=>String}] Additional metadata for the product
-      #
-      # @param name [String, nil] Optional name of the product
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

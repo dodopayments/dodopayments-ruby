@@ -113,6 +113,10 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_id
 
+      # Saved payment method id used for recurring charges
+      sig { returns(T.nilable(String)) }
+      attr_accessor :payment_method_id
+
       # Tax identifier provided for this subscription (if applicable)
       sig { returns(T.nilable(String)) }
       attr_accessor :tax_id
@@ -143,6 +147,7 @@ module Dodopayments
           cancelled_at: T.nilable(Time),
           discount_cycles_remaining: T.nilable(Integer),
           discount_id: T.nilable(String),
+          payment_method_id: T.nilable(String),
           tax_id: T.nilable(String)
         ).returns(T.attached_class)
       end
@@ -195,6 +200,8 @@ module Dodopayments
         discount_cycles_remaining: nil,
         # The discount id if discount is applied
         discount_id: nil,
+        # Saved payment method id used for recurring charges
+        payment_method_id: nil,
         # Tax identifier provided for this subscription (if applicable)
         tax_id: nil
       )
@@ -228,6 +235,7 @@ module Dodopayments
             cancelled_at: T.nilable(Time),
             discount_cycles_remaining: T.nilable(Integer),
             discount_id: T.nilable(String),
+            payment_method_id: T.nilable(String),
             tax_id: T.nilable(String)
           }
         )

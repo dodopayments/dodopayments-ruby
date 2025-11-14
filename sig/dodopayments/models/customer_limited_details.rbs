@@ -5,6 +5,7 @@ module Dodopayments
         customer_id: String,
         email: String,
         name: String,
+        metadata: ::Hash[Symbol, String],
         phone_number: String?
       }
 
@@ -15,12 +16,17 @@ module Dodopayments
 
       attr_accessor name: String
 
+      attr_reader metadata: ::Hash[Symbol, String]?
+
+      def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
       attr_accessor phone_number: String?
 
       def initialize: (
         customer_id: String,
         email: String,
         name: String,
+        ?metadata: ::Hash[Symbol, String],
         ?phone_number: String?
       ) -> void
 
@@ -28,6 +34,7 @@ module Dodopayments
         customer_id: String,
         email: String,
         name: String,
+        metadata: ::Hash[Symbol, String],
         phone_number: String?
       }
     end

@@ -4,6 +4,7 @@ module Dodopayments
       attr_reader images: Dodopayments::Resources::Products::Images
 
       def create: (
+        name: String,
         price: Dodopayments::Models::price,
         tax_category: Dodopayments::Models::tax_category,
         ?addons: ::Array[String]?,
@@ -15,7 +16,6 @@ module Dodopayments
         ?license_key_duration: Dodopayments::LicenseKeyDuration?,
         ?license_key_enabled: bool?,
         ?metadata: ::Hash[Symbol, String],
-        ?name: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Product
 

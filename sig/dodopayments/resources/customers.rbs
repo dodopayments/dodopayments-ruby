@@ -8,6 +8,7 @@ module Dodopayments
       def create: (
         email: String,
         name: String,
+        ?metadata: ::Hash[Symbol, String],
         ?phone_number: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Customer
@@ -19,6 +20,7 @@ module Dodopayments
 
       def update: (
         String customer_id,
+        ?metadata: ::Hash[Symbol, String]?,
         ?name: String?,
         ?phone_number: String?,
         ?request_options: Dodopayments::request_opts
@@ -30,6 +32,11 @@ module Dodopayments
         ?page_size: Integer,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Customer]
+
+      def retrieve_payment_methods: (
+        String customer_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::CustomerRetrievePaymentMethodsResponse
 
       def initialize: (client: Dodopayments::Client) -> void
     end

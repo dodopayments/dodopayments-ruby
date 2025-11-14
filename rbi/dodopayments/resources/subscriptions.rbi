@@ -295,6 +295,26 @@ module Dodopayments
       )
       end
 
+      sig do
+        params(
+          subscription_id: String,
+          type:
+            Dodopayments::SubscriptionUpdatePaymentMethodParams::Type::OrSymbol,
+          payment_method_id: String,
+          return_url: T.nilable(String),
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Models::SubscriptionUpdatePaymentMethodResponse)
+      end
+      def update_payment_method(
+        # Subscription Id
+        subscription_id,
+        type:,
+        payment_method_id:,
+        return_url: nil,
+        request_options: {}
+      )
+      end
+
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
       def self.new(client:)
