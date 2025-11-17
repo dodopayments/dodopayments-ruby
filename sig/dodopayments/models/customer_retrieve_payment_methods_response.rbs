@@ -18,81 +18,44 @@ module Dodopayments
 
       type item =
         {
-          connector_payment_methods: ::Hash[Symbol, Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::ConnectorPaymentMethod],
           payment_method: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::payment_method,
           payment_method_id: String,
-          profile_map: ::Hash[Symbol, String],
           card: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::Card?,
           last_used_at: Time?,
+          payment_method_type: Dodopayments::Models::payment_method_types?,
           recurring_enabled: bool?
         }
 
       class Item < Dodopayments::Internal::Type::BaseModel
-        attr_accessor connector_payment_methods: ::Hash[Symbol, Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::ConnectorPaymentMethod]
-
         attr_accessor payment_method: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::payment_method
 
         attr_accessor payment_method_id: String
-
-        attr_accessor profile_map: ::Hash[Symbol, String]
 
         attr_accessor card: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::Card?
 
         attr_accessor last_used_at: Time?
 
+        attr_accessor payment_method_type: Dodopayments::Models::payment_method_types?
+
         attr_accessor recurring_enabled: bool?
 
         def initialize: (
-          connector_payment_methods: ::Hash[Symbol, Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::ConnectorPaymentMethod],
           payment_method: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::payment_method,
           payment_method_id: String,
-          profile_map: ::Hash[Symbol, String],
           ?card: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::Card?,
           ?last_used_at: Time?,
+          ?payment_method_type: Dodopayments::Models::payment_method_types?,
           ?recurring_enabled: bool?
         ) -> void
 
         def to_hash: -> {
-          connector_payment_methods: ::Hash[Symbol, Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::ConnectorPaymentMethod],
           payment_method: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::payment_method,
           payment_method_id: String,
-          profile_map: ::Hash[Symbol, String],
           card: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::Card?,
           last_used_at: Time?,
+          payment_method_type: Dodopayments::Models::payment_method_types?,
           recurring_enabled: bool?
         }
-
-        type connector_payment_method =
-          {
-            connector_mandate_id: String,
-            original_payment_authorized_amount: Integer,
-            original_payment_authorized_currency: Dodopayments::Models::currency,
-            payment_method_type: Dodopayments::Models::payment_method_types?
-          }
-
-        class ConnectorPaymentMethod < Dodopayments::Internal::Type::BaseModel
-          attr_accessor connector_mandate_id: String
-
-          attr_accessor original_payment_authorized_amount: Integer
-
-          attr_accessor original_payment_authorized_currency: Dodopayments::Models::currency
-
-          attr_accessor payment_method_type: Dodopayments::Models::payment_method_types?
-
-          def initialize: (
-            connector_mandate_id: String,
-            original_payment_authorized_amount: Integer,
-            original_payment_authorized_currency: Dodopayments::Models::currency,
-            ?payment_method_type: Dodopayments::Models::payment_method_types?
-          ) -> void
-
-          def to_hash: -> {
-            connector_mandate_id: String,
-            original_payment_authorized_amount: Integer,
-            original_payment_authorized_currency: Dodopayments::Models::currency,
-            payment_method_type: Dodopayments::Models::payment_method_types?
-          }
-        end
 
         type payment_method =
           :card
