@@ -53,16 +53,6 @@ module Dodopayments
             )
           end
 
-        sig do
-          returns(
-            T::Hash[
-              Symbol,
-              Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::ConnectorPaymentMethod
-            ]
-          )
-        end
-        attr_accessor :connector_payment_methods
-
         # PaymentMethod enum from hyperswitch
         #
         # https://github.com/juspay/hyperswitch/blob/ecd05d53c99ae701ac94893ec632a3988afe3238/crates/common_enums/src/enums.rs#L2097
@@ -75,9 +65,6 @@ module Dodopayments
 
         sig { returns(String) }
         attr_accessor :payment_method_id
-
-        sig { returns(T::Hash[Symbol, String]) }
-        attr_accessor :profile_map
 
         sig do
           returns(
@@ -101,38 +88,38 @@ module Dodopayments
         sig { returns(T.nilable(Time)) }
         attr_accessor :last_used_at
 
+        sig do
+          returns(T.nilable(Dodopayments::PaymentMethodTypes::TaggedSymbol))
+        end
+        attr_accessor :payment_method_type
+
         sig { returns(T.nilable(T::Boolean)) }
         attr_accessor :recurring_enabled
 
         sig do
           params(
-            connector_payment_methods:
-              T::Hash[
-                Symbol,
-                Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::ConnectorPaymentMethod::OrHash
-              ],
             payment_method:
               Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::PaymentMethod::OrSymbol,
             payment_method_id: String,
-            profile_map: T::Hash[Symbol, String],
             card:
               T.nilable(
                 Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::Card::OrHash
               ),
             last_used_at: T.nilable(Time),
+            payment_method_type:
+              T.nilable(Dodopayments::PaymentMethodTypes::OrSymbol),
             recurring_enabled: T.nilable(T::Boolean)
           ).returns(T.attached_class)
         end
         def self.new(
-          connector_payment_methods:,
           # PaymentMethod enum from hyperswitch
           #
           # https://github.com/juspay/hyperswitch/blob/ecd05d53c99ae701ac94893ec632a3988afe3238/crates/common_enums/src/enums.rs#L2097
           payment_method:,
           payment_method_id:,
-          profile_map:,
           card: nil,
           last_used_at: nil,
+          payment_method_type: nil,
           recurring_enabled: nil
         )
         end
@@ -140,82 +127,21 @@ module Dodopayments
         sig do
           override.returns(
             {
-              connector_payment_methods:
-                T::Hash[
-                  Symbol,
-                  Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::ConnectorPaymentMethod
-                ],
               payment_method:
                 Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::PaymentMethod::TaggedSymbol,
               payment_method_id: String,
-              profile_map: T::Hash[Symbol, String],
               card:
                 T.nilable(
                   Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::Card
                 ),
               last_used_at: T.nilable(Time),
+              payment_method_type:
+                T.nilable(Dodopayments::PaymentMethodTypes::TaggedSymbol),
               recurring_enabled: T.nilable(T::Boolean)
             }
           )
         end
         def to_hash
-        end
-
-        class ConnectorPaymentMethod < Dodopayments::Internal::Type::BaseModel
-          OrHash =
-            T.type_alias do
-              T.any(
-                Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::ConnectorPaymentMethod,
-                Dodopayments::Internal::AnyHash
-              )
-            end
-
-          sig { returns(String) }
-          attr_accessor :connector_mandate_id
-
-          sig { returns(Integer) }
-          attr_accessor :original_payment_authorized_amount
-
-          sig { returns(Dodopayments::Currency::TaggedSymbol) }
-          attr_accessor :original_payment_authorized_currency
-
-          sig do
-            returns(T.nilable(Dodopayments::PaymentMethodTypes::TaggedSymbol))
-          end
-          attr_accessor :payment_method_type
-
-          sig do
-            params(
-              connector_mandate_id: String,
-              original_payment_authorized_amount: Integer,
-              original_payment_authorized_currency:
-                Dodopayments::Currency::OrSymbol,
-              payment_method_type:
-                T.nilable(Dodopayments::PaymentMethodTypes::OrSymbol)
-            ).returns(T.attached_class)
-          end
-          def self.new(
-            connector_mandate_id:,
-            original_payment_authorized_amount:,
-            original_payment_authorized_currency:,
-            payment_method_type: nil
-          )
-          end
-
-          sig do
-            override.returns(
-              {
-                connector_mandate_id: String,
-                original_payment_authorized_amount: Integer,
-                original_payment_authorized_currency:
-                  Dodopayments::Currency::TaggedSymbol,
-                payment_method_type:
-                  T.nilable(Dodopayments::PaymentMethodTypes::TaggedSymbol)
-              }
-            )
-          end
-          def to_hash
-          end
         end
 
         # PaymentMethod enum from hyperswitch
