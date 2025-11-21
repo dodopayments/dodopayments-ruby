@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.61.6 (2025-11-21)
+
+Full Changelog: [v1.61.5...v1.61.6](https://github.com/dodopayments/dodopayments-ruby/compare/v1.61.5...v1.61.6)
+
+### Chores
+
+* explicitly require "base64" gem ([0463bca](https://github.com/dodopayments/dodopayments-ruby/commit/0463bcabdf87e5e3e853c9322ab84592db77d352))
+
 ## 1.61.5 (2025-11-17)
 
 Full Changelog: [v1.60.0...v1.61.5](https://github.com/dodopayments/dodopayments-ruby/compare/v1.60.0...v1.61.5)
