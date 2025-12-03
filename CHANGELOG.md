@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.61.7 (2025-12-03)
+
+Full Changelog: [v1.61.6...v1.61.7](https://github.com/dodopayments/dodopayments-ruby/compare/v1.61.6...v1.61.7)
+
+### Chores
+
+* **internal:** codegen related update ([bb2f57b](https://github.com/dodopayments/dodopayments-ruby/commit/bb2f57bef749534bcbe159f2e5bf351510c7c4f7))
+
 ## 1.61.6 (2025-11-21)
 
 Full Changelog: [v1.61.5...v1.61.6](https://github.com/dodopayments/dodopayments-ruby/compare/v1.61.5...v1.61.6)
