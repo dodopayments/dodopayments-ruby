@@ -2,38 +2,38 @@ module Dodopayments
   module Models
     type billing_address =
       {
-        city: String,
         country: Dodopayments::Models::country_code,
-        state: String,
-        street: String,
-        zipcode: String
+        city: String?,
+        state: String?,
+        street: String?,
+        zipcode: String?
       }
 
     class BillingAddress < Dodopayments::Internal::Type::BaseModel
-      attr_accessor city: String
-
       attr_accessor country: Dodopayments::Models::country_code
 
-      attr_accessor state: String
+      attr_accessor city: String?
 
-      attr_accessor street: String
+      attr_accessor state: String?
 
-      attr_accessor zipcode: String
+      attr_accessor street: String?
+
+      attr_accessor zipcode: String?
 
       def initialize: (
-        city: String,
         country: Dodopayments::Models::country_code,
-        state: String,
-        street: String,
-        zipcode: String
+        ?city: String?,
+        ?state: String?,
+        ?street: String?,
+        ?zipcode: String?
       ) -> void
 
       def to_hash: -> {
-        city: String,
         country: Dodopayments::Models::country_code,
-        state: String,
-        street: String,
-        zipcode: String
+        city: String?,
+        state: String?,
+        street: String?,
+        zipcode: String?
       }
     end
   end

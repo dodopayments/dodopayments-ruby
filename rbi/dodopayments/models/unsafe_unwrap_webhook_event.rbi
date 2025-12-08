@@ -28,7 +28,8 @@ module Dodopayments
             Dodopayments::SubscriptionFailedWebhookEvent,
             Dodopayments::SubscriptionOnHoldWebhookEvent,
             Dodopayments::SubscriptionPlanChangedWebhookEvent,
-            Dodopayments::SubscriptionRenewedWebhookEvent
+            Dodopayments::SubscriptionRenewedWebhookEvent,
+            Dodopayments::SubscriptionUpdatedWebhookEvent
           )
         end
 

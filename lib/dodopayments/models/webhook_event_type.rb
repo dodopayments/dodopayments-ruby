@@ -26,6 +26,7 @@ module Dodopayments
       SUBSCRIPTION_FAILED = :"subscription.failed"
       SUBSCRIPTION_EXPIRED = :"subscription.expired"
       SUBSCRIPTION_PLAN_CHANGED = :"subscription.plan_changed"
+      SUBSCRIPTION_UPDATED = :"subscription.updated"
       LICENSE_KEY_CREATED = :"license_key.created"
 
       # @!method self.values

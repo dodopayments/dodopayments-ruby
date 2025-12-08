@@ -1,0 +1,356 @@
+module Dodopayments
+  module Models
+    type subscription_preview_change_plan_response =
+      {
+        immediate_charge: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge,
+        new_plan: Dodopayments::Subscription
+      }
+
+    class SubscriptionPreviewChangePlanResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor immediate_charge: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge
+
+      attr_accessor new_plan: Dodopayments::Subscription
+
+      def initialize: (
+        immediate_charge: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge,
+        new_plan: Dodopayments::Subscription
+      ) -> void
+
+      def to_hash: -> {
+        immediate_charge: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge,
+        new_plan: Dodopayments::Subscription
+      }
+
+      type immediate_charge =
+        {
+          line_items: ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::line_item],
+          summary: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::Summary
+        }
+
+      class ImmediateCharge < Dodopayments::Internal::Type::BaseModel
+        attr_accessor line_items: ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::line_item]
+
+        attr_accessor summary: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::Summary
+
+        def initialize: (
+          line_items: ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::line_item],
+          summary: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::Summary
+        ) -> void
+
+        def to_hash: -> {
+          line_items: ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::line_item],
+          summary: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::Summary
+        }
+
+        type line_item =
+          Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0
+          | Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1
+          | Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2
+
+        module LineItem
+          extend Dodopayments::Internal::Type::Union
+
+          type union_member0 =
+            {
+              id: String,
+              currency: Dodopayments::Models::currency,
+              product_id: String,
+              proration_factor: Float,
+              quantity: Integer,
+              tax_inclusive: bool,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::type_,
+              unit_price: Integer,
+              description: String?,
+              name: String?,
+              tax: Integer?,
+              tax_rate: Float?
+            }
+
+          class UnionMember0 < Dodopayments::Internal::Type::BaseModel
+            attr_accessor id: String
+
+            attr_accessor currency: Dodopayments::Models::currency
+
+            attr_accessor product_id: String
+
+            attr_accessor proration_factor: Float
+
+            attr_accessor quantity: Integer
+
+            attr_accessor tax_inclusive: bool
+
+            attr_accessor type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::type_
+
+            attr_accessor unit_price: Integer
+
+            attr_accessor description: String?
+
+            attr_accessor name: String?
+
+            attr_accessor tax: Integer?
+
+            attr_accessor tax_rate: Float?
+
+            def initialize: (
+              id: String,
+              currency: Dodopayments::Models::currency,
+              product_id: String,
+              proration_factor: Float,
+              quantity: Integer,
+              tax_inclusive: bool,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::type_,
+              unit_price: Integer,
+              ?description: String?,
+              ?name: String?,
+              ?tax: Integer?,
+              ?tax_rate: Float?
+            ) -> void
+
+            def to_hash: -> {
+              id: String,
+              currency: Dodopayments::Models::currency,
+              product_id: String,
+              proration_factor: Float,
+              quantity: Integer,
+              tax_inclusive: bool,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::type_,
+              unit_price: Integer,
+              description: String?,
+              name: String?,
+              tax: Integer?,
+              tax_rate: Float?
+            }
+
+            type type_ = :subscription
+
+            module Type
+              extend Dodopayments::Internal::Type::Enum
+
+              SUBSCRIPTION: :subscription
+
+              def self?.values: -> ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::type_]
+            end
+          end
+
+          type union_member1 =
+            {
+              id: String,
+              currency: Dodopayments::Models::currency,
+              name: String,
+              proration_factor: Float,
+              quantity: Integer,
+              tax_category: Dodopayments::Models::tax_category,
+              tax_inclusive: bool,
+              tax_rate: Float,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::type_,
+              unit_price: Integer,
+              description: String?,
+              tax: Integer?
+            }
+
+          class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+            attr_accessor id: String
+
+            attr_accessor currency: Dodopayments::Models::currency
+
+            attr_accessor name: String
+
+            attr_accessor proration_factor: Float
+
+            attr_accessor quantity: Integer
+
+            attr_accessor tax_category: Dodopayments::Models::tax_category
+
+            attr_accessor tax_inclusive: bool
+
+            attr_accessor tax_rate: Float
+
+            attr_accessor type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::type_
+
+            attr_accessor unit_price: Integer
+
+            attr_accessor description: String?
+
+            attr_accessor tax: Integer?
+
+            def initialize: (
+              id: String,
+              currency: Dodopayments::Models::currency,
+              name: String,
+              proration_factor: Float,
+              quantity: Integer,
+              tax_category: Dodopayments::Models::tax_category,
+              tax_inclusive: bool,
+              tax_rate: Float,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::type_,
+              unit_price: Integer,
+              ?description: String?,
+              ?tax: Integer?
+            ) -> void
+
+            def to_hash: -> {
+              id: String,
+              currency: Dodopayments::Models::currency,
+              name: String,
+              proration_factor: Float,
+              quantity: Integer,
+              tax_category: Dodopayments::Models::tax_category,
+              tax_inclusive: bool,
+              tax_rate: Float,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::type_,
+              unit_price: Integer,
+              description: String?,
+              tax: Integer?
+            }
+
+            type type_ = :addon
+
+            module Type
+              extend Dodopayments::Internal::Type::Enum
+
+              ADDON: :addon
+
+              def self?.values: -> ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::type_]
+            end
+          end
+
+          type union_member2 =
+            {
+              id: String,
+              chargeable_units: String,
+              currency: Dodopayments::Models::currency,
+              free_threshold: Integer,
+              name: String,
+              price_per_unit: String,
+              subtotal: Integer,
+              tax_inclusive: bool,
+              tax_rate: Float,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::type_,
+              units_consumed: String,
+              description: String?,
+              tax: Integer?
+            }
+
+          class UnionMember2 < Dodopayments::Internal::Type::BaseModel
+            attr_accessor id: String
+
+            attr_accessor chargeable_units: String
+
+            attr_accessor currency: Dodopayments::Models::currency
+
+            attr_accessor free_threshold: Integer
+
+            attr_accessor name: String
+
+            attr_accessor price_per_unit: String
+
+            attr_accessor subtotal: Integer
+
+            attr_accessor tax_inclusive: bool
+
+            attr_accessor tax_rate: Float
+
+            attr_accessor type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::type_
+
+            attr_accessor units_consumed: String
+
+            attr_accessor description: String?
+
+            attr_accessor tax: Integer?
+
+            def initialize: (
+              id: String,
+              chargeable_units: String,
+              currency: Dodopayments::Models::currency,
+              free_threshold: Integer,
+              name: String,
+              price_per_unit: String,
+              subtotal: Integer,
+              tax_inclusive: bool,
+              tax_rate: Float,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::type_,
+              units_consumed: String,
+              ?description: String?,
+              ?tax: Integer?
+            ) -> void
+
+            def to_hash: -> {
+              id: String,
+              chargeable_units: String,
+              currency: Dodopayments::Models::currency,
+              free_threshold: Integer,
+              name: String,
+              price_per_unit: String,
+              subtotal: Integer,
+              tax_inclusive: bool,
+              tax_rate: Float,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::type_,
+              units_consumed: String,
+              description: String?,
+              tax: Integer?
+            }
+
+            type type_ = :meter
+
+            module Type
+              extend Dodopayments::Internal::Type::Enum
+
+              METER: :meter
+
+              def self?.values: -> ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::type_]
+            end
+          end
+
+          def self?.variants: -> ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::line_item]
+        end
+
+        type summary =
+          {
+            currency: Dodopayments::Models::currency,
+            customer_credits: Integer,
+            settlement_amount: Integer,
+            settlement_currency: Dodopayments::Models::currency,
+            total_amount: Integer,
+            settlement_tax: Integer?,
+            tax: Integer?
+          }
+
+        class Summary < Dodopayments::Internal::Type::BaseModel
+          attr_accessor currency: Dodopayments::Models::currency
+
+          attr_accessor customer_credits: Integer
+
+          attr_accessor settlement_amount: Integer
+
+          attr_accessor settlement_currency: Dodopayments::Models::currency
+
+          attr_accessor total_amount: Integer
+
+          attr_accessor settlement_tax: Integer?
+
+          attr_accessor tax: Integer?
+
+          def initialize: (
+            currency: Dodopayments::Models::currency,
+            customer_credits: Integer,
+            settlement_amount: Integer,
+            settlement_currency: Dodopayments::Models::currency,
+            total_amount: Integer,
+            ?settlement_tax: Integer?,
+            ?tax: Integer?
+          ) -> void
+
+          def to_hash: -> {
+            currency: Dodopayments::Models::currency,
+            customer_credits: Integer,
+            settlement_amount: Integer,
+            settlement_currency: Dodopayments::Models::currency,
+            total_amount: Integer,
+            settlement_tax: Integer?,
+            tax: Integer?
+          }
+        end
+      end
+    end
+  end
+end

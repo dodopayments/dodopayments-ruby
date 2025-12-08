@@ -29,6 +29,7 @@ module Dodopayments
             Dodopayments::CheckoutSessionRequest::FeatureFlags::OrHash,
           force_3ds: T.nilable(T::Boolean),
           metadata: T.nilable(T::Hash[Symbol, String]),
+          minimal_address: T::Boolean,
           return_url: T.nilable(String),
           show_saved_payment_methods: T::Boolean,
           subscription_data:
@@ -65,6 +66,9 @@ module Dodopayments
         # Additional metadata associated with the payment. Defaults to empty if not
         # provided.
         metadata: nil,
+        # If true, only zipcode is required when confirm is true; other address fields
+        # remain optional
+        minimal_address: nil,
         # The url to redirect after payment failure or success.
         return_url: nil,
         # Display saved payment methods of a returning customer False by default

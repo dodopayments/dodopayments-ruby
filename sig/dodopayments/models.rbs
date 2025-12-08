@@ -247,6 +247,8 @@ module Dodopayments
 
   class SubscriptionPlanChangedWebhookEvent = Dodopayments::Models::SubscriptionPlanChangedWebhookEvent
 
+  class SubscriptionPreviewChangePlanParams = Dodopayments::Models::SubscriptionPreviewChangePlanParams
+
   class SubscriptionRenewedWebhookEvent = Dodopayments::Models::SubscriptionRenewedWebhookEvent
 
   class SubscriptionRetrieveParams = Dodopayments::Models::SubscriptionRetrieveParams
@@ -254,6 +256,8 @@ module Dodopayments
   class SubscriptionRetrieveUsageHistoryParams = Dodopayments::Models::SubscriptionRetrieveUsageHistoryParams
 
   module SubscriptionStatus = Dodopayments::Models::SubscriptionStatus
+
+  class SubscriptionUpdatedWebhookEvent = Dodopayments::Models::SubscriptionUpdatedWebhookEvent
 
   class SubscriptionUpdateParams = Dodopayments::Models::SubscriptionUpdateParams
 

@@ -70,6 +70,15 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::SubscriptionChargeResponse
 
+      def preview_change_plan: (
+        String subscription_id,
+        product_id: String,
+        proration_billing_mode: Dodopayments::Models::SubscriptionPreviewChangePlanParams::proration_billing_mode,
+        quantity: Integer,
+        ?addons: ::Array[Dodopayments::AttachAddon]?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::SubscriptionPreviewChangePlanResponse
+
       def retrieve_usage_history: (
         String subscription_id,
         ?end_date: Time?,
