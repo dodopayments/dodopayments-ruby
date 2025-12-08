@@ -107,6 +107,14 @@ module Dodopayments
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_accessor :metadata
 
+      # If true, only zipcode is required when confirm is true; other address fields
+      # remain optional
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :minimal_address
+
+      sig { params(minimal_address: T::Boolean).void }
+      attr_writer :minimal_address
+
       # The url to redirect after payment failure or success.
       sig { returns(T.nilable(String)) }
       attr_accessor :return_url
@@ -161,6 +169,7 @@ module Dodopayments
             Dodopayments::CheckoutSessionRequest::FeatureFlags::OrHash,
           force_3ds: T.nilable(T::Boolean),
           metadata: T.nilable(T::Hash[Symbol, String]),
+          minimal_address: T::Boolean,
           return_url: T.nilable(String),
           show_saved_payment_methods: T::Boolean,
           subscription_data:
@@ -196,6 +205,9 @@ module Dodopayments
         # Additional metadata associated with the payment. Defaults to empty if not
         # provided.
         metadata: nil,
+        # If true, only zipcode is required when confirm is true; other address fields
+        # remain optional
+        minimal_address: nil,
         # The url to redirect after payment failure or success.
         return_url: nil,
         # Display saved payment methods of a returning customer False by default
@@ -227,6 +239,7 @@ module Dodopayments
             feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
             force_3ds: T.nilable(T::Boolean),
             metadata: T.nilable(T::Hash[Symbol, String]),
+            minimal_address: T::Boolean,
             return_url: T.nilable(String),
             show_saved_payment_methods: T::Boolean,
             subscription_data:

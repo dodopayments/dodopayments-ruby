@@ -69,7 +69,8 @@ module Dodopayments
       | Dodopayments::SubscriptionFailedWebhookEvent
       | Dodopayments::SubscriptionOnHoldWebhookEvent
       | Dodopayments::SubscriptionPlanChangedWebhookEvent
-      | Dodopayments::SubscriptionRenewedWebhookEvent)
+      | Dodopayments::SubscriptionRenewedWebhookEvent
+      | Dodopayments::SubscriptionUpdatedWebhookEvent)
 
       def unwrap: (
         String payload
@@ -93,7 +94,8 @@ module Dodopayments
       | Dodopayments::SubscriptionFailedWebhookEvent
       | Dodopayments::SubscriptionOnHoldWebhookEvent
       | Dodopayments::SubscriptionPlanChangedWebhookEvent
-      | Dodopayments::SubscriptionRenewedWebhookEvent)
+      | Dodopayments::SubscriptionRenewedWebhookEvent
+      | Dodopayments::SubscriptionUpdatedWebhookEvent)
 
       def initialize: (client: Dodopayments::Client) -> void
     end

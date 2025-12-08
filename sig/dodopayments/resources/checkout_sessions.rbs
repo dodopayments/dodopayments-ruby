@@ -13,6 +13,7 @@ module Dodopayments
         ?feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
         ?force_3ds: bool?,
         ?metadata: ::Hash[Symbol, String]?,
+        ?minimal_address: bool,
         ?return_url: String?,
         ?show_saved_payment_methods: bool,
         ?subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?,

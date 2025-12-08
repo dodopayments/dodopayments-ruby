@@ -8,57 +8,57 @@ module Dodopayments
           T.any(Dodopayments::BillingAddress, Dodopayments::Internal::AnyHash)
         end
 
-      # City name
-      sig { returns(String) }
-      attr_accessor :city
-
       # Two-letter ISO country code (ISO 3166-1 alpha-2)
       sig { returns(Dodopayments::CountryCode::OrSymbol) }
       attr_accessor :country
 
+      # City name
+      sig { returns(T.nilable(String)) }
+      attr_accessor :city
+
       # State or province name
-      sig { returns(String) }
+      sig { returns(T.nilable(String)) }
       attr_accessor :state
 
       # Street address including house number and unit/apartment if applicable
-      sig { returns(String) }
+      sig { returns(T.nilable(String)) }
       attr_accessor :street
 
       # Postal code or ZIP code
-      sig { returns(String) }
+      sig { returns(T.nilable(String)) }
       attr_accessor :zipcode
 
       sig do
         params(
-          city: String,
           country: Dodopayments::CountryCode::OrSymbol,
-          state: String,
-          street: String,
-          zipcode: String
+          city: T.nilable(String),
+          state: T.nilable(String),
+          street: T.nilable(String),
+          zipcode: T.nilable(String)
         ).returns(T.attached_class)
       end
       def self.new(
-        # City name
-        city:,
         # Two-letter ISO country code (ISO 3166-1 alpha-2)
         country:,
+        # City name
+        city: nil,
         # State or province name
-        state:,
+        state: nil,
         # Street address including house number and unit/apartment if applicable
-        street:,
+        street: nil,
         # Postal code or ZIP code
-        zipcode:
+        zipcode: nil
       )
       end
 
       sig do
         override.returns(
           {
-            city: String,
             country: Dodopayments::CountryCode::OrSymbol,
-            state: String,
-            street: String,
-            zipcode: String
+            city: T.nilable(String),
+            state: T.nilable(String),
+            street: T.nilable(String),
+            zipcode: T.nilable(String)
           }
         )
       end
