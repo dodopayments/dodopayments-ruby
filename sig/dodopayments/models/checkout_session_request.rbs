@@ -13,6 +13,7 @@ module Dodopayments
         feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
         :force_3ds => bool?,
         metadata: ::Hash[Symbol, String]?,
+        minimal_address: bool,
         return_url: String?,
         show_saved_payment_methods: bool,
         subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?
@@ -51,6 +52,10 @@ module Dodopayments
 
       attr_accessor metadata: ::Hash[Symbol, String]?
 
+      attr_reader minimal_address: bool?
+
+      def minimal_address=: (bool) -> bool
+
       attr_accessor return_url: String?
 
       attr_reader show_saved_payment_methods: bool?
@@ -71,6 +76,7 @@ module Dodopayments
         ?feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
         ?force_3ds: bool?,
         ?metadata: ::Hash[Symbol, String]?,
+        ?minimal_address: bool,
         ?return_url: String?,
         ?show_saved_payment_methods: bool,
         ?subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?
@@ -88,6 +94,7 @@ module Dodopayments
         feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
         :force_3ds => bool?,
         metadata: ::Hash[Symbol, String]?,
+        minimal_address: bool,
         return_url: String?,
         show_saved_payment_methods: bool,
         subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?

@@ -6,7 +6,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
   def test_create_required_params
     response =
       @dodo_payments.payments.create(
-        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
+        billing: {country: :AF},
         customer: {customer_id: "customer_id"},
         product_cart: [{product_id: "product_id", quantity: 0}]
       )

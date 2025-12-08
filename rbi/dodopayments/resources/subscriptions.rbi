@@ -221,6 +221,33 @@ module Dodopayments
       )
       end
 
+      sig do
+        params(
+          subscription_id: String,
+          product_id: String,
+          proration_billing_mode:
+            Dodopayments::SubscriptionPreviewChangePlanParams::ProrationBillingMode::OrSymbol,
+          quantity: Integer,
+          addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Models::SubscriptionPreviewChangePlanResponse)
+      end
+      def preview_change_plan(
+        # Subscription Id
+        subscription_id,
+        # Unique identifier of the product to subscribe to
+        product_id:,
+        # Proration Billing Mode
+        proration_billing_mode:,
+        # Number of units to subscribe for. Must be at least 1.
+        quantity:,
+        # Addons for the new plan. Note : Leaving this empty would remove any existing
+        # addons
+        addons: nil,
+        request_options: {}
+      )
+      end
+
       # Get detailed usage history for a subscription that includes usage-based billing
       # (metered components). This endpoint provides insights into customer usage
       # patterns and billing calculations over time.

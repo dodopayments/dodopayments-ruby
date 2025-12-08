@@ -6,7 +6,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
   def test_create_required_params
     response =
       @dodo_payments.subscriptions.create(
-        billing: {city: "city", country: :AF, state: "state", street: "street", zipcode: "zipcode"},
+        billing: {country: :AF},
         customer: {customer_id: "customer_id"},
         product_id: "product_id",
         quantity: 0
@@ -183,6 +183,27 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
     assert_pattern do
       response => {
         payment_id: String
+      }
+    end
+  end
+
+  def test_preview_change_plan_required_params
+    response =
+      @dodo_payments.subscriptions.preview_change_plan(
+        "subscription_id",
+        product_id: "product_id",
+        proration_billing_mode: :prorated_immediately,
+        quantity: 0
+      )
+
+    assert_pattern do
+      response => Dodopayments::Models::SubscriptionPreviewChangePlanResponse
+    end
+
+    assert_pattern do
+      response => {
+        immediate_charge: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge,
+        new_plan: Dodopayments::Subscription
       }
     end
   end
