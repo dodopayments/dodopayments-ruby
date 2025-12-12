@@ -60,13 +60,21 @@ module Dodopayments
       #   @return [Time, nil]
       optional :expires_on, Time, nil?: true
 
+      # @!attribute one_time_product_cart
+      #   One time products associated with the purchase of subscription
+      #
+      #   @return [Array<Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart>, nil]
+      optional :one_time_product_cart,
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart] },
+               nil?: true
+
       # @!attribute payment_link
       #   URL to checkout page
       #
       #   @return [String, nil]
       optional :payment_link, String, nil?: true
 
-      # @!method initialize(addons:, customer:, metadata:, payment_id:, recurring_pre_tax_amount:, subscription_id:, client_secret: nil, discount_id: nil, expires_on: nil, payment_link: nil)
+      # @!method initialize(addons:, customer:, metadata:, payment_id:, recurring_pre_tax_amount:, subscription_id:, client_secret: nil, discount_id: nil, expires_on: nil, one_time_product_cart: nil, payment_link: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionCreateResponse} for more details.
       #
@@ -88,7 +96,25 @@ module Dodopayments
       #
       #   @param expires_on [Time, nil] Expiry timestamp of the payment link
       #
+      #   @param one_time_product_cart [Array<Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart>, nil] One time products associated with the purchase of subscription
+      #
       #   @param payment_link [String, nil] URL to checkout page
+
+      class OneTimeProductCart < Dodopayments::Internal::Type::BaseModel
+        # @!attribute product_id
+        #
+        #   @return [String]
+        required :product_id, String
+
+        # @!attribute quantity
+        #
+        #   @return [Integer]
+        required :quantity, Integer
+
+        # @!method initialize(product_id:, quantity:)
+        #   @param product_id [String]
+        #   @param quantity [Integer]
+      end
     end
   end
 end

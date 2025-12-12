@@ -97,9 +97,9 @@ module Dodopayments
             line_items:
               T::Array[
                 T.any(
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::OrHash,
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::OrHash,
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::OrHash
+                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::OrHash,
+                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::OrHash,
+                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::OrHash
                 )
               ],
             summary:
@@ -130,17 +130,17 @@ module Dodopayments
           Variants =
             T.type_alias do
               T.any(
-                Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0,
-                Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1,
-                Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2
+                Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription,
+                Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon,
+                Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter
               )
             end
 
-          class UnionMember0 < Dodopayments::Internal::Type::BaseModel
+          class Subscription < Dodopayments::Internal::Type::BaseModel
             OrHash =
               T.type_alias do
                 T.any(
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0,
+                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription,
                   Dodopayments::Internal::AnyHash
                 )
               end
@@ -165,7 +165,7 @@ module Dodopayments
 
             sig do
               returns(
-                Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::Type::TaggedSymbol
+                Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type::TaggedSymbol
               )
             end
             attr_accessor :type
@@ -194,7 +194,7 @@ module Dodopayments
                 quantity: Integer,
                 tax_inclusive: T::Boolean,
                 type:
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::Type::OrSymbol,
+                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type::OrSymbol,
                 unit_price: Integer,
                 description: T.nilable(String),
                 name: T.nilable(String),
@@ -228,7 +228,7 @@ module Dodopayments
                   quantity: Integer,
                   tax_inclusive: T::Boolean,
                   type:
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::Type::TaggedSymbol,
+                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type::TaggedSymbol,
                   unit_price: Integer,
                   description: T.nilable(String),
                   name: T.nilable(String),
@@ -247,7 +247,7 @@ module Dodopayments
                 T.type_alias do
                   T.all(
                     Symbol,
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::Type
+                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type
                   )
                 end
               OrSymbol = T.type_alias { T.any(Symbol, String) }
@@ -255,13 +255,13 @@ module Dodopayments
               SUBSCRIPTION =
                 T.let(
                   :subscription,
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::Type::TaggedSymbol
+                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type::TaggedSymbol
                 )
 
               sig do
                 override.returns(
                   T::Array[
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::Type::TaggedSymbol
+                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type::TaggedSymbol
                   ]
                 )
               end
@@ -270,11 +270,11 @@ module Dodopayments
             end
           end
 
-          class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+          class Addon < Dodopayments::Internal::Type::BaseModel
             OrHash =
               T.type_alias do
                 T.any(
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1,
+                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon,
                   Dodopayments::Internal::AnyHash
                 )
               end
@@ -307,7 +307,7 @@ module Dodopayments
 
             sig do
               returns(
-                Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::Type::TaggedSymbol
+                Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type::TaggedSymbol
               )
             end
             attr_accessor :type
@@ -332,7 +332,7 @@ module Dodopayments
                 tax_inclusive: T::Boolean,
                 tax_rate: Float,
                 type:
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::Type::OrSymbol,
+                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type::OrSymbol,
                 unit_price: Integer,
                 description: T.nilable(String),
                 tax: T.nilable(Integer)
@@ -368,7 +368,7 @@ module Dodopayments
                   tax_inclusive: T::Boolean,
                   tax_rate: Float,
                   type:
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::Type::TaggedSymbol,
+                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type::TaggedSymbol,
                   unit_price: Integer,
                   description: T.nilable(String),
                   tax: T.nilable(Integer)
@@ -385,7 +385,7 @@ module Dodopayments
                 T.type_alias do
                   T.all(
                     Symbol,
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::Type
+                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type
                   )
                 end
               OrSymbol = T.type_alias { T.any(Symbol, String) }
@@ -393,13 +393,13 @@ module Dodopayments
               ADDON =
                 T.let(
                   :addon,
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::Type::TaggedSymbol
+                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type::TaggedSymbol
                 )
 
               sig do
                 override.returns(
                   T::Array[
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::Type::TaggedSymbol
+                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type::TaggedSymbol
                   ]
                 )
               end
@@ -408,11 +408,11 @@ module Dodopayments
             end
           end
 
-          class UnionMember2 < Dodopayments::Internal::Type::BaseModel
+          class Meter < Dodopayments::Internal::Type::BaseModel
             OrHash =
               T.type_alias do
                 T.any(
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2,
+                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter,
                   Dodopayments::Internal::AnyHash
                 )
               end
@@ -446,7 +446,7 @@ module Dodopayments
 
             sig do
               returns(
-                Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::Type::TaggedSymbol
+                Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type::TaggedSymbol
               )
             end
             attr_accessor :type
@@ -472,7 +472,7 @@ module Dodopayments
                 tax_inclusive: T::Boolean,
                 tax_rate: Float,
                 type:
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::Type::OrSymbol,
+                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type::OrSymbol,
                 units_consumed: String,
                 description: T.nilable(String),
                 tax: T.nilable(Integer)
@@ -508,7 +508,7 @@ module Dodopayments
                   tax_inclusive: T::Boolean,
                   tax_rate: Float,
                   type:
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::Type::TaggedSymbol,
+                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type::TaggedSymbol,
                   units_consumed: String,
                   description: T.nilable(String),
                   tax: T.nilable(Integer)
@@ -525,7 +525,7 @@ module Dodopayments
                 T.type_alias do
                   T.all(
                     Symbol,
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::Type
+                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type
                   )
                 end
               OrSymbol = T.type_alias { T.any(Symbol, String) }
@@ -533,13 +533,13 @@ module Dodopayments
               METER =
                 T.let(
                   :meter,
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::Type::TaggedSymbol
+                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type::TaggedSymbol
                 )
 
               sig do
                 override.returns(
                   T::Array[
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::Type::TaggedSymbol
+                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type::TaggedSymbol
                   ]
                 )
               end

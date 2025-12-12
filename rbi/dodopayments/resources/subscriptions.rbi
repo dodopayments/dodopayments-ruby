@@ -21,6 +21,8 @@ module Dodopayments
           force_3ds: T.nilable(T::Boolean),
           metadata: T::Hash[Symbol, String],
           on_demand: T.nilable(Dodopayments::OnDemandSubscription::OrHash),
+          one_time_product_cart:
+            T.nilable(T::Array[Dodopayments::OneTimeProductCartItem::OrHash]),
           payment_link: T.nilable(T::Boolean),
           return_url: T.nilable(String),
           show_saved_payment_methods: T::Boolean,
@@ -57,6 +59,9 @@ module Dodopayments
         # Additional metadata for the subscription Defaults to empty if not specified
         metadata: nil,
         on_demand: nil,
+        # List of one time products that will be bundled with the first payment for this
+        # subscription
+        one_time_product_cart: nil,
         # If true, generates a payment link. Defaults to false if not specified.
         payment_link: nil,
         # Optional URL to redirect after successful subscription creation
