@@ -25,7 +25,7 @@ module Dodopayments
       class ImmediateCharge < Dodopayments::Internal::Type::BaseModel
         # @!attribute line_items
         #
-        #   @return [Array<Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2>]
+        #   @return [Array<Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter>]
         required :line_items,
                  -> { Dodopayments::Internal::Type::ArrayOf[union: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem] }
 
@@ -36,19 +36,19 @@ module Dodopayments
                  -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::Summary }
 
         # @!method initialize(line_items:, summary:)
-        #   @param line_items [Array<Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2>]
+        #   @param line_items [Array<Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter>]
         #   @param summary [Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::Summary]
 
         module LineItem
           extend Dodopayments::Internal::Type::Union
 
-          variant -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0 }
+          variant -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription }
 
-          variant -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1 }
+          variant -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon }
 
-          variant -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2 }
+          variant -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter }
 
-          class UnionMember0 < Dodopayments::Internal::Type::BaseModel
+          class Subscription < Dodopayments::Internal::Type::BaseModel
             # @!attribute id
             #
             #   @return [String]
@@ -81,9 +81,9 @@ module Dodopayments
 
             # @!attribute type
             #
-            #   @return [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::Type]
+            #   @return [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type]
             required :type,
-                     enum: -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::Type }
+                     enum: -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type }
 
             # @!attribute unit_price
             #
@@ -117,14 +117,14 @@ module Dodopayments
             #   @param proration_factor [Float]
             #   @param quantity [Integer]
             #   @param tax_inclusive [Boolean]
-            #   @param type [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::Type]
+            #   @param type [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type]
             #   @param unit_price [Integer]
             #   @param description [String, nil]
             #   @param name [String, nil]
             #   @param tax [Integer, nil]
             #   @param tax_rate [Float, nil]
 
-            # @see Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0#type
+            # @see Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription#type
             module Type
               extend Dodopayments::Internal::Type::Enum
 
@@ -135,7 +135,7 @@ module Dodopayments
             end
           end
 
-          class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+          class Addon < Dodopayments::Internal::Type::BaseModel
             # @!attribute id
             #
             #   @return [String]
@@ -180,9 +180,9 @@ module Dodopayments
 
             # @!attribute type
             #
-            #   @return [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::Type]
+            #   @return [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type]
             required :type,
-                     enum: -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::Type }
+                     enum: -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type }
 
             # @!attribute unit_price
             #
@@ -201,7 +201,7 @@ module Dodopayments
 
             # @!method initialize(id:, currency:, name:, proration_factor:, quantity:, tax_category:, tax_inclusive:, tax_rate:, type:, unit_price:, description: nil, tax: nil)
             #   Some parameter documentations has been truncated, see
-            #   {Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1}
+            #   {Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon}
             #   for more details.
             #
             #   @param id [String]
@@ -220,7 +220,7 @@ module Dodopayments
             #
             #   @param tax_rate [Float]
             #
-            #   @param type [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::Type]
+            #   @param type [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type]
             #
             #   @param unit_price [Integer]
             #
@@ -228,7 +228,7 @@ module Dodopayments
             #
             #   @param tax [Integer, nil]
 
-            # @see Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1#type
+            # @see Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon#type
             module Type
               extend Dodopayments::Internal::Type::Enum
 
@@ -239,7 +239,7 @@ module Dodopayments
             end
           end
 
-          class UnionMember2 < Dodopayments::Internal::Type::BaseModel
+          class Meter < Dodopayments::Internal::Type::BaseModel
             # @!attribute id
             #
             #   @return [String]
@@ -287,9 +287,9 @@ module Dodopayments
 
             # @!attribute type
             #
-            #   @return [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::Type]
+            #   @return [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type]
             required :type,
-                     enum: -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::Type }
+                     enum: -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type }
 
             # @!attribute units_consumed
             #
@@ -316,12 +316,12 @@ module Dodopayments
             #   @param subtotal [Integer]
             #   @param tax_inclusive [Boolean]
             #   @param tax_rate [Float]
-            #   @param type [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::Type]
+            #   @param type [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type]
             #   @param units_consumed [String]
             #   @param description [String, nil]
             #   @param tax [Integer, nil]
 
-            # @see Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2#type
+            # @see Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter#type
             module Type
               extend Dodopayments::Internal::Type::Enum
 
@@ -333,7 +333,7 @@ module Dodopayments
           end
 
           # @!method self.variants
-          #   @return [Array(Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2)]
+          #   @return [Array(Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter)]
         end
 
         # @see Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge#summary

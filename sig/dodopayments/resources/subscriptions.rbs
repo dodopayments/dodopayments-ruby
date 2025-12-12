@@ -13,6 +13,7 @@ module Dodopayments
         ?force_3ds: bool?,
         ?metadata: ::Hash[Symbol, String],
         ?on_demand: Dodopayments::OnDemandSubscription?,
+        ?one_time_product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?,
         ?payment_link: bool?,
         ?return_url: String?,
         ?show_saved_payment_methods: bool,

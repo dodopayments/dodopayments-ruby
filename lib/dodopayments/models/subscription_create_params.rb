@@ -80,6 +80,15 @@ module Dodopayments
       #   @return [Dodopayments::Models::OnDemandSubscription, nil]
       optional :on_demand, -> { Dodopayments::OnDemandSubscription }, nil?: true
 
+      # @!attribute one_time_product_cart
+      #   List of one time products that will be bundled with the first payment for this
+      #   subscription
+      #
+      #   @return [Array<Dodopayments::Models::OneTimeProductCartItem>, nil]
+      optional :one_time_product_cart,
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem] },
+               nil?: true
+
       # @!attribute payment_link
       #   If true, generates a payment link. Defaults to false if not specified.
       #
@@ -112,7 +121,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :trial_period_days, Integer, nil?: true
 
-      # @!method initialize(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, on_demand: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
+      # @!method initialize(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionCreateParams} for more details.
       #
@@ -137,6 +146,8 @@ module Dodopayments
       #   @param metadata [Hash{Symbol=>String}] Additional metadata for the subscription
       #
       #   @param on_demand [Dodopayments::Models::OnDemandSubscription, nil]
+      #
+      #   @param one_time_product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil] List of one time products that will be bundled with the first payment for this s
       #
       #   @param payment_link [Boolean, nil] If true, generates a payment link.
       #

@@ -54,6 +54,18 @@ module Dodopayments
       sig { returns(T.nilable(Time)) }
       attr_accessor :expires_on
 
+      # One time products associated with the purchase of subscription
+      sig do
+        returns(
+          T.nilable(
+            T::Array[
+              Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart
+            ]
+          )
+        )
+      end
+      attr_accessor :one_time_product_cart
+
       # URL to checkout page
       sig { returns(T.nilable(String)) }
       attr_accessor :payment_link
@@ -69,6 +81,12 @@ module Dodopayments
           client_secret: T.nilable(String),
           discount_id: T.nilable(String),
           expires_on: T.nilable(Time),
+          one_time_product_cart:
+            T.nilable(
+              T::Array[
+                Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart::OrHash
+              ]
+            ),
           payment_link: T.nilable(String)
         ).returns(T.attached_class)
       end
@@ -93,6 +111,8 @@ module Dodopayments
         discount_id: nil,
         # Expiry timestamp of the payment link
         expires_on: nil,
+        # One time products associated with the purchase of subscription
+        one_time_product_cart: nil,
         # URL to checkout page
         payment_link: nil
       )
@@ -110,11 +130,45 @@ module Dodopayments
             client_secret: T.nilable(String),
             discount_id: T.nilable(String),
             expires_on: T.nilable(Time),
+            one_time_product_cart:
+              T.nilable(
+                T::Array[
+                  Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart
+                ]
+              ),
             payment_link: T.nilable(String)
           }
         )
       end
       def to_hash
+      end
+
+      class OneTimeProductCart < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        sig { returns(String) }
+        attr_accessor :product_id
+
+        sig { returns(Integer) }
+        attr_accessor :quantity
+
+        sig do
+          params(product_id: String, quantity: Integer).returns(
+            T.attached_class
+          )
+        end
+        def self.new(product_id:, quantity:)
+        end
+
+        sig { override.returns({ product_id: String, quantity: Integer }) }
+        def to_hash
+        end
       end
     end
   end
