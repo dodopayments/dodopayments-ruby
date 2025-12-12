@@ -11,6 +11,7 @@ module Dodopayments
         client_secret: String?,
         discount_id: String?,
         expires_on: Time?,
+        one_time_product_cart: ::Array[Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart]?,
         payment_link: String?
       }
 
@@ -33,6 +34,8 @@ module Dodopayments
 
       attr_accessor expires_on: Time?
 
+      attr_accessor one_time_product_cart: ::Array[Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart]?
+
       attr_accessor payment_link: String?
 
       def initialize: (
@@ -45,6 +48,7 @@ module Dodopayments
         ?client_secret: String?,
         ?discount_id: String?,
         ?expires_on: Time?,
+        ?one_time_product_cart: ::Array[Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart]?,
         ?payment_link: String?
       ) -> void
 
@@ -58,8 +62,21 @@ module Dodopayments
         client_secret: String?,
         discount_id: String?,
         expires_on: Time?,
+        one_time_product_cart: ::Array[Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart]?,
         payment_link: String?
       }
+
+      type one_time_product_cart = { product_id: String, quantity: Integer }
+
+      class OneTimeProductCart < Dodopayments::Internal::Type::BaseModel
+        attr_accessor product_id: String
+
+        attr_accessor quantity: Integer
+
+        def initialize: (product_id: String, quantity: Integer) -> void
+
+        def to_hash: -> { product_id: String, quantity: Integer }
+      end
     end
   end
 end

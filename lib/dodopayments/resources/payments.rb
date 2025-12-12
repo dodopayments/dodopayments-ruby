@@ -3,6 +3,8 @@
 module Dodopayments
   module Resources
     class Payments
+      # @deprecated
+      #
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::PaymentCreateParams} for more details.
       #

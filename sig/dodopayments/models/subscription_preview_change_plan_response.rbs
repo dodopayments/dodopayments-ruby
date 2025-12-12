@@ -43,14 +43,14 @@ module Dodopayments
         }
 
         type line_item =
-          Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0
-          | Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1
-          | Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2
+          Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription
+          | Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon
+          | Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter
 
         module LineItem
           extend Dodopayments::Internal::Type::Union
 
-          type union_member0 =
+          type subscription =
             {
               id: String,
               currency: Dodopayments::Models::currency,
@@ -58,7 +58,7 @@ module Dodopayments
               proration_factor: Float,
               quantity: Integer,
               tax_inclusive: bool,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::type_,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::type_,
               unit_price: Integer,
               description: String?,
               name: String?,
@@ -66,7 +66,7 @@ module Dodopayments
               tax_rate: Float?
             }
 
-          class UnionMember0 < Dodopayments::Internal::Type::BaseModel
+          class Subscription < Dodopayments::Internal::Type::BaseModel
             attr_accessor id: String
 
             attr_accessor currency: Dodopayments::Models::currency
@@ -79,7 +79,7 @@ module Dodopayments
 
             attr_accessor tax_inclusive: bool
 
-            attr_accessor type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::type_
+            attr_accessor type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::type_
 
             attr_accessor unit_price: Integer
 
@@ -98,7 +98,7 @@ module Dodopayments
               proration_factor: Float,
               quantity: Integer,
               tax_inclusive: bool,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::type_,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::type_,
               unit_price: Integer,
               ?description: String?,
               ?name: String?,
@@ -113,7 +113,7 @@ module Dodopayments
               proration_factor: Float,
               quantity: Integer,
               tax_inclusive: bool,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::type_,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::type_,
               unit_price: Integer,
               description: String?,
               name: String?,
@@ -128,11 +128,11 @@ module Dodopayments
 
               SUBSCRIPTION: :subscription
 
-              def self?.values: -> ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember0::type_]
+              def self?.values: -> ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::type_]
             end
           end
 
-          type union_member1 =
+          type addon =
             {
               id: String,
               currency: Dodopayments::Models::currency,
@@ -142,13 +142,13 @@ module Dodopayments
               tax_category: Dodopayments::Models::tax_category,
               tax_inclusive: bool,
               tax_rate: Float,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::type_,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::type_,
               unit_price: Integer,
               description: String?,
               tax: Integer?
             }
 
-          class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+          class Addon < Dodopayments::Internal::Type::BaseModel
             attr_accessor id: String
 
             attr_accessor currency: Dodopayments::Models::currency
@@ -165,7 +165,7 @@ module Dodopayments
 
             attr_accessor tax_rate: Float
 
-            attr_accessor type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::type_
+            attr_accessor type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::type_
 
             attr_accessor unit_price: Integer
 
@@ -182,7 +182,7 @@ module Dodopayments
               tax_category: Dodopayments::Models::tax_category,
               tax_inclusive: bool,
               tax_rate: Float,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::type_,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::type_,
               unit_price: Integer,
               ?description: String?,
               ?tax: Integer?
@@ -197,7 +197,7 @@ module Dodopayments
               tax_category: Dodopayments::Models::tax_category,
               tax_inclusive: bool,
               tax_rate: Float,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::type_,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::type_,
               unit_price: Integer,
               description: String?,
               tax: Integer?
@@ -210,11 +210,11 @@ module Dodopayments
 
               ADDON: :addon
 
-              def self?.values: -> ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember1::type_]
+              def self?.values: -> ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::type_]
             end
           end
 
-          type union_member2 =
+          type meter =
             {
               id: String,
               chargeable_units: String,
@@ -225,13 +225,13 @@ module Dodopayments
               subtotal: Integer,
               tax_inclusive: bool,
               tax_rate: Float,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::type_,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::type_,
               units_consumed: String,
               description: String?,
               tax: Integer?
             }
 
-          class UnionMember2 < Dodopayments::Internal::Type::BaseModel
+          class Meter < Dodopayments::Internal::Type::BaseModel
             attr_accessor id: String
 
             attr_accessor chargeable_units: String
@@ -250,7 +250,7 @@ module Dodopayments
 
             attr_accessor tax_rate: Float
 
-            attr_accessor type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::type_
+            attr_accessor type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::type_
 
             attr_accessor units_consumed: String
 
@@ -268,7 +268,7 @@ module Dodopayments
               subtotal: Integer,
               tax_inclusive: bool,
               tax_rate: Float,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::type_,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::type_,
               units_consumed: String,
               ?description: String?,
               ?tax: Integer?
@@ -284,7 +284,7 @@ module Dodopayments
               subtotal: Integer,
               tax_inclusive: bool,
               tax_rate: Float,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::type_,
+              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::type_,
               units_consumed: String,
               description: String?,
               tax: Integer?
@@ -297,7 +297,7 @@ module Dodopayments
 
               METER: :meter
 
-              def self?.values: -> ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::UnionMember2::type_]
+              def self?.values: -> ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::type_]
             end
           end
 
