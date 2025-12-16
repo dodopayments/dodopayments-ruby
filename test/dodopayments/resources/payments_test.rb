@@ -61,6 +61,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         discount_id: String | nil,
         error_code: String | nil,
         error_message: String | nil,
+        invoice_id: String | nil,
         payment_link: String | nil,
         payment_method: String | nil,
         payment_method_type: String | nil,
