@@ -142,6 +142,12 @@ module Dodopayments
       #   @return [String, nil]
       optional :error_message, String, nil?: true
 
+      # @!attribute invoice_id
+      #   Invoice ID for this payment. Uses India-specific invoice ID if available.
+      #
+      #   @return [String, nil]
+      optional :invoice_id, String, nil?: true
+
       # @!attribute payment_link
       #   Checkout URL
       #
@@ -200,7 +206,7 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, discount_id: nil, error_code: nil, error_message: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, discount_id: nil, error_code: nil, error_message: nil, invoice_id: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
@@ -247,6 +253,8 @@ module Dodopayments
       #   @param error_code [String, nil] An error code if the payment failed
       #
       #   @param error_message [String, nil] An error message if the payment failed
+      #
+      #   @param invoice_id [String, nil] Invoice ID for this payment. Uses India-specific invoice ID if available.
       #
       #   @param payment_link [String, nil] Checkout URL
       #
