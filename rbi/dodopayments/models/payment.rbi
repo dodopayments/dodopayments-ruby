@@ -110,6 +110,10 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :error_message
 
+      # Invoice ID for this payment. Uses India-specific invoice ID if available.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :invoice_id
+
       # Checkout URL
       sig { returns(T.nilable(String)) }
       attr_accessor :payment_link
@@ -172,6 +176,7 @@ module Dodopayments
           discount_id: T.nilable(String),
           error_code: T.nilable(String),
           error_message: T.nilable(String),
+          invoice_id: T.nilable(String),
           payment_link: T.nilable(String),
           payment_method: T.nilable(String),
           payment_method_type: T.nilable(String),
@@ -235,6 +240,8 @@ module Dodopayments
         error_code: nil,
         # An error message if the payment failed
         error_message: nil,
+        # Invoice ID for this payment. Uses India-specific invoice ID if available.
+        invoice_id: nil,
         # Checkout URL
         payment_link: nil,
         # Payment method used by customer (e.g. "card", "bank_transfer")
@@ -284,6 +291,7 @@ module Dodopayments
             discount_id: T.nilable(String),
             error_code: T.nilable(String),
             error_message: T.nilable(String),
+            invoice_id: T.nilable(String),
             payment_link: T.nilable(String),
             payment_method: T.nilable(String),
             payment_method_type: T.nilable(String),
