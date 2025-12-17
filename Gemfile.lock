@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    dodopayments (1.67.0)
+    dodopayments (1.67.1)
       connection_pool
 
 GEM
