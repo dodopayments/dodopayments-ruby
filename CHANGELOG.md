@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.67.1 (2025-12-17)
+
+Full Changelog: [v1.67.0...v1.67.1](https://github.com/dodopayments/dodopayments-ruby/compare/v1.67.0...v1.67.1)
+
+### Bug Fixes
+
+* calling `break` out of streams should be instantaneous ([b0d7935](https://github.com/dodopayments/dodopayments-ruby/commit/b0d79352157047c5fda04b1e5c524c07b5c5516b))
+
 ## 1.67.0 (2025-12-16)
 
 Full Changelog: [v1.66.1...v1.67.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.66.1...v1.67.0)
