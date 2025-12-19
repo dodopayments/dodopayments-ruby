@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.67.2 (2025-12-19)
+
+Full Changelog: [v1.67.1...v1.67.2](https://github.com/dodopayments/dodopayments-ruby/compare/v1.67.1...v1.67.2)
+
+### Bug Fixes
+
+* issue where json.parse errors when receiving HTTP 204 with nobody ([10ab033](https://github.com/dodopayments/dodopayments-ruby/commit/10ab033abb73135f79aef03972ad0c45253b2d83))
+
 ## 1.67.1 (2025-12-17)
 
 Full Changelog: [v1.67.0...v1.67.1](https://github.com/dodopayments/dodopayments-ruby/compare/v1.67.0...v1.67.1)
