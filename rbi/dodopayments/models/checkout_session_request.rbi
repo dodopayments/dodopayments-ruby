@@ -119,6 +119,13 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :return_url
 
+      # If true, returns a shortened checkout URL. Defaults to false if not specified.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :short_link
+
+      sig { params(short_link: T::Boolean).void }
+      attr_writer :short_link
+
       # Display saved payment methods of a returning customer False by default
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :show_saved_payment_methods
@@ -171,6 +178,7 @@ module Dodopayments
           metadata: T.nilable(T::Hash[Symbol, String]),
           minimal_address: T::Boolean,
           return_url: T.nilable(String),
+          short_link: T::Boolean,
           show_saved_payment_methods: T::Boolean,
           subscription_data:
             T.nilable(
@@ -210,6 +218,8 @@ module Dodopayments
         minimal_address: nil,
         # The url to redirect after payment failure or success.
         return_url: nil,
+        # If true, returns a shortened checkout URL. Defaults to false if not specified.
+        short_link: nil,
         # Display saved payment methods of a returning customer False by default
         show_saved_payment_methods: nil,
         subscription_data: nil
@@ -241,6 +251,7 @@ module Dodopayments
             metadata: T.nilable(T::Hash[Symbol, String]),
             minimal_address: T::Boolean,
             return_url: T.nilable(String),
+            short_link: T::Boolean,
             show_saved_payment_methods: T::Boolean,
             subscription_data:
               T.nilable(Dodopayments::CheckoutSessionRequest::SubscriptionData)
@@ -620,6 +631,15 @@ module Dodopayments
         sig { params(always_create_new_customer: T::Boolean).void }
         attr_writer :always_create_new_customer
 
+        # If true, redirects the customer immediately after payment completion
+        #
+        # Default is false
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :redirect_immediately
+
+        sig { params(redirect_immediately: T::Boolean).void }
+        attr_writer :redirect_immediately
+
         sig do
           params(
             allow_currency_selection: T::Boolean,
@@ -633,7 +653,8 @@ module Dodopayments
             allow_discount_code: T::Boolean,
             allow_phone_number_collection: T::Boolean,
             allow_tax_id: T::Boolean,
-            always_create_new_customer: T::Boolean
+            always_create_new_customer: T::Boolean,
+            redirect_immediately: T::Boolean
           ).returns(T.attached_class)
         end
         def self.new(
@@ -664,7 +685,11 @@ module Dodopayments
           # to find an existing customer to attach the session to
           #
           # Default is false
-          always_create_new_customer: nil
+          always_create_new_customer: nil,
+          # If true, redirects the customer immediately after payment completion
+          #
+          # Default is false
+          redirect_immediately: nil
         )
         end
 
@@ -682,7 +707,8 @@ module Dodopayments
               allow_discount_code: T::Boolean,
               allow_phone_number_collection: T::Boolean,
               allow_tax_id: T::Boolean,
-              always_create_new_customer: T::Boolean
+              always_create_new_customer: T::Boolean,
+              redirect_immediately: T::Boolean
             }
           )
         end

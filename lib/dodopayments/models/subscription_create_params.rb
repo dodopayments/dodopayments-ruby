@@ -95,11 +95,24 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :payment_link, Dodopayments::Internal::Type::Boolean, nil?: true
 
+      # @!attribute redirect_immediately
+      #   If true, redirects the customer immediately after payment completion False by
+      #   default
+      #
+      #   @return [Boolean, nil]
+      optional :redirect_immediately, Dodopayments::Internal::Type::Boolean
+
       # @!attribute return_url
       #   Optional URL to redirect after successful subscription creation
       #
       #   @return [String, nil]
       optional :return_url, String, nil?: true
+
+      # @!attribute short_link
+      #   If true, returns a shortened payment link. Defaults to false if not specified.
+      #
+      #   @return [Boolean, nil]
+      optional :short_link, Dodopayments::Internal::Type::Boolean, nil?: true
 
       # @!attribute show_saved_payment_methods
       #   Display saved payment methods of a returning customer False by default
@@ -121,7 +134,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :trial_period_days, Integer, nil?: true
 
-      # @!method initialize(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
+      # @!method initialize(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, redirect_immediately: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionCreateParams} for more details.
       #
@@ -151,7 +164,11 @@ module Dodopayments
       #
       #   @param payment_link [Boolean, nil] If true, generates a payment link.
       #
+      #   @param redirect_immediately [Boolean] If true, redirects the customer immediately after payment completion
+      #
       #   @param return_url [String, nil] Optional URL to redirect after successful subscription creation
+      #
+      #   @param short_link [Boolean, nil] If true, returns a shortened payment link.
       #
       #   @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer
       #

@@ -69,10 +69,22 @@ module Dodopayments
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :payment_link
 
+      # If true, redirects the customer immediately after payment completion False by
+      # default
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :redirect_immediately
+
+      sig { params(redirect_immediately: T::Boolean).void }
+      attr_writer :redirect_immediately
+
       # Optional URL to redirect the customer after payment. Must be a valid URL if
       # provided.
       sig { returns(T.nilable(String)) }
       attr_accessor :return_url
+
+      # If true, returns a shortened payment link. Defaults to false if not specified.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_accessor :short_link
 
       # Display saved payment methods of a returning customer False by default
       sig { returns(T.nilable(T::Boolean)) }
@@ -102,7 +114,9 @@ module Dodopayments
           force_3ds: T.nilable(T::Boolean),
           metadata: T::Hash[Symbol, String],
           payment_link: T.nilable(T::Boolean),
+          redirect_immediately: T::Boolean,
           return_url: T.nilable(String),
+          short_link: T.nilable(T::Boolean),
           show_saved_payment_methods: T::Boolean,
           tax_id: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
@@ -134,9 +148,14 @@ module Dodopayments
         metadata: nil,
         # Whether to generate a payment link. Defaults to false if not specified.
         payment_link: nil,
+        # If true, redirects the customer immediately after payment completion False by
+        # default
+        redirect_immediately: nil,
         # Optional URL to redirect the customer after payment. Must be a valid URL if
         # provided.
         return_url: nil,
+        # If true, returns a shortened payment link. Defaults to false if not specified.
+        short_link: nil,
         # Display saved payment methods of a returning customer False by default
         show_saved_payment_methods: nil,
         # Tax ID in case the payment is B2B. If tax id validation fails the payment
@@ -163,7 +182,9 @@ module Dodopayments
             force_3ds: T.nilable(T::Boolean),
             metadata: T::Hash[Symbol, String],
             payment_link: T.nilable(T::Boolean),
+            redirect_immediately: T::Boolean,
             return_url: T.nilable(String),
+            short_link: T.nilable(T::Boolean),
             show_saved_payment_methods: T::Boolean,
             tax_id: T.nilable(String),
             request_options: Dodopayments::RequestOptions

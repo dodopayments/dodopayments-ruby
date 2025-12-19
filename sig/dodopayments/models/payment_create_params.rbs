@@ -11,7 +11,9 @@ module Dodopayments
         :force_3ds => bool?,
         metadata: ::Hash[Symbol, String],
         payment_link: bool?,
+        redirect_immediately: bool,
         return_url: String?,
+        short_link: bool?,
         show_saved_payment_methods: bool,
         tax_id: String?
       }
@@ -41,7 +43,13 @@ module Dodopayments
 
       attr_accessor payment_link: bool?
 
+      attr_reader redirect_immediately: bool?
+
+      def redirect_immediately=: (bool) -> bool
+
       attr_accessor return_url: String?
+
+      attr_accessor short_link: bool?
 
       attr_reader show_saved_payment_methods: bool?
 
@@ -59,7 +67,9 @@ module Dodopayments
         ?force_3ds: bool?,
         ?metadata: ::Hash[Symbol, String],
         ?payment_link: bool?,
+        ?redirect_immediately: bool,
         ?return_url: String?,
+        ?short_link: bool?,
         ?show_saved_payment_methods: bool,
         ?tax_id: String?,
         ?request_options: Dodopayments::request_opts
@@ -75,7 +85,9 @@ module Dodopayments
         :force_3ds => bool?,
         metadata: ::Hash[Symbol, String],
         payment_link: bool?,
+        redirect_immediately: bool,
         return_url: String?,
+        short_link: bool?,
         show_saved_payment_methods: bool,
         tax_id: String?,
         request_options: Dodopayments::RequestOptions

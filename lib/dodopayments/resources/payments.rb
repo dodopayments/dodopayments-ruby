@@ -8,7 +8,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::PaymentCreateParams} for more details.
       #
-      # @overload create(billing:, customer:, product_cart:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
+      # @overload create(billing:, customer:, product_cart:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, payment_link: nil, redirect_immediately: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
       #
       # @param billing [Dodopayments::Models::BillingAddress] Billing address details for the payment
       #
@@ -28,7 +28,11 @@ module Dodopayments
       #
       # @param payment_link [Boolean, nil] Whether to generate a payment link. Defaults to false if not specified.
       #
+      # @param redirect_immediately [Boolean] If true, redirects the customer immediately after payment completion
+      #
       # @param return_url [String, nil] Optional URL to redirect the customer after payment.
+      #
+      # @param short_link [Boolean, nil] If true, returns a shortened payment link.
       #
       # @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer
       #

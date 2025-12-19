@@ -31,6 +31,7 @@ module Dodopayments
           metadata: T.nilable(T::Hash[Symbol, String]),
           minimal_address: T::Boolean,
           return_url: T.nilable(String),
+          short_link: T::Boolean,
           show_saved_payment_methods: T::Boolean,
           subscription_data:
             T.nilable(
@@ -71,6 +72,8 @@ module Dodopayments
         minimal_address: nil,
         # The url to redirect after payment failure or success.
         return_url: nil,
+        # If true, returns a shortened checkout URL. Defaults to false if not specified.
+        short_link: nil,
         # Display saved payment methods of a returning customer False by default
         show_saved_payment_methods: nil,
         subscription_data: nil,
