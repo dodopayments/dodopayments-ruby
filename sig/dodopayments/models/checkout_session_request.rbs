@@ -15,6 +15,7 @@ module Dodopayments
         metadata: ::Hash[Symbol, String]?,
         minimal_address: bool,
         return_url: String?,
+        short_link: bool,
         show_saved_payment_methods: bool,
         subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?
       }
@@ -58,6 +59,10 @@ module Dodopayments
 
       attr_accessor return_url: String?
 
+      attr_reader short_link: bool?
+
+      def short_link=: (bool) -> bool
+
       attr_reader show_saved_payment_methods: bool?
 
       def show_saved_payment_methods=: (bool) -> bool
@@ -78,6 +83,7 @@ module Dodopayments
         ?metadata: ::Hash[Symbol, String]?,
         ?minimal_address: bool,
         ?return_url: String?,
+        ?short_link: bool,
         ?show_saved_payment_methods: bool,
         ?subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?
       ) -> void
@@ -96,6 +102,7 @@ module Dodopayments
         metadata: ::Hash[Symbol, String]?,
         minimal_address: bool,
         return_url: String?,
+        short_link: bool,
         show_saved_payment_methods: bool,
         subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?
       }
@@ -234,7 +241,8 @@ module Dodopayments
           allow_discount_code: bool,
           allow_phone_number_collection: bool,
           allow_tax_id: bool,
-          always_create_new_customer: bool
+          always_create_new_customer: bool,
+          redirect_immediately: bool
         }
 
       class FeatureFlags < Dodopayments::Internal::Type::BaseModel
@@ -286,6 +294,10 @@ module Dodopayments
 
         def always_create_new_customer=: (bool) -> bool
 
+        attr_reader redirect_immediately: bool?
+
+        def redirect_immediately=: (bool) -> bool
+
         def initialize: (
           ?allow_currency_selection: bool,
           ?allow_customer_editing_city: bool,
@@ -298,7 +310,8 @@ module Dodopayments
           ?allow_discount_code: bool,
           ?allow_phone_number_collection: bool,
           ?allow_tax_id: bool,
-          ?always_create_new_customer: bool
+          ?always_create_new_customer: bool,
+          ?redirect_immediately: bool
         ) -> void
 
         def to_hash: -> {
@@ -313,7 +326,8 @@ module Dodopayments
           allow_discount_code: bool,
           allow_phone_number_collection: bool,
           allow_tax_id: bool,
-          always_create_new_customer: bool
+          always_create_new_customer: bool,
+          redirect_immediately: bool
         }
       end
 

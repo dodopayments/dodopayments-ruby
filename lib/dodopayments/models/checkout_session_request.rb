@@ -89,6 +89,12 @@ module Dodopayments
       #   @return [String, nil]
       optional :return_url, String, nil?: true
 
+      # @!attribute short_link
+      #   If true, returns a shortened checkout URL. Defaults to false if not specified.
+      #
+      #   @return [Boolean, nil]
+      optional :short_link, Dodopayments::Internal::Type::Boolean
+
       # @!attribute show_saved_payment_methods
       #   Display saved payment methods of a returning customer False by default
       #
@@ -100,7 +106,7 @@ module Dodopayments
       #   @return [Dodopayments::Models::CheckoutSessionRequest::SubscriptionData, nil]
       optional :subscription_data, -> { Dodopayments::CheckoutSessionRequest::SubscriptionData }, nil?: true
 
-      # @!method initialize(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, return_url: nil, show_saved_payment_methods: nil, subscription_data: nil)
+      # @!method initialize(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionRequest} for more details.
       #
@@ -129,6 +135,8 @@ module Dodopayments
       #   @param minimal_address [Boolean] If true, only zipcode is required when confirm is true; other address fields rem
       #
       #   @param return_url [String, nil] The url to redirect after payment failure or success.
+      #
+      #   @param short_link [Boolean] If true, returns a shortened checkout URL.
       #
       #   @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer False by default
       #
@@ -364,7 +372,15 @@ module Dodopayments
         #   @return [Boolean, nil]
         optional :always_create_new_customer, Dodopayments::Internal::Type::Boolean
 
-        # @!method initialize(allow_currency_selection: nil, allow_customer_editing_city: nil, allow_customer_editing_country: nil, allow_customer_editing_email: nil, allow_customer_editing_name: nil, allow_customer_editing_state: nil, allow_customer_editing_street: nil, allow_customer_editing_zipcode: nil, allow_discount_code: nil, allow_phone_number_collection: nil, allow_tax_id: nil, always_create_new_customer: nil)
+        # @!attribute redirect_immediately
+        #   If true, redirects the customer immediately after payment completion
+        #
+        #   Default is false
+        #
+        #   @return [Boolean, nil]
+        optional :redirect_immediately, Dodopayments::Internal::Type::Boolean
+
+        # @!method initialize(allow_currency_selection: nil, allow_customer_editing_city: nil, allow_customer_editing_country: nil, allow_customer_editing_email: nil, allow_customer_editing_name: nil, allow_customer_editing_state: nil, allow_customer_editing_street: nil, allow_customer_editing_zipcode: nil, allow_discount_code: nil, allow_phone_number_collection: nil, allow_tax_id: nil, always_create_new_customer: nil, redirect_immediately: nil)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::CheckoutSessionRequest::FeatureFlags} for more details.
         #
@@ -391,6 +407,8 @@ module Dodopayments
         #   @param allow_tax_id [Boolean] If the customer is allowed to add tax id, set it to true
         #
         #   @param always_create_new_customer [Boolean] Set to true if a new customer object should be created.
+        #
+        #   @param redirect_immediately [Boolean] If true, redirects the customer immediately after payment completion
       end
 
       # @see Dodopayments::Models::CheckoutSessionRequest#subscription_data
