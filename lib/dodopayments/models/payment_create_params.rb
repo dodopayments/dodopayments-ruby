@@ -70,12 +70,25 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :payment_link, Dodopayments::Internal::Type::Boolean, nil?: true
 
+      # @!attribute redirect_immediately
+      #   If true, redirects the customer immediately after payment completion False by
+      #   default
+      #
+      #   @return [Boolean, nil]
+      optional :redirect_immediately, Dodopayments::Internal::Type::Boolean
+
       # @!attribute return_url
       #   Optional URL to redirect the customer after payment. Must be a valid URL if
       #   provided.
       #
       #   @return [String, nil]
       optional :return_url, String, nil?: true
+
+      # @!attribute short_link
+      #   If true, returns a shortened payment link. Defaults to false if not specified.
+      #
+      #   @return [Boolean, nil]
+      optional :short_link, Dodopayments::Internal::Type::Boolean, nil?: true
 
       # @!attribute show_saved_payment_methods
       #   Display saved payment methods of a returning customer False by default
@@ -90,7 +103,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(billing:, customer:, product_cart:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, payment_link: nil, return_url: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
+      # @!method initialize(billing:, customer:, product_cart:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, payment_link: nil, redirect_immediately: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::PaymentCreateParams} for more details.
       #
@@ -112,7 +125,11 @@ module Dodopayments
       #
       #   @param payment_link [Boolean, nil] Whether to generate a payment link. Defaults to false if not specified.
       #
+      #   @param redirect_immediately [Boolean] If true, redirects the customer immediately after payment completion
+      #
       #   @param return_url [String, nil] Optional URL to redirect the customer after payment.
+      #
+      #   @param short_link [Boolean, nil] If true, returns a shortened payment link.
       #
       #   @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer
       #
