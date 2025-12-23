@@ -1,0 +1,17 @@
+module Dodopayments
+  module Models
+    module Products
+      type short_link_create_response = { full_url: String, short_url: String }
+
+      class ShortLinkCreateResponse < Dodopayments::Internal::Type::BaseModel
+        attr_accessor full_url: String
+
+        attr_accessor short_url: String
+
+        def initialize: (full_url: String, short_url: String) -> void
+
+        def to_hash: -> { full_url: String, short_url: String }
+      end
+    end
+  end
+end

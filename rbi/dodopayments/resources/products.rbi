@@ -6,6 +6,9 @@ module Dodopayments
       sig { returns(Dodopayments::Resources::Products::Images) }
       attr_reader :images
 
+      sig { returns(Dodopayments::Resources::Products::ShortLinks) }
+      attr_reader :short_links
+
       sig do
         params(
           name: String,

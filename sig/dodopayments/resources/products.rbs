@@ -3,6 +3,8 @@ module Dodopayments
     class Products
       attr_reader images: Dodopayments::Resources::Products::Images
 
+      attr_reader short_links: Dodopayments::Resources::Products::ShortLinks
+
       def create: (
         name: String,
         price: Dodopayments::Models::price,
