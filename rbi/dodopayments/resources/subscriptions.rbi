@@ -24,6 +24,7 @@ module Dodopayments
           one_time_product_cart:
             T.nilable(T::Array[Dodopayments::OneTimeProductCartItem::OrHash]),
           payment_link: T.nilable(T::Boolean),
+          payment_method_id: T.nilable(String),
           redirect_immediately: T::Boolean,
           return_url: T.nilable(String),
           short_link: T.nilable(T::Boolean),
@@ -66,6 +67,10 @@ module Dodopayments
         one_time_product_cart: nil,
         # If true, generates a payment link. Defaults to false if not specified.
         payment_link: nil,
+        # Optional payment method ID to use for this subscription. If provided,
+        # customer_id must also be provided (via AttachExistingCustomer). The payment
+        # method will be validated for eligibility with the subscription's currency.
+        payment_method_id: nil,
         # If true, redirects the customer immediately after payment completion False by
         # default
         redirect_immediately: nil,

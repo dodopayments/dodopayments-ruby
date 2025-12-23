@@ -11,28 +11,32 @@ module Dodopayments
           )
         end
 
-      # Checkout url
-      sig { returns(String) }
-      attr_accessor :checkout_url
-
       # The ID of the created checkout session
       sig { returns(String) }
       attr_accessor :session_id
 
+      # Checkout url (None when payment_method_id is provided)
+      sig { returns(T.nilable(String)) }
+      attr_accessor :checkout_url
+
       sig do
-        params(checkout_url: String, session_id: String).returns(
+        params(session_id: String, checkout_url: T.nilable(String)).returns(
           T.attached_class
         )
       end
       def self.new(
-        # Checkout url
-        checkout_url:,
         # The ID of the created checkout session
-        session_id:
+        session_id:,
+        # Checkout url (None when payment_method_id is provided)
+        checkout_url: nil
       )
       end
 
-      sig { override.returns({ checkout_url: String, session_id: String }) }
+      sig do
+        override.returns(
+          { session_id: String, checkout_url: T.nilable(String) }
+        )
+      end
       def to_hash
       end
     end

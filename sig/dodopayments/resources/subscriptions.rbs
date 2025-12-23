@@ -15,6 +15,7 @@ module Dodopayments
         ?on_demand: Dodopayments::OnDemandSubscription?,
         ?one_time_product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?,
         ?payment_link: bool?,
+        ?payment_method_id: String?,
         ?redirect_immediately: bool,
         ?return_url: String?,
         ?short_link: bool?,

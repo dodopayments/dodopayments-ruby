@@ -30,6 +30,7 @@ module Dodopayments
           force_3ds: T.nilable(T::Boolean),
           metadata: T.nilable(T::Hash[Symbol, String]),
           minimal_address: T::Boolean,
+          payment_method_id: T.nilable(String),
           return_url: T.nilable(String),
           short_link: T::Boolean,
           show_saved_payment_methods: T::Boolean,
@@ -70,6 +71,9 @@ module Dodopayments
         # If true, only zipcode is required when confirm is true; other address fields
         # remain optional
         minimal_address: nil,
+        # Optional payment method ID to use for this checkout session. Only allowed when
+        # `confirm` is true. If provided, existing customer id must also be provided.
+        payment_method_id: nil,
         # The url to redirect after payment failure or success.
         return_url: nil,
         # If true, returns a shortened checkout URL. Defaults to false if not specified.

@@ -6,7 +6,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::CheckoutSessionCreateParams} for more details.
       #
-      # @overload create(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, request_options: {})
+      # @overload create(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, request_options: {})
       #
       # @param product_cart [Array<Dodopayments::Models::CheckoutSessionRequest::ProductCart>]
       #
@@ -31,6 +31,8 @@ module Dodopayments
       # @param metadata [Hash{Symbol=>String}, nil] Additional metadata associated with the payment. Defaults to empty if not provid
       #
       # @param minimal_address [Boolean] If true, only zipcode is required when confirm is true; other address fields rem
+      #
+      # @param payment_method_id [String, nil] Optional payment method ID to use for this checkout session.
       #
       # @param return_url [String, nil] The url to redirect after payment failure or success.
       #

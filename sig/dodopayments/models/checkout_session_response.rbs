@@ -1,16 +1,16 @@
 module Dodopayments
   module Models
     type checkout_session_response =
-      { checkout_url: String, session_id: String }
+      { session_id: String, checkout_url: String? }
 
     class CheckoutSessionResponse < Dodopayments::Internal::Type::BaseModel
-      attr_accessor checkout_url: String
-
       attr_accessor session_id: String
 
-      def initialize: (checkout_url: String, session_id: String) -> void
+      attr_accessor checkout_url: String?
 
-      def to_hash: -> { checkout_url: String, session_id: String }
+      def initialize: (session_id: String, ?checkout_url: String?) -> void
+
+      def to_hash: -> { session_id: String, checkout_url: String? }
     end
   end
 end

@@ -69,6 +69,12 @@ module Dodopayments
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :payment_link
 
+      # Optional payment method ID to use for this payment. If provided, customer_id
+      # must also be provided. The payment method will be validated for eligibility with
+      # the payment's currency.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :payment_method_id
+
       # If true, redirects the customer immediately after payment completion False by
       # default
       sig { returns(T.nilable(T::Boolean)) }
@@ -114,6 +120,7 @@ module Dodopayments
           force_3ds: T.nilable(T::Boolean),
           metadata: T::Hash[Symbol, String],
           payment_link: T.nilable(T::Boolean),
+          payment_method_id: T.nilable(String),
           redirect_immediately: T::Boolean,
           return_url: T.nilable(String),
           short_link: T.nilable(T::Boolean),
@@ -148,6 +155,10 @@ module Dodopayments
         metadata: nil,
         # Whether to generate a payment link. Defaults to false if not specified.
         payment_link: nil,
+        # Optional payment method ID to use for this payment. If provided, customer_id
+        # must also be provided. The payment method will be validated for eligibility with
+        # the payment's currency.
+        payment_method_id: nil,
         # If true, redirects the customer immediately after payment completion False by
         # default
         redirect_immediately: nil,
@@ -182,6 +193,7 @@ module Dodopayments
             force_3ds: T.nilable(T::Boolean),
             metadata: T::Hash[Symbol, String],
             payment_link: T.nilable(T::Boolean),
+            payment_method_id: T.nilable(String),
             redirect_immediately: T::Boolean,
             return_url: T.nilable(String),
             short_link: T.nilable(T::Boolean),
