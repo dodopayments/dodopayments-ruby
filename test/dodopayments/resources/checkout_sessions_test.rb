@@ -13,8 +13,8 @@ class Dodopayments::Test::Resources::CheckoutSessionsTest < Dodopayments::Test::
 
     assert_pattern do
       response => {
-        checkout_url: String,
-        session_id: String
+        session_id: String,
+        checkout_url: String | nil
       }
     end
   end
