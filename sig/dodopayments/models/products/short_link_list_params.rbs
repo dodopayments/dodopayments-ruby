@@ -1,0 +1,40 @@
+module Dodopayments
+  module Models
+    module Products
+      type short_link_list_params =
+        { page_number: Integer, page_size: Integer, product_id: String }
+        & Dodopayments::Internal::Type::request_parameters
+
+      class ShortLinkListParams < Dodopayments::Internal::Type::BaseModel
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
+
+        attr_reader page_number: Integer?
+
+        def page_number=: (Integer) -> Integer
+
+        attr_reader page_size: Integer?
+
+        def page_size=: (Integer) -> Integer
+
+        attr_reader product_id: String?
+
+        def product_id=: (String) -> String
+
+        def initialize: (
+          ?page_number: Integer,
+          ?page_size: Integer,
+          ?product_id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          page_number: Integer,
+          page_size: Integer,
+          product_id: String,
+          request_options: Dodopayments::RequestOptions
+        }
+      end
+    end
+  end
+end

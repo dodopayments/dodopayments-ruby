@@ -1,0 +1,30 @@
+module Dodopayments
+  module Models
+    module Products
+      type short_link_create_params =
+        { slug: String, static_checkout_params: ::Hash[Symbol, String]? }
+        & Dodopayments::Internal::Type::request_parameters
+
+      class ShortLinkCreateParams < Dodopayments::Internal::Type::BaseModel
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
+
+        attr_accessor slug: String
+
+        attr_accessor static_checkout_params: ::Hash[Symbol, String]?
+
+        def initialize: (
+          slug: String,
+          ?static_checkout_params: ::Hash[Symbol, String]?,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          slug: String,
+          static_checkout_params: ::Hash[Symbol, String]?,
+          request_options: Dodopayments::RequestOptions
+        }
+      end
+    end
+  end
+end
