@@ -70,6 +70,14 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :payment_link, Dodopayments::Internal::Type::Boolean, nil?: true
 
+      # @!attribute payment_method_id
+      #   Optional payment method ID to use for this payment. If provided, customer_id
+      #   must also be provided. The payment method will be validated for eligibility with
+      #   the payment's currency.
+      #
+      #   @return [String, nil]
+      optional :payment_method_id, String, nil?: true
+
       # @!attribute redirect_immediately
       #   If true, redirects the customer immediately after payment completion False by
       #   default
@@ -103,7 +111,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(billing:, customer:, product_cart:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, payment_link: nil, redirect_immediately: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
+      # @!method initialize(billing:, customer:, product_cart:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::PaymentCreateParams} for more details.
       #
@@ -124,6 +132,8 @@ module Dodopayments
       #   @param metadata [Hash{Symbol=>String}] Additional metadata associated with the payment.
       #
       #   @param payment_link [Boolean, nil] Whether to generate a payment link. Defaults to false if not specified.
+      #
+      #   @param payment_method_id [String, nil] Optional payment method ID to use for this payment.
       #
       #   @param redirect_immediately [Boolean] If true, redirects the customer immediately after payment completion
       #

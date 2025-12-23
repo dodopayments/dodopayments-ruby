@@ -14,6 +14,7 @@ module Dodopayments
         :force_3ds => bool?,
         metadata: ::Hash[Symbol, String]?,
         minimal_address: bool,
+        payment_method_id: String?,
         return_url: String?,
         short_link: bool,
         show_saved_payment_methods: bool,
@@ -57,6 +58,8 @@ module Dodopayments
 
       def minimal_address=: (bool) -> bool
 
+      attr_accessor payment_method_id: String?
+
       attr_accessor return_url: String?
 
       attr_reader short_link: bool?
@@ -82,6 +85,7 @@ module Dodopayments
         ?force_3ds: bool?,
         ?metadata: ::Hash[Symbol, String]?,
         ?minimal_address: bool,
+        ?payment_method_id: String?,
         ?return_url: String?,
         ?short_link: bool,
         ?show_saved_payment_methods: bool,
@@ -101,6 +105,7 @@ module Dodopayments
         :force_3ds => bool?,
         metadata: ::Hash[Symbol, String]?,
         minimal_address: bool,
+        payment_method_id: String?,
         return_url: String?,
         short_link: bool,
         show_saved_payment_methods: bool,

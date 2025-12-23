@@ -95,6 +95,14 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :payment_link, Dodopayments::Internal::Type::Boolean, nil?: true
 
+      # @!attribute payment_method_id
+      #   Optional payment method ID to use for this subscription. If provided,
+      #   customer_id must also be provided (via AttachExistingCustomer). The payment
+      #   method will be validated for eligibility with the subscription's currency.
+      #
+      #   @return [String, nil]
+      optional :payment_method_id, String, nil?: true
+
       # @!attribute redirect_immediately
       #   If true, redirects the customer immediately after payment completion False by
       #   default
@@ -134,7 +142,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :trial_period_days, Integer, nil?: true
 
-      # @!method initialize(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, redirect_immediately: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
+      # @!method initialize(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionCreateParams} for more details.
       #
@@ -163,6 +171,8 @@ module Dodopayments
       #   @param one_time_product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil] List of one time products that will be bundled with the first payment for this s
       #
       #   @param payment_link [Boolean, nil] If true, generates a payment link.
+      #
+      #   @param payment_method_id [String, nil] Optional payment method ID to use for this subscription.
       #
       #   @param redirect_immediately [Boolean] If true, redirects the customer immediately after payment completion
       #

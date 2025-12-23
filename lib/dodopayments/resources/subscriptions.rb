@@ -8,7 +8,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionCreateParams} for more details.
       #
-      # @overload create(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, redirect_immediately: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
+      # @overload create(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
       #
       # @param billing [Dodopayments::Models::BillingAddress] Billing address information for the subscription
       #
@@ -35,6 +35,8 @@ module Dodopayments
       # @param one_time_product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil] List of one time products that will be bundled with the first payment for this s
       #
       # @param payment_link [Boolean, nil] If true, generates a payment link.
+      #
+      # @param payment_method_id [String, nil] Optional payment method ID to use for this subscription.
       #
       # @param redirect_immediately [Boolean] If true, redirects the customer immediately after payment completion
       #

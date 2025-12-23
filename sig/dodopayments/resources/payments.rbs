@@ -11,6 +11,7 @@ module Dodopayments
         ?force_3ds: bool?,
         ?metadata: ::Hash[Symbol, String],
         ?payment_link: bool?,
+        ?payment_method_id: String?,
         ?redirect_immediately: bool,
         ?return_url: String?,
         ?short_link: bool?,
