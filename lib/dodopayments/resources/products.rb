@@ -6,6 +6,9 @@ module Dodopayments
       # @return [Dodopayments::Resources::Products::Images]
       attr_reader :images
 
+      # @return [Dodopayments::Resources::Products::ShortLinks]
+      attr_reader :short_links
+
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductCreateParams} for more details.
       #
@@ -212,6 +215,7 @@ module Dodopayments
       def initialize(client:)
         @client = client
         @images = Dodopayments::Resources::Products::Images.new(client: client)
+        @short_links = Dodopayments::Resources::Products::ShortLinks.new(client: client)
       end
     end
   end
