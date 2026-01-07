@@ -3,7 +3,7 @@ module Dodopayments
     type dispute_cancelled_webhook_event =
       {
         business_id: String,
-        data: Dodopayments::DisputeCancelledWebhookEvent::Data,
+        data: Dodopayments::Dispute,
         timestamp: Time,
         type: Dodopayments::Models::DisputeCancelledWebhookEvent::type_
       }
@@ -11,7 +11,7 @@ module Dodopayments
     class DisputeCancelledWebhookEvent < Dodopayments::Internal::Type::BaseModel
       attr_accessor business_id: String
 
-      attr_accessor data: Dodopayments::DisputeCancelledWebhookEvent::Data
+      attr_accessor data: Dodopayments::Dispute
 
       attr_accessor timestamp: Time
 
@@ -19,48 +19,17 @@ module Dodopayments
 
       def initialize: (
         business_id: String,
-        data: Dodopayments::DisputeCancelledWebhookEvent::Data,
+        data: Dodopayments::Dispute,
         timestamp: Time,
         type: Dodopayments::Models::DisputeCancelledWebhookEvent::type_
       ) -> void
 
       def to_hash: -> {
         business_id: String,
-        data: Dodopayments::DisputeCancelledWebhookEvent::Data,
+        data: Dodopayments::Dispute,
         timestamp: Time,
         type: Dodopayments::Models::DisputeCancelledWebhookEvent::type_
       }
-
-      type data =
-        {
-          payload_type: Dodopayments::Models::DisputeCancelledWebhookEvent::Data::payload_type
-        }
-
-      class Data < Dodopayments::Models::Dispute
-        def payload_type: -> Dodopayments::Models::DisputeCancelledWebhookEvent::Data::payload_type?
-
-        def payload_type=: (
-          Dodopayments::Models::DisputeCancelledWebhookEvent::Data::payload_type _
-        ) -> Dodopayments::Models::DisputeCancelledWebhookEvent::Data::payload_type
-
-        def initialize: (
-          ?payload_type: Dodopayments::Models::DisputeCancelledWebhookEvent::Data::payload_type
-        ) -> void
-
-        def to_hash: -> {
-          payload_type: Dodopayments::Models::DisputeCancelledWebhookEvent::Data::payload_type
-        }
-
-        type payload_type = :Dispute
-
-        module PayloadType
-          extend Dodopayments::Internal::Type::Enum
-
-          DISPUTE: :Dispute
-
-          def self?.values: -> ::Array[Dodopayments::Models::DisputeCancelledWebhookEvent::Data::payload_type]
-        end
-      end
 
       type type_ = :"dispute.cancelled"
 

@@ -98,6 +98,7 @@ module Dodopayments
 
         type card =
           {
+            card_holder_name: String?,
             card_issuing_country: Dodopayments::Models::country_code?,
             card_network: String?,
             card_type: String?,
@@ -107,6 +108,8 @@ module Dodopayments
           }
 
         class Card < Dodopayments::Internal::Type::BaseModel
+          attr_accessor card_holder_name: String?
+
           attr_accessor card_issuing_country: Dodopayments::Models::country_code?
 
           attr_accessor card_network: String?
@@ -120,6 +123,7 @@ module Dodopayments
           attr_accessor last4_digits: String?
 
           def initialize: (
+            ?card_holder_name: String?,
             ?card_issuing_country: Dodopayments::Models::country_code?,
             ?card_network: String?,
             ?card_type: String?,
@@ -129,6 +133,7 @@ module Dodopayments
           ) -> void
 
           def to_hash: -> {
+            card_holder_name: String?,
             card_issuing_country: Dodopayments::Models::country_code?,
             card_network: String?,
             card_type: String?,

@@ -53,6 +53,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Currency,
         total_amount: Integer,
+        card_holder_name: String | nil,
         card_issuing_country: Dodopayments::CountryCode | nil,
         card_last_four: String | nil,
         card_network: String | nil,

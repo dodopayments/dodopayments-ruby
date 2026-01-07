@@ -77,6 +77,10 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :total_amount
 
+      # Cardholder name
+      sig { returns(T.nilable(String)) }
+      attr_accessor :card_holder_name
+
       # ISO2 country code of the card
       sig { returns(T.nilable(Dodopayments::CountryCode::TaggedSymbol)) }
       attr_accessor :card_issuing_country
@@ -168,6 +172,7 @@ module Dodopayments
           settlement_amount: Integer,
           settlement_currency: Dodopayments::Currency::OrSymbol,
           total_amount: Integer,
+          card_holder_name: T.nilable(String),
           card_issuing_country: T.nilable(Dodopayments::CountryCode::OrSymbol),
           card_last_four: T.nilable(String),
           card_network: T.nilable(String),
@@ -223,6 +228,8 @@ module Dodopayments
         # Total amount charged to the customer including tax, in smallest currency unit
         # (e.g. cents)
         total_amount:,
+        # Cardholder name
+        card_holder_name: nil,
         # ISO2 country code of the card
         card_issuing_country: nil,
         # The last four digits of the card
@@ -282,6 +289,7 @@ module Dodopayments
             settlement_amount: Integer,
             settlement_currency: Dodopayments::Currency::TaggedSymbol,
             total_amount: Integer,
+            card_holder_name: T.nilable(String),
             card_issuing_country:
               T.nilable(Dodopayments::CountryCode::TaggedSymbol),
             card_last_four: T.nilable(String),

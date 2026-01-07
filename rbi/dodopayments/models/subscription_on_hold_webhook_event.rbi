@@ -15,15 +15,11 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :business_id
 
-      # Event-specific data
-      sig { returns(Dodopayments::SubscriptionOnHoldWebhookEvent::Data) }
+      # Response struct representing subscription details
+      sig { returns(Dodopayments::Subscription) }
       attr_reader :data
 
-      sig do
-        params(
-          data: Dodopayments::SubscriptionOnHoldWebhookEvent::Data::OrHash
-        ).void
-      end
+      sig { params(data: Dodopayments::Subscription::OrHash).void }
       attr_writer :data
 
       # The timestamp of when the event occurred
@@ -41,7 +37,7 @@ module Dodopayments
       sig do
         params(
           business_id: String,
-          data: Dodopayments::SubscriptionOnHoldWebhookEvent::Data::OrHash,
+          data: Dodopayments::Subscription::OrHash,
           timestamp: Time,
           type: Dodopayments::SubscriptionOnHoldWebhookEvent::Type::OrSymbol
         ).returns(T.attached_class)
@@ -49,7 +45,7 @@ module Dodopayments
       def self.new(
         # The business identifier
         business_id:,
-        # Event-specific data
+        # Response struct representing subscription details
         data:,
         # The timestamp of when the event occurred
         timestamp:,
@@ -62,7 +58,7 @@ module Dodopayments
         override.returns(
           {
             business_id: String,
-            data: Dodopayments::SubscriptionOnHoldWebhookEvent::Data,
+            data: Dodopayments::Subscription,
             timestamp: Time,
             type:
               Dodopayments::SubscriptionOnHoldWebhookEvent::Type::TaggedSymbol
@@ -70,88 +66,6 @@ module Dodopayments
         )
       end
       def to_hash
-      end
-
-      class Data < Dodopayments::Models::Subscription
-        OrHash =
-          T.type_alias do
-            T.any(
-              Dodopayments::SubscriptionOnHoldWebhookEvent::Data,
-              Dodopayments::Internal::AnyHash
-            )
-          end
-
-        # The type of payload in the data field
-        sig do
-          returns(
-            T.nilable(
-              Dodopayments::SubscriptionOnHoldWebhookEvent::Data::PayloadType::TaggedSymbol
-            )
-          )
-        end
-        attr_reader :payload_type
-
-        sig do
-          params(
-            payload_type:
-              Dodopayments::SubscriptionOnHoldWebhookEvent::Data::PayloadType::OrSymbol
-          ).void
-        end
-        attr_writer :payload_type
-
-        # Event-specific data
-        sig do
-          params(
-            payload_type:
-              Dodopayments::SubscriptionOnHoldWebhookEvent::Data::PayloadType::OrSymbol
-          ).returns(T.attached_class)
-        end
-        def self.new(
-          # The type of payload in the data field
-          payload_type: nil
-        )
-        end
-
-        sig do
-          override.returns(
-            {
-              payload_type:
-                Dodopayments::SubscriptionOnHoldWebhookEvent::Data::PayloadType::TaggedSymbol
-            }
-          )
-        end
-        def to_hash
-        end
-
-        # The type of payload in the data field
-        module PayloadType
-          extend Dodopayments::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Dodopayments::SubscriptionOnHoldWebhookEvent::Data::PayloadType
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          SUBSCRIPTION =
-            T.let(
-              :Subscription,
-              Dodopayments::SubscriptionOnHoldWebhookEvent::Data::PayloadType::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Dodopayments::SubscriptionOnHoldWebhookEvent::Data::PayloadType::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
-        end
       end
 
       # The event type
