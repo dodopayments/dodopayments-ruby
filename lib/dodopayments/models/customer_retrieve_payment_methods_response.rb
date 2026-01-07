@@ -15,9 +15,6 @@ module Dodopayments
 
       class Item < Dodopayments::Internal::Type::BaseModel
         # @!attribute payment_method
-        #   PaymentMethod enum from hyperswitch
-        #
-        #   https://github.com/juspay/hyperswitch/blob/ecd05d53c99ae701ac94893ec632a3988afe3238/crates/common_enums/src/enums.rs#L2097
         #
         #   @return [Symbol, Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::PaymentMethod]
         required :payment_method,
@@ -51,26 +48,13 @@ module Dodopayments
         optional :recurring_enabled, Dodopayments::Internal::Type::Boolean, nil?: true
 
         # @!method initialize(payment_method:, payment_method_id:, card: nil, last_used_at: nil, payment_method_type: nil, recurring_enabled: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item} for more
-        #   details.
-        #
-        #   @param payment_method [Symbol, Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::PaymentMethod] PaymentMethod enum from hyperswitch
-        #
+        #   @param payment_method [Symbol, Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::PaymentMethod]
         #   @param payment_method_id [String]
-        #
         #   @param card [Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::Card, nil]
-        #
         #   @param last_used_at [Time, nil]
-        #
         #   @param payment_method_type [Symbol, Dodopayments::Models::PaymentMethodTypes, nil]
-        #
         #   @param recurring_enabled [Boolean, nil]
 
-        # PaymentMethod enum from hyperswitch
-        #
-        # https://github.com/juspay/hyperswitch/blob/ecd05d53c99ae701ac94893ec632a3988afe3238/crates/common_enums/src/enums.rs#L2097
-        #
         # @see Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item#payment_method
         module PaymentMethod
           extend Dodopayments::Internal::Type::Enum
@@ -97,6 +81,11 @@ module Dodopayments
 
         # @see Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item#card
         class Card < Dodopayments::Internal::Type::BaseModel
+          # @!attribute card_holder_name
+          #
+          #   @return [String, nil]
+          optional :card_holder_name, String, nil?: true
+
           # @!attribute card_issuing_country
           #   ISO country code alpha2 variant
           #
@@ -128,7 +117,9 @@ module Dodopayments
           #   @return [String, nil]
           optional :last4_digits, String, nil?: true
 
-          # @!method initialize(card_issuing_country: nil, card_network: nil, card_type: nil, expiry_month: nil, expiry_year: nil, last4_digits: nil)
+          # @!method initialize(card_holder_name: nil, card_issuing_country: nil, card_network: nil, card_type: nil, expiry_month: nil, expiry_year: nil, last4_digits: nil)
+          #   @param card_holder_name [String, nil]
+          #
           #   @param card_issuing_country [Symbol, Dodopayments::Models::CountryCode, nil] ISO country code alpha2 variant
           #
           #   @param card_network [String, nil]

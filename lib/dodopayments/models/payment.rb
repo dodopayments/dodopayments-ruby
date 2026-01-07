@@ -93,6 +93,12 @@ module Dodopayments
       #   @return [Integer]
       required :total_amount, Integer
 
+      # @!attribute card_holder_name
+      #   Cardholder name
+      #
+      #   @return [String, nil]
+      optional :card_holder_name, String, nil?: true
+
       # @!attribute card_issuing_country
       #   ISO2 country code of the card
       #
@@ -206,7 +212,7 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, discount_id: nil, error_code: nil, error_message: nil, invoice_id: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, discount_id: nil, error_code: nil, error_message: nil, invoice_id: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
@@ -237,6 +243,8 @@ module Dodopayments
       #   @param settlement_currency [Symbol, Dodopayments::Models::Currency] The currency in which the settlement_amount will be credited to your Dodo balanc
       #
       #   @param total_amount [Integer] Total amount charged to the customer including tax, in smallest currency unit (e
+      #
+      #   @param card_holder_name [String, nil] Cardholder name
       #
       #   @param card_issuing_country [Symbol, Dodopayments::Models::CountryCode, nil] ISO2 country code of the card
       #

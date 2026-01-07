@@ -10,10 +10,9 @@ module Dodopayments
       required :business_id, String
 
       # @!attribute data
-      #   Event-specific data
       #
-      #   @return [Dodopayments::Models::LicenseKeyCreatedWebhookEvent::Data]
-      required :data, -> { Dodopayments::LicenseKeyCreatedWebhookEvent::Data }
+      #   @return [Dodopayments::Models::LicenseKey]
+      required :data, -> { Dodopayments::LicenseKey }
 
       # @!attribute timestamp
       #   The timestamp of when the event occurred
@@ -30,35 +29,11 @@ module Dodopayments
       # @!method initialize(business_id:, data:, timestamp:, type:)
       #   @param business_id [String] The business identifier
       #
-      #   @param data [Dodopayments::Models::LicenseKeyCreatedWebhookEvent::Data] Event-specific data
+      #   @param data [Dodopayments::Models::LicenseKey]
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
       #   @param type [Symbol, Dodopayments::Models::LicenseKeyCreatedWebhookEvent::Type] The event type
-
-      # @see Dodopayments::Models::LicenseKeyCreatedWebhookEvent#data
-      class Data < Dodopayments::Models::LicenseKey
-        # @!attribute payload_type
-        #   The type of payload in the data field
-        #
-        #   @return [Symbol, Dodopayments::Models::LicenseKeyCreatedWebhookEvent::Data::PayloadType, nil]
-        optional :payload_type, enum: -> { Dodopayments::LicenseKeyCreatedWebhookEvent::Data::PayloadType }
-
-        # @!method initialize(payload_type: nil)
-        #   Event-specific data
-        #
-        #   @param payload_type [Symbol, Dodopayments::Models::LicenseKeyCreatedWebhookEvent::Data::PayloadType] The type of payload in the data field
-
-        # The type of payload in the data field
-        module PayloadType
-          extend Dodopayments::Internal::Type::Enum
-
-          LICENSE_KEY = :LicenseKey
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
-      end
 
       # The event type
       #

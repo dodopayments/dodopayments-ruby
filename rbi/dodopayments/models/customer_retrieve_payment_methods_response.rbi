@@ -53,9 +53,6 @@ module Dodopayments
             )
           end
 
-        # PaymentMethod enum from hyperswitch
-        #
-        # https://github.com/juspay/hyperswitch/blob/ecd05d53c99ae701ac94893ec632a3988afe3238/crates/common_enums/src/enums.rs#L2097
         sig do
           returns(
             Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::PaymentMethod::TaggedSymbol
@@ -112,9 +109,6 @@ module Dodopayments
           ).returns(T.attached_class)
         end
         def self.new(
-          # PaymentMethod enum from hyperswitch
-          #
-          # https://github.com/juspay/hyperswitch/blob/ecd05d53c99ae701ac94893ec632a3988afe3238/crates/common_enums/src/enums.rs#L2097
           payment_method:,
           payment_method_id:,
           card: nil,
@@ -144,9 +138,6 @@ module Dodopayments
         def to_hash
         end
 
-        # PaymentMethod enum from hyperswitch
-        #
-        # https://github.com/juspay/hyperswitch/blob/ecd05d53c99ae701ac94893ec632a3988afe3238/crates/common_enums/src/enums.rs#L2097
         module PaymentMethod
           extend Dodopayments::Internal::Type::Enum
 
@@ -255,6 +246,9 @@ module Dodopayments
               )
             end
 
+          sig { returns(T.nilable(String)) }
+          attr_accessor :card_holder_name
+
           # ISO country code alpha2 variant
           sig { returns(T.nilable(Dodopayments::CountryCode::TaggedSymbol)) }
           attr_accessor :card_issuing_country
@@ -276,6 +270,7 @@ module Dodopayments
 
           sig do
             params(
+              card_holder_name: T.nilable(String),
               card_issuing_country:
                 T.nilable(Dodopayments::CountryCode::OrSymbol),
               card_network: T.nilable(String),
@@ -286,6 +281,7 @@ module Dodopayments
             ).returns(T.attached_class)
           end
           def self.new(
+            card_holder_name: nil,
             # ISO country code alpha2 variant
             card_issuing_country: nil,
             card_network: nil,
@@ -299,6 +295,7 @@ module Dodopayments
           sig do
             override.returns(
               {
+                card_holder_name: T.nilable(String),
                 card_issuing_country:
                   T.nilable(Dodopayments::CountryCode::TaggedSymbol),
                 card_network: T.nilable(String),
