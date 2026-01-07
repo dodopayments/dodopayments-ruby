@@ -10,10 +10,10 @@ module Dodopayments
       required :business_id, String
 
       # @!attribute data
-      #   Event-specific data
+      #   Response struct representing subscription details
       #
-      #   @return [Dodopayments::Models::SubscriptionOnHoldWebhookEvent::Data]
-      required :data, -> { Dodopayments::SubscriptionOnHoldWebhookEvent::Data }
+      #   @return [Dodopayments::Models::Subscription]
+      required :data, -> { Dodopayments::Subscription }
 
       # @!attribute timestamp
       #   The timestamp of when the event occurred
@@ -30,35 +30,11 @@ module Dodopayments
       # @!method initialize(business_id:, data:, timestamp:, type:)
       #   @param business_id [String] The business identifier
       #
-      #   @param data [Dodopayments::Models::SubscriptionOnHoldWebhookEvent::Data] Event-specific data
+      #   @param data [Dodopayments::Models::Subscription] Response struct representing subscription details
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
       #   @param type [Symbol, Dodopayments::Models::SubscriptionOnHoldWebhookEvent::Type] The event type
-
-      # @see Dodopayments::Models::SubscriptionOnHoldWebhookEvent#data
-      class Data < Dodopayments::Models::Subscription
-        # @!attribute payload_type
-        #   The type of payload in the data field
-        #
-        #   @return [Symbol, Dodopayments::Models::SubscriptionOnHoldWebhookEvent::Data::PayloadType, nil]
-        optional :payload_type, enum: -> { Dodopayments::SubscriptionOnHoldWebhookEvent::Data::PayloadType }
-
-        # @!method initialize(payload_type: nil)
-        #   Event-specific data
-        #
-        #   @param payload_type [Symbol, Dodopayments::Models::SubscriptionOnHoldWebhookEvent::Data::PayloadType] The type of payload in the data field
-
-        # The type of payload in the data field
-        module PayloadType
-          extend Dodopayments::Internal::Type::Enum
-
-          SUBSCRIPTION = :Subscription
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
-      end
 
       # The event type
       #

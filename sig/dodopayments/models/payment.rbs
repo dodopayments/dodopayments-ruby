@@ -16,6 +16,7 @@ module Dodopayments
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Models::currency,
         total_amount: Integer,
+        card_holder_name: String?,
         card_issuing_country: Dodopayments::Models::country_code?,
         card_last_four: String?,
         card_network: String?,
@@ -64,6 +65,8 @@ module Dodopayments
       attr_accessor settlement_currency: Dodopayments::Models::currency
 
       attr_accessor total_amount: Integer
+
+      attr_accessor card_holder_name: String?
 
       attr_accessor card_issuing_country: Dodopayments::Models::country_code?
 
@@ -116,6 +119,7 @@ module Dodopayments
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Models::currency,
         total_amount: Integer,
+        ?card_holder_name: String?,
         ?card_issuing_country: Dodopayments::Models::country_code?,
         ?card_last_four: String?,
         ?card_network: String?,
@@ -151,6 +155,7 @@ module Dodopayments
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Models::currency,
         total_amount: Integer,
+        card_holder_name: String?,
         card_issuing_country: Dodopayments::Models::country_code?,
         card_last_four: String?,
         card_network: String?,
