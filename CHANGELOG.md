@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.71.0 (2026-01-07)
+
+Full Changelog: [v1.70.0...v1.71.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.70.0...v1.71.0)
+
+### Features
+
+* **api:** updated openapi spec to v1.70.0 ([846fbe5](https://github.com/dodopayments/dodopayments-ruby/commit/846fbe5526e6eb1d96fdf6fc5221b6380873e7e5))
+
+
+### Chores
+
+* **internal:** codegen related update ([fcd68a1](https://github.com/dodopayments/dodopayments-ruby/commit/fcd68a18cca0b993a328a341b4db85e8c78eb78c))
+
+
+### Documentation
+
+* prominently feature MCP server setup in root SDK readmes ([8936186](https://github.com/dodopayments/dodopayments-ruby/commit/8936186536d0a906dc064904972006f7769eb6fd))
+
 ## 1.70.0 (2025-12-23)
 
 Full Changelog: [v1.69.0...v1.70.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.69.0...v1.70.0)
