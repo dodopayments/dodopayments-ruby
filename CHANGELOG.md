@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.71.1 (2026-01-10)
+
+Full Changelog: [v1.71.0...v1.71.1](https://github.com/dodopayments/dodopayments-ruby/compare/v1.71.0...v1.71.1)
+
+### Chores
+
+* move `cgi` into dependencies for ruby 4 ([b3e8e28](https://github.com/dodopayments/dodopayments-ruby/commit/b3e8e28eae1b3ca06b9ab2f7d8551316617ee2f5))
+
 ## 1.71.0 (2026-01-07)
 
 Full Changelog: [v1.70.0...v1.71.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.70.0...v1.71.0)
