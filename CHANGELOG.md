@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.71.2 (2026-01-17)
+
+Full Changelog: [v1.71.1...v1.71.2](https://github.com/dodopayments/dodopayments-ruby/compare/v1.71.1...v1.71.2)
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([7ea17a7](https://github.com/dodopayments/dodopayments-ruby/commit/7ea17a7662be22901a344ddbe9b2b7788c08f781))
+
 ## 1.71.1 (2026-01-10)
 
 Full Changelog: [v1.71.0...v1.71.1](https://github.com/dodopayments/dodopayments-ruby/compare/v1.71.0...v1.71.1)
