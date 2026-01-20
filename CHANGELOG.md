@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.73.0 (2026-01-20)
+
+Full Changelog: [v1.71.1...v1.73.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.71.1...v1.73.0)
+
+### Features
+
+* **api:** update openapi spec to v1.73.0 ([24b7c76](https://github.com/dodopayments/dodopayments-ruby/commit/24b7c763b9f8845d138ca8d286bce058831e27a9))
+
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([7ea17a7](https://github.com/dodopayments/dodopayments-ruby/commit/7ea17a7662be22901a344ddbe9b2b7788c08f781))
+
 ## 1.71.1 (2026-01-10)
 
 Full Changelog: [v1.71.0...v1.71.1](https://github.com/dodopayments/dodopayments-ruby/compare/v1.71.0...v1.71.1)
