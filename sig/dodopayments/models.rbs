@@ -35,6 +35,8 @@ module Dodopayments
 
   class CheckoutSessionCreateParams = Dodopayments::Models::CheckoutSessionCreateParams
 
+  class CheckoutSessionPreviewParams = Dodopayments::Models::CheckoutSessionPreviewParams
+
   class CheckoutSessionRequest = Dodopayments::Models::CheckoutSessionRequest
 
   class CheckoutSessionResponse = Dodopayments::Models::CheckoutSessionResponse
@@ -76,6 +78,8 @@ module Dodopayments
   class DiscountDeleteParams = Dodopayments::Models::DiscountDeleteParams
 
   class DiscountListParams = Dodopayments::Models::DiscountListParams
+
+  class DiscountRetrieveByCodeParams = Dodopayments::Models::DiscountRetrieveByCodeParams
 
   class DiscountRetrieveParams = Dodopayments::Models::DiscountRetrieveParams
 

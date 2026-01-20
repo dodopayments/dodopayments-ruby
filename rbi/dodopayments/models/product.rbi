@@ -94,6 +94,10 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :name
 
+      # The product collection ID this product belongs to, if any
+      sig { returns(T.nilable(String)) }
+      attr_accessor :product_collection_id
+
       sig do
         params(
           brand_id: String,
@@ -120,7 +124,8 @@ module Dodopayments
           license_key_activations_limit: T.nilable(Integer),
           license_key_duration:
             T.nilable(Dodopayments::LicenseKeyDuration::OrHash),
-          name: T.nilable(String)
+          name: T.nilable(String),
+          product_collection_id: T.nilable(String)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -157,7 +162,9 @@ module Dodopayments
         # Duration of the license key validity, if enabled.
         license_key_duration: nil,
         # Name of the product, optional.
-        name: nil
+        name: nil,
+        # The product collection ID this product belongs to, if any
+        product_collection_id: nil
       )
       end
 
@@ -182,7 +189,8 @@ module Dodopayments
             license_key_activation_message: T.nilable(String),
             license_key_activations_limit: T.nilable(Integer),
             license_key_duration: T.nilable(Dodopayments::LicenseKeyDuration),
-            name: T.nilable(String)
+            name: T.nilable(String),
+            product_collection_id: T.nilable(String)
           }
         )
       end

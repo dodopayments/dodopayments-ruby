@@ -1,0 +1,330 @@
+module Dodopayments
+  module Models
+    type checkout_session_preview_response =
+      {
+        billing_country: Dodopayments::Models::country_code,
+        currency: Dodopayments::Models::currency,
+        current_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup,
+        product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
+        total_price: Integer,
+        recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
+        total_tax: Integer?
+      }
+
+    class CheckoutSessionPreviewResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor billing_country: Dodopayments::Models::country_code
+
+      attr_accessor currency: Dodopayments::Models::currency
+
+      attr_accessor current_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup
+
+      attr_accessor product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart]
+
+      attr_accessor total_price: Integer
+
+      attr_accessor recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?
+
+      attr_accessor total_tax: Integer?
+
+      def initialize: (
+        billing_country: Dodopayments::Models::country_code,
+        currency: Dodopayments::Models::currency,
+        current_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup,
+        product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
+        total_price: Integer,
+        ?recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
+        ?total_tax: Integer?
+      ) -> void
+
+      def to_hash: -> {
+        billing_country: Dodopayments::Models::country_code,
+        currency: Dodopayments::Models::currency,
+        current_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup,
+        product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
+        total_price: Integer,
+        recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
+        total_tax: Integer?
+      }
+
+      type current_breakup =
+        {
+          discount: Integer,
+          subtotal: Integer,
+          total_amount: Integer,
+          tax: Integer?
+        }
+
+      class CurrentBreakup < Dodopayments::Internal::Type::BaseModel
+        attr_accessor discount: Integer
+
+        attr_accessor subtotal: Integer
+
+        attr_accessor total_amount: Integer
+
+        attr_accessor tax: Integer?
+
+        def initialize: (
+          discount: Integer,
+          subtotal: Integer,
+          total_amount: Integer,
+          ?tax: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          discount: Integer,
+          subtotal: Integer,
+          total_amount: Integer,
+          tax: Integer?
+        }
+      end
+
+      type product_cart =
+        {
+          currency: Dodopayments::Models::currency,
+          discounted_price: Integer,
+          is_subscription: bool,
+          is_usage_based: bool,
+          meters: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::Meter],
+          og_currency: Dodopayments::Models::currency,
+          og_price: Integer,
+          product_id: String,
+          quantity: Integer,
+          tax_category: Dodopayments::Models::tax_category,
+          tax_inclusive: bool,
+          tax_rate: Integer,
+          addons: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::Addon]?,
+          description: String?,
+          discount_amount: Integer?,
+          discount_cycle: Integer?,
+          name: String?,
+          tax: Integer?
+        }
+
+      class ProductCart < Dodopayments::Internal::Type::BaseModel
+        attr_accessor currency: Dodopayments::Models::currency
+
+        attr_accessor discounted_price: Integer
+
+        attr_accessor is_subscription: bool
+
+        attr_accessor is_usage_based: bool
+
+        attr_accessor meters: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::Meter]
+
+        attr_accessor og_currency: Dodopayments::Models::currency
+
+        attr_accessor og_price: Integer
+
+        attr_accessor product_id: String
+
+        attr_accessor quantity: Integer
+
+        attr_accessor tax_category: Dodopayments::Models::tax_category
+
+        attr_accessor tax_inclusive: bool
+
+        attr_accessor tax_rate: Integer
+
+        attr_accessor addons: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::Addon]?
+
+        attr_accessor description: String?
+
+        attr_accessor discount_amount: Integer?
+
+        attr_accessor discount_cycle: Integer?
+
+        attr_accessor name: String?
+
+        attr_accessor tax: Integer?
+
+        def initialize: (
+          currency: Dodopayments::Models::currency,
+          discounted_price: Integer,
+          is_subscription: bool,
+          is_usage_based: bool,
+          meters: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::Meter],
+          og_currency: Dodopayments::Models::currency,
+          og_price: Integer,
+          product_id: String,
+          quantity: Integer,
+          tax_category: Dodopayments::Models::tax_category,
+          tax_inclusive: bool,
+          tax_rate: Integer,
+          ?addons: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::Addon]?,
+          ?description: String?,
+          ?discount_amount: Integer?,
+          ?discount_cycle: Integer?,
+          ?name: String?,
+          ?tax: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          currency: Dodopayments::Models::currency,
+          discounted_price: Integer,
+          is_subscription: bool,
+          is_usage_based: bool,
+          meters: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::Meter],
+          og_currency: Dodopayments::Models::currency,
+          og_price: Integer,
+          product_id: String,
+          quantity: Integer,
+          tax_category: Dodopayments::Models::tax_category,
+          tax_inclusive: bool,
+          tax_rate: Integer,
+          addons: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::Addon]?,
+          description: String?,
+          discount_amount: Integer?,
+          discount_cycle: Integer?,
+          name: String?,
+          tax: Integer?
+        }
+
+        type meter =
+          {
+            measurement_unit: String,
+            name: String,
+            price_per_unit: String,
+            description: String?,
+            free_threshold: Integer?
+          }
+
+        class Meter < Dodopayments::Internal::Type::BaseModel
+          attr_accessor measurement_unit: String
+
+          attr_accessor name: String
+
+          attr_accessor price_per_unit: String
+
+          attr_accessor description: String?
+
+          attr_accessor free_threshold: Integer?
+
+          def initialize: (
+            measurement_unit: String,
+            name: String,
+            price_per_unit: String,
+            ?description: String?,
+            ?free_threshold: Integer?
+          ) -> void
+
+          def to_hash: -> {
+            measurement_unit: String,
+            name: String,
+            price_per_unit: String,
+            description: String?,
+            free_threshold: Integer?
+          }
+        end
+
+        type addon =
+          {
+            addon_id: String,
+            currency: Dodopayments::Models::currency,
+            discounted_price: Integer,
+            name: String,
+            og_currency: Dodopayments::Models::currency,
+            og_price: Integer,
+            quantity: Integer,
+            tax_category: Dodopayments::Models::tax_category,
+            tax_inclusive: bool,
+            tax_rate: Integer,
+            description: String?,
+            discount_amount: Integer?,
+            tax: Integer?
+          }
+
+        class Addon < Dodopayments::Internal::Type::BaseModel
+          attr_accessor addon_id: String
+
+          attr_accessor currency: Dodopayments::Models::currency
+
+          attr_accessor discounted_price: Integer
+
+          attr_accessor name: String
+
+          attr_accessor og_currency: Dodopayments::Models::currency
+
+          attr_accessor og_price: Integer
+
+          attr_accessor quantity: Integer
+
+          attr_accessor tax_category: Dodopayments::Models::tax_category
+
+          attr_accessor tax_inclusive: bool
+
+          attr_accessor tax_rate: Integer
+
+          attr_accessor description: String?
+
+          attr_accessor discount_amount: Integer?
+
+          attr_accessor tax: Integer?
+
+          def initialize: (
+            addon_id: String,
+            currency: Dodopayments::Models::currency,
+            discounted_price: Integer,
+            name: String,
+            og_currency: Dodopayments::Models::currency,
+            og_price: Integer,
+            quantity: Integer,
+            tax_category: Dodopayments::Models::tax_category,
+            tax_inclusive: bool,
+            tax_rate: Integer,
+            ?description: String?,
+            ?discount_amount: Integer?,
+            ?tax: Integer?
+          ) -> void
+
+          def to_hash: -> {
+            addon_id: String,
+            currency: Dodopayments::Models::currency,
+            discounted_price: Integer,
+            name: String,
+            og_currency: Dodopayments::Models::currency,
+            og_price: Integer,
+            quantity: Integer,
+            tax_category: Dodopayments::Models::tax_category,
+            tax_inclusive: bool,
+            tax_rate: Integer,
+            description: String?,
+            discount_amount: Integer?,
+            tax: Integer?
+          }
+        end
+      end
+
+      type recurring_breakup =
+        {
+          discount: Integer,
+          subtotal: Integer,
+          total_amount: Integer,
+          tax: Integer?
+        }
+
+      class RecurringBreakup < Dodopayments::Internal::Type::BaseModel
+        attr_accessor discount: Integer
+
+        attr_accessor subtotal: Integer
+
+        attr_accessor total_amount: Integer
+
+        attr_accessor tax: Integer?
+
+        def initialize: (
+          discount: Integer,
+          subtotal: Integer,
+          total_amount: Integer,
+          ?tax: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          discount: Integer,
+          subtotal: Integer,
+          total_amount: Integer,
+          tax: Integer?
+        }
+      end
+    end
+  end
+end

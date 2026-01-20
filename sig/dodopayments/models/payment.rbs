@@ -26,6 +26,7 @@ module Dodopayments
         error_code: String?,
         error_message: String?,
         invoice_id: String?,
+        invoice_url: String?,
         payment_link: String?,
         payment_method: String?,
         payment_method_type: String?,
@@ -86,6 +87,8 @@ module Dodopayments
 
       attr_accessor invoice_id: String?
 
+      attr_accessor invoice_url: String?
+
       attr_accessor payment_link: String?
 
       attr_accessor payment_method: String?
@@ -129,6 +132,7 @@ module Dodopayments
         ?error_code: String?,
         ?error_message: String?,
         ?invoice_id: String?,
+        ?invoice_url: String?,
         ?payment_link: String?,
         ?payment_method: String?,
         ?payment_method_type: String?,
@@ -165,6 +169,7 @@ module Dodopayments
         error_code: String?,
         error_message: String?,
         invoice_id: String?,
+        invoice_url: String?,
         payment_link: String?,
         payment_method: String?,
         payment_method_type: String?,

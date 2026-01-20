@@ -179,6 +179,7 @@ module Dodopayments
             Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::OrSymbol,
           quantity: Integer,
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
+          metadata: T.nilable(T::Hash[Symbol, String]),
           request_options: Dodopayments::RequestOptions::OrHash
         ).void
       end
@@ -194,6 +195,9 @@ module Dodopayments
         # Addons for the new plan. Note : Leaving this empty would remove any existing
         # addons
         addons: nil,
+        # Metadata for the payment. If not passed, the metadata of the subscription will
+        # be taken
+        metadata: nil,
         request_options: {}
       )
       end
@@ -246,6 +250,7 @@ module Dodopayments
             Dodopayments::SubscriptionPreviewChangePlanParams::ProrationBillingMode::OrSymbol,
           quantity: Integer,
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
+          metadata: T.nilable(T::Hash[Symbol, String]),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Models::SubscriptionPreviewChangePlanResponse)
       end
@@ -261,6 +266,9 @@ module Dodopayments
         # Addons for the new plan. Note : Leaving this empty would remove any existing
         # addons
         addons: nil,
+        # Metadata for the payment. If not passed, the metadata of the subscription will
+        # be taken
+        metadata: nil,
         request_options: {}
       )
       end

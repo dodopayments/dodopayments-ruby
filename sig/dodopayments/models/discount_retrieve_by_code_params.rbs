@@ -1,0 +1,15 @@
+module Dodopayments
+  module Models
+    type discount_retrieve_by_code_params =
+      {  } & Dodopayments::Internal::Type::request_parameters
+
+    class DiscountRetrieveByCodeParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      def initialize: (?request_options: Dodopayments::request_opts) -> void
+
+      def to_hash: -> { request_options: Dodopayments::RequestOptions }
+    end
+  end
+end

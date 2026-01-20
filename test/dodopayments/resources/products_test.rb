@@ -34,7 +34,8 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         license_key_activation_message: String | nil,
         license_key_activations_limit: Integer | nil,
         license_key_duration: Dodopayments::LicenseKeyDuration | nil,
-        name: String | nil
+        name: String | nil,
+        product_collection_id: String | nil
       }
     end
   end
@@ -65,7 +66,8 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         license_key_activation_message: String | nil,
         license_key_activations_limit: Integer | nil,
         license_key_duration: Dodopayments::LicenseKeyDuration | nil,
-        name: String | nil
+        name: String | nil,
+        product_collection_id: String | nil
       }
     end
   end

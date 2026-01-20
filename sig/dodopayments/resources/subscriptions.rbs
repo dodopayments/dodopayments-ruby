@@ -60,6 +60,7 @@ module Dodopayments
         proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode,
         quantity: Integer,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
+        ?metadata: ::Hash[Symbol, String]?,
         ?request_options: Dodopayments::request_opts
       ) -> nil
 
@@ -80,6 +81,7 @@ module Dodopayments
         proration_billing_mode: Dodopayments::Models::SubscriptionPreviewChangePlanParams::proration_billing_mode,
         quantity: Integer,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
+        ?metadata: ::Hash[Symbol, String]?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::SubscriptionPreviewChangePlanResponse
 

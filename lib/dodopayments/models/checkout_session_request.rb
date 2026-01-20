@@ -90,6 +90,12 @@ module Dodopayments
       #   @return [String, nil]
       optional :payment_method_id, String, nil?: true
 
+      # @!attribute product_collection_id
+      #   Product collection ID for collection-based checkout flow
+      #
+      #   @return [String, nil]
+      optional :product_collection_id, String, nil?: true
+
       # @!attribute return_url
       #   The url to redirect after payment failure or success.
       #
@@ -113,7 +119,7 @@ module Dodopayments
       #   @return [Dodopayments::Models::CheckoutSessionRequest::SubscriptionData, nil]
       optional :subscription_data, -> { Dodopayments::CheckoutSessionRequest::SubscriptionData }, nil?: true
 
-      # @!method initialize(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil)
+      # @!method initialize(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionRequest} for more details.
       #
@@ -142,6 +148,8 @@ module Dodopayments
       #   @param minimal_address [Boolean] If true, only zipcode is required when confirm is true; other address fields rem
       #
       #   @param payment_method_id [String, nil] Optional payment method ID to use for this checkout session.
+      #
+      #   @param product_collection_id [String, nil] Product collection ID for collection-based checkout flow
       #
       #   @param return_url [String, nil] The url to redirect after payment failure or success.
       #

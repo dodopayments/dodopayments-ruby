@@ -15,6 +15,7 @@ module Dodopayments
         metadata: ::Hash[Symbol, String]?,
         minimal_address: bool,
         payment_method_id: String?,
+        product_collection_id: String?,
         return_url: String?,
         short_link: bool,
         show_saved_payment_methods: bool,
@@ -60,6 +61,8 @@ module Dodopayments
 
       attr_accessor payment_method_id: String?
 
+      attr_accessor product_collection_id: String?
+
       attr_accessor return_url: String?
 
       attr_reader short_link: bool?
@@ -86,6 +89,7 @@ module Dodopayments
         ?metadata: ::Hash[Symbol, String]?,
         ?minimal_address: bool,
         ?payment_method_id: String?,
+        ?product_collection_id: String?,
         ?return_url: String?,
         ?short_link: bool,
         ?show_saved_payment_methods: bool,
@@ -106,6 +110,7 @@ module Dodopayments
         metadata: ::Hash[Symbol, String]?,
         minimal_address: bool,
         payment_method_id: String?,
+        product_collection_id: String?,
         return_url: String?,
         short_link: bool,
         show_saved_payment_methods: bool,

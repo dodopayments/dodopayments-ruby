@@ -42,6 +42,11 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> nil
 
+      def retrieve_by_code: (
+        String code,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Discount
+
       def initialize: (client: Dodopayments::Client) -> void
     end
   end
