@@ -117,4 +117,29 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
       response => nil
     end
   end
+
+  def test_retrieve_by_code
+    response = @dodo_payments.discounts.retrieve_by_code("code")
+
+    assert_pattern do
+      response => Dodopayments::Discount
+    end
+
+    assert_pattern do
+      response => {
+        amount: Integer,
+        business_id: String,
+        code: String,
+        created_at: Time,
+        discount_id: String,
+        restricted_to: ^(Dodopayments::Internal::Type::ArrayOf[String]),
+        times_used: Integer,
+        type: Dodopayments::DiscountType,
+        expires_at: Time | nil,
+        name: String | nil,
+        subscription_cycles: Integer | nil,
+        usage_limit: Integer | nil
+      }
+    end
+  end
 end

@@ -110,7 +110,13 @@ module Dodopayments
       #   @return [String, nil]
       optional :name, String, nil?: true
 
-      # @!method initialize(brand_id:, business_id:, created_at:, is_recurring:, license_key_enabled:, metadata:, price:, product_id:, tax_category:, updated_at:, addons: nil, description: nil, digital_product_delivery: nil, image: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, name: nil)
+      # @!attribute product_collection_id
+      #   The product collection ID this product belongs to, if any
+      #
+      #   @return [String, nil]
+      optional :product_collection_id, String, nil?: true
+
+      # @!method initialize(brand_id:, business_id:, created_at:, is_recurring:, license_key_enabled:, metadata:, price:, product_id:, tax_category:, updated_at:, addons: nil, description: nil, digital_product_delivery: nil, image: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, name: nil, product_collection_id: nil)
       #   @param brand_id [String]
       #
       #   @param business_id [String] Unique identifier for the business to which the product belongs.
@@ -146,6 +152,8 @@ module Dodopayments
       #   @param license_key_duration [Dodopayments::Models::LicenseKeyDuration, nil] Duration of the license key validity, if enabled.
       #
       #   @param name [String, nil] Name of the product, optional.
+      #
+      #   @param product_collection_id [String, nil] The product collection ID this product belongs to, if any
 
       # @see Dodopayments::Models::Product#digital_product_delivery
       class DigitalProductDelivery < Dodopayments::Internal::Type::BaseModel

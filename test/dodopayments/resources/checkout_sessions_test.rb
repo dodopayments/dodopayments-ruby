@@ -37,4 +37,25 @@ class Dodopayments::Test::Resources::CheckoutSessionsTest < Dodopayments::Test::
       }
     end
   end
+
+  def test_preview_required_params
+    response =
+      @dodo_payments.checkout_sessions.preview(product_cart: [{product_id: "product_id", quantity: 0}])
+
+    assert_pattern do
+      response => Dodopayments::Models::CheckoutSessionPreviewResponse
+    end
+
+    assert_pattern do
+      response => {
+        billing_country: Dodopayments::CountryCode,
+        currency: Dodopayments::Currency,
+        current_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup,
+        product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart]),
+        total_price: Integer,
+        recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup | nil,
+        total_tax: Integer | nil
+      }
+    end
+  end
 end

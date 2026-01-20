@@ -19,7 +19,8 @@ module Dodopayments
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
         license_key_duration: Dodopayments::LicenseKeyDuration?,
-        name: String?
+        name: String?,
+        product_collection_id: String?
       }
 
     class Product < Dodopayments::Internal::Type::BaseModel
@@ -59,6 +60,8 @@ module Dodopayments
 
       attr_accessor name: String?
 
+      attr_accessor product_collection_id: String?
+
       def initialize: (
         brand_id: String,
         business_id: String,
@@ -77,7 +80,8 @@ module Dodopayments
         ?license_key_activation_message: String?,
         ?license_key_activations_limit: Integer?,
         ?license_key_duration: Dodopayments::LicenseKeyDuration?,
-        ?name: String?
+        ?name: String?,
+        ?product_collection_id: String?
       ) -> void
 
       def to_hash: -> {
@@ -98,7 +102,8 @@ module Dodopayments
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
         license_key_duration: Dodopayments::LicenseKeyDuration?,
-        name: String?
+        name: String?,
+        product_collection_id: String?
       }
 
       type digital_product_delivery =
