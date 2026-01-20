@@ -149,6 +149,28 @@ module Dodopayments
         )
       end
 
+      # Validate and fetch a discount by its code name (e.g., "SAVE20"). This allows
+      # real-time validation directly against the API using the human-readable discount
+      # code instead of requiring the internal discount_id.
+      #
+      # @overload retrieve_by_code(code, request_options: {})
+      #
+      # @param code [String] The discount code (e.g., 'SAVE20')
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Models::Discount]
+      #
+      # @see Dodopayments::Models::DiscountRetrieveByCodeParams
+      def retrieve_by_code(code, params = {})
+        @client.request(
+          method: :get,
+          path: ["discounts/code/%1$s", code],
+          model: Dodopayments::Discount,
+          options: params[:request_options]
+        )
+      end
+
       # @api private
       #
       # @param client [Dodopayments::Client]

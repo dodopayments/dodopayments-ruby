@@ -156,7 +156,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionChangePlanParams} for more details.
       #
-      # @overload change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, addons: nil, request_options: {})
+      # @overload change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, addons: nil, metadata: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -167,6 +167,8 @@ module Dodopayments
       # @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
       # @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
+      #
+      # @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -222,7 +224,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionPreviewChangePlanParams} for more details.
       #
-      # @overload preview_change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, addons: nil, request_options: {})
+      # @overload preview_change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, addons: nil, metadata: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -233,6 +235,8 @@ module Dodopayments
       # @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
       # @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
+      #
+      # @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

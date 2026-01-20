@@ -33,7 +33,14 @@ module Dodopayments
       #   @return [Array<Dodopayments::Models::AttachAddon>, nil]
       optional :addons, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::AttachAddon] }, nil?: true
 
-      # @!method initialize(product_id:, proration_billing_mode:, quantity:, addons: nil, request_options: {})
+      # @!attribute metadata
+      #   Metadata for the payment. If not passed, the metadata of the subscription will
+      #   be taken
+      #
+      #   @return [Hash{Symbol=>String}, nil]
+      optional :metadata, Dodopayments::Internal::Type::HashOf[String], nil?: true
+
+      # @!method initialize(product_id:, proration_billing_mode:, quantity:, addons: nil, metadata: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionPreviewChangePlanParams} for more details.
       #
@@ -44,6 +51,8 @@ module Dodopayments
       #   @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
       #   @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
+      #
+      #   @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 

@@ -15,6 +15,7 @@ module Dodopayments
         ?metadata: ::Hash[Symbol, String]?,
         ?minimal_address: bool,
         ?payment_method_id: String?,
+        ?product_collection_id: String?,
         ?return_url: String?,
         ?short_link: bool,
         ?show_saved_payment_methods: bool,
@@ -26,6 +27,28 @@ module Dodopayments
         String id,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::CheckoutSessionStatus
+
+      def preview: (
+        product_cart: ::Array[Dodopayments::CheckoutSessionRequest::ProductCart],
+        ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
+        ?billing_address: Dodopayments::CheckoutSessionRequest::BillingAddress?,
+        ?billing_currency: Dodopayments::Models::currency?,
+        ?confirm: bool,
+        ?customer: Dodopayments::Models::customer_request?,
+        ?customization: Dodopayments::CheckoutSessionRequest::Customization,
+        ?discount_code: String?,
+        ?feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
+        ?force_3ds: bool?,
+        ?metadata: ::Hash[Symbol, String]?,
+        ?minimal_address: bool,
+        ?payment_method_id: String?,
+        ?product_collection_id: String?,
+        ?return_url: String?,
+        ?short_link: bool,
+        ?show_saved_payment_methods: bool,
+        ?subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::CheckoutSessionPreviewResponse
 
       def initialize: (client: Dodopayments::Client) -> void
     end

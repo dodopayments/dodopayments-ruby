@@ -120,6 +120,10 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :payment_method_id
 
+      # Product collection ID for collection-based checkout flow
+      sig { returns(T.nilable(String)) }
+      attr_accessor :product_collection_id
+
       # The url to redirect after payment failure or success.
       sig { returns(T.nilable(String)) }
       attr_accessor :return_url
@@ -183,6 +187,7 @@ module Dodopayments
           metadata: T.nilable(T::Hash[Symbol, String]),
           minimal_address: T::Boolean,
           payment_method_id: T.nilable(String),
+          product_collection_id: T.nilable(String),
           return_url: T.nilable(String),
           short_link: T::Boolean,
           show_saved_payment_methods: T::Boolean,
@@ -225,6 +230,8 @@ module Dodopayments
         # Optional payment method ID to use for this checkout session. Only allowed when
         # `confirm` is true. If provided, existing customer id must also be provided.
         payment_method_id: nil,
+        # Product collection ID for collection-based checkout flow
+        product_collection_id: nil,
         # The url to redirect after payment failure or success.
         return_url: nil,
         # If true, returns a shortened checkout URL. Defaults to false if not specified.
@@ -260,6 +267,7 @@ module Dodopayments
             metadata: T.nilable(T::Hash[Symbol, String]),
             minimal_address: T::Boolean,
             payment_method_id: T.nilable(String),
+            product_collection_id: T.nilable(String),
             return_url: T.nilable(String),
             short_link: T::Boolean,
             show_saved_payment_methods: T::Boolean,

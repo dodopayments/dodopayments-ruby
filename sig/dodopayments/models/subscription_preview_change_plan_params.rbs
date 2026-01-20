@@ -5,7 +5,8 @@ module Dodopayments
         product_id: String,
         proration_billing_mode: Dodopayments::Models::SubscriptionPreviewChangePlanParams::proration_billing_mode,
         quantity: Integer,
-        addons: ::Array[Dodopayments::AttachAddon]?
+        addons: ::Array[Dodopayments::AttachAddon]?,
+        metadata: ::Hash[Symbol, String]?
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -21,11 +22,14 @@ module Dodopayments
 
       attr_accessor addons: ::Array[Dodopayments::AttachAddon]?
 
+      attr_accessor metadata: ::Hash[Symbol, String]?
+
       def initialize: (
         product_id: String,
         proration_billing_mode: Dodopayments::Models::SubscriptionPreviewChangePlanParams::proration_billing_mode,
         quantity: Integer,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
+        ?metadata: ::Hash[Symbol, String]?,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
@@ -34,6 +38,7 @@ module Dodopayments
         proration_billing_mode: Dodopayments::Models::SubscriptionPreviewChangePlanParams::proration_billing_mode,
         quantity: Integer,
         addons: ::Array[Dodopayments::AttachAddon]?,
+        metadata: ::Hash[Symbol, String]?,
         request_options: Dodopayments::RequestOptions
       }
 
