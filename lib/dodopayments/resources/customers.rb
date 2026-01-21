@@ -79,9 +79,15 @@ module Dodopayments
         )
       end
 
-      # @overload list(email: nil, page_number: nil, page_size: nil, request_options: {})
+      # @overload list(created_at_gte: nil, created_at_lte: nil, email: nil, name: nil, page_number: nil, page_size: nil, request_options: {})
+      #
+      # @param created_at_gte [Time] Filter customers created on or after this timestamp
+      #
+      # @param created_at_lte [Time] Filter customers created on or before this timestamp
       #
       # @param email [String] Filter by customer email
+      #
+      # @param name [String] Filter by customer name (partial match, case-insensitive)
       #
       # @param page_number [Integer] Page number default is 0
       #

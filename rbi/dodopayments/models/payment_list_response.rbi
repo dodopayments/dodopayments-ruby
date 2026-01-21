@@ -40,6 +40,14 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :total_amount
 
+      # Invoice ID for this payment. Uses India-specific invoice ID if available.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :invoice_id
+
+      # URL to download the invoice PDF for this payment.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :invoice_url
+
       sig { returns(T.nilable(String)) }
       attr_accessor :payment_method
 
@@ -62,6 +70,8 @@ module Dodopayments
           metadata: T::Hash[Symbol, String],
           payment_id: String,
           total_amount: Integer,
+          invoice_id: T.nilable(String),
+          invoice_url: T.nilable(String),
           payment_method: T.nilable(String),
           payment_method_type: T.nilable(String),
           status: T.nilable(Dodopayments::IntentStatus::OrSymbol),
@@ -77,6 +87,10 @@ module Dodopayments
         metadata:,
         payment_id:,
         total_amount:,
+        # Invoice ID for this payment. Uses India-specific invoice ID if available.
+        invoice_id: nil,
+        # URL to download the invoice PDF for this payment.
+        invoice_url: nil,
         payment_method: nil,
         payment_method_type: nil,
         status: nil,
@@ -95,6 +109,8 @@ module Dodopayments
             metadata: T::Hash[Symbol, String],
             payment_id: String,
             total_amount: Integer,
+            invoice_id: T.nilable(String),
+            invoice_url: T.nilable(String),
             payment_method: T.nilable(String),
             payment_method_type: T.nilable(String),
             status: T.nilable(Dodopayments::IntentStatus::TaggedSymbol),

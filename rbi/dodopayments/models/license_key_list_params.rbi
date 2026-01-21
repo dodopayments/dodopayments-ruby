@@ -14,6 +14,20 @@ module Dodopayments
           )
         end
 
+      # Filter license keys created on or after this timestamp
+      sig { returns(T.nilable(Time)) }
+      attr_reader :created_at_gte
+
+      sig { params(created_at_gte: Time).void }
+      attr_writer :created_at_gte
+
+      # Filter license keys created on or before this timestamp
+      sig { returns(T.nilable(Time)) }
+      attr_reader :created_at_lte
+
+      sig { params(created_at_lte: Time).void }
+      attr_writer :created_at_lte
+
       # Filter by customer ID
       sig { returns(T.nilable(String)) }
       attr_reader :customer_id
@@ -57,6 +71,8 @@ module Dodopayments
 
       sig do
         params(
+          created_at_gte: Time,
+          created_at_lte: Time,
           customer_id: String,
           page_number: Integer,
           page_size: Integer,
@@ -66,6 +82,10 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        # Filter license keys created on or after this timestamp
+        created_at_gte: nil,
+        # Filter license keys created on or before this timestamp
+        created_at_lte: nil,
         # Filter by customer ID
         customer_id: nil,
         # Page number default is 0
@@ -83,6 +103,8 @@ module Dodopayments
       sig do
         override.returns(
           {
+            created_at_gte: Time,
+            created_at_lte: Time,
             customer_id: String,
             page_number: Integer,
             page_size: Integer,

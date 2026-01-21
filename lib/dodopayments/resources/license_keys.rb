@@ -50,7 +50,11 @@ module Dodopayments
         )
       end
 
-      # @overload list(customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
+      # @overload list(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
+      #
+      # @param created_at_gte [Time] Filter license keys created on or after this timestamp
+      #
+      # @param created_at_lte [Time] Filter license keys created on or before this timestamp
       #
       # @param customer_id [String] Filter by customer ID
       #

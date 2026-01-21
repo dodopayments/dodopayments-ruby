@@ -32,8 +32,12 @@ module Dodopayments
       ) -> Dodopayments::Discount
 
       def list: (
+        ?active: bool,
+        ?code: String,
+        ?discount_type: Dodopayments::Models::discount_type,
         ?page_number: Integer,
         ?page_size: Integer,
+        ?product_id: String,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Discount]
 

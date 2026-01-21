@@ -111,8 +111,12 @@ module Dodopayments
       # GET /discounts
       sig do
         params(
+          active: T::Boolean,
+          code: String,
+          discount_type: Dodopayments::DiscountType::OrSymbol,
           page_number: Integer,
           page_size: Integer,
+          product_id: String,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::DefaultPageNumberPagination[
@@ -121,10 +125,18 @@ module Dodopayments
         )
       end
       def list(
+        # Filter by active status (true = not expired, false = expired)
+        active: nil,
+        # Filter by discount code (partial match, case-insensitive)
+        code: nil,
+        # Filter by discount type (percentage)
+        discount_type: nil,
         # Page number (default = 0).
         page_number: nil,
         # Page size (default = 10, max = 100).
         page_size: nil,
+        # Filter by product restriction (only discounts that apply to this product)
+        product_id: nil,
         request_options: {}
       )
       end

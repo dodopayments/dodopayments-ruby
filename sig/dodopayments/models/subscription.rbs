@@ -25,6 +25,7 @@ module Dodopayments
         tax_inclusive: bool,
         trial_period_days: Integer,
         cancelled_at: Time?,
+        custom_field_responses: ::Array[Dodopayments::Subscription::CustomFieldResponse]?,
         discount_cycles_remaining: Integer?,
         discount_id: String?,
         expires_at: Time?,
@@ -79,6 +80,8 @@ module Dodopayments
 
       attr_accessor cancelled_at: Time?
 
+      attr_accessor custom_field_responses: ::Array[Dodopayments::Subscription::CustomFieldResponse]?
+
       attr_accessor discount_cycles_remaining: Integer?
 
       attr_accessor discount_id: String?
@@ -113,6 +116,7 @@ module Dodopayments
         tax_inclusive: bool,
         trial_period_days: Integer,
         ?cancelled_at: Time?,
+        ?custom_field_responses: ::Array[Dodopayments::Subscription::CustomFieldResponse]?,
         ?discount_cycles_remaining: Integer?,
         ?discount_id: String?,
         ?expires_at: Time?,
@@ -144,6 +148,7 @@ module Dodopayments
         tax_inclusive: bool,
         trial_period_days: Integer,
         cancelled_at: Time?,
+        custom_field_responses: ::Array[Dodopayments::Subscription::CustomFieldResponse]?,
         discount_cycles_remaining: Integer?,
         discount_id: String?,
         expires_at: Time?,
@@ -196,6 +201,18 @@ module Dodopayments
           price_per_unit: String,
           description: String?
         }
+      end
+
+      type custom_field_response = { key: String, value: String }
+
+      class CustomFieldResponse < Dodopayments::Internal::Type::BaseModel
+        attr_accessor key: String
+
+        attr_accessor value: String
+
+        def initialize: (key: String, value: String) -> void
+
+        def to_hash: -> { key: String, value: String }
       end
     end
   end
