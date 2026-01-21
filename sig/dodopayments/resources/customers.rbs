@@ -27,7 +27,10 @@ module Dodopayments
       ) -> Dodopayments::Customer
 
       def list: (
+        ?created_at_gte: Time,
+        ?created_at_lte: Time,
         ?email: String,
+        ?name: String,
         ?page_number: Integer,
         ?page_size: Integer,
         ?request_options: Dodopayments::request_opts

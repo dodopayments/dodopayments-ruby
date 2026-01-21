@@ -110,6 +110,14 @@ module Dodopayments
       sig { returns(T.nilable(Time)) }
       attr_accessor :cancelled_at
 
+      # Customer's responses to custom fields collected during checkout
+      sig do
+        returns(
+          T.nilable(T::Array[Dodopayments::Subscription::CustomFieldResponse])
+        )
+      end
+      attr_accessor :custom_field_responses
+
       # Number of remaining discount cycles if discount is applied
       sig { returns(T.nilable(Integer)) }
       attr_accessor :discount_cycles_remaining
@@ -156,6 +164,10 @@ module Dodopayments
           tax_inclusive: T::Boolean,
           trial_period_days: Integer,
           cancelled_at: T.nilable(Time),
+          custom_field_responses:
+            T.nilable(
+              T::Array[Dodopayments::Subscription::CustomFieldResponse::OrHash]
+            ),
           discount_cycles_remaining: T.nilable(Integer),
           discount_id: T.nilable(String),
           expires_at: T.nilable(Time),
@@ -212,6 +224,8 @@ module Dodopayments
         trial_period_days:,
         # Cancelled timestamp if the subscription is cancelled
         cancelled_at: nil,
+        # Customer's responses to custom fields collected during checkout
+        custom_field_responses: nil,
         # Number of remaining discount cycles if discount is applied
         discount_cycles_remaining: nil,
         # The discount id if discount is applied
@@ -253,6 +267,10 @@ module Dodopayments
             tax_inclusive: T::Boolean,
             trial_period_days: Integer,
             cancelled_at: T.nilable(Time),
+            custom_field_responses:
+              T.nilable(
+                T::Array[Dodopayments::Subscription::CustomFieldResponse]
+              ),
             discount_cycles_remaining: T.nilable(Integer),
             discount_id: T.nilable(String),
             expires_at: T.nilable(Time),
@@ -330,6 +348,38 @@ module Dodopayments
             }
           )
         end
+        def to_hash
+        end
+      end
+
+      class CustomFieldResponse < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::Subscription::CustomFieldResponse,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        # Key matching the custom field definition
+        sig { returns(String) }
+        attr_accessor :key
+
+        # Value provided by customer
+        sig { returns(String) }
+        attr_accessor :value
+
+        # Customer's response to a custom field
+        sig { params(key: String, value: String).returns(T.attached_class) }
+        def self.new(
+          # Key matching the custom field definition
+          key:,
+          # Value provided by customer
+          value:
+        )
+        end
+
+        sig { override.returns({ key: String, value: String }) }
         def to_hash
         end
       end

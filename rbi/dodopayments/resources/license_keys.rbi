@@ -43,6 +43,8 @@ module Dodopayments
 
       sig do
         params(
+          created_at_gte: Time,
+          created_at_lte: Time,
           customer_id: String,
           page_number: Integer,
           page_size: Integer,
@@ -56,6 +58,10 @@ module Dodopayments
         )
       end
       def list(
+        # Filter license keys created on or after this timestamp
+        created_at_gte: nil,
+        # Filter license keys created on or before this timestamp
+        created_at_lte: nil,
         # Filter by customer ID
         customer_id: nil,
         # Page number default is 0

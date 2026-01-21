@@ -130,6 +130,14 @@ module Dodopayments
       #   @return [String, nil]
       optional :checkout_session_id, String, nil?: true
 
+      # @!attribute custom_field_responses
+      #   Customer's responses to custom fields collected during checkout
+      #
+      #   @return [Array<Dodopayments::Models::Payment::CustomFieldResponse>, nil]
+      optional :custom_field_responses,
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Payment::CustomFieldResponse] },
+               nil?: true
+
       # @!attribute discount_id
       #   The discount id if discount is applied
       #
@@ -218,7 +226,7 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, discount_id: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
@@ -261,6 +269,8 @@ module Dodopayments
       #   @param card_type [String, nil] The type of card DEBIT or CREDIT
       #
       #   @param checkout_session_id [String, nil] If payment is made using a checkout session,
+      #
+      #   @param custom_field_responses [Array<Dodopayments::Models::Payment::CustomFieldResponse>, nil] Customer's responses to custom fields collected during checkout
       #
       #   @param discount_id [String, nil] The discount id if discount is applied
       #
@@ -363,6 +373,27 @@ module Dodopayments
         #   @param currency [Symbol, Dodopayments::Models::Currency, nil] The currency of the refund, represented as an ISO 4217 currency code.
         #
         #   @param reason [String, nil] The reason provided for the refund, if any. Optional.
+      end
+
+      class CustomFieldResponse < Dodopayments::Internal::Type::BaseModel
+        # @!attribute key
+        #   Key matching the custom field definition
+        #
+        #   @return [String]
+        required :key, String
+
+        # @!attribute value
+        #   Value provided by customer
+        #
+        #   @return [String]
+        required :value, String
+
+        # @!method initialize(key:, value:)
+        #   Customer's response to a custom field
+        #
+        #   @param key [String] Key matching the custom field definition
+        #
+        #   @param value [String] Value provided by customer
       end
 
       class ProductCart < Dodopayments::Internal::Type::BaseModel

@@ -106,11 +106,19 @@ module Dodopayments
 
       # GET /discounts
       #
-      # @overload list(page_number: nil, page_size: nil, request_options: {})
+      # @overload list(active: nil, code: nil, discount_type: nil, page_number: nil, page_size: nil, product_id: nil, request_options: {})
+      #
+      # @param active [Boolean] Filter by active status (true = not expired, false = expired)
+      #
+      # @param code [String] Filter by discount code (partial match, case-insensitive)
+      #
+      # @param discount_type [Symbol, Dodopayments::Models::DiscountType] Filter by discount type (percentage)
       #
       # @param page_number [Integer] Page number (default = 0).
       #
       # @param page_size [Integer] Page size (default = 10, max = 100).
+      #
+      # @param product_id [String] Filter by product restriction (only discounts that apply to this product)
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

@@ -7,6 +7,7 @@ module Dodopayments
         billing_address: Dodopayments::CheckoutSessionRequest::BillingAddress?,
         billing_currency: Dodopayments::Models::currency?,
         confirm: bool,
+        custom_fields: ::Array[Dodopayments::CheckoutSessionRequest::CustomField]?,
         customer: Dodopayments::Models::customer_request?,
         customization: Dodopayments::CheckoutSessionRequest::Customization,
         discount_code: String?,
@@ -34,6 +35,8 @@ module Dodopayments
       attr_reader confirm: bool?
 
       def confirm=: (bool) -> bool
+
+      attr_accessor custom_fields: ::Array[Dodopayments::CheckoutSessionRequest::CustomField]?
 
       attr_accessor customer: Dodopayments::Models::customer_request?
 
@@ -81,6 +84,7 @@ module Dodopayments
         ?billing_address: Dodopayments::CheckoutSessionRequest::BillingAddress?,
         ?billing_currency: Dodopayments::Models::currency?,
         ?confirm: bool,
+        ?custom_fields: ::Array[Dodopayments::CheckoutSessionRequest::CustomField]?,
         ?customer: Dodopayments::Models::customer_request?,
         ?customization: Dodopayments::CheckoutSessionRequest::Customization,
         ?discount_code: String?,
@@ -102,6 +106,7 @@ module Dodopayments
         billing_address: Dodopayments::CheckoutSessionRequest::BillingAddress?,
         billing_currency: Dodopayments::Models::currency?,
         confirm: bool,
+        custom_fields: ::Array[Dodopayments::CheckoutSessionRequest::CustomField]?,
         customer: Dodopayments::Models::customer_request?,
         customization: Dodopayments::CheckoutSessionRequest::Customization,
         discount_code: String?,
@@ -184,6 +189,77 @@ module Dodopayments
           street: String?,
           zipcode: String?
         }
+      end
+
+      type custom_field =
+        {
+          field_type: Dodopayments::Models::CheckoutSessionRequest::CustomField::field_type,
+          key: String,
+          label: String,
+          options: ::Array[String]?,
+          placeholder: String?,
+          required: bool
+        }
+
+      class CustomField < Dodopayments::Internal::Type::BaseModel
+        attr_accessor field_type: Dodopayments::Models::CheckoutSessionRequest::CustomField::field_type
+
+        attr_accessor key: String
+
+        attr_accessor label: String
+
+        attr_accessor options: ::Array[String]?
+
+        attr_accessor placeholder: String?
+
+        attr_reader required: bool?
+
+        def required=: (bool) -> bool
+
+        def initialize: (
+          field_type: Dodopayments::Models::CheckoutSessionRequest::CustomField::field_type,
+          key: String,
+          label: String,
+          ?options: ::Array[String]?,
+          ?placeholder: String?,
+          ?required: bool
+        ) -> void
+
+        def to_hash: -> {
+          field_type: Dodopayments::Models::CheckoutSessionRequest::CustomField::field_type,
+          key: String,
+          label: String,
+          options: ::Array[String]?,
+          placeholder: String?,
+          required: bool
+        }
+
+        type field_type =
+          :text
+          | :number
+          | :email
+          | :url
+          | :phone
+          | :date
+          | :datetime
+          | :dropdown
+          | :boolean
+
+        module FieldType
+          extend Dodopayments::Internal::Type::Enum
+
+          TEXT: :text
+          NUMBER: :number
+          EMAIL: :email
+          URL: :url
+          PHONE: :phone
+          DATE: :date
+          DATETIME: :datetime
+          DROPDOWN: :dropdown
+          BOOLEAN: :boolean
+
+          def self?.values: -> ::Array[Dodopayments::Models::CheckoutSessionRequest::CustomField::field_type]
+        end
       end
 
       type customization =

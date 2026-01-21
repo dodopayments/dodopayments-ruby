@@ -65,6 +65,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         tax_inclusive: Dodopayments::Internal::Type::Boolean,
         trial_period_days: Integer,
         cancelled_at: Time | nil,
+        custom_field_responses: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Subscription::CustomFieldResponse]) | nil,
         discount_cycles_remaining: Integer | nil,
         discount_id: String | nil,
         expires_at: Time | nil,
@@ -106,6 +107,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         tax_inclusive: Dodopayments::Internal::Type::Boolean,
         trial_period_days: Integer,
         cancelled_at: Time | nil,
+        custom_field_responses: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Subscription::CustomFieldResponse]) | nil,
         discount_cycles_remaining: Integer | nil,
         discount_id: String | nil,
         expires_at: Time | nil,
@@ -155,6 +157,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         discount_cycles_remaining: Integer | nil,
         discount_id: String | nil,
         payment_method_id: String | nil,
+        product_name: String | nil,
         tax_id: String | nil
       }
     end

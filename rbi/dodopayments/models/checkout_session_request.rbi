@@ -55,6 +55,14 @@ module Dodopayments
       sig { params(confirm: T::Boolean).void }
       attr_writer :confirm
 
+      # Custom fields to collect from customer during checkout (max 5 fields)
+      sig do
+        returns(
+          T.nilable(T::Array[Dodopayments::CheckoutSessionRequest::CustomField])
+        )
+      end
+      attr_accessor :custom_fields
+
       # Customer details for the session
       sig do
         returns(
@@ -171,6 +179,12 @@ module Dodopayments
             ),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           confirm: T::Boolean,
+          custom_fields:
+            T.nilable(
+              T::Array[
+                Dodopayments::CheckoutSessionRequest::CustomField::OrHash
+              ]
+            ),
           customer:
             T.nilable(
               T.any(
@@ -213,6 +227,8 @@ module Dodopayments
         # If confirm is true, all the details will be finalized. If required data is
         # missing, an API error is thrown.
         confirm: nil,
+        # Custom fields to collect from customer during checkout (max 5 fields)
+        custom_fields: nil,
         # Customer details for the session
         customer: nil,
         # Customization for the checkout session page
@@ -253,6 +269,10 @@ module Dodopayments
               T.nilable(Dodopayments::CheckoutSessionRequest::BillingAddress),
             billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
             confirm: T::Boolean,
+            custom_fields:
+              T.nilable(
+                T::Array[Dodopayments::CheckoutSessionRequest::CustomField]
+              ),
             customer:
               T.nilable(
                 T.any(
@@ -413,6 +433,161 @@ module Dodopayments
           )
         end
         def to_hash
+        end
+      end
+
+      class CustomField < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::CheckoutSessionRequest::CustomField,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        # Type of field determining validation rules
+        sig do
+          returns(
+            Dodopayments::CheckoutSessionRequest::CustomField::FieldType::OrSymbol
+          )
+        end
+        attr_accessor :field_type
+
+        # Unique identifier for this field (used as key in responses)
+        sig { returns(String) }
+        attr_accessor :key
+
+        # Display label shown to customer
+        sig { returns(String) }
+        attr_accessor :label
+
+        # Options for dropdown type (required for dropdown, ignored for others)
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_accessor :options
+
+        # Placeholder text for the input
+        sig { returns(T.nilable(String)) }
+        attr_accessor :placeholder
+
+        # Whether this field is required
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :required
+
+        sig { params(required: T::Boolean).void }
+        attr_writer :required
+
+        # Definition of a custom field for checkout
+        sig do
+          params(
+            field_type:
+              Dodopayments::CheckoutSessionRequest::CustomField::FieldType::OrSymbol,
+            key: String,
+            label: String,
+            options: T.nilable(T::Array[String]),
+            placeholder: T.nilable(String),
+            required: T::Boolean
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Type of field determining validation rules
+          field_type:,
+          # Unique identifier for this field (used as key in responses)
+          key:,
+          # Display label shown to customer
+          label:,
+          # Options for dropdown type (required for dropdown, ignored for others)
+          options: nil,
+          # Placeholder text for the input
+          placeholder: nil,
+          # Whether this field is required
+          required: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              field_type:
+                Dodopayments::CheckoutSessionRequest::CustomField::FieldType::OrSymbol,
+              key: String,
+              label: String,
+              options: T.nilable(T::Array[String]),
+              placeholder: T.nilable(String),
+              required: T::Boolean
+            }
+          )
+        end
+        def to_hash
+        end
+
+        # Type of field determining validation rules
+        module FieldType
+          extend Dodopayments::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Dodopayments::CheckoutSessionRequest::CustomField::FieldType
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          TEXT =
+            T.let(
+              :text,
+              Dodopayments::CheckoutSessionRequest::CustomField::FieldType::TaggedSymbol
+            )
+          NUMBER =
+            T.let(
+              :number,
+              Dodopayments::CheckoutSessionRequest::CustomField::FieldType::TaggedSymbol
+            )
+          EMAIL =
+            T.let(
+              :email,
+              Dodopayments::CheckoutSessionRequest::CustomField::FieldType::TaggedSymbol
+            )
+          URL =
+            T.let(
+              :url,
+              Dodopayments::CheckoutSessionRequest::CustomField::FieldType::TaggedSymbol
+            )
+          PHONE =
+            T.let(
+              :phone,
+              Dodopayments::CheckoutSessionRequest::CustomField::FieldType::TaggedSymbol
+            )
+          DATE =
+            T.let(
+              :date,
+              Dodopayments::CheckoutSessionRequest::CustomField::FieldType::TaggedSymbol
+            )
+          DATETIME =
+            T.let(
+              :datetime,
+              Dodopayments::CheckoutSessionRequest::CustomField::FieldType::TaggedSymbol
+            )
+          DROPDOWN =
+            T.let(
+              :dropdown,
+              Dodopayments::CheckoutSessionRequest::CustomField::FieldType::TaggedSymbol
+            )
+          BOOLEAN =
+            T.let(
+              :boolean,
+              Dodopayments::CheckoutSessionRequest::CustomField::FieldType::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Dodopayments::CheckoutSessionRequest::CustomField::FieldType::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
 
