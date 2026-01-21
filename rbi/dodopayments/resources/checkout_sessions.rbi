@@ -15,6 +15,12 @@ module Dodopayments
             ),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           confirm: T::Boolean,
+          custom_fields:
+            T.nilable(
+              T::Array[
+                Dodopayments::CheckoutSessionRequest::CustomField::OrHash
+              ]
+            ),
           customer:
             T.nilable(
               T.any(
@@ -58,6 +64,8 @@ module Dodopayments
         # If confirm is true, all the details will be finalized. If required data is
         # missing, an API error is thrown.
         confirm: nil,
+        # Custom fields to collect from customer during checkout (max 5 fields)
+        custom_fields: nil,
         # Customer details for the session
         customer: nil,
         # Customization for the checkout session page
@@ -109,6 +117,12 @@ module Dodopayments
             ),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           confirm: T::Boolean,
+          custom_fields:
+            T.nilable(
+              T::Array[
+                Dodopayments::CheckoutSessionRequest::CustomField::OrHash
+              ]
+            ),
           customer:
             T.nilable(
               T.any(
@@ -152,6 +166,8 @@ module Dodopayments
         # If confirm is true, all the details will be finalized. If required data is
         # missing, an API error is thrown.
         confirm: nil,
+        # Custom fields to collect from customer during checkout (max 5 fields)
+        custom_fields: nil,
         # Customer details for the session
         customer: nil,
         # Customization for the checkout session page

@@ -44,6 +44,18 @@ module Dodopayments
       #   @return [Integer]
       required :total_amount, Integer
 
+      # @!attribute invoice_id
+      #   Invoice ID for this payment. Uses India-specific invoice ID if available.
+      #
+      #   @return [String, nil]
+      optional :invoice_id, String, nil?: true
+
+      # @!attribute invoice_url
+      #   URL to download the invoice PDF for this payment.
+      #
+      #   @return [String, nil]
+      optional :invoice_url, String, nil?: true
+
       # @!attribute payment_method
       #
       #   @return [String, nil]
@@ -64,18 +76,33 @@ module Dodopayments
       #   @return [String, nil]
       optional :subscription_id, String, nil?: true
 
-      # @!method initialize(brand_id:, created_at:, currency:, customer:, digital_products_delivered:, metadata:, payment_id:, total_amount:, payment_method: nil, payment_method_type: nil, status: nil, subscription_id: nil)
+      # @!method initialize(brand_id:, created_at:, currency:, customer:, digital_products_delivered:, metadata:, payment_id:, total_amount:, invoice_id: nil, invoice_url: nil, payment_method: nil, payment_method_type: nil, status: nil, subscription_id: nil)
       #   @param brand_id [String]
+      #
       #   @param created_at [Time]
+      #
       #   @param currency [Symbol, Dodopayments::Models::Currency]
+      #
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
+      #
       #   @param digital_products_delivered [Boolean]
+      #
       #   @param metadata [Hash{Symbol=>String}]
+      #
       #   @param payment_id [String]
+      #
       #   @param total_amount [Integer]
+      #
+      #   @param invoice_id [String, nil] Invoice ID for this payment. Uses India-specific invoice ID if available.
+      #
+      #   @param invoice_url [String, nil] URL to download the invoice PDF for this payment.
+      #
       #   @param payment_method [String, nil]
+      #
       #   @param payment_method_type [String, nil]
+      #
       #   @param status [Symbol, Dodopayments::Models::IntentStatus, nil]
+      #
       #   @param subscription_id [String, nil]
     end
   end

@@ -2,6 +2,8 @@ module Dodopayments
   module Models
     type license_key_list_params =
       {
+        created_at_gte: Time,
+        created_at_lte: Time,
         customer_id: String,
         page_number: Integer,
         page_size: Integer,
@@ -13,6 +15,14 @@ module Dodopayments
     class LicenseKeyListParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
+
+      attr_reader created_at_gte: Time?
+
+      def created_at_gte=: (Time) -> Time
+
+      attr_reader created_at_lte: Time?
+
+      def created_at_lte=: (Time) -> Time
 
       attr_reader customer_id: String?
 
@@ -37,6 +47,8 @@ module Dodopayments
       ) -> Dodopayments::Models::LicenseKeyListParams::status
 
       def initialize: (
+        ?created_at_gte: Time,
+        ?created_at_lte: Time,
         ?customer_id: String,
         ?page_number: Integer,
         ?page_size: Integer,
@@ -46,6 +58,8 @@ module Dodopayments
       ) -> void
 
       def to_hash: -> {
+        created_at_gte: Time,
+        created_at_lte: Time,
         customer_id: String,
         page_number: Integer,
         page_size: Integer,

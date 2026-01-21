@@ -41,6 +41,16 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :confirm, Dodopayments::Internal::Type::Boolean
 
+      # @!attribute custom_fields
+      #   Custom fields to collect from customer during checkout (max 5 fields)
+      #
+      #   @return [Array<Dodopayments::Models::CheckoutSessionRequest::CustomField>, nil]
+      optional :custom_fields,
+               -> {
+                 Dodopayments::Internal::Type::ArrayOf[Dodopayments::CheckoutSessionRequest::CustomField]
+               },
+               nil?: true
+
       # @!attribute customer
       #   Customer details for the session
       #
@@ -119,7 +129,7 @@ module Dodopayments
       #   @return [Dodopayments::Models::CheckoutSessionRequest::SubscriptionData, nil]
       optional :subscription_data, -> { Dodopayments::CheckoutSessionRequest::SubscriptionData }, nil?: true
 
-      # @!method initialize(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil)
+      # @!method initialize(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionRequest} for more details.
       #
@@ -132,6 +142,8 @@ module Dodopayments
       #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] This field is ingored if adaptive pricing is disabled
       #
       #   @param confirm [Boolean] If confirm is true, all the details will be finalized. If required data is missi
+      #
+      #   @param custom_fields [Array<Dodopayments::Models::CheckoutSessionRequest::CustomField>, nil] Custom fields to collect from customer during checkout (max 5 fields)
       #
       #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer, nil] Customer details for the session
       #
@@ -246,6 +258,79 @@ module Dodopayments
         #   @param street [String, nil] Street address including house number and unit/apartment if applicable
         #
         #   @param zipcode [String, nil] Postal code or ZIP code
+      end
+
+      class CustomField < Dodopayments::Internal::Type::BaseModel
+        # @!attribute field_type
+        #   Type of field determining validation rules
+        #
+        #   @return [Symbol, Dodopayments::Models::CheckoutSessionRequest::CustomField::FieldType]
+        required :field_type, enum: -> { Dodopayments::CheckoutSessionRequest::CustomField::FieldType }
+
+        # @!attribute key
+        #   Unique identifier for this field (used as key in responses)
+        #
+        #   @return [String]
+        required :key, String
+
+        # @!attribute label
+        #   Display label shown to customer
+        #
+        #   @return [String]
+        required :label, String
+
+        # @!attribute options
+        #   Options for dropdown type (required for dropdown, ignored for others)
+        #
+        #   @return [Array<String>, nil]
+        optional :options, Dodopayments::Internal::Type::ArrayOf[String], nil?: true
+
+        # @!attribute placeholder
+        #   Placeholder text for the input
+        #
+        #   @return [String, nil]
+        optional :placeholder, String, nil?: true
+
+        # @!attribute required
+        #   Whether this field is required
+        #
+        #   @return [Boolean, nil]
+        optional :required, Dodopayments::Internal::Type::Boolean
+
+        # @!method initialize(field_type:, key:, label:, options: nil, placeholder: nil, required: nil)
+        #   Definition of a custom field for checkout
+        #
+        #   @param field_type [Symbol, Dodopayments::Models::CheckoutSessionRequest::CustomField::FieldType] Type of field determining validation rules
+        #
+        #   @param key [String] Unique identifier for this field (used as key in responses)
+        #
+        #   @param label [String] Display label shown to customer
+        #
+        #   @param options [Array<String>, nil] Options for dropdown type (required for dropdown, ignored for others)
+        #
+        #   @param placeholder [String, nil] Placeholder text for the input
+        #
+        #   @param required [Boolean] Whether this field is required
+
+        # Type of field determining validation rules
+        #
+        # @see Dodopayments::Models::CheckoutSessionRequest::CustomField#field_type
+        module FieldType
+          extend Dodopayments::Internal::Type::Enum
+
+          TEXT = :text
+          NUMBER = :number
+          EMAIL = :email
+          URL = :url
+          PHONE = :phone
+          DATE = :date
+          DATETIME = :datetime
+          DROPDOWN = :dropdown
+          BOOLEAN = :boolean
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
 
       # @see Dodopayments::Models::CheckoutSessionRequest#customization

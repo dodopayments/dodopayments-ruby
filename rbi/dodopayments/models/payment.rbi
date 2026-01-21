@@ -102,6 +102,12 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :checkout_session_id
 
+      # Customer's responses to custom fields collected during checkout
+      sig do
+        returns(T.nilable(T::Array[Dodopayments::Payment::CustomFieldResponse]))
+      end
+      attr_accessor :custom_field_responses
+
       # The discount id if discount is applied
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_id
@@ -182,6 +188,10 @@ module Dodopayments
           card_network: T.nilable(String),
           card_type: T.nilable(String),
           checkout_session_id: T.nilable(String),
+          custom_field_responses:
+            T.nilable(
+              T::Array[Dodopayments::Payment::CustomFieldResponse::OrHash]
+            ),
           discount_id: T.nilable(String),
           error_code: T.nilable(String),
           error_message: T.nilable(String),
@@ -246,6 +256,8 @@ module Dodopayments
         # If payment is made using a checkout session, this field is set to the id of the
         # session.
         checkout_session_id: nil,
+        # Customer's responses to custom fields collected during checkout
+        custom_field_responses: nil,
         # The discount id if discount is applied
         discount_id: nil,
         # An error code if the payment failed
@@ -303,6 +315,8 @@ module Dodopayments
             card_network: T.nilable(String),
             card_type: T.nilable(String),
             checkout_session_id: T.nilable(String),
+            custom_field_responses:
+              T.nilable(T::Array[Dodopayments::Payment::CustomFieldResponse]),
             discount_id: T.nilable(String),
             error_code: T.nilable(String),
             error_message: T.nilable(String),
@@ -419,6 +433,38 @@ module Dodopayments
             }
           )
         end
+        def to_hash
+        end
+      end
+
+      class CustomFieldResponse < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::Payment::CustomFieldResponse,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        # Key matching the custom field definition
+        sig { returns(String) }
+        attr_accessor :key
+
+        # Value provided by customer
+        sig { returns(String) }
+        attr_accessor :value
+
+        # Customer's response to a custom field
+        sig { params(key: String, value: String).returns(T.attached_class) }
+        def self.new(
+          # Key matching the custom field definition
+          key:,
+          # Value provided by customer
+          value:
+        )
+        end
+
+        sig { override.returns({ key: String, value: String }) }
         def to_hash
         end
       end
