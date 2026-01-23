@@ -46,9 +46,11 @@ module Dodopayments
         )
       end
 
-      # @overload update(id, image_id: nil, name: nil, statement_descriptor: nil, support_email: nil, request_options: {})
+      # @overload update(id, description: nil, image_id: nil, name: nil, statement_descriptor: nil, support_email: nil, url: nil, request_options: {})
       #
       # @param id [String] Brand Id
+      #
+      # @param description [String, nil]
       #
       # @param image_id [String, nil] The UUID you got back from the presigned‐upload call
       #
@@ -57,6 +59,8 @@ module Dodopayments
       # @param statement_descriptor [String, nil]
       #
       # @param support_email [String, nil]
+      #
+      # @param url [String, nil]
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

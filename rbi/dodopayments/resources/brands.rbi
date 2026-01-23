@@ -40,21 +40,25 @@ module Dodopayments
       sig do
         params(
           id: String,
+          description: T.nilable(String),
           image_id: T.nilable(String),
           name: T.nilable(String),
           statement_descriptor: T.nilable(String),
           support_email: T.nilable(String),
+          url: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Brand)
       end
       def update(
         # Brand Id
         id,
+        description: nil,
         # The UUID you got back from the presigned‐upload call
         image_id: nil,
         name: nil,
         statement_descriptor: nil,
         support_email: nil,
+        url: nil,
         request_options: {}
       )
       end

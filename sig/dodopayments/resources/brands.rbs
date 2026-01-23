@@ -17,10 +17,12 @@ module Dodopayments
 
       def update: (
         String id,
+        ?description: String?,
         ?image_id: String?,
         ?name: String?,
         ?statement_descriptor: String?,
         ?support_email: String?,
+        ?url: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Brand
 
