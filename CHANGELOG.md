@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.75.0 (2026-01-23)
+
+Full Changelog: [v1.74.0...v1.75.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.74.0...v1.75.0)
+
+### Features
+
+* **api:** updated openapi spec to v1.75.0 ([9f94a5f](https://github.com/dodopayments/dodopayments-ruby/commit/9f94a5fff085e5aa884aa88ee8a6d53014183693))
+
+
+### Bug Fixes
+
+* **internal:** remove duplicate imports ([b44a35a](https://github.com/dodopayments/dodopayments-ruby/commit/b44a35af1f773a566b21082917ecc9a76e9a956b))
+
 ## 1.74.0 (2026-01-21)
 
 Full Changelog: [v1.73.0...v1.74.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.73.0...v1.74.0)
