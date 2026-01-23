@@ -2,16 +2,20 @@ module Dodopayments
   module Models
     type brand_update_params =
       {
+        description: String?,
         image_id: String?,
         name: String?,
         statement_descriptor: String?,
-        support_email: String?
+        support_email: String?,
+        url: String?
       }
       & Dodopayments::Internal::Type::request_parameters
 
     class BrandUpdateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor description: String?
 
       attr_accessor image_id: String?
 
@@ -21,19 +25,25 @@ module Dodopayments
 
       attr_accessor support_email: String?
 
+      attr_accessor url: String?
+
       def initialize: (
+        ?description: String?,
         ?image_id: String?,
         ?name: String?,
         ?statement_descriptor: String?,
         ?support_email: String?,
+        ?url: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
       def to_hash: -> {
+        description: String?,
         image_id: String?,
         name: String?,
         statement_descriptor: String?,
         support_email: String?,
+        url: String?,
         request_options: Dodopayments::RequestOptions
       }
     end
