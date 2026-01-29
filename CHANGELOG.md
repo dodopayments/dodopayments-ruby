@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.75.1 (2026-01-29)
+
+Full Changelog: [v1.75.0...v1.75.1](https://github.com/dodopayments/dodopayments-ruby/compare/v1.75.0...v1.75.1)
+
+### Bug Fixes
+
+* **docs:** fix mcp installation instructions for remote servers ([c9e9571](https://github.com/dodopayments/dodopayments-ruby/commit/c9e95715e2e6e4e2c7e1549b53629cb46aed4eaf))
+
 ## 1.75.0 (2026-01-23)
 
 Full Changelog: [v1.74.0...v1.75.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.74.0...v1.75.0)
