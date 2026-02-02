@@ -553,19 +553,9 @@ module Dodopayments
               :url,
               Dodopayments::CheckoutSessionRequest::CustomField::FieldType::TaggedSymbol
             )
-          PHONE =
-            T.let(
-              :phone,
-              Dodopayments::CheckoutSessionRequest::CustomField::FieldType::TaggedSymbol
-            )
           DATE =
             T.let(
               :date,
-              Dodopayments::CheckoutSessionRequest::CustomField::FieldType::TaggedSymbol
-            )
-          DATETIME =
-            T.let(
-              :datetime,
               Dodopayments::CheckoutSessionRequest::CustomField::FieldType::TaggedSymbol
             )
           DROPDOWN =
@@ -622,7 +612,7 @@ module Dodopayments
         sig { params(show_order_details: T::Boolean).void }
         attr_writer :show_order_details
 
-        # Theme of the page
+        # Theme of the page (determines which mode - light/dark/system - to use)
         #
         # Default is `System`.
         sig do
@@ -642,6 +632,26 @@ module Dodopayments
         end
         attr_writer :theme
 
+        # Optional custom theme configuration with colors for light and dark modes
+        sig do
+          returns(
+            T.nilable(
+              Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig
+            )
+          )
+        end
+        attr_reader :theme_config
+
+        sig do
+          params(
+            theme_config:
+              T.nilable(
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::OrHash
+              )
+          ).void
+        end
+        attr_writer :theme_config
+
         # Customization for the checkout session page
         sig do
           params(
@@ -649,7 +659,11 @@ module Dodopayments
             show_on_demand_tag: T::Boolean,
             show_order_details: T::Boolean,
             theme:
-              Dodopayments::CheckoutSessionRequest::Customization::Theme::OrSymbol
+              Dodopayments::CheckoutSessionRequest::Customization::Theme::OrSymbol,
+            theme_config:
+              T.nilable(
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::OrHash
+              )
           ).returns(T.attached_class)
         end
         def self.new(
@@ -663,10 +677,12 @@ module Dodopayments
           #
           # Default is true
           show_order_details: nil,
-          # Theme of the page
+          # Theme of the page (determines which mode - light/dark/system - to use)
           #
           # Default is `System`.
-          theme: nil
+          theme: nil,
+          # Optional custom theme configuration with colors for light and dark modes
+          theme_config: nil
         )
         end
 
@@ -677,14 +693,18 @@ module Dodopayments
               show_on_demand_tag: T::Boolean,
               show_order_details: T::Boolean,
               theme:
-                Dodopayments::CheckoutSessionRequest::Customization::Theme::OrSymbol
+                Dodopayments::CheckoutSessionRequest::Customization::Theme::OrSymbol,
+              theme_config:
+                T.nilable(
+                  Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig
+                )
             }
           )
         end
         def to_hash
         end
 
-        # Theme of the page
+        # Theme of the page (determines which mode - light/dark/system - to use)
         #
         # Default is `System`.
         module Theme
@@ -723,6 +743,570 @@ module Dodopayments
             )
           end
           def self.values
+          end
+        end
+
+        class ThemeConfig < Dodopayments::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig,
+                Dodopayments::Internal::AnyHash
+              )
+            end
+
+          # Dark mode color configuration
+          sig do
+            returns(
+              T.nilable(
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Dark
+              )
+            )
+          end
+          attr_reader :dark
+
+          sig do
+            params(
+              dark:
+                T.nilable(
+                  Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Dark::OrHash
+                )
+            ).void
+          end
+          attr_writer :dark
+
+          # Font size for the checkout UI
+          sig do
+            returns(
+              T.nilable(
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontSize::OrSymbol
+              )
+            )
+          end
+          attr_accessor :font_size
+
+          # Font weight for the checkout UI
+          sig do
+            returns(
+              T.nilable(
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontWeight::OrSymbol
+              )
+            )
+          end
+          attr_accessor :font_weight
+
+          # Light mode color configuration
+          sig do
+            returns(
+              T.nilable(
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Light
+              )
+            )
+          end
+          attr_reader :light
+
+          sig do
+            params(
+              light:
+                T.nilable(
+                  Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Light::OrHash
+                )
+            ).void
+          end
+          attr_writer :light
+
+          # Custom text for the pay button (e.g., "Complete Purchase", "Subscribe Now")
+          sig { returns(T.nilable(String)) }
+          attr_accessor :pay_button_text
+
+          # Border radius for UI elements (e.g., "4px", "0.5rem", "8px")
+          sig { returns(T.nilable(String)) }
+          attr_accessor :radius
+
+          # Optional custom theme configuration with colors for light and dark modes
+          sig do
+            params(
+              dark:
+                T.nilable(
+                  Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Dark::OrHash
+                ),
+              font_size:
+                T.nilable(
+                  Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontSize::OrSymbol
+                ),
+              font_weight:
+                T.nilable(
+                  Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontWeight::OrSymbol
+                ),
+              light:
+                T.nilable(
+                  Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Light::OrHash
+                ),
+              pay_button_text: T.nilable(String),
+              radius: T.nilable(String)
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            # Dark mode color configuration
+            dark: nil,
+            # Font size for the checkout UI
+            font_size: nil,
+            # Font weight for the checkout UI
+            font_weight: nil,
+            # Light mode color configuration
+            light: nil,
+            # Custom text for the pay button (e.g., "Complete Purchase", "Subscribe Now")
+            pay_button_text: nil,
+            # Border radius for UI elements (e.g., "4px", "0.5rem", "8px")
+            radius: nil
+          )
+          end
+
+          sig do
+            override.returns(
+              {
+                dark:
+                  T.nilable(
+                    Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Dark
+                  ),
+                font_size:
+                  T.nilable(
+                    Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontSize::OrSymbol
+                  ),
+                font_weight:
+                  T.nilable(
+                    Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontWeight::OrSymbol
+                  ),
+                light:
+                  T.nilable(
+                    Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Light
+                  ),
+                pay_button_text: T.nilable(String),
+                radius: T.nilable(String)
+              }
+            )
+          end
+          def to_hash
+          end
+
+          class Dark < Dodopayments::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Dark,
+                  Dodopayments::Internal::AnyHash
+                )
+              end
+
+            # Background primary color
+            #
+            # Examples: `"#ffffff"`, `"rgb(255, 255, 255)"`, `"white"`
+            sig { returns(T.nilable(String)) }
+            attr_accessor :bg_primary
+
+            # Background secondary color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :bg_secondary
+
+            # Border primary color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :border_primary
+
+            # Border secondary color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :border_secondary
+
+            # Primary button background color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :button_primary
+
+            # Primary button hover color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :button_primary_hover
+
+            # Secondary button background color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :button_secondary
+
+            # Secondary button hover color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :button_secondary_hover
+
+            # Primary button text color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :button_text_primary
+
+            # Secondary button text color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :button_text_secondary
+
+            # Input focus border color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :input_focus_border
+
+            # Text error color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :text_error
+
+            # Text placeholder color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :text_placeholder
+
+            # Text primary color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :text_primary
+
+            # Text secondary color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :text_secondary
+
+            # Text success color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :text_success
+
+            # Dark mode color configuration
+            sig do
+              params(
+                bg_primary: T.nilable(String),
+                bg_secondary: T.nilable(String),
+                border_primary: T.nilable(String),
+                border_secondary: T.nilable(String),
+                button_primary: T.nilable(String),
+                button_primary_hover: T.nilable(String),
+                button_secondary: T.nilable(String),
+                button_secondary_hover: T.nilable(String),
+                button_text_primary: T.nilable(String),
+                button_text_secondary: T.nilable(String),
+                input_focus_border: T.nilable(String),
+                text_error: T.nilable(String),
+                text_placeholder: T.nilable(String),
+                text_primary: T.nilable(String),
+                text_secondary: T.nilable(String),
+                text_success: T.nilable(String)
+              ).returns(T.attached_class)
+            end
+            def self.new(
+              # Background primary color
+              #
+              # Examples: `"#ffffff"`, `"rgb(255, 255, 255)"`, `"white"`
+              bg_primary: nil,
+              # Background secondary color
+              bg_secondary: nil,
+              # Border primary color
+              border_primary: nil,
+              # Border secondary color
+              border_secondary: nil,
+              # Primary button background color
+              button_primary: nil,
+              # Primary button hover color
+              button_primary_hover: nil,
+              # Secondary button background color
+              button_secondary: nil,
+              # Secondary button hover color
+              button_secondary_hover: nil,
+              # Primary button text color
+              button_text_primary: nil,
+              # Secondary button text color
+              button_text_secondary: nil,
+              # Input focus border color
+              input_focus_border: nil,
+              # Text error color
+              text_error: nil,
+              # Text placeholder color
+              text_placeholder: nil,
+              # Text primary color
+              text_primary: nil,
+              # Text secondary color
+              text_secondary: nil,
+              # Text success color
+              text_success: nil
+            )
+            end
+
+            sig do
+              override.returns(
+                {
+                  bg_primary: T.nilable(String),
+                  bg_secondary: T.nilable(String),
+                  border_primary: T.nilable(String),
+                  border_secondary: T.nilable(String),
+                  button_primary: T.nilable(String),
+                  button_primary_hover: T.nilable(String),
+                  button_secondary: T.nilable(String),
+                  button_secondary_hover: T.nilable(String),
+                  button_text_primary: T.nilable(String),
+                  button_text_secondary: T.nilable(String),
+                  input_focus_border: T.nilable(String),
+                  text_error: T.nilable(String),
+                  text_placeholder: T.nilable(String),
+                  text_primary: T.nilable(String),
+                  text_secondary: T.nilable(String),
+                  text_success: T.nilable(String)
+                }
+              )
+            end
+            def to_hash
+            end
+          end
+
+          # Font size for the checkout UI
+          module FontSize
+            extend Dodopayments::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontSize
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            XS =
+              T.let(
+                :xs,
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontSize::TaggedSymbol
+              )
+            SM =
+              T.let(
+                :sm,
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontSize::TaggedSymbol
+              )
+            MD =
+              T.let(
+                :md,
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontSize::TaggedSymbol
+              )
+            LG =
+              T.let(
+                :lg,
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontSize::TaggedSymbol
+              )
+            XL =
+              T.let(
+                :xl,
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontSize::TaggedSymbol
+              )
+            FONT_SIZE_2XL =
+              T.let(
+                :"2xl",
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontSize::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontSize::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
+          # Font weight for the checkout UI
+          module FontWeight
+            extend Dodopayments::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontWeight
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            NORMAL =
+              T.let(
+                :normal,
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontWeight::TaggedSymbol
+              )
+            MEDIUM =
+              T.let(
+                :medium,
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontWeight::TaggedSymbol
+              )
+            BOLD =
+              T.let(
+                :bold,
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontWeight::TaggedSymbol
+              )
+            EXTRA_BOLD =
+              T.let(
+                :extraBold,
+                Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontWeight::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontWeight::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
+          class Light < Dodopayments::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Light,
+                  Dodopayments::Internal::AnyHash
+                )
+              end
+
+            # Background primary color
+            #
+            # Examples: `"#ffffff"`, `"rgb(255, 255, 255)"`, `"white"`
+            sig { returns(T.nilable(String)) }
+            attr_accessor :bg_primary
+
+            # Background secondary color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :bg_secondary
+
+            # Border primary color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :border_primary
+
+            # Border secondary color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :border_secondary
+
+            # Primary button background color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :button_primary
+
+            # Primary button hover color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :button_primary_hover
+
+            # Secondary button background color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :button_secondary
+
+            # Secondary button hover color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :button_secondary_hover
+
+            # Primary button text color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :button_text_primary
+
+            # Secondary button text color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :button_text_secondary
+
+            # Input focus border color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :input_focus_border
+
+            # Text error color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :text_error
+
+            # Text placeholder color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :text_placeholder
+
+            # Text primary color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :text_primary
+
+            # Text secondary color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :text_secondary
+
+            # Text success color
+            sig { returns(T.nilable(String)) }
+            attr_accessor :text_success
+
+            # Light mode color configuration
+            sig do
+              params(
+                bg_primary: T.nilable(String),
+                bg_secondary: T.nilable(String),
+                border_primary: T.nilable(String),
+                border_secondary: T.nilable(String),
+                button_primary: T.nilable(String),
+                button_primary_hover: T.nilable(String),
+                button_secondary: T.nilable(String),
+                button_secondary_hover: T.nilable(String),
+                button_text_primary: T.nilable(String),
+                button_text_secondary: T.nilable(String),
+                input_focus_border: T.nilable(String),
+                text_error: T.nilable(String),
+                text_placeholder: T.nilable(String),
+                text_primary: T.nilable(String),
+                text_secondary: T.nilable(String),
+                text_success: T.nilable(String)
+              ).returns(T.attached_class)
+            end
+            def self.new(
+              # Background primary color
+              #
+              # Examples: `"#ffffff"`, `"rgb(255, 255, 255)"`, `"white"`
+              bg_primary: nil,
+              # Background secondary color
+              bg_secondary: nil,
+              # Border primary color
+              border_primary: nil,
+              # Border secondary color
+              border_secondary: nil,
+              # Primary button background color
+              button_primary: nil,
+              # Primary button hover color
+              button_primary_hover: nil,
+              # Secondary button background color
+              button_secondary: nil,
+              # Secondary button hover color
+              button_secondary_hover: nil,
+              # Primary button text color
+              button_text_primary: nil,
+              # Secondary button text color
+              button_text_secondary: nil,
+              # Input focus border color
+              input_focus_border: nil,
+              # Text error color
+              text_error: nil,
+              # Text placeholder color
+              text_placeholder: nil,
+              # Text primary color
+              text_primary: nil,
+              # Text secondary color
+              text_secondary: nil,
+              # Text success color
+              text_success: nil
+            )
+            end
+
+            sig do
+              override.returns(
+                {
+                  bg_primary: T.nilable(String),
+                  bg_secondary: T.nilable(String),
+                  border_primary: T.nilable(String),
+                  border_secondary: T.nilable(String),
+                  button_primary: T.nilable(String),
+                  button_primary_hover: T.nilable(String),
+                  button_secondary: T.nilable(String),
+                  button_secondary_hover: T.nilable(String),
+                  button_text_primary: T.nilable(String),
+                  button_text_secondary: T.nilable(String),
+                  input_focus_border: T.nilable(String),
+                  text_error: T.nilable(String),
+                  text_placeholder: T.nilable(String),
+                  text_primary: T.nilable(String),
+                  text_secondary: T.nilable(String),
+                  text_success: T.nilable(String)
+                }
+              )
+            end
+            def to_hash
+            end
           end
         end
       end

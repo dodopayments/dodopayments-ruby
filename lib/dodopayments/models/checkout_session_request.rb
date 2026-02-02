@@ -322,9 +322,7 @@ module Dodopayments
           NUMBER = :number
           EMAIL = :email
           URL = :url
-          PHONE = :phone
           DATE = :date
-          DATETIME = :datetime
           DROPDOWN = :dropdown
           BOOLEAN = :boolean
 
@@ -358,14 +356,22 @@ module Dodopayments
         optional :show_order_details, Dodopayments::Internal::Type::Boolean
 
         # @!attribute theme
-        #   Theme of the page
+        #   Theme of the page (determines which mode - light/dark/system - to use)
         #
         #   Default is `System`.
         #
         #   @return [Symbol, Dodopayments::Models::CheckoutSessionRequest::Customization::Theme, nil]
         optional :theme, enum: -> { Dodopayments::CheckoutSessionRequest::Customization::Theme }
 
-        # @!method initialize(force_language: nil, show_on_demand_tag: nil, show_order_details: nil, theme: nil)
+        # @!attribute theme_config
+        #   Optional custom theme configuration with colors for light and dark modes
+        #
+        #   @return [Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig, nil]
+        optional :theme_config,
+                 -> { Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig },
+                 nil?: true
+
+        # @!method initialize(force_language: nil, show_on_demand_tag: nil, show_order_details: nil, theme: nil, theme_config: nil)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::CheckoutSessionRequest::Customization} for more details.
         #
@@ -377,9 +383,11 @@ module Dodopayments
         #
         #   @param show_order_details [Boolean] Show order details by default
         #
-        #   @param theme [Symbol, Dodopayments::Models::CheckoutSessionRequest::Customization::Theme] Theme of the page
+        #   @param theme [Symbol, Dodopayments::Models::CheckoutSessionRequest::Customization::Theme] Theme of the page (determines which mode - light/dark/system - to use)
+        #
+        #   @param theme_config [Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig, nil] Optional custom theme configuration with colors for light and dark modes
 
-        # Theme of the page
+        # Theme of the page (determines which mode - light/dark/system - to use)
         #
         # Default is `System`.
         #
@@ -393,6 +401,382 @@ module Dodopayments
 
           # @!method self.values
           #   @return [Array<Symbol>]
+        end
+
+        # @see Dodopayments::Models::CheckoutSessionRequest::Customization#theme_config
+        class ThemeConfig < Dodopayments::Internal::Type::BaseModel
+          # @!attribute dark
+          #   Dark mode color configuration
+          #
+          #   @return [Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::Dark, nil]
+          optional :dark,
+                   -> {
+                     Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Dark
+                   },
+                   nil?: true
+
+          # @!attribute font_size
+          #   Font size for the checkout UI
+          #
+          #   @return [Symbol, Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::FontSize, nil]
+          optional :font_size,
+                   enum: -> { Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontSize },
+                   nil?: true
+
+          # @!attribute font_weight
+          #   Font weight for the checkout UI
+          #
+          #   @return [Symbol, Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::FontWeight, nil]
+          optional :font_weight,
+                   enum: -> { Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::FontWeight },
+                   nil?: true
+
+          # @!attribute light
+          #   Light mode color configuration
+          #
+          #   @return [Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::Light, nil]
+          optional :light,
+                   -> { Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Light },
+                   nil?: true
+
+          # @!attribute pay_button_text
+          #   Custom text for the pay button (e.g., "Complete Purchase", "Subscribe Now")
+          #
+          #   @return [String, nil]
+          optional :pay_button_text, String, nil?: true
+
+          # @!attribute radius
+          #   Border radius for UI elements (e.g., "4px", "0.5rem", "8px")
+          #
+          #   @return [String, nil]
+          optional :radius, String, nil?: true
+
+          # @!method initialize(dark: nil, font_size: nil, font_weight: nil, light: nil, pay_button_text: nil, radius: nil)
+          #   Optional custom theme configuration with colors for light and dark modes
+          #
+          #   @param dark [Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::Dark, nil] Dark mode color configuration
+          #
+          #   @param font_size [Symbol, Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::FontSize, nil] Font size for the checkout UI
+          #
+          #   @param font_weight [Symbol, Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::FontWeight, nil] Font weight for the checkout UI
+          #
+          #   @param light [Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::Light, nil] Light mode color configuration
+          #
+          #   @param pay_button_text [String, nil] Custom text for the pay button (e.g., "Complete Purchase", "Subscribe Now")
+          #
+          #   @param radius [String, nil] Border radius for UI elements (e.g., "4px", "0.5rem", "8px")
+
+          # @see Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig#dark
+          class Dark < Dodopayments::Internal::Type::BaseModel
+            # @!attribute bg_primary
+            #   Background primary color
+            #
+            #   Examples: `"#ffffff"`, `"rgb(255, 255, 255)"`, `"white"`
+            #
+            #   @return [String, nil]
+            optional :bg_primary, String, nil?: true
+
+            # @!attribute bg_secondary
+            #   Background secondary color
+            #
+            #   @return [String, nil]
+            optional :bg_secondary, String, nil?: true
+
+            # @!attribute border_primary
+            #   Border primary color
+            #
+            #   @return [String, nil]
+            optional :border_primary, String, nil?: true
+
+            # @!attribute border_secondary
+            #   Border secondary color
+            #
+            #   @return [String, nil]
+            optional :border_secondary, String, nil?: true
+
+            # @!attribute button_primary
+            #   Primary button background color
+            #
+            #   @return [String, nil]
+            optional :button_primary, String, nil?: true
+
+            # @!attribute button_primary_hover
+            #   Primary button hover color
+            #
+            #   @return [String, nil]
+            optional :button_primary_hover, String, nil?: true
+
+            # @!attribute button_secondary
+            #   Secondary button background color
+            #
+            #   @return [String, nil]
+            optional :button_secondary, String, nil?: true
+
+            # @!attribute button_secondary_hover
+            #   Secondary button hover color
+            #
+            #   @return [String, nil]
+            optional :button_secondary_hover, String, nil?: true
+
+            # @!attribute button_text_primary
+            #   Primary button text color
+            #
+            #   @return [String, nil]
+            optional :button_text_primary, String, nil?: true
+
+            # @!attribute button_text_secondary
+            #   Secondary button text color
+            #
+            #   @return [String, nil]
+            optional :button_text_secondary, String, nil?: true
+
+            # @!attribute input_focus_border
+            #   Input focus border color
+            #
+            #   @return [String, nil]
+            optional :input_focus_border, String, nil?: true
+
+            # @!attribute text_error
+            #   Text error color
+            #
+            #   @return [String, nil]
+            optional :text_error, String, nil?: true
+
+            # @!attribute text_placeholder
+            #   Text placeholder color
+            #
+            #   @return [String, nil]
+            optional :text_placeholder, String, nil?: true
+
+            # @!attribute text_primary
+            #   Text primary color
+            #
+            #   @return [String, nil]
+            optional :text_primary, String, nil?: true
+
+            # @!attribute text_secondary
+            #   Text secondary color
+            #
+            #   @return [String, nil]
+            optional :text_secondary, String, nil?: true
+
+            # @!attribute text_success
+            #   Text success color
+            #
+            #   @return [String, nil]
+            optional :text_success, String, nil?: true
+
+            # @!method initialize(bg_primary: nil, bg_secondary: nil, border_primary: nil, border_secondary: nil, button_primary: nil, button_primary_hover: nil, button_secondary: nil, button_secondary_hover: nil, button_text_primary: nil, button_text_secondary: nil, input_focus_border: nil, text_error: nil, text_placeholder: nil, text_primary: nil, text_secondary: nil, text_success: nil)
+            #   Some parameter documentations has been truncated, see
+            #   {Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::Dark}
+            #   for more details.
+            #
+            #   Dark mode color configuration
+            #
+            #   @param bg_primary [String, nil] Background primary color
+            #
+            #   @param bg_secondary [String, nil] Background secondary color
+            #
+            #   @param border_primary [String, nil] Border primary color
+            #
+            #   @param border_secondary [String, nil] Border secondary color
+            #
+            #   @param button_primary [String, nil] Primary button background color
+            #
+            #   @param button_primary_hover [String, nil] Primary button hover color
+            #
+            #   @param button_secondary [String, nil] Secondary button background color
+            #
+            #   @param button_secondary_hover [String, nil] Secondary button hover color
+            #
+            #   @param button_text_primary [String, nil] Primary button text color
+            #
+            #   @param button_text_secondary [String, nil] Secondary button text color
+            #
+            #   @param input_focus_border [String, nil] Input focus border color
+            #
+            #   @param text_error [String, nil] Text error color
+            #
+            #   @param text_placeholder [String, nil] Text placeholder color
+            #
+            #   @param text_primary [String, nil] Text primary color
+            #
+            #   @param text_secondary [String, nil] Text secondary color
+            #
+            #   @param text_success [String, nil] Text success color
+          end
+
+          # Font size for the checkout UI
+          #
+          # @see Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig#font_size
+          module FontSize
+            extend Dodopayments::Internal::Type::Enum
+
+            XS = :xs
+            SM = :sm
+            MD = :md
+            LG = :lg
+            XL = :xl
+            FONT_SIZE_2XL = :"2xl"
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
+          # Font weight for the checkout UI
+          #
+          # @see Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig#font_weight
+          module FontWeight
+            extend Dodopayments::Internal::Type::Enum
+
+            NORMAL = :normal
+            MEDIUM = :medium
+            BOLD = :bold
+            EXTRA_BOLD = :extraBold
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
+          # @see Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig#light
+          class Light < Dodopayments::Internal::Type::BaseModel
+            # @!attribute bg_primary
+            #   Background primary color
+            #
+            #   Examples: `"#ffffff"`, `"rgb(255, 255, 255)"`, `"white"`
+            #
+            #   @return [String, nil]
+            optional :bg_primary, String, nil?: true
+
+            # @!attribute bg_secondary
+            #   Background secondary color
+            #
+            #   @return [String, nil]
+            optional :bg_secondary, String, nil?: true
+
+            # @!attribute border_primary
+            #   Border primary color
+            #
+            #   @return [String, nil]
+            optional :border_primary, String, nil?: true
+
+            # @!attribute border_secondary
+            #   Border secondary color
+            #
+            #   @return [String, nil]
+            optional :border_secondary, String, nil?: true
+
+            # @!attribute button_primary
+            #   Primary button background color
+            #
+            #   @return [String, nil]
+            optional :button_primary, String, nil?: true
+
+            # @!attribute button_primary_hover
+            #   Primary button hover color
+            #
+            #   @return [String, nil]
+            optional :button_primary_hover, String, nil?: true
+
+            # @!attribute button_secondary
+            #   Secondary button background color
+            #
+            #   @return [String, nil]
+            optional :button_secondary, String, nil?: true
+
+            # @!attribute button_secondary_hover
+            #   Secondary button hover color
+            #
+            #   @return [String, nil]
+            optional :button_secondary_hover, String, nil?: true
+
+            # @!attribute button_text_primary
+            #   Primary button text color
+            #
+            #   @return [String, nil]
+            optional :button_text_primary, String, nil?: true
+
+            # @!attribute button_text_secondary
+            #   Secondary button text color
+            #
+            #   @return [String, nil]
+            optional :button_text_secondary, String, nil?: true
+
+            # @!attribute input_focus_border
+            #   Input focus border color
+            #
+            #   @return [String, nil]
+            optional :input_focus_border, String, nil?: true
+
+            # @!attribute text_error
+            #   Text error color
+            #
+            #   @return [String, nil]
+            optional :text_error, String, nil?: true
+
+            # @!attribute text_placeholder
+            #   Text placeholder color
+            #
+            #   @return [String, nil]
+            optional :text_placeholder, String, nil?: true
+
+            # @!attribute text_primary
+            #   Text primary color
+            #
+            #   @return [String, nil]
+            optional :text_primary, String, nil?: true
+
+            # @!attribute text_secondary
+            #   Text secondary color
+            #
+            #   @return [String, nil]
+            optional :text_secondary, String, nil?: true
+
+            # @!attribute text_success
+            #   Text success color
+            #
+            #   @return [String, nil]
+            optional :text_success, String, nil?: true
+
+            # @!method initialize(bg_primary: nil, bg_secondary: nil, border_primary: nil, border_secondary: nil, button_primary: nil, button_primary_hover: nil, button_secondary: nil, button_secondary_hover: nil, button_text_primary: nil, button_text_secondary: nil, input_focus_border: nil, text_error: nil, text_placeholder: nil, text_primary: nil, text_secondary: nil, text_success: nil)
+            #   Some parameter documentations has been truncated, see
+            #   {Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::Light}
+            #   for more details.
+            #
+            #   Light mode color configuration
+            #
+            #   @param bg_primary [String, nil] Background primary color
+            #
+            #   @param bg_secondary [String, nil] Background secondary color
+            #
+            #   @param border_primary [String, nil] Border primary color
+            #
+            #   @param border_secondary [String, nil] Border secondary color
+            #
+            #   @param button_primary [String, nil] Primary button background color
+            #
+            #   @param button_primary_hover [String, nil] Primary button hover color
+            #
+            #   @param button_secondary [String, nil] Secondary button background color
+            #
+            #   @param button_secondary_hover [String, nil] Secondary button hover color
+            #
+            #   @param button_text_primary [String, nil] Primary button text color
+            #
+            #   @param button_text_secondary [String, nil] Secondary button text color
+            #
+            #   @param input_focus_border [String, nil] Input focus border color
+            #
+            #   @param text_error [String, nil] Text error color
+            #
+            #   @param text_placeholder [String, nil] Text placeholder color
+            #
+            #   @param text_primary [String, nil] Text primary color
+            #
+            #   @param text_secondary [String, nil] Text secondary color
+            #
+            #   @param text_success [String, nil] Text success color
+          end
         end
       end
 
