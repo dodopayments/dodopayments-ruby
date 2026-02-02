@@ -96,6 +96,22 @@ module Dodopayments
           :"license_key.created",
           Dodopayments::WebhookEventType::TaggedSymbol
         )
+      PAYOUT_NOT_INITIATED =
+        T.let(
+          :"payout.not_initiated",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
+      PAYOUT_ON_HOLD =
+        T.let(:"payout.on_hold", Dodopayments::WebhookEventType::TaggedSymbol)
+      PAYOUT_IN_PROGRESS =
+        T.let(
+          :"payout.in_progress",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
+      PAYOUT_FAILED =
+        T.let(:"payout.failed", Dodopayments::WebhookEventType::TaggedSymbol)
+      PAYOUT_SUCCESS =
+        T.let(:"payout.success", Dodopayments::WebhookEventType::TaggedSymbol)
 
       sig do
         override.returns(T::Array[Dodopayments::WebhookEventType::TaggedSymbol])
