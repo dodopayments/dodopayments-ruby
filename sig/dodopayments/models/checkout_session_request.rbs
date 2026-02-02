@@ -235,15 +235,7 @@ module Dodopayments
         }
 
         type field_type =
-          :text
-          | :number
-          | :email
-          | :url
-          | :phone
-          | :date
-          | :datetime
-          | :dropdown
-          | :boolean
+          :text | :number | :email | :url | :date | :dropdown | :boolean
 
         module FieldType
           extend Dodopayments::Internal::Type::Enum
@@ -252,9 +244,7 @@ module Dodopayments
           NUMBER: :number
           EMAIL: :email
           URL: :url
-          PHONE: :phone
           DATE: :date
-          DATETIME: :datetime
           DROPDOWN: :dropdown
           BOOLEAN: :boolean
 
@@ -267,7 +257,8 @@ module Dodopayments
           force_language: String?,
           show_on_demand_tag: bool,
           show_order_details: bool,
-          theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme
+          theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme,
+          theme_config: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig?
         }
 
       class Customization < Dodopayments::Internal::Type::BaseModel
@@ -287,18 +278,22 @@ module Dodopayments
           Dodopayments::Models::CheckoutSessionRequest::Customization::theme
         ) -> Dodopayments::Models::CheckoutSessionRequest::Customization::theme
 
+        attr_accessor theme_config: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig?
+
         def initialize: (
           ?force_language: String?,
           ?show_on_demand_tag: bool,
           ?show_order_details: bool,
-          ?theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme
+          ?theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme,
+          ?theme_config: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig?
         ) -> void
 
         def to_hash: -> {
           force_language: String?,
           show_on_demand_tag: bool,
           show_order_details: bool,
-          theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme
+          theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme,
+          theme_config: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig?
         }
 
         type theme = :dark | :light | :system
@@ -311,6 +306,260 @@ module Dodopayments
           SYSTEM: :system
 
           def self?.values: -> ::Array[Dodopayments::Models::CheckoutSessionRequest::Customization::theme]
+        end
+
+        type theme_config =
+          {
+            dark: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Dark?,
+            font_size: Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_size?,
+            font_weight: Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_weight?,
+            light: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Light?,
+            pay_button_text: String?,
+            radius: String?
+          }
+
+        class ThemeConfig < Dodopayments::Internal::Type::BaseModel
+          attr_accessor dark: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Dark?
+
+          attr_accessor font_size: Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_size?
+
+          attr_accessor font_weight: Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_weight?
+
+          attr_accessor light: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Light?
+
+          attr_accessor pay_button_text: String?
+
+          attr_accessor radius: String?
+
+          def initialize: (
+            ?dark: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Dark?,
+            ?font_size: Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_size?,
+            ?font_weight: Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_weight?,
+            ?light: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Light?,
+            ?pay_button_text: String?,
+            ?radius: String?
+          ) -> void
+
+          def to_hash: -> {
+            dark: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Dark?,
+            font_size: Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_size?,
+            font_weight: Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_weight?,
+            light: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Light?,
+            pay_button_text: String?,
+            radius: String?
+          }
+
+          type dark =
+            {
+              bg_primary: String?,
+              bg_secondary: String?,
+              border_primary: String?,
+              border_secondary: String?,
+              button_primary: String?,
+              button_primary_hover: String?,
+              button_secondary: String?,
+              button_secondary_hover: String?,
+              button_text_primary: String?,
+              button_text_secondary: String?,
+              input_focus_border: String?,
+              text_error: String?,
+              text_placeholder: String?,
+              text_primary: String?,
+              text_secondary: String?,
+              text_success: String?
+            }
+
+          class Dark < Dodopayments::Internal::Type::BaseModel
+            attr_accessor bg_primary: String?
+
+            attr_accessor bg_secondary: String?
+
+            attr_accessor border_primary: String?
+
+            attr_accessor border_secondary: String?
+
+            attr_accessor button_primary: String?
+
+            attr_accessor button_primary_hover: String?
+
+            attr_accessor button_secondary: String?
+
+            attr_accessor button_secondary_hover: String?
+
+            attr_accessor button_text_primary: String?
+
+            attr_accessor button_text_secondary: String?
+
+            attr_accessor input_focus_border: String?
+
+            attr_accessor text_error: String?
+
+            attr_accessor text_placeholder: String?
+
+            attr_accessor text_primary: String?
+
+            attr_accessor text_secondary: String?
+
+            attr_accessor text_success: String?
+
+            def initialize: (
+              ?bg_primary: String?,
+              ?bg_secondary: String?,
+              ?border_primary: String?,
+              ?border_secondary: String?,
+              ?button_primary: String?,
+              ?button_primary_hover: String?,
+              ?button_secondary: String?,
+              ?button_secondary_hover: String?,
+              ?button_text_primary: String?,
+              ?button_text_secondary: String?,
+              ?input_focus_border: String?,
+              ?text_error: String?,
+              ?text_placeholder: String?,
+              ?text_primary: String?,
+              ?text_secondary: String?,
+              ?text_success: String?
+            ) -> void
+
+            def to_hash: -> {
+              bg_primary: String?,
+              bg_secondary: String?,
+              border_primary: String?,
+              border_secondary: String?,
+              button_primary: String?,
+              button_primary_hover: String?,
+              button_secondary: String?,
+              button_secondary_hover: String?,
+              button_text_primary: String?,
+              button_text_secondary: String?,
+              input_focus_border: String?,
+              text_error: String?,
+              text_placeholder: String?,
+              text_primary: String?,
+              text_secondary: String?,
+              text_success: String?
+            }
+          end
+
+          type font_size = :xs | :sm | :md | :lg | :xl | :"2xl"
+
+          module FontSize
+            extend Dodopayments::Internal::Type::Enum
+
+            XS: :xs
+            SM: :sm
+            MD: :md
+            LG: :lg
+            XL: :xl
+            FONT_SIZE_2XL: :"2xl"
+
+            def self?.values: -> ::Array[Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_size]
+          end
+
+          type font_weight = :normal | :medium | :bold | :extraBold
+
+          module FontWeight
+            extend Dodopayments::Internal::Type::Enum
+
+            NORMAL: :normal
+            MEDIUM: :medium
+            BOLD: :bold
+            EXTRA_BOLD: :extraBold
+
+            def self?.values: -> ::Array[Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_weight]
+          end
+
+          type light =
+            {
+              bg_primary: String?,
+              bg_secondary: String?,
+              border_primary: String?,
+              border_secondary: String?,
+              button_primary: String?,
+              button_primary_hover: String?,
+              button_secondary: String?,
+              button_secondary_hover: String?,
+              button_text_primary: String?,
+              button_text_secondary: String?,
+              input_focus_border: String?,
+              text_error: String?,
+              text_placeholder: String?,
+              text_primary: String?,
+              text_secondary: String?,
+              text_success: String?
+            }
+
+          class Light < Dodopayments::Internal::Type::BaseModel
+            attr_accessor bg_primary: String?
+
+            attr_accessor bg_secondary: String?
+
+            attr_accessor border_primary: String?
+
+            attr_accessor border_secondary: String?
+
+            attr_accessor button_primary: String?
+
+            attr_accessor button_primary_hover: String?
+
+            attr_accessor button_secondary: String?
+
+            attr_accessor button_secondary_hover: String?
+
+            attr_accessor button_text_primary: String?
+
+            attr_accessor button_text_secondary: String?
+
+            attr_accessor input_focus_border: String?
+
+            attr_accessor text_error: String?
+
+            attr_accessor text_placeholder: String?
+
+            attr_accessor text_primary: String?
+
+            attr_accessor text_secondary: String?
+
+            attr_accessor text_success: String?
+
+            def initialize: (
+              ?bg_primary: String?,
+              ?bg_secondary: String?,
+              ?border_primary: String?,
+              ?border_secondary: String?,
+              ?button_primary: String?,
+              ?button_primary_hover: String?,
+              ?button_secondary: String?,
+              ?button_secondary_hover: String?,
+              ?button_text_primary: String?,
+              ?button_text_secondary: String?,
+              ?input_focus_border: String?,
+              ?text_error: String?,
+              ?text_placeholder: String?,
+              ?text_primary: String?,
+              ?text_secondary: String?,
+              ?text_success: String?
+            ) -> void
+
+            def to_hash: -> {
+              bg_primary: String?,
+              bg_secondary: String?,
+              border_primary: String?,
+              border_secondary: String?,
+              button_primary: String?,
+              button_primary_hover: String?,
+              button_secondary: String?,
+              button_secondary_hover: String?,
+              button_text_primary: String?,
+              button_text_secondary: String?,
+              input_focus_border: String?,
+              text_error: String?,
+              text_placeholder: String?,
+              text_primary: String?,
+              text_secondary: String?,
+              text_success: String?
+            }
+          end
         end
       end
 
