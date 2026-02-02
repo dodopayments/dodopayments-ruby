@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.78.0 (2026-02-02)
+
+Full Changelog: [v1.75.1...v1.78.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.75.1...v1.78.0)
+
+### Features
+
+* **api:** updated openapi spec for v1.78.1 ([471758d](https://github.com/dodopayments/dodopayments-ruby/commit/471758df73569a5435e0a8ef612a65071cc6cd67))
+
 ## 1.75.1 (2026-01-29)
 
 Full Changelog: [v1.75.0...v1.75.1](https://github.com/dodopayments/dodopayments-ruby/compare/v1.75.0...v1.75.1)
