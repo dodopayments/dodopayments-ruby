@@ -43,13 +43,13 @@ If you’d like to use the repository from source, you can either install from g
 To install via git in your `Gemfile`:
 
 ```ruby
-gem "dodopayments", git: "https://www.github.com/dodopayments/dodopayments-ruby"
+gem "dodopayments", git: "https://github.com/dodopayments/dodopayments-ruby"
 ```
 
 Alternatively, reference local copy of the repo:
 
 ```bash
-$ git clone -- 'https://www.github.com/dodopayments/dodopayments-ruby' '<path-to-repo>'
+$ git clone -- 'https://github.com/dodopayments/dodopayments-ruby' '<path-to-repo>'
 ```
 
 ```ruby
