@@ -1,0 +1,64 @@
+module Dodopayments
+  module Models
+    type custom_field =
+      {
+        field_type: Dodopayments::Models::CustomField::field_type,
+        key: String,
+        label: String,
+        options: ::Array[String]?,
+        placeholder: String?,
+        required: bool
+      }
+
+    class CustomField < Dodopayments::Internal::Type::BaseModel
+      attr_accessor field_type: Dodopayments::Models::CustomField::field_type
+
+      attr_accessor key: String
+
+      attr_accessor label: String
+
+      attr_accessor options: ::Array[String]?
+
+      attr_accessor placeholder: String?
+
+      attr_reader required: bool?
+
+      def required=: (bool) -> bool
+
+      def initialize: (
+        field_type: Dodopayments::Models::CustomField::field_type,
+        key: String,
+        label: String,
+        ?options: ::Array[String]?,
+        ?placeholder: String?,
+        ?required: bool
+      ) -> void
+
+      def to_hash: -> {
+        field_type: Dodopayments::Models::CustomField::field_type,
+        key: String,
+        label: String,
+        options: ::Array[String]?,
+        placeholder: String?,
+        required: bool
+      }
+
+      type field_type =
+        :text | :number | :email | :url | :date | :dropdown | :boolean
+
+      module FieldType
+        extend Dodopayments::Internal::Type::Enum
+
+        TEXT: :text
+        NUMBER: :number
+        EMAIL: :email
+        URL: :url
+        DATE: :date
+        DROPDOWN: :dropdown
+        BOOLEAN: :boolean
+
+        def self?.values: -> ::Array[Dodopayments::Models::CustomField::field_type]
+      end
+    end
+  end
+end

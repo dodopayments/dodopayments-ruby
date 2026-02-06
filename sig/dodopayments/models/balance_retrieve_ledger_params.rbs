@@ -1,0 +1,425 @@
+module Dodopayments
+  module Models
+    type balance_retrieve_ledger_params =
+      {
+        created_at_gte: Time,
+        created_at_lte: Time,
+        currency: Dodopayments::Models::BalanceRetrieveLedgerParams::currency,
+        event_type: Dodopayments::Models::BalanceRetrieveLedgerParams::event_type,
+        limit: Integer,
+        page_number: Integer,
+        page_size: Integer,
+        reference_object_id: String
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class BalanceRetrieveLedgerParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_reader created_at_gte: Time?
+
+      def created_at_gte=: (Time) -> Time
+
+      attr_reader created_at_lte: Time?
+
+      def created_at_lte=: (Time) -> Time
+
+      attr_reader currency: Dodopayments::Models::BalanceRetrieveLedgerParams::currency?
+
+      def currency=: (
+        Dodopayments::Models::BalanceRetrieveLedgerParams::currency
+      ) -> Dodopayments::Models::BalanceRetrieveLedgerParams::currency
+
+      attr_reader event_type: Dodopayments::Models::BalanceRetrieveLedgerParams::event_type?
+
+      def event_type=: (
+        Dodopayments::Models::BalanceRetrieveLedgerParams::event_type
+      ) -> Dodopayments::Models::BalanceRetrieveLedgerParams::event_type
+
+      attr_reader limit: Integer?
+
+      def limit=: (Integer) -> Integer
+
+      attr_reader page_number: Integer?
+
+      def page_number=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
+
+      attr_reader reference_object_id: String?
+
+      def reference_object_id=: (String) -> String
+
+      def initialize: (
+        ?created_at_gte: Time,
+        ?created_at_lte: Time,
+        ?currency: Dodopayments::Models::BalanceRetrieveLedgerParams::currency,
+        ?event_type: Dodopayments::Models::BalanceRetrieveLedgerParams::event_type,
+        ?limit: Integer,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?reference_object_id: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        created_at_gte: Time,
+        created_at_lte: Time,
+        currency: Dodopayments::Models::BalanceRetrieveLedgerParams::currency,
+        event_type: Dodopayments::Models::BalanceRetrieveLedgerParams::event_type,
+        limit: Integer,
+        page_number: Integer,
+        page_size: Integer,
+        reference_object_id: String,
+        request_options: Dodopayments::RequestOptions
+      }
+
+      type currency =
+        :AED
+        | :ALL
+        | :AMD
+        | :ANG
+        | :AOA
+        | :ARS
+        | :AUD
+        | :AWG
+        | :AZN
+        | :BAM
+        | :BBD
+        | :BDT
+        | :BGN
+        | :BHD
+        | :BIF
+        | :BMD
+        | :BND
+        | :BOB
+        | :BRL
+        | :BSD
+        | :BWP
+        | :BYN
+        | :BZD
+        | :CAD
+        | :CHF
+        | :CLP
+        | :CNY
+        | :COP
+        | :CRC
+        | :CUP
+        | :CVE
+        | :CZK
+        | :DJF
+        | :DKK
+        | :DOP
+        | :DZD
+        | :EGP
+        | :ETB
+        | :EUR
+        | :FJD
+        | :FKP
+        | :GBP
+        | :GEL
+        | :GHS
+        | :GIP
+        | :GMD
+        | :GNF
+        | :GTQ
+        | :GYD
+        | :HKD
+        | :HNL
+        | :HRK
+        | :HTG
+        | :HUF
+        | :IDR
+        | :ILS
+        | :INR
+        | :IQD
+        | :JMD
+        | :JOD
+        | :JPY
+        | :KES
+        | :KGS
+        | :KHR
+        | :KMF
+        | :KRW
+        | :KWD
+        | :KYD
+        | :KZT
+        | :LAK
+        | :LBP
+        | :LKR
+        | :LRD
+        | :LSL
+        | :LYD
+        | :MAD
+        | :MDL
+        | :MGA
+        | :MKD
+        | :MMK
+        | :MNT
+        | :MOP
+        | :MRU
+        | :MUR
+        | :MVR
+        | :MWK
+        | :MXN
+        | :MYR
+        | :MZN
+        | :NAD
+        | :NGN
+        | :NIO
+        | :NOK
+        | :NPR
+        | :NZD
+        | :OMR
+        | :PAB
+        | :PEN
+        | :PGK
+        | :PHP
+        | :PKR
+        | :PLN
+        | :PYG
+        | :QAR
+        | :RON
+        | :RSD
+        | :RUB
+        | :RWF
+        | :SAR
+        | :SBD
+        | :SCR
+        | :SEK
+        | :SGD
+        | :SHP
+        | :SLE
+        | :SLL
+        | :SOS
+        | :SRD
+        | :SSP
+        | :STN
+        | :SVC
+        | :SZL
+        | :THB
+        | :TND
+        | :TOP
+        | :TRY
+        | :TTD
+        | :TWD
+        | :TZS
+        | :UAH
+        | :UGX
+        | :USD
+        | :UYU
+        | :UZS
+        | :VES
+        | :VND
+        | :VUV
+        | :WST
+        | :XAF
+        | :XCD
+        | :XOF
+        | :XPF
+        | :YER
+        | :ZAR
+        | :ZMW
+
+      module Currency
+        extend Dodopayments::Internal::Type::Enum
+
+        AED: :AED
+        ALL: :ALL
+        AMD: :AMD
+        ANG: :ANG
+        AOA: :AOA
+        ARS: :ARS
+        AUD: :AUD
+        AWG: :AWG
+        AZN: :AZN
+        BAM: :BAM
+        BBD: :BBD
+        BDT: :BDT
+        BGN: :BGN
+        BHD: :BHD
+        BIF: :BIF
+        BMD: :BMD
+        BND: :BND
+        BOB: :BOB
+        BRL: :BRL
+        BSD: :BSD
+        BWP: :BWP
+        BYN: :BYN
+        BZD: :BZD
+        CAD: :CAD
+        CHF: :CHF
+        CLP: :CLP
+        CNY: :CNY
+        COP: :COP
+        CRC: :CRC
+        CUP: :CUP
+        CVE: :CVE
+        CZK: :CZK
+        DJF: :DJF
+        DKK: :DKK
+        DOP: :DOP
+        DZD: :DZD
+        EGP: :EGP
+        ETB: :ETB
+        EUR: :EUR
+        FJD: :FJD
+        FKP: :FKP
+        GBP: :GBP
+        GEL: :GEL
+        GHS: :GHS
+        GIP: :GIP
+        GMD: :GMD
+        GNF: :GNF
+        GTQ: :GTQ
+        GYD: :GYD
+        HKD: :HKD
+        HNL: :HNL
+        HRK: :HRK
+        HTG: :HTG
+        HUF: :HUF
+        IDR: :IDR
+        ILS: :ILS
+        INR: :INR
+        IQD: :IQD
+        JMD: :JMD
+        JOD: :JOD
+        JPY: :JPY
+        KES: :KES
+        KGS: :KGS
+        KHR: :KHR
+        KMF: :KMF
+        KRW: :KRW
+        KWD: :KWD
+        KYD: :KYD
+        KZT: :KZT
+        LAK: :LAK
+        LBP: :LBP
+        LKR: :LKR
+        LRD: :LRD
+        LSL: :LSL
+        LYD: :LYD
+        MAD: :MAD
+        MDL: :MDL
+        MGA: :MGA
+        MKD: :MKD
+        MMK: :MMK
+        MNT: :MNT
+        MOP: :MOP
+        MRU: :MRU
+        MUR: :MUR
+        MVR: :MVR
+        MWK: :MWK
+        MXN: :MXN
+        MYR: :MYR
+        MZN: :MZN
+        NAD: :NAD
+        NGN: :NGN
+        NIO: :NIO
+        NOK: :NOK
+        NPR: :NPR
+        NZD: :NZD
+        OMR: :OMR
+        PAB: :PAB
+        PEN: :PEN
+        PGK: :PGK
+        PHP: :PHP
+        PKR: :PKR
+        PLN: :PLN
+        PYG: :PYG
+        QAR: :QAR
+        RON: :RON
+        RSD: :RSD
+        RUB: :RUB
+        RWF: :RWF
+        SAR: :SAR
+        SBD: :SBD
+        SCR: :SCR
+        SEK: :SEK
+        SGD: :SGD
+        SHP: :SHP
+        SLE: :SLE
+        SLL: :SLL
+        SOS: :SOS
+        SRD: :SRD
+        SSP: :SSP
+        STN: :STN
+        SVC: :SVC
+        SZL: :SZL
+        THB: :THB
+        TND: :TND
+        TOP: :TOP
+        TRY: :TRY
+        TTD: :TTD
+        TWD: :TWD
+        TZS: :TZS
+        UAH: :UAH
+        UGX: :UGX
+        USD: :USD
+        UYU: :UYU
+        UZS: :UZS
+        VES: :VES
+        VND: :VND
+        VUV: :VUV
+        WST: :WST
+        XAF: :XAF
+        XCD: :XCD
+        XOF: :XOF
+        XPF: :XPF
+        YER: :YER
+        ZAR: :ZAR
+        ZMW: :ZMW
+
+        def self?.values: -> ::Array[Dodopayments::Models::BalanceRetrieveLedgerParams::currency]
+      end
+
+      type event_type =
+        :payment
+        | :refund
+        | :refund_reversal
+        | :dispute
+        | :dispute_reversal
+        | :tax
+        | :tax_reversal
+        | :payment_fees
+        | :refund_fees
+        | :refund_fees_reversal
+        | :dispute_fees
+        | :payout
+        | :payout_fees
+        | :payout_reversal
+        | :payout_fees_reversal
+        | :dodo_credits
+        | :adjustment
+        | :currency_conversion
+
+      module EventType
+        extend Dodopayments::Internal::Type::Enum
+
+        PAYMENT: :payment
+        REFUND: :refund
+        REFUND_REVERSAL: :refund_reversal
+        DISPUTE: :dispute
+        DISPUTE_REVERSAL: :dispute_reversal
+        TAX: :tax
+        TAX_REVERSAL: :tax_reversal
+        PAYMENT_FEES: :payment_fees
+        REFUND_FEES: :refund_fees
+        REFUND_FEES_REVERSAL: :refund_fees_reversal
+        DISPUTE_FEES: :dispute_fees
+        PAYOUT: :payout
+        PAYOUT_FEES: :payout_fees
+        PAYOUT_REVERSAL: :payout_reversal
+        PAYOUT_FEES_REVERSAL: :payout_fees_reversal
+        DODO_CREDITS: :dodo_credits
+        ADJUSTMENT: :adjustment
+        CURRENCY_CONVERSION: :currency_conversion
+
+        def self?.values: -> ::Array[Dodopayments::Models::BalanceRetrieveLedgerParams::event_type]
+      end
+    end
+  end
+end

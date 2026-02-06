@@ -1,0 +1,95 @@
+module Dodopayments
+  module Models
+    type theme_mode_config =
+      {
+        bg_primary: String?,
+        bg_secondary: String?,
+        border_primary: String?,
+        border_secondary: String?,
+        button_primary: String?,
+        button_primary_hover: String?,
+        button_secondary: String?,
+        button_secondary_hover: String?,
+        button_text_primary: String?,
+        button_text_secondary: String?,
+        input_focus_border: String?,
+        text_error: String?,
+        text_placeholder: String?,
+        text_primary: String?,
+        text_secondary: String?,
+        text_success: String?
+      }
+
+    class ThemeModeConfig < Dodopayments::Internal::Type::BaseModel
+      attr_accessor bg_primary: String?
+
+      attr_accessor bg_secondary: String?
+
+      attr_accessor border_primary: String?
+
+      attr_accessor border_secondary: String?
+
+      attr_accessor button_primary: String?
+
+      attr_accessor button_primary_hover: String?
+
+      attr_accessor button_secondary: String?
+
+      attr_accessor button_secondary_hover: String?
+
+      attr_accessor button_text_primary: String?
+
+      attr_accessor button_text_secondary: String?
+
+      attr_accessor input_focus_border: String?
+
+      attr_accessor text_error: String?
+
+      attr_accessor text_placeholder: String?
+
+      attr_accessor text_primary: String?
+
+      attr_accessor text_secondary: String?
+
+      attr_accessor text_success: String?
+
+      def initialize: (
+        ?bg_primary: String?,
+        ?bg_secondary: String?,
+        ?border_primary: String?,
+        ?border_secondary: String?,
+        ?button_primary: String?,
+        ?button_primary_hover: String?,
+        ?button_secondary: String?,
+        ?button_secondary_hover: String?,
+        ?button_text_primary: String?,
+        ?button_text_secondary: String?,
+        ?input_focus_border: String?,
+        ?text_error: String?,
+        ?text_placeholder: String?,
+        ?text_primary: String?,
+        ?text_secondary: String?,
+        ?text_success: String?
+      ) -> void
+
+      def to_hash: -> {
+        bg_primary: String?,
+        bg_secondary: String?,
+        border_primary: String?,
+        border_secondary: String?,
+        button_primary: String?,
+        button_primary_hover: String?,
+        button_secondary: String?,
+        button_secondary_hover: String?,
+        button_text_primary: String?,
+        button_text_secondary: String?,
+        input_focus_border: String?,
+        text_error: String?,
+        text_placeholder: String?,
+        text_primary: String?,
+        text_secondary: String?,
+        text_success: String?
+      }
+    end
+  end
+end

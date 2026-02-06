@@ -438,11 +438,11 @@ module Dodopayments
         # @return [Hash{Symbol=>Object}]
         #
         # @example
-        #   # `checkout_session_request` is a `Dodopayments::CheckoutSessionRequest`
-        #   checkout_session_request => {
-        #     product_cart: product_cart,
-        #     allowed_payment_method_types: allowed_payment_method_types,
-        #     billing_address: billing_address
+        #   # `checkout_session_billing_address` is a `Dodopayments::CheckoutSessionBillingAddress`
+        #   checkout_session_billing_address => {
+        #     country: country,
+        #     city: city,
+        #     state: state
         #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)

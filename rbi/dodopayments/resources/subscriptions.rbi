@@ -180,6 +180,10 @@ module Dodopayments
           quantity: Integer,
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           metadata: T.nilable(T::Hash[Symbol, String]),
+          on_payment_failure:
+            T.nilable(
+              Dodopayments::SubscriptionChangePlanParams::OnPaymentFailure::OrSymbol
+            ),
           request_options: Dodopayments::RequestOptions::OrHash
         ).void
       end
@@ -198,6 +202,14 @@ module Dodopayments
         # Metadata for the payment. If not passed, the metadata of the subscription will
         # be taken
         metadata: nil,
+        # Controls behavior when the plan change payment fails.
+        #
+        # - `prevent_change`: Keep subscription on current plan until payment succeeds
+        # - `apply_change` (default): Apply plan change immediately regardless of payment
+        #   outcome
+        #
+        # If not specified, uses the business-level default setting.
+        on_payment_failure: nil,
         request_options: {}
       )
       end
@@ -251,6 +263,10 @@ module Dodopayments
           quantity: Integer,
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           metadata: T.nilable(T::Hash[Symbol, String]),
+          on_payment_failure:
+            T.nilable(
+              Dodopayments::SubscriptionPreviewChangePlanParams::OnPaymentFailure::OrSymbol
+            ),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Models::SubscriptionPreviewChangePlanResponse)
       end
@@ -269,6 +285,14 @@ module Dodopayments
         # Metadata for the payment. If not passed, the metadata of the subscription will
         # be taken
         metadata: nil,
+        # Controls behavior when the plan change payment fails.
+        #
+        # - `prevent_change`: Keep subscription on current plan until payment succeeds
+        # - `apply_change` (default): Apply plan change immediately regardless of payment
+        #   outcome
+        #
+        # If not specified, uses the business-level default setting.
+        on_payment_failure: nil,
         request_options: {}
       )
       end

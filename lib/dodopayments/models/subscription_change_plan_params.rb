@@ -40,7 +40,21 @@ module Dodopayments
       #   @return [Hash{Symbol=>String}, nil]
       optional :metadata, Dodopayments::Internal::Type::HashOf[String], nil?: true
 
-      # @!method initialize(product_id:, proration_billing_mode:, quantity:, addons: nil, metadata: nil, request_options: {})
+      # @!attribute on_payment_failure
+      #   Controls behavior when the plan change payment fails.
+      #
+      #   - `prevent_change`: Keep subscription on current plan until payment succeeds
+      #   - `apply_change` (default): Apply plan change immediately regardless of payment
+      #     outcome
+      #
+      #   If not specified, uses the business-level default setting.
+      #
+      #   @return [Symbol, Dodopayments::Models::SubscriptionChangePlanParams::OnPaymentFailure, nil]
+      optional :on_payment_failure,
+               enum: -> { Dodopayments::SubscriptionChangePlanParams::OnPaymentFailure },
+               nil?: true
+
+      # @!method initialize(product_id:, proration_billing_mode:, quantity:, addons: nil, metadata: nil, on_payment_failure: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionChangePlanParams} for more details.
       #
@@ -54,6 +68,8 @@ module Dodopayments
       #
       #   @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
+      #   @param on_payment_failure [Symbol, Dodopayments::Models::SubscriptionChangePlanParams::OnPaymentFailure, nil] Controls behavior when the plan change payment fails.
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 
       # Proration Billing Mode
@@ -63,6 +79,23 @@ module Dodopayments
         PRORATED_IMMEDIATELY = :prorated_immediately
         FULL_IMMEDIATELY = :full_immediately
         DIFFERENCE_IMMEDIATELY = :difference_immediately
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
+      # Controls behavior when the plan change payment fails.
+      #
+      # - `prevent_change`: Keep subscription on current plan until payment succeeds
+      # - `apply_change` (default): Apply plan change immediately regardless of payment
+      #   outcome
+      #
+      # If not specified, uses the business-level default setting.
+      module OnPaymentFailure
+        extend Dodopayments::Internal::Type::Enum
+
+        PREVENT_CHANGE = :prevent_change
+        APPLY_CHANGE = :apply_change
 
         # @!method self.values
         #   @return [Array<Symbol>]

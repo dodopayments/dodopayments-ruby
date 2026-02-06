@@ -1,0 +1,19 @@
+module Dodopayments
+  module Resources
+    class Balances
+      def retrieve_ledger: (
+        ?created_at_gte: Time,
+        ?created_at_lte: Time,
+        ?currency: Dodopayments::Models::BalanceRetrieveLedgerParams::currency,
+        ?event_type: Dodopayments::Models::BalanceRetrieveLedgerParams::event_type,
+        ?limit: Integer,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?reference_object_id: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::BalanceLedgerEntry]
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

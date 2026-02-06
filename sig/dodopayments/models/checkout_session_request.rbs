@@ -2,16 +2,16 @@ module Dodopayments
   module Models
     type checkout_session_request =
       {
-        product_cart: ::Array[Dodopayments::CheckoutSessionRequest::ProductCart],
+        product_cart: ::Array[Dodopayments::ProductItemReq],
         allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
-        billing_address: Dodopayments::CheckoutSessionRequest::BillingAddress?,
+        billing_address: Dodopayments::CheckoutSessionBillingAddress?,
         billing_currency: Dodopayments::Models::currency?,
         confirm: bool,
-        custom_fields: ::Array[Dodopayments::CheckoutSessionRequest::CustomField]?,
+        custom_fields: ::Array[Dodopayments::CustomField]?,
         customer: Dodopayments::Models::customer_request?,
-        customization: Dodopayments::CheckoutSessionRequest::Customization,
+        customization: Dodopayments::CheckoutSessionCustomization,
         discount_code: String?,
-        feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
+        feature_flags: Dodopayments::CheckoutSessionFlags,
         :force_3ds => bool?,
         metadata: ::Hash[Symbol, String]?,
         minimal_address: bool,
@@ -20,15 +20,15 @@ module Dodopayments
         return_url: String?,
         short_link: bool,
         show_saved_payment_methods: bool,
-        subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?
+        subscription_data: Dodopayments::SubscriptionData?
       }
 
     class CheckoutSessionRequest < Dodopayments::Internal::Type::BaseModel
-      attr_accessor product_cart: ::Array[Dodopayments::CheckoutSessionRequest::ProductCart]
+      attr_accessor product_cart: ::Array[Dodopayments::ProductItemReq]
 
       attr_accessor allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?
 
-      attr_accessor billing_address: Dodopayments::CheckoutSessionRequest::BillingAddress?
+      attr_accessor billing_address: Dodopayments::CheckoutSessionBillingAddress?
 
       attr_accessor billing_currency: Dodopayments::Models::currency?
 
@@ -36,23 +36,23 @@ module Dodopayments
 
       def confirm=: (bool) -> bool
 
-      attr_accessor custom_fields: ::Array[Dodopayments::CheckoutSessionRequest::CustomField]?
+      attr_accessor custom_fields: ::Array[Dodopayments::CustomField]?
 
       attr_accessor customer: Dodopayments::Models::customer_request?
 
-      attr_reader customization: Dodopayments::CheckoutSessionRequest::Customization?
+      attr_reader customization: Dodopayments::CheckoutSessionCustomization?
 
       def customization=: (
-        Dodopayments::CheckoutSessionRequest::Customization
-      ) -> Dodopayments::CheckoutSessionRequest::Customization
+        Dodopayments::CheckoutSessionCustomization
+      ) -> Dodopayments::CheckoutSessionCustomization
 
       attr_accessor discount_code: String?
 
-      attr_reader feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags?
+      attr_reader feature_flags: Dodopayments::CheckoutSessionFlags?
 
       def feature_flags=: (
-        Dodopayments::CheckoutSessionRequest::FeatureFlags
-      ) -> Dodopayments::CheckoutSessionRequest::FeatureFlags
+        Dodopayments::CheckoutSessionFlags
+      ) -> Dodopayments::CheckoutSessionFlags
 
       attr_accessor force_3ds: bool?
 
@@ -76,19 +76,19 @@ module Dodopayments
 
       def show_saved_payment_methods=: (bool) -> bool
 
-      attr_accessor subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?
+      attr_accessor subscription_data: Dodopayments::SubscriptionData?
 
       def initialize: (
-        product_cart: ::Array[Dodopayments::CheckoutSessionRequest::ProductCart],
+        product_cart: ::Array[Dodopayments::ProductItemReq],
         ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
-        ?billing_address: Dodopayments::CheckoutSessionRequest::BillingAddress?,
+        ?billing_address: Dodopayments::CheckoutSessionBillingAddress?,
         ?billing_currency: Dodopayments::Models::currency?,
         ?confirm: bool,
-        ?custom_fields: ::Array[Dodopayments::CheckoutSessionRequest::CustomField]?,
+        ?custom_fields: ::Array[Dodopayments::CustomField]?,
         ?customer: Dodopayments::Models::customer_request?,
-        ?customization: Dodopayments::CheckoutSessionRequest::Customization,
+        ?customization: Dodopayments::CheckoutSessionCustomization,
         ?discount_code: String?,
-        ?feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
+        ?feature_flags: Dodopayments::CheckoutSessionFlags,
         ?force_3ds: bool?,
         ?metadata: ::Hash[Symbol, String]?,
         ?minimal_address: bool,
@@ -97,20 +97,20 @@ module Dodopayments
         ?return_url: String?,
         ?short_link: bool,
         ?show_saved_payment_methods: bool,
-        ?subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?
+        ?subscription_data: Dodopayments::SubscriptionData?
       ) -> void
 
       def to_hash: -> {
-        product_cart: ::Array[Dodopayments::CheckoutSessionRequest::ProductCart],
+        product_cart: ::Array[Dodopayments::ProductItemReq],
         allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
-        billing_address: Dodopayments::CheckoutSessionRequest::BillingAddress?,
+        billing_address: Dodopayments::CheckoutSessionBillingAddress?,
         billing_currency: Dodopayments::Models::currency?,
         confirm: bool,
-        custom_fields: ::Array[Dodopayments::CheckoutSessionRequest::CustomField]?,
+        custom_fields: ::Array[Dodopayments::CustomField]?,
         customer: Dodopayments::Models::customer_request?,
-        customization: Dodopayments::CheckoutSessionRequest::Customization,
+        customization: Dodopayments::CheckoutSessionCustomization,
         discount_code: String?,
-        feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
+        feature_flags: Dodopayments::CheckoutSessionFlags,
         :force_3ds => bool?,
         metadata: ::Hash[Symbol, String]?,
         minimal_address: bool,
@@ -119,574 +119,8 @@ module Dodopayments
         return_url: String?,
         short_link: bool,
         show_saved_payment_methods: bool,
-        subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?
+        subscription_data: Dodopayments::SubscriptionData?
       }
-
-      type product_cart =
-        {
-          product_id: String,
-          quantity: Integer,
-          addons: ::Array[Dodopayments::AttachAddon]?,
-          amount: Integer?
-        }
-
-      class ProductCart < Dodopayments::Internal::Type::BaseModel
-        attr_accessor product_id: String
-
-        attr_accessor quantity: Integer
-
-        attr_accessor addons: ::Array[Dodopayments::AttachAddon]?
-
-        attr_accessor amount: Integer?
-
-        def initialize: (
-          product_id: String,
-          quantity: Integer,
-          ?addons: ::Array[Dodopayments::AttachAddon]?,
-          ?amount: Integer?
-        ) -> void
-
-        def to_hash: -> {
-          product_id: String,
-          quantity: Integer,
-          addons: ::Array[Dodopayments::AttachAddon]?,
-          amount: Integer?
-        }
-      end
-
-      type billing_address =
-        {
-          country: Dodopayments::Models::country_code,
-          city: String?,
-          state: String?,
-          street: String?,
-          zipcode: String?
-        }
-
-      class BillingAddress < Dodopayments::Internal::Type::BaseModel
-        attr_accessor country: Dodopayments::Models::country_code
-
-        attr_accessor city: String?
-
-        attr_accessor state: String?
-
-        attr_accessor street: String?
-
-        attr_accessor zipcode: String?
-
-        def initialize: (
-          country: Dodopayments::Models::country_code,
-          ?city: String?,
-          ?state: String?,
-          ?street: String?,
-          ?zipcode: String?
-        ) -> void
-
-        def to_hash: -> {
-          country: Dodopayments::Models::country_code,
-          city: String?,
-          state: String?,
-          street: String?,
-          zipcode: String?
-        }
-      end
-
-      type custom_field =
-        {
-          field_type: Dodopayments::Models::CheckoutSessionRequest::CustomField::field_type,
-          key: String,
-          label: String,
-          options: ::Array[String]?,
-          placeholder: String?,
-          required: bool
-        }
-
-      class CustomField < Dodopayments::Internal::Type::BaseModel
-        attr_accessor field_type: Dodopayments::Models::CheckoutSessionRequest::CustomField::field_type
-
-        attr_accessor key: String
-
-        attr_accessor label: String
-
-        attr_accessor options: ::Array[String]?
-
-        attr_accessor placeholder: String?
-
-        attr_reader required: bool?
-
-        def required=: (bool) -> bool
-
-        def initialize: (
-          field_type: Dodopayments::Models::CheckoutSessionRequest::CustomField::field_type,
-          key: String,
-          label: String,
-          ?options: ::Array[String]?,
-          ?placeholder: String?,
-          ?required: bool
-        ) -> void
-
-        def to_hash: -> {
-          field_type: Dodopayments::Models::CheckoutSessionRequest::CustomField::field_type,
-          key: String,
-          label: String,
-          options: ::Array[String]?,
-          placeholder: String?,
-          required: bool
-        }
-
-        type field_type =
-          :text | :number | :email | :url | :date | :dropdown | :boolean
-
-        module FieldType
-          extend Dodopayments::Internal::Type::Enum
-
-          TEXT: :text
-          NUMBER: :number
-          EMAIL: :email
-          URL: :url
-          DATE: :date
-          DROPDOWN: :dropdown
-          BOOLEAN: :boolean
-
-          def self?.values: -> ::Array[Dodopayments::Models::CheckoutSessionRequest::CustomField::field_type]
-        end
-      end
-
-      type customization =
-        {
-          force_language: String?,
-          show_on_demand_tag: bool,
-          show_order_details: bool,
-          theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme,
-          theme_config: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig?
-        }
-
-      class Customization < Dodopayments::Internal::Type::BaseModel
-        attr_accessor force_language: String?
-
-        attr_reader show_on_demand_tag: bool?
-
-        def show_on_demand_tag=: (bool) -> bool
-
-        attr_reader show_order_details: bool?
-
-        def show_order_details=: (bool) -> bool
-
-        attr_reader theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme?
-
-        def theme=: (
-          Dodopayments::Models::CheckoutSessionRequest::Customization::theme
-        ) -> Dodopayments::Models::CheckoutSessionRequest::Customization::theme
-
-        attr_accessor theme_config: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig?
-
-        def initialize: (
-          ?force_language: String?,
-          ?show_on_demand_tag: bool,
-          ?show_order_details: bool,
-          ?theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme,
-          ?theme_config: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig?
-        ) -> void
-
-        def to_hash: -> {
-          force_language: String?,
-          show_on_demand_tag: bool,
-          show_order_details: bool,
-          theme: Dodopayments::Models::CheckoutSessionRequest::Customization::theme,
-          theme_config: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig?
-        }
-
-        type theme = :dark | :light | :system
-
-        module Theme
-          extend Dodopayments::Internal::Type::Enum
-
-          DARK: :dark
-          LIGHT: :light
-          SYSTEM: :system
-
-          def self?.values: -> ::Array[Dodopayments::Models::CheckoutSessionRequest::Customization::theme]
-        end
-
-        type theme_config =
-          {
-            dark: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Dark?,
-            font_size: Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_size?,
-            font_weight: Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_weight?,
-            light: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Light?,
-            pay_button_text: String?,
-            radius: String?
-          }
-
-        class ThemeConfig < Dodopayments::Internal::Type::BaseModel
-          attr_accessor dark: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Dark?
-
-          attr_accessor font_size: Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_size?
-
-          attr_accessor font_weight: Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_weight?
-
-          attr_accessor light: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Light?
-
-          attr_accessor pay_button_text: String?
-
-          attr_accessor radius: String?
-
-          def initialize: (
-            ?dark: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Dark?,
-            ?font_size: Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_size?,
-            ?font_weight: Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_weight?,
-            ?light: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Light?,
-            ?pay_button_text: String?,
-            ?radius: String?
-          ) -> void
-
-          def to_hash: -> {
-            dark: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Dark?,
-            font_size: Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_size?,
-            font_weight: Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_weight?,
-            light: Dodopayments::CheckoutSessionRequest::Customization::ThemeConfig::Light?,
-            pay_button_text: String?,
-            radius: String?
-          }
-
-          type dark =
-            {
-              bg_primary: String?,
-              bg_secondary: String?,
-              border_primary: String?,
-              border_secondary: String?,
-              button_primary: String?,
-              button_primary_hover: String?,
-              button_secondary: String?,
-              button_secondary_hover: String?,
-              button_text_primary: String?,
-              button_text_secondary: String?,
-              input_focus_border: String?,
-              text_error: String?,
-              text_placeholder: String?,
-              text_primary: String?,
-              text_secondary: String?,
-              text_success: String?
-            }
-
-          class Dark < Dodopayments::Internal::Type::BaseModel
-            attr_accessor bg_primary: String?
-
-            attr_accessor bg_secondary: String?
-
-            attr_accessor border_primary: String?
-
-            attr_accessor border_secondary: String?
-
-            attr_accessor button_primary: String?
-
-            attr_accessor button_primary_hover: String?
-
-            attr_accessor button_secondary: String?
-
-            attr_accessor button_secondary_hover: String?
-
-            attr_accessor button_text_primary: String?
-
-            attr_accessor button_text_secondary: String?
-
-            attr_accessor input_focus_border: String?
-
-            attr_accessor text_error: String?
-
-            attr_accessor text_placeholder: String?
-
-            attr_accessor text_primary: String?
-
-            attr_accessor text_secondary: String?
-
-            attr_accessor text_success: String?
-
-            def initialize: (
-              ?bg_primary: String?,
-              ?bg_secondary: String?,
-              ?border_primary: String?,
-              ?border_secondary: String?,
-              ?button_primary: String?,
-              ?button_primary_hover: String?,
-              ?button_secondary: String?,
-              ?button_secondary_hover: String?,
-              ?button_text_primary: String?,
-              ?button_text_secondary: String?,
-              ?input_focus_border: String?,
-              ?text_error: String?,
-              ?text_placeholder: String?,
-              ?text_primary: String?,
-              ?text_secondary: String?,
-              ?text_success: String?
-            ) -> void
-
-            def to_hash: -> {
-              bg_primary: String?,
-              bg_secondary: String?,
-              border_primary: String?,
-              border_secondary: String?,
-              button_primary: String?,
-              button_primary_hover: String?,
-              button_secondary: String?,
-              button_secondary_hover: String?,
-              button_text_primary: String?,
-              button_text_secondary: String?,
-              input_focus_border: String?,
-              text_error: String?,
-              text_placeholder: String?,
-              text_primary: String?,
-              text_secondary: String?,
-              text_success: String?
-            }
-          end
-
-          type font_size = :xs | :sm | :md | :lg | :xl | :"2xl"
-
-          module FontSize
-            extend Dodopayments::Internal::Type::Enum
-
-            XS: :xs
-            SM: :sm
-            MD: :md
-            LG: :lg
-            XL: :xl
-            FONT_SIZE_2XL: :"2xl"
-
-            def self?.values: -> ::Array[Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_size]
-          end
-
-          type font_weight = :normal | :medium | :bold | :extraBold
-
-          module FontWeight
-            extend Dodopayments::Internal::Type::Enum
-
-            NORMAL: :normal
-            MEDIUM: :medium
-            BOLD: :bold
-            EXTRA_BOLD: :extraBold
-
-            def self?.values: -> ::Array[Dodopayments::Models::CheckoutSessionRequest::Customization::ThemeConfig::font_weight]
-          end
-
-          type light =
-            {
-              bg_primary: String?,
-              bg_secondary: String?,
-              border_primary: String?,
-              border_secondary: String?,
-              button_primary: String?,
-              button_primary_hover: String?,
-              button_secondary: String?,
-              button_secondary_hover: String?,
-              button_text_primary: String?,
-              button_text_secondary: String?,
-              input_focus_border: String?,
-              text_error: String?,
-              text_placeholder: String?,
-              text_primary: String?,
-              text_secondary: String?,
-              text_success: String?
-            }
-
-          class Light < Dodopayments::Internal::Type::BaseModel
-            attr_accessor bg_primary: String?
-
-            attr_accessor bg_secondary: String?
-
-            attr_accessor border_primary: String?
-
-            attr_accessor border_secondary: String?
-
-            attr_accessor button_primary: String?
-
-            attr_accessor button_primary_hover: String?
-
-            attr_accessor button_secondary: String?
-
-            attr_accessor button_secondary_hover: String?
-
-            attr_accessor button_text_primary: String?
-
-            attr_accessor button_text_secondary: String?
-
-            attr_accessor input_focus_border: String?
-
-            attr_accessor text_error: String?
-
-            attr_accessor text_placeholder: String?
-
-            attr_accessor text_primary: String?
-
-            attr_accessor text_secondary: String?
-
-            attr_accessor text_success: String?
-
-            def initialize: (
-              ?bg_primary: String?,
-              ?bg_secondary: String?,
-              ?border_primary: String?,
-              ?border_secondary: String?,
-              ?button_primary: String?,
-              ?button_primary_hover: String?,
-              ?button_secondary: String?,
-              ?button_secondary_hover: String?,
-              ?button_text_primary: String?,
-              ?button_text_secondary: String?,
-              ?input_focus_border: String?,
-              ?text_error: String?,
-              ?text_placeholder: String?,
-              ?text_primary: String?,
-              ?text_secondary: String?,
-              ?text_success: String?
-            ) -> void
-
-            def to_hash: -> {
-              bg_primary: String?,
-              bg_secondary: String?,
-              border_primary: String?,
-              border_secondary: String?,
-              button_primary: String?,
-              button_primary_hover: String?,
-              button_secondary: String?,
-              button_secondary_hover: String?,
-              button_text_primary: String?,
-              button_text_secondary: String?,
-              input_focus_border: String?,
-              text_error: String?,
-              text_placeholder: String?,
-              text_primary: String?,
-              text_secondary: String?,
-              text_success: String?
-            }
-          end
-        end
-      end
-
-      type feature_flags =
-        {
-          allow_currency_selection: bool,
-          allow_customer_editing_city: bool,
-          allow_customer_editing_country: bool,
-          allow_customer_editing_email: bool,
-          allow_customer_editing_name: bool,
-          allow_customer_editing_state: bool,
-          allow_customer_editing_street: bool,
-          allow_customer_editing_zipcode: bool,
-          allow_discount_code: bool,
-          allow_phone_number_collection: bool,
-          allow_tax_id: bool,
-          always_create_new_customer: bool,
-          redirect_immediately: bool
-        }
-
-      class FeatureFlags < Dodopayments::Internal::Type::BaseModel
-        attr_reader allow_currency_selection: bool?
-
-        def allow_currency_selection=: (bool) -> bool
-
-        attr_reader allow_customer_editing_city: bool?
-
-        def allow_customer_editing_city=: (bool) -> bool
-
-        attr_reader allow_customer_editing_country: bool?
-
-        def allow_customer_editing_country=: (bool) -> bool
-
-        attr_reader allow_customer_editing_email: bool?
-
-        def allow_customer_editing_email=: (bool) -> bool
-
-        attr_reader allow_customer_editing_name: bool?
-
-        def allow_customer_editing_name=: (bool) -> bool
-
-        attr_reader allow_customer_editing_state: bool?
-
-        def allow_customer_editing_state=: (bool) -> bool
-
-        attr_reader allow_customer_editing_street: bool?
-
-        def allow_customer_editing_street=: (bool) -> bool
-
-        attr_reader allow_customer_editing_zipcode: bool?
-
-        def allow_customer_editing_zipcode=: (bool) -> bool
-
-        attr_reader allow_discount_code: bool?
-
-        def allow_discount_code=: (bool) -> bool
-
-        attr_reader allow_phone_number_collection: bool?
-
-        def allow_phone_number_collection=: (bool) -> bool
-
-        attr_reader allow_tax_id: bool?
-
-        def allow_tax_id=: (bool) -> bool
-
-        attr_reader always_create_new_customer: bool?
-
-        def always_create_new_customer=: (bool) -> bool
-
-        attr_reader redirect_immediately: bool?
-
-        def redirect_immediately=: (bool) -> bool
-
-        def initialize: (
-          ?allow_currency_selection: bool,
-          ?allow_customer_editing_city: bool,
-          ?allow_customer_editing_country: bool,
-          ?allow_customer_editing_email: bool,
-          ?allow_customer_editing_name: bool,
-          ?allow_customer_editing_state: bool,
-          ?allow_customer_editing_street: bool,
-          ?allow_customer_editing_zipcode: bool,
-          ?allow_discount_code: bool,
-          ?allow_phone_number_collection: bool,
-          ?allow_tax_id: bool,
-          ?always_create_new_customer: bool,
-          ?redirect_immediately: bool
-        ) -> void
-
-        def to_hash: -> {
-          allow_currency_selection: bool,
-          allow_customer_editing_city: bool,
-          allow_customer_editing_country: bool,
-          allow_customer_editing_email: bool,
-          allow_customer_editing_name: bool,
-          allow_customer_editing_state: bool,
-          allow_customer_editing_street: bool,
-          allow_customer_editing_zipcode: bool,
-          allow_discount_code: bool,
-          allow_phone_number_collection: bool,
-          allow_tax_id: bool,
-          always_create_new_customer: bool,
-          redirect_immediately: bool
-        }
-      end
-
-      type subscription_data =
-        {
-          on_demand: Dodopayments::OnDemandSubscription?,
-          trial_period_days: Integer?
-        }
-
-      class SubscriptionData < Dodopayments::Internal::Type::BaseModel
-        attr_accessor on_demand: Dodopayments::OnDemandSubscription?
-
-        attr_accessor trial_period_days: Integer?
-
-        def initialize: (
-          ?on_demand: Dodopayments::OnDemandSubscription?,
-          ?trial_period_days: Integer?
-        ) -> void
-
-        def to_hash: -> {
-          on_demand: Dodopayments::OnDemandSubscription?,
-          trial_period_days: Integer?
-        }
-      end
     end
   end
 end

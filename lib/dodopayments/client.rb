@@ -84,6 +84,9 @@ module Dodopayments
     # @return [Dodopayments::Resources::Meters]
     attr_reader :meters
 
+    # @return [Dodopayments::Resources::Balances]
+    attr_reader :balances
+
     # @api private
     #
     # @return [Hash{String=>String}]
@@ -162,6 +165,7 @@ module Dodopayments
       @webhook_events = Dodopayments::Resources::WebhookEvents.new(client: self)
       @usage_events = Dodopayments::Resources::UsageEvents.new(client: self)
       @meters = Dodopayments::Resources::Meters.new(client: self)
+      @balances = Dodopayments::Resources::Balances.new(client: self)
     end
   end
 end

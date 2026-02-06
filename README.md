@@ -223,7 +223,7 @@ You can provide typesafe request parameters like so:
 
 ```ruby
 dodo_payments.checkout_sessions.create(
-  product_cart: [Dodopayments::CheckoutSessionRequest::ProductCart.new(product_id: "product_id", quantity: 0)]
+  product_cart: [Dodopayments::ProductItemReq.new(product_id: "product_id", quantity: 0)]
 )
 ```
 
@@ -235,7 +235,7 @@ dodo_payments.checkout_sessions.create(product_cart: [{product_id: "product_id",
 
 # You can also splat a full Params class:
 params = Dodopayments::CheckoutSessionCreateParams.new(
-  product_cart: [Dodopayments::CheckoutSessionRequest::ProductCart.new(product_id: "product_id", quantity: 0)]
+  product_cart: [Dodopayments::ProductItemReq.new(product_id: "product_id", quantity: 0)]
 )
 dodo_payments.checkout_sessions.create(**params)
 ```

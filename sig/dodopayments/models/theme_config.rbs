@@ -1,0 +1,83 @@
+module Dodopayments
+  module Models
+    type theme_config =
+      {
+        dark: Dodopayments::ThemeModeConfig?,
+        font_primary_url: String?,
+        font_secondary_url: String?,
+        font_size: Dodopayments::Models::ThemeConfig::font_size?,
+        font_weight: Dodopayments::Models::ThemeConfig::font_weight?,
+        light: Dodopayments::ThemeModeConfig?,
+        pay_button_text: String?,
+        radius: String?
+      }
+
+    class ThemeConfig < Dodopayments::Internal::Type::BaseModel
+      attr_accessor dark: Dodopayments::ThemeModeConfig?
+
+      attr_accessor font_primary_url: String?
+
+      attr_accessor font_secondary_url: String?
+
+      attr_accessor font_size: Dodopayments::Models::ThemeConfig::font_size?
+
+      attr_accessor font_weight: Dodopayments::Models::ThemeConfig::font_weight?
+
+      attr_accessor light: Dodopayments::ThemeModeConfig?
+
+      attr_accessor pay_button_text: String?
+
+      attr_accessor radius: String?
+
+      def initialize: (
+        ?dark: Dodopayments::ThemeModeConfig?,
+        ?font_primary_url: String?,
+        ?font_secondary_url: String?,
+        ?font_size: Dodopayments::Models::ThemeConfig::font_size?,
+        ?font_weight: Dodopayments::Models::ThemeConfig::font_weight?,
+        ?light: Dodopayments::ThemeModeConfig?,
+        ?pay_button_text: String?,
+        ?radius: String?
+      ) -> void
+
+      def to_hash: -> {
+        dark: Dodopayments::ThemeModeConfig?,
+        font_primary_url: String?,
+        font_secondary_url: String?,
+        font_size: Dodopayments::Models::ThemeConfig::font_size?,
+        font_weight: Dodopayments::Models::ThemeConfig::font_weight?,
+        light: Dodopayments::ThemeModeConfig?,
+        pay_button_text: String?,
+        radius: String?
+      }
+
+      type font_size = :xs | :sm | :md | :lg | :xl | :"2xl"
+
+      module FontSize
+        extend Dodopayments::Internal::Type::Enum
+
+        XS: :xs
+        SM: :sm
+        MD: :md
+        LG: :lg
+        XL: :xl
+        FONT_SIZE_2XL: :"2xl"
+
+        def self?.values: -> ::Array[Dodopayments::Models::ThemeConfig::font_size]
+      end
+
+      type font_weight = :normal | :medium | :bold | :extraBold
+
+      module FontWeight
+        extend Dodopayments::Internal::Type::Enum
+
+        NORMAL: :normal
+        MEDIUM: :medium
+        BOLD: :bold
+        EXTRA_BOLD: :extraBold
+
+        def self?.values: -> ::Array[Dodopayments::Models::ThemeConfig::font_weight]
+      end
+    end
+  end
+end

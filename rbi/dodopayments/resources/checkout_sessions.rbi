@@ -5,22 +5,14 @@ module Dodopayments
     class CheckoutSessions
       sig do
         params(
-          product_cart:
-            T::Array[Dodopayments::CheckoutSessionRequest::ProductCart::OrHash],
+          product_cart: T::Array[Dodopayments::ProductItemReq::OrHash],
           allowed_payment_method_types:
             T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_address:
-            T.nilable(
-              Dodopayments::CheckoutSessionRequest::BillingAddress::OrHash
-            ),
+            T.nilable(Dodopayments::CheckoutSessionBillingAddress::OrHash),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           confirm: T::Boolean,
-          custom_fields:
-            T.nilable(
-              T::Array[
-                Dodopayments::CheckoutSessionRequest::CustomField::OrHash
-              ]
-            ),
+          custom_fields: T.nilable(T::Array[Dodopayments::CustomField::OrHash]),
           customer:
             T.nilable(
               T.any(
@@ -28,11 +20,9 @@ module Dodopayments
                 Dodopayments::NewCustomer::OrHash
               )
             ),
-          customization:
-            Dodopayments::CheckoutSessionRequest::Customization::OrHash,
+          customization: Dodopayments::CheckoutSessionCustomization::OrHash,
           discount_code: T.nilable(String),
-          feature_flags:
-            Dodopayments::CheckoutSessionRequest::FeatureFlags::OrHash,
+          feature_flags: Dodopayments::CheckoutSessionFlags::OrHash,
           force_3ds: T.nilable(T::Boolean),
           metadata: T.nilable(T::Hash[Symbol, String]),
           minimal_address: T::Boolean,
@@ -41,10 +31,7 @@ module Dodopayments
           return_url: T.nilable(String),
           short_link: T::Boolean,
           show_saved_payment_methods: T::Boolean,
-          subscription_data:
-            T.nilable(
-              Dodopayments::CheckoutSessionRequest::SubscriptionData::OrHash
-            ),
+          subscription_data: T.nilable(Dodopayments::SubscriptionData::OrHash),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::CheckoutSessionResponse)
       end
@@ -107,22 +94,14 @@ module Dodopayments
 
       sig do
         params(
-          product_cart:
-            T::Array[Dodopayments::CheckoutSessionRequest::ProductCart::OrHash],
+          product_cart: T::Array[Dodopayments::ProductItemReq::OrHash],
           allowed_payment_method_types:
             T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_address:
-            T.nilable(
-              Dodopayments::CheckoutSessionRequest::BillingAddress::OrHash
-            ),
+            T.nilable(Dodopayments::CheckoutSessionBillingAddress::OrHash),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           confirm: T::Boolean,
-          custom_fields:
-            T.nilable(
-              T::Array[
-                Dodopayments::CheckoutSessionRequest::CustomField::OrHash
-              ]
-            ),
+          custom_fields: T.nilable(T::Array[Dodopayments::CustomField::OrHash]),
           customer:
             T.nilable(
               T.any(
@@ -130,11 +109,9 @@ module Dodopayments
                 Dodopayments::NewCustomer::OrHash
               )
             ),
-          customization:
-            Dodopayments::CheckoutSessionRequest::Customization::OrHash,
+          customization: Dodopayments::CheckoutSessionCustomization::OrHash,
           discount_code: T.nilable(String),
-          feature_flags:
-            Dodopayments::CheckoutSessionRequest::FeatureFlags::OrHash,
+          feature_flags: Dodopayments::CheckoutSessionFlags::OrHash,
           force_3ds: T.nilable(T::Boolean),
           metadata: T.nilable(T::Hash[Symbol, String]),
           minimal_address: T::Boolean,
@@ -143,10 +120,7 @@ module Dodopayments
           return_url: T.nilable(String),
           short_link: T::Boolean,
           show_saved_payment_methods: T::Boolean,
-          subscription_data:
-            T.nilable(
-              Dodopayments::CheckoutSessionRequest::SubscriptionData::OrHash
-            ),
+          subscription_data: T.nilable(Dodopayments::SubscriptionData::OrHash),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Models::CheckoutSessionPreviewResponse)
       end
