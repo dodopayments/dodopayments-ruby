@@ -1,0 +1,25 @@
+module Dodopayments
+  module Models
+    type subscription_data =
+      {
+        on_demand: Dodopayments::OnDemandSubscription?,
+        trial_period_days: Integer?
+      }
+
+    class SubscriptionData < Dodopayments::Internal::Type::BaseModel
+      attr_accessor on_demand: Dodopayments::OnDemandSubscription?
+
+      attr_accessor trial_period_days: Integer?
+
+      def initialize: (
+        ?on_demand: Dodopayments::OnDemandSubscription?,
+        ?trial_period_days: Integer?
+      ) -> void
+
+      def to_hash: -> {
+        on_demand: Dodopayments::OnDemandSubscription?,
+        trial_period_days: Integer?
+      }
+    end
+  end
+end

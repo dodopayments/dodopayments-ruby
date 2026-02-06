@@ -1,0 +1,120 @@
+module Dodopayments
+  module Models
+    type balance_ledger_entry =
+      {
+        id: String,
+        amount: Integer,
+        business_id: String,
+        created_at: Time,
+        currency: Dodopayments::Models::currency,
+        event_type: Dodopayments::Models::BalanceLedgerEntry::event_type,
+        is_credit: bool,
+        usd_equivalent_amount: Integer,
+        after_balance: Integer?,
+        before_balance: Integer?,
+        description: String?,
+        reference_object_id: String?
+      }
+
+    class BalanceLedgerEntry < Dodopayments::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor amount: Integer
+
+      attr_accessor business_id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor currency: Dodopayments::Models::currency
+
+      attr_accessor event_type: Dodopayments::Models::BalanceLedgerEntry::event_type
+
+      attr_accessor is_credit: bool
+
+      attr_accessor usd_equivalent_amount: Integer
+
+      attr_accessor after_balance: Integer?
+
+      attr_accessor before_balance: Integer?
+
+      attr_accessor description: String?
+
+      attr_accessor reference_object_id: String?
+
+      def initialize: (
+        id: String,
+        amount: Integer,
+        business_id: String,
+        created_at: Time,
+        currency: Dodopayments::Models::currency,
+        event_type: Dodopayments::Models::BalanceLedgerEntry::event_type,
+        is_credit: bool,
+        usd_equivalent_amount: Integer,
+        ?after_balance: Integer?,
+        ?before_balance: Integer?,
+        ?description: String?,
+        ?reference_object_id: String?
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        amount: Integer,
+        business_id: String,
+        created_at: Time,
+        currency: Dodopayments::Models::currency,
+        event_type: Dodopayments::Models::BalanceLedgerEntry::event_type,
+        is_credit: bool,
+        usd_equivalent_amount: Integer,
+        after_balance: Integer?,
+        before_balance: Integer?,
+        description: String?,
+        reference_object_id: String?
+      }
+
+      type event_type =
+        :payment
+        | :refund
+        | :refund_reversal
+        | :dispute
+        | :dispute_reversal
+        | :tax
+        | :tax_reversal
+        | :payment_fees
+        | :refund_fees
+        | :refund_fees_reversal
+        | :dispute_fees
+        | :payout
+        | :payout_fees
+        | :payout_reversal
+        | :payout_fees_reversal
+        | :dodo_credits
+        | :adjustment
+        | :currency_conversion
+
+      module EventType
+        extend Dodopayments::Internal::Type::Enum
+
+        PAYMENT: :payment
+        REFUND: :refund
+        REFUND_REVERSAL: :refund_reversal
+        DISPUTE: :dispute
+        DISPUTE_REVERSAL: :dispute_reversal
+        TAX: :tax
+        TAX_REVERSAL: :tax_reversal
+        PAYMENT_FEES: :payment_fees
+        REFUND_FEES: :refund_fees
+        REFUND_FEES_REVERSAL: :refund_fees_reversal
+        DISPUTE_FEES: :dispute_fees
+        PAYOUT: :payout
+        PAYOUT_FEES: :payout_fees
+        PAYOUT_REVERSAL: :payout_reversal
+        PAYOUT_FEES_REVERSAL: :payout_fees_reversal
+        DODO_CREDITS: :dodo_credits
+        ADJUSTMENT: :adjustment
+        CURRENCY_CONVERSION: :currency_conversion
+
+        def self?.values: -> ::Array[Dodopayments::Models::BalanceLedgerEntry::event_type]
+      end
+    end
+  end
+end

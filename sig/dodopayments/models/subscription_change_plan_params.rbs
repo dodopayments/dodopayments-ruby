@@ -6,7 +6,8 @@ module Dodopayments
         proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode,
         quantity: Integer,
         addons: ::Array[Dodopayments::AttachAddon]?,
-        metadata: ::Hash[Symbol, String]?
+        metadata: ::Hash[Symbol, String]?,
+        on_payment_failure: Dodopayments::Models::SubscriptionChangePlanParams::on_payment_failure?
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -24,12 +25,15 @@ module Dodopayments
 
       attr_accessor metadata: ::Hash[Symbol, String]?
 
+      attr_accessor on_payment_failure: Dodopayments::Models::SubscriptionChangePlanParams::on_payment_failure?
+
       def initialize: (
         product_id: String,
         proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode,
         quantity: Integer,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
         ?metadata: ::Hash[Symbol, String]?,
+        ?on_payment_failure: Dodopayments::Models::SubscriptionChangePlanParams::on_payment_failure?,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
@@ -39,6 +43,7 @@ module Dodopayments
         quantity: Integer,
         addons: ::Array[Dodopayments::AttachAddon]?,
         metadata: ::Hash[Symbol, String]?,
+        on_payment_failure: Dodopayments::Models::SubscriptionChangePlanParams::on_payment_failure?,
         request_options: Dodopayments::RequestOptions
       }
 
@@ -53,6 +58,17 @@ module Dodopayments
         DIFFERENCE_IMMEDIATELY: :difference_immediately
 
         def self?.values: -> ::Array[Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode]
+      end
+
+      type on_payment_failure = :prevent_change | :apply_change
+
+      module OnPaymentFailure
+        extend Dodopayments::Internal::Type::Enum
+
+        PREVENT_CHANGE: :prevent_change
+        APPLY_CHANGE: :apply_change
+
+        def self?.values: -> ::Array[Dodopayments::Models::SubscriptionChangePlanParams::on_payment_failure]
       end
     end
   end

@@ -144,6 +144,13 @@ module Dodopayments
       sig { returns(T.nilable(T::Array[Dodopayments::Payment::ProductCart])) }
       attr_accessor :product_cart
 
+      # Summary of the refund status for this payment. None if no succeeded refunds
+      # exist.
+      sig do
+        returns(T.nilable(Dodopayments::Payment::RefundStatus::TaggedSymbol))
+      end
+      attr_accessor :refund_status
+
       # This represents the portion of settlement_amount that corresponds to taxes
       # collected. Especially relevant for adaptive pricing where the tax component must
       # be tracked separately in your Dodo balance.
@@ -202,6 +209,8 @@ module Dodopayments
           payment_method_type: T.nilable(String),
           product_cart:
             T.nilable(T::Array[Dodopayments::Payment::ProductCart::OrHash]),
+          refund_status:
+            T.nilable(Dodopayments::Payment::RefundStatus::OrSymbol),
           settlement_tax: T.nilable(Integer),
           status: T.nilable(Dodopayments::IntentStatus::OrSymbol),
           subscription_id: T.nilable(String),
@@ -276,6 +285,9 @@ module Dodopayments
         payment_method_type: nil,
         # List of products purchased in a one-time payment
         product_cart: nil,
+        # Summary of the refund status for this payment. None if no succeeded refunds
+        # exist.
+        refund_status: nil,
         # This represents the portion of settlement_amount that corresponds to taxes
         # collected. Especially relevant for adaptive pricing where the tax component must
         # be tracked separately in your Dodo balance.
@@ -327,6 +339,8 @@ module Dodopayments
             payment_method_type: T.nilable(String),
             product_cart:
               T.nilable(T::Array[Dodopayments::Payment::ProductCart]),
+            refund_status:
+              T.nilable(Dodopayments::Payment::RefundStatus::TaggedSymbol),
             settlement_tax: T.nilable(Integer),
             status: T.nilable(Dodopayments::IntentStatus::TaggedSymbol),
             subscription_id: T.nilable(String),
@@ -494,6 +508,28 @@ module Dodopayments
 
         sig { override.returns({ product_id: String, quantity: Integer }) }
         def to_hash
+        end
+      end
+
+      # Summary of the refund status for this payment. None if no succeeded refunds
+      # exist.
+      module RefundStatus
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias { T.all(Symbol, Dodopayments::Payment::RefundStatus) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        PARTIAL =
+          T.let(:partial, Dodopayments::Payment::RefundStatus::TaggedSymbol)
+        FULL = T.let(:full, Dodopayments::Payment::RefundStatus::TaggedSymbol)
+
+        sig do
+          override.returns(
+            T::Array[Dodopayments::Payment::RefundStatus::TaggedSymbol]
+          )
+        end
+        def self.values
         end
       end
     end

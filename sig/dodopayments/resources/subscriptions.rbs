@@ -61,6 +61,7 @@ module Dodopayments
         quantity: Integer,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
         ?metadata: ::Hash[Symbol, String]?,
+        ?on_payment_failure: Dodopayments::Models::SubscriptionChangePlanParams::on_payment_failure?,
         ?request_options: Dodopayments::request_opts
       ) -> nil
 
@@ -82,6 +83,7 @@ module Dodopayments
         quantity: Integer,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
         ?metadata: ::Hash[Symbol, String]?,
+        ?on_payment_failure: Dodopayments::Models::SubscriptionPreviewChangePlanParams::on_payment_failure?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::SubscriptionPreviewChangePlanResponse
 

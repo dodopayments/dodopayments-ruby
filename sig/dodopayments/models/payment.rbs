@@ -32,6 +32,7 @@ module Dodopayments
         payment_method: String?,
         payment_method_type: String?,
         product_cart: ::Array[Dodopayments::Payment::ProductCart]?,
+        refund_status: Dodopayments::Models::Payment::refund_status?,
         settlement_tax: Integer?,
         status: Dodopayments::Models::intent_status?,
         subscription_id: String?,
@@ -100,6 +101,8 @@ module Dodopayments
 
       attr_accessor product_cart: ::Array[Dodopayments::Payment::ProductCart]?
 
+      attr_accessor refund_status: Dodopayments::Models::Payment::refund_status?
+
       attr_accessor settlement_tax: Integer?
 
       attr_accessor status: Dodopayments::Models::intent_status?
@@ -141,6 +144,7 @@ module Dodopayments
         ?payment_method: String?,
         ?payment_method_type: String?,
         ?product_cart: ::Array[Dodopayments::Payment::ProductCart]?,
+        ?refund_status: Dodopayments::Models::Payment::refund_status?,
         ?settlement_tax: Integer?,
         ?status: Dodopayments::Models::intent_status?,
         ?subscription_id: String?,
@@ -179,6 +183,7 @@ module Dodopayments
         payment_method: String?,
         payment_method_type: String?,
         product_cart: ::Array[Dodopayments::Payment::ProductCart]?,
+        refund_status: Dodopayments::Models::Payment::refund_status?,
         settlement_tax: Integer?,
         status: Dodopayments::Models::intent_status?,
         subscription_id: String?,
@@ -265,6 +270,17 @@ module Dodopayments
         def initialize: (product_id: String, quantity: Integer) -> void
 
         def to_hash: -> { product_id: String, quantity: Integer }
+      end
+
+      type refund_status = :partial | :full
+
+      module RefundStatus
+        extend Dodopayments::Internal::Type::Enum
+
+        PARTIAL: :partial
+        FULL: :full
+
+        def self?.values: -> ::Array[Dodopayments::Models::Payment::refund_status]
       end
     end
   end

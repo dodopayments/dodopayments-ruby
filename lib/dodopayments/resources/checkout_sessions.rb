@@ -8,25 +8,25 @@ module Dodopayments
       #
       # @overload create(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, request_options: {})
       #
-      # @param product_cart [Array<Dodopayments::Models::CheckoutSessionRequest::ProductCart>]
+      # @param product_cart [Array<Dodopayments::Models::ProductItemReq>]
       #
       # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil] Customers will never see payment methods that are not in this list.
       #
-      # @param billing_address [Dodopayments::Models::CheckoutSessionRequest::BillingAddress, nil] Billing address information for the session
+      # @param billing_address [Dodopayments::Models::CheckoutSessionBillingAddress, nil] Billing address information for the session
       #
       # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] This field is ingored if adaptive pricing is disabled
       #
       # @param confirm [Boolean] If confirm is true, all the details will be finalized. If required data is missi
       #
-      # @param custom_fields [Array<Dodopayments::Models::CheckoutSessionRequest::CustomField>, nil] Custom fields to collect from customer during checkout (max 5 fields)
+      # @param custom_fields [Array<Dodopayments::Models::CustomField>, nil] Custom fields to collect from customer during checkout (max 5 fields)
       #
       # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer, nil] Customer details for the session
       #
-      # @param customization [Dodopayments::Models::CheckoutSessionRequest::Customization] Customization for the checkout session page
+      # @param customization [Dodopayments::Models::CheckoutSessionCustomization] Customization for the checkout session page
       #
       # @param discount_code [String, nil]
       #
-      # @param feature_flags [Dodopayments::Models::CheckoutSessionRequest::FeatureFlags]
+      # @param feature_flags [Dodopayments::Models::CheckoutSessionFlags]
       #
       # @param force_3ds [Boolean, nil] Override merchant default 3DS behaviour for this session
       #
@@ -44,7 +44,7 @@ module Dodopayments
       #
       # @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer False by default
       #
-      # @param subscription_data [Dodopayments::Models::CheckoutSessionRequest::SubscriptionData, nil]
+      # @param subscription_data [Dodopayments::Models::SubscriptionData, nil]
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -84,25 +84,25 @@ module Dodopayments
       #
       # @overload preview(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, request_options: {})
       #
-      # @param product_cart [Array<Dodopayments::Models::CheckoutSessionRequest::ProductCart>]
+      # @param product_cart [Array<Dodopayments::Models::ProductItemReq>]
       #
       # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil] Customers will never see payment methods that are not in this list.
       #
-      # @param billing_address [Dodopayments::Models::CheckoutSessionRequest::BillingAddress, nil] Billing address information for the session
+      # @param billing_address [Dodopayments::Models::CheckoutSessionBillingAddress, nil] Billing address information for the session
       #
       # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] This field is ingored if adaptive pricing is disabled
       #
       # @param confirm [Boolean] If confirm is true, all the details will be finalized. If required data is missi
       #
-      # @param custom_fields [Array<Dodopayments::Models::CheckoutSessionRequest::CustomField>, nil] Custom fields to collect from customer during checkout (max 5 fields)
+      # @param custom_fields [Array<Dodopayments::Models::CustomField>, nil] Custom fields to collect from customer during checkout (max 5 fields)
       #
       # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer, nil] Customer details for the session
       #
-      # @param customization [Dodopayments::Models::CheckoutSessionRequest::Customization] Customization for the checkout session page
+      # @param customization [Dodopayments::Models::CheckoutSessionCustomization] Customization for the checkout session page
       #
       # @param discount_code [String, nil]
       #
-      # @param feature_flags [Dodopayments::Models::CheckoutSessionRequest::FeatureFlags]
+      # @param feature_flags [Dodopayments::Models::CheckoutSessionFlags]
       #
       # @param force_3ds [Boolean, nil] Override merchant default 3DS behaviour for this session
       #
@@ -120,7 +120,7 @@ module Dodopayments
       #
       # @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer False by default
       #
-      # @param subscription_data [Dodopayments::Models::CheckoutSessionRequest::SubscriptionData, nil]
+      # @param subscription_data [Dodopayments::Models::SubscriptionData, nil]
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

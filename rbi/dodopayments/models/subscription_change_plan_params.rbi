@@ -40,6 +40,22 @@ module Dodopayments
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_accessor :metadata
 
+      # Controls behavior when the plan change payment fails.
+      #
+      # - `prevent_change`: Keep subscription on current plan until payment succeeds
+      # - `apply_change` (default): Apply plan change immediately regardless of payment
+      #   outcome
+      #
+      # If not specified, uses the business-level default setting.
+      sig do
+        returns(
+          T.nilable(
+            Dodopayments::SubscriptionChangePlanParams::OnPaymentFailure::OrSymbol
+          )
+        )
+      end
+      attr_accessor :on_payment_failure
+
       sig do
         params(
           product_id: String,
@@ -48,6 +64,10 @@ module Dodopayments
           quantity: Integer,
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           metadata: T.nilable(T::Hash[Symbol, String]),
+          on_payment_failure:
+            T.nilable(
+              Dodopayments::SubscriptionChangePlanParams::OnPaymentFailure::OrSymbol
+            ),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -64,6 +84,14 @@ module Dodopayments
         # Metadata for the payment. If not passed, the metadata of the subscription will
         # be taken
         metadata: nil,
+        # Controls behavior when the plan change payment fails.
+        #
+        # - `prevent_change`: Keep subscription on current plan until payment succeeds
+        # - `apply_change` (default): Apply plan change immediately regardless of payment
+        #   outcome
+        #
+        # If not specified, uses the business-level default setting.
+        on_payment_failure: nil,
         request_options: {}
       )
       end
@@ -77,6 +105,10 @@ module Dodopayments
             quantity: Integer,
             addons: T.nilable(T::Array[Dodopayments::AttachAddon]),
             metadata: T.nilable(T::Hash[Symbol, String]),
+            on_payment_failure:
+              T.nilable(
+                Dodopayments::SubscriptionChangePlanParams::OnPaymentFailure::OrSymbol
+              ),
             request_options: Dodopayments::RequestOptions
           }
         )
@@ -117,6 +149,47 @@ module Dodopayments
           override.returns(
             T::Array[
               Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
+      end
+
+      # Controls behavior when the plan change payment fails.
+      #
+      # - `prevent_change`: Keep subscription on current plan until payment succeeds
+      # - `apply_change` (default): Apply plan change immediately regardless of payment
+      #   outcome
+      #
+      # If not specified, uses the business-level default setting.
+      module OnPaymentFailure
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(
+              Symbol,
+              Dodopayments::SubscriptionChangePlanParams::OnPaymentFailure
+            )
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        PREVENT_CHANGE =
+          T.let(
+            :prevent_change,
+            Dodopayments::SubscriptionChangePlanParams::OnPaymentFailure::TaggedSymbol
+          )
+        APPLY_CHANGE =
+          T.let(
+            :apply_change,
+            Dodopayments::SubscriptionChangePlanParams::OnPaymentFailure::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Dodopayments::SubscriptionChangePlanParams::OnPaymentFailure::TaggedSymbol
             ]
           )
         end
