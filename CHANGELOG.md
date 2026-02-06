@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.81.0 (2026-02-06)
+
+Full Changelog: [v1.78.0...v1.81.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.78.0...v1.81.0)
+
+### Features
+
+* **api:** updated openapi spec to v1.81.0 ([5352bb7](https://github.com/dodopayments/dodopayments-ruby/commit/5352bb779fd2126cd087e9b13b36ba1e44f8859f))
+
+
+### Bug Fixes
+
+* **client:** always add content-length to post body, even when empty ([79b027e](https://github.com/dodopayments/dodopayments-ruby/commit/79b027e2ad0b8290d6918ecaa1cb364c94caa6dc))
+
+
+### Chores
+
+* **docs:** remove www prefix ([594f8da](https://github.com/dodopayments/dodopayments-ruby/commit/594f8da91e1dc3e4d7d185109126b31902a9d420))
+
 ## 1.78.0 (2026-02-02)
 
 Full Changelog: [v1.75.1...v1.78.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.75.1...v1.78.0)
