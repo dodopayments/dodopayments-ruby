@@ -2,16 +2,16 @@ module Dodopayments
   module Resources
     class CheckoutSessions
       def create: (
-        product_cart: ::Array[Dodopayments::CheckoutSessionRequest::ProductCart],
+        product_cart: ::Array[Dodopayments::ProductItemReq],
         ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
-        ?billing_address: Dodopayments::CheckoutSessionRequest::BillingAddress?,
+        ?billing_address: Dodopayments::CheckoutSessionBillingAddress?,
         ?billing_currency: Dodopayments::Models::currency?,
         ?confirm: bool,
-        ?custom_fields: ::Array[Dodopayments::CheckoutSessionRequest::CustomField]?,
+        ?custom_fields: ::Array[Dodopayments::CustomField]?,
         ?customer: Dodopayments::Models::customer_request?,
-        ?customization: Dodopayments::CheckoutSessionRequest::Customization,
+        ?customization: Dodopayments::CheckoutSessionCustomization,
         ?discount_code: String?,
-        ?feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
+        ?feature_flags: Dodopayments::CheckoutSessionFlags,
         ?force_3ds: bool?,
         ?metadata: ::Hash[Symbol, String]?,
         ?minimal_address: bool,
@@ -20,7 +20,7 @@ module Dodopayments
         ?return_url: String?,
         ?short_link: bool,
         ?show_saved_payment_methods: bool,
-        ?subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?,
+        ?subscription_data: Dodopayments::SubscriptionData?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::CheckoutSessionResponse
 
@@ -30,16 +30,16 @@ module Dodopayments
       ) -> Dodopayments::CheckoutSessionStatus
 
       def preview: (
-        product_cart: ::Array[Dodopayments::CheckoutSessionRequest::ProductCart],
+        product_cart: ::Array[Dodopayments::ProductItemReq],
         ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
-        ?billing_address: Dodopayments::CheckoutSessionRequest::BillingAddress?,
+        ?billing_address: Dodopayments::CheckoutSessionBillingAddress?,
         ?billing_currency: Dodopayments::Models::currency?,
         ?confirm: bool,
-        ?custom_fields: ::Array[Dodopayments::CheckoutSessionRequest::CustomField]?,
+        ?custom_fields: ::Array[Dodopayments::CustomField]?,
         ?customer: Dodopayments::Models::customer_request?,
-        ?customization: Dodopayments::CheckoutSessionRequest::Customization,
+        ?customization: Dodopayments::CheckoutSessionCustomization,
         ?discount_code: String?,
-        ?feature_flags: Dodopayments::CheckoutSessionRequest::FeatureFlags,
+        ?feature_flags: Dodopayments::CheckoutSessionFlags,
         ?force_3ds: bool?,
         ?metadata: ::Hash[Symbol, String]?,
         ?minimal_address: bool,
@@ -48,7 +48,7 @@ module Dodopayments
         ?return_url: String?,
         ?short_link: bool,
         ?show_saved_payment_methods: bool,
-        ?subscription_data: Dodopayments::CheckoutSessionRequest::SubscriptionData?,
+        ?subscription_data: Dodopayments::SubscriptionData?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::CheckoutSessionPreviewResponse
 

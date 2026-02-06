@@ -1,0 +1,106 @@
+module Dodopayments
+  module Models
+    type checkout_session_flags =
+      {
+        allow_currency_selection: bool,
+        allow_customer_editing_city: bool,
+        allow_customer_editing_country: bool,
+        allow_customer_editing_email: bool,
+        allow_customer_editing_name: bool,
+        allow_customer_editing_state: bool,
+        allow_customer_editing_street: bool,
+        allow_customer_editing_zipcode: bool,
+        allow_discount_code: bool,
+        allow_phone_number_collection: bool,
+        allow_tax_id: bool,
+        always_create_new_customer: bool,
+        redirect_immediately: bool
+      }
+
+    class CheckoutSessionFlags < Dodopayments::Internal::Type::BaseModel
+      attr_reader allow_currency_selection: bool?
+
+      def allow_currency_selection=: (bool) -> bool
+
+      attr_reader allow_customer_editing_city: bool?
+
+      def allow_customer_editing_city=: (bool) -> bool
+
+      attr_reader allow_customer_editing_country: bool?
+
+      def allow_customer_editing_country=: (bool) -> bool
+
+      attr_reader allow_customer_editing_email: bool?
+
+      def allow_customer_editing_email=: (bool) -> bool
+
+      attr_reader allow_customer_editing_name: bool?
+
+      def allow_customer_editing_name=: (bool) -> bool
+
+      attr_reader allow_customer_editing_state: bool?
+
+      def allow_customer_editing_state=: (bool) -> bool
+
+      attr_reader allow_customer_editing_street: bool?
+
+      def allow_customer_editing_street=: (bool) -> bool
+
+      attr_reader allow_customer_editing_zipcode: bool?
+
+      def allow_customer_editing_zipcode=: (bool) -> bool
+
+      attr_reader allow_discount_code: bool?
+
+      def allow_discount_code=: (bool) -> bool
+
+      attr_reader allow_phone_number_collection: bool?
+
+      def allow_phone_number_collection=: (bool) -> bool
+
+      attr_reader allow_tax_id: bool?
+
+      def allow_tax_id=: (bool) -> bool
+
+      attr_reader always_create_new_customer: bool?
+
+      def always_create_new_customer=: (bool) -> bool
+
+      attr_reader redirect_immediately: bool?
+
+      def redirect_immediately=: (bool) -> bool
+
+      def initialize: (
+        ?allow_currency_selection: bool,
+        ?allow_customer_editing_city: bool,
+        ?allow_customer_editing_country: bool,
+        ?allow_customer_editing_email: bool,
+        ?allow_customer_editing_name: bool,
+        ?allow_customer_editing_state: bool,
+        ?allow_customer_editing_street: bool,
+        ?allow_customer_editing_zipcode: bool,
+        ?allow_discount_code: bool,
+        ?allow_phone_number_collection: bool,
+        ?allow_tax_id: bool,
+        ?always_create_new_customer: bool,
+        ?redirect_immediately: bool
+      ) -> void
+
+      def to_hash: -> {
+        allow_currency_selection: bool,
+        allow_customer_editing_city: bool,
+        allow_customer_editing_country: bool,
+        allow_customer_editing_email: bool,
+        allow_customer_editing_name: bool,
+        allow_customer_editing_state: bool,
+        allow_customer_editing_street: bool,
+        allow_customer_editing_zipcode: bool,
+        allow_discount_code: bool,
+        allow_phone_number_collection: bool,
+        allow_tax_id: bool,
+        always_create_new_customer: bool,
+        redirect_immediately: bool
+      }
+    end
+  end
+end

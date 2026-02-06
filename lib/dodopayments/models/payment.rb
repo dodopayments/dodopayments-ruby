@@ -194,6 +194,13 @@ module Dodopayments
                -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Payment::ProductCart] },
                nil?: true
 
+      # @!attribute refund_status
+      #   Summary of the refund status for this payment. None if no succeeded refunds
+      #   exist.
+      #
+      #   @return [Symbol, Dodopayments::Models::Payment::RefundStatus, nil]
+      optional :refund_status, enum: -> { Dodopayments::Payment::RefundStatus }, nil?: true
+
       # @!attribute settlement_tax
       #   This represents the portion of settlement_amount that corresponds to taxes
       #   collected. Especially relevant for adaptive pricing where the tax component must
@@ -226,7 +233,7 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
@@ -289,6 +296,8 @@ module Dodopayments
       #   @param payment_method_type [String, nil] Specific type of payment method (e.g. "visa", "mastercard")
       #
       #   @param product_cart [Array<Dodopayments::Models::Payment::ProductCart>, nil] List of products purchased in a one-time payment
+      #
+      #   @param refund_status [Symbol, Dodopayments::Models::Payment::RefundStatus, nil] Summary of the refund status for this payment. None if no succeeded refunds exis
       #
       #   @param settlement_tax [Integer, nil] This represents the portion of settlement_amount that corresponds to taxes colle
       #
@@ -410,6 +419,20 @@ module Dodopayments
         # @!method initialize(product_id:, quantity:)
         #   @param product_id [String]
         #   @param quantity [Integer]
+      end
+
+      # Summary of the refund status for this payment. None if no succeeded refunds
+      # exist.
+      #
+      # @see Dodopayments::Models::Payment#refund_status
+      module RefundStatus
+        extend Dodopayments::Internal::Type::Enum
+
+        PARTIAL = :partial
+        FULL = :full
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
   end

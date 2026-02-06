@@ -1,0 +1,60 @@
+module Dodopayments
+  module Models
+    type checkout_session_customization =
+      {
+        force_language: String?,
+        show_on_demand_tag: bool,
+        show_order_details: bool,
+        theme: Dodopayments::Models::CheckoutSessionCustomization::theme,
+        theme_config: Dodopayments::ThemeConfig?
+      }
+
+    class CheckoutSessionCustomization < Dodopayments::Internal::Type::BaseModel
+      attr_accessor force_language: String?
+
+      attr_reader show_on_demand_tag: bool?
+
+      def show_on_demand_tag=: (bool) -> bool
+
+      attr_reader show_order_details: bool?
+
+      def show_order_details=: (bool) -> bool
+
+      attr_reader theme: Dodopayments::Models::CheckoutSessionCustomization::theme?
+
+      def theme=: (
+        Dodopayments::Models::CheckoutSessionCustomization::theme
+      ) -> Dodopayments::Models::CheckoutSessionCustomization::theme
+
+      attr_accessor theme_config: Dodopayments::ThemeConfig?
+
+      def initialize: (
+        ?force_language: String?,
+        ?show_on_demand_tag: bool,
+        ?show_order_details: bool,
+        ?theme: Dodopayments::Models::CheckoutSessionCustomization::theme,
+        ?theme_config: Dodopayments::ThemeConfig?
+      ) -> void
+
+      def to_hash: -> {
+        force_language: String?,
+        show_on_demand_tag: bool,
+        show_order_details: bool,
+        theme: Dodopayments::Models::CheckoutSessionCustomization::theme,
+        theme_config: Dodopayments::ThemeConfig?
+      }
+
+      type theme = :dark | :light | :system
+
+      module Theme
+        extend Dodopayments::Internal::Type::Enum
+
+        DARK: :dark
+        LIGHT: :light
+        SYSTEM: :system
+
+        def self?.values: -> ::Array[Dodopayments::Models::CheckoutSessionCustomization::theme]
+      end
+    end
+  end
+end

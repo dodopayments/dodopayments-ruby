@@ -19,6 +19,10 @@ module Dodopayments
 
   class AttachExistingCustomer = Dodopayments::Models::AttachExistingCustomer
 
+  class BalanceLedgerEntry = Dodopayments::Models::BalanceLedgerEntry
+
+  class BalanceRetrieveLedgerParams = Dodopayments::Models::BalanceRetrieveLedgerParams
+
   class BillingAddress = Dodopayments::Models::BillingAddress
 
   class Brand = Dodopayments::Models::Brand
@@ -33,7 +37,13 @@ module Dodopayments
 
   class BrandUpdateParams = Dodopayments::Models::BrandUpdateParams
 
+  class CheckoutSessionBillingAddress = Dodopayments::Models::CheckoutSessionBillingAddress
+
   class CheckoutSessionCreateParams = Dodopayments::Models::CheckoutSessionCreateParams
+
+  class CheckoutSessionCustomization = Dodopayments::Models::CheckoutSessionCustomization
+
+  class CheckoutSessionFlags = Dodopayments::Models::CheckoutSessionFlags
 
   class CheckoutSessionPreviewParams = Dodopayments::Models::CheckoutSessionPreviewParams
 
@@ -70,6 +80,8 @@ module Dodopayments
   module Customers = Dodopayments::Models::Customers
 
   class CustomerUpdateParams = Dodopayments::Models::CustomerUpdateParams
+
+  class CustomField = Dodopayments::Models::CustomField
 
   class Discount = Dodopayments::Models::Discount
 
@@ -203,6 +215,8 @@ module Dodopayments
 
   class ProductCreateParams = Dodopayments::Models::ProductCreateParams
 
+  class ProductItemReq = Dodopayments::Models::ProductItemReq
+
   class ProductListParams = Dodopayments::Models::ProductListParams
 
   class ProductRetrieveParams = Dodopayments::Models::ProductRetrieveParams
@@ -241,6 +255,8 @@ module Dodopayments
 
   class SubscriptionCreateParams = Dodopayments::Models::SubscriptionCreateParams
 
+  class SubscriptionData = Dodopayments::Models::SubscriptionData
+
   class SubscriptionExpiredWebhookEvent = Dodopayments::Models::SubscriptionExpiredWebhookEvent
 
   class SubscriptionFailedWebhookEvent = Dodopayments::Models::SubscriptionFailedWebhookEvent
@@ -268,6 +284,10 @@ module Dodopayments
   class SubscriptionUpdatePaymentMethodParams = Dodopayments::Models::SubscriptionUpdatePaymentMethodParams
 
   module TaxCategory = Dodopayments::Models::TaxCategory
+
+  class ThemeConfig = Dodopayments::Models::ThemeConfig
+
+  class ThemeModeConfig = Dodopayments::Models::ThemeModeConfig
 
   module TimeInterval = Dodopayments::Models::TimeInterval
 

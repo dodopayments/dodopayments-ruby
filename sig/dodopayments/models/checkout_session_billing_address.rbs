@@ -1,0 +1,40 @@
+module Dodopayments
+  module Models
+    type checkout_session_billing_address =
+      {
+        country: Dodopayments::Models::country_code,
+        city: String?,
+        state: String?,
+        street: String?,
+        zipcode: String?
+      }
+
+    class CheckoutSessionBillingAddress < Dodopayments::Internal::Type::BaseModel
+      attr_accessor country: Dodopayments::Models::country_code
+
+      attr_accessor city: String?
+
+      attr_accessor state: String?
+
+      attr_accessor street: String?
+
+      attr_accessor zipcode: String?
+
+      def initialize: (
+        country: Dodopayments::Models::country_code,
+        ?city: String?,
+        ?state: String?,
+        ?street: String?,
+        ?zipcode: String?
+      ) -> void
+
+      def to_hash: -> {
+        country: Dodopayments::Models::country_code,
+        city: String?,
+        state: String?,
+        street: String?,
+        zipcode: String?
+      }
+    end
+  end
+end

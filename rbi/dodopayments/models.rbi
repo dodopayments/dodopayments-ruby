@@ -21,6 +21,11 @@ module Dodopayments
 
   AttachExistingCustomer = Dodopayments::Models::AttachExistingCustomer
 
+  BalanceLedgerEntry = Dodopayments::Models::BalanceLedgerEntry
+
+  BalanceRetrieveLedgerParams =
+    Dodopayments::Models::BalanceRetrieveLedgerParams
+
   BillingAddress = Dodopayments::Models::BillingAddress
 
   Brand = Dodopayments::Models::Brand
@@ -35,8 +40,16 @@ module Dodopayments
 
   BrandUpdateParams = Dodopayments::Models::BrandUpdateParams
 
+  CheckoutSessionBillingAddress =
+    Dodopayments::Models::CheckoutSessionBillingAddress
+
   CheckoutSessionCreateParams =
     Dodopayments::Models::CheckoutSessionCreateParams
+
+  CheckoutSessionCustomization =
+    Dodopayments::Models::CheckoutSessionCustomization
+
+  CheckoutSessionFlags = Dodopayments::Models::CheckoutSessionFlags
 
   CheckoutSessionPreviewParams =
     Dodopayments::Models::CheckoutSessionPreviewParams
@@ -76,6 +89,8 @@ module Dodopayments
   Customers = Dodopayments::Models::Customers
 
   CustomerUpdateParams = Dodopayments::Models::CustomerUpdateParams
+
+  CustomField = Dodopayments::Models::CustomField
 
   Discount = Dodopayments::Models::Discount
 
@@ -222,6 +237,8 @@ module Dodopayments
 
   ProductCreateParams = Dodopayments::Models::ProductCreateParams
 
+  ProductItemReq = Dodopayments::Models::ProductItemReq
+
   ProductListParams = Dodopayments::Models::ProductListParams
 
   ProductRetrieveParams = Dodopayments::Models::ProductRetrieveParams
@@ -264,6 +281,8 @@ module Dodopayments
 
   SubscriptionCreateParams = Dodopayments::Models::SubscriptionCreateParams
 
+  SubscriptionData = Dodopayments::Models::SubscriptionData
+
   SubscriptionExpiredWebhookEvent =
     Dodopayments::Models::SubscriptionExpiredWebhookEvent
 
@@ -300,6 +319,10 @@ module Dodopayments
     Dodopayments::Models::SubscriptionUpdatePaymentMethodParams
 
   TaxCategory = Dodopayments::Models::TaxCategory
+
+  ThemeConfig = Dodopayments::Models::ThemeConfig
+
+  ThemeModeConfig = Dodopayments::Models::ThemeModeConfig
 
   TimeInterval = Dodopayments::Models::TimeInterval
 

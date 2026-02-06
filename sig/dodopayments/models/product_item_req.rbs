@@ -1,0 +1,35 @@
+module Dodopayments
+  module Models
+    type product_item_req =
+      {
+        product_id: String,
+        quantity: Integer,
+        addons: ::Array[Dodopayments::AttachAddon]?,
+        amount: Integer?
+      }
+
+    class ProductItemReq < Dodopayments::Internal::Type::BaseModel
+      attr_accessor product_id: String
+
+      attr_accessor quantity: Integer
+
+      attr_accessor addons: ::Array[Dodopayments::AttachAddon]?
+
+      attr_accessor amount: Integer?
+
+      def initialize: (
+        product_id: String,
+        quantity: Integer,
+        ?addons: ::Array[Dodopayments::AttachAddon]?,
+        ?amount: Integer?
+      ) -> void
+
+      def to_hash: -> {
+        product_id: String,
+        quantity: Integer,
+        addons: ::Array[Dodopayments::AttachAddon]?,
+        amount: Integer?
+      }
+    end
+  end
+end
