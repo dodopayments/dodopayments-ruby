@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.81.1 (2026-02-07)
+
+Full Changelog: [v1.81.0...v1.81.1](https://github.com/dodopayments/dodopayments-ruby/compare/v1.81.0...v1.81.1)
+
+### Bug Fixes
+
+* **client:** loosen json header parsing ([c89ca91](https://github.com/dodopayments/dodopayments-ruby/commit/c89ca911568c15c34c55801fd959a528fc2c29af))
+
 ## 1.81.0 (2026-02-06)
 
 Full Changelog: [v1.78.0...v1.81.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.78.0...v1.81.0)
