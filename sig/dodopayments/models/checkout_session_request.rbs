@@ -20,7 +20,8 @@ module Dodopayments
         return_url: String?,
         short_link: bool,
         show_saved_payment_methods: bool,
-        subscription_data: Dodopayments::SubscriptionData?
+        subscription_data: Dodopayments::SubscriptionData?,
+        tax_id: String?
       }
 
     class CheckoutSessionRequest < Dodopayments::Internal::Type::BaseModel
@@ -78,6 +79,8 @@ module Dodopayments
 
       attr_accessor subscription_data: Dodopayments::SubscriptionData?
 
+      attr_accessor tax_id: String?
+
       def initialize: (
         product_cart: ::Array[Dodopayments::ProductItemReq],
         ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
@@ -97,7 +100,8 @@ module Dodopayments
         ?return_url: String?,
         ?short_link: bool,
         ?show_saved_payment_methods: bool,
-        ?subscription_data: Dodopayments::SubscriptionData?
+        ?subscription_data: Dodopayments::SubscriptionData?,
+        ?tax_id: String?
       ) -> void
 
       def to_hash: -> {
@@ -119,7 +123,8 @@ module Dodopayments
         return_url: String?,
         short_link: bool,
         show_saved_payment_methods: bool,
-        subscription_data: Dodopayments::SubscriptionData?
+        subscription_data: Dodopayments::SubscriptionData?,
+        tax_id: String?
       }
     end
   end

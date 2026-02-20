@@ -112,6 +112,37 @@ module Dodopayments
         T.let(:"payout.failed", Dodopayments::WebhookEventType::TaggedSymbol)
       PAYOUT_SUCCESS =
         T.let(:"payout.success", Dodopayments::WebhookEventType::TaggedSymbol)
+      CREDIT_ADDED =
+        T.let(:"credit.added", Dodopayments::WebhookEventType::TaggedSymbol)
+      CREDIT_DEDUCTED =
+        T.let(:"credit.deducted", Dodopayments::WebhookEventType::TaggedSymbol)
+      CREDIT_EXPIRED =
+        T.let(:"credit.expired", Dodopayments::WebhookEventType::TaggedSymbol)
+      CREDIT_ROLLED_OVER =
+        T.let(
+          :"credit.rolled_over",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
+      CREDIT_ROLLOVER_FORFEITED =
+        T.let(
+          :"credit.rollover_forfeited",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
+      CREDIT_OVERAGE_CHARGED =
+        T.let(
+          :"credit.overage_charged",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
+      CREDIT_MANUAL_ADJUSTMENT =
+        T.let(
+          :"credit.manual_adjustment",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
+      CREDIT_BALANCE_LOW =
+        T.let(
+          :"credit.balance_low",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
 
       sig do
         override.returns(T::Array[Dodopayments::WebhookEventType::TaggedSymbol])

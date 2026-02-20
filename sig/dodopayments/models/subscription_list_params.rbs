@@ -8,6 +8,7 @@ module Dodopayments
         customer_id: String,
         page_number: Integer,
         page_size: Integer,
+        product_id: String,
         status: Dodopayments::Models::SubscriptionListParams::status
       }
       & Dodopayments::Internal::Type::request_parameters
@@ -40,6 +41,10 @@ module Dodopayments
 
       def page_size=: (Integer) -> Integer
 
+      attr_reader product_id: String?
+
+      def product_id=: (String) -> String
+
       attr_reader status: Dodopayments::Models::SubscriptionListParams::status?
 
       def status=: (
@@ -53,6 +58,7 @@ module Dodopayments
         ?customer_id: String,
         ?page_number: Integer,
         ?page_size: Integer,
+        ?product_id: String,
         ?status: Dodopayments::Models::SubscriptionListParams::status,
         ?request_options: Dodopayments::request_opts
       ) -> void
@@ -64,6 +70,7 @@ module Dodopayments
         customer_id: String,
         page_number: Integer,
         page_size: Integer,
+        product_id: String,
         status: Dodopayments::Models::SubscriptionListParams::status,
         request_options: Dodopayments::RequestOptions
       }

@@ -20,6 +20,7 @@ module Dodopayments
 
       def update: (
         String customer_id,
+        ?email: String?,
         ?metadata: ::Hash[Symbol, String]?,
         ?name: String?,
         ?phone_number: String?,

@@ -33,6 +33,14 @@ module Dodopayments
       PAYOUT_IN_PROGRESS = :"payout.in_progress"
       PAYOUT_FAILED = :"payout.failed"
       PAYOUT_SUCCESS = :"payout.success"
+      CREDIT_ADDED = :"credit.added"
+      CREDIT_DEDUCTED = :"credit.deducted"
+      CREDIT_EXPIRED = :"credit.expired"
+      CREDIT_ROLLED_OVER = :"credit.rolled_over"
+      CREDIT_ROLLOVER_FORFEITED = :"credit.rollover_forfeited"
+      CREDIT_OVERAGE_CHARGED = :"credit.overage_charged"
+      CREDIT_MANUAL_ADJUSTMENT = :"credit.manual_adjustment"
+      CREDIT_BALANCE_LOW = :"credit.balance_low"
 
       # @!method self.values
       #   @return [Array<Symbol>]

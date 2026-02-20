@@ -17,11 +17,11 @@ module Dodopayments
       end
       attr_writer :dark
 
-      # URL for the primary font
+      # URL for the primary font. Must be a valid https:// URL.
       sig { returns(T.nilable(String)) }
       attr_accessor :font_primary_url
 
-      # URL for the secondary font
+      # URL for the secondary font. Must be a valid https:// URL.
       sig { returns(T.nilable(String)) }
       attr_accessor :font_secondary_url
 
@@ -44,11 +44,13 @@ module Dodopayments
       end
       attr_writer :light
 
-      # Custom text for the pay button (e.g., "Complete Purchase", "Subscribe Now")
+      # Custom text for the pay button (e.g., "Complete Purchase", "Subscribe Now"). Max
+      # 100 characters.
       sig { returns(T.nilable(String)) }
       attr_accessor :pay_button_text
 
-      # Border radius for UI elements (e.g., "4px", "0.5rem", "8px")
+      # Border radius for UI elements. Must be a number followed by px, rem, or em
+      # (e.g., "4px", "0.5rem", "1em")
       sig { returns(T.nilable(String)) }
       attr_accessor :radius
 
@@ -69,9 +71,9 @@ module Dodopayments
       def self.new(
         # Dark mode color configuration
         dark: nil,
-        # URL for the primary font
+        # URL for the primary font. Must be a valid https:// URL.
         font_primary_url: nil,
-        # URL for the secondary font
+        # URL for the secondary font. Must be a valid https:// URL.
         font_secondary_url: nil,
         # Font size for the checkout UI
         font_size: nil,
@@ -79,9 +81,11 @@ module Dodopayments
         font_weight: nil,
         # Light mode color configuration
         light: nil,
-        # Custom text for the pay button (e.g., "Complete Purchase", "Subscribe Now")
+        # Custom text for the pay button (e.g., "Complete Purchase", "Subscribe Now"). Max
+        # 100 characters.
         pay_button_text: nil,
-        # Border radius for UI elements (e.g., "4px", "0.5rem", "8px")
+        # Border radius for UI elements. Must be a number followed by px, rem, or em
+        # (e.g., "4px", "0.5rem", "1em")
         radius: nil
       )
       end

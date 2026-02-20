@@ -6,7 +6,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::CheckoutSessionCreateParams} for more details.
       #
-      # @overload create(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, request_options: {})
+      # @overload create(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil, request_options: {})
       #
       # @param product_cart [Array<Dodopayments::Models::ProductItemReq>]
       #
@@ -45,6 +45,8 @@ module Dodopayments
       # @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer False by default
       #
       # @param subscription_data [Dodopayments::Models::SubscriptionData, nil]
+      #
+      # @param tax_id [String, nil] Tax ID for the customer (e.g. VAT number). Requires billing_address with country
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -82,7 +84,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::CheckoutSessionPreviewParams} for more details.
       #
-      # @overload preview(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, request_options: {})
+      # @overload preview(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil, request_options: {})
       #
       # @param product_cart [Array<Dodopayments::Models::ProductItemReq>]
       #
@@ -121,6 +123,8 @@ module Dodopayments
       # @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer False by default
       #
       # @param subscription_data [Dodopayments::Models::SubscriptionData, nil]
+      #
+      # @param tax_id [String, nil] Tax ID for the customer (e.g. VAT number). Requires billing_address with country
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

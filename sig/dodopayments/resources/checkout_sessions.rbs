@@ -21,6 +21,7 @@ module Dodopayments
         ?short_link: bool,
         ?show_saved_payment_methods: bool,
         ?subscription_data: Dodopayments::SubscriptionData?,
+        ?tax_id: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::CheckoutSessionResponse
 
@@ -49,6 +50,7 @@ module Dodopayments
         ?short_link: bool,
         ?show_saved_payment_methods: bool,
         ?subscription_data: Dodopayments::SubscriptionData?,
+        ?tax_id: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::CheckoutSessionPreviewResponse
 

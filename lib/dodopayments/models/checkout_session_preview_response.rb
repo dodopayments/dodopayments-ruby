@@ -43,13 +43,19 @@ module Dodopayments
                -> { Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup },
                nil?: true
 
+      # @!attribute tax_id_err_msg
+      #   Error message if tax ID validation failed
+      #
+      #   @return [String, nil]
+      optional :tax_id_err_msg, String, nil?: true
+
       # @!attribute total_tax
       #   Total tax
       #
       #   @return [Integer, nil]
       optional :total_tax, Integer, nil?: true
 
-      # @!method initialize(billing_country:, currency:, current_breakup:, product_cart:, total_price:, recurring_breakup: nil, total_tax: nil)
+      # @!method initialize(billing_country:, currency:, current_breakup:, product_cart:, total_price:, recurring_breakup: nil, tax_id_err_msg: nil, total_tax: nil)
       #   Data returned by the calculate checkout session API
       #
       #   @param billing_country [Symbol, Dodopayments::Models::CountryCode] Billing country
@@ -63,6 +69,8 @@ module Dodopayments
       #   @param total_price [Integer] Total calculate price of the product cart
       #
       #   @param recurring_breakup [Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup, nil] Breakup of recurring payments (None for one-time only)
+      #
+      #   @param tax_id_err_msg [String, nil] Error message if tax ID validation failed
       #
       #   @param total_tax [Integer, nil] Total tax
 
@@ -105,6 +113,13 @@ module Dodopayments
       end
 
       class ProductCart < Dodopayments::Internal::Type::BaseModel
+        # @!attribute credit_entitlements
+        #   Credit entitlements that will be granted upon purchase
+        #
+        #   @return [Array<Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::CreditEntitlement>]
+        required :credit_entitlements,
+                 -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::CreditEntitlement] }
+
         # @!attribute currency
         #   the currency in which the calculatiosn were made
         #
@@ -212,7 +227,9 @@ module Dodopayments
         #   @return [Integer, nil]
         optional :tax, Integer, nil?: true
 
-        # @!method initialize(currency:, discounted_price:, is_subscription:, is_usage_based:, meters:, og_currency:, og_price:, product_id:, quantity:, tax_category:, tax_inclusive:, tax_rate:, addons: nil, description: nil, discount_amount: nil, discount_cycle: nil, name: nil, tax: nil)
+        # @!method initialize(credit_entitlements:, currency:, discounted_price:, is_subscription:, is_usage_based:, meters:, og_currency:, og_price:, product_id:, quantity:, tax_category:, tax_inclusive:, tax_rate:, addons: nil, description: nil, discount_amount: nil, discount_cycle: nil, name: nil, tax: nil)
+        #   @param credit_entitlements [Array<Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::CreditEntitlement>] Credit entitlements that will be granted upon purchase
+        #
         #   @param currency [Symbol, Dodopayments::Models::Currency] the currency in which the calculatiosn were made
         #
         #   @param discounted_price [Integer] discounted price
@@ -248,6 +265,44 @@ module Dodopayments
         #   @param name [String, nil] name of the product
         #
         #   @param tax [Integer, nil] total tax
+
+        class CreditEntitlement < Dodopayments::Internal::Type::BaseModel
+          # @!attribute credit_entitlement_id
+          #   ID of the credit entitlement
+          #
+          #   @return [String]
+          required :credit_entitlement_id, String
+
+          # @!attribute credit_entitlement_name
+          #   Name of the credit entitlement
+          #
+          #   @return [String]
+          required :credit_entitlement_name, String
+
+          # @!attribute credit_entitlement_unit
+          #   Unit label (e.g. "API Calls", "Tokens")
+          #
+          #   @return [String]
+          required :credit_entitlement_unit, String
+
+          # @!attribute credits_amount
+          #   Number of credits granted
+          #
+          #   @return [String]
+          required :credits_amount, String
+
+          # @!method initialize(credit_entitlement_id:, credit_entitlement_name:, credit_entitlement_unit:, credits_amount:)
+          #   Minimal credit entitlement info shown at checkout — what credits the customer
+          #   will receive
+          #
+          #   @param credit_entitlement_id [String] ID of the credit entitlement
+          #
+          #   @param credit_entitlement_name [String] Name of the credit entitlement
+          #
+          #   @param credit_entitlement_unit [String] Unit label (e.g. "API Calls", "Tokens")
+          #
+          #   @param credits_amount [String] Number of credits granted
+        end
 
         class Meter < Dodopayments::Internal::Type::BaseModel
           # @!attribute measurement_unit

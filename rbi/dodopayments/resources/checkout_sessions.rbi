@@ -32,6 +32,7 @@ module Dodopayments
           short_link: T::Boolean,
           show_saved_payment_methods: T::Boolean,
           subscription_data: T.nilable(Dodopayments::SubscriptionData::OrHash),
+          tax_id: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::CheckoutSessionResponse)
       end
@@ -79,6 +80,9 @@ module Dodopayments
         # Display saved payment methods of a returning customer False by default
         show_saved_payment_methods: nil,
         subscription_data: nil,
+        # Tax ID for the customer (e.g. VAT number). Requires billing_address with
+        # country.
+        tax_id: nil,
         request_options: {}
       )
       end
@@ -121,6 +125,7 @@ module Dodopayments
           short_link: T::Boolean,
           show_saved_payment_methods: T::Boolean,
           subscription_data: T.nilable(Dodopayments::SubscriptionData::OrHash),
+          tax_id: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Models::CheckoutSessionPreviewResponse)
       end
@@ -168,6 +173,9 @@ module Dodopayments
         # Display saved payment methods of a returning customer False by default
         show_saved_payment_methods: nil,
         subscription_data: nil,
+        # Tax ID for the customer (e.g. VAT number). Requires billing_address with
+        # country.
+        tax_id: nil,
         request_options: {}
       )
       end

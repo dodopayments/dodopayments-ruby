@@ -69,6 +69,10 @@ module Dodopayments
       end
       attr_writer :recurring_breakup
 
+      # Error message if tax ID validation failed
+      sig { returns(T.nilable(String)) }
+      attr_accessor :tax_id_err_msg
+
       # Total tax
       sig { returns(T.nilable(Integer)) }
       attr_accessor :total_tax
@@ -89,6 +93,7 @@ module Dodopayments
             T.nilable(
               Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup::OrHash
             ),
+          tax_id_err_msg: T.nilable(String),
           total_tax: T.nilable(Integer)
         ).returns(T.attached_class)
       end
@@ -105,6 +110,8 @@ module Dodopayments
         total_price:,
         # Breakup of recurring payments (None for one-time only)
         recurring_breakup: nil,
+        # Error message if tax ID validation failed
+        tax_id_err_msg: nil,
         # Total tax
         total_tax: nil
       )
@@ -126,6 +133,7 @@ module Dodopayments
               T.nilable(
                 Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup
               ),
+            tax_id_err_msg: T.nilable(String),
             total_tax: T.nilable(Integer)
           }
         )
@@ -201,6 +209,16 @@ module Dodopayments
               Dodopayments::Internal::AnyHash
             )
           end
+
+        # Credit entitlements that will be granted upon purchase
+        sig do
+          returns(
+            T::Array[
+              Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::CreditEntitlement
+            ]
+          )
+        end
+        attr_accessor :credit_entitlements
 
         # the currency in which the calculatiosn were made
         sig { returns(Dodopayments::Currency::TaggedSymbol) }
@@ -286,6 +304,10 @@ module Dodopayments
 
         sig do
           params(
+            credit_entitlements:
+              T::Array[
+                Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::CreditEntitlement::OrHash
+              ],
             currency: Dodopayments::Currency::OrSymbol,
             discounted_price: Integer,
             is_subscription: T::Boolean,
@@ -315,6 +337,8 @@ module Dodopayments
           ).returns(T.attached_class)
         end
         def self.new(
+          # Credit entitlements that will be granted upon purchase
+          credit_entitlements:,
           # the currency in which the calculatiosn were made
           currency:,
           # discounted price
@@ -353,6 +377,10 @@ module Dodopayments
         sig do
           override.returns(
             {
+              credit_entitlements:
+                T::Array[
+                  Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::CreditEntitlement
+                ],
               currency: Dodopayments::Currency::TaggedSymbol,
               discounted_price: Integer,
               is_subscription: T::Boolean,
@@ -383,6 +411,67 @@ module Dodopayments
           )
         end
         def to_hash
+        end
+
+        class CreditEntitlement < Dodopayments::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::CreditEntitlement,
+                Dodopayments::Internal::AnyHash
+              )
+            end
+
+          # ID of the credit entitlement
+          sig { returns(String) }
+          attr_accessor :credit_entitlement_id
+
+          # Name of the credit entitlement
+          sig { returns(String) }
+          attr_accessor :credit_entitlement_name
+
+          # Unit label (e.g. "API Calls", "Tokens")
+          sig { returns(String) }
+          attr_accessor :credit_entitlement_unit
+
+          # Number of credits granted
+          sig { returns(String) }
+          attr_accessor :credits_amount
+
+          # Minimal credit entitlement info shown at checkout — what credits the customer
+          # will receive
+          sig do
+            params(
+              credit_entitlement_id: String,
+              credit_entitlement_name: String,
+              credit_entitlement_unit: String,
+              credits_amount: String
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            # ID of the credit entitlement
+            credit_entitlement_id:,
+            # Name of the credit entitlement
+            credit_entitlement_name:,
+            # Unit label (e.g. "API Calls", "Tokens")
+            credit_entitlement_unit:,
+            # Number of credits granted
+            credits_amount:
+          )
+          end
+
+          sig do
+            override.returns(
+              {
+                credit_entitlement_id: String,
+                credit_entitlement_name: String,
+                credit_entitlement_unit: String,
+                credits_amount: String
+              }
+            )
+          end
+          def to_hash
+          end
         end
 
         class Meter < Dodopayments::Internal::Type::BaseModel

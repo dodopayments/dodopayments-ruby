@@ -29,6 +29,11 @@ module Dodopayments
       #   @return [Boolean]
       required :digital_products_delivered, Dodopayments::Internal::Type::Boolean
 
+      # @!attribute has_license_key
+      #
+      #   @return [Boolean]
+      required :has_license_key, Dodopayments::Internal::Type::Boolean
+
       # @!attribute metadata
       #
       #   @return [Hash{Symbol=>String}]
@@ -76,7 +81,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :subscription_id, String, nil?: true
 
-      # @!method initialize(brand_id:, created_at:, currency:, customer:, digital_products_delivered:, metadata:, payment_id:, total_amount:, invoice_id: nil, invoice_url: nil, payment_method: nil, payment_method_type: nil, status: nil, subscription_id: nil)
+      # @!method initialize(brand_id:, created_at:, currency:, customer:, digital_products_delivered:, has_license_key:, metadata:, payment_id:, total_amount:, invoice_id: nil, invoice_url: nil, payment_method: nil, payment_method_type: nil, status: nil, subscription_id: nil)
       #   @param brand_id [String]
       #
       #   @param created_at [Time]
@@ -86,6 +91,8 @@ module Dodopayments
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails]
       #
       #   @param digital_products_delivered [Boolean]
+      #
+      #   @param has_license_key [Boolean]
       #
       #   @param metadata [Hash{Symbol=>String}]
       #

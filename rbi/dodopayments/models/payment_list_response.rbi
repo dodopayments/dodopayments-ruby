@@ -31,6 +31,9 @@ module Dodopayments
       sig { returns(T::Boolean) }
       attr_accessor :digital_products_delivered
 
+      sig { returns(T::Boolean) }
+      attr_accessor :has_license_key
+
       sig { returns(T::Hash[Symbol, String]) }
       attr_accessor :metadata
 
@@ -67,6 +70,7 @@ module Dodopayments
           currency: Dodopayments::Currency::OrSymbol,
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
           digital_products_delivered: T::Boolean,
+          has_license_key: T::Boolean,
           metadata: T::Hash[Symbol, String],
           payment_id: String,
           total_amount: Integer,
@@ -84,6 +88,7 @@ module Dodopayments
         currency:,
         customer:,
         digital_products_delivered:,
+        has_license_key:,
         metadata:,
         payment_id:,
         total_amount:,
@@ -106,6 +111,7 @@ module Dodopayments
             currency: Dodopayments::Currency::TaggedSymbol,
             customer: Dodopayments::CustomerLimitedDetails,
             digital_products_delivered: T::Boolean,
+            has_license_key: T::Boolean,
             metadata: T::Hash[Symbol, String],
             payment_id: String,
             total_amount: Integer,

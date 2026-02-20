@@ -14,6 +14,9 @@ module Dodopayments
           )
         end
 
+      sig { returns(T.nilable(String)) }
+      attr_accessor :email
+
       # Additional metadata for the customer
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_accessor :metadata
@@ -26,6 +29,7 @@ module Dodopayments
 
       sig do
         params(
+          email: T.nilable(String),
           metadata: T.nilable(T::Hash[Symbol, String]),
           name: T.nilable(String),
           phone_number: T.nilable(String),
@@ -33,6 +37,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        email: nil,
         # Additional metadata for the customer
         metadata: nil,
         name: nil,
@@ -44,6 +49,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            email: T.nilable(String),
             metadata: T.nilable(T::Hash[Symbol, String]),
             name: T.nilable(String),
             phone_number: T.nilable(String),
