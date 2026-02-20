@@ -53,9 +53,11 @@ module Dodopayments
         )
       end
 
-      # @overload update(customer_id, metadata: nil, name: nil, phone_number: nil, request_options: {})
+      # @overload update(customer_id, email: nil, metadata: nil, name: nil, phone_number: nil, request_options: {})
       #
       # @param customer_id [String] Customer Id
+      #
+      # @param email [String, nil]
       #
       # @param metadata [Hash{Symbol=>String}, nil] Additional metadata for the customer
       #

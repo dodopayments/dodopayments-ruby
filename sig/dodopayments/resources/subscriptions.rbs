@@ -34,6 +34,7 @@ module Dodopayments
         String subscription_id,
         ?billing: Dodopayments::BillingAddress?,
         ?cancel_at_next_billing_date: bool?,
+        ?credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?,
         ?customer_name: String?,
         ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         ?metadata: ::Hash[Symbol, String]?,
@@ -50,6 +51,7 @@ module Dodopayments
         ?customer_id: String,
         ?page_number: Integer,
         ?page_size: Integer,
+        ?product_id: String,
         ?status: Dodopayments::Models::SubscriptionListParams::status,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::SubscriptionListResponse]

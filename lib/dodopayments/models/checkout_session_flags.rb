@@ -41,6 +41,11 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :allow_customer_editing_street, Dodopayments::Internal::Type::Boolean
 
+      # @!attribute allow_customer_editing_tax_id
+      #
+      #   @return [Boolean, nil]
+      optional :allow_customer_editing_tax_id, Dodopayments::Internal::Type::Boolean
+
       # @!attribute allow_customer_editing_zipcode
       #
       #   @return [Boolean, nil]
@@ -87,7 +92,7 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :redirect_immediately, Dodopayments::Internal::Type::Boolean
 
-      # @!method initialize(allow_currency_selection: nil, allow_customer_editing_city: nil, allow_customer_editing_country: nil, allow_customer_editing_email: nil, allow_customer_editing_name: nil, allow_customer_editing_state: nil, allow_customer_editing_street: nil, allow_customer_editing_zipcode: nil, allow_discount_code: nil, allow_phone_number_collection: nil, allow_tax_id: nil, always_create_new_customer: nil, redirect_immediately: nil)
+      # @!method initialize(allow_currency_selection: nil, allow_customer_editing_city: nil, allow_customer_editing_country: nil, allow_customer_editing_email: nil, allow_customer_editing_name: nil, allow_customer_editing_state: nil, allow_customer_editing_street: nil, allow_customer_editing_tax_id: nil, allow_customer_editing_zipcode: nil, allow_discount_code: nil, allow_phone_number_collection: nil, allow_tax_id: nil, always_create_new_customer: nil, redirect_immediately: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionFlags} for more details.
       #
@@ -104,6 +109,8 @@ module Dodopayments
       #   @param allow_customer_editing_state [Boolean]
       #
       #   @param allow_customer_editing_street [Boolean]
+      #
+      #   @param allow_customer_editing_tax_id [Boolean]
       #
       #   @param allow_customer_editing_zipcode [Boolean]
       #

@@ -7,6 +7,7 @@ module Dodopayments
         tax_category: Dodopayments::Models::tax_category,
         addons: ::Array[String]?,
         brand_id: String?,
+        credit_entitlements: ::Array[Dodopayments::ProductCreateParams::CreditEntitlement]?,
         description: String?,
         digital_product_delivery: Dodopayments::ProductCreateParams::DigitalProductDelivery?,
         license_key_activation_message: String?,
@@ -31,6 +32,8 @@ module Dodopayments
 
       attr_accessor brand_id: String?
 
+      attr_accessor credit_entitlements: ::Array[Dodopayments::ProductCreateParams::CreditEntitlement]?
+
       attr_accessor description: String?
 
       attr_accessor digital_product_delivery: Dodopayments::ProductCreateParams::DigitalProductDelivery?
@@ -53,6 +56,7 @@ module Dodopayments
         tax_category: Dodopayments::Models::tax_category,
         ?addons: ::Array[String]?,
         ?brand_id: String?,
+        ?credit_entitlements: ::Array[Dodopayments::ProductCreateParams::CreditEntitlement]?,
         ?description: String?,
         ?digital_product_delivery: Dodopayments::ProductCreateParams::DigitalProductDelivery?,
         ?license_key_activation_message: String?,
@@ -69,6 +73,7 @@ module Dodopayments
         tax_category: Dodopayments::Models::tax_category,
         addons: ::Array[String]?,
         brand_id: String?,
+        credit_entitlements: ::Array[Dodopayments::ProductCreateParams::CreditEntitlement]?,
         description: String?,
         digital_product_delivery: Dodopayments::ProductCreateParams::DigitalProductDelivery?,
         license_key_activation_message: String?,
@@ -78,6 +83,124 @@ module Dodopayments
         metadata: ::Hash[Symbol, String],
         request_options: Dodopayments::RequestOptions
       }
+
+      type credit_entitlement =
+        {
+          credit_entitlement_id: String,
+          credits_amount: String,
+          credits_reduce_overage: bool?,
+          currency: Dodopayments::Models::currency?,
+          expires_after_days: Integer?,
+          low_balance_threshold_percent: Integer?,
+          max_rollover_count: Integer?,
+          overage_charge_at_billing: bool?,
+          overage_enabled: bool?,
+          overage_limit: String?,
+          preserve_overage_at_reset: bool?,
+          price_per_unit: String?,
+          proration_behavior: Dodopayments::Models::ProductCreateParams::CreditEntitlement::proration_behavior?,
+          rollover_enabled: bool?,
+          rollover_percentage: Integer?,
+          rollover_timeframe_count: Integer?,
+          rollover_timeframe_interval: Dodopayments::Models::time_interval?,
+          trial_credits: String?,
+          trial_credits_expire_after_trial: bool?
+        }
+
+      class CreditEntitlement < Dodopayments::Internal::Type::BaseModel
+        attr_accessor credit_entitlement_id: String
+
+        attr_accessor credits_amount: String
+
+        attr_accessor credits_reduce_overage: bool?
+
+        attr_accessor currency: Dodopayments::Models::currency?
+
+        attr_accessor expires_after_days: Integer?
+
+        attr_accessor low_balance_threshold_percent: Integer?
+
+        attr_accessor max_rollover_count: Integer?
+
+        attr_accessor overage_charge_at_billing: bool?
+
+        attr_accessor overage_enabled: bool?
+
+        attr_accessor overage_limit: String?
+
+        attr_accessor preserve_overage_at_reset: bool?
+
+        attr_accessor price_per_unit: String?
+
+        attr_accessor proration_behavior: Dodopayments::Models::ProductCreateParams::CreditEntitlement::proration_behavior?
+
+        attr_accessor rollover_enabled: bool?
+
+        attr_accessor rollover_percentage: Integer?
+
+        attr_accessor rollover_timeframe_count: Integer?
+
+        attr_accessor rollover_timeframe_interval: Dodopayments::Models::time_interval?
+
+        attr_accessor trial_credits: String?
+
+        attr_accessor trial_credits_expire_after_trial: bool?
+
+        def initialize: (
+          credit_entitlement_id: String,
+          credits_amount: String,
+          ?credits_reduce_overage: bool?,
+          ?currency: Dodopayments::Models::currency?,
+          ?expires_after_days: Integer?,
+          ?low_balance_threshold_percent: Integer?,
+          ?max_rollover_count: Integer?,
+          ?overage_charge_at_billing: bool?,
+          ?overage_enabled: bool?,
+          ?overage_limit: String?,
+          ?preserve_overage_at_reset: bool?,
+          ?price_per_unit: String?,
+          ?proration_behavior: Dodopayments::Models::ProductCreateParams::CreditEntitlement::proration_behavior?,
+          ?rollover_enabled: bool?,
+          ?rollover_percentage: Integer?,
+          ?rollover_timeframe_count: Integer?,
+          ?rollover_timeframe_interval: Dodopayments::Models::time_interval?,
+          ?trial_credits: String?,
+          ?trial_credits_expire_after_trial: bool?
+        ) -> void
+
+        def to_hash: -> {
+          credit_entitlement_id: String,
+          credits_amount: String,
+          credits_reduce_overage: bool?,
+          currency: Dodopayments::Models::currency?,
+          expires_after_days: Integer?,
+          low_balance_threshold_percent: Integer?,
+          max_rollover_count: Integer?,
+          overage_charge_at_billing: bool?,
+          overage_enabled: bool?,
+          overage_limit: String?,
+          preserve_overage_at_reset: bool?,
+          price_per_unit: String?,
+          proration_behavior: Dodopayments::Models::ProductCreateParams::CreditEntitlement::proration_behavior?,
+          rollover_enabled: bool?,
+          rollover_percentage: Integer?,
+          rollover_timeframe_count: Integer?,
+          rollover_timeframe_interval: Dodopayments::Models::time_interval?,
+          trial_credits: String?,
+          trial_credits_expire_after_trial: bool?
+        }
+
+        type proration_behavior = :prorate | :no_prorate
+
+        module ProrationBehavior
+          extend Dodopayments::Internal::Type::Enum
+
+          PRORATE: :prorate
+          NO_PRORATE: :no_prorate
+
+          def self?.values: -> ::Array[Dodopayments::Models::ProductCreateParams::CreditEntitlement::proration_behavior]
+        end
+      end
 
       type digital_product_delivery =
         { external_url: String?, instructions: String? }

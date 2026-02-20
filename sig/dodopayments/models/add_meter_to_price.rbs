@@ -4,9 +4,11 @@ module Dodopayments
       {
         meter_id: String,
         price_per_unit: String,
+        credit_entitlement_id: String?,
         description: String?,
         free_threshold: Integer?,
         measurement_unit: String?,
+        meter_units_per_credit: String?,
         name: String?
       }
 
@@ -15,29 +17,37 @@ module Dodopayments
 
       attr_accessor price_per_unit: String
 
+      attr_accessor credit_entitlement_id: String?
+
       attr_accessor description: String?
 
       attr_accessor free_threshold: Integer?
 
       attr_accessor measurement_unit: String?
 
+      attr_accessor meter_units_per_credit: String?
+
       attr_accessor name: String?
 
       def initialize: (
         meter_id: String,
         price_per_unit: String,
+        ?credit_entitlement_id: String?,
         ?description: String?,
         ?free_threshold: Integer?,
         ?measurement_unit: String?,
+        ?meter_units_per_credit: String?,
         ?name: String?
       ) -> void
 
       def to_hash: -> {
         meter_id: String,
         price_per_unit: String,
+        credit_entitlement_id: String?,
         description: String?,
         free_threshold: Integer?,
         measurement_unit: String?,
+        meter_units_per_credit: String?,
         name: String?
       }
     end

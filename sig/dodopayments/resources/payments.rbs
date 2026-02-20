@@ -32,6 +32,7 @@ module Dodopayments
         ?customer_id: String,
         ?page_number: Integer,
         ?page_size: Integer,
+        ?product_id: String,
         ?status: Dodopayments::Models::PaymentListParams::status,
         ?subscription_id: String,
         ?request_options: Dodopayments::request_opts

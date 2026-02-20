@@ -84,13 +84,15 @@ module Dodopayments
         )
       end
 
-      # @overload update(subscription_id, billing: nil, cancel_at_next_billing_date: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
+      # @overload update(subscription_id, billing: nil, cancel_at_next_billing_date: nil, credit_entitlement_cart: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
       # @param billing [Dodopayments::Models::BillingAddress, nil]
       #
       # @param cancel_at_next_billing_date [Boolean, nil] When set, the subscription will remain active until the end of billing period
+      #
+      # @param credit_entitlement_cart [Array<Dodopayments::Models::SubscriptionUpdateParams::CreditEntitlementCart>, nil] Update credit entitlement cart settings
       #
       # @param customer_name [String, nil]
       #
@@ -120,7 +122,7 @@ module Dodopayments
         )
       end
 
-      # @overload list(brand_id: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, request_options: {})
+      # @overload list(brand_id: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
       #
       # @param brand_id [String] filter by Brand id
       #
@@ -133,6 +135,8 @@ module Dodopayments
       # @param page_number [Integer] Page number default is 0
       #
       # @param page_size [Integer] Page size default is 10 max is 100
+      #
+      # @param product_id [String] Filter by product id
       #
       # @param status [Symbol, Dodopayments::Models::SubscriptionListParams::Status] Filter by status
       #

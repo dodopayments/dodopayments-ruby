@@ -126,7 +126,14 @@ module Dodopayments
       #   @return [Dodopayments::Models::SubscriptionData, nil]
       optional :subscription_data, -> { Dodopayments::SubscriptionData }, nil?: true
 
-      # @!method initialize(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil)
+      # @!attribute tax_id
+      #   Tax ID for the customer (e.g. VAT number). Requires billing_address with
+      #   country.
+      #
+      #   @return [String, nil]
+      optional :tax_id, String, nil?: true
+
+      # @!method initialize(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionRequest} for more details.
       #
@@ -167,6 +174,8 @@ module Dodopayments
       #   @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer False by default
       #
       #   @param subscription_data [Dodopayments::Models::SubscriptionData, nil]
+      #
+      #   @param tax_id [String, nil] Tax ID for the customer (e.g. VAT number). Requires billing_address with country
     end
   end
 end

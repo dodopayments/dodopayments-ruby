@@ -7,6 +7,11 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      # @!attribute email
+      #
+      #   @return [String, nil]
+      optional :email, String, nil?: true
+
       # @!attribute metadata
       #   Additional metadata for the customer
       #
@@ -23,7 +28,9 @@ module Dodopayments
       #   @return [String, nil]
       optional :phone_number, String, nil?: true
 
-      # @!method initialize(metadata: nil, name: nil, phone_number: nil, request_options: {})
+      # @!method initialize(email: nil, metadata: nil, name: nil, phone_number: nil, request_options: {})
+      #   @param email [String, nil]
+      #
       #   @param metadata [Hash{Symbol=>String}, nil] Additional metadata for the customer
       #
       #   @param name [String, nil]

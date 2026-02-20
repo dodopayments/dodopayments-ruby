@@ -100,6 +100,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         currency: Dodopayments::Currency,
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: Dodopayments::Internal::Type::Boolean,
+        has_license_key: Dodopayments::Internal::Type::Boolean,
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         payment_id: String,
         total_amount: Integer,

@@ -37,6 +37,8 @@ module Dodopayments
         | Dodopayments::WebhookPayload::Data::Refund
         | Dodopayments::WebhookPayload::Data::Dispute
         | Dodopayments::WebhookPayload::Data::LicenseKey
+        | Dodopayments::WebhookPayload::Data::CreditLedgerEntry
+        | Dodopayments::WebhookPayload::Data::CreditBalanceLow
 
       module Data
         extend Dodopayments::Internal::Type::Union
@@ -193,6 +195,207 @@ module Dodopayments
             LICENSE_KEY: :LicenseKey
 
             def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::LicenseKey::payload_type]
+          end
+        end
+
+        type credit_ledger_entry =
+          {
+            id: String,
+            amount: String,
+            balance_after: String,
+            balance_before: String,
+            business_id: String,
+            created_at: Time,
+            credit_entitlement_id: String,
+            customer_id: String,
+            is_credit: bool,
+            overage_after: String,
+            overage_before: String,
+            payload_type: Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::payload_type,
+            transaction_type: Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::transaction_type,
+            description: String?,
+            grant_id: String?,
+            reference_id: String?,
+            reference_type: String?
+          }
+
+        class CreditLedgerEntry < Dodopayments::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor amount: String
+
+          attr_accessor balance_after: String
+
+          attr_accessor balance_before: String
+
+          attr_accessor business_id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor credit_entitlement_id: String
+
+          attr_accessor customer_id: String
+
+          attr_accessor is_credit: bool
+
+          attr_accessor overage_after: String
+
+          attr_accessor overage_before: String
+
+          attr_accessor payload_type: Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::payload_type
+
+          attr_accessor transaction_type: Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::transaction_type
+
+          attr_accessor description: String?
+
+          attr_accessor grant_id: String?
+
+          attr_accessor reference_id: String?
+
+          attr_accessor reference_type: String?
+
+          def initialize: (
+            id: String,
+            amount: String,
+            balance_after: String,
+            balance_before: String,
+            business_id: String,
+            created_at: Time,
+            credit_entitlement_id: String,
+            customer_id: String,
+            is_credit: bool,
+            overage_after: String,
+            overage_before: String,
+            payload_type: Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::payload_type,
+            transaction_type: Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::transaction_type,
+            ?description: String?,
+            ?grant_id: String?,
+            ?reference_id: String?,
+            ?reference_type: String?
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            amount: String,
+            balance_after: String,
+            balance_before: String,
+            business_id: String,
+            created_at: Time,
+            credit_entitlement_id: String,
+            customer_id: String,
+            is_credit: bool,
+            overage_after: String,
+            overage_before: String,
+            payload_type: Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::payload_type,
+            transaction_type: Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::transaction_type,
+            description: String?,
+            grant_id: String?,
+            reference_id: String?,
+            reference_type: String?
+          }
+
+          type payload_type = :CreditLedgerEntry
+
+          module PayloadType
+            extend Dodopayments::Internal::Type::Enum
+
+            CREDIT_LEDGER_ENTRY: :CreditLedgerEntry
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::payload_type]
+          end
+
+          type transaction_type =
+            :credit_added
+            | :credit_deducted
+            | :credit_expired
+            | :credit_rolled_over
+            | :rollover_forfeited
+            | :overage_charged
+            | :auto_top_up
+            | :manual_adjustment
+            | :refund
+
+          module TransactionType
+            extend Dodopayments::Internal::Type::Enum
+
+            CREDIT_ADDED: :credit_added
+            CREDIT_DEDUCTED: :credit_deducted
+            CREDIT_EXPIRED: :credit_expired
+            CREDIT_ROLLED_OVER: :credit_rolled_over
+            ROLLOVER_FORFEITED: :rollover_forfeited
+            OVERAGE_CHARGED: :overage_charged
+            AUTO_TOP_UP: :auto_top_up
+            MANUAL_ADJUSTMENT: :manual_adjustment
+            REFUND: :refund
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::transaction_type]
+          end
+        end
+
+        type credit_balance_low =
+          {
+            available_balance: String,
+            credit_entitlement_id: String,
+            credit_entitlement_name: String,
+            customer_id: String,
+            payload_type: Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow::payload_type,
+            subscription_credits_amount: String,
+            subscription_id: String,
+            threshold_amount: String,
+            threshold_percent: Integer
+          }
+
+        class CreditBalanceLow < Dodopayments::Internal::Type::BaseModel
+          attr_accessor available_balance: String
+
+          attr_accessor credit_entitlement_id: String
+
+          attr_accessor credit_entitlement_name: String
+
+          attr_accessor customer_id: String
+
+          attr_accessor payload_type: Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow::payload_type
+
+          attr_accessor subscription_credits_amount: String
+
+          attr_accessor subscription_id: String
+
+          attr_accessor threshold_amount: String
+
+          attr_accessor threshold_percent: Integer
+
+          def initialize: (
+            available_balance: String,
+            credit_entitlement_id: String,
+            credit_entitlement_name: String,
+            customer_id: String,
+            payload_type: Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow::payload_type,
+            subscription_credits_amount: String,
+            subscription_id: String,
+            threshold_amount: String,
+            threshold_percent: Integer
+          ) -> void
+
+          def to_hash: -> {
+            available_balance: String,
+            credit_entitlement_id: String,
+            credit_entitlement_name: String,
+            customer_id: String,
+            payload_type: Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow::payload_type,
+            subscription_credits_amount: String,
+            subscription_id: String,
+            threshold_amount: String,
+            threshold_percent: Integer
+          }
+
+          type payload_type = :CreditBalanceLow
+
+          module PayloadType
+            extend Dodopayments::Internal::Type::Enum
+
+            CREDIT_BALANCE_LOW: :CreditBalanceLow
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow::payload_type]
           end
         end
 

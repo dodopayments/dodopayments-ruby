@@ -21,6 +21,13 @@ module Dodopayments
       #   @return [Time]
       required :created_at, Time
 
+      # @!attribute credit_entitlements
+      #   Attached credit entitlements with settings
+      #
+      #   @return [Array<Dodopayments::Models::Product::CreditEntitlement>]
+      required :credit_entitlements,
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Product::CreditEntitlement] }
+
       # @!attribute is_recurring
       #   Indicates if the product is recurring (e.g., subscriptions).
       #
@@ -116,12 +123,14 @@ module Dodopayments
       #   @return [String, nil]
       optional :product_collection_id, String, nil?: true
 
-      # @!method initialize(brand_id:, business_id:, created_at:, is_recurring:, license_key_enabled:, metadata:, price:, product_id:, tax_category:, updated_at:, addons: nil, description: nil, digital_product_delivery: nil, image: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, name: nil, product_collection_id: nil)
+      # @!method initialize(brand_id:, business_id:, created_at:, credit_entitlements:, is_recurring:, license_key_enabled:, metadata:, price:, product_id:, tax_category:, updated_at:, addons: nil, description: nil, digital_product_delivery: nil, image: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, name: nil, product_collection_id: nil)
       #   @param brand_id [String]
       #
       #   @param business_id [String] Unique identifier for the business to which the product belongs.
       #
       #   @param created_at [Time] Timestamp when the product was created.
+      #
+      #   @param credit_entitlements [Array<Dodopayments::Models::Product::CreditEntitlement>] Attached credit entitlements with settings
       #
       #   @param is_recurring [Boolean] Indicates if the product is recurring (e.g., subscriptions).
       #
@@ -154,6 +163,200 @@ module Dodopayments
       #   @param name [String, nil] Name of the product, optional.
       #
       #   @param product_collection_id [String, nil] The product collection ID this product belongs to, if any
+
+      class CreditEntitlement < Dodopayments::Internal::Type::BaseModel
+        # @!attribute id
+        #   Unique ID of this mapping
+        #
+        #   @return [String]
+        required :id, String
+
+        # @!attribute credit_entitlement_id
+        #   ID of the credit entitlement
+        #
+        #   @return [String]
+        required :credit_entitlement_id, String
+
+        # @!attribute credit_entitlement_name
+        #   Name of the credit entitlement
+        #
+        #   @return [String]
+        required :credit_entitlement_name, String
+
+        # @!attribute credit_entitlement_unit
+        #   Unit label for the credit entitlement
+        #
+        #   @return [String]
+        required :credit_entitlement_unit, String
+
+        # @!attribute credits_amount
+        #   Number of credits granted
+        #
+        #   @return [String]
+        required :credits_amount, String
+
+        # @!attribute credits_reduce_overage
+        #   Whether new credit grants reduce existing overage
+        #
+        #   @return [Boolean]
+        required :credits_reduce_overage, Dodopayments::Internal::Type::Boolean
+
+        # @!attribute overage_charge_at_billing
+        #   Whether overage is charged at billing
+        #
+        #   @return [Boolean]
+        required :overage_charge_at_billing, Dodopayments::Internal::Type::Boolean
+
+        # @!attribute overage_enabled
+        #   Whether overage is enabled
+        #
+        #   @return [Boolean]
+        required :overage_enabled, Dodopayments::Internal::Type::Boolean
+
+        # @!attribute preserve_overage_at_reset
+        #   Whether to preserve overage balance when credits reset
+        #
+        #   @return [Boolean]
+        required :preserve_overage_at_reset, Dodopayments::Internal::Type::Boolean
+
+        # @!attribute proration_behavior
+        #   Proration behavior for credit grants during plan changes
+        #
+        #   @return [Symbol, Dodopayments::Models::Product::CreditEntitlement::ProrationBehavior]
+        required :proration_behavior, enum: -> { Dodopayments::Product::CreditEntitlement::ProrationBehavior }
+
+        # @!attribute rollover_enabled
+        #   Whether rollover is enabled
+        #
+        #   @return [Boolean]
+        required :rollover_enabled, Dodopayments::Internal::Type::Boolean
+
+        # @!attribute trial_credits_expire_after_trial
+        #   Whether trial credits expire after trial
+        #
+        #   @return [Boolean]
+        required :trial_credits_expire_after_trial, Dodopayments::Internal::Type::Boolean
+
+        # @!attribute currency
+        #   Currency
+        #
+        #   @return [Symbol, Dodopayments::Models::Currency, nil]
+        optional :currency, enum: -> { Dodopayments::Currency }, nil?: true
+
+        # @!attribute expires_after_days
+        #   Days until credits expire
+        #
+        #   @return [Integer, nil]
+        optional :expires_after_days, Integer, nil?: true
+
+        # @!attribute low_balance_threshold_percent
+        #   Low balance threshold percentage
+        #
+        #   @return [Integer, nil]
+        optional :low_balance_threshold_percent, Integer, nil?: true
+
+        # @!attribute max_rollover_count
+        #   Maximum rollover cycles
+        #
+        #   @return [Integer, nil]
+        optional :max_rollover_count, Integer, nil?: true
+
+        # @!attribute overage_limit
+        #   Overage limit
+        #
+        #   @return [String, nil]
+        optional :overage_limit, String, nil?: true
+
+        # @!attribute price_per_unit
+        #   Price per unit
+        #
+        #   @return [String, nil]
+        optional :price_per_unit, String, nil?: true
+
+        # @!attribute rollover_percentage
+        #   Rollover percentage
+        #
+        #   @return [Integer, nil]
+        optional :rollover_percentage, Integer, nil?: true
+
+        # @!attribute rollover_timeframe_count
+        #   Rollover timeframe count
+        #
+        #   @return [Integer, nil]
+        optional :rollover_timeframe_count, Integer, nil?: true
+
+        # @!attribute rollover_timeframe_interval
+        #   Rollover timeframe interval
+        #
+        #   @return [Symbol, Dodopayments::Models::TimeInterval, nil]
+        optional :rollover_timeframe_interval, enum: -> { Dodopayments::TimeInterval }, nil?: true
+
+        # @!attribute trial_credits
+        #   Trial credits
+        #
+        #   @return [String, nil]
+        optional :trial_credits, String, nil?: true
+
+        # @!method initialize(id:, credit_entitlement_id:, credit_entitlement_name:, credit_entitlement_unit:, credits_amount:, credits_reduce_overage:, overage_charge_at_billing:, overage_enabled:, preserve_overage_at_reset:, proration_behavior:, rollover_enabled:, trial_credits_expire_after_trial:, currency: nil, expires_after_days: nil, low_balance_threshold_percent: nil, max_rollover_count: nil, overage_limit: nil, price_per_unit: nil, rollover_percentage: nil, rollover_timeframe_count: nil, rollover_timeframe_interval: nil, trial_credits: nil)
+        #   Response struct for credit entitlement mapping
+        #
+        #   @param id [String] Unique ID of this mapping
+        #
+        #   @param credit_entitlement_id [String] ID of the credit entitlement
+        #
+        #   @param credit_entitlement_name [String] Name of the credit entitlement
+        #
+        #   @param credit_entitlement_unit [String] Unit label for the credit entitlement
+        #
+        #   @param credits_amount [String] Number of credits granted
+        #
+        #   @param credits_reduce_overage [Boolean] Whether new credit grants reduce existing overage
+        #
+        #   @param overage_charge_at_billing [Boolean] Whether overage is charged at billing
+        #
+        #   @param overage_enabled [Boolean] Whether overage is enabled
+        #
+        #   @param preserve_overage_at_reset [Boolean] Whether to preserve overage balance when credits reset
+        #
+        #   @param proration_behavior [Symbol, Dodopayments::Models::Product::CreditEntitlement::ProrationBehavior] Proration behavior for credit grants during plan changes
+        #
+        #   @param rollover_enabled [Boolean] Whether rollover is enabled
+        #
+        #   @param trial_credits_expire_after_trial [Boolean] Whether trial credits expire after trial
+        #
+        #   @param currency [Symbol, Dodopayments::Models::Currency, nil] Currency
+        #
+        #   @param expires_after_days [Integer, nil] Days until credits expire
+        #
+        #   @param low_balance_threshold_percent [Integer, nil] Low balance threshold percentage
+        #
+        #   @param max_rollover_count [Integer, nil] Maximum rollover cycles
+        #
+        #   @param overage_limit [String, nil] Overage limit
+        #
+        #   @param price_per_unit [String, nil] Price per unit
+        #
+        #   @param rollover_percentage [Integer, nil] Rollover percentage
+        #
+        #   @param rollover_timeframe_count [Integer, nil] Rollover timeframe count
+        #
+        #   @param rollover_timeframe_interval [Symbol, Dodopayments::Models::TimeInterval, nil] Rollover timeframe interval
+        #
+        #   @param trial_credits [String, nil] Trial credits
+
+        # Proration behavior for credit grants during plan changes
+        #
+        # @see Dodopayments::Models::Product::CreditEntitlement#proration_behavior
+        module ProrationBehavior
+          extend Dodopayments::Internal::Type::Enum
+
+          PRORATE = :prorate
+          NO_PRORATE = :no_prorate
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+      end
 
       # @see Dodopayments::Models::Product#digital_product_delivery
       class DigitalProductDelivery < Dodopayments::Internal::Type::BaseModel

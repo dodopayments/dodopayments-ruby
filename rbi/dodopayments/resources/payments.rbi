@@ -96,6 +96,7 @@ module Dodopayments
           customer_id: String,
           page_number: Integer,
           page_size: Integer,
+          product_id: String,
           status: Dodopayments::PaymentListParams::Status::OrSymbol,
           subscription_id: String,
           request_options: Dodopayments::RequestOptions::OrHash
@@ -118,6 +119,8 @@ module Dodopayments
         page_number: nil,
         # Page size default is 10 max is 100
         page_size: nil,
+        # Filter by product id
+        product_id: nil,
         # Filter by status
         status: nil,
         # Filter by subscription id

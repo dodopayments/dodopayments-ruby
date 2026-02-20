@@ -44,6 +44,7 @@ module Dodopayments
       sig do
         params(
           customer_id: String,
+          email: T.nilable(String),
           metadata: T.nilable(T::Hash[Symbol, String]),
           name: T.nilable(String),
           phone_number: T.nilable(String),
@@ -53,6 +54,7 @@ module Dodopayments
       def update(
         # Customer Id
         customer_id,
+        email: nil,
         # Additional metadata for the customer
         metadata: nil,
         name: nil,

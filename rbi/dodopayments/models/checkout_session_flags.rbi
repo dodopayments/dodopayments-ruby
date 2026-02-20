@@ -57,6 +57,12 @@ module Dodopayments
       attr_writer :allow_customer_editing_street
 
       sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :allow_customer_editing_tax_id
+
+      sig { params(allow_customer_editing_tax_id: T::Boolean).void }
+      attr_writer :allow_customer_editing_tax_id
+
+      sig { returns(T.nilable(T::Boolean)) }
       attr_reader :allow_customer_editing_zipcode
 
       sig { params(allow_customer_editing_zipcode: T::Boolean).void }
@@ -117,6 +123,7 @@ module Dodopayments
           allow_customer_editing_name: T::Boolean,
           allow_customer_editing_state: T::Boolean,
           allow_customer_editing_street: T::Boolean,
+          allow_customer_editing_tax_id: T::Boolean,
           allow_customer_editing_zipcode: T::Boolean,
           allow_discount_code: T::Boolean,
           allow_phone_number_collection: T::Boolean,
@@ -136,6 +143,7 @@ module Dodopayments
         allow_customer_editing_name: nil,
         allow_customer_editing_state: nil,
         allow_customer_editing_street: nil,
+        allow_customer_editing_tax_id: nil,
         allow_customer_editing_zipcode: nil,
         # If the customer is allowed to apply discount code, set it to true.
         #
@@ -171,6 +179,7 @@ module Dodopayments
             allow_customer_editing_name: T::Boolean,
             allow_customer_editing_state: T::Boolean,
             allow_customer_editing_street: T::Boolean,
+            allow_customer_editing_tax_id: T::Boolean,
             allow_customer_editing_zipcode: T::Boolean,
             allow_discount_code: T::Boolean,
             allow_phone_number_collection: T::Boolean,

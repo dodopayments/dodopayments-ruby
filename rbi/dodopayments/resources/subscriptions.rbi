@@ -108,6 +108,12 @@ module Dodopayments
           subscription_id: String,
           billing: T.nilable(Dodopayments::BillingAddress::OrHash),
           cancel_at_next_billing_date: T.nilable(T::Boolean),
+          credit_entitlement_cart:
+            T.nilable(
+              T::Array[
+                Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart::OrHash
+              ]
+            ),
           customer_name: T.nilable(String),
           disable_on_demand:
             T.nilable(
@@ -126,6 +132,8 @@ module Dodopayments
         billing: nil,
         # When set, the subscription will remain active until the end of billing period
         cancel_at_next_billing_date: nil,
+        # Update credit entitlement cart settings
+        credit_entitlement_cart: nil,
         customer_name: nil,
         disable_on_demand: nil,
         metadata: nil,
@@ -144,6 +152,7 @@ module Dodopayments
           customer_id: String,
           page_number: Integer,
           page_size: Integer,
+          product_id: String,
           status: Dodopayments::SubscriptionListParams::Status::OrSymbol,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
@@ -165,6 +174,8 @@ module Dodopayments
         page_number: nil,
         # Page size default is 10 max is 100
         page_size: nil,
+        # Filter by product id
+        product_id: nil,
         # Filter by status
         status: nil,
         request_options: {}

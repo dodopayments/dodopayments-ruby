@@ -7,6 +7,7 @@ module Dodopayments
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
+        has_license_key: bool,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,
@@ -28,6 +29,8 @@ module Dodopayments
       attr_accessor customer: Dodopayments::CustomerLimitedDetails
 
       attr_accessor digital_products_delivered: bool
+
+      attr_accessor has_license_key: bool
 
       attr_accessor metadata: ::Hash[Symbol, String]
 
@@ -53,6 +56,7 @@ module Dodopayments
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
+        has_license_key: bool,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,
@@ -70,6 +74,7 @@ module Dodopayments
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
+        has_license_key: bool,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,
