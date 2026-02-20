@@ -56,6 +56,13 @@ module Dodopayments
       sig { params(page_size: Integer).void }
       attr_writer :page_size
 
+      # Filter by product id
+      sig { returns(T.nilable(String)) }
+      attr_reader :product_id
+
+      sig { params(product_id: String).void }
+      attr_writer :product_id
+
       # Filter by status
       sig do
         returns(T.nilable(Dodopayments::PaymentListParams::Status::OrSymbol))
@@ -82,6 +89,7 @@ module Dodopayments
           customer_id: String,
           page_number: Integer,
           page_size: Integer,
+          product_id: String,
           status: Dodopayments::PaymentListParams::Status::OrSymbol,
           subscription_id: String,
           request_options: Dodopayments::RequestOptions::OrHash
@@ -100,6 +108,8 @@ module Dodopayments
         page_number: nil,
         # Page size default is 10 max is 100
         page_size: nil,
+        # Filter by product id
+        product_id: nil,
         # Filter by status
         status: nil,
         # Filter by subscription id
@@ -117,6 +127,7 @@ module Dodopayments
             customer_id: String,
             page_number: Integer,
             page_size: Integer,
+            product_id: String,
             status: Dodopayments::PaymentListParams::Status::OrSymbol,
             subscription_id: String,
             request_options: Dodopayments::RequestOptions

@@ -12,7 +12,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductCreateParams} for more details.
       #
-      # @overload create(name:, price:, tax_category:, addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, request_options: {})
+      # @overload create(name:, price:, tax_category:, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, request_options: {})
       #
       # @param name [String] Name of the product
       #
@@ -23,6 +23,8 @@ module Dodopayments
       # @param addons [Array<String>, nil] Addons available for subscription product
       #
       # @param brand_id [String, nil] Brand id for the product, if not provided will default to primary brand
+      #
+      # @param credit_entitlements [Array<Dodopayments::Models::ProductCreateParams::CreditEntitlement>, nil] Optional credit entitlements to attach (max 3)
       #
       # @param description [String, nil] Optional description of the product
       #
@@ -75,13 +77,15 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductUpdateParams} for more details.
       #
-      # @overload update(id, addons: nil, brand_id: nil, description: nil, digital_product_delivery: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      # @overload update(id, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, price: nil, tax_category: nil, request_options: {})
       #
       # @param id [String]
       #
       # @param addons [Array<String>, nil] Available Addons for subscription products
       #
       # @param brand_id [String, nil]
+      #
+      # @param credit_entitlements [Array<Dodopayments::Models::ProductUpdateParams::CreditEntitlement>, nil] Credit entitlements to update (replaces all existing when present)
       #
       # @param description [String, nil] Description of the product, optional and must be at most 1000 characters.
       #

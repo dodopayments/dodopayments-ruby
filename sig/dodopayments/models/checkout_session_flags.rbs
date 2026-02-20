@@ -9,6 +9,7 @@ module Dodopayments
         allow_customer_editing_name: bool,
         allow_customer_editing_state: bool,
         allow_customer_editing_street: bool,
+        allow_customer_editing_tax_id: bool,
         allow_customer_editing_zipcode: bool,
         allow_discount_code: bool,
         allow_phone_number_collection: bool,
@@ -46,6 +47,10 @@ module Dodopayments
 
       def allow_customer_editing_street=: (bool) -> bool
 
+      attr_reader allow_customer_editing_tax_id: bool?
+
+      def allow_customer_editing_tax_id=: (bool) -> bool
+
       attr_reader allow_customer_editing_zipcode: bool?
 
       def allow_customer_editing_zipcode=: (bool) -> bool
@@ -78,6 +83,7 @@ module Dodopayments
         ?allow_customer_editing_name: bool,
         ?allow_customer_editing_state: bool,
         ?allow_customer_editing_street: bool,
+        ?allow_customer_editing_tax_id: bool,
         ?allow_customer_editing_zipcode: bool,
         ?allow_discount_code: bool,
         ?allow_phone_number_collection: bool,
@@ -94,6 +100,7 @@ module Dodopayments
         allow_customer_editing_name: bool,
         allow_customer_editing_state: bool,
         allow_customer_editing_street: bool,
+        allow_customer_editing_tax_id: bool,
         allow_customer_editing_zipcode: bool,
         allow_discount_code: bool,
         allow_phone_number_collection: bool,

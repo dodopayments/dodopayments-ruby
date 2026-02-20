@@ -21,6 +21,12 @@ module Dodopayments
           tax_category: Dodopayments::TaxCategory::OrSymbol,
           addons: T.nilable(T::Array[String]),
           brand_id: T.nilable(String),
+          credit_entitlements:
+            T.nilable(
+              T::Array[
+                Dodopayments::ProductCreateParams::CreditEntitlement::OrHash
+              ]
+            ),
           description: T.nilable(String),
           digital_product_delivery:
             T.nilable(
@@ -46,6 +52,8 @@ module Dodopayments
         addons: nil,
         # Brand id for the product, if not provided will default to primary brand
         brand_id: nil,
+        # Optional credit entitlements to attach (max 3)
+        credit_entitlements: nil,
         # Optional description of the product
         description: nil,
         # Choose how you would like you digital product delivered
@@ -84,6 +92,12 @@ module Dodopayments
           id: String,
           addons: T.nilable(T::Array[String]),
           brand_id: T.nilable(String),
+          credit_entitlements:
+            T.nilable(
+              T::Array[
+                Dodopayments::ProductUpdateParams::CreditEntitlement::OrHash
+              ]
+            ),
           description: T.nilable(String),
           digital_product_delivery:
             T.nilable(
@@ -114,6 +128,9 @@ module Dodopayments
         # Available Addons for subscription products
         addons: nil,
         brand_id: nil,
+        # Credit entitlements to update (replaces all existing when present) Send empty
+        # array to remove all, omit field to leave unchanged
+        credit_entitlements: nil,
         # Description of the product, optional and must be at most 1000 characters.
         description: nil,
         # Choose how you would like you digital product delivered

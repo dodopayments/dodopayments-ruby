@@ -28,6 +28,14 @@ module Dodopayments
       | :"payout.in_progress"
       | :"payout.failed"
       | :"payout.success"
+      | :"credit.added"
+      | :"credit.deducted"
+      | :"credit.expired"
+      | :"credit.rolled_over"
+      | :"credit.rollover_forfeited"
+      | :"credit.overage_charged"
+      | :"credit.manual_adjustment"
+      | :"credit.balance_low"
 
     module WebhookEventType
       extend Dodopayments::Internal::Type::Enum
@@ -59,6 +67,14 @@ module Dodopayments
       PAYOUT_IN_PROGRESS: :"payout.in_progress"
       PAYOUT_FAILED: :"payout.failed"
       PAYOUT_SUCCESS: :"payout.success"
+      CREDIT_ADDED: :"credit.added"
+      CREDIT_DEDUCTED: :"credit.deducted"
+      CREDIT_EXPIRED: :"credit.expired"
+      CREDIT_ROLLED_OVER: :"credit.rolled_over"
+      CREDIT_ROLLOVER_FORFEITED: :"credit.rollover_forfeited"
+      CREDIT_OVERAGE_CHARGED: :"credit.overage_charged"
+      CREDIT_MANUAL_ADJUSTMENT: :"credit.manual_adjustment"
+      CREDIT_BALANCE_LOW: :"credit.balance_low"
 
       def self?.values: -> ::Array[Dodopayments::Models::webhook_event_type]
     end

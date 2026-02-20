@@ -27,6 +27,12 @@ module Dodopayments
       sig { returns(Time) }
       attr_accessor :created_at
 
+      # Credit entitlement cart settings for this subscription
+      sig do
+        returns(T::Array[Dodopayments::Subscription::CreditEntitlementCart])
+      end
+      attr_accessor :credit_entitlement_cart
+
       # Currency used for the subscription payments
       sig { returns(Dodopayments::Currency::TaggedSymbol) }
       attr_accessor :currency
@@ -43,6 +49,14 @@ module Dodopayments
       # Additional custom data associated with the subscription
       sig { returns(T::Hash[Symbol, String]) }
       attr_accessor :metadata
+
+      # Meter credit entitlement cart settings for this subscription
+      sig do
+        returns(
+          T::Array[Dodopayments::Subscription::MeterCreditEntitlementCart]
+        )
+      end
+      attr_accessor :meter_credit_entitlement_cart
 
       # Meters associated with this subscription (for usage-based billing)
       sig { returns(T::Array[Dodopayments::Subscription::Meter]) }
@@ -145,9 +159,15 @@ module Dodopayments
           billing: Dodopayments::BillingAddress::OrHash,
           cancel_at_next_billing_date: T::Boolean,
           created_at: Time,
+          credit_entitlement_cart:
+            T::Array[Dodopayments::Subscription::CreditEntitlementCart::OrHash],
           currency: Dodopayments::Currency::OrSymbol,
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
           metadata: T::Hash[Symbol, String],
+          meter_credit_entitlement_cart:
+            T::Array[
+              Dodopayments::Subscription::MeterCreditEntitlementCart::OrHash
+            ],
           meters: T::Array[Dodopayments::Subscription::Meter::OrHash],
           next_billing_date: Time,
           on_demand: T::Boolean,
@@ -184,12 +204,16 @@ module Dodopayments
         cancel_at_next_billing_date:,
         # Timestamp when the subscription was created
         created_at:,
+        # Credit entitlement cart settings for this subscription
+        credit_entitlement_cart:,
         # Currency used for the subscription payments
         currency:,
         # Customer details associated with the subscription
         customer:,
         # Additional custom data associated with the subscription
         metadata:,
+        # Meter credit entitlement cart settings for this subscription
+        meter_credit_entitlement_cart:,
         # Meters associated with this subscription (for usage-based billing)
         meters:,
         # Timestamp of the next scheduled billing. Indicates the end of current billing
@@ -246,9 +270,13 @@ module Dodopayments
             billing: Dodopayments::BillingAddress,
             cancel_at_next_billing_date: T::Boolean,
             created_at: Time,
+            credit_entitlement_cart:
+              T::Array[Dodopayments::Subscription::CreditEntitlementCart],
             currency: Dodopayments::Currency::TaggedSymbol,
             customer: Dodopayments::CustomerLimitedDetails,
             metadata: T::Hash[Symbol, String],
+            meter_credit_entitlement_cart:
+              T::Array[Dodopayments::Subscription::MeterCreditEntitlementCart],
             meters: T::Array[Dodopayments::Subscription::Meter],
             next_billing_date: Time,
             on_demand: T::Boolean,
@@ -280,6 +308,203 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      class CreditEntitlementCart < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::Subscription::CreditEntitlementCart,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        sig { returns(String) }
+        attr_accessor :credit_entitlement_id
+
+        sig { returns(String) }
+        attr_accessor :credit_entitlement_name
+
+        sig { returns(String) }
+        attr_accessor :credits_amount
+
+        # Customer's current overage balance for this entitlement
+        sig { returns(String) }
+        attr_accessor :overage_balance
+
+        sig { returns(T::Boolean) }
+        attr_accessor :overage_charge_at_billing
+
+        sig { returns(T::Boolean) }
+        attr_accessor :overage_enabled
+
+        sig { returns(String) }
+        attr_accessor :product_id
+
+        # Customer's current remaining credit balance for this entitlement
+        sig { returns(String) }
+        attr_accessor :remaining_balance
+
+        sig { returns(T::Boolean) }
+        attr_accessor :rollover_enabled
+
+        # Unit label for the credit entitlement (e.g., "API Calls", "Tokens")
+        sig { returns(String) }
+        attr_accessor :unit
+
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :expires_after_days
+
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :low_balance_threshold_percent
+
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :max_rollover_count
+
+        sig { returns(T.nilable(String)) }
+        attr_accessor :overage_limit
+
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :rollover_percentage
+
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :rollover_timeframe_count
+
+        sig { returns(T.nilable(Dodopayments::TimeInterval::TaggedSymbol)) }
+        attr_accessor :rollover_timeframe_interval
+
+        # Response struct representing credit entitlement cart details for a subscription
+        sig do
+          params(
+            credit_entitlement_id: String,
+            credit_entitlement_name: String,
+            credits_amount: String,
+            overage_balance: String,
+            overage_charge_at_billing: T::Boolean,
+            overage_enabled: T::Boolean,
+            product_id: String,
+            remaining_balance: String,
+            rollover_enabled: T::Boolean,
+            unit: String,
+            expires_after_days: T.nilable(Integer),
+            low_balance_threshold_percent: T.nilable(Integer),
+            max_rollover_count: T.nilable(Integer),
+            overage_limit: T.nilable(String),
+            rollover_percentage: T.nilable(Integer),
+            rollover_timeframe_count: T.nilable(Integer),
+            rollover_timeframe_interval:
+              T.nilable(Dodopayments::TimeInterval::OrSymbol)
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          credit_entitlement_id:,
+          credit_entitlement_name:,
+          credits_amount:,
+          # Customer's current overage balance for this entitlement
+          overage_balance:,
+          overage_charge_at_billing:,
+          overage_enabled:,
+          product_id:,
+          # Customer's current remaining credit balance for this entitlement
+          remaining_balance:,
+          rollover_enabled:,
+          # Unit label for the credit entitlement (e.g., "API Calls", "Tokens")
+          unit:,
+          expires_after_days: nil,
+          low_balance_threshold_percent: nil,
+          max_rollover_count: nil,
+          overage_limit: nil,
+          rollover_percentage: nil,
+          rollover_timeframe_count: nil,
+          rollover_timeframe_interval: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              credit_entitlement_id: String,
+              credit_entitlement_name: String,
+              credits_amount: String,
+              overage_balance: String,
+              overage_charge_at_billing: T::Boolean,
+              overage_enabled: T::Boolean,
+              product_id: String,
+              remaining_balance: String,
+              rollover_enabled: T::Boolean,
+              unit: String,
+              expires_after_days: T.nilable(Integer),
+              low_balance_threshold_percent: T.nilable(Integer),
+              max_rollover_count: T.nilable(Integer),
+              overage_limit: T.nilable(String),
+              rollover_percentage: T.nilable(Integer),
+              rollover_timeframe_count: T.nilable(Integer),
+              rollover_timeframe_interval:
+                T.nilable(Dodopayments::TimeInterval::TaggedSymbol)
+            }
+          )
+        end
+        def to_hash
+        end
+      end
+
+      class MeterCreditEntitlementCart < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::Subscription::MeterCreditEntitlementCart,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        sig { returns(String) }
+        attr_accessor :credit_entitlement_id
+
+        sig { returns(String) }
+        attr_accessor :meter_id
+
+        sig { returns(String) }
+        attr_accessor :meter_name
+
+        sig { returns(String) }
+        attr_accessor :meter_units_per_credit
+
+        sig { returns(String) }
+        attr_accessor :product_id
+
+        # Response struct representing meter-credit entitlement mapping cart details for a
+        # subscription
+        sig do
+          params(
+            credit_entitlement_id: String,
+            meter_id: String,
+            meter_name: String,
+            meter_units_per_credit: String,
+            product_id: String
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          credit_entitlement_id:,
+          meter_id:,
+          meter_name:,
+          meter_units_per_credit:,
+          product_id:
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              credit_entitlement_id: String,
+              meter_id: String,
+              meter_name: String,
+              meter_units_per_credit: String,
+              product_id: String
+            }
+          )
+        end
+        def to_hash
+        end
       end
 
       class Meter < Dodopayments::Internal::Type::BaseModel

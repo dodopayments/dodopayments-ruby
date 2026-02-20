@@ -4,6 +4,7 @@ module Dodopayments
       {
         billing: Dodopayments::BillingAddress?,
         cancel_at_next_billing_date: bool?,
+        credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?,
         customer_name: String?,
         disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         metadata: ::Hash[Symbol, String]?,
@@ -21,6 +22,8 @@ module Dodopayments
 
       attr_accessor cancel_at_next_billing_date: bool?
 
+      attr_accessor credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?
+
       attr_accessor customer_name: String?
 
       attr_accessor disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?
@@ -36,6 +39,7 @@ module Dodopayments
       def initialize: (
         ?billing: Dodopayments::BillingAddress?,
         ?cancel_at_next_billing_date: bool?,
+        ?credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?,
         ?customer_name: String?,
         ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         ?metadata: ::Hash[Symbol, String]?,
@@ -48,6 +52,7 @@ module Dodopayments
       def to_hash: -> {
         billing: Dodopayments::BillingAddress?,
         cancel_at_next_billing_date: bool?,
+        credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?,
         customer_name: String?,
         disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         metadata: ::Hash[Symbol, String]?,
@@ -56,6 +61,78 @@ module Dodopayments
         tax_id: String?,
         request_options: Dodopayments::RequestOptions
       }
+
+      type credit_entitlement_cart =
+        {
+          credit_entitlement_id: String,
+          credits_amount: String?,
+          expires_after_days: Integer?,
+          low_balance_threshold_percent: Integer?,
+          max_rollover_count: Integer?,
+          overage_charge_at_billing: bool?,
+          overage_enabled: bool?,
+          overage_limit: String?,
+          rollover_enabled: bool?,
+          rollover_percentage: Integer?,
+          rollover_timeframe_count: Integer?,
+          rollover_timeframe_interval: Dodopayments::Models::time_interval?
+        }
+
+      class CreditEntitlementCart < Dodopayments::Internal::Type::BaseModel
+        attr_accessor credit_entitlement_id: String
+
+        attr_accessor credits_amount: String?
+
+        attr_accessor expires_after_days: Integer?
+
+        attr_accessor low_balance_threshold_percent: Integer?
+
+        attr_accessor max_rollover_count: Integer?
+
+        attr_accessor overage_charge_at_billing: bool?
+
+        attr_accessor overage_enabled: bool?
+
+        attr_accessor overage_limit: String?
+
+        attr_accessor rollover_enabled: bool?
+
+        attr_accessor rollover_percentage: Integer?
+
+        attr_accessor rollover_timeframe_count: Integer?
+
+        attr_accessor rollover_timeframe_interval: Dodopayments::Models::time_interval?
+
+        def initialize: (
+          credit_entitlement_id: String,
+          ?credits_amount: String?,
+          ?expires_after_days: Integer?,
+          ?low_balance_threshold_percent: Integer?,
+          ?max_rollover_count: Integer?,
+          ?overage_charge_at_billing: bool?,
+          ?overage_enabled: bool?,
+          ?overage_limit: String?,
+          ?rollover_enabled: bool?,
+          ?rollover_percentage: Integer?,
+          ?rollover_timeframe_count: Integer?,
+          ?rollover_timeframe_interval: Dodopayments::Models::time_interval?
+        ) -> void
+
+        def to_hash: -> {
+          credit_entitlement_id: String,
+          credits_amount: String?,
+          expires_after_days: Integer?,
+          low_balance_threshold_percent: Integer?,
+          max_rollover_count: Integer?,
+          overage_charge_at_billing: bool?,
+          overage_enabled: bool?,
+          overage_limit: String?,
+          rollover_enabled: bool?,
+          rollover_percentage: Integer?,
+          rollover_timeframe_count: Integer?,
+          rollover_timeframe_interval: Dodopayments::Models::time_interval?
+        }
+      end
 
       type disable_on_demand = { next_billing_date: Time }
 

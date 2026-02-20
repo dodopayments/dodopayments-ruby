@@ -8,6 +8,7 @@ module Dodopayments
         product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
         total_price: Integer,
         recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
+        tax_id_err_msg: String?,
         total_tax: Integer?
       }
 
@@ -24,6 +25,8 @@ module Dodopayments
 
       attr_accessor recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?
 
+      attr_accessor tax_id_err_msg: String?
+
       attr_accessor total_tax: Integer?
 
       def initialize: (
@@ -33,6 +36,7 @@ module Dodopayments
         product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
         total_price: Integer,
         ?recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
+        ?tax_id_err_msg: String?,
         ?total_tax: Integer?
       ) -> void
 
@@ -43,6 +47,7 @@ module Dodopayments
         product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
         total_price: Integer,
         recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
+        tax_id_err_msg: String?,
         total_tax: Integer?
       }
 
@@ -80,6 +85,7 @@ module Dodopayments
 
       type product_cart =
         {
+          credit_entitlements: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::CreditEntitlement],
           currency: Dodopayments::Models::currency,
           discounted_price: Integer,
           is_subscription: bool,
@@ -101,6 +107,8 @@ module Dodopayments
         }
 
       class ProductCart < Dodopayments::Internal::Type::BaseModel
+        attr_accessor credit_entitlements: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::CreditEntitlement]
+
         attr_accessor currency: Dodopayments::Models::currency
 
         attr_accessor discounted_price: Integer
@@ -138,6 +146,7 @@ module Dodopayments
         attr_accessor tax: Integer?
 
         def initialize: (
+          credit_entitlements: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::CreditEntitlement],
           currency: Dodopayments::Models::currency,
           discounted_price: Integer,
           is_subscription: bool,
@@ -159,6 +168,7 @@ module Dodopayments
         ) -> void
 
         def to_hash: -> {
+          credit_entitlements: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::CreditEntitlement],
           currency: Dodopayments::Models::currency,
           discounted_price: Integer,
           is_subscription: bool,
@@ -178,6 +188,38 @@ module Dodopayments
           name: String?,
           tax: Integer?
         }
+
+        type credit_entitlement =
+          {
+            credit_entitlement_id: String,
+            credit_entitlement_name: String,
+            credit_entitlement_unit: String,
+            credits_amount: String
+          }
+
+        class CreditEntitlement < Dodopayments::Internal::Type::BaseModel
+          attr_accessor credit_entitlement_id: String
+
+          attr_accessor credit_entitlement_name: String
+
+          attr_accessor credit_entitlement_unit: String
+
+          attr_accessor credits_amount: String
+
+          def initialize: (
+            credit_entitlement_id: String,
+            credit_entitlement_name: String,
+            credit_entitlement_unit: String,
+            credits_amount: String
+          ) -> void
+
+          def to_hash: -> {
+            credit_entitlement_id: String,
+            credit_entitlement_name: String,
+            credit_entitlement_unit: String,
+            credits_amount: String
+          }
+        end
 
         type meter =
           {

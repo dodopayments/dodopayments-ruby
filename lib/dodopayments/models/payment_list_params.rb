@@ -43,6 +43,12 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :page_size, Integer
 
+      # @!attribute product_id
+      #   Filter by product id
+      #
+      #   @return [String, nil]
+      optional :product_id, String
+
       # @!attribute status
       #   Filter by status
       #
@@ -55,7 +61,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :subscription_id, String
 
-      # @!method initialize(brand_id: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, subscription_id: nil, request_options: {})
+      # @!method initialize(brand_id: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, subscription_id: nil, request_options: {})
       #   @param brand_id [String] filter by Brand id
       #
       #   @param created_at_gte [Time] Get events after this created time
@@ -67,6 +73,8 @@ module Dodopayments
       #   @param page_number [Integer] Page number default is 0
       #
       #   @param page_size [Integer] Page size default is 10 max is 100
+      #
+      #   @param product_id [String] Filter by product id
       #
       #   @param status [Symbol, Dodopayments::Models::PaymentListParams::Status] Filter by status
       #

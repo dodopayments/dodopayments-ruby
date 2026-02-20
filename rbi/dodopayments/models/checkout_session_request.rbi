@@ -142,6 +142,11 @@ module Dodopayments
       end
       attr_writer :subscription_data
 
+      # Tax ID for the customer (e.g. VAT number). Requires billing_address with
+      # country.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :tax_id
+
       sig do
         params(
           product_cart: T::Array[Dodopayments::ProductItemReq::OrHash],
@@ -170,7 +175,8 @@ module Dodopayments
           return_url: T.nilable(String),
           short_link: T::Boolean,
           show_saved_payment_methods: T::Boolean,
-          subscription_data: T.nilable(Dodopayments::SubscriptionData::OrHash)
+          subscription_data: T.nilable(Dodopayments::SubscriptionData::OrHash),
+          tax_id: T.nilable(String)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -216,7 +222,10 @@ module Dodopayments
         short_link: nil,
         # Display saved payment methods of a returning customer False by default
         show_saved_payment_methods: nil,
-        subscription_data: nil
+        subscription_data: nil,
+        # Tax ID for the customer (e.g. VAT number). Requires billing_address with
+        # country.
+        tax_id: nil
       )
       end
 
@@ -249,7 +258,8 @@ module Dodopayments
             return_url: T.nilable(String),
             short_link: T::Boolean,
             show_saved_payment_methods: T::Boolean,
-            subscription_data: T.nilable(Dodopayments::SubscriptionData)
+            subscription_data: T.nilable(Dodopayments::SubscriptionData),
+            tax_id: T.nilable(String)
           }
         )
       end
