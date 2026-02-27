@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.84.1 (2026-02-27)
+
+Full Changelog: [v1.84.0...v1.84.1](https://github.com/dodopayments/dodopayments-ruby/compare/v1.84.0...v1.84.1)
+
+### Bug Fixes
+
+* properly mock time in ruby ci tests ([1317060](https://github.com/dodopayments/dodopayments-ruby/commit/1317060af172f68ed0ca7dc1ca7d994ab1673d2a))
+
 ## 1.84.0 (2026-02-20)
 
 Full Changelog: [v1.81.1...v1.84.0](https://github.com/dodopayments/dodopayments-ruby/compare/v1.81.1...v1.84.0)
