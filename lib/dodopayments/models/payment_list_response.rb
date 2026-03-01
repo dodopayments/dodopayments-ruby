@@ -49,6 +49,12 @@ module Dodopayments
       #   @return [Integer]
       required :total_amount, Integer
 
+      # @!attribute dispute_status
+      #   The most recent dispute status for this payment. None if no disputes exist.
+      #
+      #   @return [Symbol, Dodopayments::Models::DisputeStatus, nil]
+      optional :dispute_status, enum: -> { Dodopayments::DisputeStatus }, nil?: true
+
       # @!attribute invoice_id
       #   Invoice ID for this payment. Uses India-specific invoice ID if available.
       #
@@ -71,6 +77,13 @@ module Dodopayments
       #   @return [String, nil]
       optional :payment_method_type, String, nil?: true
 
+      # @!attribute refund_status
+      #   Summary of the refund status for this payment. None if no succeeded refunds
+      #   exist.
+      #
+      #   @return [Symbol, Dodopayments::Models::PaymentRefundStatus, nil]
+      optional :refund_status, enum: -> { Dodopayments::PaymentRefundStatus }, nil?: true
+
       # @!attribute status
       #
       #   @return [Symbol, Dodopayments::Models::IntentStatus, nil]
@@ -81,7 +94,10 @@ module Dodopayments
       #   @return [String, nil]
       optional :subscription_id, String, nil?: true
 
-      # @!method initialize(brand_id:, created_at:, currency:, customer:, digital_products_delivered:, has_license_key:, metadata:, payment_id:, total_amount:, invoice_id: nil, invoice_url: nil, payment_method: nil, payment_method_type: nil, status: nil, subscription_id: nil)
+      # @!method initialize(brand_id:, created_at:, currency:, customer:, digital_products_delivered:, has_license_key:, metadata:, payment_id:, total_amount:, dispute_status: nil, invoice_id: nil, invoice_url: nil, payment_method: nil, payment_method_type: nil, refund_status: nil, status: nil, subscription_id: nil)
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::PaymentListResponse} for more details.
+      #
       #   @param brand_id [String]
       #
       #   @param created_at [Time]
@@ -100,6 +116,8 @@ module Dodopayments
       #
       #   @param total_amount [Integer]
       #
+      #   @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus, nil] The most recent dispute status for this payment. None if no disputes exist.
+      #
       #   @param invoice_id [String, nil] Invoice ID for this payment. Uses India-specific invoice ID if available.
       #
       #   @param invoice_url [String, nil] URL to download the invoice PDF for this payment.
@@ -107,6 +125,8 @@ module Dodopayments
       #   @param payment_method [String, nil]
       #
       #   @param payment_method_type [String, nil]
+      #
+      #   @param refund_status [Symbol, Dodopayments::Models::PaymentRefundStatus, nil] Summary of the refund status for this payment. None if no succeeded refunds exis
       #
       #   @param status [Symbol, Dodopayments::Models::IntentStatus, nil]
       #

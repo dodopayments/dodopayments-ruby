@@ -1,0 +1,97 @@
+module Dodopayments
+  module Models
+    type credit_balance_low_webhook_event =
+      {
+        business_id: String,
+        data: Dodopayments::CreditBalanceLowWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditBalanceLowWebhookEvent::type_
+      }
+
+    class CreditBalanceLowWebhookEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::CreditBalanceLowWebhookEvent::Data
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: Dodopayments::Models::CreditBalanceLowWebhookEvent::type_
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::CreditBalanceLowWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditBalanceLowWebhookEvent::type_
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::CreditBalanceLowWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditBalanceLowWebhookEvent::type_
+      }
+
+      type data =
+        {
+          available_balance: String,
+          credit_entitlement_id: String,
+          credit_entitlement_name: String,
+          customer_id: String,
+          subscription_credits_amount: String,
+          subscription_id: String,
+          threshold_amount: String,
+          threshold_percent: Integer
+        }
+
+      class Data < Dodopayments::Internal::Type::BaseModel
+        attr_accessor available_balance: String
+
+        attr_accessor credit_entitlement_id: String
+
+        attr_accessor credit_entitlement_name: String
+
+        attr_accessor customer_id: String
+
+        attr_accessor subscription_credits_amount: String
+
+        attr_accessor subscription_id: String
+
+        attr_accessor threshold_amount: String
+
+        attr_accessor threshold_percent: Integer
+
+        def initialize: (
+          available_balance: String,
+          credit_entitlement_id: String,
+          credit_entitlement_name: String,
+          customer_id: String,
+          subscription_credits_amount: String,
+          subscription_id: String,
+          threshold_amount: String,
+          threshold_percent: Integer
+        ) -> void
+
+        def to_hash: -> {
+          available_balance: String,
+          credit_entitlement_id: String,
+          credit_entitlement_name: String,
+          customer_id: String,
+          subscription_credits_amount: String,
+          subscription_id: String,
+          threshold_amount: String,
+          threshold_percent: Integer
+        }
+      end
+
+      type type_ = :"credit.balance_low"
+
+      module Type
+        extend Dodopayments::Internal::Type::Enum
+
+        CREDIT_BALANCE_LOW: :"credit.balance_low"
+
+        def self?.values: -> ::Array[Dodopayments::Models::CreditBalanceLowWebhookEvent::type_]
+      end
+    end
+  end
+end

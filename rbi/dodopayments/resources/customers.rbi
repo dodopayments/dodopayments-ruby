@@ -95,6 +95,20 @@ module Dodopayments
       )
       end
 
+      # List all credit entitlements for a customer with their current balances
+      sig do
+        params(
+          customer_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Models::CustomerListCreditEntitlementsResponse)
+      end
+      def list_credit_entitlements(
+        # Customer ID
+        customer_id,
+        request_options: {}
+      )
+      end
+
       sig do
         params(
           customer_id: String,

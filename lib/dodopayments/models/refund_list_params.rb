@@ -43,7 +43,13 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::RefundListParams::Status, nil]
       optional :status, enum: -> { Dodopayments::RefundListParams::Status }
 
-      # @!method initialize(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, request_options: {})
+      # @!attribute subscription_id
+      #   Filter by subscription id
+      #
+      #   @return [String, nil]
+      optional :subscription_id, String
+
+      # @!method initialize(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, subscription_id: nil, request_options: {})
       #   @param created_at_gte [Time] Get events after this created time
       #
       #   @param created_at_lte [Time] Get events created before this time
@@ -55,6 +61,8 @@ module Dodopayments
       #   @param page_size [Integer] Page size default is 10 max is 100
       #
       #   @param status [Symbol, Dodopayments::Models::RefundListParams::Status] Filter by status
+      #
+      #   @param subscription_id [String] Filter by subscription id
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 

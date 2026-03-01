@@ -1,0 +1,16 @@
+module Dodopayments
+  module Models
+    module CreditEntitlements
+      type ledger_entry_type = :credit | :debit
+
+      module LedgerEntryType
+        extend Dodopayments::Internal::Type::Enum
+
+        CREDIT: :credit
+        DEBIT: :debit
+
+        def self?.values: -> ::Array[Dodopayments::Models::CreditEntitlements::ledger_entry_type]
+      end
+    end
+  end
+end

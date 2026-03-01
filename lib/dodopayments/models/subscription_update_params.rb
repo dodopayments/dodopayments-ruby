@@ -105,11 +105,6 @@ module Dodopayments
         #   @return [Integer, nil]
         optional :max_rollover_count, Integer, nil?: true
 
-        # @!attribute overage_charge_at_billing
-        #
-        #   @return [Boolean, nil]
-        optional :overage_charge_at_billing, Dodopayments::Internal::Type::Boolean, nil?: true
-
         # @!attribute overage_enabled
         #
         #   @return [Boolean, nil]
@@ -140,13 +135,12 @@ module Dodopayments
         #   @return [Symbol, Dodopayments::Models::TimeInterval, nil]
         optional :rollover_timeframe_interval, enum: -> { Dodopayments::TimeInterval }, nil?: true
 
-        # @!method initialize(credit_entitlement_id:, credits_amount: nil, expires_after_days: nil, low_balance_threshold_percent: nil, max_rollover_count: nil, overage_charge_at_billing: nil, overage_enabled: nil, overage_limit: nil, rollover_enabled: nil, rollover_percentage: nil, rollover_timeframe_count: nil, rollover_timeframe_interval: nil)
+        # @!method initialize(credit_entitlement_id:, credits_amount: nil, expires_after_days: nil, low_balance_threshold_percent: nil, max_rollover_count: nil, overage_enabled: nil, overage_limit: nil, rollover_enabled: nil, rollover_percentage: nil, rollover_timeframe_count: nil, rollover_timeframe_interval: nil)
         #   @param credit_entitlement_id [String]
         #   @param credits_amount [String, nil]
         #   @param expires_after_days [Integer, nil]
         #   @param low_balance_threshold_percent [Integer, nil]
         #   @param max_rollover_count [Integer, nil]
-        #   @param overage_charge_at_billing [Boolean, nil]
         #   @param overage_enabled [Boolean, nil]
         #   @param overage_limit [String, nil]
         #   @param rollover_enabled [Boolean, nil]

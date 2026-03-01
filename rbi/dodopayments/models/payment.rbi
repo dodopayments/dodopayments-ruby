@@ -57,7 +57,7 @@ module Dodopayments
       attr_accessor :payment_id
 
       # List of refunds issued for this payment
-      sig { returns(T::Array[Dodopayments::Payment::Refund]) }
+      sig { returns(T::Array[Dodopayments::RefundListItem]) }
       attr_accessor :refunds
 
       # The amount that will be credited to your Dodo balance after currency conversion
@@ -103,9 +103,7 @@ module Dodopayments
       attr_accessor :checkout_session_id
 
       # Customer's responses to custom fields collected during checkout
-      sig do
-        returns(T.nilable(T::Array[Dodopayments::Payment::CustomFieldResponse]))
-      end
+      sig { returns(T.nilable(T::Array[Dodopayments::CustomFieldResponse])) }
       attr_accessor :custom_field_responses
 
       # The discount id if discount is applied
@@ -141,13 +139,13 @@ module Dodopayments
       attr_accessor :payment_method_type
 
       # List of products purchased in a one-time payment
-      sig { returns(T.nilable(T::Array[Dodopayments::Payment::ProductCart])) }
+      sig { returns(T.nilable(T::Array[Dodopayments::OneTimeProductCartItem])) }
       attr_accessor :product_cart
 
       # Summary of the refund status for this payment. None if no succeeded refunds
       # exist.
       sig do
-        returns(T.nilable(Dodopayments::Payment::RefundStatus::TaggedSymbol))
+        returns(T.nilable(Dodopayments::PaymentRefundStatus::TaggedSymbol))
       end
       attr_accessor :refund_status
 
@@ -185,7 +183,7 @@ module Dodopayments
           disputes: T::Array[Dodopayments::Dispute::OrHash],
           metadata: T::Hash[Symbol, String],
           payment_id: String,
-          refunds: T::Array[Dodopayments::Payment::Refund::OrHash],
+          refunds: T::Array[Dodopayments::RefundListItem::OrHash],
           settlement_amount: Integer,
           settlement_currency: Dodopayments::Currency::OrSymbol,
           total_amount: Integer,
@@ -196,9 +194,7 @@ module Dodopayments
           card_type: T.nilable(String),
           checkout_session_id: T.nilable(String),
           custom_field_responses:
-            T.nilable(
-              T::Array[Dodopayments::Payment::CustomFieldResponse::OrHash]
-            ),
+            T.nilable(T::Array[Dodopayments::CustomFieldResponse::OrHash]),
           discount_id: T.nilable(String),
           error_code: T.nilable(String),
           error_message: T.nilable(String),
@@ -208,9 +204,8 @@ module Dodopayments
           payment_method: T.nilable(String),
           payment_method_type: T.nilable(String),
           product_cart:
-            T.nilable(T::Array[Dodopayments::Payment::ProductCart::OrHash]),
-          refund_status:
-            T.nilable(Dodopayments::Payment::RefundStatus::OrSymbol),
+            T.nilable(T::Array[Dodopayments::OneTimeProductCartItem::OrHash]),
+          refund_status: T.nilable(Dodopayments::PaymentRefundStatus::OrSymbol),
           settlement_tax: T.nilable(Integer),
           status: T.nilable(Dodopayments::IntentStatus::OrSymbol),
           subscription_id: T.nilable(String),
@@ -316,7 +311,7 @@ module Dodopayments
             disputes: T::Array[Dodopayments::Dispute],
             metadata: T::Hash[Symbol, String],
             payment_id: String,
-            refunds: T::Array[Dodopayments::Payment::Refund],
+            refunds: T::Array[Dodopayments::RefundListItem],
             settlement_amount: Integer,
             settlement_currency: Dodopayments::Currency::TaggedSymbol,
             total_amount: Integer,
@@ -328,7 +323,7 @@ module Dodopayments
             card_type: T.nilable(String),
             checkout_session_id: T.nilable(String),
             custom_field_responses:
-              T.nilable(T::Array[Dodopayments::Payment::CustomFieldResponse]),
+              T.nilable(T::Array[Dodopayments::CustomFieldResponse]),
             discount_id: T.nilable(String),
             error_code: T.nilable(String),
             error_message: T.nilable(String),
@@ -338,9 +333,9 @@ module Dodopayments
             payment_method: T.nilable(String),
             payment_method_type: T.nilable(String),
             product_cart:
-              T.nilable(T::Array[Dodopayments::Payment::ProductCart]),
+              T.nilable(T::Array[Dodopayments::OneTimeProductCartItem]),
             refund_status:
-              T.nilable(Dodopayments::Payment::RefundStatus::TaggedSymbol),
+              T.nilable(Dodopayments::PaymentRefundStatus::TaggedSymbol),
             settlement_tax: T.nilable(Integer),
             status: T.nilable(Dodopayments::IntentStatus::TaggedSymbol),
             subscription_id: T.nilable(String),
@@ -350,187 +345,6 @@ module Dodopayments
         )
       end
       def to_hash
-      end
-
-      class Refund < Dodopayments::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Dodopayments::Payment::Refund,
-              Dodopayments::Internal::AnyHash
-            )
-          end
-
-        # The unique identifier of the business issuing the refund.
-        sig { returns(String) }
-        attr_accessor :business_id
-
-        # The timestamp of when the refund was created in UTC.
-        sig { returns(Time) }
-        attr_accessor :created_at
-
-        # If true the refund is a partial refund
-        sig { returns(T::Boolean) }
-        attr_accessor :is_partial
-
-        # The unique identifier of the payment associated with the refund.
-        sig { returns(String) }
-        attr_accessor :payment_id
-
-        # The unique identifier of the refund.
-        sig { returns(String) }
-        attr_accessor :refund_id
-
-        # The current status of the refund.
-        sig { returns(Dodopayments::RefundStatus::TaggedSymbol) }
-        attr_accessor :status
-
-        # The refunded amount.
-        sig { returns(T.nilable(Integer)) }
-        attr_accessor :amount
-
-        # The currency of the refund, represented as an ISO 4217 currency code.
-        sig { returns(T.nilable(Dodopayments::Currency::TaggedSymbol)) }
-        attr_accessor :currency
-
-        # The reason provided for the refund, if any. Optional.
-        sig { returns(T.nilable(String)) }
-        attr_accessor :reason
-
-        sig do
-          params(
-            business_id: String,
-            created_at: Time,
-            is_partial: T::Boolean,
-            payment_id: String,
-            refund_id: String,
-            status: Dodopayments::RefundStatus::OrSymbol,
-            amount: T.nilable(Integer),
-            currency: T.nilable(Dodopayments::Currency::OrSymbol),
-            reason: T.nilable(String)
-          ).returns(T.attached_class)
-        end
-        def self.new(
-          # The unique identifier of the business issuing the refund.
-          business_id:,
-          # The timestamp of when the refund was created in UTC.
-          created_at:,
-          # If true the refund is a partial refund
-          is_partial:,
-          # The unique identifier of the payment associated with the refund.
-          payment_id:,
-          # The unique identifier of the refund.
-          refund_id:,
-          # The current status of the refund.
-          status:,
-          # The refunded amount.
-          amount: nil,
-          # The currency of the refund, represented as an ISO 4217 currency code.
-          currency: nil,
-          # The reason provided for the refund, if any. Optional.
-          reason: nil
-        )
-        end
-
-        sig do
-          override.returns(
-            {
-              business_id: String,
-              created_at: Time,
-              is_partial: T::Boolean,
-              payment_id: String,
-              refund_id: String,
-              status: Dodopayments::RefundStatus::TaggedSymbol,
-              amount: T.nilable(Integer),
-              currency: T.nilable(Dodopayments::Currency::TaggedSymbol),
-              reason: T.nilable(String)
-            }
-          )
-        end
-        def to_hash
-        end
-      end
-
-      class CustomFieldResponse < Dodopayments::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Dodopayments::Payment::CustomFieldResponse,
-              Dodopayments::Internal::AnyHash
-            )
-          end
-
-        # Key matching the custom field definition
-        sig { returns(String) }
-        attr_accessor :key
-
-        # Value provided by customer
-        sig { returns(String) }
-        attr_accessor :value
-
-        # Customer's response to a custom field
-        sig { params(key: String, value: String).returns(T.attached_class) }
-        def self.new(
-          # Key matching the custom field definition
-          key:,
-          # Value provided by customer
-          value:
-        )
-        end
-
-        sig { override.returns({ key: String, value: String }) }
-        def to_hash
-        end
-      end
-
-      class ProductCart < Dodopayments::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Dodopayments::Payment::ProductCart,
-              Dodopayments::Internal::AnyHash
-            )
-          end
-
-        sig { returns(String) }
-        attr_accessor :product_id
-
-        sig { returns(Integer) }
-        attr_accessor :quantity
-
-        sig do
-          params(product_id: String, quantity: Integer).returns(
-            T.attached_class
-          )
-        end
-        def self.new(product_id:, quantity:)
-        end
-
-        sig { override.returns({ product_id: String, quantity: Integer }) }
-        def to_hash
-        end
-      end
-
-      # Summary of the refund status for this payment. None if no succeeded refunds
-      # exist.
-      module RefundStatus
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias { T.all(Symbol, Dodopayments::Payment::RefundStatus) }
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        PARTIAL =
-          T.let(:partial, Dodopayments::Payment::RefundStatus::TaggedSymbol)
-        FULL = T.let(:full, Dodopayments::Payment::RefundStatus::TaggedSymbol)
-
-        sig do
-          override.returns(
-            T::Array[Dodopayments::Payment::RefundStatus::TaggedSymbol]
-          )
-        end
-        def self.values
-        end
       end
     end
   end

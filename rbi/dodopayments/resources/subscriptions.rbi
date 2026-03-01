@@ -22,7 +22,11 @@ module Dodopayments
           metadata: T::Hash[Symbol, String],
           on_demand: T.nilable(Dodopayments::OnDemandSubscription::OrHash),
           one_time_product_cart:
-            T.nilable(T::Array[Dodopayments::OneTimeProductCartItem::OrHash]),
+            T.nilable(
+              T::Array[
+                Dodopayments::SubscriptionCreateParams::OneTimeProductCart::OrHash
+              ]
+            ),
           payment_link: T.nilable(T::Boolean),
           payment_method_id: T.nilable(String),
           redirect_immediately: T::Boolean,
@@ -187,13 +191,13 @@ module Dodopayments
           subscription_id: String,
           product_id: String,
           proration_billing_mode:
-            Dodopayments::SubscriptionChangePlanParams::ProrationBillingMode::OrSymbol,
+            Dodopayments::UpdateSubscriptionPlanReq::ProrationBillingMode::OrSymbol,
           quantity: Integer,
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           metadata: T.nilable(T::Hash[Symbol, String]),
           on_payment_failure:
             T.nilable(
-              Dodopayments::SubscriptionChangePlanParams::OnPaymentFailure::OrSymbol
+              Dodopayments::UpdateSubscriptionPlanReq::OnPaymentFailure::OrSymbol
             ),
           request_options: Dodopayments::RequestOptions::OrHash
         ).void
@@ -270,13 +274,13 @@ module Dodopayments
           subscription_id: String,
           product_id: String,
           proration_billing_mode:
-            Dodopayments::SubscriptionPreviewChangePlanParams::ProrationBillingMode::OrSymbol,
+            Dodopayments::UpdateSubscriptionPlanReq::ProrationBillingMode::OrSymbol,
           quantity: Integer,
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           metadata: T.nilable(T::Hash[Symbol, String]),
           on_payment_failure:
             T.nilable(
-              Dodopayments::SubscriptionPreviewChangePlanParams::OnPaymentFailure::OrSymbol
+              Dodopayments::UpdateSubscriptionPlanReq::OnPaymentFailure::OrSymbol
             ),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Models::SubscriptionPreviewChangePlanResponse)
@@ -304,6 +308,19 @@ module Dodopayments
         #
         # If not specified, uses the business-level default setting.
         on_payment_failure: nil,
+        request_options: {}
+      )
+      end
+
+      sig do
+        params(
+          subscription_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Models::SubscriptionRetrieveCreditUsageResponse)
+      end
+      def retrieve_credit_usage(
+        # Subscription ID
+        subscription_id,
         request_options: {}
       )
       end

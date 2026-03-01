@@ -195,17 +195,11 @@ module Dodopayments
         #   @return [String]
         required :credits_amount, String
 
-        # @!attribute credits_reduce_overage
-        #   Whether new credit grants reduce existing overage
+        # @!attribute overage_behavior
+        #   Controls how overage is handled at billing cycle end.
         #
-        #   @return [Boolean]
-        required :credits_reduce_overage, Dodopayments::Internal::Type::Boolean
-
-        # @!attribute overage_charge_at_billing
-        #   Whether overage is charged at billing
-        #
-        #   @return [Boolean]
-        required :overage_charge_at_billing, Dodopayments::Internal::Type::Boolean
+        #   @return [Symbol, Dodopayments::Models::CbbOverageBehavior]
+        required :overage_behavior, enum: -> { Dodopayments::CbbOverageBehavior }
 
         # @!attribute overage_enabled
         #   Whether overage is enabled
@@ -213,17 +207,11 @@ module Dodopayments
         #   @return [Boolean]
         required :overage_enabled, Dodopayments::Internal::Type::Boolean
 
-        # @!attribute preserve_overage_at_reset
-        #   Whether to preserve overage balance when credits reset
-        #
-        #   @return [Boolean]
-        required :preserve_overage_at_reset, Dodopayments::Internal::Type::Boolean
-
         # @!attribute proration_behavior
         #   Proration behavior for credit grants during plan changes
         #
-        #   @return [Symbol, Dodopayments::Models::Product::CreditEntitlement::ProrationBehavior]
-        required :proration_behavior, enum: -> { Dodopayments::Product::CreditEntitlement::ProrationBehavior }
+        #   @return [Symbol, Dodopayments::Models::CbbProrationBehavior]
+        required :proration_behavior, enum: -> { Dodopayments::CbbProrationBehavior }
 
         # @!attribute rollover_enabled
         #   Whether rollover is enabled
@@ -297,7 +285,7 @@ module Dodopayments
         #   @return [String, nil]
         optional :trial_credits, String, nil?: true
 
-        # @!method initialize(id:, credit_entitlement_id:, credit_entitlement_name:, credit_entitlement_unit:, credits_amount:, credits_reduce_overage:, overage_charge_at_billing:, overage_enabled:, preserve_overage_at_reset:, proration_behavior:, rollover_enabled:, trial_credits_expire_after_trial:, currency: nil, expires_after_days: nil, low_balance_threshold_percent: nil, max_rollover_count: nil, overage_limit: nil, price_per_unit: nil, rollover_percentage: nil, rollover_timeframe_count: nil, rollover_timeframe_interval: nil, trial_credits: nil)
+        # @!method initialize(id:, credit_entitlement_id:, credit_entitlement_name:, credit_entitlement_unit:, credits_amount:, overage_behavior:, overage_enabled:, proration_behavior:, rollover_enabled:, trial_credits_expire_after_trial:, currency: nil, expires_after_days: nil, low_balance_threshold_percent: nil, max_rollover_count: nil, overage_limit: nil, price_per_unit: nil, rollover_percentage: nil, rollover_timeframe_count: nil, rollover_timeframe_interval: nil, trial_credits: nil)
         #   Response struct for credit entitlement mapping
         #
         #   @param id [String] Unique ID of this mapping
@@ -310,15 +298,11 @@ module Dodopayments
         #
         #   @param credits_amount [String] Number of credits granted
         #
-        #   @param credits_reduce_overage [Boolean] Whether new credit grants reduce existing overage
-        #
-        #   @param overage_charge_at_billing [Boolean] Whether overage is charged at billing
+        #   @param overage_behavior [Symbol, Dodopayments::Models::CbbOverageBehavior] Controls how overage is handled at billing cycle end.
         #
         #   @param overage_enabled [Boolean] Whether overage is enabled
         #
-        #   @param preserve_overage_at_reset [Boolean] Whether to preserve overage balance when credits reset
-        #
-        #   @param proration_behavior [Symbol, Dodopayments::Models::Product::CreditEntitlement::ProrationBehavior] Proration behavior for credit grants during plan changes
+        #   @param proration_behavior [Symbol, Dodopayments::Models::CbbProrationBehavior] Proration behavior for credit grants during plan changes
         #
         #   @param rollover_enabled [Boolean] Whether rollover is enabled
         #
@@ -343,19 +327,6 @@ module Dodopayments
         #   @param rollover_timeframe_interval [Symbol, Dodopayments::Models::TimeInterval, nil] Rollover timeframe interval
         #
         #   @param trial_credits [String, nil] Trial credits
-
-        # Proration behavior for credit grants during plan changes
-        #
-        # @see Dodopayments::Models::Product::CreditEntitlement#proration_behavior
-        module ProrationBehavior
-          extend Dodopayments::Internal::Type::Enum
-
-          PRORATE = :prorate
-          NO_PRORATE = :no_prorate
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
       end
 
       # @see Dodopayments::Models::Product#digital_product_delivery

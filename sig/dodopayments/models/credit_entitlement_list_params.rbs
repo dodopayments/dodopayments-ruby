@@ -1,0 +1,38 @@
+module Dodopayments
+  module Models
+    type credit_entitlement_list_params =
+      { deleted: bool, page_number: Integer, page_size: Integer }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class CreditEntitlementListParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_reader deleted: bool?
+
+      def deleted=: (bool) -> bool
+
+      attr_reader page_number: Integer?
+
+      def page_number=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
+
+      def initialize: (
+        ?deleted: bool,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        deleted: bool,
+        page_number: Integer,
+        page_size: Integer,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

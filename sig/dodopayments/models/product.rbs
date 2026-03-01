@@ -118,11 +118,9 @@ module Dodopayments
           credit_entitlement_name: String,
           credit_entitlement_unit: String,
           credits_amount: String,
-          credits_reduce_overage: bool,
-          overage_charge_at_billing: bool,
+          overage_behavior: Dodopayments::Models::cbb_overage_behavior,
           overage_enabled: bool,
-          preserve_overage_at_reset: bool,
-          proration_behavior: Dodopayments::Models::Product::CreditEntitlement::proration_behavior,
+          proration_behavior: Dodopayments::Models::cbb_proration_behavior,
           rollover_enabled: bool,
           trial_credits_expire_after_trial: bool,
           currency: Dodopayments::Models::currency?,
@@ -148,15 +146,11 @@ module Dodopayments
 
         attr_accessor credits_amount: String
 
-        attr_accessor credits_reduce_overage: bool
-
-        attr_accessor overage_charge_at_billing: bool
+        attr_accessor overage_behavior: Dodopayments::Models::cbb_overage_behavior
 
         attr_accessor overage_enabled: bool
 
-        attr_accessor preserve_overage_at_reset: bool
-
-        attr_accessor proration_behavior: Dodopayments::Models::Product::CreditEntitlement::proration_behavior
+        attr_accessor proration_behavior: Dodopayments::Models::cbb_proration_behavior
 
         attr_accessor rollover_enabled: bool
 
@@ -188,11 +182,9 @@ module Dodopayments
           credit_entitlement_name: String,
           credit_entitlement_unit: String,
           credits_amount: String,
-          credits_reduce_overage: bool,
-          overage_charge_at_billing: bool,
+          overage_behavior: Dodopayments::Models::cbb_overage_behavior,
           overage_enabled: bool,
-          preserve_overage_at_reset: bool,
-          proration_behavior: Dodopayments::Models::Product::CreditEntitlement::proration_behavior,
+          proration_behavior: Dodopayments::Models::cbb_proration_behavior,
           rollover_enabled: bool,
           trial_credits_expire_after_trial: bool,
           ?currency: Dodopayments::Models::currency?,
@@ -213,11 +205,9 @@ module Dodopayments
           credit_entitlement_name: String,
           credit_entitlement_unit: String,
           credits_amount: String,
-          credits_reduce_overage: bool,
-          overage_charge_at_billing: bool,
+          overage_behavior: Dodopayments::Models::cbb_overage_behavior,
           overage_enabled: bool,
-          preserve_overage_at_reset: bool,
-          proration_behavior: Dodopayments::Models::Product::CreditEntitlement::proration_behavior,
+          proration_behavior: Dodopayments::Models::cbb_proration_behavior,
           rollover_enabled: bool,
           trial_credits_expire_after_trial: bool,
           currency: Dodopayments::Models::currency?,
@@ -231,17 +221,6 @@ module Dodopayments
           rollover_timeframe_interval: Dodopayments::Models::time_interval?,
           trial_credits: String?
         }
-
-        type proration_behavior = :prorate | :no_prorate
-
-        module ProrationBehavior
-          extend Dodopayments::Internal::Type::Enum
-
-          PRORATE: :prorate
-          NO_PRORATE: :no_prorate
-
-          def self?.values: -> ::Array[Dodopayments::Models::Product::CreditEntitlement::proration_behavior]
-        end
       end
 
       type digital_product_delivery =

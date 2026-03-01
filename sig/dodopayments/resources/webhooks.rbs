@@ -49,7 +49,15 @@ module Dodopayments
 
       def unsafe_unwrap: (
         String payload
-      ) -> (Dodopayments::DisputeAcceptedWebhookEvent
+      ) -> (Dodopayments::CreditAddedWebhookEvent
+      | Dodopayments::CreditBalanceLowWebhookEvent
+      | Dodopayments::CreditDeductedWebhookEvent
+      | Dodopayments::CreditExpiredWebhookEvent
+      | Dodopayments::CreditManualAdjustmentWebhookEvent
+      | Dodopayments::CreditOverageChargedWebhookEvent
+      | Dodopayments::CreditRolledOverWebhookEvent
+      | Dodopayments::CreditRolloverForfeitedWebhookEvent
+      | Dodopayments::DisputeAcceptedWebhookEvent
       | Dodopayments::DisputeCancelledWebhookEvent
       | Dodopayments::DisputeChallengedWebhookEvent
       | Dodopayments::DisputeExpiredWebhookEvent
@@ -74,7 +82,15 @@ module Dodopayments
 
       def unwrap: (
         String payload
-      ) -> (Dodopayments::DisputeAcceptedWebhookEvent
+      ) -> (Dodopayments::CreditAddedWebhookEvent
+      | Dodopayments::CreditBalanceLowWebhookEvent
+      | Dodopayments::CreditDeductedWebhookEvent
+      | Dodopayments::CreditExpiredWebhookEvent
+      | Dodopayments::CreditManualAdjustmentWebhookEvent
+      | Dodopayments::CreditOverageChargedWebhookEvent
+      | Dodopayments::CreditRolledOverWebhookEvent
+      | Dodopayments::CreditRolloverForfeitedWebhookEvent
+      | Dodopayments::DisputeAcceptedWebhookEvent
       | Dodopayments::DisputeCancelledWebhookEvent
       | Dodopayments::DisputeChallengedWebhookEvent
       | Dodopayments::DisputeExpiredWebhookEvent

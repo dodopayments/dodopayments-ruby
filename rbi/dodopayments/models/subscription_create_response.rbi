@@ -55,15 +55,7 @@ module Dodopayments
       attr_accessor :expires_on
 
       # One time products associated with the purchase of subscription
-      sig do
-        returns(
-          T.nilable(
-            T::Array[
-              Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart
-            ]
-          )
-        )
-      end
+      sig { returns(T.nilable(T::Array[Dodopayments::OneTimeProductCartItem])) }
       attr_accessor :one_time_product_cart
 
       # URL to checkout page
@@ -82,11 +74,7 @@ module Dodopayments
           discount_id: T.nilable(String),
           expires_on: T.nilable(Time),
           one_time_product_cart:
-            T.nilable(
-              T::Array[
-                Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart::OrHash
-              ]
-            ),
+            T.nilable(T::Array[Dodopayments::OneTimeProductCartItem::OrHash]),
           payment_link: T.nilable(String)
         ).returns(T.attached_class)
       end
@@ -131,44 +119,12 @@ module Dodopayments
             discount_id: T.nilable(String),
             expires_on: T.nilable(Time),
             one_time_product_cart:
-              T.nilable(
-                T::Array[
-                  Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart
-                ]
-              ),
+              T.nilable(T::Array[Dodopayments::OneTimeProductCartItem]),
             payment_link: T.nilable(String)
           }
         )
       end
       def to_hash
-      end
-
-      class OneTimeProductCart < Dodopayments::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart,
-              Dodopayments::Internal::AnyHash
-            )
-          end
-
-        sig { returns(String) }
-        attr_accessor :product_id
-
-        sig { returns(Integer) }
-        attr_accessor :quantity
-
-        sig do
-          params(product_id: String, quantity: Integer).returns(
-            T.attached_class
-          )
-        end
-        def self.new(product_id:, quantity:)
-        end
-
-        sig { override.returns({ product_id: String, quantity: Integer }) }
-        def to_hash
-        end
       end
     end
   end

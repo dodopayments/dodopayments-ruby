@@ -43,6 +43,10 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :total_amount
 
+      # The most recent dispute status for this payment. None if no disputes exist.
+      sig { returns(T.nilable(Dodopayments::DisputeStatus::TaggedSymbol)) }
+      attr_accessor :dispute_status
+
       # Invoice ID for this payment. Uses India-specific invoice ID if available.
       sig { returns(T.nilable(String)) }
       attr_accessor :invoice_id
@@ -56,6 +60,13 @@ module Dodopayments
 
       sig { returns(T.nilable(String)) }
       attr_accessor :payment_method_type
+
+      # Summary of the refund status for this payment. None if no succeeded refunds
+      # exist.
+      sig do
+        returns(T.nilable(Dodopayments::PaymentRefundStatus::TaggedSymbol))
+      end
+      attr_accessor :refund_status
 
       sig { returns(T.nilable(Dodopayments::IntentStatus::TaggedSymbol)) }
       attr_accessor :status
@@ -74,10 +85,12 @@ module Dodopayments
           metadata: T::Hash[Symbol, String],
           payment_id: String,
           total_amount: Integer,
+          dispute_status: T.nilable(Dodopayments::DisputeStatus::OrSymbol),
           invoice_id: T.nilable(String),
           invoice_url: T.nilable(String),
           payment_method: T.nilable(String),
           payment_method_type: T.nilable(String),
+          refund_status: T.nilable(Dodopayments::PaymentRefundStatus::OrSymbol),
           status: T.nilable(Dodopayments::IntentStatus::OrSymbol),
           subscription_id: T.nilable(String)
         ).returns(T.attached_class)
@@ -92,12 +105,17 @@ module Dodopayments
         metadata:,
         payment_id:,
         total_amount:,
+        # The most recent dispute status for this payment. None if no disputes exist.
+        dispute_status: nil,
         # Invoice ID for this payment. Uses India-specific invoice ID if available.
         invoice_id: nil,
         # URL to download the invoice PDF for this payment.
         invoice_url: nil,
         payment_method: nil,
         payment_method_type: nil,
+        # Summary of the refund status for this payment. None if no succeeded refunds
+        # exist.
+        refund_status: nil,
         status: nil,
         subscription_id: nil
       )
@@ -115,10 +133,14 @@ module Dodopayments
             metadata: T::Hash[Symbol, String],
             payment_id: String,
             total_amount: Integer,
+            dispute_status:
+              T.nilable(Dodopayments::DisputeStatus::TaggedSymbol),
             invoice_id: T.nilable(String),
             invoice_url: T.nilable(String),
             payment_method: T.nilable(String),
             payment_method_type: T.nilable(String),
+            refund_status:
+              T.nilable(Dodopayments::PaymentRefundStatus::TaggedSymbol),
             status: T.nilable(Dodopayments::IntentStatus::TaggedSymbol),
             subscription_id: T.nilable(String)
           }

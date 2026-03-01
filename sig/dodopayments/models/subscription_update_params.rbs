@@ -69,7 +69,6 @@ module Dodopayments
           expires_after_days: Integer?,
           low_balance_threshold_percent: Integer?,
           max_rollover_count: Integer?,
-          overage_charge_at_billing: bool?,
           overage_enabled: bool?,
           overage_limit: String?,
           rollover_enabled: bool?,
@@ -89,8 +88,6 @@ module Dodopayments
 
         attr_accessor max_rollover_count: Integer?
 
-        attr_accessor overage_charge_at_billing: bool?
-
         attr_accessor overage_enabled: bool?
 
         attr_accessor overage_limit: String?
@@ -109,7 +106,6 @@ module Dodopayments
           ?expires_after_days: Integer?,
           ?low_balance_threshold_percent: Integer?,
           ?max_rollover_count: Integer?,
-          ?overage_charge_at_billing: bool?,
           ?overage_enabled: bool?,
           ?overage_limit: String?,
           ?rollover_enabled: bool?,
@@ -124,7 +120,6 @@ module Dodopayments
           expires_after_days: Integer?,
           low_balance_threshold_percent: Integer?,
           max_rollover_count: Integer?,
-          overage_charge_at_billing: bool?,
           overage_enabled: bool?,
           overage_limit: String?,
           rollover_enabled: bool?,

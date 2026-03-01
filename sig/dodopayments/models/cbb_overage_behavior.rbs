@@ -1,0 +1,20 @@
+module Dodopayments
+  module Models
+    type cbb_overage_behavior =
+      :forgive_at_reset
+      | :invoice_at_billing
+      | :carry_deficit
+      | :carry_deficit_auto_repay
+
+    module CbbOverageBehavior
+      extend Dodopayments::Internal::Type::Enum
+
+      FORGIVE_AT_RESET: :forgive_at_reset
+      INVOICE_AT_BILLING: :invoice_at_billing
+      CARRY_DEFICIT: :carry_deficit
+      CARRY_DEFICIT_AUTO_REPAY: :carry_deficit_auto_repay
+
+      def self?.values: -> ::Array[Dodopayments::Models::cbb_overage_behavior]
+    end
+  end
+end

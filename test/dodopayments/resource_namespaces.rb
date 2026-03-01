@@ -3,6 +3,9 @@
 module Dodopayments
   module Test
     module Resources
+      module CreditEntitlements
+      end
+
       module Customers
         module Wallets
         end

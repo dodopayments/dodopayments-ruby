@@ -57,6 +57,8 @@ module Dodopayments
 
     attr_reader balances: Dodopayments::Resources::Balances
 
+    attr_reader credit_entitlements: Dodopayments::Resources::CreditEntitlements
+
     private def auth_headers: -> ::Hash[String, String]
 
     def initialize: (

@@ -1,0 +1,63 @@
+module Dodopayments
+  module Models
+    module CreditEntitlements
+      type balance_list_ledger_params =
+        {
+          credit_entitlement_id: String,
+          end_date: Time,
+          page_number: Integer,
+          page_size: Integer,
+          start_date: Time,
+          transaction_type: String
+        }
+        & Dodopayments::Internal::Type::request_parameters
+
+      class BalanceListLedgerParams < Dodopayments::Internal::Type::BaseModel
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
+
+        attr_accessor credit_entitlement_id: String
+
+        attr_reader end_date: Time?
+
+        def end_date=: (Time) -> Time
+
+        attr_reader page_number: Integer?
+
+        def page_number=: (Integer) -> Integer
+
+        attr_reader page_size: Integer?
+
+        def page_size=: (Integer) -> Integer
+
+        attr_reader start_date: Time?
+
+        def start_date=: (Time) -> Time
+
+        attr_reader transaction_type: String?
+
+        def transaction_type=: (String) -> String
+
+        def initialize: (
+          credit_entitlement_id: String,
+          ?end_date: Time,
+          ?page_number: Integer,
+          ?page_size: Integer,
+          ?start_date: Time,
+          ?transaction_type: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          credit_entitlement_id: String,
+          end_date: Time,
+          page_number: Integer,
+          page_size: Integer,
+          start_date: Time,
+          transaction_type: String,
+          request_options: Dodopayments::RequestOptions
+        }
+      end
+    end
+  end
+end

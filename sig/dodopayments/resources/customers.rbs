@@ -37,6 +37,11 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Customer]
 
+      def list_credit_entitlements: (
+        String customer_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::CustomerListCreditEntitlementsResponse
+
       def retrieve_payment_methods: (
         String customer_id,
         ?request_options: Dodopayments::request_opts

@@ -1,0 +1,58 @@
+module Dodopayments
+  module Models
+    module CreditEntitlements
+      type balance_create_ledger_entry_params =
+        {
+          credit_entitlement_id: String,
+          amount: String,
+          entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type,
+          expires_at: Time?,
+          idempotency_key: String?,
+          metadata: ::Hash[Symbol, String]?,
+          reason: String?
+        }
+        & Dodopayments::Internal::Type::request_parameters
+
+      class BalanceCreateLedgerEntryParams < Dodopayments::Internal::Type::BaseModel
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
+
+        attr_accessor credit_entitlement_id: String
+
+        attr_accessor amount: String
+
+        attr_accessor entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type
+
+        attr_accessor expires_at: Time?
+
+        attr_accessor idempotency_key: String?
+
+        attr_accessor metadata: ::Hash[Symbol, String]?
+
+        attr_accessor reason: String?
+
+        def initialize: (
+          credit_entitlement_id: String,
+          amount: String,
+          entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type,
+          ?expires_at: Time?,
+          ?idempotency_key: String?,
+          ?metadata: ::Hash[Symbol, String]?,
+          ?reason: String?,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          credit_entitlement_id: String,
+          amount: String,
+          entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type,
+          expires_at: Time?,
+          idempotency_key: String?,
+          metadata: ::Hash[Symbol, String]?,
+          reason: String?,
+          request_options: Dodopayments::RequestOptions
+        }
+      end
+    end
+  end
+end

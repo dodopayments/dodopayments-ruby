@@ -236,28 +236,16 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :credits_amount
 
-        # Whether new credit grants reduce existing overage
-        sig { returns(T::Boolean) }
-        attr_accessor :credits_reduce_overage
-
-        # Whether overage is charged at billing
-        sig { returns(T::Boolean) }
-        attr_accessor :overage_charge_at_billing
+        # Controls how overage is handled at billing cycle end.
+        sig { returns(Dodopayments::CbbOverageBehavior::TaggedSymbol) }
+        attr_accessor :overage_behavior
 
         # Whether overage is enabled
         sig { returns(T::Boolean) }
         attr_accessor :overage_enabled
 
-        # Whether to preserve overage balance when credits reset
-        sig { returns(T::Boolean) }
-        attr_accessor :preserve_overage_at_reset
-
         # Proration behavior for credit grants during plan changes
-        sig do
-          returns(
-            Dodopayments::Product::CreditEntitlement::ProrationBehavior::TaggedSymbol
-          )
-        end
+        sig { returns(Dodopayments::CbbProrationBehavior::TaggedSymbol) }
         attr_accessor :proration_behavior
 
         # Whether rollover is enabled
@@ -316,12 +304,9 @@ module Dodopayments
             credit_entitlement_name: String,
             credit_entitlement_unit: String,
             credits_amount: String,
-            credits_reduce_overage: T::Boolean,
-            overage_charge_at_billing: T::Boolean,
+            overage_behavior: Dodopayments::CbbOverageBehavior::OrSymbol,
             overage_enabled: T::Boolean,
-            preserve_overage_at_reset: T::Boolean,
-            proration_behavior:
-              Dodopayments::Product::CreditEntitlement::ProrationBehavior::OrSymbol,
+            proration_behavior: Dodopayments::CbbProrationBehavior::OrSymbol,
             rollover_enabled: T::Boolean,
             trial_credits_expire_after_trial: T::Boolean,
             currency: T.nilable(Dodopayments::Currency::OrSymbol),
@@ -348,14 +333,10 @@ module Dodopayments
           credit_entitlement_unit:,
           # Number of credits granted
           credits_amount:,
-          # Whether new credit grants reduce existing overage
-          credits_reduce_overage:,
-          # Whether overage is charged at billing
-          overage_charge_at_billing:,
+          # Controls how overage is handled at billing cycle end.
+          overage_behavior:,
           # Whether overage is enabled
           overage_enabled:,
-          # Whether to preserve overage balance when credits reset
-          preserve_overage_at_reset:,
           # Proration behavior for credit grants during plan changes
           proration_behavior:,
           # Whether rollover is enabled
@@ -393,12 +374,10 @@ module Dodopayments
               credit_entitlement_name: String,
               credit_entitlement_unit: String,
               credits_amount: String,
-              credits_reduce_overage: T::Boolean,
-              overage_charge_at_billing: T::Boolean,
+              overage_behavior: Dodopayments::CbbOverageBehavior::TaggedSymbol,
               overage_enabled: T::Boolean,
-              preserve_overage_at_reset: T::Boolean,
               proration_behavior:
-                Dodopayments::Product::CreditEntitlement::ProrationBehavior::TaggedSymbol,
+                Dodopayments::CbbProrationBehavior::TaggedSymbol,
               rollover_enabled: T::Boolean,
               trial_credits_expire_after_trial: T::Boolean,
               currency: T.nilable(Dodopayments::Currency::TaggedSymbol),
@@ -416,41 +395,6 @@ module Dodopayments
           )
         end
         def to_hash
-        end
-
-        # Proration behavior for credit grants during plan changes
-        module ProrationBehavior
-          extend Dodopayments::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Dodopayments::Product::CreditEntitlement::ProrationBehavior
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          PRORATE =
-            T.let(
-              :prorate,
-              Dodopayments::Product::CreditEntitlement::ProrationBehavior::TaggedSymbol
-            )
-          NO_PRORATE =
-            T.let(
-              :no_prorate,
-              Dodopayments::Product::CreditEntitlement::ProrationBehavior::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Dodopayments::Product::CreditEntitlement::ProrationBehavior::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
 

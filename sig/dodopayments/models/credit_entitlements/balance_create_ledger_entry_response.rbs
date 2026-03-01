@@ -1,0 +1,82 @@
+module Dodopayments
+  module Models
+    module CreditEntitlements
+      type balance_create_ledger_entry_response =
+        {
+          id: String,
+          amount: String,
+          balance_after: String,
+          balance_before: String,
+          created_at: Time,
+          credit_entitlement_id: String,
+          customer_id: String,
+          entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type,
+          is_credit: bool,
+          overage_after: String,
+          overage_before: String,
+          grant_id: String?,
+          reason: String?
+        }
+
+      class BalanceCreateLedgerEntryResponse < Dodopayments::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor amount: String
+
+        attr_accessor balance_after: String
+
+        attr_accessor balance_before: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor credit_entitlement_id: String
+
+        attr_accessor customer_id: String
+
+        attr_accessor entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type
+
+        attr_accessor is_credit: bool
+
+        attr_accessor overage_after: String
+
+        attr_accessor overage_before: String
+
+        attr_accessor grant_id: String?
+
+        attr_accessor reason: String?
+
+        def initialize: (
+          id: String,
+          amount: String,
+          balance_after: String,
+          balance_before: String,
+          created_at: Time,
+          credit_entitlement_id: String,
+          customer_id: String,
+          entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type,
+          is_credit: bool,
+          overage_after: String,
+          overage_before: String,
+          ?grant_id: String?,
+          ?reason: String?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          amount: String,
+          balance_after: String,
+          balance_before: String,
+          created_at: Time,
+          credit_entitlement_id: String,
+          customer_id: String,
+          entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type,
+          is_credit: bool,
+          overage_after: String,
+          overage_before: String,
+          grant_id: String?,
+          reason: String?
+        }
+      end
+    end
+  end
+end
