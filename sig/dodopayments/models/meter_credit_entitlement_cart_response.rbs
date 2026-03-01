@@ -1,0 +1,40 @@
+module Dodopayments
+  module Models
+    type meter_credit_entitlement_cart_response =
+      {
+        credit_entitlement_id: String,
+        meter_id: String,
+        meter_name: String,
+        meter_units_per_credit: String,
+        product_id: String
+      }
+
+    class MeterCreditEntitlementCartResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor credit_entitlement_id: String
+
+      attr_accessor meter_id: String
+
+      attr_accessor meter_name: String
+
+      attr_accessor meter_units_per_credit: String
+
+      attr_accessor product_id: String
+
+      def initialize: (
+        credit_entitlement_id: String,
+        meter_id: String,
+        meter_name: String,
+        meter_units_per_credit: String,
+        product_id: String
+      ) -> void
+
+      def to_hash: -> {
+        credit_entitlement_id: String,
+        meter_id: String,
+        meter_name: String,
+        meter_units_per_credit: String,
+        product_id: String
+      }
+    end
+  end
+end
