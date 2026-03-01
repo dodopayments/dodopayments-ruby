@@ -6,12 +6,12 @@ module Dodopayments
         billing: Dodopayments::BillingAddress,
         cancel_at_next_billing_date: bool,
         created_at: Time,
-        credit_entitlement_cart: ::Array[Dodopayments::Subscription::CreditEntitlementCart],
+        credit_entitlement_cart: ::Array[Dodopayments::CreditEntitlementCartResponse],
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
-        meter_credit_entitlement_cart: ::Array[Dodopayments::Subscription::MeterCreditEntitlementCart],
-        meters: ::Array[Dodopayments::Subscription::Meter],
+        meter_credit_entitlement_cart: ::Array[Dodopayments::MeterCreditEntitlementCartResponse],
+        meters: ::Array[Dodopayments::MeterCartResponseItem],
         next_billing_date: Time,
         on_demand: bool,
         payment_frequency_count: Integer,
@@ -44,7 +44,7 @@ module Dodopayments
 
       attr_accessor created_at: Time
 
-      attr_accessor credit_entitlement_cart: ::Array[Dodopayments::Subscription::CreditEntitlementCart]
+      attr_accessor credit_entitlement_cart: ::Array[Dodopayments::CreditEntitlementCartResponse]
 
       attr_accessor currency: Dodopayments::Models::currency
 
@@ -52,9 +52,9 @@ module Dodopayments
 
       attr_accessor metadata: ::Hash[Symbol, String]
 
-      attr_accessor meter_credit_entitlement_cart: ::Array[Dodopayments::Subscription::MeterCreditEntitlementCart]
+      attr_accessor meter_credit_entitlement_cart: ::Array[Dodopayments::MeterCreditEntitlementCartResponse]
 
-      attr_accessor meters: ::Array[Dodopayments::Subscription::Meter]
+      attr_accessor meters: ::Array[Dodopayments::MeterCartResponseItem]
 
       attr_accessor next_billing_date: Time
 
@@ -103,12 +103,12 @@ module Dodopayments
         billing: Dodopayments::BillingAddress,
         cancel_at_next_billing_date: bool,
         created_at: Time,
-        credit_entitlement_cart: ::Array[Dodopayments::Subscription::CreditEntitlementCart],
+        credit_entitlement_cart: ::Array[Dodopayments::CreditEntitlementCartResponse],
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
-        meter_credit_entitlement_cart: ::Array[Dodopayments::Subscription::MeterCreditEntitlementCart],
-        meters: ::Array[Dodopayments::Subscription::Meter],
+        meter_credit_entitlement_cart: ::Array[Dodopayments::MeterCreditEntitlementCartResponse],
+        meters: ::Array[Dodopayments::MeterCartResponseItem],
         next_billing_date: Time,
         on_demand: bool,
         payment_frequency_count: Integer,
@@ -137,12 +137,12 @@ module Dodopayments
         billing: Dodopayments::BillingAddress,
         cancel_at_next_billing_date: bool,
         created_at: Time,
-        credit_entitlement_cart: ::Array[Dodopayments::Subscription::CreditEntitlementCart],
+        credit_entitlement_cart: ::Array[Dodopayments::CreditEntitlementCartResponse],
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
         metadata: ::Hash[Symbol, String],
-        meter_credit_entitlement_cart: ::Array[Dodopayments::Subscription::MeterCreditEntitlementCart],
-        meters: ::Array[Dodopayments::Subscription::Meter],
+        meter_credit_entitlement_cart: ::Array[Dodopayments::MeterCreditEntitlementCartResponse],
+        meters: ::Array[Dodopayments::MeterCartResponseItem],
         next_billing_date: Time,
         on_demand: bool,
         payment_frequency_count: Integer,
@@ -165,187 +165,6 @@ module Dodopayments
         payment_method_id: String?,
         tax_id: String?
       }
-
-      type credit_entitlement_cart =
-        {
-          credit_entitlement_id: String,
-          credit_entitlement_name: String,
-          credits_amount: String,
-          overage_balance: String,
-          overage_behavior: Dodopayments::Models::cbb_overage_behavior,
-          overage_enabled: bool,
-          product_id: String,
-          remaining_balance: String,
-          rollover_enabled: bool,
-          unit: String,
-          expires_after_days: Integer?,
-          low_balance_threshold_percent: Integer?,
-          max_rollover_count: Integer?,
-          overage_limit: String?,
-          rollover_percentage: Integer?,
-          rollover_timeframe_count: Integer?,
-          rollover_timeframe_interval: Dodopayments::Models::time_interval?
-        }
-
-      class CreditEntitlementCart < Dodopayments::Internal::Type::BaseModel
-        attr_accessor credit_entitlement_id: String
-
-        attr_accessor credit_entitlement_name: String
-
-        attr_accessor credits_amount: String
-
-        attr_accessor overage_balance: String
-
-        attr_accessor overage_behavior: Dodopayments::Models::cbb_overage_behavior
-
-        attr_accessor overage_enabled: bool
-
-        attr_accessor product_id: String
-
-        attr_accessor remaining_balance: String
-
-        attr_accessor rollover_enabled: bool
-
-        attr_accessor unit: String
-
-        attr_accessor expires_after_days: Integer?
-
-        attr_accessor low_balance_threshold_percent: Integer?
-
-        attr_accessor max_rollover_count: Integer?
-
-        attr_accessor overage_limit: String?
-
-        attr_accessor rollover_percentage: Integer?
-
-        attr_accessor rollover_timeframe_count: Integer?
-
-        attr_accessor rollover_timeframe_interval: Dodopayments::Models::time_interval?
-
-        def initialize: (
-          credit_entitlement_id: String,
-          credit_entitlement_name: String,
-          credits_amount: String,
-          overage_balance: String,
-          overage_behavior: Dodopayments::Models::cbb_overage_behavior,
-          overage_enabled: bool,
-          product_id: String,
-          remaining_balance: String,
-          rollover_enabled: bool,
-          unit: String,
-          ?expires_after_days: Integer?,
-          ?low_balance_threshold_percent: Integer?,
-          ?max_rollover_count: Integer?,
-          ?overage_limit: String?,
-          ?rollover_percentage: Integer?,
-          ?rollover_timeframe_count: Integer?,
-          ?rollover_timeframe_interval: Dodopayments::Models::time_interval?
-        ) -> void
-
-        def to_hash: -> {
-          credit_entitlement_id: String,
-          credit_entitlement_name: String,
-          credits_amount: String,
-          overage_balance: String,
-          overage_behavior: Dodopayments::Models::cbb_overage_behavior,
-          overage_enabled: bool,
-          product_id: String,
-          remaining_balance: String,
-          rollover_enabled: bool,
-          unit: String,
-          expires_after_days: Integer?,
-          low_balance_threshold_percent: Integer?,
-          max_rollover_count: Integer?,
-          overage_limit: String?,
-          rollover_percentage: Integer?,
-          rollover_timeframe_count: Integer?,
-          rollover_timeframe_interval: Dodopayments::Models::time_interval?
-        }
-      end
-
-      type meter_credit_entitlement_cart =
-        {
-          credit_entitlement_id: String,
-          meter_id: String,
-          meter_name: String,
-          meter_units_per_credit: String,
-          product_id: String
-        }
-
-      class MeterCreditEntitlementCart < Dodopayments::Internal::Type::BaseModel
-        attr_accessor credit_entitlement_id: String
-
-        attr_accessor meter_id: String
-
-        attr_accessor meter_name: String
-
-        attr_accessor meter_units_per_credit: String
-
-        attr_accessor product_id: String
-
-        def initialize: (
-          credit_entitlement_id: String,
-          meter_id: String,
-          meter_name: String,
-          meter_units_per_credit: String,
-          product_id: String
-        ) -> void
-
-        def to_hash: -> {
-          credit_entitlement_id: String,
-          meter_id: String,
-          meter_name: String,
-          meter_units_per_credit: String,
-          product_id: String
-        }
-      end
-
-      type meter =
-        {
-          currency: Dodopayments::Models::currency,
-          free_threshold: Integer,
-          measurement_unit: String,
-          meter_id: String,
-          name: String,
-          description: String?,
-          price_per_unit: String?
-        }
-
-      class Meter < Dodopayments::Internal::Type::BaseModel
-        attr_accessor currency: Dodopayments::Models::currency
-
-        attr_accessor free_threshold: Integer
-
-        attr_accessor measurement_unit: String
-
-        attr_accessor meter_id: String
-
-        attr_accessor name: String
-
-        attr_accessor description: String?
-
-        attr_accessor price_per_unit: String?
-
-        def initialize: (
-          currency: Dodopayments::Models::currency,
-          free_threshold: Integer,
-          measurement_unit: String,
-          meter_id: String,
-          name: String,
-          ?description: String?,
-          ?price_per_unit: String?
-        ) -> void
-
-        def to_hash: -> {
-          currency: Dodopayments::Models::currency,
-          free_threshold: Integer,
-          measurement_unit: String,
-          meter_id: String,
-          name: String,
-          description: String?,
-          price_per_unit: String?
-        }
-      end
     end
   end
 end
