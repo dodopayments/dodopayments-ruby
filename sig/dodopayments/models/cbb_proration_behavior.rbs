@@ -1,0 +1,14 @@
+module Dodopayments
+  module Models
+    type cbb_proration_behavior = :prorate | :no_prorate
+
+    module CbbProrationBehavior
+      extend Dodopayments::Internal::Type::Enum
+
+      PRORATE: :prorate
+      NO_PRORATE: :no_prorate
+
+      def self?.values: -> ::Array[Dodopayments::Models::cbb_proration_behavior]
+    end
+  end
+end

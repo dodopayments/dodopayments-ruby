@@ -1,0 +1,45 @@
+module Dodopayments
+  module Models
+    type credit_rolled_over_webhook_event =
+      {
+        business_id: String,
+        data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditRolledOverWebhookEvent::type_
+      }
+
+    class CreditRolledOverWebhookEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::CreditEntitlements::CreditLedgerEntry
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: Dodopayments::Models::CreditRolledOverWebhookEvent::type_
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditRolledOverWebhookEvent::type_
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditRolledOverWebhookEvent::type_
+      }
+
+      type type_ = :"credit.rolled_over"
+
+      module Type
+        extend Dodopayments::Internal::Type::Enum
+
+        CREDIT_ROLLED_OVER: :"credit.rolled_over"
+
+        def self?.values: -> ::Array[Dodopayments::Models::CreditRolledOverWebhookEvent::type_]
+      end
+    end
+  end
+end

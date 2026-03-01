@@ -7,7 +7,8 @@ module Dodopayments
         customer_id: String,
         page_number: Integer,
         page_size: Integer,
-        status: Dodopayments::Models::RefundListParams::status
+        status: Dodopayments::Models::RefundListParams::status,
+        subscription_id: String
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -41,6 +42,10 @@ module Dodopayments
         Dodopayments::Models::RefundListParams::status
       ) -> Dodopayments::Models::RefundListParams::status
 
+      attr_reader subscription_id: String?
+
+      def subscription_id=: (String) -> String
+
       def initialize: (
         ?created_at_gte: Time,
         ?created_at_lte: Time,
@@ -48,6 +53,7 @@ module Dodopayments
         ?page_number: Integer,
         ?page_size: Integer,
         ?status: Dodopayments::Models::RefundListParams::status,
+        ?subscription_id: String,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
@@ -58,6 +64,7 @@ module Dodopayments
         page_number: Integer,
         page_size: Integer,
         status: Dodopayments::Models::RefundListParams::status,
+        subscription_id: String,
         request_options: Dodopayments::RequestOptions
       }
 

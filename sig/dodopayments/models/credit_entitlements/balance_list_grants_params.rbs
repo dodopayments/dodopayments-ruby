@@ -1,0 +1,63 @@
+module Dodopayments
+  module Models
+    module CreditEntitlements
+      type balance_list_grants_params =
+        {
+          credit_entitlement_id: String,
+          page_number: Integer,
+          page_size: Integer,
+          status: Dodopayments::Models::CreditEntitlements::BalanceListGrantsParams::status
+        }
+        & Dodopayments::Internal::Type::request_parameters
+
+      class BalanceListGrantsParams < Dodopayments::Internal::Type::BaseModel
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
+
+        attr_accessor credit_entitlement_id: String
+
+        attr_reader page_number: Integer?
+
+        def page_number=: (Integer) -> Integer
+
+        attr_reader page_size: Integer?
+
+        def page_size=: (Integer) -> Integer
+
+        attr_reader status: Dodopayments::Models::CreditEntitlements::BalanceListGrantsParams::status?
+
+        def status=: (
+          Dodopayments::Models::CreditEntitlements::BalanceListGrantsParams::status
+        ) -> Dodopayments::Models::CreditEntitlements::BalanceListGrantsParams::status
+
+        def initialize: (
+          credit_entitlement_id: String,
+          ?page_number: Integer,
+          ?page_size: Integer,
+          ?status: Dodopayments::Models::CreditEntitlements::BalanceListGrantsParams::status,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          credit_entitlement_id: String,
+          page_number: Integer,
+          page_size: Integer,
+          status: Dodopayments::Models::CreditEntitlements::BalanceListGrantsParams::status,
+          request_options: Dodopayments::RequestOptions
+        }
+
+        type status = :active | :expired | :depleted
+
+        module Status
+          extend Dodopayments::Internal::Type::Enum
+
+          ACTIVE: :active
+          EXPIRED: :expired
+          DEPLETED: :depleted
+
+          def self?.values: -> ::Array[Dodopayments::Models::CreditEntitlements::BalanceListGrantsParams::status]
+        end
+      end
+    end
+  end
+end

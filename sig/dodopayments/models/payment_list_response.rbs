@@ -11,10 +11,12 @@ module Dodopayments
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,
+        dispute_status: Dodopayments::Models::dispute_status?,
         invoice_id: String?,
         invoice_url: String?,
         payment_method: String?,
         payment_method_type: String?,
+        refund_status: Dodopayments::Models::payment_refund_status?,
         status: Dodopayments::Models::intent_status?,
         subscription_id: String?
       }
@@ -38,6 +40,8 @@ module Dodopayments
 
       attr_accessor total_amount: Integer
 
+      attr_accessor dispute_status: Dodopayments::Models::dispute_status?
+
       attr_accessor invoice_id: String?
 
       attr_accessor invoice_url: String?
@@ -45,6 +49,8 @@ module Dodopayments
       attr_accessor payment_method: String?
 
       attr_accessor payment_method_type: String?
+
+      attr_accessor refund_status: Dodopayments::Models::payment_refund_status?
 
       attr_accessor status: Dodopayments::Models::intent_status?
 
@@ -60,10 +66,12 @@ module Dodopayments
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,
+        ?dispute_status: Dodopayments::Models::dispute_status?,
         ?invoice_id: String?,
         ?invoice_url: String?,
         ?payment_method: String?,
         ?payment_method_type: String?,
+        ?refund_status: Dodopayments::Models::payment_refund_status?,
         ?status: Dodopayments::Models::intent_status?,
         ?subscription_id: String?
       ) -> void
@@ -78,10 +86,12 @@ module Dodopayments
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         total_amount: Integer,
+        dispute_status: Dodopayments::Models::dispute_status?,
         invoice_id: String?,
         invoice_url: String?,
         payment_method: String?,
         payment_method_type: String?,
+        refund_status: Dodopayments::Models::payment_refund_status?,
         status: Dodopayments::Models::intent_status?,
         subscription_id: String?
       }

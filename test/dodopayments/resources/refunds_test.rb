@@ -62,7 +62,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
     return if row.nil?
 
     assert_pattern do
-      row => Dodopayments::Models::RefundListResponse
+      row => Dodopayments::RefundListItem
     end
 
     assert_pattern do

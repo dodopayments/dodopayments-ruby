@@ -14,7 +14,7 @@ module Dodopayments
       attr_accessor :clauses
 
       # Logical conjunction to apply between clauses (and/or)
-      sig { returns(Dodopayments::MeterFilter::Conjunction::OrSymbol) }
+      sig { returns(Dodopayments::Conjunction::OrSymbol) }
       attr_accessor :conjunction
 
       # A filter structure that combines multiple conditions with logical conjunctions
@@ -26,7 +26,7 @@ module Dodopayments
       sig do
         params(
           clauses: Dodopayments::MeterFilter::Clauses::Variants,
-          conjunction: Dodopayments::MeterFilter::Conjunction::OrSymbol
+          conjunction: Dodopayments::Conjunction::OrSymbol
         ).returns(T.attached_class)
       end
       def self.new(
@@ -42,7 +42,7 @@ module Dodopayments
         override.returns(
           {
             clauses: Dodopayments::MeterFilter::Clauses::Variants,
-            conjunction: Dodopayments::MeterFilter::Conjunction::OrSymbol
+            conjunction: Dodopayments::Conjunction::OrSymbol
           }
         )
       end
@@ -77,11 +77,7 @@ module Dodopayments
           sig { returns(String) }
           attr_accessor :key
 
-          sig do
-            returns(
-              Dodopayments::MeterFilter::Clauses::DirectFilterCondition::Operator::OrSymbol
-            )
-          end
+          sig { returns(Dodopayments::FilterOperator::OrSymbol) }
           attr_accessor :operator
 
           # Filter value - can be string, number, or boolean
@@ -96,8 +92,7 @@ module Dodopayments
           sig do
             params(
               key: String,
-              operator:
-                Dodopayments::MeterFilter::Clauses::DirectFilterCondition::Operator::OrSymbol,
+              operator: Dodopayments::FilterOperator::OrSymbol,
               value:
                 Dodopayments::MeterFilter::Clauses::DirectFilterCondition::Value::Variants
             ).returns(T.attached_class)
@@ -115,78 +110,13 @@ module Dodopayments
             override.returns(
               {
                 key: String,
-                operator:
-                  Dodopayments::MeterFilter::Clauses::DirectFilterCondition::Operator::OrSymbol,
+                operator: Dodopayments::FilterOperator::OrSymbol,
                 value:
                   Dodopayments::MeterFilter::Clauses::DirectFilterCondition::Value::Variants
               }
             )
           end
           def to_hash
-          end
-
-          module Operator
-            extend Dodopayments::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Dodopayments::MeterFilter::Clauses::DirectFilterCondition::Operator
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            EQUALS =
-              T.let(
-                :equals,
-                Dodopayments::MeterFilter::Clauses::DirectFilterCondition::Operator::TaggedSymbol
-              )
-            NOT_EQUALS =
-              T.let(
-                :not_equals,
-                Dodopayments::MeterFilter::Clauses::DirectFilterCondition::Operator::TaggedSymbol
-              )
-            GREATER_THAN =
-              T.let(
-                :greater_than,
-                Dodopayments::MeterFilter::Clauses::DirectFilterCondition::Operator::TaggedSymbol
-              )
-            GREATER_THAN_OR_EQUALS =
-              T.let(
-                :greater_than_or_equals,
-                Dodopayments::MeterFilter::Clauses::DirectFilterCondition::Operator::TaggedSymbol
-              )
-            LESS_THAN =
-              T.let(
-                :less_than,
-                Dodopayments::MeterFilter::Clauses::DirectFilterCondition::Operator::TaggedSymbol
-              )
-            LESS_THAN_OR_EQUALS =
-              T.let(
-                :less_than_or_equals,
-                Dodopayments::MeterFilter::Clauses::DirectFilterCondition::Operator::TaggedSymbol
-              )
-            CONTAINS =
-              T.let(
-                :contains,
-                Dodopayments::MeterFilter::Clauses::DirectFilterCondition::Operator::TaggedSymbol
-              )
-            DOES_NOT_CONTAIN =
-              T.let(
-                :does_not_contain,
-                Dodopayments::MeterFilter::Clauses::DirectFilterCondition::Operator::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Dodopayments::MeterFilter::Clauses::DirectFilterCondition::Operator::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
 
           # Filter value - can be string, number, or boolean
@@ -224,11 +154,7 @@ module Dodopayments
           end
           attr_accessor :clauses
 
-          sig do
-            returns(
-              Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Conjunction::OrSymbol
-            )
-          end
+          sig { returns(Dodopayments::Conjunction::OrSymbol) }
           attr_accessor :conjunction
 
           # Level 1 nested filter - can contain Level 2 filters
@@ -236,8 +162,7 @@ module Dodopayments
             params(
               clauses:
                 Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Variants,
-              conjunction:
-                Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Conjunction::OrSymbol
+              conjunction: Dodopayments::Conjunction::OrSymbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -252,8 +177,7 @@ module Dodopayments
               {
                 clauses:
                   Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Variants,
-                conjunction:
-                  Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Conjunction::OrSymbol
+                conjunction: Dodopayments::Conjunction::OrSymbol
               }
             )
           end
@@ -289,11 +213,7 @@ module Dodopayments
               sig { returns(String) }
               attr_accessor :key
 
-              sig do
-                returns(
-                  Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::Operator::OrSymbol
-                )
-              end
+              sig { returns(Dodopayments::FilterOperator::OrSymbol) }
               attr_accessor :operator
 
               # Filter value - can be string, number, or boolean
@@ -308,8 +228,7 @@ module Dodopayments
               sig do
                 params(
                   key: String,
-                  operator:
-                    Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::Operator::OrSymbol,
+                  operator: Dodopayments::FilterOperator::OrSymbol,
                   value:
                     Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::Value::Variants
                 ).returns(T.attached_class)
@@ -327,78 +246,13 @@ module Dodopayments
                 override.returns(
                   {
                     key: String,
-                    operator:
-                      Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::Operator::OrSymbol,
+                    operator: Dodopayments::FilterOperator::OrSymbol,
                     value:
                       Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::Value::Variants
                   }
                 )
               end
               def to_hash
-              end
-
-              module Operator
-                extend Dodopayments::Internal::Type::Enum
-
-                TaggedSymbol =
-                  T.type_alias do
-                    T.all(
-                      Symbol,
-                      Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::Operator
-                    )
-                  end
-                OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-                EQUALS =
-                  T.let(
-                    :equals,
-                    Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::Operator::TaggedSymbol
-                  )
-                NOT_EQUALS =
-                  T.let(
-                    :not_equals,
-                    Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::Operator::TaggedSymbol
-                  )
-                GREATER_THAN =
-                  T.let(
-                    :greater_than,
-                    Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::Operator::TaggedSymbol
-                  )
-                GREATER_THAN_OR_EQUALS =
-                  T.let(
-                    :greater_than_or_equals,
-                    Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::Operator::TaggedSymbol
-                  )
-                LESS_THAN =
-                  T.let(
-                    :less_than,
-                    Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::Operator::TaggedSymbol
-                  )
-                LESS_THAN_OR_EQUALS =
-                  T.let(
-                    :less_than_or_equals,
-                    Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::Operator::TaggedSymbol
-                  )
-                CONTAINS =
-                  T.let(
-                    :contains,
-                    Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::Operator::TaggedSymbol
-                  )
-                DOES_NOT_CONTAIN =
-                  T.let(
-                    :does_not_contain,
-                    Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::Operator::TaggedSymbol
-                  )
-
-                sig do
-                  override.returns(
-                    T::Array[
-                      Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1FilterCondition::Operator::TaggedSymbol
-                    ]
-                  )
-                end
-                def self.values
-                end
               end
 
               # Filter value - can be string, number, or boolean
@@ -436,11 +290,7 @@ module Dodopayments
               end
               attr_accessor :clauses
 
-              sig do
-                returns(
-                  Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Conjunction::OrSymbol
-                )
-              end
+              sig { returns(Dodopayments::Conjunction::OrSymbol) }
               attr_accessor :conjunction
 
               # Level 2 nested filter
@@ -448,8 +298,7 @@ module Dodopayments
                 params(
                   clauses:
                     Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Variants,
-                  conjunction:
-                    Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Conjunction::OrSymbol
+                  conjunction: Dodopayments::Conjunction::OrSymbol
                 ).returns(T.attached_class)
               end
               def self.new(
@@ -464,8 +313,7 @@ module Dodopayments
                   {
                     clauses:
                       Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Variants,
-                    conjunction:
-                      Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Conjunction::OrSymbol
+                    conjunction: Dodopayments::Conjunction::OrSymbol
                   }
                 )
               end
@@ -501,11 +349,7 @@ module Dodopayments
                   sig { returns(String) }
                   attr_accessor :key
 
-                  sig do
-                    returns(
-                      Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::Operator::OrSymbol
-                    )
-                  end
+                  sig { returns(Dodopayments::FilterOperator::OrSymbol) }
                   attr_accessor :operator
 
                   # Filter value - can be string, number, or boolean
@@ -520,8 +364,7 @@ module Dodopayments
                   sig do
                     params(
                       key: String,
-                      operator:
-                        Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::Operator::OrSymbol,
+                      operator: Dodopayments::FilterOperator::OrSymbol,
                       value:
                         Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::Value::Variants
                     ).returns(T.attached_class)
@@ -539,78 +382,13 @@ module Dodopayments
                     override.returns(
                       {
                         key: String,
-                        operator:
-                          Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::Operator::OrSymbol,
+                        operator: Dodopayments::FilterOperator::OrSymbol,
                         value:
                           Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::Value::Variants
                       }
                     )
                   end
                   def to_hash
-                  end
-
-                  module Operator
-                    extend Dodopayments::Internal::Type::Enum
-
-                    TaggedSymbol =
-                      T.type_alias do
-                        T.all(
-                          Symbol,
-                          Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::Operator
-                        )
-                      end
-                    OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-                    EQUALS =
-                      T.let(
-                        :equals,
-                        Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::Operator::TaggedSymbol
-                      )
-                    NOT_EQUALS =
-                      T.let(
-                        :not_equals,
-                        Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::Operator::TaggedSymbol
-                      )
-                    GREATER_THAN =
-                      T.let(
-                        :greater_than,
-                        Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::Operator::TaggedSymbol
-                      )
-                    GREATER_THAN_OR_EQUALS =
-                      T.let(
-                        :greater_than_or_equals,
-                        Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::Operator::TaggedSymbol
-                      )
-                    LESS_THAN =
-                      T.let(
-                        :less_than,
-                        Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::Operator::TaggedSymbol
-                      )
-                    LESS_THAN_OR_EQUALS =
-                      T.let(
-                        :less_than_or_equals,
-                        Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::Operator::TaggedSymbol
-                      )
-                    CONTAINS =
-                      T.let(
-                        :contains,
-                        Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::Operator::TaggedSymbol
-                      )
-                    DOES_NOT_CONTAIN =
-                      T.let(
-                        :does_not_contain,
-                        Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::Operator::TaggedSymbol
-                      )
-
-                    sig do
-                      override.returns(
-                        T::Array[
-                          Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2FilterCondition::Operator::TaggedSymbol
-                        ]
-                      )
-                    end
-                    def self.values
-                    end
                   end
 
                   # Filter value - can be string, number, or boolean
@@ -650,11 +428,7 @@ module Dodopayments
                   end
                   attr_accessor :clauses
 
-                  sig do
-                    returns(
-                      Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Conjunction::OrSymbol
-                    )
-                  end
+                  sig { returns(Dodopayments::Conjunction::OrSymbol) }
                   attr_accessor :conjunction
 
                   # Level 3 nested filter (final nesting level)
@@ -664,8 +438,7 @@ module Dodopayments
                         T::Array[
                           Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::OrHash
                         ],
-                      conjunction:
-                        Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Conjunction::OrSymbol
+                      conjunction: Dodopayments::Conjunction::OrSymbol
                     ).returns(T.attached_class)
                   end
                   def self.new(
@@ -682,8 +455,7 @@ module Dodopayments
                           T::Array[
                             Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause
                           ],
-                        conjunction:
-                          Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Conjunction::OrSymbol
+                        conjunction: Dodopayments::Conjunction::OrSymbol
                       }
                     )
                   end
@@ -703,11 +475,7 @@ module Dodopayments
                     sig { returns(String) }
                     attr_accessor :key
 
-                    sig do
-                      returns(
-                        Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::Operator::OrSymbol
-                      )
-                    end
+                    sig { returns(Dodopayments::FilterOperator::OrSymbol) }
                     attr_accessor :operator
 
                     # Filter value - can be string, number, or boolean
@@ -722,8 +490,7 @@ module Dodopayments
                     sig do
                       params(
                         key: String,
-                        operator:
-                          Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::Operator::OrSymbol,
+                        operator: Dodopayments::FilterOperator::OrSymbol,
                         value:
                           Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::Value::Variants
                       ).returns(T.attached_class)
@@ -741,78 +508,13 @@ module Dodopayments
                       override.returns(
                         {
                           key: String,
-                          operator:
-                            Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::Operator::OrSymbol,
+                          operator: Dodopayments::FilterOperator::OrSymbol,
                           value:
                             Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::Value::Variants
                         }
                       )
                     end
                     def to_hash
-                    end
-
-                    module Operator
-                      extend Dodopayments::Internal::Type::Enum
-
-                      TaggedSymbol =
-                        T.type_alias do
-                          T.all(
-                            Symbol,
-                            Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::Operator
-                          )
-                        end
-                      OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-                      EQUALS =
-                        T.let(
-                          :equals,
-                          Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::Operator::TaggedSymbol
-                        )
-                      NOT_EQUALS =
-                        T.let(
-                          :not_equals,
-                          Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::Operator::TaggedSymbol
-                        )
-                      GREATER_THAN =
-                        T.let(
-                          :greater_than,
-                          Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::Operator::TaggedSymbol
-                        )
-                      GREATER_THAN_OR_EQUALS =
-                        T.let(
-                          :greater_than_or_equals,
-                          Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::Operator::TaggedSymbol
-                        )
-                      LESS_THAN =
-                        T.let(
-                          :less_than,
-                          Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::Operator::TaggedSymbol
-                        )
-                      LESS_THAN_OR_EQUALS =
-                        T.let(
-                          :less_than_or_equals,
-                          Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::Operator::TaggedSymbol
-                        )
-                      CONTAINS =
-                        T.let(
-                          :contains,
-                          Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::Operator::TaggedSymbol
-                        )
-                      DOES_NOT_CONTAIN =
-                        T.let(
-                          :does_not_contain,
-                          Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::Operator::TaggedSymbol
-                        )
-
-                      sig do
-                        override.returns(
-                          T::Array[
-                            Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Clause::Operator::TaggedSymbol
-                          ]
-                        )
-                      end
-                      def self.values
-                      end
                     end
 
                     # Filter value - can be string, number, or boolean
@@ -831,40 +533,6 @@ module Dodopayments
                       end
                       def self.variants
                       end
-                    end
-                  end
-
-                  module Conjunction
-                    extend Dodopayments::Internal::Type::Enum
-
-                    TaggedSymbol =
-                      T.type_alias do
-                        T.all(
-                          Symbol,
-                          Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Conjunction
-                        )
-                      end
-                    OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-                    AND =
-                      T.let(
-                        :and,
-                        Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Conjunction::TaggedSymbol
-                      )
-                    OR =
-                      T.let(
-                        :or,
-                        Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Conjunction::TaggedSymbol
-                      )
-
-                    sig do
-                      override.returns(
-                        T::Array[
-                          Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Clauses::Level2NestedFilter::Conjunction::TaggedSymbol
-                        ]
-                      )
-                    end
-                    def self.values
                     end
                   end
                 end
@@ -895,40 +563,6 @@ module Dodopayments
                     Dodopayments::Internal::Type::Converter
                   )
               end
-
-              module Conjunction
-                extend Dodopayments::Internal::Type::Enum
-
-                TaggedSymbol =
-                  T.type_alias do
-                    T.all(
-                      Symbol,
-                      Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Conjunction
-                    )
-                  end
-                OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-                AND =
-                  T.let(
-                    :and,
-                    Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Conjunction::TaggedSymbol
-                  )
-                OR =
-                  T.let(
-                    :or,
-                    Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Conjunction::TaggedSymbol
-                  )
-
-                sig do
-                  override.returns(
-                    T::Array[
-                      Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Clauses::Level1NestedFilter::Conjunction::TaggedSymbol
-                    ]
-                  )
-                end
-                def self.values
-                end
-              end
             end
 
             sig do
@@ -957,40 +591,6 @@ module Dodopayments
                 Dodopayments::Internal::Type::Converter
               )
           end
-
-          module Conjunction
-            extend Dodopayments::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Conjunction
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            AND =
-              T.let(
-                :and,
-                Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Conjunction::TaggedSymbol
-              )
-            OR =
-              T.let(
-                :or,
-                Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Conjunction::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Dodopayments::MeterFilter::Clauses::NestedMeterFilter::Conjunction::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
-          end
         end
 
         sig do
@@ -1016,26 +616,6 @@ module Dodopayments
             ],
             Dodopayments::Internal::Type::Converter
           )
-      end
-
-      # Logical conjunction to apply between clauses (and/or)
-      module Conjunction
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias { T.all(Symbol, Dodopayments::MeterFilter::Conjunction) }
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        AND = T.let(:and, Dodopayments::MeterFilter::Conjunction::TaggedSymbol)
-        OR = T.let(:or, Dodopayments::MeterFilter::Conjunction::TaggedSymbol)
-
-        sig do
-          override.returns(
-            T::Array[Dodopayments::MeterFilter::Conjunction::TaggedSymbol]
-          )
-        end
-        def self.values
-        end
       end
     end
   end

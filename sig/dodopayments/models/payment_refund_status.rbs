@@ -1,0 +1,14 @@
+module Dodopayments
+  module Models
+    type payment_refund_status = :partial | :full
+
+    module PaymentRefundStatus
+      extend Dodopayments::Internal::Type::Enum
+
+      PARTIAL: :partial
+      FULL: :full
+
+      def self?.values: -> ::Array[Dodopayments::Models::payment_refund_status]
+    end
+  end
+end

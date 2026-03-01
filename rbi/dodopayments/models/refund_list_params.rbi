@@ -57,6 +57,13 @@ module Dodopayments
       end
       attr_writer :status
 
+      # Filter by subscription id
+      sig { returns(T.nilable(String)) }
+      attr_reader :subscription_id
+
+      sig { params(subscription_id: String).void }
+      attr_writer :subscription_id
+
       sig do
         params(
           created_at_gte: Time,
@@ -65,6 +72,7 @@ module Dodopayments
           page_number: Integer,
           page_size: Integer,
           status: Dodopayments::RefundListParams::Status::OrSymbol,
+          subscription_id: String,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -81,6 +89,8 @@ module Dodopayments
         page_size: nil,
         # Filter by status
         status: nil,
+        # Filter by subscription id
+        subscription_id: nil,
         request_options: {}
       )
       end
@@ -94,6 +104,7 @@ module Dodopayments
             page_number: Integer,
             page_size: Integer,
             status: Dodopayments::RefundListParams::Status::OrSymbol,
+            subscription_id: String,
             request_options: Dodopayments::RequestOptions
           }
         )

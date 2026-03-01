@@ -1,0 +1,45 @@
+module Dodopayments
+  module Models
+    type credit_rollover_forfeited_webhook_event =
+      {
+        business_id: String,
+        data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditRolloverForfeitedWebhookEvent::type_
+      }
+
+    class CreditRolloverForfeitedWebhookEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::CreditEntitlements::CreditLedgerEntry
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: Dodopayments::Models::CreditRolloverForfeitedWebhookEvent::type_
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditRolloverForfeitedWebhookEvent::type_
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditRolloverForfeitedWebhookEvent::type_
+      }
+
+      type type_ = :"credit.rollover_forfeited"
+
+      module Type
+        extend Dodopayments::Internal::Type::Enum
+
+        CREDIT_ROLLOVER_FORFEITED: :"credit.rollover_forfeited"
+
+        def self?.values: -> ::Array[Dodopayments::Models::CreditRolloverForfeitedWebhookEvent::type_]
+      end
+    end
+  end
+end

@@ -24,7 +24,7 @@ module Dodopayments
       #
       # @param brand_id [String, nil] Brand id for the product, if not provided will default to primary brand
       #
-      # @param credit_entitlements [Array<Dodopayments::Models::ProductCreateParams::CreditEntitlement>, nil] Optional credit entitlements to attach (max 3)
+      # @param credit_entitlements [Array<Dodopayments::Models::AttachCreditEntitlement>, nil] Optional credit entitlements to attach (max 3)
       #
       # @param description [String, nil] Optional description of the product
       #
@@ -85,7 +85,7 @@ module Dodopayments
       #
       # @param brand_id [String, nil]
       #
-      # @param credit_entitlements [Array<Dodopayments::Models::ProductUpdateParams::CreditEntitlement>, nil] Credit entitlements to update (replaces all existing when present)
+      # @param credit_entitlements [Array<Dodopayments::Models::AttachCreditEntitlement>, nil] Credit entitlements to update (replaces all existing when present)
       #
       # @param description [String, nil] Description of the product, optional and must be at most 1000 characters.
       #

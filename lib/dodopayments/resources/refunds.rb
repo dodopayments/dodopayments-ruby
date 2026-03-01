@@ -47,7 +47,7 @@ module Dodopayments
         )
       end
 
-      # @overload list(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, request_options: {})
+      # @overload list(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, status: nil, subscription_id: nil, request_options: {})
       #
       # @param created_at_gte [Time] Get events after this created time
       #
@@ -61,9 +61,11 @@ module Dodopayments
       #
       # @param status [Symbol, Dodopayments::Models::RefundListParams::Status] Filter by status
       #
+      # @param subscription_id [String] Filter by subscription id
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::RefundListResponse>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::RefundListItem>]
       #
       # @see Dodopayments::Models::RefundListParams
       def list(params = {})
@@ -73,7 +75,7 @@ module Dodopayments
           path: "refunds",
           query: parsed,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
-          model: Dodopayments::Models::RefundListResponse,
+          model: Dodopayments::RefundListItem,
           options: options
         )
       end

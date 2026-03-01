@@ -3,19 +3,17 @@ module Dodopayments
     type add_meter_to_price =
       {
         meter_id: String,
-        price_per_unit: String,
         credit_entitlement_id: String?,
         description: String?,
         free_threshold: Integer?,
         measurement_unit: String?,
         meter_units_per_credit: String?,
-        name: String?
+        name: String?,
+        price_per_unit: String?
       }
 
     class AddMeterToPrice < Dodopayments::Internal::Type::BaseModel
       attr_accessor meter_id: String
-
-      attr_accessor price_per_unit: String
 
       attr_accessor credit_entitlement_id: String?
 
@@ -29,26 +27,28 @@ module Dodopayments
 
       attr_accessor name: String?
 
+      attr_accessor price_per_unit: String?
+
       def initialize: (
         meter_id: String,
-        price_per_unit: String,
         ?credit_entitlement_id: String?,
         ?description: String?,
         ?free_threshold: Integer?,
         ?measurement_unit: String?,
         ?meter_units_per_credit: String?,
-        ?name: String?
+        ?name: String?,
+        ?price_per_unit: String?
       ) -> void
 
       def to_hash: -> {
         meter_id: String,
-        price_per_unit: String,
         credit_entitlement_id: String?,
         description: String?,
         free_threshold: Integer?,
         measurement_unit: String?,
         meter_units_per_credit: String?,
-        name: String?
+        name: String?,
+        price_per_unit: String?
       }
     end
   end

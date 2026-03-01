@@ -25,7 +25,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         discount_id: String | nil,
         expires_on: Time | nil,
         payment_link: String | nil,
-        product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem]) | nil
+        product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::PaymentCreateResponse::ProductCart]) | nil
       }
     end
   end
@@ -49,7 +49,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         disputes: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Dispute]),
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         payment_id: String,
-        refunds: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Payment::Refund]),
+        refunds: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::RefundListItem]),
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Currency,
         total_amount: Integer,
@@ -59,7 +59,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         card_network: String | nil,
         card_type: String | nil,
         checkout_session_id: String | nil,
-        custom_field_responses: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Payment::CustomFieldResponse]) | nil,
+        custom_field_responses: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::CustomFieldResponse]) | nil,
         discount_id: String | nil,
         error_code: String | nil,
         error_message: String | nil,
@@ -68,8 +68,8 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         payment_link: String | nil,
         payment_method: String | nil,
         payment_method_type: String | nil,
-        product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Payment::ProductCart]) | nil,
-        refund_status: Dodopayments::Payment::RefundStatus | nil,
+        product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem]) | nil,
+        refund_status: Dodopayments::PaymentRefundStatus | nil,
         settlement_tax: Integer | nil,
         status: Dodopayments::IntentStatus | nil,
         subscription_id: String | nil,
@@ -104,10 +104,12 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         payment_id: String,
         total_amount: Integer,
+        dispute_status: Dodopayments::DisputeStatus | nil,
         invoice_id: String | nil,
         invoice_url: String | nil,
         payment_method: String | nil,
         payment_method_type: String | nil,
+        refund_status: Dodopayments::PaymentRefundStatus | nil,
         status: Dodopayments::IntentStatus | nil,
         subscription_id: String | nil
       }

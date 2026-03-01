@@ -1,0 +1,15 @@
+module Dodopayments
+  module Models
+    type custom_field_response = { key: String, value: String }
+
+    class CustomFieldResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor key: String
+
+      attr_accessor value: String
+
+      def initialize: (key: String, value: String) -> void
+
+      def to_hash: -> { key: String, value: String }
+    end
+  end
+end

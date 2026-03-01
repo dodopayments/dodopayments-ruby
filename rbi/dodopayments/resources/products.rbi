@@ -22,11 +22,7 @@ module Dodopayments
           addons: T.nilable(T::Array[String]),
           brand_id: T.nilable(String),
           credit_entitlements:
-            T.nilable(
-              T::Array[
-                Dodopayments::ProductCreateParams::CreditEntitlement::OrHash
-              ]
-            ),
+            T.nilable(T::Array[Dodopayments::AttachCreditEntitlement::OrHash]),
           description: T.nilable(String),
           digital_product_delivery:
             T.nilable(
@@ -93,11 +89,7 @@ module Dodopayments
           addons: T.nilable(T::Array[String]),
           brand_id: T.nilable(String),
           credit_entitlements:
-            T.nilable(
-              T::Array[
-                Dodopayments::ProductUpdateParams::CreditEntitlement::OrHash
-              ]
-            ),
+            T.nilable(T::Array[Dodopayments::AttachCreditEntitlement::OrHash]),
           description: T.nilable(String),
           digital_product_delivery:
             T.nilable(

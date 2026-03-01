@@ -1,0 +1,14 @@
+module Dodopayments
+  module Models
+    type conjunction = :and | :or
+
+    module Conjunction
+      extend Dodopayments::Internal::Type::Enum
+
+      AND: :and
+      OR: :or
+
+      def self?.values: -> ::Array[Dodopayments::Models::conjunction]
+    end
+  end
+end
