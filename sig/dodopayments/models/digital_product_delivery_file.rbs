@@ -1,0 +1,18 @@
+module Dodopayments
+  module Models
+    type digital_product_delivery_file =
+      { file_id: String, file_name: String, url: String }
+
+    class DigitalProductDeliveryFile < Dodopayments::Internal::Type::BaseModel
+      attr_accessor file_id: String
+
+      attr_accessor file_name: String
+
+      attr_accessor url: String
+
+      def initialize: (file_id: String, file_name: String, url: String) -> void
+
+      def to_hash: -> { file_id: String, file_name: String, url: String }
+    end
+  end
+end

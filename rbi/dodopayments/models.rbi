@@ -84,6 +84,9 @@ module Dodopayments
 
   CreditEntitlement = Dodopayments::Models::CreditEntitlement
 
+  CreditEntitlementCartResponse =
+    Dodopayments::Models::CreditEntitlementCartResponse
+
   CreditEntitlementCreateParams =
     Dodopayments::Models::CreditEntitlementCreateParams
 
@@ -92,6 +95,9 @@ module Dodopayments
 
   CreditEntitlementListParams =
     Dodopayments::Models::CreditEntitlementListParams
+
+  CreditEntitlementMappingResponse =
+    Dodopayments::Models::CreditEntitlementMappingResponse
 
   CreditEntitlementRetrieveParams =
     Dodopayments::Models::CreditEntitlementRetrieveParams
@@ -147,6 +153,10 @@ module Dodopayments
   CustomField = Dodopayments::Models::CustomField
 
   CustomFieldResponse = Dodopayments::Models::CustomFieldResponse
+
+  DigitalProductDelivery = Dodopayments::Models::DigitalProductDelivery
+
+  DigitalProductDeliveryFile = Dodopayments::Models::DigitalProductDeliveryFile
 
   Discount = Dodopayments::Models::Discount
 
@@ -242,7 +252,12 @@ module Dodopayments
 
   MeterArchiveParams = Dodopayments::Models::MeterArchiveParams
 
+  MeterCartResponseItem = Dodopayments::Models::MeterCartResponseItem
+
   MeterCreateParams = Dodopayments::Models::MeterCreateParams
+
+  MeterCreditEntitlementCartResponse =
+    Dodopayments::Models::MeterCreditEntitlementCartResponse
 
   MeterFilter = Dodopayments::Models::MeterFilter
 
