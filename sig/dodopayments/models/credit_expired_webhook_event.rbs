@@ -1,0 +1,45 @@
+module Dodopayments
+  module Models
+    type credit_expired_webhook_event =
+      {
+        business_id: String,
+        data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditExpiredWebhookEvent::type_
+      }
+
+    class CreditExpiredWebhookEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::CreditEntitlements::CreditLedgerEntry
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: Dodopayments::Models::CreditExpiredWebhookEvent::type_
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditExpiredWebhookEvent::type_
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditExpiredWebhookEvent::type_
+      }
+
+      type type_ = :"credit.expired"
+
+      module Type
+        extend Dodopayments::Internal::Type::Enum
+
+        CREDIT_EXPIRED: :"credit.expired"
+
+        def self?.values: -> ::Array[Dodopayments::Models::CreditExpiredWebhookEvent::type_]
+      end
+    end
+  end
+end

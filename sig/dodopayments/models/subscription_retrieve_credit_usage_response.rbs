@@ -1,0 +1,82 @@
+module Dodopayments
+  module Models
+    type subscription_retrieve_credit_usage_response =
+      {
+        items: ::Array[Dodopayments::Models::SubscriptionRetrieveCreditUsageResponse::Item],
+        subscription_id: String
+      }
+
+    class SubscriptionRetrieveCreditUsageResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor items: ::Array[Dodopayments::Models::SubscriptionRetrieveCreditUsageResponse::Item]
+
+      attr_accessor subscription_id: String
+
+      def initialize: (
+        items: ::Array[Dodopayments::Models::SubscriptionRetrieveCreditUsageResponse::Item],
+        subscription_id: String
+      ) -> void
+
+      def to_hash: -> {
+        items: ::Array[Dodopayments::Models::SubscriptionRetrieveCreditUsageResponse::Item],
+        subscription_id: String
+      }
+
+      type item =
+        {
+          balance: String,
+          credit_entitlement_id: String,
+          credit_entitlement_name: String,
+          limit_reached: bool,
+          overage: String,
+          overage_enabled: bool,
+          unit: String,
+          overage_limit: String?,
+          remaining_headroom: String?
+        }
+
+      class Item < Dodopayments::Internal::Type::BaseModel
+        attr_accessor balance: String
+
+        attr_accessor credit_entitlement_id: String
+
+        attr_accessor credit_entitlement_name: String
+
+        attr_accessor limit_reached: bool
+
+        attr_accessor overage: String
+
+        attr_accessor overage_enabled: bool
+
+        attr_accessor unit: String
+
+        attr_accessor overage_limit: String?
+
+        attr_accessor remaining_headroom: String?
+
+        def initialize: (
+          balance: String,
+          credit_entitlement_id: String,
+          credit_entitlement_name: String,
+          limit_reached: bool,
+          overage: String,
+          overage_enabled: bool,
+          unit: String,
+          ?overage_limit: String?,
+          ?remaining_headroom: String?
+        ) -> void
+
+        def to_hash: -> {
+          balance: String,
+          credit_entitlement_id: String,
+          credit_entitlement_name: String,
+          limit_reached: bool,
+          overage: String,
+          overage_enabled: bool,
+          unit: String,
+          overage_limit: String?,
+          remaining_headroom: String?
+        }
+      end
+    end
+  end
+end

@@ -160,9 +160,6 @@ module Dodopayments
         attr_accessor :max_rollover_count
 
         sig { returns(T.nilable(T::Boolean)) }
-        attr_accessor :overage_charge_at_billing
-
-        sig { returns(T.nilable(T::Boolean)) }
         attr_accessor :overage_enabled
 
         sig { returns(T.nilable(String)) }
@@ -187,7 +184,6 @@ module Dodopayments
             expires_after_days: T.nilable(Integer),
             low_balance_threshold_percent: T.nilable(Integer),
             max_rollover_count: T.nilable(Integer),
-            overage_charge_at_billing: T.nilable(T::Boolean),
             overage_enabled: T.nilable(T::Boolean),
             overage_limit: T.nilable(String),
             rollover_enabled: T.nilable(T::Boolean),
@@ -203,7 +199,6 @@ module Dodopayments
           expires_after_days: nil,
           low_balance_threshold_percent: nil,
           max_rollover_count: nil,
-          overage_charge_at_billing: nil,
           overage_enabled: nil,
           overage_limit: nil,
           rollover_enabled: nil,
@@ -221,7 +216,6 @@ module Dodopayments
               expires_after_days: T.nilable(Integer),
               low_balance_threshold_percent: T.nilable(Integer),
               max_rollover_count: T.nilable(Integer),
-              overage_charge_at_billing: T.nilable(T::Boolean),
               overage_enabled: T.nilable(T::Boolean),
               overage_limit: T.nilable(String),
               rollover_enabled: T.nilable(T::Boolean),

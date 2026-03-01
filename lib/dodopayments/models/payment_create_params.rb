@@ -22,8 +22,9 @@ module Dodopayments
       # @!attribute product_cart
       #   List of products in the cart. Must contain at least 1 and at most 100 items.
       #
-      #   @return [Array<Dodopayments::Models::OneTimeProductCartItem>]
-      required :product_cart, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem] }
+      #   @return [Array<Dodopayments::Models::PaymentCreateParams::ProductCart>]
+      required :product_cart,
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::PaymentCreateParams::ProductCart] }
 
       # @!attribute allowed_payment_method_types
       #   List of payment methods allowed during checkout.
@@ -119,7 +120,7 @@ module Dodopayments
       #
       #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer] Customer information for the payment
       #
-      #   @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>] List of products in the cart. Must contain at least 1 and at most 100 items.
+      #   @param product_cart [Array<Dodopayments::Models::PaymentCreateParams::ProductCart>] List of products in the cart. Must contain at least 1 and at most 100 items.
       #
       #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil] List of payment methods allowed during checkout.
       #
@@ -146,6 +147,36 @@ module Dodopayments
       #   @param tax_id [String, nil] Tax ID in case the payment is B2B. If tax id validation fails the payment creati
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
+
+      class ProductCart < Dodopayments::Internal::Type::BaseModel
+        # @!attribute product_id
+        #
+        #   @return [String]
+        required :product_id, String
+
+        # @!attribute quantity
+        #
+        #   @return [Integer]
+        required :quantity, Integer
+
+        # @!attribute amount
+        #   Amount the customer pays if pay_what_you_want is enabled. If disabled then
+        #   amount will be ignored Represented in the lowest denomination of the currency
+        #   (e.g., cents for USD). For example, to charge $1.00, pass `100`.
+        #
+        #   @return [Integer, nil]
+        optional :amount, Integer, nil?: true
+
+        # @!method initialize(product_id:, quantity:, amount: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::PaymentCreateParams::ProductCart} for more details.
+        #
+        #   @param product_id [String]
+        #
+        #   @param quantity [Integer]
+        #
+        #   @param amount [Integer, nil] Amount the customer pays if pay_what_you_want is enabled. If disabled then amoun
+      end
     end
   end
 end

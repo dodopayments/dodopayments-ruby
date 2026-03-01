@@ -1,0 +1,124 @@
+module Dodopayments
+  module Models
+    module CreditEntitlements
+      type credit_ledger_entry =
+        {
+          id: String,
+          amount: String,
+          balance_after: String,
+          balance_before: String,
+          business_id: String,
+          created_at: Time,
+          credit_entitlement_id: String,
+          customer_id: String,
+          is_credit: bool,
+          overage_after: String,
+          overage_before: String,
+          transaction_type: Dodopayments::Models::CreditEntitlements::CreditLedgerEntry::transaction_type,
+          description: String?,
+          grant_id: String?,
+          reference_id: String?,
+          reference_type: String?
+        }
+
+      class CreditLedgerEntry < Dodopayments::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor amount: String
+
+        attr_accessor balance_after: String
+
+        attr_accessor balance_before: String
+
+        attr_accessor business_id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor credit_entitlement_id: String
+
+        attr_accessor customer_id: String
+
+        attr_accessor is_credit: bool
+
+        attr_accessor overage_after: String
+
+        attr_accessor overage_before: String
+
+        attr_accessor transaction_type: Dodopayments::Models::CreditEntitlements::CreditLedgerEntry::transaction_type
+
+        attr_accessor description: String?
+
+        attr_accessor grant_id: String?
+
+        attr_accessor reference_id: String?
+
+        attr_accessor reference_type: String?
+
+        def initialize: (
+          id: String,
+          amount: String,
+          balance_after: String,
+          balance_before: String,
+          business_id: String,
+          created_at: Time,
+          credit_entitlement_id: String,
+          customer_id: String,
+          is_credit: bool,
+          overage_after: String,
+          overage_before: String,
+          transaction_type: Dodopayments::Models::CreditEntitlements::CreditLedgerEntry::transaction_type,
+          ?description: String?,
+          ?grant_id: String?,
+          ?reference_id: String?,
+          ?reference_type: String?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          amount: String,
+          balance_after: String,
+          balance_before: String,
+          business_id: String,
+          created_at: Time,
+          credit_entitlement_id: String,
+          customer_id: String,
+          is_credit: bool,
+          overage_after: String,
+          overage_before: String,
+          transaction_type: Dodopayments::Models::CreditEntitlements::CreditLedgerEntry::transaction_type,
+          description: String?,
+          grant_id: String?,
+          reference_id: String?,
+          reference_type: String?
+        }
+
+        type transaction_type =
+          :credit_added
+          | :credit_deducted
+          | :credit_expired
+          | :credit_rolled_over
+          | :rollover_forfeited
+          | :overage_charged
+          | :auto_top_up
+          | :manual_adjustment
+          | :refund
+
+        module TransactionType
+          extend Dodopayments::Internal::Type::Enum
+
+          CREDIT_ADDED: :credit_added
+          CREDIT_DEDUCTED: :credit_deducted
+          CREDIT_EXPIRED: :credit_expired
+          CREDIT_ROLLED_OVER: :credit_rolled_over
+          ROLLOVER_FORFEITED: :rollover_forfeited
+          OVERAGE_CHARGED: :overage_charged
+          AUTO_TOP_UP: :auto_top_up
+          MANUAL_ADJUSTMENT: :manual_adjustment
+          REFUND: :refund
+
+          def self?.values: -> ::Array[Dodopayments::Models::CreditEntitlements::CreditLedgerEntry::transaction_type]
+        end
+      end
+    end
+  end
+end

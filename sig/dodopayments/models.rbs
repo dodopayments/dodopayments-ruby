@@ -17,6 +17,8 @@ module Dodopayments
 
   class AttachAddon = Dodopayments::Models::AttachAddon
 
+  class AttachCreditEntitlement = Dodopayments::Models::AttachCreditEntitlement
+
   class AttachExistingCustomer = Dodopayments::Models::AttachExistingCustomer
 
   class BalanceLedgerEntry = Dodopayments::Models::BalanceLedgerEntry
@@ -37,6 +39,10 @@ module Dodopayments
 
   class BrandUpdateParams = Dodopayments::Models::BrandUpdateParams
 
+  module CbbOverageBehavior = Dodopayments::Models::CbbOverageBehavior
+
+  module CbbProrationBehavior = Dodopayments::Models::CbbProrationBehavior
+
   class CheckoutSessionBillingAddress = Dodopayments::Models::CheckoutSessionBillingAddress
 
   class CheckoutSessionCreateParams = Dodopayments::Models::CheckoutSessionCreateParams
@@ -55,9 +61,43 @@ module Dodopayments
 
   class CheckoutSessionStatus = Dodopayments::Models::CheckoutSessionStatus
 
+  module Conjunction = Dodopayments::Models::Conjunction
+
   module CountryCode = Dodopayments::Models::CountryCode
 
   class CreateNewCustomer = Dodopayments::Models::CreateNewCustomer
+
+  class CreditAddedWebhookEvent = Dodopayments::Models::CreditAddedWebhookEvent
+
+  class CreditBalanceLowWebhookEvent = Dodopayments::Models::CreditBalanceLowWebhookEvent
+
+  class CreditDeductedWebhookEvent = Dodopayments::Models::CreditDeductedWebhookEvent
+
+  class CreditEntitlement = Dodopayments::Models::CreditEntitlement
+
+  class CreditEntitlementCreateParams = Dodopayments::Models::CreditEntitlementCreateParams
+
+  class CreditEntitlementDeleteParams = Dodopayments::Models::CreditEntitlementDeleteParams
+
+  class CreditEntitlementListParams = Dodopayments::Models::CreditEntitlementListParams
+
+  class CreditEntitlementRetrieveParams = Dodopayments::Models::CreditEntitlementRetrieveParams
+
+  module CreditEntitlements = Dodopayments::Models::CreditEntitlements
+
+  class CreditEntitlementUndeleteParams = Dodopayments::Models::CreditEntitlementUndeleteParams
+
+  class CreditEntitlementUpdateParams = Dodopayments::Models::CreditEntitlementUpdateParams
+
+  class CreditExpiredWebhookEvent = Dodopayments::Models::CreditExpiredWebhookEvent
+
+  class CreditManualAdjustmentWebhookEvent = Dodopayments::Models::CreditManualAdjustmentWebhookEvent
+
+  class CreditOverageChargedWebhookEvent = Dodopayments::Models::CreditOverageChargedWebhookEvent
+
+  class CreditRolledOverWebhookEvent = Dodopayments::Models::CreditRolledOverWebhookEvent
+
+  class CreditRolloverForfeitedWebhookEvent = Dodopayments::Models::CreditRolloverForfeitedWebhookEvent
 
   module Currency = Dodopayments::Models::Currency
 
@@ -66,6 +106,8 @@ module Dodopayments
   class CustomerCreateParams = Dodopayments::Models::CustomerCreateParams
 
   class CustomerLimitedDetails = Dodopayments::Models::CustomerLimitedDetails
+
+  class CustomerListCreditEntitlementsParams = Dodopayments::Models::CustomerListCreditEntitlementsParams
 
   class CustomerListParams = Dodopayments::Models::CustomerListParams
 
@@ -82,6 +124,8 @@ module Dodopayments
   class CustomerUpdateParams = Dodopayments::Models::CustomerUpdateParams
 
   class CustomField = Dodopayments::Models::CustomField
+
+  class CustomFieldResponse = Dodopayments::Models::CustomFieldResponse
 
   class Discount = Dodopayments::Models::Discount
 
@@ -126,6 +170,8 @@ module Dodopayments
   class Event = Dodopayments::Models::Event
 
   class EventInput = Dodopayments::Models::EventInput
+
+  module FilterOperator = Dodopayments::Models::FilterOperator
 
   class GetDispute = Dodopayments::Models::GetDispute
 
@@ -199,6 +245,8 @@ module Dodopayments
 
   class PaymentProcessingWebhookEvent = Dodopayments::Models::PaymentProcessingWebhookEvent
 
+  module PaymentRefundStatus = Dodopayments::Models::PaymentRefundStatus
+
   class PaymentRetrieveLineItemsParams = Dodopayments::Models::PaymentRetrieveLineItemsParams
 
   class PaymentRetrieveParams = Dodopayments::Models::PaymentRetrieveParams
@@ -234,6 +282,8 @@ module Dodopayments
   class RefundCreateParams = Dodopayments::Models::RefundCreateParams
 
   class RefundFailedWebhookEvent = Dodopayments::Models::RefundFailedWebhookEvent
+
+  class RefundListItem = Dodopayments::Models::RefundListItem
 
   class RefundListParams = Dodopayments::Models::RefundListParams
 
@@ -271,6 +321,8 @@ module Dodopayments
 
   class SubscriptionRenewedWebhookEvent = Dodopayments::Models::SubscriptionRenewedWebhookEvent
 
+  class SubscriptionRetrieveCreditUsageParams = Dodopayments::Models::SubscriptionRetrieveCreditUsageParams
+
   class SubscriptionRetrieveParams = Dodopayments::Models::SubscriptionRetrieveParams
 
   class SubscriptionRetrieveUsageHistoryParams = Dodopayments::Models::SubscriptionRetrieveUsageHistoryParams
@@ -294,6 +346,8 @@ module Dodopayments
   module UnsafeUnwrapWebhookEvent = Dodopayments::Models::UnsafeUnwrapWebhookEvent
 
   module UnwrapWebhookEvent = Dodopayments::Models::UnwrapWebhookEvent
+
+  class UpdateSubscriptionPlanReq = Dodopayments::Models::UpdateSubscriptionPlanReq
 
   class UsageEventIngestParams = Dodopayments::Models::UsageEventIngestParams
 

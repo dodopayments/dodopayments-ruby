@@ -47,10 +47,11 @@ module Dodopayments
           page_number: Integer,
           page_size: Integer,
           status: Dodopayments::RefundListParams::Status::OrSymbol,
+          subscription_id: String,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::DefaultPageNumberPagination[
-            Dodopayments::Models::RefundListResponse
+            Dodopayments::RefundListItem
           ]
         )
       end
@@ -67,6 +68,8 @@ module Dodopayments
         page_size: nil,
         # Filter by status
         status: nil,
+        # Filter by subscription id
+        subscription_id: nil,
         request_options: {}
       )
       end

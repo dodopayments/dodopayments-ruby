@@ -125,11 +125,7 @@ module Dodopayments
       attr_accessor :cancelled_at
 
       # Customer's responses to custom fields collected during checkout
-      sig do
-        returns(
-          T.nilable(T::Array[Dodopayments::Subscription::CustomFieldResponse])
-        )
-      end
+      sig { returns(T.nilable(T::Array[Dodopayments::CustomFieldResponse])) }
       attr_accessor :custom_field_responses
 
       # Number of remaining discount cycles if discount is applied
@@ -185,9 +181,7 @@ module Dodopayments
           trial_period_days: Integer,
           cancelled_at: T.nilable(Time),
           custom_field_responses:
-            T.nilable(
-              T::Array[Dodopayments::Subscription::CustomFieldResponse::OrHash]
-            ),
+            T.nilable(T::Array[Dodopayments::CustomFieldResponse::OrHash]),
           discount_cycles_remaining: T.nilable(Integer),
           discount_id: T.nilable(String),
           expires_at: T.nilable(Time),
@@ -296,9 +290,7 @@ module Dodopayments
             trial_period_days: Integer,
             cancelled_at: T.nilable(Time),
             custom_field_responses:
-              T.nilable(
-                T::Array[Dodopayments::Subscription::CustomFieldResponse]
-              ),
+              T.nilable(T::Array[Dodopayments::CustomFieldResponse]),
             discount_cycles_remaining: T.nilable(Integer),
             discount_id: T.nilable(String),
             expires_at: T.nilable(Time),
@@ -332,8 +324,16 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :overage_balance
 
-        sig { returns(T::Boolean) }
-        attr_accessor :overage_charge_at_billing
+        # Controls how overage is handled at the end of a billing cycle.
+        #
+        # | Preset                     | Charge at billing | Credits reduce overage | Preserve overage at reset |
+        # | -------------------------- | :---------------: | :--------------------: | :-----------------------: |
+        # | `forgive_at_reset`         |        No         |           No           |            No             |
+        # | `invoice_at_billing`       |        Yes        |           No           |            No             |
+        # | `carry_deficit`            |        No         |           No           |            Yes            |
+        # | `carry_deficit_auto_repay` |        No         |          Yes           |            Yes            |
+        sig { returns(Dodopayments::CbbOverageBehavior::TaggedSymbol) }
+        attr_accessor :overage_behavior
 
         sig { returns(T::Boolean) }
         attr_accessor :overage_enabled
@@ -380,7 +380,7 @@ module Dodopayments
             credit_entitlement_name: String,
             credits_amount: String,
             overage_balance: String,
-            overage_charge_at_billing: T::Boolean,
+            overage_behavior: Dodopayments::CbbOverageBehavior::OrSymbol,
             overage_enabled: T::Boolean,
             product_id: String,
             remaining_balance: String,
@@ -402,7 +402,15 @@ module Dodopayments
           credits_amount:,
           # Customer's current overage balance for this entitlement
           overage_balance:,
-          overage_charge_at_billing:,
+          # Controls how overage is handled at the end of a billing cycle.
+          #
+          # | Preset                     | Charge at billing | Credits reduce overage | Preserve overage at reset |
+          # | -------------------------- | :---------------: | :--------------------: | :-----------------------: |
+          # | `forgive_at_reset`         |        No         |           No           |            No             |
+          # | `invoice_at_billing`       |        Yes        |           No           |            No             |
+          # | `carry_deficit`            |        No         |           No           |            Yes            |
+          # | `carry_deficit_auto_repay` |        No         |          Yes           |            Yes            |
+          overage_behavior:,
           overage_enabled:,
           product_id:,
           # Customer's current remaining credit balance for this entitlement
@@ -427,7 +435,7 @@ module Dodopayments
               credit_entitlement_name: String,
               credits_amount: String,
               overage_balance: String,
-              overage_charge_at_billing: T::Boolean,
+              overage_behavior: Dodopayments::CbbOverageBehavior::TaggedSymbol,
               overage_enabled: T::Boolean,
               product_id: String,
               remaining_balance: String,
@@ -531,11 +539,11 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :name
 
-        sig { returns(String) }
-        attr_accessor :price_per_unit
-
         sig { returns(T.nilable(String)) }
         attr_accessor :description
+
+        sig { returns(T.nilable(String)) }
+        attr_accessor :price_per_unit
 
         # Response struct representing usage-based meter cart details for a subscription
         sig do
@@ -545,8 +553,8 @@ module Dodopayments
             measurement_unit: String,
             meter_id: String,
             name: String,
-            price_per_unit: String,
-            description: T.nilable(String)
+            description: T.nilable(String),
+            price_per_unit: T.nilable(String)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -555,8 +563,8 @@ module Dodopayments
           measurement_unit:,
           meter_id:,
           name:,
-          price_per_unit:,
-          description: nil
+          description: nil,
+          price_per_unit: nil
         )
         end
 
@@ -568,43 +576,11 @@ module Dodopayments
               measurement_unit: String,
               meter_id: String,
               name: String,
-              price_per_unit: String,
-              description: T.nilable(String)
+              description: T.nilable(String),
+              price_per_unit: T.nilable(String)
             }
           )
         end
-        def to_hash
-        end
-      end
-
-      class CustomFieldResponse < Dodopayments::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Dodopayments::Subscription::CustomFieldResponse,
-              Dodopayments::Internal::AnyHash
-            )
-          end
-
-        # Key matching the custom field definition
-        sig { returns(String) }
-        attr_accessor :key
-
-        # Value provided by customer
-        sig { returns(String) }
-        attr_accessor :value
-
-        # Customer's response to a custom field
-        sig { params(key: String, value: String).returns(T.attached_class) }
-        def self.new(
-          # Key matching the custom field definition
-          key:,
-          # Value provided by customer
-          value:
-        )
-        end
-
-        sig { override.returns({ key: String, value: String }) }
         def to_hash
         end
       end

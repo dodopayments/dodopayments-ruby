@@ -112,6 +112,26 @@ module Dodopayments
         )
       end
 
+      # List all credit entitlements for a customer with their current balances
+      #
+      # @overload list_credit_entitlements(customer_id, request_options: {})
+      #
+      # @param customer_id [String] Customer ID
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Models::CustomerListCreditEntitlementsResponse]
+      #
+      # @see Dodopayments::Models::CustomerListCreditEntitlementsParams
+      def list_credit_entitlements(customer_id, params = {})
+        @client.request(
+          method: :get,
+          path: ["customers/%1$s/credit-entitlements", customer_id],
+          model: Dodopayments::Models::CustomerListCreditEntitlementsResponse,
+          options: params[:request_options]
+        )
+      end
+
       # @overload retrieve_payment_methods(customer_id, request_options: {})
       #
       # @param customer_id [String] Customer Id

@@ -13,7 +13,7 @@ module Dodopayments
         ?force_3ds: bool?,
         ?metadata: ::Hash[Symbol, String],
         ?on_demand: Dodopayments::OnDemandSubscription?,
-        ?one_time_product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?,
+        ?one_time_product_cart: ::Array[Dodopayments::SubscriptionCreateParams::OneTimeProductCart]?,
         ?payment_link: bool?,
         ?payment_method_id: String?,
         ?redirect_immediately: bool,
@@ -59,11 +59,11 @@ module Dodopayments
       def change_plan: (
         String subscription_id,
         product_id: String,
-        proration_billing_mode: Dodopayments::Models::SubscriptionChangePlanParams::proration_billing_mode,
+        proration_billing_mode: Dodopayments::Models::UpdateSubscriptionPlanReq::proration_billing_mode,
         quantity: Integer,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
         ?metadata: ::Hash[Symbol, String]?,
-        ?on_payment_failure: Dodopayments::Models::SubscriptionChangePlanParams::on_payment_failure?,
+        ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?,
         ?request_options: Dodopayments::request_opts
       ) -> nil
 
@@ -81,13 +81,18 @@ module Dodopayments
       def preview_change_plan: (
         String subscription_id,
         product_id: String,
-        proration_billing_mode: Dodopayments::Models::SubscriptionPreviewChangePlanParams::proration_billing_mode,
+        proration_billing_mode: Dodopayments::Models::UpdateSubscriptionPlanReq::proration_billing_mode,
         quantity: Integer,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
         ?metadata: ::Hash[Symbol, String]?,
-        ?on_payment_failure: Dodopayments::Models::SubscriptionPreviewChangePlanParams::on_payment_failure?,
+        ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::SubscriptionPreviewChangePlanResponse
+
+      def retrieve_credit_usage: (
+        String subscription_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::SubscriptionRetrieveCreditUsageResponse
 
       def retrieve_usage_history: (
         String subscription_id,

@@ -21,8 +21,9 @@ module Dodopayments
         ?page_number: Integer,
         ?page_size: Integer,
         ?status: Dodopayments::Models::RefundListParams::status,
+        ?subscription_id: String,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::RefundListResponse]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::RefundListItem]
 
       def initialize: (client: Dodopayments::Client) -> void
     end

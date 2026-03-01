@@ -30,7 +30,7 @@ module Dodopayments
       attr_accessor :customer
 
       # List of products in the cart. Must contain at least 1 and at most 100 items.
-      sig { returns(T::Array[Dodopayments::OneTimeProductCartItem]) }
+      sig { returns(T::Array[Dodopayments::PaymentCreateParams::ProductCart]) }
       attr_accessor :product_cart
 
       # List of payment methods allowed during checkout.
@@ -112,7 +112,8 @@ module Dodopayments
               Dodopayments::AttachExistingCustomer::OrHash,
               Dodopayments::NewCustomer::OrHash
             ),
-          product_cart: T::Array[Dodopayments::OneTimeProductCartItem::OrHash],
+          product_cart:
+            T::Array[Dodopayments::PaymentCreateParams::ProductCart::OrHash],
           allowed_payment_method_types:
             T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
@@ -185,7 +186,8 @@ module Dodopayments
                 Dodopayments::AttachExistingCustomer,
                 Dodopayments::NewCustomer
               ),
-            product_cart: T::Array[Dodopayments::OneTimeProductCartItem],
+            product_cart:
+              T::Array[Dodopayments::PaymentCreateParams::ProductCart],
             allowed_payment_method_types:
               T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
             billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
@@ -204,6 +206,57 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      class ProductCart < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::PaymentCreateParams::ProductCart,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        sig { returns(String) }
+        attr_accessor :product_id
+
+        sig { returns(Integer) }
+        attr_accessor :quantity
+
+        # Amount the customer pays if pay_what_you_want is enabled. If disabled then
+        # amount will be ignored Represented in the lowest denomination of the currency
+        # (e.g., cents for USD). For example, to charge $1.00, pass `100`.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :amount
+
+        sig do
+          params(
+            product_id: String,
+            quantity: Integer,
+            amount: T.nilable(Integer)
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          product_id:,
+          quantity:,
+          # Amount the customer pays if pay_what_you_want is enabled. If disabled then
+          # amount will be ignored Represented in the lowest denomination of the currency
+          # (e.g., cents for USD). For example, to charge $1.00, pass `100`.
+          amount: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              product_id: String,
+              quantity: Integer,
+              amount: T.nilable(Integer)
+            }
+          )
+        end
+        def to_hash
+        end
       end
     end
   end

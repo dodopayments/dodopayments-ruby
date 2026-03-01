@@ -1,0 +1,57 @@
+module Dodopayments
+  module Models
+    module CreditEntitlements
+      type customer_credit_balance =
+        {
+          id: String,
+          balance: String,
+          created_at: Time,
+          credit_entitlement_id: String,
+          customer_id: String,
+          overage: String,
+          updated_at: Time,
+          last_transaction_at: Time?
+        }
+
+      class CustomerCreditBalance < Dodopayments::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor balance: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor credit_entitlement_id: String
+
+        attr_accessor customer_id: String
+
+        attr_accessor overage: String
+
+        attr_accessor updated_at: Time
+
+        attr_accessor last_transaction_at: Time?
+
+        def initialize: (
+          id: String,
+          balance: String,
+          created_at: Time,
+          credit_entitlement_id: String,
+          customer_id: String,
+          overage: String,
+          updated_at: Time,
+          ?last_transaction_at: Time?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          balance: String,
+          created_at: Time,
+          credit_entitlement_id: String,
+          customer_id: String,
+          overage: String,
+          updated_at: Time,
+          last_transaction_at: Time?
+        }
+      end
+    end
+  end
+end

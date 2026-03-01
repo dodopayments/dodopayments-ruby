@@ -161,9 +161,9 @@ module Dodopayments
       # @!attribute custom_field_responses
       #   Customer's responses to custom fields collected during checkout
       #
-      #   @return [Array<Dodopayments::Models::Subscription::CustomFieldResponse>, nil]
+      #   @return [Array<Dodopayments::Models::CustomFieldResponse>, nil]
       optional :custom_field_responses,
-               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Subscription::CustomFieldResponse] },
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::CustomFieldResponse] },
                nil?: true
 
       # @!attribute discount_cycles_remaining
@@ -252,7 +252,7 @@ module Dodopayments
       #
       #   @param cancelled_at [Time, nil] Cancelled timestamp if the subscription is cancelled
       #
-      #   @param custom_field_responses [Array<Dodopayments::Models::Subscription::CustomFieldResponse>, nil] Customer's responses to custom fields collected during checkout
+      #   @param custom_field_responses [Array<Dodopayments::Models::CustomFieldResponse>, nil] Customer's responses to custom fields collected during checkout
       #
       #   @param discount_cycles_remaining [Integer, nil] Number of remaining discount cycles if discount is applied
       #
@@ -286,10 +286,18 @@ module Dodopayments
         #   @return [String]
         required :overage_balance, String
 
-        # @!attribute overage_charge_at_billing
+        # @!attribute overage_behavior
+        #   Controls how overage is handled at the end of a billing cycle.
         #
-        #   @return [Boolean]
-        required :overage_charge_at_billing, Dodopayments::Internal::Type::Boolean
+        #   | Preset                     | Charge at billing | Credits reduce overage | Preserve overage at reset |
+        #   | -------------------------- | :---------------: | :--------------------: | :-----------------------: |
+        #   | `forgive_at_reset`         |        No         |           No           |            No             |
+        #   | `invoice_at_billing`       |        Yes        |           No           |            No             |
+        #   | `carry_deficit`            |        No         |           No           |            Yes            |
+        #   | `carry_deficit_auto_repay` |        No         |          Yes           |            Yes            |
+        #
+        #   @return [Symbol, Dodopayments::Models::CbbOverageBehavior]
+        required :overage_behavior, enum: -> { Dodopayments::CbbOverageBehavior }
 
         # @!attribute overage_enabled
         #
@@ -353,7 +361,10 @@ module Dodopayments
         #   @return [Symbol, Dodopayments::Models::TimeInterval, nil]
         optional :rollover_timeframe_interval, enum: -> { Dodopayments::TimeInterval }, nil?: true
 
-        # @!method initialize(credit_entitlement_id:, credit_entitlement_name:, credits_amount:, overage_balance:, overage_charge_at_billing:, overage_enabled:, product_id:, remaining_balance:, rollover_enabled:, unit:, expires_after_days: nil, low_balance_threshold_percent: nil, max_rollover_count: nil, overage_limit: nil, rollover_percentage: nil, rollover_timeframe_count: nil, rollover_timeframe_interval: nil)
+        # @!method initialize(credit_entitlement_id:, credit_entitlement_name:, credits_amount:, overage_balance:, overage_behavior:, overage_enabled:, product_id:, remaining_balance:, rollover_enabled:, unit:, expires_after_days: nil, low_balance_threshold_percent: nil, max_rollover_count: nil, overage_limit: nil, rollover_percentage: nil, rollover_timeframe_count: nil, rollover_timeframe_interval: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::Subscription::CreditEntitlementCart} for more details.
+        #
         #   Response struct representing credit entitlement cart details for a subscription
         #
         #   @param credit_entitlement_id [String]
@@ -364,7 +375,7 @@ module Dodopayments
         #
         #   @param overage_balance [String] Customer's current overage balance for this entitlement
         #
-        #   @param overage_charge_at_billing [Boolean]
+        #   @param overage_behavior [Symbol, Dodopayments::Models::CbbOverageBehavior] Controls how overage is handled at the end of a billing cycle.
         #
         #   @param overage_enabled [Boolean]
         #
@@ -454,17 +465,17 @@ module Dodopayments
         #   @return [String]
         required :name, String
 
-        # @!attribute price_per_unit
-        #
-        #   @return [String]
-        required :price_per_unit, String
-
         # @!attribute description
         #
         #   @return [String, nil]
         optional :description, String, nil?: true
 
-        # @!method initialize(currency:, free_threshold:, measurement_unit:, meter_id:, name:, price_per_unit:, description: nil)
+        # @!attribute price_per_unit
+        #
+        #   @return [String, nil]
+        optional :price_per_unit, String, nil?: true
+
+        # @!method initialize(currency:, free_threshold:, measurement_unit:, meter_id:, name:, description: nil, price_per_unit: nil)
         #   Response struct representing usage-based meter cart details for a subscription
         #
         #   @param currency [Symbol, Dodopayments::Models::Currency]
@@ -472,29 +483,8 @@ module Dodopayments
         #   @param measurement_unit [String]
         #   @param meter_id [String]
         #   @param name [String]
-        #   @param price_per_unit [String]
         #   @param description [String, nil]
-      end
-
-      class CustomFieldResponse < Dodopayments::Internal::Type::BaseModel
-        # @!attribute key
-        #   Key matching the custom field definition
-        #
-        #   @return [String]
-        required :key, String
-
-        # @!attribute value
-        #   Value provided by customer
-        #
-        #   @return [String]
-        required :value, String
-
-        # @!method initialize(key:, value:)
-        #   Customer's response to a custom field
-        #
-        #   @param key [String] Key matching the custom field definition
-        #
-        #   @param value [String] Value provided by customer
+        #   @param price_per_unit [String, nil]
       end
     end
   end

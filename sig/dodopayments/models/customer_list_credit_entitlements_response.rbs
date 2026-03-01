@@ -1,0 +1,62 @@
+module Dodopayments
+  module Models
+    type customer_list_credit_entitlements_response =
+      {
+        items: ::Array[Dodopayments::Models::CustomerListCreditEntitlementsResponse::Item]
+      }
+
+    class CustomerListCreditEntitlementsResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor items: ::Array[Dodopayments::Models::CustomerListCreditEntitlementsResponse::Item]
+
+      def initialize: (
+        items: ::Array[Dodopayments::Models::CustomerListCreditEntitlementsResponse::Item]
+      ) -> void
+
+      def to_hash: -> {
+        items: ::Array[Dodopayments::Models::CustomerListCreditEntitlementsResponse::Item]
+      }
+
+      type item =
+        {
+          balance: String,
+          credit_entitlement_id: String,
+          name: String,
+          overage: String,
+          unit: String,
+          description: String?
+        }
+
+      class Item < Dodopayments::Internal::Type::BaseModel
+        attr_accessor balance: String
+
+        attr_accessor credit_entitlement_id: String
+
+        attr_accessor name: String
+
+        attr_accessor overage: String
+
+        attr_accessor unit: String
+
+        attr_accessor description: String?
+
+        def initialize: (
+          balance: String,
+          credit_entitlement_id: String,
+          name: String,
+          overage: String,
+          unit: String,
+          ?description: String?
+        ) -> void
+
+        def to_hash: -> {
+          balance: String,
+          credit_entitlement_id: String,
+          name: String,
+          overage: String,
+          unit: String,
+          description: String?
+        }
+      end
+    end
+  end
+end

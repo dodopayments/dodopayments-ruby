@@ -1,0 +1,69 @@
+module Dodopayments
+  module Resources
+    class CreditEntitlements
+      attr_reader balances: Dodopayments::Resources::CreditEntitlements::Balances
+
+      def create: (
+        name: String,
+        overage_enabled: bool,
+        precision: Integer,
+        rollover_enabled: bool,
+        unit: String,
+        ?currency: Dodopayments::Models::currency?,
+        ?description: String?,
+        ?expires_after_days: Integer?,
+        ?max_rollover_count: Integer?,
+        ?overage_behavior: Dodopayments::Models::cbb_overage_behavior?,
+        ?overage_limit: Integer?,
+        ?price_per_unit: String?,
+        ?rollover_percentage: Integer?,
+        ?rollover_timeframe_count: Integer?,
+        ?rollover_timeframe_interval: Dodopayments::Models::time_interval?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::CreditEntitlement
+
+      def retrieve: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::CreditEntitlement
+
+      def update: (
+        String id,
+        ?currency: Dodopayments::Models::currency?,
+        ?description: String?,
+        ?expires_after_days: Integer?,
+        ?max_rollover_count: Integer?,
+        ?name: String?,
+        ?overage_behavior: Dodopayments::Models::cbb_overage_behavior?,
+        ?overage_enabled: bool?,
+        ?overage_limit: Integer?,
+        ?price_per_unit: String?,
+        ?rollover_enabled: bool?,
+        ?rollover_percentage: Integer?,
+        ?rollover_timeframe_count: Integer?,
+        ?rollover_timeframe_interval: Dodopayments::Models::time_interval?,
+        ?unit: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
+
+      def list: (
+        ?deleted: bool,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::CreditEntitlement]
+
+      def delete: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
+
+      def undelete: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

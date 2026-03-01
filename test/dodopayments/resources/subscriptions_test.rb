@@ -27,7 +27,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         client_secret: String | nil,
         discount_id: String | nil,
         expires_on: Time | nil,
-        one_time_product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart]) | nil,
+        one_time_product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem]) | nil,
         payment_link: String | nil
       }
     end
@@ -67,7 +67,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         tax_inclusive: Dodopayments::Internal::Type::Boolean,
         trial_period_days: Integer,
         cancelled_at: Time | nil,
-        custom_field_responses: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Subscription::CustomFieldResponse]) | nil,
+        custom_field_responses: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::CustomFieldResponse]) | nil,
         discount_cycles_remaining: Integer | nil,
         discount_id: String | nil,
         expires_at: Time | nil,
@@ -111,7 +111,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         tax_inclusive: Dodopayments::Internal::Type::Boolean,
         trial_period_days: Integer,
         cancelled_at: Time | nil,
-        custom_field_responses: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Subscription::CustomFieldResponse]) | nil,
+        custom_field_responses: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::CustomFieldResponse]) | nil,
         discount_cycles_remaining: Integer | nil,
         discount_id: String | nil,
         expires_at: Time | nil,
@@ -212,6 +212,21 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
       response => {
         immediate_charge: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge,
         new_plan: Dodopayments::Subscription
+      }
+    end
+  end
+
+  def test_retrieve_credit_usage
+    response = @dodo_payments.subscriptions.retrieve_credit_usage("subscription_id")
+
+    assert_pattern do
+      response => Dodopayments::Models::SubscriptionRetrieveCreditUsageResponse
+    end
+
+    assert_pattern do
+      response => {
+        items: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::SubscriptionRetrieveCreditUsageResponse::Item]),
+        subscription_id: String
       }
     end
   end

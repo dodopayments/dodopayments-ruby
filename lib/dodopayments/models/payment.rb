@@ -67,8 +67,8 @@ module Dodopayments
       # @!attribute refunds
       #   List of refunds issued for this payment
       #
-      #   @return [Array<Dodopayments::Models::Payment::Refund>]
-      required :refunds, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Payment::Refund] }
+      #   @return [Array<Dodopayments::Models::RefundListItem>]
+      required :refunds, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::RefundListItem] }
 
       # @!attribute settlement_amount
       #   The amount that will be credited to your Dodo balance after currency conversion
@@ -133,9 +133,9 @@ module Dodopayments
       # @!attribute custom_field_responses
       #   Customer's responses to custom fields collected during checkout
       #
-      #   @return [Array<Dodopayments::Models::Payment::CustomFieldResponse>, nil]
+      #   @return [Array<Dodopayments::Models::CustomFieldResponse>, nil]
       optional :custom_field_responses,
-               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Payment::CustomFieldResponse] },
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::CustomFieldResponse] },
                nil?: true
 
       # @!attribute discount_id
@@ -189,17 +189,17 @@ module Dodopayments
       # @!attribute product_cart
       #   List of products purchased in a one-time payment
       #
-      #   @return [Array<Dodopayments::Models::Payment::ProductCart>, nil]
+      #   @return [Array<Dodopayments::Models::OneTimeProductCartItem>, nil]
       optional :product_cart,
-               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Payment::ProductCart] },
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem] },
                nil?: true
 
       # @!attribute refund_status
       #   Summary of the refund status for this payment. None if no succeeded refunds
       #   exist.
       #
-      #   @return [Symbol, Dodopayments::Models::Payment::RefundStatus, nil]
-      optional :refund_status, enum: -> { Dodopayments::Payment::RefundStatus }, nil?: true
+      #   @return [Symbol, Dodopayments::Models::PaymentRefundStatus, nil]
+      optional :refund_status, enum: -> { Dodopayments::PaymentRefundStatus }, nil?: true
 
       # @!attribute settlement_tax
       #   This represents the portion of settlement_amount that corresponds to taxes
@@ -257,7 +257,7 @@ module Dodopayments
       #
       #   @param payment_id [String] Unique identifier for the payment
       #
-      #   @param refunds [Array<Dodopayments::Models::Payment::Refund>] List of refunds issued for this payment
+      #   @param refunds [Array<Dodopayments::Models::RefundListItem>] List of refunds issued for this payment
       #
       #   @param settlement_amount [Integer] The amount that will be credited to your Dodo balance after currency conversion
       #
@@ -277,7 +277,7 @@ module Dodopayments
       #
       #   @param checkout_session_id [String, nil] If payment is made using a checkout session,
       #
-      #   @param custom_field_responses [Array<Dodopayments::Models::Payment::CustomFieldResponse>, nil] Customer's responses to custom fields collected during checkout
+      #   @param custom_field_responses [Array<Dodopayments::Models::CustomFieldResponse>, nil] Customer's responses to custom fields collected during checkout
       #
       #   @param discount_id [String, nil] The discount id if discount is applied
       #
@@ -295,9 +295,9 @@ module Dodopayments
       #
       #   @param payment_method_type [String, nil] Specific type of payment method (e.g. "visa", "mastercard")
       #
-      #   @param product_cart [Array<Dodopayments::Models::Payment::ProductCart>, nil] List of products purchased in a one-time payment
+      #   @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil] List of products purchased in a one-time payment
       #
-      #   @param refund_status [Symbol, Dodopayments::Models::Payment::RefundStatus, nil] Summary of the refund status for this payment. None if no succeeded refunds exis
+      #   @param refund_status [Symbol, Dodopayments::Models::PaymentRefundStatus, nil] Summary of the refund status for this payment. None if no succeeded refunds exis
       #
       #   @param settlement_tax [Integer, nil] This represents the portion of settlement_amount that corresponds to taxes colle
       #
@@ -308,132 +308,6 @@ module Dodopayments
       #   @param tax [Integer, nil] Amount of tax collected in smallest currency unit (e.g. cents)
       #
       #   @param updated_at [Time, nil] Timestamp when the payment was last updated
-
-      class Refund < Dodopayments::Internal::Type::BaseModel
-        # @!attribute business_id
-        #   The unique identifier of the business issuing the refund.
-        #
-        #   @return [String]
-        required :business_id, String
-
-        # @!attribute created_at
-        #   The timestamp of when the refund was created in UTC.
-        #
-        #   @return [Time]
-        required :created_at, Time
-
-        # @!attribute is_partial
-        #   If true the refund is a partial refund
-        #
-        #   @return [Boolean]
-        required :is_partial, Dodopayments::Internal::Type::Boolean
-
-        # @!attribute payment_id
-        #   The unique identifier of the payment associated with the refund.
-        #
-        #   @return [String]
-        required :payment_id, String
-
-        # @!attribute refund_id
-        #   The unique identifier of the refund.
-        #
-        #   @return [String]
-        required :refund_id, String
-
-        # @!attribute status
-        #   The current status of the refund.
-        #
-        #   @return [Symbol, Dodopayments::Models::RefundStatus]
-        required :status, enum: -> { Dodopayments::RefundStatus }
-
-        # @!attribute amount
-        #   The refunded amount.
-        #
-        #   @return [Integer, nil]
-        optional :amount, Integer, nil?: true
-
-        # @!attribute currency
-        #   The currency of the refund, represented as an ISO 4217 currency code.
-        #
-        #   @return [Symbol, Dodopayments::Models::Currency, nil]
-        optional :currency, enum: -> { Dodopayments::Currency }, nil?: true
-
-        # @!attribute reason
-        #   The reason provided for the refund, if any. Optional.
-        #
-        #   @return [String, nil]
-        optional :reason, String, nil?: true
-
-        # @!method initialize(business_id:, created_at:, is_partial:, payment_id:, refund_id:, status:, amount: nil, currency: nil, reason: nil)
-        #   @param business_id [String] The unique identifier of the business issuing the refund.
-        #
-        #   @param created_at [Time] The timestamp of when the refund was created in UTC.
-        #
-        #   @param is_partial [Boolean] If true the refund is a partial refund
-        #
-        #   @param payment_id [String] The unique identifier of the payment associated with the refund.
-        #
-        #   @param refund_id [String] The unique identifier of the refund.
-        #
-        #   @param status [Symbol, Dodopayments::Models::RefundStatus] The current status of the refund.
-        #
-        #   @param amount [Integer, nil] The refunded amount.
-        #
-        #   @param currency [Symbol, Dodopayments::Models::Currency, nil] The currency of the refund, represented as an ISO 4217 currency code.
-        #
-        #   @param reason [String, nil] The reason provided for the refund, if any. Optional.
-      end
-
-      class CustomFieldResponse < Dodopayments::Internal::Type::BaseModel
-        # @!attribute key
-        #   Key matching the custom field definition
-        #
-        #   @return [String]
-        required :key, String
-
-        # @!attribute value
-        #   Value provided by customer
-        #
-        #   @return [String]
-        required :value, String
-
-        # @!method initialize(key:, value:)
-        #   Customer's response to a custom field
-        #
-        #   @param key [String] Key matching the custom field definition
-        #
-        #   @param value [String] Value provided by customer
-      end
-
-      class ProductCart < Dodopayments::Internal::Type::BaseModel
-        # @!attribute product_id
-        #
-        #   @return [String]
-        required :product_id, String
-
-        # @!attribute quantity
-        #
-        #   @return [Integer]
-        required :quantity, Integer
-
-        # @!method initialize(product_id:, quantity:)
-        #   @param product_id [String]
-        #   @param quantity [Integer]
-      end
-
-      # Summary of the refund status for this payment. None if no succeeded refunds
-      # exist.
-      #
-      # @see Dodopayments::Models::Payment#refund_status
-      module RefundStatus
-        extend Dodopayments::Internal::Type::Enum
-
-        PARTIAL = :partial
-        FULL = :full
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
     end
   end
 end

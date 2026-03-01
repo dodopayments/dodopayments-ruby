@@ -32,7 +32,7 @@ module Dodopayments
       #
       # @param on_demand [Dodopayments::Models::OnDemandSubscription, nil]
       #
-      # @param one_time_product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil] List of one time products that will be bundled with the first payment for this s
+      # @param one_time_product_cart [Array<Dodopayments::Models::SubscriptionCreateParams::OneTimeProductCart>, nil] List of one time products that will be bundled with the first payment for this s
       #
       # @param payment_link [Boolean, nil] If true, generates a payment link.
       #
@@ -166,7 +166,7 @@ module Dodopayments
       #
       # @param product_id [String] Unique identifier of the product to subscribe to
       #
-      # @param proration_billing_mode [Symbol, Dodopayments::Models::SubscriptionChangePlanParams::ProrationBillingMode] Proration Billing Mode
+      # @param proration_billing_mode [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::ProrationBillingMode] Proration Billing Mode
       #
       # @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
@@ -174,7 +174,7 @@ module Dodopayments
       #
       # @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
-      # @param on_payment_failure [Symbol, Dodopayments::Models::SubscriptionChangePlanParams::OnPaymentFailure, nil] Controls behavior when the plan change payment fails.
+      # @param on_payment_failure [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::OnPaymentFailure, nil] Controls behavior when the plan change payment fails.
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -236,7 +236,7 @@ module Dodopayments
       #
       # @param product_id [String] Unique identifier of the product to subscribe to
       #
-      # @param proration_billing_mode [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanParams::ProrationBillingMode] Proration Billing Mode
+      # @param proration_billing_mode [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::ProrationBillingMode] Proration Billing Mode
       #
       # @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
@@ -244,7 +244,7 @@ module Dodopayments
       #
       # @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
-      # @param on_payment_failure [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanParams::OnPaymentFailure, nil] Controls behavior when the plan change payment fails.
+      # @param on_payment_failure [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::OnPaymentFailure, nil] Controls behavior when the plan change payment fails.
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -259,6 +259,24 @@ module Dodopayments
           body: parsed,
           model: Dodopayments::Models::SubscriptionPreviewChangePlanResponse,
           options: options
+        )
+      end
+
+      # @overload retrieve_credit_usage(subscription_id, request_options: {})
+      #
+      # @param subscription_id [String] Subscription ID
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Models::SubscriptionRetrieveCreditUsageResponse]
+      #
+      # @see Dodopayments::Models::SubscriptionRetrieveCreditUsageParams
+      def retrieve_credit_usage(subscription_id, params = {})
+        @client.request(
+          method: :get,
+          path: ["subscriptions/%1$s/credit-usage", subscription_id],
+          model: Dodopayments::Models::SubscriptionRetrieveCreditUsageResponse,
+          options: params[:request_options]
         )
       end
 

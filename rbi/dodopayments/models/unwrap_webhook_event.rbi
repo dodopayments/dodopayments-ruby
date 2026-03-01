@@ -8,6 +8,14 @@ module Dodopayments
       Variants =
         T.type_alias do
           T.any(
+            Dodopayments::CreditAddedWebhookEvent,
+            Dodopayments::CreditBalanceLowWebhookEvent,
+            Dodopayments::CreditDeductedWebhookEvent,
+            Dodopayments::CreditExpiredWebhookEvent,
+            Dodopayments::CreditManualAdjustmentWebhookEvent,
+            Dodopayments::CreditOverageChargedWebhookEvent,
+            Dodopayments::CreditRolledOverWebhookEvent,
+            Dodopayments::CreditRolloverForfeitedWebhookEvent,
             Dodopayments::DisputeAcceptedWebhookEvent,
             Dodopayments::DisputeCancelledWebhookEvent,
             Dodopayments::DisputeChallengedWebhookEvent,

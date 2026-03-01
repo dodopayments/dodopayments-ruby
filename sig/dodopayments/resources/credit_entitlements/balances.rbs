@@ -1,0 +1,55 @@
+module Dodopayments
+  module Resources
+    class CreditEntitlements
+      class Balances
+        def retrieve: (
+          String customer_id,
+          credit_entitlement_id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::CreditEntitlements::CustomerCreditBalance
+
+        def list: (
+          String credit_entitlement_id,
+          ?customer_id: String,
+          ?page_number: Integer,
+          ?page_size: Integer,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::CreditEntitlements::CustomerCreditBalance]
+
+        def create_ledger_entry: (
+          String customer_id,
+          credit_entitlement_id: String,
+          amount: String,
+          entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type,
+          ?expires_at: Time?,
+          ?idempotency_key: String?,
+          ?metadata: ::Hash[Symbol, String]?,
+          ?reason: String?,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::CreditEntitlements::BalanceCreateLedgerEntryResponse
+
+        def list_grants: (
+          String customer_id,
+          credit_entitlement_id: String,
+          ?page_number: Integer,
+          ?page_size: Integer,
+          ?status: Dodopayments::Models::CreditEntitlements::BalanceListGrantsParams::status,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::CreditEntitlements::BalanceListGrantsResponse]
+
+        def list_ledger: (
+          String customer_id,
+          credit_entitlement_id: String,
+          ?end_date: Time,
+          ?page_number: Integer,
+          ?page_size: Integer,
+          ?start_date: Time,
+          ?transaction_type: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::CreditEntitlements::CreditLedgerEntry]
+
+        def initialize: (client: Dodopayments::Client) -> void
+      end
+    end
+  end
+end

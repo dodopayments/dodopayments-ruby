@@ -8,13 +8,6 @@ module Dodopayments
       #   @return [String]
       required :meter_id, String
 
-      # @!attribute price_per_unit
-      #   The price per unit in lowest denomination. Must be greater than zero. Supports
-      #   up to 5 digits before decimal point and 12 decimal places.
-      #
-      #   @return [String]
-      required :price_per_unit, String
-
       # @!attribute credit_entitlement_id
       #   Optional credit entitlement ID to link this meter to for credit-based billing
       #
@@ -51,13 +44,18 @@ module Dodopayments
       #   @return [String, nil]
       optional :name, String, nil?: true
 
-      # @!method initialize(meter_id:, price_per_unit:, credit_entitlement_id: nil, description: nil, free_threshold: nil, measurement_unit: nil, meter_units_per_credit: nil, name: nil)
+      # @!attribute price_per_unit
+      #   The price per unit in lowest denomination. Must be greater than zero. Supports
+      #   up to 5 digits before decimal point and 12 decimal places.
+      #
+      #   @return [String, nil]
+      optional :price_per_unit, String, nil?: true
+
+      # @!method initialize(meter_id:, credit_entitlement_id: nil, description: nil, free_threshold: nil, measurement_unit: nil, meter_units_per_credit: nil, name: nil, price_per_unit: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::AddMeterToPrice} for more details.
       #
       #   @param meter_id [String]
-      #
-      #   @param price_per_unit [String] The price per unit in lowest denomination. Must be greater than zero. Supports u
       #
       #   @param credit_entitlement_id [String, nil] Optional credit entitlement ID to link this meter to for credit-based billing
       #
@@ -70,6 +68,8 @@ module Dodopayments
       #   @param meter_units_per_credit [String, nil] Number of meter units that equal one credit. Required when credit_entitlement_id
       #
       #   @param name [String, nil] Meter name. Will ignored on Request, but will be shown in response
+      #
+      #   @param price_per_unit [String, nil] The price per unit in lowest denomination. Must be greater than zero. Supports u
     end
   end
 end

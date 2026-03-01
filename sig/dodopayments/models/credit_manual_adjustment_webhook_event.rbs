@@ -1,0 +1,45 @@
+module Dodopayments
+  module Models
+    type credit_manual_adjustment_webhook_event =
+      {
+        business_id: String,
+        data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditManualAdjustmentWebhookEvent::type_
+      }
+
+    class CreditManualAdjustmentWebhookEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::CreditEntitlements::CreditLedgerEntry
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: Dodopayments::Models::CreditManualAdjustmentWebhookEvent::type_
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditManualAdjustmentWebhookEvent::type_
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditManualAdjustmentWebhookEvent::type_
+      }
+
+      type type_ = :"credit.manual_adjustment"
+
+      module Type
+        extend Dodopayments::Internal::Type::Enum
+
+        CREDIT_MANUAL_ADJUSTMENT: :"credit.manual_adjustment"
+
+        def self?.values: -> ::Array[Dodopayments::Models::CreditManualAdjustmentWebhookEvent::type_]
+      end
+    end
+  end
+end
