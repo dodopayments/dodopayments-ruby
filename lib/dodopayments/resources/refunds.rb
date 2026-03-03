@@ -70,10 +70,11 @@ module Dodopayments
       # @see Dodopayments::Models::RefundListParams
       def list(params = {})
         parsed, options = Dodopayments::RefundListParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "refunds",
-          query: parsed,
+          query: query,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::RefundListItem,
           options: options

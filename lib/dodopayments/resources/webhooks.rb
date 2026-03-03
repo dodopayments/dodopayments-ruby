@@ -116,10 +116,11 @@ module Dodopayments
       # @see Dodopayments::Models::WebhookListParams
       def list(params = {})
         parsed, options = Dodopayments::WebhookListParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "webhooks",
-          query: parsed,
+          query: query,
           page: Dodopayments::Internal::CursorPagePagination,
           model: Dodopayments::WebhookDetails,
           options: options
