@@ -44,10 +44,11 @@ module Dodopayments
       # @see Dodopayments::Models::DisputeListParams
       def list(params = {})
         parsed, options = Dodopayments::DisputeListParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "disputes",
-          query: parsed,
+          query: query,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Models::DisputeListResponse,
           options: options

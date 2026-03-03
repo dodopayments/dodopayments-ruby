@@ -147,10 +147,11 @@ module Dodopayments
       # @see Dodopayments::Models::SubscriptionListParams
       def list(params = {})
         parsed, options = Dodopayments::SubscriptionListParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "subscriptions",
-          query: parsed,
+          query: query,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Models::SubscriptionListResponse,
           options: options
@@ -344,10 +345,11 @@ module Dodopayments
       # @see Dodopayments::Models::SubscriptionRetrieveUsageHistoryParams
       def retrieve_usage_history(subscription_id, params = {})
         parsed, options = Dodopayments::SubscriptionRetrieveUsageHistoryParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["subscriptions/%1$s/usage-history", subscription_id],
-          query: parsed,
+          query: query,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Models::SubscriptionRetrieveUsageHistoryResponse,
           options: options

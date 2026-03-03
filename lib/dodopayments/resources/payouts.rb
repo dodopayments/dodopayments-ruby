@@ -20,10 +20,11 @@ module Dodopayments
       # @see Dodopayments::Models::PayoutListParams
       def list(params = {})
         parsed, options = Dodopayments::PayoutListParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "payouts",
-          query: parsed,
+          query: query,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Models::PayoutListResponse,
           options: options

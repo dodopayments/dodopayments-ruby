@@ -101,10 +101,11 @@ module Dodopayments
       # @see Dodopayments::Models::PaymentListParams
       def list(params = {})
         parsed, options = Dodopayments::PaymentListParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "payments",
-          query: parsed,
+          query: query,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Models::PaymentListResponse,
           options: options

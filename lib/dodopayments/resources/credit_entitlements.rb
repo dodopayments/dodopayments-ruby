@@ -291,10 +291,11 @@ module Dodopayments
       # @see Dodopayments::Models::CreditEntitlementListParams
       def list(params = {})
         parsed, options = Dodopayments::CreditEntitlementListParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "credit-entitlements",
-          query: parsed,
+          query: query,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::CreditEntitlement,
           options: options

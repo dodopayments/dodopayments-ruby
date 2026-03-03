@@ -66,10 +66,11 @@ module Dodopayments
       # @see Dodopayments::Models::MeterListParams
       def list(params = {})
         parsed, options = Dodopayments::MeterListParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "meters",
-          query: parsed,
+          query: query,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Meter,
           options: options
