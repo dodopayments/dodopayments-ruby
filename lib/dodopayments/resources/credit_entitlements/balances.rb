@@ -87,10 +87,11 @@ module Dodopayments
         # @see Dodopayments::Models::CreditEntitlements::BalanceListParams
         def list(credit_entitlement_id, params = {})
           parsed, options = Dodopayments::CreditEntitlements::BalanceListParams.dump_request(params)
+          query = Dodopayments::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: ["credit-entitlements/%1$s/balances", credit_entitlement_id],
-            query: parsed,
+            query: query,
             page: Dodopayments::Internal::DefaultPageNumberPagination,
             model: Dodopayments::CreditEntitlements::CustomerCreditBalance,
             options: options
@@ -213,6 +214,7 @@ module Dodopayments
         # @see Dodopayments::Models::CreditEntitlements::BalanceListGrantsParams
         def list_grants(customer_id, params)
           parsed, options = Dodopayments::CreditEntitlements::BalanceListGrantsParams.dump_request(params)
+          query = Dodopayments::Internal::Util.encode_query_params(parsed)
           credit_entitlement_id =
             parsed.delete(:credit_entitlement_id) do
               raise ArgumentError.new("missing required path argument #{_1}")
@@ -220,7 +222,7 @@ module Dodopayments
           @client.request(
             method: :get,
             path: ["credit-entitlements/%1$s/balances/%2$s/grants", credit_entitlement_id, customer_id],
-            query: parsed,
+            query: query,
             page: Dodopayments::Internal::DefaultPageNumberPagination,
             model: Dodopayments::Models::CreditEntitlements::BalanceListGrantsResponse,
             options: options
@@ -279,6 +281,7 @@ module Dodopayments
         # @see Dodopayments::Models::CreditEntitlements::BalanceListLedgerParams
         def list_ledger(customer_id, params)
           parsed, options = Dodopayments::CreditEntitlements::BalanceListLedgerParams.dump_request(params)
+          query = Dodopayments::Internal::Util.encode_query_params(parsed)
           credit_entitlement_id =
             parsed.delete(:credit_entitlement_id) do
               raise ArgumentError.new("missing required path argument #{_1}")
@@ -286,7 +289,7 @@ module Dodopayments
           @client.request(
             method: :get,
             path: ["credit-entitlements/%1$s/balances/%2$s/ledger", credit_entitlement_id, customer_id],
-            query: parsed,
+            query: query,
             page: Dodopayments::Internal::DefaultPageNumberPagination,
             model: Dodopayments::CreditEntitlements::CreditLedgerEntry,
             options: options

@@ -52,10 +52,11 @@ module Dodopayments
           # @see Dodopayments::Models::Customers::Wallets::LedgerEntryListParams
           def list(customer_id, params = {})
             parsed, options = Dodopayments::Customers::Wallets::LedgerEntryListParams.dump_request(params)
+            query = Dodopayments::Internal::Util.encode_query_params(parsed)
             @client.request(
               method: :get,
               path: ["customers/%1$s/wallets/ledger-entries", customer_id],
-              query: parsed,
+              query: query,
               page: Dodopayments::Internal::DefaultPageNumberPagination,
               model: Dodopayments::Customers::Wallets::CustomerWalletTransaction,
               options: options

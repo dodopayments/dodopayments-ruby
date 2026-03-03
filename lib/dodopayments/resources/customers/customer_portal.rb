@@ -17,10 +17,11 @@ module Dodopayments
         # @see Dodopayments::Models::Customers::CustomerPortalCreateParams
         def create(customer_id, params = {})
           parsed, options = Dodopayments::Customers::CustomerPortalCreateParams.dump_request(params)
+          query = Dodopayments::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :post,
             path: ["customers/%1$s/customer-portal/session", customer_id],
-            query: parsed,
+            query: query,
             model: Dodopayments::CustomerPortalSession,
             options: options
           )

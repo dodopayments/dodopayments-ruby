@@ -73,10 +73,11 @@ module Dodopayments
       # @see Dodopayments::Models::LicenseKeyListParams
       def list(params = {})
         parsed, options = Dodopayments::LicenseKeyListParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "license_keys",
-          query: parsed,
+          query: query,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::LicenseKey,
           options: options

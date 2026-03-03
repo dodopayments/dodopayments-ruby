@@ -31,10 +31,11 @@ module Dodopayments
       # @see Dodopayments::Models::BalanceRetrieveLedgerParams
       def retrieve_ledger(params = {})
         parsed, options = Dodopayments::BalanceRetrieveLedgerParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "balances/ledger",
-          query: parsed,
+          query: query,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::BalanceLedgerEntry,
           options: options

@@ -113,10 +113,11 @@ module Dodopayments
       # @see Dodopayments::Models::UsageEventListParams
       def list(params = {})
         parsed, options = Dodopayments::UsageEventListParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "events",
-          query: parsed.transform_keys(end_: "end"),
+          query: query.transform_keys(end_: "end"),
           page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::Event,
           options: options
