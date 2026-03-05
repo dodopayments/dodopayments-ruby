@@ -43,6 +43,14 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :name
 
+      # Whether this discount should be preserved when a subscription changes plans.
+      # Default: false (discount is removed on plan change)
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :preserve_on_plan_change
+
+      sig { params(preserve_on_plan_change: T::Boolean).void }
+      attr_writer :preserve_on_plan_change
+
       # List of product IDs to restrict usage (if any).
       sig { returns(T.nilable(T::Array[String])) }
       attr_accessor :restricted_to
@@ -64,6 +72,7 @@ module Dodopayments
           code: T.nilable(String),
           expires_at: T.nilable(Time),
           name: T.nilable(String),
+          preserve_on_plan_change: T::Boolean,
           restricted_to: T.nilable(T::Array[String]),
           subscription_cycles: T.nilable(Integer),
           usage_limit: T.nilable(Integer),
@@ -90,6 +99,9 @@ module Dodopayments
         # When the discount expires, if ever.
         expires_at: nil,
         name: nil,
+        # Whether this discount should be preserved when a subscription changes plans.
+        # Default: false (discount is removed on plan change)
+        preserve_on_plan_change: nil,
         # List of product IDs to restrict usage (if any).
         restricted_to: nil,
         # Number of subscription billing cycles this discount is valid for. If not
@@ -110,6 +122,7 @@ module Dodopayments
             code: T.nilable(String),
             expires_at: T.nilable(Time),
             name: T.nilable(String),
+            preserve_on_plan_change: T::Boolean,
             restricted_to: T.nilable(T::Array[String]),
             subscription_cycles: T.nilable(Integer),
             usage_limit: T.nilable(Integer),

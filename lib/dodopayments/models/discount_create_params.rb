@@ -46,6 +46,13 @@ module Dodopayments
       #   @return [String, nil]
       optional :name, String, nil?: true
 
+      # @!attribute preserve_on_plan_change
+      #   Whether this discount should be preserved when a subscription changes plans.
+      #   Default: false (discount is removed on plan change)
+      #
+      #   @return [Boolean, nil]
+      optional :preserve_on_plan_change, Dodopayments::Internal::Type::Boolean
+
       # @!attribute restricted_to
       #   List of product IDs to restrict usage (if any).
       #
@@ -66,7 +73,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :usage_limit, Integer, nil?: true
 
-      # @!method initialize(amount:, type:, code: nil, expires_at: nil, name: nil, restricted_to: nil, subscription_cycles: nil, usage_limit: nil, request_options: {})
+      # @!method initialize(amount:, type:, code: nil, expires_at: nil, name: nil, preserve_on_plan_change: nil, restricted_to: nil, subscription_cycles: nil, usage_limit: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::DiscountCreateParams} for more details.
       #
@@ -79,6 +86,8 @@ module Dodopayments
       #   @param expires_at [Time, nil] When the discount expires, if ever.
       #
       #   @param name [String, nil]
+      #
+      #   @param preserve_on_plan_change [Boolean] Whether this discount should be preserved when a subscription changes plans.
       #
       #   @param restricted_to [Array<String>, nil] List of product IDs to restrict usage (if any).
       #

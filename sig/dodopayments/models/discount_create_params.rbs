@@ -7,6 +7,7 @@ module Dodopayments
         code: String?,
         expires_at: Time?,
         name: String?,
+        preserve_on_plan_change: bool,
         restricted_to: ::Array[String]?,
         subscription_cycles: Integer?,
         usage_limit: Integer?
@@ -27,6 +28,10 @@ module Dodopayments
 
       attr_accessor name: String?
 
+      attr_reader preserve_on_plan_change: bool?
+
+      def preserve_on_plan_change=: (bool) -> bool
+
       attr_accessor restricted_to: ::Array[String]?
 
       attr_accessor subscription_cycles: Integer?
@@ -39,6 +44,7 @@ module Dodopayments
         ?code: String?,
         ?expires_at: Time?,
         ?name: String?,
+        ?preserve_on_plan_change: bool,
         ?restricted_to: ::Array[String]?,
         ?subscription_cycles: Integer?,
         ?usage_limit: Integer?,
@@ -51,6 +57,7 @@ module Dodopayments
         code: String?,
         expires_at: Time?,
         name: String?,
+        preserve_on_plan_change: bool,
         restricted_to: ::Array[String]?,
         subscription_cycles: Integer?,
         usage_limit: Integer?,

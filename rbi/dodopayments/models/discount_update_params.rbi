@@ -34,6 +34,11 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :name
 
+      # Whether this discount should be preserved when a subscription changes plans. If
+      # not provided, the existing value is kept.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_accessor :preserve_on_plan_change
+
       # If present, replaces all restricted product IDs with this new set. To remove all
       # restrictions, send empty array
       sig { returns(T.nilable(T::Array[String])) }
@@ -58,6 +63,7 @@ module Dodopayments
           code: T.nilable(String),
           expires_at: T.nilable(Time),
           name: T.nilable(String),
+          preserve_on_plan_change: T.nilable(T::Boolean),
           restricted_to: T.nilable(T::Array[String]),
           subscription_cycles: T.nilable(Integer),
           type: T.nilable(Dodopayments::DiscountType::OrSymbol),
@@ -78,6 +84,9 @@ module Dodopayments
         code: nil,
         expires_at: nil,
         name: nil,
+        # Whether this discount should be preserved when a subscription changes plans. If
+        # not provided, the existing value is kept.
+        preserve_on_plan_change: nil,
         # If present, replaces all restricted product IDs with this new set. To remove all
         # restrictions, send empty array
         restricted_to: nil,
@@ -99,6 +108,7 @@ module Dodopayments
             code: T.nilable(String),
             expires_at: T.nilable(Time),
             name: T.nilable(String),
+            preserve_on_plan_change: T.nilable(T::Boolean),
             restricted_to: T.nilable(T::Array[String]),
             subscription_cycles: T.nilable(Integer),
             type: T.nilable(Dodopayments::DiscountType::OrSymbol),
