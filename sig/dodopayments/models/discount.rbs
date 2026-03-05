@@ -7,6 +7,7 @@ module Dodopayments
         code: String,
         created_at: Time,
         discount_id: String,
+        preserve_on_plan_change: bool,
         restricted_to: ::Array[String],
         times_used: Integer,
         type: Dodopayments::Models::discount_type,
@@ -26,6 +27,8 @@ module Dodopayments
       attr_accessor created_at: Time
 
       attr_accessor discount_id: String
+
+      attr_accessor preserve_on_plan_change: bool
 
       attr_accessor restricted_to: ::Array[String]
 
@@ -47,6 +50,7 @@ module Dodopayments
         code: String,
         created_at: Time,
         discount_id: String,
+        preserve_on_plan_change: bool,
         restricted_to: ::Array[String],
         times_used: Integer,
         type: Dodopayments::Models::discount_type,
@@ -62,6 +66,7 @@ module Dodopayments
         code: String,
         created_at: Time,
         discount_id: String,
+        preserve_on_plan_change: bool,
         restricted_to: ::Array[String],
         times_used: Integer,
         type: Dodopayments::Models::discount_type,
