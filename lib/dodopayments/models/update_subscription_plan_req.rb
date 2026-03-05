@@ -29,6 +29,15 @@ module Dodopayments
       #   @return [Array<Dodopayments::Models::AttachAddon>, nil]
       optional :addons, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::AttachAddon] }, nil?: true
 
+      # @!attribute discount_code
+      #   Optional discount code to apply to the new plan. If provided, validates and
+      #   applies the discount to the plan change. If not provided and the subscription
+      #   has an existing discount with `preserve_on_plan_change=true`, the existing
+      #   discount will be preserved (if applicable to the new product).
+      #
+      #   @return [String, nil]
+      optional :discount_code, String, nil?: true
+
       # @!attribute metadata
       #   Metadata for the payment. If not passed, the metadata of the subscription will
       #   be taken
@@ -50,7 +59,7 @@ module Dodopayments
                enum: -> { Dodopayments::UpdateSubscriptionPlanReq::OnPaymentFailure },
                nil?: true
 
-      # @!method initialize(product_id:, proration_billing_mode:, quantity:, addons: nil, metadata: nil, on_payment_failure: nil)
+      # @!method initialize(product_id:, proration_billing_mode:, quantity:, addons: nil, discount_code: nil, metadata: nil, on_payment_failure: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::UpdateSubscriptionPlanReq} for more details.
       #
@@ -61,6 +70,8 @@ module Dodopayments
       #   @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
       #
       #   @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
+      #
+      #   @param discount_code [String, nil] Optional discount code to apply to the new plan.
       #
       #   @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #

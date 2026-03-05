@@ -32,6 +32,13 @@ module Dodopayments
       sig { returns(T.nilable(T::Array[Dodopayments::AttachAddon])) }
       attr_accessor :addons
 
+      # Optional discount code to apply to the new plan. If provided, validates and
+      # applies the discount to the plan change. If not provided and the subscription
+      # has an existing discount with `preserve_on_plan_change=true`, the existing
+      # discount will be preserved (if applicable to the new product).
+      sig { returns(T.nilable(String)) }
+      attr_accessor :discount_code
+
       # Metadata for the payment. If not passed, the metadata of the subscription will
       # be taken
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
@@ -60,6 +67,7 @@ module Dodopayments
             Dodopayments::UpdateSubscriptionPlanReq::ProrationBillingMode::OrSymbol,
           quantity: Integer,
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
+          discount_code: T.nilable(String),
           metadata: T.nilable(T::Hash[Symbol, String]),
           on_payment_failure:
             T.nilable(
@@ -77,6 +85,11 @@ module Dodopayments
         # Addons for the new plan. Note : Leaving this empty would remove any existing
         # addons
         addons: nil,
+        # Optional discount code to apply to the new plan. If provided, validates and
+        # applies the discount to the plan change. If not provided and the subscription
+        # has an existing discount with `preserve_on_plan_change=true`, the existing
+        # discount will be preserved (if applicable to the new product).
+        discount_code: nil,
         # Metadata for the payment. If not passed, the metadata of the subscription will
         # be taken
         metadata: nil,
@@ -99,6 +112,7 @@ module Dodopayments
               Dodopayments::UpdateSubscriptionPlanReq::ProrationBillingMode::OrSymbol,
             quantity: Integer,
             addons: T.nilable(T::Array[Dodopayments::AttachAddon]),
+            discount_code: T.nilable(String),
             metadata: T.nilable(T::Hash[Symbol, String]),
             on_payment_failure:
               T.nilable(

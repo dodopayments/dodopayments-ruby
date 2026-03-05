@@ -12,6 +12,7 @@ module Dodopayments
           code: T.nilable(String),
           expires_at: T.nilable(Time),
           name: T.nilable(String),
+          preserve_on_plan_change: T::Boolean,
           restricted_to: T.nilable(T::Array[String]),
           subscription_cycles: T.nilable(Integer),
           usage_limit: T.nilable(Integer),
@@ -38,6 +39,9 @@ module Dodopayments
         # When the discount expires, if ever.
         expires_at: nil,
         name: nil,
+        # Whether this discount should be preserved when a subscription changes plans.
+        # Default: false (discount is removed on plan change)
+        preserve_on_plan_change: nil,
         # List of product IDs to restrict usage (if any).
         restricted_to: nil,
         # Number of subscription billing cycles this discount is valid for. If not
@@ -72,6 +76,7 @@ module Dodopayments
           code: T.nilable(String),
           expires_at: T.nilable(Time),
           name: T.nilable(String),
+          preserve_on_plan_change: T.nilable(T::Boolean),
           restricted_to: T.nilable(T::Array[String]),
           subscription_cycles: T.nilable(Integer),
           type: T.nilable(Dodopayments::DiscountType::OrSymbol),
@@ -94,6 +99,9 @@ module Dodopayments
         code: nil,
         expires_at: nil,
         name: nil,
+        # Whether this discount should be preserved when a subscription changes plans. If
+        # not provided, the existing value is kept.
+        preserve_on_plan_change: nil,
         # If present, replaces all restricted product IDs with this new set. To remove all
         # restrictions, send empty array
         restricted_to: nil,

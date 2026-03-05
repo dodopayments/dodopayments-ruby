@@ -6,6 +6,7 @@ module Dodopayments
         proration_billing_mode: Dodopayments::Models::UpdateSubscriptionPlanReq::proration_billing_mode,
         quantity: Integer,
         addons: ::Array[Dodopayments::AttachAddon]?,
+        discount_code: String?,
         metadata: ::Hash[Symbol, String]?,
         on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
       }
@@ -19,6 +20,8 @@ module Dodopayments
 
       attr_accessor addons: ::Array[Dodopayments::AttachAddon]?
 
+      attr_accessor discount_code: String?
+
       attr_accessor metadata: ::Hash[Symbol, String]?
 
       attr_accessor on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
@@ -28,6 +31,7 @@ module Dodopayments
         proration_billing_mode: Dodopayments::Models::UpdateSubscriptionPlanReq::proration_billing_mode,
         quantity: Integer,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
+        ?discount_code: String?,
         ?metadata: ::Hash[Symbol, String]?,
         ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
       ) -> void
@@ -37,6 +41,7 @@ module Dodopayments
         proration_billing_mode: Dodopayments::Models::UpdateSubscriptionPlanReq::proration_billing_mode,
         quantity: Integer,
         addons: ::Array[Dodopayments::AttachAddon]?,
+        discount_code: String?,
         metadata: ::Hash[Symbol, String]?,
         on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
       }
