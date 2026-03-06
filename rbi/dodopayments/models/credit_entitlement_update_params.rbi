@@ -14,6 +14,9 @@ module Dodopayments
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       # Currency for pricing
       sig { returns(T.nilable(Dodopayments::Currency::OrSymbol)) }
       attr_accessor :currency
@@ -72,6 +75,7 @@ module Dodopayments
 
       sig do
         params(
+          id: String,
           currency: T.nilable(Dodopayments::Currency::OrSymbol),
           description: T.nilable(String),
           expires_after_days: T.nilable(Integer),
@@ -92,6 +96,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         # Currency for pricing
         currency: nil,
         # Optional description of the credit entitlement
@@ -127,6 +132,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            id: String,
             currency: T.nilable(Dodopayments::Currency::OrSymbol),
             description: T.nilable(String),
             expires_after_days: T.nilable(Integer),

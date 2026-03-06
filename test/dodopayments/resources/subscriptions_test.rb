@@ -255,12 +255,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
   end
 
   def test_update_payment_method_required_params
-    response =
-      @dodo_payments.subscriptions.update_payment_method(
-        "subscription_id",
-        payment_method_id: "payment_method_id",
-        type: :existing
-      )
+    response = @dodo_payments.subscriptions.update_payment_method("subscription_id", body: {type: :new})
 
     assert_pattern do
       response => Dodopayments::Models::SubscriptionUpdatePaymentMethodResponse

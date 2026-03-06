@@ -2,6 +2,7 @@ module Dodopayments
   module Models
     type discount_update_params =
       {
+        discount_id: String,
         amount: Integer?,
         code: String?,
         expires_at: Time?,
@@ -17,6 +18,8 @@ module Dodopayments
     class DiscountUpdateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor discount_id: String
 
       attr_accessor amount: Integer?
 
@@ -37,6 +40,7 @@ module Dodopayments
       attr_accessor usage_limit: Integer?
 
       def initialize: (
+        discount_id: String,
         ?amount: Integer?,
         ?code: String?,
         ?expires_at: Time?,
@@ -50,6 +54,7 @@ module Dodopayments
       ) -> void
 
       def to_hash: -> {
+        discount_id: String,
         amount: Integer?,
         code: String?,
         expires_at: Time?,

@@ -360,15 +360,11 @@ module Dodopayments
         )
       end
 
-      # @overload update_payment_method(subscription_id, type:, payment_method_id:, return_url: nil, request_options: {})
+      # @overload update_payment_method(subscription_id, body:, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
-      # @param type [Symbol, Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Type]
-      #
-      # @param payment_method_id [String]
-      #
-      # @param return_url [String, nil]
+      # @param body [Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::New, Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::Existing]
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -380,7 +376,7 @@ module Dodopayments
         @client.request(
           method: :post,
           path: ["subscriptions/%1$s/update-payment-method", subscription_id],
-          body: parsed,
+          body: parsed[:body],
           model: Dodopayments::Models::SubscriptionUpdatePaymentMethodResponse,
           options: options
         )

@@ -18,6 +18,9 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :credit_entitlement_id
 
+        sig { returns(String) }
+        attr_accessor :customer_id
+
         # Filter by end date
         sig { returns(T.nilable(Time)) }
         attr_reader :end_date
@@ -57,6 +60,7 @@ module Dodopayments
         sig do
           params(
             credit_entitlement_id: String,
+            customer_id: String,
             end_date: Time,
             page_number: Integer,
             page_size: Integer,
@@ -67,6 +71,7 @@ module Dodopayments
         end
         def self.new(
           credit_entitlement_id:,
+          customer_id:,
           # Filter by end date
           end_date: nil,
           # Page number default is 0
@@ -86,6 +91,7 @@ module Dodopayments
           override.returns(
             {
               credit_entitlement_id: String,
+              customer_id: String,
               end_date: Time,
               page_number: Integer,
               page_size: Integer,

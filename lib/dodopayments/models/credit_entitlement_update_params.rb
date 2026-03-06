@@ -7,6 +7,11 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute currency
       #   Currency for pricing
       #
@@ -91,7 +96,9 @@ module Dodopayments
       #   @return [String, nil]
       optional :unit, String, nil?: true
 
-      # @!method initialize(currency: nil, description: nil, expires_after_days: nil, max_rollover_count: nil, name: nil, overage_behavior: nil, overage_enabled: nil, overage_limit: nil, price_per_unit: nil, rollover_enabled: nil, rollover_percentage: nil, rollover_timeframe_count: nil, rollover_timeframe_interval: nil, unit: nil, request_options: {})
+      # @!method initialize(id:, currency: nil, description: nil, expires_after_days: nil, max_rollover_count: nil, name: nil, overage_behavior: nil, overage_enabled: nil, overage_limit: nil, price_per_unit: nil, rollover_enabled: nil, rollover_percentage: nil, rollover_timeframe_count: nil, rollover_timeframe_interval: nil, unit: nil, request_options: {})
+      #   @param id [String]
+      #
       #   @param currency [Symbol, Dodopayments::Models::Currency, nil] Currency for pricing
       #
       #   @param description [String, nil] Optional description of the credit entitlement

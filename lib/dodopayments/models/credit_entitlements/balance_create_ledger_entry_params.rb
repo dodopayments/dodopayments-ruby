@@ -13,6 +13,11 @@ module Dodopayments
         #   @return [String]
         required :credit_entitlement_id, String
 
+        # @!attribute customer_id
+        #
+        #   @return [String]
+        required :customer_id, String
+
         # @!attribute amount
         #   Amount to credit or debit
         #
@@ -50,12 +55,14 @@ module Dodopayments
         #   @return [String, nil]
         optional :reason, String, nil?: true
 
-        # @!method initialize(credit_entitlement_id:, amount:, entry_type:, expires_at: nil, idempotency_key: nil, metadata: nil, reason: nil, request_options: {})
+        # @!method initialize(credit_entitlement_id:, customer_id:, amount:, entry_type:, expires_at: nil, idempotency_key: nil, metadata: nil, reason: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::CreditEntitlements::BalanceCreateLedgerEntryParams} for
         #   more details.
         #
         #   @param credit_entitlement_id [String]
+        #
+        #   @param customer_id [String]
         #
         #   @param amount [String] Amount to credit or debit
         #

@@ -2,15 +2,24 @@ module Dodopayments
   module Models
     module Customers
       type wallet_list_params =
-        {  } & Dodopayments::Internal::Type::request_parameters
+        { customer_id: String }
+        & Dodopayments::Internal::Type::request_parameters
 
       class WalletListParams < Dodopayments::Internal::Type::BaseModel
         extend Dodopayments::Internal::Type::RequestParameters::Converter
         include Dodopayments::Internal::Type::RequestParameters
 
-        def initialize: (?request_options: Dodopayments::request_opts) -> void
+        attr_accessor customer_id: String
 
-        def to_hash: -> { request_options: Dodopayments::RequestOptions }
+        def initialize: (
+          customer_id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          customer_id: String,
+          request_options: Dodopayments::RequestOptions
+        }
       end
     end
   end

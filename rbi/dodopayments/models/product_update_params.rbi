@@ -14,6 +14,9 @@ module Dodopayments
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       # Available Addons for subscription products
       sig { returns(T.nilable(T::Array[String])) }
       attr_accessor :addons
@@ -118,6 +121,7 @@ module Dodopayments
 
       sig do
         params(
+          id: String,
           addons: T.nilable(T::Array[String]),
           brand_id: T.nilable(String),
           credit_entitlements:
@@ -148,6 +152,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         # Available Addons for subscription products
         addons: nil,
         brand_id: nil,
@@ -195,6 +200,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            id: String,
             addons: T.nilable(T::Array[String]),
             brand_id: T.nilable(String),
             credit_entitlements:

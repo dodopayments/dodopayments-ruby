@@ -4,6 +4,7 @@ module Dodopayments
       type balance_create_ledger_entry_params =
         {
           credit_entitlement_id: String,
+          customer_id: String,
           amount: String,
           entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type,
           expires_at: Time?,
@@ -19,6 +20,8 @@ module Dodopayments
 
         attr_accessor credit_entitlement_id: String
 
+        attr_accessor customer_id: String
+
         attr_accessor amount: String
 
         attr_accessor entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type
@@ -33,6 +36,7 @@ module Dodopayments
 
         def initialize: (
           credit_entitlement_id: String,
+          customer_id: String,
           amount: String,
           entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type,
           ?expires_at: Time?,
@@ -44,6 +48,7 @@ module Dodopayments
 
         def to_hash: -> {
           credit_entitlement_id: String,
+          customer_id: String,
           amount: String,
           entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type,
           expires_at: Time?,

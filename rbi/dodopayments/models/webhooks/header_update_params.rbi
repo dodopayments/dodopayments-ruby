@@ -15,17 +15,22 @@ module Dodopayments
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :webhook_id
+
         # Object of header-value pair to update or add
         sig { returns(T::Hash[Symbol, String]) }
         attr_accessor :headers
 
         sig do
           params(
+            webhook_id: String,
             headers: T::Hash[Symbol, String],
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
+          webhook_id:,
           # Object of header-value pair to update or add
           headers:,
           request_options: {}
@@ -35,6 +40,7 @@ module Dodopayments
         sig do
           override.returns(
             {
+              webhook_id: String,
               headers: T::Hash[Symbol, String],
               request_options: Dodopayments::RequestOptions
             }

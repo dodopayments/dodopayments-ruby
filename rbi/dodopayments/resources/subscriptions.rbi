@@ -414,19 +414,18 @@ module Dodopayments
       sig do
         params(
           subscription_id: String,
-          type:
-            Dodopayments::SubscriptionUpdatePaymentMethodParams::Type::OrSymbol,
-          payment_method_id: String,
-          return_url: T.nilable(String),
+          body:
+            T.any(
+              Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New::OrHash,
+              Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing::OrHash
+            ),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Models::SubscriptionUpdatePaymentMethodResponse)
       end
       def update_payment_method(
         # Subscription Id
         subscription_id,
-        type:,
-        payment_method_id:,
-        return_url: nil,
+        body:,
         request_options: {}
       )
       end

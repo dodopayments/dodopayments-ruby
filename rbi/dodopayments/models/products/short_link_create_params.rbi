@@ -15,6 +15,9 @@ module Dodopayments
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :id
+
         # Slug for the short link.
         sig { returns(String) }
         attr_accessor :slug
@@ -25,12 +28,14 @@ module Dodopayments
 
         sig do
           params(
+            id: String,
             slug: String,
             static_checkout_params: T.nilable(T::Hash[Symbol, String]),
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
+          id:,
           # Slug for the short link.
           slug:,
           # Static Checkout URL parameters to apply to the resulting short URL.
@@ -42,6 +47,7 @@ module Dodopayments
         sig do
           override.returns(
             {
+              id: String,
               slug: String,
               static_checkout_params: T.nilable(T::Hash[Symbol, String]),
               request_options: Dodopayments::RequestOptions

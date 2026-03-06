@@ -14,6 +14,9 @@ module Dodopayments
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       sig { returns(T.nilable(String)) }
       attr_accessor :description
 
@@ -35,6 +38,7 @@ module Dodopayments
 
       sig do
         params(
+          id: String,
           description: T.nilable(String),
           image_id: T.nilable(String),
           name: T.nilable(String),
@@ -45,6 +49,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         description: nil,
         # The UUID you got back from the presigned‐upload call
         image_id: nil,
@@ -59,6 +64,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            id: String,
             description: T.nilable(String),
             image_id: T.nilable(String),
             name: T.nilable(String),

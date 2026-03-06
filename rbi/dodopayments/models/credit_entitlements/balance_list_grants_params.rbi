@@ -18,6 +18,9 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :credit_entitlement_id
 
+        sig { returns(String) }
+        attr_accessor :customer_id
+
         # Page number default is 0
         sig { returns(T.nilable(Integer)) }
         attr_reader :page_number
@@ -53,6 +56,7 @@ module Dodopayments
         sig do
           params(
             credit_entitlement_id: String,
+            customer_id: String,
             page_number: Integer,
             page_size: Integer,
             status:
@@ -62,6 +66,7 @@ module Dodopayments
         end
         def self.new(
           credit_entitlement_id:,
+          customer_id:,
           # Page number default is 0
           page_number: nil,
           # Page size default is 10 max is 100
@@ -76,6 +81,7 @@ module Dodopayments
           override.returns(
             {
               credit_entitlement_id: String,
+              customer_id: String,
               page_number: Integer,
               page_size: Integer,
               status:
