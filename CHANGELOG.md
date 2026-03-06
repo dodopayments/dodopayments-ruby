@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.1.2 (2026-03-06)
+
+Full Changelog: [v2.1.1...v2.1.2](https://github.com/dodopayments/dodopayments-ruby/compare/v2.1.1...v2.1.2)
+
+### Bug Fixes
+
+* use :live_mode as default environment fallback instead of :production ([e3dabaf](https://github.com/dodopayments/dodopayments-ruby/commit/e3dabaf88b923805c29c4c57b5cbb22390eaae53))
+
 ## 2.1.1 (2026-03-06)
 
 Full Changelog: [v2.1.0...v2.1.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.1.0...v2.1.1)
