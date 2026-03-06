@@ -7,6 +7,11 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      # @!attribute webhook_id
+      #
+      #   @return [String]
+      required :webhook_id, String
+
       # @!attribute description
       #   Description of the webhook
       #
@@ -47,9 +52,11 @@ module Dodopayments
       #   @return [String, nil]
       optional :url, String, nil?: true
 
-      # @!method initialize(description: nil, disabled: nil, filter_types: nil, metadata: nil, rate_limit: nil, url: nil, request_options: {})
+      # @!method initialize(webhook_id:, description: nil, disabled: nil, filter_types: nil, metadata: nil, rate_limit: nil, url: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::WebhookUpdateParams} for more details.
+      #
+      #   @param webhook_id [String]
       #
       #   @param description [String, nil] Description of the webhook
       #

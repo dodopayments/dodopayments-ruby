@@ -7,6 +7,11 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      # @!attribute subscription_id
+      #
+      #   @return [String]
+      required :subscription_id, String
+
       # @!attribute billing
       #
       #   @return [Dodopayments::Models::BillingAddress, nil]
@@ -58,7 +63,9 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(billing: nil, cancel_at_next_billing_date: nil, credit_entitlement_cart: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
+      # @!method initialize(subscription_id:, billing: nil, cancel_at_next_billing_date: nil, credit_entitlement_cart: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
+      #   @param subscription_id [String]
+      #
       #   @param billing [Dodopayments::Models::BillingAddress, nil]
       #
       #   @param cancel_at_next_billing_date [Boolean, nil] When set, the subscription will remain active until the end of billing period

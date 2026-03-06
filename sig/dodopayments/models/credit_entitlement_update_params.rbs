@@ -2,6 +2,7 @@ module Dodopayments
   module Models
     type credit_entitlement_update_params =
       {
+        id: String,
         currency: Dodopayments::Models::currency?,
         description: String?,
         expires_after_days: Integer?,
@@ -22,6 +23,8 @@ module Dodopayments
     class CreditEntitlementUpdateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_accessor currency: Dodopayments::Models::currency?
 
@@ -52,6 +55,7 @@ module Dodopayments
       attr_accessor unit: String?
 
       def initialize: (
+        id: String,
         ?currency: Dodopayments::Models::currency?,
         ?description: String?,
         ?expires_after_days: Integer?,
@@ -70,6 +74,7 @@ module Dodopayments
       ) -> void
 
       def to_hash: -> {
+        id: String,
         currency: Dodopayments::Models::currency?,
         description: String?,
         expires_after_days: Integer?,

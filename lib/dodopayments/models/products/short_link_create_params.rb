@@ -8,6 +8,11 @@ module Dodopayments
         extend Dodopayments::Internal::Type::RequestParameters::Converter
         include Dodopayments::Internal::Type::RequestParameters
 
+        # @!attribute id
+        #
+        #   @return [String]
+        required :id, String
+
         # @!attribute slug
         #   Slug for the short link.
         #
@@ -20,9 +25,11 @@ module Dodopayments
         #   @return [Hash{Symbol=>String}, nil]
         optional :static_checkout_params, Dodopayments::Internal::Type::HashOf[String], nil?: true
 
-        # @!method initialize(slug:, static_checkout_params: nil, request_options: {})
+        # @!method initialize(id:, slug:, static_checkout_params: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Products::ShortLinkCreateParams} for more details.
+        #
+        #   @param id [String]
         #
         #   @param slug [String] Slug for the short link.
         #

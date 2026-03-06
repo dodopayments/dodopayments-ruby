@@ -2,6 +2,7 @@ module Dodopayments
   module Models
     type product_update_params =
       {
+        id: String,
         addons: ::Array[String]?,
         brand_id: String?,
         credit_entitlements: ::Array[Dodopayments::AttachCreditEntitlement]?,
@@ -22,6 +23,8 @@ module Dodopayments
     class ProductUpdateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_accessor addons: ::Array[String]?
 
@@ -52,6 +55,7 @@ module Dodopayments
       attr_accessor tax_category: Dodopayments::Models::tax_category?
 
       def initialize: (
+        id: String,
         ?addons: ::Array[String]?,
         ?brand_id: String?,
         ?credit_entitlements: ::Array[Dodopayments::AttachCreditEntitlement]?,
@@ -70,6 +74,7 @@ module Dodopayments
       ) -> void
 
       def to_hash: -> {
+        id: String,
         addons: ::Array[String]?,
         brand_id: String?,
         credit_entitlements: ::Array[Dodopayments::AttachCreditEntitlement]?,

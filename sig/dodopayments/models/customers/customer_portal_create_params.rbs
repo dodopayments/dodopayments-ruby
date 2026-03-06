@@ -2,22 +2,27 @@ module Dodopayments
   module Models
     module Customers
       type customer_portal_create_params =
-        { send_email: bool } & Dodopayments::Internal::Type::request_parameters
+        { customer_id: String, send_email: bool }
+        & Dodopayments::Internal::Type::request_parameters
 
       class CustomerPortalCreateParams < Dodopayments::Internal::Type::BaseModel
         extend Dodopayments::Internal::Type::RequestParameters::Converter
         include Dodopayments::Internal::Type::RequestParameters
+
+        attr_accessor customer_id: String
 
         attr_reader send_email: bool?
 
         def send_email=: (bool) -> bool
 
         def initialize: (
+          customer_id: String,
           ?send_email: bool,
           ?request_options: Dodopayments::request_opts
         ) -> void
 
         def to_hash: -> {
+          customer_id: String,
           send_email: bool,
           request_options: Dodopayments::RequestOptions
         }

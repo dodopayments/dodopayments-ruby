@@ -7,6 +7,11 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      # @!attribute discount_id
+      #
+      #   @return [String]
+      required :discount_id, String
+
       # @!attribute amount
       #   If present, update the discount amount:
       #
@@ -68,9 +73,11 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :usage_limit, Integer, nil?: true
 
-      # @!method initialize(amount: nil, code: nil, expires_at: nil, name: nil, preserve_on_plan_change: nil, restricted_to: nil, subscription_cycles: nil, type: nil, usage_limit: nil, request_options: {})
+      # @!method initialize(discount_id:, amount: nil, code: nil, expires_at: nil, name: nil, preserve_on_plan_change: nil, restricted_to: nil, subscription_cycles: nil, type: nil, usage_limit: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::DiscountUpdateParams} for more details.
+      #
+      #   @param discount_id [String]
       #
       #   @param amount [Integer, nil] If present, update the discount amount:
       #

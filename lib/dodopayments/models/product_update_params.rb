@@ -7,6 +7,11 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute addons
       #   Available Addons for subscription products
       #
@@ -107,9 +112,11 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::TaxCategory, nil]
       optional :tax_category, enum: -> { Dodopayments::TaxCategory }, nil?: true
 
-      # @!method initialize(addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      # @!method initialize(id:, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, price: nil, tax_category: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductUpdateParams} for more details.
+      #
+      #   @param id [String]
       #
       #   @param addons [Array<String>, nil] Available Addons for subscription products
       #

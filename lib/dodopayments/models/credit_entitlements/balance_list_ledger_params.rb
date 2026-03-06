@@ -13,6 +13,11 @@ module Dodopayments
         #   @return [String]
         required :credit_entitlement_id, String
 
+        # @!attribute customer_id
+        #
+        #   @return [String]
+        required :customer_id, String
+
         # @!attribute end_date
         #   Filter by end date
         #
@@ -44,12 +49,14 @@ module Dodopayments
         #   @return [String, nil]
         optional :transaction_type, String
 
-        # @!method initialize(credit_entitlement_id:, end_date: nil, page_number: nil, page_size: nil, start_date: nil, transaction_type: nil, request_options: {})
+        # @!method initialize(credit_entitlement_id:, customer_id:, end_date: nil, page_number: nil, page_size: nil, start_date: nil, transaction_type: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::CreditEntitlements::BalanceListLedgerParams} for more
         #   details.
         #
         #   @param credit_entitlement_id [String]
+        #
+        #   @param customer_id [String]
         #
         #   @param end_date [Time] Filter by end date
         #

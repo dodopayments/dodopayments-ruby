@@ -1,15 +1,26 @@
 module Dodopayments
   module Models
     type subscription_preview_change_plan_params =
-      {  } & Dodopayments::Internal::Type::request_parameters
+      { subscription_id: String }
+      & Dodopayments::Internal::Type::request_parameters
 
     class SubscriptionPreviewChangePlanParams < Dodopayments::Models::UpdateSubscriptionPlanReq
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      def initialize: (?request_options: Dodopayments::request_opts) -> void
+      def subscription_id: -> String
 
-      def to_hash: -> { request_options: Dodopayments::RequestOptions }
+      def subscription_id=: (String _) -> String
+
+      def initialize: (
+        subscription_id: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        subscription_id: String,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

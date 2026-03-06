@@ -14,6 +14,9 @@ module Dodopayments
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :subscription_id
+
       # Filter by end date (inclusive)
       sig { returns(T.nilable(Time)) }
       attr_accessor :end_date
@@ -36,6 +39,7 @@ module Dodopayments
 
       sig do
         params(
+          subscription_id: String,
           end_date: T.nilable(Time),
           meter_id: T.nilable(String),
           page_number: T.nilable(Integer),
@@ -45,6 +49,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        subscription_id:,
         # Filter by end date (inclusive)
         end_date: nil,
         # Filter by specific meter ID
@@ -62,6 +67,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            subscription_id: String,
             end_date: T.nilable(Time),
             meter_id: T.nilable(String),
             page_number: T.nilable(Integer),

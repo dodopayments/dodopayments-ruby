@@ -15,6 +15,9 @@ module Dodopayments
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :customer_id
+
         # If true, will send link to user.
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :send_email
@@ -24,11 +27,13 @@ module Dodopayments
 
         sig do
           params(
+            customer_id: String,
             send_email: T::Boolean,
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
+          customer_id:,
           # If true, will send link to user.
           send_email: nil,
           request_options: {}
@@ -38,6 +43,7 @@ module Dodopayments
         sig do
           override.returns(
             {
+              customer_id: String,
               send_email: T::Boolean,
               request_options: Dodopayments::RequestOptions
             }

@@ -14,6 +14,9 @@ module Dodopayments
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :webhook_id
+
       # Description of the webhook
       sig { returns(T.nilable(String)) }
       attr_accessor :description
@@ -44,6 +47,7 @@ module Dodopayments
 
       sig do
         params(
+          webhook_id: String,
           description: T.nilable(String),
           disabled: T.nilable(T::Boolean),
           filter_types:
@@ -55,6 +59,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        webhook_id:,
         # Description of the webhook
         description: nil,
         # To Disable the endpoint, set it to true.
@@ -76,6 +81,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            webhook_id: String,
             description: T.nilable(String),
             disabled: T.nilable(T::Boolean),
             filter_types:

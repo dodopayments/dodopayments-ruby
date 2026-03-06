@@ -7,12 +7,18 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute file_name
       #
       #   @return [String]
       required :file_name, String
 
-      # @!method initialize(file_name:, request_options: {})
+      # @!method initialize(id:, file_name:, request_options: {})
+      #   @param id [String]
       #   @param file_name [String]
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end

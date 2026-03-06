@@ -15,6 +15,9 @@ module Dodopayments
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :credit_entitlement_id
+
         # Filter by specific customer ID
         sig { returns(T.nilable(String)) }
         attr_reader :customer_id
@@ -38,6 +41,7 @@ module Dodopayments
 
         sig do
           params(
+            credit_entitlement_id: String,
             customer_id: String,
             page_number: Integer,
             page_size: Integer,
@@ -45,6 +49,7 @@ module Dodopayments
           ).returns(T.attached_class)
         end
         def self.new(
+          credit_entitlement_id:,
           # Filter by specific customer ID
           customer_id: nil,
           # Page number default is 0
@@ -58,6 +63,7 @@ module Dodopayments
         sig do
           override.returns(
             {
+              credit_entitlement_id: String,
               customer_id: String,
               page_number: Integer,
               page_size: Integer,

@@ -2,9 +2,8 @@ module Dodopayments
   module Models
     type subscription_update_payment_method_params =
       {
-        type: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::type_,
-        return_url: String?,
-        payment_method_id: String
+        subscription_id: String,
+        body: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::body
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -12,34 +11,94 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      attr_accessor type: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::type_
+      attr_accessor subscription_id: String
 
-      attr_accessor return_url: String?
-
-      attr_accessor payment_method_id: String
+      attr_accessor body: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::body
 
       def initialize: (
-        type: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::type_,
-        payment_method_id: String,
-        ?return_url: String?,
+        subscription_id: String,
+        body: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::body,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
       def to_hash: -> {
-        type: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::type_,
-        return_url: String?,
-        payment_method_id: String,
+        subscription_id: String,
+        body: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::body,
         request_options: Dodopayments::RequestOptions
       }
 
-      type type_ = :existing
+      type body =
+        Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New
+        | Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing
 
-      module Type
-        extend Dodopayments::Internal::Type::Enum
+      module Body
+        extend Dodopayments::Internal::Type::Union
 
-        EXISTING: :existing
+        type new_ =
+          {
+            type: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::New::type_,
+            return_url: String?
+          }
 
-        def self?.values: -> ::Array[Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::type_]
+        class New < Dodopayments::Internal::Type::BaseModel
+          attr_accessor type: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::New::type_
+
+          attr_accessor return_url: String?
+
+          def initialize: (
+            type: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::New::type_,
+            ?return_url: String?
+          ) -> void
+
+          def to_hash: -> {
+            type: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::New::type_,
+            return_url: String?
+          }
+
+          type type_ = :new
+
+          module Type
+            extend Dodopayments::Internal::Type::Enum
+
+            NEW: :new
+
+            def self?.values: -> ::Array[Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::New::type_]
+          end
+        end
+
+        type existing =
+          {
+            payment_method_id: String,
+            type: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::Existing::type_
+          }
+
+        class Existing < Dodopayments::Internal::Type::BaseModel
+          attr_accessor payment_method_id: String
+
+          attr_accessor type: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::Existing::type_
+
+          def initialize: (
+            payment_method_id: String,
+            type: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::Existing::type_
+          ) -> void
+
+          def to_hash: -> {
+            payment_method_id: String,
+            type: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::Existing::type_
+          }
+
+          type type_ = :existing
+
+          module Type
+            extend Dodopayments::Internal::Type::Enum
+
+            EXISTING: :existing
+
+            def self?.values: -> ::Array[Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::Existing::type_]
+          end
+        end
+
+        def self?.variants: -> ::Array[Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::body]
       end
     end
   end

@@ -14,6 +14,9 @@ module Dodopayments
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :subscription_id
+
       # The product price. Represented in the lowest denomination of the currency (e.g.,
       # cents for USD). For example, to charge $1.00, pass `100`.
       sig { returns(Integer) }
@@ -62,6 +65,7 @@ module Dodopayments
 
       sig do
         params(
+          subscription_id: String,
           product_price: Integer,
           adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
           customer_balance_config:
@@ -75,6 +79,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        subscription_id:,
         # The product price. Represented in the lowest denomination of the currency (e.g.,
         # cents for USD). For example, to charge $1.00, pass `100`.
         product_price:,
@@ -100,6 +105,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            subscription_id: String,
             product_price: Integer,
             adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
             customer_balance_config:

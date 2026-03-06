@@ -2,7 +2,7 @@ module Dodopayments
   module Models
     module CreditEntitlements
       type balance_retrieve_params =
-        { credit_entitlement_id: String }
+        { credit_entitlement_id: String, customer_id: String }
         & Dodopayments::Internal::Type::request_parameters
 
       class BalanceRetrieveParams < Dodopayments::Internal::Type::BaseModel
@@ -11,13 +11,17 @@ module Dodopayments
 
         attr_accessor credit_entitlement_id: String
 
+        attr_accessor customer_id: String
+
         def initialize: (
           credit_entitlement_id: String,
+          customer_id: String,
           ?request_options: Dodopayments::request_opts
         ) -> void
 
         def to_hash: -> {
           credit_entitlement_id: String,
+          customer_id: String,
           request_options: Dodopayments::RequestOptions
         }
       end

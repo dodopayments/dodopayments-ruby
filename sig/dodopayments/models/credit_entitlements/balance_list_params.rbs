@@ -2,12 +2,19 @@ module Dodopayments
   module Models
     module CreditEntitlements
       type balance_list_params =
-        { customer_id: String, page_number: Integer, page_size: Integer }
+        {
+          credit_entitlement_id: String,
+          customer_id: String,
+          page_number: Integer,
+          page_size: Integer
+        }
         & Dodopayments::Internal::Type::request_parameters
 
       class BalanceListParams < Dodopayments::Internal::Type::BaseModel
         extend Dodopayments::Internal::Type::RequestParameters::Converter
         include Dodopayments::Internal::Type::RequestParameters
+
+        attr_accessor credit_entitlement_id: String
 
         attr_reader customer_id: String?
 
@@ -22,6 +29,7 @@ module Dodopayments
         def page_size=: (Integer) -> Integer
 
         def initialize: (
+          credit_entitlement_id: String,
           ?customer_id: String,
           ?page_number: Integer,
           ?page_size: Integer,
@@ -29,6 +37,7 @@ module Dodopayments
         ) -> void
 
         def to_hash: -> {
+          credit_entitlement_id: String,
           customer_id: String,
           page_number: Integer,
           page_size: Integer,

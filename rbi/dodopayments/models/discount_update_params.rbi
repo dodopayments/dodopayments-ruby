@@ -14,6 +14,9 @@ module Dodopayments
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :discount_id
+
       # If present, update the discount amount:
       #
       # - If `discount_type` is `percentage`, this represents **basis points** (e.g.,
@@ -59,6 +62,7 @@ module Dodopayments
 
       sig do
         params(
+          discount_id: String,
           amount: T.nilable(Integer),
           code: T.nilable(String),
           expires_at: T.nilable(Time),
@@ -72,6 +76,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        discount_id:,
         # If present, update the discount amount:
         #
         # - If `discount_type` is `percentage`, this represents **basis points** (e.g.,
@@ -104,6 +109,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            discount_id: String,
             amount: T.nilable(Integer),
             code: T.nilable(String),
             expires_at: T.nilable(Time),

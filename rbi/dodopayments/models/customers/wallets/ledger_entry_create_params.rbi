@@ -16,6 +16,9 @@ module Dodopayments
               )
             end
 
+          sig { returns(String) }
+          attr_accessor :customer_id
+
           sig { returns(Integer) }
           attr_accessor :amount
 
@@ -40,6 +43,7 @@ module Dodopayments
 
           sig do
             params(
+              customer_id: String,
               amount: Integer,
               currency: Dodopayments::Currency::OrSymbol,
               entry_type:
@@ -50,6 +54,7 @@ module Dodopayments
             ).returns(T.attached_class)
           end
           def self.new(
+            customer_id:,
             amount:,
             # Currency of the wallet to adjust
             currency:,
@@ -65,6 +70,7 @@ module Dodopayments
           sig do
             override.returns(
               {
+                customer_id: String,
                 amount: Integer,
                 currency: Dodopayments::Currency::OrSymbol,
                 entry_type:

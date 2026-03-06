@@ -8,6 +8,11 @@ module Dodopayments
         extend Dodopayments::Internal::Type::RequestParameters::Converter
         include Dodopayments::Internal::Type::RequestParameters
 
+        # @!attribute credit_entitlement_id
+        #
+        #   @return [String]
+        required :credit_entitlement_id, String
+
         # @!attribute customer_id
         #   Filter by specific customer ID
         #
@@ -26,7 +31,9 @@ module Dodopayments
         #   @return [Integer, nil]
         optional :page_size, Integer
 
-        # @!method initialize(customer_id: nil, page_number: nil, page_size: nil, request_options: {})
+        # @!method initialize(credit_entitlement_id:, customer_id: nil, page_number: nil, page_size: nil, request_options: {})
+        #   @param credit_entitlement_id [String]
+        #
         #   @param customer_id [String] Filter by specific customer ID
         #
         #   @param page_number [Integer] Page number default is 0

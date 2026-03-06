@@ -7,6 +7,11 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute description
       #
       #   @return [String, nil]
@@ -38,7 +43,9 @@ module Dodopayments
       #   @return [String, nil]
       optional :url, String, nil?: true
 
-      # @!method initialize(description: nil, image_id: nil, name: nil, statement_descriptor: nil, support_email: nil, url: nil, request_options: {})
+      # @!method initialize(id:, description: nil, image_id: nil, name: nil, statement_descriptor: nil, support_email: nil, url: nil, request_options: {})
+      #   @param id [String]
+      #
       #   @param description [String, nil]
       #
       #   @param image_id [String, nil] The UUID you got back from the presigned‐upload call
