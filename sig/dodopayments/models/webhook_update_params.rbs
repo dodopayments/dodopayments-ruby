@@ -2,6 +2,7 @@ module Dodopayments
   module Models
     type webhook_update_params =
       {
+        webhook_id: String,
         description: String?,
         disabled: bool?,
         filter_types: ::Array[Dodopayments::Models::webhook_event_type]?,
@@ -14,6 +15,8 @@ module Dodopayments
     class WebhookUpdateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor webhook_id: String
 
       attr_accessor description: String?
 
@@ -28,6 +31,7 @@ module Dodopayments
       attr_accessor url: String?
 
       def initialize: (
+        webhook_id: String,
         ?description: String?,
         ?disabled: bool?,
         ?filter_types: ::Array[Dodopayments::Models::webhook_event_type]?,
@@ -38,6 +42,7 @@ module Dodopayments
       ) -> void
 
       def to_hash: -> {
+        webhook_id: String,
         description: String?,
         disabled: bool?,
         filter_types: ::Array[Dodopayments::Models::webhook_event_type]?,

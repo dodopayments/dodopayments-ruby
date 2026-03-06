@@ -2,6 +2,7 @@ module Dodopayments
   module Models
     type customer_update_params =
       {
+        customer_id: String,
         email: String?,
         metadata: ::Hash[Symbol, String]?,
         name: String?,
@@ -13,6 +14,8 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      attr_accessor customer_id: String
+
       attr_accessor email: String?
 
       attr_accessor metadata: ::Hash[Symbol, String]?
@@ -22,6 +25,7 @@ module Dodopayments
       attr_accessor phone_number: String?
 
       def initialize: (
+        customer_id: String,
         ?email: String?,
         ?metadata: ::Hash[Symbol, String]?,
         ?name: String?,
@@ -30,6 +34,7 @@ module Dodopayments
       ) -> void
 
       def to_hash: -> {
+        customer_id: String,
         email: String?,
         metadata: ::Hash[Symbol, String]?,
         name: String?,

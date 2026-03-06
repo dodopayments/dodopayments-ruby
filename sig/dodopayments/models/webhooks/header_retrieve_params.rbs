@@ -2,15 +2,24 @@ module Dodopayments
   module Models
     module Webhooks
       type header_retrieve_params =
-        {  } & Dodopayments::Internal::Type::request_parameters
+        { webhook_id: String }
+        & Dodopayments::Internal::Type::request_parameters
 
       class HeaderRetrieveParams < Dodopayments::Internal::Type::BaseModel
         extend Dodopayments::Internal::Type::RequestParameters::Converter
         include Dodopayments::Internal::Type::RequestParameters
 
-        def initialize: (?request_options: Dodopayments::request_opts) -> void
+        attr_accessor webhook_id: String
 
-        def to_hash: -> { request_options: Dodopayments::RequestOptions }
+        def initialize: (
+          webhook_id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          webhook_id: String,
+          request_options: Dodopayments::RequestOptions
+        }
       end
     end
   end

@@ -1,15 +1,23 @@
 module Dodopayments
   module Models
     type discount_delete_params =
-      {  } & Dodopayments::Internal::Type::request_parameters
+      { discount_id: String } & Dodopayments::Internal::Type::request_parameters
 
     class DiscountDeleteParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      def initialize: (?request_options: Dodopayments::request_opts) -> void
+      attr_accessor discount_id: String
 
-      def to_hash: -> { request_options: Dodopayments::RequestOptions }
+      def initialize: (
+        discount_id: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        discount_id: String,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

@@ -15,20 +15,28 @@ module Dodopayments
         end
 
       sig { returns(String) }
+      attr_accessor :id
+
+      sig { returns(String) }
       attr_accessor :file_name
 
       sig do
         params(
+          id: String,
           file_name: String,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(file_name:, request_options: {})
+      def self.new(id:, file_name:, request_options: {})
       end
 
       sig do
         override.returns(
-          { file_name: String, request_options: Dodopayments::RequestOptions }
+          {
+            id: String,
+            file_name: String,
+            request_options: Dodopayments::RequestOptions
+          }
         )
       end
       def to_hash

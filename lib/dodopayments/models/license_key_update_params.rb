@@ -7,6 +7,11 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute activations_limit
       #   The updated activation limit for the license key. Use `null` to remove the
       #   limit, or omit this field to leave it unchanged.
@@ -28,9 +33,11 @@ module Dodopayments
       #   @return [Time, nil]
       optional :expires_at, Time, nil?: true
 
-      # @!method initialize(activations_limit: nil, disabled: nil, expires_at: nil, request_options: {})
+      # @!method initialize(id:, activations_limit: nil, disabled: nil, expires_at: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::LicenseKeyUpdateParams} for more details.
+      #
+      #   @param id [String]
       #
       #   @param activations_limit [Integer, nil] The updated activation limit for the license key.
       #

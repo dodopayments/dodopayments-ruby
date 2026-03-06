@@ -7,6 +7,11 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      # @!attribute subscription_id
+      #
+      #   @return [String]
+      required :subscription_id, String
+
       # @!attribute end_date
       #   Filter by end date (inclusive)
       #
@@ -37,7 +42,9 @@ module Dodopayments
       #   @return [Time, nil]
       optional :start_date, Time, nil?: true
 
-      # @!method initialize(end_date: nil, meter_id: nil, page_number: nil, page_size: nil, start_date: nil, request_options: {})
+      # @!method initialize(subscription_id:, end_date: nil, meter_id: nil, page_number: nil, page_size: nil, start_date: nil, request_options: {})
+      #   @param subscription_id [String]
+      #
       #   @param end_date [Time, nil] Filter by end date (inclusive)
       #
       #   @param meter_id [String, nil] Filter by specific meter ID

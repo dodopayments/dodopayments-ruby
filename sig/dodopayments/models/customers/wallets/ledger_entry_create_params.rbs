@@ -4,6 +4,7 @@ module Dodopayments
       module Wallets
         type ledger_entry_create_params =
           {
+            customer_id: String,
             amount: Integer,
             currency: Dodopayments::Models::currency,
             entry_type: Dodopayments::Models::Customers::Wallets::LedgerEntryCreateParams::entry_type,
@@ -16,6 +17,8 @@ module Dodopayments
           extend Dodopayments::Internal::Type::RequestParameters::Converter
           include Dodopayments::Internal::Type::RequestParameters
 
+          attr_accessor customer_id: String
+
           attr_accessor amount: Integer
 
           attr_accessor currency: Dodopayments::Models::currency
@@ -27,6 +30,7 @@ module Dodopayments
           attr_accessor reason: String?
 
           def initialize: (
+            customer_id: String,
             amount: Integer,
             currency: Dodopayments::Models::currency,
             entry_type: Dodopayments::Models::Customers::Wallets::LedgerEntryCreateParams::entry_type,
@@ -36,6 +40,7 @@ module Dodopayments
           ) -> void
 
           def to_hash: -> {
+            customer_id: String,
             amount: Integer,
             currency: Dodopayments::Models::currency,
             entry_type: Dodopayments::Models::Customers::Wallets::LedgerEntryCreateParams::entry_type,

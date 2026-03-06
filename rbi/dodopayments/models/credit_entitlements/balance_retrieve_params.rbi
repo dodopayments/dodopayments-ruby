@@ -18,19 +18,24 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :credit_entitlement_id
 
+        sig { returns(String) }
+        attr_accessor :customer_id
+
         sig do
           params(
             credit_entitlement_id: String,
+            customer_id: String,
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
-        def self.new(credit_entitlement_id:, request_options: {})
+        def self.new(credit_entitlement_id:, customer_id:, request_options: {})
         end
 
         sig do
           override.returns(
             {
               credit_entitlement_id: String,
+              customer_id: String,
               request_options: Dodopayments::RequestOptions
             }
           )

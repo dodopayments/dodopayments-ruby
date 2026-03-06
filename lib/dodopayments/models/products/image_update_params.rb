@@ -8,12 +8,18 @@ module Dodopayments
         extend Dodopayments::Internal::Type::RequestParameters::Converter
         include Dodopayments::Internal::Type::RequestParameters
 
+        # @!attribute id
+        #
+        #   @return [String]
+        required :id, String
+
         # @!attribute force_update
         #
         #   @return [Boolean, nil]
         optional :force_update, Dodopayments::Internal::Type::Boolean
 
-        # @!method initialize(force_update: nil, request_options: {})
+        # @!method initialize(id:, force_update: nil, request_options: {})
+        #   @param id [String]
         #   @param force_update [Boolean]
         #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
       end

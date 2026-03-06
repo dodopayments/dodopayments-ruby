@@ -15,6 +15,9 @@ module Dodopayments
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :id
+
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :force_update
 
@@ -23,16 +26,18 @@ module Dodopayments
 
         sig do
           params(
+            id: String,
             force_update: T::Boolean,
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
-        def self.new(force_update: nil, request_options: {})
+        def self.new(id:, force_update: nil, request_options: {})
         end
 
         sig do
           override.returns(
             {
+              id: String,
               force_update: T::Boolean,
               request_options: Dodopayments::RequestOptions
             }

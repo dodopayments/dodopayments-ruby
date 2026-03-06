@@ -7,6 +7,11 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute currency
       #   The currency of the Addon
       #
@@ -43,7 +48,9 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::TaxCategory, nil]
       optional :tax_category, enum: -> { Dodopayments::TaxCategory }, nil?: true
 
-      # @!method initialize(currency: nil, description: nil, image_id: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      # @!method initialize(id:, currency: nil, description: nil, image_id: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      #   @param id [String]
+      #
       #   @param currency [Symbol, Dodopayments::Models::Currency, nil] The currency of the Addon
       #
       #   @param description [String, nil] Description of the Addon, optional and must be at most 1000 characters.

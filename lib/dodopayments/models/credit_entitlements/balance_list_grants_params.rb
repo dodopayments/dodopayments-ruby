@@ -13,6 +13,11 @@ module Dodopayments
         #   @return [String]
         required :credit_entitlement_id, String
 
+        # @!attribute customer_id
+        #
+        #   @return [String]
+        required :customer_id, String
+
         # @!attribute page_number
         #   Page number default is 0
         #
@@ -31,8 +36,10 @@ module Dodopayments
         #   @return [Symbol, Dodopayments::Models::CreditEntitlements::BalanceListGrantsParams::Status, nil]
         optional :status, enum: -> { Dodopayments::CreditEntitlements::BalanceListGrantsParams::Status }
 
-        # @!method initialize(credit_entitlement_id:, page_number: nil, page_size: nil, status: nil, request_options: {})
+        # @!method initialize(credit_entitlement_id:, customer_id:, page_number: nil, page_size: nil, status: nil, request_options: {})
         #   @param credit_entitlement_id [String]
+        #
+        #   @param customer_id [String]
         #
         #   @param page_number [Integer] Page number default is 0
         #

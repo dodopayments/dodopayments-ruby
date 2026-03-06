@@ -1,12 +1,19 @@
 module Dodopayments
   module Models
     type license_key_update_params =
-      { activations_limit: Integer?, disabled: bool?, expires_at: Time? }
+      {
+        id: String,
+        activations_limit: Integer?,
+        disabled: bool?,
+        expires_at: Time?
+      }
       & Dodopayments::Internal::Type::request_parameters
 
     class LicenseKeyUpdateParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_accessor activations_limit: Integer?
 
@@ -15,6 +22,7 @@ module Dodopayments
       attr_accessor expires_at: Time?
 
       def initialize: (
+        id: String,
         ?activations_limit: Integer?,
         ?disabled: bool?,
         ?expires_at: Time?,
@@ -22,6 +30,7 @@ module Dodopayments
       ) -> void
 
       def to_hash: -> {
+        id: String,
         activations_limit: Integer?,
         disabled: bool?,
         expires_at: Time?,

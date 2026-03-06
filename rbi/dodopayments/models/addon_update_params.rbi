@@ -14,6 +14,9 @@ module Dodopayments
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       # The currency of the Addon
       sig { returns(T.nilable(Dodopayments::Currency::OrSymbol)) }
       attr_accessor :currency
@@ -40,6 +43,7 @@ module Dodopayments
 
       sig do
         params(
+          id: String,
           currency: T.nilable(Dodopayments::Currency::OrSymbol),
           description: T.nilable(String),
           image_id: T.nilable(String),
@@ -50,6 +54,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         # The currency of the Addon
         currency: nil,
         # Description of the Addon, optional and must be at most 1000 characters.
@@ -69,6 +74,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            id: String,
             currency: T.nilable(Dodopayments::Currency::OrSymbol),
             description: T.nilable(String),
             image_id: T.nilable(String),

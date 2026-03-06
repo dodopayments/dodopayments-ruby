@@ -2,6 +2,7 @@ module Dodopayments
   module Models
     type subscription_charge_params =
       {
+        subscription_id: String,
         product_price: Integer,
         adaptive_currency_fees_inclusive: bool?,
         customer_balance_config: Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig?,
@@ -14,6 +15,8 @@ module Dodopayments
     class SubscriptionChargeParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor subscription_id: String
 
       attr_accessor product_price: Integer
 
@@ -28,6 +31,7 @@ module Dodopayments
       attr_accessor product_description: String?
 
       def initialize: (
+        subscription_id: String,
         product_price: Integer,
         ?adaptive_currency_fees_inclusive: bool?,
         ?customer_balance_config: Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig?,
@@ -38,6 +42,7 @@ module Dodopayments
       ) -> void
 
       def to_hash: -> {
+        subscription_id: String,
         product_price: Integer,
         adaptive_currency_fees_inclusive: bool?,
         customer_balance_config: Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig?,

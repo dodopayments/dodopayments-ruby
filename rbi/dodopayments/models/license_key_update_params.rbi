@@ -14,6 +14,9 @@ module Dodopayments
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       # The updated activation limit for the license key. Use `null` to remove the
       # limit, or omit this field to leave it unchanged.
       sig { returns(T.nilable(Integer)) }
@@ -31,6 +34,7 @@ module Dodopayments
 
       sig do
         params(
+          id: String,
           activations_limit: T.nilable(Integer),
           disabled: T.nilable(T::Boolean),
           expires_at: T.nilable(Time),
@@ -38,6 +42,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         # The updated activation limit for the license key. Use `null` to remove the
         # limit, or omit this field to leave it unchanged.
         activations_limit: nil,
@@ -54,6 +59,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            id: String,
             activations_limit: T.nilable(Integer),
             disabled: T.nilable(T::Boolean),
             expires_at: T.nilable(Time),

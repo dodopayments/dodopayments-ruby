@@ -1,20 +1,25 @@
 module Dodopayments
   module Models
     type product_update_files_params =
-      { file_name: String } & Dodopayments::Internal::Type::request_parameters
+      { id: String, file_name: String }
+      & Dodopayments::Internal::Type::request_parameters
 
     class ProductUpdateFilesParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      attr_accessor id: String
+
       attr_accessor file_name: String
 
       def initialize: (
+        id: String,
         file_name: String,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
       def to_hash: -> {
+        id: String,
         file_name: String,
         request_options: Dodopayments::RequestOptions
       }

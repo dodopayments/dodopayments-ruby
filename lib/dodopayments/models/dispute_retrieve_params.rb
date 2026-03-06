@@ -7,7 +7,13 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      # @!method initialize(request_options: {})
+      # @!attribute dispute_id
+      #
+      #   @return [String]
+      required :dispute_id, String
+
+      # @!method initialize(dispute_id:, request_options: {})
+      #   @param dispute_id [String]
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end

@@ -7,6 +7,11 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      # @!attribute subscription_id
+      #
+      #   @return [String]
+      required :subscription_id, String
+
       # @!attribute product_price
       #   The product price. Represented in the lowest denomination of the currency (e.g.,
       #   cents for USD). For example, to charge $1.00, pass `100`.
@@ -51,9 +56,11 @@ module Dodopayments
       #   @return [String, nil]
       optional :product_description, String, nil?: true
 
-      # @!method initialize(product_price:, adaptive_currency_fees_inclusive: nil, customer_balance_config: nil, metadata: nil, product_currency: nil, product_description: nil, request_options: {})
+      # @!method initialize(subscription_id:, product_price:, adaptive_currency_fees_inclusive: nil, customer_balance_config: nil, metadata: nil, product_currency: nil, product_description: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionChargeParams} for more details.
+      #
+      #   @param subscription_id [String]
       #
       #   @param product_price [Integer] The product price. Represented in the lowest denomination of the currency (e.g.,
       #

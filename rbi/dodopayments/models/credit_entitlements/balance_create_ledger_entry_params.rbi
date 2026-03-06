@@ -18,6 +18,9 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :credit_entitlement_id
 
+        sig { returns(String) }
+        attr_accessor :customer_id
+
         # Amount to credit or debit
         sig { returns(String) }
         attr_accessor :amount
@@ -48,6 +51,7 @@ module Dodopayments
         sig do
           params(
             credit_entitlement_id: String,
+            customer_id: String,
             amount: String,
             entry_type:
               Dodopayments::CreditEntitlements::LedgerEntryType::OrSymbol,
@@ -60,6 +64,7 @@ module Dodopayments
         end
         def self.new(
           credit_entitlement_id:,
+          customer_id:,
           # Amount to credit or debit
           amount:,
           # Entry type: credit or debit
@@ -81,6 +86,7 @@ module Dodopayments
           override.returns(
             {
               credit_entitlement_id: String,
+              customer_id: String,
               amount: String,
               entry_type:
                 Dodopayments::CreditEntitlements::LedgerEntryType::OrSymbol,

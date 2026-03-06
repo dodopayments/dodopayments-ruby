@@ -14,16 +14,22 @@ module Dodopayments
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :discount_id
+
       sig do
-        params(request_options: Dodopayments::RequestOptions::OrHash).returns(
-          T.attached_class
-        )
+        params(
+          discount_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
-      def self.new(request_options: {})
+      def self.new(discount_id:, request_options: {})
       end
 
       sig do
-        override.returns({ request_options: Dodopayments::RequestOptions })
+        override.returns(
+          { discount_id: String, request_options: Dodopayments::RequestOptions }
+        )
       end
       def to_hash
       end

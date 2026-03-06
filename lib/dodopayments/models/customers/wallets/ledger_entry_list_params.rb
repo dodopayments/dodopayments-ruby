@@ -9,6 +9,11 @@ module Dodopayments
           extend Dodopayments::Internal::Type::RequestParameters::Converter
           include Dodopayments::Internal::Type::RequestParameters
 
+          # @!attribute customer_id
+          #
+          #   @return [String]
+          required :customer_id, String
+
           # @!attribute currency
           #   Optional currency filter
           #
@@ -25,7 +30,9 @@ module Dodopayments
           #   @return [Integer, nil]
           optional :page_size, Integer
 
-          # @!method initialize(currency: nil, page_number: nil, page_size: nil, request_options: {})
+          # @!method initialize(customer_id:, currency: nil, page_number: nil, page_size: nil, request_options: {})
+          #   @param customer_id [String]
+          #
           #   @param currency [Symbol, Dodopayments::Models::Currency] Optional currency filter
           #
           #   @param page_number [Integer]

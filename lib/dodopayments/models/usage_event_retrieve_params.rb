@@ -7,7 +7,13 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      # @!method initialize(request_options: {})
+      # @!attribute event_id
+      #
+      #   @return [String]
+      required :event_id, String
+
+      # @!method initialize(event_id:, request_options: {})
+      #   @param event_id [String]
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end

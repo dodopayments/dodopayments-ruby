@@ -4,6 +4,7 @@ module Dodopayments
       type balance_list_ledger_params =
         {
           credit_entitlement_id: String,
+          customer_id: String,
           end_date: Time,
           page_number: Integer,
           page_size: Integer,
@@ -17,6 +18,8 @@ module Dodopayments
         include Dodopayments::Internal::Type::RequestParameters
 
         attr_accessor credit_entitlement_id: String
+
+        attr_accessor customer_id: String
 
         attr_reader end_date: Time?
 
@@ -40,6 +43,7 @@ module Dodopayments
 
         def initialize: (
           credit_entitlement_id: String,
+          customer_id: String,
           ?end_date: Time,
           ?page_number: Integer,
           ?page_size: Integer,
@@ -50,6 +54,7 @@ module Dodopayments
 
         def to_hash: -> {
           credit_entitlement_id: String,
+          customer_id: String,
           end_date: Time,
           page_number: Integer,
           page_size: Integer,

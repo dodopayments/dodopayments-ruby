@@ -9,6 +9,11 @@ module Dodopayments
           extend Dodopayments::Internal::Type::RequestParameters::Converter
           include Dodopayments::Internal::Type::RequestParameters
 
+          # @!attribute customer_id
+          #
+          #   @return [String]
+          required :customer_id, String
+
           # @!attribute amount
           #
           #   @return [Integer]
@@ -37,7 +42,9 @@ module Dodopayments
           #   @return [String, nil]
           optional :reason, String, nil?: true
 
-          # @!method initialize(amount:, currency:, entry_type:, idempotency_key: nil, reason: nil, request_options: {})
+          # @!method initialize(customer_id:, amount:, currency:, entry_type:, idempotency_key: nil, reason: nil, request_options: {})
+          #   @param customer_id [String]
+          #
           #   @param amount [Integer]
           #
           #   @param currency [Symbol, Dodopayments::Models::Currency] Currency of the wallet to adjust

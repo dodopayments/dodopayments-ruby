@@ -14,6 +14,9 @@ module Dodopayments
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :subscription_id
+
       sig { returns(T.nilable(Dodopayments::BillingAddress)) }
       attr_reader :billing
 
@@ -72,6 +75,7 @@ module Dodopayments
 
       sig do
         params(
+          subscription_id: String,
           billing: T.nilable(Dodopayments::BillingAddress::OrHash),
           cancel_at_next_billing_date: T.nilable(T::Boolean),
           credit_entitlement_cart:
@@ -93,6 +97,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        subscription_id:,
         billing: nil,
         # When set, the subscription will remain active until the end of billing period
         cancel_at_next_billing_date: nil,
@@ -111,6 +116,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            subscription_id: String,
             billing: T.nilable(Dodopayments::BillingAddress),
             cancel_at_next_billing_date: T.nilable(T::Boolean),
             credit_entitlement_cart:
