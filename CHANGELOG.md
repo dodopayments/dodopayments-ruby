@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.1.1 (2026-03-06)
+
+Full Changelog: [v2.1.0...v2.1.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.1.0...v2.1.1)
+
+### Chores
+
+* **internal:** codegen related update ([2c286c6](https://github.com/dodopayments/dodopayments-ruby/commit/2c286c64692841d5e41b6bb939c5715bb689a411))
+* **test:** do not count install time for mock server timeout ([0e1eb6a](https://github.com/dodopayments/dodopayments-ruby/commit/0e1eb6afd24f4f2d290a75abde3afb2f0f54cdde))
+
 ## 2.1.0 (2026-03-05)
 
 Full Changelog: [v2.0.0...v2.1.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.0.0...v2.1.0)
