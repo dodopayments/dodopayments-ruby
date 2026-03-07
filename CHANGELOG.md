@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.1.3 (2026-03-07)
+
+Full Changelog: [v2.1.2...v2.1.3](https://github.com/dodopayments/dodopayments-ruby/compare/v2.1.2...v2.1.3)
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([15197f0](https://github.com/dodopayments/dodopayments-ruby/commit/15197f0450856e33a2e6fa990ea4e0d0bc294022))
+
 ## 2.1.2 (2026-03-06)
 
 Full Changelog: [v2.1.1...v2.1.2](https://github.com/dodopayments/dodopayments-ruby/compare/v2.1.1...v2.1.2)

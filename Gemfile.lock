@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    dodopayments (2.1.2)
+    dodopayments (2.1.3)
       cgi
       connection_pool
 
