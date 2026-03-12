@@ -15,6 +15,8 @@ module Dodopayments
 
     attr_reader bearer_token: String
 
+    attr_reader webhook_key: String?
+
     attr_reader checkout_sessions: Dodopayments::Resources::CheckoutSessions
 
     attr_reader payments: Dodopayments::Resources::Payments
@@ -63,6 +65,7 @@ module Dodopayments
 
     def initialize: (
       ?bearer_token: String?,
+      ?webhook_key: String?,
       ?environment: :live_mode | :test_mode | nil,
       ?base_url: String?,
       ?max_retries: Integer,

@@ -24,6 +24,9 @@ module Dodopayments
     # @return [String]
     attr_reader :bearer_token
 
+    # @return [String, nil]
+    attr_reader :webhook_key
+
     # @return [Dodopayments::Resources::CheckoutSessions]
     attr_reader :checkout_sessions
 
@@ -103,6 +106,8 @@ module Dodopayments
     #
     # @param bearer_token [String, nil] Bearer Token for API authentication Defaults to `ENV["DODO_PAYMENTS_API_KEY"]`
     #
+    # @param webhook_key [String, nil] Defaults to `ENV["DODO_PAYMENTS_WEBHOOK_KEY"]`
+    #
     # @param environment [:live_mode, :test_mode, nil] Specifies the environment to use for the API.
     #
     # Each environment maps to a different base URL:
@@ -122,6 +127,7 @@ module Dodopayments
     # @param max_retry_delay [Float]
     def initialize(
       bearer_token: ENV["DODO_PAYMENTS_API_KEY"],
+      webhook_key: ENV["DODO_PAYMENTS_WEBHOOK_KEY"],
       environment: nil,
       base_url: ENV["DODO_PAYMENTS_BASE_URL"],
       max_retries: self.class::DEFAULT_MAX_RETRIES,
@@ -139,6 +145,7 @@ module Dodopayments
       end
 
       @bearer_token = bearer_token.to_s
+      @webhook_key = webhook_key&.to_s
 
       super(
         base_url: base_url,
