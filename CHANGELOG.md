@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.2.0 (2026-03-12)
+
+Full Changelog: [v2.1.2...v2.2.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.1.2...v2.2.0)
+
+### Features
+
+* **client:** add webhook support ([8f3488c](https://github.com/dodopayments/dodopayments-ruby/commit/8f3488c1db4e3c8b58c9d9bb208448db009c4ad3))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([15197f0](https://github.com/dodopayments/dodopayments-ruby/commit/15197f0450856e33a2e6fa990ea4e0d0bc294022))
+
 ## 2.1.2 (2026-03-06)
 
 Full Changelog: [v2.1.1...v2.1.2](https://github.com/dodopayments/dodopayments-ruby/compare/v2.1.1...v2.1.2)
