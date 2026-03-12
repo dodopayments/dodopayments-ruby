@@ -171,7 +171,11 @@ module Dodopayments
       end
 
       sig do
-        params(payload: String).returns(
+        params(
+          payload: String,
+          headers: T::Hash[String, String],
+          key: T.nilable(String)
+        ).returns(
           T.any(
             Dodopayments::CreditAddedWebhookEvent,
             Dodopayments::CreditBalanceLowWebhookEvent,
@@ -208,7 +212,11 @@ module Dodopayments
       end
       def unwrap(
         # The raw webhook payload as a string
-        payload
+        payload,
+        # The raw HTTP headers that came with the payload
+        headers:,
+        # The webhook signing key
+        key: @client.webhook_key
       )
       end
 
