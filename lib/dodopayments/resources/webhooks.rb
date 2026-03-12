@@ -175,8 +175,18 @@ module Dodopayments
 
       # @param payload [String] The raw webhook payload as a string
       #
+      # @param headers [Hash{String=>String}] The raw HTTP headers that came with the payload
+      #
+      # @param key [String, nil] The webhook signing key
+      #
       # @return [Dodopayments::Models::CreditAddedWebhookEvent, Dodopayments::Models::CreditBalanceLowWebhookEvent, Dodopayments::Models::CreditDeductedWebhookEvent, Dodopayments::Models::CreditExpiredWebhookEvent, Dodopayments::Models::CreditManualAdjustmentWebhookEvent, Dodopayments::Models::CreditOverageChargedWebhookEvent, Dodopayments::Models::CreditRolledOverWebhookEvent, Dodopayments::Models::CreditRolloverForfeitedWebhookEvent, Dodopayments::Models::DisputeAcceptedWebhookEvent, Dodopayments::Models::DisputeCancelledWebhookEvent, Dodopayments::Models::DisputeChallengedWebhookEvent, Dodopayments::Models::DisputeExpiredWebhookEvent, Dodopayments::Models::DisputeLostWebhookEvent, Dodopayments::Models::DisputeOpenedWebhookEvent, Dodopayments::Models::DisputeWonWebhookEvent, Dodopayments::Models::LicenseKeyCreatedWebhookEvent, Dodopayments::Models::PaymentCancelledWebhookEvent, Dodopayments::Models::PaymentFailedWebhookEvent, Dodopayments::Models::PaymentProcessingWebhookEvent, Dodopayments::Models::PaymentSucceededWebhookEvent, Dodopayments::Models::RefundFailedWebhookEvent, Dodopayments::Models::RefundSucceededWebhookEvent, Dodopayments::Models::SubscriptionActiveWebhookEvent, Dodopayments::Models::SubscriptionCancelledWebhookEvent, Dodopayments::Models::SubscriptionExpiredWebhookEvent, Dodopayments::Models::SubscriptionFailedWebhookEvent, Dodopayments::Models::SubscriptionOnHoldWebhookEvent, Dodopayments::Models::SubscriptionPlanChangedWebhookEvent, Dodopayments::Models::SubscriptionRenewedWebhookEvent, Dodopayments::Models::SubscriptionUpdatedWebhookEvent]
-      def unwrap(payload)
+      def unwrap(payload, headers:, key: @client.webhook_key)
+        if key.nil?
+          raise ArgumentError.new("Cannot verify a webhook without a key on either the client's webhook_key or passed in as an argument")
+        end
+
+        ::StandardWebhooks::Webhook.new(key).verify(payload, headers)
+
         parsed = JSON.parse(payload, symbolize_names: true)
         Dodopayments::Internal::Type::Converter.coerce(Dodopayments::Models::UnwrapWebhookEvent, parsed)
       end
