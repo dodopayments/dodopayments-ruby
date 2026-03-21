@@ -23,6 +23,9 @@ module Dodopayments
     sig { returns(String) }
     attr_reader :bearer_token
 
+    sig { returns(T.nilable(String)) }
+    attr_reader :webhook_key
+
     sig { returns(Dodopayments::Resources::CheckoutSessions) }
     attr_reader :checkout_sessions
 
@@ -98,6 +101,7 @@ module Dodopayments
     sig do
       params(
         bearer_token: T.nilable(String),
+        webhook_key: T.nilable(String),
         environment: T.nilable(T.any(Symbol, String)),
         base_url: T.nilable(String),
         max_retries: Integer,
@@ -109,6 +113,8 @@ module Dodopayments
     def self.new(
       # Bearer Token for API authentication Defaults to `ENV["DODO_PAYMENTS_API_KEY"]`
       bearer_token: ENV["DODO_PAYMENTS_API_KEY"],
+      # Defaults to `ENV["DODO_PAYMENTS_WEBHOOK_KEY"]`
+      webhook_key: ENV["DODO_PAYMENTS_WEBHOOK_KEY"],
       # Specifies the environment to use for the API.
       #
       # Each environment maps to a different base URL:

@@ -81,7 +81,9 @@ module Dodopayments
       | Dodopayments::SubscriptionUpdatedWebhookEvent)
 
       def unwrap: (
-        String payload
+        String payload,
+        headers: ::Hash[String, String],
+        ?key: String?
       ) -> (Dodopayments::CreditAddedWebhookEvent
       | Dodopayments::CreditBalanceLowWebhookEvent
       | Dodopayments::CreditDeductedWebhookEvent
