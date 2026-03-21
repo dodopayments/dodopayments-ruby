@@ -1,5 +1,26 @@
 # Changelog
 
+## 2.2.0 (2026-03-21)
+
+Full Changelog: [v2.1.2...v2.2.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.1.2...v2.2.0)
+
+### Features
+
+* **client:** add webhook support ([8f3488c](https://github.com/dodopayments/dodopayments-ruby/commit/8f3488c1db4e3c8b58c9d9bb208448db009c4ad3))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([15197f0](https://github.com/dodopayments/dodopayments-ruby/commit/15197f0450856e33a2e6fa990ea4e0d0bc294022))
+* **internal:** tweak CI branches ([dc3f7dc](https://github.com/dodopayments/dodopayments-ruby/commit/dc3f7dc0938f71b047786e11f56c4b51a1e0a776))
+* **tests:** bump steady to v0.19.4 ([4247a60](https://github.com/dodopayments/dodopayments-ruby/commit/4247a60b34ccc131f2b906b03eb0f23841a18240))
+* **tests:** bump steady to v0.19.5 ([7f4e044](https://github.com/dodopayments/dodopayments-ruby/commit/7f4e04431b6f274cccd98ef0d9bd322a1c73868a))
+
+
+### Refactors
+
+* **tests:** switch from prism to steady ([62bcdf6](https://github.com/dodopayments/dodopayments-ruby/commit/62bcdf666e0b382ba8dc83bb530cff79c31931bc))
+
 ## 2.1.2 (2026-03-06)
 
 Full Changelog: [v2.1.1...v2.1.2](https://github.com/dodopayments/dodopayments-ruby/compare/v2.1.1...v2.1.2)
