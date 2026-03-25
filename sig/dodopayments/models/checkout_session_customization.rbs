@@ -5,7 +5,7 @@ module Dodopayments
         force_language: String?,
         show_on_demand_tag: bool,
         show_order_details: bool,
-        theme: Dodopayments::Models::CheckoutSessionCustomization::theme,
+        theme: Dodopayments::Models::CheckoutSessionCustomization::theme?,
         theme_config: Dodopayments::ThemeConfig?
       }
 
@@ -20,11 +20,7 @@ module Dodopayments
 
       def show_order_details=: (bool) -> bool
 
-      attr_reader theme: Dodopayments::Models::CheckoutSessionCustomization::theme?
-
-      def theme=: (
-        Dodopayments::Models::CheckoutSessionCustomization::theme
-      ) -> Dodopayments::Models::CheckoutSessionCustomization::theme
+      attr_accessor theme: Dodopayments::Models::CheckoutSessionCustomization::theme?
 
       attr_accessor theme_config: Dodopayments::ThemeConfig?
 
@@ -32,7 +28,7 @@ module Dodopayments
         ?force_language: String?,
         ?show_on_demand_tag: bool,
         ?show_order_details: bool,
-        ?theme: Dodopayments::Models::CheckoutSessionCustomization::theme,
+        ?theme: Dodopayments::Models::CheckoutSessionCustomization::theme?,
         ?theme_config: Dodopayments::ThemeConfig?
       ) -> void
 
@@ -40,7 +36,7 @@ module Dodopayments
         force_language: String?,
         show_on_demand_tag: bool,
         show_order_details: bool,
-        theme: Dodopayments::Models::CheckoutSessionCustomization::theme,
+        theme: Dodopayments::Models::CheckoutSessionCustomization::theme?,
         theme_config: Dodopayments::ThemeConfig?
       }
 

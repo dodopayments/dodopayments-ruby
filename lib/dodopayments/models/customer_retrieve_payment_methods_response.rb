@@ -38,6 +38,9 @@ module Dodopayments
         optional :last_used_at, Time, nil?: true
 
         # @!attribute payment_method_type
+        #   All supported payment method types (from Hyperswitch).
+        #
+        #   Used for disabled-payment-methods filtering and validation.
         #
         #   @return [Symbol, Dodopayments::Models::PaymentMethodTypes, nil]
         optional :payment_method_type, enum: -> { Dodopayments::PaymentMethodTypes }, nil?: true
@@ -48,11 +51,20 @@ module Dodopayments
         optional :recurring_enabled, Dodopayments::Internal::Type::Boolean, nil?: true
 
         # @!method initialize(payment_method:, payment_method_id:, card: nil, last_used_at: nil, payment_method_type: nil, recurring_enabled: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item} for more
+        #   details.
+        #
         #   @param payment_method [Symbol, Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::PaymentMethod]
+        #
         #   @param payment_method_id [String]
+        #
         #   @param card [Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item::Card, nil]
+        #
         #   @param last_used_at [Time, nil]
-        #   @param payment_method_type [Symbol, Dodopayments::Models::PaymentMethodTypes, nil]
+        #
+        #   @param payment_method_type [Symbol, Dodopayments::Models::PaymentMethodTypes, nil] All supported payment method types (from Hyperswitch).
+        #
         #   @param recurring_enabled [Boolean, nil]
 
         # @see Dodopayments::Models::CustomerRetrievePaymentMethodsResponse::Item#payment_method

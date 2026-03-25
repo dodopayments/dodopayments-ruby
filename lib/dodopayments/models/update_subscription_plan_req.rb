@@ -38,6 +38,15 @@ module Dodopayments
       #   @return [String, nil]
       optional :discount_code, String, nil?: true
 
+      # @!attribute effective_at
+      #   When to apply the plan change.
+      #
+      #   - `immediately` (default): Apply the plan change right away
+      #   - `next_billing_date`: Schedule the change for the next billing date
+      #
+      #   @return [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::EffectiveAt, nil]
+      optional :effective_at, enum: -> { Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt }
+
       # @!attribute metadata
       #   Metadata for the payment. If not passed, the metadata of the subscription will
       #   be taken
@@ -59,7 +68,7 @@ module Dodopayments
                enum: -> { Dodopayments::UpdateSubscriptionPlanReq::OnPaymentFailure },
                nil?: true
 
-      # @!method initialize(product_id:, proration_billing_mode:, quantity:, addons: nil, discount_code: nil, metadata: nil, on_payment_failure: nil)
+      # @!method initialize(product_id:, proration_billing_mode:, quantity:, addons: nil, discount_code: nil, effective_at: nil, metadata: nil, on_payment_failure: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::UpdateSubscriptionPlanReq} for more details.
       #
@@ -72,6 +81,8 @@ module Dodopayments
       #   @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
       #
       #   @param discount_code [String, nil] Optional discount code to apply to the new plan.
+      #
+      #   @param effective_at [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::EffectiveAt] When to apply the plan change.
       #
       #   @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
@@ -86,6 +97,23 @@ module Dodopayments
         PRORATED_IMMEDIATELY = :prorated_immediately
         FULL_IMMEDIATELY = :full_immediately
         DIFFERENCE_IMMEDIATELY = :difference_immediately
+        DO_NOT_BILL = :do_not_bill
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
+      # When to apply the plan change.
+      #
+      # - `immediately` (default): Apply the plan change right away
+      # - `next_billing_date`: Schedule the change for the next billing date
+      #
+      # @see Dodopayments::Models::UpdateSubscriptionPlanReq#effective_at
+      module EffectiveAt
+        extend Dodopayments::Internal::Type::Enum
+
+        IMMEDIATELY = :immediately
+        NEXT_BILLING_DATE = :next_billing_date
 
         # @!method self.values
         #   @return [Array<Symbol>]

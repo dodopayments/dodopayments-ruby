@@ -11,6 +11,7 @@ module Dodopayments
           billing_address:
             T.nilable(Dodopayments::CheckoutSessionBillingAddress::OrHash),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
+          cancel_url: T.nilable(String),
           confirm: T::Boolean,
           custom_fields: T.nilable(T::Array[Dodopayments::CustomField::OrHash]),
           customer:
@@ -49,6 +50,9 @@ module Dodopayments
         billing_address: nil,
         # This field is ingored if adaptive pricing is disabled
         billing_currency: nil,
+        # The URL to redirect the customer if they cancel or go back from the checkout. If
+        # not provided, the back button will not be displayed.
+        cancel_url: nil,
         # If confirm is true, all the details will be finalized. If required data is
         # missing, an API error is thrown.
         confirm: nil,
@@ -104,6 +108,7 @@ module Dodopayments
           billing_address:
             T.nilable(Dodopayments::CheckoutSessionBillingAddress::OrHash),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
+          cancel_url: T.nilable(String),
           confirm: T::Boolean,
           custom_fields: T.nilable(T::Array[Dodopayments::CustomField::OrHash]),
           customer:
@@ -142,6 +147,9 @@ module Dodopayments
         billing_address: nil,
         # This field is ingored if adaptive pricing is disabled
         billing_currency: nil,
+        # The URL to redirect the customer if they cancel or go back from the checkout. If
+        # not provided, the back button will not be displayed.
+        cancel_url: nil,
         # If confirm is true, all the details will be finalized. If required data is
         # missing, an API error is thrown.
         confirm: nil,

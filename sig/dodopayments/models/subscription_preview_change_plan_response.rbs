@@ -23,21 +23,26 @@ module Dodopayments
 
       type immediate_charge =
         {
+          effective_at: Time,
           line_items: ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::line_item],
           summary: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::Summary
         }
 
       class ImmediateCharge < Dodopayments::Internal::Type::BaseModel
+        attr_accessor effective_at: Time
+
         attr_accessor line_items: ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::line_item]
 
         attr_accessor summary: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::Summary
 
         def initialize: (
+          effective_at: Time,
           line_items: ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::line_item],
           summary: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::Summary
         ) -> void
 
         def to_hash: -> {
+          effective_at: Time,
           line_items: ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::line_item],
           summary: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::Summary
         }

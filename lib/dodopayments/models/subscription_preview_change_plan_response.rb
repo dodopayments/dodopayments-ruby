@@ -23,6 +23,12 @@ module Dodopayments
 
       # @see Dodopayments::Models::SubscriptionPreviewChangePlanResponse#immediate_charge
       class ImmediateCharge < Dodopayments::Internal::Type::BaseModel
+        # @!attribute effective_at
+        #   When the plan change will be effective
+        #
+        #   @return [Time]
+        required :effective_at, Time
+
         # @!attribute line_items
         #
         #   @return [Array<Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter>]
@@ -35,8 +41,11 @@ module Dodopayments
         required :summary,
                  -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::Summary }
 
-        # @!method initialize(line_items:, summary:)
+        # @!method initialize(effective_at:, line_items:, summary:)
+        #   @param effective_at [Time] When the plan change will be effective
+        #
         #   @param line_items [Array<Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter>]
+        #
         #   @param summary [Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::Summary]
 
         module LineItem

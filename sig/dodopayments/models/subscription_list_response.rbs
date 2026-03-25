@@ -27,6 +27,7 @@ module Dodopayments
         discount_id: String?,
         payment_method_id: String?,
         product_name: String?,
+        scheduled_change: Dodopayments::Models::SubscriptionListResponse::ScheduledChange?,
         tax_id: String?
       }
 
@@ -81,6 +82,8 @@ module Dodopayments
 
       attr_accessor product_name: String?
 
+      attr_accessor scheduled_change: Dodopayments::Models::SubscriptionListResponse::ScheduledChange?
+
       attr_accessor tax_id: String?
 
       def initialize: (
@@ -109,6 +112,7 @@ module Dodopayments
         ?discount_id: String?,
         ?payment_method_id: String?,
         ?product_name: String?,
+        ?scheduled_change: Dodopayments::Models::SubscriptionListResponse::ScheduledChange?,
         ?tax_id: String?
       ) -> void
 
@@ -138,8 +142,79 @@ module Dodopayments
         discount_id: String?,
         payment_method_id: String?,
         product_name: String?,
+        scheduled_change: Dodopayments::Models::SubscriptionListResponse::ScheduledChange?,
         tax_id: String?
       }
+
+      type scheduled_change =
+        {
+          id: String,
+          addons: ::Array[Dodopayments::Models::SubscriptionListResponse::ScheduledChange::Addon],
+          created_at: Time,
+          effective_at: Time,
+          product_id: String,
+          quantity: Integer,
+          product_description: String?,
+          product_name: String?
+        }
+
+      class ScheduledChange < Dodopayments::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor addons: ::Array[Dodopayments::Models::SubscriptionListResponse::ScheduledChange::Addon]
+
+        attr_accessor created_at: Time
+
+        attr_accessor effective_at: Time
+
+        attr_accessor product_id: String
+
+        attr_accessor quantity: Integer
+
+        attr_accessor product_description: String?
+
+        attr_accessor product_name: String?
+
+        def initialize: (
+          id: String,
+          addons: ::Array[Dodopayments::Models::SubscriptionListResponse::ScheduledChange::Addon],
+          created_at: Time,
+          effective_at: Time,
+          product_id: String,
+          quantity: Integer,
+          ?product_description: String?,
+          ?product_name: String?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          addons: ::Array[Dodopayments::Models::SubscriptionListResponse::ScheduledChange::Addon],
+          created_at: Time,
+          effective_at: Time,
+          product_id: String,
+          quantity: Integer,
+          product_description: String?,
+          product_name: String?
+        }
+
+        type addon = { addon_id: String, name: String, quantity: Integer }
+
+        class Addon < Dodopayments::Internal::Type::BaseModel
+          attr_accessor addon_id: String
+
+          attr_accessor name: String
+
+          attr_accessor quantity: Integer
+
+          def initialize: (
+            addon_id: String,
+            name: String,
+            quantity: Integer
+          ) -> void
+
+          def to_hash: -> { addon_id: String, name: String, quantity: Integer }
+        end
+      end
     end
   end
 end

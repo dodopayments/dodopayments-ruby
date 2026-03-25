@@ -7,6 +7,7 @@ module Dodopayments
         quantity: Integer,
         addons: ::Array[Dodopayments::AttachAddon]?,
         discount_code: String?,
+        effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
         metadata: ::Hash[Symbol, String]?,
         on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
       }
@@ -22,6 +23,12 @@ module Dodopayments
 
       attr_accessor discount_code: String?
 
+      attr_reader effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at?
+
+      def effective_at=: (
+        Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at
+      ) -> Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at
+
       attr_accessor metadata: ::Hash[Symbol, String]?
 
       attr_accessor on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
@@ -32,6 +39,7 @@ module Dodopayments
         quantity: Integer,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
         ?discount_code: String?,
+        ?effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
         ?metadata: ::Hash[Symbol, String]?,
         ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
       ) -> void
@@ -42,12 +50,16 @@ module Dodopayments
         quantity: Integer,
         addons: ::Array[Dodopayments::AttachAddon]?,
         discount_code: String?,
+        effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
         metadata: ::Hash[Symbol, String]?,
         on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
       }
 
       type proration_billing_mode =
-        :prorated_immediately | :full_immediately | :difference_immediately
+        :prorated_immediately
+        | :full_immediately
+        | :difference_immediately
+        | :do_not_bill
 
       module ProrationBillingMode
         extend Dodopayments::Internal::Type::Enum
@@ -55,8 +67,20 @@ module Dodopayments
         PRORATED_IMMEDIATELY: :prorated_immediately
         FULL_IMMEDIATELY: :full_immediately
         DIFFERENCE_IMMEDIATELY: :difference_immediately
+        DO_NOT_BILL: :do_not_bill
 
         def self?.values: -> ::Array[Dodopayments::Models::UpdateSubscriptionPlanReq::proration_billing_mode]
+      end
+
+      type effective_at = :immediately | :next_billing_date
+
+      module EffectiveAt
+        extend Dodopayments::Internal::Type::Enum
+
+        IMMEDIATELY: :immediately
+        NEXT_BILLING_DATE: :next_billing_date
+
+        def self?.values: -> ::Array[Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at]
       end
 
       type on_payment_failure = :prevent_change | :apply_change

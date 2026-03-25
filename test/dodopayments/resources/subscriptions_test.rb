@@ -72,6 +72,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         discount_id: String | nil,
         expires_at: Time | nil,
         payment_method_id: String | nil,
+        scheduled_change: Dodopayments::Subscription::ScheduledChange | nil,
         tax_id: String | nil
       }
     end
@@ -116,6 +117,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         discount_id: String | nil,
         expires_at: Time | nil,
         payment_method_id: String | nil,
+        scheduled_change: Dodopayments::Subscription::ScheduledChange | nil,
         tax_id: String | nil
       }
     end
@@ -162,6 +164,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         discount_id: String | nil,
         payment_method_id: String | nil,
         product_name: String | nil,
+        scheduled_change: Dodopayments::Models::SubscriptionListResponse::ScheduledChange | nil,
         tax_id: String | nil
       }
     end

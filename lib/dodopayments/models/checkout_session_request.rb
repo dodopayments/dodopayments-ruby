@@ -33,6 +33,13 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::Currency, nil]
       optional :billing_currency, enum: -> { Dodopayments::Currency }, nil?: true
 
+      # @!attribute cancel_url
+      #   The URL to redirect the customer if they cancel or go back from the checkout. If
+      #   not provided, the back button will not be displayed.
+      #
+      #   @return [String, nil]
+      optional :cancel_url, String, nil?: true
+
       # @!attribute confirm
       #   If confirm is true, all the details will be finalized. If required data is
       #   missing, an API error is thrown.
@@ -133,7 +140,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil)
+      # @!method initialize(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionRequest} for more details.
       #
@@ -144,6 +151,8 @@ module Dodopayments
       #   @param billing_address [Dodopayments::Models::CheckoutSessionBillingAddress, nil] Billing address information for the session
       #
       #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] This field is ingored if adaptive pricing is disabled
+      #
+      #   @param cancel_url [String, nil] The URL to redirect the customer if they cancel or go back from the checkout.
       #
       #   @param confirm [Boolean] If confirm is true, all the details will be finalized. If required data is missi
       #

@@ -7,6 +7,7 @@ module Dodopayments
         sig do
           params(
             customer_id: String,
+            return_url: String,
             send_email: T::Boolean,
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(Dodopayments::CustomerPortalSession)
@@ -14,6 +15,9 @@ module Dodopayments
         def create(
           # Customer Id
           customer_id,
+          # Optional return URL for this session. Overrides the business-level default. This
+          # URL will be shown as a "Return to {business}" back button in the portal.
+          return_url: nil,
           # If true, will send link to user.
           send_email: nil,
           request_options: {}
