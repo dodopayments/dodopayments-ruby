@@ -113,6 +113,31 @@ module Dodopayments
         )
       end
 
+      # @overload delete_payment_method(payment_method_id, customer_id:, request_options: {})
+      #
+      # @param payment_method_id [String] Payment Method Id
+      #
+      # @param customer_id [String] Customer Id
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [nil]
+      #
+      # @see Dodopayments::Models::CustomerDeletePaymentMethodParams
+      def delete_payment_method(payment_method_id, params)
+        parsed, options = Dodopayments::CustomerDeletePaymentMethodParams.dump_request(params)
+        customer_id =
+          parsed.delete(:customer_id) do
+            raise ArgumentError.new("missing required path argument #{_1}")
+          end
+        @client.request(
+          method: :delete,
+          path: ["customers/%1$s/payment-methods/%2$s", customer_id, payment_method_id],
+          model: NilClass,
+          options: options
+        )
+      end
+
       # List all credit entitlements for a customer with their current balances
       #
       # @overload list_credit_entitlements(customer_id, request_options: {})

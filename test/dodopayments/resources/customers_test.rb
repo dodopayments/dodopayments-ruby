@@ -90,6 +90,15 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
     end
   end
 
+  def test_delete_payment_method_required_params
+    response =
+      @dodo_payments.customers.delete_payment_method("payment_method_id", customer_id: "customer_id")
+
+    assert_pattern do
+      response => nil
+    end
+  end
+
   def test_list_credit_entitlements
     response = @dodo_payments.customers.list_credit_entitlements("customer_id")
 

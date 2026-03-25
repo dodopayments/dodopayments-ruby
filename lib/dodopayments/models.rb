@@ -149,6 +149,8 @@ module Dodopayments
 
   CustomerCreateParams = Dodopayments::Models::CustomerCreateParams
 
+  CustomerDeletePaymentMethodParams = Dodopayments::Models::CustomerDeletePaymentMethodParams
+
   CustomerLimitedDetails = Dodopayments::Models::CustomerLimitedDetails
 
   CustomerListCreditEntitlementsParams = Dodopayments::Models::CustomerListCreditEntitlementsParams

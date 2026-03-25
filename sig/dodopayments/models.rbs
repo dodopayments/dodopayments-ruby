@@ -109,6 +109,8 @@ module Dodopayments
 
   class CustomerCreateParams = Dodopayments::Models::CustomerCreateParams
 
+  class CustomerDeletePaymentMethodParams = Dodopayments::Models::CustomerDeletePaymentMethodParams
+
   class CustomerLimitedDetails = Dodopayments::Models::CustomerLimitedDetails
 
   class CustomerListCreditEntitlementsParams = Dodopayments::Models::CustomerListCreditEntitlementsParams

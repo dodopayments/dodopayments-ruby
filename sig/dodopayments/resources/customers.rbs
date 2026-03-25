@@ -37,6 +37,12 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Customer]
 
+      def delete_payment_method: (
+        String payment_method_id,
+        customer_id: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
+
       def list_credit_entitlements: (
         String customer_id,
         ?request_options: Dodopayments::request_opts
