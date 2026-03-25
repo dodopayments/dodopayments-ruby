@@ -68,6 +68,10 @@ module Dodopayments
             )
           end
 
+        # When the plan change will be effective
+        sig { returns(Time) }
+        attr_accessor :effective_at
+
         sig do
           returns(
             T::Array[
@@ -94,6 +98,7 @@ module Dodopayments
 
         sig do
           params(
+            effective_at: Time,
             line_items:
               T::Array[
                 T.any(
@@ -106,12 +111,18 @@ module Dodopayments
               Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::Summary::OrHash
           ).returns(T.attached_class)
         end
-        def self.new(line_items:, summary:)
+        def self.new(
+          # When the plan change will be effective
+          effective_at:,
+          line_items:,
+          summary:
+        )
         end
 
         sig do
           override.returns(
             {
+              effective_at: Time,
               line_items:
                 T::Array[
                   Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Variants

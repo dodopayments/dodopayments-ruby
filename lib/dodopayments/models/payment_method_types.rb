@@ -2,6 +2,9 @@
 
 module Dodopayments
   module Models
+    # All supported payment method types (from Hyperswitch).
+    #
+    # Used for disabled-payment-methods filtering and validation.
     module PaymentMethodTypes
       extend Dodopayments::Internal::Type::Enum
 

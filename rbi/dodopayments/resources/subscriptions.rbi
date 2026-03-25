@@ -195,6 +195,8 @@ module Dodopayments
           quantity: Integer,
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           discount_code: T.nilable(String),
+          effective_at:
+            Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol,
           metadata: T.nilable(T::Hash[Symbol, String]),
           on_payment_failure:
             T.nilable(
@@ -220,6 +222,11 @@ module Dodopayments
         # has an existing discount with `preserve_on_plan_change=true`, the existing
         # discount will be preserved (if applicable to the new product).
         discount_code: nil,
+        # When to apply the plan change.
+        #
+        # - `immediately` (default): Apply the plan change right away
+        # - `next_billing_date`: Schedule the change for the next billing date
+        effective_at: nil,
         # Metadata for the payment. If not passed, the metadata of the subscription will
         # be taken
         metadata: nil,
@@ -284,6 +291,8 @@ module Dodopayments
           quantity: Integer,
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           discount_code: T.nilable(String),
+          effective_at:
+            Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol,
           metadata: T.nilable(T::Hash[Symbol, String]),
           on_payment_failure:
             T.nilable(
@@ -309,6 +318,11 @@ module Dodopayments
         # has an existing discount with `preserve_on_plan_change=true`, the existing
         # discount will be preserved (if applicable to the new product).
         discount_code: nil,
+        # When to apply the plan change.
+        #
+        # - `immediately` (default): Apply the plan change right away
+        # - `next_billing_date`: Schedule the change for the next billing date
+        effective_at: nil,
         # Metadata for the payment. If not passed, the metadata of the subscription will
         # be taken
         metadata: nil,

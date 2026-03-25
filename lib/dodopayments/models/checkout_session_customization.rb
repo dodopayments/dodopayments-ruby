@@ -28,10 +28,10 @@ module Dodopayments
       # @!attribute theme
       #   Theme of the page (determines which mode - light/dark/system - to use)
       #
-      #   Default is `System`.
+      #   If not provided, uses the business-configured theme from business_themes table.
       #
       #   @return [Symbol, Dodopayments::Models::CheckoutSessionCustomization::Theme, nil]
-      optional :theme, enum: -> { Dodopayments::CheckoutSessionCustomization::Theme }
+      optional :theme, enum: -> { Dodopayments::CheckoutSessionCustomization::Theme }, nil?: true
 
       # @!attribute theme_config
       #   Optional custom theme configuration with colors for light and dark modes
@@ -49,13 +49,13 @@ module Dodopayments
       #
       #   @param show_order_details [Boolean] Show order details by default
       #
-      #   @param theme [Symbol, Dodopayments::Models::CheckoutSessionCustomization::Theme] Theme of the page (determines which mode - light/dark/system - to use)
+      #   @param theme [Symbol, Dodopayments::Models::CheckoutSessionCustomization::Theme, nil] Theme of the page (determines which mode - light/dark/system - to use)
       #
       #   @param theme_config [Dodopayments::Models::ThemeConfig, nil] Optional custom theme configuration with colors for light and dark modes
 
       # Theme of the page (determines which mode - light/dark/system - to use)
       #
-      # Default is `System`.
+      # If not provided, uses the business-configured theme from business_themes table.
       #
       # @see Dodopayments::Models::CheckoutSessionCustomization#theme
       module Theme

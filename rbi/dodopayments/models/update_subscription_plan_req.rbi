@@ -39,6 +39,27 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_code
 
+      # When to apply the plan change.
+      #
+      # - `immediately` (default): Apply the plan change right away
+      # - `next_billing_date`: Schedule the change for the next billing date
+      sig do
+        returns(
+          T.nilable(
+            Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol
+          )
+        )
+      end
+      attr_reader :effective_at
+
+      sig do
+        params(
+          effective_at:
+            Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol
+        ).void
+      end
+      attr_writer :effective_at
+
       # Metadata for the payment. If not passed, the metadata of the subscription will
       # be taken
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
@@ -68,6 +89,8 @@ module Dodopayments
           quantity: Integer,
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           discount_code: T.nilable(String),
+          effective_at:
+            Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol,
           metadata: T.nilable(T::Hash[Symbol, String]),
           on_payment_failure:
             T.nilable(
@@ -90,6 +113,11 @@ module Dodopayments
         # has an existing discount with `preserve_on_plan_change=true`, the existing
         # discount will be preserved (if applicable to the new product).
         discount_code: nil,
+        # When to apply the plan change.
+        #
+        # - `immediately` (default): Apply the plan change right away
+        # - `next_billing_date`: Schedule the change for the next billing date
+        effective_at: nil,
         # Metadata for the payment. If not passed, the metadata of the subscription will
         # be taken
         metadata: nil,
@@ -113,6 +141,8 @@ module Dodopayments
             quantity: Integer,
             addons: T.nilable(T::Array[Dodopayments::AttachAddon]),
             discount_code: T.nilable(String),
+            effective_at:
+              Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol,
             metadata: T.nilable(T::Hash[Symbol, String]),
             on_payment_failure:
               T.nilable(
@@ -152,11 +182,51 @@ module Dodopayments
             :difference_immediately,
             Dodopayments::UpdateSubscriptionPlanReq::ProrationBillingMode::TaggedSymbol
           )
+        DO_NOT_BILL =
+          T.let(
+            :do_not_bill,
+            Dodopayments::UpdateSubscriptionPlanReq::ProrationBillingMode::TaggedSymbol
+          )
 
         sig do
           override.returns(
             T::Array[
               Dodopayments::UpdateSubscriptionPlanReq::ProrationBillingMode::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
+      end
+
+      # When to apply the plan change.
+      #
+      # - `immediately` (default): Apply the plan change right away
+      # - `next_billing_date`: Schedule the change for the next billing date
+      module EffectiveAt
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        IMMEDIATELY =
+          T.let(
+            :immediately,
+            Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::TaggedSymbol
+          )
+        NEXT_BILLING_DATE =
+          T.let(
+            :next_billing_date,
+            Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::TaggedSymbol
             ]
           )
         end

@@ -6,7 +6,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::CheckoutSessionCreateParams} for more details.
       #
-      # @overload create(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil, request_options: {})
+      # @overload create(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil, request_options: {})
       #
       # @param product_cart [Array<Dodopayments::Models::ProductItemReq>]
       #
@@ -15,6 +15,8 @@ module Dodopayments
       # @param billing_address [Dodopayments::Models::CheckoutSessionBillingAddress, nil] Billing address information for the session
       #
       # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] This field is ingored if adaptive pricing is disabled
+      #
+      # @param cancel_url [String, nil] The URL to redirect the customer if they cancel or go back from the checkout.
       #
       # @param confirm [Boolean] If confirm is true, all the details will be finalized. If required data is missi
       #
@@ -84,7 +86,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::CheckoutSessionPreviewParams} for more details.
       #
-      # @overload preview(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil, request_options: {})
+      # @overload preview(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil, request_options: {})
       #
       # @param product_cart [Array<Dodopayments::Models::ProductItemReq>]
       #
@@ -93,6 +95,8 @@ module Dodopayments
       # @param billing_address [Dodopayments::Models::CheckoutSessionBillingAddress, nil] Billing address information for the session
       #
       # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] This field is ingored if adaptive pricing is disabled
+      #
+      # @param cancel_url [String, nil] The URL to redirect the customer if they cancel or go back from the checkout.
       #
       # @param confirm [Boolean] If confirm is true, all the details will be finalized. If required data is missi
       #
