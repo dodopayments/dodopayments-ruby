@@ -4,6 +4,7 @@ module Dodopayments
       class CustomerPortal
         def create: (
           String customer_id,
+          ?return_url: String,
           ?send_email: bool,
           ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::CustomerPortalSession

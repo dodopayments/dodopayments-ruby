@@ -85,6 +85,9 @@ module Dodopayments
         sig { returns(T.nilable(Time)) }
         attr_accessor :last_used_at
 
+        # All supported payment method types (from Hyperswitch).
+        #
+        # Used for disabled-payment-methods filtering and validation.
         sig do
           returns(T.nilable(Dodopayments::PaymentMethodTypes::TaggedSymbol))
         end
@@ -113,6 +116,9 @@ module Dodopayments
           payment_method_id:,
           card: nil,
           last_used_at: nil,
+          # All supported payment method types (from Hyperswitch).
+          #
+          # Used for disabled-payment-methods filtering and validation.
           payment_method_type: nil,
           recurring_enabled: nil
         )

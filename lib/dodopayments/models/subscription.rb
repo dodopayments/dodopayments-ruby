@@ -190,13 +190,19 @@ module Dodopayments
       #   @return [String, nil]
       optional :payment_method_id, String, nil?: true
 
+      # @!attribute scheduled_change
+      #   Scheduled plan change details, if any
+      #
+      #   @return [Dodopayments::Models::Subscription::ScheduledChange, nil]
+      optional :scheduled_change, -> { Dodopayments::Subscription::ScheduledChange }, nil?: true
+
       # @!attribute tax_id
       #   Tax identifier provided for this subscription (if applicable)
       #
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(addons:, billing:, cancel_at_next_billing_date:, created_at:, credit_entitlement_cart:, currency:, customer:, metadata:, meter_credit_entitlement_cart:, meters:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, custom_field_responses: nil, discount_cycles_remaining: nil, discount_id: nil, expires_at: nil, payment_method_id: nil, tax_id: nil)
+      # @!method initialize(addons:, billing:, cancel_at_next_billing_date:, created_at:, credit_entitlement_cart:, currency:, customer:, metadata:, meter_credit_entitlement_cart:, meters:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, custom_field_responses: nil, discount_cycles_remaining: nil, discount_id: nil, expires_at: nil, payment_method_id: nil, scheduled_change: nil, tax_id: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Subscription} for more details.
       #
@@ -262,7 +268,107 @@ module Dodopayments
       #
       #   @param payment_method_id [String, nil] Saved payment method id used for recurring charges
       #
+      #   @param scheduled_change [Dodopayments::Models::Subscription::ScheduledChange, nil] Scheduled plan change details, if any
+      #
       #   @param tax_id [String, nil] Tax identifier provided for this subscription (if applicable)
+
+      # @see Dodopayments::Models::Subscription#scheduled_change
+      class ScheduledChange < Dodopayments::Internal::Type::BaseModel
+        # @!attribute id
+        #   The scheduled plan change ID
+        #
+        #   @return [String]
+        required :id, String
+
+        # @!attribute addons
+        #   Addons included in the scheduled change
+        #
+        #   @return [Array<Dodopayments::Models::Subscription::ScheduledChange::Addon>]
+        required :addons,
+                 -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Subscription::ScheduledChange::Addon] }
+
+        # @!attribute created_at
+        #   When this scheduled change was created
+        #
+        #   @return [Time]
+        required :created_at, Time
+
+        # @!attribute effective_at
+        #   When the change will be applied
+        #
+        #   @return [Time]
+        required :effective_at, Time
+
+        # @!attribute product_id
+        #   The product ID the subscription will change to
+        #
+        #   @return [String]
+        required :product_id, String
+
+        # @!attribute quantity
+        #   Quantity for the new plan
+        #
+        #   @return [Integer]
+        required :quantity, Integer
+
+        # @!attribute product_description
+        #   Description of the product being changed to
+        #
+        #   @return [String, nil]
+        optional :product_description, String, nil?: true
+
+        # @!attribute product_name
+        #   Name of the product being changed to
+        #
+        #   @return [String, nil]
+        optional :product_name, String, nil?: true
+
+        # @!method initialize(id:, addons:, created_at:, effective_at:, product_id:, quantity:, product_description: nil, product_name: nil)
+        #   Scheduled plan change details, if any
+        #
+        #   @param id [String] The scheduled plan change ID
+        #
+        #   @param addons [Array<Dodopayments::Models::Subscription::ScheduledChange::Addon>] Addons included in the scheduled change
+        #
+        #   @param created_at [Time] When this scheduled change was created
+        #
+        #   @param effective_at [Time] When the change will be applied
+        #
+        #   @param product_id [String] The product ID the subscription will change to
+        #
+        #   @param quantity [Integer] Quantity for the new plan
+        #
+        #   @param product_description [String, nil] Description of the product being changed to
+        #
+        #   @param product_name [String, nil] Name of the product being changed to
+
+        class Addon < Dodopayments::Internal::Type::BaseModel
+          # @!attribute addon_id
+          #   The addon ID
+          #
+          #   @return [String]
+          required :addon_id, String
+
+          # @!attribute name
+          #   Name of the addon
+          #
+          #   @return [String]
+          required :name, String
+
+          # @!attribute quantity
+          #   Quantity of the addon
+          #
+          #   @return [Integer]
+          required :quantity, Integer
+
+          # @!method initialize(addon_id:, name:, quantity:)
+          #   @param addon_id [String] The addon ID
+          #
+          #   @param name [String] Name of the addon
+          #
+          #   @param quantity [Integer] Quantity of the addon
+        end
+      end
     end
   end
 end

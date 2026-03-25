@@ -35,20 +35,13 @@ module Dodopayments
 
       # Theme of the page (determines which mode - light/dark/system - to use)
       #
-      # Default is `System`.
+      # If not provided, uses the business-configured theme from business_themes table.
       sig do
         returns(
           T.nilable(Dodopayments::CheckoutSessionCustomization::Theme::OrSymbol)
         )
       end
-      attr_reader :theme
-
-      sig do
-        params(
-          theme: Dodopayments::CheckoutSessionCustomization::Theme::OrSymbol
-        ).void
-      end
-      attr_writer :theme
+      attr_accessor :theme
 
       # Optional custom theme configuration with colors for light and dark modes
       sig { returns(T.nilable(Dodopayments::ThemeConfig)) }
@@ -64,7 +57,10 @@ module Dodopayments
           force_language: T.nilable(String),
           show_on_demand_tag: T::Boolean,
           show_order_details: T::Boolean,
-          theme: Dodopayments::CheckoutSessionCustomization::Theme::OrSymbol,
+          theme:
+            T.nilable(
+              Dodopayments::CheckoutSessionCustomization::Theme::OrSymbol
+            ),
           theme_config: T.nilable(Dodopayments::ThemeConfig::OrHash)
         ).returns(T.attached_class)
       end
@@ -81,7 +77,7 @@ module Dodopayments
         show_order_details: nil,
         # Theme of the page (determines which mode - light/dark/system - to use)
         #
-        # Default is `System`.
+        # If not provided, uses the business-configured theme from business_themes table.
         theme: nil,
         # Optional custom theme configuration with colors for light and dark modes
         theme_config: nil
@@ -94,7 +90,10 @@ module Dodopayments
             force_language: T.nilable(String),
             show_on_demand_tag: T::Boolean,
             show_order_details: T::Boolean,
-            theme: Dodopayments::CheckoutSessionCustomization::Theme::OrSymbol,
+            theme:
+              T.nilable(
+                Dodopayments::CheckoutSessionCustomization::Theme::OrSymbol
+              ),
             theme_config: T.nilable(Dodopayments::ThemeConfig)
           }
         )
@@ -104,7 +103,7 @@ module Dodopayments
 
       # Theme of the page (determines which mode - light/dark/system - to use)
       #
-      # Default is `System`.
+      # If not provided, uses the business-configured theme from business_themes table.
       module Theme
         extend Dodopayments::Internal::Type::Enum
 

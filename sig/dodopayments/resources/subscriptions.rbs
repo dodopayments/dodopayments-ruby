@@ -63,6 +63,7 @@ module Dodopayments
         quantity: Integer,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
         ?discount_code: String?,
+        ?effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
         ?metadata: ::Hash[Symbol, String]?,
         ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?,
         ?request_options: Dodopayments::request_opts
@@ -86,6 +87,7 @@ module Dodopayments
         quantity: Integer,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
         ?discount_code: String?,
+        ?effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
         ?metadata: ::Hash[Symbol, String]?,
         ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?,
         ?request_options: Dodopayments::request_opts
