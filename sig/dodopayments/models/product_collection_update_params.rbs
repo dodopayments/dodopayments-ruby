@@ -1,0 +1,51 @@
+module Dodopayments
+  module Models
+    type product_collection_update_params =
+      {
+        id: String,
+        brand_id: String?,
+        description: String?,
+        group_order: ::Array[String]?,
+        image_id: String?,
+        name: String?
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class ProductCollectionUpdateParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor id: String
+
+      attr_accessor brand_id: String?
+
+      attr_accessor description: String?
+
+      attr_accessor group_order: ::Array[String]?
+
+      attr_accessor image_id: String?
+
+      attr_accessor name: String?
+
+      def initialize: (
+        id: String,
+        ?brand_id: String?,
+        ?description: String?,
+        ?group_order: ::Array[String]?,
+        ?image_id: String?,
+        ?name: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        brand_id: String?,
+        description: String?,
+        group_order: ::Array[String]?,
+        image_id: String?,
+        name: String?,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

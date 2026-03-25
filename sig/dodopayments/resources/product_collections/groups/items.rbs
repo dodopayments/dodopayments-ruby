@@ -1,0 +1,33 @@
+module Dodopayments
+  module Resources
+    class ProductCollections
+      class Groups
+        class Items
+          def create: (
+            String group_id,
+            id: String,
+            products: ::Array[Dodopayments::ProductCollections::Groups::ItemCreateParams::Product],
+            ?request_options: Dodopayments::request_opts
+          ) -> Dodopayments::Models::ProductCollections::Groups::item_create_response
+
+          def update: (
+            String item_id,
+            id: String,
+            group_id: String,
+            status: bool,
+            ?request_options: Dodopayments::request_opts
+          ) -> nil
+
+          def delete: (
+            String item_id,
+            id: String,
+            group_id: String,
+            ?request_options: Dodopayments::request_opts
+          ) -> nil
+
+          def initialize: (client: Dodopayments::Client) -> void
+        end
+      end
+    end
+  end
+end

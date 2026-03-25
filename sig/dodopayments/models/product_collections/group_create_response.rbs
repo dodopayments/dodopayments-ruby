@@ -1,0 +1,129 @@
+module Dodopayments
+  module Models
+    module ProductCollections
+      type group_create_response =
+        {
+          group_id: String,
+          products: ::Array[Dodopayments::Models::ProductCollections::GroupCreateResponse::Product],
+          status: bool,
+          group_name: String?
+        }
+
+      class GroupCreateResponse < Dodopayments::Internal::Type::BaseModel
+        attr_accessor group_id: String
+
+        attr_accessor products: ::Array[Dodopayments::Models::ProductCollections::GroupCreateResponse::Product]
+
+        attr_accessor status: bool
+
+        attr_accessor group_name: String?
+
+        def initialize: (
+          group_id: String,
+          products: ::Array[Dodopayments::Models::ProductCollections::GroupCreateResponse::Product],
+          status: bool,
+          ?group_name: String?
+        ) -> void
+
+        def to_hash: -> {
+          group_id: String,
+          products: ::Array[Dodopayments::Models::ProductCollections::GroupCreateResponse::Product],
+          status: bool,
+          group_name: String?
+        }
+
+        type product =
+          {
+            id: String,
+            addons_count: Integer,
+            files_count: Integer,
+            has_credit_entitlements: bool,
+            is_recurring: bool,
+            license_key_enabled: bool,
+            meters_count: Integer,
+            product_id: String,
+            status: bool,
+            currency: Dodopayments::Models::currency?,
+            description: String?,
+            name: String?,
+            price: Integer?,
+            price_detail: Dodopayments::Models::price?,
+            tax_category: Dodopayments::Models::tax_category?,
+            tax_inclusive: bool?
+          }
+
+        class Product < Dodopayments::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor addons_count: Integer
+
+          attr_accessor files_count: Integer
+
+          attr_accessor has_credit_entitlements: bool
+
+          attr_accessor is_recurring: bool
+
+          attr_accessor license_key_enabled: bool
+
+          attr_accessor meters_count: Integer
+
+          attr_accessor product_id: String
+
+          attr_accessor status: bool
+
+          attr_accessor currency: Dodopayments::Models::currency?
+
+          attr_accessor description: String?
+
+          attr_accessor name: String?
+
+          attr_accessor price: Integer?
+
+          attr_accessor price_detail: Dodopayments::Models::price?
+
+          attr_accessor tax_category: Dodopayments::Models::tax_category?
+
+          attr_accessor tax_inclusive: bool?
+
+          def initialize: (
+            id: String,
+            addons_count: Integer,
+            files_count: Integer,
+            has_credit_entitlements: bool,
+            is_recurring: bool,
+            license_key_enabled: bool,
+            meters_count: Integer,
+            product_id: String,
+            status: bool,
+            ?currency: Dodopayments::Models::currency?,
+            ?description: String?,
+            ?name: String?,
+            ?price: Integer?,
+            ?price_detail: Dodopayments::Models::price?,
+            ?tax_category: Dodopayments::Models::tax_category?,
+            ?tax_inclusive: bool?
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            addons_count: Integer,
+            files_count: Integer,
+            has_credit_entitlements: bool,
+            is_recurring: bool,
+            license_key_enabled: bool,
+            meters_count: Integer,
+            product_id: String,
+            status: bool,
+            currency: Dodopayments::Models::currency?,
+            description: String?,
+            name: String?,
+            price: Integer?,
+            price_detail: Dodopayments::Models::price?,
+            tax_category: Dodopayments::Models::tax_category?,
+            tax_inclusive: bool?
+          }
+        end
+      end
+    end
+  end
+end

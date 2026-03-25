@@ -1,0 +1,24 @@
+module Dodopayments
+  module Models
+    type subscription_cancel_change_plan_params =
+      { subscription_id: String }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class SubscriptionCancelChangePlanParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor subscription_id: String
+
+      def initialize: (
+        subscription_id: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        subscription_id: String,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

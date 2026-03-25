@@ -273,6 +273,22 @@ module Dodopayments
 
   class ProductArchiveParams = Dodopayments::Models::ProductArchiveParams
 
+  class ProductCollectionCreateParams = Dodopayments::Models::ProductCollectionCreateParams
+
+  class ProductCollectionDeleteParams = Dodopayments::Models::ProductCollectionDeleteParams
+
+  class ProductCollectionListParams = Dodopayments::Models::ProductCollectionListParams
+
+  class ProductCollectionRetrieveParams = Dodopayments::Models::ProductCollectionRetrieveParams
+
+  module ProductCollections = Dodopayments::Models::ProductCollections
+
+  class ProductCollectionUnarchiveParams = Dodopayments::Models::ProductCollectionUnarchiveParams
+
+  class ProductCollectionUpdateImagesParams = Dodopayments::Models::ProductCollectionUpdateImagesParams
+
+  class ProductCollectionUpdateParams = Dodopayments::Models::ProductCollectionUpdateParams
+
   class ProductCreateParams = Dodopayments::Models::ProductCreateParams
 
   class ProductItemReq = Dodopayments::Models::ProductItemReq
@@ -308,6 +324,8 @@ module Dodopayments
   class Subscription = Dodopayments::Models::Subscription
 
   class SubscriptionActiveWebhookEvent = Dodopayments::Models::SubscriptionActiveWebhookEvent
+
+  class SubscriptionCancelChangePlanParams = Dodopayments::Models::SubscriptionCancelChangePlanParams
 
   class SubscriptionCancelledWebhookEvent = Dodopayments::Models::SubscriptionCancelledWebhookEvent
 
@@ -390,4 +408,6 @@ module Dodopayments
   class WebhookUnwrapParams = Dodopayments::Models::WebhookUnwrapParams
 
   class WebhookUpdateParams = Dodopayments::Models::WebhookUpdateParams
+
+  class YourWebhookURLCreateParams = Dodopayments::Models::YourWebhookURLCreateParams
 end

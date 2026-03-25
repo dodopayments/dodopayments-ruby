@@ -56,6 +56,11 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::SubscriptionListResponse]
 
+      def cancel_change_plan: (
+        String subscription_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
+
       def change_plan: (
         String subscription_id,
         product_id: String,

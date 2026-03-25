@@ -47,7 +47,7 @@ module Dodopayments
 
         sig do
           returns(
-            Dodopayments::CreditEntitlements::CreditLedgerEntry::TransactionType::TaggedSymbol
+            Dodopayments::CreditEntitlements::CreditLedgerEntry::TransactionType::OrSymbol
           )
         end
         attr_accessor :transaction_type
@@ -121,7 +121,7 @@ module Dodopayments
               overage_after: String,
               overage_before: String,
               transaction_type:
-                Dodopayments::CreditEntitlements::CreditLedgerEntry::TransactionType::TaggedSymbol,
+                Dodopayments::CreditEntitlements::CreditLedgerEntry::TransactionType::OrSymbol,
               description: T.nilable(String),
               grant_id: T.nilable(String),
               reference_id: T.nilable(String),

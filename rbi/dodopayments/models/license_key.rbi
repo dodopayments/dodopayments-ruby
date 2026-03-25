@@ -41,7 +41,7 @@ module Dodopayments
       attr_accessor :product_id
 
       # The current status of the license key (e.g., active, inactive, expired).
-      sig { returns(Dodopayments::LicenseKeyStatus::TaggedSymbol) }
+      sig { returns(Dodopayments::LicenseKeyStatus::OrSymbol) }
       attr_accessor :status
 
       # The maximum number of activations allowed for this license key.
@@ -113,7 +113,7 @@ module Dodopayments
             key: String,
             payment_id: String,
             product_id: String,
-            status: Dodopayments::LicenseKeyStatus::TaggedSymbol,
+            status: Dodopayments::LicenseKeyStatus::OrSymbol,
             activations_limit: T.nilable(Integer),
             expires_at: T.nilable(Time),
             subscription_id: T.nilable(String)
