@@ -95,6 +95,22 @@ module Dodopayments
       )
       end
 
+      sig do
+        params(
+          payment_method_id: String,
+          customer_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).void
+      end
+      def delete_payment_method(
+        # Payment Method Id
+        payment_method_id,
+        # Customer Id
+        customer_id:,
+        request_options: {}
+      )
+      end
+
       # List all credit entitlements for a customer with their current balances
       sig do
         params(

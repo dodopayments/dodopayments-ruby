@@ -44,6 +44,10 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :payment_id
 
+      # Whether the dispute was resolved by Rapid Dispute Resolution
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_accessor :is_resolved_by_rdr
+
       sig do
         params(
           amount: String,
@@ -53,7 +57,8 @@ module Dodopayments
           dispute_id: String,
           dispute_stage: Dodopayments::DisputeStage::OrSymbol,
           dispute_status: Dodopayments::DisputeStatus::OrSymbol,
-          payment_id: String
+          payment_id: String,
+          is_resolved_by_rdr: T.nilable(T::Boolean)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -73,7 +78,9 @@ module Dodopayments
         # The current status of the dispute.
         dispute_status:,
         # The unique identifier of the payment associated with the dispute.
-        payment_id:
+        payment_id:,
+        # Whether the dispute was resolved by Rapid Dispute Resolution
+        is_resolved_by_rdr: nil
       )
       end
 
@@ -87,7 +94,8 @@ module Dodopayments
             dispute_id: String,
             dispute_stage: Dodopayments::DisputeStage::TaggedSymbol,
             dispute_status: Dodopayments::DisputeStatus::TaggedSymbol,
-            payment_id: String
+            payment_id: String,
+            is_resolved_by_rdr: T.nilable(T::Boolean)
           }
         )
       end

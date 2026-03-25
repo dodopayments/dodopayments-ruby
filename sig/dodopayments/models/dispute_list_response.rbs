@@ -9,7 +9,8 @@ module Dodopayments
         dispute_id: String,
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
-        payment_id: String
+        payment_id: String,
+        is_resolved_by_rdr: bool?
       }
 
     class DisputeListResponse < Dodopayments::Internal::Type::BaseModel
@@ -29,6 +30,8 @@ module Dodopayments
 
       attr_accessor payment_id: String
 
+      attr_accessor is_resolved_by_rdr: bool?
+
       def initialize: (
         amount: String,
         business_id: String,
@@ -37,7 +40,8 @@ module Dodopayments
         dispute_id: String,
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
-        payment_id: String
+        payment_id: String,
+        ?is_resolved_by_rdr: bool?
       ) -> void
 
       def to_hash: -> {
@@ -48,7 +52,8 @@ module Dodopayments
         dispute_id: String,
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
-        payment_id: String
+        payment_id: String,
+        is_resolved_by_rdr: bool?
       }
     end
   end

@@ -10,6 +10,7 @@ module Dodopayments
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
         payment_id: String,
+        is_resolved_by_rdr: bool?,
         remarks: String?
       }
 
@@ -30,6 +31,8 @@ module Dodopayments
 
       attr_accessor payment_id: String
 
+      attr_accessor is_resolved_by_rdr: bool?
+
       attr_accessor remarks: String?
 
       def initialize: (
@@ -41,6 +44,7 @@ module Dodopayments
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
         payment_id: String,
+        ?is_resolved_by_rdr: bool?,
         ?remarks: String?
       ) -> void
 
@@ -53,6 +57,7 @@ module Dodopayments
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
         payment_id: String,
+        is_resolved_by_rdr: bool?,
         remarks: String?
       }
     end

@@ -53,7 +53,13 @@ module Dodopayments
       #   @return [String]
       required :payment_id, String
 
-      # @!method initialize(amount:, business_id:, created_at:, currency:, dispute_id:, dispute_stage:, dispute_status:, payment_id:)
+      # @!attribute is_resolved_by_rdr
+      #   Whether the dispute was resolved by Rapid Dispute Resolution
+      #
+      #   @return [Boolean, nil]
+      optional :is_resolved_by_rdr, Dodopayments::Internal::Type::Boolean, nil?: true
+
+      # @!method initialize(amount:, business_id:, created_at:, currency:, dispute_id:, dispute_stage:, dispute_status:, payment_id:, is_resolved_by_rdr: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::DisputeListResponse} for more details.
       #
@@ -72,6 +78,8 @@ module Dodopayments
       #   @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus] The current status of the dispute.
       #
       #   @param payment_id [String] The unique identifier of the payment associated with the dispute.
+      #
+      #   @param is_resolved_by_rdr [Boolean, nil] Whether the dispute was resolved by Rapid Dispute Resolution
     end
   end
 end
