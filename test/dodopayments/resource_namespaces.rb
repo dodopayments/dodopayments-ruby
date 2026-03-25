@@ -11,15 +11,7 @@ module Dodopayments
         end
       end
 
-      module Groups
-      end
-
       module Invoices
-      end
-
-      module ProductCollections
-        module Groups
-        end
       end
 
       module Products
