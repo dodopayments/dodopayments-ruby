@@ -39,11 +39,11 @@ module Dodopayments
       attr_accessor :dispute_id
 
       # The current stage of the dispute process.
-      sig { returns(Dodopayments::DisputeStage::TaggedSymbol) }
+      sig { returns(Dodopayments::DisputeStage::OrSymbol) }
       attr_accessor :dispute_stage
 
       # The current status of the dispute.
-      sig { returns(Dodopayments::DisputeStatus::TaggedSymbol) }
+      sig { returns(Dodopayments::DisputeStatus::OrSymbol) }
       attr_accessor :dispute_status
 
       # The unique identifier of the payment associated with the dispute.
@@ -109,8 +109,8 @@ module Dodopayments
             currency: String,
             customer: Dodopayments::CustomerLimitedDetails,
             dispute_id: String,
-            dispute_stage: Dodopayments::DisputeStage::TaggedSymbol,
-            dispute_status: Dodopayments::DisputeStatus::TaggedSymbol,
+            dispute_stage: Dodopayments::DisputeStage::OrSymbol,
+            dispute_status: Dodopayments::DisputeStatus::OrSymbol,
             payment_id: String,
             reason: T.nilable(String),
             remarks: T.nilable(String)

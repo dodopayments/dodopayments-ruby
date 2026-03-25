@@ -1,0 +1,18 @@
+module Dodopayments
+  module Resources
+    class YourWebhookURL
+      def create: (
+        business_id: String,
+        data: Dodopayments::Models::WebhookPayload::data,
+        timestamp: Time,
+        type: Dodopayments::Models::webhook_event_type,
+        webhook_id: String,
+        webhook_signature: String,
+        webhook_timestamp: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

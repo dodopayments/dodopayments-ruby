@@ -32,7 +32,7 @@ module Dodopayments
       # | `invoice_at_billing`       |        Yes        |           No           |            No             |
       # | `carry_deficit`            |        No         |           No           |            Yes            |
       # | `carry_deficit_auto_repay` |        No         |          Yes           |            Yes            |
-      sig { returns(Dodopayments::CbbOverageBehavior::TaggedSymbol) }
+      sig { returns(Dodopayments::CbbOverageBehavior::OrSymbol) }
       attr_accessor :overage_behavior
 
       sig { returns(T::Boolean) }
@@ -70,7 +70,7 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :rollover_timeframe_count
 
-      sig { returns(T.nilable(Dodopayments::TimeInterval::TaggedSymbol)) }
+      sig { returns(T.nilable(Dodopayments::TimeInterval::OrSymbol)) }
       attr_accessor :rollover_timeframe_interval
 
       # Response struct representing credit entitlement cart details for a subscription
@@ -135,7 +135,7 @@ module Dodopayments
             credit_entitlement_name: String,
             credits_amount: String,
             overage_balance: String,
-            overage_behavior: Dodopayments::CbbOverageBehavior::TaggedSymbol,
+            overage_behavior: Dodopayments::CbbOverageBehavior::OrSymbol,
             overage_enabled: T::Boolean,
             product_id: String,
             remaining_balance: String,
@@ -148,7 +148,7 @@ module Dodopayments
             rollover_percentage: T.nilable(Integer),
             rollover_timeframe_count: T.nilable(Integer),
             rollover_timeframe_interval:
-              T.nilable(Dodopayments::TimeInterval::TaggedSymbol)
+              T.nilable(Dodopayments::TimeInterval::OrSymbol)
           }
         )
       end
