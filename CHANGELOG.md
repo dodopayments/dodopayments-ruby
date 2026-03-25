@@ -1,5 +1,22 @@
 # Changelog
 
+## 2.3.0 (2026-03-25)
+
+Full Changelog: [v2.2.0...v2.3.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.2.0...v2.3.0)
+
+### Features
+
+* **api:** added cancel change plan endpoint ([c8748db](https://github.com/dodopayments/dodopayments-ruby/commit/c8748db3c02b945204bf7fab98c48361ff8615a7))
+* **api:** updated openapi spec to 1.92.1 ([0355574](https://github.com/dodopayments/dodopayments-ruby/commit/035557423766f101ac5f35e62ba84cfbe0fbfbd5))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([ad5b48a](https://github.com/dodopayments/dodopayments-ruby/commit/ad5b48a9eebd480a0da063316bd0732b200ffa2a))
+* **internal:** update gitignore ([249ca11](https://github.com/dodopayments/dodopayments-ruby/commit/249ca1127b6aa3913db257668ec8f2fb6d1d0c5c))
+* **tests:** bump steady to v0.19.6 ([b3ff385](https://github.com/dodopayments/dodopayments-ruby/commit/b3ff385d9e3db267aeedfe9f27a294f0239f989c))
+* **tests:** bump steady to v0.19.7 ([4f7229a](https://github.com/dodopayments/dodopayments-ruby/commit/4f7229ae821eb448e3efc1335a6a13da1b391156))
+
 ## 2.2.0 (2026-03-21)
 
 Full Changelog: [v2.1.2...v2.2.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.1.2...v2.2.0)
