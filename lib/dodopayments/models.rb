@@ -313,22 +313,6 @@ module Dodopayments
 
   ProductArchiveParams = Dodopayments::Models::ProductArchiveParams
 
-  ProductCollectionCreateParams = Dodopayments::Models::ProductCollectionCreateParams
-
-  ProductCollectionDeleteParams = Dodopayments::Models::ProductCollectionDeleteParams
-
-  ProductCollectionListParams = Dodopayments::Models::ProductCollectionListParams
-
-  ProductCollectionRetrieveParams = Dodopayments::Models::ProductCollectionRetrieveParams
-
-  ProductCollections = Dodopayments::Models::ProductCollections
-
-  ProductCollectionUnarchiveParams = Dodopayments::Models::ProductCollectionUnarchiveParams
-
-  ProductCollectionUpdateImagesParams = Dodopayments::Models::ProductCollectionUpdateImagesParams
-
-  ProductCollectionUpdateParams = Dodopayments::Models::ProductCollectionUpdateParams
-
   ProductCreateParams = Dodopayments::Models::ProductCreateParams
 
   ProductItemReq = Dodopayments::Models::ProductItemReq
@@ -448,6 +432,4 @@ module Dodopayments
   WebhookUnwrapParams = Dodopayments::Models::WebhookUnwrapParams
 
   WebhookUpdateParams = Dodopayments::Models::WebhookUpdateParams
-
-  YourWebhookURLCreateParams = Dodopayments::Models::YourWebhookURLCreateParams
 end

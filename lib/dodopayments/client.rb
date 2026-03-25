@@ -93,12 +93,6 @@ module Dodopayments
     # @return [Dodopayments::Resources::CreditEntitlements]
     attr_reader :credit_entitlements
 
-    # @return [Dodopayments::Resources::ProductCollections]
-    attr_reader :product_collections
-
-    # @return [Dodopayments::Resources::YourWebhookURL]
-    attr_reader :your_webhook_url
-
     # @api private
     #
     # @return [Hash{String=>String}]
@@ -183,8 +177,6 @@ module Dodopayments
       @meters = Dodopayments::Resources::Meters.new(client: self)
       @balances = Dodopayments::Resources::Balances.new(client: self)
       @credit_entitlements = Dodopayments::Resources::CreditEntitlements.new(client: self)
-      @product_collections = Dodopayments::Resources::ProductCollections.new(client: self)
-      @your_webhook_url = Dodopayments::Resources::YourWebhookURL.new(client: self)
     end
   end
 end

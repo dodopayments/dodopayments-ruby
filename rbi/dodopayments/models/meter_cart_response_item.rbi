@@ -11,7 +11,7 @@ module Dodopayments
           )
         end
 
-      sig { returns(Dodopayments::Currency::OrSymbol) }
+      sig { returns(Dodopayments::Currency::TaggedSymbol) }
       attr_accessor :currency
 
       sig { returns(Integer) }
@@ -58,7 +58,7 @@ module Dodopayments
       sig do
         override.returns(
           {
-            currency: Dodopayments::Currency::OrSymbol,
+            currency: Dodopayments::Currency::TaggedSymbol,
             free_threshold: Integer,
             measurement_unit: String,
             meter_id: String,
