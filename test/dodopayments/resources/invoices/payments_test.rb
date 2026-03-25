@@ -11,14 +11,6 @@ class Dodopayments::Test::Resources::Invoices::PaymentsTest < Dodopayments::Test
     end
   end
 
-  def test_retrieve_payout
-    response = @dodo_payments.invoices.payments.retrieve_payout("payout_id")
-
-    assert_pattern do
-      response => StringIO
-    end
-  end
-
   def test_retrieve_refund
     response = @dodo_payments.invoices.payments.retrieve_refund("refund_id")
 
