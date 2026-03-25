@@ -11,6 +11,7 @@ module Dodopayments
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
         payment_id: String,
+        is_resolved_by_rdr: bool?,
         reason: String?,
         remarks: String?
       }
@@ -34,6 +35,8 @@ module Dodopayments
 
       attr_accessor payment_id: String
 
+      attr_accessor is_resolved_by_rdr: bool?
+
       attr_accessor reason: String?
 
       attr_accessor remarks: String?
@@ -48,6 +51,7 @@ module Dodopayments
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
         payment_id: String,
+        ?is_resolved_by_rdr: bool?,
         ?reason: String?,
         ?remarks: String?
       ) -> void
@@ -62,6 +66,7 @@ module Dodopayments
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
         payment_id: String,
+        is_resolved_by_rdr: bool?,
         reason: String?,
         remarks: String?
       }

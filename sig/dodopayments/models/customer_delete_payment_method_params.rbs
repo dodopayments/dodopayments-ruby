@@ -1,0 +1,28 @@
+module Dodopayments
+  module Models
+    type customer_delete_payment_method_params =
+      { customer_id: String, payment_method_id: String }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class CustomerDeletePaymentMethodParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor customer_id: String
+
+      attr_accessor payment_method_id: String
+
+      def initialize: (
+        customer_id: String,
+        payment_method_id: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        customer_id: String,
+        payment_method_id: String,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

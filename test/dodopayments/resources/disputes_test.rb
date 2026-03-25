@@ -21,6 +21,7 @@ class Dodopayments::Test::Resources::DisputesTest < Dodopayments::Test::Resource
         dispute_stage: Dodopayments::DisputeStage,
         dispute_status: Dodopayments::DisputeStatus,
         payment_id: String,
+        is_resolved_by_rdr: Dodopayments::Internal::Type::Boolean | nil,
         reason: String | nil,
         remarks: String | nil
       }
@@ -50,7 +51,8 @@ class Dodopayments::Test::Resources::DisputesTest < Dodopayments::Test::Resource
         dispute_id: String,
         dispute_stage: Dodopayments::DisputeStage,
         dispute_status: Dodopayments::DisputeStatus,
-        payment_id: String
+        payment_id: String,
+        is_resolved_by_rdr: Dodopayments::Internal::Type::Boolean | nil
       }
     end
   end
