@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.4.0 (2026-03-25)
+
+Full Changelog: [v2.3.0...v2.4.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.3.0...v2.4.0)
+
+### Features
+
+* **api:** manual updates ([63ef98e](https://github.com/dodopayments/dodopayments-ruby/commit/63ef98ecd320d35628d2e1e3a7d494708023c55e))
+* **api:** updated openapi spec to v1.92.3 ([e827af5](https://github.com/dodopayments/dodopayments-ruby/commit/e827af5ba14c9af4f6bf8cc911f4160f4a6ead93))
+
 ## 2.3.0 (2026-03-25)
 
 Full Changelog: [v2.2.0...v2.3.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.2.0...v2.3.0)
