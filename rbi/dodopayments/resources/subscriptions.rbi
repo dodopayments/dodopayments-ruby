@@ -189,6 +189,19 @@ module Dodopayments
       sig do
         params(
           subscription_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).void
+      end
+      def cancel_change_plan(
+        # Subscription Id
+        subscription_id,
+        request_options: {}
+      )
+      end
+
+      sig do
+        params(
+          subscription_id: String,
           product_id: String,
           proration_billing_mode:
             Dodopayments::UpdateSubscriptionPlanReq::ProrationBillingMode::OrSymbol,

@@ -1,0 +1,30 @@
+module Dodopayments
+  module Models
+    type product_collection_unarchive_response =
+      {
+        collection_id: String,
+        excluded_product_ids: ::Array[String],
+        message: String
+      }
+
+    class ProductCollectionUnarchiveResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor collection_id: String
+
+      attr_accessor excluded_product_ids: ::Array[String]
+
+      attr_accessor message: String
+
+      def initialize: (
+        collection_id: String,
+        excluded_product_ids: ::Array[String],
+        message: String
+      ) -> void
+
+      def to_hash: -> {
+        collection_id: String,
+        excluded_product_ids: ::Array[String],
+        message: String
+      }
+    end
+  end
+end

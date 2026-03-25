@@ -61,6 +61,10 @@ module Dodopayments
 
     attr_reader credit_entitlements: Dodopayments::Resources::CreditEntitlements
 
+    attr_reader product_collections: Dodopayments::Resources::ProductCollections
+
+    attr_reader your_webhook_url: Dodopayments::Resources::YourWebhookURL
+
     private def auth_headers: -> ::Hash[String, String]
 
     def initialize: (

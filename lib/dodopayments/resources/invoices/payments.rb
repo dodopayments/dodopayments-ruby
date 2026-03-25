@@ -22,6 +22,24 @@ module Dodopayments
           )
         end
 
+        # @overload retrieve_payout(payout_id, request_options: {})
+        #
+        # @param payout_id [String]
+        # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [StringIO]
+        #
+        # @see Dodopayments::Models::Invoices::PaymentRetrievePayoutParams
+        def retrieve_payout(payout_id, params = {})
+          @client.request(
+            method: :get,
+            path: ["invoices/payouts/%1$s", payout_id],
+            headers: {"accept" => "application/pdf"},
+            model: StringIO,
+            options: params[:request_options]
+          )
+        end
+
         # @overload retrieve_refund(refund_id, request_options: {})
         #
         # @param refund_id [String]

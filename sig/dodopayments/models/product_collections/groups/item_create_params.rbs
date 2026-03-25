@@ -1,0 +1,52 @@
+module Dodopayments
+  module Models
+    module ProductCollections
+      module Groups
+        type item_create_params =
+          {
+            id: String,
+            group_id: String,
+            products: ::Array[Dodopayments::ProductCollections::Groups::ItemCreateParams::Product]
+          }
+          & Dodopayments::Internal::Type::request_parameters
+
+        class ItemCreateParams < Dodopayments::Internal::Type::BaseModel
+          extend Dodopayments::Internal::Type::RequestParameters::Converter
+          include Dodopayments::Internal::Type::RequestParameters
+
+          attr_accessor id: String
+
+          attr_accessor group_id: String
+
+          attr_accessor products: ::Array[Dodopayments::ProductCollections::Groups::ItemCreateParams::Product]
+
+          def initialize: (
+            id: String,
+            group_id: String,
+            products: ::Array[Dodopayments::ProductCollections::Groups::ItemCreateParams::Product],
+            ?request_options: Dodopayments::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            group_id: String,
+            products: ::Array[Dodopayments::ProductCollections::Groups::ItemCreateParams::Product],
+            request_options: Dodopayments::RequestOptions
+          }
+
+          type product = { product_id: String, status: bool? }
+
+          class Product < Dodopayments::Internal::Type::BaseModel
+            attr_accessor product_id: String
+
+            attr_accessor status: bool?
+
+            def initialize: (product_id: String, ?status: bool?) -> void
+
+            def to_hash: -> { product_id: String, status: bool? }
+          end
+        end
+      end
+    end
+  end
+end

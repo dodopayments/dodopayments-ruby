@@ -158,6 +158,24 @@ module Dodopayments
         )
       end
 
+      # @overload cancel_change_plan(subscription_id, request_options: {})
+      #
+      # @param subscription_id [String] Subscription Id
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [nil]
+      #
+      # @see Dodopayments::Models::SubscriptionCancelChangePlanParams
+      def cancel_change_plan(subscription_id, params = {})
+        @client.request(
+          method: :delete,
+          path: ["subscriptions/%1$s/change-plan/scheduled", subscription_id],
+          model: NilClass,
+          options: params[:request_options]
+        )
+      end
+
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionChangePlanParams} for more details.
       #

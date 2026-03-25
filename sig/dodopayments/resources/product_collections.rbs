@@ -1,0 +1,56 @@
+module Dodopayments
+  module Resources
+    class ProductCollections
+      attr_reader groups: Dodopayments::Resources::ProductCollections::Groups
+
+      def create: (
+        groups: ::Array[Dodopayments::ProductCollectionCreateParams::Group],
+        name: String,
+        ?brand_id: String?,
+        ?description: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::ProductCollectionCreateResponse
+
+      def retrieve: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::ProductCollectionRetrieveResponse
+
+      def update: (
+        String id,
+        ?brand_id: String?,
+        ?description: String?,
+        ?group_order: ::Array[String]?,
+        ?image_id: String?,
+        ?name: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
+
+      def list: (
+        ?archived: bool,
+        ?brand_id: String,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::ProductCollectionListResponse]
+
+      def delete: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
+
+      def unarchive: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::ProductCollectionUnarchiveResponse
+
+      def update_images: (
+        String id,
+        ?force_update: bool?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::ProductCollectionUpdateImagesResponse
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

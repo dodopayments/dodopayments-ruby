@@ -92,6 +92,12 @@ module Dodopayments
     sig { returns(Dodopayments::Resources::CreditEntitlements) }
     attr_reader :credit_entitlements
 
+    sig { returns(Dodopayments::Resources::ProductCollections) }
+    attr_reader :product_collections
+
+    sig { returns(Dodopayments::Resources::YourWebhookURL) }
+    attr_reader :your_webhook_url
+
     # @api private
     sig { override.returns(T::Hash[String, String]) }
     private def auth_headers
