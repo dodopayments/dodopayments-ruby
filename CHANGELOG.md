@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.4.1 (2026-03-27)
+
+Full Changelog: [v2.4.0...v2.4.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.4.0...v2.4.1)
+
+### Bug Fixes
+
+* **internal:** correct multipart form field name encoding ([c8ce307](https://github.com/dodopayments/dodopayments-ruby/commit/c8ce307005fec7624c59fa411a186f9d0047d61c))
+
 ## 2.4.0 (2026-03-25)
 
 Full Changelog: [v2.3.0...v2.4.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.3.0...v2.4.0)
