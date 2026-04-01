@@ -1,5 +1,26 @@
 # Changelog
 
+## 2.5.0 (2026-04-01)
+
+Full Changelog: [v2.4.1...v2.5.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.4.1...v2.5.0)
+
+### Features
+
+* **api:** updated openapi spec to v1.93.0 ([108653e](https://github.com/dodopayments/dodopayments-ruby/commit/108653eb281d4b33283a7bc9bcaa7ce8434b077b))
+
+
+### Bug Fixes
+
+* align path encoding with RFC 3986 section 3.3 ([c77867d](https://github.com/dodopayments/dodopayments-ruby/commit/c77867d2f7a352bc7f6ede137e629fa0d6a37808))
+* variable name typo ([93ee38e](https://github.com/dodopayments/dodopayments-ruby/commit/93ee38e03c625a03d6c716c93bae44bdd9682272))
+
+
+### Chores
+
+* **ci:** support opting out of skipping builds on metadata-only commits ([440f676](https://github.com/dodopayments/dodopayments-ruby/commit/440f6769cfae73ecd8414c50f35d724ca6c84ce0))
+* **tests:** bump steady to v0.20.1 ([c0ca147](https://github.com/dodopayments/dodopayments-ruby/commit/c0ca147e996ceec20c39b2076153c6084048f9e6))
+* **tests:** bump steady to v0.20.2 ([5d83036](https://github.com/dodopayments/dodopayments-ruby/commit/5d830369abcabf01109bdb3e9c21ea3c2aed894b))
+
 ## 2.4.1 (2026-03-27)
 
 Full Changelog: [v2.4.0...v2.4.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.4.0...v2.4.1)
