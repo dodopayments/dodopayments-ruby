@@ -1,4 +1,8 @@
 module Dodopayments
+  class AbandonedCheckoutDetectedWebhookEvent = Dodopayments::Models::AbandonedCheckoutDetectedWebhookEvent
+
+  class AbandonedCheckoutRecoveredWebhookEvent = Dodopayments::Models::AbandonedCheckoutRecoveredWebhookEvent
+
   class AddMeterToPrice = Dodopayments::Models::AddMeterToPrice
 
   class AddonCartResponseItem = Dodopayments::Models::AddonCartResponseItem
@@ -177,6 +181,10 @@ module Dodopayments
 
   class DisputeWonWebhookEvent = Dodopayments::Models::DisputeWonWebhookEvent
 
+  class DunningRecoveredWebhookEvent = Dodopayments::Models::DunningRecoveredWebhookEvent
+
+  class DunningStartedWebhookEvent = Dodopayments::Models::DunningStartedWebhookEvent
+
   class Event = Dodopayments::Models::Event
 
   class EventInput = Dodopayments::Models::EventInput
@@ -268,6 +276,8 @@ module Dodopayments
   class PaymentSucceededWebhookEvent = Dodopayments::Models::PaymentSucceededWebhookEvent
 
   class PayoutListParams = Dodopayments::Models::PayoutListParams
+
+  module Payouts = Dodopayments::Models::Payouts
 
   module Price = Dodopayments::Models::Price
 

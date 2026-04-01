@@ -11,7 +11,7 @@ module Dodopayments
       # @!attribute data
       #   The latest data at the time of delivery attempt
       #
-      #   @return [Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow]
+      #   @return [Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout, Dodopayments::Models::WebhookPayload::Data::DunningAttempt]
       required :data, union: -> { Dodopayments::WebhookPayload::Data }
 
       # @!attribute timestamp
@@ -33,7 +33,7 @@ module Dodopayments
       #
       #   @param business_id [String]
       #
-      #   @param data [Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow] The latest data at the time of delivery attempt
+      #   @param data [Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout, Dodopayments::Models::WebhookPayload::Data::DunningAttempt] The latest data at the time of delivery attempt
       #
       #   @param timestamp [Time] The timestamp of when the event occurred (not necessarily the same of when it wa
       #
@@ -60,6 +60,10 @@ module Dodopayments
         variant -> { Dodopayments::WebhookPayload::Data::CreditLedgerEntry }
 
         variant -> { Dodopayments::WebhookPayload::Data::CreditBalanceLow }
+
+        variant -> { Dodopayments::WebhookPayload::Data::AbandonedCheckout }
+
+        variant -> { Dodopayments::WebhookPayload::Data::DunningAttempt }
 
         class Payment < Dodopayments::Models::Payment
           # @!attribute payload_type
@@ -247,8 +251,169 @@ module Dodopayments
           end
         end
 
+        class AbandonedCheckout < Dodopayments::Internal::Type::BaseModel
+          # @!attribute abandoned_at
+          #
+          #   @return [Time]
+          required :abandoned_at, Time
+
+          # @!attribute abandonment_reason
+          #
+          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::AbandonmentReason]
+          required :abandonment_reason,
+                   enum: -> { Dodopayments::WebhookPayload::Data::AbandonedCheckout::AbandonmentReason }
+
+          # @!attribute customer_id
+          #
+          #   @return [String]
+          required :customer_id, String
+
+          # @!attribute payload_type
+          #
+          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::PayloadType]
+          required :payload_type, enum: -> { Dodopayments::WebhookPayload::Data::AbandonedCheckout::PayloadType }
+
+          # @!attribute payment_id
+          #
+          #   @return [String]
+          required :payment_id, String
+
+          # @!attribute status
+          #
+          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::Status]
+          required :status, enum: -> { Dodopayments::WebhookPayload::Data::AbandonedCheckout::Status }
+
+          # @!attribute recovered_payment_id
+          #
+          #   @return [String, nil]
+          optional :recovered_payment_id, String, nil?: true
+
+          # @!method initialize(abandoned_at:, abandonment_reason:, customer_id:, payload_type:, payment_id:, status:, recovered_payment_id: nil)
+          #   @param abandoned_at [Time]
+          #   @param abandonment_reason [Symbol, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::AbandonmentReason]
+          #   @param customer_id [String]
+          #   @param payload_type [Symbol, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::PayloadType]
+          #   @param payment_id [String]
+          #   @param status [Symbol, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::Status]
+          #   @param recovered_payment_id [String, nil]
+
+          # @see Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout#abandonment_reason
+          module AbandonmentReason
+            extend Dodopayments::Internal::Type::Enum
+
+            PAYMENT_FAILED = :payment_failed
+            CHECKOUT_INCOMPLETE = :checkout_incomplete
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
+          # @see Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout#payload_type
+          module PayloadType
+            extend Dodopayments::Internal::Type::Enum
+
+            ABANDONED_CHECKOUT = :AbandonedCheckout
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
+          # @see Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout#status
+          module Status
+            extend Dodopayments::Internal::Type::Enum
+
+            ABANDONED = :abandoned
+            RECOVERING = :recovering
+            RECOVERED = :recovered
+            EXHAUSTED = :exhausted
+            OPTED_OUT = :opted_out
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+        end
+
+        class DunningAttempt < Dodopayments::Internal::Type::BaseModel
+          # @!attribute created_at
+          #
+          #   @return [Time]
+          required :created_at, Time
+
+          # @!attribute customer_id
+          #
+          #   @return [String]
+          required :customer_id, String
+
+          # @!attribute payload_type
+          #
+          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::DunningAttempt::PayloadType]
+          required :payload_type, enum: -> { Dodopayments::WebhookPayload::Data::DunningAttempt::PayloadType }
+
+          # @!attribute status
+          #
+          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::DunningAttempt::Status]
+          required :status, enum: -> { Dodopayments::WebhookPayload::Data::DunningAttempt::Status }
+
+          # @!attribute subscription_id
+          #
+          #   @return [String]
+          required :subscription_id, String
+
+          # @!attribute trigger_state
+          #
+          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::DunningAttempt::TriggerState]
+          required :trigger_state, enum: -> { Dodopayments::WebhookPayload::Data::DunningAttempt::TriggerState }
+
+          # @!attribute payment_id
+          #
+          #   @return [String, nil]
+          optional :payment_id, String, nil?: true
+
+          # @!method initialize(created_at:, customer_id:, payload_type:, status:, subscription_id:, trigger_state:, payment_id: nil)
+          #   @param created_at [Time]
+          #   @param customer_id [String]
+          #   @param payload_type [Symbol, Dodopayments::Models::WebhookPayload::Data::DunningAttempt::PayloadType]
+          #   @param status [Symbol, Dodopayments::Models::WebhookPayload::Data::DunningAttempt::Status]
+          #   @param subscription_id [String]
+          #   @param trigger_state [Symbol, Dodopayments::Models::WebhookPayload::Data::DunningAttempt::TriggerState]
+          #   @param payment_id [String, nil]
+
+          # @see Dodopayments::Models::WebhookPayload::Data::DunningAttempt#payload_type
+          module PayloadType
+            extend Dodopayments::Internal::Type::Enum
+
+            DUNNING_ATTEMPT = :DunningAttempt
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
+          # @see Dodopayments::Models::WebhookPayload::Data::DunningAttempt#status
+          module Status
+            extend Dodopayments::Internal::Type::Enum
+
+            RECOVERING = :recovering
+            RECOVERED = :recovered
+            EXHAUSTED = :exhausted
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
+          # @see Dodopayments::Models::WebhookPayload::Data::DunningAttempt#trigger_state
+          module TriggerState
+            extend Dodopayments::Internal::Type::Enum
+
+            ON_HOLD = :on_hold
+            CANCELLED = :cancelled
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+        end
+
         # @!method self.variants
-        #   @return [Array(Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow)]
+        #   @return [Array(Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout, Dodopayments::Models::WebhookPayload::Data::DunningAttempt)]
       end
     end
   end

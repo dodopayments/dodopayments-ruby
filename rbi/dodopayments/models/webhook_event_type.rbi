@@ -143,6 +143,27 @@ module Dodopayments
           :"credit.balance_low",
           Dodopayments::WebhookEventType::TaggedSymbol
         )
+      ABANDONED_CHECKOUT_DETECTED =
+        T.let(
+          :"abandoned_checkout.detected",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
+      ABANDONED_CHECKOUT_RECOVERED =
+        T.let(
+          :"abandoned_checkout.recovered",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
+      DUNNING_STARTED =
+        T.let(:"dunning.started", Dodopayments::WebhookEventType::TaggedSymbol)
+      DUNNING_RECOVERED =
+        T.let(
+          :"dunning.recovered",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
+      ACR_EMAIL =
+        T.let(:"acr.email", Dodopayments::WebhookEventType::TaggedSymbol)
+      DUNNING_EMAIL =
+        T.let(:"dunning.email", Dodopayments::WebhookEventType::TaggedSymbol)
 
       sig do
         override.returns(T::Array[Dodopayments::WebhookEventType::TaggedSymbol])

@@ -49,7 +49,9 @@ module Dodopayments
 
       def unsafe_unwrap: (
         String payload
-      ) -> (Dodopayments::CreditAddedWebhookEvent
+      ) -> (Dodopayments::AbandonedCheckoutDetectedWebhookEvent
+      | Dodopayments::AbandonedCheckoutRecoveredWebhookEvent
+      | Dodopayments::CreditAddedWebhookEvent
       | Dodopayments::CreditBalanceLowWebhookEvent
       | Dodopayments::CreditDeductedWebhookEvent
       | Dodopayments::CreditExpiredWebhookEvent
@@ -64,6 +66,8 @@ module Dodopayments
       | Dodopayments::DisputeLostWebhookEvent
       | Dodopayments::DisputeOpenedWebhookEvent
       | Dodopayments::DisputeWonWebhookEvent
+      | Dodopayments::DunningRecoveredWebhookEvent
+      | Dodopayments::DunningStartedWebhookEvent
       | Dodopayments::LicenseKeyCreatedWebhookEvent
       | Dodopayments::PaymentCancelledWebhookEvent
       | Dodopayments::PaymentFailedWebhookEvent
@@ -84,7 +88,9 @@ module Dodopayments
         String payload,
         headers: ::Hash[String, String],
         ?key: String?
-      ) -> (Dodopayments::CreditAddedWebhookEvent
+      ) -> (Dodopayments::AbandonedCheckoutDetectedWebhookEvent
+      | Dodopayments::AbandonedCheckoutRecoveredWebhookEvent
+      | Dodopayments::CreditAddedWebhookEvent
       | Dodopayments::CreditBalanceLowWebhookEvent
       | Dodopayments::CreditDeductedWebhookEvent
       | Dodopayments::CreditExpiredWebhookEvent
@@ -99,6 +105,8 @@ module Dodopayments
       | Dodopayments::DisputeLostWebhookEvent
       | Dodopayments::DisputeOpenedWebhookEvent
       | Dodopayments::DisputeWonWebhookEvent
+      | Dodopayments::DunningRecoveredWebhookEvent
+      | Dodopayments::DunningStartedWebhookEvent
       | Dodopayments::LicenseKeyCreatedWebhookEvent
       | Dodopayments::PaymentCancelledWebhookEvent
       | Dodopayments::PaymentFailedWebhookEvent

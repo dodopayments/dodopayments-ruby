@@ -1,0 +1,28 @@
+module Dodopayments
+  module Models
+    module Payouts
+      module Breakup
+        type detail_download_csv_params =
+          { payout_id: String }
+          & Dodopayments::Internal::Type::request_parameters
+
+        class DetailDownloadCsvParams < Dodopayments::Internal::Type::BaseModel
+          extend Dodopayments::Internal::Type::RequestParameters::Converter
+          include Dodopayments::Internal::Type::RequestParameters
+
+          attr_accessor payout_id: String
+
+          def initialize: (
+            payout_id: String,
+            ?request_options: Dodopayments::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            payout_id: String,
+            request_options: Dodopayments::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

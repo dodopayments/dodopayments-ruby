@@ -21,7 +21,9 @@ module Dodopayments
             Dodopayments::WebhookPayload::Data::Dispute,
             Dodopayments::WebhookPayload::Data::LicenseKey,
             Dodopayments::WebhookPayload::Data::CreditLedgerEntry,
-            Dodopayments::WebhookPayload::Data::CreditBalanceLow
+            Dodopayments::WebhookPayload::Data::CreditBalanceLow,
+            Dodopayments::WebhookPayload::Data::AbandonedCheckout,
+            Dodopayments::WebhookPayload::Data::DunningAttempt
           )
         )
       end
@@ -47,7 +49,9 @@ module Dodopayments
               Dodopayments::WebhookPayload::Data::Dispute::OrHash,
               Dodopayments::WebhookPayload::Data::LicenseKey::OrHash,
               Dodopayments::WebhookPayload::Data::CreditLedgerEntry::OrHash,
-              Dodopayments::WebhookPayload::Data::CreditBalanceLow::OrHash
+              Dodopayments::WebhookPayload::Data::CreditBalanceLow::OrHash,
+              Dodopayments::WebhookPayload::Data::AbandonedCheckout::OrHash,
+              Dodopayments::WebhookPayload::Data::DunningAttempt::OrHash
             ),
           timestamp: Time,
           type: Dodopayments::WebhookEventType::OrSymbol
@@ -77,7 +81,9 @@ module Dodopayments
                 Dodopayments::WebhookPayload::Data::Dispute,
                 Dodopayments::WebhookPayload::Data::LicenseKey,
                 Dodopayments::WebhookPayload::Data::CreditLedgerEntry,
-                Dodopayments::WebhookPayload::Data::CreditBalanceLow
+                Dodopayments::WebhookPayload::Data::CreditBalanceLow,
+                Dodopayments::WebhookPayload::Data::AbandonedCheckout,
+                Dodopayments::WebhookPayload::Data::DunningAttempt
               ),
             timestamp: Time,
             type: Dodopayments::WebhookEventType::OrSymbol
@@ -100,7 +106,9 @@ module Dodopayments
               Dodopayments::WebhookPayload::Data::Dispute,
               Dodopayments::WebhookPayload::Data::LicenseKey,
               Dodopayments::WebhookPayload::Data::CreditLedgerEntry,
-              Dodopayments::WebhookPayload::Data::CreditBalanceLow
+              Dodopayments::WebhookPayload::Data::CreditBalanceLow,
+              Dodopayments::WebhookPayload::Data::AbandonedCheckout,
+              Dodopayments::WebhookPayload::Data::DunningAttempt
             )
           end
 
@@ -610,6 +618,394 @@ module Dodopayments
               override.returns(
                 T::Array[
                   Dodopayments::WebhookPayload::Data::CreditBalanceLow::PayloadType::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+        end
+
+        class AbandonedCheckout < Dodopayments::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Dodopayments::WebhookPayload::Data::AbandonedCheckout,
+                Dodopayments::Internal::AnyHash
+              )
+            end
+
+          sig { returns(Time) }
+          attr_accessor :abandoned_at
+
+          sig do
+            returns(
+              Dodopayments::WebhookPayload::Data::AbandonedCheckout::AbandonmentReason::OrSymbol
+            )
+          end
+          attr_accessor :abandonment_reason
+
+          sig { returns(String) }
+          attr_accessor :customer_id
+
+          sig do
+            returns(
+              Dodopayments::WebhookPayload::Data::AbandonedCheckout::PayloadType::OrSymbol
+            )
+          end
+          attr_accessor :payload_type
+
+          sig { returns(String) }
+          attr_accessor :payment_id
+
+          sig do
+            returns(
+              Dodopayments::WebhookPayload::Data::AbandonedCheckout::Status::OrSymbol
+            )
+          end
+          attr_accessor :status
+
+          sig { returns(T.nilable(String)) }
+          attr_accessor :recovered_payment_id
+
+          sig do
+            params(
+              abandoned_at: Time,
+              abandonment_reason:
+                Dodopayments::WebhookPayload::Data::AbandonedCheckout::AbandonmentReason::OrSymbol,
+              customer_id: String,
+              payload_type:
+                Dodopayments::WebhookPayload::Data::AbandonedCheckout::PayloadType::OrSymbol,
+              payment_id: String,
+              status:
+                Dodopayments::WebhookPayload::Data::AbandonedCheckout::Status::OrSymbol,
+              recovered_payment_id: T.nilable(String)
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            abandoned_at:,
+            abandonment_reason:,
+            customer_id:,
+            payload_type:,
+            payment_id:,
+            status:,
+            recovered_payment_id: nil
+          )
+          end
+
+          sig do
+            override.returns(
+              {
+                abandoned_at: Time,
+                abandonment_reason:
+                  Dodopayments::WebhookPayload::Data::AbandonedCheckout::AbandonmentReason::OrSymbol,
+                customer_id: String,
+                payload_type:
+                  Dodopayments::WebhookPayload::Data::AbandonedCheckout::PayloadType::OrSymbol,
+                payment_id: String,
+                status:
+                  Dodopayments::WebhookPayload::Data::AbandonedCheckout::Status::OrSymbol,
+                recovered_payment_id: T.nilable(String)
+              }
+            )
+          end
+          def to_hash
+          end
+
+          module AbandonmentReason
+            extend Dodopayments::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Dodopayments::WebhookPayload::Data::AbandonedCheckout::AbandonmentReason
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            PAYMENT_FAILED =
+              T.let(
+                :payment_failed,
+                Dodopayments::WebhookPayload::Data::AbandonedCheckout::AbandonmentReason::TaggedSymbol
+              )
+            CHECKOUT_INCOMPLETE =
+              T.let(
+                :checkout_incomplete,
+                Dodopayments::WebhookPayload::Data::AbandonedCheckout::AbandonmentReason::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Dodopayments::WebhookPayload::Data::AbandonedCheckout::AbandonmentReason::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
+          module PayloadType
+            extend Dodopayments::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Dodopayments::WebhookPayload::Data::AbandonedCheckout::PayloadType
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            ABANDONED_CHECKOUT =
+              T.let(
+                :AbandonedCheckout,
+                Dodopayments::WebhookPayload::Data::AbandonedCheckout::PayloadType::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Dodopayments::WebhookPayload::Data::AbandonedCheckout::PayloadType::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
+          module Status
+            extend Dodopayments::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Dodopayments::WebhookPayload::Data::AbandonedCheckout::Status
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            ABANDONED =
+              T.let(
+                :abandoned,
+                Dodopayments::WebhookPayload::Data::AbandonedCheckout::Status::TaggedSymbol
+              )
+            RECOVERING =
+              T.let(
+                :recovering,
+                Dodopayments::WebhookPayload::Data::AbandonedCheckout::Status::TaggedSymbol
+              )
+            RECOVERED =
+              T.let(
+                :recovered,
+                Dodopayments::WebhookPayload::Data::AbandonedCheckout::Status::TaggedSymbol
+              )
+            EXHAUSTED =
+              T.let(
+                :exhausted,
+                Dodopayments::WebhookPayload::Data::AbandonedCheckout::Status::TaggedSymbol
+              )
+            OPTED_OUT =
+              T.let(
+                :opted_out,
+                Dodopayments::WebhookPayload::Data::AbandonedCheckout::Status::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Dodopayments::WebhookPayload::Data::AbandonedCheckout::Status::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+        end
+
+        class DunningAttempt < Dodopayments::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Dodopayments::WebhookPayload::Data::DunningAttempt,
+                Dodopayments::Internal::AnyHash
+              )
+            end
+
+          sig { returns(Time) }
+          attr_accessor :created_at
+
+          sig { returns(String) }
+          attr_accessor :customer_id
+
+          sig do
+            returns(
+              Dodopayments::WebhookPayload::Data::DunningAttempt::PayloadType::OrSymbol
+            )
+          end
+          attr_accessor :payload_type
+
+          sig do
+            returns(
+              Dodopayments::WebhookPayload::Data::DunningAttempt::Status::OrSymbol
+            )
+          end
+          attr_accessor :status
+
+          sig { returns(String) }
+          attr_accessor :subscription_id
+
+          sig do
+            returns(
+              Dodopayments::WebhookPayload::Data::DunningAttempt::TriggerState::OrSymbol
+            )
+          end
+          attr_accessor :trigger_state
+
+          sig { returns(T.nilable(String)) }
+          attr_accessor :payment_id
+
+          sig do
+            params(
+              created_at: Time,
+              customer_id: String,
+              payload_type:
+                Dodopayments::WebhookPayload::Data::DunningAttempt::PayloadType::OrSymbol,
+              status:
+                Dodopayments::WebhookPayload::Data::DunningAttempt::Status::OrSymbol,
+              subscription_id: String,
+              trigger_state:
+                Dodopayments::WebhookPayload::Data::DunningAttempt::TriggerState::OrSymbol,
+              payment_id: T.nilable(String)
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            created_at:,
+            customer_id:,
+            payload_type:,
+            status:,
+            subscription_id:,
+            trigger_state:,
+            payment_id: nil
+          )
+          end
+
+          sig do
+            override.returns(
+              {
+                created_at: Time,
+                customer_id: String,
+                payload_type:
+                  Dodopayments::WebhookPayload::Data::DunningAttempt::PayloadType::OrSymbol,
+                status:
+                  Dodopayments::WebhookPayload::Data::DunningAttempt::Status::OrSymbol,
+                subscription_id: String,
+                trigger_state:
+                  Dodopayments::WebhookPayload::Data::DunningAttempt::TriggerState::OrSymbol,
+                payment_id: T.nilable(String)
+              }
+            )
+          end
+          def to_hash
+          end
+
+          module PayloadType
+            extend Dodopayments::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Dodopayments::WebhookPayload::Data::DunningAttempt::PayloadType
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            DUNNING_ATTEMPT =
+              T.let(
+                :DunningAttempt,
+                Dodopayments::WebhookPayload::Data::DunningAttempt::PayloadType::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Dodopayments::WebhookPayload::Data::DunningAttempt::PayloadType::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
+          module Status
+            extend Dodopayments::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Dodopayments::WebhookPayload::Data::DunningAttempt::Status
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            RECOVERING =
+              T.let(
+                :recovering,
+                Dodopayments::WebhookPayload::Data::DunningAttempt::Status::TaggedSymbol
+              )
+            RECOVERED =
+              T.let(
+                :recovered,
+                Dodopayments::WebhookPayload::Data::DunningAttempt::Status::TaggedSymbol
+              )
+            EXHAUSTED =
+              T.let(
+                :exhausted,
+                Dodopayments::WebhookPayload::Data::DunningAttempt::Status::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Dodopayments::WebhookPayload::Data::DunningAttempt::Status::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
+          module TriggerState
+            extend Dodopayments::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Dodopayments::WebhookPayload::Data::DunningAttempt::TriggerState
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            ON_HOLD =
+              T.let(
+                :on_hold,
+                Dodopayments::WebhookPayload::Data::DunningAttempt::TriggerState::TaggedSymbol
+              )
+            CANCELLED =
+              T.let(
+                :cancelled,
+                Dodopayments::WebhookPayload::Data::DunningAttempt::TriggerState::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Dodopayments::WebhookPayload::Data::DunningAttempt::TriggerState::TaggedSymbol
                 ]
               )
             end

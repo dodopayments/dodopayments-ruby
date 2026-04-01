@@ -1,0 +1,23 @@
+module Dodopayments
+  module Models
+    module Payouts
+      type breakup_retrieve_response_item =
+        { event_type: String, total: Integer }
+
+      class BreakupRetrieveResponseItem < Dodopayments::Internal::Type::BaseModel
+        attr_accessor event_type: String
+
+        attr_accessor total: Integer
+
+        def initialize: (event_type: String, total: Integer) -> void
+
+        def to_hash: -> { event_type: String, total: Integer }
+      end
+
+      type breakup_retrieve_response =
+        ::Array[Dodopayments::Models::Payouts::BreakupRetrieveResponseItem]
+
+      BreakupRetrieveResponse: Dodopayments::Internal::Type::Converter
+    end
+  end
+end

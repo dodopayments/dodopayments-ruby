@@ -23,6 +23,11 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :cancel_at_next_billing_date, Dodopayments::Internal::Type::Boolean, nil?: true
 
+      # @!attribute cancel_reason
+      #
+      #   @return [Symbol, Dodopayments::Models::SubscriptionUpdateParams::CancelReason, nil]
+      optional :cancel_reason, enum: -> { Dodopayments::SubscriptionUpdateParams::CancelReason }, nil?: true
+
       # @!attribute credit_entitlement_cart
       #   Update credit entitlement cart settings
       #
@@ -63,12 +68,14 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(subscription_id:, billing: nil, cancel_at_next_billing_date: nil, credit_entitlement_cart: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
+      # @!method initialize(subscription_id:, billing: nil, cancel_at_next_billing_date: nil, cancel_reason: nil, credit_entitlement_cart: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
       #   @param subscription_id [String]
       #
       #   @param billing [Dodopayments::Models::BillingAddress, nil]
       #
       #   @param cancel_at_next_billing_date [Boolean, nil] When set, the subscription will remain active until the end of billing period
+      #
+      #   @param cancel_reason [Symbol, Dodopayments::Models::SubscriptionUpdateParams::CancelReason, nil]
       #
       #   @param credit_entitlement_cart [Array<Dodopayments::Models::SubscriptionUpdateParams::CreditEntitlementCart>, nil] Update credit entitlement cart settings
       #
@@ -85,6 +92,17 @@ module Dodopayments
       #   @param tax_id [String, nil]
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
+
+      module CancelReason
+        extend Dodopayments::Internal::Type::Enum
+
+        CANCELLED_BY_CUSTOMER = :cancelled_by_customer
+        CANCELLED_BY_MERCHANT = :cancelled_by_merchant
+        CANCELLED_BY_MERCHANT_SEND_DUNNING = :cancelled_by_merchant_send_dunning
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
 
       class CreditEntitlementCart < Dodopayments::Internal::Type::BaseModel
         # @!attribute credit_entitlement_id

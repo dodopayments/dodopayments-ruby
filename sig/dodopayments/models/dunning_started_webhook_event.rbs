@@ -1,0 +1,110 @@
+module Dodopayments
+  module Models
+    type dunning_started_webhook_event =
+      {
+        business_id: String,
+        data: Dodopayments::DunningStartedWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::DunningStartedWebhookEvent::type_
+      }
+
+    class DunningStartedWebhookEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::DunningStartedWebhookEvent::Data
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: Dodopayments::Models::DunningStartedWebhookEvent::type_
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::DunningStartedWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::DunningStartedWebhookEvent::type_
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::DunningStartedWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::DunningStartedWebhookEvent::type_
+      }
+
+      type data =
+        {
+          created_at: Time,
+          customer_id: String,
+          status: Dodopayments::Models::DunningStartedWebhookEvent::Data::status,
+          subscription_id: String,
+          trigger_state: Dodopayments::Models::DunningStartedWebhookEvent::Data::trigger_state,
+          payment_id: String?
+        }
+
+      class Data < Dodopayments::Internal::Type::BaseModel
+        attr_accessor created_at: Time
+
+        attr_accessor customer_id: String
+
+        attr_accessor status: Dodopayments::Models::DunningStartedWebhookEvent::Data::status
+
+        attr_accessor subscription_id: String
+
+        attr_accessor trigger_state: Dodopayments::Models::DunningStartedWebhookEvent::Data::trigger_state
+
+        attr_accessor payment_id: String?
+
+        def initialize: (
+          created_at: Time,
+          customer_id: String,
+          status: Dodopayments::Models::DunningStartedWebhookEvent::Data::status,
+          subscription_id: String,
+          trigger_state: Dodopayments::Models::DunningStartedWebhookEvent::Data::trigger_state,
+          ?payment_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          created_at: Time,
+          customer_id: String,
+          status: Dodopayments::Models::DunningStartedWebhookEvent::Data::status,
+          subscription_id: String,
+          trigger_state: Dodopayments::Models::DunningStartedWebhookEvent::Data::trigger_state,
+          payment_id: String?
+        }
+
+        type status = :recovering | :recovered | :exhausted
+
+        module Status
+          extend Dodopayments::Internal::Type::Enum
+
+          RECOVERING: :recovering
+          RECOVERED: :recovered
+          EXHAUSTED: :exhausted
+
+          def self?.values: -> ::Array[Dodopayments::Models::DunningStartedWebhookEvent::Data::status]
+        end
+
+        type trigger_state = :on_hold | :cancelled
+
+        module TriggerState
+          extend Dodopayments::Internal::Type::Enum
+
+          ON_HOLD: :on_hold
+          CANCELLED: :cancelled
+
+          def self?.values: -> ::Array[Dodopayments::Models::DunningStartedWebhookEvent::Data::trigger_state]
+        end
+      end
+
+      type type_ = :"dunning.started"
+
+      module Type
+        extend Dodopayments::Internal::Type::Enum
+
+        DUNNING_STARTED: :"dunning.started"
+
+        def self?.values: -> ::Array[Dodopayments::Models::DunningStartedWebhookEvent::type_]
+      end
+    end
+  end
+end

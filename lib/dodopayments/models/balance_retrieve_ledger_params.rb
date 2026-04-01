@@ -253,6 +253,8 @@ module Dodopayments
         DODO_CREDITS = :dodo_credits
         ADJUSTMENT = :adjustment
         CURRENCY_CONVERSION = :currency_conversion
+        ABANDONED_CART_RECOVERY_FEE = :abandoned_cart_recovery_fee
+        DUNNING_FEES = :dunning_fees
 
         # @!method self.values
         #   @return [Array<Symbol>]

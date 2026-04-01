@@ -197,6 +197,16 @@ module Dodopayments
             :currency_conversion,
             Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
           )
+        ABANDONED_CART_RECOVERY_FEE =
+          T.let(
+            :abandoned_cart_recovery_fee,
+            Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
+          )
+        DUNNING_FEES =
+          T.let(
+            :dunning_fees,
+            Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
+          )
 
         sig do
           override.returns(

@@ -131,6 +131,8 @@ module Dodopayments
       sig do
         params(payload: String).returns(
           T.any(
+            Dodopayments::AbandonedCheckoutDetectedWebhookEvent,
+            Dodopayments::AbandonedCheckoutRecoveredWebhookEvent,
             Dodopayments::CreditAddedWebhookEvent,
             Dodopayments::CreditBalanceLowWebhookEvent,
             Dodopayments::CreditDeductedWebhookEvent,
@@ -146,6 +148,8 @@ module Dodopayments
             Dodopayments::DisputeLostWebhookEvent,
             Dodopayments::DisputeOpenedWebhookEvent,
             Dodopayments::DisputeWonWebhookEvent,
+            Dodopayments::DunningRecoveredWebhookEvent,
+            Dodopayments::DunningStartedWebhookEvent,
             Dodopayments::LicenseKeyCreatedWebhookEvent,
             Dodopayments::PaymentCancelledWebhookEvent,
             Dodopayments::PaymentFailedWebhookEvent,
@@ -177,6 +181,8 @@ module Dodopayments
           key: T.nilable(String)
         ).returns(
           T.any(
+            Dodopayments::AbandonedCheckoutDetectedWebhookEvent,
+            Dodopayments::AbandonedCheckoutRecoveredWebhookEvent,
             Dodopayments::CreditAddedWebhookEvent,
             Dodopayments::CreditBalanceLowWebhookEvent,
             Dodopayments::CreditDeductedWebhookEvent,
@@ -192,6 +198,8 @@ module Dodopayments
             Dodopayments::DisputeLostWebhookEvent,
             Dodopayments::DisputeOpenedWebhookEvent,
             Dodopayments::DisputeWonWebhookEvent,
+            Dodopayments::DunningRecoveredWebhookEvent,
+            Dodopayments::DunningStartedWebhookEvent,
             Dodopayments::LicenseKeyCreatedWebhookEvent,
             Dodopayments::PaymentCancelledWebhookEvent,
             Dodopayments::PaymentFailedWebhookEvent,
