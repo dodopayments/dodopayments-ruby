@@ -3,6 +3,9 @@
 module Dodopayments
   module Resources
     class Payouts
+      # @return [Dodopayments::Resources::Payouts::Breakup]
+      attr_reader :breakup
+
       # @overload list(created_at_gte: nil, created_at_lte: nil, page_number: nil, page_size: nil, request_options: {})
       #
       # @param created_at_gte [Time] Get payouts created after this time (inclusive)
@@ -36,6 +39,7 @@ module Dodopayments
       # @param client [Dodopayments::Client]
       def initialize(client:)
         @client = client
+        @breakup = Dodopayments::Resources::Payouts::Breakup.new(client: client)
       end
     end
   end

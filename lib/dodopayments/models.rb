@@ -39,6 +39,10 @@ module Dodopayments
     mod.define_sorbet_constant!(const) { T.type_alias { mod.to_sorbet_type } }
   end
 
+  AbandonedCheckoutDetectedWebhookEvent = Dodopayments::Models::AbandonedCheckoutDetectedWebhookEvent
+
+  AbandonedCheckoutRecoveredWebhookEvent = Dodopayments::Models::AbandonedCheckoutRecoveredWebhookEvent
+
   AddMeterToPrice = Dodopayments::Models::AddMeterToPrice
 
   AddonCartResponseItem = Dodopayments::Models::AddonCartResponseItem
@@ -217,6 +221,10 @@ module Dodopayments
 
   DisputeWonWebhookEvent = Dodopayments::Models::DisputeWonWebhookEvent
 
+  DunningRecoveredWebhookEvent = Dodopayments::Models::DunningRecoveredWebhookEvent
+
+  DunningStartedWebhookEvent = Dodopayments::Models::DunningStartedWebhookEvent
+
   Event = Dodopayments::Models::Event
 
   EventInput = Dodopayments::Models::EventInput
@@ -308,6 +316,8 @@ module Dodopayments
   PaymentSucceededWebhookEvent = Dodopayments::Models::PaymentSucceededWebhookEvent
 
   PayoutListParams = Dodopayments::Models::PayoutListParams
+
+  Payouts = Dodopayments::Models::Payouts
 
   Price = Dodopayments::Models::Price
 

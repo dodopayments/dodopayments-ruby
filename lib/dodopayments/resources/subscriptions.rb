@@ -84,13 +84,15 @@ module Dodopayments
         )
       end
 
-      # @overload update(subscription_id, billing: nil, cancel_at_next_billing_date: nil, credit_entitlement_cart: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
+      # @overload update(subscription_id, billing: nil, cancel_at_next_billing_date: nil, cancel_reason: nil, credit_entitlement_cart: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
       # @param billing [Dodopayments::Models::BillingAddress, nil]
       #
       # @param cancel_at_next_billing_date [Boolean, nil] When set, the subscription will remain active until the end of billing period
+      #
+      # @param cancel_reason [Symbol, Dodopayments::Models::SubscriptionUpdateParams::CancelReason, nil]
       #
       # @param credit_entitlement_cart [Array<Dodopayments::Models::SubscriptionUpdateParams::CreditEntitlementCart>, nil] Update credit entitlement cart settings
       #

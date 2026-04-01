@@ -1,0 +1,16 @@
+module Dodopayments
+  module Resources
+    class Payouts
+      class Breakup
+        attr_reader details: Dodopayments::Resources::Payouts::Breakup::Details
+
+        def retrieve: (
+          String payout_id,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::Payouts::breakup_retrieve_response
+
+        def initialize: (client: Dodopayments::Client) -> void
+      end
+    end
+  end
+end

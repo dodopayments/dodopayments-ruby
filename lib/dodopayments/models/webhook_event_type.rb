@@ -41,6 +41,12 @@ module Dodopayments
       CREDIT_OVERAGE_CHARGED = :"credit.overage_charged"
       CREDIT_MANUAL_ADJUSTMENT = :"credit.manual_adjustment"
       CREDIT_BALANCE_LOW = :"credit.balance_low"
+      ABANDONED_CHECKOUT_DETECTED = :"abandoned_checkout.detected"
+      ABANDONED_CHECKOUT_RECOVERED = :"abandoned_checkout.recovered"
+      DUNNING_STARTED = :"dunning.started"
+      DUNNING_RECOVERED = :"dunning.recovered"
+      ACR_EMAIL = :"acr.email"
+      DUNNING_EMAIL = :"dunning.email"
 
       # @!method self.values
       #   @return [Array<Symbol>]

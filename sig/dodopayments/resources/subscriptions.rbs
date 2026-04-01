@@ -34,6 +34,7 @@ module Dodopayments
         String subscription_id,
         ?billing: Dodopayments::BillingAddress?,
         ?cancel_at_next_billing_date: bool?,
+        ?cancel_reason: Dodopayments::Models::SubscriptionUpdateParams::cancel_reason?,
         ?credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?,
         ?customer_name: String?,
         ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,

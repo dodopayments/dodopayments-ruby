@@ -1,7 +1,9 @@
 module Dodopayments
   module Models
     type unwrap_webhook_event =
-      Dodopayments::CreditAddedWebhookEvent
+      Dodopayments::AbandonedCheckoutDetectedWebhookEvent
+      | Dodopayments::AbandonedCheckoutRecoveredWebhookEvent
+      | Dodopayments::CreditAddedWebhookEvent
       | Dodopayments::CreditBalanceLowWebhookEvent
       | Dodopayments::CreditDeductedWebhookEvent
       | Dodopayments::CreditExpiredWebhookEvent
@@ -16,6 +18,8 @@ module Dodopayments
       | Dodopayments::DisputeLostWebhookEvent
       | Dodopayments::DisputeOpenedWebhookEvent
       | Dodopayments::DisputeWonWebhookEvent
+      | Dodopayments::DunningRecoveredWebhookEvent
+      | Dodopayments::DunningStartedWebhookEvent
       | Dodopayments::LicenseKeyCreatedWebhookEvent
       | Dodopayments::PaymentCancelledWebhookEvent
       | Dodopayments::PaymentFailedWebhookEvent

@@ -36,6 +36,12 @@ module Dodopayments
       | :"credit.overage_charged"
       | :"credit.manual_adjustment"
       | :"credit.balance_low"
+      | :"abandoned_checkout.detected"
+      | :"abandoned_checkout.recovered"
+      | :"dunning.started"
+      | :"dunning.recovered"
+      | :"acr.email"
+      | :"dunning.email"
 
     module WebhookEventType
       extend Dodopayments::Internal::Type::Enum
@@ -75,6 +81,12 @@ module Dodopayments
       CREDIT_OVERAGE_CHARGED: :"credit.overage_charged"
       CREDIT_MANUAL_ADJUSTMENT: :"credit.manual_adjustment"
       CREDIT_BALANCE_LOW: :"credit.balance_low"
+      ABANDONED_CHECKOUT_DETECTED: :"abandoned_checkout.detected"
+      ABANDONED_CHECKOUT_RECOVERED: :"abandoned_checkout.recovered"
+      DUNNING_STARTED: :"dunning.started"
+      DUNNING_RECOVERED: :"dunning.recovered"
+      ACR_EMAIL: :"acr.email"
+      DUNNING_EMAIL: :"dunning.email"
 
       def self?.values: -> ::Array[Dodopayments::Models::webhook_event_type]
     end

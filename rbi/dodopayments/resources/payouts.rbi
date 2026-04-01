@@ -3,6 +3,9 @@
 module Dodopayments
   module Resources
     class Payouts
+      sig { returns(Dodopayments::Resources::Payouts::Breakup) }
+      attr_reader :breakup
+
       sig do
         params(
           created_at_gte: Time,

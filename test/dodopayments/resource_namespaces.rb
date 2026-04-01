@@ -3,6 +3,9 @@
 module Dodopayments
   module Test
     module Resources
+      module Breakup
+      end
+
       module CreditEntitlements
       end
 
@@ -12,6 +15,11 @@ module Dodopayments
       end
 
       module Invoices
+      end
+
+      module Payouts
+        module Breakup
+        end
       end
 
       module Products
