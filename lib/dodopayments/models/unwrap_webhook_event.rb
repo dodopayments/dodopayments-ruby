@@ -5,6 +5,10 @@ module Dodopayments
     module UnwrapWebhookEvent
       extend Dodopayments::Internal::Type::Union
 
+      variant -> { Dodopayments::AbandonedCheckoutDetectedWebhookEvent }
+
+      variant -> { Dodopayments::AbandonedCheckoutRecoveredWebhookEvent }
+
       variant -> { Dodopayments::CreditAddedWebhookEvent }
 
       variant -> { Dodopayments::CreditBalanceLowWebhookEvent }
@@ -34,6 +38,10 @@ module Dodopayments
       variant -> { Dodopayments::DisputeOpenedWebhookEvent }
 
       variant -> { Dodopayments::DisputeWonWebhookEvent }
+
+      variant -> { Dodopayments::DunningRecoveredWebhookEvent }
+
+      variant -> { Dodopayments::DunningStartedWebhookEvent }
 
       variant -> { Dodopayments::LicenseKeyCreatedWebhookEvent }
 
@@ -66,7 +74,7 @@ module Dodopayments
       variant -> { Dodopayments::SubscriptionUpdatedWebhookEvent }
 
       # @!method self.variants
-      #   @return [Array(Dodopayments::Models::CreditAddedWebhookEvent, Dodopayments::Models::CreditBalanceLowWebhookEvent, Dodopayments::Models::CreditDeductedWebhookEvent, Dodopayments::Models::CreditExpiredWebhookEvent, Dodopayments::Models::CreditManualAdjustmentWebhookEvent, Dodopayments::Models::CreditOverageChargedWebhookEvent, Dodopayments::Models::CreditRolledOverWebhookEvent, Dodopayments::Models::CreditRolloverForfeitedWebhookEvent, Dodopayments::Models::DisputeAcceptedWebhookEvent, Dodopayments::Models::DisputeCancelledWebhookEvent, Dodopayments::Models::DisputeChallengedWebhookEvent, Dodopayments::Models::DisputeExpiredWebhookEvent, Dodopayments::Models::DisputeLostWebhookEvent, Dodopayments::Models::DisputeOpenedWebhookEvent, Dodopayments::Models::DisputeWonWebhookEvent, Dodopayments::Models::LicenseKeyCreatedWebhookEvent, Dodopayments::Models::PaymentCancelledWebhookEvent, Dodopayments::Models::PaymentFailedWebhookEvent, Dodopayments::Models::PaymentProcessingWebhookEvent, Dodopayments::Models::PaymentSucceededWebhookEvent, Dodopayments::Models::RefundFailedWebhookEvent, Dodopayments::Models::RefundSucceededWebhookEvent, Dodopayments::Models::SubscriptionActiveWebhookEvent, Dodopayments::Models::SubscriptionCancelledWebhookEvent, Dodopayments::Models::SubscriptionExpiredWebhookEvent, Dodopayments::Models::SubscriptionFailedWebhookEvent, Dodopayments::Models::SubscriptionOnHoldWebhookEvent, Dodopayments::Models::SubscriptionPlanChangedWebhookEvent, Dodopayments::Models::SubscriptionRenewedWebhookEvent, Dodopayments::Models::SubscriptionUpdatedWebhookEvent)]
+      #   @return [Array(Dodopayments::Models::AbandonedCheckoutDetectedWebhookEvent, Dodopayments::Models::AbandonedCheckoutRecoveredWebhookEvent, Dodopayments::Models::CreditAddedWebhookEvent, Dodopayments::Models::CreditBalanceLowWebhookEvent, Dodopayments::Models::CreditDeductedWebhookEvent, Dodopayments::Models::CreditExpiredWebhookEvent, Dodopayments::Models::CreditManualAdjustmentWebhookEvent, Dodopayments::Models::CreditOverageChargedWebhookEvent, Dodopayments::Models::CreditRolledOverWebhookEvent, Dodopayments::Models::CreditRolloverForfeitedWebhookEvent, Dodopayments::Models::DisputeAcceptedWebhookEvent, Dodopayments::Models::DisputeCancelledWebhookEvent, Dodopayments::Models::DisputeChallengedWebhookEvent, Dodopayments::Models::DisputeExpiredWebhookEvent, Dodopayments::Models::DisputeLostWebhookEvent, Dodopayments::Models::DisputeOpenedWebhookEvent, Dodopayments::Models::DisputeWonWebhookEvent, Dodopayments::Models::DunningRecoveredWebhookEvent, Dodopayments::Models::DunningStartedWebhookEvent, Dodopayments::Models::LicenseKeyCreatedWebhookEvent, Dodopayments::Models::PaymentCancelledWebhookEvent, Dodopayments::Models::PaymentFailedWebhookEvent, Dodopayments::Models::PaymentProcessingWebhookEvent, Dodopayments::Models::PaymentSucceededWebhookEvent, Dodopayments::Models::RefundFailedWebhookEvent, Dodopayments::Models::RefundSucceededWebhookEvent, Dodopayments::Models::SubscriptionActiveWebhookEvent, Dodopayments::Models::SubscriptionCancelledWebhookEvent, Dodopayments::Models::SubscriptionExpiredWebhookEvent, Dodopayments::Models::SubscriptionFailedWebhookEvent, Dodopayments::Models::SubscriptionOnHoldWebhookEvent, Dodopayments::Models::SubscriptionPlanChangedWebhookEvent, Dodopayments::Models::SubscriptionRenewedWebhookEvent, Dodopayments::Models::SubscriptionUpdatedWebhookEvent)]
     end
   end
 end

@@ -39,6 +39,8 @@ module Dodopayments
         | Dodopayments::WebhookPayload::Data::LicenseKey
         | Dodopayments::WebhookPayload::Data::CreditLedgerEntry
         | Dodopayments::WebhookPayload::Data::CreditBalanceLow
+        | Dodopayments::WebhookPayload::Data::AbandonedCheckout
+        | Dodopayments::WebhookPayload::Data::DunningAttempt
 
       module Data
         extend Dodopayments::Internal::Type::Union
@@ -293,6 +295,169 @@ module Dodopayments
             CREDIT_BALANCE_LOW: :CreditBalanceLow
 
             def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow::payload_type]
+          end
+        end
+
+        type abandoned_checkout =
+          {
+            abandoned_at: Time,
+            abandonment_reason: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::abandonment_reason,
+            customer_id: String,
+            payload_type: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::payload_type,
+            payment_id: String,
+            status: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::status,
+            recovered_payment_id: String?
+          }
+
+        class AbandonedCheckout < Dodopayments::Internal::Type::BaseModel
+          attr_accessor abandoned_at: Time
+
+          attr_accessor abandonment_reason: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::abandonment_reason
+
+          attr_accessor customer_id: String
+
+          attr_accessor payload_type: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::payload_type
+
+          attr_accessor payment_id: String
+
+          attr_accessor status: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::status
+
+          attr_accessor recovered_payment_id: String?
+
+          def initialize: (
+            abandoned_at: Time,
+            abandonment_reason: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::abandonment_reason,
+            customer_id: String,
+            payload_type: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::payload_type,
+            payment_id: String,
+            status: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::status,
+            ?recovered_payment_id: String?
+          ) -> void
+
+          def to_hash: -> {
+            abandoned_at: Time,
+            abandonment_reason: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::abandonment_reason,
+            customer_id: String,
+            payload_type: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::payload_type,
+            payment_id: String,
+            status: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::status,
+            recovered_payment_id: String?
+          }
+
+          type abandonment_reason = :payment_failed | :checkout_incomplete
+
+          module AbandonmentReason
+            extend Dodopayments::Internal::Type::Enum
+
+            PAYMENT_FAILED: :payment_failed
+            CHECKOUT_INCOMPLETE: :checkout_incomplete
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::abandonment_reason]
+          end
+
+          type payload_type = :AbandonedCheckout
+
+          module PayloadType
+            extend Dodopayments::Internal::Type::Enum
+
+            ABANDONED_CHECKOUT: :AbandonedCheckout
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::payload_type]
+          end
+
+          type status =
+            :abandoned | :recovering | :recovered | :exhausted | :opted_out
+
+          module Status
+            extend Dodopayments::Internal::Type::Enum
+
+            ABANDONED: :abandoned
+            RECOVERING: :recovering
+            RECOVERED: :recovered
+            EXHAUSTED: :exhausted
+            OPTED_OUT: :opted_out
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::status]
+          end
+        end
+
+        type dunning_attempt =
+          {
+            created_at: Time,
+            customer_id: String,
+            payload_type: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::payload_type,
+            status: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::status,
+            subscription_id: String,
+            trigger_state: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::trigger_state,
+            payment_id: String?
+          }
+
+        class DunningAttempt < Dodopayments::Internal::Type::BaseModel
+          attr_accessor created_at: Time
+
+          attr_accessor customer_id: String
+
+          attr_accessor payload_type: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::payload_type
+
+          attr_accessor status: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::status
+
+          attr_accessor subscription_id: String
+
+          attr_accessor trigger_state: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::trigger_state
+
+          attr_accessor payment_id: String?
+
+          def initialize: (
+            created_at: Time,
+            customer_id: String,
+            payload_type: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::payload_type,
+            status: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::status,
+            subscription_id: String,
+            trigger_state: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::trigger_state,
+            ?payment_id: String?
+          ) -> void
+
+          def to_hash: -> {
+            created_at: Time,
+            customer_id: String,
+            payload_type: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::payload_type,
+            status: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::status,
+            subscription_id: String,
+            trigger_state: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::trigger_state,
+            payment_id: String?
+          }
+
+          type payload_type = :DunningAttempt
+
+          module PayloadType
+            extend Dodopayments::Internal::Type::Enum
+
+            DUNNING_ATTEMPT: :DunningAttempt
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::DunningAttempt::payload_type]
+          end
+
+          type status = :recovering | :recovered | :exhausted
+
+          module Status
+            extend Dodopayments::Internal::Type::Enum
+
+            RECOVERING: :recovering
+            RECOVERED: :recovered
+            EXHAUSTED: :exhausted
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::DunningAttempt::status]
+          end
+
+          type trigger_state = :on_hold | :cancelled
+
+          module TriggerState
+            extend Dodopayments::Internal::Type::Enum
+
+            ON_HOLD: :on_hold
+            CANCELLED: :cancelled
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::DunningAttempt::trigger_state]
           end
         end
 

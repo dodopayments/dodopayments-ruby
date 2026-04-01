@@ -5,6 +5,7 @@ module Dodopayments
         subscription_id: String,
         billing: Dodopayments::BillingAddress?,
         cancel_at_next_billing_date: bool?,
+        cancel_reason: Dodopayments::Models::SubscriptionUpdateParams::cancel_reason?,
         credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?,
         customer_name: String?,
         disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
@@ -25,6 +26,8 @@ module Dodopayments
 
       attr_accessor cancel_at_next_billing_date: bool?
 
+      attr_accessor cancel_reason: Dodopayments::Models::SubscriptionUpdateParams::cancel_reason?
+
       attr_accessor credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?
 
       attr_accessor customer_name: String?
@@ -43,6 +46,7 @@ module Dodopayments
         subscription_id: String,
         ?billing: Dodopayments::BillingAddress?,
         ?cancel_at_next_billing_date: bool?,
+        ?cancel_reason: Dodopayments::Models::SubscriptionUpdateParams::cancel_reason?,
         ?credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?,
         ?customer_name: String?,
         ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
@@ -57,6 +61,7 @@ module Dodopayments
         subscription_id: String,
         billing: Dodopayments::BillingAddress?,
         cancel_at_next_billing_date: bool?,
+        cancel_reason: Dodopayments::Models::SubscriptionUpdateParams::cancel_reason?,
         credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?,
         customer_name: String?,
         disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
@@ -66,6 +71,21 @@ module Dodopayments
         tax_id: String?,
         request_options: Dodopayments::RequestOptions
       }
+
+      type cancel_reason =
+        :cancelled_by_customer
+        | :cancelled_by_merchant
+        | :cancelled_by_merchant_send_dunning
+
+      module CancelReason
+        extend Dodopayments::Internal::Type::Enum
+
+        CANCELLED_BY_CUSTOMER: :cancelled_by_customer
+        CANCELLED_BY_MERCHANT: :cancelled_by_merchant
+        CANCELLED_BY_MERCHANT_SEND_DUNNING: :cancelled_by_merchant_send_dunning
+
+        def self?.values: -> ::Array[Dodopayments::Models::SubscriptionUpdateParams::cancel_reason]
+      end
 
       type credit_entitlement_cart =
         {

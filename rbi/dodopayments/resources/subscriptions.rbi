@@ -112,6 +112,10 @@ module Dodopayments
           subscription_id: String,
           billing: T.nilable(Dodopayments::BillingAddress::OrHash),
           cancel_at_next_billing_date: T.nilable(T::Boolean),
+          cancel_reason:
+            T.nilable(
+              Dodopayments::SubscriptionUpdateParams::CancelReason::OrSymbol
+            ),
           credit_entitlement_cart:
             T.nilable(
               T::Array[
@@ -136,6 +140,7 @@ module Dodopayments
         billing: nil,
         # When set, the subscription will remain active until the end of billing period
         cancel_at_next_billing_date: nil,
+        cancel_reason: nil,
         # Update credit entitlement cart settings
         credit_entitlement_cart: nil,
         customer_name: nil,

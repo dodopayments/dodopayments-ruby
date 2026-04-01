@@ -29,6 +29,15 @@ module Dodopayments
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :cancel_at_next_billing_date
 
+      sig do
+        returns(
+          T.nilable(
+            Dodopayments::SubscriptionUpdateParams::CancelReason::OrSymbol
+          )
+        )
+      end
+      attr_accessor :cancel_reason
+
       # Update credit entitlement cart settings
       sig do
         returns(
@@ -78,6 +87,10 @@ module Dodopayments
           subscription_id: String,
           billing: T.nilable(Dodopayments::BillingAddress::OrHash),
           cancel_at_next_billing_date: T.nilable(T::Boolean),
+          cancel_reason:
+            T.nilable(
+              Dodopayments::SubscriptionUpdateParams::CancelReason::OrSymbol
+            ),
           credit_entitlement_cart:
             T.nilable(
               T::Array[
@@ -101,6 +114,7 @@ module Dodopayments
         billing: nil,
         # When set, the subscription will remain active until the end of billing period
         cancel_at_next_billing_date: nil,
+        cancel_reason: nil,
         # Update credit entitlement cart settings
         credit_entitlement_cart: nil,
         customer_name: nil,
@@ -119,6 +133,10 @@ module Dodopayments
             subscription_id: String,
             billing: T.nilable(Dodopayments::BillingAddress),
             cancel_at_next_billing_date: T.nilable(T::Boolean),
+            cancel_reason:
+              T.nilable(
+                Dodopayments::SubscriptionUpdateParams::CancelReason::OrSymbol
+              ),
             credit_entitlement_cart:
               T.nilable(
                 T::Array[
@@ -139,6 +157,42 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      module CancelReason
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, Dodopayments::SubscriptionUpdateParams::CancelReason)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        CANCELLED_BY_CUSTOMER =
+          T.let(
+            :cancelled_by_customer,
+            Dodopayments::SubscriptionUpdateParams::CancelReason::TaggedSymbol
+          )
+        CANCELLED_BY_MERCHANT =
+          T.let(
+            :cancelled_by_merchant,
+            Dodopayments::SubscriptionUpdateParams::CancelReason::TaggedSymbol
+          )
+        CANCELLED_BY_MERCHANT_SEND_DUNNING =
+          T.let(
+            :cancelled_by_merchant_send_dunning,
+            Dodopayments::SubscriptionUpdateParams::CancelReason::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Dodopayments::SubscriptionUpdateParams::CancelReason::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
       end
 
       class CreditEntitlementCart < Dodopayments::Internal::Type::BaseModel

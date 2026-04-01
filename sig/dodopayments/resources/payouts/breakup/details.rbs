@@ -1,0 +1,23 @@
+module Dodopayments
+  module Resources
+    class Payouts
+      class Breakup
+        class Details
+          def list: (
+            String payout_id,
+            ?page_number: Integer,
+            ?page_size: Integer,
+            ?request_options: Dodopayments::request_opts
+          ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Payouts::Breakup::DetailListResponse]
+
+          def download_csv: (
+            String payout_id,
+            ?request_options: Dodopayments::request_opts
+          ) -> nil
+
+          def initialize: (client: Dodopayments::Client) -> void
+        end
+      end
+    end
+  end
+end
