@@ -38,6 +38,11 @@ module Dodopayments
       #   @return [String]
       required :discount_id, String
 
+      # @!attribute metadata
+      #
+      #   @return [Hash{Symbol=>String}]
+      required :metadata, Dodopayments::Internal::Type::HashOf[String]
+
       # @!attribute preserve_on_plan_change
       #   Whether this discount should be preserved when a subscription changes plans.
       #   Default: false (discount is removed on plan change)
@@ -89,7 +94,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :usage_limit, Integer, nil?: true
 
-      # @!method initialize(amount:, business_id:, code:, created_at:, discount_id:, preserve_on_plan_change:, restricted_to:, times_used:, type:, expires_at: nil, name: nil, subscription_cycles: nil, usage_limit: nil)
+      # @!method initialize(amount:, business_id:, code:, created_at:, discount_id:, metadata:, preserve_on_plan_change:, restricted_to:, times_used:, type:, expires_at: nil, name: nil, subscription_cycles: nil, usage_limit: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Discount} for more details.
       #
@@ -102,6 +107,8 @@ module Dodopayments
       #   @param created_at [Time] Timestamp when the discount is created
       #
       #   @param discount_id [String] The unique discount ID
+      #
+      #   @param metadata [Hash{Symbol=>String}]
       #
       #   @param preserve_on_plan_change [Boolean] Whether this discount should be preserved when a subscription changes plans.
       #

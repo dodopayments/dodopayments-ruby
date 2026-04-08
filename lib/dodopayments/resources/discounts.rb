@@ -9,7 +9,7 @@ module Dodopayments
       # POST /discounts If `code` is omitted or empty, a random 16-char uppercase code
       # is generated.
       #
-      # @overload create(amount:, type:, code: nil, expires_at: nil, name: nil, preserve_on_plan_change: nil, restricted_to: nil, subscription_cycles: nil, usage_limit: nil, request_options: {})
+      # @overload create(amount:, type:, code: nil, expires_at: nil, metadata: nil, name: nil, preserve_on_plan_change: nil, restricted_to: nil, subscription_cycles: nil, usage_limit: nil, request_options: {})
       #
       # @param amount [Integer] The discount amount.
       #
@@ -18,6 +18,8 @@ module Dodopayments
       # @param code [String, nil] Optionally supply a code (will be uppercased).
       #
       # @param expires_at [Time, nil] When the discount expires, if ever.
+      #
+      # @param metadata [Hash{Symbol=>String}] Additional metadata for the discount
       #
       # @param name [String, nil]
       #
@@ -70,7 +72,7 @@ module Dodopayments
       #
       # PATCH /discounts/{discount_id}
       #
-      # @overload update(discount_id, amount: nil, code: nil, expires_at: nil, name: nil, preserve_on_plan_change: nil, restricted_to: nil, subscription_cycles: nil, type: nil, usage_limit: nil, request_options: {})
+      # @overload update(discount_id, amount: nil, code: nil, expires_at: nil, metadata: nil, name: nil, preserve_on_plan_change: nil, restricted_to: nil, subscription_cycles: nil, type: nil, usage_limit: nil, request_options: {})
       #
       # @param discount_id [String] Discount Id
       #
@@ -79,6 +81,8 @@ module Dodopayments
       # @param code [String, nil] If present, update the discount code (uppercase).
       #
       # @param expires_at [Time, nil]
+      #
+      # @param metadata [Hash{Symbol=>String}, nil] Additional metadata for the discount
       #
       # @param name [String, nil]
       #
