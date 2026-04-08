@@ -6,6 +6,7 @@ module Dodopayments
         amount: Integer?,
         code: String?,
         expires_at: Time?,
+        metadata: ::Hash[Symbol, String]?,
         name: String?,
         preserve_on_plan_change: bool?,
         restricted_to: ::Array[String]?,
@@ -27,6 +28,8 @@ module Dodopayments
 
       attr_accessor expires_at: Time?
 
+      attr_accessor metadata: ::Hash[Symbol, String]?
+
       attr_accessor name: String?
 
       attr_accessor preserve_on_plan_change: bool?
@@ -44,6 +47,7 @@ module Dodopayments
         ?amount: Integer?,
         ?code: String?,
         ?expires_at: Time?,
+        ?metadata: ::Hash[Symbol, String]?,
         ?name: String?,
         ?preserve_on_plan_change: bool?,
         ?restricted_to: ::Array[String]?,
@@ -58,6 +62,7 @@ module Dodopayments
         amount: Integer?,
         code: String?,
         expires_at: Time?,
+        metadata: ::Hash[Symbol, String]?,
         name: String?,
         preserve_on_plan_change: bool?,
         restricted_to: ::Array[String]?,

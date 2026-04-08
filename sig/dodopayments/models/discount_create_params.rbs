@@ -6,6 +6,7 @@ module Dodopayments
         type: Dodopayments::Models::discount_type,
         code: String?,
         expires_at: Time?,
+        metadata: ::Hash[Symbol, String],
         name: String?,
         preserve_on_plan_change: bool,
         restricted_to: ::Array[String]?,
@@ -26,6 +27,10 @@ module Dodopayments
 
       attr_accessor expires_at: Time?
 
+      attr_reader metadata: ::Hash[Symbol, String]?
+
+      def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
       attr_accessor name: String?
 
       attr_reader preserve_on_plan_change: bool?
@@ -43,6 +48,7 @@ module Dodopayments
         type: Dodopayments::Models::discount_type,
         ?code: String?,
         ?expires_at: Time?,
+        ?metadata: ::Hash[Symbol, String],
         ?name: String?,
         ?preserve_on_plan_change: bool,
         ?restricted_to: ::Array[String]?,
@@ -56,6 +62,7 @@ module Dodopayments
         type: Dodopayments::Models::discount_type,
         code: String?,
         expires_at: Time?,
+        metadata: ::Hash[Symbol, String],
         name: String?,
         preserve_on_plan_change: bool,
         restricted_to: ::Array[String]?,
