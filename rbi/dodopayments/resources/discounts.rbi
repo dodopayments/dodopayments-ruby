@@ -11,6 +11,7 @@ module Dodopayments
           type: Dodopayments::DiscountType::OrSymbol,
           code: T.nilable(String),
           expires_at: T.nilable(Time),
+          metadata: T::Hash[Symbol, String],
           name: T.nilable(String),
           preserve_on_plan_change: T::Boolean,
           restricted_to: T.nilable(T::Array[String]),
@@ -38,6 +39,8 @@ module Dodopayments
         code: nil,
         # When the discount expires, if ever.
         expires_at: nil,
+        # Additional metadata for the discount
+        metadata: nil,
         name: nil,
         # Whether this discount should be preserved when a subscription changes plans.
         # Default: false (discount is removed on plan change)
@@ -75,6 +78,7 @@ module Dodopayments
           amount: T.nilable(Integer),
           code: T.nilable(String),
           expires_at: T.nilable(Time),
+          metadata: T.nilable(T::Hash[Symbol, String]),
           name: T.nilable(String),
           preserve_on_plan_change: T.nilable(T::Boolean),
           restricted_to: T.nilable(T::Array[String]),
@@ -98,6 +102,8 @@ module Dodopayments
         # If present, update the discount code (uppercase).
         code: nil,
         expires_at: nil,
+        # Additional metadata for the discount
+        metadata: nil,
         name: nil,
         # Whether this discount should be preserved when a subscription changes plans. If
         # not provided, the existing value is kept.

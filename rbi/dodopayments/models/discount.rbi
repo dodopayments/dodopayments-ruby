@@ -32,6 +32,9 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :discount_id
 
+      sig { returns(T::Hash[Symbol, String]) }
+      attr_accessor :metadata
+
       # Whether this discount should be preserved when a subscription changes plans.
       # Default: false (discount is removed on plan change)
       sig { returns(T::Boolean) }
@@ -74,6 +77,7 @@ module Dodopayments
           code: String,
           created_at: Time,
           discount_id: String,
+          metadata: T::Hash[Symbol, String],
           preserve_on_plan_change: T::Boolean,
           restricted_to: T::Array[String],
           times_used: Integer,
@@ -99,6 +103,7 @@ module Dodopayments
         created_at:,
         # The unique discount ID
         discount_id:,
+        metadata:,
         # Whether this discount should be preserved when a subscription changes plans.
         # Default: false (discount is removed on plan change)
         preserve_on_plan_change:,
@@ -129,6 +134,7 @@ module Dodopayments
             code: String,
             created_at: Time,
             discount_id: String,
+            metadata: T::Hash[Symbol, String],
             preserve_on_plan_change: T::Boolean,
             restricted_to: T::Array[String],
             times_used: Integer,

@@ -41,6 +41,12 @@ module Dodopayments
       #   @return [Time, nil]
       optional :expires_at, Time, nil?: true
 
+      # @!attribute metadata
+      #   Additional metadata for the discount
+      #
+      #   @return [Hash{Symbol=>String}, nil]
+      optional :metadata, Dodopayments::Internal::Type::HashOf[String]
+
       # @!attribute name
       #
       #   @return [String, nil]
@@ -73,7 +79,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :usage_limit, Integer, nil?: true
 
-      # @!method initialize(amount:, type:, code: nil, expires_at: nil, name: nil, preserve_on_plan_change: nil, restricted_to: nil, subscription_cycles: nil, usage_limit: nil, request_options: {})
+      # @!method initialize(amount:, type:, code: nil, expires_at: nil, metadata: nil, name: nil, preserve_on_plan_change: nil, restricted_to: nil, subscription_cycles: nil, usage_limit: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::DiscountCreateParams} for more details.
       #
@@ -84,6 +90,8 @@ module Dodopayments
       #   @param code [String, nil] Optionally supply a code (will be uppercased).
       #
       #   @param expires_at [Time, nil] When the discount expires, if ever.
+      #
+      #   @param metadata [Hash{Symbol=>String}] Additional metadata for the discount
       #
       #   @param name [String, nil]
       #
