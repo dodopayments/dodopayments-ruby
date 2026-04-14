@@ -3,6 +3,36 @@
 module Dodopayments
   module Resources
     class LicenseKeys
+      # @overload create(customer_id:, key:, product_id:, activations_limit: nil, expires_at: nil, request_options: {})
+      #
+      # @param customer_id [String] The customer this license key belongs to.
+      #
+      # @param key [String] The license key string to import.
+      #
+      # @param product_id [String] The product this license key is for.
+      #
+      # @param activations_limit [Integer, nil] Maximum number of activations allowed. Null means unlimited.
+      #
+      # @param expires_at [Time, nil] Expiration timestamp. Null means the key never expires.
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Models::LicenseKey]
+      #
+      # @see Dodopayments::Models::LicenseKeyCreateParams
+      def create(params)
+        parsed, options = Dodopayments::LicenseKeyCreateParams.dump_request(params)
+        @client.request(
+          method: :post,
+          path: "license_keys",
+          body: parsed,
+          model: Dodopayments::LicenseKey,
+          options: options
+        )
+      end
+
+      # @deprecated
+      #
       # @overload retrieve(id, request_options: {})
       #
       # @param id [String] License key ID
@@ -21,6 +51,8 @@ module Dodopayments
         )
       end
 
+      # @deprecated
+      #
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::LicenseKeyUpdateParams} for more details.
       #
@@ -50,7 +82,9 @@ module Dodopayments
         )
       end
 
-      # @overload list(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
+      # @deprecated
+      #
+      # @overload list(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, source: nil, status: nil, request_options: {})
       #
       # @param created_at_gte [Time] Filter license keys created on or after this timestamp
       #
@@ -63,6 +97,8 @@ module Dodopayments
       # @param page_size [Integer] Page size default is 10 max is 100
       #
       # @param product_id [String] Filter by product ID
+      #
+      # @param source [Symbol, Dodopayments::Models::LicenseKeyListParams::Source] Filter by license key source
       #
       # @param status [Symbol, Dodopayments::Models::LicenseKeyListParams::Status] Filter by license key status
       #

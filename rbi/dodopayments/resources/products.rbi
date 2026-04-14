@@ -28,6 +28,7 @@ module Dodopayments
             T.nilable(
               Dodopayments::ProductCreateParams::DigitalProductDelivery::OrHash
             ),
+          entitlement_ids: T.nilable(T::Array[String]),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
           license_key_duration:
@@ -54,6 +55,8 @@ module Dodopayments
         description: nil,
         # Choose how you would like you digital product delivered
         digital_product_delivery: nil,
+        # Optional entitlement IDs to attach to this product (max 20)
+        entitlement_ids: nil,
         # Optional message displayed during license key activation
         license_key_activation_message: nil,
         # The number of times the license key can be activated. Must be 0 or greater
@@ -95,6 +98,7 @@ module Dodopayments
             T.nilable(
               Dodopayments::ProductUpdateParams::DigitalProductDelivery::OrHash
             ),
+          entitlement_ids: T.nilable(T::Array[String]),
           image_id: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
@@ -127,6 +131,9 @@ module Dodopayments
         description: nil,
         # Choose how you would like you digital product delivered
         digital_product_delivery: nil,
+        # Entitlement IDs to attach (replaces all existing when present) Send empty array
+        # to remove all, omit field to leave unchanged
+        entitlement_ids: nil,
         # Product image id after its uploaded to S3
         image_id: nil,
         # Message sent to the customer upon license key activation.

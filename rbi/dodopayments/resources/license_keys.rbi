@@ -5,6 +5,31 @@ module Dodopayments
     class LicenseKeys
       sig do
         params(
+          customer_id: String,
+          key: String,
+          product_id: String,
+          activations_limit: T.nilable(Integer),
+          expires_at: T.nilable(Time),
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::LicenseKey)
+      end
+      def create(
+        # The customer this license key belongs to.
+        customer_id:,
+        # The license key string to import.
+        key:,
+        # The product this license key is for.
+        product_id:,
+        # Maximum number of activations allowed. Null means unlimited.
+        activations_limit: nil,
+        # Expiration timestamp. Null means the key never expires.
+        expires_at: nil,
+        request_options: {}
+      )
+      end
+
+      sig do
+        params(
           id: String,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::LicenseKey)
@@ -49,6 +74,7 @@ module Dodopayments
           page_number: Integer,
           page_size: Integer,
           product_id: String,
+          source: Dodopayments::LicenseKeyListParams::Source::OrSymbol,
           status: Dodopayments::LicenseKeyListParams::Status::OrSymbol,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
@@ -70,6 +96,8 @@ module Dodopayments
         page_size: nil,
         # Filter by product ID
         product_id: nil,
+        # Filter by license key source
+        source: nil,
         # Filter by license key status
         status: nil,
         request_options: {}

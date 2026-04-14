@@ -8,6 +8,7 @@ module Dodopayments
         credit_entitlements: ::Array[Dodopayments::AttachCreditEntitlement]?,
         description: String?,
         digital_product_delivery: Dodopayments::ProductUpdateParams::DigitalProductDelivery?,
+        entitlement_ids: ::Array[String]?,
         image_id: String?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
@@ -36,6 +37,8 @@ module Dodopayments
 
       attr_accessor digital_product_delivery: Dodopayments::ProductUpdateParams::DigitalProductDelivery?
 
+      attr_accessor entitlement_ids: ::Array[String]?
+
       attr_accessor image_id: String?
 
       attr_accessor license_key_activation_message: String?
@@ -61,6 +64,7 @@ module Dodopayments
         ?credit_entitlements: ::Array[Dodopayments::AttachCreditEntitlement]?,
         ?description: String?,
         ?digital_product_delivery: Dodopayments::ProductUpdateParams::DigitalProductDelivery?,
+        ?entitlement_ids: ::Array[String]?,
         ?image_id: String?,
         ?license_key_activation_message: String?,
         ?license_key_activations_limit: Integer?,
@@ -80,6 +84,7 @@ module Dodopayments
         credit_entitlements: ::Array[Dodopayments::AttachCreditEntitlement]?,
         description: String?,
         digital_product_delivery: Dodopayments::ProductUpdateParams::DigitalProductDelivery?,
+        entitlement_ids: ::Array[String]?,
         image_id: String?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,

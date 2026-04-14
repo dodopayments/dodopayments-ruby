@@ -56,6 +56,19 @@ module Dodopayments
       sig { params(product_id: String).void }
       attr_writer :product_id
 
+      # Filter by license key source
+      sig do
+        returns(T.nilable(Dodopayments::LicenseKeyListParams::Source::OrSymbol))
+      end
+      attr_reader :source
+
+      sig do
+        params(
+          source: Dodopayments::LicenseKeyListParams::Source::OrSymbol
+        ).void
+      end
+      attr_writer :source
+
       # Filter by license key status
       sig do
         returns(T.nilable(Dodopayments::LicenseKeyListParams::Status::OrSymbol))
@@ -77,6 +90,7 @@ module Dodopayments
           page_number: Integer,
           page_size: Integer,
           product_id: String,
+          source: Dodopayments::LicenseKeyListParams::Source::OrSymbol,
           status: Dodopayments::LicenseKeyListParams::Status::OrSymbol,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -94,6 +108,8 @@ module Dodopayments
         page_size: nil,
         # Filter by product ID
         product_id: nil,
+        # Filter by license key source
+        source: nil,
         # Filter by license key status
         status: nil,
         request_options: {}
@@ -109,12 +125,40 @@ module Dodopayments
             page_number: Integer,
             page_size: Integer,
             product_id: String,
+            source: Dodopayments::LicenseKeyListParams::Source::OrSymbol,
             status: Dodopayments::LicenseKeyListParams::Status::OrSymbol,
             request_options: Dodopayments::RequestOptions
           }
         )
       end
       def to_hash
+      end
+
+      # Filter by license key source
+      module Source
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, Dodopayments::LicenseKeyListParams::Source)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        AUTO =
+          T.let(:auto, Dodopayments::LicenseKeyListParams::Source::TaggedSymbol)
+        IMPORT =
+          T.let(
+            :import,
+            Dodopayments::LicenseKeyListParams::Source::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[Dodopayments::LicenseKeyListParams::Source::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
       end
 
       # Filter by license key status

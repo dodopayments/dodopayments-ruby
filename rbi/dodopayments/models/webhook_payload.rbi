@@ -23,7 +23,8 @@ module Dodopayments
             Dodopayments::WebhookPayload::Data::CreditLedgerEntry,
             Dodopayments::WebhookPayload::Data::CreditBalanceLow,
             Dodopayments::WebhookPayload::Data::AbandonedCheckout,
-            Dodopayments::WebhookPayload::Data::DunningAttempt
+            Dodopayments::WebhookPayload::Data::DunningAttempt,
+            Dodopayments::WebhookPayload::Data::EntitlementGrant
           )
         )
       end
@@ -51,7 +52,8 @@ module Dodopayments
               Dodopayments::WebhookPayload::Data::CreditLedgerEntry::OrHash,
               Dodopayments::WebhookPayload::Data::CreditBalanceLow::OrHash,
               Dodopayments::WebhookPayload::Data::AbandonedCheckout::OrHash,
-              Dodopayments::WebhookPayload::Data::DunningAttempt::OrHash
+              Dodopayments::WebhookPayload::Data::DunningAttempt::OrHash,
+              Dodopayments::WebhookPayload::Data::EntitlementGrant::OrHash
             ),
           timestamp: Time,
           type: Dodopayments::WebhookEventType::OrSymbol
@@ -83,7 +85,8 @@ module Dodopayments
                 Dodopayments::WebhookPayload::Data::CreditLedgerEntry,
                 Dodopayments::WebhookPayload::Data::CreditBalanceLow,
                 Dodopayments::WebhookPayload::Data::AbandonedCheckout,
-                Dodopayments::WebhookPayload::Data::DunningAttempt
+                Dodopayments::WebhookPayload::Data::DunningAttempt,
+                Dodopayments::WebhookPayload::Data::EntitlementGrant
               ),
             timestamp: Time,
             type: Dodopayments::WebhookEventType::OrSymbol
@@ -108,7 +111,8 @@ module Dodopayments
               Dodopayments::WebhookPayload::Data::CreditLedgerEntry,
               Dodopayments::WebhookPayload::Data::CreditBalanceLow,
               Dodopayments::WebhookPayload::Data::AbandonedCheckout,
-              Dodopayments::WebhookPayload::Data::DunningAttempt
+              Dodopayments::WebhookPayload::Data::DunningAttempt,
+              Dodopayments::WebhookPayload::Data::EntitlementGrant
             )
           end
 
@@ -1006,6 +1010,265 @@ module Dodopayments
               override.returns(
                 T::Array[
                   Dodopayments::WebhookPayload::Data::DunningAttempt::TriggerState::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+        end
+
+        class EntitlementGrant < Dodopayments::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Dodopayments::WebhookPayload::Data::EntitlementGrant,
+                Dodopayments::Internal::AnyHash
+              )
+            end
+
+          sig { returns(String) }
+          attr_accessor :id
+
+          sig { returns(String) }
+          attr_accessor :business_id
+
+          sig { returns(Time) }
+          attr_accessor :created_at
+
+          sig { returns(String) }
+          attr_accessor :customer_id
+
+          sig { returns(String) }
+          attr_accessor :entitlement_id
+
+          sig { returns(String) }
+          attr_accessor :external_id
+
+          sig do
+            returns(
+              Dodopayments::WebhookPayload::Data::EntitlementGrant::PayloadType::OrSymbol
+            )
+          end
+          attr_accessor :payload_type
+
+          sig do
+            returns(
+              Dodopayments::WebhookPayload::Data::EntitlementGrant::Status::OrSymbol
+            )
+          end
+          attr_accessor :status
+
+          sig { returns(Time) }
+          attr_accessor :updated_at
+
+          sig { returns(T.nilable(Time)) }
+          attr_accessor :delivered_at
+
+          sig { returns(T.nilable(String)) }
+          attr_accessor :error_code
+
+          sig { returns(T.nilable(String)) }
+          attr_accessor :error_message
+
+          sig { returns(T.nilable(String)) }
+          attr_accessor :license_key
+
+          sig { returns(T.nilable(Integer)) }
+          attr_accessor :license_key_activations_limit
+
+          sig { returns(T.nilable(Integer)) }
+          attr_accessor :license_key_activations_used
+
+          sig { returns(T.nilable(Time)) }
+          attr_accessor :license_key_expires_at
+
+          sig { returns(T.nilable(String)) }
+          attr_accessor :license_key_status
+
+          sig { returns(T.nilable(T.anything)) }
+          attr_reader :metadata
+
+          sig { params(metadata: T.anything).void }
+          attr_writer :metadata
+
+          sig { returns(T.nilable(Time)) }
+          attr_accessor :oauth_expires_at
+
+          sig { returns(T.nilable(String)) }
+          attr_accessor :oauth_url
+
+          sig { returns(T.nilable(String)) }
+          attr_accessor :payment_id
+
+          sig { returns(T.nilable(String)) }
+          attr_accessor :revocation_reason
+
+          sig { returns(T.nilable(Time)) }
+          attr_accessor :revoked_at
+
+          sig { returns(T.nilable(String)) }
+          attr_accessor :subscription_id
+
+          sig do
+            params(
+              id: String,
+              business_id: String,
+              created_at: Time,
+              customer_id: String,
+              entitlement_id: String,
+              external_id: String,
+              payload_type:
+                Dodopayments::WebhookPayload::Data::EntitlementGrant::PayloadType::OrSymbol,
+              status:
+                Dodopayments::WebhookPayload::Data::EntitlementGrant::Status::OrSymbol,
+              updated_at: Time,
+              delivered_at: T.nilable(Time),
+              error_code: T.nilable(String),
+              error_message: T.nilable(String),
+              license_key: T.nilable(String),
+              license_key_activations_limit: T.nilable(Integer),
+              license_key_activations_used: T.nilable(Integer),
+              license_key_expires_at: T.nilable(Time),
+              license_key_status: T.nilable(String),
+              metadata: T.anything,
+              oauth_expires_at: T.nilable(Time),
+              oauth_url: T.nilable(String),
+              payment_id: T.nilable(String),
+              revocation_reason: T.nilable(String),
+              revoked_at: T.nilable(Time),
+              subscription_id: T.nilable(String)
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            id:,
+            business_id:,
+            created_at:,
+            customer_id:,
+            entitlement_id:,
+            external_id:,
+            payload_type:,
+            status:,
+            updated_at:,
+            delivered_at: nil,
+            error_code: nil,
+            error_message: nil,
+            license_key: nil,
+            license_key_activations_limit: nil,
+            license_key_activations_used: nil,
+            license_key_expires_at: nil,
+            license_key_status: nil,
+            metadata: nil,
+            oauth_expires_at: nil,
+            oauth_url: nil,
+            payment_id: nil,
+            revocation_reason: nil,
+            revoked_at: nil,
+            subscription_id: nil
+          )
+          end
+
+          sig do
+            override.returns(
+              {
+                id: String,
+                business_id: String,
+                created_at: Time,
+                customer_id: String,
+                entitlement_id: String,
+                external_id: String,
+                payload_type:
+                  Dodopayments::WebhookPayload::Data::EntitlementGrant::PayloadType::OrSymbol,
+                status:
+                  Dodopayments::WebhookPayload::Data::EntitlementGrant::Status::OrSymbol,
+                updated_at: Time,
+                delivered_at: T.nilable(Time),
+                error_code: T.nilable(String),
+                error_message: T.nilable(String),
+                license_key: T.nilable(String),
+                license_key_activations_limit: T.nilable(Integer),
+                license_key_activations_used: T.nilable(Integer),
+                license_key_expires_at: T.nilable(Time),
+                license_key_status: T.nilable(String),
+                metadata: T.anything,
+                oauth_expires_at: T.nilable(Time),
+                oauth_url: T.nilable(String),
+                payment_id: T.nilable(String),
+                revocation_reason: T.nilable(String),
+                revoked_at: T.nilable(Time),
+                subscription_id: T.nilable(String)
+              }
+            )
+          end
+          def to_hash
+          end
+
+          module PayloadType
+            extend Dodopayments::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Dodopayments::WebhookPayload::Data::EntitlementGrant::PayloadType
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            ENTITLEMENT_GRANT =
+              T.let(
+                :EntitlementGrant,
+                Dodopayments::WebhookPayload::Data::EntitlementGrant::PayloadType::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Dodopayments::WebhookPayload::Data::EntitlementGrant::PayloadType::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
+          module Status
+            extend Dodopayments::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Dodopayments::WebhookPayload::Data::EntitlementGrant::Status
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            PENDING =
+              T.let(
+                :Pending,
+                Dodopayments::WebhookPayload::Data::EntitlementGrant::Status::TaggedSymbol
+              )
+            DELIVERED =
+              T.let(
+                :Delivered,
+                Dodopayments::WebhookPayload::Data::EntitlementGrant::Status::TaggedSymbol
+              )
+            FAILED =
+              T.let(
+                :Failed,
+                Dodopayments::WebhookPayload::Data::EntitlementGrant::Status::TaggedSymbol
+              )
+            REVOKED =
+              T.let(
+                :Revoked,
+                Dodopayments::WebhookPayload::Data::EntitlementGrant::Status::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Dodopayments::WebhookPayload::Data::EntitlementGrant::Status::TaggedSymbol
                 ]
               )
             end
