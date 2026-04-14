@@ -41,6 +41,7 @@ module Dodopayments
         | Dodopayments::WebhookPayload::Data::CreditBalanceLow
         | Dodopayments::WebhookPayload::Data::AbandonedCheckout
         | Dodopayments::WebhookPayload::Data::DunningAttempt
+        | Dodopayments::WebhookPayload::Data::EntitlementGrant
 
       module Data
         extend Dodopayments::Internal::Type::Union
@@ -458,6 +459,163 @@ module Dodopayments
             CANCELLED: :cancelled
 
             def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::DunningAttempt::trigger_state]
+          end
+        end
+
+        type entitlement_grant =
+          {
+            id: String,
+            business_id: String,
+            created_at: Time,
+            customer_id: String,
+            entitlement_id: String,
+            external_id: String,
+            payload_type: Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::payload_type,
+            status: Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::status,
+            updated_at: Time,
+            delivered_at: Time?,
+            error_code: String?,
+            error_message: String?,
+            license_key: String?,
+            license_key_activations_limit: Integer?,
+            license_key_activations_used: Integer?,
+            license_key_expires_at: Time?,
+            license_key_status: String?,
+            metadata: top,
+            oauth_expires_at: Time?,
+            oauth_url: String?,
+            payment_id: String?,
+            revocation_reason: String?,
+            revoked_at: Time?,
+            subscription_id: String?
+          }
+
+        class EntitlementGrant < Dodopayments::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor business_id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor customer_id: String
+
+          attr_accessor entitlement_id: String
+
+          attr_accessor external_id: String
+
+          attr_accessor payload_type: Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::payload_type
+
+          attr_accessor status: Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::status
+
+          attr_accessor updated_at: Time
+
+          attr_accessor delivered_at: Time?
+
+          attr_accessor error_code: String?
+
+          attr_accessor error_message: String?
+
+          attr_accessor license_key: String?
+
+          attr_accessor license_key_activations_limit: Integer?
+
+          attr_accessor license_key_activations_used: Integer?
+
+          attr_accessor license_key_expires_at: Time?
+
+          attr_accessor license_key_status: String?
+
+          attr_reader metadata: top?
+
+          def metadata=: (top) -> top
+
+          attr_accessor oauth_expires_at: Time?
+
+          attr_accessor oauth_url: String?
+
+          attr_accessor payment_id: String?
+
+          attr_accessor revocation_reason: String?
+
+          attr_accessor revoked_at: Time?
+
+          attr_accessor subscription_id: String?
+
+          def initialize: (
+            id: String,
+            business_id: String,
+            created_at: Time,
+            customer_id: String,
+            entitlement_id: String,
+            external_id: String,
+            payload_type: Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::payload_type,
+            status: Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::status,
+            updated_at: Time,
+            ?delivered_at: Time?,
+            ?error_code: String?,
+            ?error_message: String?,
+            ?license_key: String?,
+            ?license_key_activations_limit: Integer?,
+            ?license_key_activations_used: Integer?,
+            ?license_key_expires_at: Time?,
+            ?license_key_status: String?,
+            ?metadata: top,
+            ?oauth_expires_at: Time?,
+            ?oauth_url: String?,
+            ?payment_id: String?,
+            ?revocation_reason: String?,
+            ?revoked_at: Time?,
+            ?subscription_id: String?
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            business_id: String,
+            created_at: Time,
+            customer_id: String,
+            entitlement_id: String,
+            external_id: String,
+            payload_type: Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::payload_type,
+            status: Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::status,
+            updated_at: Time,
+            delivered_at: Time?,
+            error_code: String?,
+            error_message: String?,
+            license_key: String?,
+            license_key_activations_limit: Integer?,
+            license_key_activations_used: Integer?,
+            license_key_expires_at: Time?,
+            license_key_status: String?,
+            metadata: top,
+            oauth_expires_at: Time?,
+            oauth_url: String?,
+            payment_id: String?,
+            revocation_reason: String?,
+            revoked_at: Time?,
+            subscription_id: String?
+          }
+
+          type payload_type = :EntitlementGrant
+
+          module PayloadType
+            extend Dodopayments::Internal::Type::Enum
+
+            ENTITLEMENT_GRANT: :EntitlementGrant
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::payload_type]
+          end
+
+          type status = :Pending | :Delivered | :Failed | :Revoked
+
+          module Status
+            extend Dodopayments::Internal::Type::Enum
+
+            PENDING: :Pending
+            DELIVERED: :Delivered
+            FAILED: :Failed
+            REVOKED: :Revoked
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::status]
           end
         end
 

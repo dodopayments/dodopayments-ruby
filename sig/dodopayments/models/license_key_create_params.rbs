@@ -1,0 +1,46 @@
+module Dodopayments
+  module Models
+    type license_key_create_params =
+      {
+        customer_id: String,
+        key: String,
+        product_id: String,
+        activations_limit: Integer?,
+        expires_at: Time?
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class LicenseKeyCreateParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor customer_id: String
+
+      attr_accessor key: String
+
+      attr_accessor product_id: String
+
+      attr_accessor activations_limit: Integer?
+
+      attr_accessor expires_at: Time?
+
+      def initialize: (
+        customer_id: String,
+        key: String,
+        product_id: String,
+        ?activations_limit: Integer?,
+        ?expires_at: Time?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        customer_id: String,
+        key: String,
+        product_id: String,
+        activations_limit: Integer?,
+        expires_at: Time?,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

@@ -164,6 +164,26 @@ module Dodopayments
         T.let(:"acr.email", Dodopayments::WebhookEventType::TaggedSymbol)
       DUNNING_EMAIL =
         T.let(:"dunning.email", Dodopayments::WebhookEventType::TaggedSymbol)
+      ENTITLEMENT_GRANT_CREATED =
+        T.let(
+          :"entitlement_grant.created",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
+      ENTITLEMENT_GRANT_DELIVERED =
+        T.let(
+          :"entitlement_grant.delivered",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
+      ENTITLEMENT_GRANT_FAILED =
+        T.let(
+          :"entitlement_grant.failed",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
+      ENTITLEMENT_GRANT_REVOKED =
+        T.let(
+          :"entitlement_grant.revoked",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
 
       sig do
         override.returns(T::Array[Dodopayments::WebhookEventType::TaggedSymbol])

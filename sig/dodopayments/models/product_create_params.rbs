@@ -10,6 +10,7 @@ module Dodopayments
         credit_entitlements: ::Array[Dodopayments::AttachCreditEntitlement]?,
         description: String?,
         digital_product_delivery: Dodopayments::ProductCreateParams::DigitalProductDelivery?,
+        entitlement_ids: ::Array[String]?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
         license_key_duration: Dodopayments::LicenseKeyDuration?,
@@ -38,6 +39,8 @@ module Dodopayments
 
       attr_accessor digital_product_delivery: Dodopayments::ProductCreateParams::DigitalProductDelivery?
 
+      attr_accessor entitlement_ids: ::Array[String]?
+
       attr_accessor license_key_activation_message: String?
 
       attr_accessor license_key_activations_limit: Integer?
@@ -59,6 +62,7 @@ module Dodopayments
         ?credit_entitlements: ::Array[Dodopayments::AttachCreditEntitlement]?,
         ?description: String?,
         ?digital_product_delivery: Dodopayments::ProductCreateParams::DigitalProductDelivery?,
+        ?entitlement_ids: ::Array[String]?,
         ?license_key_activation_message: String?,
         ?license_key_activations_limit: Integer?,
         ?license_key_duration: Dodopayments::LicenseKeyDuration?,
@@ -76,6 +80,7 @@ module Dodopayments
         credit_entitlements: ::Array[Dodopayments::AttachCreditEntitlement]?,
         description: String?,
         digital_product_delivery: Dodopayments::ProductCreateParams::DigitalProductDelivery?,
+        entitlement_ids: ::Array[String]?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
         license_key_duration: Dodopayments::LicenseKeyDuration?,

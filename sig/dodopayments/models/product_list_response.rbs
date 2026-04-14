@@ -4,6 +4,7 @@ module Dodopayments
       {
         business_id: String,
         created_at: Time,
+        entitlements: ::Array[Dodopayments::Models::ProductListResponse::Entitlement],
         is_recurring: bool,
         metadata: ::Hash[Symbol, String],
         product_id: String,
@@ -22,6 +23,8 @@ module Dodopayments
       attr_accessor business_id: String
 
       attr_accessor created_at: Time
+
+      attr_accessor entitlements: ::Array[Dodopayments::Models::ProductListResponse::Entitlement]
 
       attr_accessor is_recurring: bool
 
@@ -50,6 +53,7 @@ module Dodopayments
       def initialize: (
         business_id: String,
         created_at: Time,
+        entitlements: ::Array[Dodopayments::Models::ProductListResponse::Entitlement],
         is_recurring: bool,
         metadata: ::Hash[Symbol, String],
         product_id: String,
@@ -67,6 +71,7 @@ module Dodopayments
       def to_hash: -> {
         business_id: String,
         created_at: Time,
+        entitlements: ::Array[Dodopayments::Models::ProductListResponse::Entitlement],
         is_recurring: bool,
         metadata: ::Hash[Symbol, String],
         product_id: String,
@@ -80,6 +85,207 @@ module Dodopayments
         price_detail: Dodopayments::Models::price?,
         tax_inclusive: bool?
       }
+
+      type entitlement =
+        {
+          id: String,
+          integration_config: Dodopayments::Models::ProductListResponse::Entitlement::integration_config,
+          integration_type: Dodopayments::Models::ProductListResponse::Entitlement::integration_type,
+          name: String,
+          description: String?
+        }
+
+      class Entitlement < Dodopayments::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor integration_config: Dodopayments::Models::ProductListResponse::Entitlement::integration_config
+
+        attr_accessor integration_type: Dodopayments::Models::ProductListResponse::Entitlement::integration_type
+
+        attr_accessor name: String
+
+        attr_accessor description: String?
+
+        def initialize: (
+          id: String,
+          integration_config: Dodopayments::Models::ProductListResponse::Entitlement::integration_config,
+          integration_type: Dodopayments::Models::ProductListResponse::Entitlement::integration_type,
+          name: String,
+          ?description: String?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          integration_config: Dodopayments::Models::ProductListResponse::Entitlement::integration_config,
+          integration_type: Dodopayments::Models::ProductListResponse::Entitlement::integration_type,
+          name: String,
+          description: String?
+        }
+
+        type integration_config =
+          Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::GitHubConfig
+          | Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DiscordConfig
+          | Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::TelegramConfig
+          | Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::FigmaConfig
+          | Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::FramerConfig
+          | Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::NotionConfig
+          | Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig
+          | Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::LicenseKeyConfig
+
+        module IntegrationConfig
+          extend Dodopayments::Internal::Type::Union
+
+          type github_config = { permission: String, target_id: String }
+
+          class GitHubConfig < Dodopayments::Internal::Type::BaseModel
+            attr_accessor permission: String
+
+            attr_accessor target_id: String
+
+            def initialize: (permission: String, target_id: String) -> void
+
+            def to_hash: -> { permission: String, target_id: String }
+          end
+
+          type discord_config = { guild_id: String, role_id: String? }
+
+          class DiscordConfig < Dodopayments::Internal::Type::BaseModel
+            attr_accessor guild_id: String
+
+            attr_accessor role_id: String?
+
+            def initialize: (guild_id: String, ?role_id: String?) -> void
+
+            def to_hash: -> { guild_id: String, role_id: String? }
+          end
+
+          type telegram_config = { chat_id: String }
+
+          class TelegramConfig < Dodopayments::Internal::Type::BaseModel
+            attr_accessor chat_id: String
+
+            def initialize: (chat_id: String) -> void
+
+            def to_hash: -> { chat_id: String }
+          end
+
+          type figma_config = { figma_file_id: String }
+
+          class FigmaConfig < Dodopayments::Internal::Type::BaseModel
+            attr_accessor figma_file_id: String
+
+            def initialize: (figma_file_id: String) -> void
+
+            def to_hash: -> { figma_file_id: String }
+          end
+
+          type framer_config = { framer_template_id: String }
+
+          class FramerConfig < Dodopayments::Internal::Type::BaseModel
+            attr_accessor framer_template_id: String
+
+            def initialize: (framer_template_id: String) -> void
+
+            def to_hash: -> { framer_template_id: String }
+          end
+
+          type notion_config = { notion_template_id: String }
+
+          class NotionConfig < Dodopayments::Internal::Type::BaseModel
+            attr_accessor notion_template_id: String
+
+            def initialize: (notion_template_id: String) -> void
+
+            def to_hash: -> { notion_template_id: String }
+          end
+
+          type digital_files_config =
+            {
+              digital_file_ids: ::Array[String],
+              external_url: String?,
+              instructions: String?
+            }
+
+          class DigitalFilesConfig < Dodopayments::Internal::Type::BaseModel
+            attr_accessor digital_file_ids: ::Array[String]
+
+            attr_accessor external_url: String?
+
+            attr_accessor instructions: String?
+
+            def initialize: (
+              digital_file_ids: ::Array[String],
+              ?external_url: String?,
+              ?instructions: String?
+            ) -> void
+
+            def to_hash: -> {
+              digital_file_ids: ::Array[String],
+              external_url: String?,
+              instructions: String?
+            }
+          end
+
+          type license_key_config =
+            {
+              activation_message: String?,
+              activations_limit: Integer?,
+              duration_count: Integer?,
+              duration_interval: String?
+            }
+
+          class LicenseKeyConfig < Dodopayments::Internal::Type::BaseModel
+            attr_accessor activation_message: String?
+
+            attr_accessor activations_limit: Integer?
+
+            attr_accessor duration_count: Integer?
+
+            attr_accessor duration_interval: String?
+
+            def initialize: (
+              ?activation_message: String?,
+              ?activations_limit: Integer?,
+              ?duration_count: Integer?,
+              ?duration_interval: String?
+            ) -> void
+
+            def to_hash: -> {
+              activation_message: String?,
+              activations_limit: Integer?,
+              duration_count: Integer?,
+              duration_interval: String?
+            }
+          end
+
+          def self?.variants: -> ::Array[Dodopayments::Models::ProductListResponse::Entitlement::integration_config]
+        end
+
+        type integration_type =
+          :discord
+          | :telegram
+          | :github
+          | :figma
+          | :framer
+          | :notion
+          | :digital_files
+          | :license_key
+
+        module IntegrationType
+          extend Dodopayments::Internal::Type::Enum
+
+          DISCORD: :discord
+          TELEGRAM: :telegram
+          GITHUB: :github
+          FIGMA: :figma
+          FRAMER: :framer
+          NOTION: :notion
+          DIGITAL_FILES: :digital_files
+          LICENSE_KEY: :license_key
+
+          def self?.values: -> ::Array[Dodopayments::Models::ProductListResponse::Entitlement::integration_type]
+        end
+      end
     end
   end
 end

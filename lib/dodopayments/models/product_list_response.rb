@@ -16,6 +16,13 @@ module Dodopayments
       #   @return [Time]
       required :created_at, Time
 
+      # @!attribute entitlements
+      #   Entitlements linked to this product
+      #
+      #   @return [Array<Dodopayments::Models::ProductListResponse::Entitlement>]
+      required :entitlements,
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::ProductListResponse::Entitlement] }
+
       # @!attribute is_recurring
       #   Indicates if the product is recurring (e.g., subscriptions).
       #
@@ -97,13 +104,15 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
-      # @!method initialize(business_id:, created_at:, is_recurring:, metadata:, product_id:, tax_category:, updated_at:, currency: nil, description: nil, image: nil, name: nil, price: nil, price_detail: nil, tax_inclusive: nil)
+      # @!method initialize(business_id:, created_at:, entitlements:, is_recurring:, metadata:, product_id:, tax_category:, updated_at:, currency: nil, description: nil, image: nil, name: nil, price: nil, price_detail: nil, tax_inclusive: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductListResponse} for more details.
       #
       #   @param business_id [String] Unique identifier for the business to which the product belongs.
       #
       #   @param created_at [Time] Timestamp when the product was created.
+      #
+      #   @param entitlements [Array<Dodopayments::Models::ProductListResponse::Entitlement>] Entitlements linked to this product
       #
       #   @param is_recurring [Boolean] Indicates if the product is recurring (e.g., subscriptions).
       #
@@ -128,6 +137,221 @@ module Dodopayments
       #   @param price_detail [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice, nil] Details of the price
       #
       #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive
+
+      class Entitlement < Dodopayments::Internal::Type::BaseModel
+        # @!attribute id
+        #
+        #   @return [String]
+        required :id, String
+
+        # @!attribute integration_config
+        #   Platform-specific configuration for an entitlement. Each variant uses unique
+        #   field names so `#[serde(untagged)]` can disambiguate correctly.
+        #
+        #   @return [Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::GitHubConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DiscordConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::TelegramConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::FigmaConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::FramerConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::NotionConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::LicenseKeyConfig]
+        required :integration_config,
+                 union: -> { Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig }
+
+        # @!attribute integration_type
+        #
+        #   @return [Symbol, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationType]
+        required :integration_type,
+                 enum: -> { Dodopayments::Models::ProductListResponse::Entitlement::IntegrationType }
+
+        # @!attribute name
+        #
+        #   @return [String]
+        required :name, String
+
+        # @!attribute description
+        #
+        #   @return [String, nil]
+        optional :description, String, nil?: true
+
+        # @!method initialize(id:, integration_config:, integration_type:, name:, description: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::ProductListResponse::Entitlement} for more details.
+        #
+        #   Summary of an entitlement attached to a product
+        #
+        #   @param id [String]
+        #
+        #   @param integration_config [Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::GitHubConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DiscordConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::TelegramConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::FigmaConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::FramerConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::NotionConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::LicenseKeyConfig] Platform-specific configuration for an entitlement.
+        #
+        #   @param integration_type [Symbol, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationType]
+        #
+        #   @param name [String]
+        #
+        #   @param description [String, nil]
+
+        # Platform-specific configuration for an entitlement. Each variant uses unique
+        # field names so `#[serde(untagged)]` can disambiguate correctly.
+        #
+        # @see Dodopayments::Models::ProductListResponse::Entitlement#integration_config
+        module IntegrationConfig
+          extend Dodopayments::Internal::Type::Union
+
+          variant -> { Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::GitHubConfig }
+
+          variant -> { Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DiscordConfig }
+
+          variant -> { Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::TelegramConfig }
+
+          variant -> { Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::FigmaConfig }
+
+          variant -> { Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::FramerConfig }
+
+          variant -> { Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::NotionConfig }
+
+          variant -> { Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig }
+
+          variant -> { Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::LicenseKeyConfig }
+
+          class GitHubConfig < Dodopayments::Internal::Type::BaseModel
+            # @!attribute permission
+            #   One of: pull, push, admin, maintain, triage
+            #
+            #   @return [String]
+            required :permission, String
+
+            # @!attribute target_id
+            #
+            #   @return [String]
+            required :target_id, String
+
+            # @!method initialize(permission:, target_id:)
+            #   @param permission [String] One of: pull, push, admin, maintain, triage
+            #
+            #   @param target_id [String]
+          end
+
+          class DiscordConfig < Dodopayments::Internal::Type::BaseModel
+            # @!attribute guild_id
+            #
+            #   @return [String]
+            required :guild_id, String
+
+            # @!attribute role_id
+            #
+            #   @return [String, nil]
+            optional :role_id, String, nil?: true
+
+            # @!method initialize(guild_id:, role_id: nil)
+            #   @param guild_id [String]
+            #   @param role_id [String, nil]
+          end
+
+          class TelegramConfig < Dodopayments::Internal::Type::BaseModel
+            # @!attribute chat_id
+            #
+            #   @return [String]
+            required :chat_id, String
+
+            # @!method initialize(chat_id:)
+            #   @param chat_id [String]
+          end
+
+          class FigmaConfig < Dodopayments::Internal::Type::BaseModel
+            # @!attribute figma_file_id
+            #
+            #   @return [String]
+            required :figma_file_id, String
+
+            # @!method initialize(figma_file_id:)
+            #   @param figma_file_id [String]
+          end
+
+          class FramerConfig < Dodopayments::Internal::Type::BaseModel
+            # @!attribute framer_template_id
+            #
+            #   @return [String]
+            required :framer_template_id, String
+
+            # @!method initialize(framer_template_id:)
+            #   @param framer_template_id [String]
+          end
+
+          class NotionConfig < Dodopayments::Internal::Type::BaseModel
+            # @!attribute notion_template_id
+            #
+            #   @return [String]
+            required :notion_template_id, String
+
+            # @!method initialize(notion_template_id:)
+            #   @param notion_template_id [String]
+          end
+
+          class DigitalFilesConfig < Dodopayments::Internal::Type::BaseModel
+            # @!attribute digital_file_ids
+            #
+            #   @return [Array<String>]
+            required :digital_file_ids, Dodopayments::Internal::Type::ArrayOf[String]
+
+            # @!attribute external_url
+            #
+            #   @return [String, nil]
+            optional :external_url, String, nil?: true
+
+            # @!attribute instructions
+            #
+            #   @return [String, nil]
+            optional :instructions, String, nil?: true
+
+            # @!method initialize(digital_file_ids:, external_url: nil, instructions: nil)
+            #   @param digital_file_ids [Array<String>]
+            #   @param external_url [String, nil]
+            #   @param instructions [String, nil]
+          end
+
+          class LicenseKeyConfig < Dodopayments::Internal::Type::BaseModel
+            # @!attribute activation_message
+            #
+            #   @return [String, nil]
+            optional :activation_message, String, nil?: true
+
+            # @!attribute activations_limit
+            #
+            #   @return [Integer, nil]
+            optional :activations_limit, Integer, nil?: true
+
+            # @!attribute duration_count
+            #
+            #   @return [Integer, nil]
+            optional :duration_count, Integer, nil?: true
+
+            # @!attribute duration_interval
+            #
+            #   @return [String, nil]
+            optional :duration_interval, String, nil?: true
+
+            # @!method initialize(activation_message: nil, activations_limit: nil, duration_count: nil, duration_interval: nil)
+            #   @param activation_message [String, nil]
+            #   @param activations_limit [Integer, nil]
+            #   @param duration_count [Integer, nil]
+            #   @param duration_interval [String, nil]
+          end
+
+          # @!method self.variants
+          #   @return [Array(Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::GitHubConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DiscordConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::TelegramConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::FigmaConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::FramerConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::NotionConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::LicenseKeyConfig)]
+        end
+
+        # @see Dodopayments::Models::ProductListResponse::Entitlement#integration_type
+        module IntegrationType
+          extend Dodopayments::Internal::Type::Enum
+
+          DISCORD = :discord
+          TELEGRAM = :telegram
+          GITHUB = :github
+          FIGMA = :figma
+          FRAMER = :framer
+          NOTION = :notion
+          DIGITAL_FILES = :digital_files
+          LICENSE_KEY = :license_key
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+      end
     end
   end
 end

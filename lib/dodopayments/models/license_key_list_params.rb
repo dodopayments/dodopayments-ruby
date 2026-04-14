@@ -43,13 +43,19 @@ module Dodopayments
       #   @return [String, nil]
       optional :product_id, String
 
+      # @!attribute source
+      #   Filter by license key source
+      #
+      #   @return [Symbol, Dodopayments::Models::LicenseKeyListParams::Source, nil]
+      optional :source, enum: -> { Dodopayments::LicenseKeyListParams::Source }
+
       # @!attribute status
       #   Filter by license key status
       #
       #   @return [Symbol, Dodopayments::Models::LicenseKeyListParams::Status, nil]
       optional :status, enum: -> { Dodopayments::LicenseKeyListParams::Status }
 
-      # @!method initialize(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
+      # @!method initialize(created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, source: nil, status: nil, request_options: {})
       #   @param created_at_gte [Time] Filter license keys created on or after this timestamp
       #
       #   @param created_at_lte [Time] Filter license keys created on or before this timestamp
@@ -62,9 +68,22 @@ module Dodopayments
       #
       #   @param product_id [String] Filter by product ID
       #
+      #   @param source [Symbol, Dodopayments::Models::LicenseKeyListParams::Source] Filter by license key source
+      #
       #   @param status [Symbol, Dodopayments::Models::LicenseKeyListParams::Status] Filter by license key status
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
+
+      # Filter by license key source
+      module Source
+        extend Dodopayments::Internal::Type::Enum
+
+        AUTO = :auto
+        IMPORT = :import
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
 
       # Filter by license key status
       module Status

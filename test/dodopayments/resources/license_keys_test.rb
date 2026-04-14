@@ -3,6 +3,33 @@
 require_relative "../test_helper"
 
 class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::ResourceTest
+  def test_create_required_params
+    response =
+      @dodo_payments.license_keys.create(customer_id: "customer_id", key: "key", product_id: "product_id")
+
+    assert_pattern do
+      response => Dodopayments::LicenseKey
+    end
+
+    assert_pattern do
+      response => {
+        id: String,
+        business_id: String,
+        created_at: Time,
+        customer_id: String,
+        instances_count: Integer,
+        key: String,
+        product_id: String,
+        source: Dodopayments::LicenseKey::Source,
+        status: Dodopayments::LicenseKeyStatus,
+        activations_limit: Integer | nil,
+        expires_at: Time | nil,
+        payment_id: String | nil,
+        subscription_id: String | nil
+      }
+    end
+  end
+
   def test_retrieve
     response = @dodo_payments.license_keys.retrieve("lic_123")
 
@@ -18,11 +45,12 @@ class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::Resou
         customer_id: String,
         instances_count: Integer,
         key: String,
-        payment_id: String,
         product_id: String,
+        source: Dodopayments::LicenseKey::Source,
         status: Dodopayments::LicenseKeyStatus,
         activations_limit: Integer | nil,
         expires_at: Time | nil,
+        payment_id: String | nil,
         subscription_id: String | nil
       }
     end
@@ -43,11 +71,12 @@ class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::Resou
         customer_id: String,
         instances_count: Integer,
         key: String,
-        payment_id: String,
         product_id: String,
+        source: Dodopayments::LicenseKey::Source,
         status: Dodopayments::LicenseKeyStatus,
         activations_limit: Integer | nil,
         expires_at: Time | nil,
+        payment_id: String | nil,
         subscription_id: String | nil
       }
     end
@@ -75,11 +104,12 @@ class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::Resou
         customer_id: String,
         instances_count: Integer,
         key: String,
-        payment_id: String,
         product_id: String,
+        source: Dodopayments::LicenseKey::Source,
         status: Dodopayments::LicenseKeyStatus,
         activations_limit: Integer | nil,
         expires_at: Time | nil,
+        payment_id: String | nil,
         subscription_id: String | nil
       }
     end
