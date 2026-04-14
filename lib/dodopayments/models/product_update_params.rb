@@ -46,6 +46,13 @@ module Dodopayments
                -> { Dodopayments::ProductUpdateParams::DigitalProductDelivery },
                nil?: true
 
+      # @!attribute entitlement_ids
+      #   Entitlement IDs to attach (replaces all existing when present) Send empty array
+      #   to remove all, omit field to leave unchanged
+      #
+      #   @return [Array<String>, nil]
+      optional :entitlement_ids, Dodopayments::Internal::Type::ArrayOf[String], nil?: true
+
       # @!attribute image_id
       #   Product image id after its uploaded to S3
       #
@@ -53,6 +60,8 @@ module Dodopayments
       optional :image_id, String, nil?: true
 
       # @!attribute license_key_activation_message
+      #   @deprecated
+      #
       #   Message sent to the customer upon license key activation.
       #
       #   Only applicable if `license_key_enabled` is `true`. This message contains
@@ -62,6 +71,8 @@ module Dodopayments
       optional :license_key_activation_message, String, nil?: true
 
       # @!attribute license_key_activations_limit
+      #   @deprecated
+      #
       #   Limit for the number of activations for the license key.
       #
       #   Only applicable if `license_key_enabled` is `true`. Represents the maximum
@@ -80,6 +91,8 @@ module Dodopayments
       optional :license_key_duration, -> { Dodopayments::LicenseKeyDuration }, nil?: true
 
       # @!attribute license_key_enabled
+      #   @deprecated
+      #
       #   Whether the product requires a license key.
       #
       #   If `true`, additional fields related to license key (duration, activations
@@ -112,7 +125,7 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::TaxCategory, nil]
       optional :tax_category, enum: -> { Dodopayments::TaxCategory }, nil?: true
 
-      # @!method initialize(id:, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      # @!method initialize(id:, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, entitlement_ids: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, price: nil, tax_category: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductUpdateParams} for more details.
       #
@@ -127,6 +140,8 @@ module Dodopayments
       #   @param description [String, nil] Description of the product, optional and must be at most 1000 characters.
       #
       #   @param digital_product_delivery [Dodopayments::Models::ProductUpdateParams::DigitalProductDelivery, nil] Choose how you would like you digital product delivered
+      #
+      #   @param entitlement_ids [Array<String>, nil] Entitlement IDs to attach (replaces all existing when present)
       #
       #   @param image_id [String, nil] Product image id after its uploaded to S3
       #

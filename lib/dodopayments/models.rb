@@ -245,6 +245,8 @@ module Dodopayments
 
   LicenseKeyCreatedWebhookEvent = Dodopayments::Models::LicenseKeyCreatedWebhookEvent
 
+  LicenseKeyCreateParams = Dodopayments::Models::LicenseKeyCreateParams
+
   LicenseKeyDuration = Dodopayments::Models::LicenseKeyDuration
 
   LicenseKeyInstance = Dodopayments::Models::LicenseKeyInstance

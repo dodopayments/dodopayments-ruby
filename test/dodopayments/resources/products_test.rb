@@ -21,6 +21,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         business_id: String,
         created_at: Time,
         credit_entitlements: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::CreditEntitlementMappingResponse]),
+        entitlements: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Product::Entitlement]),
         is_recurring: Dodopayments::Internal::Type::Boolean,
         license_key_enabled: Dodopayments::Internal::Type::Boolean,
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
@@ -54,6 +55,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         business_id: String,
         created_at: Time,
         credit_entitlements: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::CreditEntitlementMappingResponse]),
+        entitlements: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Product::Entitlement]),
         is_recurring: Dodopayments::Internal::Type::Boolean,
         license_key_enabled: Dodopayments::Internal::Type::Boolean,
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
@@ -100,6 +102,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
       row => {
         business_id: String,
         created_at: Time,
+        entitlements: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::ProductListResponse::Entitlement]),
         is_recurring: Dodopayments::Internal::Type::Boolean,
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         product_id: String,

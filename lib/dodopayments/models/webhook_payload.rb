@@ -11,7 +11,7 @@ module Dodopayments
       # @!attribute data
       #   The latest data at the time of delivery attempt
       #
-      #   @return [Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout, Dodopayments::Models::WebhookPayload::Data::DunningAttempt]
+      #   @return [Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout, Dodopayments::Models::WebhookPayload::Data::DunningAttempt, Dodopayments::Models::WebhookPayload::Data::EntitlementGrant]
       required :data, union: -> { Dodopayments::WebhookPayload::Data }
 
       # @!attribute timestamp
@@ -33,7 +33,7 @@ module Dodopayments
       #
       #   @param business_id [String]
       #
-      #   @param data [Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout, Dodopayments::Models::WebhookPayload::Data::DunningAttempt] The latest data at the time of delivery attempt
+      #   @param data [Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout, Dodopayments::Models::WebhookPayload::Data::DunningAttempt, Dodopayments::Models::WebhookPayload::Data::EntitlementGrant] The latest data at the time of delivery attempt
       #
       #   @param timestamp [Time] The timestamp of when the event occurred (not necessarily the same of when it wa
       #
@@ -64,6 +64,8 @@ module Dodopayments
         variant -> { Dodopayments::WebhookPayload::Data::AbandonedCheckout }
 
         variant -> { Dodopayments::WebhookPayload::Data::DunningAttempt }
+
+        variant -> { Dodopayments::WebhookPayload::Data::EntitlementGrant }
 
         class Payment < Dodopayments::Models::Payment
           # @!attribute payload_type
@@ -412,8 +414,179 @@ module Dodopayments
           end
         end
 
+        class EntitlementGrant < Dodopayments::Internal::Type::BaseModel
+          # @!attribute id
+          #
+          #   @return [String]
+          required :id, String
+
+          # @!attribute business_id
+          #
+          #   @return [String]
+          required :business_id, String
+
+          # @!attribute created_at
+          #
+          #   @return [Time]
+          required :created_at, Time
+
+          # @!attribute customer_id
+          #
+          #   @return [String]
+          required :customer_id, String
+
+          # @!attribute entitlement_id
+          #
+          #   @return [String]
+          required :entitlement_id, String
+
+          # @!attribute external_id
+          #
+          #   @return [String]
+          required :external_id, String
+
+          # @!attribute payload_type
+          #
+          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::PayloadType]
+          required :payload_type, enum: -> { Dodopayments::WebhookPayload::Data::EntitlementGrant::PayloadType }
+
+          # @!attribute status
+          #
+          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::Status]
+          required :status, enum: -> { Dodopayments::WebhookPayload::Data::EntitlementGrant::Status }
+
+          # @!attribute updated_at
+          #
+          #   @return [Time]
+          required :updated_at, Time
+
+          # @!attribute delivered_at
+          #
+          #   @return [Time, nil]
+          optional :delivered_at, Time, nil?: true
+
+          # @!attribute error_code
+          #
+          #   @return [String, nil]
+          optional :error_code, String, nil?: true
+
+          # @!attribute error_message
+          #
+          #   @return [String, nil]
+          optional :error_message, String, nil?: true
+
+          # @!attribute license_key
+          #
+          #   @return [String, nil]
+          optional :license_key, String, nil?: true
+
+          # @!attribute license_key_activations_limit
+          #
+          #   @return [Integer, nil]
+          optional :license_key_activations_limit, Integer, nil?: true
+
+          # @!attribute license_key_activations_used
+          #
+          #   @return [Integer, nil]
+          optional :license_key_activations_used, Integer, nil?: true
+
+          # @!attribute license_key_expires_at
+          #
+          #   @return [Time, nil]
+          optional :license_key_expires_at, Time, nil?: true
+
+          # @!attribute license_key_status
+          #
+          #   @return [String, nil]
+          optional :license_key_status, String, nil?: true
+
+          # @!attribute metadata
+          #
+          #   @return [Object, nil]
+          optional :metadata, Dodopayments::Internal::Type::Unknown
+
+          # @!attribute oauth_expires_at
+          #
+          #   @return [Time, nil]
+          optional :oauth_expires_at, Time, nil?: true
+
+          # @!attribute oauth_url
+          #
+          #   @return [String, nil]
+          optional :oauth_url, String, nil?: true
+
+          # @!attribute payment_id
+          #
+          #   @return [String, nil]
+          optional :payment_id, String, nil?: true
+
+          # @!attribute revocation_reason
+          #
+          #   @return [String, nil]
+          optional :revocation_reason, String, nil?: true
+
+          # @!attribute revoked_at
+          #
+          #   @return [Time, nil]
+          optional :revoked_at, Time, nil?: true
+
+          # @!attribute subscription_id
+          #
+          #   @return [String, nil]
+          optional :subscription_id, String, nil?: true
+
+          # @!method initialize(id:, business_id:, created_at:, customer_id:, entitlement_id:, external_id:, payload_type:, status:, updated_at:, delivered_at: nil, error_code: nil, error_message: nil, license_key: nil, license_key_activations_limit: nil, license_key_activations_used: nil, license_key_expires_at: nil, license_key_status: nil, metadata: nil, oauth_expires_at: nil, oauth_url: nil, payment_id: nil, revocation_reason: nil, revoked_at: nil, subscription_id: nil)
+          #   @param id [String]
+          #   @param business_id [String]
+          #   @param created_at [Time]
+          #   @param customer_id [String]
+          #   @param entitlement_id [String]
+          #   @param external_id [String]
+          #   @param payload_type [Symbol, Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::PayloadType]
+          #   @param status [Symbol, Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::Status]
+          #   @param updated_at [Time]
+          #   @param delivered_at [Time, nil]
+          #   @param error_code [String, nil]
+          #   @param error_message [String, nil]
+          #   @param license_key [String, nil]
+          #   @param license_key_activations_limit [Integer, nil]
+          #   @param license_key_activations_used [Integer, nil]
+          #   @param license_key_expires_at [Time, nil]
+          #   @param license_key_status [String, nil]
+          #   @param metadata [Object]
+          #   @param oauth_expires_at [Time, nil]
+          #   @param oauth_url [String, nil]
+          #   @param payment_id [String, nil]
+          #   @param revocation_reason [String, nil]
+          #   @param revoked_at [Time, nil]
+          #   @param subscription_id [String, nil]
+
+          # @see Dodopayments::Models::WebhookPayload::Data::EntitlementGrant#payload_type
+          module PayloadType
+            extend Dodopayments::Internal::Type::Enum
+
+            ENTITLEMENT_GRANT = :EntitlementGrant
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
+          # @see Dodopayments::Models::WebhookPayload::Data::EntitlementGrant#status
+          module Status
+            extend Dodopayments::Internal::Type::Enum
+
+            PENDING = :Pending
+            DELIVERED = :Delivered
+            FAILED = :Failed
+            REVOKED = :Revoked
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+        end
+
         # @!method self.variants
-        #   @return [Array(Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout, Dodopayments::Models::WebhookPayload::Data::DunningAttempt)]
+        #   @return [Array(Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout, Dodopayments::Models::WebhookPayload::Data::DunningAttempt, Dodopayments::Models::WebhookPayload::Data::EntitlementGrant)]
       end
     end
   end

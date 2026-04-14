@@ -8,6 +8,7 @@ module Dodopayments
         page_number: Integer,
         page_size: Integer,
         product_id: String,
+        source: Dodopayments::Models::LicenseKeyListParams::source,
         status: Dodopayments::Models::LicenseKeyListParams::status
       }
       & Dodopayments::Internal::Type::request_parameters
@@ -40,6 +41,12 @@ module Dodopayments
 
       def product_id=: (String) -> String
 
+      attr_reader source: Dodopayments::Models::LicenseKeyListParams::source?
+
+      def source=: (
+        Dodopayments::Models::LicenseKeyListParams::source
+      ) -> Dodopayments::Models::LicenseKeyListParams::source
+
       attr_reader status: Dodopayments::Models::LicenseKeyListParams::status?
 
       def status=: (
@@ -53,6 +60,7 @@ module Dodopayments
         ?page_number: Integer,
         ?page_size: Integer,
         ?product_id: String,
+        ?source: Dodopayments::Models::LicenseKeyListParams::source,
         ?status: Dodopayments::Models::LicenseKeyListParams::status,
         ?request_options: Dodopayments::request_opts
       ) -> void
@@ -64,9 +72,21 @@ module Dodopayments
         page_number: Integer,
         page_size: Integer,
         product_id: String,
+        source: Dodopayments::Models::LicenseKeyListParams::source,
         status: Dodopayments::Models::LicenseKeyListParams::status,
         request_options: Dodopayments::RequestOptions
       }
+
+      type source = :auto | :import
+
+      module Source
+        extend Dodopayments::Internal::Type::Enum
+
+        AUTO: :auto
+        IMPORT: :import
+
+        def self?.values: -> ::Array[Dodopayments::Models::LicenseKeyListParams::source]
+      end
 
       type status = :active | :expired | :disabled
 

@@ -8,11 +8,12 @@ module Dodopayments
         customer_id: String,
         instances_count: Integer,
         key: String,
-        payment_id: String,
         product_id: String,
+        source: Dodopayments::Models::LicenseKey::source,
         status: Dodopayments::Models::license_key_status,
         activations_limit: Integer?,
         expires_at: Time?,
+        payment_id: String?,
         subscription_id: String?
       }
 
@@ -29,15 +30,17 @@ module Dodopayments
 
       attr_accessor key: String
 
-      attr_accessor payment_id: String
-
       attr_accessor product_id: String
+
+      attr_accessor source: Dodopayments::Models::LicenseKey::source
 
       attr_accessor status: Dodopayments::Models::license_key_status
 
       attr_accessor activations_limit: Integer?
 
       attr_accessor expires_at: Time?
+
+      attr_accessor payment_id: String?
 
       attr_accessor subscription_id: String?
 
@@ -48,11 +51,12 @@ module Dodopayments
         customer_id: String,
         instances_count: Integer,
         key: String,
-        payment_id: String,
         product_id: String,
+        source: Dodopayments::Models::LicenseKey::source,
         status: Dodopayments::Models::license_key_status,
         ?activations_limit: Integer?,
         ?expires_at: Time?,
+        ?payment_id: String?,
         ?subscription_id: String?
       ) -> void
 
@@ -63,13 +67,25 @@ module Dodopayments
         customer_id: String,
         instances_count: Integer,
         key: String,
-        payment_id: String,
         product_id: String,
+        source: Dodopayments::Models::LicenseKey::source,
         status: Dodopayments::Models::license_key_status,
         activations_limit: Integer?,
         expires_at: Time?,
+        payment_id: String?,
         subscription_id: String?
       }
+
+      type source = :auto | :import
+
+      module Source
+        extend Dodopayments::Internal::Type::Enum
+
+        AUTO: :auto
+        IMPORT: :import
+
+        def self?.values: -> ::Array[Dodopayments::Models::LicenseKey::source]
+      end
     end
   end
 end

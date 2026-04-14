@@ -59,13 +59,23 @@ module Dodopayments
                -> { Dodopayments::ProductCreateParams::DigitalProductDelivery },
                nil?: true
 
+      # @!attribute entitlement_ids
+      #   Optional entitlement IDs to attach to this product (max 20)
+      #
+      #   @return [Array<String>, nil]
+      optional :entitlement_ids, Dodopayments::Internal::Type::ArrayOf[String], nil?: true
+
       # @!attribute license_key_activation_message
+      #   @deprecated
+      #
       #   Optional message displayed during license key activation
       #
       #   @return [String, nil]
       optional :license_key_activation_message, String, nil?: true
 
       # @!attribute license_key_activations_limit
+      #   @deprecated
+      #
       #   The number of times the license key can be activated. Must be 0 or greater
       #
       #   @return [Integer, nil]
@@ -80,6 +90,8 @@ module Dodopayments
       optional :license_key_duration, -> { Dodopayments::LicenseKeyDuration }, nil?: true
 
       # @!attribute license_key_enabled
+      #   @deprecated
+      #
       #   When true, generates and sends a license key to your customer. Defaults to false
       #
       #   @return [Boolean, nil]
@@ -91,7 +103,7 @@ module Dodopayments
       #   @return [Hash{Symbol=>String}, nil]
       optional :metadata, Dodopayments::Internal::Type::HashOf[String]
 
-      # @!method initialize(name:, price:, tax_category:, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, request_options: {})
+      # @!method initialize(name:, price:, tax_category:, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, entitlement_ids: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductCreateParams} for more details.
       #
@@ -110,6 +122,8 @@ module Dodopayments
       #   @param description [String, nil] Optional description of the product
       #
       #   @param digital_product_delivery [Dodopayments::Models::ProductCreateParams::DigitalProductDelivery, nil] Choose how you would like you digital product delivered
+      #
+      #   @param entitlement_ids [Array<String>, nil] Optional entitlement IDs to attach to this product (max 20)
       #
       #   @param license_key_activation_message [String, nil] Optional message displayed during license key activation
       #

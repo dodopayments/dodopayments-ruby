@@ -47,6 +47,10 @@ module Dodopayments
       DUNNING_RECOVERED = :"dunning.recovered"
       ACR_EMAIL = :"acr.email"
       DUNNING_EMAIL = :"dunning.email"
+      ENTITLEMENT_GRANT_CREATED = :"entitlement_grant.created"
+      ENTITLEMENT_GRANT_DELIVERED = :"entitlement_grant.delivered"
+      ENTITLEMENT_GRANT_FAILED = :"entitlement_grant.failed"
+      ENTITLEMENT_GRANT_REVOKED = :"entitlement_grant.revoked"
 
       # @!method self.values
       #   @return [Array<Symbol>]

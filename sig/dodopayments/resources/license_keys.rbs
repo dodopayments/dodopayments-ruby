@@ -1,6 +1,15 @@
 module Dodopayments
   module Resources
     class LicenseKeys
+      def create: (
+        customer_id: String,
+        key: String,
+        product_id: String,
+        ?activations_limit: Integer?,
+        ?expires_at: Time?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::LicenseKey
+
       def retrieve: (
         String id,
         ?request_options: Dodopayments::request_opts
@@ -21,6 +30,7 @@ module Dodopayments
         ?page_number: Integer,
         ?page_size: Integer,
         ?product_id: String,
+        ?source: Dodopayments::Models::LicenseKeyListParams::source,
         ?status: Dodopayments::Models::LicenseKeyListParams::status,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::LicenseKey]
