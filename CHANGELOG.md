@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.7.0 (2026-04-14)
+
+Full Changelog: [v2.6.0...v2.7.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.6.0...v2.7.0)
+
+### Features
+
+* **api:** update openapi spec to v1.95.3 ([f06c818](https://github.com/dodopayments/dodopayments-ruby/commit/f06c818716c04073a76fea8624f781a69ef1a7d2))
+
+
+### Bug Fixes
+
+* multipart encoding for file arrays ([dadec9c](https://github.com/dodopayments/dodopayments-ruby/commit/dadec9cee7f50218fb778deea6e3371d8331d4bb))
+
 ## 2.6.0 (2026-04-08)
 
 Full Changelog: [v2.5.0...v2.6.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.5.0...v2.6.0)
