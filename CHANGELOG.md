@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.7.1 (2026-04-18)
+
+Full Changelog: [v2.7.0...v2.7.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.7.0...v2.7.1)
+
+### Chores
+
+* **tests:** bump steady to v0.22.1 ([73df298](https://github.com/dodopayments/dodopayments-ruby/commit/73df29860801d174afc1ad43487be178c27fab66))
+
 ## 2.7.0 (2026-04-14)
 
 Full Changelog: [v2.6.0...v2.7.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.6.0...v2.7.0)
