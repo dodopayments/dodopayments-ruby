@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.7.2 (2026-04-23)
+
+Full Changelog: [v2.7.1...v2.7.2](https://github.com/dodopayments/dodopayments-ruby/compare/v2.7.1...v2.7.2)
+
+### Chores
+
+* **internal:** more robust bootstrap script ([e870736](https://github.com/dodopayments/dodopayments-ruby/commit/e8707366cb03cc5e90e6cb7d5d54aebd40c74a30))
+
 ## 2.7.1 (2026-04-18)
 
 Full Changelog: [v2.7.0...v2.7.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.7.0...v2.7.1)
