@@ -144,6 +144,19 @@ module Dodopayments
         raise ArgumentError.new("bearer_token is required, and can be set via environ: \"DODO_PAYMENTS_API_KEY\"")
       end
 
+      headers = {}
+      custom_headers_env = ENV["DODO_PAYMENTS_CUSTOM_HEADERS"]
+      unless custom_headers_env.nil?
+        parsed = {}
+        custom_headers_env.split("\n").each do |line|
+          colon = line.index(":")
+          unless colon.nil?
+            parsed[line[0...colon].strip] = line[(colon + 1)..].strip
+          end
+        end
+        headers = parsed.merge(headers)
+      end
+
       @bearer_token = bearer_token.to_s
       @webhook_key = webhook_key&.to_s
 
@@ -152,7 +165,8 @@ module Dodopayments
         timeout: timeout,
         max_retries: max_retries,
         initial_retry_delay: initial_retry_delay,
-        max_retry_delay: max_retry_delay
+        max_retry_delay: max_retry_delay,
+        headers: headers
       )
 
       @checkout_sessions = Dodopayments::Resources::CheckoutSessions.new(client: self)
