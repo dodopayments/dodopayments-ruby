@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.8.0 (2026-04-28)
+
+Full Changelog: [v2.7.1...v2.8.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.7.1...v2.8.0)
+
+### Features
+
+* support setting headers via env ([490f2d8](https://github.com/dodopayments/dodopayments-ruby/commit/490f2d85bcea253ca8f0e95d587020e65df1c87e))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([e870736](https://github.com/dodopayments/dodopayments-ruby/commit/e8707366cb03cc5e90e6cb7d5d54aebd40c74a30))
+
 ## 2.7.1 (2026-04-18)
 
 Full Changelog: [v2.7.0...v2.7.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.7.0...v2.7.1)
