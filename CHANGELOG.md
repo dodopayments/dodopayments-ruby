@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.8.1 (2026-04-29)
+
+Full Changelog: [v2.8.0...v2.8.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.8.0...v2.8.1)
+
+### Chores
+
+* **internal:** codegen related update ([a8cf8d2](https://github.com/dodopayments/dodopayments-ruby/commit/a8cf8d230adc076226ef2f63d36a207704006c85))
+
 ## 2.8.0 (2026-04-28)
 
 Full Changelog: [v2.7.1...v2.8.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.7.1...v2.8.0)
