@@ -1,0 +1,45 @@
+module Dodopayments
+  module Models
+    type credit_overage_reset_webhook_event =
+      {
+        business_id: String,
+        data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditOverageResetWebhookEvent::type_
+      }
+
+    class CreditOverageResetWebhookEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::CreditEntitlements::CreditLedgerEntry
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: Dodopayments::Models::CreditOverageResetWebhookEvent::type_
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditOverageResetWebhookEvent::type_
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
+        timestamp: Time,
+        type: Dodopayments::Models::CreditOverageResetWebhookEvent::type_
+      }
+
+      type type_ = :"credit.overage_reset"
+
+      module Type
+        extend Dodopayments::Internal::Type::Enum
+
+        CREDIT_OVERAGE_RESET: :"credit.overage_reset"
+
+        def self?.values: -> ::Array[Dodopayments::Models::CreditOverageResetWebhookEvent::type_]
+      end
+    end
+  end
+end

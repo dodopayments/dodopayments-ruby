@@ -28,6 +28,22 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::SubscriptionUpdateParams::CancelReason, nil]
       optional :cancel_reason, enum: -> { Dodopayments::SubscriptionUpdateParams::CancelReason }, nil?: true
 
+      # @!attribute cancellation_comment
+      #   Free-text cancellation comment (only valid when cancelling or scheduling
+      #   cancellation).
+      #
+      #   @return [String, nil]
+      optional :cancellation_comment, String, nil?: true
+
+      # @!attribute cancellation_feedback
+      #   Customer-supplied churn reason (only valid when cancelling or scheduling
+      #   cancellation).
+      #
+      #   @return [Symbol, Dodopayments::Models::SubscriptionUpdateParams::CancellationFeedback, nil]
+      optional :cancellation_feedback,
+               enum: -> { Dodopayments::SubscriptionUpdateParams::CancellationFeedback },
+               nil?: true
+
       # @!attribute credit_entitlement_cart
       #   Update credit entitlement cart settings
       #
@@ -68,7 +84,10 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(subscription_id:, billing: nil, cancel_at_next_billing_date: nil, cancel_reason: nil, credit_entitlement_cart: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
+      # @!method initialize(subscription_id:, billing: nil, cancel_at_next_billing_date: nil, cancel_reason: nil, cancellation_comment: nil, cancellation_feedback: nil, credit_entitlement_cart: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::SubscriptionUpdateParams} for more details.
+      #
       #   @param subscription_id [String]
       #
       #   @param billing [Dodopayments::Models::BillingAddress, nil]
@@ -76,6 +95,10 @@ module Dodopayments
       #   @param cancel_at_next_billing_date [Boolean, nil] When set, the subscription will remain active until the end of billing period
       #
       #   @param cancel_reason [Symbol, Dodopayments::Models::SubscriptionUpdateParams::CancelReason, nil]
+      #
+      #   @param cancellation_comment [String, nil] Free-text cancellation comment (only valid when cancelling or scheduling cancell
+      #
+      #   @param cancellation_feedback [Symbol, Dodopayments::Models::SubscriptionUpdateParams::CancellationFeedback, nil] Customer-supplied churn reason (only valid when cancelling or scheduling cancell
       #
       #   @param credit_entitlement_cart [Array<Dodopayments::Models::SubscriptionUpdateParams::CreditEntitlementCart>, nil] Update credit entitlement cart settings
       #
@@ -99,6 +122,25 @@ module Dodopayments
         CANCELLED_BY_CUSTOMER = :cancelled_by_customer
         CANCELLED_BY_MERCHANT = :cancelled_by_merchant
         CANCELLED_BY_MERCHANT_SEND_DUNNING = :cancelled_by_merchant_send_dunning
+        DODO_TEAM = :dodo_team
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
+      # Customer-supplied churn reason (only valid when cancelling or scheduling
+      # cancellation).
+      module CancellationFeedback
+        extend Dodopayments::Internal::Type::Enum
+
+        TOO_EXPENSIVE = :too_expensive
+        MISSING_FEATURES = :missing_features
+        SWITCHED_SERVICE = :switched_service
+        UNUSED = :unused
+        CUSTOMER_SERVICE = :customer_service
+        LOW_QUALITY = :low_quality
+        TOO_COMPLEX = :too_complex
+        OTHER = :other
 
         # @!method self.values
         #   @return [Array<Symbol>]

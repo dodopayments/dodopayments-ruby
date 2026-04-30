@@ -8,7 +8,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionCreateParams} for more details.
       #
-      # @overload create(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
+      # @overload create(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, require_phone_number: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
       #
       # @param billing [Dodopayments::Models::BillingAddress] Billing address information for the subscription
       #
@@ -28,6 +28,8 @@ module Dodopayments
       #
       # @param force_3ds [Boolean, nil] Override merchant default 3DS behaviour for this subscription
       #
+      # @param mandate_min_amount_inr_paise [Integer, nil] Override the merchant-level mandate floor (in INR paise) for INR
+      #
       # @param metadata [Hash{Symbol=>String}] Additional metadata for the subscription
       #
       # @param on_demand [Dodopayments::Models::OnDemandSubscription, nil]
@@ -39,6 +41,8 @@ module Dodopayments
       # @param payment_method_id [String, nil] Optional payment method ID to use for this subscription.
       #
       # @param redirect_immediately [Boolean] If true, redirects the customer immediately after payment completion
+      #
+      # @param require_phone_number [Boolean] If true, the customer's phone number is required to create this subscription.
       #
       # @param return_url [String, nil] Optional URL to redirect after successful subscription creation
       #
@@ -84,7 +88,10 @@ module Dodopayments
         )
       end
 
-      # @overload update(subscription_id, billing: nil, cancel_at_next_billing_date: nil, cancel_reason: nil, credit_entitlement_cart: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::SubscriptionUpdateParams} for more details.
+      #
+      # @overload update(subscription_id, billing: nil, cancel_at_next_billing_date: nil, cancel_reason: nil, cancellation_comment: nil, cancellation_feedback: nil, credit_entitlement_cart: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -93,6 +100,10 @@ module Dodopayments
       # @param cancel_at_next_billing_date [Boolean, nil] When set, the subscription will remain active until the end of billing period
       #
       # @param cancel_reason [Symbol, Dodopayments::Models::SubscriptionUpdateParams::CancelReason, nil]
+      #
+      # @param cancellation_comment [String, nil] Free-text cancellation comment (only valid when cancelling or scheduling cancell
+      #
+      # @param cancellation_feedback [Symbol, Dodopayments::Models::SubscriptionUpdateParams::CancellationFeedback, nil] Customer-supplied churn reason (only valid when cancelling or scheduling cancell
       #
       # @param credit_entitlement_cart [Array<Dodopayments::Models::SubscriptionUpdateParams::CreditEntitlementCart>, nil] Update credit entitlement cart settings
       #
@@ -181,7 +192,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionChangePlanParams} for more details.
       #
-      # @overload change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, addons: nil, discount_code: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, request_options: {})
+      # @overload change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, discount_code: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -190,6 +201,8 @@ module Dodopayments
       # @param proration_billing_mode [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::ProrationBillingMode] Proration Billing Mode
       #
       # @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
+      #
+      # @param adaptive_currency_fees_inclusive [Boolean, nil] Whether adaptive currency fees should be included in the price (true) or added o
       #
       # @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
       #
@@ -255,7 +268,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionPreviewChangePlanParams} for more details.
       #
-      # @overload preview_change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, addons: nil, discount_code: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, request_options: {})
+      # @overload preview_change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, discount_code: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -264,6 +277,8 @@ module Dodopayments
       # @param proration_billing_mode [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::ProrationBillingMode] Proration Billing Mode
       #
       # @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
+      #
+      # @param adaptive_currency_fees_inclusive [Boolean, nil] Whether adaptive currency fees should be included in the price (true) or added o
       #
       # @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
       #

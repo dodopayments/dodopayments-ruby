@@ -1,0 +1,71 @@
+module Dodopayments
+  module Models
+    module Entitlements
+      type grant_list_params =
+        {
+          id: String,
+          customer_id: String,
+          page_number: Integer,
+          page_size: Integer,
+          status: Dodopayments::Models::Entitlements::GrantListParams::status
+        }
+        & Dodopayments::Internal::Type::request_parameters
+
+      class GrantListParams < Dodopayments::Internal::Type::BaseModel
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_reader customer_id: String?
+
+        def customer_id=: (String) -> String
+
+        attr_reader page_number: Integer?
+
+        def page_number=: (Integer) -> Integer
+
+        attr_reader page_size: Integer?
+
+        def page_size=: (Integer) -> Integer
+
+        attr_reader status: Dodopayments::Models::Entitlements::GrantListParams::status?
+
+        def status=: (
+          Dodopayments::Models::Entitlements::GrantListParams::status
+        ) -> Dodopayments::Models::Entitlements::GrantListParams::status
+
+        def initialize: (
+          id: String,
+          ?customer_id: String,
+          ?page_number: Integer,
+          ?page_size: Integer,
+          ?status: Dodopayments::Models::Entitlements::GrantListParams::status,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          customer_id: String,
+          page_number: Integer,
+          page_size: Integer,
+          status: Dodopayments::Models::Entitlements::GrantListParams::status,
+          request_options: Dodopayments::RequestOptions
+        }
+
+        type status = :Pending | :Delivered | :Failed | :Revoked
+
+        module Status
+          extend Dodopayments::Internal::Type::Enum
+
+          PENDING: :Pending
+          DELIVERED: :Delivered
+          FAILED: :Failed
+          REVOKED: :Revoked
+
+          def self?.values: -> ::Array[Dodopayments::Models::Entitlements::GrantListParams::status]
+        end
+      end
+    end
+  end
+end

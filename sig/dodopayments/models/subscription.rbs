@@ -26,6 +26,8 @@ module Dodopayments
         subscription_period_interval: Dodopayments::Models::time_interval,
         tax_inclusive: bool,
         trial_period_days: Integer,
+        cancellation_comment: String?,
+        cancellation_feedback: Dodopayments::Models::Subscription::cancellation_feedback?,
         cancelled_at: Time?,
         custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?,
         discount_cycles_remaining: Integer?,
@@ -85,6 +87,10 @@ module Dodopayments
 
       attr_accessor trial_period_days: Integer
 
+      attr_accessor cancellation_comment: String?
+
+      attr_accessor cancellation_feedback: Dodopayments::Models::Subscription::cancellation_feedback?
+
       attr_accessor cancelled_at: Time?
 
       attr_accessor custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?
@@ -126,6 +132,8 @@ module Dodopayments
         subscription_period_interval: Dodopayments::Models::time_interval,
         tax_inclusive: bool,
         trial_period_days: Integer,
+        ?cancellation_comment: String?,
+        ?cancellation_feedback: Dodopayments::Models::Subscription::cancellation_feedback?,
         ?cancelled_at: Time?,
         ?custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?,
         ?discount_cycles_remaining: Integer?,
@@ -161,6 +169,8 @@ module Dodopayments
         subscription_period_interval: Dodopayments::Models::time_interval,
         tax_inclusive: bool,
         trial_period_days: Integer,
+        cancellation_comment: String?,
+        cancellation_feedback: Dodopayments::Models::Subscription::cancellation_feedback?,
         cancelled_at: Time?,
         custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?,
         discount_cycles_remaining: Integer?,
@@ -170,6 +180,31 @@ module Dodopayments
         scheduled_change: Dodopayments::Subscription::ScheduledChange?,
         tax_id: String?
       }
+
+      type cancellation_feedback =
+        :too_expensive
+        | :missing_features
+        | :switched_service
+        | :unused
+        | :customer_service
+        | :low_quality
+        | :too_complex
+        | :other
+
+      module CancellationFeedback
+        extend Dodopayments::Internal::Type::Enum
+
+        TOO_EXPENSIVE: :too_expensive
+        MISSING_FEATURES: :missing_features
+        SWITCHED_SERVICE: :switched_service
+        UNUSED: :unused
+        CUSTOMER_SERVICE: :customer_service
+        LOW_QUALITY: :low_quality
+        TOO_COMPLEX: :too_complex
+        OTHER: :other
+
+        def self?.values: -> ::Array[Dodopayments::Models::Subscription::cancellation_feedback]
+      end
 
       type scheduled_change =
         {

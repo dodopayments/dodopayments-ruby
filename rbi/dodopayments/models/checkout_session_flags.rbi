@@ -114,6 +114,16 @@ module Dodopayments
       sig { params(redirect_immediately: T::Boolean).void }
       attr_writer :redirect_immediately
 
+      # If true, the customer must provide a phone number to complete checkout. Requires
+      # `allow_phone_number_collection` to also be true.
+      #
+      # Default is false
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :require_phone_number
+
+      sig { params(require_phone_number: T::Boolean).void }
+      attr_writer :require_phone_number
+
       sig do
         params(
           allow_currency_selection: T::Boolean,
@@ -129,7 +139,8 @@ module Dodopayments
           allow_phone_number_collection: T::Boolean,
           allow_tax_id: T::Boolean,
           always_create_new_customer: T::Boolean,
-          redirect_immediately: T::Boolean
+          redirect_immediately: T::Boolean,
+          require_phone_number: T::Boolean
         ).returns(T.attached_class)
       end
       def self.new(
@@ -165,7 +176,12 @@ module Dodopayments
         # If true, redirects the customer immediately after payment completion
         #
         # Default is false
-        redirect_immediately: nil
+        redirect_immediately: nil,
+        # If true, the customer must provide a phone number to complete checkout. Requires
+        # `allow_phone_number_collection` to also be true.
+        #
+        # Default is false
+        require_phone_number: nil
       )
       end
 
@@ -185,7 +201,8 @@ module Dodopayments
             allow_phone_number_collection: T::Boolean,
             allow_tax_id: T::Boolean,
             always_create_new_customer: T::Boolean,
-            redirect_immediately: T::Boolean
+            redirect_immediately: T::Boolean,
+            require_phone_number: T::Boolean
           }
         )
       end

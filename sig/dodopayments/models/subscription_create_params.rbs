@@ -11,12 +11,14 @@ module Dodopayments
         billing_currency: Dodopayments::Models::currency?,
         discount_code: String?,
         :force_3ds => bool?,
+        mandate_min_amount_inr_paise: Integer?,
         metadata: ::Hash[Symbol, String],
         on_demand: Dodopayments::OnDemandSubscription?,
         one_time_product_cart: ::Array[Dodopayments::SubscriptionCreateParams::OneTimeProductCart]?,
         payment_link: bool?,
         payment_method_id: String?,
         redirect_immediately: bool,
+        require_phone_number: bool,
         return_url: String?,
         short_link: bool?,
         show_saved_payment_methods: bool,
@@ -47,6 +49,8 @@ module Dodopayments
 
       attr_accessor force_3ds: bool?
 
+      attr_accessor mandate_min_amount_inr_paise: Integer?
+
       attr_reader metadata: ::Hash[Symbol, String]?
 
       def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
@@ -62,6 +66,10 @@ module Dodopayments
       attr_reader redirect_immediately: bool?
 
       def redirect_immediately=: (bool) -> bool
+
+      attr_reader require_phone_number: bool?
+
+      def require_phone_number=: (bool) -> bool
 
       attr_accessor return_url: String?
 
@@ -85,12 +93,14 @@ module Dodopayments
         ?billing_currency: Dodopayments::Models::currency?,
         ?discount_code: String?,
         ?force_3ds: bool?,
+        ?mandate_min_amount_inr_paise: Integer?,
         ?metadata: ::Hash[Symbol, String],
         ?on_demand: Dodopayments::OnDemandSubscription?,
         ?one_time_product_cart: ::Array[Dodopayments::SubscriptionCreateParams::OneTimeProductCart]?,
         ?payment_link: bool?,
         ?payment_method_id: String?,
         ?redirect_immediately: bool,
+        ?require_phone_number: bool,
         ?return_url: String?,
         ?short_link: bool?,
         ?show_saved_payment_methods: bool,
@@ -109,12 +119,14 @@ module Dodopayments
         billing_currency: Dodopayments::Models::currency?,
         discount_code: String?,
         :force_3ds => bool?,
+        mandate_min_amount_inr_paise: Integer?,
         metadata: ::Hash[Symbol, String],
         on_demand: Dodopayments::OnDemandSubscription?,
         one_time_product_cart: ::Array[Dodopayments::SubscriptionCreateParams::OneTimeProductCart]?,
         payment_link: bool?,
         payment_method_id: String?,
         redirect_immediately: bool,
+        require_phone_number: bool,
         return_url: String?,
         short_link: bool?,
         show_saved_payment_methods: bool,

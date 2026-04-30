@@ -174,6 +174,11 @@ module Dodopayments
               :overage_charged,
               Dodopayments::CreditEntitlements::CreditLedgerEntry::TransactionType::TaggedSymbol
             )
+          OVERAGE_RESET =
+            T.let(
+              :overage_reset,
+              Dodopayments::CreditEntitlements::CreditLedgerEntry::TransactionType::TaggedSymbol
+            )
           AUTO_TOP_UP =
             T.let(
               :auto_top_up,

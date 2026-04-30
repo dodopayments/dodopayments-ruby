@@ -1,0 +1,120 @@
+module Dodopayments
+  module Models
+    type customer_list_entitlements_response =
+      {
+        items: ::Array[Dodopayments::Models::CustomerListEntitlementsResponse::Item]
+      }
+
+    class CustomerListEntitlementsResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor items: ::Array[Dodopayments::Models::CustomerListEntitlementsResponse::Item]
+
+      def initialize: (
+        items: ::Array[Dodopayments::Models::CustomerListEntitlementsResponse::Item]
+      ) -> void
+
+      def to_hash: -> {
+        items: ::Array[Dodopayments::Models::CustomerListEntitlementsResponse::Item]
+      }
+
+      type item =
+        {
+          created_at: Time,
+          entitlement_id: String,
+          entitlement_name: String,
+          grant_id: String,
+          integration_type: Dodopayments::Models::CustomerListEntitlementsResponse::Item::integration_type,
+          status: Dodopayments::Models::CustomerListEntitlementsResponse::Item::status,
+          updated_at: Time,
+          delivered_at: Time?,
+          entitlement_description: String?,
+          revoked_at: Time?
+        }
+
+      class Item < Dodopayments::Internal::Type::BaseModel
+        attr_accessor created_at: Time
+
+        attr_accessor entitlement_id: String
+
+        attr_accessor entitlement_name: String
+
+        attr_accessor grant_id: String
+
+        attr_accessor integration_type: Dodopayments::Models::CustomerListEntitlementsResponse::Item::integration_type
+
+        attr_accessor status: Dodopayments::Models::CustomerListEntitlementsResponse::Item::status
+
+        attr_accessor updated_at: Time
+
+        attr_accessor delivered_at: Time?
+
+        attr_accessor entitlement_description: String?
+
+        attr_accessor revoked_at: Time?
+
+        def initialize: (
+          created_at: Time,
+          entitlement_id: String,
+          entitlement_name: String,
+          grant_id: String,
+          integration_type: Dodopayments::Models::CustomerListEntitlementsResponse::Item::integration_type,
+          status: Dodopayments::Models::CustomerListEntitlementsResponse::Item::status,
+          updated_at: Time,
+          ?delivered_at: Time?,
+          ?entitlement_description: String?,
+          ?revoked_at: Time?
+        ) -> void
+
+        def to_hash: -> {
+          created_at: Time,
+          entitlement_id: String,
+          entitlement_name: String,
+          grant_id: String,
+          integration_type: Dodopayments::Models::CustomerListEntitlementsResponse::Item::integration_type,
+          status: Dodopayments::Models::CustomerListEntitlementsResponse::Item::status,
+          updated_at: Time,
+          delivered_at: Time?,
+          entitlement_description: String?,
+          revoked_at: Time?
+        }
+
+        type integration_type =
+          :discord
+          | :telegram
+          | :github
+          | :figma
+          | :framer
+          | :notion
+          | :digital_files
+          | :license_key
+
+        module IntegrationType
+          extend Dodopayments::Internal::Type::Enum
+
+          DISCORD: :discord
+          TELEGRAM: :telegram
+          GITHUB: :github
+          FIGMA: :figma
+          FRAMER: :framer
+          NOTION: :notion
+          DIGITAL_FILES: :digital_files
+          LICENSE_KEY: :license_key
+
+          def self?.values: -> ::Array[Dodopayments::Models::CustomerListEntitlementsResponse::Item::integration_type]
+        end
+
+        type status = :pending | :delivered | :failed | :revoked
+
+        module Status
+          extend Dodopayments::Internal::Type::Enum
+
+          PENDING: :pending
+          DELIVERED: :delivered
+          FAILED: :failed
+          REVOKED: :revoked
+
+          def self?.values: -> ::Array[Dodopayments::Models::CustomerListEntitlementsResponse::Item::status]
+        end
+      end
+    end
+  end
+end

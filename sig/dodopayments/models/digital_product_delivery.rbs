@@ -2,27 +2,27 @@ module Dodopayments
   module Models
     type digital_product_delivery =
       {
+        files: ::Array[Dodopayments::DigitalProductDeliveryFile],
         external_url: String?,
-        files: ::Array[Dodopayments::DigitalProductDeliveryFile]?,
         instructions: String?
       }
 
     class DigitalProductDelivery < Dodopayments::Internal::Type::BaseModel
-      attr_accessor external_url: String?
+      attr_accessor files: ::Array[Dodopayments::DigitalProductDeliveryFile]
 
-      attr_accessor files: ::Array[Dodopayments::DigitalProductDeliveryFile]?
+      attr_accessor external_url: String?
 
       attr_accessor instructions: String?
 
       def initialize: (
+        files: ::Array[Dodopayments::DigitalProductDeliveryFile],
         ?external_url: String?,
-        ?files: ::Array[Dodopayments::DigitalProductDeliveryFile]?,
         ?instructions: String?
       ) -> void
 
       def to_hash: -> {
+        files: ::Array[Dodopayments::DigitalProductDeliveryFile],
         external_url: String?,
-        files: ::Array[Dodopayments::DigitalProductDeliveryFile]?,
         instructions: String?
       }
     end

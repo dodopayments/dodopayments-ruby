@@ -14,6 +14,9 @@ module Dodopayments
         end
       end
 
+      module Entitlements
+      end
+
       module Invoices
       end
 

@@ -1,0 +1,23 @@
+module Dodopayments
+  module Models
+    type customer_list_entitlements_params =
+      { customer_id: String } & Dodopayments::Internal::Type::request_parameters
+
+    class CustomerListEntitlementsParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor customer_id: String
+
+      def initialize: (
+        customer_id: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        customer_id: String,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

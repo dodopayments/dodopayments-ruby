@@ -92,7 +92,16 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :redirect_immediately, Dodopayments::Internal::Type::Boolean
 
-      # @!method initialize(allow_currency_selection: nil, allow_customer_editing_city: nil, allow_customer_editing_country: nil, allow_customer_editing_email: nil, allow_customer_editing_name: nil, allow_customer_editing_state: nil, allow_customer_editing_street: nil, allow_customer_editing_tax_id: nil, allow_customer_editing_zipcode: nil, allow_discount_code: nil, allow_phone_number_collection: nil, allow_tax_id: nil, always_create_new_customer: nil, redirect_immediately: nil)
+      # @!attribute require_phone_number
+      #   If true, the customer must provide a phone number to complete checkout. Requires
+      #   `allow_phone_number_collection` to also be true.
+      #
+      #   Default is false
+      #
+      #   @return [Boolean, nil]
+      optional :require_phone_number, Dodopayments::Internal::Type::Boolean
+
+      # @!method initialize(allow_currency_selection: nil, allow_customer_editing_city: nil, allow_customer_editing_country: nil, allow_customer_editing_email: nil, allow_customer_editing_name: nil, allow_customer_editing_state: nil, allow_customer_editing_street: nil, allow_customer_editing_tax_id: nil, allow_customer_editing_zipcode: nil, allow_discount_code: nil, allow_phone_number_collection: nil, allow_tax_id: nil, always_create_new_customer: nil, redirect_immediately: nil, require_phone_number: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionFlags} for more details.
       #
@@ -123,6 +132,8 @@ module Dodopayments
       #   @param always_create_new_customer [Boolean] Set to true if a new customer object should be created.
       #
       #   @param redirect_immediately [Boolean] If true, redirects the customer immediately after payment completion
+      #
+      #   @param require_phone_number [Boolean] If true, the customer must provide a phone number to complete checkout.
     end
   end
 end

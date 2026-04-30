@@ -231,29 +231,93 @@ module Dodopayments
 
           type digital_files_config =
             {
-              digital_file_ids: ::Array[String],
-              external_url: String?,
-              instructions: String?
+              digital_files: Dodopayments::Product::Entitlement::IntegrationConfig::DigitalFilesConfig::DigitalFiles
             }
 
           class DigitalFilesConfig < Dodopayments::Internal::Type::BaseModel
-            attr_accessor digital_file_ids: ::Array[String]
-
-            attr_accessor external_url: String?
-
-            attr_accessor instructions: String?
+            attr_accessor digital_files: Dodopayments::Product::Entitlement::IntegrationConfig::DigitalFilesConfig::DigitalFiles
 
             def initialize: (
-              digital_file_ids: ::Array[String],
-              ?external_url: String?,
-              ?instructions: String?
+              digital_files: Dodopayments::Product::Entitlement::IntegrationConfig::DigitalFilesConfig::DigitalFiles
             ) -> void
 
             def to_hash: -> {
-              digital_file_ids: ::Array[String],
-              external_url: String?,
-              instructions: String?
+              digital_files: Dodopayments::Product::Entitlement::IntegrationConfig::DigitalFilesConfig::DigitalFiles
             }
+
+            type digital_files =
+              {
+                files: ::Array[Dodopayments::Product::Entitlement::IntegrationConfig::DigitalFilesConfig::DigitalFiles::File],
+                external_url: String?,
+                instructions: String?
+              }
+
+            class DigitalFiles < Dodopayments::Internal::Type::BaseModel
+              attr_accessor files: ::Array[Dodopayments::Product::Entitlement::IntegrationConfig::DigitalFilesConfig::DigitalFiles::File]
+
+              attr_accessor external_url: String?
+
+              attr_accessor instructions: String?
+
+              def initialize: (
+                files: ::Array[Dodopayments::Product::Entitlement::IntegrationConfig::DigitalFilesConfig::DigitalFiles::File],
+                ?external_url: String?,
+                ?instructions: String?
+              ) -> void
+
+              def to_hash: -> {
+                files: ::Array[Dodopayments::Product::Entitlement::IntegrationConfig::DigitalFilesConfig::DigitalFiles::File],
+                external_url: String?,
+                instructions: String?
+              }
+
+              type file =
+                {
+                  download_url: String,
+                  expires_in: Integer,
+                  file_id: String,
+                  filename: String,
+                  source: String,
+                  content_type: String?,
+                  file_size: Integer?
+                }
+
+              class File < Dodopayments::Internal::Type::BaseModel
+                attr_accessor download_url: String
+
+                attr_accessor expires_in: Integer
+
+                attr_accessor file_id: String
+
+                attr_accessor filename: String
+
+                attr_accessor source: String
+
+                attr_accessor content_type: String?
+
+                attr_accessor file_size: Integer?
+
+                def initialize: (
+                  download_url: String,
+                  expires_in: Integer,
+                  file_id: String,
+                  filename: String,
+                  source: String,
+                  ?content_type: String?,
+                  ?file_size: Integer?
+                ) -> void
+
+                def to_hash: -> {
+                  download_url: String,
+                  expires_in: Integer,
+                  file_id: String,
+                  filename: String,
+                  source: String,
+                  content_type: String?,
+                  file_size: Integer?
+                }
+              end
+            end
           end
 
           type license_key_config =
@@ -261,7 +325,7 @@ module Dodopayments
               activation_message: String?,
               activations_limit: Integer?,
               duration_count: Integer?,
-              duration_interval: String?
+              duration_interval: Dodopayments::Models::time_interval?
             }
 
           class LicenseKeyConfig < Dodopayments::Internal::Type::BaseModel
@@ -271,20 +335,20 @@ module Dodopayments
 
             attr_accessor duration_count: Integer?
 
-            attr_accessor duration_interval: String?
+            attr_accessor duration_interval: Dodopayments::Models::time_interval?
 
             def initialize: (
               ?activation_message: String?,
               ?activations_limit: Integer?,
               ?duration_count: Integer?,
-              ?duration_interval: String?
+              ?duration_interval: Dodopayments::Models::time_interval?
             ) -> void
 
             def to_hash: -> {
               activation_message: String?,
               activations_limit: Integer?,
               duration_count: Integer?,
-              duration_interval: String?
+              duration_interval: Dodopayments::Models::time_interval?
             }
           end
 

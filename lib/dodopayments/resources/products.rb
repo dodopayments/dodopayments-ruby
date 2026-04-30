@@ -12,7 +12,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductCreateParams} for more details.
       #
-      # @overload create(name:, price:, tax_category:, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, entitlement_ids: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, request_options: {})
+      # @overload create(name:, price:, tax_category:, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, entitlements: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, request_options: {})
       #
       # @param name [String] Name of the product
       #
@@ -30,7 +30,7 @@ module Dodopayments
       #
       # @param digital_product_delivery [Dodopayments::Models::ProductCreateParams::DigitalProductDelivery, nil] Choose how you would like you digital product delivered
       #
-      # @param entitlement_ids [Array<String>, nil] Optional entitlement IDs to attach to this product (max 20)
+      # @param entitlements [Array<Dodopayments::Models::ProductCreateParams::Entitlement>, nil] Optional entitlements to attach to this product (max 20)
       #
       # @param license_key_activation_message [String, nil] Optional message displayed during license key activation
       #
@@ -79,7 +79,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductUpdateParams} for more details.
       #
-      # @overload update(id, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, entitlement_ids: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      # @overload update(id, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, entitlements: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, price: nil, tax_category: nil, request_options: {})
       #
       # @param id [String]
       #
@@ -93,7 +93,7 @@ module Dodopayments
       #
       # @param digital_product_delivery [Dodopayments::Models::ProductUpdateParams::DigitalProductDelivery, nil] Choose how you would like you digital product delivered
       #
-      # @param entitlement_ids [Array<String>, nil] Entitlement IDs to attach (replaces all existing when present)
+      # @param entitlements [Array<Dodopayments::Models::ProductUpdateParams::Entitlement>, nil] Entitlements to attach (replaces all existing when present)
       #
       # @param image_id [String, nil] Product image id after its uploaded to S3
       #

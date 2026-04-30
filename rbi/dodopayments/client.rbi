@@ -92,6 +92,9 @@ module Dodopayments
     sig { returns(Dodopayments::Resources::CreditEntitlements) }
     attr_reader :credit_entitlements
 
+    sig { returns(Dodopayments::Resources::Entitlements) }
+    attr_reader :entitlements
+
     # @api private
     sig { override.returns(T::Hash[String, String]) }
     private def auth_headers
