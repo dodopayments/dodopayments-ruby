@@ -56,9 +56,9 @@ module Dodopayments
       # @!attribute product_cart
       #   Optional list of products included in the payment
       #
-      #   @return [Array<Dodopayments::Models::PaymentCreateResponse::ProductCart>, nil]
+      #   @return [Array<Dodopayments::Models::OneTimeProductCartItem>, nil]
       optional :product_cart,
-               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::PaymentCreateResponse::ProductCart] },
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem] },
                nil?: true
 
       # @!method initialize(client_secret:, customer:, metadata:, payment_id:, total_amount:, discount_id: nil, expires_on: nil, payment_link: nil, product_cart: nil)
@@ -81,37 +81,7 @@ module Dodopayments
       #
       #   @param payment_link [String, nil] Optional URL to a hosted payment page
       #
-      #   @param product_cart [Array<Dodopayments::Models::PaymentCreateResponse::ProductCart>, nil] Optional list of products included in the payment
-
-      class ProductCart < Dodopayments::Internal::Type::BaseModel
-        # @!attribute product_id
-        #
-        #   @return [String]
-        required :product_id, String
-
-        # @!attribute quantity
-        #
-        #   @return [Integer]
-        required :quantity, Integer
-
-        # @!attribute amount
-        #   Amount the customer pays if pay_what_you_want is enabled. If disabled then
-        #   amount will be ignored Represented in the lowest denomination of the currency
-        #   (e.g., cents for USD). For example, to charge $1.00, pass `100`.
-        #
-        #   @return [Integer, nil]
-        optional :amount, Integer, nil?: true
-
-        # @!method initialize(product_id:, quantity:, amount: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Dodopayments::Models::PaymentCreateResponse::ProductCart} for more details.
-        #
-        #   @param product_id [String]
-        #
-        #   @param quantity [Integer]
-        #
-        #   @param amount [Integer, nil] Amount the customer pays if pay_what_you_want is enabled. If disabled then amoun
-      end
+      #   @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil] Optional list of products included in the payment
     end
   end
 end

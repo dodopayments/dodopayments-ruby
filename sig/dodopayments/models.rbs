@@ -25,6 +25,8 @@ module Dodopayments
 
   class AttachExistingCustomer = Dodopayments::Models::AttachExistingCustomer
 
+  class AttachProductEntitlement = Dodopayments::Models::AttachProductEntitlement
+
   class BalanceLedgerEntry = Dodopayments::Models::BalanceLedgerEntry
 
   class BalanceRetrieveLedgerParams = Dodopayments::Models::BalanceRetrieveLedgerParams
@@ -42,6 +44,8 @@ module Dodopayments
   class BrandUpdateImagesParams = Dodopayments::Models::BrandUpdateImagesParams
 
   class BrandUpdateParams = Dodopayments::Models::BrandUpdateParams
+
+  module CancellationFeedback = Dodopayments::Models::CancellationFeedback
 
   module CbbOverageBehavior = Dodopayments::Models::CbbOverageBehavior
 
@@ -189,6 +193,8 @@ module Dodopayments
 
   class DunningStartedWebhookEvent = Dodopayments::Models::DunningStartedWebhookEvent
 
+  class Entitlement = Dodopayments::Models::Entitlement
+
   class EntitlementCreateParams = Dodopayments::Models::EntitlementCreateParams
 
   class EntitlementDeleteParams = Dodopayments::Models::EntitlementDeleteParams
@@ -200,6 +206,8 @@ module Dodopayments
   class EntitlementGrantFailedWebhookEvent = Dodopayments::Models::EntitlementGrantFailedWebhookEvent
 
   class EntitlementGrantRevokedWebhookEvent = Dodopayments::Models::EntitlementGrantRevokedWebhookEvent
+
+  module EntitlementIntegrationType = Dodopayments::Models::EntitlementIntegrationType
 
   class EntitlementListParams = Dodopayments::Models::EntitlementListParams
 
@@ -216,6 +224,10 @@ module Dodopayments
   module FilterOperator = Dodopayments::Models::FilterOperator
 
   class GetDispute = Dodopayments::Models::GetDispute
+
+  module IntegrationConfig = Dodopayments::Models::IntegrationConfig
+
+  module IntegrationConfigResponse = Dodopayments::Models::IntegrationConfigResponse
 
   module IntentStatus = Dodopayments::Models::IntentStatus
 
@@ -313,6 +325,8 @@ module Dodopayments
 
   class ProductCreateParams = Dodopayments::Models::ProductCreateParams
 
+  class ProductEntitlementSummary = Dodopayments::Models::ProductEntitlementSummary
+
   class ProductItemReq = Dodopayments::Models::ProductItemReq
 
   class ProductListParams = Dodopayments::Models::ProductListParams
@@ -342,6 +356,8 @@ module Dodopayments
   module RefundStatus = Dodopayments::Models::RefundStatus
 
   class RefundSucceededWebhookEvent = Dodopayments::Models::RefundSucceededWebhookEvent
+
+  class ScheduledPlanChange = Dodopayments::Models::ScheduledPlanChange
 
   class Subscription = Dodopayments::Models::Subscription
 

@@ -65,11 +65,7 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :grant_id
 
-        sig do
-          returns(
-            Dodopayments::Models::CustomerListEntitlementsResponse::Item::IntegrationType::TaggedSymbol
-          )
-        end
+        sig { returns(Dodopayments::EntitlementIntegrationType::TaggedSymbol) }
         attr_accessor :integration_type
 
         sig do
@@ -98,7 +94,7 @@ module Dodopayments
             entitlement_name: String,
             grant_id: String,
             integration_type:
-              Dodopayments::Models::CustomerListEntitlementsResponse::Item::IntegrationType::OrSymbol,
+              Dodopayments::EntitlementIntegrationType::OrSymbol,
             status:
               Dodopayments::Models::CustomerListEntitlementsResponse::Item::Status::OrSymbol,
             updated_at: Time,
@@ -131,7 +127,7 @@ module Dodopayments
               entitlement_name: String,
               grant_id: String,
               integration_type:
-                Dodopayments::Models::CustomerListEntitlementsResponse::Item::IntegrationType::TaggedSymbol,
+                Dodopayments::EntitlementIntegrationType::TaggedSymbol,
               status:
                 Dodopayments::Models::CustomerListEntitlementsResponse::Item::Status::TaggedSymbol,
               updated_at: Time,
@@ -142,70 +138,6 @@ module Dodopayments
           )
         end
         def to_hash
-        end
-
-        module IntegrationType
-          extend Dodopayments::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Dodopayments::Models::CustomerListEntitlementsResponse::Item::IntegrationType
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          DISCORD =
-            T.let(
-              :discord,
-              Dodopayments::Models::CustomerListEntitlementsResponse::Item::IntegrationType::TaggedSymbol
-            )
-          TELEGRAM =
-            T.let(
-              :telegram,
-              Dodopayments::Models::CustomerListEntitlementsResponse::Item::IntegrationType::TaggedSymbol
-            )
-          GITHUB =
-            T.let(
-              :github,
-              Dodopayments::Models::CustomerListEntitlementsResponse::Item::IntegrationType::TaggedSymbol
-            )
-          FIGMA =
-            T.let(
-              :figma,
-              Dodopayments::Models::CustomerListEntitlementsResponse::Item::IntegrationType::TaggedSymbol
-            )
-          FRAMER =
-            T.let(
-              :framer,
-              Dodopayments::Models::CustomerListEntitlementsResponse::Item::IntegrationType::TaggedSymbol
-            )
-          NOTION =
-            T.let(
-              :notion,
-              Dodopayments::Models::CustomerListEntitlementsResponse::Item::IntegrationType::TaggedSymbol
-            )
-          DIGITAL_FILES =
-            T.let(
-              :digital_files,
-              Dodopayments::Models::CustomerListEntitlementsResponse::Item::IntegrationType::TaggedSymbol
-            )
-          LICENSE_KEY =
-            T.let(
-              :license_key,
-              Dodopayments::Models::CustomerListEntitlementsResponse::Item::IntegrationType::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Dodopayments::Models::CustomerListEntitlementsResponse::Item::IntegrationType::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
 
         module Status

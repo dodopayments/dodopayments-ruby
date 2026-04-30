@@ -189,9 +189,9 @@ module Dodopayments
       # @!attribute product_cart
       #   List of products purchased in a one-time payment
       #
-      #   @return [Array<Dodopayments::Models::OneTimeProductCartItem>, nil]
+      #   @return [Array<Dodopayments::Models::Payment::ProductCart>, nil]
       optional :product_cart,
-               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem] },
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Payment::ProductCart] },
                nil?: true
 
       # @!attribute refund_status
@@ -295,7 +295,7 @@ module Dodopayments
       #
       #   @param payment_method_type [String, nil] Specific type of payment method (e.g. "visa", "mastercard")
       #
-      #   @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil] List of products purchased in a one-time payment
+      #   @param product_cart [Array<Dodopayments::Models::Payment::ProductCart>, nil] List of products purchased in a one-time payment
       #
       #   @param refund_status [Symbol, Dodopayments::Models::PaymentRefundStatus, nil] Summary of the refund status for this payment. None if no succeeded refunds exis
       #
@@ -308,6 +308,22 @@ module Dodopayments
       #   @param tax [Integer, nil] Amount of tax collected in smallest currency unit (e.g. cents)
       #
       #   @param updated_at [Time, nil] Timestamp when the payment was last updated
+
+      class ProductCart < Dodopayments::Internal::Type::BaseModel
+        # @!attribute product_id
+        #
+        #   @return [String]
+        required :product_id, String
+
+        # @!attribute quantity
+        #
+        #   @return [Integer]
+        required :quantity, Integer
+
+        # @!method initialize(product_id:, quantity:)
+        #   @param product_id [String]
+        #   @param quantity [Integer]
+      end
     end
   end
 end

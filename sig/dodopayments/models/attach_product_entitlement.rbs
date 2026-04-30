@@ -1,0 +1,13 @@
+module Dodopayments
+  module Models
+    type attach_product_entitlement = { entitlement_id: String }
+
+    class AttachProductEntitlement < Dodopayments::Internal::Type::BaseModel
+      attr_accessor entitlement_id: String
+
+      def initialize: (entitlement_id: String) -> void
+
+      def to_hash: -> { entitlement_id: String }
+    end
+  end
+end

@@ -4,7 +4,7 @@ module Dodopayments
       {
         billing: Dodopayments::BillingAddress,
         customer: Dodopayments::Models::customer_request,
-        product_cart: ::Array[Dodopayments::PaymentCreateParams::ProductCart],
+        product_cart: ::Array[Dodopayments::OneTimeProductCartItem],
         adaptive_currency_fees_inclusive: bool?,
         allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
         billing_currency: Dodopayments::Models::currency?,
@@ -30,7 +30,7 @@ module Dodopayments
 
       attr_accessor customer: Dodopayments::Models::customer_request
 
-      attr_accessor product_cart: ::Array[Dodopayments::PaymentCreateParams::ProductCart]
+      attr_accessor product_cart: ::Array[Dodopayments::OneTimeProductCartItem]
 
       attr_accessor adaptive_currency_fees_inclusive: bool?
 
@@ -71,7 +71,7 @@ module Dodopayments
       def initialize: (
         billing: Dodopayments::BillingAddress,
         customer: Dodopayments::Models::customer_request,
-        product_cart: ::Array[Dodopayments::PaymentCreateParams::ProductCart],
+        product_cart: ::Array[Dodopayments::OneTimeProductCartItem],
         ?adaptive_currency_fees_inclusive: bool?,
         ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
         ?billing_currency: Dodopayments::Models::currency?,
@@ -92,7 +92,7 @@ module Dodopayments
       def to_hash: -> {
         billing: Dodopayments::BillingAddress,
         customer: Dodopayments::Models::customer_request,
-        product_cart: ::Array[Dodopayments::PaymentCreateParams::ProductCart],
+        product_cart: ::Array[Dodopayments::OneTimeProductCartItem],
         adaptive_currency_fees_inclusive: bool?,
         allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
         billing_currency: Dodopayments::Models::currency?,
@@ -109,29 +109,6 @@ module Dodopayments
         tax_id: String?,
         request_options: Dodopayments::RequestOptions
       }
-
-      type product_cart =
-        { product_id: String, quantity: Integer, amount: Integer? }
-
-      class ProductCart < Dodopayments::Internal::Type::BaseModel
-        attr_accessor product_id: String
-
-        attr_accessor quantity: Integer
-
-        attr_accessor amount: Integer?
-
-        def initialize: (
-          product_id: String,
-          quantity: Integer,
-          ?amount: Integer?
-        ) -> void
-
-        def to_hash: -> {
-          product_id: String,
-          quantity: Integer,
-          amount: Integer?
-        }
-      end
     end
   end
 end

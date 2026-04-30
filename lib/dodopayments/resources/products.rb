@@ -30,7 +30,7 @@ module Dodopayments
       #
       # @param digital_product_delivery [Dodopayments::Models::ProductCreateParams::DigitalProductDelivery, nil] Choose how you would like you digital product delivered
       #
-      # @param entitlements [Array<Dodopayments::Models::ProductCreateParams::Entitlement>, nil] Optional entitlements to attach to this product (max 20)
+      # @param entitlements [Array<Dodopayments::Models::AttachProductEntitlement>, nil] Optional entitlements to attach to this product (max 20)
       #
       # @param license_key_activation_message [String, nil] Optional message displayed during license key activation
       #
@@ -93,7 +93,7 @@ module Dodopayments
       #
       # @param digital_product_delivery [Dodopayments::Models::ProductUpdateParams::DigitalProductDelivery, nil] Choose how you would like you digital product delivered
       #
-      # @param entitlements [Array<Dodopayments::Models::ProductUpdateParams::Entitlement>, nil] Entitlements to attach (replaces all existing when present)
+      # @param entitlements [Array<Dodopayments::Models::AttachProductEntitlement>, nil] Entitlements to attach (replaces all existing when present)
       #
       # @param image_id [String, nil] Product image id after its uploaded to S3
       #

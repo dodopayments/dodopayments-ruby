@@ -1,7 +1,9 @@
 module Dodopayments
   module Models
+    class EntitlementGrant = Entitlements::EntitlementGrant
+
     module Entitlements
-      type grant_revoke_response =
+      type entitlement_grant =
         {
           id: String,
           business_id: String,
@@ -9,13 +11,13 @@ module Dodopayments
           customer_id: String,
           entitlement_id: String,
           external_id: String,
-          status: Dodopayments::Models::Entitlements::GrantRevokeResponse::status,
+          status: Dodopayments::Models::Entitlements::EntitlementGrant::status,
           updated_at: Time,
           delivered_at: Time?,
           digital_product_delivery: Dodopayments::DigitalProductDelivery?,
           error_code: String?,
           error_message: String?,
-          license_key: Dodopayments::Models::Entitlements::GrantRevokeResponse::LicenseKey?,
+          license_key: Dodopayments::Entitlements::LicenseKeyGrant?,
           metadata: top,
           oauth_expires_at: Time?,
           oauth_url: String?,
@@ -25,7 +27,7 @@ module Dodopayments
           subscription_id: String?
         }
 
-      class GrantRevokeResponse < Dodopayments::Internal::Type::BaseModel
+      class EntitlementGrant < Dodopayments::Internal::Type::BaseModel
         attr_accessor id: String
 
         attr_accessor business_id: String
@@ -38,7 +40,7 @@ module Dodopayments
 
         attr_accessor external_id: String
 
-        attr_accessor status: Dodopayments::Models::Entitlements::GrantRevokeResponse::status
+        attr_accessor status: Dodopayments::Models::Entitlements::EntitlementGrant::status
 
         attr_accessor updated_at: Time
 
@@ -50,7 +52,7 @@ module Dodopayments
 
         attr_accessor error_message: String?
 
-        attr_accessor license_key: Dodopayments::Models::Entitlements::GrantRevokeResponse::LicenseKey?
+        attr_accessor license_key: Dodopayments::Entitlements::LicenseKeyGrant?
 
         attr_reader metadata: top?
 
@@ -75,13 +77,13 @@ module Dodopayments
           customer_id: String,
           entitlement_id: String,
           external_id: String,
-          status: Dodopayments::Models::Entitlements::GrantRevokeResponse::status,
+          status: Dodopayments::Models::Entitlements::EntitlementGrant::status,
           updated_at: Time,
           ?delivered_at: Time?,
           ?digital_product_delivery: Dodopayments::DigitalProductDelivery?,
           ?error_code: String?,
           ?error_message: String?,
-          ?license_key: Dodopayments::Models::Entitlements::GrantRevokeResponse::LicenseKey?,
+          ?license_key: Dodopayments::Entitlements::LicenseKeyGrant?,
           ?metadata: top,
           ?oauth_expires_at: Time?,
           ?oauth_url: String?,
@@ -98,13 +100,13 @@ module Dodopayments
           customer_id: String,
           entitlement_id: String,
           external_id: String,
-          status: Dodopayments::Models::Entitlements::GrantRevokeResponse::status,
+          status: Dodopayments::Models::Entitlements::EntitlementGrant::status,
           updated_at: Time,
           delivered_at: Time?,
           digital_product_delivery: Dodopayments::DigitalProductDelivery?,
           error_code: String?,
           error_message: String?,
-          license_key: Dodopayments::Models::Entitlements::GrantRevokeResponse::LicenseKey?,
+          license_key: Dodopayments::Entitlements::LicenseKeyGrant?,
           metadata: top,
           oauth_expires_at: Time?,
           oauth_url: String?,
@@ -124,39 +126,7 @@ module Dodopayments
           FAILED: :Failed
           REVOKED: :Revoked
 
-          def self?.values: -> ::Array[Dodopayments::Models::Entitlements::GrantRevokeResponse::status]
-        end
-
-        type license_key =
-          {
-            activations_used: Integer,
-            key: String,
-            activations_limit: Integer?,
-            expires_at: Time?
-          }
-
-        class LicenseKey < Dodopayments::Internal::Type::BaseModel
-          attr_accessor activations_used: Integer
-
-          attr_accessor key: String
-
-          attr_accessor activations_limit: Integer?
-
-          attr_accessor expires_at: Time?
-
-          def initialize: (
-            activations_used: Integer,
-            key: String,
-            ?activations_limit: Integer?,
-            ?expires_at: Time?
-          ) -> void
-
-          def to_hash: -> {
-            activations_used: Integer,
-            key: String,
-            activations_limit: Integer?,
-            expires_at: Time?
-          }
+          def self?.values: -> ::Array[Dodopayments::Models::Entitlements::EntitlementGrant::status]
         end
       end
     end

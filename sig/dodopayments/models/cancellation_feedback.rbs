@@ -1,0 +1,28 @@
+module Dodopayments
+  module Models
+    type cancellation_feedback =
+      :too_expensive
+      | :missing_features
+      | :switched_service
+      | :unused
+      | :customer_service
+      | :low_quality
+      | :too_complex
+      | :other
+
+    module CancellationFeedback
+      extend Dodopayments::Internal::Type::Enum
+
+      TOO_EXPENSIVE: :too_expensive
+      MISSING_FEATURES: :missing_features
+      SWITCHED_SERVICE: :switched_service
+      UNUSED: :unused
+      CUSTOMER_SERVICE: :customer_service
+      LOW_QUALITY: :low_quality
+      TOO_COMPLEX: :too_complex
+      OTHER: :other
+
+      def self?.values: -> ::Array[Dodopayments::Models::cancellation_feedback]
+    end
+  end
+end

@@ -12,7 +12,7 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
       )
 
     assert_pattern do
-      response => Dodopayments::Models::EntitlementCreateResponse
+      response => Dodopayments::Entitlement
     end
 
     assert_pattern do
@@ -20,8 +20,8 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
         id: String,
         business_id: String,
         created_at: Time,
-        integration_config: Dodopayments::Models::EntitlementCreateResponse::IntegrationConfig,
-        integration_type: Dodopayments::Models::EntitlementCreateResponse::IntegrationType,
+        integration_config: Dodopayments::IntegrationConfigResponse,
+        integration_type: Dodopayments::EntitlementIntegrationType,
         is_active: Dodopayments::Internal::Type::Boolean,
         name: String,
         updated_at: Time,
@@ -35,7 +35,7 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
     response = @dodo_payments.entitlements.retrieve("id")
 
     assert_pattern do
-      response => Dodopayments::Models::EntitlementRetrieveResponse
+      response => Dodopayments::Entitlement
     end
 
     assert_pattern do
@@ -43,8 +43,8 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
         id: String,
         business_id: String,
         created_at: Time,
-        integration_config: Dodopayments::Models::EntitlementRetrieveResponse::IntegrationConfig,
-        integration_type: Dodopayments::Models::EntitlementRetrieveResponse::IntegrationType,
+        integration_config: Dodopayments::IntegrationConfigResponse,
+        integration_type: Dodopayments::EntitlementIntegrationType,
         is_active: Dodopayments::Internal::Type::Boolean,
         name: String,
         updated_at: Time,
@@ -58,7 +58,7 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
     response = @dodo_payments.entitlements.update("id")
 
     assert_pattern do
-      response => Dodopayments::Models::EntitlementUpdateResponse
+      response => Dodopayments::Entitlement
     end
 
     assert_pattern do
@@ -66,8 +66,8 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
         id: String,
         business_id: String,
         created_at: Time,
-        integration_config: Dodopayments::Models::EntitlementUpdateResponse::IntegrationConfig,
-        integration_type: Dodopayments::Models::EntitlementUpdateResponse::IntegrationType,
+        integration_config: Dodopayments::IntegrationConfigResponse,
+        integration_type: Dodopayments::EntitlementIntegrationType,
         is_active: Dodopayments::Internal::Type::Boolean,
         name: String,
         updated_at: Time,
@@ -88,7 +88,7 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
     return if row.nil?
 
     assert_pattern do
-      row => Dodopayments::Models::EntitlementListResponse
+      row => Dodopayments::Entitlement
     end
 
     assert_pattern do
@@ -96,8 +96,8 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
         id: String,
         business_id: String,
         created_at: Time,
-        integration_config: Dodopayments::Models::EntitlementListResponse::IntegrationConfig,
-        integration_type: Dodopayments::Models::EntitlementListResponse::IntegrationType,
+        integration_config: Dodopayments::IntegrationConfigResponse,
+        integration_type: Dodopayments::EntitlementIntegrationType,
         is_active: Dodopayments::Internal::Type::Boolean,
         name: String,
         updated_at: Time,

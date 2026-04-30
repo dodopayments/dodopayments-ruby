@@ -14,22 +14,21 @@ module Dodopayments
         params(
           integration_config:
             T.any(
-              Dodopayments::EntitlementCreateParams::IntegrationConfig::GitHubConfig::OrHash,
-              Dodopayments::EntitlementCreateParams::IntegrationConfig::DiscordConfig::OrHash,
-              Dodopayments::EntitlementCreateParams::IntegrationConfig::TelegramConfig::OrHash,
-              Dodopayments::EntitlementCreateParams::IntegrationConfig::FigmaConfig::OrHash,
-              Dodopayments::EntitlementCreateParams::IntegrationConfig::FramerConfig::OrHash,
-              Dodopayments::EntitlementCreateParams::IntegrationConfig::NotionConfig::OrHash,
-              Dodopayments::EntitlementCreateParams::IntegrationConfig::DigitalFilesConfig::OrHash,
-              Dodopayments::EntitlementCreateParams::IntegrationConfig::LicenseKeyConfig::OrHash
+              Dodopayments::IntegrationConfig::GitHubConfig::OrHash,
+              Dodopayments::IntegrationConfig::DiscordConfig::OrHash,
+              Dodopayments::IntegrationConfig::TelegramConfig::OrHash,
+              Dodopayments::IntegrationConfig::FigmaConfig::OrHash,
+              Dodopayments::IntegrationConfig::FramerConfig::OrHash,
+              Dodopayments::IntegrationConfig::NotionConfig::OrHash,
+              Dodopayments::IntegrationConfig::DigitalFilesConfig::OrHash,
+              Dodopayments::IntegrationConfig::LicenseKeyConfig::OrHash
             ),
-          integration_type:
-            Dodopayments::EntitlementCreateParams::IntegrationType::OrSymbol,
+          integration_type: Dodopayments::EntitlementIntegrationType::OrSymbol,
           name: String,
           description: T.nilable(String),
           metadata: T.nilable(T::Hash[Symbol, String]),
           request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Models::EntitlementCreateResponse)
+        ).returns(Dodopayments::Entitlement)
       end
       def create(
         # Platform-specific configuration (validated per integration_type)
@@ -51,7 +50,7 @@ module Dodopayments
         params(
           id: String,
           request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Models::EntitlementRetrieveResponse)
+        ).returns(Dodopayments::Entitlement)
       end
       def retrieve(
         # Entitlement ID
@@ -68,20 +67,20 @@ module Dodopayments
           integration_config:
             T.nilable(
               T.any(
-                Dodopayments::EntitlementUpdateParams::IntegrationConfig::GitHubConfig::OrHash,
-                Dodopayments::EntitlementUpdateParams::IntegrationConfig::DiscordConfig::OrHash,
-                Dodopayments::EntitlementUpdateParams::IntegrationConfig::TelegramConfig::OrHash,
-                Dodopayments::EntitlementUpdateParams::IntegrationConfig::FigmaConfig::OrHash,
-                Dodopayments::EntitlementUpdateParams::IntegrationConfig::FramerConfig::OrHash,
-                Dodopayments::EntitlementUpdateParams::IntegrationConfig::NotionConfig::OrHash,
-                Dodopayments::EntitlementUpdateParams::IntegrationConfig::DigitalFilesConfig::OrHash,
-                Dodopayments::EntitlementUpdateParams::IntegrationConfig::LicenseKeyConfig::OrHash
+                Dodopayments::IntegrationConfig::GitHubConfig::OrHash,
+                Dodopayments::IntegrationConfig::DiscordConfig::OrHash,
+                Dodopayments::IntegrationConfig::TelegramConfig::OrHash,
+                Dodopayments::IntegrationConfig::FigmaConfig::OrHash,
+                Dodopayments::IntegrationConfig::FramerConfig::OrHash,
+                Dodopayments::IntegrationConfig::NotionConfig::OrHash,
+                Dodopayments::IntegrationConfig::DigitalFilesConfig::OrHash,
+                Dodopayments::IntegrationConfig::LicenseKeyConfig::OrHash
               )
             ),
           metadata: T.nilable(T::Hash[Symbol, String]),
           name: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
-        ).returns(Dodopayments::Models::EntitlementUpdateResponse)
+        ).returns(Dodopayments::Entitlement)
       end
       def update(
         # Entitlement ID
@@ -106,7 +105,7 @@ module Dodopayments
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(
           Dodopayments::Internal::DefaultPageNumberPagination[
-            Dodopayments::Models::EntitlementListResponse
+            Dodopayments::Entitlement
           ]
         )
       end

@@ -63,9 +63,9 @@ module Dodopayments
       # @!attribute one_time_product_cart
       #   One time products associated with the purchase of subscription
       #
-      #   @return [Array<Dodopayments::Models::OneTimeProductCartItem>, nil]
+      #   @return [Array<Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart>, nil]
       optional :one_time_product_cart,
-               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem] },
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart] },
                nil?: true
 
       # @!attribute payment_link
@@ -96,9 +96,25 @@ module Dodopayments
       #
       #   @param expires_on [Time, nil] Expiry timestamp of the payment link
       #
-      #   @param one_time_product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil] One time products associated with the purchase of subscription
+      #   @param one_time_product_cart [Array<Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart>, nil] One time products associated with the purchase of subscription
       #
       #   @param payment_link [String, nil] URL to checkout page
+
+      class OneTimeProductCart < Dodopayments::Internal::Type::BaseModel
+        # @!attribute product_id
+        #
+        #   @return [String]
+        required :product_id, String
+
+        # @!attribute quantity
+        #
+        #   @return [Integer]
+        required :quantity, Integer
+
+        # @!method initialize(product_id:, quantity:)
+        #   @param product_id [String]
+        #   @param quantity [Integer]
+      end
     end
   end
 end
