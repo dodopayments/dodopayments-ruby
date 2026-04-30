@@ -33,6 +33,7 @@ module Dodopayments
 
       sig do
         params(
+          grant_id: T.nilable(String),
           license_key_id: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
@@ -44,6 +45,8 @@ module Dodopayments
         )
       end
       def list(
+        # Filter instances by entitlement grant ID
+        grant_id: nil,
         # Filter by license key ID
         license_key_id: nil,
         # Page number default is 0

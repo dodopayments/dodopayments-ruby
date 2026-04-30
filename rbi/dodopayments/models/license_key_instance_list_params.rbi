@@ -14,6 +14,10 @@ module Dodopayments
           )
         end
 
+      # Filter instances by entitlement grant ID
+      sig { returns(T.nilable(String)) }
+      attr_accessor :grant_id
+
       # Filter by license key ID
       sig { returns(T.nilable(String)) }
       attr_accessor :license_key_id
@@ -28,6 +32,7 @@ module Dodopayments
 
       sig do
         params(
+          grant_id: T.nilable(String),
           license_key_id: T.nilable(String),
           page_number: T.nilable(Integer),
           page_size: T.nilable(Integer),
@@ -35,6 +40,8 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        # Filter instances by entitlement grant ID
+        grant_id: nil,
         # Filter by license key ID
         license_key_id: nil,
         # Page number default is 0
@@ -48,6 +55,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            grant_id: T.nilable(String),
             license_key_id: T.nilable(String),
             page_number: T.nilable(Integer),
             page_size: T.nilable(Integer),

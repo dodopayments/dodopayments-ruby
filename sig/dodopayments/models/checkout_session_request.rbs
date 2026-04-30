@@ -14,6 +14,7 @@ module Dodopayments
         discount_code: String?,
         feature_flags: Dodopayments::CheckoutSessionFlags,
         :force_3ds => bool?,
+        mandate_min_amount_inr_paise: Integer?,
         metadata: ::Hash[Symbol, String]?,
         minimal_address: bool,
         payment_method_id: String?,
@@ -60,6 +61,8 @@ module Dodopayments
 
       attr_accessor force_3ds: bool?
 
+      attr_accessor mandate_min_amount_inr_paise: Integer?
+
       attr_accessor metadata: ::Hash[Symbol, String]?
 
       attr_reader minimal_address: bool?
@@ -97,6 +100,7 @@ module Dodopayments
         ?discount_code: String?,
         ?feature_flags: Dodopayments::CheckoutSessionFlags,
         ?force_3ds: bool?,
+        ?mandate_min_amount_inr_paise: Integer?,
         ?metadata: ::Hash[Symbol, String]?,
         ?minimal_address: bool,
         ?payment_method_id: String?,
@@ -121,6 +125,7 @@ module Dodopayments
         discount_code: String?,
         feature_flags: Dodopayments::CheckoutSessionFlags,
         :force_3ds => bool?,
+        mandate_min_amount_inr_paise: Integer?,
         metadata: ::Hash[Symbol, String]?,
         minimal_address: bool,
         payment_method_id: String?,

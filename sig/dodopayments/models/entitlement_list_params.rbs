@@ -1,0 +1,69 @@
+module Dodopayments
+  module Models
+    type entitlement_list_params =
+      {
+        integration_type: Dodopayments::Models::EntitlementListParams::integration_type,
+        page_number: Integer,
+        page_size: Integer
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class EntitlementListParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_reader integration_type: Dodopayments::Models::EntitlementListParams::integration_type?
+
+      def integration_type=: (
+        Dodopayments::Models::EntitlementListParams::integration_type
+      ) -> Dodopayments::Models::EntitlementListParams::integration_type
+
+      attr_reader page_number: Integer?
+
+      def page_number=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
+
+      def initialize: (
+        ?integration_type: Dodopayments::Models::EntitlementListParams::integration_type,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        integration_type: Dodopayments::Models::EntitlementListParams::integration_type,
+        page_number: Integer,
+        page_size: Integer,
+        request_options: Dodopayments::RequestOptions
+      }
+
+      type integration_type =
+        :discord
+        | :telegram
+        | :github
+        | :figma
+        | :framer
+        | :notion
+        | :digital_files
+        | :license_key
+
+      module IntegrationType
+        extend Dodopayments::Internal::Type::Enum
+
+        DISCORD: :discord
+        TELEGRAM: :telegram
+        GITHUB: :github
+        FIGMA: :figma
+        FRAMER: :framer
+        NOTION: :notion
+        DIGITAL_FILES: :digital_files
+        LICENSE_KEY: :license_key
+
+        def self?.values: -> ::Array[Dodopayments::Models::EntitlementListParams::integration_type]
+      end
+    end
+  end
+end

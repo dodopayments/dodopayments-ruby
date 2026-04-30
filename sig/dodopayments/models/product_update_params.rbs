@@ -8,7 +8,7 @@ module Dodopayments
         credit_entitlements: ::Array[Dodopayments::AttachCreditEntitlement]?,
         description: String?,
         digital_product_delivery: Dodopayments::ProductUpdateParams::DigitalProductDelivery?,
-        entitlement_ids: ::Array[String]?,
+        entitlements: ::Array[Dodopayments::ProductUpdateParams::Entitlement]?,
         image_id: String?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
@@ -37,7 +37,7 @@ module Dodopayments
 
       attr_accessor digital_product_delivery: Dodopayments::ProductUpdateParams::DigitalProductDelivery?
 
-      attr_accessor entitlement_ids: ::Array[String]?
+      attr_accessor entitlements: ::Array[Dodopayments::ProductUpdateParams::Entitlement]?
 
       attr_accessor image_id: String?
 
@@ -64,7 +64,7 @@ module Dodopayments
         ?credit_entitlements: ::Array[Dodopayments::AttachCreditEntitlement]?,
         ?description: String?,
         ?digital_product_delivery: Dodopayments::ProductUpdateParams::DigitalProductDelivery?,
-        ?entitlement_ids: ::Array[String]?,
+        ?entitlements: ::Array[Dodopayments::ProductUpdateParams::Entitlement]?,
         ?image_id: String?,
         ?license_key_activation_message: String?,
         ?license_key_activations_limit: Integer?,
@@ -84,7 +84,7 @@ module Dodopayments
         credit_entitlements: ::Array[Dodopayments::AttachCreditEntitlement]?,
         description: String?,
         digital_product_delivery: Dodopayments::ProductUpdateParams::DigitalProductDelivery?,
-        entitlement_ids: ::Array[String]?,
+        entitlements: ::Array[Dodopayments::ProductUpdateParams::Entitlement]?,
         image_id: String?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
@@ -122,6 +122,16 @@ module Dodopayments
           files: ::Array[String]?,
           instructions: String?
         }
+      end
+
+      type entitlement = { entitlement_id: String }
+
+      class Entitlement < Dodopayments::Internal::Type::BaseModel
+        attr_accessor entitlement_id: String
+
+        def initialize: (entitlement_id: String) -> void
+
+        def to_hash: -> { entitlement_id: String }
       end
     end
   end

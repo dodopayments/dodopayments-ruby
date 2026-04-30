@@ -145,8 +145,10 @@ module Dodopayments
         required :id, String
 
         # @!attribute integration_config
-        #   Platform-specific configuration for an entitlement. Each variant uses unique
-        #   field names so `#[serde(untagged)]` can disambiguate correctly.
+        #   Public-facing variant of [`IntegrationConfig`]. Mirrors every variant shape on
+        #   the wire EXCEPT `DigitalFiles`, which is replaced with a hydrated
+        #   `digital_files` object (resolved download URLs etc.). The persisted JSONB stays
+        #   ID-only via [`IntegrationConfig`]; this enum is response-only.
         #
         #   @return [Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::GitHubConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DiscordConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::TelegramConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::FigmaConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::FramerConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::NotionConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::LicenseKeyConfig]
         required :integration_config,
@@ -172,11 +174,16 @@ module Dodopayments
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::ProductListResponse::Entitlement} for more details.
         #
-        #   Summary of an entitlement attached to a product
+        #   Summary of an entitlement attached to a product.
+        #
+        #   `integration_config` uses [`IntegrationConfigResponse`] (NOT the persisted
+        #   [`IntegrationConfig`]) so digital_files entitlements embed the resolved
+        #   `digital_files` object — matching what `GET /entitlements/{id}` returns. All
+        #   other variants pass through unchanged via `#[serde(untagged)]`.
         #
         #   @param id [String]
         #
-        #   @param integration_config [Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::GitHubConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DiscordConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::TelegramConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::FigmaConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::FramerConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::NotionConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::LicenseKeyConfig] Platform-specific configuration for an entitlement.
+        #   @param integration_config [Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::GitHubConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DiscordConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::TelegramConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::FigmaConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::FramerConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::NotionConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::LicenseKeyConfig] Public-facing variant of [`IntegrationConfig`]. Mirrors every variant
         #
         #   @param integration_type [Symbol, Dodopayments::Models::ProductListResponse::Entitlement::IntegrationType]
         #
@@ -184,8 +191,10 @@ module Dodopayments
         #
         #   @param description [String, nil]
 
-        # Platform-specific configuration for an entitlement. Each variant uses unique
-        # field names so `#[serde(untagged)]` can disambiguate correctly.
+        # Public-facing variant of [`IntegrationConfig`]. Mirrors every variant shape on
+        # the wire EXCEPT `DigitalFiles`, which is replaced with a hydrated
+        # `digital_files` object (resolved download URLs etc.). The persisted JSONB stays
+        # ID-only via [`IntegrationConfig`]; this enum is response-only.
         #
         # @see Dodopayments::Models::ProductListResponse::Entitlement#integration_config
         module IntegrationConfig
@@ -209,7 +218,6 @@ module Dodopayments
 
           class GitHubConfig < Dodopayments::Internal::Type::BaseModel
             # @!attribute permission
-            #   One of: pull, push, admin, maintain, triage
             #
             #   @return [String]
             required :permission, String
@@ -220,8 +228,7 @@ module Dodopayments
             required :target_id, String
 
             # @!method initialize(permission:, target_id:)
-            #   @param permission [String] One of: pull, push, admin, maintain, triage
-            #
+            #   @param permission [String]
             #   @param target_id [String]
           end
 
@@ -282,25 +289,114 @@ module Dodopayments
           end
 
           class DigitalFilesConfig < Dodopayments::Internal::Type::BaseModel
-            # @!attribute digital_file_ids
+            # @!attribute digital_files
+            #   Populated digital-files payload for entitlement read surfaces. Mirrors
+            #   `DigitalProductDelivery` but is sourced from an entitlement's
+            #   `integration_config` (not a grant) and tags each file with its origin (`legacy`
+            #   vs `ee`).
             #
-            #   @return [Array<String>]
-            required :digital_file_ids, Dodopayments::Internal::Type::ArrayOf[String]
+            #   @return [Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig::DigitalFiles]
+            required :digital_files,
+                     -> { Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig::DigitalFiles }
 
-            # @!attribute external_url
+            # @!method initialize(digital_files:)
+            #   Some parameter documentations has been truncated, see
+            #   {Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig}
+            #   for more details.
             #
-            #   @return [String, nil]
-            optional :external_url, String, nil?: true
+            #   @param digital_files [Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig::DigitalFiles] Populated digital-files payload for entitlement read surfaces. Mirrors
 
-            # @!attribute instructions
-            #
-            #   @return [String, nil]
-            optional :instructions, String, nil?: true
+            # @see Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig#digital_files
+            class DigitalFiles < Dodopayments::Internal::Type::BaseModel
+              # @!attribute files
+              #
+              #   @return [Array<Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig::DigitalFiles::File>]
+              required :files,
+                       -> do
+                         Dodopayments::Internal::Type::ArrayOf[
+                           Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig::DigitalFiles::File
+                         ]
+                       end
 
-            # @!method initialize(digital_file_ids:, external_url: nil, instructions: nil)
-            #   @param digital_file_ids [Array<String>]
-            #   @param external_url [String, nil]
-            #   @param instructions [String, nil]
+              # @!attribute external_url
+              #
+              #   @return [String, nil]
+              optional :external_url, String, nil?: true
+
+              # @!attribute instructions
+              #
+              #   @return [String, nil]
+              optional :instructions, String, nil?: true
+
+              # @!method initialize(files:, external_url: nil, instructions: nil)
+              #   Populated digital-files payload for entitlement read surfaces. Mirrors
+              #   `DigitalProductDelivery` but is sourced from an entitlement's
+              #   `integration_config` (not a grant) and tags each file with its origin (`legacy`
+              #   vs `ee`).
+              #
+              #   @param files [Array<Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig::DigitalFiles::File>]
+              #   @param external_url [String, nil]
+              #   @param instructions [String, nil]
+
+              class File < Dodopayments::Internal::Type::BaseModel
+                # @!attribute download_url
+                #
+                #   @return [String]
+                required :download_url, String
+
+                # @!attribute expires_in
+                #   Seconds until `download_url` expires.
+                #
+                #   @return [Integer]
+                required :expires_in, Integer
+
+                # @!attribute file_id
+                #
+                #   @return [String]
+                required :file_id, String
+
+                # @!attribute filename
+                #
+                #   @return [String]
+                required :filename, String
+
+                # @!attribute source
+                #   `"legacy"` for files in `product_files`, `"ee"` for files managed by the
+                #   Entitlements Engine.
+                #
+                #   @return [String]
+                required :source, String
+
+                # @!attribute content_type
+                #
+                #   @return [String, nil]
+                optional :content_type, String, nil?: true
+
+                # @!attribute file_size
+                #
+                #   @return [Integer, nil]
+                optional :file_size, Integer, nil?: true
+
+                # @!method initialize(download_url:, expires_in:, file_id:, filename:, source:, content_type: nil, file_size: nil)
+                #   Some parameter documentations has been truncated, see
+                #   {Dodopayments::Models::ProductListResponse::Entitlement::IntegrationConfig::DigitalFilesConfig::DigitalFiles::File}
+                #   for more details.
+                #
+                #   @param download_url [String]
+                #
+                #   @param expires_in [Integer] Seconds until `download_url` expires.
+                #
+                #   @param file_id [String]
+                #
+                #   @param filename [String]
+                #
+                #   @param source [String] `"legacy"` for files in `product_files`, `"ee"` for files managed by the
+                #
+                #   @param content_type [String, nil]
+                #
+                #   @param file_size [Integer, nil]
+              end
+            end
           end
 
           class LicenseKeyConfig < Dodopayments::Internal::Type::BaseModel
@@ -321,14 +417,14 @@ module Dodopayments
 
             # @!attribute duration_interval
             #
-            #   @return [String, nil]
-            optional :duration_interval, String, nil?: true
+            #   @return [Symbol, Dodopayments::Models::TimeInterval, nil]
+            optional :duration_interval, enum: -> { Dodopayments::TimeInterval }, nil?: true
 
             # @!method initialize(activation_message: nil, activations_limit: nil, duration_count: nil, duration_interval: nil)
             #   @param activation_message [String, nil]
             #   @param activations_limit [Integer, nil]
             #   @param duration_count [Integer, nil]
-            #   @param duration_interval [String, nil]
+            #   @param duration_interval [Symbol, Dodopayments::Models::TimeInterval, nil]
           end
 
           # @!method self.variants

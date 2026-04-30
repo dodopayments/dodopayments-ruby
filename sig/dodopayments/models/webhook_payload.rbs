@@ -474,13 +474,10 @@ module Dodopayments
             status: Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::status,
             updated_at: Time,
             delivered_at: Time?,
+            digital_product_delivery: Dodopayments::DigitalProductDelivery?,
             error_code: String?,
             error_message: String?,
-            license_key: String?,
-            license_key_activations_limit: Integer?,
-            license_key_activations_used: Integer?,
-            license_key_expires_at: Time?,
-            license_key_status: String?,
+            license_key: Dodopayments::WebhookPayload::Data::EntitlementGrant::LicenseKey?,
             metadata: top,
             oauth_expires_at: Time?,
             oauth_url: String?,
@@ -511,19 +508,13 @@ module Dodopayments
 
           attr_accessor delivered_at: Time?
 
+          attr_accessor digital_product_delivery: Dodopayments::DigitalProductDelivery?
+
           attr_accessor error_code: String?
 
           attr_accessor error_message: String?
 
-          attr_accessor license_key: String?
-
-          attr_accessor license_key_activations_limit: Integer?
-
-          attr_accessor license_key_activations_used: Integer?
-
-          attr_accessor license_key_expires_at: Time?
-
-          attr_accessor license_key_status: String?
+          attr_accessor license_key: Dodopayments::WebhookPayload::Data::EntitlementGrant::LicenseKey?
 
           attr_reader metadata: top?
 
@@ -552,13 +543,10 @@ module Dodopayments
             status: Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::status,
             updated_at: Time,
             ?delivered_at: Time?,
+            ?digital_product_delivery: Dodopayments::DigitalProductDelivery?,
             ?error_code: String?,
             ?error_message: String?,
-            ?license_key: String?,
-            ?license_key_activations_limit: Integer?,
-            ?license_key_activations_used: Integer?,
-            ?license_key_expires_at: Time?,
-            ?license_key_status: String?,
+            ?license_key: Dodopayments::WebhookPayload::Data::EntitlementGrant::LicenseKey?,
             ?metadata: top,
             ?oauth_expires_at: Time?,
             ?oauth_url: String?,
@@ -579,13 +567,10 @@ module Dodopayments
             status: Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::status,
             updated_at: Time,
             delivered_at: Time?,
+            digital_product_delivery: Dodopayments::DigitalProductDelivery?,
             error_code: String?,
             error_message: String?,
-            license_key: String?,
-            license_key_activations_limit: Integer?,
-            license_key_activations_used: Integer?,
-            license_key_expires_at: Time?,
-            license_key_status: String?,
+            license_key: Dodopayments::WebhookPayload::Data::EntitlementGrant::LicenseKey?,
             metadata: top,
             oauth_expires_at: Time?,
             oauth_url: String?,
@@ -616,6 +601,38 @@ module Dodopayments
             REVOKED: :Revoked
 
             def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::status]
+          end
+
+          type license_key =
+            {
+              activations_used: Integer,
+              key: String,
+              activations_limit: Integer?,
+              expires_at: Time?
+            }
+
+          class LicenseKey < Dodopayments::Internal::Type::BaseModel
+            attr_accessor activations_used: Integer
+
+            attr_accessor key: String
+
+            attr_accessor activations_limit: Integer?
+
+            attr_accessor expires_at: Time?
+
+            def initialize: (
+              activations_used: Integer,
+              key: String,
+              ?activations_limit: Integer?,
+              ?expires_at: Time?
+            ) -> void
+
+            def to_hash: -> {
+              activations_used: Integer,
+              key: String,
+              activations_limit: Integer?,
+              expires_at: Time?
+            }
           end
         end
 

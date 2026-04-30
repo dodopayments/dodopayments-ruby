@@ -83,6 +83,17 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :force_3ds, Dodopayments::Internal::Type::Boolean, nil?: true
 
+      # @!attribute mandate_min_amount_inr_paise
+      #   Override the merchant-level mandate floor (in INR paise) for INR e-mandates on
+      #   Indian-card recurring payments. The mandate amount sent to the processor is
+      #   `max(this_floor, actual_billing_amount)`, so this is effectively the
+      #   customer-facing authorization ceiling whenever billing is lower. When unset, the
+      #   merchant setting applies; when that's also unset, the system default of ₹15,000
+      #   applies.
+      #
+      #   @return [Integer, nil]
+      optional :mandate_min_amount_inr_paise, Integer, nil?: true
+
       # @!attribute metadata
       #   Additional metadata associated with the payment. Defaults to empty if not
       #   provided.
@@ -140,7 +151,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil)
+      # @!method initialize(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionRequest} for more details.
       #
@@ -167,6 +178,8 @@ module Dodopayments
       #   @param feature_flags [Dodopayments::Models::CheckoutSessionFlags]
       #
       #   @param force_3ds [Boolean, nil] Override merchant default 3DS behaviour for this session
+      #
+      #   @param mandate_min_amount_inr_paise [Integer, nil] Override the merchant-level mandate floor (in INR paise) for INR
       #
       #   @param metadata [Hash{Symbol=>String}, nil] Additional metadata associated with the payment. Defaults to empty if not provid
       #

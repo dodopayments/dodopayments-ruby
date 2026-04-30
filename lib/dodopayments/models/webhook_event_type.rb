@@ -39,6 +39,7 @@ module Dodopayments
       CREDIT_ROLLED_OVER = :"credit.rolled_over"
       CREDIT_ROLLOVER_FORFEITED = :"credit.rollover_forfeited"
       CREDIT_OVERAGE_CHARGED = :"credit.overage_charged"
+      CREDIT_OVERAGE_RESET = :"credit.overage_reset"
       CREDIT_MANUAL_ADJUSTMENT = :"credit.manual_adjustment"
       CREDIT_BALANCE_LOW = :"credit.balance_low"
       ABANDONED_CHECKOUT_DETECTED = :"abandoned_checkout.detected"

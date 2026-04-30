@@ -143,6 +143,8 @@ module Dodopayments
 
   CreditOverageChargedWebhookEvent = Dodopayments::Models::CreditOverageChargedWebhookEvent
 
+  CreditOverageResetWebhookEvent = Dodopayments::Models::CreditOverageResetWebhookEvent
+
   CreditRolledOverWebhookEvent = Dodopayments::Models::CreditRolledOverWebhookEvent
 
   CreditRolloverForfeitedWebhookEvent = Dodopayments::Models::CreditRolloverForfeitedWebhookEvent
@@ -158,6 +160,8 @@ module Dodopayments
   CustomerLimitedDetails = Dodopayments::Models::CustomerLimitedDetails
 
   CustomerListCreditEntitlementsParams = Dodopayments::Models::CustomerListCreditEntitlementsParams
+
+  CustomerListEntitlementsParams = Dodopayments::Models::CustomerListEntitlementsParams
 
   CustomerListParams = Dodopayments::Models::CustomerListParams
 
@@ -224,6 +228,26 @@ module Dodopayments
   DunningRecoveredWebhookEvent = Dodopayments::Models::DunningRecoveredWebhookEvent
 
   DunningStartedWebhookEvent = Dodopayments::Models::DunningStartedWebhookEvent
+
+  EntitlementCreateParams = Dodopayments::Models::EntitlementCreateParams
+
+  EntitlementDeleteParams = Dodopayments::Models::EntitlementDeleteParams
+
+  EntitlementGrantCreatedWebhookEvent = Dodopayments::Models::EntitlementGrantCreatedWebhookEvent
+
+  EntitlementGrantDeliveredWebhookEvent = Dodopayments::Models::EntitlementGrantDeliveredWebhookEvent
+
+  EntitlementGrantFailedWebhookEvent = Dodopayments::Models::EntitlementGrantFailedWebhookEvent
+
+  EntitlementGrantRevokedWebhookEvent = Dodopayments::Models::EntitlementGrantRevokedWebhookEvent
+
+  EntitlementListParams = Dodopayments::Models::EntitlementListParams
+
+  EntitlementRetrieveParams = Dodopayments::Models::EntitlementRetrieveParams
+
+  Entitlements = Dodopayments::Models::Entitlements
+
+  EntitlementUpdateParams = Dodopayments::Models::EntitlementUpdateParams
 
   Event = Dodopayments::Models::Event
 

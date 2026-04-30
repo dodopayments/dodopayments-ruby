@@ -1,0 +1,204 @@
+module Dodopayments
+  module Models
+    type entitlement_grant_delivered_webhook_event =
+      {
+        business_id: String,
+        data: Dodopayments::EntitlementGrantDeliveredWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::EntitlementGrantDeliveredWebhookEvent::type_
+      }
+
+    class EntitlementGrantDeliveredWebhookEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::EntitlementGrantDeliveredWebhookEvent::Data
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: Dodopayments::Models::EntitlementGrantDeliveredWebhookEvent::type_
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::EntitlementGrantDeliveredWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::EntitlementGrantDeliveredWebhookEvent::type_
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::EntitlementGrantDeliveredWebhookEvent::Data,
+        timestamp: Time,
+        type: Dodopayments::Models::EntitlementGrantDeliveredWebhookEvent::type_
+      }
+
+      type data =
+        {
+          id: String,
+          business_id: String,
+          created_at: Time,
+          customer_id: String,
+          entitlement_id: String,
+          external_id: String,
+          status: Dodopayments::Models::EntitlementGrantDeliveredWebhookEvent::Data::status,
+          updated_at: Time,
+          delivered_at: Time?,
+          digital_product_delivery: Dodopayments::DigitalProductDelivery?,
+          error_code: String?,
+          error_message: String?,
+          license_key: Dodopayments::EntitlementGrantDeliveredWebhookEvent::Data::LicenseKey?,
+          metadata: top,
+          oauth_expires_at: Time?,
+          oauth_url: String?,
+          payment_id: String?,
+          revocation_reason: String?,
+          revoked_at: Time?,
+          subscription_id: String?
+        }
+
+      class Data < Dodopayments::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor business_id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor customer_id: String
+
+        attr_accessor entitlement_id: String
+
+        attr_accessor external_id: String
+
+        attr_accessor status: Dodopayments::Models::EntitlementGrantDeliveredWebhookEvent::Data::status
+
+        attr_accessor updated_at: Time
+
+        attr_accessor delivered_at: Time?
+
+        attr_accessor digital_product_delivery: Dodopayments::DigitalProductDelivery?
+
+        attr_accessor error_code: String?
+
+        attr_accessor error_message: String?
+
+        attr_accessor license_key: Dodopayments::EntitlementGrantDeliveredWebhookEvent::Data::LicenseKey?
+
+        attr_reader metadata: top?
+
+        def metadata=: (top) -> top
+
+        attr_accessor oauth_expires_at: Time?
+
+        attr_accessor oauth_url: String?
+
+        attr_accessor payment_id: String?
+
+        attr_accessor revocation_reason: String?
+
+        attr_accessor revoked_at: Time?
+
+        attr_accessor subscription_id: String?
+
+        def initialize: (
+          id: String,
+          business_id: String,
+          created_at: Time,
+          customer_id: String,
+          entitlement_id: String,
+          external_id: String,
+          status: Dodopayments::Models::EntitlementGrantDeliveredWebhookEvent::Data::status,
+          updated_at: Time,
+          ?delivered_at: Time?,
+          ?digital_product_delivery: Dodopayments::DigitalProductDelivery?,
+          ?error_code: String?,
+          ?error_message: String?,
+          ?license_key: Dodopayments::EntitlementGrantDeliveredWebhookEvent::Data::LicenseKey?,
+          ?metadata: top,
+          ?oauth_expires_at: Time?,
+          ?oauth_url: String?,
+          ?payment_id: String?,
+          ?revocation_reason: String?,
+          ?revoked_at: Time?,
+          ?subscription_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          business_id: String,
+          created_at: Time,
+          customer_id: String,
+          entitlement_id: String,
+          external_id: String,
+          status: Dodopayments::Models::EntitlementGrantDeliveredWebhookEvent::Data::status,
+          updated_at: Time,
+          delivered_at: Time?,
+          digital_product_delivery: Dodopayments::DigitalProductDelivery?,
+          error_code: String?,
+          error_message: String?,
+          license_key: Dodopayments::EntitlementGrantDeliveredWebhookEvent::Data::LicenseKey?,
+          metadata: top,
+          oauth_expires_at: Time?,
+          oauth_url: String?,
+          payment_id: String?,
+          revocation_reason: String?,
+          revoked_at: Time?,
+          subscription_id: String?
+        }
+
+        type status = :Pending | :Delivered | :Failed | :Revoked
+
+        module Status
+          extend Dodopayments::Internal::Type::Enum
+
+          PENDING: :Pending
+          DELIVERED: :Delivered
+          FAILED: :Failed
+          REVOKED: :Revoked
+
+          def self?.values: -> ::Array[Dodopayments::Models::EntitlementGrantDeliveredWebhookEvent::Data::status]
+        end
+
+        type license_key =
+          {
+            activations_used: Integer,
+            key: String,
+            activations_limit: Integer?,
+            expires_at: Time?
+          }
+
+        class LicenseKey < Dodopayments::Internal::Type::BaseModel
+          attr_accessor activations_used: Integer
+
+          attr_accessor key: String
+
+          attr_accessor activations_limit: Integer?
+
+          attr_accessor expires_at: Time?
+
+          def initialize: (
+            activations_used: Integer,
+            key: String,
+            ?activations_limit: Integer?,
+            ?expires_at: Time?
+          ) -> void
+
+          def to_hash: -> {
+            activations_used: Integer,
+            key: String,
+            activations_limit: Integer?,
+            expires_at: Time?
+          }
+        end
+      end
+
+      type type_ = :"entitlement_grant.delivered"
+
+      module Type
+        extend Dodopayments::Internal::Type::Enum
+
+        ENTITLEMENT_GRANT_DELIVERED: :"entitlement_grant.delivered"
+
+        def self?.values: -> ::Array[Dodopayments::Models::EntitlementGrantDeliveredWebhookEvent::type_]
+      end
+    end
+  end
+end

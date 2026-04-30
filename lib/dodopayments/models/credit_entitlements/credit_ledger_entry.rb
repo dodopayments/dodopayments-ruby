@@ -116,6 +116,7 @@ module Dodopayments
           CREDIT_ROLLED_OVER = :credit_rolled_over
           ROLLOVER_FORFEITED = :rollover_forfeited
           OVERAGE_CHARGED = :overage_charged
+          OVERAGE_RESET = :overage_reset
           AUTO_TOP_UP = :auto_top_up
           MANUAL_ADJUSTMENT = :manual_adjustment
           REFUND = :refund

@@ -69,6 +69,17 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :force_3ds, Dodopayments::Internal::Type::Boolean, nil?: true
 
+      # @!attribute mandate_min_amount_inr_paise
+      #   Override the merchant-level mandate floor (in INR paise) for INR e-mandates on
+      #   Indian-card recurring payments. The mandate amount sent to the processor is
+      #   `max(this_floor, actual_billing_amount)`, so this is effectively the
+      #   customer-facing authorization ceiling whenever billing is lower. When unset, the
+      #   merchant setting applies; when that's also unset, the system default of ₹15,000
+      #   applies.
+      #
+      #   @return [Integer, nil]
+      optional :mandate_min_amount_inr_paise, Integer, nil?: true
+
       # @!attribute metadata
       #   Additional metadata for the subscription Defaults to empty if not specified
       #
@@ -112,6 +123,14 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :redirect_immediately, Dodopayments::Internal::Type::Boolean
 
+      # @!attribute require_phone_number
+      #   If true, the customer's phone number is required to create this subscription.
+      #   Typically set alongside `payment_link=true` so merchants can enforce phone
+      #   collection on the hosted payment page. Defaults to false.
+      #
+      #   @return [Boolean, nil]
+      optional :require_phone_number, Dodopayments::Internal::Type::Boolean
+
       # @!attribute return_url
       #   Optional URL to redirect after successful subscription creation
       #
@@ -144,7 +163,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :trial_period_days, Integer, nil?: true
 
-      # @!method initialize(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
+      # @!method initialize(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, require_phone_number: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionCreateParams} for more details.
       #
@@ -166,6 +185,8 @@ module Dodopayments
       #
       #   @param force_3ds [Boolean, nil] Override merchant default 3DS behaviour for this subscription
       #
+      #   @param mandate_min_amount_inr_paise [Integer, nil] Override the merchant-level mandate floor (in INR paise) for INR
+      #
       #   @param metadata [Hash{Symbol=>String}] Additional metadata for the subscription
       #
       #   @param on_demand [Dodopayments::Models::OnDemandSubscription, nil]
@@ -177,6 +198,8 @@ module Dodopayments
       #   @param payment_method_id [String, nil] Optional payment method ID to use for this subscription.
       #
       #   @param redirect_immediately [Boolean] If true, redirects the customer immediately after payment completion
+      #
+      #   @param require_phone_number [Boolean] If true, the customer's phone number is required to create this subscription.
       #
       #   @param return_url [String, nil] Optional URL to redirect after successful subscription creation
       #

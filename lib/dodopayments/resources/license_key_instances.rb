@@ -43,7 +43,9 @@ module Dodopayments
         )
       end
 
-      # @overload list(license_key_id: nil, page_number: nil, page_size: nil, request_options: {})
+      # @overload list(grant_id: nil, license_key_id: nil, page_number: nil, page_size: nil, request_options: {})
+      #
+      # @param grant_id [String, nil] Filter instances by entitlement grant ID
       #
       # @param license_key_id [String, nil] Filter by license key ID
       #

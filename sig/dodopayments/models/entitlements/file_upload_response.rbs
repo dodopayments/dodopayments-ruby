@@ -1,0 +1,15 @@
+module Dodopayments
+  module Models
+    module Entitlements
+      type file_upload_response = { file_id: String }
+
+      class FileUploadResponse < Dodopayments::Internal::Type::BaseModel
+        attr_accessor file_id: String
+
+        def initialize: (file_id: String) -> void
+
+        def to_hash: -> { file_id: String }
+      end
+    end
+  end
+end

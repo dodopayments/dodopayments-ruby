@@ -33,6 +33,11 @@ module Dodopayments
       sig { returns(T::Array[Dodopayments::PaymentCreateParams::ProductCart]) }
       attr_accessor :product_cart
 
+      # Whether adaptive currency fees should be included in the price (true) or added
+      # on top (false). If not specified, defaults to the business-level setting.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_accessor :adaptive_currency_fees_inclusive
+
       # List of payment methods allowed during checkout.
       #
       # Customers will **never** see payment methods that are **not** in this list.
@@ -83,6 +88,15 @@ module Dodopayments
       sig { params(redirect_immediately: T::Boolean).void }
       attr_writer :redirect_immediately
 
+      # If true, the customer's phone number is required to create this payment.
+      # Typically set alongside `payment_link=true` so merchants can enforce phone
+      # collection on the hosted payment page. Defaults to false.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :require_phone_number
+
+      sig { params(require_phone_number: T::Boolean).void }
+      attr_writer :require_phone_number
+
       # Optional URL to redirect the customer after payment. Must be a valid URL if
       # provided.
       sig { returns(T.nilable(String)) }
@@ -114,6 +128,7 @@ module Dodopayments
             ),
           product_cart:
             T::Array[Dodopayments::PaymentCreateParams::ProductCart::OrHash],
+          adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
           allowed_payment_method_types:
             T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
@@ -123,6 +138,7 @@ module Dodopayments
           payment_link: T.nilable(T::Boolean),
           payment_method_id: T.nilable(String),
           redirect_immediately: T::Boolean,
+          require_phone_number: T::Boolean,
           return_url: T.nilable(String),
           short_link: T.nilable(T::Boolean),
           show_saved_payment_methods: T::Boolean,
@@ -137,6 +153,9 @@ module Dodopayments
         customer:,
         # List of products in the cart. Must contain at least 1 and at most 100 items.
         product_cart:,
+        # Whether adaptive currency fees should be included in the price (true) or added
+        # on top (false). If not specified, defaults to the business-level setting.
+        adaptive_currency_fees_inclusive: nil,
         # List of payment methods allowed during checkout.
         #
         # Customers will **never** see payment methods that are **not** in this list.
@@ -163,6 +182,10 @@ module Dodopayments
         # If true, redirects the customer immediately after payment completion False by
         # default
         redirect_immediately: nil,
+        # If true, the customer's phone number is required to create this payment.
+        # Typically set alongside `payment_link=true` so merchants can enforce phone
+        # collection on the hosted payment page. Defaults to false.
+        require_phone_number: nil,
         # Optional URL to redirect the customer after payment. Must be a valid URL if
         # provided.
         return_url: nil,
@@ -188,6 +211,7 @@ module Dodopayments
               ),
             product_cart:
               T::Array[Dodopayments::PaymentCreateParams::ProductCart],
+            adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
             allowed_payment_method_types:
               T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
             billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
@@ -197,6 +221,7 @@ module Dodopayments
             payment_link: T.nilable(T::Boolean),
             payment_method_id: T.nilable(String),
             redirect_immediately: T::Boolean,
+            require_phone_number: T::Boolean,
             return_url: T.nilable(String),
             short_link: T.nilable(T::Boolean),
             show_saved_payment_methods: T::Boolean,

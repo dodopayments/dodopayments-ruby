@@ -5,6 +5,7 @@ module Dodopayments
         billing: Dodopayments::BillingAddress,
         customer: Dodopayments::Models::customer_request,
         product_cart: ::Array[Dodopayments::PaymentCreateParams::ProductCart],
+        adaptive_currency_fees_inclusive: bool?,
         allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
         billing_currency: Dodopayments::Models::currency?,
         discount_code: String?,
@@ -13,6 +14,7 @@ module Dodopayments
         payment_link: bool?,
         payment_method_id: String?,
         redirect_immediately: bool,
+        require_phone_number: bool,
         return_url: String?,
         short_link: bool?,
         show_saved_payment_methods: bool,
@@ -29,6 +31,8 @@ module Dodopayments
       attr_accessor customer: Dodopayments::Models::customer_request
 
       attr_accessor product_cart: ::Array[Dodopayments::PaymentCreateParams::ProductCart]
+
+      attr_accessor adaptive_currency_fees_inclusive: bool?
 
       attr_accessor allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?
 
@@ -50,6 +54,10 @@ module Dodopayments
 
       def redirect_immediately=: (bool) -> bool
 
+      attr_reader require_phone_number: bool?
+
+      def require_phone_number=: (bool) -> bool
+
       attr_accessor return_url: String?
 
       attr_accessor short_link: bool?
@@ -64,6 +72,7 @@ module Dodopayments
         billing: Dodopayments::BillingAddress,
         customer: Dodopayments::Models::customer_request,
         product_cart: ::Array[Dodopayments::PaymentCreateParams::ProductCart],
+        ?adaptive_currency_fees_inclusive: bool?,
         ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
         ?billing_currency: Dodopayments::Models::currency?,
         ?discount_code: String?,
@@ -72,6 +81,7 @@ module Dodopayments
         ?payment_link: bool?,
         ?payment_method_id: String?,
         ?redirect_immediately: bool,
+        ?require_phone_number: bool,
         ?return_url: String?,
         ?short_link: bool?,
         ?show_saved_payment_methods: bool,
@@ -83,6 +93,7 @@ module Dodopayments
         billing: Dodopayments::BillingAddress,
         customer: Dodopayments::Models::customer_request,
         product_cart: ::Array[Dodopayments::PaymentCreateParams::ProductCart],
+        adaptive_currency_fees_inclusive: bool?,
         allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
         billing_currency: Dodopayments::Models::currency?,
         discount_code: String?,
@@ -91,6 +102,7 @@ module Dodopayments
         payment_link: bool?,
         payment_method_id: String?,
         redirect_immediately: bool,
+        require_phone_number: bool,
         return_url: String?,
         short_link: bool?,
         show_saved_payment_methods: bool,

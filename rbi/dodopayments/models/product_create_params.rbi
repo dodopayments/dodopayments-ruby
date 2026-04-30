@@ -53,6 +53,8 @@ module Dodopayments
       attr_accessor :description
 
       # Choose how you would like you digital product delivered
+      #
+      # deprecated: use entitlements instead
       sig do
         returns(
           T.nilable(Dodopayments::ProductCreateParams::DigitalProductDelivery)
@@ -70,21 +72,34 @@ module Dodopayments
       end
       attr_writer :digital_product_delivery
 
-      # Optional entitlement IDs to attach to this product (max 20)
-      sig { returns(T.nilable(T::Array[String])) }
-      attr_accessor :entitlement_ids
+      # Optional entitlements to attach to this product (max 20)
+      sig do
+        returns(
+          T.nilable(T::Array[Dodopayments::ProductCreateParams::Entitlement])
+        )
+      end
+      attr_accessor :entitlements
 
       # Optional message displayed during license key activation
+      #
+      # deprecated: use entitlements instead. Ignored when a `license_key` entitlement
+      # is attached via the `entitlements` field.
       sig { returns(T.nilable(String)) }
       attr_accessor :license_key_activation_message
 
       # The number of times the license key can be activated. Must be 0 or greater
+      #
+      # deprecated: use entitlements instead. Ignored when a `license_key` entitlement
+      # is attached via the `entitlements` field.
       sig { returns(T.nilable(Integer)) }
       attr_accessor :license_key_activations_limit
 
       # Duration configuration for the license key. Set to null if you don't want the
       # license key to expire. For subscriptions, the lifetime of the license key is
       # tied to the subscription period
+      #
+      # deprecated: use entitlements instead. Ignored when a `license_key` entitlement
+      # is attached via the `entitlements` field.
       sig { returns(T.nilable(Dodopayments::LicenseKeyDuration)) }
       attr_reader :license_key_duration
 
@@ -97,6 +112,10 @@ module Dodopayments
       attr_writer :license_key_duration
 
       # When true, generates and sends a license key to your customer. Defaults to false
+      #
+      # deprecated: use entitlements instead. If a `license_key` entitlement is also
+      # attached via the `entitlements` field, the `license_key_*` config fields below
+      # are ignored — the attached entitlement's config is the source of truth.
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :license_key_enabled
 
@@ -126,7 +145,10 @@ module Dodopayments
             T.nilable(
               Dodopayments::ProductCreateParams::DigitalProductDelivery::OrHash
             ),
-          entitlement_ids: T.nilable(T::Array[String]),
+          entitlements:
+            T.nilable(
+              T::Array[Dodopayments::ProductCreateParams::Entitlement::OrHash]
+            ),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
           license_key_duration:
@@ -152,18 +174,33 @@ module Dodopayments
         # Optional description of the product
         description: nil,
         # Choose how you would like you digital product delivered
+        #
+        # deprecated: use entitlements instead
         digital_product_delivery: nil,
-        # Optional entitlement IDs to attach to this product (max 20)
-        entitlement_ids: nil,
+        # Optional entitlements to attach to this product (max 20)
+        entitlements: nil,
         # Optional message displayed during license key activation
+        #
+        # deprecated: use entitlements instead. Ignored when a `license_key` entitlement
+        # is attached via the `entitlements` field.
         license_key_activation_message: nil,
         # The number of times the license key can be activated. Must be 0 or greater
+        #
+        # deprecated: use entitlements instead. Ignored when a `license_key` entitlement
+        # is attached via the `entitlements` field.
         license_key_activations_limit: nil,
         # Duration configuration for the license key. Set to null if you don't want the
         # license key to expire. For subscriptions, the lifetime of the license key is
         # tied to the subscription period
+        #
+        # deprecated: use entitlements instead. Ignored when a `license_key` entitlement
+        # is attached via the `entitlements` field.
         license_key_duration: nil,
         # When true, generates and sends a license key to your customer. Defaults to false
+        #
+        # deprecated: use entitlements instead. If a `license_key` entitlement is also
+        # attached via the `entitlements` field, the `license_key_*` config fields below
+        # are ignored — the attached entitlement's config is the source of truth.
         license_key_enabled: nil,
         # Additional metadata for the product
         metadata: nil,
@@ -191,7 +228,10 @@ module Dodopayments
               T.nilable(
                 Dodopayments::ProductCreateParams::DigitalProductDelivery
               ),
-            entitlement_ids: T.nilable(T::Array[String]),
+            entitlements:
+              T.nilable(
+                T::Array[Dodopayments::ProductCreateParams::Entitlement]
+              ),
             license_key_activation_message: T.nilable(String),
             license_key_activations_limit: T.nilable(Integer),
             license_key_duration: T.nilable(Dodopayments::LicenseKeyDuration),
@@ -222,6 +262,8 @@ module Dodopayments
         attr_accessor :instructions
 
         # Choose how you would like you digital product delivered
+        #
+        # deprecated: use entitlements instead
         sig do
           params(
             external_url: T.nilable(String),
@@ -241,6 +283,36 @@ module Dodopayments
             { external_url: T.nilable(String), instructions: T.nilable(String) }
           )
         end
+        def to_hash
+        end
+      end
+
+      class Entitlement < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::ProductCreateParams::Entitlement,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        # ID of the entitlement to attach to the product
+        sig { returns(String) }
+        attr_accessor :entitlement_id
+
+        # Request struct for attaching an entitlement to a product.
+        #
+        # Mirrors the `credit_entitlements` attach shape — every "attach something to a
+        # product" array takes objects, not bare IDs. Uniform shape leaves room for
+        # per-attachment settings later without another API break.
+        sig { params(entitlement_id: String).returns(T.attached_class) }
+        def self.new(
+          # ID of the entitlement to attach to the product
+          entitlement_id:
+        )
+        end
+
+        sig { override.returns({ entitlement_id: String }) }
         def to_hash
         end
       end

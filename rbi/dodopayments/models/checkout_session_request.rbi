@@ -97,6 +97,15 @@ module Dodopayments
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :force_3ds
 
+      # Override the merchant-level mandate floor (in INR paise) for INR e-mandates on
+      # Indian-card recurring payments. The mandate amount sent to the processor is
+      # `max(this_floor, actual_billing_amount)`, so this is effectively the
+      # customer-facing authorization ceiling whenever billing is lower. When unset, the
+      # merchant setting applies; when that's also unset, the system default of ₹15,000
+      # applies.
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :mandate_min_amount_inr_paise
+
       # Additional metadata associated with the payment. Defaults to empty if not
       # provided.
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
@@ -174,6 +183,7 @@ module Dodopayments
           discount_code: T.nilable(String),
           feature_flags: Dodopayments::CheckoutSessionFlags::OrHash,
           force_3ds: T.nilable(T::Boolean),
+          mandate_min_amount_inr_paise: T.nilable(Integer),
           metadata: T.nilable(T::Hash[Symbol, String]),
           minimal_address: T::Boolean,
           payment_method_id: T.nilable(String),
@@ -214,6 +224,13 @@ module Dodopayments
         feature_flags: nil,
         # Override merchant default 3DS behaviour for this session
         force_3ds: nil,
+        # Override the merchant-level mandate floor (in INR paise) for INR e-mandates on
+        # Indian-card recurring payments. The mandate amount sent to the processor is
+        # `max(this_floor, actual_billing_amount)`, so this is effectively the
+        # customer-facing authorization ceiling whenever billing is lower. When unset, the
+        # merchant setting applies; when that's also unset, the system default of ₹15,000
+        # applies.
+        mandate_min_amount_inr_paise: nil,
         # Additional metadata associated with the payment. Defaults to empty if not
         # provided.
         metadata: nil,
@@ -261,6 +278,7 @@ module Dodopayments
             discount_code: T.nilable(String),
             feature_flags: Dodopayments::CheckoutSessionFlags,
             force_3ds: T.nilable(T::Boolean),
+            mandate_min_amount_inr_paise: T.nilable(Integer),
             metadata: T.nilable(T::Hash[Symbol, String]),
             minimal_address: T::Boolean,
             payment_method_id: T.nilable(String),

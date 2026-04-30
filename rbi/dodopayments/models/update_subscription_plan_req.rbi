@@ -27,6 +27,11 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :quantity
 
+      # Whether adaptive currency fees should be included in the price (true) or added
+      # on top (false). If not specified, uses the subscription's stored setting.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_accessor :adaptive_currency_fees_inclusive
+
       # Addons for the new plan. Note : Leaving this empty would remove any existing
       # addons
       sig { returns(T.nilable(T::Array[Dodopayments::AttachAddon])) }
@@ -87,6 +92,7 @@ module Dodopayments
           proration_billing_mode:
             Dodopayments::UpdateSubscriptionPlanReq::ProrationBillingMode::OrSymbol,
           quantity: Integer,
+          adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           discount_code: T.nilable(String),
           effective_at:
@@ -105,6 +111,9 @@ module Dodopayments
         proration_billing_mode:,
         # Number of units to subscribe for. Must be at least 1.
         quantity:,
+        # Whether adaptive currency fees should be included in the price (true) or added
+        # on top (false). If not specified, uses the subscription's stored setting.
+        adaptive_currency_fees_inclusive: nil,
         # Addons for the new plan. Note : Leaving this empty would remove any existing
         # addons
         addons: nil,
@@ -139,6 +148,7 @@ module Dodopayments
             proration_billing_mode:
               Dodopayments::UpdateSubscriptionPlanReq::ProrationBillingMode::OrSymbol,
             quantity: Integer,
+            adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
             addons: T.nilable(T::Array[Dodopayments::AttachAddon]),
             discount_code: T.nilable(String),
             effective_at:

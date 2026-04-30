@@ -57,6 +57,7 @@ module Dodopayments
       | Dodopayments::CreditExpiredWebhookEvent
       | Dodopayments::CreditManualAdjustmentWebhookEvent
       | Dodopayments::CreditOverageChargedWebhookEvent
+      | Dodopayments::CreditOverageResetWebhookEvent
       | Dodopayments::CreditRolledOverWebhookEvent
       | Dodopayments::CreditRolloverForfeitedWebhookEvent
       | Dodopayments::DisputeAcceptedWebhookEvent
@@ -68,6 +69,10 @@ module Dodopayments
       | Dodopayments::DisputeWonWebhookEvent
       | Dodopayments::DunningRecoveredWebhookEvent
       | Dodopayments::DunningStartedWebhookEvent
+      | Dodopayments::EntitlementGrantCreatedWebhookEvent
+      | Dodopayments::EntitlementGrantDeliveredWebhookEvent
+      | Dodopayments::EntitlementGrantFailedWebhookEvent
+      | Dodopayments::EntitlementGrantRevokedWebhookEvent
       | Dodopayments::LicenseKeyCreatedWebhookEvent
       | Dodopayments::PaymentCancelledWebhookEvent
       | Dodopayments::PaymentFailedWebhookEvent
@@ -96,6 +101,7 @@ module Dodopayments
       | Dodopayments::CreditExpiredWebhookEvent
       | Dodopayments::CreditManualAdjustmentWebhookEvent
       | Dodopayments::CreditOverageChargedWebhookEvent
+      | Dodopayments::CreditOverageResetWebhookEvent
       | Dodopayments::CreditRolledOverWebhookEvent
       | Dodopayments::CreditRolloverForfeitedWebhookEvent
       | Dodopayments::DisputeAcceptedWebhookEvent
@@ -107,6 +113,10 @@ module Dodopayments
       | Dodopayments::DisputeWonWebhookEvent
       | Dodopayments::DunningRecoveredWebhookEvent
       | Dodopayments::DunningStartedWebhookEvent
+      | Dodopayments::EntitlementGrantCreatedWebhookEvent
+      | Dodopayments::EntitlementGrantDeliveredWebhookEvent
+      | Dodopayments::EntitlementGrantFailedWebhookEvent
+      | Dodopayments::EntitlementGrantRevokedWebhookEvent
       | Dodopayments::LicenseKeyCreatedWebhookEvent
       | Dodopayments::PaymentCancelledWebhookEvent
       | Dodopayments::PaymentFailedWebhookEvent

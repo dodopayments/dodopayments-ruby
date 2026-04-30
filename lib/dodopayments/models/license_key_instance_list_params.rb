@@ -7,6 +7,12 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
+      # @!attribute grant_id
+      #   Filter instances by entitlement grant ID
+      #
+      #   @return [String, nil]
+      optional :grant_id, String, nil?: true
+
       # @!attribute license_key_id
       #   Filter by license key ID
       #
@@ -25,7 +31,9 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :page_size, Integer, nil?: true
 
-      # @!method initialize(license_key_id: nil, page_number: nil, page_size: nil, request_options: {})
+      # @!method initialize(grant_id: nil, license_key_id: nil, page_number: nil, page_size: nil, request_options: {})
+      #   @param grant_id [String, nil] Filter instances by entitlement grant ID
+      #
       #   @param license_key_id [String, nil] Filter by license key ID
       #
       #   @param page_number [Integer, nil] Page number default is 0

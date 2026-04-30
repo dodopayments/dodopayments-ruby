@@ -22,6 +22,13 @@ module Dodopayments
       #   @return [Integer]
       required :quantity, Integer
 
+      # @!attribute adaptive_currency_fees_inclusive
+      #   Whether adaptive currency fees should be included in the price (true) or added
+      #   on top (false). If not specified, uses the subscription's stored setting.
+      #
+      #   @return [Boolean, nil]
+      optional :adaptive_currency_fees_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
+
       # @!attribute addons
       #   Addons for the new plan. Note : Leaving this empty would remove any existing
       #   addons
@@ -68,7 +75,7 @@ module Dodopayments
                enum: -> { Dodopayments::UpdateSubscriptionPlanReq::OnPaymentFailure },
                nil?: true
 
-      # @!method initialize(product_id:, proration_billing_mode:, quantity:, addons: nil, discount_code: nil, effective_at: nil, metadata: nil, on_payment_failure: nil)
+      # @!method initialize(product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, discount_code: nil, effective_at: nil, metadata: nil, on_payment_failure: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::UpdateSubscriptionPlanReq} for more details.
       #
@@ -77,6 +84,8 @@ module Dodopayments
       #   @param proration_billing_mode [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::ProrationBillingMode] Proration Billing Mode
       #
       #   @param quantity [Integer] Number of units to subscribe for. Must be at least 1.
+      #
+      #   @param adaptive_currency_fees_inclusive [Boolean, nil] Whether adaptive currency fees should be included in the price (true) or added o
       #
       #   @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
       #

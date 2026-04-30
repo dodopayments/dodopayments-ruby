@@ -1,0 +1,30 @@
+module Dodopayments
+  module Models
+    module Entitlements
+      type file_delete_params =
+        { id: String, file_id: String }
+        & Dodopayments::Internal::Type::request_parameters
+
+      class FileDeleteParams < Dodopayments::Internal::Type::BaseModel
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor file_id: String
+
+        def initialize: (
+          id: String,
+          file_id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          file_id: String,
+          request_options: Dodopayments::RequestOptions
+        }
+      end
+    end
+  end
+end

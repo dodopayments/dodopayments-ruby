@@ -1,0 +1,20 @@
+module Dodopayments
+  module Resources
+    class Entitlements
+      class Files
+        def delete: (
+          String file_id,
+          id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> nil
+
+        def upload: (
+          String id,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::Entitlements::FileUploadResponse
+
+        def initialize: (client: Dodopayments::Client) -> void
+      end
+    end
+  end
+end

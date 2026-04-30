@@ -6,7 +6,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::CheckoutSessionCreateParams} for more details.
       #
-      # @overload create(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil, request_options: {})
+      # @overload create(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil, request_options: {})
       #
       # @param product_cart [Array<Dodopayments::Models::ProductItemReq>]
       #
@@ -31,6 +31,8 @@ module Dodopayments
       # @param feature_flags [Dodopayments::Models::CheckoutSessionFlags]
       #
       # @param force_3ds [Boolean, nil] Override merchant default 3DS behaviour for this session
+      #
+      # @param mandate_min_amount_inr_paise [Integer, nil] Override the merchant-level mandate floor (in INR paise) for INR
       #
       # @param metadata [Hash{Symbol=>String}, nil] Additional metadata associated with the payment. Defaults to empty if not provid
       #
@@ -86,7 +88,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::CheckoutSessionPreviewParams} for more details.
       #
-      # @overload preview(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil, request_options: {})
+      # @overload preview(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, feature_flags: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil, request_options: {})
       #
       # @param product_cart [Array<Dodopayments::Models::ProductItemReq>]
       #
@@ -111,6 +113,8 @@ module Dodopayments
       # @param feature_flags [Dodopayments::Models::CheckoutSessionFlags]
       #
       # @param force_3ds [Boolean, nil] Override merchant default 3DS behaviour for this session
+      #
+      # @param mandate_min_amount_inr_paise [Integer, nil] Override the merchant-level mandate floor (in INR paise) for INR
       #
       # @param metadata [Hash{Symbol=>String}, nil] Additional metadata associated with the payment. Defaults to empty if not provid
       #

@@ -1,0 +1,30 @@
+module Dodopayments
+  module Models
+    module Entitlements
+      type grant_revoke_params =
+        { id: String, grant_id: String }
+        & Dodopayments::Internal::Type::request_parameters
+
+      class GrantRevokeParams < Dodopayments::Internal::Type::BaseModel
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor grant_id: String
+
+        def initialize: (
+          id: String,
+          grant_id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          grant_id: String,
+          request_options: Dodopayments::RequestOptions
+        }
+      end
+    end
+  end
+end

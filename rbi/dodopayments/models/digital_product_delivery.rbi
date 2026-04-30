@@ -11,46 +11,34 @@ module Dodopayments
           )
         end
 
-      # External URL to digital product
+      sig { returns(T::Array[Dodopayments::DigitalProductDeliveryFile]) }
+      attr_accessor :files
+
       sig { returns(T.nilable(String)) }
       attr_accessor :external_url
 
-      # Uploaded files ids of digital product
-      sig do
-        returns(T.nilable(T::Array[Dodopayments::DigitalProductDeliveryFile]))
-      end
-      attr_accessor :files
-
-      # Instructions to download and use the digital product
       sig { returns(T.nilable(String)) }
       attr_accessor :instructions
 
+      # Digital-product-delivery payload for a grant. Populated for grants whose
+      # entitlement has `integration_type = 'digital_files'`. `files` carries presigned
+      # download URLs; the source (EE service or legacy in-process S3 presigning) is
+      # opaque to the caller.
       sig do
         params(
+          files: T::Array[Dodopayments::DigitalProductDeliveryFile::OrHash],
           external_url: T.nilable(String),
-          files:
-            T.nilable(
-              T::Array[Dodopayments::DigitalProductDeliveryFile::OrHash]
-            ),
           instructions: T.nilable(String)
         ).returns(T.attached_class)
       end
-      def self.new(
-        # External URL to digital product
-        external_url: nil,
-        # Uploaded files ids of digital product
-        files: nil,
-        # Instructions to download and use the digital product
-        instructions: nil
-      )
+      def self.new(files:, external_url: nil, instructions: nil)
       end
 
       sig do
         override.returns(
           {
+            files: T::Array[Dodopayments::DigitalProductDeliveryFile],
             external_url: T.nilable(String),
-            files:
-              T.nilable(T::Array[Dodopayments::DigitalProductDeliveryFile]),
             instructions: T.nilable(String)
           }
         )

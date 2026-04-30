@@ -158,6 +158,26 @@ module Dodopayments
         )
       end
 
+      # List all entitlement grants delivered (or in flight) to a customer.
+      #
+      # @overload list_entitlements(customer_id, request_options: {})
+      #
+      # @param customer_id [String] Customer ID
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Models::CustomerListEntitlementsResponse]
+      #
+      # @see Dodopayments::Models::CustomerListEntitlementsParams
+      def list_entitlements(customer_id, params = {})
+        @client.request(
+          method: :get,
+          path: ["customers/%1$s/entitlements", customer_id],
+          model: Dodopayments::Models::CustomerListEntitlementsResponse,
+          options: params[:request_options]
+        )
+      end
+
       # @overload retrieve_payment_methods(customer_id, request_options: {})
       #
       # @param customer_id [String] Customer Id

@@ -125,6 +125,20 @@ module Dodopayments
       )
       end
 
+      # List all entitlement grants delivered (or in flight) to a customer.
+      sig do
+        params(
+          customer_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Models::CustomerListEntitlementsResponse)
+      end
+      def list_entitlements(
+        # Customer ID
+        customer_id,
+        request_options: {}
+      )
+      end
+
       sig do
         params(
           customer_id: String,

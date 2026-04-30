@@ -1,0 +1,24 @@
+module Dodopayments
+  module Resources
+    class Entitlements
+      class Grants
+        def list: (
+          String id,
+          ?customer_id: String,
+          ?page_number: Integer,
+          ?page_size: Integer,
+          ?status: Dodopayments::Models::Entitlements::GrantListParams::status,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Entitlements::GrantListResponse]
+
+        def revoke: (
+          String grant_id,
+          id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Models::Entitlements::GrantRevokeResponse
+
+        def initialize: (client: Dodopayments::Client) -> void
+      end
+    end
+  end
+end

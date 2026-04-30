@@ -65,6 +65,15 @@ module Dodopayments
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :force_3ds
 
+      # Override the merchant-level mandate floor (in INR paise) for INR e-mandates on
+      # Indian-card recurring payments. The mandate amount sent to the processor is
+      # `max(this_floor, actual_billing_amount)`, so this is effectively the
+      # customer-facing authorization ceiling whenever billing is lower. When unset, the
+      # merchant setting applies; when that's also unset, the system default of ₹15,000
+      # applies.
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :mandate_min_amount_inr_paise
+
       # Additional metadata for the subscription Defaults to empty if not specified
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_reader :metadata
@@ -111,6 +120,15 @@ module Dodopayments
       sig { params(redirect_immediately: T::Boolean).void }
       attr_writer :redirect_immediately
 
+      # If true, the customer's phone number is required to create this subscription.
+      # Typically set alongside `payment_link=true` so merchants can enforce phone
+      # collection on the hosted payment page. Defaults to false.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :require_phone_number
+
+      sig { params(require_phone_number: T::Boolean).void }
+      attr_writer :require_phone_number
+
       # Optional URL to redirect after successful subscription creation
       sig { returns(T.nilable(String)) }
       attr_accessor :return_url
@@ -152,6 +170,7 @@ module Dodopayments
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           discount_code: T.nilable(String),
           force_3ds: T.nilable(T::Boolean),
+          mandate_min_amount_inr_paise: T.nilable(Integer),
           metadata: T::Hash[Symbol, String],
           on_demand: T.nilable(Dodopayments::OnDemandSubscription::OrHash),
           one_time_product_cart:
@@ -163,6 +182,7 @@ module Dodopayments
           payment_link: T.nilable(T::Boolean),
           payment_method_id: T.nilable(String),
           redirect_immediately: T::Boolean,
+          require_phone_number: T::Boolean,
           return_url: T.nilable(String),
           short_link: T.nilable(T::Boolean),
           show_saved_payment_methods: T::Boolean,
@@ -196,6 +216,13 @@ module Dodopayments
         discount_code: nil,
         # Override merchant default 3DS behaviour for this subscription
         force_3ds: nil,
+        # Override the merchant-level mandate floor (in INR paise) for INR e-mandates on
+        # Indian-card recurring payments. The mandate amount sent to the processor is
+        # `max(this_floor, actual_billing_amount)`, so this is effectively the
+        # customer-facing authorization ceiling whenever billing is lower. When unset, the
+        # merchant setting applies; when that's also unset, the system default of ₹15,000
+        # applies.
+        mandate_min_amount_inr_paise: nil,
         # Additional metadata for the subscription Defaults to empty if not specified
         metadata: nil,
         on_demand: nil,
@@ -211,6 +238,10 @@ module Dodopayments
         # If true, redirects the customer immediately after payment completion False by
         # default
         redirect_immediately: nil,
+        # If true, the customer's phone number is required to create this subscription.
+        # Typically set alongside `payment_link=true` so merchants can enforce phone
+        # collection on the hosted payment page. Defaults to false.
+        require_phone_number: nil,
         # Optional URL to redirect after successful subscription creation
         return_url: nil,
         # If true, returns a shortened payment link. Defaults to false if not specified.
@@ -244,6 +275,7 @@ module Dodopayments
             billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
             discount_code: T.nilable(String),
             force_3ds: T.nilable(T::Boolean),
+            mandate_min_amount_inr_paise: T.nilable(Integer),
             metadata: T::Hash[Symbol, String],
             on_demand: T.nilable(Dodopayments::OnDemandSubscription),
             one_time_product_cart:
@@ -255,6 +287,7 @@ module Dodopayments
             payment_link: T.nilable(T::Boolean),
             payment_method_id: T.nilable(String),
             redirect_immediately: T::Boolean,
+            require_phone_number: T::Boolean,
             return_url: T.nilable(String),
             short_link: T.nilable(T::Boolean),
             show_saved_payment_methods: T::Boolean,
