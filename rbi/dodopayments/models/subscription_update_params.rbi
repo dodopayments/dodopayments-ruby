@@ -45,13 +45,7 @@ module Dodopayments
 
       # Customer-supplied churn reason (only valid when cancelling or scheduling
       # cancellation).
-      sig do
-        returns(
-          T.nilable(
-            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::OrSymbol
-          )
-        )
-      end
+      sig { returns(T.nilable(Dodopayments::CancellationFeedback::OrSymbol)) }
       attr_accessor :cancellation_feedback
 
       # Update credit entitlement cart settings
@@ -109,9 +103,7 @@ module Dodopayments
             ),
           cancellation_comment: T.nilable(String),
           cancellation_feedback:
-            T.nilable(
-              Dodopayments::SubscriptionUpdateParams::CancellationFeedback::OrSymbol
-            ),
+            T.nilable(Dodopayments::CancellationFeedback::OrSymbol),
           credit_entitlement_cart:
             T.nilable(
               T::Array[
@@ -166,9 +158,7 @@ module Dodopayments
               ),
             cancellation_comment: T.nilable(String),
             cancellation_feedback:
-              T.nilable(
-                Dodopayments::SubscriptionUpdateParams::CancellationFeedback::OrSymbol
-              ),
+              T.nilable(Dodopayments::CancellationFeedback::OrSymbol),
             credit_entitlement_cart:
               T.nilable(
                 T::Array[
@@ -225,72 +215,6 @@ module Dodopayments
           override.returns(
             T::Array[
               Dodopayments::SubscriptionUpdateParams::CancelReason::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
-      end
-
-      # Customer-supplied churn reason (only valid when cancelling or scheduling
-      # cancellation).
-      module CancellationFeedback
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(
-              Symbol,
-              Dodopayments::SubscriptionUpdateParams::CancellationFeedback
-            )
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        TOO_EXPENSIVE =
-          T.let(
-            :too_expensive,
-            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
-          )
-        MISSING_FEATURES =
-          T.let(
-            :missing_features,
-            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
-          )
-        SWITCHED_SERVICE =
-          T.let(
-            :switched_service,
-            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
-          )
-        UNUSED =
-          T.let(
-            :unused,
-            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
-          )
-        CUSTOMER_SERVICE =
-          T.let(
-            :customer_service,
-            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
-          )
-        LOW_QUALITY =
-          T.let(
-            :low_quality,
-            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
-          )
-        TOO_COMPLEX =
-          T.let(
-            :too_complex,
-            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
-          )
-        OTHER =
-          T.let(
-            :other,
-            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
             ]
           )
         end

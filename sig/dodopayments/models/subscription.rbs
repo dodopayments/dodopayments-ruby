@@ -27,14 +27,14 @@ module Dodopayments
         tax_inclusive: bool,
         trial_period_days: Integer,
         cancellation_comment: String?,
-        cancellation_feedback: Dodopayments::Models::Subscription::cancellation_feedback?,
+        cancellation_feedback: Dodopayments::Models::cancellation_feedback?,
         cancelled_at: Time?,
         custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?,
         discount_cycles_remaining: Integer?,
         discount_id: String?,
         expires_at: Time?,
         payment_method_id: String?,
-        scheduled_change: Dodopayments::Subscription::ScheduledChange?,
+        scheduled_change: Dodopayments::ScheduledPlanChange?,
         tax_id: String?
       }
 
@@ -89,7 +89,7 @@ module Dodopayments
 
       attr_accessor cancellation_comment: String?
 
-      attr_accessor cancellation_feedback: Dodopayments::Models::Subscription::cancellation_feedback?
+      attr_accessor cancellation_feedback: Dodopayments::Models::cancellation_feedback?
 
       attr_accessor cancelled_at: Time?
 
@@ -103,7 +103,7 @@ module Dodopayments
 
       attr_accessor payment_method_id: String?
 
-      attr_accessor scheduled_change: Dodopayments::Subscription::ScheduledChange?
+      attr_accessor scheduled_change: Dodopayments::ScheduledPlanChange?
 
       attr_accessor tax_id: String?
 
@@ -133,14 +133,14 @@ module Dodopayments
         tax_inclusive: bool,
         trial_period_days: Integer,
         ?cancellation_comment: String?,
-        ?cancellation_feedback: Dodopayments::Models::Subscription::cancellation_feedback?,
+        ?cancellation_feedback: Dodopayments::Models::cancellation_feedback?,
         ?cancelled_at: Time?,
         ?custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?,
         ?discount_cycles_remaining: Integer?,
         ?discount_id: String?,
         ?expires_at: Time?,
         ?payment_method_id: String?,
-        ?scheduled_change: Dodopayments::Subscription::ScheduledChange?,
+        ?scheduled_change: Dodopayments::ScheduledPlanChange?,
         ?tax_id: String?
       ) -> void
 
@@ -170,111 +170,16 @@ module Dodopayments
         tax_inclusive: bool,
         trial_period_days: Integer,
         cancellation_comment: String?,
-        cancellation_feedback: Dodopayments::Models::Subscription::cancellation_feedback?,
+        cancellation_feedback: Dodopayments::Models::cancellation_feedback?,
         cancelled_at: Time?,
         custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?,
         discount_cycles_remaining: Integer?,
         discount_id: String?,
         expires_at: Time?,
         payment_method_id: String?,
-        scheduled_change: Dodopayments::Subscription::ScheduledChange?,
+        scheduled_change: Dodopayments::ScheduledPlanChange?,
         tax_id: String?
       }
-
-      type cancellation_feedback =
-        :too_expensive
-        | :missing_features
-        | :switched_service
-        | :unused
-        | :customer_service
-        | :low_quality
-        | :too_complex
-        | :other
-
-      module CancellationFeedback
-        extend Dodopayments::Internal::Type::Enum
-
-        TOO_EXPENSIVE: :too_expensive
-        MISSING_FEATURES: :missing_features
-        SWITCHED_SERVICE: :switched_service
-        UNUSED: :unused
-        CUSTOMER_SERVICE: :customer_service
-        LOW_QUALITY: :low_quality
-        TOO_COMPLEX: :too_complex
-        OTHER: :other
-
-        def self?.values: -> ::Array[Dodopayments::Models::Subscription::cancellation_feedback]
-      end
-
-      type scheduled_change =
-        {
-          id: String,
-          addons: ::Array[Dodopayments::Subscription::ScheduledChange::Addon],
-          created_at: Time,
-          effective_at: Time,
-          product_id: String,
-          quantity: Integer,
-          product_description: String?,
-          product_name: String?
-        }
-
-      class ScheduledChange < Dodopayments::Internal::Type::BaseModel
-        attr_accessor id: String
-
-        attr_accessor addons: ::Array[Dodopayments::Subscription::ScheduledChange::Addon]
-
-        attr_accessor created_at: Time
-
-        attr_accessor effective_at: Time
-
-        attr_accessor product_id: String
-
-        attr_accessor quantity: Integer
-
-        attr_accessor product_description: String?
-
-        attr_accessor product_name: String?
-
-        def initialize: (
-          id: String,
-          addons: ::Array[Dodopayments::Subscription::ScheduledChange::Addon],
-          created_at: Time,
-          effective_at: Time,
-          product_id: String,
-          quantity: Integer,
-          ?product_description: String?,
-          ?product_name: String?
-        ) -> void
-
-        def to_hash: -> {
-          id: String,
-          addons: ::Array[Dodopayments::Subscription::ScheduledChange::Addon],
-          created_at: Time,
-          effective_at: Time,
-          product_id: String,
-          quantity: Integer,
-          product_description: String?,
-          product_name: String?
-        }
-
-        type addon = { addon_id: String, name: String, quantity: Integer }
-
-        class Addon < Dodopayments::Internal::Type::BaseModel
-          attr_accessor addon_id: String
-
-          attr_accessor name: String
-
-          attr_accessor quantity: Integer
-
-          def initialize: (
-            addon_id: String,
-            name: String,
-            quantity: Integer
-          ) -> void
-
-          def to_hash: -> { addon_id: String, name: String, quantity: Integer }
-        end
-      end
     end
   end
 end

@@ -58,9 +58,7 @@ module Dodopayments
       # Entitlements to attach (replaces all existing when present) Send empty array to
       # remove all, omit field to leave unchanged
       sig do
-        returns(
-          T.nilable(T::Array[Dodopayments::ProductUpdateParams::Entitlement])
-        )
+        returns(T.nilable(T::Array[Dodopayments::AttachProductEntitlement]))
       end
       attr_accessor :entitlements
 
@@ -151,9 +149,7 @@ module Dodopayments
               Dodopayments::ProductUpdateParams::DigitalProductDelivery::OrHash
             ),
           entitlements:
-            T.nilable(
-              T::Array[Dodopayments::ProductUpdateParams::Entitlement::OrHash]
-            ),
+            T.nilable(T::Array[Dodopayments::AttachProductEntitlement::OrHash]),
           image_id: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
@@ -247,9 +243,7 @@ module Dodopayments
                 Dodopayments::ProductUpdateParams::DigitalProductDelivery
               ),
             entitlements:
-              T.nilable(
-                T::Array[Dodopayments::ProductUpdateParams::Entitlement]
-              ),
+              T.nilable(T::Array[Dodopayments::AttachProductEntitlement]),
             image_id: T.nilable(String),
             license_key_activation_message: T.nilable(String),
             license_key_activations_limit: T.nilable(Integer),
@@ -323,36 +317,6 @@ module Dodopayments
             }
           )
         end
-        def to_hash
-        end
-      end
-
-      class Entitlement < Dodopayments::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Dodopayments::ProductUpdateParams::Entitlement,
-              Dodopayments::Internal::AnyHash
-            )
-          end
-
-        # ID of the entitlement to attach to the product
-        sig { returns(String) }
-        attr_accessor :entitlement_id
-
-        # Request struct for attaching an entitlement to a product.
-        #
-        # Mirrors the `credit_entitlements` attach shape — every "attach something to a
-        # product" array takes objects, not bare IDs. Uniform shape leaves room for
-        # per-attachment settings later without another API break.
-        sig { params(entitlement_id: String).returns(T.attached_class) }
-        def self.new(
-          # ID of the entitlement to attach to the product
-          entitlement_id:
-        )
-        end
-
-        sig { override.returns({ entitlement_id: String }) }
         def to_hash
         end
       end

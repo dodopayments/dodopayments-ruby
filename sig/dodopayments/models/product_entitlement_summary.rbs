@@ -1,0 +1,40 @@
+module Dodopayments
+  module Models
+    type product_entitlement_summary =
+      {
+        id: String,
+        integration_config: Dodopayments::Models::integration_config_response,
+        integration_type: Dodopayments::Models::entitlement_integration_type,
+        name: String,
+        description: String?
+      }
+
+    class ProductEntitlementSummary < Dodopayments::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor integration_config: Dodopayments::Models::integration_config_response
+
+      attr_accessor integration_type: Dodopayments::Models::entitlement_integration_type
+
+      attr_accessor name: String
+
+      attr_accessor description: String?
+
+      def initialize: (
+        id: String,
+        integration_config: Dodopayments::Models::integration_config_response,
+        integration_type: Dodopayments::Models::entitlement_integration_type,
+        name: String,
+        ?description: String?
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        integration_config: Dodopayments::Models::integration_config_response,
+        integration_type: Dodopayments::Models::entitlement_integration_type,
+        name: String,
+        description: String?
+      }
+    end
+  end
+end

@@ -95,11 +95,9 @@ module Dodopayments
       #   List of one time products that will be bundled with the first payment for this
       #   subscription
       #
-      #   @return [Array<Dodopayments::Models::SubscriptionCreateParams::OneTimeProductCart>, nil]
+      #   @return [Array<Dodopayments::Models::OneTimeProductCartItem>, nil]
       optional :one_time_product_cart,
-               -> {
-                 Dodopayments::Internal::Type::ArrayOf[Dodopayments::SubscriptionCreateParams::OneTimeProductCart]
-               },
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem] },
                nil?: true
 
       # @!attribute payment_link
@@ -191,7 +189,7 @@ module Dodopayments
       #
       #   @param on_demand [Dodopayments::Models::OnDemandSubscription, nil]
       #
-      #   @param one_time_product_cart [Array<Dodopayments::Models::SubscriptionCreateParams::OneTimeProductCart>, nil] List of one time products that will be bundled with the first payment for this s
+      #   @param one_time_product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil] List of one time products that will be bundled with the first payment for this s
       #
       #   @param payment_link [Boolean, nil] If true, generates a payment link.
       #
@@ -212,37 +210,6 @@ module Dodopayments
       #   @param trial_period_days [Integer, nil] Optional trial period in days
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
-
-      class OneTimeProductCart < Dodopayments::Internal::Type::BaseModel
-        # @!attribute product_id
-        #
-        #   @return [String]
-        required :product_id, String
-
-        # @!attribute quantity
-        #
-        #   @return [Integer]
-        required :quantity, Integer
-
-        # @!attribute amount
-        #   Amount the customer pays if pay_what_you_want is enabled. If disabled then
-        #   amount will be ignored Represented in the lowest denomination of the currency
-        #   (e.g., cents for USD). For example, to charge $1.00, pass `100`.
-        #
-        #   @return [Integer, nil]
-        optional :amount, Integer, nil?: true
-
-        # @!method initialize(product_id:, quantity:, amount: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Dodopayments::Models::SubscriptionCreateParams::OneTimeProductCart} for more
-        #   details.
-        #
-        #   @param product_id [String]
-        #
-        #   @param quantity [Integer]
-        #
-        #   @param amount [Integer, nil] Amount the customer pays if pay_what_you_want is enabled. If disabled then amoun
-      end
     end
   end
 end

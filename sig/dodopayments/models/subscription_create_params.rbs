@@ -14,7 +14,7 @@ module Dodopayments
         mandate_min_amount_inr_paise: Integer?,
         metadata: ::Hash[Symbol, String],
         on_demand: Dodopayments::OnDemandSubscription?,
-        one_time_product_cart: ::Array[Dodopayments::SubscriptionCreateParams::OneTimeProductCart]?,
+        one_time_product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?,
         payment_link: bool?,
         payment_method_id: String?,
         redirect_immediately: bool,
@@ -57,7 +57,7 @@ module Dodopayments
 
       attr_accessor on_demand: Dodopayments::OnDemandSubscription?
 
-      attr_accessor one_time_product_cart: ::Array[Dodopayments::SubscriptionCreateParams::OneTimeProductCart]?
+      attr_accessor one_time_product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?
 
       attr_accessor payment_link: bool?
 
@@ -96,7 +96,7 @@ module Dodopayments
         ?mandate_min_amount_inr_paise: Integer?,
         ?metadata: ::Hash[Symbol, String],
         ?on_demand: Dodopayments::OnDemandSubscription?,
-        ?one_time_product_cart: ::Array[Dodopayments::SubscriptionCreateParams::OneTimeProductCart]?,
+        ?one_time_product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?,
         ?payment_link: bool?,
         ?payment_method_id: String?,
         ?redirect_immediately: bool,
@@ -122,7 +122,7 @@ module Dodopayments
         mandate_min_amount_inr_paise: Integer?,
         metadata: ::Hash[Symbol, String],
         on_demand: Dodopayments::OnDemandSubscription?,
-        one_time_product_cart: ::Array[Dodopayments::SubscriptionCreateParams::OneTimeProductCart]?,
+        one_time_product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?,
         payment_link: bool?,
         payment_method_id: String?,
         redirect_immediately: bool,
@@ -134,29 +134,6 @@ module Dodopayments
         trial_period_days: Integer?,
         request_options: Dodopayments::RequestOptions
       }
-
-      type one_time_product_cart =
-        { product_id: String, quantity: Integer, amount: Integer? }
-
-      class OneTimeProductCart < Dodopayments::Internal::Type::BaseModel
-        attr_accessor product_id: String
-
-        attr_accessor quantity: Integer
-
-        attr_accessor amount: Integer?
-
-        def initialize: (
-          product_id: String,
-          quantity: Integer,
-          ?amount: Integer?
-        ) -> void
-
-        def to_hash: -> {
-          product_id: String,
-          quantity: Integer,
-          amount: Integer?
-        }
-      end
     end
   end
 end

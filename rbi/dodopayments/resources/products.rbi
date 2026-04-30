@@ -29,9 +29,7 @@ module Dodopayments
               Dodopayments::ProductCreateParams::DigitalProductDelivery::OrHash
             ),
           entitlements:
-            T.nilable(
-              T::Array[Dodopayments::ProductCreateParams::Entitlement::OrHash]
-            ),
+            T.nilable(T::Array[Dodopayments::AttachProductEntitlement::OrHash]),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
           license_key_duration:
@@ -117,9 +115,7 @@ module Dodopayments
               Dodopayments::ProductUpdateParams::DigitalProductDelivery::OrHash
             ),
           entitlements:
-            T.nilable(
-              T::Array[Dodopayments::ProductUpdateParams::Entitlement::OrHash]
-            ),
+            T.nilable(T::Array[Dodopayments::AttachProductEntitlement::OrHash]),
           image_id: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),

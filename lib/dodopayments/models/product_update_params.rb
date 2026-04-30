@@ -52,9 +52,9 @@ module Dodopayments
       #   Entitlements to attach (replaces all existing when present) Send empty array to
       #   remove all, omit field to leave unchanged
       #
-      #   @return [Array<Dodopayments::Models::ProductUpdateParams::Entitlement>, nil]
+      #   @return [Array<Dodopayments::Models::AttachProductEntitlement>, nil]
       optional :entitlements,
-               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::ProductUpdateParams::Entitlement] },
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::AttachProductEntitlement] },
                nil?: true
 
       # @!attribute image_id
@@ -153,7 +153,7 @@ module Dodopayments
       #
       #   @param digital_product_delivery [Dodopayments::Models::ProductUpdateParams::DigitalProductDelivery, nil] Choose how you would like you digital product delivered
       #
-      #   @param entitlements [Array<Dodopayments::Models::ProductUpdateParams::Entitlement>, nil] Entitlements to attach (replaces all existing when present)
+      #   @param entitlements [Array<Dodopayments::Models::AttachProductEntitlement>, nil] Entitlements to attach (replaces all existing when present)
       #
       #   @param image_id [String, nil] Product image id after its uploaded to S3
       #
@@ -204,23 +204,6 @@ module Dodopayments
         #   @param files [Array<String>, nil] Uploaded files ids of digital product
         #
         #   @param instructions [String, nil] Instructions to download and use the digital product
-      end
-
-      class Entitlement < Dodopayments::Internal::Type::BaseModel
-        # @!attribute entitlement_id
-        #   ID of the entitlement to attach to the product
-        #
-        #   @return [String]
-        required :entitlement_id, String
-
-        # @!method initialize(entitlement_id:)
-        #   Request struct for attaching an entitlement to a product.
-        #
-        #   Mirrors the `credit_entitlements` attach shape — every "attach something to a
-        #   product" array takes objects, not bare IDs. Uniform shape leaves room for
-        #   per-attachment settings later without another API break.
-        #
-        #   @param entitlement_id [String] ID of the entitlement to attach to the product
       end
     end
   end

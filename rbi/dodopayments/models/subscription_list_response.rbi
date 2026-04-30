@@ -122,21 +122,12 @@ module Dodopayments
       attr_accessor :product_name
 
       # Scheduled plan change details, if any
-      sig do
-        returns(
-          T.nilable(
-            Dodopayments::Models::SubscriptionListResponse::ScheduledChange
-          )
-        )
-      end
+      sig { returns(T.nilable(Dodopayments::ScheduledPlanChange)) }
       attr_reader :scheduled_change
 
       sig do
         params(
-          scheduled_change:
-            T.nilable(
-              Dodopayments::Models::SubscriptionListResponse::ScheduledChange::OrHash
-            )
+          scheduled_change: T.nilable(Dodopayments::ScheduledPlanChange::OrHash)
         ).void
       end
       attr_writer :scheduled_change
@@ -174,9 +165,7 @@ module Dodopayments
           payment_method_id: T.nilable(String),
           product_name: T.nilable(String),
           scheduled_change:
-            T.nilable(
-              Dodopayments::Models::SubscriptionListResponse::ScheduledChange::OrHash
-            ),
+            T.nilable(Dodopayments::ScheduledPlanChange::OrHash),
           tax_id: T.nilable(String)
         ).returns(T.attached_class)
       end
@@ -270,164 +259,12 @@ module Dodopayments
             discount_id: T.nilable(String),
             payment_method_id: T.nilable(String),
             product_name: T.nilable(String),
-            scheduled_change:
-              T.nilable(
-                Dodopayments::Models::SubscriptionListResponse::ScheduledChange
-              ),
+            scheduled_change: T.nilable(Dodopayments::ScheduledPlanChange),
             tax_id: T.nilable(String)
           }
         )
       end
       def to_hash
-      end
-
-      class ScheduledChange < Dodopayments::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Dodopayments::Models::SubscriptionListResponse::ScheduledChange,
-              Dodopayments::Internal::AnyHash
-            )
-          end
-
-        # The scheduled plan change ID
-        sig { returns(String) }
-        attr_accessor :id
-
-        # Addons included in the scheduled change
-        sig do
-          returns(
-            T::Array[
-              Dodopayments::Models::SubscriptionListResponse::ScheduledChange::Addon
-            ]
-          )
-        end
-        attr_accessor :addons
-
-        # When this scheduled change was created
-        sig { returns(Time) }
-        attr_accessor :created_at
-
-        # When the change will be applied
-        sig { returns(Time) }
-        attr_accessor :effective_at
-
-        # The product ID the subscription will change to
-        sig { returns(String) }
-        attr_accessor :product_id
-
-        # Quantity for the new plan
-        sig { returns(Integer) }
-        attr_accessor :quantity
-
-        # Description of the product being changed to
-        sig { returns(T.nilable(String)) }
-        attr_accessor :product_description
-
-        # Name of the product being changed to
-        sig { returns(T.nilable(String)) }
-        attr_accessor :product_name
-
-        # Scheduled plan change details, if any
-        sig do
-          params(
-            id: String,
-            addons:
-              T::Array[
-                Dodopayments::Models::SubscriptionListResponse::ScheduledChange::Addon::OrHash
-              ],
-            created_at: Time,
-            effective_at: Time,
-            product_id: String,
-            quantity: Integer,
-            product_description: T.nilable(String),
-            product_name: T.nilable(String)
-          ).returns(T.attached_class)
-        end
-        def self.new(
-          # The scheduled plan change ID
-          id:,
-          # Addons included in the scheduled change
-          addons:,
-          # When this scheduled change was created
-          created_at:,
-          # When the change will be applied
-          effective_at:,
-          # The product ID the subscription will change to
-          product_id:,
-          # Quantity for the new plan
-          quantity:,
-          # Description of the product being changed to
-          product_description: nil,
-          # Name of the product being changed to
-          product_name: nil
-        )
-        end
-
-        sig do
-          override.returns(
-            {
-              id: String,
-              addons:
-                T::Array[
-                  Dodopayments::Models::SubscriptionListResponse::ScheduledChange::Addon
-                ],
-              created_at: Time,
-              effective_at: Time,
-              product_id: String,
-              quantity: Integer,
-              product_description: T.nilable(String),
-              product_name: T.nilable(String)
-            }
-          )
-        end
-        def to_hash
-        end
-
-        class Addon < Dodopayments::Internal::Type::BaseModel
-          OrHash =
-            T.type_alias do
-              T.any(
-                Dodopayments::Models::SubscriptionListResponse::ScheduledChange::Addon,
-                Dodopayments::Internal::AnyHash
-              )
-            end
-
-          # The addon ID
-          sig { returns(String) }
-          attr_accessor :addon_id
-
-          # Name of the addon
-          sig { returns(String) }
-          attr_accessor :name
-
-          # Quantity of the addon
-          sig { returns(Integer) }
-          attr_accessor :quantity
-
-          sig do
-            params(addon_id: String, name: String, quantity: Integer).returns(
-              T.attached_class
-            )
-          end
-          def self.new(
-            # The addon ID
-            addon_id:,
-            # Name of the addon
-            name:,
-            # Quantity of the addon
-            quantity:
-          )
-          end
-
-          sig do
-            override.returns(
-              { addon_id: String, name: String, quantity: Integer }
-            )
-          end
-          def to_hash
-          end
-        end
       end
     end
   end

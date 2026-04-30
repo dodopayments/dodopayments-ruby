@@ -9,13 +9,13 @@ module Dodopayments
           ?page_size: Integer,
           ?status: Dodopayments::Models::Entitlements::GrantListParams::status,
           ?request_options: Dodopayments::request_opts
-        ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::Entitlements::GrantListResponse]
+        ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Entitlements::EntitlementGrant]
 
         def revoke: (
           String grant_id,
           id: String,
           ?request_options: Dodopayments::request_opts
-        ) -> Dodopayments::Models::Entitlements::GrantRevokeResponse
+        ) -> Dodopayments::Entitlements::EntitlementGrant
 
         def initialize: (client: Dodopayments::Client) -> void
       end

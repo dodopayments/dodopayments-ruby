@@ -14,7 +14,7 @@ class Dodopayments::Test::Resources::Entitlements::GrantsTest < Dodopayments::Te
     return if row.nil?
 
     assert_pattern do
-      row => Dodopayments::Models::Entitlements::GrantListResponse
+      row => Dodopayments::Entitlements::EntitlementGrant
     end
 
     assert_pattern do
@@ -25,13 +25,13 @@ class Dodopayments::Test::Resources::Entitlements::GrantsTest < Dodopayments::Te
         customer_id: String,
         entitlement_id: String,
         external_id: String,
-        status: Dodopayments::Models::Entitlements::GrantListResponse::Status,
+        status: Dodopayments::Entitlements::EntitlementGrant::Status,
         updated_at: Time,
         delivered_at: Time | nil,
         digital_product_delivery: Dodopayments::DigitalProductDelivery | nil,
         error_code: String | nil,
         error_message: String | nil,
-        license_key: Dodopayments::Models::Entitlements::GrantListResponse::LicenseKey | nil,
+        license_key: Dodopayments::Entitlements::LicenseKeyGrant | nil,
         metadata: Dodopayments::Internal::Type::Unknown | nil,
         oauth_expires_at: Time | nil,
         oauth_url: String | nil,
@@ -47,7 +47,7 @@ class Dodopayments::Test::Resources::Entitlements::GrantsTest < Dodopayments::Te
     response = @dodo_payments.entitlements.grants.revoke("grant_id", id: "id")
 
     assert_pattern do
-      response => Dodopayments::Models::Entitlements::GrantRevokeResponse
+      response => Dodopayments::Entitlements::EntitlementGrant
     end
 
     assert_pattern do
@@ -58,13 +58,13 @@ class Dodopayments::Test::Resources::Entitlements::GrantsTest < Dodopayments::Te
         customer_id: String,
         entitlement_id: String,
         external_id: String,
-        status: Dodopayments::Models::Entitlements::GrantRevokeResponse::Status,
+        status: Dodopayments::Entitlements::EntitlementGrant::Status,
         updated_at: Time,
         delivered_at: Time | nil,
         digital_product_delivery: Dodopayments::DigitalProductDelivery | nil,
         error_code: String | nil,
         error_message: String | nil,
-        license_key: Dodopayments::Models::Entitlements::GrantRevokeResponse::LicenseKey | nil,
+        license_key: Dodopayments::Entitlements::LicenseKeyGrant | nil,
         metadata: Dodopayments::Internal::Type::Unknown | nil,
         oauth_expires_at: Time | nil,
         oauth_url: String | nil,

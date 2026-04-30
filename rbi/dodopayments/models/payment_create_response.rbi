@@ -50,13 +50,7 @@ module Dodopayments
       attr_accessor :payment_link
 
       # Optional list of products included in the payment
-      sig do
-        returns(
-          T.nilable(
-            T::Array[Dodopayments::Models::PaymentCreateResponse::ProductCart]
-          )
-        )
-      end
+      sig { returns(T.nilable(T::Array[Dodopayments::OneTimeProductCartItem])) }
       attr_accessor :product_cart
 
       sig do
@@ -70,11 +64,7 @@ module Dodopayments
           expires_on: T.nilable(Time),
           payment_link: T.nilable(String),
           product_cart:
-            T.nilable(
-              T::Array[
-                Dodopayments::Models::PaymentCreateResponse::ProductCart::OrHash
-              ]
-            )
+            T.nilable(T::Array[Dodopayments::OneTimeProductCartItem::OrHash])
         ).returns(T.attached_class)
       end
       def self.new(
@@ -112,66 +102,11 @@ module Dodopayments
             expires_on: T.nilable(Time),
             payment_link: T.nilable(String),
             product_cart:
-              T.nilable(
-                T::Array[
-                  Dodopayments::Models::PaymentCreateResponse::ProductCart
-                ]
-              )
+              T.nilable(T::Array[Dodopayments::OneTimeProductCartItem])
           }
         )
       end
       def to_hash
-      end
-
-      class ProductCart < Dodopayments::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Dodopayments::Models::PaymentCreateResponse::ProductCart,
-              Dodopayments::Internal::AnyHash
-            )
-          end
-
-        sig { returns(String) }
-        attr_accessor :product_id
-
-        sig { returns(Integer) }
-        attr_accessor :quantity
-
-        # Amount the customer pays if pay_what_you_want is enabled. If disabled then
-        # amount will be ignored Represented in the lowest denomination of the currency
-        # (e.g., cents for USD). For example, to charge $1.00, pass `100`.
-        sig { returns(T.nilable(Integer)) }
-        attr_accessor :amount
-
-        sig do
-          params(
-            product_id: String,
-            quantity: Integer,
-            amount: T.nilable(Integer)
-          ).returns(T.attached_class)
-        end
-        def self.new(
-          product_id:,
-          quantity:,
-          # Amount the customer pays if pay_what_you_want is enabled. If disabled then
-          # amount will be ignored Represented in the lowest denomination of the currency
-          # (e.g., cents for USD). For example, to charge $1.00, pass `100`.
-          amount: nil
-        )
-        end
-
-        sig do
-          override.returns(
-            {
-              product_id: String,
-              quantity: Integer,
-              amount: T.nilable(Integer)
-            }
-          )
-        end
-        def to_hash
-        end
       end
     end
   end

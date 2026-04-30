@@ -29,6 +29,8 @@ module Dodopayments
 
   AttachExistingCustomer = Dodopayments::Models::AttachExistingCustomer
 
+  AttachProductEntitlement = Dodopayments::Models::AttachProductEntitlement
+
   BalanceLedgerEntry = Dodopayments::Models::BalanceLedgerEntry
 
   BalanceRetrieveLedgerParams =
@@ -47,6 +49,8 @@ module Dodopayments
   BrandUpdateImagesParams = Dodopayments::Models::BrandUpdateImagesParams
 
   BrandUpdateParams = Dodopayments::Models::BrandUpdateParams
+
+  CancellationFeedback = Dodopayments::Models::CancellationFeedback
 
   CbbOverageBehavior = Dodopayments::Models::CbbOverageBehavior
 
@@ -222,6 +226,8 @@ module Dodopayments
 
   DunningStartedWebhookEvent = Dodopayments::Models::DunningStartedWebhookEvent
 
+  Entitlement = Dodopayments::Models::Entitlement
+
   EntitlementCreateParams = Dodopayments::Models::EntitlementCreateParams
 
   EntitlementDeleteParams = Dodopayments::Models::EntitlementDeleteParams
@@ -238,6 +244,8 @@ module Dodopayments
   EntitlementGrantRevokedWebhookEvent =
     Dodopayments::Models::EntitlementGrantRevokedWebhookEvent
 
+  EntitlementIntegrationType = Dodopayments::Models::EntitlementIntegrationType
+
   EntitlementListParams = Dodopayments::Models::EntitlementListParams
 
   EntitlementRetrieveParams = Dodopayments::Models::EntitlementRetrieveParams
@@ -253,6 +261,10 @@ module Dodopayments
   FilterOperator = Dodopayments::Models::FilterOperator
 
   GetDispute = Dodopayments::Models::GetDispute
+
+  IntegrationConfig = Dodopayments::Models::IntegrationConfig
+
+  IntegrationConfigResponse = Dodopayments::Models::IntegrationConfigResponse
 
   IntentStatus = Dodopayments::Models::IntentStatus
 
@@ -360,6 +372,8 @@ module Dodopayments
 
   ProductCreateParams = Dodopayments::Models::ProductCreateParams
 
+  ProductEntitlementSummary = Dodopayments::Models::ProductEntitlementSummary
+
   ProductItemReq = Dodopayments::Models::ProductItemReq
 
   ProductListParams = Dodopayments::Models::ProductListParams
@@ -390,6 +404,8 @@ module Dodopayments
 
   RefundSucceededWebhookEvent =
     Dodopayments::Models::RefundSucceededWebhookEvent
+
+  ScheduledPlanChange = Dodopayments::Models::ScheduledPlanChange
 
   Subscription = Dodopayments::Models::Subscription
 

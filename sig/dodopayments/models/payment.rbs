@@ -31,7 +31,7 @@ module Dodopayments
         payment_link: String?,
         payment_method: String?,
         payment_method_type: String?,
-        product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?,
+        product_cart: ::Array[Dodopayments::Payment::ProductCart]?,
         refund_status: Dodopayments::Models::payment_refund_status?,
         settlement_tax: Integer?,
         status: Dodopayments::Models::intent_status?,
@@ -99,7 +99,7 @@ module Dodopayments
 
       attr_accessor payment_method_type: String?
 
-      attr_accessor product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?
+      attr_accessor product_cart: ::Array[Dodopayments::Payment::ProductCart]?
 
       attr_accessor refund_status: Dodopayments::Models::payment_refund_status?
 
@@ -143,7 +143,7 @@ module Dodopayments
         ?payment_link: String?,
         ?payment_method: String?,
         ?payment_method_type: String?,
-        ?product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?,
+        ?product_cart: ::Array[Dodopayments::Payment::ProductCart]?,
         ?refund_status: Dodopayments::Models::payment_refund_status?,
         ?settlement_tax: Integer?,
         ?status: Dodopayments::Models::intent_status?,
@@ -182,7 +182,7 @@ module Dodopayments
         payment_link: String?,
         payment_method: String?,
         payment_method_type: String?,
-        product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?,
+        product_cart: ::Array[Dodopayments::Payment::ProductCart]?,
         refund_status: Dodopayments::Models::payment_refund_status?,
         settlement_tax: Integer?,
         status: Dodopayments::Models::intent_status?,
@@ -190,6 +190,18 @@ module Dodopayments
         tax: Integer?,
         updated_at: Time?
       }
+
+      type product_cart = { product_id: String, quantity: Integer }
+
+      class ProductCart < Dodopayments::Internal::Type::BaseModel
+        attr_accessor product_id: String
+
+        attr_accessor quantity: Integer
+
+        def initialize: (product_id: String, quantity: Integer) -> void
+
+        def to_hash: -> { product_id: String, quantity: Integer }
+      end
     end
   end
 end

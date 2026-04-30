@@ -10,7 +10,7 @@ module Dodopayments
         credit_entitlements: ::Array[Dodopayments::AttachCreditEntitlement]?,
         description: String?,
         digital_product_delivery: Dodopayments::ProductCreateParams::DigitalProductDelivery?,
-        entitlements: ::Array[Dodopayments::ProductCreateParams::Entitlement]?,
+        entitlements: ::Array[Dodopayments::AttachProductEntitlement]?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
         license_key_duration: Dodopayments::LicenseKeyDuration?,
@@ -39,7 +39,7 @@ module Dodopayments
 
       attr_accessor digital_product_delivery: Dodopayments::ProductCreateParams::DigitalProductDelivery?
 
-      attr_accessor entitlements: ::Array[Dodopayments::ProductCreateParams::Entitlement]?
+      attr_accessor entitlements: ::Array[Dodopayments::AttachProductEntitlement]?
 
       attr_accessor license_key_activation_message: String?
 
@@ -62,7 +62,7 @@ module Dodopayments
         ?credit_entitlements: ::Array[Dodopayments::AttachCreditEntitlement]?,
         ?description: String?,
         ?digital_product_delivery: Dodopayments::ProductCreateParams::DigitalProductDelivery?,
-        ?entitlements: ::Array[Dodopayments::ProductCreateParams::Entitlement]?,
+        ?entitlements: ::Array[Dodopayments::AttachProductEntitlement]?,
         ?license_key_activation_message: String?,
         ?license_key_activations_limit: Integer?,
         ?license_key_duration: Dodopayments::LicenseKeyDuration?,
@@ -80,7 +80,7 @@ module Dodopayments
         credit_entitlements: ::Array[Dodopayments::AttachCreditEntitlement]?,
         description: String?,
         digital_product_delivery: Dodopayments::ProductCreateParams::DigitalProductDelivery?,
-        entitlements: ::Array[Dodopayments::ProductCreateParams::Entitlement]?,
+        entitlements: ::Array[Dodopayments::AttachProductEntitlement]?,
         license_key_activation_message: String?,
         license_key_activations_limit: Integer?,
         license_key_duration: Dodopayments::LicenseKeyDuration?,
@@ -100,16 +100,6 @@ module Dodopayments
         def initialize: (?external_url: String?, ?instructions: String?) -> void
 
         def to_hash: -> { external_url: String?, instructions: String? }
-      end
-
-      type entitlement = { entitlement_id: String }
-
-      class Entitlement < Dodopayments::Internal::Type::BaseModel
-        attr_accessor entitlement_id: String
-
-        def initialize: (entitlement_id: String) -> void
-
-        def to_hash: -> { entitlement_id: String }
       end
     end
   end

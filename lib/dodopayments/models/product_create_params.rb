@@ -64,9 +64,9 @@ module Dodopayments
       # @!attribute entitlements
       #   Optional entitlements to attach to this product (max 20)
       #
-      #   @return [Array<Dodopayments::Models::ProductCreateParams::Entitlement>, nil]
+      #   @return [Array<Dodopayments::Models::AttachProductEntitlement>, nil]
       optional :entitlements,
-               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::ProductCreateParams::Entitlement] },
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::AttachProductEntitlement] },
                nil?: true
 
       # @!attribute license_key_activation_message
@@ -140,7 +140,7 @@ module Dodopayments
       #
       #   @param digital_product_delivery [Dodopayments::Models::ProductCreateParams::DigitalProductDelivery, nil] Choose how you would like you digital product delivered
       #
-      #   @param entitlements [Array<Dodopayments::Models::ProductCreateParams::Entitlement>, nil] Optional entitlements to attach to this product (max 20)
+      #   @param entitlements [Array<Dodopayments::Models::AttachProductEntitlement>, nil] Optional entitlements to attach to this product (max 20)
       #
       #   @param license_key_activation_message [String, nil] Optional message displayed during license key activation
       #
@@ -175,23 +175,6 @@ module Dodopayments
         #   @param external_url [String, nil] External URL to digital product
         #
         #   @param instructions [String, nil] Instructions to download and use the digital product
-      end
-
-      class Entitlement < Dodopayments::Internal::Type::BaseModel
-        # @!attribute entitlement_id
-        #   ID of the entitlement to attach to the product
-        #
-        #   @return [String]
-        required :entitlement_id, String
-
-        # @!method initialize(entitlement_id:)
-        #   Request struct for attaching an entitlement to a product.
-        #
-        #   Mirrors the `credit_entitlements` attach shape — every "attach something to a
-        #   product" array takes objects, not bare IDs. Uniform shape leaves room for
-        #   per-attachment settings later without another API break.
-        #
-        #   @param entitlement_id [String] ID of the entitlement to attach to the product
       end
     end
   end

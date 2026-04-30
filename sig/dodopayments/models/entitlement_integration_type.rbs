@@ -1,0 +1,28 @@
+module Dodopayments
+  module Models
+    type entitlement_integration_type =
+      :discord
+      | :telegram
+      | :github
+      | :figma
+      | :framer
+      | :notion
+      | :digital_files
+      | :license_key
+
+    module EntitlementIntegrationType
+      extend Dodopayments::Internal::Type::Enum
+
+      DISCORD: :discord
+      TELEGRAM: :telegram
+      GITHUB: :github
+      FIGMA: :figma
+      FRAMER: :framer
+      NOTION: :notion
+      DIGITAL_FILES: :digital_files
+      LICENSE_KEY: :license_key
+
+      def self?.values: -> ::Array[Dodopayments::Models::entitlement_integration_type]
+    end
+  end
+end

@@ -22,7 +22,7 @@ module Dodopayments
           entitlement_id: String,
           entitlement_name: String,
           grant_id: String,
-          integration_type: Dodopayments::Models::CustomerListEntitlementsResponse::Item::integration_type,
+          integration_type: Dodopayments::Models::entitlement_integration_type,
           status: Dodopayments::Models::CustomerListEntitlementsResponse::Item::status,
           updated_at: Time,
           delivered_at: Time?,
@@ -39,7 +39,7 @@ module Dodopayments
 
         attr_accessor grant_id: String
 
-        attr_accessor integration_type: Dodopayments::Models::CustomerListEntitlementsResponse::Item::integration_type
+        attr_accessor integration_type: Dodopayments::Models::entitlement_integration_type
 
         attr_accessor status: Dodopayments::Models::CustomerListEntitlementsResponse::Item::status
 
@@ -56,7 +56,7 @@ module Dodopayments
           entitlement_id: String,
           entitlement_name: String,
           grant_id: String,
-          integration_type: Dodopayments::Models::CustomerListEntitlementsResponse::Item::integration_type,
+          integration_type: Dodopayments::Models::entitlement_integration_type,
           status: Dodopayments::Models::CustomerListEntitlementsResponse::Item::status,
           updated_at: Time,
           ?delivered_at: Time?,
@@ -69,38 +69,13 @@ module Dodopayments
           entitlement_id: String,
           entitlement_name: String,
           grant_id: String,
-          integration_type: Dodopayments::Models::CustomerListEntitlementsResponse::Item::integration_type,
+          integration_type: Dodopayments::Models::entitlement_integration_type,
           status: Dodopayments::Models::CustomerListEntitlementsResponse::Item::status,
           updated_at: Time,
           delivered_at: Time?,
           entitlement_description: String?,
           revoked_at: Time?
         }
-
-        type integration_type =
-          :discord
-          | :telegram
-          | :github
-          | :figma
-          | :framer
-          | :notion
-          | :digital_files
-          | :license_key
-
-        module IntegrationType
-          extend Dodopayments::Internal::Type::Enum
-
-          DISCORD: :discord
-          TELEGRAM: :telegram
-          GITHUB: :github
-          FIGMA: :figma
-          FRAMER: :framer
-          NOTION: :notion
-          DIGITAL_FILES: :digital_files
-          LICENSE_KEY: :license_key
-
-          def self?.values: -> ::Array[Dodopayments::Models::CustomerListEntitlementsResponse::Item::integration_type]
-        end
 
         type status = :pending | :delivered | :failed | :revoked
 

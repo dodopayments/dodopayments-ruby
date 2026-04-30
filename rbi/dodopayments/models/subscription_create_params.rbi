@@ -93,13 +93,7 @@ module Dodopayments
 
       # List of one time products that will be bundled with the first payment for this
       # subscription
-      sig do
-        returns(
-          T.nilable(
-            T::Array[Dodopayments::SubscriptionCreateParams::OneTimeProductCart]
-          )
-        )
-      end
+      sig { returns(T.nilable(T::Array[Dodopayments::OneTimeProductCartItem])) }
       attr_accessor :one_time_product_cart
 
       # If true, generates a payment link. Defaults to false if not specified.
@@ -174,11 +168,7 @@ module Dodopayments
           metadata: T::Hash[Symbol, String],
           on_demand: T.nilable(Dodopayments::OnDemandSubscription::OrHash),
           one_time_product_cart:
-            T.nilable(
-              T::Array[
-                Dodopayments::SubscriptionCreateParams::OneTimeProductCart::OrHash
-              ]
-            ),
+            T.nilable(T::Array[Dodopayments::OneTimeProductCartItem::OrHash]),
           payment_link: T.nilable(T::Boolean),
           payment_method_id: T.nilable(String),
           redirect_immediately: T::Boolean,
@@ -279,11 +269,7 @@ module Dodopayments
             metadata: T::Hash[Symbol, String],
             on_demand: T.nilable(Dodopayments::OnDemandSubscription),
             one_time_product_cart:
-              T.nilable(
-                T::Array[
-                  Dodopayments::SubscriptionCreateParams::OneTimeProductCart
-                ]
-              ),
+              T.nilable(T::Array[Dodopayments::OneTimeProductCartItem]),
             payment_link: T.nilable(T::Boolean),
             payment_method_id: T.nilable(String),
             redirect_immediately: T::Boolean,
@@ -298,57 +284,6 @@ module Dodopayments
         )
       end
       def to_hash
-      end
-
-      class OneTimeProductCart < Dodopayments::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Dodopayments::SubscriptionCreateParams::OneTimeProductCart,
-              Dodopayments::Internal::AnyHash
-            )
-          end
-
-        sig { returns(String) }
-        attr_accessor :product_id
-
-        sig { returns(Integer) }
-        attr_accessor :quantity
-
-        # Amount the customer pays if pay_what_you_want is enabled. If disabled then
-        # amount will be ignored Represented in the lowest denomination of the currency
-        # (e.g., cents for USD). For example, to charge $1.00, pass `100`.
-        sig { returns(T.nilable(Integer)) }
-        attr_accessor :amount
-
-        sig do
-          params(
-            product_id: String,
-            quantity: Integer,
-            amount: T.nilable(Integer)
-          ).returns(T.attached_class)
-        end
-        def self.new(
-          product_id:,
-          quantity:,
-          # Amount the customer pays if pay_what_you_want is enabled. If disabled then
-          # amount will be ignored Represented in the lowest denomination of the currency
-          # (e.g., cents for USD). For example, to charge $1.00, pass `100`.
-          amount: nil
-        )
-        end
-
-        sig do
-          override.returns(
-            {
-              product_id: String,
-              quantity: Integer,
-              amount: T.nilable(Integer)
-            }
-          )
-        end
-        def to_hash
-        end
       end
     end
   end

@@ -39,10 +39,8 @@ module Dodopayments
       #   Customer-supplied churn reason (only valid when cancelling or scheduling
       #   cancellation).
       #
-      #   @return [Symbol, Dodopayments::Models::SubscriptionUpdateParams::CancellationFeedback, nil]
-      optional :cancellation_feedback,
-               enum: -> { Dodopayments::SubscriptionUpdateParams::CancellationFeedback },
-               nil?: true
+      #   @return [Symbol, Dodopayments::Models::CancellationFeedback, nil]
+      optional :cancellation_feedback, enum: -> { Dodopayments::CancellationFeedback }, nil?: true
 
       # @!attribute credit_entitlement_cart
       #   Update credit entitlement cart settings
@@ -98,7 +96,7 @@ module Dodopayments
       #
       #   @param cancellation_comment [String, nil] Free-text cancellation comment (only valid when cancelling or scheduling cancell
       #
-      #   @param cancellation_feedback [Symbol, Dodopayments::Models::SubscriptionUpdateParams::CancellationFeedback, nil] Customer-supplied churn reason (only valid when cancelling or scheduling cancell
+      #   @param cancellation_feedback [Symbol, Dodopayments::Models::CancellationFeedback, nil] Customer-supplied churn reason (only valid when cancelling or scheduling cancell
       #
       #   @param credit_entitlement_cart [Array<Dodopayments::Models::SubscriptionUpdateParams::CreditEntitlementCart>, nil] Update credit entitlement cart settings
       #
@@ -123,24 +121,6 @@ module Dodopayments
         CANCELLED_BY_MERCHANT = :cancelled_by_merchant
         CANCELLED_BY_MERCHANT_SEND_DUNNING = :cancelled_by_merchant_send_dunning
         DODO_TEAM = :dodo_team
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
-
-      # Customer-supplied churn reason (only valid when cancelling or scheduling
-      # cancellation).
-      module CancellationFeedback
-        extend Dodopayments::Internal::Type::Enum
-
-        TOO_EXPENSIVE = :too_expensive
-        MISSING_FEATURES = :missing_features
-        SWITCHED_SERVICE = :switched_service
-        UNUSED = :unused
-        CUSTOMER_SERVICE = :customer_service
-        LOW_QUALITY = :low_quality
-        TOO_COMPLEX = :too_complex
-        OTHER = :other
 
         # @!method self.values
         #   @return [Array<Symbol>]

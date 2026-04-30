@@ -13,9 +13,9 @@ module Dodopayments
       #
       # @overload create(integration_config:, integration_type:, name:, description: nil, metadata: nil, request_options: {})
       #
-      # @param integration_config [Dodopayments::Models::EntitlementCreateParams::IntegrationConfig::GitHubConfig, Dodopayments::Models::EntitlementCreateParams::IntegrationConfig::DiscordConfig, Dodopayments::Models::EntitlementCreateParams::IntegrationConfig::TelegramConfig, Dodopayments::Models::EntitlementCreateParams::IntegrationConfig::FigmaConfig, Dodopayments::Models::EntitlementCreateParams::IntegrationConfig::FramerConfig, Dodopayments::Models::EntitlementCreateParams::IntegrationConfig::NotionConfig, Dodopayments::Models::EntitlementCreateParams::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::EntitlementCreateParams::IntegrationConfig::LicenseKeyConfig] Platform-specific configuration (validated per integration_type)
+      # @param integration_config [Dodopayments::Models::IntegrationConfig::GitHubConfig, Dodopayments::Models::IntegrationConfig::DiscordConfig, Dodopayments::Models::IntegrationConfig::TelegramConfig, Dodopayments::Models::IntegrationConfig::FigmaConfig, Dodopayments::Models::IntegrationConfig::FramerConfig, Dodopayments::Models::IntegrationConfig::NotionConfig, Dodopayments::Models::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig] Platform-specific configuration (validated per integration_type)
       #
-      # @param integration_type [Symbol, Dodopayments::Models::EntitlementCreateParams::IntegrationType] Which platform integration this entitlement uses
+      # @param integration_type [Symbol, Dodopayments::Models::EntitlementIntegrationType] Which platform integration this entitlement uses
       #
       # @param name [String] Display name for this entitlement
       #
@@ -25,7 +25,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::EntitlementCreateResponse]
+      # @return [Dodopayments::Models::Entitlement]
       #
       # @see Dodopayments::Models::EntitlementCreateParams
       def create(params)
@@ -34,7 +34,7 @@ module Dodopayments
           method: :post,
           path: "entitlements",
           body: parsed,
-          model: Dodopayments::Models::EntitlementCreateResponse,
+          model: Dodopayments::Entitlement,
           options: options
         )
       end
@@ -47,14 +47,14 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::EntitlementRetrieveResponse]
+      # @return [Dodopayments::Models::Entitlement]
       #
       # @see Dodopayments::Models::EntitlementRetrieveParams
       def retrieve(id, params = {})
         @client.request(
           method: :get,
           path: ["entitlements/%1$s", id],
-          model: Dodopayments::Models::EntitlementRetrieveResponse,
+          model: Dodopayments::Entitlement,
           options: params[:request_options]
         )
       end
@@ -70,7 +70,7 @@ module Dodopayments
       #
       # @param description [String, nil]
       #
-      # @param integration_config [Dodopayments::Models::EntitlementUpdateParams::IntegrationConfig::GitHubConfig, Dodopayments::Models::EntitlementUpdateParams::IntegrationConfig::DiscordConfig, Dodopayments::Models::EntitlementUpdateParams::IntegrationConfig::TelegramConfig, Dodopayments::Models::EntitlementUpdateParams::IntegrationConfig::FigmaConfig, Dodopayments::Models::EntitlementUpdateParams::IntegrationConfig::FramerConfig, Dodopayments::Models::EntitlementUpdateParams::IntegrationConfig::NotionConfig, Dodopayments::Models::EntitlementUpdateParams::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::EntitlementUpdateParams::IntegrationConfig::LicenseKeyConfig, nil] Platform-specific configuration for an entitlement.
+      # @param integration_config [Dodopayments::Models::IntegrationConfig::GitHubConfig, Dodopayments::Models::IntegrationConfig::DiscordConfig, Dodopayments::Models::IntegrationConfig::TelegramConfig, Dodopayments::Models::IntegrationConfig::FigmaConfig, Dodopayments::Models::IntegrationConfig::FramerConfig, Dodopayments::Models::IntegrationConfig::NotionConfig, Dodopayments::Models::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig, nil] Platform-specific configuration for an entitlement.
       #
       # @param metadata [Hash{Symbol=>String}, nil]
       #
@@ -78,7 +78,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Models::EntitlementUpdateResponse]
+      # @return [Dodopayments::Models::Entitlement]
       #
       # @see Dodopayments::Models::EntitlementUpdateParams
       def update(id, params = {})
@@ -87,7 +87,7 @@ module Dodopayments
           method: :patch,
           path: ["entitlements/%1$s", id],
           body: parsed,
-          model: Dodopayments::Models::EntitlementUpdateResponse,
+          model: Dodopayments::Entitlement,
           options: options
         )
       end
@@ -104,7 +104,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::EntitlementListResponse>]
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Entitlement>]
       #
       # @see Dodopayments::Models::EntitlementListParams
       def list(params = {})
@@ -115,7 +115,7 @@ module Dodopayments
           path: "entitlements",
           query: query,
           page: Dodopayments::Internal::DefaultPageNumberPagination,
-          model: Dodopayments::Models::EntitlementListResponse,
+          model: Dodopayments::Entitlement,
           options: options
         )
       end

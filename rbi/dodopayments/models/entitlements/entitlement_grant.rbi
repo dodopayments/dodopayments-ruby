@@ -2,12 +2,14 @@
 
 module Dodopayments
   module Models
+    EntitlementGrant = Entitlements::EntitlementGrant
+
     module Entitlements
-      class GrantListResponse < Dodopayments::Internal::Type::BaseModel
+      class EntitlementGrant < Dodopayments::Internal::Type::BaseModel
         OrHash =
           T.type_alias do
             T.any(
-              Dodopayments::Models::Entitlements::GrantListResponse,
+              Dodopayments::Entitlements::EntitlementGrant,
               Dodopayments::Internal::AnyHash
             )
           end
@@ -32,7 +34,7 @@ module Dodopayments
 
         sig do
           returns(
-            Dodopayments::Models::Entitlements::GrantListResponse::Status::TaggedSymbol
+            Dodopayments::Entitlements::EntitlementGrant::Status::TaggedSymbol
           )
         end
         attr_accessor :status
@@ -63,21 +65,13 @@ module Dodopayments
         attr_accessor :error_message
 
         # Present only when the entitlement integration_type is `license_key`.
-        sig do
-          returns(
-            T.nilable(
-              Dodopayments::Models::Entitlements::GrantListResponse::LicenseKey
-            )
-          )
-        end
+        sig { returns(T.nilable(Dodopayments::Entitlements::LicenseKeyGrant)) }
         attr_reader :license_key
 
         sig do
           params(
             license_key:
-              T.nilable(
-                Dodopayments::Models::Entitlements::GrantListResponse::LicenseKey::OrHash
-              )
+              T.nilable(Dodopayments::Entitlements::LicenseKeyGrant::OrHash)
           ).void
         end
         attr_writer :license_key
@@ -115,7 +109,7 @@ module Dodopayments
             entitlement_id: String,
             external_id: String,
             status:
-              Dodopayments::Models::Entitlements::GrantListResponse::Status::OrSymbol,
+              Dodopayments::Entitlements::EntitlementGrant::Status::OrSymbol,
             updated_at: Time,
             delivered_at: T.nilable(Time),
             digital_product_delivery:
@@ -123,9 +117,7 @@ module Dodopayments
             error_code: T.nilable(String),
             error_message: T.nilable(String),
             license_key:
-              T.nilable(
-                Dodopayments::Models::Entitlements::GrantListResponse::LicenseKey::OrHash
-              ),
+              T.nilable(Dodopayments::Entitlements::LicenseKeyGrant::OrHash),
             metadata: T.anything,
             oauth_expires_at: T.nilable(Time),
             oauth_url: T.nilable(String),
@@ -172,7 +164,7 @@ module Dodopayments
               entitlement_id: String,
               external_id: String,
               status:
-                Dodopayments::Models::Entitlements::GrantListResponse::Status::TaggedSymbol,
+                Dodopayments::Entitlements::EntitlementGrant::Status::TaggedSymbol,
               updated_at: Time,
               delivered_at: T.nilable(Time),
               digital_product_delivery:
@@ -180,9 +172,7 @@ module Dodopayments
               error_code: T.nilable(String),
               error_message: T.nilable(String),
               license_key:
-                T.nilable(
-                  Dodopayments::Models::Entitlements::GrantListResponse::LicenseKey
-                ),
+                T.nilable(Dodopayments::Entitlements::LicenseKeyGrant),
               metadata: T.anything,
               oauth_expires_at: T.nilable(Time),
               oauth_url: T.nilable(String),
@@ -203,7 +193,7 @@ module Dodopayments
             T.type_alias do
               T.all(
                 Symbol,
-                Dodopayments::Models::Entitlements::GrantListResponse::Status
+                Dodopayments::Entitlements::EntitlementGrant::Status
               )
             end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
@@ -211,84 +201,32 @@ module Dodopayments
           PENDING =
             T.let(
               :Pending,
-              Dodopayments::Models::Entitlements::GrantListResponse::Status::TaggedSymbol
+              Dodopayments::Entitlements::EntitlementGrant::Status::TaggedSymbol
             )
           DELIVERED =
             T.let(
               :Delivered,
-              Dodopayments::Models::Entitlements::GrantListResponse::Status::TaggedSymbol
+              Dodopayments::Entitlements::EntitlementGrant::Status::TaggedSymbol
             )
           FAILED =
             T.let(
               :Failed,
-              Dodopayments::Models::Entitlements::GrantListResponse::Status::TaggedSymbol
+              Dodopayments::Entitlements::EntitlementGrant::Status::TaggedSymbol
             )
           REVOKED =
             T.let(
               :Revoked,
-              Dodopayments::Models::Entitlements::GrantListResponse::Status::TaggedSymbol
+              Dodopayments::Entitlements::EntitlementGrant::Status::TaggedSymbol
             )
 
           sig do
             override.returns(
               T::Array[
-                Dodopayments::Models::Entitlements::GrantListResponse::Status::TaggedSymbol
+                Dodopayments::Entitlements::EntitlementGrant::Status::TaggedSymbol
               ]
             )
           end
           def self.values
-          end
-        end
-
-        class LicenseKey < Dodopayments::Internal::Type::BaseModel
-          OrHash =
-            T.type_alias do
-              T.any(
-                Dodopayments::Models::Entitlements::GrantListResponse::LicenseKey,
-                Dodopayments::Internal::AnyHash
-              )
-            end
-
-          sig { returns(Integer) }
-          attr_accessor :activations_used
-
-          sig { returns(String) }
-          attr_accessor :key
-
-          sig { returns(T.nilable(Integer)) }
-          attr_accessor :activations_limit
-
-          sig { returns(T.nilable(Time)) }
-          attr_accessor :expires_at
-
-          # Present only when the entitlement integration_type is `license_key`.
-          sig do
-            params(
-              activations_used: Integer,
-              key: String,
-              activations_limit: T.nilable(Integer),
-              expires_at: T.nilable(Time)
-            ).returns(T.attached_class)
-          end
-          def self.new(
-            activations_used:,
-            key:,
-            activations_limit: nil,
-            expires_at: nil
-          )
-          end
-
-          sig do
-            override.returns(
-              {
-                activations_used: Integer,
-                key: String,
-                activations_limit: T.nilable(Integer),
-                expires_at: T.nilable(Time)
-              }
-            )
-          end
-          def to_hash
           end
         end
       end
