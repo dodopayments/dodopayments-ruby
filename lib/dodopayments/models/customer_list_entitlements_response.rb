@@ -38,9 +38,8 @@ module Dodopayments
 
         # @!attribute integration_type
         #
-        #   @return [Symbol, Dodopayments::Models::CustomerListEntitlementsResponse::Item::IntegrationType]
-        required :integration_type,
-                 enum: -> { Dodopayments::Models::CustomerListEntitlementsResponse::Item::IntegrationType }
+        #   @return [Symbol, Dodopayments::Models::EntitlementIntegrationType]
+        required :integration_type, enum: -> { Dodopayments::EntitlementIntegrationType }
 
         # @!attribute status
         #
@@ -76,7 +75,7 @@ module Dodopayments
         #
         #   @param grant_id [String] Grant id (the per-customer row in `entitlement_grants`).
         #
-        #   @param integration_type [Symbol, Dodopayments::Models::CustomerListEntitlementsResponse::Item::IntegrationType]
+        #   @param integration_type [Symbol, Dodopayments::Models::EntitlementIntegrationType]
         #
         #   @param status [Symbol, Dodopayments::Models::CustomerListEntitlementsResponse::Item::Status]
         #
@@ -87,23 +86,6 @@ module Dodopayments
         #   @param entitlement_description [String, nil]
         #
         #   @param revoked_at [Time, nil]
-
-        # @see Dodopayments::Models::CustomerListEntitlementsResponse::Item#integration_type
-        module IntegrationType
-          extend Dodopayments::Internal::Type::Enum
-
-          DISCORD = :discord
-          TELEGRAM = :telegram
-          GITHUB = :github
-          FIGMA = :figma
-          FRAMER = :framer
-          NOTION = :notion
-          DIGITAL_FILES = :digital_files
-          LICENSE_KEY = :license_key
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
 
         # @see Dodopayments::Models::CustomerListEntitlementsResponse::Item#status
         module Status

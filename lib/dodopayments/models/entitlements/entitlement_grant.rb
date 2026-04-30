@@ -3,8 +3,8 @@
 module Dodopayments
   module Models
     module Entitlements
-      # @see Dodopayments::Resources::Entitlements::Grants#revoke
-      class GrantRevokeResponse < Dodopayments::Internal::Type::BaseModel
+      # @see Dodopayments::Resources::Entitlements::Grants#list
+      class EntitlementGrant < Dodopayments::Internal::Type::BaseModel
         # @!attribute id
         #
         #   @return [String]
@@ -37,8 +37,8 @@ module Dodopayments
 
         # @!attribute status
         #
-        #   @return [Symbol, Dodopayments::Models::Entitlements::GrantRevokeResponse::Status]
-        required :status, enum: -> { Dodopayments::Models::Entitlements::GrantRevokeResponse::Status }
+        #   @return [Symbol, Dodopayments::Models::Entitlements::EntitlementGrant::Status]
+        required :status, enum: -> { Dodopayments::Entitlements::EntitlementGrant::Status }
 
         # @!attribute updated_at
         #
@@ -70,10 +70,8 @@ module Dodopayments
         # @!attribute license_key
         #   Present only when the entitlement integration_type is `license_key`.
         #
-        #   @return [Dodopayments::Models::Entitlements::GrantRevokeResponse::LicenseKey, nil]
-        optional :license_key,
-                 -> { Dodopayments::Models::Entitlements::GrantRevokeResponse::LicenseKey },
-                 nil?: true
+        #   @return [Dodopayments::Models::Entitlements::LicenseKeyGrant, nil]
+        optional :license_key, -> { Dodopayments::Entitlements::LicenseKeyGrant }, nil?: true
 
         # @!attribute metadata
         #
@@ -112,7 +110,7 @@ module Dodopayments
 
         # @!method initialize(id:, business_id:, created_at:, customer_id:, entitlement_id:, external_id:, status:, updated_at:, delivered_at: nil, digital_product_delivery: nil, error_code: nil, error_message: nil, license_key: nil, metadata: nil, oauth_expires_at: nil, oauth_url: nil, payment_id: nil, revocation_reason: nil, revoked_at: nil, subscription_id: nil)
         #   Some parameter documentations has been truncated, see
-        #   {Dodopayments::Models::Entitlements::GrantRevokeResponse} for more details.
+        #   {Dodopayments::Models::Entitlements::EntitlementGrant} for more details.
         #
         #   @param id [String]
         #
@@ -126,7 +124,7 @@ module Dodopayments
         #
         #   @param external_id [String]
         #
-        #   @param status [Symbol, Dodopayments::Models::Entitlements::GrantRevokeResponse::Status]
+        #   @param status [Symbol, Dodopayments::Models::Entitlements::EntitlementGrant::Status]
         #
         #   @param updated_at [Time]
         #
@@ -138,7 +136,7 @@ module Dodopayments
         #
         #   @param error_message [String, nil]
         #
-        #   @param license_key [Dodopayments::Models::Entitlements::GrantRevokeResponse::LicenseKey, nil] Present only when the entitlement integration_type is `license_key`.
+        #   @param license_key [Dodopayments::Models::Entitlements::LicenseKeyGrant, nil] Present only when the entitlement integration_type is `license_key`.
         #
         #   @param metadata [Object]
         #
@@ -154,7 +152,7 @@ module Dodopayments
         #
         #   @param subscription_id [String, nil]
 
-        # @see Dodopayments::Models::Entitlements::GrantRevokeResponse#status
+        # @see Dodopayments::Models::Entitlements::EntitlementGrant#status
         module Status
           extend Dodopayments::Internal::Type::Enum
 
@@ -166,38 +164,9 @@ module Dodopayments
           # @!method self.values
           #   @return [Array<Symbol>]
         end
-
-        # @see Dodopayments::Models::Entitlements::GrantRevokeResponse#license_key
-        class LicenseKey < Dodopayments::Internal::Type::BaseModel
-          # @!attribute activations_used
-          #
-          #   @return [Integer]
-          required :activations_used, Integer
-
-          # @!attribute key
-          #
-          #   @return [String]
-          required :key, String
-
-          # @!attribute activations_limit
-          #
-          #   @return [Integer, nil]
-          optional :activations_limit, Integer, nil?: true
-
-          # @!attribute expires_at
-          #
-          #   @return [Time, nil]
-          optional :expires_at, Time, nil?: true
-
-          # @!method initialize(activations_used:, key:, activations_limit: nil, expires_at: nil)
-          #   Present only when the entitlement integration_type is `license_key`.
-          #
-          #   @param activations_used [Integer]
-          #   @param key [String]
-          #   @param activations_limit [Integer, nil]
-          #   @param expires_at [Time, nil]
-        end
       end
     end
+
+    EntitlementGrant = Entitlements::EntitlementGrant
   end
 end

@@ -23,11 +23,7 @@ module Dodopayments
           metadata: T::Hash[Symbol, String],
           on_demand: T.nilable(Dodopayments::OnDemandSubscription::OrHash),
           one_time_product_cart:
-            T.nilable(
-              T::Array[
-                Dodopayments::SubscriptionCreateParams::OneTimeProductCart::OrHash
-              ]
-            ),
+            T.nilable(T::Array[Dodopayments::OneTimeProductCartItem::OrHash]),
           payment_link: T.nilable(T::Boolean),
           payment_method_id: T.nilable(String),
           redirect_immediately: T::Boolean,
@@ -131,9 +127,7 @@ module Dodopayments
             ),
           cancellation_comment: T.nilable(String),
           cancellation_feedback:
-            T.nilable(
-              Dodopayments::SubscriptionUpdateParams::CancellationFeedback::OrSymbol
-            ),
+            T.nilable(Dodopayments::CancellationFeedback::OrSymbol),
           credit_entitlement_cart:
             T.nilable(
               T::Array[

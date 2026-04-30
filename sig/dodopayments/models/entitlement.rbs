@@ -1,0 +1,67 @@
+module Dodopayments
+  module Models
+    type entitlement =
+      {
+        id: String,
+        business_id: String,
+        created_at: Time,
+        integration_config: Dodopayments::Models::integration_config_response,
+        integration_type: Dodopayments::Models::entitlement_integration_type,
+        is_active: bool,
+        name: String,
+        updated_at: Time,
+        description: String?,
+        metadata: top
+      }
+
+    class Entitlement < Dodopayments::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor business_id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor integration_config: Dodopayments::Models::integration_config_response
+
+      attr_accessor integration_type: Dodopayments::Models::entitlement_integration_type
+
+      attr_accessor is_active: bool
+
+      attr_accessor name: String
+
+      attr_accessor updated_at: Time
+
+      attr_accessor description: String?
+
+      attr_reader metadata: top?
+
+      def metadata=: (top) -> top
+
+      def initialize: (
+        id: String,
+        business_id: String,
+        created_at: Time,
+        integration_config: Dodopayments::Models::integration_config_response,
+        integration_type: Dodopayments::Models::entitlement_integration_type,
+        is_active: bool,
+        name: String,
+        updated_at: Time,
+        ?description: String?,
+        ?metadata: top
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        business_id: String,
+        created_at: Time,
+        integration_config: Dodopayments::Models::integration_config_response,
+        integration_type: Dodopayments::Models::entitlement_integration_type,
+        is_active: bool,
+        name: String,
+        updated_at: Time,
+        description: String?,
+        metadata: top
+      }
+    end
+  end
+end

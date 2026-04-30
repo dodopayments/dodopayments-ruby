@@ -6,34 +6,34 @@ module Dodopayments
       attr_reader grants: Dodopayments::Resources::Entitlements::Grants
 
       def create: (
-        integration_config: Dodopayments::Models::EntitlementCreateParams::integration_config,
-        integration_type: Dodopayments::Models::EntitlementCreateParams::integration_type,
+        integration_config: Dodopayments::Models::integration_config,
+        integration_type: Dodopayments::Models::entitlement_integration_type,
         name: String,
         ?description: String?,
         ?metadata: ::Hash[Symbol, String]?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::EntitlementCreateResponse
+      ) -> Dodopayments::Entitlement
 
       def retrieve: (
         String id,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::EntitlementRetrieveResponse
+      ) -> Dodopayments::Entitlement
 
       def update: (
         String id,
         ?description: String?,
-        ?integration_config: Dodopayments::Models::EntitlementUpdateParams::integration_config?,
+        ?integration_config: Dodopayments::Models::integration_config?,
         ?metadata: ::Hash[Symbol, String]?,
         ?name: String?,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Models::EntitlementUpdateResponse
+      ) -> Dodopayments::Entitlement
 
       def list: (
         ?integration_type: Dodopayments::Models::EntitlementListParams::integration_type,
         ?page_number: Integer,
         ?page_size: Integer,
         ?request_options: Dodopayments::request_opts
-      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::EntitlementListResponse]
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Entitlement]
 
       def delete: (
         String id,

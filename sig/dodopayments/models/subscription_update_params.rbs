@@ -7,7 +7,7 @@ module Dodopayments
         cancel_at_next_billing_date: bool?,
         cancel_reason: Dodopayments::Models::SubscriptionUpdateParams::cancel_reason?,
         cancellation_comment: String?,
-        cancellation_feedback: Dodopayments::Models::SubscriptionUpdateParams::cancellation_feedback?,
+        cancellation_feedback: Dodopayments::Models::cancellation_feedback?,
         credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?,
         customer_name: String?,
         disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
@@ -32,7 +32,7 @@ module Dodopayments
 
       attr_accessor cancellation_comment: String?
 
-      attr_accessor cancellation_feedback: Dodopayments::Models::SubscriptionUpdateParams::cancellation_feedback?
+      attr_accessor cancellation_feedback: Dodopayments::Models::cancellation_feedback?
 
       attr_accessor credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?
 
@@ -54,7 +54,7 @@ module Dodopayments
         ?cancel_at_next_billing_date: bool?,
         ?cancel_reason: Dodopayments::Models::SubscriptionUpdateParams::cancel_reason?,
         ?cancellation_comment: String?,
-        ?cancellation_feedback: Dodopayments::Models::SubscriptionUpdateParams::cancellation_feedback?,
+        ?cancellation_feedback: Dodopayments::Models::cancellation_feedback?,
         ?credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?,
         ?customer_name: String?,
         ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
@@ -71,7 +71,7 @@ module Dodopayments
         cancel_at_next_billing_date: bool?,
         cancel_reason: Dodopayments::Models::SubscriptionUpdateParams::cancel_reason?,
         cancellation_comment: String?,
-        cancellation_feedback: Dodopayments::Models::SubscriptionUpdateParams::cancellation_feedback?,
+        cancellation_feedback: Dodopayments::Models::cancellation_feedback?,
         credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?,
         customer_name: String?,
         disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
@@ -97,31 +97,6 @@ module Dodopayments
         DODO_TEAM: :dodo_team
 
         def self?.values: -> ::Array[Dodopayments::Models::SubscriptionUpdateParams::cancel_reason]
-      end
-
-      type cancellation_feedback =
-        :too_expensive
-        | :missing_features
-        | :switched_service
-        | :unused
-        | :customer_service
-        | :low_quality
-        | :too_complex
-        | :other
-
-      module CancellationFeedback
-        extend Dodopayments::Internal::Type::Enum
-
-        TOO_EXPENSIVE: :too_expensive
-        MISSING_FEATURES: :missing_features
-        SWITCHED_SERVICE: :switched_service
-        UNUSED: :unused
-        CUSTOMER_SERVICE: :customer_service
-        LOW_QUALITY: :low_quality
-        TOO_COMPLEX: :too_complex
-        OTHER: :other
-
-        def self?.values: -> ::Array[Dodopayments::Models::SubscriptionUpdateParams::cancellation_feedback]
       end
 
       type credit_entitlement_cart =

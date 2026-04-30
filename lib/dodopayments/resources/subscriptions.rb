@@ -34,7 +34,7 @@ module Dodopayments
       #
       # @param on_demand [Dodopayments::Models::OnDemandSubscription, nil]
       #
-      # @param one_time_product_cart [Array<Dodopayments::Models::SubscriptionCreateParams::OneTimeProductCart>, nil] List of one time products that will be bundled with the first payment for this s
+      # @param one_time_product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil] List of one time products that will be bundled with the first payment for this s
       #
       # @param payment_link [Boolean, nil] If true, generates a payment link.
       #
@@ -103,7 +103,7 @@ module Dodopayments
       #
       # @param cancellation_comment [String, nil] Free-text cancellation comment (only valid when cancelling or scheduling cancell
       #
-      # @param cancellation_feedback [Symbol, Dodopayments::Models::SubscriptionUpdateParams::CancellationFeedback, nil] Customer-supplied churn reason (only valid when cancelling or scheduling cancell
+      # @param cancellation_feedback [Symbol, Dodopayments::Models::CancellationFeedback, nil] Customer-supplied churn reason (only valid when cancelling or scheduling cancell
       #
       # @param credit_entitlement_cart [Array<Dodopayments::Models::SubscriptionUpdateParams::CreditEntitlementCart>, nil] Update credit entitlement cart settings
       #

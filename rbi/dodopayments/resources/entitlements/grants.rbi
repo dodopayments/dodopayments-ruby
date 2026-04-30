@@ -16,7 +16,7 @@ module Dodopayments
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(
             Dodopayments::Internal::DefaultPageNumberPagination[
-              Dodopayments::Models::Entitlements::GrantListResponse
+              Dodopayments::Entitlements::EntitlementGrant
             ]
           )
         end
@@ -44,7 +44,7 @@ module Dodopayments
             grant_id: String,
             id: String,
             request_options: Dodopayments::RequestOptions::OrHash
-          ).returns(Dodopayments::Models::Entitlements::GrantRevokeResponse)
+          ).returns(Dodopayments::Entitlements::EntitlementGrant)
         end
         def revoke(
           # Grant ID

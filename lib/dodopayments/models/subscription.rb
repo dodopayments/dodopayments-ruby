@@ -161,12 +161,8 @@ module Dodopayments
       # @!attribute cancellation_feedback
       #   Customer-supplied churn reason, if any
       #
-      #   @return [Symbol, Dodopayments::Models::Subscription::CancellationFeedback, nil]
-      optional :cancellation_feedback,
-               enum: -> {
-                 Dodopayments::Subscription::CancellationFeedback
-               },
-               nil?: true
+      #   @return [Symbol, Dodopayments::Models::CancellationFeedback, nil]
+      optional :cancellation_feedback, enum: -> { Dodopayments::CancellationFeedback }, nil?: true
 
       # @!attribute cancelled_at
       #   Cancelled timestamp if the subscription is cancelled
@@ -209,8 +205,8 @@ module Dodopayments
       # @!attribute scheduled_change
       #   Scheduled plan change details, if any
       #
-      #   @return [Dodopayments::Models::Subscription::ScheduledChange, nil]
-      optional :scheduled_change, -> { Dodopayments::Subscription::ScheduledChange }, nil?: true
+      #   @return [Dodopayments::Models::ScheduledPlanChange, nil]
+      optional :scheduled_change, -> { Dodopayments::ScheduledPlanChange }, nil?: true
 
       # @!attribute tax_id
       #   Tax identifier provided for this subscription (if applicable)
@@ -274,7 +270,7 @@ module Dodopayments
       #
       #   @param cancellation_comment [String, nil] Free-text cancellation comment, if any
       #
-      #   @param cancellation_feedback [Symbol, Dodopayments::Models::Subscription::CancellationFeedback, nil] Customer-supplied churn reason, if any
+      #   @param cancellation_feedback [Symbol, Dodopayments::Models::CancellationFeedback, nil] Customer-supplied churn reason, if any
       #
       #   @param cancelled_at [Time, nil] Cancelled timestamp if the subscription is cancelled
       #
@@ -288,126 +284,9 @@ module Dodopayments
       #
       #   @param payment_method_id [String, nil] Saved payment method id used for recurring charges
       #
-      #   @param scheduled_change [Dodopayments::Models::Subscription::ScheduledChange, nil] Scheduled plan change details, if any
+      #   @param scheduled_change [Dodopayments::Models::ScheduledPlanChange, nil] Scheduled plan change details, if any
       #
       #   @param tax_id [String, nil] Tax identifier provided for this subscription (if applicable)
-
-      # Customer-supplied churn reason, if any
-      #
-      # @see Dodopayments::Models::Subscription#cancellation_feedback
-      module CancellationFeedback
-        extend Dodopayments::Internal::Type::Enum
-
-        TOO_EXPENSIVE = :too_expensive
-        MISSING_FEATURES = :missing_features
-        SWITCHED_SERVICE = :switched_service
-        UNUSED = :unused
-        CUSTOMER_SERVICE = :customer_service
-        LOW_QUALITY = :low_quality
-        TOO_COMPLEX = :too_complex
-        OTHER = :other
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
-
-      # @see Dodopayments::Models::Subscription#scheduled_change
-      class ScheduledChange < Dodopayments::Internal::Type::BaseModel
-        # @!attribute id
-        #   The scheduled plan change ID
-        #
-        #   @return [String]
-        required :id, String
-
-        # @!attribute addons
-        #   Addons included in the scheduled change
-        #
-        #   @return [Array<Dodopayments::Models::Subscription::ScheduledChange::Addon>]
-        required :addons,
-                 -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Subscription::ScheduledChange::Addon] }
-
-        # @!attribute created_at
-        #   When this scheduled change was created
-        #
-        #   @return [Time]
-        required :created_at, Time
-
-        # @!attribute effective_at
-        #   When the change will be applied
-        #
-        #   @return [Time]
-        required :effective_at, Time
-
-        # @!attribute product_id
-        #   The product ID the subscription will change to
-        #
-        #   @return [String]
-        required :product_id, String
-
-        # @!attribute quantity
-        #   Quantity for the new plan
-        #
-        #   @return [Integer]
-        required :quantity, Integer
-
-        # @!attribute product_description
-        #   Description of the product being changed to
-        #
-        #   @return [String, nil]
-        optional :product_description, String, nil?: true
-
-        # @!attribute product_name
-        #   Name of the product being changed to
-        #
-        #   @return [String, nil]
-        optional :product_name, String, nil?: true
-
-        # @!method initialize(id:, addons:, created_at:, effective_at:, product_id:, quantity:, product_description: nil, product_name: nil)
-        #   Scheduled plan change details, if any
-        #
-        #   @param id [String] The scheduled plan change ID
-        #
-        #   @param addons [Array<Dodopayments::Models::Subscription::ScheduledChange::Addon>] Addons included in the scheduled change
-        #
-        #   @param created_at [Time] When this scheduled change was created
-        #
-        #   @param effective_at [Time] When the change will be applied
-        #
-        #   @param product_id [String] The product ID the subscription will change to
-        #
-        #   @param quantity [Integer] Quantity for the new plan
-        #
-        #   @param product_description [String, nil] Description of the product being changed to
-        #
-        #   @param product_name [String, nil] Name of the product being changed to
-
-        class Addon < Dodopayments::Internal::Type::BaseModel
-          # @!attribute addon_id
-          #   The addon ID
-          #
-          #   @return [String]
-          required :addon_id, String
-
-          # @!attribute name
-          #   Name of the addon
-          #
-          #   @return [String]
-          required :name, String
-
-          # @!attribute quantity
-          #   Quantity of the addon
-          #
-          #   @return [Integer]
-          required :quantity, Integer
-
-          # @!method initialize(addon_id:, name:, quantity:)
-          #   @param addon_id [String] The addon ID
-          #
-          #   @param name [String] Name of the addon
-          #
-          #   @param quantity [Integer] Quantity of the addon
-        end
-      end
     end
   end
 end

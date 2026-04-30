@@ -20,7 +20,7 @@ module Dodopayments
         #
         # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Entitlements::GrantListResponse>]
+        # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Entitlements::EntitlementGrant>]
         #
         # @see Dodopayments::Models::Entitlements::GrantListParams
         def list(id, params = {})
@@ -31,7 +31,7 @@ module Dodopayments
             path: ["entitlements/%1$s/grants", id],
             query: query,
             page: Dodopayments::Internal::DefaultPageNumberPagination,
-            model: Dodopayments::Models::Entitlements::GrantListResponse,
+            model: Dodopayments::Entitlements::EntitlementGrant,
             options: options
           )
         end
@@ -49,7 +49,7 @@ module Dodopayments
         #
         # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Dodopayments::Models::Entitlements::GrantRevokeResponse]
+        # @return [Dodopayments::Models::Entitlements::EntitlementGrant]
         #
         # @see Dodopayments::Models::Entitlements::GrantRevokeParams
         def revoke(grant_id, params)
@@ -61,7 +61,7 @@ module Dodopayments
           @client.request(
             method: :delete,
             path: ["entitlements/%1$s/grants/%2$s", id, grant_id],
-            model: Dodopayments::Models::Entitlements::GrantRevokeResponse,
+            model: Dodopayments::Entitlements::EntitlementGrant,
             options: options
           )
         end

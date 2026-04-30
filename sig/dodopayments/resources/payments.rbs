@@ -4,7 +4,7 @@ module Dodopayments
       def create: (
         billing: Dodopayments::BillingAddress,
         customer: Dodopayments::Models::customer_request,
-        product_cart: ::Array[Dodopayments::PaymentCreateParams::ProductCart],
+        product_cart: ::Array[Dodopayments::OneTimeProductCartItem],
         ?adaptive_currency_fees_inclusive: bool?,
         ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
         ?billing_currency: Dodopayments::Models::currency?,
