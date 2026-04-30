@@ -152,6 +152,22 @@ module Dodopayments
       #   @return [Integer]
       required :trial_period_days, Integer
 
+      # @!attribute cancellation_comment
+      #   Free-text cancellation comment, if any
+      #
+      #   @return [String, nil]
+      optional :cancellation_comment, String, nil?: true
+
+      # @!attribute cancellation_feedback
+      #   Customer-supplied churn reason, if any
+      #
+      #   @return [Symbol, Dodopayments::Models::Subscription::CancellationFeedback, nil]
+      optional :cancellation_feedback,
+               enum: -> {
+                 Dodopayments::Subscription::CancellationFeedback
+               },
+               nil?: true
+
       # @!attribute cancelled_at
       #   Cancelled timestamp if the subscription is cancelled
       #
@@ -202,7 +218,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(addons:, billing:, cancel_at_next_billing_date:, created_at:, credit_entitlement_cart:, currency:, customer:, metadata:, meter_credit_entitlement_cart:, meters:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, custom_field_responses: nil, discount_cycles_remaining: nil, discount_id: nil, expires_at: nil, payment_method_id: nil, scheduled_change: nil, tax_id: nil)
+      # @!method initialize(addons:, billing:, cancel_at_next_billing_date:, created_at:, credit_entitlement_cart:, currency:, customer:, metadata:, meter_credit_entitlement_cart:, meters:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancellation_comment: nil, cancellation_feedback: nil, cancelled_at: nil, custom_field_responses: nil, discount_cycles_remaining: nil, discount_id: nil, expires_at: nil, payment_method_id: nil, scheduled_change: nil, tax_id: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Subscription} for more details.
       #
@@ -256,6 +272,10 @@ module Dodopayments
       #
       #   @param trial_period_days [Integer] Number of days in the trial period (0 if no trial)
       #
+      #   @param cancellation_comment [String, nil] Free-text cancellation comment, if any
+      #
+      #   @param cancellation_feedback [Symbol, Dodopayments::Models::Subscription::CancellationFeedback, nil] Customer-supplied churn reason, if any
+      #
       #   @param cancelled_at [Time, nil] Cancelled timestamp if the subscription is cancelled
       #
       #   @param custom_field_responses [Array<Dodopayments::Models::CustomFieldResponse>, nil] Customer's responses to custom fields collected during checkout
@@ -271,6 +291,25 @@ module Dodopayments
       #   @param scheduled_change [Dodopayments::Models::Subscription::ScheduledChange, nil] Scheduled plan change details, if any
       #
       #   @param tax_id [String, nil] Tax identifier provided for this subscription (if applicable)
+
+      # Customer-supplied churn reason, if any
+      #
+      # @see Dodopayments::Models::Subscription#cancellation_feedback
+      module CancellationFeedback
+        extend Dodopayments::Internal::Type::Enum
+
+        TOO_EXPENSIVE = :too_expensive
+        MISSING_FEATURES = :missing_features
+        SWITCHED_SERVICE = :switched_service
+        UNUSED = :unused
+        CUSTOMER_SERVICE = :customer_service
+        LOW_QUALITY = :low_quality
+        TOO_COMPLEX = :too_complex
+        OTHER = :other
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
 
       # @see Dodopayments::Models::Subscription#scheduled_change
       class ScheduledChange < Dodopayments::Internal::Type::BaseModel

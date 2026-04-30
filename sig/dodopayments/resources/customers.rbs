@@ -48,6 +48,11 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::CustomerListCreditEntitlementsResponse
 
+      def list_entitlements: (
+        String customer_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::CustomerListEntitlementsResponse
+
       def retrieve_payment_methods: (
         String customer_id,
         ?request_options: Dodopayments::request_opts

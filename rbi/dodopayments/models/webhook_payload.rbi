@@ -1065,26 +1065,44 @@ module Dodopayments
           sig { returns(T.nilable(Time)) }
           attr_accessor :delivered_at
 
+          # Present only when the entitlement integration_type is `digital_files`. Populated
+          # eagerly on every list and single-record endpoint.
+          sig { returns(T.nilable(Dodopayments::DigitalProductDelivery)) }
+          attr_reader :digital_product_delivery
+
+          sig do
+            params(
+              digital_product_delivery:
+                T.nilable(Dodopayments::DigitalProductDelivery::OrHash)
+            ).void
+          end
+          attr_writer :digital_product_delivery
+
           sig { returns(T.nilable(String)) }
           attr_accessor :error_code
 
           sig { returns(T.nilable(String)) }
           attr_accessor :error_message
 
-          sig { returns(T.nilable(String)) }
-          attr_accessor :license_key
+          # Present only when the entitlement integration_type is `license_key`.
+          sig do
+            returns(
+              T.nilable(
+                Dodopayments::WebhookPayload::Data::EntitlementGrant::LicenseKey
+              )
+            )
+          end
+          attr_reader :license_key
 
-          sig { returns(T.nilable(Integer)) }
-          attr_accessor :license_key_activations_limit
-
-          sig { returns(T.nilable(Integer)) }
-          attr_accessor :license_key_activations_used
-
-          sig { returns(T.nilable(Time)) }
-          attr_accessor :license_key_expires_at
-
-          sig { returns(T.nilable(String)) }
-          attr_accessor :license_key_status
+          sig do
+            params(
+              license_key:
+                T.nilable(
+                  Dodopayments::WebhookPayload::Data::EntitlementGrant::LicenseKey::OrHash
+                )
+            ).void
+          end
+          attr_writer :license_key
 
           sig { returns(T.nilable(T.anything)) }
           attr_reader :metadata
@@ -1124,13 +1142,14 @@ module Dodopayments
                 Dodopayments::WebhookPayload::Data::EntitlementGrant::Status::OrSymbol,
               updated_at: Time,
               delivered_at: T.nilable(Time),
+              digital_product_delivery:
+                T.nilable(Dodopayments::DigitalProductDelivery::OrHash),
               error_code: T.nilable(String),
               error_message: T.nilable(String),
-              license_key: T.nilable(String),
-              license_key_activations_limit: T.nilable(Integer),
-              license_key_activations_used: T.nilable(Integer),
-              license_key_expires_at: T.nilable(Time),
-              license_key_status: T.nilable(String),
+              license_key:
+                T.nilable(
+                  Dodopayments::WebhookPayload::Data::EntitlementGrant::LicenseKey::OrHash
+                ),
               metadata: T.anything,
               oauth_expires_at: T.nilable(Time),
               oauth_url: T.nilable(String),
@@ -1151,13 +1170,13 @@ module Dodopayments
             status:,
             updated_at:,
             delivered_at: nil,
+            # Present only when the entitlement integration_type is `digital_files`. Populated
+            # eagerly on every list and single-record endpoint.
+            digital_product_delivery: nil,
             error_code: nil,
             error_message: nil,
+            # Present only when the entitlement integration_type is `license_key`.
             license_key: nil,
-            license_key_activations_limit: nil,
-            license_key_activations_used: nil,
-            license_key_expires_at: nil,
-            license_key_status: nil,
             metadata: nil,
             oauth_expires_at: nil,
             oauth_url: nil,
@@ -1183,13 +1202,14 @@ module Dodopayments
                   Dodopayments::WebhookPayload::Data::EntitlementGrant::Status::OrSymbol,
                 updated_at: Time,
                 delivered_at: T.nilable(Time),
+                digital_product_delivery:
+                  T.nilable(Dodopayments::DigitalProductDelivery),
                 error_code: T.nilable(String),
                 error_message: T.nilable(String),
-                license_key: T.nilable(String),
-                license_key_activations_limit: T.nilable(Integer),
-                license_key_activations_used: T.nilable(Integer),
-                license_key_expires_at: T.nilable(Time),
-                license_key_status: T.nilable(String),
+                license_key:
+                  T.nilable(
+                    Dodopayments::WebhookPayload::Data::EntitlementGrant::LicenseKey
+                  ),
                 metadata: T.anything,
                 oauth_expires_at: T.nilable(Time),
                 oauth_url: T.nilable(String),
@@ -1273,6 +1293,58 @@ module Dodopayments
               )
             end
             def self.values
+            end
+          end
+
+          class LicenseKey < Dodopayments::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  Dodopayments::WebhookPayload::Data::EntitlementGrant::LicenseKey,
+                  Dodopayments::Internal::AnyHash
+                )
+              end
+
+            sig { returns(Integer) }
+            attr_accessor :activations_used
+
+            sig { returns(String) }
+            attr_accessor :key
+
+            sig { returns(T.nilable(Integer)) }
+            attr_accessor :activations_limit
+
+            sig { returns(T.nilable(Time)) }
+            attr_accessor :expires_at
+
+            # Present only when the entitlement integration_type is `license_key`.
+            sig do
+              params(
+                activations_used: Integer,
+                key: String,
+                activations_limit: T.nilable(Integer),
+                expires_at: T.nilable(Time)
+              ).returns(T.attached_class)
+            end
+            def self.new(
+              activations_used:,
+              key:,
+              activations_limit: nil,
+              expires_at: nil
+            )
+            end
+
+            sig do
+              override.returns(
+                {
+                  activations_used: Integer,
+                  key: String,
+                  activations_limit: T.nilable(Integer),
+                  expires_at: T.nilable(Time)
+                }
+              )
+            end
+            def to_hash
             end
           end
         end

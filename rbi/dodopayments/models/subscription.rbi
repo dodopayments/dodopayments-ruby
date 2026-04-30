@@ -116,6 +116,20 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :trial_period_days
 
+      # Free-text cancellation comment, if any
+      sig { returns(T.nilable(String)) }
+      attr_accessor :cancellation_comment
+
+      # Customer-supplied churn reason, if any
+      sig do
+        returns(
+          T.nilable(
+            Dodopayments::Subscription::CancellationFeedback::TaggedSymbol
+          )
+        )
+      end
+      attr_accessor :cancellation_feedback
+
       # Cancelled timestamp if the subscription is cancelled
       sig { returns(T.nilable(Time)) }
       attr_accessor :cancelled_at
@@ -185,6 +199,11 @@ module Dodopayments
           subscription_period_interval: Dodopayments::TimeInterval::OrSymbol,
           tax_inclusive: T::Boolean,
           trial_period_days: Integer,
+          cancellation_comment: T.nilable(String),
+          cancellation_feedback:
+            T.nilable(
+              Dodopayments::Subscription::CancellationFeedback::OrSymbol
+            ),
           cancelled_at: T.nilable(Time),
           custom_field_responses:
             T.nilable(T::Array[Dodopayments::CustomFieldResponse::OrHash]),
@@ -248,6 +267,10 @@ module Dodopayments
         tax_inclusive:,
         # Number of days in the trial period (0 if no trial)
         trial_period_days:,
+        # Free-text cancellation comment, if any
+        cancellation_comment: nil,
+        # Customer-supplied churn reason, if any
+        cancellation_feedback: nil,
         # Cancelled timestamp if the subscription is cancelled
         cancelled_at: nil,
         # Customer's responses to custom fields collected during checkout
@@ -298,6 +321,11 @@ module Dodopayments
               Dodopayments::TimeInterval::TaggedSymbol,
             tax_inclusive: T::Boolean,
             trial_period_days: Integer,
+            cancellation_comment: T.nilable(String),
+            cancellation_feedback:
+              T.nilable(
+                Dodopayments::Subscription::CancellationFeedback::TaggedSymbol
+              ),
             cancelled_at: T.nilable(Time),
             custom_field_responses:
               T.nilable(T::Array[Dodopayments::CustomFieldResponse]),
@@ -312,6 +340,68 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      # Customer-supplied churn reason, if any
+      module CancellationFeedback
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, Dodopayments::Subscription::CancellationFeedback)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        TOO_EXPENSIVE =
+          T.let(
+            :too_expensive,
+            Dodopayments::Subscription::CancellationFeedback::TaggedSymbol
+          )
+        MISSING_FEATURES =
+          T.let(
+            :missing_features,
+            Dodopayments::Subscription::CancellationFeedback::TaggedSymbol
+          )
+        SWITCHED_SERVICE =
+          T.let(
+            :switched_service,
+            Dodopayments::Subscription::CancellationFeedback::TaggedSymbol
+          )
+        UNUSED =
+          T.let(
+            :unused,
+            Dodopayments::Subscription::CancellationFeedback::TaggedSymbol
+          )
+        CUSTOMER_SERVICE =
+          T.let(
+            :customer_service,
+            Dodopayments::Subscription::CancellationFeedback::TaggedSymbol
+          )
+        LOW_QUALITY =
+          T.let(
+            :low_quality,
+            Dodopayments::Subscription::CancellationFeedback::TaggedSymbol
+          )
+        TOO_COMPLEX =
+          T.let(
+            :too_complex,
+            Dodopayments::Subscription::CancellationFeedback::TaggedSymbol
+          )
+        OTHER =
+          T.let(
+            :other,
+            Dodopayments::Subscription::CancellationFeedback::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Dodopayments::Subscription::CancellationFeedback::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
       end
 
       class ScheduledChange < Dodopayments::Internal::Type::BaseModel

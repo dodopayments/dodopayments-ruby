@@ -5,6 +5,7 @@ module Dodopayments
         product_id: String,
         proration_billing_mode: Dodopayments::Models::UpdateSubscriptionPlanReq::proration_billing_mode,
         quantity: Integer,
+        adaptive_currency_fees_inclusive: bool?,
         addons: ::Array[Dodopayments::AttachAddon]?,
         discount_code: String?,
         effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
@@ -18,6 +19,8 @@ module Dodopayments
       attr_accessor proration_billing_mode: Dodopayments::Models::UpdateSubscriptionPlanReq::proration_billing_mode
 
       attr_accessor quantity: Integer
+
+      attr_accessor adaptive_currency_fees_inclusive: bool?
 
       attr_accessor addons: ::Array[Dodopayments::AttachAddon]?
 
@@ -37,6 +40,7 @@ module Dodopayments
         product_id: String,
         proration_billing_mode: Dodopayments::Models::UpdateSubscriptionPlanReq::proration_billing_mode,
         quantity: Integer,
+        ?adaptive_currency_fees_inclusive: bool?,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
         ?discount_code: String?,
         ?effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
@@ -48,6 +52,7 @@ module Dodopayments
         product_id: String,
         proration_billing_mode: Dodopayments::Models::UpdateSubscriptionPlanReq::proration_billing_mode,
         quantity: Integer,
+        adaptive_currency_fees_inclusive: bool?,
         addons: ::Array[Dodopayments::AttachAddon]?,
         discount_code: String?,
         effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,

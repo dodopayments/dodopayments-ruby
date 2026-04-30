@@ -19,6 +19,7 @@ module Dodopayments
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           discount_code: T.nilable(String),
           force_3ds: T.nilable(T::Boolean),
+          mandate_min_amount_inr_paise: T.nilable(Integer),
           metadata: T::Hash[Symbol, String],
           on_demand: T.nilable(Dodopayments::OnDemandSubscription::OrHash),
           one_time_product_cart:
@@ -30,6 +31,7 @@ module Dodopayments
           payment_link: T.nilable(T::Boolean),
           payment_method_id: T.nilable(String),
           redirect_immediately: T::Boolean,
+          require_phone_number: T::Boolean,
           return_url: T.nilable(String),
           short_link: T.nilable(T::Boolean),
           show_saved_payment_methods: T::Boolean,
@@ -63,6 +65,13 @@ module Dodopayments
         discount_code: nil,
         # Override merchant default 3DS behaviour for this subscription
         force_3ds: nil,
+        # Override the merchant-level mandate floor (in INR paise) for INR e-mandates on
+        # Indian-card recurring payments. The mandate amount sent to the processor is
+        # `max(this_floor, actual_billing_amount)`, so this is effectively the
+        # customer-facing authorization ceiling whenever billing is lower. When unset, the
+        # merchant setting applies; when that's also unset, the system default of ₹15,000
+        # applies.
+        mandate_min_amount_inr_paise: nil,
         # Additional metadata for the subscription Defaults to empty if not specified
         metadata: nil,
         on_demand: nil,
@@ -78,6 +87,10 @@ module Dodopayments
         # If true, redirects the customer immediately after payment completion False by
         # default
         redirect_immediately: nil,
+        # If true, the customer's phone number is required to create this subscription.
+        # Typically set alongside `payment_link=true` so merchants can enforce phone
+        # collection on the hosted payment page. Defaults to false.
+        require_phone_number: nil,
         # Optional URL to redirect after successful subscription creation
         return_url: nil,
         # If true, returns a shortened payment link. Defaults to false if not specified.
@@ -116,6 +129,11 @@ module Dodopayments
             T.nilable(
               Dodopayments::SubscriptionUpdateParams::CancelReason::OrSymbol
             ),
+          cancellation_comment: T.nilable(String),
+          cancellation_feedback:
+            T.nilable(
+              Dodopayments::SubscriptionUpdateParams::CancellationFeedback::OrSymbol
+            ),
           credit_entitlement_cart:
             T.nilable(
               T::Array[
@@ -141,6 +159,12 @@ module Dodopayments
         # When set, the subscription will remain active until the end of billing period
         cancel_at_next_billing_date: nil,
         cancel_reason: nil,
+        # Free-text cancellation comment (only valid when cancelling or scheduling
+        # cancellation).
+        cancellation_comment: nil,
+        # Customer-supplied churn reason (only valid when cancelling or scheduling
+        # cancellation).
+        cancellation_feedback: nil,
         # Update credit entitlement cart settings
         credit_entitlement_cart: nil,
         customer_name: nil,
@@ -211,6 +235,7 @@ module Dodopayments
           proration_billing_mode:
             Dodopayments::UpdateSubscriptionPlanReq::ProrationBillingMode::OrSymbol,
           quantity: Integer,
+          adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           discount_code: T.nilable(String),
           effective_at:
@@ -232,6 +257,9 @@ module Dodopayments
         proration_billing_mode:,
         # Number of units to subscribe for. Must be at least 1.
         quantity:,
+        # Whether adaptive currency fees should be included in the price (true) or added
+        # on top (false). If not specified, uses the subscription's stored setting.
+        adaptive_currency_fees_inclusive: nil,
         # Addons for the new plan. Note : Leaving this empty would remove any existing
         # addons
         addons: nil,
@@ -307,6 +335,7 @@ module Dodopayments
           proration_billing_mode:
             Dodopayments::UpdateSubscriptionPlanReq::ProrationBillingMode::OrSymbol,
           quantity: Integer,
+          adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           discount_code: T.nilable(String),
           effective_at:
@@ -328,6 +357,9 @@ module Dodopayments
         proration_billing_mode:,
         # Number of units to subscribe for. Must be at least 1.
         quantity:,
+        # Whether adaptive currency fees should be included in the price (true) or added
+        # on top (false). If not specified, uses the subscription's stored setting.
+        adaptive_currency_fees_inclusive: nil,
         # Addons for the new plan. Note : Leaving this empty would remove any existing
         # addons
         addons: nil,

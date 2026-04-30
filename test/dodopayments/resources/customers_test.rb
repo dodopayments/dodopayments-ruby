@@ -113,6 +113,20 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
     end
   end
 
+  def test_list_entitlements
+    response = @dodo_payments.customers.list_entitlements("customer_id")
+
+    assert_pattern do
+      response => Dodopayments::Models::CustomerListEntitlementsResponse
+    end
+
+    assert_pattern do
+      response => {
+        items: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::CustomerListEntitlementsResponse::Item])
+      }
+    end
+  end
+
   def test_retrieve_payment_methods
     response = @dodo_payments.customers.retrieve_payment_methods("customer_id")
 

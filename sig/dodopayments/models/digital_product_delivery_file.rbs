@@ -1,18 +1,45 @@
 module Dodopayments
   module Models
     type digital_product_delivery_file =
-      { file_id: String, file_name: String, url: String }
+      {
+        download_url: String,
+        expires_in: Integer,
+        file_id: String,
+        filename: String,
+        content_type: String?,
+        file_size: Integer?
+      }
 
     class DigitalProductDeliveryFile < Dodopayments::Internal::Type::BaseModel
+      attr_accessor download_url: String
+
+      attr_accessor expires_in: Integer
+
       attr_accessor file_id: String
 
-      attr_accessor file_name: String
+      attr_accessor filename: String
 
-      attr_accessor url: String
+      attr_accessor content_type: String?
 
-      def initialize: (file_id: String, file_name: String, url: String) -> void
+      attr_accessor file_size: Integer?
 
-      def to_hash: -> { file_id: String, file_name: String, url: String }
+      def initialize: (
+        download_url: String,
+        expires_in: Integer,
+        file_id: String,
+        filename: String,
+        ?content_type: String?,
+        ?file_size: Integer?
+      ) -> void
+
+      def to_hash: -> {
+        download_url: String,
+        expires_in: Integer,
+        file_id: String,
+        filename: String,
+        content_type: String?,
+        file_size: Integer?
+      }
     end
   end
 end

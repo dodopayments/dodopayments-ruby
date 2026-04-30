@@ -26,6 +26,13 @@ module Dodopayments
       required :product_cart,
                -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::PaymentCreateParams::ProductCart] }
 
+      # @!attribute adaptive_currency_fees_inclusive
+      #   Whether adaptive currency fees should be included in the price (true) or added
+      #   on top (false). If not specified, defaults to the business-level setting.
+      #
+      #   @return [Boolean, nil]
+      optional :adaptive_currency_fees_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
+
       # @!attribute allowed_payment_method_types
       #   List of payment methods allowed during checkout.
       #
@@ -86,6 +93,14 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :redirect_immediately, Dodopayments::Internal::Type::Boolean
 
+      # @!attribute require_phone_number
+      #   If true, the customer's phone number is required to create this payment.
+      #   Typically set alongside `payment_link=true` so merchants can enforce phone
+      #   collection on the hosted payment page. Defaults to false.
+      #
+      #   @return [Boolean, nil]
+      optional :require_phone_number, Dodopayments::Internal::Type::Boolean
+
       # @!attribute return_url
       #   Optional URL to redirect the customer after payment. Must be a valid URL if
       #   provided.
@@ -112,7 +127,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(billing:, customer:, product_cart:, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
+      # @!method initialize(billing:, customer:, product_cart:, adaptive_currency_fees_inclusive: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, require_phone_number: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::PaymentCreateParams} for more details.
       #
@@ -121,6 +136,8 @@ module Dodopayments
       #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer] Customer information for the payment
       #
       #   @param product_cart [Array<Dodopayments::Models::PaymentCreateParams::ProductCart>] List of products in the cart. Must contain at least 1 and at most 100 items.
+      #
+      #   @param adaptive_currency_fees_inclusive [Boolean, nil] Whether adaptive currency fees should be included in the price (true) or added o
       #
       #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil] List of payment methods allowed during checkout.
       #
@@ -137,6 +154,8 @@ module Dodopayments
       #   @param payment_method_id [String, nil] Optional payment method ID to use for this payment.
       #
       #   @param redirect_immediately [Boolean] If true, redirects the customer immediately after payment completion
+      #
+      #   @param require_phone_number [Boolean] If true, the customer's phone number is required to create this payment.
       #
       #   @param return_url [String, nil] Optional URL to redirect the customer after payment.
       #

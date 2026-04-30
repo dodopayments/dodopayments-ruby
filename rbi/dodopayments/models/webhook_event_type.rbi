@@ -133,6 +133,11 @@ module Dodopayments
           :"credit.overage_charged",
           Dodopayments::WebhookEventType::TaggedSymbol
         )
+      CREDIT_OVERAGE_RESET =
+        T.let(
+          :"credit.overage_reset",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
       CREDIT_MANUAL_ADJUSTMENT =
         T.let(
           :"credit.manual_adjustment",

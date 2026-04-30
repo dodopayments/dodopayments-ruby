@@ -38,6 +38,22 @@ module Dodopayments
       end
       attr_accessor :cancel_reason
 
+      # Free-text cancellation comment (only valid when cancelling or scheduling
+      # cancellation).
+      sig { returns(T.nilable(String)) }
+      attr_accessor :cancellation_comment
+
+      # Customer-supplied churn reason (only valid when cancelling or scheduling
+      # cancellation).
+      sig do
+        returns(
+          T.nilable(
+            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::OrSymbol
+          )
+        )
+      end
+      attr_accessor :cancellation_feedback
+
       # Update credit entitlement cart settings
       sig do
         returns(
@@ -91,6 +107,11 @@ module Dodopayments
             T.nilable(
               Dodopayments::SubscriptionUpdateParams::CancelReason::OrSymbol
             ),
+          cancellation_comment: T.nilable(String),
+          cancellation_feedback:
+            T.nilable(
+              Dodopayments::SubscriptionUpdateParams::CancellationFeedback::OrSymbol
+            ),
           credit_entitlement_cart:
             T.nilable(
               T::Array[
@@ -115,6 +136,12 @@ module Dodopayments
         # When set, the subscription will remain active until the end of billing period
         cancel_at_next_billing_date: nil,
         cancel_reason: nil,
+        # Free-text cancellation comment (only valid when cancelling or scheduling
+        # cancellation).
+        cancellation_comment: nil,
+        # Customer-supplied churn reason (only valid when cancelling or scheduling
+        # cancellation).
+        cancellation_feedback: nil,
         # Update credit entitlement cart settings
         credit_entitlement_cart: nil,
         customer_name: nil,
@@ -136,6 +163,11 @@ module Dodopayments
             cancel_reason:
               T.nilable(
                 Dodopayments::SubscriptionUpdateParams::CancelReason::OrSymbol
+              ),
+            cancellation_comment: T.nilable(String),
+            cancellation_feedback:
+              T.nilable(
+                Dodopayments::SubscriptionUpdateParams::CancellationFeedback::OrSymbol
               ),
             credit_entitlement_cart:
               T.nilable(
@@ -183,11 +215,82 @@ module Dodopayments
             :cancelled_by_merchant_send_dunning,
             Dodopayments::SubscriptionUpdateParams::CancelReason::TaggedSymbol
           )
+        DODO_TEAM =
+          T.let(
+            :dodo_team,
+            Dodopayments::SubscriptionUpdateParams::CancelReason::TaggedSymbol
+          )
 
         sig do
           override.returns(
             T::Array[
               Dodopayments::SubscriptionUpdateParams::CancelReason::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
+      end
+
+      # Customer-supplied churn reason (only valid when cancelling or scheduling
+      # cancellation).
+      module CancellationFeedback
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(
+              Symbol,
+              Dodopayments::SubscriptionUpdateParams::CancellationFeedback
+            )
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        TOO_EXPENSIVE =
+          T.let(
+            :too_expensive,
+            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
+          )
+        MISSING_FEATURES =
+          T.let(
+            :missing_features,
+            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
+          )
+        SWITCHED_SERVICE =
+          T.let(
+            :switched_service,
+            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
+          )
+        UNUSED =
+          T.let(
+            :unused,
+            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
+          )
+        CUSTOMER_SERVICE =
+          T.let(
+            :customer_service,
+            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
+          )
+        LOW_QUALITY =
+          T.let(
+            :low_quality,
+            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
+          )
+        TOO_COMPLEX =
+          T.let(
+            :too_complex,
+            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
+          )
+        OTHER =
+          T.let(
+            :other,
+            Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Dodopayments::SubscriptionUpdateParams::CancellationFeedback::TaggedSymbol
             ]
           )
         end

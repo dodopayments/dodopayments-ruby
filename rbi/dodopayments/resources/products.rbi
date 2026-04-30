@@ -28,7 +28,10 @@ module Dodopayments
             T.nilable(
               Dodopayments::ProductCreateParams::DigitalProductDelivery::OrHash
             ),
-          entitlement_ids: T.nilable(T::Array[String]),
+          entitlements:
+            T.nilable(
+              T::Array[Dodopayments::ProductCreateParams::Entitlement::OrHash]
+            ),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
           license_key_duration:
@@ -54,18 +57,33 @@ module Dodopayments
         # Optional description of the product
         description: nil,
         # Choose how you would like you digital product delivered
+        #
+        # deprecated: use entitlements instead
         digital_product_delivery: nil,
-        # Optional entitlement IDs to attach to this product (max 20)
-        entitlement_ids: nil,
+        # Optional entitlements to attach to this product (max 20)
+        entitlements: nil,
         # Optional message displayed during license key activation
+        #
+        # deprecated: use entitlements instead. Ignored when a `license_key` entitlement
+        # is attached via the `entitlements` field.
         license_key_activation_message: nil,
         # The number of times the license key can be activated. Must be 0 or greater
+        #
+        # deprecated: use entitlements instead. Ignored when a `license_key` entitlement
+        # is attached via the `entitlements` field.
         license_key_activations_limit: nil,
         # Duration configuration for the license key. Set to null if you don't want the
         # license key to expire. For subscriptions, the lifetime of the license key is
         # tied to the subscription period
+        #
+        # deprecated: use entitlements instead. Ignored when a `license_key` entitlement
+        # is attached via the `entitlements` field.
         license_key_duration: nil,
         # When true, generates and sends a license key to your customer. Defaults to false
+        #
+        # deprecated: use entitlements instead. If a `license_key` entitlement is also
+        # attached via the `entitlements` field, the `license_key_*` config fields below
+        # are ignored — the attached entitlement's config is the source of truth.
         license_key_enabled: nil,
         # Additional metadata for the product
         metadata: nil,
@@ -98,7 +116,10 @@ module Dodopayments
             T.nilable(
               Dodopayments::ProductUpdateParams::DigitalProductDelivery::OrHash
             ),
-          entitlement_ids: T.nilable(T::Array[String]),
+          entitlements:
+            T.nilable(
+              T::Array[Dodopayments::ProductUpdateParams::Entitlement::OrHash]
+            ),
           image_id: T.nilable(String),
           license_key_activation_message: T.nilable(String),
           license_key_activations_limit: T.nilable(Integer),
@@ -130,31 +151,41 @@ module Dodopayments
         # Description of the product, optional and must be at most 1000 characters.
         description: nil,
         # Choose how you would like you digital product delivered
+        #
+        # deprecated: use entitlements instead
         digital_product_delivery: nil,
-        # Entitlement IDs to attach (replaces all existing when present) Send empty array
-        # to remove all, omit field to leave unchanged
-        entitlement_ids: nil,
+        # Entitlements to attach (replaces all existing when present) Send empty array to
+        # remove all, omit field to leave unchanged
+        entitlements: nil,
         # Product image id after its uploaded to S3
         image_id: nil,
         # Message sent to the customer upon license key activation.
         #
         # Only applicable if `license_key_enabled` is `true`. This message contains
         # instructions for activating the license key.
+        #
+        # deprecated: use entitlements instead
         license_key_activation_message: nil,
         # Limit for the number of activations for the license key.
         #
         # Only applicable if `license_key_enabled` is `true`. Represents the maximum
         # number of times the license key can be activated.
+        #
+        # deprecated: use entitlements instead
         license_key_activations_limit: nil,
         # Duration of the license key if enabled.
         #
         # Only applicable if `license_key_enabled` is `true`. Represents the duration in
         # days for which the license key is valid.
+        #
+        # deprecated: use entitlements instead
         license_key_duration: nil,
         # Whether the product requires a license key.
         #
         # If `true`, additional fields related to license key (duration, activations
         # limit, activation message) become applicable.
+        #
+        # deprecated: use entitlements instead
         license_key_enabled: nil,
         # Additional metadata for the product
         metadata: nil,

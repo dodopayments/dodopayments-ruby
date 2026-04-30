@@ -1,0 +1,46 @@
+module Dodopayments
+  module Resources
+    class Entitlements
+      attr_reader files: Dodopayments::Resources::Entitlements::Files
+
+      attr_reader grants: Dodopayments::Resources::Entitlements::Grants
+
+      def create: (
+        integration_config: Dodopayments::Models::EntitlementCreateParams::integration_config,
+        integration_type: Dodopayments::Models::EntitlementCreateParams::integration_type,
+        name: String,
+        ?description: String?,
+        ?metadata: ::Hash[Symbol, String]?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::EntitlementCreateResponse
+
+      def retrieve: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::EntitlementRetrieveResponse
+
+      def update: (
+        String id,
+        ?description: String?,
+        ?integration_config: Dodopayments::Models::EntitlementUpdateParams::integration_config?,
+        ?metadata: ::Hash[Symbol, String]?,
+        ?name: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::EntitlementUpdateResponse
+
+      def list: (
+        ?integration_type: Dodopayments::Models::EntitlementListParams::integration_type,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::EntitlementListResponse]
+
+      def delete: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

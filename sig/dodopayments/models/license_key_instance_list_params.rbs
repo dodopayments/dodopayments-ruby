@@ -1,12 +1,19 @@
 module Dodopayments
   module Models
     type license_key_instance_list_params =
-      { license_key_id: String?, page_number: Integer?, page_size: Integer? }
+      {
+        grant_id: String?,
+        license_key_id: String?,
+        page_number: Integer?,
+        page_size: Integer?
+      }
       & Dodopayments::Internal::Type::request_parameters
 
     class LicenseKeyInstanceListParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor grant_id: String?
 
       attr_accessor license_key_id: String?
 
@@ -15,6 +22,7 @@ module Dodopayments
       attr_accessor page_size: Integer?
 
       def initialize: (
+        ?grant_id: String?,
         ?license_key_id: String?,
         ?page_number: Integer?,
         ?page_size: Integer?,
@@ -22,6 +30,7 @@ module Dodopayments
       ) -> void
 
       def to_hash: -> {
+        grant_id: String?,
         license_key_id: String?,
         page_number: Integer?,
         page_size: Integer?,
