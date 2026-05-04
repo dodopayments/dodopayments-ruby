@@ -6,152 +6,170 @@ module Dodopayments
       # @see Dodopayments::Resources::Entitlements::Grants#list
       class EntitlementGrant < Dodopayments::Internal::Type::BaseModel
         # @!attribute id
+        #   Unique identifier of the grant.
         #
         #   @return [String]
         required :id, String
 
         # @!attribute business_id
+        #   Identifier of the business that owns the grant.
         #
         #   @return [String]
         required :business_id, String
 
         # @!attribute created_at
+        #   Timestamp when the grant was created.
         #
         #   @return [Time]
         required :created_at, Time
 
         # @!attribute customer_id
+        #   Identifier of the customer the grant was issued to.
         #
         #   @return [String]
         required :customer_id, String
 
         # @!attribute entitlement_id
+        #   Identifier of the entitlement this grant was issued from.
         #
         #   @return [String]
         required :entitlement_id, String
 
-        # @!attribute external_id
+        # @!attribute metadata
+        #   Arbitrary key-value metadata recorded on the grant.
         #
-        #   @return [String]
-        required :external_id, String
+        #   @return [Hash{Symbol=>String}]
+        required :metadata, Dodopayments::Internal::Type::HashOf[String]
 
         # @!attribute status
+        #   Lifecycle status of the grant.
         #
         #   @return [Symbol, Dodopayments::Models::Entitlements::EntitlementGrant::Status]
         required :status, enum: -> { Dodopayments::Entitlements::EntitlementGrant::Status }
 
         # @!attribute updated_at
+        #   Timestamp when the grant was last modified.
         #
         #   @return [Time]
         required :updated_at, Time
 
         # @!attribute delivered_at
+        #   Timestamp when the grant transitioned to `delivered`, when applicable.
         #
         #   @return [Time, nil]
         optional :delivered_at, Time, nil?: true
 
         # @!attribute digital_product_delivery
-        #   Present only when the entitlement integration_type is `digital_files`. Populated
-        #   eagerly on every list and single-record endpoint.
+        #   Digital-product-delivery payload, present when the entitlement integration is
+        #   `digital_files`.
         #
         #   @return [Dodopayments::Models::DigitalProductDelivery, nil]
         optional :digital_product_delivery, -> { Dodopayments::DigitalProductDelivery }, nil?: true
 
         # @!attribute error_code
+        #   Machine-readable code reported when delivery failed, when applicable.
         #
         #   @return [String, nil]
         optional :error_code, String, nil?: true
 
         # @!attribute error_message
+        #   Human-readable message reported when delivery failed, when applicable.
         #
         #   @return [String, nil]
         optional :error_message, String, nil?: true
 
         # @!attribute license_key
-        #   Present only when the entitlement integration_type is `license_key`.
+        #   License-key delivery payload, present when the entitlement integration is
+        #   `license_key`.
         #
         #   @return [Dodopayments::Models::Entitlements::LicenseKeyGrant, nil]
         optional :license_key, -> { Dodopayments::Entitlements::LicenseKeyGrant }, nil?: true
 
-        # @!attribute metadata
-        #
-        #   @return [Object, nil]
-        optional :metadata, Dodopayments::Internal::Type::Unknown
-
         # @!attribute oauth_expires_at
+        #   Timestamp when `oauth_url` stops being valid, when applicable.
         #
         #   @return [Time, nil]
         optional :oauth_expires_at, Time, nil?: true
 
         # @!attribute oauth_url
+        #   Customer-facing OAuth URL for OAuth-style integrations. Populated during the
+        #   customer-portal accept flow; `null` until the customer completes that step, and
+        #   on grants for non-OAuth integrations.
         #
         #   @return [String, nil]
         optional :oauth_url, String, nil?: true
 
         # @!attribute payment_id
+        #   Identifier of the payment that triggered this grant, when applicable.
         #
         #   @return [String, nil]
         optional :payment_id, String, nil?: true
 
         # @!attribute revocation_reason
+        #   Reason recorded when the grant was revoked, when applicable.
         #
         #   @return [String, nil]
         optional :revocation_reason, String, nil?: true
 
         # @!attribute revoked_at
+        #   Timestamp when the grant transitioned to `revoked`, when applicable.
         #
         #   @return [Time, nil]
         optional :revoked_at, Time, nil?: true
 
         # @!attribute subscription_id
+        #   Identifier of the subscription that triggered this grant, when applicable.
         #
         #   @return [String, nil]
         optional :subscription_id, String, nil?: true
 
-        # @!method initialize(id:, business_id:, created_at:, customer_id:, entitlement_id:, external_id:, status:, updated_at:, delivered_at: nil, digital_product_delivery: nil, error_code: nil, error_message: nil, license_key: nil, metadata: nil, oauth_expires_at: nil, oauth_url: nil, payment_id: nil, revocation_reason: nil, revoked_at: nil, subscription_id: nil)
+        # @!method initialize(id:, business_id:, created_at:, customer_id:, entitlement_id:, metadata:, status:, updated_at:, delivered_at: nil, digital_product_delivery: nil, error_code: nil, error_message: nil, license_key: nil, oauth_expires_at: nil, oauth_url: nil, payment_id: nil, revocation_reason: nil, revoked_at: nil, subscription_id: nil)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Entitlements::EntitlementGrant} for more details.
         #
-        #   @param id [String]
+        #   Detailed view of a single entitlement grant: who it's for, its lifecycle state,
+        #   and any integration-specific delivery payload.
         #
-        #   @param business_id [String]
+        #   @param id [String] Unique identifier of the grant.
         #
-        #   @param created_at [Time]
+        #   @param business_id [String] Identifier of the business that owns the grant.
         #
-        #   @param customer_id [String]
+        #   @param created_at [Time] Timestamp when the grant was created.
         #
-        #   @param entitlement_id [String]
+        #   @param customer_id [String] Identifier of the customer the grant was issued to.
         #
-        #   @param external_id [String]
+        #   @param entitlement_id [String] Identifier of the entitlement this grant was issued from.
         #
-        #   @param status [Symbol, Dodopayments::Models::Entitlements::EntitlementGrant::Status]
+        #   @param metadata [Hash{Symbol=>String}] Arbitrary key-value metadata recorded on the grant.
         #
-        #   @param updated_at [Time]
+        #   @param status [Symbol, Dodopayments::Models::Entitlements::EntitlementGrant::Status] Lifecycle status of the grant.
         #
-        #   @param delivered_at [Time, nil]
+        #   @param updated_at [Time] Timestamp when the grant was last modified.
         #
-        #   @param digital_product_delivery [Dodopayments::Models::DigitalProductDelivery, nil] Present only when the entitlement integration_type is `digital_files`.
+        #   @param delivered_at [Time, nil] Timestamp when the grant transitioned to `delivered`, when applicable.
         #
-        #   @param error_code [String, nil]
+        #   @param digital_product_delivery [Dodopayments::Models::DigitalProductDelivery, nil] Digital-product-delivery payload, present when the entitlement
         #
-        #   @param error_message [String, nil]
+        #   @param error_code [String, nil] Machine-readable code reported when delivery failed, when applicable.
         #
-        #   @param license_key [Dodopayments::Models::Entitlements::LicenseKeyGrant, nil] Present only when the entitlement integration_type is `license_key`.
+        #   @param error_message [String, nil] Human-readable message reported when delivery failed, when applicable.
         #
-        #   @param metadata [Object]
+        #   @param license_key [Dodopayments::Models::Entitlements::LicenseKeyGrant, nil] License-key delivery payload, present when the entitlement integration
         #
-        #   @param oauth_expires_at [Time, nil]
+        #   @param oauth_expires_at [Time, nil] Timestamp when `oauth_url` stops being valid, when applicable.
         #
-        #   @param oauth_url [String, nil]
+        #   @param oauth_url [String, nil] Customer-facing OAuth URL for OAuth-style integrations. Populated
         #
-        #   @param payment_id [String, nil]
+        #   @param payment_id [String, nil] Identifier of the payment that triggered this grant, when applicable.
         #
-        #   @param revocation_reason [String, nil]
+        #   @param revocation_reason [String, nil] Reason recorded when the grant was revoked, when applicable.
         #
-        #   @param revoked_at [Time, nil]
+        #   @param revoked_at [Time, nil] Timestamp when the grant transitioned to `revoked`, when applicable.
         #
-        #   @param subscription_id [String, nil]
+        #   @param subscription_id [String, nil] Identifier of the subscription that triggered this grant, when applicable.
 
+        # Lifecycle status of the grant.
+        #
         # @see Dodopayments::Models::Entitlements::EntitlementGrant#status
         module Status
           extend Dodopayments::Internal::Type::Enum

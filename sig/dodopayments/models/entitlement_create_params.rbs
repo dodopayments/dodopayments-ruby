@@ -6,7 +6,7 @@ module Dodopayments
         integration_type: Dodopayments::Models::entitlement_integration_type,
         name: String,
         description: String?,
-        metadata: ::Hash[Symbol, String]?
+        metadata: ::Hash[Symbol, String]
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -22,14 +22,16 @@ module Dodopayments
 
       attr_accessor description: String?
 
-      attr_accessor metadata: ::Hash[Symbol, String]?
+      attr_reader metadata: ::Hash[Symbol, String]?
+
+      def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
       def initialize: (
         integration_config: Dodopayments::Models::integration_config,
         integration_type: Dodopayments::Models::entitlement_integration_type,
         name: String,
         ?description: String?,
-        ?metadata: ::Hash[Symbol, String]?,
+        ?metadata: ::Hash[Symbol, String],
         ?request_options: Dodopayments::request_opts
       ) -> void
 
@@ -38,7 +40,7 @@ module Dodopayments
         integration_type: Dodopayments::Models::entitlement_integration_type,
         name: String,
         description: String?,
-        metadata: ::Hash[Symbol, String]?,
+        metadata: ::Hash[Symbol, String],
         request_options: Dodopayments::RequestOptions
       }
     end

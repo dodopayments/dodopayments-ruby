@@ -21,7 +21,7 @@ module Dodopayments
       #
       # @param description [String, nil] Optional description
       #
-      # @param metadata [Hash{Symbol=>String}, nil] Optional user-facing metadata
+      # @param metadata [Hash{Symbol=>String}] Additional metadata for the entitlement
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -70,7 +70,7 @@ module Dodopayments
       #
       # @param description [String, nil]
       #
-      # @param integration_config [Dodopayments::Models::IntegrationConfig::GitHubConfig, Dodopayments::Models::IntegrationConfig::DiscordConfig, Dodopayments::Models::IntegrationConfig::TelegramConfig, Dodopayments::Models::IntegrationConfig::FigmaConfig, Dodopayments::Models::IntegrationConfig::FramerConfig, Dodopayments::Models::IntegrationConfig::NotionConfig, Dodopayments::Models::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig, nil] Platform-specific configuration for an entitlement.
+      # @param integration_config [Dodopayments::Models::IntegrationConfig::GitHubConfig, Dodopayments::Models::IntegrationConfig::DiscordConfig, Dodopayments::Models::IntegrationConfig::TelegramConfig, Dodopayments::Models::IntegrationConfig::FigmaConfig, Dodopayments::Models::IntegrationConfig::FramerConfig, Dodopayments::Models::IntegrationConfig::NotionConfig, Dodopayments::Models::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig, nil] Integration-specific configuration supplied when creating or updating
       #
       # @param metadata [Hash{Symbol=>String}, nil]
       #

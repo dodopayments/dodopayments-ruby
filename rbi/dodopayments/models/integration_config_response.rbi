@@ -2,10 +2,10 @@
 
 module Dodopayments
   module Models
-    # Public-facing variant of [`IntegrationConfig`]. Mirrors every variant shape on
-    # the wire EXCEPT `DigitalFiles`, which is replaced with a hydrated
-    # `digital_files` object (resolved download URLs etc.). The persisted JSONB stays
-    # ID-only via [`IntegrationConfig`]; this enum is response-only.
+    # Integration-specific configuration on an entitlement read response.
+    #
+    # For `digital_files` entitlements the response includes presigned download URLs
+    # for each attached file; other integrations match the shape supplied at creation.
     module IntegrationConfigResponse
       extend Dodopayments::Internal::Type::Union
 
@@ -32,22 +32,93 @@ module Dodopayments
             )
           end
 
-        sig { returns(String) }
+        # Permission to grant on the repository.
+        sig do
+          returns(
+            Dodopayments::IntegrationConfigResponse::GitHubConfig::Permission::TaggedSymbol
+          )
+        end
         attr_accessor :permission
 
+        # Repository or organisation slug to grant access to.
         sig { returns(String) }
         attr_accessor :target_id
 
         sig do
-          params(permission: String, target_id: String).returns(
-            T.attached_class
-          )
+          params(
+            permission:
+              Dodopayments::IntegrationConfigResponse::GitHubConfig::Permission::OrSymbol,
+            target_id: String
+          ).returns(T.attached_class)
         end
-        def self.new(permission:, target_id:)
+        def self.new(
+          # Permission to grant on the repository.
+          permission:,
+          # Repository or organisation slug to grant access to.
+          target_id:
+        )
         end
 
-        sig { override.returns({ permission: String, target_id: String }) }
+        sig do
+          override.returns(
+            {
+              permission:
+                Dodopayments::IntegrationConfigResponse::GitHubConfig::Permission::TaggedSymbol,
+              target_id: String
+            }
+          )
+        end
         def to_hash
+        end
+
+        # Permission to grant on the repository.
+        module Permission
+          extend Dodopayments::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Dodopayments::IntegrationConfigResponse::GitHubConfig::Permission
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          PULL =
+            T.let(
+              :pull,
+              Dodopayments::IntegrationConfigResponse::GitHubConfig::Permission::TaggedSymbol
+            )
+          PUSH =
+            T.let(
+              :push,
+              Dodopayments::IntegrationConfigResponse::GitHubConfig::Permission::TaggedSymbol
+            )
+          ADMIN =
+            T.let(
+              :admin,
+              Dodopayments::IntegrationConfigResponse::GitHubConfig::Permission::TaggedSymbol
+            )
+          MAINTAIN =
+            T.let(
+              :maintain,
+              Dodopayments::IntegrationConfigResponse::GitHubConfig::Permission::TaggedSymbol
+            )
+          TRIAGE =
+            T.let(
+              :triage,
+              Dodopayments::IntegrationConfigResponse::GitHubConfig::Permission::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Dodopayments::IntegrationConfigResponse::GitHubConfig::Permission::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
 
@@ -60,9 +131,11 @@ module Dodopayments
             )
           end
 
+        # Discord guild (server) ID.
         sig { returns(String) }
         attr_accessor :guild_id
 
+        # Optional Discord role to assign within the guild.
         sig { returns(T.nilable(String)) }
         attr_accessor :role_id
 
@@ -71,7 +144,12 @@ module Dodopayments
             T.attached_class
           )
         end
-        def self.new(guild_id:, role_id: nil)
+        def self.new(
+          # Discord guild (server) ID.
+          guild_id:,
+          # Optional Discord role to assign within the guild.
+          role_id: nil
+        )
         end
 
         sig do
@@ -90,11 +168,15 @@ module Dodopayments
             )
           end
 
+        # Telegram chat ID. For groups this is typically a negative integer.
         sig { returns(String) }
         attr_accessor :chat_id
 
         sig { params(chat_id: String).returns(T.attached_class) }
-        def self.new(chat_id:)
+        def self.new(
+          # Telegram chat ID. For groups this is typically a negative integer.
+          chat_id:
+        )
         end
 
         sig { override.returns({ chat_id: String }) }
@@ -111,11 +193,15 @@ module Dodopayments
             )
           end
 
+        # Figma file identifier to grant access to.
         sig { returns(String) }
         attr_accessor :figma_file_id
 
         sig { params(figma_file_id: String).returns(T.attached_class) }
-        def self.new(figma_file_id:)
+        def self.new(
+          # Figma file identifier to grant access to.
+          figma_file_id:
+        )
         end
 
         sig { override.returns({ figma_file_id: String }) }
@@ -132,11 +218,15 @@ module Dodopayments
             )
           end
 
+        # Framer template identifier to grant access to.
         sig { returns(String) }
         attr_accessor :framer_template_id
 
         sig { params(framer_template_id: String).returns(T.attached_class) }
-        def self.new(framer_template_id:)
+        def self.new(
+          # Framer template identifier to grant access to.
+          framer_template_id:
+        )
         end
 
         sig { override.returns({ framer_template_id: String }) }
@@ -153,11 +243,15 @@ module Dodopayments
             )
           end
 
+        # Notion template identifier to grant access to.
         sig { returns(String) }
         attr_accessor :notion_template_id
 
         sig { params(notion_template_id: String).returns(T.attached_class) }
-        def self.new(notion_template_id:)
+        def self.new(
+          # Notion template identifier to grant access to.
+          notion_template_id:
+        )
         end
 
         sig { override.returns({ notion_template_id: String }) }
@@ -174,10 +268,8 @@ module Dodopayments
             )
           end
 
-        # Populated digital-files payload for entitlement read surfaces. Mirrors
-        # `DigitalProductDelivery` but is sourced from an entitlement's
-        # `integration_config` (not a grant) and tags each file with its origin (`legacy`
-        # vs `ee`).
+        # Populated digital-files payload with each file's metadata and a short-lived
+        # presigned download URL.
         sig do
           returns(
             Dodopayments::IntegrationConfigResponse::DigitalFilesConfig::DigitalFiles
@@ -200,10 +292,8 @@ module Dodopayments
           ).returns(T.attached_class)
         end
         def self.new(
-          # Populated digital-files payload for entitlement read surfaces. Mirrors
-          # `DigitalProductDelivery` but is sourced from an entitlement's
-          # `integration_config` (not a grant) and tags each file with its origin (`legacy`
-          # vs `ee`).
+          # Populated digital-files payload with each file's metadata and a short-lived
+          # presigned download URL.
           digital_files:
         )
         end
@@ -228,6 +318,7 @@ module Dodopayments
               )
             end
 
+          # One entry per attached file.
           sig do
             returns(
               T::Array[
@@ -237,16 +328,17 @@ module Dodopayments
           end
           attr_accessor :files
 
+          # Optional external URL, passed through from the entitlement configuration.
           sig { returns(T.nilable(String)) }
           attr_accessor :external_url
 
+          # Optional human-readable delivery instructions, passed through from the
+          # entitlement configuration.
           sig { returns(T.nilable(String)) }
           attr_accessor :instructions
 
-          # Populated digital-files payload for entitlement read surfaces. Mirrors
-          # `DigitalProductDelivery` but is sourced from an entitlement's
-          # `integration_config` (not a grant) and tags each file with its origin (`legacy`
-          # vs `ee`).
+          # Populated digital-files payload with each file's metadata and a short-lived
+          # presigned download URL.
           sig do
             params(
               files:
@@ -257,7 +349,15 @@ module Dodopayments
               instructions: T.nilable(String)
             ).returns(T.attached_class)
           end
-          def self.new(files:, external_url: nil, instructions: nil)
+          def self.new(
+            # One entry per attached file.
+            files:,
+            # Optional external URL, passed through from the entitlement configuration.
+            external_url: nil,
+            # Optional human-readable delivery instructions, passed through from the
+            # entitlement configuration.
+            instructions: nil
+          )
           end
 
           sig do
@@ -284,6 +384,7 @@ module Dodopayments
                 )
               end
 
+            # Short-lived presigned URL for downloading the file.
             sig { returns(String) }
             attr_accessor :download_url
 
@@ -291,44 +392,45 @@ module Dodopayments
             sig { returns(Integer) }
             attr_accessor :expires_in
 
+            # Identifier of the attached file.
             sig { returns(String) }
             attr_accessor :file_id
 
+            # Original filename of the attached file.
             sig { returns(String) }
             attr_accessor :filename
 
-            # `"legacy"` for files in `product_files`, `"ee"` for files managed by the
-            # Entitlements Engine.
-            sig { returns(String) }
-            attr_accessor :source
-
+            # Optional content-type declared at upload.
             sig { returns(T.nilable(String)) }
             attr_accessor :content_type
 
+            # Optional size of the file in bytes.
             sig { returns(T.nilable(Integer)) }
             attr_accessor :file_size
 
+            # One file in a resolved digital-files payload.
             sig do
               params(
                 download_url: String,
                 expires_in: Integer,
                 file_id: String,
                 filename: String,
-                source: String,
                 content_type: T.nilable(String),
                 file_size: T.nilable(Integer)
               ).returns(T.attached_class)
             end
             def self.new(
+              # Short-lived presigned URL for downloading the file.
               download_url:,
               # Seconds until `download_url` expires.
               expires_in:,
+              # Identifier of the attached file.
               file_id:,
+              # Original filename of the attached file.
               filename:,
-              # `"legacy"` for files in `product_files`, `"ee"` for files managed by the
-              # Entitlements Engine.
-              source:,
+              # Optional content-type declared at upload.
               content_type: nil,
+              # Optional size of the file in bytes.
               file_size: nil
             )
             end
@@ -340,7 +442,6 @@ module Dodopayments
                   expires_in: Integer,
                   file_id: String,
                   filename: String,
-                  source: String,
                   content_type: T.nilable(String),
                   file_size: T.nilable(Integer)
                 }
@@ -361,15 +462,22 @@ module Dodopayments
             )
           end
 
+        # Optional message displayed when a customer activates the license key (≤ 2500
+        # characters).
         sig { returns(T.nilable(String)) }
         attr_accessor :activation_message
 
+        # Maximum activations allowed per issued license key. Omit for unlimited.
         sig { returns(T.nilable(Integer)) }
         attr_accessor :activations_limit
 
+        # Validity duration of issued license keys. Provide both `duration_count` and
+        # `duration_interval` together for a fixed duration; omit both for non-expiring
+        # keys.
         sig { returns(T.nilable(Integer)) }
         attr_accessor :duration_count
 
+        # Unit of `duration_count`.
         sig { returns(T.nilable(Dodopayments::TimeInterval::TaggedSymbol)) }
         attr_accessor :duration_interval
 
@@ -382,9 +490,16 @@ module Dodopayments
           ).returns(T.attached_class)
         end
         def self.new(
+          # Optional message displayed when a customer activates the license key (≤ 2500
+          # characters).
           activation_message: nil,
+          # Maximum activations allowed per issued license key. Omit for unlimited.
           activations_limit: nil,
+          # Validity duration of issued license keys. Provide both `duration_count` and
+          # `duration_interval` together for a fixed duration; omit both for non-expiring
+          # keys.
           duration_count: nil,
+          # Unit of `duration_count`.
           duration_interval: nil
         )
         end

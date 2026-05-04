@@ -15,6 +15,8 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :business_id
 
+      # Detailed view of a single entitlement grant: who it's for, its lifecycle state,
+      # and any integration-specific delivery payload.
       sig { returns(Dodopayments::Entitlements::EntitlementGrant) }
       attr_reader :data
 
@@ -46,6 +48,8 @@ module Dodopayments
       def self.new(
         # The business identifier
         business_id:,
+        # Detailed view of a single entitlement grant: who it's for, its lifecycle state,
+        # and any integration-specific delivery payload.
         data:,
         # The timestamp of when the event occurred
         timestamp:,

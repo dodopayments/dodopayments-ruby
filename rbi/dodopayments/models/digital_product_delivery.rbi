@@ -11,19 +11,21 @@ module Dodopayments
           )
         end
 
+      # One entry per attached file.
       sig { returns(T::Array[Dodopayments::DigitalProductDeliveryFile]) }
       attr_accessor :files
 
+      # Optional external URL, passed through from the entitlement configuration.
       sig { returns(T.nilable(String)) }
       attr_accessor :external_url
 
+      # Optional human-readable delivery instructions, passed through from the
+      # entitlement configuration.
       sig { returns(T.nilable(String)) }
       attr_accessor :instructions
 
-      # Digital-product-delivery payload for a grant. Populated for grants whose
-      # entitlement has `integration_type = 'digital_files'`. `files` carries presigned
-      # download URLs; the source (EE service or legacy in-process S3 presigning) is
-      # opaque to the caller.
+      # Digital-product-delivery payload, present on grants for `digital_files`
+      # entitlements. Each file carries a short-lived presigned download URL.
       sig do
         params(
           files: T::Array[Dodopayments::DigitalProductDeliveryFile::OrHash],
@@ -31,7 +33,15 @@ module Dodopayments
           instructions: T.nilable(String)
         ).returns(T.attached_class)
       end
-      def self.new(files:, external_url: nil, instructions: nil)
+      def self.new(
+        # One entry per attached file.
+        files:,
+        # Optional external URL, passed through from the entitlement configuration.
+        external_url: nil,
+        # Optional human-readable delivery instructions, passed through from the
+        # entitlement configuration.
+        instructions: nil
+      )
       end
 
       sig do
