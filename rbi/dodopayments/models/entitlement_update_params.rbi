@@ -20,8 +20,8 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :description
 
-      # Platform-specific configuration for an entitlement. Each variant uses unique
-      # field names so `#[serde(untagged)]` can disambiguate correctly.
+      # Integration-specific configuration supplied when creating or updating an
+      # entitlement. The shape required matches the entitlement's `integration_type`.
       sig do
         returns(
           T.nilable(
@@ -71,8 +71,8 @@ module Dodopayments
       def self.new(
         id:,
         description: nil,
-        # Platform-specific configuration for an entitlement. Each variant uses unique
-        # field names so `#[serde(untagged)]` can disambiguate correctly.
+        # Integration-specific configuration supplied when creating or updating an
+        # entitlement. The shape required matches the entitlement's `integration_type`.
         integration_config: nil,
         metadata: nil,
         name: nil,

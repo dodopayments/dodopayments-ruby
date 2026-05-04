@@ -43,9 +43,12 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :description
 
-      # Optional user-facing metadata
+      # Additional metadata for the entitlement
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
-      attr_accessor :metadata
+      attr_reader :metadata
+
+      sig { params(metadata: T::Hash[Symbol, String]).void }
+      attr_writer :metadata
 
       sig do
         params(
@@ -63,7 +66,7 @@ module Dodopayments
           integration_type: Dodopayments::EntitlementIntegrationType::OrSymbol,
           name: String,
           description: T.nilable(String),
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata: T::Hash[Symbol, String],
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -76,7 +79,7 @@ module Dodopayments
         name:,
         # Optional description
         description: nil,
-        # Optional user-facing metadata
+        # Additional metadata for the entitlement
         metadata: nil,
         request_options: {}
       )
@@ -100,7 +103,7 @@ module Dodopayments
               Dodopayments::EntitlementIntegrationType::OrSymbol,
             name: String,
             description: T.nilable(String),
-            metadata: T.nilable(T::Hash[Symbol, String]),
+            metadata: T::Hash[Symbol, String],
             request_options: Dodopayments::RequestOptions
           }
         )

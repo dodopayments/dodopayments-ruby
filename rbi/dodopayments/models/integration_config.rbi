@@ -2,8 +2,8 @@
 
 module Dodopayments
   module Models
-    # Platform-specific configuration for an entitlement. Each variant uses unique
-    # field names so `#[serde(untagged)]` can disambiguate correctly.
+    # Integration-specific configuration supplied when creating or updating an
+    # entitlement. The shape required matches the entitlement's `integration_type`.
     module IntegrationConfig
       extend Dodopayments::Internal::Type::Union
 
@@ -30,27 +30,93 @@ module Dodopayments
             )
           end
 
-        # One of: pull, push, admin, maintain, triage
-        sig { returns(String) }
+        # Permission to grant on the repository.
+        sig do
+          returns(
+            Dodopayments::IntegrationConfig::GitHubConfig::Permission::OrSymbol
+          )
+        end
         attr_accessor :permission
 
+        # Repository or organisation slug to grant access to.
         sig { returns(String) }
         attr_accessor :target_id
 
         sig do
-          params(permission: String, target_id: String).returns(
-            T.attached_class
-          )
+          params(
+            permission:
+              Dodopayments::IntegrationConfig::GitHubConfig::Permission::OrSymbol,
+            target_id: String
+          ).returns(T.attached_class)
         end
         def self.new(
-          # One of: pull, push, admin, maintain, triage
+          # Permission to grant on the repository.
           permission:,
+          # Repository or organisation slug to grant access to.
           target_id:
         )
         end
 
-        sig { override.returns({ permission: String, target_id: String }) }
+        sig do
+          override.returns(
+            {
+              permission:
+                Dodopayments::IntegrationConfig::GitHubConfig::Permission::OrSymbol,
+              target_id: String
+            }
+          )
+        end
         def to_hash
+        end
+
+        # Permission to grant on the repository.
+        module Permission
+          extend Dodopayments::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Dodopayments::IntegrationConfig::GitHubConfig::Permission
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          PULL =
+            T.let(
+              :pull,
+              Dodopayments::IntegrationConfig::GitHubConfig::Permission::TaggedSymbol
+            )
+          PUSH =
+            T.let(
+              :push,
+              Dodopayments::IntegrationConfig::GitHubConfig::Permission::TaggedSymbol
+            )
+          ADMIN =
+            T.let(
+              :admin,
+              Dodopayments::IntegrationConfig::GitHubConfig::Permission::TaggedSymbol
+            )
+          MAINTAIN =
+            T.let(
+              :maintain,
+              Dodopayments::IntegrationConfig::GitHubConfig::Permission::TaggedSymbol
+            )
+          TRIAGE =
+            T.let(
+              :triage,
+              Dodopayments::IntegrationConfig::GitHubConfig::Permission::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Dodopayments::IntegrationConfig::GitHubConfig::Permission::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
 
@@ -63,9 +129,11 @@ module Dodopayments
             )
           end
 
+        # Discord guild (server) ID.
         sig { returns(String) }
         attr_accessor :guild_id
 
+        # Optional Discord role to assign within the guild.
         sig { returns(T.nilable(String)) }
         attr_accessor :role_id
 
@@ -74,7 +142,12 @@ module Dodopayments
             T.attached_class
           )
         end
-        def self.new(guild_id:, role_id: nil)
+        def self.new(
+          # Discord guild (server) ID.
+          guild_id:,
+          # Optional Discord role to assign within the guild.
+          role_id: nil
+        )
         end
 
         sig do
@@ -93,11 +166,15 @@ module Dodopayments
             )
           end
 
+        # Telegram chat ID. For groups this is typically a negative integer.
         sig { returns(String) }
         attr_accessor :chat_id
 
         sig { params(chat_id: String).returns(T.attached_class) }
-        def self.new(chat_id:)
+        def self.new(
+          # Telegram chat ID. For groups this is typically a negative integer.
+          chat_id:
+        )
         end
 
         sig { override.returns({ chat_id: String }) }
@@ -114,11 +191,15 @@ module Dodopayments
             )
           end
 
+        # Figma file identifier to grant access to.
         sig { returns(String) }
         attr_accessor :figma_file_id
 
         sig { params(figma_file_id: String).returns(T.attached_class) }
-        def self.new(figma_file_id:)
+        def self.new(
+          # Figma file identifier to grant access to.
+          figma_file_id:
+        )
         end
 
         sig { override.returns({ figma_file_id: String }) }
@@ -135,11 +216,15 @@ module Dodopayments
             )
           end
 
+        # Framer template identifier to grant access to.
         sig { returns(String) }
         attr_accessor :framer_template_id
 
         sig { params(framer_template_id: String).returns(T.attached_class) }
-        def self.new(framer_template_id:)
+        def self.new(
+          # Framer template identifier to grant access to.
+          framer_template_id:
+        )
         end
 
         sig { override.returns({ framer_template_id: String }) }
@@ -156,11 +241,15 @@ module Dodopayments
             )
           end
 
+        # Notion template identifier to grant access to.
         sig { returns(String) }
         attr_accessor :notion_template_id
 
         sig { params(notion_template_id: String).returns(T.attached_class) }
-        def self.new(notion_template_id:)
+        def self.new(
+          # Notion template identifier to grant access to.
+          notion_template_id:
+        )
         end
 
         sig { override.returns({ notion_template_id: String }) }
@@ -177,23 +266,29 @@ module Dodopayments
             )
           end
 
+        # Files attached to this entitlement. Add files via
+        # `POST /entitlements/{id}/files` and remove them via
+        # `DELETE /entitlements/{id}/files/{file_id}`.
         sig { returns(T::Array[String]) }
         attr_accessor :digital_file_ids
 
+        # Optional external URL shown to the customer alongside the files.
         sig { returns(T.nilable(String)) }
         attr_accessor :external_url
 
+        # Optional human-readable delivery instructions shown to the customer alongside
+        # the files.
         sig { returns(T.nilable(String)) }
         attr_accessor :instructions
 
-        # Three-way patchable field (mirrors the credit_entitlements pattern):
+        # Three-way patchable list of legacy file identifiers:
         #
-        # - omitted → preserve persisted (`None`)
-        # - `null` → clear (`Some(None)`)
-        # - `[...]` → replace (`Some(Some(...))`)
+        # - omitted → preserve the current value
+        # - `null` → clear
+        # - `[...]` → replace
         #
-        # On Create / storage we collapse "clear" and empty-array to `None` so the
-        # persisted JSONB never carries a `null` legacy_file_ids key.
+        # On create, an omitted field, an explicit `null`, or an empty array all result in
+        # no legacy files attached.
         sig { returns(T.nilable(T::Array[String])) }
         attr_accessor :legacy_file_ids
 
@@ -206,17 +301,23 @@ module Dodopayments
           ).returns(T.attached_class)
         end
         def self.new(
+          # Files attached to this entitlement. Add files via
+          # `POST /entitlements/{id}/files` and remove them via
+          # `DELETE /entitlements/{id}/files/{file_id}`.
           digital_file_ids:,
+          # Optional external URL shown to the customer alongside the files.
           external_url: nil,
+          # Optional human-readable delivery instructions shown to the customer alongside
+          # the files.
           instructions: nil,
-          # Three-way patchable field (mirrors the credit_entitlements pattern):
+          # Three-way patchable list of legacy file identifiers:
           #
-          # - omitted → preserve persisted (`None`)
-          # - `null` → clear (`Some(None)`)
-          # - `[...]` → replace (`Some(Some(...))`)
+          # - omitted → preserve the current value
+          # - `null` → clear
+          # - `[...]` → replace
           #
-          # On Create / storage we collapse "clear" and empty-array to `None` so the
-          # persisted JSONB never carries a `null` legacy_file_ids key.
+          # On create, an omitted field, an explicit `null`, or an empty array all result in
+          # no legacy files attached.
           legacy_file_ids: nil
         )
         end
@@ -244,15 +345,22 @@ module Dodopayments
             )
           end
 
+        # Optional message displayed when a customer activates the license key (≤ 2500
+        # characters).
         sig { returns(T.nilable(String)) }
         attr_accessor :activation_message
 
+        # Maximum activations allowed per issued license key. Omit for unlimited.
         sig { returns(T.nilable(Integer)) }
         attr_accessor :activations_limit
 
+        # Validity duration of issued license keys. Provide both `duration_count` and
+        # `duration_interval` together for a fixed duration; omit both for non-expiring
+        # keys.
         sig { returns(T.nilable(Integer)) }
         attr_accessor :duration_count
 
+        # Unit of `duration_count`.
         sig { returns(T.nilable(Dodopayments::TimeInterval::OrSymbol)) }
         attr_accessor :duration_interval
 
@@ -265,9 +373,16 @@ module Dodopayments
           ).returns(T.attached_class)
         end
         def self.new(
+          # Optional message displayed when a customer activates the license key (≤ 2500
+          # characters).
           activation_message: nil,
+          # Maximum activations allowed per issued license key. Omit for unlimited.
           activations_limit: nil,
+          # Validity duration of issued license keys. Provide both `duration_count` and
+          # `duration_interval` together for a fixed duration; omit both for non-expiring
+          # keys.
           duration_count: nil,
+          # Unit of `duration_count`.
           duration_interval: nil
         )
         end

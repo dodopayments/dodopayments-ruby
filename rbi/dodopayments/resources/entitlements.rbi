@@ -26,7 +26,7 @@ module Dodopayments
           integration_type: Dodopayments::EntitlementIntegrationType::OrSymbol,
           name: String,
           description: T.nilable(String),
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata: T::Hash[Symbol, String],
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Entitlement)
       end
@@ -39,7 +39,7 @@ module Dodopayments
         name:,
         # Optional description
         description: nil,
-        # Optional user-facing metadata
+        # Additional metadata for the entitlement
         metadata: nil,
         request_options: {}
       )
@@ -86,8 +86,8 @@ module Dodopayments
         # Entitlement ID
         id,
         description: nil,
-        # Platform-specific configuration for an entitlement. Each variant uses unique
-        # field names so `#[serde(untagged)]` can disambiguate correctly.
+        # Integration-specific configuration supplied when creating or updating an
+        # entitlement. The shape required matches the entitlement's `integration_type`.
         integration_config: nil,
         metadata: nil,
         name: nil,

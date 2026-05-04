@@ -8,10 +8,10 @@ module Dodopayments
         integration_config: Dodopayments::Models::integration_config_response,
         integration_type: Dodopayments::Models::entitlement_integration_type,
         is_active: bool,
+        metadata: ::Hash[Symbol, String],
         name: String,
         updated_at: Time,
-        description: String?,
-        metadata: top
+        description: String?
       }
 
     class Entitlement < Dodopayments::Internal::Type::BaseModel
@@ -27,15 +27,13 @@ module Dodopayments
 
       attr_accessor is_active: bool
 
+      attr_accessor metadata: ::Hash[Symbol, String]
+
       attr_accessor name: String
 
       attr_accessor updated_at: Time
 
       attr_accessor description: String?
-
-      attr_reader metadata: top?
-
-      def metadata=: (top) -> top
 
       def initialize: (
         id: String,
@@ -44,10 +42,10 @@ module Dodopayments
         integration_config: Dodopayments::Models::integration_config_response,
         integration_type: Dodopayments::Models::entitlement_integration_type,
         is_active: bool,
+        metadata: ::Hash[Symbol, String],
         name: String,
         updated_at: Time,
-        ?description: String?,
-        ?metadata: top
+        ?description: String?
       ) -> void
 
       def to_hash: -> {
@@ -57,10 +55,10 @@ module Dodopayments
         integration_config: Dodopayments::Models::integration_config_response,
         integration_type: Dodopayments::Models::entitlement_integration_type,
         is_active: bool,
+        metadata: ::Hash[Symbol, String],
         name: String,
         updated_at: Time,
-        description: String?,
-        metadata: top
+        description: String?
       }
     end
   end

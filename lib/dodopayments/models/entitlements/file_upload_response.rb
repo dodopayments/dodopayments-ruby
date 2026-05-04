@@ -6,8 +6,8 @@ module Dodopayments
       # @see Dodopayments::Resources::Entitlements::Files#upload
       class FileUploadResponse < Dodopayments::Internal::Type::BaseModel
         # @!attribute file_id
-        #   EE-issued digital file id; appended to
-        #   `entitlements.integration_config.digital_file_ids`.
+        #   Identifier of the attached file. Pass it to
+        #   `DELETE /entitlements/{id}/files/{file_id}` to detach the file later.
         #
         #   @return [String]
         required :file_id, String
@@ -16,7 +16,7 @@ module Dodopayments
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Entitlements::FileUploadResponse} for more details.
         #
-        #   @param file_id [String] EE-issued digital file id; appended to
+        #   @param file_id [String] Identifier of the attached file. Pass it to
       end
     end
   end

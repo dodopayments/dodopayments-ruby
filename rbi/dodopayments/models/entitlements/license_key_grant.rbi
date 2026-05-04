@@ -12,22 +12,24 @@ module Dodopayments
             )
           end
 
+        # Number of activations consumed so far.
         sig { returns(Integer) }
         attr_accessor :activations_used
 
+        # Issued license key.
         sig { returns(String) }
         attr_accessor :key
 
+        # Maximum activations allowed by the entitlement, when set.
         sig { returns(T.nilable(Integer)) }
         attr_accessor :activations_limit
 
+        # When the license key expires, when applicable.
         sig { returns(T.nilable(Time)) }
         attr_accessor :expires_at
 
-        # Nested representation of license-key grant fields. Present only when the grant's
-        # entitlement has `integration_type = 'license_key'` and a row exists in
-        # `license_keys`. The grant's top-level `status` is the source of truth for the
-        # grant's lifecycle — no per-license-key status is exposed here.
+        # License-key delivery payload, present on grants for `license_key` entitlements.
+        # The grant's top-level `status` is the source of truth for the grant's lifecycle.
         sig do
           params(
             activations_used: Integer,
@@ -37,9 +39,13 @@ module Dodopayments
           ).returns(T.attached_class)
         end
         def self.new(
+          # Number of activations consumed so far.
           activations_used:,
+          # Issued license key.
           key:,
+          # Maximum activations allowed by the entitlement, when set.
           activations_limit: nil,
+          # When the license key expires, when applicable.
           expires_at: nil
         )
         end

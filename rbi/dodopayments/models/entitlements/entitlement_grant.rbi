@@ -14,24 +14,31 @@ module Dodopayments
             )
           end
 
+        # Unique identifier of the grant.
         sig { returns(String) }
         attr_accessor :id
 
+        # Identifier of the business that owns the grant.
         sig { returns(String) }
         attr_accessor :business_id
 
+        # Timestamp when the grant was created.
         sig { returns(Time) }
         attr_accessor :created_at
 
+        # Identifier of the customer the grant was issued to.
         sig { returns(String) }
         attr_accessor :customer_id
 
+        # Identifier of the entitlement this grant was issued from.
         sig { returns(String) }
         attr_accessor :entitlement_id
 
-        sig { returns(String) }
-        attr_accessor :external_id
+        # Arbitrary key-value metadata recorded on the grant.
+        sig { returns(T::Hash[Symbol, String]) }
+        attr_accessor :metadata
 
+        # Lifecycle status of the grant.
         sig do
           returns(
             Dodopayments::Entitlements::EntitlementGrant::Status::TaggedSymbol
@@ -39,14 +46,16 @@ module Dodopayments
         end
         attr_accessor :status
 
+        # Timestamp when the grant was last modified.
         sig { returns(Time) }
         attr_accessor :updated_at
 
+        # Timestamp when the grant transitioned to `delivered`, when applicable.
         sig { returns(T.nilable(Time)) }
         attr_accessor :delivered_at
 
-        # Present only when the entitlement integration_type is `digital_files`. Populated
-        # eagerly on every list and single-record endpoint.
+        # Digital-product-delivery payload, present when the entitlement integration is
+        # `digital_files`.
         sig { returns(T.nilable(Dodopayments::DigitalProductDelivery)) }
         attr_reader :digital_product_delivery
 
@@ -58,13 +67,16 @@ module Dodopayments
         end
         attr_writer :digital_product_delivery
 
+        # Machine-readable code reported when delivery failed, when applicable.
         sig { returns(T.nilable(String)) }
         attr_accessor :error_code
 
+        # Human-readable message reported when delivery failed, when applicable.
         sig { returns(T.nilable(String)) }
         attr_accessor :error_message
 
-        # Present only when the entitlement integration_type is `license_key`.
+        # License-key delivery payload, present when the entitlement integration is
+        # `license_key`.
         sig { returns(T.nilable(Dodopayments::Entitlements::LicenseKeyGrant)) }
         attr_reader :license_key
 
@@ -76,30 +88,34 @@ module Dodopayments
         end
         attr_writer :license_key
 
-        sig { returns(T.nilable(T.anything)) }
-        attr_reader :metadata
-
-        sig { params(metadata: T.anything).void }
-        attr_writer :metadata
-
+        # Timestamp when `oauth_url` stops being valid, when applicable.
         sig { returns(T.nilable(Time)) }
         attr_accessor :oauth_expires_at
 
+        # Customer-facing OAuth URL for OAuth-style integrations. Populated during the
+        # customer-portal accept flow; `null` until the customer completes that step, and
+        # on grants for non-OAuth integrations.
         sig { returns(T.nilable(String)) }
         attr_accessor :oauth_url
 
+        # Identifier of the payment that triggered this grant, when applicable.
         sig { returns(T.nilable(String)) }
         attr_accessor :payment_id
 
+        # Reason recorded when the grant was revoked, when applicable.
         sig { returns(T.nilable(String)) }
         attr_accessor :revocation_reason
 
+        # Timestamp when the grant transitioned to `revoked`, when applicable.
         sig { returns(T.nilable(Time)) }
         attr_accessor :revoked_at
 
+        # Identifier of the subscription that triggered this grant, when applicable.
         sig { returns(T.nilable(String)) }
         attr_accessor :subscription_id
 
+        # Detailed view of a single entitlement grant: who it's for, its lifecycle state,
+        # and any integration-specific delivery payload.
         sig do
           params(
             id: String,
@@ -107,7 +123,7 @@ module Dodopayments
             created_at: Time,
             customer_id: String,
             entitlement_id: String,
-            external_id: String,
+            metadata: T::Hash[Symbol, String],
             status:
               Dodopayments::Entitlements::EntitlementGrant::Status::OrSymbol,
             updated_at: Time,
@@ -118,7 +134,6 @@ module Dodopayments
             error_message: T.nilable(String),
             license_key:
               T.nilable(Dodopayments::Entitlements::LicenseKeyGrant::OrHash),
-            metadata: T.anything,
             oauth_expires_at: T.nilable(Time),
             oauth_url: T.nilable(String),
             payment_id: T.nilable(String),
@@ -128,28 +143,47 @@ module Dodopayments
           ).returns(T.attached_class)
         end
         def self.new(
+          # Unique identifier of the grant.
           id:,
+          # Identifier of the business that owns the grant.
           business_id:,
+          # Timestamp when the grant was created.
           created_at:,
+          # Identifier of the customer the grant was issued to.
           customer_id:,
+          # Identifier of the entitlement this grant was issued from.
           entitlement_id:,
-          external_id:,
+          # Arbitrary key-value metadata recorded on the grant.
+          metadata:,
+          # Lifecycle status of the grant.
           status:,
+          # Timestamp when the grant was last modified.
           updated_at:,
+          # Timestamp when the grant transitioned to `delivered`, when applicable.
           delivered_at: nil,
-          # Present only when the entitlement integration_type is `digital_files`. Populated
-          # eagerly on every list and single-record endpoint.
+          # Digital-product-delivery payload, present when the entitlement integration is
+          # `digital_files`.
           digital_product_delivery: nil,
+          # Machine-readable code reported when delivery failed, when applicable.
           error_code: nil,
+          # Human-readable message reported when delivery failed, when applicable.
           error_message: nil,
-          # Present only when the entitlement integration_type is `license_key`.
+          # License-key delivery payload, present when the entitlement integration is
+          # `license_key`.
           license_key: nil,
-          metadata: nil,
+          # Timestamp when `oauth_url` stops being valid, when applicable.
           oauth_expires_at: nil,
+          # Customer-facing OAuth URL for OAuth-style integrations. Populated during the
+          # customer-portal accept flow; `null` until the customer completes that step, and
+          # on grants for non-OAuth integrations.
           oauth_url: nil,
+          # Identifier of the payment that triggered this grant, when applicable.
           payment_id: nil,
+          # Reason recorded when the grant was revoked, when applicable.
           revocation_reason: nil,
+          # Timestamp when the grant transitioned to `revoked`, when applicable.
           revoked_at: nil,
+          # Identifier of the subscription that triggered this grant, when applicable.
           subscription_id: nil
         )
         end
@@ -162,7 +196,7 @@ module Dodopayments
               created_at: Time,
               customer_id: String,
               entitlement_id: String,
-              external_id: String,
+              metadata: T::Hash[Symbol, String],
               status:
                 Dodopayments::Entitlements::EntitlementGrant::Status::TaggedSymbol,
               updated_at: Time,
@@ -173,7 +207,6 @@ module Dodopayments
               error_message: T.nilable(String),
               license_key:
                 T.nilable(Dodopayments::Entitlements::LicenseKeyGrant),
-              metadata: T.anything,
               oauth_expires_at: T.nilable(Time),
               oauth_url: T.nilable(String),
               payment_id: T.nilable(String),
@@ -186,6 +219,7 @@ module Dodopayments
         def to_hash
         end
 
+        # Lifecycle status of the grant.
         module Status
           extend Dodopayments::Internal::Type::Enum
 
