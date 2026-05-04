@@ -1034,6 +1034,8 @@ module Dodopayments
           end
           attr_accessor :payload_type
 
+          # Detailed view of a single entitlement grant: who it's for, its lifecycle state,
+          # and any integration-specific delivery payload.
           sig do
             params(
               payload_type:

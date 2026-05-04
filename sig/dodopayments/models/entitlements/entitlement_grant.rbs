@@ -10,7 +10,7 @@ module Dodopayments
           created_at: Time,
           customer_id: String,
           entitlement_id: String,
-          external_id: String,
+          metadata: ::Hash[Symbol, String],
           status: Dodopayments::Models::Entitlements::EntitlementGrant::status,
           updated_at: Time,
           delivered_at: Time?,
@@ -18,7 +18,6 @@ module Dodopayments
           error_code: String?,
           error_message: String?,
           license_key: Dodopayments::Entitlements::LicenseKeyGrant?,
-          metadata: top,
           oauth_expires_at: Time?,
           oauth_url: String?,
           payment_id: String?,
@@ -38,7 +37,7 @@ module Dodopayments
 
         attr_accessor entitlement_id: String
 
-        attr_accessor external_id: String
+        attr_accessor metadata: ::Hash[Symbol, String]
 
         attr_accessor status: Dodopayments::Models::Entitlements::EntitlementGrant::status
 
@@ -53,10 +52,6 @@ module Dodopayments
         attr_accessor error_message: String?
 
         attr_accessor license_key: Dodopayments::Entitlements::LicenseKeyGrant?
-
-        attr_reader metadata: top?
-
-        def metadata=: (top) -> top
 
         attr_accessor oauth_expires_at: Time?
 
@@ -76,7 +71,7 @@ module Dodopayments
           created_at: Time,
           customer_id: String,
           entitlement_id: String,
-          external_id: String,
+          metadata: ::Hash[Symbol, String],
           status: Dodopayments::Models::Entitlements::EntitlementGrant::status,
           updated_at: Time,
           ?delivered_at: Time?,
@@ -84,7 +79,6 @@ module Dodopayments
           ?error_code: String?,
           ?error_message: String?,
           ?license_key: Dodopayments::Entitlements::LicenseKeyGrant?,
-          ?metadata: top,
           ?oauth_expires_at: Time?,
           ?oauth_url: String?,
           ?payment_id: String?,
@@ -99,7 +93,7 @@ module Dodopayments
           created_at: Time,
           customer_id: String,
           entitlement_id: String,
-          external_id: String,
+          metadata: ::Hash[Symbol, String],
           status: Dodopayments::Models::Entitlements::EntitlementGrant::status,
           updated_at: Time,
           delivered_at: Time?,
@@ -107,7 +101,6 @@ module Dodopayments
           error_code: String?,
           error_message: String?,
           license_key: Dodopayments::Entitlements::LicenseKeyGrant?,
-          metadata: top,
           oauth_expires_at: Time?,
           oauth_url: String?,
           payment_id: String?,

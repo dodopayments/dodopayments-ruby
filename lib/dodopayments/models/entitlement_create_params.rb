@@ -32,10 +32,10 @@ module Dodopayments
       optional :description, String, nil?: true
 
       # @!attribute metadata
-      #   Optional user-facing metadata
+      #   Additional metadata for the entitlement
       #
       #   @return [Hash{Symbol=>String}, nil]
-      optional :metadata, Dodopayments::Internal::Type::HashOf[String], nil?: true
+      optional :metadata, Dodopayments::Internal::Type::HashOf[String]
 
       # @!method initialize(integration_config:, integration_type:, name:, description: nil, metadata: nil, request_options: {})
       #   @param integration_config [Dodopayments::Models::IntegrationConfig::GitHubConfig, Dodopayments::Models::IntegrationConfig::DiscordConfig, Dodopayments::Models::IntegrationConfig::TelegramConfig, Dodopayments::Models::IntegrationConfig::FigmaConfig, Dodopayments::Models::IntegrationConfig::FramerConfig, Dodopayments::Models::IntegrationConfig::NotionConfig, Dodopayments::Models::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig] Platform-specific configuration (validated per integration_type)
@@ -46,7 +46,7 @@ module Dodopayments
       #
       #   @param description [String, nil] Optional description
       #
-      #   @param metadata [Hash{Symbol=>String}, nil] Optional user-facing metadata
+      #   @param metadata [Hash{Symbol=>String}] Additional metadata for the entitlement
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end

@@ -18,8 +18,8 @@ module Dodopayments
       optional :description, String, nil?: true
 
       # @!attribute integration_config
-      #   Platform-specific configuration for an entitlement. Each variant uses unique
-      #   field names so `#[serde(untagged)]` can disambiguate correctly.
+      #   Integration-specific configuration supplied when creating or updating an
+      #   entitlement. The shape required matches the entitlement's `integration_type`.
       #
       #   @return [Dodopayments::Models::IntegrationConfig::GitHubConfig, Dodopayments::Models::IntegrationConfig::DiscordConfig, Dodopayments::Models::IntegrationConfig::TelegramConfig, Dodopayments::Models::IntegrationConfig::FigmaConfig, Dodopayments::Models::IntegrationConfig::FramerConfig, Dodopayments::Models::IntegrationConfig::NotionConfig, Dodopayments::Models::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig, nil]
       optional :integration_config, union: -> { Dodopayments::IntegrationConfig }, nil?: true
@@ -42,7 +42,7 @@ module Dodopayments
       #
       #   @param description [String, nil]
       #
-      #   @param integration_config [Dodopayments::Models::IntegrationConfig::GitHubConfig, Dodopayments::Models::IntegrationConfig::DiscordConfig, Dodopayments::Models::IntegrationConfig::TelegramConfig, Dodopayments::Models::IntegrationConfig::FigmaConfig, Dodopayments::Models::IntegrationConfig::FramerConfig, Dodopayments::Models::IntegrationConfig::NotionConfig, Dodopayments::Models::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig, nil] Platform-specific configuration for an entitlement.
+      #   @param integration_config [Dodopayments::Models::IntegrationConfig::GitHubConfig, Dodopayments::Models::IntegrationConfig::DiscordConfig, Dodopayments::Models::IntegrationConfig::TelegramConfig, Dodopayments::Models::IntegrationConfig::FigmaConfig, Dodopayments::Models::IntegrationConfig::FramerConfig, Dodopayments::Models::IntegrationConfig::NotionConfig, Dodopayments::Models::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig, nil] Integration-specific configuration supplied when creating or updating
       #
       #   @param metadata [Hash{Symbol=>String}, nil]
       #

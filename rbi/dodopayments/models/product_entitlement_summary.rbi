@@ -14,10 +14,10 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :id
 
-      # Public-facing variant of [`IntegrationConfig`]. Mirrors every variant shape on
-      # the wire EXCEPT `DigitalFiles`, which is replaced with a hydrated
-      # `digital_files` object (resolved download URLs etc.). The persisted JSONB stays
-      # ID-only via [`IntegrationConfig`]; this enum is response-only.
+      # Integration-specific configuration on an entitlement read response.
+      #
+      # For `digital_files` entitlements the response includes presigned download URLs
+      # for each attached file; other integrations match the shape supplied at creation.
       sig { returns(Dodopayments::IntegrationConfigResponse::Variants) }
       attr_accessor :integration_config
 
@@ -57,10 +57,10 @@ module Dodopayments
       end
       def self.new(
         id:,
-        # Public-facing variant of [`IntegrationConfig`]. Mirrors every variant shape on
-        # the wire EXCEPT `DigitalFiles`, which is replaced with a hydrated
-        # `digital_files` object (resolved download URLs etc.). The persisted JSONB stays
-        # ID-only via [`IntegrationConfig`]; this enum is response-only.
+        # Integration-specific configuration on an entitlement read response.
+        #
+        # For `digital_files` entitlements the response includes presigned download URLs
+        # for each attached file; other integrations match the shape supplied at creation.
         integration_config:,
         integration_type:,
         name:,

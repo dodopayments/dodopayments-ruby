@@ -92,10 +92,8 @@ module Dodopayments
       optional :description, String, nil?: true
 
       # @!attribute digital_product_delivery
-      #   Digital-product-delivery payload for a grant. Populated for grants whose
-      #   entitlement has `integration_type = 'digital_files'`. `files` carries presigned
-      #   download URLs; the source (EE service or legacy in-process S3 presigning) is
-      #   opaque to the caller.
+      #   Digital-product-delivery payload, present on grants for `digital_files`
+      #   entitlements. Each file carries a short-lived presigned download URL.
       #
       #   @return [Dodopayments::Models::DigitalProductDelivery, nil]
       optional :digital_product_delivery, -> { Dodopayments::DigitalProductDelivery }, nil?: true
@@ -172,7 +170,7 @@ module Dodopayments
       #
       #   @param description [String, nil] Description of the product, optional.
       #
-      #   @param digital_product_delivery [Dodopayments::Models::DigitalProductDelivery, nil] Digital-product-delivery payload for a grant. Populated for grants whose
+      #   @param digital_product_delivery [Dodopayments::Models::DigitalProductDelivery, nil] Digital-product-delivery payload, present on grants for `digital_files`
       #
       #   @param image [String, nil] URL of the product image, optional.
       #

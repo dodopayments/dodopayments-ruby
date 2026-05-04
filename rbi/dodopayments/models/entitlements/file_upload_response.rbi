@@ -12,15 +12,15 @@ module Dodopayments
             )
           end
 
-        # EE-issued digital file id; appended to
-        # `entitlements.integration_config.digital_file_ids`.
+        # Identifier of the attached file. Pass it to
+        # `DELETE /entitlements/{id}/files/{file_id}` to detach the file later.
         sig { returns(String) }
         attr_accessor :file_id
 
         sig { params(file_id: String).returns(T.attached_class) }
         def self.new(
-          # EE-issued digital file id; appended to
-          # `entitlements.integration_config.digital_file_ids`.
+          # Identifier of the attached file. Pass it to
+          # `DELETE /entitlements/{id}/files/{file_id}` to detach the file later.
           file_id:
         )
         end

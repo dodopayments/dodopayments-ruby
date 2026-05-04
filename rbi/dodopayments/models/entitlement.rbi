@@ -8,43 +8,50 @@ module Dodopayments
           T.any(Dodopayments::Entitlement, Dodopayments::Internal::AnyHash)
         end
 
+      # Unique identifier of the entitlement.
       sig { returns(String) }
       attr_accessor :id
 
+      # Identifier of the business that owns this entitlement.
       sig { returns(String) }
       attr_accessor :business_id
 
+      # Timestamp when the entitlement was created.
       sig { returns(Time) }
       attr_accessor :created_at
 
-      # Public-facing variant of [`IntegrationConfig`]. Mirrors every variant shape on
-      # the wire EXCEPT `DigitalFiles`, which is replaced with a hydrated
-      # `digital_files` object (resolved download URLs etc.). The persisted JSONB stays
-      # ID-only via [`IntegrationConfig`]; this enum is response-only.
+      # Integration-specific configuration. For `digital_files` entitlements this
+      # includes presigned download URLs for each attached file.
       sig { returns(Dodopayments::IntegrationConfigResponse::Variants) }
       attr_accessor :integration_config
 
+      # Platform integration this entitlement uses.
       sig { returns(Dodopayments::EntitlementIntegrationType::TaggedSymbol) }
       attr_accessor :integration_type
 
+      # Always `true` for entitlements returned by the public API; soft-deleted
+      # entitlements are not returned.
       sig { returns(T::Boolean) }
       attr_accessor :is_active
 
+      # Arbitrary key-value metadata supplied at creation or via PATCH.
+      sig { returns(T::Hash[Symbol, String]) }
+      attr_accessor :metadata
+
+      # Display name supplied at creation.
       sig { returns(String) }
       attr_accessor :name
 
+      # Timestamp when the entitlement was last modified.
       sig { returns(Time) }
       attr_accessor :updated_at
 
+      # Optional description supplied at creation.
       sig { returns(T.nilable(String)) }
       attr_accessor :description
 
-      sig { returns(T.nilable(T.anything)) }
-      attr_reader :metadata
-
-      sig { params(metadata: T.anything).void }
-      attr_writer :metadata
-
+      # Detailed view of a single entitlement: identity, integration type,
+      # integration-specific configuration, and metadata.
       sig do
         params(
           id: String,
@@ -63,27 +70,35 @@ module Dodopayments
             ),
           integration_type: Dodopayments::EntitlementIntegrationType::OrSymbol,
           is_active: T::Boolean,
+          metadata: T::Hash[Symbol, String],
           name: String,
           updated_at: Time,
-          description: T.nilable(String),
-          metadata: T.anything
+          description: T.nilable(String)
         ).returns(T.attached_class)
       end
       def self.new(
+        # Unique identifier of the entitlement.
         id:,
+        # Identifier of the business that owns this entitlement.
         business_id:,
+        # Timestamp when the entitlement was created.
         created_at:,
-        # Public-facing variant of [`IntegrationConfig`]. Mirrors every variant shape on
-        # the wire EXCEPT `DigitalFiles`, which is replaced with a hydrated
-        # `digital_files` object (resolved download URLs etc.). The persisted JSONB stays
-        # ID-only via [`IntegrationConfig`]; this enum is response-only.
+        # Integration-specific configuration. For `digital_files` entitlements this
+        # includes presigned download URLs for each attached file.
         integration_config:,
+        # Platform integration this entitlement uses.
         integration_type:,
+        # Always `true` for entitlements returned by the public API; soft-deleted
+        # entitlements are not returned.
         is_active:,
+        # Arbitrary key-value metadata supplied at creation or via PATCH.
+        metadata:,
+        # Display name supplied at creation.
         name:,
+        # Timestamp when the entitlement was last modified.
         updated_at:,
-        description: nil,
-        metadata: nil
+        # Optional description supplied at creation.
+        description: nil
       )
       end
 
@@ -98,10 +113,10 @@ module Dodopayments
             integration_type:
               Dodopayments::EntitlementIntegrationType::TaggedSymbol,
             is_active: T::Boolean,
+            metadata: T::Hash[Symbol, String],
             name: String,
             updated_at: Time,
-            description: T.nilable(String),
-            metadata: T.anything
+            description: T.nilable(String)
           }
         )
       end

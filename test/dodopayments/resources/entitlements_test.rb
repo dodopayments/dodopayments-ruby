@@ -6,7 +6,7 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
   def test_create_required_params
     response =
       @dodo_payments.entitlements.create(
-        integration_config: {permission: "permission", target_id: "target_id"},
+        integration_config: {permission: :pull, target_id: "target_id"},
         integration_type: :discord,
         name: "name"
       )
@@ -23,10 +23,10 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
         integration_config: Dodopayments::IntegrationConfigResponse,
         integration_type: Dodopayments::EntitlementIntegrationType,
         is_active: Dodopayments::Internal::Type::Boolean,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         name: String,
         updated_at: Time,
-        description: String | nil,
-        metadata: Dodopayments::Internal::Type::Unknown | nil
+        description: String | nil
       }
     end
   end
@@ -46,10 +46,10 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
         integration_config: Dodopayments::IntegrationConfigResponse,
         integration_type: Dodopayments::EntitlementIntegrationType,
         is_active: Dodopayments::Internal::Type::Boolean,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         name: String,
         updated_at: Time,
-        description: String | nil,
-        metadata: Dodopayments::Internal::Type::Unknown | nil
+        description: String | nil
       }
     end
   end
@@ -69,10 +69,10 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
         integration_config: Dodopayments::IntegrationConfigResponse,
         integration_type: Dodopayments::EntitlementIntegrationType,
         is_active: Dodopayments::Internal::Type::Boolean,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         name: String,
         updated_at: Time,
-        description: String | nil,
-        metadata: Dodopayments::Internal::Type::Unknown | nil
+        description: String | nil
       }
     end
   end
@@ -99,10 +99,10 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
         integration_config: Dodopayments::IntegrationConfigResponse,
         integration_type: Dodopayments::EntitlementIntegrationType,
         is_active: Dodopayments::Internal::Type::Boolean,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         name: String,
         updated_at: Time,
-        description: String | nil,
-        metadata: Dodopayments::Internal::Type::Unknown | nil
+        description: String | nil
       }
     end
   end

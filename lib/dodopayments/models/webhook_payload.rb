@@ -65,6 +65,8 @@ module Dodopayments
 
         variant -> { Dodopayments::WebhookPayload::Data::DunningAttempt }
 
+        # Detailed view of a single entitlement grant: who it's for, its
+        # lifecycle state, and any integration-specific delivery payload.
         variant -> { Dodopayments::WebhookPayload::Data::EntitlementGrant }
 
         class Payment < Dodopayments::Models::Payment
@@ -421,6 +423,9 @@ module Dodopayments
           required :payload_type, enum: -> { Dodopayments::WebhookPayload::Data::EntitlementGrant::PayloadType }
 
           # @!method initialize(payload_type:)
+          #   Detailed view of a single entitlement grant: who it's for, its lifecycle state,
+          #   and any integration-specific delivery payload.
+          #
           #   @param payload_type [Symbol, Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::PayloadType]
 
           module PayloadType
