@@ -34,6 +34,13 @@ module Dodopayments
       #   @return [Dodopayments::Models::CustomerLimitedDetails]
       required :customer, -> { Dodopayments::CustomerLimitedDetails }
 
+      # @!attribute discounts
+      #   All stacked discounts applied, in order of application
+      #
+      #   @return [Array<Dodopayments::Models::SubscriptionListResponse::Discount>]
+      required :discounts,
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::SubscriptionListResponse::Discount] }
+
       # @!attribute metadata
       #   Additional custom data associated with the subscription
       #
@@ -133,13 +140,13 @@ module Dodopayments
       optional :cancelled_at, Time, nil?: true
 
       # @!attribute discount_cycles_remaining
-      #   Number of remaining discount cycles if discount is applied
+      #   DEPRECATED: Use discounts[].cycles_remaining instead.
       #
       #   @return [Integer, nil]
       optional :discount_cycles_remaining, Integer, nil?: true
 
       # @!attribute discount_id
-      #   The discount id if discount is applied
+      #   DEPRECATED: Use discounts instead.
       #
       #   @return [String, nil]
       optional :discount_id, String, nil?: true
@@ -168,7 +175,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(billing:, cancel_at_next_billing_date:, created_at:, currency:, customer:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, discount_cycles_remaining: nil, discount_id: nil, payment_method_id: nil, product_name: nil, scheduled_change: nil, tax_id: nil)
+      # @!method initialize(billing:, cancel_at_next_billing_date:, created_at:, currency:, customer:, discounts:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, discount_cycles_remaining: nil, discount_id: nil, payment_method_id: nil, product_name: nil, scheduled_change: nil, tax_id: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionListResponse} for more details.
       #
@@ -183,6 +190,8 @@ module Dodopayments
       #   @param currency [Symbol, Dodopayments::Models::Currency] Currency used for the subscription payments
       #
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails] Customer details associated with the subscription
+      #
+      #   @param discounts [Array<Dodopayments::Models::SubscriptionListResponse::Discount>] All stacked discounts applied, in order of application
       #
       #   @param metadata [Hash{Symbol=>String}] Additional custom data associated with the subscription
       #
@@ -216,9 +225,9 @@ module Dodopayments
       #
       #   @param cancelled_at [Time, nil] Cancelled timestamp if the subscription is cancelled
       #
-      #   @param discount_cycles_remaining [Integer, nil] Number of remaining discount cycles if discount is applied
+      #   @param discount_cycles_remaining [Integer, nil] DEPRECATED: Use discounts[].cycles_remaining instead.
       #
-      #   @param discount_id [String, nil] The discount id if discount is applied
+      #   @param discount_id [String, nil] DEPRECATED: Use discounts instead.
       #
       #   @param payment_method_id [String, nil] Saved payment method id used for recurring charges
       #
@@ -227,6 +236,28 @@ module Dodopayments
       #   @param scheduled_change [Dodopayments::Models::ScheduledPlanChange, nil] Scheduled plan change details, if any
       #
       #   @param tax_id [String, nil] Tax identifier provided for this subscription (if applicable)
+
+      class Discount < Dodopayments::Internal::Type::BaseModel
+        # @!attribute discount_id
+        #   The unique discount ID
+        #
+        #   @return [String]
+        required :discount_id, String
+
+        # @!attribute discount_cycles_remaining
+        #   Remaining billing cycles for this discount on this subscription
+        #
+        #   @return [Integer, nil]
+        optional :discount_cycles_remaining, Integer, nil?: true
+
+        # @!method initialize(discount_id:, discount_cycles_remaining: nil)
+        #   Lightweight discount info for list endpoints. Array order represents position
+        #   (no explicit position field).
+        #
+        #   @param discount_id [String] The unique discount ID
+        #
+        #   @param discount_cycles_remaining [Integer, nil] Remaining billing cycles for this discount on this subscription
+      end
     end
   end
 end

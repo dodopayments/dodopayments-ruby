@@ -49,10 +49,19 @@ module Dodopayments
       optional :client_secret, String, nil?: true
 
       # @!attribute discount_id
-      #   The discount id if discount is applied
+      #   @deprecated
+      #
+      #   DEPRECATED: Use discount_ids instead. Returns the first discount's ID if
+      #   present.
       #
       #   @return [String, nil]
       optional :discount_id, String, nil?: true
+
+      # @!attribute discount_ids
+      #   All stacked discount IDs applied, in order of application
+      #
+      #   @return [Array<String>, nil]
+      optional :discount_ids, Dodopayments::Internal::Type::ArrayOf[String], nil?: true
 
       # @!attribute expires_on
       #   Expiry timestamp of the payment link
@@ -74,7 +83,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :payment_link, String, nil?: true
 
-      # @!method initialize(addons:, customer:, metadata:, payment_id:, recurring_pre_tax_amount:, subscription_id:, client_secret: nil, discount_id: nil, expires_on: nil, one_time_product_cart: nil, payment_link: nil)
+      # @!method initialize(addons:, customer:, metadata:, payment_id:, recurring_pre_tax_amount:, subscription_id:, client_secret: nil, discount_id: nil, discount_ids: nil, expires_on: nil, one_time_product_cart: nil, payment_link: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionCreateResponse} for more details.
       #
@@ -92,7 +101,9 @@ module Dodopayments
       #
       #   @param client_secret [String, nil] Client secret used to load Dodo checkout SDK
       #
-      #   @param discount_id [String, nil] The discount id if discount is applied
+      #   @param discount_id [String, nil] DEPRECATED: Use discount_ids instead. Returns the first discount's ID if present
+      #
+      #   @param discount_ids [Array<String>, nil] All stacked discount IDs applied, in order of application
       #
       #   @param expires_on [Time, nil] Expiry timestamp of the payment link
       #

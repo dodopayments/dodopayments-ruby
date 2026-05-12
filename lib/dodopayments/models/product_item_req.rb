@@ -32,7 +32,18 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :amount, Integer, nil?: true
 
-      # @!method initialize(product_id:, quantity:, addons: nil, amount: nil)
+      # @!attribute credit_entitlements
+      #   Per-checkout-session overrides for credit entitlements already attached to this
+      #   product. Each entry overrides the `credits_amount` granted by the referenced
+      #   credit entitlement when this checkout session is fulfilled. The
+      #   credit_entitlement_id must already be attached to the product.
+      #
+      #   @return [Array<Dodopayments::Models::ProductItemReq::CreditEntitlement>, nil]
+      optional :credit_entitlements,
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::ProductItemReq::CreditEntitlement] },
+               nil?: true
+
+      # @!method initialize(product_id:, quantity:, addons: nil, amount: nil, credit_entitlements: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductItemReq} for more details.
       #
@@ -43,6 +54,36 @@ module Dodopayments
       #   @param addons [Array<Dodopayments::Models::AttachAddon>, nil] only valid if product is a subscription
       #
       #   @param amount [Integer, nil] Amount the customer pays if pay_what_you_want is enabled. If disabled then amoun
+      #
+      #   @param credit_entitlements [Array<Dodopayments::Models::ProductItemReq::CreditEntitlement>, nil] Per-checkout-session overrides for credit entitlements already attached
+
+      class CreditEntitlement < Dodopayments::Internal::Type::BaseModel
+        # @!attribute credit_entitlement_id
+        #   ID of the credit entitlement to override. Must already be attached to the
+        #   product.
+        #
+        #   @return [String]
+        required :credit_entitlement_id, String
+
+        # @!attribute credits_amount
+        #   Number of credits to grant for this checkout session, overriding the
+        #   product-level `credits_amount` set on the credit entitlement mapping. Must be
+        #   greater than zero.
+        #
+        #   @return [String]
+        required :credits_amount, String
+
+        # @!method initialize(credit_entitlement_id:, credits_amount:)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::ProductItemReq::CreditEntitlement} for more details.
+        #
+        #   Per-checkout-session override for a single credit entitlement attached to a
+        #   product.
+        #
+        #   @param credit_entitlement_id [String] ID of the credit entitlement to override. Must already be attached to the produc
+        #
+        #   @param credits_amount [String] Number of credits to grant for this checkout session, overriding the
+      end
     end
   end
 end

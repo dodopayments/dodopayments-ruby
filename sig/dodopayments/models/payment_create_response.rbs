@@ -8,6 +8,7 @@ module Dodopayments
         payment_id: String,
         total_amount: Integer,
         discount_id: String?,
+        discount_ids: ::Array[String]?,
         expires_on: Time?,
         payment_link: String?,
         product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?
@@ -26,6 +27,8 @@ module Dodopayments
 
       attr_accessor discount_id: String?
 
+      attr_accessor discount_ids: ::Array[String]?
+
       attr_accessor expires_on: Time?
 
       attr_accessor payment_link: String?
@@ -39,6 +42,7 @@ module Dodopayments
         payment_id: String,
         total_amount: Integer,
         ?discount_id: String?,
+        ?discount_ids: ::Array[String]?,
         ?expires_on: Time?,
         ?payment_link: String?,
         ?product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?
@@ -51,6 +55,7 @@ module Dodopayments
         payment_id: String,
         total_amount: Integer,
         discount_id: String?,
+        discount_ids: ::Array[String]?,
         expires_on: Time?,
         payment_link: String?,
         product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?

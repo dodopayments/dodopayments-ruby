@@ -5,7 +5,8 @@ module Dodopayments
         product_id: String,
         quantity: Integer,
         addons: ::Array[Dodopayments::AttachAddon]?,
-        amount: Integer?
+        amount: Integer?,
+        credit_entitlements: ::Array[Dodopayments::ProductItemReq::CreditEntitlement]?
       }
 
     class ProductItemReq < Dodopayments::Internal::Type::BaseModel
@@ -17,19 +18,42 @@ module Dodopayments
 
       attr_accessor amount: Integer?
 
+      attr_accessor credit_entitlements: ::Array[Dodopayments::ProductItemReq::CreditEntitlement]?
+
       def initialize: (
         product_id: String,
         quantity: Integer,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
-        ?amount: Integer?
+        ?amount: Integer?,
+        ?credit_entitlements: ::Array[Dodopayments::ProductItemReq::CreditEntitlement]?
       ) -> void
 
       def to_hash: -> {
         product_id: String,
         quantity: Integer,
         addons: ::Array[Dodopayments::AttachAddon]?,
-        amount: Integer?
+        amount: Integer?,
+        credit_entitlements: ::Array[Dodopayments::ProductItemReq::CreditEntitlement]?
       }
+
+      type credit_entitlement =
+        { credit_entitlement_id: String, credits_amount: String }
+
+      class CreditEntitlement < Dodopayments::Internal::Type::BaseModel
+        attr_accessor credit_entitlement_id: String
+
+        attr_accessor credits_amount: String
+
+        def initialize: (
+          credit_entitlement_id: String,
+          credits_amount: String
+        ) -> void
+
+        def to_hash: -> {
+          credit_entitlement_id: String,
+          credits_amount: String
+        }
+      end
     end
   end
 end
