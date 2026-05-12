@@ -8,7 +8,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::PaymentCreateParams} for more details.
       #
-      # @overload create(billing:, customer:, product_cart:, adaptive_currency_fees_inclusive: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, require_phone_number: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
+      # @overload create(billing:, customer:, product_cart:, adaptive_currency_fees_inclusive: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, discount_codes: nil, force_3ds: nil, metadata: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, require_phone_number: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
       #
       # @param billing [Dodopayments::Models::BillingAddress] Billing address details for the payment
       #
@@ -22,7 +22,9 @@ module Dodopayments
       #
       # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Fix the currency in which the end customer is billed.
       #
-      # @param discount_code [String, nil] Discount Code to apply to the transaction
+      # @param discount_code [String, nil] DEPRECATED: Use discount_codes instead. Cannot be used together with discount_co
+      #
+      # @param discount_codes [Array<String>, nil] Stacked discount codes to apply, in order of application. Max 20.
       #
       # @param force_3ds [Boolean, nil] Override merchant default 3DS behaviour for this payment
       #

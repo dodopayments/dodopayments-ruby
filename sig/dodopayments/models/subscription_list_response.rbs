@@ -7,6 +7,7 @@ module Dodopayments
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
+        discounts: ::Array[Dodopayments::Models::SubscriptionListResponse::Discount],
         metadata: ::Hash[Symbol, String],
         next_billing_date: Time,
         on_demand: bool,
@@ -41,6 +42,8 @@ module Dodopayments
       attr_accessor currency: Dodopayments::Models::currency
 
       attr_accessor customer: Dodopayments::CustomerLimitedDetails
+
+      attr_accessor discounts: ::Array[Dodopayments::Models::SubscriptionListResponse::Discount]
 
       attr_accessor metadata: ::Hash[Symbol, String]
 
@@ -92,6 +95,7 @@ module Dodopayments
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
+        discounts: ::Array[Dodopayments::Models::SubscriptionListResponse::Discount],
         metadata: ::Hash[Symbol, String],
         next_billing_date: Time,
         on_demand: bool,
@@ -122,6 +126,7 @@ module Dodopayments
         created_at: Time,
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
+        discounts: ::Array[Dodopayments::Models::SubscriptionListResponse::Discount],
         metadata: ::Hash[Symbol, String],
         next_billing_date: Time,
         on_demand: bool,
@@ -145,6 +150,25 @@ module Dodopayments
         scheduled_change: Dodopayments::ScheduledPlanChange?,
         tax_id: String?
       }
+
+      type discount =
+        { discount_id: String, discount_cycles_remaining: Integer? }
+
+      class Discount < Dodopayments::Internal::Type::BaseModel
+        attr_accessor discount_id: String
+
+        attr_accessor discount_cycles_remaining: Integer?
+
+        def initialize: (
+          discount_id: String,
+          ?discount_cycles_remaining: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          discount_id: String,
+          discount_cycles_remaining: Integer?
+        }
+      end
     end
   end
 end

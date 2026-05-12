@@ -39,6 +39,14 @@ module Dodopayments
       end
       attr_writer :customer
 
+      # All stacked discounts applied, in order of application
+      sig do
+        returns(
+          T::Array[Dodopayments::Models::SubscriptionListResponse::Discount]
+        )
+      end
+      attr_accessor :discounts
+
       # Additional custom data associated with the subscription
       sig { returns(T::Hash[Symbol, String]) }
       attr_accessor :metadata
@@ -105,11 +113,11 @@ module Dodopayments
       sig { returns(T.nilable(Time)) }
       attr_accessor :cancelled_at
 
-      # Number of remaining discount cycles if discount is applied
+      # DEPRECATED: Use discounts[].cycles_remaining instead.
       sig { returns(T.nilable(Integer)) }
       attr_accessor :discount_cycles_remaining
 
-      # The discount id if discount is applied
+      # DEPRECATED: Use discounts instead.
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_id
 
@@ -144,6 +152,10 @@ module Dodopayments
           created_at: Time,
           currency: Dodopayments::Currency::OrSymbol,
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
+          discounts:
+            T::Array[
+              Dodopayments::Models::SubscriptionListResponse::Discount::OrHash
+            ],
           metadata: T::Hash[Symbol, String],
           next_billing_date: Time,
           on_demand: T::Boolean,
@@ -180,6 +192,8 @@ module Dodopayments
         currency:,
         # Customer details associated with the subscription
         customer:,
+        # All stacked discounts applied, in order of application
+        discounts:,
         # Additional custom data associated with the subscription
         metadata:,
         # Timestamp of the next scheduled billing. Indicates the end of current billing
@@ -214,9 +228,9 @@ module Dodopayments
         trial_period_days:,
         # Cancelled timestamp if the subscription is cancelled
         cancelled_at: nil,
-        # Number of remaining discount cycles if discount is applied
+        # DEPRECATED: Use discounts[].cycles_remaining instead.
         discount_cycles_remaining: nil,
-        # The discount id if discount is applied
+        # DEPRECATED: Use discounts instead.
         discount_id: nil,
         # Saved payment method id used for recurring charges
         payment_method_id: nil,
@@ -237,6 +251,10 @@ module Dodopayments
             created_at: Time,
             currency: Dodopayments::Currency::TaggedSymbol,
             customer: Dodopayments::CustomerLimitedDetails,
+            discounts:
+              T::Array[
+                Dodopayments::Models::SubscriptionListResponse::Discount
+              ],
             metadata: T::Hash[Symbol, String],
             next_billing_date: Time,
             on_demand: T::Boolean,
@@ -265,6 +283,51 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      class Discount < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::Models::SubscriptionListResponse::Discount,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        # The unique discount ID
+        sig { returns(String) }
+        attr_accessor :discount_id
+
+        # Remaining billing cycles for this discount on this subscription
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :discount_cycles_remaining
+
+        # Lightweight discount info for list endpoints. Array order represents position
+        # (no explicit position field).
+        sig do
+          params(
+            discount_id: String,
+            discount_cycles_remaining: T.nilable(Integer)
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # The unique discount ID
+          discount_id:,
+          # Remaining billing cycles for this discount on this subscription
+          discount_cycles_remaining: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              discount_id: String,
+              discount_cycles_remaining: T.nilable(Integer)
+            }
+          )
+        end
+        def to_hash
+        end
       end
     end
   end

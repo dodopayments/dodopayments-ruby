@@ -18,6 +18,7 @@ module Dodopayments
             T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           discount_code: T.nilable(String),
+          discount_codes: T.nilable(T::Array[String]),
           force_3ds: T.nilable(T::Boolean),
           mandate_min_amount_inr_paise: T.nilable(Integer),
           metadata: T::Hash[Symbol, String],
@@ -57,8 +58,12 @@ module Dodopayments
         # Fix the currency in which the end customer is billed. If Dodo Payments cannot
         # support that currency for this transaction, it will not proceed
         billing_currency: nil,
-        # Discount Code to apply to the subscription
+        # DEPRECATED: Use discount_codes instead. Cannot be used together with
+        # discount_codes.
         discount_code: nil,
+        # Stacked discount codes to apply, in order of application. Max 20. Cannot be used
+        # together with discount_code.
+        discount_codes: nil,
         # Override merchant default 3DS behaviour for this subscription
         force_3ds: nil,
         # Override the merchant-level mandate floor (in INR paise) for INR e-mandates on
@@ -232,6 +237,7 @@ module Dodopayments
           adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           discount_code: T.nilable(String),
+          discount_codes: T.nilable(T::Array[String]),
           effective_at:
             Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol,
           metadata: T.nilable(T::Hash[Symbol, String]),
@@ -257,11 +263,14 @@ module Dodopayments
         # Addons for the new plan. Note : Leaving this empty would remove any existing
         # addons
         addons: nil,
-        # Optional discount code to apply to the new plan. If provided, validates and
-        # applies the discount to the plan change. If not provided and the subscription
-        # has an existing discount with `preserve_on_plan_change=true`, the existing
-        # discount will be preserved (if applicable to the new product).
+        # DEPRECATED: Use discount_codes instead. Cannot be used together with
+        # discount_codes.
         discount_code: nil,
+        # Stacked discount codes to apply to the new plan. Max 20. Cannot be used together
+        # with discount_code. If provided, replaces any existing discount codes. Empty
+        # array removes all discounts. If not provided (None), existing discounts with
+        # preserve_on_plan_change=true are preserved.
+        discount_codes: nil,
         # When to apply the plan change.
         #
         # - `immediately` (default): Apply the plan change right away
@@ -332,6 +341,7 @@ module Dodopayments
           adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           discount_code: T.nilable(String),
+          discount_codes: T.nilable(T::Array[String]),
           effective_at:
             Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol,
           metadata: T.nilable(T::Hash[Symbol, String]),
@@ -357,11 +367,14 @@ module Dodopayments
         # Addons for the new plan. Note : Leaving this empty would remove any existing
         # addons
         addons: nil,
-        # Optional discount code to apply to the new plan. If provided, validates and
-        # applies the discount to the plan change. If not provided and the subscription
-        # has an existing discount with `preserve_on_plan_change=true`, the existing
-        # discount will be preserved (if applicable to the new product).
+        # DEPRECATED: Use discount_codes instead. Cannot be used together with
+        # discount_codes.
         discount_code: nil,
+        # Stacked discount codes to apply to the new plan. Max 20. Cannot be used together
+        # with discount_code. If provided, replaces any existing discount codes. Empty
+        # array removes all discounts. If not provided (None), existing discounts with
+        # preserve_on_plan_change=true are preserved.
+        discount_codes: nil,
         # When to apply the plan change.
         #
         # - `immediately` (default): Apply the plan change right away

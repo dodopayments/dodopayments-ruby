@@ -37,12 +37,17 @@ module Dodopayments
       sig { returns(T.nilable(T::Array[Dodopayments::AttachAddon])) }
       attr_accessor :addons
 
-      # Optional discount code to apply to the new plan. If provided, validates and
-      # applies the discount to the plan change. If not provided and the subscription
-      # has an existing discount with `preserve_on_plan_change=true`, the existing
-      # discount will be preserved (if applicable to the new product).
+      # DEPRECATED: Use discount_codes instead. Cannot be used together with
+      # discount_codes.
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_code
+
+      # Stacked discount codes to apply to the new plan. Max 20. Cannot be used together
+      # with discount_code. If provided, replaces any existing discount codes. Empty
+      # array removes all discounts. If not provided (None), existing discounts with
+      # preserve_on_plan_change=true are preserved.
+      sig { returns(T.nilable(T::Array[String])) }
+      attr_accessor :discount_codes
 
       # When to apply the plan change.
       #
@@ -95,6 +100,7 @@ module Dodopayments
           adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
           discount_code: T.nilable(String),
+          discount_codes: T.nilable(T::Array[String]),
           effective_at:
             Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol,
           metadata: T.nilable(T::Hash[Symbol, String]),
@@ -117,11 +123,14 @@ module Dodopayments
         # Addons for the new plan. Note : Leaving this empty would remove any existing
         # addons
         addons: nil,
-        # Optional discount code to apply to the new plan. If provided, validates and
-        # applies the discount to the plan change. If not provided and the subscription
-        # has an existing discount with `preserve_on_plan_change=true`, the existing
-        # discount will be preserved (if applicable to the new product).
+        # DEPRECATED: Use discount_codes instead. Cannot be used together with
+        # discount_codes.
         discount_code: nil,
+        # Stacked discount codes to apply to the new plan. Max 20. Cannot be used together
+        # with discount_code. If provided, replaces any existing discount codes. Empty
+        # array removes all discounts. If not provided (None), existing discounts with
+        # preserve_on_plan_change=true are preserved.
+        discount_codes: nil,
         # When to apply the plan change.
         #
         # - `immediately` (default): Apply the plan change right away
@@ -151,6 +160,7 @@ module Dodopayments
             adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
             addons: T.nilable(T::Array[Dodopayments::AttachAddon]),
             discount_code: T.nilable(String),
+            discount_codes: T.nilable(T::Array[String]),
             effective_at:
               Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol,
             metadata: T.nilable(T::Hash[Symbol, String]),

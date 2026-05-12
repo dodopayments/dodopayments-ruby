@@ -12,6 +12,7 @@ module Dodopayments
         customer: Dodopayments::Models::customer_request?,
         customization: Dodopayments::CheckoutSessionCustomization,
         discount_code: String?,
+        discount_codes: ::Array[String]?,
         feature_flags: Dodopayments::CheckoutSessionFlags,
         :force_3ds => bool?,
         mandate_min_amount_inr_paise: Integer?,
@@ -52,6 +53,8 @@ module Dodopayments
       ) -> Dodopayments::CheckoutSessionCustomization
 
       attr_accessor discount_code: String?
+
+      attr_accessor discount_codes: ::Array[String]?
 
       attr_reader feature_flags: Dodopayments::CheckoutSessionFlags?
 
@@ -98,6 +101,7 @@ module Dodopayments
         ?customer: Dodopayments::Models::customer_request?,
         ?customization: Dodopayments::CheckoutSessionCustomization,
         ?discount_code: String?,
+        ?discount_codes: ::Array[String]?,
         ?feature_flags: Dodopayments::CheckoutSessionFlags,
         ?force_3ds: bool?,
         ?mandate_min_amount_inr_paise: Integer?,
@@ -123,6 +127,7 @@ module Dodopayments
         customer: Dodopayments::Models::customer_request?,
         customization: Dodopayments::CheckoutSessionCustomization,
         discount_code: String?,
+        discount_codes: ::Array[String]?,
         feature_flags: Dodopayments::CheckoutSessionFlags,
         :force_3ds => bool?,
         mandate_min_amount_inr_paise: Integer?,

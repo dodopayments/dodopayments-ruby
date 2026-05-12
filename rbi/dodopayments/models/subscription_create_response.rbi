@@ -46,9 +46,14 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :client_secret
 
-      # The discount id if discount is applied
+      # DEPRECATED: Use discount_ids instead. Returns the first discount's ID if
+      # present.
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_id
+
+      # All stacked discount IDs applied, in order of application
+      sig { returns(T.nilable(T::Array[String])) }
+      attr_accessor :discount_ids
 
       # Expiry timestamp of the payment link
       sig { returns(T.nilable(Time)) }
@@ -80,6 +85,7 @@ module Dodopayments
           subscription_id: String,
           client_secret: T.nilable(String),
           discount_id: T.nilable(String),
+          discount_ids: T.nilable(T::Array[String]),
           expires_on: T.nilable(Time),
           one_time_product_cart:
             T.nilable(
@@ -107,8 +113,11 @@ module Dodopayments
         # Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will be
         # coming soon
         client_secret: nil,
-        # The discount id if discount is applied
+        # DEPRECATED: Use discount_ids instead. Returns the first discount's ID if
+        # present.
         discount_id: nil,
+        # All stacked discount IDs applied, in order of application
+        discount_ids: nil,
         # Expiry timestamp of the payment link
         expires_on: nil,
         # One time products associated with the purchase of subscription
@@ -129,6 +138,7 @@ module Dodopayments
             subscription_id: String,
             client_secret: T.nilable(String),
             discount_id: T.nilable(String),
+            discount_ids: T.nilable(T::Array[String]),
             expires_on: T.nilable(Time),
             one_time_product_cart:
               T.nilable(

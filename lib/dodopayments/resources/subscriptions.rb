@@ -8,7 +8,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionCreateParams} for more details.
       #
-      # @overload create(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, require_phone_number: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
+      # @overload create(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, discount_codes: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, require_phone_number: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
       #
       # @param billing [Dodopayments::Models::BillingAddress] Billing address information for the subscription
       #
@@ -24,7 +24,9 @@ module Dodopayments
       #
       # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Fix the currency in which the end customer is billed.
       #
-      # @param discount_code [String, nil] Discount Code to apply to the subscription
+      # @param discount_code [String, nil] DEPRECATED: Use discount_codes instead. Cannot be used together with discount_co
+      #
+      # @param discount_codes [Array<String>, nil] Stacked discount codes to apply, in order of application. Max 20.
       #
       # @param force_3ds [Boolean, nil] Override merchant default 3DS behaviour for this subscription
       #
@@ -192,7 +194,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionChangePlanParams} for more details.
       #
-      # @overload change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, discount_code: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, request_options: {})
+      # @overload change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -206,7 +208,9 @@ module Dodopayments
       #
       # @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
       #
-      # @param discount_code [String, nil] Optional discount code to apply to the new plan.
+      # @param discount_code [String, nil] DEPRECATED: Use discount_codes instead. Cannot be used together with discount_co
+      #
+      # @param discount_codes [Array<String>, nil] Stacked discount codes to apply to the new plan. Max 20.
       #
       # @param effective_at [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::EffectiveAt] When to apply the plan change.
       #
@@ -268,7 +272,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionPreviewChangePlanParams} for more details.
       #
-      # @overload preview_change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, discount_code: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, request_options: {})
+      # @overload preview_change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -282,7 +286,9 @@ module Dodopayments
       #
       # @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
       #
-      # @param discount_code [String, nil] Optional discount code to apply to the new plan.
+      # @param discount_code [String, nil] DEPRECATED: Use discount_codes instead. Cannot be used together with discount_co
+      #
+      # @param discount_codes [Array<String>, nil] Stacked discount codes to apply to the new plan. Max 20.
       #
       # @param effective_at [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::EffectiveAt] When to apply the plan change.
       #
