@@ -8,6 +8,7 @@ module Dodopayments
         adaptive_currency_fees_inclusive: bool?,
         addons: ::Array[Dodopayments::AttachAddon]?,
         discount_code: String?,
+        discount_codes: ::Array[String]?,
         effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
         metadata: ::Hash[Symbol, String]?,
         on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
@@ -26,6 +27,8 @@ module Dodopayments
 
       attr_accessor discount_code: String?
 
+      attr_accessor discount_codes: ::Array[String]?
+
       attr_reader effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at?
 
       def effective_at=: (
@@ -43,6 +46,7 @@ module Dodopayments
         ?adaptive_currency_fees_inclusive: bool?,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
         ?discount_code: String?,
+        ?discount_codes: ::Array[String]?,
         ?effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
         ?metadata: ::Hash[Symbol, String]?,
         ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
@@ -55,6 +59,7 @@ module Dodopayments
         adaptive_currency_fees_inclusive: bool?,
         addons: ::Array[Dodopayments::AttachAddon]?,
         discount_code: String?,
+        discount_codes: ::Array[String]?,
         effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
         metadata: ::Hash[Symbol, String]?,
         on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?

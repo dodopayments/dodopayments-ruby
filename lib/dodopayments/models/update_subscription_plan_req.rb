@@ -37,13 +37,22 @@ module Dodopayments
       optional :addons, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::AttachAddon] }, nil?: true
 
       # @!attribute discount_code
-      #   Optional discount code to apply to the new plan. If provided, validates and
-      #   applies the discount to the plan change. If not provided and the subscription
-      #   has an existing discount with `preserve_on_plan_change=true`, the existing
-      #   discount will be preserved (if applicable to the new product).
+      #   @deprecated
+      #
+      #   DEPRECATED: Use discount_codes instead. Cannot be used together with
+      #   discount_codes.
       #
       #   @return [String, nil]
       optional :discount_code, String, nil?: true
+
+      # @!attribute discount_codes
+      #   Stacked discount codes to apply to the new plan. Max 20. Cannot be used together
+      #   with discount_code. If provided, replaces any existing discount codes. Empty
+      #   array removes all discounts. If not provided (None), existing discounts with
+      #   preserve_on_plan_change=true are preserved.
+      #
+      #   @return [Array<String>, nil]
+      optional :discount_codes, Dodopayments::Internal::Type::ArrayOf[String], nil?: true
 
       # @!attribute effective_at
       #   When to apply the plan change.
@@ -75,7 +84,7 @@ module Dodopayments
                enum: -> { Dodopayments::UpdateSubscriptionPlanReq::OnPaymentFailure },
                nil?: true
 
-      # @!method initialize(product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, discount_code: nil, effective_at: nil, metadata: nil, on_payment_failure: nil)
+      # @!method initialize(product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::UpdateSubscriptionPlanReq} for more details.
       #
@@ -89,7 +98,9 @@ module Dodopayments
       #
       #   @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
       #
-      #   @param discount_code [String, nil] Optional discount code to apply to the new plan.
+      #   @param discount_code [String, nil] DEPRECATED: Use discount_codes instead. Cannot be used together with discount_co
+      #
+      #   @param discount_codes [Array<String>, nil] Stacked discount codes to apply to the new plan. Max 20.
       #
       #   @param effective_at [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::EffectiveAt] When to apply the plan change.
       #

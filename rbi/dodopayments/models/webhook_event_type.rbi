@@ -71,6 +71,21 @@ module Dodopayments
           :"subscription.cancelled",
           Dodopayments::WebhookEventType::TaggedSymbol
         )
+      SUBSCRIPTION_CANCELLATION_SCHEDULED =
+        T.let(
+          :"subscription.cancellation_scheduled",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
+      SUBSCRIPTION_TRIAL_ENDING =
+        T.let(
+          :"subscription.trial_ending",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
+      SUBSCRIPTION_UPCOMING_RENEWAL =
+        T.let(
+          :"subscription.upcoming_renewal",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
       SUBSCRIPTION_FAILED =
         T.let(
           :"subscription.failed",

@@ -36,10 +36,19 @@ module Dodopayments
       required :total_amount, Integer
 
       # @!attribute discount_id
-      #   The discount id if discount is applied
+      #   @deprecated
+      #
+      #   DEPRECATED: Use discount_ids instead. Returns the first discount's ID if
+      #   present.
       #
       #   @return [String, nil]
       optional :discount_id, String, nil?: true
+
+      # @!attribute discount_ids
+      #   All stacked discount IDs applied, in order of application
+      #
+      #   @return [Array<String>, nil]
+      optional :discount_ids, Dodopayments::Internal::Type::ArrayOf[String], nil?: true
 
       # @!attribute expires_on
       #   Expiry timestamp of the payment link
@@ -61,7 +70,7 @@ module Dodopayments
                -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem] },
                nil?: true
 
-      # @!method initialize(client_secret:, customer:, metadata:, payment_id:, total_amount:, discount_id: nil, expires_on: nil, payment_link: nil, product_cart: nil)
+      # @!method initialize(client_secret:, customer:, metadata:, payment_id:, total_amount:, discount_id: nil, discount_ids: nil, expires_on: nil, payment_link: nil, product_cart: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::PaymentCreateResponse} for more details.
       #
@@ -75,7 +84,9 @@ module Dodopayments
       #
       #   @param total_amount [Integer] Total amount of the payment in smallest currency unit (e.g. cents)
       #
-      #   @param discount_id [String, nil] The discount id if discount is applied
+      #   @param discount_id [String, nil] DEPRECATED: Use discount_ids instead. Returns the first discount's ID if present
+      #
+      #   @param discount_ids [Array<String>, nil] All stacked discount IDs applied, in order of application
       #
       #   @param expires_on [Time, nil] Expiry timestamp of the payment link
       #

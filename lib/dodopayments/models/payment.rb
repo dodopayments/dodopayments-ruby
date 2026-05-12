@@ -139,10 +139,20 @@ module Dodopayments
                nil?: true
 
       # @!attribute discount_id
-      #   The discount id if discount is applied
+      #   @deprecated
+      #
+      #   DEPRECATED: Use discounts instead. Returns the first discount's ID if present.
       #
       #   @return [String, nil]
       optional :discount_id, String, nil?: true
+
+      # @!attribute discounts
+      #   All stacked discounts applied, ordered by position
+      #
+      #   @return [Array<Dodopayments::Models::Payment::Discount>, nil]
+      optional :discounts,
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Payment::Discount] },
+               nil?: true
 
       # @!attribute error_code
       #   An error code if the payment failed
@@ -233,7 +243,7 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, discounts: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
@@ -279,7 +289,9 @@ module Dodopayments
       #
       #   @param custom_field_responses [Array<Dodopayments::Models::CustomFieldResponse>, nil] Customer's responses to custom fields collected during checkout
       #
-      #   @param discount_id [String, nil] The discount id if discount is applied
+      #   @param discount_id [String, nil] DEPRECATED: Use discounts instead. Returns the first discount's ID if present.
+      #
+      #   @param discounts [Array<Dodopayments::Models::Payment::Discount>, nil] All stacked discounts applied, ordered by position
       #
       #   @param error_code [String, nil] An error code if the payment failed
       #
@@ -308,6 +320,144 @@ module Dodopayments
       #   @param tax [Integer, nil] Amount of tax collected in smallest currency unit (e.g. cents)
       #
       #   @param updated_at [Time, nil] Timestamp when the payment was last updated
+
+      class Discount < Dodopayments::Internal::Type::BaseModel
+        # @!attribute amount
+        #   The discount amount (basis points for percentage, USD cents for flat)
+        #
+        #   @return [Integer]
+        required :amount, Integer
+
+        # @!attribute business_id
+        #   The business this discount belongs to
+        #
+        #   @return [String]
+        required :business_id, String
+
+        # @!attribute code
+        #   The discount code
+        #
+        #   @return [String]
+        required :code, String
+
+        # @!attribute created_at
+        #   Timestamp when the discount was created
+        #
+        #   @return [Time]
+        required :created_at, Time
+
+        # @!attribute discount_id
+        #   The unique discount ID
+        #
+        #   @return [String]
+        required :discount_id, String
+
+        # @!attribute metadata
+        #   Additional metadata
+        #
+        #   @return [Hash{Symbol=>String}]
+        required :metadata, Dodopayments::Internal::Type::HashOf[String]
+
+        # @!attribute position
+        #   Position of this discount in the stack (0-based)
+        #
+        #   @return [Integer]
+        required :position, Integer
+
+        # @!attribute preserve_on_plan_change
+        #   Whether this discount should be preserved when a subscription changes plans
+        #
+        #   @return [Boolean]
+        required :preserve_on_plan_change, Dodopayments::Internal::Type::Boolean
+
+        # @!attribute restricted_to
+        #   List of product IDs to which this discount is restricted
+        #
+        #   @return [Array<String>]
+        required :restricted_to, Dodopayments::Internal::Type::ArrayOf[String]
+
+        # @!attribute times_used
+        #   How many times this discount has been used
+        #
+        #   @return [Integer]
+        required :times_used, Integer
+
+        # @!attribute type
+        #   The type of discount
+        #
+        #   @return [Symbol, Dodopayments::Models::DiscountType]
+        required :type, enum: -> { Dodopayments::DiscountType }
+
+        # @!attribute cycles_remaining
+        #   Remaining billing cycles for this discount on this subscription (None for
+        #   one-time payments)
+        #
+        #   @return [Integer, nil]
+        optional :cycles_remaining, Integer, nil?: true
+
+        # @!attribute expires_at
+        #   Optional date/time after which discount is expired
+        #
+        #   @return [Time, nil]
+        optional :expires_at, Time, nil?: true
+
+        # @!attribute name
+        #   Name for the Discount
+        #
+        #   @return [String, nil]
+        optional :name, String, nil?: true
+
+        # @!attribute subscription_cycles
+        #   Number of subscription billing cycles this discount is valid for
+        #
+        #   @return [Integer, nil]
+        optional :subscription_cycles, Integer, nil?: true
+
+        # @!attribute usage_limit
+        #   Usage limit for this discount, if any
+        #
+        #   @return [Integer, nil]
+        optional :usage_limit, Integer, nil?: true
+
+        # @!method initialize(amount:, business_id:, code:, created_at:, discount_id:, metadata:, position:, preserve_on_plan_change:, restricted_to:, times_used:, type:, cycles_remaining: nil, expires_at: nil, name: nil, subscription_cycles: nil, usage_limit: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::Payment::Discount} for more details.
+        #
+        #   Response struct for a discount with its position in a stack and optional
+        #   cycle-tracking information (for subscriptions).
+        #
+        #   @param amount [Integer] The discount amount (basis points for percentage, USD cents for flat)
+        #
+        #   @param business_id [String] The business this discount belongs to
+        #
+        #   @param code [String] The discount code
+        #
+        #   @param created_at [Time] Timestamp when the discount was created
+        #
+        #   @param discount_id [String] The unique discount ID
+        #
+        #   @param metadata [Hash{Symbol=>String}] Additional metadata
+        #
+        #   @param position [Integer] Position of this discount in the stack (0-based)
+        #
+        #   @param preserve_on_plan_change [Boolean] Whether this discount should be preserved when a subscription changes plans
+        #
+        #   @param restricted_to [Array<String>] List of product IDs to which this discount is restricted
+        #
+        #   @param times_used [Integer] How many times this discount has been used
+        #
+        #   @param type [Symbol, Dodopayments::Models::DiscountType] The type of discount
+        #
+        #   @param cycles_remaining [Integer, nil] Remaining billing cycles for this discount on this subscription (None for one-ti
+        #
+        #   @param expires_at [Time, nil] Optional date/time after which discount is expired
+        #
+        #   @param name [String, nil] Name for the Discount
+        #
+        #   @param subscription_cycles [Integer, nil] Number of subscription billing cycles this discount is valid for
+        #
+        #   @param usage_limit [Integer, nil] Usage limit for this discount, if any
+      end
 
       class ProductCart < Dodopayments::Internal::Type::BaseModel
         # @!attribute product_id

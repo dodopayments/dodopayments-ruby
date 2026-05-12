@@ -37,9 +37,14 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :total_amount
 
-      # The discount id if discount is applied
+      # DEPRECATED: Use discount_ids instead. Returns the first discount's ID if
+      # present.
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_id
+
+      # All stacked discount IDs applied, in order of application
+      sig { returns(T.nilable(T::Array[String])) }
+      attr_accessor :discount_ids
 
       # Expiry timestamp of the payment link
       sig { returns(T.nilable(Time)) }
@@ -61,6 +66,7 @@ module Dodopayments
           payment_id: String,
           total_amount: Integer,
           discount_id: T.nilable(String),
+          discount_ids: T.nilable(T::Array[String]),
           expires_on: T.nilable(Time),
           payment_link: T.nilable(String),
           product_cart:
@@ -79,8 +85,11 @@ module Dodopayments
         payment_id:,
         # Total amount of the payment in smallest currency unit (e.g. cents)
         total_amount:,
-        # The discount id if discount is applied
+        # DEPRECATED: Use discount_ids instead. Returns the first discount's ID if
+        # present.
         discount_id: nil,
+        # All stacked discount IDs applied, in order of application
+        discount_ids: nil,
         # Expiry timestamp of the payment link
         expires_on: nil,
         # Optional URL to a hosted payment page
@@ -99,6 +108,7 @@ module Dodopayments
             payment_id: String,
             total_amount: Integer,
             discount_id: T.nilable(String),
+            discount_ids: T.nilable(T::Array[String]),
             expires_on: T.nilable(Time),
             payment_link: T.nilable(String),
             product_cart:

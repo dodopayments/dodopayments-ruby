@@ -53,10 +53,20 @@ module Dodopayments
       optional :billing_currency, enum: -> { Dodopayments::Currency }, nil?: true
 
       # @!attribute discount_code
-      #   Discount Code to apply to the transaction
+      #   @deprecated
+      #
+      #   DEPRECATED: Use discount_codes instead. Cannot be used together with
+      #   discount_codes.
       #
       #   @return [String, nil]
       optional :discount_code, String, nil?: true
+
+      # @!attribute discount_codes
+      #   Stacked discount codes to apply, in order of application. Max 20. Cannot be used
+      #   together with discount_code.
+      #
+      #   @return [Array<String>, nil]
+      optional :discount_codes, Dodopayments::Internal::Type::ArrayOf[String], nil?: true
 
       # @!attribute force_3ds
       #   Override merchant default 3DS behaviour for this payment
@@ -126,7 +136,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(billing:, customer:, product_cart:, adaptive_currency_fees_inclusive: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, force_3ds: nil, metadata: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, require_phone_number: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
+      # @!method initialize(billing:, customer:, product_cart:, adaptive_currency_fees_inclusive: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, discount_codes: nil, force_3ds: nil, metadata: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, require_phone_number: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::PaymentCreateParams} for more details.
       #
@@ -142,7 +152,9 @@ module Dodopayments
       #
       #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Fix the currency in which the end customer is billed.
       #
-      #   @param discount_code [String, nil] Discount Code to apply to the transaction
+      #   @param discount_code [String, nil] DEPRECATED: Use discount_codes instead. Cannot be used together with discount_co
+      #
+      #   @param discount_codes [Array<String>, nil] Stacked discount codes to apply, in order of application. Max 20.
       #
       #   @param force_3ds [Boolean, nil] Override merchant default 3DS behaviour for this payment
       #

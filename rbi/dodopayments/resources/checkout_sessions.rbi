@@ -23,6 +23,7 @@ module Dodopayments
             ),
           customization: Dodopayments::CheckoutSessionCustomization::OrHash,
           discount_code: T.nilable(String),
+          discount_codes: T.nilable(T::Array[String]),
           feature_flags: Dodopayments::CheckoutSessionFlags::OrHash,
           force_3ds: T.nilable(T::Boolean),
           mandate_min_amount_inr_paise: T.nilable(Integer),
@@ -63,7 +64,12 @@ module Dodopayments
         customer: nil,
         # Customization for the checkout session page
         customization: nil,
+        # DEPRECATED: Use discount_codes instead. Cannot be used together with
+        # discount_codes.
         discount_code: nil,
+        # Stacked discount codes to apply, in order. Max 20. Cannot be used together with
+        # discount_code.
+        discount_codes: nil,
         feature_flags: nil,
         # Override merchant default 3DS behaviour for this session
         force_3ds: nil,
@@ -128,6 +134,7 @@ module Dodopayments
             ),
           customization: Dodopayments::CheckoutSessionCustomization::OrHash,
           discount_code: T.nilable(String),
+          discount_codes: T.nilable(T::Array[String]),
           feature_flags: Dodopayments::CheckoutSessionFlags::OrHash,
           force_3ds: T.nilable(T::Boolean),
           mandate_min_amount_inr_paise: T.nilable(Integer),
@@ -168,7 +175,12 @@ module Dodopayments
         customer: nil,
         # Customization for the checkout session page
         customization: nil,
+        # DEPRECATED: Use discount_codes instead. Cannot be used together with
+        # discount_codes.
         discount_code: nil,
+        # Stacked discount codes to apply, in order. Max 20. Cannot be used together with
+        # discount_code.
+        discount_codes: nil,
         feature_flags: nil,
         # Override merchant default 3DS behaviour for this session
         force_3ds: nil,

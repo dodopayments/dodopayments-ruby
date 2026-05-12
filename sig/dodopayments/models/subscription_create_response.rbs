@@ -10,6 +10,7 @@ module Dodopayments
         subscription_id: String,
         client_secret: String?,
         discount_id: String?,
+        discount_ids: ::Array[String]?,
         expires_on: Time?,
         one_time_product_cart: ::Array[Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart]?,
         payment_link: String?
@@ -32,6 +33,8 @@ module Dodopayments
 
       attr_accessor discount_id: String?
 
+      attr_accessor discount_ids: ::Array[String]?
+
       attr_accessor expires_on: Time?
 
       attr_accessor one_time_product_cart: ::Array[Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart]?
@@ -47,6 +50,7 @@ module Dodopayments
         subscription_id: String,
         ?client_secret: String?,
         ?discount_id: String?,
+        ?discount_ids: ::Array[String]?,
         ?expires_on: Time?,
         ?one_time_product_cart: ::Array[Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart]?,
         ?payment_link: String?
@@ -61,6 +65,7 @@ module Dodopayments
         subscription_id: String,
         client_secret: String?,
         discount_id: String?,
+        discount_ids: ::Array[String]?,
         expires_on: Time?,
         one_time_product_cart: ::Array[Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart]?,
         payment_link: String?

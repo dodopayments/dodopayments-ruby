@@ -10,6 +10,7 @@ module Dodopayments
         allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
         billing_currency: Dodopayments::Models::currency?,
         discount_code: String?,
+        discount_codes: ::Array[String]?,
         :force_3ds => bool?,
         mandate_min_amount_inr_paise: Integer?,
         metadata: ::Hash[Symbol, String],
@@ -46,6 +47,8 @@ module Dodopayments
       attr_accessor billing_currency: Dodopayments::Models::currency?
 
       attr_accessor discount_code: String?
+
+      attr_accessor discount_codes: ::Array[String]?
 
       attr_accessor force_3ds: bool?
 
@@ -92,6 +95,7 @@ module Dodopayments
         ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
         ?billing_currency: Dodopayments::Models::currency?,
         ?discount_code: String?,
+        ?discount_codes: ::Array[String]?,
         ?force_3ds: bool?,
         ?mandate_min_amount_inr_paise: Integer?,
         ?metadata: ::Hash[Symbol, String],
@@ -118,6 +122,7 @@ module Dodopayments
         allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
         billing_currency: Dodopayments::Models::currency?,
         discount_code: String?,
+        discount_codes: ::Array[String]?,
         :force_3ds => bool?,
         mandate_min_amount_inr_paise: Integer?,
         metadata: ::Hash[Symbol, String],

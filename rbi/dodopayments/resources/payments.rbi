@@ -17,6 +17,7 @@ module Dodopayments
             T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           discount_code: T.nilable(String),
+          discount_codes: T.nilable(T::Array[String]),
           force_3ds: T.nilable(T::Boolean),
           metadata: T::Hash[Symbol, String],
           payment_link: T.nilable(T::Boolean),
@@ -50,8 +51,12 @@ module Dodopayments
         # Fix the currency in which the end customer is billed. If Dodo Payments cannot
         # support that currency for this transaction, it will not proceed
         billing_currency: nil,
-        # Discount Code to apply to the transaction
+        # DEPRECATED: Use discount_codes instead. Cannot be used together with
+        # discount_codes.
         discount_code: nil,
+        # Stacked discount codes to apply, in order of application. Max 20. Cannot be used
+        # together with discount_code.
+        discount_codes: nil,
         # Override merchant default 3DS behaviour for this payment
         force_3ds: nil,
         # Additional metadata associated with the payment. Defaults to empty if not
