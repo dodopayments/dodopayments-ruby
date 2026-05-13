@@ -6,14 +6,28 @@ module Dodopayments
       # @api private
       #
       # @example
-      #   # `customer_request` is a `Dodopayments::CustomerRequest`
-      #   case customer_request
-      #   when Dodopayments::AttachExistingCustomer
-      #     puts(customer_request.customer_id)
-      #   when Dodopayments::NewCustomer
-      #     puts(customer_request.email)
+      #   # `unsafe_unwrap_webhook_event` is a `Dodopayments::UnsafeUnwrapWebhookEvent`
+      #   case unsafe_unwrap_webhook_event
+      #   when Dodopayments::AbandonedCheckoutDetectedWebhookEvent
+      #     puts(unsafe_unwrap_webhook_event.business_id)
+      #   when Dodopayments::AbandonedCheckoutRecoveredWebhookEvent
+      #     puts(unsafe_unwrap_webhook_event.data)
+      #   when Dodopayments::CreditAddedWebhookEvent
+      #     puts(unsafe_unwrap_webhook_event.timestamp)
       #   else
-      #     puts(customer_request)
+      #     puts(unsafe_unwrap_webhook_event)
+      #   end
+      #
+      # @example
+      #   case unsafe_unwrap_webhook_event
+      #   in {type: :"abandoned_checkout.detected", business_id: business_id, data: data, timestamp: timestamp}
+      #     puts(business_id)
+      #   in {type: :"abandoned_checkout.recovered", business_id: business_id, data: data, timestamp: timestamp}
+      #     puts(data)
+      #   in {type: :"credit.added", business_id: business_id, data: data, timestamp: timestamp}
+      #     puts(timestamp)
+      #   else
+      #     puts(unsafe_unwrap_webhook_event)
       #   end
       module Union
         include Dodopayments::Internal::Type::Converter
