@@ -5,83 +5,85 @@ module Dodopayments
     module UnsafeUnwrapWebhookEvent
       extend Dodopayments::Internal::Type::Union
 
-      variant -> { Dodopayments::AbandonedCheckoutDetectedWebhookEvent }
+      discriminator :type
 
-      variant -> { Dodopayments::AbandonedCheckoutRecoveredWebhookEvent }
+      variant :"abandoned_checkout.detected", -> { Dodopayments::AbandonedCheckoutDetectedWebhookEvent }
 
-      variant -> { Dodopayments::CreditAddedWebhookEvent }
+      variant :"abandoned_checkout.recovered", -> { Dodopayments::AbandonedCheckoutRecoveredWebhookEvent }
 
-      variant -> { Dodopayments::CreditBalanceLowWebhookEvent }
+      variant :"credit.added", -> { Dodopayments::CreditAddedWebhookEvent }
 
-      variant -> { Dodopayments::CreditDeductedWebhookEvent }
+      variant :"credit.balance_low", -> { Dodopayments::CreditBalanceLowWebhookEvent }
 
-      variant -> { Dodopayments::CreditExpiredWebhookEvent }
+      variant :"credit.deducted", -> { Dodopayments::CreditDeductedWebhookEvent }
 
-      variant -> { Dodopayments::CreditManualAdjustmentWebhookEvent }
+      variant :"credit.expired", -> { Dodopayments::CreditExpiredWebhookEvent }
 
-      variant -> { Dodopayments::CreditOverageChargedWebhookEvent }
+      variant :"credit.manual_adjustment", -> { Dodopayments::CreditManualAdjustmentWebhookEvent }
 
-      variant -> { Dodopayments::CreditOverageResetWebhookEvent }
+      variant :"credit.overage_charged", -> { Dodopayments::CreditOverageChargedWebhookEvent }
 
-      variant -> { Dodopayments::CreditRolledOverWebhookEvent }
+      variant :"credit.overage_reset", -> { Dodopayments::CreditOverageResetWebhookEvent }
 
-      variant -> { Dodopayments::CreditRolloverForfeitedWebhookEvent }
+      variant :"credit.rolled_over", -> { Dodopayments::CreditRolledOverWebhookEvent }
 
-      variant -> { Dodopayments::DisputeAcceptedWebhookEvent }
+      variant :"credit.rollover_forfeited", -> { Dodopayments::CreditRolloverForfeitedWebhookEvent }
 
-      variant -> { Dodopayments::DisputeCancelledWebhookEvent }
+      variant :"dispute.accepted", -> { Dodopayments::DisputeAcceptedWebhookEvent }
 
-      variant -> { Dodopayments::DisputeChallengedWebhookEvent }
+      variant :"dispute.cancelled", -> { Dodopayments::DisputeCancelledWebhookEvent }
 
-      variant -> { Dodopayments::DisputeExpiredWebhookEvent }
+      variant :"dispute.challenged", -> { Dodopayments::DisputeChallengedWebhookEvent }
 
-      variant -> { Dodopayments::DisputeLostWebhookEvent }
+      variant :"dispute.expired", -> { Dodopayments::DisputeExpiredWebhookEvent }
 
-      variant -> { Dodopayments::DisputeOpenedWebhookEvent }
+      variant :"dispute.lost", -> { Dodopayments::DisputeLostWebhookEvent }
 
-      variant -> { Dodopayments::DisputeWonWebhookEvent }
+      variant :"dispute.opened", -> { Dodopayments::DisputeOpenedWebhookEvent }
 
-      variant -> { Dodopayments::DunningRecoveredWebhookEvent }
+      variant :"dispute.won", -> { Dodopayments::DisputeWonWebhookEvent }
 
-      variant -> { Dodopayments::DunningStartedWebhookEvent }
+      variant :"dunning.recovered", -> { Dodopayments::DunningRecoveredWebhookEvent }
 
-      variant -> { Dodopayments::EntitlementGrantCreatedWebhookEvent }
+      variant :"dunning.started", -> { Dodopayments::DunningStartedWebhookEvent }
 
-      variant -> { Dodopayments::EntitlementGrantDeliveredWebhookEvent }
+      variant :"entitlement_grant.created", -> { Dodopayments::EntitlementGrantCreatedWebhookEvent }
 
-      variant -> { Dodopayments::EntitlementGrantFailedWebhookEvent }
+      variant :"entitlement_grant.delivered", -> { Dodopayments::EntitlementGrantDeliveredWebhookEvent }
 
-      variant -> { Dodopayments::EntitlementGrantRevokedWebhookEvent }
+      variant :"entitlement_grant.failed", -> { Dodopayments::EntitlementGrantFailedWebhookEvent }
 
-      variant -> { Dodopayments::LicenseKeyCreatedWebhookEvent }
+      variant :"entitlement_grant.revoked", -> { Dodopayments::EntitlementGrantRevokedWebhookEvent }
 
-      variant -> { Dodopayments::PaymentCancelledWebhookEvent }
+      variant :"license_key.created", -> { Dodopayments::LicenseKeyCreatedWebhookEvent }
 
-      variant -> { Dodopayments::PaymentFailedWebhookEvent }
+      variant :"payment.cancelled", -> { Dodopayments::PaymentCancelledWebhookEvent }
 
-      variant -> { Dodopayments::PaymentProcessingWebhookEvent }
+      variant :"payment.failed", -> { Dodopayments::PaymentFailedWebhookEvent }
 
-      variant -> { Dodopayments::PaymentSucceededWebhookEvent }
+      variant :"payment.processing", -> { Dodopayments::PaymentProcessingWebhookEvent }
 
-      variant -> { Dodopayments::RefundFailedWebhookEvent }
+      variant :"payment.succeeded", -> { Dodopayments::PaymentSucceededWebhookEvent }
 
-      variant -> { Dodopayments::RefundSucceededWebhookEvent }
+      variant :"refund.failed", -> { Dodopayments::RefundFailedWebhookEvent }
 
-      variant -> { Dodopayments::SubscriptionActiveWebhookEvent }
+      variant :"refund.succeeded", -> { Dodopayments::RefundSucceededWebhookEvent }
 
-      variant -> { Dodopayments::SubscriptionCancelledWebhookEvent }
+      variant :"subscription.active", -> { Dodopayments::SubscriptionActiveWebhookEvent }
 
-      variant -> { Dodopayments::SubscriptionExpiredWebhookEvent }
+      variant :"subscription.cancelled", -> { Dodopayments::SubscriptionCancelledWebhookEvent }
 
-      variant -> { Dodopayments::SubscriptionFailedWebhookEvent }
+      variant :"subscription.expired", -> { Dodopayments::SubscriptionExpiredWebhookEvent }
 
-      variant -> { Dodopayments::SubscriptionOnHoldWebhookEvent }
+      variant :"subscription.failed", -> { Dodopayments::SubscriptionFailedWebhookEvent }
 
-      variant -> { Dodopayments::SubscriptionPlanChangedWebhookEvent }
+      variant :"subscription.on_hold", -> { Dodopayments::SubscriptionOnHoldWebhookEvent }
 
-      variant -> { Dodopayments::SubscriptionRenewedWebhookEvent }
+      variant :"subscription.plan_changed", -> { Dodopayments::SubscriptionPlanChangedWebhookEvent }
 
-      variant -> { Dodopayments::SubscriptionUpdatedWebhookEvent }
+      variant :"subscription.renewed", -> { Dodopayments::SubscriptionRenewedWebhookEvent }
+
+      variant :"subscription.updated", -> { Dodopayments::SubscriptionUpdatedWebhookEvent }
 
       # @!method self.variants
       #   @return [Array(Dodopayments::Models::AbandonedCheckoutDetectedWebhookEvent, Dodopayments::Models::AbandonedCheckoutRecoveredWebhookEvent, Dodopayments::Models::CreditAddedWebhookEvent, Dodopayments::Models::CreditBalanceLowWebhookEvent, Dodopayments::Models::CreditDeductedWebhookEvent, Dodopayments::Models::CreditExpiredWebhookEvent, Dodopayments::Models::CreditManualAdjustmentWebhookEvent, Dodopayments::Models::CreditOverageChargedWebhookEvent, Dodopayments::Models::CreditOverageResetWebhookEvent, Dodopayments::Models::CreditRolledOverWebhookEvent, Dodopayments::Models::CreditRolloverForfeitedWebhookEvent, Dodopayments::Models::DisputeAcceptedWebhookEvent, Dodopayments::Models::DisputeCancelledWebhookEvent, Dodopayments::Models::DisputeChallengedWebhookEvent, Dodopayments::Models::DisputeExpiredWebhookEvent, Dodopayments::Models::DisputeLostWebhookEvent, Dodopayments::Models::DisputeOpenedWebhookEvent, Dodopayments::Models::DisputeWonWebhookEvent, Dodopayments::Models::DunningRecoveredWebhookEvent, Dodopayments::Models::DunningStartedWebhookEvent, Dodopayments::Models::EntitlementGrantCreatedWebhookEvent, Dodopayments::Models::EntitlementGrantDeliveredWebhookEvent, Dodopayments::Models::EntitlementGrantFailedWebhookEvent, Dodopayments::Models::EntitlementGrantRevokedWebhookEvent, Dodopayments::Models::LicenseKeyCreatedWebhookEvent, Dodopayments::Models::PaymentCancelledWebhookEvent, Dodopayments::Models::PaymentFailedWebhookEvent, Dodopayments::Models::PaymentProcessingWebhookEvent, Dodopayments::Models::PaymentSucceededWebhookEvent, Dodopayments::Models::RefundFailedWebhookEvent, Dodopayments::Models::RefundSucceededWebhookEvent, Dodopayments::Models::SubscriptionActiveWebhookEvent, Dodopayments::Models::SubscriptionCancelledWebhookEvent, Dodopayments::Models::SubscriptionExpiredWebhookEvent, Dodopayments::Models::SubscriptionFailedWebhookEvent, Dodopayments::Models::SubscriptionOnHoldWebhookEvent, Dodopayments::Models::SubscriptionPlanChangedWebhookEvent, Dodopayments::Models::SubscriptionRenewedWebhookEvent, Dodopayments::Models::SubscriptionUpdatedWebhookEvent)]
