@@ -70,7 +70,7 @@ module Dodopayments
                nil?: true
 
       # @!attribute license_key_activation_message
-      #   @deprecated
+      #   @deprecated Use the dedicated entitlements API to configure license-key delivery.
       #
       #   Optional message displayed during license key activation
       #
@@ -81,7 +81,7 @@ module Dodopayments
       optional :license_key_activation_message, String, nil?: true
 
       # @!attribute license_key_activations_limit
-      #   @deprecated
+      #   @deprecated Use the dedicated entitlements API to configure license-key delivery.
       #
       #   The number of times the license key can be activated. Must be 0 or greater
       #
@@ -103,7 +103,7 @@ module Dodopayments
       optional :license_key_duration, -> { Dodopayments::LicenseKeyDuration }, nil?: true
 
       # @!attribute license_key_enabled
-      #   @deprecated
+      #   @deprecated Use the dedicated entitlements API to configure license-key delivery.
       #
       #   When true, generates and sends a license key to your customer. Defaults to false
       #

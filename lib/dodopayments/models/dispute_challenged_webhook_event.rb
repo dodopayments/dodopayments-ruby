@@ -23,29 +23,17 @@ module Dodopayments
       # @!attribute type
       #   The event type
       #
-      #   @return [Symbol, Dodopayments::Models::DisputeChallengedWebhookEvent::Type]
-      required :type, enum: -> { Dodopayments::DisputeChallengedWebhookEvent::Type }
+      #   @return [Symbol, :"dispute.challenged"]
+      required :type, const: :"dispute.challenged"
 
-      # @!method initialize(business_id:, data:, timestamp:, type:)
+      # @!method initialize(business_id:, data:, timestamp:, type: :"dispute.challenged")
       #   @param business_id [String] The business identifier
       #
       #   @param data [Dodopayments::Models::Dispute]
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
-      #   @param type [Symbol, Dodopayments::Models::DisputeChallengedWebhookEvent::Type] The event type
-
-      # The event type
-      #
-      # @see Dodopayments::Models::DisputeChallengedWebhookEvent#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        DISPUTE_CHALLENGED = :"dispute.challenged"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #   @param type [Symbol, :"dispute.challenged"] The event type
     end
   end
 end

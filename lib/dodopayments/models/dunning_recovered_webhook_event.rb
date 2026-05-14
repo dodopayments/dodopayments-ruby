@@ -24,17 +24,17 @@ module Dodopayments
       # @!attribute type
       #   The event type
       #
-      #   @return [Symbol, Dodopayments::Models::DunningRecoveredWebhookEvent::Type]
-      required :type, enum: -> { Dodopayments::DunningRecoveredWebhookEvent::Type }
+      #   @return [Symbol, :"dunning.recovered"]
+      required :type, const: :"dunning.recovered"
 
-      # @!method initialize(business_id:, data:, timestamp:, type:)
+      # @!method initialize(business_id:, data:, timestamp:, type: :"dunning.recovered")
       #   @param business_id [String] The business identifier
       #
       #   @param data [Dodopayments::Models::DunningRecoveredWebhookEvent::Data] Webhook payload for dunning.started and dunning.recovered events
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
-      #   @param type [Symbol, Dodopayments::Models::DunningRecoveredWebhookEvent::Type] The event type
+      #   @param type [Symbol, :"dunning.recovered"] The event type
 
       # @see Dodopayments::Models::DunningRecoveredWebhookEvent#data
       class Data < Dodopayments::Internal::Type::BaseModel
@@ -100,18 +100,6 @@ module Dodopayments
           # @!method self.values
           #   @return [Array<Symbol>]
         end
-      end
-
-      # The event type
-      #
-      # @see Dodopayments::Models::DunningRecoveredWebhookEvent#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        DUNNING_RECOVERED = :"dunning.recovered"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
       end
     end
   end

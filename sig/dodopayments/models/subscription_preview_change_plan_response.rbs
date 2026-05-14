@@ -63,7 +63,7 @@ module Dodopayments
               proration_factor: Float,
               quantity: Integer,
               tax_inclusive: bool,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::type_,
+              type: :subscription,
               unit_price: Integer,
               description: String?,
               name: String?,
@@ -84,7 +84,7 @@ module Dodopayments
 
             attr_accessor tax_inclusive: bool
 
-            attr_accessor type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::type_
+            attr_accessor type: :subscription
 
             attr_accessor unit_price: Integer
 
@@ -103,12 +103,12 @@ module Dodopayments
               proration_factor: Float,
               quantity: Integer,
               tax_inclusive: bool,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::type_,
               unit_price: Integer,
               ?description: String?,
               ?name: String?,
               ?tax: Integer?,
-              ?tax_rate: Float?
+              ?tax_rate: Float?,
+              ?type: :subscription
             ) -> void
 
             def to_hash: -> {
@@ -118,23 +118,13 @@ module Dodopayments
               proration_factor: Float,
               quantity: Integer,
               tax_inclusive: bool,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::type_,
+              type: :subscription,
               unit_price: Integer,
               description: String?,
               name: String?,
               tax: Integer?,
               tax_rate: Float?
             }
-
-            type type_ = :subscription
-
-            module Type
-              extend Dodopayments::Internal::Type::Enum
-
-              SUBSCRIPTION: :subscription
-
-              def self?.values: -> ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::type_]
-            end
           end
 
           type addon =
@@ -147,7 +137,7 @@ module Dodopayments
               tax_category: Dodopayments::Models::tax_category,
               tax_inclusive: bool,
               tax_rate: Float,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::type_,
+              type: :addon,
               unit_price: Integer,
               description: String?,
               tax: Integer?
@@ -170,7 +160,7 @@ module Dodopayments
 
             attr_accessor tax_rate: Float
 
-            attr_accessor type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::type_
+            attr_accessor type: :addon
 
             attr_accessor unit_price: Integer
 
@@ -187,10 +177,10 @@ module Dodopayments
               tax_category: Dodopayments::Models::tax_category,
               tax_inclusive: bool,
               tax_rate: Float,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::type_,
               unit_price: Integer,
               ?description: String?,
-              ?tax: Integer?
+              ?tax: Integer?,
+              ?type: :addon
             ) -> void
 
             def to_hash: -> {
@@ -202,21 +192,11 @@ module Dodopayments
               tax_category: Dodopayments::Models::tax_category,
               tax_inclusive: bool,
               tax_rate: Float,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::type_,
+              type: :addon,
               unit_price: Integer,
               description: String?,
               tax: Integer?
             }
-
-            type type_ = :addon
-
-            module Type
-              extend Dodopayments::Internal::Type::Enum
-
-              ADDON: :addon
-
-              def self?.values: -> ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::type_]
-            end
           end
 
           type meter =
@@ -230,7 +210,7 @@ module Dodopayments
               subtotal: Integer,
               tax_inclusive: bool,
               tax_rate: Float,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::type_,
+              type: :meter,
               units_consumed: String,
               description: String?,
               tax: Integer?
@@ -255,7 +235,7 @@ module Dodopayments
 
             attr_accessor tax_rate: Float
 
-            attr_accessor type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::type_
+            attr_accessor type: :meter
 
             attr_accessor units_consumed: String
 
@@ -273,10 +253,10 @@ module Dodopayments
               subtotal: Integer,
               tax_inclusive: bool,
               tax_rate: Float,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::type_,
               units_consumed: String,
               ?description: String?,
-              ?tax: Integer?
+              ?tax: Integer?,
+              ?type: :meter
             ) -> void
 
             def to_hash: -> {
@@ -289,21 +269,11 @@ module Dodopayments
               subtotal: Integer,
               tax_inclusive: bool,
               tax_rate: Float,
-              type: Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::type_,
+              type: :meter,
               units_consumed: String,
               description: String?,
               tax: Integer?
             }
-
-            type type_ = :meter
-
-            module Type
-              extend Dodopayments::Internal::Type::Enum
-
-              METER: :meter
-
-              def self?.values: -> ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::type_]
-            end
           end
 
           def self?.variants: -> ::Array[Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::line_item]

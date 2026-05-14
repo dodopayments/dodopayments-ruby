@@ -5,7 +5,7 @@ module Dodopayments
         business_id: String,
         data: Dodopayments::Subscription,
         timestamp: Time,
-        type: Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::type_
+        type: :"subscription.plan_changed"
       }
 
     class SubscriptionPlanChangedWebhookEvent < Dodopayments::Internal::Type::BaseModel
@@ -15,31 +15,21 @@ module Dodopayments
 
       attr_accessor timestamp: Time
 
-      attr_accessor type: Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::type_
+      attr_accessor type: :"subscription.plan_changed"
 
       def initialize: (
         business_id: String,
         data: Dodopayments::Subscription,
         timestamp: Time,
-        type: Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::type_
+        ?type: :"subscription.plan_changed"
       ) -> void
 
       def to_hash: -> {
         business_id: String,
         data: Dodopayments::Subscription,
         timestamp: Time,
-        type: Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::type_
+        type: :"subscription.plan_changed"
       }
-
-      type type_ = :"subscription.plan_changed"
-
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        SUBSCRIPTION_PLAN_CHANGED: :"subscription.plan_changed"
-
-        def self?.values: -> ::Array[Dodopayments::Models::SubscriptionPlanChangedWebhookEvent::type_]
-      end
     end
   end
 end

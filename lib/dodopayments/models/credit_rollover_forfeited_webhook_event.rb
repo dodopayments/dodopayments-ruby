@@ -24,29 +24,17 @@ module Dodopayments
       # @!attribute type
       #   The event type
       #
-      #   @return [Symbol, Dodopayments::Models::CreditRolloverForfeitedWebhookEvent::Type]
-      required :type, enum: -> { Dodopayments::CreditRolloverForfeitedWebhookEvent::Type }
+      #   @return [Symbol, :"credit.rollover_forfeited"]
+      required :type, const: :"credit.rollover_forfeited"
 
-      # @!method initialize(business_id:, data:, timestamp:, type:)
+      # @!method initialize(business_id:, data:, timestamp:, type: :"credit.rollover_forfeited")
       #   @param business_id [String] The business identifier
       #
       #   @param data [Dodopayments::Models::CreditEntitlements::CreditLedgerEntry] Response for a ledger entry
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
-      #   @param type [Symbol, Dodopayments::Models::CreditRolloverForfeitedWebhookEvent::Type] The event type
-
-      # The event type
-      #
-      # @see Dodopayments::Models::CreditRolloverForfeitedWebhookEvent#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        CREDIT_ROLLOVER_FORFEITED = :"credit.rollover_forfeited"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #   @param type [Symbol, :"credit.rollover_forfeited"] The event type
     end
   end
 end

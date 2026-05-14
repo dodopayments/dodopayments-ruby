@@ -23,29 +23,17 @@ module Dodopayments
       # @!attribute type
       #   The event type
       #
-      #   @return [Symbol, Dodopayments::Models::PaymentProcessingWebhookEvent::Type]
-      required :type, enum: -> { Dodopayments::PaymentProcessingWebhookEvent::Type }
+      #   @return [Symbol, :"payment.processing"]
+      required :type, const: :"payment.processing"
 
-      # @!method initialize(business_id:, data:, timestamp:, type:)
+      # @!method initialize(business_id:, data:, timestamp:, type: :"payment.processing")
       #   @param business_id [String] The business identifier
       #
       #   @param data [Dodopayments::Models::Payment]
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
-      #   @param type [Symbol, Dodopayments::Models::PaymentProcessingWebhookEvent::Type] The event type
-
-      # The event type
-      #
-      # @see Dodopayments::Models::PaymentProcessingWebhookEvent#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        PAYMENT_PROCESSING = :"payment.processing"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #   @param type [Symbol, :"payment.processing"] The event type
     end
   end
 end

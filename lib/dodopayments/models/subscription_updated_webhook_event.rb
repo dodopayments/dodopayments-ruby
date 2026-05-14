@@ -24,29 +24,17 @@ module Dodopayments
       # @!attribute type
       #   The event type
       #
-      #   @return [Symbol, Dodopayments::Models::SubscriptionUpdatedWebhookEvent::Type]
-      required :type, enum: -> { Dodopayments::SubscriptionUpdatedWebhookEvent::Type }
+      #   @return [Symbol, :"subscription.updated"]
+      required :type, const: :"subscription.updated"
 
-      # @!method initialize(business_id:, data:, timestamp:, type:)
+      # @!method initialize(business_id:, data:, timestamp:, type: :"subscription.updated")
       #   @param business_id [String] The business identifier
       #
       #   @param data [Dodopayments::Models::Subscription] Response struct representing subscription details
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
-      #   @param type [Symbol, Dodopayments::Models::SubscriptionUpdatedWebhookEvent::Type] The event type
-
-      # The event type
-      #
-      # @see Dodopayments::Models::SubscriptionUpdatedWebhookEvent#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        SUBSCRIPTION_UPDATED = :"subscription.updated"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #   @param type [Symbol, :"subscription.updated"] The event type
     end
   end
 end

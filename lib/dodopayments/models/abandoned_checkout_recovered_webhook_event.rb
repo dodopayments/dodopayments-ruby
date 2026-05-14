@@ -25,10 +25,10 @@ module Dodopayments
       # @!attribute type
       #   The event type
       #
-      #   @return [Symbol, Dodopayments::Models::AbandonedCheckoutRecoveredWebhookEvent::Type]
-      required :type, enum: -> { Dodopayments::AbandonedCheckoutRecoveredWebhookEvent::Type }
+      #   @return [Symbol, :"abandoned_checkout.recovered"]
+      required :type, const: :"abandoned_checkout.recovered"
 
-      # @!method initialize(business_id:, data:, timestamp:, type:)
+      # @!method initialize(business_id:, data:, timestamp:, type: :"abandoned_checkout.recovered")
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::AbandonedCheckoutRecoveredWebhookEvent} for more details.
       #
@@ -38,7 +38,7 @@ module Dodopayments
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
-      #   @param type [Symbol, Dodopayments::Models::AbandonedCheckoutRecoveredWebhookEvent::Type] The event type
+      #   @param type [Symbol, :"abandoned_checkout.recovered"] The event type
 
       # @see Dodopayments::Models::AbandonedCheckoutRecoveredWebhookEvent#data
       class Data < Dodopayments::Internal::Type::BaseModel
@@ -108,18 +108,6 @@ module Dodopayments
           # @!method self.values
           #   @return [Array<Symbol>]
         end
-      end
-
-      # The event type
-      #
-      # @see Dodopayments::Models::AbandonedCheckoutRecoveredWebhookEvent#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        ABANDONED_CHECKOUT_RECOVERED = :"abandoned_checkout.recovered"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
       end
     end
   end

@@ -77,65 +77,24 @@ module Dodopayments
               )
             end
 
-          sig do
-            returns(
-              Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           sig { returns(T.nilable(String)) }
           attr_accessor :return_url
 
           sig do
-            params(
-              type:
-                Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New::Type::OrSymbol,
-              return_url: T.nilable(String)
-            ).returns(T.attached_class)
+            params(return_url: T.nilable(String), type: Symbol).returns(
+              T.attached_class
+            )
           end
-          def self.new(type:, return_url: nil)
+          def self.new(return_url: nil, type: :new)
           end
 
           sig do
-            override.returns(
-              {
-                type:
-                  Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New::Type::OrSymbol,
-                return_url: T.nilable(String)
-              }
-            )
+            override.returns({ type: Symbol, return_url: T.nilable(String) })
           end
           def to_hash
-          end
-
-          module Type
-            extend Dodopayments::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            NEW =
-              T.let(
-                :new,
-                Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
 
@@ -151,62 +110,19 @@ module Dodopayments
           sig { returns(String) }
           attr_accessor :payment_method_id
 
-          sig do
-            returns(
-              Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           sig do
-            params(
-              payment_method_id: String,
-              type:
-                Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing::Type::OrSymbol
-            ).returns(T.attached_class)
-          end
-          def self.new(payment_method_id:, type:)
-          end
-
-          sig do
-            override.returns(
-              {
-                payment_method_id: String,
-                type:
-                  Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing::Type::OrSymbol
-              }
+            params(payment_method_id: String, type: Symbol).returns(
+              T.attached_class
             )
           end
-          def to_hash
+          def self.new(payment_method_id:, type: :existing)
           end
 
-          module Type
-            extend Dodopayments::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            EXISTING =
-              T.let(
-                :existing,
-                Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
+          sig { override.returns({ payment_method_id: String, type: Symbol }) }
+          def to_hash
           end
         end
 

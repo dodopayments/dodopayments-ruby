@@ -42,7 +42,7 @@ module Dodopayments
       required :is_recurring, Dodopayments::Internal::Type::Boolean
 
       # @!attribute license_key_enabled
-      #   @deprecated
+      #   @deprecated Use the dedicated entitlements API to configure license-key delivery.
       #
       #   Indicates whether the product requires a license key.
       #
@@ -105,7 +105,7 @@ module Dodopayments
       optional :image, String, nil?: true
 
       # @!attribute license_key_activation_message
-      #   @deprecated
+      #   @deprecated Use the dedicated entitlements API to configure license-key delivery.
       #
       #   Message sent upon license key activation, if applicable.
       #
@@ -113,7 +113,7 @@ module Dodopayments
       optional :license_key_activation_message, String, nil?: true
 
       # @!attribute license_key_activations_limit
-      #   @deprecated
+      #   @deprecated Use the dedicated entitlements API to configure license-key delivery.
       #
       #   Limit on the number of activations for the license key, if enabled.
       #

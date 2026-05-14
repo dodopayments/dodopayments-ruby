@@ -24,29 +24,17 @@ module Dodopayments
       # @!attribute type
       #   The event type
       #
-      #   @return [Symbol, Dodopayments::Models::CreditManualAdjustmentWebhookEvent::Type]
-      required :type, enum: -> { Dodopayments::CreditManualAdjustmentWebhookEvent::Type }
+      #   @return [Symbol, :"credit.manual_adjustment"]
+      required :type, const: :"credit.manual_adjustment"
 
-      # @!method initialize(business_id:, data:, timestamp:, type:)
+      # @!method initialize(business_id:, data:, timestamp:, type: :"credit.manual_adjustment")
       #   @param business_id [String] The business identifier
       #
       #   @param data [Dodopayments::Models::CreditEntitlements::CreditLedgerEntry] Response for a ledger entry
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
-      #   @param type [Symbol, Dodopayments::Models::CreditManualAdjustmentWebhookEvent::Type] The event type
-
-      # The event type
-      #
-      # @see Dodopayments::Models::CreditManualAdjustmentWebhookEvent#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        CREDIT_MANUAL_ADJUSTMENT = :"credit.manual_adjustment"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #   @param type [Symbol, :"credit.manual_adjustment"] The event type
     end
   end
 end

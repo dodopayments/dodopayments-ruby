@@ -5,7 +5,7 @@ module Dodopayments
         business_id: String,
         data: Dodopayments::Subscription,
         timestamp: Time,
-        type: Dodopayments::Models::SubscriptionFailedWebhookEvent::type_
+        type: :"subscription.failed"
       }
 
     class SubscriptionFailedWebhookEvent < Dodopayments::Internal::Type::BaseModel
@@ -15,31 +15,21 @@ module Dodopayments
 
       attr_accessor timestamp: Time
 
-      attr_accessor type: Dodopayments::Models::SubscriptionFailedWebhookEvent::type_
+      attr_accessor type: :"subscription.failed"
 
       def initialize: (
         business_id: String,
         data: Dodopayments::Subscription,
         timestamp: Time,
-        type: Dodopayments::Models::SubscriptionFailedWebhookEvent::type_
+        ?type: :"subscription.failed"
       ) -> void
 
       def to_hash: -> {
         business_id: String,
         data: Dodopayments::Subscription,
         timestamp: Time,
-        type: Dodopayments::Models::SubscriptionFailedWebhookEvent::type_
+        type: :"subscription.failed"
       }
-
-      type type_ = :"subscription.failed"
-
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        SUBSCRIPTION_FAILED: :"subscription.failed"
-
-        def self?.values: -> ::Array[Dodopayments::Models::SubscriptionFailedWebhookEvent::type_]
-      end
     end
   end
 end

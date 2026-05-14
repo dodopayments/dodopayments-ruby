@@ -5,7 +5,7 @@ module Dodopayments
         business_id: String,
         data: Dodopayments::Refund,
         timestamp: Time,
-        type: Dodopayments::Models::RefundFailedWebhookEvent::type_
+        type: :"refund.failed"
       }
 
     class RefundFailedWebhookEvent < Dodopayments::Internal::Type::BaseModel
@@ -15,31 +15,21 @@ module Dodopayments
 
       attr_accessor timestamp: Time
 
-      attr_accessor type: Dodopayments::Models::RefundFailedWebhookEvent::type_
+      attr_accessor type: :"refund.failed"
 
       def initialize: (
         business_id: String,
         data: Dodopayments::Refund,
         timestamp: Time,
-        type: Dodopayments::Models::RefundFailedWebhookEvent::type_
+        ?type: :"refund.failed"
       ) -> void
 
       def to_hash: -> {
         business_id: String,
         data: Dodopayments::Refund,
         timestamp: Time,
-        type: Dodopayments::Models::RefundFailedWebhookEvent::type_
+        type: :"refund.failed"
       }
-
-      type type_ = :"refund.failed"
-
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        REFUND_FAILED: :"refund.failed"
-
-        def self?.values: -> ::Array[Dodopayments::Models::RefundFailedWebhookEvent::type_]
-      end
     end
   end
 end

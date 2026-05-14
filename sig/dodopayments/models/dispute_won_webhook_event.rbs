@@ -5,7 +5,7 @@ module Dodopayments
         business_id: String,
         data: Dodopayments::Dispute,
         timestamp: Time,
-        type: Dodopayments::Models::DisputeWonWebhookEvent::type_
+        type: :"dispute.won"
       }
 
     class DisputeWonWebhookEvent < Dodopayments::Internal::Type::BaseModel
@@ -15,31 +15,21 @@ module Dodopayments
 
       attr_accessor timestamp: Time
 
-      attr_accessor type: Dodopayments::Models::DisputeWonWebhookEvent::type_
+      attr_accessor type: :"dispute.won"
 
       def initialize: (
         business_id: String,
         data: Dodopayments::Dispute,
         timestamp: Time,
-        type: Dodopayments::Models::DisputeWonWebhookEvent::type_
+        ?type: :"dispute.won"
       ) -> void
 
       def to_hash: -> {
         business_id: String,
         data: Dodopayments::Dispute,
         timestamp: Time,
-        type: Dodopayments::Models::DisputeWonWebhookEvent::type_
+        type: :"dispute.won"
       }
-
-      type type_ = :"dispute.won"
-
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        DISPUTE_WON: :"dispute.won"
-
-        def self?.values: -> ::Array[Dodopayments::Models::DisputeWonWebhookEvent::type_]
-      end
     end
   end
 end

@@ -17,7 +17,8 @@ module Dodopayments
       required :business_id, String
 
       # @!attribute chargebacks
-      #   @deprecated
+      #   @deprecated Use the v3 payout breakup endpoints instead. Will be removed in a future
+      #   release.
       #
       #   The total value of chargebacks associated with the payout.
       #
@@ -55,7 +56,8 @@ module Dodopayments
       required :payout_id, String
 
       # @!attribute refunds
-      #   @deprecated
+      #   @deprecated Use the v3 payout breakup endpoints instead. Will be removed in a future
+      #   release.
       #
       #   The total value of refunds associated with the payout.
       #
@@ -69,7 +71,8 @@ module Dodopayments
       required :status, enum: -> { Dodopayments::Models::PayoutListResponse::Status }
 
       # @!attribute tax
-      #   @deprecated
+      #   @deprecated Use the v3 payout breakup endpoints instead. Will be removed in a future
+      #   release.
       #
       #   The tax applied to the payout.
       #
