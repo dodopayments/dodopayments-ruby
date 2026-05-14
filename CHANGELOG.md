@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.10.0 (2026-05-14)
+
+Full Changelog: [v2.9.1...v2.10.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.9.1...v2.10.0)
+
+### Features
+
+* **api:** manual updates ([5bea624](https://github.com/dodopayments/dodopayments-ruby/commit/5bea6246c3a998c3587e24a9c345a41000a87e31))
+* **api:** updated openapi spec to 1.98.0 ([4747cdf](https://github.com/dodopayments/dodopayments-ruby/commit/4747cdf437c49a58c4e70908e08e4bd853dd0859))
+* **api:** updated openapi spec to v1.97.10 ([4b79dec](https://github.com/dodopayments/dodopayments-ruby/commit/4b79dec6275293cce30c1db6d682eeb4ee1f69b7))
+
+
+### Bug Fixes
+
+* **client:** elide content type header on requests without body ([036bd33](https://github.com/dodopayments/dodopayments-ruby/commit/036bd33ad42365dfd68d18274297dcb46887ab94))
+
 ## 2.9.1 (2026-05-04)
 
 Full Changelog: [v2.9.0...v2.9.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.9.0...v2.9.1)
