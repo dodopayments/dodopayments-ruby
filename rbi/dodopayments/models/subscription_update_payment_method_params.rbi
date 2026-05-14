@@ -20,35 +20,35 @@ module Dodopayments
       sig do
         returns(
           T.any(
-            Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New,
-            Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing
+            Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::New,
+            Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::Existing
           )
         )
       end
-      attr_accessor :body
+      attr_accessor :payment_method
 
       sig do
         params(
           subscription_id: String,
-          body:
+          payment_method:
             T.any(
-              Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New::OrHash,
-              Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing::OrHash
+              Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::New::OrHash,
+              Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::Existing::OrHash
             ),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(subscription_id:, body:, request_options: {})
+      def self.new(subscription_id:, payment_method:, request_options: {})
       end
 
       sig do
         override.returns(
           {
             subscription_id: String,
-            body:
+            payment_method:
               T.any(
-                Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New,
-                Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing
+                Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::New,
+                Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::Existing
               ),
             request_options: Dodopayments::RequestOptions
           }
@@ -57,14 +57,14 @@ module Dodopayments
       def to_hash
       end
 
-      module Body
+      module PaymentMethod
         extend Dodopayments::Internal::Type::Union
 
         Variants =
           T.type_alias do
             T.any(
-              Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New,
-              Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing
+              Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::New,
+              Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::Existing
             )
           end
 
@@ -72,7 +72,7 @@ module Dodopayments
           OrHash =
             T.type_alias do
               T.any(
-                Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New,
+                Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::New,
                 Dodopayments::Internal::AnyHash
               )
             end
@@ -102,7 +102,7 @@ module Dodopayments
           OrHash =
             T.type_alias do
               T.any(
-                Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing,
+                Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::Existing,
                 Dodopayments::Internal::AnyHash
               )
             end
@@ -129,7 +129,7 @@ module Dodopayments
         sig do
           override.returns(
             T::Array[
-              Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Variants
+              Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::Variants
             ]
           )
         end

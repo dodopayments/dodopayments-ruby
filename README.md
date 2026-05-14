@@ -42,7 +42,7 @@ dodo_payments = Dodopayments::Client.new(
   environment: "test_mode" # defaults to "live_mode"
 )
 
-checkout_session_response = dodo_payments.checkout_sessions.create(product_cart: [{product_id: "product_id", quantity: 0}])
+checkout_session_response = dodo_payments.checkout_sessions.create(product_cart: [{product_id: "pdt_example", quantity: 1}])
 
 puts(checkout_session_response.session_id)
 ```
@@ -81,7 +81,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```ruby
 begin
-  checkout_session = dodo_payments.checkout_sessions.create(product_cart: [{product_id: "product_id", quantity: 0}])
+  checkout_session = dodo_payments.checkout_sessions.create(product_cart: [{product_id: "pdt_example", quantity: 1}])
 rescue Dodopayments::Errors::APIConnectionError => e
   puts("The server could not be reached")
   puts(e.cause)  # an underlying Exception, likely raised within `net/http`
@@ -125,7 +125,7 @@ dodo_payments = Dodopayments::Client.new(
 
 # Or, configure per-request:
 dodo_payments.checkout_sessions.create(
-  product_cart: [{product_id: "product_id", quantity: 0}],
+  product_cart: [{product_id: "pdt_example", quantity: 1}],
   request_options: {max_retries: 5}
 )
 ```
@@ -142,7 +142,7 @@ dodo_payments = Dodopayments::Client.new(
 
 # Or, configure per-request:
 dodo_payments.checkout_sessions.create(
-  product_cart: [{product_id: "product_id", quantity: 0}],
+  product_cart: [{product_id: "pdt_example", quantity: 1}],
   request_options: {timeout: 5}
 )
 ```
@@ -176,7 +176,7 @@ Note: the `extra_` parameters of the same name overrides the documented paramete
 ```ruby
 checkout_session_response =
   dodo_payments.checkout_sessions.create(
-    product_cart: [{product_id: "product_id", quantity: 0}],
+    product_cart: [{product_id: "pdt_example", quantity: 1}],
     request_options: {
       extra_query: {my_query_parameter: value},
       extra_body: {my_body_parameter: value},
@@ -223,7 +223,7 @@ You can provide typesafe request parameters like so:
 
 ```ruby
 dodo_payments.checkout_sessions.create(
-  product_cart: [Dodopayments::ProductItemReq.new(product_id: "product_id", quantity: 0)]
+  product_cart: [Dodopayments::ProductItemReq.new(product_id: "pdt_example", quantity: 1)]
 )
 ```
 
@@ -231,11 +231,11 @@ Or, equivalently:
 
 ```ruby
 # Hashes work, but are not typesafe:
-dodo_payments.checkout_sessions.create(product_cart: [{product_id: "product_id", quantity: 0}])
+dodo_payments.checkout_sessions.create(product_cart: [{product_id: "pdt_example", quantity: 1}])
 
 # You can also splat a full Params class:
 params = Dodopayments::CheckoutSessionCreateParams.new(
-  product_cart: [Dodopayments::ProductItemReq.new(product_id: "product_id", quantity: 0)]
+  product_cart: [Dodopayments::ProductItemReq.new(product_id: "pdt_example", quantity: 1)]
 )
 dodo_payments.checkout_sessions.create(**params)
 ```

@@ -73,7 +73,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         custom_field_responses: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::CustomFieldResponse]) | nil,
         discount_cycles_remaining: Integer | nil,
         discount_id: String | nil,
-        discounts: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Subscription::Discount]) | nil,
+        discounts: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::DiscountDetail]) | nil,
         expires_at: Time | nil,
         payment_method_id: String | nil,
         scheduled_change: Dodopayments::ScheduledPlanChange | nil,
@@ -121,7 +121,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         custom_field_responses: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::CustomFieldResponse]) | nil,
         discount_cycles_remaining: Integer | nil,
         discount_id: String | nil,
-        discounts: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Subscription::Discount]) | nil,
+        discounts: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::DiscountDetail]) | nil,
         expires_at: Time | nil,
         payment_method_id: String | nil,
         scheduled_change: Dodopayments::ScheduledPlanChange | nil,
@@ -274,7 +274,8 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
   end
 
   def test_update_payment_method_required_params
-    response = @dodo_payments.subscriptions.update_payment_method("subscription_id", body: {type: :new})
+    response =
+      @dodo_payments.subscriptions.update_payment_method("subscription_id", payment_method: {type: :new})
 
     assert_pattern do
       response => Dodopayments::Models::SubscriptionUpdatePaymentMethodResponse

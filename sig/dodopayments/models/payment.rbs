@@ -24,7 +24,7 @@ module Dodopayments
         checkout_session_id: String?,
         custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?,
         discount_id: String?,
-        discounts: ::Array[Dodopayments::Payment::Discount]?,
+        discounts: ::Array[Dodopayments::DiscountDetail]?,
         error_code: String?,
         error_message: String?,
         invoice_id: String?,
@@ -86,7 +86,7 @@ module Dodopayments
 
       attr_accessor discount_id: String?
 
-      attr_accessor discounts: ::Array[Dodopayments::Payment::Discount]?
+      attr_accessor discounts: ::Array[Dodopayments::DiscountDetail]?
 
       attr_accessor error_code: String?
 
@@ -139,7 +139,7 @@ module Dodopayments
         ?checkout_session_id: String?,
         ?custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?,
         ?discount_id: String?,
-        ?discounts: ::Array[Dodopayments::Payment::Discount]?,
+        ?discounts: ::Array[Dodopayments::DiscountDetail]?,
         ?error_code: String?,
         ?error_message: String?,
         ?invoice_id: String?,
@@ -179,7 +179,7 @@ module Dodopayments
         checkout_session_id: String?,
         custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?,
         discount_id: String?,
-        discounts: ::Array[Dodopayments::Payment::Discount]?,
+        discounts: ::Array[Dodopayments::DiscountDetail]?,
         error_code: String?,
         error_message: String?,
         invoice_id: String?,
@@ -195,98 +195,6 @@ module Dodopayments
         tax: Integer?,
         updated_at: Time?
       }
-
-      type discount =
-        {
-          amount: Integer,
-          business_id: String,
-          code: String,
-          created_at: Time,
-          discount_id: String,
-          metadata: ::Hash[Symbol, String],
-          position: Integer,
-          preserve_on_plan_change: bool,
-          restricted_to: ::Array[String],
-          times_used: Integer,
-          type: Dodopayments::Models::discount_type,
-          cycles_remaining: Integer?,
-          expires_at: Time?,
-          name: String?,
-          subscription_cycles: Integer?,
-          usage_limit: Integer?
-        }
-
-      class Discount < Dodopayments::Internal::Type::BaseModel
-        attr_accessor amount: Integer
-
-        attr_accessor business_id: String
-
-        attr_accessor code: String
-
-        attr_accessor created_at: Time
-
-        attr_accessor discount_id: String
-
-        attr_accessor metadata: ::Hash[Symbol, String]
-
-        attr_accessor position: Integer
-
-        attr_accessor preserve_on_plan_change: bool
-
-        attr_accessor restricted_to: ::Array[String]
-
-        attr_accessor times_used: Integer
-
-        attr_accessor type: Dodopayments::Models::discount_type
-
-        attr_accessor cycles_remaining: Integer?
-
-        attr_accessor expires_at: Time?
-
-        attr_accessor name: String?
-
-        attr_accessor subscription_cycles: Integer?
-
-        attr_accessor usage_limit: Integer?
-
-        def initialize: (
-          amount: Integer,
-          business_id: String,
-          code: String,
-          created_at: Time,
-          discount_id: String,
-          metadata: ::Hash[Symbol, String],
-          position: Integer,
-          preserve_on_plan_change: bool,
-          restricted_to: ::Array[String],
-          times_used: Integer,
-          type: Dodopayments::Models::discount_type,
-          ?cycles_remaining: Integer?,
-          ?expires_at: Time?,
-          ?name: String?,
-          ?subscription_cycles: Integer?,
-          ?usage_limit: Integer?
-        ) -> void
-
-        def to_hash: -> {
-          amount: Integer,
-          business_id: String,
-          code: String,
-          created_at: Time,
-          discount_id: String,
-          metadata: ::Hash[Symbol, String],
-          position: Integer,
-          preserve_on_plan_change: bool,
-          restricted_to: ::Array[String],
-          times_used: Integer,
-          type: Dodopayments::Models::discount_type,
-          cycles_remaining: Integer?,
-          expires_at: Time?,
-          name: String?,
-          subscription_cycles: Integer?,
-          usage_limit: Integer?
-        }
-      end
 
       type product_cart = { product_id: String, quantity: Integer }
 
