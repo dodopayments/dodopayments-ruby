@@ -37,7 +37,7 @@ module Dodopayments
       optional :addons, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::AttachAddon] }, nil?: true
 
       # @!attribute discount_code
-      #   @deprecated
+      #   @deprecated Use `discount_id` instead.
       #
       #   DEPRECATED: Use discount_codes instead. Cannot be used together with
       #   discount_codes.

@@ -5,7 +5,7 @@ module Dodopayments
         business_id: String,
         data: Dodopayments::AbandonedCheckoutDetectedWebhookEvent::Data,
         timestamp: Time,
-        type: Dodopayments::Models::AbandonedCheckoutDetectedWebhookEvent::type_
+        type: :"abandoned_checkout.detected"
       }
 
     class AbandonedCheckoutDetectedWebhookEvent < Dodopayments::Internal::Type::BaseModel
@@ -15,20 +15,20 @@ module Dodopayments
 
       attr_accessor timestamp: Time
 
-      attr_accessor type: Dodopayments::Models::AbandonedCheckoutDetectedWebhookEvent::type_
+      attr_accessor type: :"abandoned_checkout.detected"
 
       def initialize: (
         business_id: String,
         data: Dodopayments::AbandonedCheckoutDetectedWebhookEvent::Data,
         timestamp: Time,
-        type: Dodopayments::Models::AbandonedCheckoutDetectedWebhookEvent::type_
+        ?type: :"abandoned_checkout.detected"
       ) -> void
 
       def to_hash: -> {
         business_id: String,
         data: Dodopayments::AbandonedCheckoutDetectedWebhookEvent::Data,
         timestamp: Time,
-        type: Dodopayments::Models::AbandonedCheckoutDetectedWebhookEvent::type_
+        type: :"abandoned_checkout.detected"
       }
 
       type data =
@@ -97,16 +97,6 @@ module Dodopayments
 
           def self?.values: -> ::Array[Dodopayments::Models::AbandonedCheckoutDetectedWebhookEvent::Data::status]
         end
-      end
-
-      type type_ = :"abandoned_checkout.detected"
-
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        ABANDONED_CHECKOUT_DETECTED: :"abandoned_checkout.detected"
-
-        def self?.values: -> ::Array[Dodopayments::Models::AbandonedCheckoutDetectedWebhookEvent::type_]
       end
     end
   end

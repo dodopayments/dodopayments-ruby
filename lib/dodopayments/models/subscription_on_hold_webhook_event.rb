@@ -24,29 +24,17 @@ module Dodopayments
       # @!attribute type
       #   The event type
       #
-      #   @return [Symbol, Dodopayments::Models::SubscriptionOnHoldWebhookEvent::Type]
-      required :type, enum: -> { Dodopayments::SubscriptionOnHoldWebhookEvent::Type }
+      #   @return [Symbol, :"subscription.on_hold"]
+      required :type, const: :"subscription.on_hold"
 
-      # @!method initialize(business_id:, data:, timestamp:, type:)
+      # @!method initialize(business_id:, data:, timestamp:, type: :"subscription.on_hold")
       #   @param business_id [String] The business identifier
       #
       #   @param data [Dodopayments::Models::Subscription] Response struct representing subscription details
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
-      #   @param type [Symbol, Dodopayments::Models::SubscriptionOnHoldWebhookEvent::Type] The event type
-
-      # The event type
-      #
-      # @see Dodopayments::Models::SubscriptionOnHoldWebhookEvent#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        SUBSCRIPTION_ON_HOLD = :"subscription.on_hold"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #   @param type [Symbol, :"subscription.on_hold"] The event type
     end
   end
 end

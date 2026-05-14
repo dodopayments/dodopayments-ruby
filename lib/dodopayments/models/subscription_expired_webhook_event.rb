@@ -24,29 +24,17 @@ module Dodopayments
       # @!attribute type
       #   The event type
       #
-      #   @return [Symbol, Dodopayments::Models::SubscriptionExpiredWebhookEvent::Type]
-      required :type, enum: -> { Dodopayments::SubscriptionExpiredWebhookEvent::Type }
+      #   @return [Symbol, :"subscription.expired"]
+      required :type, const: :"subscription.expired"
 
-      # @!method initialize(business_id:, data:, timestamp:, type:)
+      # @!method initialize(business_id:, data:, timestamp:, type: :"subscription.expired")
       #   @param business_id [String] The business identifier
       #
       #   @param data [Dodopayments::Models::Subscription] Response struct representing subscription details
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
-      #   @param type [Symbol, Dodopayments::Models::SubscriptionExpiredWebhookEvent::Type] The event type
-
-      # The event type
-      #
-      # @see Dodopayments::Models::SubscriptionExpiredWebhookEvent#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        SUBSCRIPTION_EXPIRED = :"subscription.expired"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #   @param type [Symbol, :"subscription.expired"] The event type
     end
   end
 end

@@ -45,7 +45,7 @@ module Dodopayments
         sig { returns(T::Boolean) }
         attr_accessor :purchasing_power_parity
 
-        sig { returns(Dodopayments::Price::OneTimePrice::Type::OrSymbol) }
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Indicates whether the customer can pay any amount they choose. If set to `true`,
@@ -73,10 +73,10 @@ module Dodopayments
             discount: Integer,
             price: Integer,
             purchasing_power_parity: T::Boolean,
-            type: Dodopayments::Price::OneTimePrice::Type::OrSymbol,
             pay_what_you_want: T::Boolean,
             suggested_price: T.nilable(Integer),
-            tax_inclusive: T.nilable(T::Boolean)
+            tax_inclusive: T.nilable(T::Boolean),
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -93,7 +93,6 @@ module Dodopayments
           # Indicates if purchasing power parity adjustments are applied to the price.
           # Purchasing power parity feature is not available as of now.
           purchasing_power_parity:,
-          type:,
           # Indicates whether the customer can pay any amount they choose. If set to `true`,
           # the [`price`](Self::price) field is the minimum amount.
           pay_what_you_want: nil,
@@ -102,7 +101,8 @@ module Dodopayments
           # ignored.
           suggested_price: nil,
           # Indicates if the price is tax inclusive.
-          tax_inclusive: nil
+          tax_inclusive: nil,
+          type: :one_time_price
         )
         end
 
@@ -113,7 +113,7 @@ module Dodopayments
               discount: Integer,
               price: Integer,
               purchasing_power_parity: T::Boolean,
-              type: Dodopayments::Price::OneTimePrice::Type::OrSymbol,
+              type: Symbol,
               pay_what_you_want: T::Boolean,
               suggested_price: T.nilable(Integer),
               tax_inclusive: T.nilable(T::Boolean)
@@ -121,30 +121,6 @@ module Dodopayments
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Dodopayments::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Dodopayments::Price::OneTimePrice::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          ONE_TIME_PRICE =
-            T.let(
-              :one_time_price,
-              Dodopayments::Price::OneTimePrice::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[Dodopayments::Price::OneTimePrice::Type::TaggedSymbol]
-            )
-          end
-          def self.values
-          end
         end
       end
 
@@ -193,7 +169,7 @@ module Dodopayments
         sig { returns(Dodopayments::TimeInterval::OrSymbol) }
         attr_accessor :subscription_period_interval
 
-        sig { returns(Dodopayments::Price::RecurringPrice::Type::OrSymbol) }
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Indicates if the price is tax inclusive
@@ -218,9 +194,9 @@ module Dodopayments
             purchasing_power_parity: T::Boolean,
             subscription_period_count: Integer,
             subscription_period_interval: Dodopayments::TimeInterval::OrSymbol,
-            type: Dodopayments::Price::RecurringPrice::Type::OrSymbol,
             tax_inclusive: T.nilable(T::Boolean),
-            trial_period_days: Integer
+            trial_period_days: Integer,
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -244,11 +220,11 @@ module Dodopayments
           subscription_period_count:,
           # The time interval for the subscription period (e.g., day, month, year).
           subscription_period_interval:,
-          type:,
           # Indicates if the price is tax inclusive
           tax_inclusive: nil,
           # Number of days for the trial period. A value of `0` indicates no trial period.
-          trial_period_days: nil
+          trial_period_days: nil,
+          type: :recurring_price
         )
         end
 
@@ -264,37 +240,13 @@ module Dodopayments
               subscription_period_count: Integer,
               subscription_period_interval:
                 Dodopayments::TimeInterval::OrSymbol,
-              type: Dodopayments::Price::RecurringPrice::Type::OrSymbol,
+              type: Symbol,
               tax_inclusive: T.nilable(T::Boolean),
               trial_period_days: Integer
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Dodopayments::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Dodopayments::Price::RecurringPrice::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          RECURRING_PRICE =
-            T.let(
-              :recurring_price,
-              Dodopayments::Price::RecurringPrice::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[Dodopayments::Price::RecurringPrice::Type::TaggedSymbol]
-            )
-          end
-          def self.values
-          end
         end
       end
 
@@ -343,7 +295,7 @@ module Dodopayments
         sig { returns(Dodopayments::TimeInterval::OrSymbol) }
         attr_accessor :subscription_period_interval
 
-        sig { returns(Dodopayments::Price::UsageBasedPrice::Type::OrSymbol) }
+        sig { returns(Symbol) }
         attr_accessor :type
 
         sig { returns(T.nilable(T::Array[Dodopayments::AddMeterToPrice])) }
@@ -364,9 +316,9 @@ module Dodopayments
             purchasing_power_parity: T::Boolean,
             subscription_period_count: Integer,
             subscription_period_interval: Dodopayments::TimeInterval::OrSymbol,
-            type: Dodopayments::Price::UsageBasedPrice::Type::OrSymbol,
             meters: T.nilable(T::Array[Dodopayments::AddMeterToPrice::OrHash]),
-            tax_inclusive: T.nilable(T::Boolean)
+            tax_inclusive: T.nilable(T::Boolean),
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -390,10 +342,10 @@ module Dodopayments
           subscription_period_count:,
           # The time interval for the subscription period (e.g., day, month, year).
           subscription_period_interval:,
-          type:,
           meters: nil,
           # Indicates if the price is tax inclusive
-          tax_inclusive: nil
+          tax_inclusive: nil,
+          type: :usage_based_price
         )
         end
 
@@ -409,37 +361,13 @@ module Dodopayments
               subscription_period_count: Integer,
               subscription_period_interval:
                 Dodopayments::TimeInterval::OrSymbol,
-              type: Dodopayments::Price::UsageBasedPrice::Type::OrSymbol,
+              type: Symbol,
               meters: T.nilable(T::Array[Dodopayments::AddMeterToPrice]),
               tax_inclusive: T.nilable(T::Boolean)
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Dodopayments::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Dodopayments::Price::UsageBasedPrice::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          USAGE_BASED_PRICE =
-            T.let(
-              :usage_based_price,
-              Dodopayments::Price::UsageBasedPrice::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[Dodopayments::Price::UsageBasedPrice::Type::TaggedSymbol]
-            )
-          end
-          def self.values
-          end
         end
       end
 

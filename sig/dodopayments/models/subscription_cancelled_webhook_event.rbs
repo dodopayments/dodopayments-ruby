@@ -5,7 +5,7 @@ module Dodopayments
         business_id: String,
         data: Dodopayments::Subscription,
         timestamp: Time,
-        type: Dodopayments::Models::SubscriptionCancelledWebhookEvent::type_
+        type: :"subscription.cancelled"
       }
 
     class SubscriptionCancelledWebhookEvent < Dodopayments::Internal::Type::BaseModel
@@ -15,31 +15,21 @@ module Dodopayments
 
       attr_accessor timestamp: Time
 
-      attr_accessor type: Dodopayments::Models::SubscriptionCancelledWebhookEvent::type_
+      attr_accessor type: :"subscription.cancelled"
 
       def initialize: (
         business_id: String,
         data: Dodopayments::Subscription,
         timestamp: Time,
-        type: Dodopayments::Models::SubscriptionCancelledWebhookEvent::type_
+        ?type: :"subscription.cancelled"
       ) -> void
 
       def to_hash: -> {
         business_id: String,
         data: Dodopayments::Subscription,
         timestamp: Time,
-        type: Dodopayments::Models::SubscriptionCancelledWebhookEvent::type_
+        type: :"subscription.cancelled"
       }
-
-      type type_ = :"subscription.cancelled"
-
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        SUBSCRIPTION_CANCELLED: :"subscription.cancelled"
-
-        def self?.values: -> ::Array[Dodopayments::Models::SubscriptionCancelledWebhookEvent::type_]
-      end
     end
   end
 end

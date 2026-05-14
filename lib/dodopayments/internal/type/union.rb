@@ -6,28 +6,28 @@ module Dodopayments
       # @api private
       #
       # @example
-      #   # `unsafe_unwrap_webhook_event` is a `Dodopayments::UnsafeUnwrapWebhookEvent`
-      #   case unsafe_unwrap_webhook_event
-      #   when Dodopayments::AbandonedCheckoutDetectedWebhookEvent
-      #     puts(unsafe_unwrap_webhook_event.business_id)
-      #   when Dodopayments::AbandonedCheckoutRecoveredWebhookEvent
-      #     puts(unsafe_unwrap_webhook_event.data)
-      #   when Dodopayments::CreditAddedWebhookEvent
-      #     puts(unsafe_unwrap_webhook_event.timestamp)
+      #   # `price` is a `Dodopayments::Price`
+      #   case price
+      #   when Dodopayments::Price::OneTimePrice
+      #     puts(price.currency)
+      #   when Dodopayments::Price::RecurringPrice
+      #     puts(price.discount)
+      #   when Dodopayments::Price::UsageBasedPrice
+      #     puts(price.fixed_price)
       #   else
-      #     puts(unsafe_unwrap_webhook_event)
+      #     puts(price)
       #   end
       #
       # @example
-      #   case unsafe_unwrap_webhook_event
-      #   in {type: :"abandoned_checkout.detected", business_id: business_id, data: data, timestamp: timestamp}
-      #     puts(business_id)
-      #   in {type: :"abandoned_checkout.recovered", business_id: business_id, data: data, timestamp: timestamp}
-      #     puts(data)
-      #   in {type: :"credit.added", business_id: business_id, data: data, timestamp: timestamp}
-      #     puts(timestamp)
+      #   case price
+      #   in {type: :one_time_price, currency: currency, discount: discount, price: price}
+      #     puts(currency)
+      #   in {type: :recurring_price, currency: currency, discount: discount, payment_frequency_count: payment_frequency_count}
+      #     puts(discount)
+      #   in {type: :usage_based_price, currency: currency, discount: discount, fixed_price: fixed_price}
+      #     puts(fixed_price)
       #   else
-      #     puts(unsafe_unwrap_webhook_event)
+      #     puts(price)
       #   end
       module Union
         include Dodopayments::Internal::Type::Converter

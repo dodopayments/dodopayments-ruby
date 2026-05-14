@@ -31,9 +31,7 @@ module Dodopayments
       attr_accessor :timestamp
 
       # The event type
-      sig do
-        returns(Dodopayments::DunningRecoveredWebhookEvent::Type::TaggedSymbol)
-      end
+      sig { returns(Symbol) }
       attr_accessor :type
 
       sig do
@@ -41,7 +39,7 @@ module Dodopayments
           business_id: String,
           data: Dodopayments::DunningRecoveredWebhookEvent::Data::OrHash,
           timestamp: Time,
-          type: Dodopayments::DunningRecoveredWebhookEvent::Type::OrSymbol
+          type: Symbol
         ).returns(T.attached_class)
       end
       def self.new(
@@ -52,7 +50,7 @@ module Dodopayments
         # The timestamp of when the event occurred
         timestamp:,
         # The event type
-        type:
+        type: :"dunning.recovered"
       )
       end
 
@@ -62,7 +60,7 @@ module Dodopayments
             business_id: String,
             data: Dodopayments::DunningRecoveredWebhookEvent::Data,
             timestamp: Time,
-            type: Dodopayments::DunningRecoveredWebhookEvent::Type::TaggedSymbol
+            type: Symbol
           }
         )
       end
@@ -215,33 +213,6 @@ module Dodopayments
           end
           def self.values
           end
-        end
-      end
-
-      # The event type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, Dodopayments::DunningRecoveredWebhookEvent::Type)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        DUNNING_RECOVERED =
-          T.let(
-            :"dunning.recovered",
-            Dodopayments::DunningRecoveredWebhookEvent::Type::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Dodopayments::DunningRecoveredWebhookEvent::Type::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
         end
       end
     end

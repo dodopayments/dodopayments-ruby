@@ -49,7 +49,7 @@ module Dodopayments
       optional :client_secret, String, nil?: true
 
       # @!attribute discount_id
-      #   @deprecated
+      #   @deprecated Use `discounts` instead.
       #
       #   DEPRECATED: Use discount_ids instead. Returns the first discount's ID if
       #   present.

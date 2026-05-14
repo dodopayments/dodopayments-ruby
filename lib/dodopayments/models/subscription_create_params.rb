@@ -58,7 +58,7 @@ module Dodopayments
       optional :billing_currency, enum: -> { Dodopayments::Currency }, nil?: true
 
       # @!attribute discount_code
-      #   @deprecated
+      #   @deprecated Use `discount_id` instead.
       #
       #   DEPRECATED: Use discount_codes instead. Cannot be used together with
       #   discount_codes.

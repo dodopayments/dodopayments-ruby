@@ -23,29 +23,17 @@ module Dodopayments
       # @!attribute type
       #   The event type
       #
-      #   @return [Symbol, Dodopayments::Models::PaymentSucceededWebhookEvent::Type]
-      required :type, enum: -> { Dodopayments::PaymentSucceededWebhookEvent::Type }
+      #   @return [Symbol, :"payment.succeeded"]
+      required :type, const: :"payment.succeeded"
 
-      # @!method initialize(business_id:, data:, timestamp:, type:)
+      # @!method initialize(business_id:, data:, timestamp:, type: :"payment.succeeded")
       #   @param business_id [String] The business identifier
       #
       #   @param data [Dodopayments::Models::Payment]
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
-      #   @param type [Symbol, Dodopayments::Models::PaymentSucceededWebhookEvent::Type] The event type
-
-      # The event type
-      #
-      # @see Dodopayments::Models::PaymentSucceededWebhookEvent#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        PAYMENT_SUCCEEDED = :"payment.succeeded"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #   @param type [Symbol, :"payment.succeeded"] The event type
     end
   end
 end

@@ -27,11 +27,7 @@ module Dodopayments
       attr_accessor :timestamp
 
       # The event type
-      sig do
-        returns(
-          Dodopayments::SubscriptionUpdatedWebhookEvent::Type::TaggedSymbol
-        )
-      end
+      sig { returns(Symbol) }
       attr_accessor :type
 
       sig do
@@ -39,7 +35,7 @@ module Dodopayments
           business_id: String,
           data: Dodopayments::Subscription::OrHash,
           timestamp: Time,
-          type: Dodopayments::SubscriptionUpdatedWebhookEvent::Type::OrSymbol
+          type: Symbol
         ).returns(T.attached_class)
       end
       def self.new(
@@ -50,7 +46,7 @@ module Dodopayments
         # The timestamp of when the event occurred
         timestamp:,
         # The event type
-        type:
+        type: :"subscription.updated"
       )
       end
 
@@ -60,39 +56,11 @@ module Dodopayments
             business_id: String,
             data: Dodopayments::Subscription,
             timestamp: Time,
-            type:
-              Dodopayments::SubscriptionUpdatedWebhookEvent::Type::TaggedSymbol
+            type: Symbol
           }
         )
       end
       def to_hash
-      end
-
-      # The event type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, Dodopayments::SubscriptionUpdatedWebhookEvent::Type)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        SUBSCRIPTION_UPDATED =
-          T.let(
-            :"subscription.updated",
-            Dodopayments::SubscriptionUpdatedWebhookEvent::Type::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Dodopayments::SubscriptionUpdatedWebhookEvent::Type::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
       end
     end
   end

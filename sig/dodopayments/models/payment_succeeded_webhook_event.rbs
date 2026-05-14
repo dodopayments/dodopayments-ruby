@@ -5,7 +5,7 @@ module Dodopayments
         business_id: String,
         data: Dodopayments::Payment,
         timestamp: Time,
-        type: Dodopayments::Models::PaymentSucceededWebhookEvent::type_
+        type: :"payment.succeeded"
       }
 
     class PaymentSucceededWebhookEvent < Dodopayments::Internal::Type::BaseModel
@@ -15,31 +15,21 @@ module Dodopayments
 
       attr_accessor timestamp: Time
 
-      attr_accessor type: Dodopayments::Models::PaymentSucceededWebhookEvent::type_
+      attr_accessor type: :"payment.succeeded"
 
       def initialize: (
         business_id: String,
         data: Dodopayments::Payment,
         timestamp: Time,
-        type: Dodopayments::Models::PaymentSucceededWebhookEvent::type_
+        ?type: :"payment.succeeded"
       ) -> void
 
       def to_hash: -> {
         business_id: String,
         data: Dodopayments::Payment,
         timestamp: Time,
-        type: Dodopayments::Models::PaymentSucceededWebhookEvent::type_
+        type: :"payment.succeeded"
       }
-
-      type type_ = :"payment.succeeded"
-
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        PAYMENT_SUCCEEDED: :"payment.succeeded"
-
-        def self?.values: -> ::Array[Dodopayments::Models::PaymentSucceededWebhookEvent::type_]
-      end
     end
   end
 end

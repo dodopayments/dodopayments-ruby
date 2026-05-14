@@ -139,7 +139,7 @@ module Dodopayments
                nil?: true
 
       # @!attribute discount_id
-      #   @deprecated
+      #   @deprecated Use `discounts` instead.
       #
       #   DEPRECATED: Use discounts instead. Returns the first discount's ID if present.
       #

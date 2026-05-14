@@ -174,11 +174,7 @@ module Dodopayments
             sig { returns(T::Boolean) }
             attr_accessor :tax_inclusive
 
-            sig do
-              returns(
-                Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type::TaggedSymbol
-              )
-            end
+            sig { returns(Symbol) }
             attr_accessor :type
 
             sig { returns(Integer) }
@@ -204,13 +200,12 @@ module Dodopayments
                 proration_factor: Float,
                 quantity: Integer,
                 tax_inclusive: T::Boolean,
-                type:
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type::OrSymbol,
                 unit_price: Integer,
                 description: T.nilable(String),
                 name: T.nilable(String),
                 tax: T.nilable(Integer),
-                tax_rate: T.nilable(Float)
+                tax_rate: T.nilable(Float),
+                type: Symbol
               ).returns(T.attached_class)
             end
             def self.new(
@@ -220,12 +215,12 @@ module Dodopayments
               proration_factor:,
               quantity:,
               tax_inclusive:,
-              type:,
               unit_price:,
               description: nil,
               name: nil,
               tax: nil,
-              tax_rate: nil
+              tax_rate: nil,
+              type: :subscription
             )
             end
 
@@ -238,8 +233,7 @@ module Dodopayments
                   proration_factor: Float,
                   quantity: Integer,
                   tax_inclusive: T::Boolean,
-                  type:
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type::TaggedSymbol,
+                  type: Symbol,
                   unit_price: Integer,
                   description: T.nilable(String),
                   name: T.nilable(String),
@@ -249,35 +243,6 @@ module Dodopayments
               )
             end
             def to_hash
-            end
-
-            module Type
-              extend Dodopayments::Internal::Type::Enum
-
-              TaggedSymbol =
-                T.type_alias do
-                  T.all(
-                    Symbol,
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type
-                  )
-                end
-              OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-              SUBSCRIPTION =
-                T.let(
-                  :subscription,
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type::TaggedSymbol
-                )
-
-              sig do
-                override.returns(
-                  T::Array[
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type::TaggedSymbol
-                  ]
-                )
-              end
-              def self.values
-              end
             end
           end
 
@@ -316,11 +281,7 @@ module Dodopayments
             sig { returns(Float) }
             attr_accessor :tax_rate
 
-            sig do
-              returns(
-                Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type::TaggedSymbol
-              )
-            end
+            sig { returns(Symbol) }
             attr_accessor :type
 
             sig { returns(Integer) }
@@ -342,11 +303,10 @@ module Dodopayments
                 tax_category: Dodopayments::TaxCategory::OrSymbol,
                 tax_inclusive: T::Boolean,
                 tax_rate: Float,
-                type:
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type::OrSymbol,
                 unit_price: Integer,
                 description: T.nilable(String),
-                tax: T.nilable(Integer)
+                tax: T.nilable(Integer),
+                type: Symbol
               ).returns(T.attached_class)
             end
             def self.new(
@@ -360,10 +320,10 @@ module Dodopayments
               tax_category:,
               tax_inclusive:,
               tax_rate:,
-              type:,
               unit_price:,
               description: nil,
-              tax: nil
+              tax: nil,
+              type: :addon
             )
             end
 
@@ -378,8 +338,7 @@ module Dodopayments
                   tax_category: Dodopayments::TaxCategory::TaggedSymbol,
                   tax_inclusive: T::Boolean,
                   tax_rate: Float,
-                  type:
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type::TaggedSymbol,
+                  type: Symbol,
                   unit_price: Integer,
                   description: T.nilable(String),
                   tax: T.nilable(Integer)
@@ -387,35 +346,6 @@ module Dodopayments
               )
             end
             def to_hash
-            end
-
-            module Type
-              extend Dodopayments::Internal::Type::Enum
-
-              TaggedSymbol =
-                T.type_alias do
-                  T.all(
-                    Symbol,
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type
-                  )
-                end
-              OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-              ADDON =
-                T.let(
-                  :addon,
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type::TaggedSymbol
-                )
-
-              sig do
-                override.returns(
-                  T::Array[
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type::TaggedSymbol
-                  ]
-                )
-              end
-              def self.values
-              end
             end
           end
 
@@ -455,11 +385,7 @@ module Dodopayments
             sig { returns(Float) }
             attr_accessor :tax_rate
 
-            sig do
-              returns(
-                Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type::TaggedSymbol
-              )
-            end
+            sig { returns(Symbol) }
             attr_accessor :type
 
             sig { returns(String) }
@@ -482,11 +408,10 @@ module Dodopayments
                 subtotal: Integer,
                 tax_inclusive: T::Boolean,
                 tax_rate: Float,
-                type:
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type::OrSymbol,
                 units_consumed: String,
                 description: T.nilable(String),
-                tax: T.nilable(Integer)
+                tax: T.nilable(Integer),
+                type: Symbol
               ).returns(T.attached_class)
             end
             def self.new(
@@ -499,10 +424,10 @@ module Dodopayments
               subtotal:,
               tax_inclusive:,
               tax_rate:,
-              type:,
               units_consumed:,
               description: nil,
-              tax: nil
+              tax: nil,
+              type: :meter
             )
             end
 
@@ -518,8 +443,7 @@ module Dodopayments
                   subtotal: Integer,
                   tax_inclusive: T::Boolean,
                   tax_rate: Float,
-                  type:
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type::TaggedSymbol,
+                  type: Symbol,
                   units_consumed: String,
                   description: T.nilable(String),
                   tax: T.nilable(Integer)
@@ -527,35 +451,6 @@ module Dodopayments
               )
             end
             def to_hash
-            end
-
-            module Type
-              extend Dodopayments::Internal::Type::Enum
-
-              TaggedSymbol =
-                T.type_alias do
-                  T.all(
-                    Symbol,
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type
-                  )
-                end
-              OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-              METER =
-                T.let(
-                  :meter,
-                  Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type::TaggedSymbol
-                )
-
-              sig do
-                override.returns(
-                  T::Array[
-                    Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type::TaggedSymbol
-                  ]
-                )
-              end
-              def self.values
-              end
             end
           end
 

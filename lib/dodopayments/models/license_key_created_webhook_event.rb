@@ -23,29 +23,17 @@ module Dodopayments
       # @!attribute type
       #   The event type
       #
-      #   @return [Symbol, Dodopayments::Models::LicenseKeyCreatedWebhookEvent::Type]
-      required :type, enum: -> { Dodopayments::LicenseKeyCreatedWebhookEvent::Type }
+      #   @return [Symbol, :"license_key.created"]
+      required :type, const: :"license_key.created"
 
-      # @!method initialize(business_id:, data:, timestamp:, type:)
+      # @!method initialize(business_id:, data:, timestamp:, type: :"license_key.created")
       #   @param business_id [String] The business identifier
       #
       #   @param data [Dodopayments::Models::LicenseKey]
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
-      #   @param type [Symbol, Dodopayments::Models::LicenseKeyCreatedWebhookEvent::Type] The event type
-
-      # The event type
-      #
-      # @see Dodopayments::Models::LicenseKeyCreatedWebhookEvent#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        LICENSE_KEY_CREATED = :"license_key.created"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #   @param type [Symbol, :"license_key.created"] The event type
     end
   end
 end

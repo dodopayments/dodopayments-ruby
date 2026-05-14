@@ -5,7 +5,7 @@ module Dodopayments
         business_id: String,
         data: Dodopayments::CreditBalanceLowWebhookEvent::Data,
         timestamp: Time,
-        type: Dodopayments::Models::CreditBalanceLowWebhookEvent::type_
+        type: :"credit.balance_low"
       }
 
     class CreditBalanceLowWebhookEvent < Dodopayments::Internal::Type::BaseModel
@@ -15,20 +15,20 @@ module Dodopayments
 
       attr_accessor timestamp: Time
 
-      attr_accessor type: Dodopayments::Models::CreditBalanceLowWebhookEvent::type_
+      attr_accessor type: :"credit.balance_low"
 
       def initialize: (
         business_id: String,
         data: Dodopayments::CreditBalanceLowWebhookEvent::Data,
         timestamp: Time,
-        type: Dodopayments::Models::CreditBalanceLowWebhookEvent::type_
+        ?type: :"credit.balance_low"
       ) -> void
 
       def to_hash: -> {
         business_id: String,
         data: Dodopayments::CreditBalanceLowWebhookEvent::Data,
         timestamp: Time,
-        type: Dodopayments::Models::CreditBalanceLowWebhookEvent::type_
+        type: :"credit.balance_low"
       }
 
       type data =
@@ -81,16 +81,6 @@ module Dodopayments
           threshold_amount: String,
           threshold_percent: Integer
         }
-      end
-
-      type type_ = :"credit.balance_low"
-
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        CREDIT_BALANCE_LOW: :"credit.balance_low"
-
-        def self?.values: -> ::Array[Dodopayments::Models::CreditBalanceLowWebhookEvent::type_]
       end
     end
   end
