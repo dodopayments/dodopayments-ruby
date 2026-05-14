@@ -12,24 +12,24 @@ module Dodopayments
       #   @return [String]
       required :subscription_id, String
 
-      # @!attribute body
+      # @!attribute payment_method
       #
-      #   @return [Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::New, Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::Existing]
-      required :body, union: -> { Dodopayments::SubscriptionUpdatePaymentMethodParams::Body }
+      #   @return [Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::PaymentMethod::New, Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::PaymentMethod::Existing]
+      required :payment_method, union: -> { Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod }
 
-      # @!method initialize(subscription_id:, body:, request_options: {})
+      # @!method initialize(subscription_id:, payment_method:, request_options: {})
       #   @param subscription_id [String]
-      #   @param body [Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::New, Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::Existing]
+      #   @param payment_method [Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::PaymentMethod::New, Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::PaymentMethod::Existing]
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 
-      module Body
+      module PaymentMethod
         extend Dodopayments::Internal::Type::Union
 
         discriminator :type
 
-        variant :new, -> { Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New }
+        variant :new, -> { Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::New }
 
-        variant :existing, -> { Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing }
+        variant :existing, -> { Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::Existing }
 
         class New < Dodopayments::Internal::Type::BaseModel
           # @!attribute type
@@ -64,7 +64,7 @@ module Dodopayments
         end
 
         # @!method self.variants
-        #   @return [Array(Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::New, Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::Existing)]
+        #   @return [Array(Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::PaymentMethod::New, Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::PaymentMethod::Existing)]
       end
     end
   end

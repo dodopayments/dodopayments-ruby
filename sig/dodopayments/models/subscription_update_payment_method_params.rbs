@@ -3,7 +3,7 @@ module Dodopayments
     type subscription_update_payment_method_params =
       {
         subscription_id: String,
-        body: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::body
+        payment_method: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::payment_method
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -13,25 +13,25 @@ module Dodopayments
 
       attr_accessor subscription_id: String
 
-      attr_accessor body: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::body
+      attr_accessor payment_method: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::payment_method
 
       def initialize: (
         subscription_id: String,
-        body: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::body,
+        payment_method: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::payment_method,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
       def to_hash: -> {
         subscription_id: String,
-        body: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::body,
+        payment_method: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::payment_method,
         request_options: Dodopayments::RequestOptions
       }
 
-      type body =
-        Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New
-        | Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing
+      type payment_method =
+        Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::New
+        | Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::Existing
 
-      module Body
+      module PaymentMethod
         extend Dodopayments::Internal::Type::Union
 
         type new_ = { type: :new, return_url: String? }
@@ -58,7 +58,7 @@ module Dodopayments
           def to_hash: -> { payment_method_id: String, type: :existing }
         end
 
-        def self?.variants: -> ::Array[Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::body]
+        def self?.variants: -> ::Array[Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::payment_method]
       end
     end
   end

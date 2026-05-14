@@ -183,6 +183,8 @@ module Dodopayments
 
   DiscountDeleteParams = Dodopayments::Models::DiscountDeleteParams
 
+  DiscountDetail = Dodopayments::Models::DiscountDetail
+
   DiscountListParams = Dodopayments::Models::DiscountListParams
 
   DiscountRetrieveByCodeParams =

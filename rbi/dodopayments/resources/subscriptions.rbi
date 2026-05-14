@@ -485,10 +485,10 @@ module Dodopayments
       sig do
         params(
           subscription_id: String,
-          body:
+          payment_method:
             T.any(
-              Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New::OrHash,
-              Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing::OrHash
+              Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::New::OrHash,
+              Dodopayments::SubscriptionUpdatePaymentMethodParams::PaymentMethod::Existing::OrHash
             ),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Models::SubscriptionUpdatePaymentMethodResponse)
@@ -496,7 +496,7 @@ module Dodopayments
       def update_payment_method(
         # Subscription Id
         subscription_id,
-        body:,
+        payment_method:,
         request_options: {}
       )
       end

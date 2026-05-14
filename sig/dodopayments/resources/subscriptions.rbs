@@ -125,7 +125,7 @@ module Dodopayments
 
       def update_payment_method: (
         String subscription_id,
-        body: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::body,
+        payment_method: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::payment_method,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::SubscriptionUpdatePaymentMethodResponse
 
