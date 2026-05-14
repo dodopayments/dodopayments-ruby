@@ -6,14 +6,16 @@ module Dodopayments
     module Price
       extend Dodopayments::Internal::Type::Union
 
+      discriminator :type
+
       # One-time price details.
-      variant -> { Dodopayments::Price::OneTimePrice }
+      variant :one_time_price, -> { Dodopayments::Price::OneTimePrice }
 
       # Recurring price details.
-      variant -> { Dodopayments::Price::RecurringPrice }
+      variant :recurring_price, -> { Dodopayments::Price::RecurringPrice }
 
       # Usage Based price details.
-      variant -> { Dodopayments::Price::UsageBasedPrice }
+      variant :usage_based_price, -> { Dodopayments::Price::UsageBasedPrice }
 
       class OneTimePrice < Dodopayments::Internal::Type::BaseModel
         # @!attribute currency
@@ -47,8 +49,8 @@ module Dodopayments
 
         # @!attribute type
         #
-        #   @return [Symbol, Dodopayments::Models::Price::OneTimePrice::Type]
-        required :type, enum: -> { Dodopayments::Price::OneTimePrice::Type }
+        #   @return [Symbol, :one_time_price]
+        required :type, const: :one_time_price
 
         # @!attribute pay_what_you_want
         #   Indicates whether the customer can pay any amount they choose. If set to `true`,
@@ -71,7 +73,7 @@ module Dodopayments
         #   @return [Boolean, nil]
         optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
-        # @!method initialize(currency:, discount:, price:, purchasing_power_parity:, type:, pay_what_you_want: nil, suggested_price: nil, tax_inclusive: nil)
+        # @!method initialize(currency:, discount:, price:, purchasing_power_parity:, pay_what_you_want: nil, suggested_price: nil, tax_inclusive: nil, type: :one_time_price)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Price::OneTimePrice} for more details.
         #
@@ -85,23 +87,13 @@ module Dodopayments
         #
         #   @param purchasing_power_parity [Boolean] Indicates if purchasing power parity adjustments are applied to the price.
         #
-        #   @param type [Symbol, Dodopayments::Models::Price::OneTimePrice::Type]
-        #
         #   @param pay_what_you_want [Boolean] Indicates whether the customer can pay any amount they choose.
         #
         #   @param suggested_price [Integer, nil] A suggested price for the user to pay. This value is only considered if
         #
         #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive.
-
-        # @see Dodopayments::Models::Price::OneTimePrice#type
-        module Type
-          extend Dodopayments::Internal::Type::Enum
-
-          ONE_TIME_PRICE = :one_time_price
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :one_time_price]
       end
 
       class RecurringPrice < Dodopayments::Internal::Type::BaseModel
@@ -159,8 +151,8 @@ module Dodopayments
 
         # @!attribute type
         #
-        #   @return [Symbol, Dodopayments::Models::Price::RecurringPrice::Type]
-        required :type, enum: -> { Dodopayments::Price::RecurringPrice::Type }
+        #   @return [Symbol, :recurring_price]
+        required :type, const: :recurring_price
 
         # @!attribute tax_inclusive
         #   Indicates if the price is tax inclusive
@@ -174,7 +166,7 @@ module Dodopayments
         #   @return [Integer, nil]
         optional :trial_period_days, Integer
 
-        # @!method initialize(currency:, discount:, payment_frequency_count:, payment_frequency_interval:, price:, purchasing_power_parity:, subscription_period_count:, subscription_period_interval:, type:, tax_inclusive: nil, trial_period_days: nil)
+        # @!method initialize(currency:, discount:, payment_frequency_count:, payment_frequency_interval:, price:, purchasing_power_parity:, subscription_period_count:, subscription_period_interval:, tax_inclusive: nil, trial_period_days: nil, type: :recurring_price)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Price::RecurringPrice} for more details.
         #
@@ -196,21 +188,11 @@ module Dodopayments
         #
         #   @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval] The time interval for the subscription period (e.g., day, month, year).
         #
-        #   @param type [Symbol, Dodopayments::Models::Price::RecurringPrice::Type]
-        #
         #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive
         #
         #   @param trial_period_days [Integer] Number of days for the trial period. A value of `0` indicates no trial period.
-
-        # @see Dodopayments::Models::Price::RecurringPrice#type
-        module Type
-          extend Dodopayments::Internal::Type::Enum
-
-          RECURRING_PRICE = :recurring_price
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :recurring_price]
       end
 
       class UsageBasedPrice < Dodopayments::Internal::Type::BaseModel
@@ -268,8 +250,8 @@ module Dodopayments
 
         # @!attribute type
         #
-        #   @return [Symbol, Dodopayments::Models::Price::UsageBasedPrice::Type]
-        required :type, enum: -> { Dodopayments::Price::UsageBasedPrice::Type }
+        #   @return [Symbol, :usage_based_price]
+        required :type, const: :usage_based_price
 
         # @!attribute meters
         #
@@ -286,7 +268,7 @@ module Dodopayments
         #   @return [Boolean, nil]
         optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
-        # @!method initialize(currency:, discount:, fixed_price:, payment_frequency_count:, payment_frequency_interval:, purchasing_power_parity:, subscription_period_count:, subscription_period_interval:, type:, meters: nil, tax_inclusive: nil)
+        # @!method initialize(currency:, discount:, fixed_price:, payment_frequency_count:, payment_frequency_interval:, purchasing_power_parity:, subscription_period_count:, subscription_period_interval:, meters: nil, tax_inclusive: nil, type: :usage_based_price)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Price::UsageBasedPrice} for more details.
         #
@@ -308,21 +290,11 @@ module Dodopayments
         #
         #   @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval] The time interval for the subscription period (e.g., day, month, year).
         #
-        #   @param type [Symbol, Dodopayments::Models::Price::UsageBasedPrice::Type]
-        #
         #   @param meters [Array<Dodopayments::Models::AddMeterToPrice>, nil]
         #
         #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive
-
-        # @see Dodopayments::Models::Price::UsageBasedPrice#type
-        module Type
-          extend Dodopayments::Internal::Type::Enum
-
-          USAGE_BASED_PRICE = :usage_based_price
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :usage_based_price]
       end
 
       # @!method self.variants

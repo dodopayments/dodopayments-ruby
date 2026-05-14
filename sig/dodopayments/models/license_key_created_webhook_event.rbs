@@ -5,7 +5,7 @@ module Dodopayments
         business_id: String,
         data: Dodopayments::LicenseKey,
         timestamp: Time,
-        type: Dodopayments::Models::LicenseKeyCreatedWebhookEvent::type_
+        type: :"license_key.created"
       }
 
     class LicenseKeyCreatedWebhookEvent < Dodopayments::Internal::Type::BaseModel
@@ -15,31 +15,21 @@ module Dodopayments
 
       attr_accessor timestamp: Time
 
-      attr_accessor type: Dodopayments::Models::LicenseKeyCreatedWebhookEvent::type_
+      attr_accessor type: :"license_key.created"
 
       def initialize: (
         business_id: String,
         data: Dodopayments::LicenseKey,
         timestamp: Time,
-        type: Dodopayments::Models::LicenseKeyCreatedWebhookEvent::type_
+        ?type: :"license_key.created"
       ) -> void
 
       def to_hash: -> {
         business_id: String,
         data: Dodopayments::LicenseKey,
         timestamp: Time,
-        type: Dodopayments::Models::LicenseKeyCreatedWebhookEvent::type_
+        type: :"license_key.created"
       }
-
-      type type_ = :"license_key.created"
-
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        LICENSE_KEY_CREATED: :"license_key.created"
-
-        def self?.values: -> ::Array[Dodopayments::Models::LicenseKeyCreatedWebhookEvent::type_]
-      end
     end
   end
 end

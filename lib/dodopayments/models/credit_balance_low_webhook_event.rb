@@ -24,17 +24,17 @@ module Dodopayments
       # @!attribute type
       #   The event type
       #
-      #   @return [Symbol, Dodopayments::Models::CreditBalanceLowWebhookEvent::Type]
-      required :type, enum: -> { Dodopayments::CreditBalanceLowWebhookEvent::Type }
+      #   @return [Symbol, :"credit.balance_low"]
+      required :type, const: :"credit.balance_low"
 
-      # @!method initialize(business_id:, data:, timestamp:, type:)
+      # @!method initialize(business_id:, data:, timestamp:, type: :"credit.balance_low")
       #   @param business_id [String] The business identifier
       #
       #   @param data [Dodopayments::Models::CreditBalanceLowWebhookEvent::Data] Webhook payload for credit.balance_low event
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
-      #   @param type [Symbol, Dodopayments::Models::CreditBalanceLowWebhookEvent::Type] The event type
+      #   @param type [Symbol, :"credit.balance_low"] The event type
 
       # @see Dodopayments::Models::CreditBalanceLowWebhookEvent#data
       class Data < Dodopayments::Internal::Type::BaseModel
@@ -89,18 +89,6 @@ module Dodopayments
         #   @param subscription_id [String]
         #   @param threshold_amount [String]
         #   @param threshold_percent [Integer]
-      end
-
-      # The event type
-      #
-      # @see Dodopayments::Models::CreditBalanceLowWebhookEvent#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        CREDIT_BALANCE_LOW = :"credit.balance_low"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
       end
     end
   end

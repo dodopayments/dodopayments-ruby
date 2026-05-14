@@ -35,11 +35,7 @@ module Dodopayments
       attr_accessor :timestamp
 
       # The event type
-      sig do
-        returns(
-          Dodopayments::AbandonedCheckoutRecoveredWebhookEvent::Type::TaggedSymbol
-        )
-      end
+      sig { returns(Symbol) }
       attr_accessor :type
 
       sig do
@@ -48,8 +44,7 @@ module Dodopayments
           data:
             Dodopayments::AbandonedCheckoutRecoveredWebhookEvent::Data::OrHash,
           timestamp: Time,
-          type:
-            Dodopayments::AbandonedCheckoutRecoveredWebhookEvent::Type::OrSymbol
+          type: Symbol
         ).returns(T.attached_class)
       end
       def self.new(
@@ -61,7 +56,7 @@ module Dodopayments
         # The timestamp of when the event occurred
         timestamp:,
         # The event type
-        type:
+        type: :"abandoned_checkout.recovered"
       )
       end
 
@@ -71,8 +66,7 @@ module Dodopayments
             business_id: String,
             data: Dodopayments::AbandonedCheckoutRecoveredWebhookEvent::Data,
             timestamp: Time,
-            type:
-              Dodopayments::AbandonedCheckoutRecoveredWebhookEvent::Type::TaggedSymbol
+            type: Symbol
           }
         )
       end
@@ -236,36 +230,6 @@ module Dodopayments
           end
           def self.values
           end
-        end
-      end
-
-      # The event type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(
-              Symbol,
-              Dodopayments::AbandonedCheckoutRecoveredWebhookEvent::Type
-            )
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        ABANDONED_CHECKOUT_RECOVERED =
-          T.let(
-            :"abandoned_checkout.recovered",
-            Dodopayments::AbandonedCheckoutRecoveredWebhookEvent::Type::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Dodopayments::AbandonedCheckoutRecoveredWebhookEvent::Type::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
         end
       end
     end

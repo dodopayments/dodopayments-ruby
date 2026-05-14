@@ -26,9 +26,7 @@ module Dodopayments
       attr_accessor :timestamp
 
       # The event type
-      sig do
-        returns(Dodopayments::DisputeChallengedWebhookEvent::Type::TaggedSymbol)
-      end
+      sig { returns(Symbol) }
       attr_accessor :type
 
       sig do
@@ -36,7 +34,7 @@ module Dodopayments
           business_id: String,
           data: Dodopayments::Dispute::OrHash,
           timestamp: Time,
-          type: Dodopayments::DisputeChallengedWebhookEvent::Type::OrSymbol
+          type: Symbol
         ).returns(T.attached_class)
       end
       def self.new(
@@ -46,7 +44,7 @@ module Dodopayments
         # The timestamp of when the event occurred
         timestamp:,
         # The event type
-        type:
+        type: :"dispute.challenged"
       )
       end
 
@@ -56,39 +54,11 @@ module Dodopayments
             business_id: String,
             data: Dodopayments::Dispute,
             timestamp: Time,
-            type:
-              Dodopayments::DisputeChallengedWebhookEvent::Type::TaggedSymbol
+            type: Symbol
           }
         )
       end
       def to_hash
-      end
-
-      # The event type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, Dodopayments::DisputeChallengedWebhookEvent::Type)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        DISPUTE_CHALLENGED =
-          T.let(
-            :"dispute.challenged",
-            Dodopayments::DisputeChallengedWebhookEvent::Type::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Dodopayments::DisputeChallengedWebhookEvent::Type::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
       end
     end
   end

@@ -5,7 +5,7 @@ module Dodopayments
         business_id: String,
         data: Dodopayments::DunningRecoveredWebhookEvent::Data,
         timestamp: Time,
-        type: Dodopayments::Models::DunningRecoveredWebhookEvent::type_
+        type: :"dunning.recovered"
       }
 
     class DunningRecoveredWebhookEvent < Dodopayments::Internal::Type::BaseModel
@@ -15,20 +15,20 @@ module Dodopayments
 
       attr_accessor timestamp: Time
 
-      attr_accessor type: Dodopayments::Models::DunningRecoveredWebhookEvent::type_
+      attr_accessor type: :"dunning.recovered"
 
       def initialize: (
         business_id: String,
         data: Dodopayments::DunningRecoveredWebhookEvent::Data,
         timestamp: Time,
-        type: Dodopayments::Models::DunningRecoveredWebhookEvent::type_
+        ?type: :"dunning.recovered"
       ) -> void
 
       def to_hash: -> {
         business_id: String,
         data: Dodopayments::DunningRecoveredWebhookEvent::Data,
         timestamp: Time,
-        type: Dodopayments::Models::DunningRecoveredWebhookEvent::type_
+        type: :"dunning.recovered"
       }
 
       type data =
@@ -94,16 +94,6 @@ module Dodopayments
 
           def self?.values: -> ::Array[Dodopayments::Models::DunningRecoveredWebhookEvent::Data::trigger_state]
         end
-      end
-
-      type type_ = :"dunning.recovered"
-
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        DUNNING_RECOVERED: :"dunning.recovered"
-
-        def self?.values: -> ::Array[Dodopayments::Models::DunningRecoveredWebhookEvent::type_]
       end
     end
   end

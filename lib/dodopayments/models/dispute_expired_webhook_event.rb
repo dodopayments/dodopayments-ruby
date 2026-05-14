@@ -23,29 +23,17 @@ module Dodopayments
       # @!attribute type
       #   The event type
       #
-      #   @return [Symbol, Dodopayments::Models::DisputeExpiredWebhookEvent::Type]
-      required :type, enum: -> { Dodopayments::DisputeExpiredWebhookEvent::Type }
+      #   @return [Symbol, :"dispute.expired"]
+      required :type, const: :"dispute.expired"
 
-      # @!method initialize(business_id:, data:, timestamp:, type:)
+      # @!method initialize(business_id:, data:, timestamp:, type: :"dispute.expired")
       #   @param business_id [String] The business identifier
       #
       #   @param data [Dodopayments::Models::Dispute]
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
-      #   @param type [Symbol, Dodopayments::Models::DisputeExpiredWebhookEvent::Type] The event type
-
-      # The event type
-      #
-      # @see Dodopayments::Models::DisputeExpiredWebhookEvent#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        DISPUTE_EXPIRED = :"dispute.expired"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #   @param type [Symbol, :"dispute.expired"] The event type
     end
   end
 end

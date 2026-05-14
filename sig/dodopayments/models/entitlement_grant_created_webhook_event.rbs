@@ -5,7 +5,7 @@ module Dodopayments
         business_id: String,
         data: Dodopayments::Entitlements::EntitlementGrant,
         timestamp: Time,
-        type: Dodopayments::Models::EntitlementGrantCreatedWebhookEvent::type_
+        type: :"entitlement_grant.created"
       }
 
     class EntitlementGrantCreatedWebhookEvent < Dodopayments::Internal::Type::BaseModel
@@ -15,31 +15,21 @@ module Dodopayments
 
       attr_accessor timestamp: Time
 
-      attr_accessor type: Dodopayments::Models::EntitlementGrantCreatedWebhookEvent::type_
+      attr_accessor type: :"entitlement_grant.created"
 
       def initialize: (
         business_id: String,
         data: Dodopayments::Entitlements::EntitlementGrant,
         timestamp: Time,
-        type: Dodopayments::Models::EntitlementGrantCreatedWebhookEvent::type_
+        ?type: :"entitlement_grant.created"
       ) -> void
 
       def to_hash: -> {
         business_id: String,
         data: Dodopayments::Entitlements::EntitlementGrant,
         timestamp: Time,
-        type: Dodopayments::Models::EntitlementGrantCreatedWebhookEvent::type_
+        type: :"entitlement_grant.created"
       }
-
-      type type_ = :"entitlement_grant.created"
-
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        ENTITLEMENT_GRANT_CREATED: :"entitlement_grant.created"
-
-        def self?.values: -> ::Array[Dodopayments::Models::EntitlementGrantCreatedWebhookEvent::type_]
-      end
     end
   end
 end

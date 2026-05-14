@@ -51,11 +51,16 @@ module Dodopayments
         module LineItem
           extend Dodopayments::Internal::Type::Union
 
-          variant -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription }
+          discriminator :type
 
-          variant -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon }
+          variant :subscription,
+                  -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription }
 
-          variant -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter }
+          variant :addon,
+                  -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon }
+
+          variant :meter,
+                  -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter }
 
           class Subscription < Dodopayments::Internal::Type::BaseModel
             # @!attribute id
@@ -90,9 +95,8 @@ module Dodopayments
 
             # @!attribute type
             #
-            #   @return [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type]
-            required :type,
-                     enum: -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type }
+            #   @return [Symbol, :subscription]
+            required :type, const: :subscription
 
             # @!attribute unit_price
             #
@@ -119,29 +123,19 @@ module Dodopayments
             #   @return [Float, nil]
             optional :tax_rate, Float, nil?: true
 
-            # @!method initialize(id:, currency:, product_id:, proration_factor:, quantity:, tax_inclusive:, type:, unit_price:, description: nil, name: nil, tax: nil, tax_rate: nil)
+            # @!method initialize(id:, currency:, product_id:, proration_factor:, quantity:, tax_inclusive:, unit_price:, description: nil, name: nil, tax: nil, tax_rate: nil, type: :subscription)
             #   @param id [String]
             #   @param currency [Symbol, Dodopayments::Models::Currency]
             #   @param product_id [String]
             #   @param proration_factor [Float]
             #   @param quantity [Integer]
             #   @param tax_inclusive [Boolean]
-            #   @param type [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription::Type]
             #   @param unit_price [Integer]
             #   @param description [String, nil]
             #   @param name [String, nil]
             #   @param tax [Integer, nil]
             #   @param tax_rate [Float, nil]
-
-            # @see Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Subscription#type
-            module Type
-              extend Dodopayments::Internal::Type::Enum
-
-              SUBSCRIPTION = :subscription
-
-              # @!method self.values
-              #   @return [Array<Symbol>]
-            end
+            #   @param type [Symbol, :subscription]
           end
 
           class Addon < Dodopayments::Internal::Type::BaseModel
@@ -189,9 +183,8 @@ module Dodopayments
 
             # @!attribute type
             #
-            #   @return [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type]
-            required :type,
-                     enum: -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type }
+            #   @return [Symbol, :addon]
+            required :type, const: :addon
 
             # @!attribute unit_price
             #
@@ -208,7 +201,7 @@ module Dodopayments
             #   @return [Integer, nil]
             optional :tax, Integer, nil?: true
 
-            # @!method initialize(id:, currency:, name:, proration_factor:, quantity:, tax_category:, tax_inclusive:, tax_rate:, type:, unit_price:, description: nil, tax: nil)
+            # @!method initialize(id:, currency:, name:, proration_factor:, quantity:, tax_category:, tax_inclusive:, tax_rate:, unit_price:, description: nil, tax: nil, type: :addon)
             #   Some parameter documentations has been truncated, see
             #   {Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon}
             #   for more details.
@@ -229,23 +222,13 @@ module Dodopayments
             #
             #   @param tax_rate [Float]
             #
-            #   @param type [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon::Type]
-            #
             #   @param unit_price [Integer]
             #
             #   @param description [String, nil]
             #
             #   @param tax [Integer, nil]
-
-            # @see Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Addon#type
-            module Type
-              extend Dodopayments::Internal::Type::Enum
-
-              ADDON = :addon
-
-              # @!method self.values
-              #   @return [Array<Symbol>]
-            end
+            #
+            #   @param type [Symbol, :addon]
           end
 
           class Meter < Dodopayments::Internal::Type::BaseModel
@@ -296,9 +279,8 @@ module Dodopayments
 
             # @!attribute type
             #
-            #   @return [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type]
-            required :type,
-                     enum: -> { Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type }
+            #   @return [Symbol, :meter]
+            required :type, const: :meter
 
             # @!attribute units_consumed
             #
@@ -315,7 +297,7 @@ module Dodopayments
             #   @return [Integer, nil]
             optional :tax, Integer, nil?: true
 
-            # @!method initialize(id:, chargeable_units:, currency:, free_threshold:, name:, price_per_unit:, subtotal:, tax_inclusive:, tax_rate:, type:, units_consumed:, description: nil, tax: nil)
+            # @!method initialize(id:, chargeable_units:, currency:, free_threshold:, name:, price_per_unit:, subtotal:, tax_inclusive:, tax_rate:, units_consumed:, description: nil, tax: nil, type: :meter)
             #   @param id [String]
             #   @param chargeable_units [String]
             #   @param currency [Symbol, Dodopayments::Models::Currency]
@@ -325,20 +307,10 @@ module Dodopayments
             #   @param subtotal [Integer]
             #   @param tax_inclusive [Boolean]
             #   @param tax_rate [Float]
-            #   @param type [Symbol, Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter::Type]
             #   @param units_consumed [String]
             #   @param description [String, nil]
             #   @param tax [Integer, nil]
-
-            # @see Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::LineItem::Meter#type
-            module Type
-              extend Dodopayments::Internal::Type::Enum
-
-              METER = :meter
-
-              # @!method self.values
-              #   @return [Array<Symbol>]
-            end
+            #   @param type [Symbol, :meter]
           end
 
           # @!method self.variants

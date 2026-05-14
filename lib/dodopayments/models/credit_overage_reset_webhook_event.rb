@@ -24,29 +24,17 @@ module Dodopayments
       # @!attribute type
       #   The event type
       #
-      #   @return [Symbol, Dodopayments::Models::CreditOverageResetWebhookEvent::Type]
-      required :type, enum: -> { Dodopayments::CreditOverageResetWebhookEvent::Type }
+      #   @return [Symbol, :"credit.overage_reset"]
+      required :type, const: :"credit.overage_reset"
 
-      # @!method initialize(business_id:, data:, timestamp:, type:)
+      # @!method initialize(business_id:, data:, timestamp:, type: :"credit.overage_reset")
       #   @param business_id [String] The business identifier
       #
       #   @param data [Dodopayments::Models::CreditEntitlements::CreditLedgerEntry] Response for a ledger entry
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
-      #   @param type [Symbol, Dodopayments::Models::CreditOverageResetWebhookEvent::Type] The event type
-
-      # The event type
-      #
-      # @see Dodopayments::Models::CreditOverageResetWebhookEvent#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        CREDIT_OVERAGE_RESET = :"credit.overage_reset"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #   @param type [Symbol, :"credit.overage_reset"] The event type
     end
   end
 end

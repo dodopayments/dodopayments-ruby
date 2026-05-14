@@ -25,10 +25,10 @@ module Dodopayments
       # @!attribute type
       #   The event type
       #
-      #   @return [Symbol, Dodopayments::Models::EntitlementGrantRevokedWebhookEvent::Type]
-      required :type, enum: -> { Dodopayments::EntitlementGrantRevokedWebhookEvent::Type }
+      #   @return [Symbol, :"entitlement_grant.revoked"]
+      required :type, const: :"entitlement_grant.revoked"
 
-      # @!method initialize(business_id:, data:, timestamp:, type:)
+      # @!method initialize(business_id:, data:, timestamp:, type: :"entitlement_grant.revoked")
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::EntitlementGrantRevokedWebhookEvent} for more details.
       #
@@ -38,19 +38,7 @@ module Dodopayments
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
-      #   @param type [Symbol, Dodopayments::Models::EntitlementGrantRevokedWebhookEvent::Type] The event type
-
-      # The event type
-      #
-      # @see Dodopayments::Models::EntitlementGrantRevokedWebhookEvent#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        ENTITLEMENT_GRANT_REVOKED = :"entitlement_grant.revoked"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #   @param type [Symbol, :"entitlement_grant.revoked"] The event type
     end
   end
 end

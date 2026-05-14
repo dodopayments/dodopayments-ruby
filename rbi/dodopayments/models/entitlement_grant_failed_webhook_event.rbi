@@ -30,11 +30,7 @@ module Dodopayments
       attr_accessor :timestamp
 
       # The event type
-      sig do
-        returns(
-          Dodopayments::EntitlementGrantFailedWebhookEvent::Type::TaggedSymbol
-        )
-      end
+      sig { returns(Symbol) }
       attr_accessor :type
 
       sig do
@@ -42,7 +38,7 @@ module Dodopayments
           business_id: String,
           data: Dodopayments::Entitlements::EntitlementGrant::OrHash,
           timestamp: Time,
-          type: Dodopayments::EntitlementGrantFailedWebhookEvent::Type::OrSymbol
+          type: Symbol
         ).returns(T.attached_class)
       end
       def self.new(
@@ -54,7 +50,7 @@ module Dodopayments
         # The timestamp of when the event occurred
         timestamp:,
         # The event type
-        type:
+        type: :"entitlement_grant.failed"
       )
       end
 
@@ -64,42 +60,11 @@ module Dodopayments
             business_id: String,
             data: Dodopayments::Entitlements::EntitlementGrant,
             timestamp: Time,
-            type:
-              Dodopayments::EntitlementGrantFailedWebhookEvent::Type::TaggedSymbol
+            type: Symbol
           }
         )
       end
       def to_hash
-      end
-
-      # The event type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(
-              Symbol,
-              Dodopayments::EntitlementGrantFailedWebhookEvent::Type
-            )
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        ENTITLEMENT_GRANT_FAILED =
-          T.let(
-            :"entitlement_grant.failed",
-            Dodopayments::EntitlementGrantFailedWebhookEvent::Type::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Dodopayments::EntitlementGrantFailedWebhookEvent::Type::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
       end
     end
   end

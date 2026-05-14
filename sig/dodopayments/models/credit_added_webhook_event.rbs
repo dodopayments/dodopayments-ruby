@@ -5,7 +5,7 @@ module Dodopayments
         business_id: String,
         data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
         timestamp: Time,
-        type: Dodopayments::Models::CreditAddedWebhookEvent::type_
+        type: :"credit.added"
       }
 
     class CreditAddedWebhookEvent < Dodopayments::Internal::Type::BaseModel
@@ -15,31 +15,21 @@ module Dodopayments
 
       attr_accessor timestamp: Time
 
-      attr_accessor type: Dodopayments::Models::CreditAddedWebhookEvent::type_
+      attr_accessor type: :"credit.added"
 
       def initialize: (
         business_id: String,
         data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
         timestamp: Time,
-        type: Dodopayments::Models::CreditAddedWebhookEvent::type_
+        ?type: :"credit.added"
       ) -> void
 
       def to_hash: -> {
         business_id: String,
         data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
         timestamp: Time,
-        type: Dodopayments::Models::CreditAddedWebhookEvent::type_
+        type: :"credit.added"
       }
-
-      type type_ = :"credit.added"
-
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        CREDIT_ADDED: :"credit.added"
-
-        def self?.values: -> ::Array[Dodopayments::Models::CreditAddedWebhookEvent::type_]
-      end
     end
   end
 end

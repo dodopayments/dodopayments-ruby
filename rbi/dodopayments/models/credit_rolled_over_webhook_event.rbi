@@ -31,9 +31,7 @@ module Dodopayments
       attr_accessor :timestamp
 
       # The event type
-      sig do
-        returns(Dodopayments::CreditRolledOverWebhookEvent::Type::TaggedSymbol)
-      end
+      sig { returns(Symbol) }
       attr_accessor :type
 
       sig do
@@ -41,7 +39,7 @@ module Dodopayments
           business_id: String,
           data: Dodopayments::CreditEntitlements::CreditLedgerEntry::OrHash,
           timestamp: Time,
-          type: Dodopayments::CreditRolledOverWebhookEvent::Type::OrSymbol
+          type: Symbol
         ).returns(T.attached_class)
       end
       def self.new(
@@ -52,7 +50,7 @@ module Dodopayments
         # The timestamp of when the event occurred
         timestamp:,
         # The event type
-        type:
+        type: :"credit.rolled_over"
       )
       end
 
@@ -62,38 +60,11 @@ module Dodopayments
             business_id: String,
             data: Dodopayments::CreditEntitlements::CreditLedgerEntry,
             timestamp: Time,
-            type: Dodopayments::CreditRolledOverWebhookEvent::Type::TaggedSymbol
+            type: Symbol
           }
         )
       end
       def to_hash
-      end
-
-      # The event type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, Dodopayments::CreditRolledOverWebhookEvent::Type)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        CREDIT_ROLLED_OVER =
-          T.let(
-            :"credit.rolled_over",
-            Dodopayments::CreditRolledOverWebhookEvent::Type::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Dodopayments::CreditRolledOverWebhookEvent::Type::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
       end
     end
   end

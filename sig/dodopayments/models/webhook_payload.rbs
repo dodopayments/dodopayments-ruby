@@ -46,190 +46,76 @@ module Dodopayments
       module Data
         extend Dodopayments::Internal::Type::Union
 
-        type payment =
-          {
-            payload_type: Dodopayments::Models::WebhookPayload::Data::Payment::payload_type
-          }
+        type payment = { payload_type: :Payment }
 
         class Payment < Dodopayments::Models::Payment
-          def payload_type: -> Dodopayments::Models::WebhookPayload::Data::Payment::payload_type
+          def payload_type: -> :Payment
 
-          def payload_type=: (
-            Dodopayments::Models::WebhookPayload::Data::Payment::payload_type _
-          ) -> Dodopayments::Models::WebhookPayload::Data::Payment::payload_type
+          def payload_type=: (:Payment _) -> :Payment
 
-          def initialize: (
-            payload_type: Dodopayments::Models::WebhookPayload::Data::Payment::payload_type
-          ) -> void
+          def initialize: (?payload_type: :Payment) -> void
 
-          def to_hash: -> {
-            payload_type: Dodopayments::Models::WebhookPayload::Data::Payment::payload_type
-          }
-
-          type payload_type = :Payment
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            PAYMENT: :Payment
-
-            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::Payment::payload_type]
-          end
+          def to_hash: -> { payload_type: :Payment }
         end
 
-        type subscription =
-          {
-            payload_type: Dodopayments::Models::WebhookPayload::Data::Subscription::payload_type
-          }
+        type subscription = { payload_type: :Subscription }
 
         class Subscription < Dodopayments::Models::Subscription
-          def payload_type: -> Dodopayments::Models::WebhookPayload::Data::Subscription::payload_type
+          def payload_type: -> :Subscription
 
-          def payload_type=: (
-            Dodopayments::Models::WebhookPayload::Data::Subscription::payload_type _
-          ) -> Dodopayments::Models::WebhookPayload::Data::Subscription::payload_type
+          def payload_type=: (:Subscription _) -> :Subscription
 
-          def initialize: (
-            payload_type: Dodopayments::Models::WebhookPayload::Data::Subscription::payload_type
-          ) -> void
+          def initialize: (?payload_type: :Subscription) -> void
 
-          def to_hash: -> {
-            payload_type: Dodopayments::Models::WebhookPayload::Data::Subscription::payload_type
-          }
-
-          type payload_type = :Subscription
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            SUBSCRIPTION: :Subscription
-
-            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::Subscription::payload_type]
-          end
+          def to_hash: -> { payload_type: :Subscription }
         end
 
-        type refund =
-          {
-            payload_type: Dodopayments::Models::WebhookPayload::Data::Refund::payload_type
-          }
+        type refund = { payload_type: :Refund }
 
         class Refund < Dodopayments::Models::Refund
-          def payload_type: -> Dodopayments::Models::WebhookPayload::Data::Refund::payload_type
+          def payload_type: -> :Refund
 
-          def payload_type=: (
-            Dodopayments::Models::WebhookPayload::Data::Refund::payload_type _
-          ) -> Dodopayments::Models::WebhookPayload::Data::Refund::payload_type
+          def payload_type=: (:Refund _) -> :Refund
 
-          def initialize: (
-            payload_type: Dodopayments::Models::WebhookPayload::Data::Refund::payload_type
-          ) -> void
+          def initialize: (?payload_type: :Refund) -> void
 
-          def to_hash: -> {
-            payload_type: Dodopayments::Models::WebhookPayload::Data::Refund::payload_type
-          }
-
-          type payload_type = :Refund
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            REFUND: :Refund
-
-            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::Refund::payload_type]
-          end
+          def to_hash: -> { payload_type: :Refund }
         end
 
-        type dispute =
-          {
-            payload_type: Dodopayments::Models::WebhookPayload::Data::Dispute::payload_type
-          }
+        type dispute = { payload_type: :Dispute }
 
         class Dispute < Dodopayments::Models::GetDispute
-          def payload_type: -> Dodopayments::Models::WebhookPayload::Data::Dispute::payload_type
+          def payload_type: -> :Dispute
 
-          def payload_type=: (
-            Dodopayments::Models::WebhookPayload::Data::Dispute::payload_type _
-          ) -> Dodopayments::Models::WebhookPayload::Data::Dispute::payload_type
+          def payload_type=: (:Dispute _) -> :Dispute
 
-          def initialize: (
-            payload_type: Dodopayments::Models::WebhookPayload::Data::Dispute::payload_type
-          ) -> void
+          def initialize: (?payload_type: :Dispute) -> void
 
-          def to_hash: -> {
-            payload_type: Dodopayments::Models::WebhookPayload::Data::Dispute::payload_type
-          }
-
-          type payload_type = :Dispute
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            DISPUTE: :Dispute
-
-            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::Dispute::payload_type]
-          end
+          def to_hash: -> { payload_type: :Dispute }
         end
 
-        type license_key =
-          {
-            payload_type: Dodopayments::Models::WebhookPayload::Data::LicenseKey::payload_type
-          }
+        type license_key = { payload_type: :LicenseKey }
 
         class LicenseKey < Dodopayments::Models::LicenseKey
-          def payload_type: -> Dodopayments::Models::WebhookPayload::Data::LicenseKey::payload_type
+          def payload_type: -> :LicenseKey
 
-          def payload_type=: (
-            Dodopayments::Models::WebhookPayload::Data::LicenseKey::payload_type _
-          ) -> Dodopayments::Models::WebhookPayload::Data::LicenseKey::payload_type
+          def payload_type=: (:LicenseKey _) -> :LicenseKey
 
-          def initialize: (
-            payload_type: Dodopayments::Models::WebhookPayload::Data::LicenseKey::payload_type
-          ) -> void
+          def initialize: (?payload_type: :LicenseKey) -> void
 
-          def to_hash: -> {
-            payload_type: Dodopayments::Models::WebhookPayload::Data::LicenseKey::payload_type
-          }
-
-          type payload_type = :LicenseKey
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            LICENSE_KEY: :LicenseKey
-
-            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::LicenseKey::payload_type]
-          end
+          def to_hash: -> { payload_type: :LicenseKey }
         end
 
-        type credit_ledger_entry =
-          {
-            payload_type: Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::payload_type
-          }
+        type credit_ledger_entry = { payload_type: :CreditLedgerEntry }
 
         class CreditLedgerEntry < Dodopayments::Models::CreditEntitlements::CreditLedgerEntry
-          def payload_type: -> Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::payload_type
+          def payload_type: -> :CreditLedgerEntry
 
-          def payload_type=: (
-            Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::payload_type _
-          ) -> Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::payload_type
+          def payload_type=: (:CreditLedgerEntry _) -> :CreditLedgerEntry
 
-          def initialize: (
-            payload_type: Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::payload_type
-          ) -> void
+          def initialize: (?payload_type: :CreditLedgerEntry) -> void
 
-          def to_hash: -> {
-            payload_type: Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::payload_type
-          }
-
-          type payload_type = :CreditLedgerEntry
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            CREDIT_LEDGER_ENTRY: :CreditLedgerEntry
-
-            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::payload_type]
-          end
+          def to_hash: -> { payload_type: :CreditLedgerEntry }
         end
 
         type credit_balance_low =
@@ -238,7 +124,7 @@ module Dodopayments
             credit_entitlement_id: String,
             credit_entitlement_name: String,
             customer_id: String,
-            payload_type: Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow::payload_type,
+            payload_type: :CreditBalanceLow,
             subscription_credits_amount: String,
             subscription_id: String,
             threshold_amount: String,
@@ -254,7 +140,7 @@ module Dodopayments
 
           attr_accessor customer_id: String
 
-          attr_accessor payload_type: Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow::payload_type
+          attr_accessor payload_type: :CreditBalanceLow
 
           attr_accessor subscription_credits_amount: String
 
@@ -269,11 +155,11 @@ module Dodopayments
             credit_entitlement_id: String,
             credit_entitlement_name: String,
             customer_id: String,
-            payload_type: Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow::payload_type,
             subscription_credits_amount: String,
             subscription_id: String,
             threshold_amount: String,
-            threshold_percent: Integer
+            threshold_percent: Integer,
+            ?payload_type: :CreditBalanceLow
           ) -> void
 
           def to_hash: -> {
@@ -281,22 +167,12 @@ module Dodopayments
             credit_entitlement_id: String,
             credit_entitlement_name: String,
             customer_id: String,
-            payload_type: Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow::payload_type,
+            payload_type: :CreditBalanceLow,
             subscription_credits_amount: String,
             subscription_id: String,
             threshold_amount: String,
             threshold_percent: Integer
           }
-
-          type payload_type = :CreditBalanceLow
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            CREDIT_BALANCE_LOW: :CreditBalanceLow
-
-            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow::payload_type]
-          end
         end
 
         type abandoned_checkout =
@@ -304,7 +180,7 @@ module Dodopayments
             abandoned_at: Time,
             abandonment_reason: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::abandonment_reason,
             customer_id: String,
-            payload_type: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::payload_type,
+            payload_type: :AbandonedCheckout,
             payment_id: String,
             status: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::status,
             recovered_payment_id: String?
@@ -317,7 +193,7 @@ module Dodopayments
 
           attr_accessor customer_id: String
 
-          attr_accessor payload_type: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::payload_type
+          attr_accessor payload_type: :AbandonedCheckout
 
           attr_accessor payment_id: String
 
@@ -329,17 +205,17 @@ module Dodopayments
             abandoned_at: Time,
             abandonment_reason: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::abandonment_reason,
             customer_id: String,
-            payload_type: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::payload_type,
             payment_id: String,
             status: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::status,
-            ?recovered_payment_id: String?
+            ?recovered_payment_id: String?,
+            ?payload_type: :AbandonedCheckout
           ) -> void
 
           def to_hash: -> {
             abandoned_at: Time,
             abandonment_reason: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::abandonment_reason,
             customer_id: String,
-            payload_type: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::payload_type,
+            payload_type: :AbandonedCheckout,
             payment_id: String,
             status: Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::status,
             recovered_payment_id: String?
@@ -354,16 +230,6 @@ module Dodopayments
             CHECKOUT_INCOMPLETE: :checkout_incomplete
 
             def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::abandonment_reason]
-          end
-
-          type payload_type = :AbandonedCheckout
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            ABANDONED_CHECKOUT: :AbandonedCheckout
-
-            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::payload_type]
           end
 
           type status =
@@ -386,7 +252,7 @@ module Dodopayments
           {
             created_at: Time,
             customer_id: String,
-            payload_type: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::payload_type,
+            payload_type: :DunningAttempt,
             status: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::status,
             subscription_id: String,
             trigger_state: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::trigger_state,
@@ -398,7 +264,7 @@ module Dodopayments
 
           attr_accessor customer_id: String
 
-          attr_accessor payload_type: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::payload_type
+          attr_accessor payload_type: :DunningAttempt
 
           attr_accessor status: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::status
 
@@ -411,32 +277,22 @@ module Dodopayments
           def initialize: (
             created_at: Time,
             customer_id: String,
-            payload_type: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::payload_type,
             status: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::status,
             subscription_id: String,
             trigger_state: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::trigger_state,
-            ?payment_id: String?
+            ?payment_id: String?,
+            ?payload_type: :DunningAttempt
           ) -> void
 
           def to_hash: -> {
             created_at: Time,
             customer_id: String,
-            payload_type: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::payload_type,
+            payload_type: :DunningAttempt,
             status: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::status,
             subscription_id: String,
             trigger_state: Dodopayments::Models::WebhookPayload::Data::DunningAttempt::trigger_state,
             payment_id: String?
           }
-
-          type payload_type = :DunningAttempt
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            DUNNING_ATTEMPT: :DunningAttempt
-
-            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::DunningAttempt::payload_type]
-          end
 
           type status = :recovering | :recovered | :exhausted
 
@@ -462,35 +318,16 @@ module Dodopayments
           end
         end
 
-        type entitlement_grant =
-          {
-            payload_type: Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::payload_type
-          }
+        type entitlement_grant = { payload_type: :EntitlementGrant }
 
         class EntitlementGrant < Dodopayments::Models::Entitlements::EntitlementGrant
-          def payload_type: -> Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::payload_type
+          def payload_type: -> :EntitlementGrant
 
-          def payload_type=: (
-            Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::payload_type _
-          ) -> Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::payload_type
+          def payload_type=: (:EntitlementGrant _) -> :EntitlementGrant
 
-          def initialize: (
-            payload_type: Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::payload_type
-          ) -> void
+          def initialize: (?payload_type: :EntitlementGrant) -> void
 
-          def to_hash: -> {
-            payload_type: Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::payload_type
-          }
-
-          type payload_type = :EntitlementGrant
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            ENTITLEMENT_GRANT: :EntitlementGrant
-
-            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::payload_type]
-          end
+          def to_hash: -> { payload_type: :EntitlementGrant }
         end
 
         def self?.variants: -> ::Array[Dodopayments::Models::WebhookPayload::data]

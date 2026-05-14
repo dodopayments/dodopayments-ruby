@@ -24,29 +24,17 @@ module Dodopayments
       # @!attribute type
       #   The event type
       #
-      #   @return [Symbol, Dodopayments::Models::CreditDeductedWebhookEvent::Type]
-      required :type, enum: -> { Dodopayments::CreditDeductedWebhookEvent::Type }
+      #   @return [Symbol, :"credit.deducted"]
+      required :type, const: :"credit.deducted"
 
-      # @!method initialize(business_id:, data:, timestamp:, type:)
+      # @!method initialize(business_id:, data:, timestamp:, type: :"credit.deducted")
       #   @param business_id [String] The business identifier
       #
       #   @param data [Dodopayments::Models::CreditEntitlements::CreditLedgerEntry] Response for a ledger entry
       #
       #   @param timestamp [Time] The timestamp of when the event occurred
       #
-      #   @param type [Symbol, Dodopayments::Models::CreditDeductedWebhookEvent::Type] The event type
-
-      # The event type
-      #
-      # @see Dodopayments::Models::CreditDeductedWebhookEvent#type
-      module Type
-        extend Dodopayments::Internal::Type::Enum
-
-        CREDIT_DEDUCTED = :"credit.deducted"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #   @param type [Symbol, :"credit.deducted"] The event type
     end
   end
 end

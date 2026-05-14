@@ -45,146 +45,94 @@ module Dodopayments
       module Data
         extend Dodopayments::Internal::Type::Union
 
-        variant -> { Dodopayments::WebhookPayload::Data::Payment }
+        discriminator :payload_type
+
+        variant :Payment, -> { Dodopayments::WebhookPayload::Data::Payment }
 
         # Response struct representing subscription details
-        variant -> { Dodopayments::WebhookPayload::Data::Subscription }
+        variant :Subscription, -> { Dodopayments::WebhookPayload::Data::Subscription }
 
-        variant -> { Dodopayments::WebhookPayload::Data::Refund }
+        variant :Refund, -> { Dodopayments::WebhookPayload::Data::Refund }
 
-        variant -> { Dodopayments::WebhookPayload::Data::Dispute }
+        variant :Dispute, -> { Dodopayments::WebhookPayload::Data::Dispute }
 
-        variant -> { Dodopayments::WebhookPayload::Data::LicenseKey }
+        variant :LicenseKey, -> { Dodopayments::WebhookPayload::Data::LicenseKey }
 
         # Response for a ledger entry
-        variant -> { Dodopayments::WebhookPayload::Data::CreditLedgerEntry }
+        variant :CreditLedgerEntry, -> { Dodopayments::WebhookPayload::Data::CreditLedgerEntry }
 
-        variant -> { Dodopayments::WebhookPayload::Data::CreditBalanceLow }
+        variant :CreditBalanceLow, -> { Dodopayments::WebhookPayload::Data::CreditBalanceLow }
 
-        variant -> { Dodopayments::WebhookPayload::Data::AbandonedCheckout }
+        variant :AbandonedCheckout, -> { Dodopayments::WebhookPayload::Data::AbandonedCheckout }
 
-        variant -> { Dodopayments::WebhookPayload::Data::DunningAttempt }
+        variant :DunningAttempt, -> { Dodopayments::WebhookPayload::Data::DunningAttempt }
 
         # Detailed view of a single entitlement grant: who it's for, its
         # lifecycle state, and any integration-specific delivery payload.
-        variant -> { Dodopayments::WebhookPayload::Data::EntitlementGrant }
+        variant :EntitlementGrant, -> { Dodopayments::WebhookPayload::Data::EntitlementGrant }
 
         class Payment < Dodopayments::Models::Payment
           # @!attribute payload_type
           #
-          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::Payment::PayloadType]
-          required :payload_type, enum: -> { Dodopayments::WebhookPayload::Data::Payment::PayloadType }
+          #   @return [Symbol, :Payment]
+          required :payload_type, const: :Payment
 
-          # @!method initialize(payload_type:)
-          #   @param payload_type [Symbol, Dodopayments::Models::WebhookPayload::Data::Payment::PayloadType]
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            PAYMENT = :Payment
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          # @!method initialize(payload_type: :Payment)
+          #   @param payload_type [Symbol, :Payment]
         end
 
         class Subscription < Dodopayments::Models::Subscription
           # @!attribute payload_type
           #
-          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::Subscription::PayloadType]
-          required :payload_type, enum: -> { Dodopayments::WebhookPayload::Data::Subscription::PayloadType }
+          #   @return [Symbol, :Subscription]
+          required :payload_type, const: :Subscription
 
-          # @!method initialize(payload_type:)
+          # @!method initialize(payload_type: :Subscription)
           #   Response struct representing subscription details
           #
-          #   @param payload_type [Symbol, Dodopayments::Models::WebhookPayload::Data::Subscription::PayloadType]
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            SUBSCRIPTION = :Subscription
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param payload_type [Symbol, :Subscription]
         end
 
         class Refund < Dodopayments::Models::Refund
           # @!attribute payload_type
           #
-          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::Refund::PayloadType]
-          required :payload_type, enum: -> { Dodopayments::WebhookPayload::Data::Refund::PayloadType }
+          #   @return [Symbol, :Refund]
+          required :payload_type, const: :Refund
 
-          # @!method initialize(payload_type:)
-          #   @param payload_type [Symbol, Dodopayments::Models::WebhookPayload::Data::Refund::PayloadType]
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            REFUND = :Refund
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          # @!method initialize(payload_type: :Refund)
+          #   @param payload_type [Symbol, :Refund]
         end
 
         class Dispute < Dodopayments::Models::GetDispute
           # @!attribute payload_type
           #
-          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::Dispute::PayloadType]
-          required :payload_type, enum: -> { Dodopayments::WebhookPayload::Data::Dispute::PayloadType }
+          #   @return [Symbol, :Dispute]
+          required :payload_type, const: :Dispute
 
-          # @!method initialize(payload_type:)
-          #   @param payload_type [Symbol, Dodopayments::Models::WebhookPayload::Data::Dispute::PayloadType]
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            DISPUTE = :Dispute
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          # @!method initialize(payload_type: :Dispute)
+          #   @param payload_type [Symbol, :Dispute]
         end
 
         class LicenseKey < Dodopayments::Models::LicenseKey
           # @!attribute payload_type
           #
-          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::LicenseKey::PayloadType]
-          required :payload_type, enum: -> { Dodopayments::WebhookPayload::Data::LicenseKey::PayloadType }
+          #   @return [Symbol, :LicenseKey]
+          required :payload_type, const: :LicenseKey
 
-          # @!method initialize(payload_type:)
-          #   @param payload_type [Symbol, Dodopayments::Models::WebhookPayload::Data::LicenseKey::PayloadType]
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            LICENSE_KEY = :LicenseKey
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          # @!method initialize(payload_type: :LicenseKey)
+          #   @param payload_type [Symbol, :LicenseKey]
         end
 
         class CreditLedgerEntry < Dodopayments::Models::CreditEntitlements::CreditLedgerEntry
           # @!attribute payload_type
           #
-          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::PayloadType]
-          required :payload_type, enum: -> { Dodopayments::WebhookPayload::Data::CreditLedgerEntry::PayloadType }
+          #   @return [Symbol, :CreditLedgerEntry]
+          required :payload_type, const: :CreditLedgerEntry
 
-          # @!method initialize(payload_type:)
+          # @!method initialize(payload_type: :CreditLedgerEntry)
           #   Response for a ledger entry
           #
-          #   @param payload_type [Symbol, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry::PayloadType]
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            CREDIT_LEDGER_ENTRY = :CreditLedgerEntry
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param payload_type [Symbol, :CreditLedgerEntry]
         end
 
         class CreditBalanceLow < Dodopayments::Internal::Type::BaseModel
@@ -210,8 +158,8 @@ module Dodopayments
 
           # @!attribute payload_type
           #
-          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow::PayloadType]
-          required :payload_type, enum: -> { Dodopayments::WebhookPayload::Data::CreditBalanceLow::PayloadType }
+          #   @return [Symbol, :CreditBalanceLow]
+          required :payload_type, const: :CreditBalanceLow
 
           # @!attribute subscription_credits_amount
           #
@@ -233,26 +181,16 @@ module Dodopayments
           #   @return [Integer]
           required :threshold_percent, Integer
 
-          # @!method initialize(available_balance:, credit_entitlement_id:, credit_entitlement_name:, customer_id:, payload_type:, subscription_credits_amount:, subscription_id:, threshold_amount:, threshold_percent:)
+          # @!method initialize(available_balance:, credit_entitlement_id:, credit_entitlement_name:, customer_id:, subscription_credits_amount:, subscription_id:, threshold_amount:, threshold_percent:, payload_type: :CreditBalanceLow)
           #   @param available_balance [String]
           #   @param credit_entitlement_id [String]
           #   @param credit_entitlement_name [String]
           #   @param customer_id [String]
-          #   @param payload_type [Symbol, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow::PayloadType]
           #   @param subscription_credits_amount [String]
           #   @param subscription_id [String]
           #   @param threshold_amount [String]
           #   @param threshold_percent [Integer]
-
-          # @see Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow#payload_type
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            CREDIT_BALANCE_LOW = :CreditBalanceLow
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param payload_type [Symbol, :CreditBalanceLow]
         end
 
         class AbandonedCheckout < Dodopayments::Internal::Type::BaseModel
@@ -274,8 +212,8 @@ module Dodopayments
 
           # @!attribute payload_type
           #
-          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::PayloadType]
-          required :payload_type, enum: -> { Dodopayments::WebhookPayload::Data::AbandonedCheckout::PayloadType }
+          #   @return [Symbol, :AbandonedCheckout]
+          required :payload_type, const: :AbandonedCheckout
 
           # @!attribute payment_id
           #
@@ -292,14 +230,14 @@ module Dodopayments
           #   @return [String, nil]
           optional :recovered_payment_id, String, nil?: true
 
-          # @!method initialize(abandoned_at:, abandonment_reason:, customer_id:, payload_type:, payment_id:, status:, recovered_payment_id: nil)
+          # @!method initialize(abandoned_at:, abandonment_reason:, customer_id:, payment_id:, status:, recovered_payment_id: nil, payload_type: :AbandonedCheckout)
           #   @param abandoned_at [Time]
           #   @param abandonment_reason [Symbol, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::AbandonmentReason]
           #   @param customer_id [String]
-          #   @param payload_type [Symbol, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::PayloadType]
           #   @param payment_id [String]
           #   @param status [Symbol, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::Status]
           #   @param recovered_payment_id [String, nil]
+          #   @param payload_type [Symbol, :AbandonedCheckout]
 
           # @see Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout#abandonment_reason
           module AbandonmentReason
@@ -307,16 +245,6 @@ module Dodopayments
 
             PAYMENT_FAILED = :payment_failed
             CHECKOUT_INCOMPLETE = :checkout_incomplete
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
-
-          # @see Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout#payload_type
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            ABANDONED_CHECKOUT = :AbandonedCheckout
 
             # @!method self.values
             #   @return [Array<Symbol>]
@@ -350,8 +278,8 @@ module Dodopayments
 
           # @!attribute payload_type
           #
-          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::DunningAttempt::PayloadType]
-          required :payload_type, enum: -> { Dodopayments::WebhookPayload::Data::DunningAttempt::PayloadType }
+          #   @return [Symbol, :DunningAttempt]
+          required :payload_type, const: :DunningAttempt
 
           # @!attribute status
           #
@@ -373,24 +301,14 @@ module Dodopayments
           #   @return [String, nil]
           optional :payment_id, String, nil?: true
 
-          # @!method initialize(created_at:, customer_id:, payload_type:, status:, subscription_id:, trigger_state:, payment_id: nil)
+          # @!method initialize(created_at:, customer_id:, status:, subscription_id:, trigger_state:, payment_id: nil, payload_type: :DunningAttempt)
           #   @param created_at [Time]
           #   @param customer_id [String]
-          #   @param payload_type [Symbol, Dodopayments::Models::WebhookPayload::Data::DunningAttempt::PayloadType]
           #   @param status [Symbol, Dodopayments::Models::WebhookPayload::Data::DunningAttempt::Status]
           #   @param subscription_id [String]
           #   @param trigger_state [Symbol, Dodopayments::Models::WebhookPayload::Data::DunningAttempt::TriggerState]
           #   @param payment_id [String, nil]
-
-          # @see Dodopayments::Models::WebhookPayload::Data::DunningAttempt#payload_type
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            DUNNING_ATTEMPT = :DunningAttempt
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param payload_type [Symbol, :DunningAttempt]
 
           # @see Dodopayments::Models::WebhookPayload::Data::DunningAttempt#status
           module Status
@@ -419,23 +337,14 @@ module Dodopayments
         class EntitlementGrant < Dodopayments::Models::Entitlements::EntitlementGrant
           # @!attribute payload_type
           #
-          #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::PayloadType]
-          required :payload_type, enum: -> { Dodopayments::WebhookPayload::Data::EntitlementGrant::PayloadType }
+          #   @return [Symbol, :EntitlementGrant]
+          required :payload_type, const: :EntitlementGrant
 
-          # @!method initialize(payload_type:)
+          # @!method initialize(payload_type: :EntitlementGrant)
           #   Detailed view of a single entitlement grant: who it's for, its lifecycle state,
           #   and any integration-specific delivery payload.
           #
-          #   @param payload_type [Symbol, Dodopayments::Models::WebhookPayload::Data::EntitlementGrant::PayloadType]
-
-          module PayloadType
-            extend Dodopayments::Internal::Type::Enum
-
-            ENTITLEMENT_GRANT = :EntitlementGrant
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param payload_type [Symbol, :EntitlementGrant]
         end
 
         # @!method self.variants

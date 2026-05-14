@@ -25,34 +25,26 @@ module Dodopayments
       module Body
         extend Dodopayments::Internal::Type::Union
 
-        variant -> { Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New }
+        discriminator :type
 
-        variant -> { Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing }
+        variant :new, -> { Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New }
+
+        variant :existing, -> { Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing }
 
         class New < Dodopayments::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::New::Type]
-          required :type, enum: -> { Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::New::Type }
+          #   @return [Symbol, :new]
+          required :type, const: :new
 
           # @!attribute return_url
           #
           #   @return [String, nil]
           optional :return_url, String, nil?: true
 
-          # @!method initialize(type:, return_url: nil)
-          #   @param type [Symbol, Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::New::Type]
+          # @!method initialize(return_url: nil, type: :new)
           #   @param return_url [String, nil]
-
-          # @see Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::New#type
-          module Type
-            extend Dodopayments::Internal::Type::Enum
-
-            NEW = :new
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :new]
         end
 
         class Existing < Dodopayments::Internal::Type::BaseModel
@@ -63,22 +55,12 @@ module Dodopayments
 
           # @!attribute type
           #
-          #   @return [Symbol, Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::Existing::Type]
-          required :type, enum: -> { Dodopayments::SubscriptionUpdatePaymentMethodParams::Body::Existing::Type }
+          #   @return [Symbol, :existing]
+          required :type, const: :existing
 
-          # @!method initialize(payment_method_id:, type:)
+          # @!method initialize(payment_method_id:, type: :existing)
           #   @param payment_method_id [String]
-          #   @param type [Symbol, Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::Existing::Type]
-
-          # @see Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::Body::Existing#type
-          module Type
-            extend Dodopayments::Internal::Type::Enum
-
-            EXISTING = :existing
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :existing]
         end
 
         # @!method self.variants
