@@ -155,6 +155,8 @@ module Dodopayments
 
   class DiscountDeleteParams = Dodopayments::Models::DiscountDeleteParams
 
+  class DiscountDetail = Dodopayments::Models::DiscountDetail
+
   class DiscountListParams = Dodopayments::Models::DiscountListParams
 
   class DiscountRetrieveByCodeParams = Dodopayments::Models::DiscountRetrieveByCodeParams

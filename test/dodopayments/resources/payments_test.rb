@@ -62,7 +62,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         checkout_session_id: String | nil,
         custom_field_responses: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::CustomFieldResponse]) | nil,
         discount_id: String | nil,
-        discounts: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Payment::Discount]) | nil,
+        discounts: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::DiscountDetail]) | nil,
         error_code: String | nil,
         error_message: String | nil,
         invoice_id: String | nil,
