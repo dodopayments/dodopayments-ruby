@@ -28,7 +28,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         discount_id: String | nil,
         discount_ids: ^(Dodopayments::Internal::Type::ArrayOf[String]) | nil,
         expires_on: Time | nil,
-        one_time_product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem]) | nil,
+        one_time_product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart]) | nil,
         payment_link: String | nil
       }
     end
