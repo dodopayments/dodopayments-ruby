@@ -143,7 +143,7 @@ module Dodopayments
       attr_accessor :payment_method_type
 
       # List of products purchased in a one-time payment
-      sig { returns(T.nilable(T::Array[Dodopayments::OneTimeProductCartItem])) }
+      sig { returns(T.nilable(T::Array[Dodopayments::Payment::ProductCart])) }
       attr_accessor :product_cart
 
       # Summary of the refund status for this payment. None if no succeeded refunds
@@ -209,7 +209,7 @@ module Dodopayments
           payment_method: T.nilable(String),
           payment_method_type: T.nilable(String),
           product_cart:
-            T.nilable(T::Array[Dodopayments::OneTimeProductCartItem::OrHash]),
+            T.nilable(T::Array[Dodopayments::Payment::ProductCart::OrHash]),
           refund_status: T.nilable(Dodopayments::PaymentRefundStatus::OrSymbol),
           settlement_tax: T.nilable(Integer),
           status: T.nilable(Dodopayments::IntentStatus::OrSymbol),
@@ -341,7 +341,7 @@ module Dodopayments
             payment_method: T.nilable(String),
             payment_method_type: T.nilable(String),
             product_cart:
-              T.nilable(T::Array[Dodopayments::OneTimeProductCartItem]),
+              T.nilable(T::Array[Dodopayments::Payment::ProductCart]),
             refund_status:
               T.nilable(Dodopayments::PaymentRefundStatus::TaggedSymbol),
             settlement_tax: T.nilable(Integer),
@@ -353,6 +353,34 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      class ProductCart < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::Payment::ProductCart,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        sig { returns(String) }
+        attr_accessor :product_id
+
+        sig { returns(Integer) }
+        attr_accessor :quantity
+
+        sig do
+          params(product_id: String, quantity: Integer).returns(
+            T.attached_class
+          )
+        end
+        def self.new(product_id:, quantity:)
+        end
+
+        sig { override.returns({ product_id: String, quantity: Integer }) }
+        def to_hash
+        end
       end
     end
   end
