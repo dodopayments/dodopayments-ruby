@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.11.0 (2026-05-21)
+
+Full Changelog: [v2.10.0...v2.11.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.10.0...v2.11.0)
+
+### Features
+
+* **api:** fixed a breaking modal change ([ca90fef](https://github.com/dodopayments/dodopayments-ruby/commit/ca90fef9200c68c0686261728a7d1add4820cdb5))
+* **api:** stainless fixes ([3b16e3f](https://github.com/dodopayments/dodopayments-ruby/commit/3b16e3f755914b312d060f705631c8e5f172beb7))
+* **api:** updated openapi spec to v1.99.0 and added missing endpoints as well ([11e4b50](https://github.com/dodopayments/dodopayments-ruby/commit/11e4b50fb9a96cad609583025a02490e58677296))
+
 ## 2.10.0 (2026-05-14)
 
 Full Changelog: [v2.9.1...v2.10.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.9.1...v2.10.0)
