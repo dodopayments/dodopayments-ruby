@@ -57,6 +57,14 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::Currency, nil]
       optional :billing_currency, enum: -> { Dodopayments::Currency }, nil?: true
 
+      # @!attribute customer_business_name
+      #   Optional business / legal name associated with the tax id. When provided
+      #   together with a valid tax id for a B2B purchase, this name is rendered on the
+      #   invoice instead of the customer's personal name.
+      #
+      #   @return [String, nil]
+      optional :customer_business_name, String, nil?: true
+
       # @!attribute discount_code
       #   @deprecated Use `discount_id` instead.
       #
@@ -105,9 +113,11 @@ module Dodopayments
       #   List of one time products that will be bundled with the first payment for this
       #   subscription
       #
-      #   @return [Array<Dodopayments::Models::OneTimeProductCartItem>, nil]
+      #   @return [Array<Dodopayments::Models::SubscriptionCreateParams::OneTimeProductCart>, nil]
       optional :one_time_product_cart,
-               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem] },
+               -> {
+                 Dodopayments::Internal::Type::ArrayOf[Dodopayments::SubscriptionCreateParams::OneTimeProductCart]
+               },
                nil?: true
 
       # @!attribute payment_link
@@ -171,7 +181,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :trial_period_days, Integer, nil?: true
 
-      # @!method initialize(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, discount_codes: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, require_phone_number: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
+      # @!method initialize(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, customer_business_name: nil, discount_code: nil, discount_codes: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, require_phone_number: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionCreateParams} for more details.
       #
@@ -189,6 +199,8 @@ module Dodopayments
       #
       #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Fix the currency in which the end customer is billed.
       #
+      #   @param customer_business_name [String, nil] Optional business / legal name associated with the tax id. When provided
+      #
       #   @param discount_code [String, nil] DEPRECATED: Use discount_codes instead. Cannot be used together with discount_co
       #
       #   @param discount_codes [Array<String>, nil] Stacked discount codes to apply, in order of application. Max 20.
@@ -201,7 +213,7 @@ module Dodopayments
       #
       #   @param on_demand [Dodopayments::Models::OnDemandSubscription, nil]
       #
-      #   @param one_time_product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil] List of one time products that will be bundled with the first payment for this s
+      #   @param one_time_product_cart [Array<Dodopayments::Models::SubscriptionCreateParams::OneTimeProductCart>, nil] List of one time products that will be bundled with the first payment for this s
       #
       #   @param payment_link [Boolean, nil] If true, generates a payment link.
       #
@@ -222,6 +234,37 @@ module Dodopayments
       #   @param trial_period_days [Integer, nil] Optional trial period in days
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
+
+      class OneTimeProductCart < Dodopayments::Internal::Type::BaseModel
+        # @!attribute product_id
+        #
+        #   @return [String]
+        required :product_id, String
+
+        # @!attribute quantity
+        #
+        #   @return [Integer]
+        required :quantity, Integer
+
+        # @!attribute amount
+        #   Amount the customer pays if pay_what_you_want is enabled. If disabled then
+        #   amount will be ignored Represented in the lowest denomination of the currency
+        #   (e.g., cents for USD). For example, to charge $1.00, pass `100`.
+        #
+        #   @return [Integer, nil]
+        optional :amount, Integer, nil?: true
+
+        # @!method initialize(product_id:, quantity:, amount: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::SubscriptionCreateParams::OneTimeProductCart} for more
+        #   details.
+        #
+        #   @param product_id [String]
+        #
+        #   @param quantity [Integer]
+        #
+        #   @param amount [Integer, nil] Amount the customer pays if pay_what_you_want is enabled. If disabled then amoun
+      end
     end
   end
 end

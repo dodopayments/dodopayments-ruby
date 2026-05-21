@@ -8,19 +8,21 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::PaymentCreateParams} for more details.
       #
-      # @overload create(billing:, customer:, product_cart:, adaptive_currency_fees_inclusive: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, discount_codes: nil, force_3ds: nil, metadata: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, require_phone_number: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
+      # @overload create(billing:, customer:, product_cart:, adaptive_currency_fees_inclusive: nil, allowed_payment_method_types: nil, billing_currency: nil, customer_business_name: nil, discount_code: nil, discount_codes: nil, force_3ds: nil, metadata: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, require_phone_number: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, request_options: {})
       #
       # @param billing [Dodopayments::Models::BillingAddress] Billing address details for the payment
       #
       # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer] Customer information for the payment
       #
-      # @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>] List of products in the cart. Must contain at least 1 and at most 100 items.
+      # @param product_cart [Array<Dodopayments::Models::PaymentCreateParams::ProductCart>] List of products in the cart. Must contain at least 1 and at most 100 items.
       #
       # @param adaptive_currency_fees_inclusive [Boolean, nil] Whether adaptive currency fees should be included in the price (true) or added o
       #
       # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil] List of payment methods allowed during checkout.
       #
       # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Fix the currency in which the end customer is billed.
+      #
+      # @param customer_business_name [String, nil] Optional business / legal name associated with the tax id. When provided
       #
       # @param discount_code [String, nil] DEPRECATED: Use discount_codes instead. Cannot be used together with discount_co
       #

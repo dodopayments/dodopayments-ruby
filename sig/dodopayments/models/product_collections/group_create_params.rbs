@@ -1,0 +1,27 @@
+module Dodopayments
+  module Models
+    module ProductCollections
+      type group_create_params =
+        { id: String } & Dodopayments::Internal::Type::request_parameters
+
+      class GroupCreateParams < Dodopayments::Models::ProductCollections::ProductCollectionGroupDetails
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
+
+        def id: -> String
+
+        def id=: (String _) -> String
+
+        def initialize: (
+          id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          request_options: Dodopayments::RequestOptions
+        }
+      end
+    end
+  end
+end

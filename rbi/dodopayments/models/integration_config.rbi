@@ -31,11 +31,7 @@ module Dodopayments
           end
 
         # Permission to grant on the repository.
-        sig do
-          returns(
-            Dodopayments::IntegrationConfig::GitHubConfig::Permission::OrSymbol
-          )
-        end
+        sig { returns(Dodopayments::GitHubPermission::OrSymbol) }
         attr_accessor :permission
 
         # Repository or organisation slug to grant access to.
@@ -44,8 +40,7 @@ module Dodopayments
 
         sig do
           params(
-            permission:
-              Dodopayments::IntegrationConfig::GitHubConfig::Permission::OrSymbol,
+            permission: Dodopayments::GitHubPermission::OrSymbol,
             target_id: String
           ).returns(T.attached_class)
         end
@@ -60,63 +55,12 @@ module Dodopayments
         sig do
           override.returns(
             {
-              permission:
-                Dodopayments::IntegrationConfig::GitHubConfig::Permission::OrSymbol,
+              permission: Dodopayments::GitHubPermission::OrSymbol,
               target_id: String
             }
           )
         end
         def to_hash
-        end
-
-        # Permission to grant on the repository.
-        module Permission
-          extend Dodopayments::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Dodopayments::IntegrationConfig::GitHubConfig::Permission
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          PULL =
-            T.let(
-              :pull,
-              Dodopayments::IntegrationConfig::GitHubConfig::Permission::TaggedSymbol
-            )
-          PUSH =
-            T.let(
-              :push,
-              Dodopayments::IntegrationConfig::GitHubConfig::Permission::TaggedSymbol
-            )
-          ADMIN =
-            T.let(
-              :admin,
-              Dodopayments::IntegrationConfig::GitHubConfig::Permission::TaggedSymbol
-            )
-          MAINTAIN =
-            T.let(
-              :maintain,
-              Dodopayments::IntegrationConfig::GitHubConfig::Permission::TaggedSymbol
-            )
-          TRIAGE =
-            T.let(
-              :triage,
-              Dodopayments::IntegrationConfig::GitHubConfig::Permission::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Dodopayments::IntegrationConfig::GitHubConfig::Permission::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
 

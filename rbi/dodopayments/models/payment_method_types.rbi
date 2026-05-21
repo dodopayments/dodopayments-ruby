@@ -159,6 +159,7 @@ module Dodopayments
           Dodopayments::PaymentMethodTypes::TaggedSymbol
         )
       SOFORT = T.let(:sofort, Dodopayments::PaymentMethodTypes::TaggedSymbol)
+      SUNBIT = T.let(:sunbit, Dodopayments::PaymentMethodTypes::TaggedSymbol)
       SWISH = T.let(:swish, Dodopayments::PaymentMethodTypes::TaggedSymbol)
       TOUCH_N_GO =
         T.let(:touch_n_go, Dodopayments::PaymentMethodTypes::TaggedSymbol)

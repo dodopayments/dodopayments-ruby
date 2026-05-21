@@ -7,6 +7,11 @@ module Dodopayments
           ?request_options: Dodopayments::request_opts
         ) -> StringIO
 
+        def retrieve_payout: (
+          String payout_id,
+          ?request_options: Dodopayments::request_opts
+        ) -> StringIO
+
         def retrieve_refund: (
           String refund_id,
           ?request_options: Dodopayments::request_opts

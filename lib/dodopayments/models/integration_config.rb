@@ -27,8 +27,8 @@ module Dodopayments
         # @!attribute permission
         #   Permission to grant on the repository.
         #
-        #   @return [Symbol, Dodopayments::Models::IntegrationConfig::GitHubConfig::Permission]
-        required :permission, enum: -> { Dodopayments::IntegrationConfig::GitHubConfig::Permission }
+        #   @return [Symbol, Dodopayments::Models::GitHubPermission]
+        required :permission, enum: -> { Dodopayments::GitHubPermission }
 
         # @!attribute target_id
         #   Repository or organisation slug to grant access to.
@@ -37,25 +37,9 @@ module Dodopayments
         required :target_id, String
 
         # @!method initialize(permission:, target_id:)
-        #   @param permission [Symbol, Dodopayments::Models::IntegrationConfig::GitHubConfig::Permission] Permission to grant on the repository.
+        #   @param permission [Symbol, Dodopayments::Models::GitHubPermission] Permission to grant on the repository.
         #
         #   @param target_id [String] Repository or organisation slug to grant access to.
-
-        # Permission to grant on the repository.
-        #
-        # @see Dodopayments::Models::IntegrationConfig::GitHubConfig#permission
-        module Permission
-          extend Dodopayments::Internal::Type::Enum
-
-          PULL = :pull
-          PUSH = :push
-          ADMIN = :admin
-          MAINTAIN = :maintain
-          TRIAGE = :triage
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
       end
 
       class DiscordConfig < Dodopayments::Internal::Type::BaseModel

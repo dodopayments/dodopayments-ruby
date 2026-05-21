@@ -8,7 +8,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionCreateParams} for more details.
       #
-      # @overload create(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, discount_code: nil, discount_codes: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, require_phone_number: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
+      # @overload create(billing:, customer:, product_id:, quantity:, addons: nil, allowed_payment_method_types: nil, billing_currency: nil, customer_business_name: nil, discount_code: nil, discount_codes: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, on_demand: nil, one_time_product_cart: nil, payment_link: nil, payment_method_id: nil, redirect_immediately: nil, require_phone_number: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, tax_id: nil, trial_period_days: nil, request_options: {})
       #
       # @param billing [Dodopayments::Models::BillingAddress] Billing address information for the subscription
       #
@@ -24,6 +24,8 @@ module Dodopayments
       #
       # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Fix the currency in which the end customer is billed.
       #
+      # @param customer_business_name [String, nil] Optional business / legal name associated with the tax id. When provided
+      #
       # @param discount_code [String, nil] DEPRECATED: Use discount_codes instead. Cannot be used together with discount_co
       #
       # @param discount_codes [Array<String>, nil] Stacked discount codes to apply, in order of application. Max 20.
@@ -36,7 +38,7 @@ module Dodopayments
       #
       # @param on_demand [Dodopayments::Models::OnDemandSubscription, nil]
       #
-      # @param one_time_product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>, nil] List of one time products that will be bundled with the first payment for this s
+      # @param one_time_product_cart [Array<Dodopayments::Models::SubscriptionCreateParams::OneTimeProductCart>, nil] List of one time products that will be bundled with the first payment for this s
       #
       # @param payment_link [Boolean, nil] If true, generates a payment link.
       #
@@ -93,7 +95,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionUpdateParams} for more details.
       #
-      # @overload update(subscription_id, billing: nil, cancel_at_next_billing_date: nil, cancel_reason: nil, cancellation_comment: nil, cancellation_feedback: nil, credit_entitlement_cart: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
+      # @overload update(subscription_id, billing: nil, cancel_at_next_billing_date: nil, cancel_reason: nil, cancellation_comment: nil, cancellation_feedback: nil, credit_entitlement_cart: nil, customer_business_name: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -108,6 +110,8 @@ module Dodopayments
       # @param cancellation_feedback [Symbol, Dodopayments::Models::CancellationFeedback, nil] Customer-supplied churn reason (only valid when cancelling or scheduling cancell
       #
       # @param credit_entitlement_cart [Array<Dodopayments::Models::SubscriptionUpdateParams::CreditEntitlementCart>, nil] Update credit entitlement cart settings
+      #
+      # @param customer_business_name [String, nil] Optional business / legal name associated with the tax id. When provided
       #
       # @param customer_name [String, nil]
       #

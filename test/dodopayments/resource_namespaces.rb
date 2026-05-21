@@ -17,11 +17,19 @@ module Dodopayments
       module Entitlements
       end
 
+      module Groups
+      end
+
       module Invoices
       end
 
       module Payouts
         module Breakup
+        end
+      end
+
+      module ProductCollections
+        module Groups
         end
       end
 

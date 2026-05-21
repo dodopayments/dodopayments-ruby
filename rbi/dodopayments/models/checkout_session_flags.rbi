@@ -20,6 +20,19 @@ module Dodopayments
       sig { params(allow_currency_selection: T::Boolean).void }
       attr_writer :allow_currency_selection
 
+      # If true, the customer can supply or edit the business name associated with the
+      # tax id during checkout. Works independently of `allow_customer_editing_tax_id` —
+      # either flag (or `allow_tax_id`) is sufficient to let the customer override the
+      # session's business name. Typically set together with
+      # `allow_customer_editing_tax_id`.
+      #
+      # Default is false
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :allow_customer_editing_business_name
+
+      sig { params(allow_customer_editing_business_name: T::Boolean).void }
+      attr_writer :allow_customer_editing_business_name
+
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :allow_customer_editing_city
 
@@ -127,6 +140,7 @@ module Dodopayments
       sig do
         params(
           allow_currency_selection: T::Boolean,
+          allow_customer_editing_business_name: T::Boolean,
           allow_customer_editing_city: T::Boolean,
           allow_customer_editing_country: T::Boolean,
           allow_customer_editing_email: T::Boolean,
@@ -148,6 +162,14 @@ module Dodopayments
         #
         # Default is true
         allow_currency_selection: nil,
+        # If true, the customer can supply or edit the business name associated with the
+        # tax id during checkout. Works independently of `allow_customer_editing_tax_id` —
+        # either flag (or `allow_tax_id`) is sufficient to let the customer override the
+        # session's business name. Typically set together with
+        # `allow_customer_editing_tax_id`.
+        #
+        # Default is false
+        allow_customer_editing_business_name: nil,
         allow_customer_editing_city: nil,
         allow_customer_editing_country: nil,
         allow_customer_editing_email: nil,
@@ -189,6 +211,7 @@ module Dodopayments
         override.returns(
           {
             allow_currency_selection: T::Boolean,
+            allow_customer_editing_business_name: T::Boolean,
             allow_customer_editing_city: T::Boolean,
             allow_customer_editing_country: T::Boolean,
             allow_customer_editing_email: T::Boolean,

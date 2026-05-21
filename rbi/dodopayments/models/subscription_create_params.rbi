@@ -57,6 +57,12 @@ module Dodopayments
       sig { returns(T.nilable(Dodopayments::Currency::OrSymbol)) }
       attr_accessor :billing_currency
 
+      # Optional business / legal name associated with the tax id. When provided
+      # together with a valid tax id for a B2B purchase, this name is rendered on the
+      # invoice instead of the customer's personal name.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :customer_business_name
+
       # DEPRECATED: Use discount_codes instead. Cannot be used together with
       # discount_codes.
       sig { returns(T.nilable(String)) }
@@ -99,7 +105,13 @@ module Dodopayments
 
       # List of one time products that will be bundled with the first payment for this
       # subscription
-      sig { returns(T.nilable(T::Array[Dodopayments::OneTimeProductCartItem])) }
+      sig do
+        returns(
+          T.nilable(
+            T::Array[Dodopayments::SubscriptionCreateParams::OneTimeProductCart]
+          )
+        )
+      end
       attr_accessor :one_time_product_cart
 
       # If true, generates a payment link. Defaults to false if not specified.
@@ -168,6 +180,7 @@ module Dodopayments
           allowed_payment_method_types:
             T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
+          customer_business_name: T.nilable(String),
           discount_code: T.nilable(String),
           discount_codes: T.nilable(T::Array[String]),
           force_3ds: T.nilable(T::Boolean),
@@ -175,7 +188,11 @@ module Dodopayments
           metadata: T::Hash[Symbol, String],
           on_demand: T.nilable(Dodopayments::OnDemandSubscription::OrHash),
           one_time_product_cart:
-            T.nilable(T::Array[Dodopayments::OneTimeProductCartItem::OrHash]),
+            T.nilable(
+              T::Array[
+                Dodopayments::SubscriptionCreateParams::OneTimeProductCart::OrHash
+              ]
+            ),
           payment_link: T.nilable(T::Boolean),
           payment_method_id: T.nilable(String),
           redirect_immediately: T::Boolean,
@@ -209,6 +226,10 @@ module Dodopayments
         # Fix the currency in which the end customer is billed. If Dodo Payments cannot
         # support that currency for this transaction, it will not proceed
         billing_currency: nil,
+        # Optional business / legal name associated with the tax id. When provided
+        # together with a valid tax id for a B2B purchase, this name is rendered on the
+        # invoice instead of the customer's personal name.
+        customer_business_name: nil,
         # DEPRECATED: Use discount_codes instead. Cannot be used together with
         # discount_codes.
         discount_code: nil,
@@ -274,6 +295,7 @@ module Dodopayments
             allowed_payment_method_types:
               T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
             billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
+            customer_business_name: T.nilable(String),
             discount_code: T.nilable(String),
             discount_codes: T.nilable(T::Array[String]),
             force_3ds: T.nilable(T::Boolean),
@@ -281,7 +303,11 @@ module Dodopayments
             metadata: T::Hash[Symbol, String],
             on_demand: T.nilable(Dodopayments::OnDemandSubscription),
             one_time_product_cart:
-              T.nilable(T::Array[Dodopayments::OneTimeProductCartItem]),
+              T.nilable(
+                T::Array[
+                  Dodopayments::SubscriptionCreateParams::OneTimeProductCart
+                ]
+              ),
             payment_link: T.nilable(T::Boolean),
             payment_method_id: T.nilable(String),
             redirect_immediately: T::Boolean,
@@ -296,6 +322,57 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      class OneTimeProductCart < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::SubscriptionCreateParams::OneTimeProductCart,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        sig { returns(String) }
+        attr_accessor :product_id
+
+        sig { returns(Integer) }
+        attr_accessor :quantity
+
+        # Amount the customer pays if pay_what_you_want is enabled. If disabled then
+        # amount will be ignored Represented in the lowest denomination of the currency
+        # (e.g., cents for USD). For example, to charge $1.00, pass `100`.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :amount
+
+        sig do
+          params(
+            product_id: String,
+            quantity: Integer,
+            amount: T.nilable(Integer)
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          product_id:,
+          quantity:,
+          # Amount the customer pays if pay_what_you_want is enabled. If disabled then
+          # amount will be ignored Represented in the lowest denomination of the currency
+          # (e.g., cents for USD). For example, to charge $1.00, pass `100`.
+          amount: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              product_id: String,
+              quantity: Integer,
+              amount: T.nilable(Integer)
+            }
+          )
+        end
+        def to_hash
+        end
       end
     end
   end

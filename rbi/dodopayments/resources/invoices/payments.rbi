@@ -15,6 +15,15 @@ module Dodopayments
 
         sig do
           params(
+            payout_id: String,
+            request_options: Dodopayments::RequestOptions::OrHash
+          ).returns(StringIO)
+        end
+        def retrieve_payout(payout_id, request_options: {})
+        end
+
+        sig do
+          params(
             refund_id: String,
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(StringIO)

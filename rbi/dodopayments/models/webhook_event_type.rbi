@@ -66,24 +66,14 @@ module Dodopayments
           :"subscription.on_hold",
           Dodopayments::WebhookEventType::TaggedSymbol
         )
+      SUBSCRIPTION_PAUSED =
+        T.let(
+          :"subscription.paused",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
       SUBSCRIPTION_CANCELLED =
         T.let(
           :"subscription.cancelled",
-          Dodopayments::WebhookEventType::TaggedSymbol
-        )
-      SUBSCRIPTION_CANCELLATION_SCHEDULED =
-        T.let(
-          :"subscription.cancellation_scheduled",
-          Dodopayments::WebhookEventType::TaggedSymbol
-        )
-      SUBSCRIPTION_TRIAL_ENDING =
-        T.let(
-          :"subscription.trial_ending",
-          Dodopayments::WebhookEventType::TaggedSymbol
-        )
-      SUBSCRIPTION_UPCOMING_RENEWAL =
-        T.let(
-          :"subscription.upcoming_renewal",
           Dodopayments::WebhookEventType::TaggedSymbol
         )
       SUBSCRIPTION_FAILED =
@@ -180,10 +170,6 @@ module Dodopayments
           :"dunning.recovered",
           Dodopayments::WebhookEventType::TaggedSymbol
         )
-      ACR_EMAIL =
-        T.let(:"acr.email", Dodopayments::WebhookEventType::TaggedSymbol)
-      DUNNING_EMAIL =
-        T.let(:"dunning.email", Dodopayments::WebhookEventType::TaggedSymbol)
       ENTITLEMENT_GRANT_CREATED =
         T.let(
           :"entitlement_grant.created",
