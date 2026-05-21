@@ -265,7 +265,11 @@ module Dodopayments
 
   FilterOperator = Dodopayments::Models::FilterOperator
 
+  FilterType = Dodopayments::Models::FilterType
+
   GetDispute = Dodopayments::Models::GetDispute
+
+  GitHubPermission = Dodopayments::Models::GitHubPermission
 
   IntegrationConfig = Dodopayments::Models::IntegrationConfig
 
@@ -364,6 +368,24 @@ module Dodopayments
   Product = Dodopayments::Models::Product
 
   ProductArchiveParams = Dodopayments::Models::ProductArchiveParams
+
+  ProductCollection = Dodopayments::Models::ProductCollection
+
+  ProductCollectionCreateParams = Dodopayments::Models::ProductCollectionCreateParams
+
+  ProductCollectionDeleteParams = Dodopayments::Models::ProductCollectionDeleteParams
+
+  ProductCollectionListParams = Dodopayments::Models::ProductCollectionListParams
+
+  ProductCollectionRetrieveParams = Dodopayments::Models::ProductCollectionRetrieveParams
+
+  ProductCollections = Dodopayments::Models::ProductCollections
+
+  ProductCollectionUnarchiveParams = Dodopayments::Models::ProductCollectionUnarchiveParams
+
+  ProductCollectionUpdateImagesParams = Dodopayments::Models::ProductCollectionUpdateImagesParams
+
+  ProductCollectionUpdateParams = Dodopayments::Models::ProductCollectionUpdateParams
 
   ProductCreateParams = Dodopayments::Models::ProductCreateParams
 

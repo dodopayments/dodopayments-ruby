@@ -71,6 +71,12 @@ module Dodopayments
       end
       attr_accessor :customer
 
+      # Optional business / legal name associated with the tax id. When provided
+      # together with a valid tax id for a B2B purchase, this name is rendered on the
+      # invoice instead of the customer's personal name.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :customer_business_name
+
       # Customization for the checkout session page
       sig { returns(T.nilable(Dodopayments::CheckoutSessionCustomization)) }
       attr_reader :customization
@@ -186,6 +192,7 @@ module Dodopayments
                 Dodopayments::NewCustomer::OrHash
               )
             ),
+          customer_business_name: T.nilable(String),
           customization: Dodopayments::CheckoutSessionCustomization::OrHash,
           discount_code: T.nilable(String),
           discount_codes: T.nilable(T::Array[String]),
@@ -226,6 +233,10 @@ module Dodopayments
         custom_fields: nil,
         # Customer details for the session
         customer: nil,
+        # Optional business / legal name associated with the tax id. When provided
+        # together with a valid tax id for a B2B purchase, this name is rendered on the
+        # invoice instead of the customer's personal name.
+        customer_business_name: nil,
         # Customization for the checkout session page
         customization: nil,
         # DEPRECATED: Use discount_codes instead. Cannot be used together with
@@ -287,6 +298,7 @@ module Dodopayments
                   Dodopayments::NewCustomer
                 )
               ),
+            customer_business_name: T.nilable(String),
             customization: Dodopayments::CheckoutSessionCustomization,
             discount_code: T.nilable(String),
             discount_codes: T.nilable(T::Array[String]),

@@ -60,6 +60,13 @@ module Dodopayments
       end
       attr_accessor :credit_entitlement_cart
 
+      # Optional business / legal name associated with the tax id. When provided
+      # together with a valid tax id for a B2B subscription, this name is rendered on
+      # the invoice instead of the customer's personal name. Send `null` to explicitly
+      # clear the business name.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :customer_business_name
+
       sig { returns(T.nilable(String)) }
       attr_accessor :customer_name
 
@@ -110,6 +117,7 @@ module Dodopayments
                 Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart::OrHash
               ]
             ),
+          customer_business_name: T.nilable(String),
           customer_name: T.nilable(String),
           disable_on_demand:
             T.nilable(
@@ -136,6 +144,11 @@ module Dodopayments
         cancellation_feedback: nil,
         # Update credit entitlement cart settings
         credit_entitlement_cart: nil,
+        # Optional business / legal name associated with the tax id. When provided
+        # together with a valid tax id for a B2B subscription, this name is rendered on
+        # the invoice instead of the customer's personal name. Send `null` to explicitly
+        # clear the business name.
+        customer_business_name: nil,
         customer_name: nil,
         disable_on_demand: nil,
         metadata: nil,
@@ -165,6 +178,7 @@ module Dodopayments
                   Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart
                 ]
               ),
+            customer_business_name: T.nilable(String),
             customer_name: T.nilable(String),
             disable_on_demand:
               T.nilable(

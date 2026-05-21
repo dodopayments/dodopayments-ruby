@@ -11,6 +11,18 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :allow_currency_selection, Dodopayments::Internal::Type::Boolean
 
+      # @!attribute allow_customer_editing_business_name
+      #   If true, the customer can supply or edit the business name associated with the
+      #   tax id during checkout. Works independently of `allow_customer_editing_tax_id` —
+      #   either flag (or `allow_tax_id`) is sufficient to let the customer override the
+      #   session's business name. Typically set together with
+      #   `allow_customer_editing_tax_id`.
+      #
+      #   Default is false
+      #
+      #   @return [Boolean, nil]
+      optional :allow_customer_editing_business_name, Dodopayments::Internal::Type::Boolean
+
       # @!attribute allow_customer_editing_city
       #
       #   @return [Boolean, nil]
@@ -101,11 +113,13 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :require_phone_number, Dodopayments::Internal::Type::Boolean
 
-      # @!method initialize(allow_currency_selection: nil, allow_customer_editing_city: nil, allow_customer_editing_country: nil, allow_customer_editing_email: nil, allow_customer_editing_name: nil, allow_customer_editing_state: nil, allow_customer_editing_street: nil, allow_customer_editing_tax_id: nil, allow_customer_editing_zipcode: nil, allow_discount_code: nil, allow_phone_number_collection: nil, allow_tax_id: nil, always_create_new_customer: nil, redirect_immediately: nil, require_phone_number: nil)
+      # @!method initialize(allow_currency_selection: nil, allow_customer_editing_business_name: nil, allow_customer_editing_city: nil, allow_customer_editing_country: nil, allow_customer_editing_email: nil, allow_customer_editing_name: nil, allow_customer_editing_state: nil, allow_customer_editing_street: nil, allow_customer_editing_tax_id: nil, allow_customer_editing_zipcode: nil, allow_discount_code: nil, allow_phone_number_collection: nil, allow_tax_id: nil, always_create_new_customer: nil, redirect_immediately: nil, require_phone_number: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionFlags} for more details.
       #
       #   @param allow_currency_selection [Boolean] if customer is allowed to change currency, set it to true
+      #
+      #   @param allow_customer_editing_business_name [Boolean] If true, the customer can supply or edit the business name associated
       #
       #   @param allow_customer_editing_city [Boolean]
       #

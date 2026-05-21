@@ -61,6 +61,14 @@ module Dodopayments
       #   @return [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer, nil]
       optional :customer, union: -> { Dodopayments::CustomerRequest }, nil?: true
 
+      # @!attribute customer_business_name
+      #   Optional business / legal name associated with the tax id. When provided
+      #   together with a valid tax id for a B2B purchase, this name is rendered on the
+      #   invoice instead of the customer's personal name.
+      #
+      #   @return [String, nil]
+      optional :customer_business_name, String, nil?: true
+
       # @!attribute customization
       #   Customization for the checkout session page
       #
@@ -162,7 +170,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, discount_codes: nil, feature_flags: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil)
+      # @!method initialize(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customer_business_name: nil, customization: nil, discount_code: nil, discount_codes: nil, feature_flags: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionRequest} for more details.
       #
@@ -181,6 +189,8 @@ module Dodopayments
       #   @param custom_fields [Array<Dodopayments::Models::CustomField>, nil] Custom fields to collect from customer during checkout (max 5 fields)
       #
       #   @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer, nil] Customer details for the session
+      #
+      #   @param customer_business_name [String, nil] Optional business / legal name associated with the tax id. When provided
       #
       #   @param customization [Dodopayments::Models::CheckoutSessionCustomization] Customization for the checkout session page
       #

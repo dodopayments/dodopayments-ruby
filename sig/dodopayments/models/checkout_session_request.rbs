@@ -10,6 +10,7 @@ module Dodopayments
         confirm: bool,
         custom_fields: ::Array[Dodopayments::CustomField]?,
         customer: Dodopayments::Models::customer_request?,
+        customer_business_name: String?,
         customization: Dodopayments::CheckoutSessionCustomization,
         discount_code: String?,
         discount_codes: ::Array[String]?,
@@ -45,6 +46,8 @@ module Dodopayments
       attr_accessor custom_fields: ::Array[Dodopayments::CustomField]?
 
       attr_accessor customer: Dodopayments::Models::customer_request?
+
+      attr_accessor customer_business_name: String?
 
       attr_reader customization: Dodopayments::CheckoutSessionCustomization?
 
@@ -99,6 +102,7 @@ module Dodopayments
         ?confirm: bool,
         ?custom_fields: ::Array[Dodopayments::CustomField]?,
         ?customer: Dodopayments::Models::customer_request?,
+        ?customer_business_name: String?,
         ?customization: Dodopayments::CheckoutSessionCustomization,
         ?discount_code: String?,
         ?discount_codes: ::Array[String]?,
@@ -125,6 +129,7 @@ module Dodopayments
         confirm: bool,
         custom_fields: ::Array[Dodopayments::CustomField]?,
         customer: Dodopayments::Models::customer_request?,
+        customer_business_name: String?,
         customization: Dodopayments::CheckoutSessionCustomization,
         discount_code: String?,
         discount_codes: ::Array[String]?,

@@ -11,11 +11,13 @@ module Dodopayments
               Dodopayments::AttachExistingCustomer::OrHash,
               Dodopayments::NewCustomer::OrHash
             ),
-          product_cart: T::Array[Dodopayments::OneTimeProductCartItem::OrHash],
+          product_cart:
+            T::Array[Dodopayments::PaymentCreateParams::ProductCart::OrHash],
           adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
           allowed_payment_method_types:
             T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
+          customer_business_name: T.nilable(String),
           discount_code: T.nilable(String),
           discount_codes: T.nilable(T::Array[String]),
           force_3ds: T.nilable(T::Boolean),
@@ -51,6 +53,10 @@ module Dodopayments
         # Fix the currency in which the end customer is billed. If Dodo Payments cannot
         # support that currency for this transaction, it will not proceed
         billing_currency: nil,
+        # Optional business / legal name associated with the tax id. When provided
+        # together with a valid tax id for a B2B purchase, this name is rendered on the
+        # invoice instead of the customer's personal name.
+        customer_business_name: nil,
         # DEPRECATED: Use discount_codes instead. Cannot be used together with
         # discount_codes.
         discount_code: nil,

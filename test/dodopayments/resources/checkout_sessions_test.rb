@@ -14,7 +14,10 @@ class Dodopayments::Test::Resources::CheckoutSessionsTest < Dodopayments::Test::
     assert_pattern do
       response => {
         session_id: String,
-        checkout_url: String | nil
+        checkout_url: String | nil,
+        client_secret: String | nil,
+        payment_id: String | nil,
+        publishable_key: String | nil
       }
     end
   end

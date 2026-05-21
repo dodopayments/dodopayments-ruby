@@ -3,6 +3,7 @@ module Dodopayments
     type checkout_session_flags =
       {
         allow_currency_selection: bool,
+        allow_customer_editing_business_name: bool,
         allow_customer_editing_city: bool,
         allow_customer_editing_country: bool,
         allow_customer_editing_email: bool,
@@ -23,6 +24,10 @@ module Dodopayments
       attr_reader allow_currency_selection: bool?
 
       def allow_currency_selection=: (bool) -> bool
+
+      attr_reader allow_customer_editing_business_name: bool?
+
+      def allow_customer_editing_business_name=: (bool) -> bool
 
       attr_reader allow_customer_editing_city: bool?
 
@@ -82,6 +87,7 @@ module Dodopayments
 
       def initialize: (
         ?allow_currency_selection: bool,
+        ?allow_customer_editing_business_name: bool,
         ?allow_customer_editing_city: bool,
         ?allow_customer_editing_country: bool,
         ?allow_customer_editing_email: bool,
@@ -100,6 +106,7 @@ module Dodopayments
 
       def to_hash: -> {
         allow_currency_selection: bool,
+        allow_customer_editing_business_name: bool,
         allow_customer_editing_city: bool,
         allow_customer_editing_country: bool,
         allow_customer_editing_email: bool,

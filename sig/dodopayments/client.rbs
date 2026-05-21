@@ -63,6 +63,8 @@ module Dodopayments
 
     attr_reader entitlements: Dodopayments::Resources::Entitlements
 
+    attr_reader product_collections: Dodopayments::Resources::ProductCollections
+
     private def auth_headers: -> ::Hash[String, String]
 
     def initialize: (

@@ -1,0 +1,52 @@
+module Dodopayments
+  module Models
+    type filter_type =
+      ::Array[Dodopayments::FilterType::MeterFilterConditionList]
+      | ::Array[Dodopayments::MeterFilter]
+
+    module FilterType
+      extend Dodopayments::Internal::Type::Union
+
+      type meter_filter_condition_list =
+        {
+          key: String,
+          operator: Dodopayments::Models::filter_operator,
+          value: Dodopayments::Models::FilterType::MeterFilterConditionList::value
+        }
+
+      class MeterFilterConditionList < Dodopayments::Internal::Type::BaseModel
+        attr_accessor key: String
+
+        attr_accessor operator: Dodopayments::Models::filter_operator
+
+        attr_accessor value: Dodopayments::Models::FilterType::MeterFilterConditionList::value
+
+        def initialize: (
+          key: String,
+          operator: Dodopayments::Models::filter_operator,
+          value: Dodopayments::Models::FilterType::MeterFilterConditionList::value
+        ) -> void
+
+        def to_hash: -> {
+          key: String,
+          operator: Dodopayments::Models::filter_operator,
+          value: Dodopayments::Models::FilterType::MeterFilterConditionList::value
+        }
+
+        type value = String | Float | bool
+
+        module Value
+          extend Dodopayments::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Dodopayments::Models::FilterType::MeterFilterConditionList::value]
+        end
+      end
+
+      def self?.variants: -> ::Array[Dodopayments::Models::filter_type]
+
+      MeterFilterConditionListArray: Dodopayments::Internal::Type::Converter
+
+      MeterFilterArray: Dodopayments::Internal::Type::Converter
+    end
+  end
+end
