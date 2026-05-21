@@ -11,8 +11,7 @@ module Dodopayments
               Dodopayments::AttachExistingCustomer::OrHash,
               Dodopayments::NewCustomer::OrHash
             ),
-          product_cart:
-            T::Array[Dodopayments::PaymentCreateParams::ProductCart::OrHash],
+          product_cart: T::Array[Dodopayments::OneTimeProductCartItem::OrHash],
           adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
           allowed_payment_method_types:
             T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),

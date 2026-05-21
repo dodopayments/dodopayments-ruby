@@ -16,7 +16,7 @@ module Dodopayments
         ?mandate_min_amount_inr_paise: Integer?,
         ?metadata: ::Hash[Symbol, String],
         ?on_demand: Dodopayments::OnDemandSubscription?,
-        ?one_time_product_cart: ::Array[Dodopayments::SubscriptionCreateParams::OneTimeProductCart]?,
+        ?one_time_product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?,
         ?payment_link: bool?,
         ?payment_method_id: String?,
         ?redirect_immediately: bool,

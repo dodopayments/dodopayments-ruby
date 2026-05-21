@@ -14,7 +14,7 @@ module Dodopayments
       #
       # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer] Customer information for the payment
       #
-      # @param product_cart [Array<Dodopayments::Models::PaymentCreateParams::ProductCart>] List of products in the cart. Must contain at least 1 and at most 100 items.
+      # @param product_cart [Array<Dodopayments::Models::OneTimeProductCartItem>] List of products in the cart. Must contain at least 1 and at most 100 items.
       #
       # @param adaptive_currency_fees_inclusive [Boolean, nil] Whether adaptive currency fees should be included in the price (true) or added o
       #
