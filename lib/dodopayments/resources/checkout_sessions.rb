@@ -6,7 +6,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::CheckoutSessionCreateParams} for more details.
       #
-      # @overload create(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, discount_codes: nil, feature_flags: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil, request_options: {})
+      # @overload create(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customer_business_name: nil, customization: nil, discount_code: nil, discount_codes: nil, feature_flags: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil, request_options: {})
       #
       # @param product_cart [Array<Dodopayments::Models::ProductItemReq>]
       #
@@ -23,6 +23,8 @@ module Dodopayments
       # @param custom_fields [Array<Dodopayments::Models::CustomField>, nil] Custom fields to collect from customer during checkout (max 5 fields)
       #
       # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer, nil] Customer details for the session
+      #
+      # @param customer_business_name [String, nil] Optional business / legal name associated with the tax id. When provided
       #
       # @param customization [Dodopayments::Models::CheckoutSessionCustomization] Customization for the checkout session page
       #
@@ -90,7 +92,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::CheckoutSessionPreviewParams} for more details.
       #
-      # @overload preview(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customization: nil, discount_code: nil, discount_codes: nil, feature_flags: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil, request_options: {})
+      # @overload preview(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customer_business_name: nil, customization: nil, discount_code: nil, discount_codes: nil, feature_flags: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil, request_options: {})
       #
       # @param product_cart [Array<Dodopayments::Models::ProductItemReq>]
       #
@@ -107,6 +109,8 @@ module Dodopayments
       # @param custom_fields [Array<Dodopayments::Models::CustomField>, nil] Custom fields to collect from customer during checkout (max 5 fields)
       #
       # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer, nil] Customer details for the session
+      #
+      # @param customer_business_name [String, nil] Optional business / legal name associated with the tax id. When provided
       #
       # @param customization [Dodopayments::Models::CheckoutSessionCustomization] Customization for the checkout session page
       #

@@ -113,6 +113,11 @@ module Dodopayments
       sig { returns(T.nilable(Time)) }
       attr_accessor :cancelled_at
 
+      # Business / legal name associated with the tax id (B2B). When set this is used on
+      # the invoice in place of the customer's personal name.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :customer_business_name
+
       # DEPRECATED: Use discounts[].cycles_remaining instead.
       sig { returns(T.nilable(Integer)) }
       attr_accessor :discount_cycles_remaining
@@ -172,6 +177,7 @@ module Dodopayments
           tax_inclusive: T::Boolean,
           trial_period_days: Integer,
           cancelled_at: T.nilable(Time),
+          customer_business_name: T.nilable(String),
           discount_cycles_remaining: T.nilable(Integer),
           discount_id: T.nilable(String),
           payment_method_id: T.nilable(String),
@@ -228,6 +234,9 @@ module Dodopayments
         trial_period_days:,
         # Cancelled timestamp if the subscription is cancelled
         cancelled_at: nil,
+        # Business / legal name associated with the tax id (B2B). When set this is used on
+        # the invoice in place of the customer's personal name.
+        customer_business_name: nil,
         # DEPRECATED: Use discounts[].cycles_remaining instead.
         discount_cycles_remaining: nil,
         # DEPRECATED: Use discounts instead.
@@ -273,6 +282,7 @@ module Dodopayments
             tax_inclusive: T::Boolean,
             trial_period_days: Integer,
             cancelled_at: T.nilable(Time),
+            customer_business_name: T.nilable(String),
             discount_cycles_remaining: T.nilable(Integer),
             discount_id: T.nilable(String),
             payment_method_id: T.nilable(String),

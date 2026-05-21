@@ -26,7 +26,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         discount_ids: ^(Dodopayments::Internal::Type::ArrayOf[String]) | nil,
         expires_on: Time | nil,
         payment_link: String | nil,
-        product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem]) | nil
+        product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::PaymentCreateResponse::ProductCart]) | nil
       }
     end
   end
@@ -70,7 +70,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         payment_link: String | nil,
         payment_method: String | nil,
         payment_method_type: String | nil,
-        product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Payment::ProductCart]) | nil,
+        product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem]) | nil,
         refund_status: Dodopayments::PaymentRefundStatus | nil,
         settlement_tax: Integer | nil,
         status: Dodopayments::IntentStatus | nil,

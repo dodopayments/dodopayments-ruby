@@ -52,6 +52,15 @@ module Dodopayments
                },
                nil?: true
 
+      # @!attribute customer_business_name
+      #   Optional business / legal name associated with the tax id. When provided
+      #   together with a valid tax id for a B2B subscription, this name is rendered on
+      #   the invoice instead of the customer's personal name. Send `null` to explicitly
+      #   clear the business name.
+      #
+      #   @return [String, nil]
+      optional :customer_business_name, String, nil?: true
+
       # @!attribute customer_name
       #
       #   @return [String, nil]
@@ -82,7 +91,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(subscription_id:, billing: nil, cancel_at_next_billing_date: nil, cancel_reason: nil, cancellation_comment: nil, cancellation_feedback: nil, credit_entitlement_cart: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
+      # @!method initialize(subscription_id:, billing: nil, cancel_at_next_billing_date: nil, cancel_reason: nil, cancellation_comment: nil, cancellation_feedback: nil, credit_entitlement_cart: nil, customer_business_name: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionUpdateParams} for more details.
       #
@@ -99,6 +108,8 @@ module Dodopayments
       #   @param cancellation_feedback [Symbol, Dodopayments::Models::CancellationFeedback, nil] Customer-supplied churn reason (only valid when cancelling or scheduling cancell
       #
       #   @param credit_entitlement_cart [Array<Dodopayments::Models::SubscriptionUpdateParams::CreditEntitlementCart>, nil] Update credit entitlement cart settings
+      #
+      #   @param customer_business_name [String, nil] Optional business / legal name associated with the tax id. When provided
       #
       #   @param customer_name [String, nil]
       #

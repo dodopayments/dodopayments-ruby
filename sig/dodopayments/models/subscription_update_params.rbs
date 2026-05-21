@@ -9,6 +9,7 @@ module Dodopayments
         cancellation_comment: String?,
         cancellation_feedback: Dodopayments::Models::cancellation_feedback?,
         credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?,
+        customer_business_name: String?,
         customer_name: String?,
         disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         metadata: ::Hash[Symbol, String]?,
@@ -36,6 +37,8 @@ module Dodopayments
 
       attr_accessor credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?
 
+      attr_accessor customer_business_name: String?
+
       attr_accessor customer_name: String?
 
       attr_accessor disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?
@@ -56,6 +59,7 @@ module Dodopayments
         ?cancellation_comment: String?,
         ?cancellation_feedback: Dodopayments::Models::cancellation_feedback?,
         ?credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?,
+        ?customer_business_name: String?,
         ?customer_name: String?,
         ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         ?metadata: ::Hash[Symbol, String]?,
@@ -73,6 +77,7 @@ module Dodopayments
         cancellation_comment: String?,
         cancellation_feedback: Dodopayments::Models::cancellation_feedback?,
         credit_entitlement_cart: ::Array[Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart]?,
+        customer_business_name: String?,
         customer_name: String?,
         disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         metadata: ::Hash[Symbol, String]?,

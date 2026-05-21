@@ -1,0 +1,12 @@
+module Dodopayments
+  module Models
+    module ProductCollections
+      module Groups
+        type item_create_response =
+          ::Array[Dodopayments::ProductCollections::Groups::ProductCollectionProduct]
+
+        ItemCreateResponse: Dodopayments::Internal::Type::Converter
+      end
+    end
+  end
+end

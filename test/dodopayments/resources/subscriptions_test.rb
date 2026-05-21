@@ -28,7 +28,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         discount_id: String | nil,
         discount_ids: ^(Dodopayments::Internal::Type::ArrayOf[String]) | nil,
         expires_on: Time | nil,
-        one_time_product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart]) | nil,
+        one_time_product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::OneTimeProductCartItem]) | nil,
         payment_link: String | nil
       }
     end
@@ -71,6 +71,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         cancellation_feedback: Dodopayments::CancellationFeedback | nil,
         cancelled_at: Time | nil,
         custom_field_responses: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::CustomFieldResponse]) | nil,
+        customer_business_name: String | nil,
         discount_cycles_remaining: Integer | nil,
         discount_id: String | nil,
         discounts: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::DiscountDetail]) | nil,
@@ -119,6 +120,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         cancellation_feedback: Dodopayments::CancellationFeedback | nil,
         cancelled_at: Time | nil,
         custom_field_responses: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::CustomFieldResponse]) | nil,
+        customer_business_name: String | nil,
         discount_cycles_remaining: Integer | nil,
         discount_id: String | nil,
         discounts: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::DiscountDetail]) | nil,
@@ -168,6 +170,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         tax_inclusive: Dodopayments::Internal::Type::Boolean,
         trial_period_days: Integer,
         cancelled_at: Time | nil,
+        customer_business_name: String | nil,
         discount_cycles_remaining: Integer | nil,
         discount_id: String | nil,
         payment_method_id: String | nil,

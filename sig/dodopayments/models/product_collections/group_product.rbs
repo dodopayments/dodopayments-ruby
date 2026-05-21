@@ -1,0 +1,17 @@
+module Dodopayments
+  module Models
+    module ProductCollections
+      type group_product = { product_id: String, status: bool? }
+
+      class GroupProduct < Dodopayments::Internal::Type::BaseModel
+        attr_accessor product_id: String
+
+        attr_accessor status: bool?
+
+        def initialize: (product_id: String, ?status: bool?) -> void
+
+        def to_hash: -> { product_id: String, status: bool? }
+      end
+    end
+  end
+end

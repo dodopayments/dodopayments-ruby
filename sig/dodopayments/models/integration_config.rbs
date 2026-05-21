@@ -15,38 +15,24 @@ module Dodopayments
 
       type github_config =
         {
-          permission: Dodopayments::Models::IntegrationConfig::GitHubConfig::permission,
+          permission: Dodopayments::Models::github_permission,
           target_id: String
         }
 
       class GitHubConfig < Dodopayments::Internal::Type::BaseModel
-        attr_accessor permission: Dodopayments::Models::IntegrationConfig::GitHubConfig::permission
+        attr_accessor permission: Dodopayments::Models::github_permission
 
         attr_accessor target_id: String
 
         def initialize: (
-          permission: Dodopayments::Models::IntegrationConfig::GitHubConfig::permission,
+          permission: Dodopayments::Models::github_permission,
           target_id: String
         ) -> void
 
         def to_hash: -> {
-          permission: Dodopayments::Models::IntegrationConfig::GitHubConfig::permission,
+          permission: Dodopayments::Models::github_permission,
           target_id: String
         }
-
-        type permission = :pull | :push | :admin | :maintain | :triage
-
-        module Permission
-          extend Dodopayments::Internal::Type::Enum
-
-          PULL: :pull
-          PUSH: :push
-          ADMIN: :admin
-          MAINTAIN: :maintain
-          TRIAGE: :triage
-
-          def self?.values: -> ::Array[Dodopayments::Models::IntegrationConfig::GitHubConfig::permission]
-        end
       end
 
       type discord_config = { guild_id: String, role_id: String? }

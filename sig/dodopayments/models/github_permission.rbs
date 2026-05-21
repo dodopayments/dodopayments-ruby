@@ -1,0 +1,17 @@
+module Dodopayments
+  module Models
+    type github_permission = :pull | :push | :admin | :maintain | :triage
+
+    module GitHubPermission
+      extend Dodopayments::Internal::Type::Enum
+
+      PULL: :pull
+      PUSH: :push
+      ADMIN: :admin
+      MAINTAIN: :maintain
+      TRIAGE: :triage
+
+      def self?.values: -> ::Array[Dodopayments::Models::github_permission]
+    end
+  end
+end

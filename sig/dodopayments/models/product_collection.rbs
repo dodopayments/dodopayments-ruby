@@ -1,0 +1,55 @@
+module Dodopayments
+  module Models
+    type product_collection =
+      {
+        id: String,
+        brand_id: String,
+        created_at: Time,
+        groups: ::Array[Dodopayments::ProductCollections::ProductCollectionGroupResponse],
+        name: String,
+        updated_at: Time,
+        description: String?,
+        image: String?
+      }
+
+    class ProductCollection < Dodopayments::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor brand_id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor groups: ::Array[Dodopayments::ProductCollections::ProductCollectionGroupResponse]
+
+      attr_accessor name: String
+
+      attr_accessor updated_at: Time
+
+      attr_accessor description: String?
+
+      attr_accessor image: String?
+
+      def initialize: (
+        id: String,
+        brand_id: String,
+        created_at: Time,
+        groups: ::Array[Dodopayments::ProductCollections::ProductCollectionGroupResponse],
+        name: String,
+        updated_at: Time,
+        ?description: String?,
+        ?image: String?
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        brand_id: String,
+        created_at: Time,
+        groups: ::Array[Dodopayments::ProductCollections::ProductCollectionGroupResponse],
+        name: String,
+        updated_at: Time,
+        description: String?,
+        image: String?
+      }
+    end
+  end
+end

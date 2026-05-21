@@ -134,6 +134,11 @@ module Dodopayments
       sig { returns(T.nilable(T::Array[Dodopayments::CustomFieldResponse])) }
       attr_accessor :custom_field_responses
 
+      # Business / legal name associated with the tax id (B2B). When set this is used on
+      # the invoice in place of the customer's personal name.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :customer_business_name
+
       # DEPRECATED: Use discounts[].cycles_remaining instead.
       sig { returns(T.nilable(Integer)) }
       attr_accessor :discount_cycles_remaining
@@ -204,6 +209,7 @@ module Dodopayments
           cancelled_at: T.nilable(Time),
           custom_field_responses:
             T.nilable(T::Array[Dodopayments::CustomFieldResponse::OrHash]),
+          customer_business_name: T.nilable(String),
           discount_cycles_remaining: T.nilable(Integer),
           discount_id: T.nilable(String),
           discounts: T.nilable(T::Array[Dodopayments::DiscountDetail::OrHash]),
@@ -273,6 +279,9 @@ module Dodopayments
         cancelled_at: nil,
         # Customer's responses to custom fields collected during checkout
         custom_field_responses: nil,
+        # Business / legal name associated with the tax id (B2B). When set this is used on
+        # the invoice in place of the customer's personal name.
+        customer_business_name: nil,
         # DEPRECATED: Use discounts[].cycles_remaining instead.
         discount_cycles_remaining: nil,
         # DEPRECATED: Use discounts instead. Returns the first discount's ID if present.
@@ -327,6 +336,7 @@ module Dodopayments
             cancelled_at: T.nilable(Time),
             custom_field_responses:
               T.nilable(T::Array[Dodopayments::CustomFieldResponse]),
+            customer_business_name: T.nilable(String),
             discount_cycles_remaining: T.nilable(Integer),
             discount_id: T.nilable(String),
             discounts: T.nilable(T::Array[Dodopayments::DiscountDetail]),

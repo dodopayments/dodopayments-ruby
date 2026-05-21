@@ -17,6 +17,7 @@ module Dodopayments
           allowed_payment_method_types:
             T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_currency: T.nilable(Dodopayments::Currency::OrSymbol),
+          customer_business_name: T.nilable(String),
           discount_code: T.nilable(String),
           discount_codes: T.nilable(T::Array[String]),
           force_3ds: T.nilable(T::Boolean),
@@ -24,7 +25,11 @@ module Dodopayments
           metadata: T::Hash[Symbol, String],
           on_demand: T.nilable(Dodopayments::OnDemandSubscription::OrHash),
           one_time_product_cart:
-            T.nilable(T::Array[Dodopayments::OneTimeProductCartItem::OrHash]),
+            T.nilable(
+              T::Array[
+                Dodopayments::SubscriptionCreateParams::OneTimeProductCart::OrHash
+              ]
+            ),
           payment_link: T.nilable(T::Boolean),
           payment_method_id: T.nilable(String),
           redirect_immediately: T::Boolean,
@@ -58,6 +63,10 @@ module Dodopayments
         # Fix the currency in which the end customer is billed. If Dodo Payments cannot
         # support that currency for this transaction, it will not proceed
         billing_currency: nil,
+        # Optional business / legal name associated with the tax id. When provided
+        # together with a valid tax id for a B2B purchase, this name is rendered on the
+        # invoice instead of the customer's personal name.
+        customer_business_name: nil,
         # DEPRECATED: Use discount_codes instead. Cannot be used together with
         # discount_codes.
         discount_code: nil,
@@ -139,6 +148,7 @@ module Dodopayments
                 Dodopayments::SubscriptionUpdateParams::CreditEntitlementCart::OrHash
               ]
             ),
+          customer_business_name: T.nilable(String),
           customer_name: T.nilable(String),
           disable_on_demand:
             T.nilable(
@@ -166,6 +176,11 @@ module Dodopayments
         cancellation_feedback: nil,
         # Update credit entitlement cart settings
         credit_entitlement_cart: nil,
+        # Optional business / legal name associated with the tax id. When provided
+        # together with a valid tax id for a B2B subscription, this name is rendered on
+        # the invoice instead of the customer's personal name. Send `null` to explicitly
+        # clear the business name.
+        customer_business_name: nil,
         customer_name: nil,
         disable_on_demand: nil,
         metadata: nil,
