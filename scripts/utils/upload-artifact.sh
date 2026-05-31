@@ -110,4 +110,4 @@ walk_tree "$DIST_DIR"
 echo "::endgroup::"
 
 echo -e "${GREEN}Gem artifacts uploaded to Stainless storage.${NC}"
-echo -e "\033[32mInstallation: bundle remove dodopayments && bundle add dodopayments --source 'https://pkg.stainless.com/s/dodo-payments-ruby/$SHA'\033[0m"
+echo -e "\033[32mInstallation: bundle remove dodopayments && bundle add dodopayments --source 'https://pkg.stainless.com/s/dodopayments-ruby/$SHA'\033[0m"
