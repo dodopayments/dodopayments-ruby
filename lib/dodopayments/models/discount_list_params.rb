@@ -20,7 +20,7 @@ module Dodopayments
       optional :code, String
 
       # @!attribute discount_type
-      #   Filter by discount type (percentage)
+      #   Filter by discount type
       #
       #   @return [Symbol, Dodopayments::Models::DiscountType, nil]
       optional :discount_type, enum: -> { Dodopayments::DiscountType }
@@ -48,7 +48,7 @@ module Dodopayments
       #
       #   @param code [String] Filter by discount code (partial match, case-insensitive)
       #
-      #   @param discount_type [Symbol, Dodopayments::Models::DiscountType] Filter by discount type (percentage)
+      #   @param discount_type [Symbol, Dodopayments::Models::DiscountType] Filter by discount type
       #
       #   @param page_number [Integer] Page number (default = 0).
       #

@@ -15,6 +15,26 @@ module Dodopayments
           name: String,
           brand_id: T.nilable(String),
           description: T.nilable(String),
+          effective_at_on_downgrade:
+            T.nilable(
+              Dodopayments::ProductCollectionCreateParams::EffectiveAtOnDowngrade::OrSymbol
+            ),
+          effective_at_on_upgrade:
+            T.nilable(
+              Dodopayments::ProductCollectionCreateParams::EffectiveAtOnUpgrade::OrSymbol
+            ),
+          on_payment_failure:
+            T.nilable(
+              Dodopayments::ProductCollectionCreateParams::OnPaymentFailure::OrSymbol
+            ),
+          proration_billing_mode_on_downgrade:
+            T.nilable(
+              Dodopayments::ProductCollectionCreateParams::ProrationBillingModeOnDowngrade::OrSymbol
+            ),
+          proration_billing_mode_on_upgrade:
+            T.nilable(
+              Dodopayments::ProductCollectionCreateParams::ProrationBillingModeOnUpgrade::OrSymbol
+            ),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::ProductCollection)
       end
@@ -27,6 +47,21 @@ module Dodopayments
         brand_id: nil,
         # Optional description of the product collection
         description: nil,
+        # Default effective_at setting for subscription plan downgrades (NULL = inherit
+        # from business)
+        effective_at_on_downgrade: nil,
+        # Default effective_at setting for subscription plan upgrades (NULL = inherit from
+        # business)
+        effective_at_on_upgrade: nil,
+        # Default behavior for subscription plan changes on payment failure (NULL =
+        # inherit from business)
+        on_payment_failure: nil,
+        # Default proration billing mode for subscription plan downgrades (NULL = inherit
+        # from business)
+        proration_billing_mode_on_downgrade: nil,
+        # Default proration billing mode for subscription plan upgrades (NULL = inherit
+        # from business)
+        proration_billing_mode_on_upgrade: nil,
         request_options: {}
       )
       end
@@ -49,9 +84,29 @@ module Dodopayments
           id: String,
           brand_id: T.nilable(String),
           description: T.nilable(String),
+          effective_at_on_downgrade:
+            T.nilable(
+              Dodopayments::ProductCollectionUpdateParams::EffectiveAtOnDowngrade::OrSymbol
+            ),
+          effective_at_on_upgrade:
+            T.nilable(
+              Dodopayments::ProductCollectionUpdateParams::EffectiveAtOnUpgrade::OrSymbol
+            ),
           group_order: T.nilable(T::Array[String]),
           image_id: T.nilable(String),
           name: T.nilable(String),
+          on_payment_failure:
+            T.nilable(
+              Dodopayments::ProductCollectionUpdateParams::OnPaymentFailure::OrSymbol
+            ),
+          proration_billing_mode_on_downgrade:
+            T.nilable(
+              Dodopayments::ProductCollectionUpdateParams::ProrationBillingModeOnDowngrade::OrSymbol
+            ),
+          proration_billing_mode_on_upgrade:
+            T.nilable(
+              Dodopayments::ProductCollectionUpdateParams::ProrationBillingModeOnUpgrade::OrSymbol
+            ),
           request_options: Dodopayments::RequestOptions::OrHash
         ).void
       end
@@ -62,12 +117,27 @@ module Dodopayments
         brand_id: nil,
         # Optional description update - pass null to remove, omit to keep unchanged
         description: nil,
+        # Effective_at setting for downgrades: Some(Some(val)) = set, Some(None) = clear
+        # (inherit), None = no change
+        effective_at_on_downgrade: nil,
+        # Effective_at setting for upgrades: Some(Some(val)) = set, Some(None) = clear
+        # (inherit), None = no change
+        effective_at_on_upgrade: nil,
         # Optional new order for groups (array of group UUIDs in desired order)
         group_order: nil,
         # Optional image update - pass null to remove, omit to keep unchanged
         image_id: nil,
         # Optional new name for the collection
         name: nil,
+        # On payment failure behavior: Some(Some(val)) = set, Some(None) = clear
+        # (inherit), None = no change
+        on_payment_failure: nil,
+        # Proration billing mode for downgrades: Some(Some(val)) = set, Some(None) = clear
+        # (inherit), None = no change
+        proration_billing_mode_on_downgrade: nil,
+        # Proration billing mode for upgrades: Some(Some(val)) = set, Some(None) = clear
+        # (inherit), None = no change
+        proration_billing_mode_on_upgrade: nil,
         request_options: {}
       )
       end

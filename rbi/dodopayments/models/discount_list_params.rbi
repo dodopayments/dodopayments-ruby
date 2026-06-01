@@ -28,7 +28,7 @@ module Dodopayments
       sig { params(code: String).void }
       attr_writer :code
 
-      # Filter by discount type (percentage)
+      # Filter by discount type
       sig { returns(T.nilable(Dodopayments::DiscountType::OrSymbol)) }
       attr_reader :discount_type
 
@@ -72,7 +72,7 @@ module Dodopayments
         active: nil,
         # Filter by discount code (partial match, case-insensitive)
         code: nil,
-        # Filter by discount type (percentage)
+        # Filter by discount type
         discount_type: nil,
         # Page number (default = 0).
         page_number: nil,

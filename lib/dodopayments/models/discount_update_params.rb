@@ -13,11 +13,8 @@ module Dodopayments
       required :discount_id, String
 
       # @!attribute amount
-      #   If present, update the discount amount:
-      #
-      #   - If `discount_type` is `percentage`, this represents **basis points** (e.g.,
-      #     `540` = `5.4%`).
-      #   - Otherwise, this represents **USD cents** (e.g., `100` = `$1.00`).
+      #   If present, update the discount amount in **basis points** (e.g., `540` =
+      #   `5.4%`, `10000` = `100%`).
       #
       #   Must be at least 1 if provided.
       #
@@ -69,7 +66,7 @@ module Dodopayments
       optional :subscription_cycles, Integer, nil?: true
 
       # @!attribute type
-      #   If present, update the discount type.
+      #   If present, update the discount type. Currently only `percentage` is supported.
       #
       #   @return [Symbol, Dodopayments::Models::DiscountType, nil]
       optional :type, enum: -> { Dodopayments::DiscountType }, nil?: true
@@ -85,7 +82,7 @@ module Dodopayments
       #
       #   @param discount_id [String]
       #
-      #   @param amount [Integer, nil] If present, update the discount amount:
+      #   @param amount [Integer, nil] If present, update the discount amount in **basis points** (e.g., `540` = `5.4%`
       #
       #   @param code [String, nil] If present, update the discount code (uppercase).
       #
@@ -101,7 +98,7 @@ module Dodopayments
       #
       #   @param subscription_cycles [Integer, nil] Number of subscription billing cycles this discount is valid for.
       #
-      #   @param type [Symbol, Dodopayments::Models::DiscountType, nil] If present, update the discount type.
+      #   @param type [Symbol, Dodopayments::Models::DiscountType, nil] If present, update the discount type. Currently only `percentage` is supported.
       #
       #   @param usage_limit [Integer, nil]
       #
