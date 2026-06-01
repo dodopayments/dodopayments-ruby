@@ -1,18 +1,5 @@
 # Changelog
 
-## [2.12.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.11.1...v2.12.0) (2026-06-01)
-
-
-### Features
-
-* **api:** regenerate SDK from latest OpenAPI spec (1.101.0) ([89eb2dd](https://github.com/dodopayments/dodopayments-ruby/commit/89eb2dd3ba7d768a18e7c6fd5d01208e1797111d))
-
-
-### Chores
-
-* re-seal custom code for 1.101.0 spec (python/go/typescript/kotlin/ruby/php) ([0d504b6](https://github.com/dodopayments/dodopayments-ruby/commit/0d504b65f0563ad1af89ce13f7e6e825b2528efd))
-* release 2.12.0 ([c17c8a5](https://github.com/dodopayments/dodopayments-ruby/commit/c17c8a5ca1f104234733babc117e3d272724be25))
-
 ## [2.11.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.11.0...v2.11.1) (2026-06-01)
 
 
