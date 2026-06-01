@@ -60,6 +60,12 @@ module Dodopayments
       sig { returns(T::Array[Dodopayments::RefundListItem]) }
       attr_accessor :refunds
 
+      # Retry attempt number for subscription renewal payments. `0` for the original
+      # payment, `1`+ for each scheduled off-session retry after a failed renewal.
+      # Always `0` for non-subscription payments.
+      sig { returns(Integer) }
+      attr_accessor :retry_attempt
+
       # The amount that will be credited to your Dodo balance after currency conversion
       # and processing. Especially relevant for adaptive pricing where the customer's
       # payment currency differs from your settlement currency.
@@ -188,6 +194,7 @@ module Dodopayments
           metadata: T::Hash[Symbol, String],
           payment_id: String,
           refunds: T::Array[Dodopayments::RefundListItem::OrHash],
+          retry_attempt: Integer,
           settlement_amount: Integer,
           settlement_currency: Dodopayments::Currency::OrSymbol,
           total_amount: Integer,
@@ -241,6 +248,10 @@ module Dodopayments
         payment_id:,
         # List of refunds issued for this payment
         refunds:,
+        # Retry attempt number for subscription renewal payments. `0` for the original
+        # payment, `1`+ for each scheduled off-session retry after a failed renewal.
+        # Always `0` for non-subscription payments.
+        retry_attempt:,
         # The amount that will be credited to your Dodo balance after currency conversion
         # and processing. Especially relevant for adaptive pricing where the customer's
         # payment currency differs from your settlement currency.
@@ -319,6 +330,7 @@ module Dodopayments
             metadata: T::Hash[Symbol, String],
             payment_id: String,
             refunds: T::Array[Dodopayments::RefundListItem],
+            retry_attempt: Integer,
             settlement_amount: Integer,
             settlement_currency: Dodopayments::Currency::TaggedSymbol,
             total_amount: Integer,

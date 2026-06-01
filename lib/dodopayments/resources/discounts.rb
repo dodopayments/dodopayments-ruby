@@ -11,9 +11,9 @@ module Dodopayments
       #
       # @overload create(amount:, type:, code: nil, expires_at: nil, metadata: nil, name: nil, preserve_on_plan_change: nil, restricted_to: nil, subscription_cycles: nil, usage_limit: nil, request_options: {})
       #
-      # @param amount [Integer] The discount amount.
+      # @param amount [Integer] The discount amount in **basis points** (e.g. `540` means `5.4%`, `10000` means
       #
-      # @param type [Symbol, Dodopayments::Models::DiscountType] The discount type (e.g. `percentage`, `flat`, or `flat_per_unit`).
+      # @param type [Symbol, Dodopayments::Models::DiscountType] The discount type. Currently only `percentage` is supported.
       #
       # @param code [String, nil] Optionally supply a code (will be uppercased).
       #
@@ -76,7 +76,7 @@ module Dodopayments
       #
       # @param discount_id [String] Discount Id
       #
-      # @param amount [Integer, nil] If present, update the discount amount:
+      # @param amount [Integer, nil] If present, update the discount amount in **basis points** (e.g., `540` = `5.4%`
       #
       # @param code [String, nil] If present, update the discount code (uppercase).
       #
@@ -92,7 +92,7 @@ module Dodopayments
       #
       # @param subscription_cycles [Integer, nil] Number of subscription billing cycles this discount is valid for.
       #
-      # @param type [Symbol, Dodopayments::Models::DiscountType, nil] If present, update the discount type.
+      # @param type [Symbol, Dodopayments::Models::DiscountType, nil] If present, update the discount type. Currently only `percentage` is supported.
       #
       # @param usage_limit [Integer, nil]
       #
@@ -120,7 +120,7 @@ module Dodopayments
       #
       # @param code [String] Filter by discount code (partial match, case-insensitive)
       #
-      # @param discount_type [Symbol, Dodopayments::Models::DiscountType] Filter by discount type (percentage)
+      # @param discount_type [Symbol, Dodopayments::Models::DiscountType] Filter by discount type
       #
       # @param page_number [Integer] Page number (default = 0).
       #

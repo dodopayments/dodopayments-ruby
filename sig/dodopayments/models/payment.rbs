@@ -13,6 +13,7 @@ module Dodopayments
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         refunds: ::Array[Dodopayments::RefundListItem],
+        retry_attempt: Integer,
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Models::currency,
         total_amount: Integer,
@@ -63,6 +64,8 @@ module Dodopayments
       attr_accessor payment_id: String
 
       attr_accessor refunds: ::Array[Dodopayments::RefundListItem]
+
+      attr_accessor retry_attempt: Integer
 
       attr_accessor settlement_amount: Integer
 
@@ -128,6 +131,7 @@ module Dodopayments
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         refunds: ::Array[Dodopayments::RefundListItem],
+        retry_attempt: Integer,
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Models::currency,
         total_amount: Integer,
@@ -168,6 +172,7 @@ module Dodopayments
         metadata: ::Hash[Symbol, String],
         payment_id: String,
         refunds: ::Array[Dodopayments::RefundListItem],
+        retry_attempt: Integer,
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Models::currency,
         total_amount: Integer,

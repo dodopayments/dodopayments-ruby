@@ -14,18 +14,14 @@ module Dodopayments
           )
         end
 
-      # The discount amount.
-      #
-      # - If `discount_type` is **not** `percentage`, `amount` is in **USD cents**. For
-      #   example, `100` means `$1.00`. Only USD is allowed.
-      # - If `discount_type` **is** `percentage`, `amount` is in **basis points**. For
-      #   example, `540` means `5.4%`.
+      # The discount amount in **basis points** (e.g. `540` means `5.4%`, `10000` means
+      # `100%`).
       #
       # Must be at least 1.
       sig { returns(Integer) }
       attr_accessor :amount
 
-      # The discount type (e.g. `percentage`, `flat`, or `flat_per_unit`).
+      # The discount type. Currently only `percentage` is supported.
       sig { returns(Dodopayments::DiscountType::OrSymbol) }
       attr_accessor :type
 
@@ -88,16 +84,12 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
-        # The discount amount.
-        #
-        # - If `discount_type` is **not** `percentage`, `amount` is in **USD cents**. For
-        #   example, `100` means `$1.00`. Only USD is allowed.
-        # - If `discount_type` **is** `percentage`, `amount` is in **basis points**. For
-        #   example, `540` means `5.4%`.
+        # The discount amount in **basis points** (e.g. `540` means `5.4%`, `10000` means
+        # `100%`).
         #
         # Must be at least 1.
         amount:,
-        # The discount type (e.g. `percentage`, `flat`, or `flat_per_unit`).
+        # The discount type. Currently only `percentage` is supported.
         type:,
         # Optionally supply a code (will be uppercased).
         #

@@ -5,11 +5,7 @@ module Dodopayments
     # @see Dodopayments::Resources::Discounts#create
     class Discount < Dodopayments::Internal::Type::BaseModel
       # @!attribute amount
-      #   The discount amount.
-      #
-      #   - If `discount_type` is `percentage`, this is in **basis points** (e.g., 540 =>
-      #     5.4%).
-      #   - Otherwise, this is **USD cents** (e.g., 100 => `$1.00`).
+      #   The discount amount in **basis points** (e.g., 540 => 5.4%).
       #
       #   @return [Integer]
       required :amount, Integer
@@ -63,7 +59,7 @@ module Dodopayments
       required :times_used, Integer
 
       # @!attribute type
-      #   The type of discount, e.g. `percentage`, `flat`, or `flat_per_unit`.
+      #   The type of discount. Currently only `percentage` is supported.
       #
       #   @return [Symbol, Dodopayments::Models::DiscountType]
       required :type, enum: -> { Dodopayments::DiscountType }
@@ -98,7 +94,7 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Discount} for more details.
       #
-      #   @param amount [Integer] The discount amount.
+      #   @param amount [Integer] The discount amount in **basis points** (e.g., 540 => 5.4%).
       #
       #   @param business_id [String] The business this discount belongs to.
       #
@@ -116,7 +112,7 @@ module Dodopayments
       #
       #   @param times_used [Integer] How many times this discount has been used.
       #
-      #   @param type [Symbol, Dodopayments::Models::DiscountType] The type of discount, e.g. `percentage`, `flat`, or `flat_per_unit`.
+      #   @param type [Symbol, Dodopayments::Models::DiscountType] The type of discount. Currently only `percentage` is supported.
       #
       #   @param expires_at [Time, nil] Optional date/time after which discount is expired.
       #
