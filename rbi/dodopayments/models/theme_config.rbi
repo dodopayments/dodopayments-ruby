@@ -121,7 +121,7 @@ module Dodopayments
         MD = T.let(:md, Dodopayments::ThemeConfig::FontSize::TaggedSymbol)
         LG = T.let(:lg, Dodopayments::ThemeConfig::FontSize::TaggedSymbol)
         XL = T.let(:xl, Dodopayments::ThemeConfig::FontSize::TaggedSymbol)
-        FONT_SIZE_2XL =
+        SIZE2_XL =
           T.let(:"2xl", Dodopayments::ThemeConfig::FontSize::TaggedSymbol)
 
         sig do
