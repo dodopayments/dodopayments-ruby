@@ -1005,6 +1005,11 @@ module Dodopayments
             :dunning_fees,
             Dodopayments::BalanceRetrieveLedgerParams::EventType::TaggedSymbol
           )
+        PAYMENT_RETRY_FEE =
+          T.let(
+            :payment_retry_fee,
+            Dodopayments::BalanceRetrieveLedgerParams::EventType::TaggedSymbol
+          )
 
         sig do
           override.returns(

@@ -23,7 +23,12 @@ class Dodopayments::Test::Resources::ProductCollectionsTest < Dodopayments::Test
         name: String,
         updated_at: Time,
         description: String | nil,
-        image: String | nil
+        effective_at_on_downgrade: Dodopayments::ProductCollection::EffectiveAtOnDowngrade | nil,
+        effective_at_on_upgrade: Dodopayments::ProductCollection::EffectiveAtOnUpgrade | nil,
+        image: String | nil,
+        on_payment_failure: Dodopayments::ProductCollection::OnPaymentFailure | nil,
+        proration_billing_mode_on_downgrade: Dodopayments::ProductCollection::ProrationBillingModeOnDowngrade | nil,
+        proration_billing_mode_on_upgrade: Dodopayments::ProductCollection::ProrationBillingModeOnUpgrade | nil
       }
     end
   end
@@ -44,7 +49,12 @@ class Dodopayments::Test::Resources::ProductCollectionsTest < Dodopayments::Test
         name: String,
         updated_at: Time,
         description: String | nil,
-        image: String | nil
+        effective_at_on_downgrade: Dodopayments::ProductCollection::EffectiveAtOnDowngrade | nil,
+        effective_at_on_upgrade: Dodopayments::ProductCollection::EffectiveAtOnUpgrade | nil,
+        image: String | nil,
+        on_payment_failure: Dodopayments::ProductCollection::OnPaymentFailure | nil,
+        proration_billing_mode_on_downgrade: Dodopayments::ProductCollection::ProrationBillingModeOnDowngrade | nil,
+        proration_billing_mode_on_upgrade: Dodopayments::ProductCollection::ProrationBillingModeOnUpgrade | nil
       }
     end
   end

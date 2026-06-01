@@ -21,16 +21,12 @@ module Dodopayments
         ).returns(Dodopayments::Discount)
       end
       def create(
-        # The discount amount.
-        #
-        # - If `discount_type` is **not** `percentage`, `amount` is in **USD cents**. For
-        #   example, `100` means `$1.00`. Only USD is allowed.
-        # - If `discount_type` **is** `percentage`, `amount` is in **basis points**. For
-        #   example, `540` means `5.4%`.
+        # The discount amount in **basis points** (e.g. `540` means `5.4%`, `10000` means
+        # `100%`).
         #
         # Must be at least 1.
         amount:,
-        # The discount type (e.g. `percentage`, `flat`, or `flat_per_unit`).
+        # The discount type. Currently only `percentage` is supported.
         type:,
         # Optionally supply a code (will be uppercased).
         #
@@ -91,11 +87,8 @@ module Dodopayments
       def update(
         # Discount Id
         discount_id,
-        # If present, update the discount amount:
-        #
-        # - If `discount_type` is `percentage`, this represents **basis points** (e.g.,
-        #   `540` = `5.4%`).
-        # - Otherwise, this represents **USD cents** (e.g., `100` = `$1.00`).
+        # If present, update the discount amount in **basis points** (e.g., `540` =
+        # `5.4%`, `10000` = `100%`).
         #
         # Must be at least 1 if provided.
         amount: nil,
@@ -115,7 +108,7 @@ module Dodopayments
         # provided, the discount will be applied indefinitely to all recurring payments
         # related to the subscription.
         subscription_cycles: nil,
-        # If present, update the discount type.
+        # If present, update the discount type. Currently only `percentage` is supported.
         type: nil,
         usage_limit: nil,
         request_options: {}
@@ -143,7 +136,7 @@ module Dodopayments
         active: nil,
         # Filter by discount code (partial match, case-insensitive)
         code: nil,
-        # Filter by discount type (percentage)
+        # Filter by discount type
         discount_type: nil,
         # Page number (default = 0).
         page_number: nil,

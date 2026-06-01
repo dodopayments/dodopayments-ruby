@@ -8,11 +8,7 @@ module Dodopayments
           T.any(Dodopayments::Discount, Dodopayments::Internal::AnyHash)
         end
 
-      # The discount amount.
-      #
-      # - If `discount_type` is `percentage`, this is in **basis points** (e.g., 540 =>
-      #   5.4%).
-      # - Otherwise, this is **USD cents** (e.g., 100 => `$1.00`).
+      # The discount amount in **basis points** (e.g., 540 => 5.4%).
       sig { returns(Integer) }
       attr_accessor :amount
 
@@ -48,7 +44,7 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :times_used
 
-      # The type of discount, e.g. `percentage`, `flat`, or `flat_per_unit`.
+      # The type of discount. Currently only `percentage` is supported.
       sig { returns(Dodopayments::DiscountType::TaggedSymbol) }
       attr_accessor :type
 
@@ -89,11 +85,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
-        # The discount amount.
-        #
-        # - If `discount_type` is `percentage`, this is in **basis points** (e.g., 540 =>
-        #   5.4%).
-        # - Otherwise, this is **USD cents** (e.g., 100 => `$1.00`).
+        # The discount amount in **basis points** (e.g., 540 => 5.4%).
         amount:,
         # The business this discount belongs to.
         business_id:,
@@ -111,7 +103,7 @@ module Dodopayments
         restricted_to:,
         # How many times this discount has been used.
         times_used:,
-        # The type of discount, e.g. `percentage`, `flat`, or `flat_per_unit`.
+        # The type of discount. Currently only `percentage` is supported.
         type:,
         # Optional date/time after which discount is expired.
         expires_at: nil,

@@ -8,12 +8,8 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute amount
-      #   The discount amount.
-      #
-      #   - If `discount_type` is **not** `percentage`, `amount` is in **USD cents**. For
-      #     example, `100` means `$1.00`. Only USD is allowed.
-      #   - If `discount_type` **is** `percentage`, `amount` is in **basis points**. For
-      #     example, `540` means `5.4%`.
+      #   The discount amount in **basis points** (e.g. `540` means `5.4%`, `10000` means
+      #   `100%`).
       #
       #   Must be at least 1.
       #
@@ -21,7 +17,7 @@ module Dodopayments
       required :amount, Integer
 
       # @!attribute type
-      #   The discount type (e.g. `percentage`, `flat`, or `flat_per_unit`).
+      #   The discount type. Currently only `percentage` is supported.
       #
       #   @return [Symbol, Dodopayments::Models::DiscountType]
       required :type, enum: -> { Dodopayments::DiscountType }
@@ -83,9 +79,9 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::DiscountCreateParams} for more details.
       #
-      #   @param amount [Integer] The discount amount.
+      #   @param amount [Integer] The discount amount in **basis points** (e.g. `540` means `5.4%`, `10000` means
       #
-      #   @param type [Symbol, Dodopayments::Models::DiscountType] The discount type (e.g. `percentage`, `flat`, or `flat_per_unit`).
+      #   @param type [Symbol, Dodopayments::Models::DiscountType] The discount type. Currently only `percentage` is supported.
       #
       #   @param code [String, nil] Optionally supply a code (will be uppercased).
       #

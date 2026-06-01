@@ -8,6 +8,11 @@ module Dodopayments
         name: String,
         ?brand_id: String?,
         ?description: String?,
+        ?effective_at_on_downgrade: Dodopayments::Models::ProductCollectionCreateParams::effective_at_on_downgrade?,
+        ?effective_at_on_upgrade: Dodopayments::Models::ProductCollectionCreateParams::effective_at_on_upgrade?,
+        ?on_payment_failure: Dodopayments::Models::ProductCollectionCreateParams::on_payment_failure?,
+        ?proration_billing_mode_on_downgrade: Dodopayments::Models::ProductCollectionCreateParams::proration_billing_mode_on_downgrade?,
+        ?proration_billing_mode_on_upgrade: Dodopayments::Models::ProductCollectionCreateParams::proration_billing_mode_on_upgrade?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::ProductCollection
 
@@ -20,9 +25,14 @@ module Dodopayments
         String id,
         ?brand_id: String?,
         ?description: String?,
+        ?effective_at_on_downgrade: Dodopayments::Models::ProductCollectionUpdateParams::effective_at_on_downgrade?,
+        ?effective_at_on_upgrade: Dodopayments::Models::ProductCollectionUpdateParams::effective_at_on_upgrade?,
         ?group_order: ::Array[String]?,
         ?image_id: String?,
         ?name: String?,
+        ?on_payment_failure: Dodopayments::Models::ProductCollectionUpdateParams::on_payment_failure?,
+        ?proration_billing_mode_on_downgrade: Dodopayments::Models::ProductCollectionUpdateParams::proration_billing_mode_on_downgrade?,
+        ?proration_billing_mode_on_upgrade: Dodopayments::Models::ProductCollectionUpdateParams::proration_billing_mode_on_upgrade?,
         ?request_options: Dodopayments::request_opts
       ) -> nil
 

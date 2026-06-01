@@ -8,7 +8,7 @@ module Dodopayments
           T.any(Dodopayments::DiscountDetail, Dodopayments::Internal::AnyHash)
         end
 
-      # The discount amount (basis points for percentage, USD cents for flat)
+      # The discount amount in **basis points** (e.g., 540 => 5.4%).
       sig { returns(Integer) }
       attr_accessor :amount
 
@@ -96,7 +96,7 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
-        # The discount amount (basis points for percentage, USD cents for flat)
+        # The discount amount in **basis points** (e.g., 540 => 5.4%).
         amount:,
         # The business this discount belongs to
         business_id:,
