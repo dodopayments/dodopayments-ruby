@@ -1,13 +1,5 @@
 # Changelog
 
-## [2.13.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.12.0...v2.13.0) (2026-06-01)
-
-
-### Features
-
-* **readme:** drop 'generated with Stainless' attribution from SDK READMEs ([2c1ea56](https://github.com/dodopayments/dodopayments-ruby/commit/2c1ea563cce9ebf05d276be00dd461cba40394f6))
-* **readme:** drop 'generated with Stainless' attribution from SDK READMEs ([68a062a](https://github.com/dodopayments/dodopayments-ruby/commit/68a062a557e448f609926f096b8300dc034fdff4))
-
 ## [2.11.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.11.0...v2.11.1) (2026-06-01)
 
 

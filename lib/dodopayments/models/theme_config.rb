@@ -86,7 +86,7 @@ module Dodopayments
         MD = :md
         LG = :lg
         XL = :xl
-        FONT_SIZE_2XL = :"2xl"
+        SIZE2_XL = :"2xl"
 
         # @!method self.values
         #   @return [Array<Symbol>]
