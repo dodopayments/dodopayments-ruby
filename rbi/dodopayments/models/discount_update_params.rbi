@@ -17,11 +17,8 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :discount_id
 
-      # If present, update the discount amount:
-      #
-      # - If `discount_type` is `percentage`, this represents **basis points** (e.g.,
-      #   `540` = `5.4%`).
-      # - Otherwise, this represents **USD cents** (e.g., `100` = `$1.00`).
+      # If present, update the discount amount in **basis points** (e.g., `540` =
+      # `5.4%`, `10000` = `100%`).
       #
       # Must be at least 1 if provided.
       sig { returns(T.nilable(Integer)) }
@@ -57,7 +54,7 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :subscription_cycles
 
-      # If present, update the discount type.
+      # If present, update the discount type. Currently only `percentage` is supported.
       sig { returns(T.nilable(Dodopayments::DiscountType::OrSymbol)) }
       attr_accessor :type
 
@@ -82,11 +79,8 @@ module Dodopayments
       end
       def self.new(
         discount_id:,
-        # If present, update the discount amount:
-        #
-        # - If `discount_type` is `percentage`, this represents **basis points** (e.g.,
-        #   `540` = `5.4%`).
-        # - Otherwise, this represents **USD cents** (e.g., `100` = `$1.00`).
+        # If present, update the discount amount in **basis points** (e.g., `540` =
+        # `5.4%`, `10000` = `100%`).
         #
         # Must be at least 1 if provided.
         amount: nil,
@@ -106,7 +100,7 @@ module Dodopayments
         # provided, the discount will be applied indefinitely to all recurring payments
         # related to the subscription.
         subscription_cycles: nil,
-        # If present, update the discount type.
+        # If present, update the discount type. Currently only `percentage` is supported.
         type: nil,
         usage_limit: nil,
         request_options: {}

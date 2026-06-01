@@ -4,7 +4,7 @@ module Dodopayments
   module Models
     class DiscountDetail < Dodopayments::Internal::Type::BaseModel
       # @!attribute amount
-      #   The discount amount (basis points for percentage, USD cents for flat)
+      #   The discount amount in **basis points** (e.g., 540 => 5.4%).
       #
       #   @return [Integer]
       required :amount, Integer
@@ -107,7 +107,7 @@ module Dodopayments
       #   Response struct for a discount with its position in a stack and optional
       #   cycle-tracking information (for subscriptions).
       #
-      #   @param amount [Integer] The discount amount (basis points for percentage, USD cents for flat)
+      #   @param amount [Integer] The discount amount in **basis points** (e.g., 540 => 5.4%).
       #
       #   @param business_id [String] The business this discount belongs to
       #

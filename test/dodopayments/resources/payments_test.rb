@@ -51,6 +51,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         payment_id: String,
         refunds: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::RefundListItem]),
+        retry_attempt: Integer,
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Currency,
         total_amount: Integer,

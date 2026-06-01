@@ -6,7 +6,10 @@ module Dodopayments
       # @return [Dodopayments::Resources::ProductCollections::Groups]
       attr_reader :groups
 
-      # @overload create(groups:, name:, brand_id: nil, description: nil, request_options: {})
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::ProductCollectionCreateParams} for more details.
+      #
+      # @overload create(groups:, name:, brand_id: nil, description: nil, effective_at_on_downgrade: nil, effective_at_on_upgrade: nil, on_payment_failure: nil, proration_billing_mode_on_downgrade: nil, proration_billing_mode_on_upgrade: nil, request_options: {})
       #
       # @param groups [Array<Dodopayments::Models::ProductCollections::ProductCollectionGroupDetails>] Groups of products in this collection
       #
@@ -15,6 +18,16 @@ module Dodopayments
       # @param brand_id [String, nil] Brand id for the collection, if not provided will default to primary brand
       #
       # @param description [String, nil] Optional description of the product collection
+      #
+      # @param effective_at_on_downgrade [Symbol, Dodopayments::Models::ProductCollectionCreateParams::EffectiveAtOnDowngrade, nil] Default effective_at setting for subscription plan downgrades (NULL = inherit fr
+      #
+      # @param effective_at_on_upgrade [Symbol, Dodopayments::Models::ProductCollectionCreateParams::EffectiveAtOnUpgrade, nil] Default effective_at setting for subscription plan upgrades (NULL = inherit from
+      #
+      # @param on_payment_failure [Symbol, Dodopayments::Models::ProductCollectionCreateParams::OnPaymentFailure, nil] Default behavior for subscription plan changes on payment failure (NULL = inheri
+      #
+      # @param proration_billing_mode_on_downgrade [Symbol, Dodopayments::Models::ProductCollectionCreateParams::ProrationBillingModeOnDowngrade, nil] Default proration billing mode for subscription plan downgrades (NULL = inherit
+      #
+      # @param proration_billing_mode_on_upgrade [Symbol, Dodopayments::Models::ProductCollectionCreateParams::ProrationBillingModeOnUpgrade, nil] Default proration billing mode for subscription plan upgrades (NULL = inherit fr
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -50,7 +63,10 @@ module Dodopayments
         )
       end
 
-      # @overload update(id, brand_id: nil, description: nil, group_order: nil, image_id: nil, name: nil, request_options: {})
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::ProductCollectionUpdateParams} for more details.
+      #
+      # @overload update(id, brand_id: nil, description: nil, effective_at_on_downgrade: nil, effective_at_on_upgrade: nil, group_order: nil, image_id: nil, name: nil, on_payment_failure: nil, proration_billing_mode_on_downgrade: nil, proration_billing_mode_on_upgrade: nil, request_options: {})
       #
       # @param id [String] Product Collection Id
       #
@@ -58,11 +74,21 @@ module Dodopayments
       #
       # @param description [String, nil] Optional description update - pass null to remove, omit to keep unchanged
       #
+      # @param effective_at_on_downgrade [Symbol, Dodopayments::Models::ProductCollectionUpdateParams::EffectiveAtOnDowngrade, nil] Effective_at setting for downgrades: Some(Some(val)) = set, Some(None) = clear (
+      #
+      # @param effective_at_on_upgrade [Symbol, Dodopayments::Models::ProductCollectionUpdateParams::EffectiveAtOnUpgrade, nil] Effective_at setting for upgrades: Some(Some(val)) = set, Some(None) = clear (in
+      #
       # @param group_order [Array<String>, nil] Optional new order for groups (array of group UUIDs in desired order)
       #
       # @param image_id [String, nil] Optional image update - pass null to remove, omit to keep unchanged
       #
       # @param name [String, nil] Optional new name for the collection
+      #
+      # @param on_payment_failure [Symbol, Dodopayments::Models::ProductCollectionUpdateParams::OnPaymentFailure, nil] On payment failure behavior: Some(Some(val)) = set, Some(None) = clear (inherit)
+      #
+      # @param proration_billing_mode_on_downgrade [Symbol, Dodopayments::Models::ProductCollectionUpdateParams::ProrationBillingModeOnDowngrade, nil] Proration billing mode for downgrades: Some(Some(val)) = set, Some(None) = clear
+      #
+      # @param proration_billing_mode_on_upgrade [Symbol, Dodopayments::Models::ProductCollectionUpdateParams::ProrationBillingModeOnUpgrade, nil] Proration billing mode for upgrades: Some(Some(val)) = set, Some(None) = clear (
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

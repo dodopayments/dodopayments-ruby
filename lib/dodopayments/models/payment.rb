@@ -70,6 +70,14 @@ module Dodopayments
       #   @return [Array<Dodopayments::Models::RefundListItem>]
       required :refunds, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::RefundListItem] }
 
+      # @!attribute retry_attempt
+      #   Retry attempt number for subscription renewal payments. `0` for the original
+      #   payment, `1`+ for each scheduled off-session retry after a failed renewal.
+      #   Always `0` for non-subscription payments.
+      #
+      #   @return [Integer]
+      required :retry_attempt, Integer
+
       # @!attribute settlement_amount
       #   The amount that will be credited to your Dodo balance after currency conversion
       #   and processing. Especially relevant for adaptive pricing where the customer's
@@ -243,7 +251,7 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, refunds:, settlement_amount:, settlement_currency:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, discounts: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, refunds:, retry_attempt:, settlement_amount:, settlement_currency:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, discounts: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
@@ -268,6 +276,8 @@ module Dodopayments
       #   @param payment_id [String] Unique identifier for the payment
       #
       #   @param refunds [Array<Dodopayments::Models::RefundListItem>] List of refunds issued for this payment
+      #
+      #   @param retry_attempt [Integer] Retry attempt number for subscription renewal payments.
       #
       #   @param settlement_amount [Integer] The amount that will be credited to your Dodo balance after currency conversion
       #

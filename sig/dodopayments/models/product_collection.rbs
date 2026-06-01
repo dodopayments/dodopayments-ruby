@@ -9,7 +9,12 @@ module Dodopayments
         name: String,
         updated_at: Time,
         description: String?,
-        image: String?
+        effective_at_on_downgrade: Dodopayments::Models::ProductCollection::effective_at_on_downgrade?,
+        effective_at_on_upgrade: Dodopayments::Models::ProductCollection::effective_at_on_upgrade?,
+        image: String?,
+        on_payment_failure: Dodopayments::Models::ProductCollection::on_payment_failure?,
+        proration_billing_mode_on_downgrade: Dodopayments::Models::ProductCollection::proration_billing_mode_on_downgrade?,
+        proration_billing_mode_on_upgrade: Dodopayments::Models::ProductCollection::proration_billing_mode_on_upgrade?
       }
 
     class ProductCollection < Dodopayments::Internal::Type::BaseModel
@@ -27,7 +32,17 @@ module Dodopayments
 
       attr_accessor description: String?
 
+      attr_accessor effective_at_on_downgrade: Dodopayments::Models::ProductCollection::effective_at_on_downgrade?
+
+      attr_accessor effective_at_on_upgrade: Dodopayments::Models::ProductCollection::effective_at_on_upgrade?
+
       attr_accessor image: String?
+
+      attr_accessor on_payment_failure: Dodopayments::Models::ProductCollection::on_payment_failure?
+
+      attr_accessor proration_billing_mode_on_downgrade: Dodopayments::Models::ProductCollection::proration_billing_mode_on_downgrade?
+
+      attr_accessor proration_billing_mode_on_upgrade: Dodopayments::Models::ProductCollection::proration_billing_mode_on_upgrade?
 
       def initialize: (
         id: String,
@@ -37,7 +52,12 @@ module Dodopayments
         name: String,
         updated_at: Time,
         ?description: String?,
-        ?image: String?
+        ?effective_at_on_downgrade: Dodopayments::Models::ProductCollection::effective_at_on_downgrade?,
+        ?effective_at_on_upgrade: Dodopayments::Models::ProductCollection::effective_at_on_upgrade?,
+        ?image: String?,
+        ?on_payment_failure: Dodopayments::Models::ProductCollection::on_payment_failure?,
+        ?proration_billing_mode_on_downgrade: Dodopayments::Models::ProductCollection::proration_billing_mode_on_downgrade?,
+        ?proration_billing_mode_on_upgrade: Dodopayments::Models::ProductCollection::proration_billing_mode_on_upgrade?
       ) -> void
 
       def to_hash: -> {
@@ -48,8 +68,80 @@ module Dodopayments
         name: String,
         updated_at: Time,
         description: String?,
-        image: String?
+        effective_at_on_downgrade: Dodopayments::Models::ProductCollection::effective_at_on_downgrade?,
+        effective_at_on_upgrade: Dodopayments::Models::ProductCollection::effective_at_on_upgrade?,
+        image: String?,
+        on_payment_failure: Dodopayments::Models::ProductCollection::on_payment_failure?,
+        proration_billing_mode_on_downgrade: Dodopayments::Models::ProductCollection::proration_billing_mode_on_downgrade?,
+        proration_billing_mode_on_upgrade: Dodopayments::Models::ProductCollection::proration_billing_mode_on_upgrade?
       }
+
+      type effective_at_on_downgrade = :immediately | :next_billing_date
+
+      module EffectiveAtOnDowngrade
+        extend Dodopayments::Internal::Type::Enum
+
+        IMMEDIATELY: :immediately
+        NEXT_BILLING_DATE: :next_billing_date
+
+        def self?.values: -> ::Array[Dodopayments::Models::ProductCollection::effective_at_on_downgrade]
+      end
+
+      type effective_at_on_upgrade = :immediately | :next_billing_date
+
+      module EffectiveAtOnUpgrade
+        extend Dodopayments::Internal::Type::Enum
+
+        IMMEDIATELY: :immediately
+        NEXT_BILLING_DATE: :next_billing_date
+
+        def self?.values: -> ::Array[Dodopayments::Models::ProductCollection::effective_at_on_upgrade]
+      end
+
+      type on_payment_failure = :prevent_change | :apply_change
+
+      module OnPaymentFailure
+        extend Dodopayments::Internal::Type::Enum
+
+        PREVENT_CHANGE: :prevent_change
+        APPLY_CHANGE: :apply_change
+
+        def self?.values: -> ::Array[Dodopayments::Models::ProductCollection::on_payment_failure]
+      end
+
+      type proration_billing_mode_on_downgrade =
+        :prorated_immediately
+        | :full_immediately
+        | :difference_immediately
+        | :do_not_bill
+
+      module ProrationBillingModeOnDowngrade
+        extend Dodopayments::Internal::Type::Enum
+
+        PRORATED_IMMEDIATELY: :prorated_immediately
+        FULL_IMMEDIATELY: :full_immediately
+        DIFFERENCE_IMMEDIATELY: :difference_immediately
+        DO_NOT_BILL: :do_not_bill
+
+        def self?.values: -> ::Array[Dodopayments::Models::ProductCollection::proration_billing_mode_on_downgrade]
+      end
+
+      type proration_billing_mode_on_upgrade =
+        :prorated_immediately
+        | :full_immediately
+        | :difference_immediately
+        | :do_not_bill
+
+      module ProrationBillingModeOnUpgrade
+        extend Dodopayments::Internal::Type::Enum
+
+        PRORATED_IMMEDIATELY: :prorated_immediately
+        FULL_IMMEDIATELY: :full_immediately
+        DIFFERENCE_IMMEDIATELY: :difference_immediately
+        DO_NOT_BILL: :do_not_bill
+
+        def self?.values: -> ::Array[Dodopayments::Models::ProductCollection::proration_billing_mode_on_upgrade]
+      end
     end
   end
 end
