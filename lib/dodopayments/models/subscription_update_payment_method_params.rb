@@ -37,13 +37,33 @@ module Dodopayments
           #   @return [Symbol, :new]
           required :type, const: :new
 
+          # @!attribute allowed_payment_method_types
+          #   List of payment methods allowed during checkout.
+          #
+          #   Customers will **never** see payment methods that are **not** in this list.
+          #   However, adding a method here **does not guarantee** customers will see it.
+          #   Availability still depends on other factors (e.g., customer location, merchant
+          #   settings).
+          #
+          #   @return [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil]
+          optional :allowed_payment_method_types,
+                   -> { Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::PaymentMethodTypes] },
+                   nil?: true
+
           # @!attribute return_url
           #
           #   @return [String, nil]
           optional :return_url, String, nil?: true
 
-          # @!method initialize(return_url: nil, type: :new)
+          # @!method initialize(allowed_payment_method_types: nil, return_url: nil, type: :new)
+          #   Some parameter documentations has been truncated, see
+          #   {Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::PaymentMethod::New}
+          #   for more details.
+          #
+          #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil] List of payment methods allowed during checkout.
+          #
           #   @param return_url [String, nil]
+          #
           #   @param type [Symbol, :new]
         end
 

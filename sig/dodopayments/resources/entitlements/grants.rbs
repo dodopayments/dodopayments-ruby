@@ -5,6 +5,7 @@ module Dodopayments
         def list: (
           String id,
           ?customer_id: String,
+          ?integration_type: Dodopayments::Models::Entitlements::GrantListParams::integration_type,
           ?page_number: Integer,
           ?page_size: Integer,
           ?status: Dodopayments::Models::Entitlements::GrantListParams::status,

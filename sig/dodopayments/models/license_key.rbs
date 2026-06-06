@@ -76,13 +76,14 @@ module Dodopayments
         subscription_id: String?
       }
 
-      type source = :auto | :import
+      type source = :auto | :import | :manual
 
       module Source
         extend Dodopayments::Internal::Type::Enum
 
         AUTO: :auto
         IMPORT: :import
+        MANUAL: :manual
 
         def self?.values: -> ::Array[Dodopayments::Models::LicenseKey::source]
       end

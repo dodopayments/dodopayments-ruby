@@ -151,6 +151,11 @@ module Dodopayments
             :import,
             Dodopayments::LicenseKeyListParams::Source::TaggedSymbol
           )
+        MANUAL =
+          T.let(
+            :manual,
+            Dodopayments::LicenseKeyListParams::Source::TaggedSymbol
+          )
 
         sig do
           override.returns(
