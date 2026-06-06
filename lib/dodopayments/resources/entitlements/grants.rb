@@ -6,11 +6,13 @@ module Dodopayments
       class Grants
         # GET /entitlements/{id}/grants (public API)
         #
-        # @overload list(id, customer_id: nil, page_number: nil, page_size: nil, status: nil, request_options: {})
+        # @overload list(id, customer_id: nil, integration_type: nil, page_number: nil, page_size: nil, status: nil, request_options: {})
         #
         # @param id [String] Entitlement ID
         #
         # @param customer_id [String] Filter by customer ID
+        #
+        # @param integration_type [Symbol, Dodopayments::Models::Entitlements::GrantListParams::IntegrationType] Filter by integration type
         #
         # @param page_number [Integer] Page number (default 0)
         #

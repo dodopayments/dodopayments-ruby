@@ -256,6 +256,7 @@ module Dodopayments
         ABANDONED_CART_RECOVERY_FEE = :abandoned_cart_recovery_fee
         DUNNING_FEES = :dunning_fees
         PAYMENT_RETRY_FEE = :payment_retry_fee
+        BYOP_FEE = :byop_fee
 
         # @!method self.values
         #   @return [Array<Symbol>]
