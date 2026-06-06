@@ -35,6 +35,12 @@ module Dodopayments
         #   @return [String]
         required :entitlement_id, String
 
+        # @!attribute integration_type
+        #   The integration type of the grant's entitlement (e.g. `license_key`).
+        #
+        #   @return [Symbol, Dodopayments::Models::EntitlementIntegrationType]
+        required :integration_type, enum: -> { Dodopayments::EntitlementIntegrationType }
+
         # @!attribute metadata
         #   Arbitrary key-value metadata recorded on the grant.
         #
@@ -123,7 +129,7 @@ module Dodopayments
         #   @return [String, nil]
         optional :subscription_id, String, nil?: true
 
-        # @!method initialize(id:, business_id:, created_at:, customer_id:, entitlement_id:, metadata:, status:, updated_at:, delivered_at: nil, digital_product_delivery: nil, error_code: nil, error_message: nil, license_key: nil, oauth_expires_at: nil, oauth_url: nil, payment_id: nil, revocation_reason: nil, revoked_at: nil, subscription_id: nil)
+        # @!method initialize(id:, business_id:, created_at:, customer_id:, entitlement_id:, integration_type:, metadata:, status:, updated_at:, delivered_at: nil, digital_product_delivery: nil, error_code: nil, error_message: nil, license_key: nil, oauth_expires_at: nil, oauth_url: nil, payment_id: nil, revocation_reason: nil, revoked_at: nil, subscription_id: nil)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Entitlements::EntitlementGrant} for more details.
         #
@@ -139,6 +145,8 @@ module Dodopayments
         #   @param customer_id [String] Identifier of the customer the grant was issued to.
         #
         #   @param entitlement_id [String] Identifier of the entitlement this grant was issued from.
+        #
+        #   @param integration_type [Symbol, Dodopayments::Models::EntitlementIntegrationType] The integration type of the grant's entitlement (e.g. `license_key`).
         #
         #   @param metadata [Hash{Symbol=>String}] Arbitrary key-value metadata recorded on the grant.
         #

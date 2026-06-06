@@ -10,6 +10,7 @@ module Dodopayments
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
         payment_id: String,
+        payment_provider: Dodopayments::Models::DisputeListResponse::payment_provider,
         is_resolved_by_rdr: bool?
       }
 
@@ -30,6 +31,8 @@ module Dodopayments
 
       attr_accessor payment_id: String
 
+      attr_accessor payment_provider: Dodopayments::Models::DisputeListResponse::payment_provider
+
       attr_accessor is_resolved_by_rdr: bool?
 
       def initialize: (
@@ -41,6 +44,7 @@ module Dodopayments
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
         payment_id: String,
+        payment_provider: Dodopayments::Models::DisputeListResponse::payment_provider,
         ?is_resolved_by_rdr: bool?
       ) -> void
 
@@ -53,8 +57,21 @@ module Dodopayments
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
         payment_id: String,
+        payment_provider: Dodopayments::Models::DisputeListResponse::payment_provider,
         is_resolved_by_rdr: bool?
       }
+
+      type payment_provider = :stripe | :adyen | :dodo
+
+      module PaymentProvider
+        extend Dodopayments::Internal::Type::Enum
+
+        STRIPE: :stripe
+        ADYEN: :adyen
+        DODO: :dodo
+
+        def self?.values: -> ::Array[Dodopayments::Models::DisputeListResponse::payment_provider]
+      end
     end
   end
 end
