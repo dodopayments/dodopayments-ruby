@@ -144,6 +144,7 @@ module Dodopayments
 
         AUTO = T.let(:auto, Dodopayments::LicenseKey::Source::TaggedSymbol)
         IMPORT = T.let(:import, Dodopayments::LicenseKey::Source::TaggedSymbol)
+        MANUAL = T.let(:manual, Dodopayments::LicenseKey::Source::TaggedSymbol)
 
         sig do
           override.returns(

@@ -40,8 +40,26 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :payment_id
 
+      # Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
+      # merchant's own Hyperswitch connector); `dodo` for everything Dodo processed
+      # itself.
+      sig do
+        returns(
+          Dodopayments::Models::PaymentListResponse::PaymentProvider::TaggedSymbol
+        )
+      end
+      attr_accessor :payment_provider
+
       sig { returns(Integer) }
       attr_accessor :total_amount
+
+      # The last four digits of the card
+      sig { returns(T.nilable(String)) }
+      attr_accessor :card_last_four
+
+      # Card network like VISA, MASTERCARD etc.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :card_network
 
       # The most recent dispute status for this payment. None if no disputes exist.
       sig { returns(T.nilable(Dodopayments::DisputeStatus::TaggedSymbol)) }
@@ -84,7 +102,11 @@ module Dodopayments
           has_license_key: T::Boolean,
           metadata: T::Hash[Symbol, String],
           payment_id: String,
+          payment_provider:
+            Dodopayments::Models::PaymentListResponse::PaymentProvider::OrSymbol,
           total_amount: Integer,
+          card_last_four: T.nilable(String),
+          card_network: T.nilable(String),
           dispute_status: T.nilable(Dodopayments::DisputeStatus::OrSymbol),
           invoice_id: T.nilable(String),
           invoice_url: T.nilable(String),
@@ -104,7 +126,15 @@ module Dodopayments
         has_license_key:,
         metadata:,
         payment_id:,
+        # Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
+        # merchant's own Hyperswitch connector); `dodo` for everything Dodo processed
+        # itself.
+        payment_provider:,
         total_amount:,
+        # The last four digits of the card
+        card_last_four: nil,
+        # Card network like VISA, MASTERCARD etc.
+        card_network: nil,
         # The most recent dispute status for this payment. None if no disputes exist.
         dispute_status: nil,
         # Invoice ID for this payment. Uses India-specific invoice ID if available.
@@ -132,7 +162,11 @@ module Dodopayments
             has_license_key: T::Boolean,
             metadata: T::Hash[Symbol, String],
             payment_id: String,
+            payment_provider:
+              Dodopayments::Models::PaymentListResponse::PaymentProvider::TaggedSymbol,
             total_amount: Integer,
+            card_last_four: T.nilable(String),
+            card_network: T.nilable(String),
             dispute_status:
               T.nilable(Dodopayments::DisputeStatus::TaggedSymbol),
             invoice_id: T.nilable(String),
@@ -147,6 +181,48 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      # Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
+      # merchant's own Hyperswitch connector); `dodo` for everything Dodo processed
+      # itself.
+      module PaymentProvider
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(
+              Symbol,
+              Dodopayments::Models::PaymentListResponse::PaymentProvider
+            )
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        STRIPE =
+          T.let(
+            :stripe,
+            Dodopayments::Models::PaymentListResponse::PaymentProvider::TaggedSymbol
+          )
+        ADYEN =
+          T.let(
+            :adyen,
+            Dodopayments::Models::PaymentListResponse::PaymentProvider::TaggedSymbol
+          )
+        DODO =
+          T.let(
+            :dodo,
+            Dodopayments::Models::PaymentListResponse::PaymentProvider::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Dodopayments::Models::PaymentListResponse::PaymentProvider::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
       end
     end
   end

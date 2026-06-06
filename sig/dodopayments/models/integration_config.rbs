@@ -124,7 +124,8 @@ module Dodopayments
           activation_message: String?,
           activations_limit: Integer?,
           duration_count: Integer?,
-          duration_interval: Dodopayments::Models::time_interval?
+          duration_interval: Dodopayments::Models::time_interval?,
+          fulfillment_mode: Dodopayments::Models::IntegrationConfig::LicenseKeyConfig::fulfillment_mode?
         }
 
       class LicenseKeyConfig < Dodopayments::Internal::Type::BaseModel
@@ -136,19 +137,34 @@ module Dodopayments
 
         attr_accessor duration_interval: Dodopayments::Models::time_interval?
 
+        attr_accessor fulfillment_mode: Dodopayments::Models::IntegrationConfig::LicenseKeyConfig::fulfillment_mode?
+
         def initialize: (
           ?activation_message: String?,
           ?activations_limit: Integer?,
           ?duration_count: Integer?,
-          ?duration_interval: Dodopayments::Models::time_interval?
+          ?duration_interval: Dodopayments::Models::time_interval?,
+          ?fulfillment_mode: Dodopayments::Models::IntegrationConfig::LicenseKeyConfig::fulfillment_mode?
         ) -> void
 
         def to_hash: -> {
           activation_message: String?,
           activations_limit: Integer?,
           duration_count: Integer?,
-          duration_interval: Dodopayments::Models::time_interval?
+          duration_interval: Dodopayments::Models::time_interval?,
+          fulfillment_mode: Dodopayments::Models::IntegrationConfig::LicenseKeyConfig::fulfillment_mode?
         }
+
+        type fulfillment_mode = :auto | :manual
+
+        module FulfillmentMode
+          extend Dodopayments::Internal::Type::Enum
+
+          AUTO: :auto
+          MANUAL: :manual
+
+          def self?.values: -> ::Array[Dodopayments::Models::IntegrationConfig::LicenseKeyConfig::fulfillment_mode]
+        end
       end
 
       def self?.variants: -> ::Array[Dodopayments::Models::integration_config]

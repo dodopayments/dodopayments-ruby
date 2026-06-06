@@ -10,7 +10,10 @@ module Dodopayments
         has_license_key: bool,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
+        payment_provider: Dodopayments::Models::PaymentListResponse::payment_provider,
         total_amount: Integer,
+        card_last_four: String?,
+        card_network: String?,
         dispute_status: Dodopayments::Models::dispute_status?,
         invoice_id: String?,
         invoice_url: String?,
@@ -38,7 +41,13 @@ module Dodopayments
 
       attr_accessor payment_id: String
 
+      attr_accessor payment_provider: Dodopayments::Models::PaymentListResponse::payment_provider
+
       attr_accessor total_amount: Integer
+
+      attr_accessor card_last_four: String?
+
+      attr_accessor card_network: String?
 
       attr_accessor dispute_status: Dodopayments::Models::dispute_status?
 
@@ -65,7 +74,10 @@ module Dodopayments
         has_license_key: bool,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
+        payment_provider: Dodopayments::Models::PaymentListResponse::payment_provider,
         total_amount: Integer,
+        ?card_last_four: String?,
+        ?card_network: String?,
         ?dispute_status: Dodopayments::Models::dispute_status?,
         ?invoice_id: String?,
         ?invoice_url: String?,
@@ -85,7 +97,10 @@ module Dodopayments
         has_license_key: bool,
         metadata: ::Hash[Symbol, String],
         payment_id: String,
+        payment_provider: Dodopayments::Models::PaymentListResponse::payment_provider,
         total_amount: Integer,
+        card_last_four: String?,
+        card_network: String?,
         dispute_status: Dodopayments::Models::dispute_status?,
         invoice_id: String?,
         invoice_url: String?,
@@ -95,6 +110,18 @@ module Dodopayments
         status: Dodopayments::Models::intent_status?,
         subscription_id: String?
       }
+
+      type payment_provider = :stripe | :adyen | :dodo
+
+      module PaymentProvider
+        extend Dodopayments::Internal::Type::Enum
+
+        STRIPE: :stripe
+        ADYEN: :adyen
+        DODO: :dodo
+
+        def self?.values: -> ::Array[Dodopayments::Models::PaymentListResponse::payment_provider]
+      end
     end
   end
 end

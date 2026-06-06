@@ -34,16 +34,31 @@ module Dodopayments
       module PaymentMethod
         extend Dodopayments::Internal::Type::Union
 
-        type new_ = { type: :new, return_url: String? }
+        type new_ =
+          {
+            type: :new,
+            allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
+            return_url: String?
+          }
 
         class New < Dodopayments::Internal::Type::BaseModel
           attr_accessor type: :new
 
+          attr_accessor allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?
+
           attr_accessor return_url: String?
 
-          def initialize: (?return_url: String?, ?type: :new) -> void
+          def initialize: (
+            ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
+            ?return_url: String?,
+            ?type: :new
+          ) -> void
 
-          def to_hash: -> { type: :new, return_url: String? }
+          def to_hash: -> {
+            type: :new,
+            allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
+            return_url: String?
+          }
         end
 
         type existing = { payment_method_id: String, type: :existing }

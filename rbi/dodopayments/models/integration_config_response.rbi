@@ -425,12 +425,30 @@ module Dodopayments
         sig { returns(T.nilable(Dodopayments::TimeInterval::TaggedSymbol)) }
         attr_accessor :duration_interval
 
+        # Fulfillment mode:
+        #
+        # `auto` (default) generate and delivery license keys to customers automatically.
+        # `manual` creates pending grants, actual key is provided via the fulfillment API
+        # and delivered to the customer when fulfilled.
+        sig do
+          returns(
+            T.nilable(
+              Dodopayments::IntegrationConfigResponse::LicenseKeyConfig::FulfillmentMode::TaggedSymbol
+            )
+          )
+        end
+        attr_accessor :fulfillment_mode
+
         sig do
           params(
             activation_message: T.nilable(String),
             activations_limit: T.nilable(Integer),
             duration_count: T.nilable(Integer),
-            duration_interval: T.nilable(Dodopayments::TimeInterval::OrSymbol)
+            duration_interval: T.nilable(Dodopayments::TimeInterval::OrSymbol),
+            fulfillment_mode:
+              T.nilable(
+                Dodopayments::IntegrationConfigResponse::LicenseKeyConfig::FulfillmentMode::OrSymbol
+              )
           ).returns(T.attached_class)
         end
         def self.new(
@@ -444,7 +462,13 @@ module Dodopayments
           # keys.
           duration_count: nil,
           # Unit of `duration_count`.
-          duration_interval: nil
+          duration_interval: nil,
+          # Fulfillment mode:
+          #
+          # `auto` (default) generate and delivery license keys to customers automatically.
+          # `manual` creates pending grants, actual key is provided via the fulfillment API
+          # and delivered to the customer when fulfilled.
+          fulfillment_mode: nil
         )
         end
 
@@ -455,11 +479,54 @@ module Dodopayments
               activations_limit: T.nilable(Integer),
               duration_count: T.nilable(Integer),
               duration_interval:
-                T.nilable(Dodopayments::TimeInterval::TaggedSymbol)
+                T.nilable(Dodopayments::TimeInterval::TaggedSymbol),
+              fulfillment_mode:
+                T.nilable(
+                  Dodopayments::IntegrationConfigResponse::LicenseKeyConfig::FulfillmentMode::TaggedSymbol
+                )
             }
           )
         end
         def to_hash
+        end
+
+        # Fulfillment mode:
+        #
+        # `auto` (default) generate and delivery license keys to customers automatically.
+        # `manual` creates pending grants, actual key is provided via the fulfillment API
+        # and delivered to the customer when fulfilled.
+        module FulfillmentMode
+          extend Dodopayments::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Dodopayments::IntegrationConfigResponse::LicenseKeyConfig::FulfillmentMode
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          AUTO =
+            T.let(
+              :auto,
+              Dodopayments::IntegrationConfigResponse::LicenseKeyConfig::FulfillmentMode::TaggedSymbol
+            )
+          MANUAL =
+            T.let(
+              :manual,
+              Dodopayments::IntegrationConfigResponse::LicenseKeyConfig::FulfillmentMode::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Dodopayments::IntegrationConfigResponse::LicenseKeyConfig::FulfillmentMode::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
 
