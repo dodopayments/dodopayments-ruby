@@ -34,6 +34,10 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :entitlement_id
 
+        # The integration type of the grant's entitlement (e.g. `license_key`).
+        sig { returns(Dodopayments::EntitlementIntegrationType::TaggedSymbol) }
+        attr_accessor :integration_type
+
         # Arbitrary key-value metadata recorded on the grant.
         sig { returns(T::Hash[Symbol, String]) }
         attr_accessor :metadata
@@ -123,6 +127,8 @@ module Dodopayments
             created_at: Time,
             customer_id: String,
             entitlement_id: String,
+            integration_type:
+              Dodopayments::EntitlementIntegrationType::OrSymbol,
             metadata: T::Hash[Symbol, String],
             status:
               Dodopayments::Entitlements::EntitlementGrant::Status::OrSymbol,
@@ -153,6 +159,8 @@ module Dodopayments
           customer_id:,
           # Identifier of the entitlement this grant was issued from.
           entitlement_id:,
+          # The integration type of the grant's entitlement (e.g. `license_key`).
+          integration_type:,
           # Arbitrary key-value metadata recorded on the grant.
           metadata:,
           # Lifecycle status of the grant.
@@ -196,6 +204,8 @@ module Dodopayments
               created_at: Time,
               customer_id: String,
               entitlement_id: String,
+              integration_type:
+                Dodopayments::EntitlementIntegrationType::TaggedSymbol,
               metadata: T::Hash[Symbol, String],
               status:
                 Dodopayments::Entitlements::EntitlementGrant::Status::TaggedSymbol,

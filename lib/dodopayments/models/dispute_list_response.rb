@@ -53,13 +53,21 @@ module Dodopayments
       #   @return [String]
       required :payment_id, String
 
+      # @!attribute payment_provider
+      #   Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
+      #   routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+      #   processed itself.
+      #
+      #   @return [Symbol, Dodopayments::Models::DisputeListResponse::PaymentProvider]
+      required :payment_provider, enum: -> { Dodopayments::Models::DisputeListResponse::PaymentProvider }
+
       # @!attribute is_resolved_by_rdr
       #   Whether the dispute was resolved by Rapid Dispute Resolution
       #
       #   @return [Boolean, nil]
       optional :is_resolved_by_rdr, Dodopayments::Internal::Type::Boolean, nil?: true
 
-      # @!method initialize(amount:, business_id:, created_at:, currency:, dispute_id:, dispute_stage:, dispute_status:, payment_id:, is_resolved_by_rdr: nil)
+      # @!method initialize(amount:, business_id:, created_at:, currency:, dispute_id:, dispute_stage:, dispute_status:, payment_id:, payment_provider:, is_resolved_by_rdr: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::DisputeListResponse} for more details.
       #
@@ -79,7 +87,25 @@ module Dodopayments
       #
       #   @param payment_id [String] The unique identifier of the payment associated with the dispute.
       #
+      #   @param payment_provider [Symbol, Dodopayments::Models::DisputeListResponse::PaymentProvider] Which processor handled the underlying payment. `stripe` / `adyen` for
+      #
       #   @param is_resolved_by_rdr [Boolean, nil] Whether the dispute was resolved by Rapid Dispute Resolution
+
+      # Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
+      # routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+      # processed itself.
+      #
+      # @see Dodopayments::Models::DisputeListResponse#payment_provider
+      module PaymentProvider
+        extend Dodopayments::Internal::Type::Enum
+
+        STRIPE = :stripe
+        ADYEN = :adyen
+        DODO = :dodo
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
     end
   end
 end

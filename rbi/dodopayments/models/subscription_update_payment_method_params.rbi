@@ -80,19 +80,54 @@ module Dodopayments
           sig { returns(Symbol) }
           attr_accessor :type
 
+          # List of payment methods allowed during checkout.
+          #
+          # Customers will **never** see payment methods that are **not** in this list.
+          # However, adding a method here **does not guarantee** customers will see it.
+          # Availability still depends on other factors (e.g., customer location, merchant
+          # settings).
+          sig do
+            returns(
+              T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol])
+            )
+          end
+          attr_accessor :allowed_payment_method_types
+
           sig { returns(T.nilable(String)) }
           attr_accessor :return_url
 
           sig do
-            params(return_url: T.nilable(String), type: Symbol).returns(
-              T.attached_class
-            )
+            params(
+              allowed_payment_method_types:
+                T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
+              return_url: T.nilable(String),
+              type: Symbol
+            ).returns(T.attached_class)
           end
-          def self.new(return_url: nil, type: :new)
+          def self.new(
+            # List of payment methods allowed during checkout.
+            #
+            # Customers will **never** see payment methods that are **not** in this list.
+            # However, adding a method here **does not guarantee** customers will see it.
+            # Availability still depends on other factors (e.g., customer location, merchant
+            # settings).
+            allowed_payment_method_types: nil,
+            return_url: nil,
+            type: :new
+          )
           end
 
           sig do
-            override.returns({ type: Symbol, return_url: T.nilable(String) })
+            override.returns(
+              {
+                type: Symbol,
+                allowed_payment_method_types:
+                  T.nilable(
+                    T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]
+                  ),
+                return_url: T.nilable(String)
+              }
+            )
           end
           def to_hash
           end
