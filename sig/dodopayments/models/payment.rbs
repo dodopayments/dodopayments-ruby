@@ -12,6 +12,7 @@ module Dodopayments
         disputes: ::Array[Dodopayments::Dispute],
         metadata: ::Hash[Symbol, String],
         payment_id: String,
+        payment_provider: Dodopayments::Models::Payment::payment_provider,
         refunds: ::Array[Dodopayments::RefundListItem],
         retry_attempt: Integer,
         settlement_amount: Integer,
@@ -62,6 +63,8 @@ module Dodopayments
       attr_accessor metadata: ::Hash[Symbol, String]
 
       attr_accessor payment_id: String
+
+      attr_accessor payment_provider: Dodopayments::Models::Payment::payment_provider
 
       attr_accessor refunds: ::Array[Dodopayments::RefundListItem]
 
@@ -130,6 +133,7 @@ module Dodopayments
         disputes: ::Array[Dodopayments::Dispute],
         metadata: ::Hash[Symbol, String],
         payment_id: String,
+        payment_provider: Dodopayments::Models::Payment::payment_provider,
         refunds: ::Array[Dodopayments::RefundListItem],
         retry_attempt: Integer,
         settlement_amount: Integer,
@@ -171,6 +175,7 @@ module Dodopayments
         disputes: ::Array[Dodopayments::Dispute],
         metadata: ::Hash[Symbol, String],
         payment_id: String,
+        payment_provider: Dodopayments::Models::Payment::payment_provider,
         refunds: ::Array[Dodopayments::RefundListItem],
         retry_attempt: Integer,
         settlement_amount: Integer,
@@ -200,6 +205,18 @@ module Dodopayments
         tax: Integer?,
         updated_at: Time?
       }
+
+      type payment_provider = :stripe | :adyen | :dodo
+
+      module PaymentProvider
+        extend Dodopayments::Internal::Type::Enum
+
+        STRIPE: :stripe
+        ADYEN: :adyen
+        DODO: :dodo
+
+        def self?.values: -> ::Array[Dodopayments::Models::Payment::payment_provider]
+      end
 
       type product_cart = { product_id: String, quantity: Integer }
 

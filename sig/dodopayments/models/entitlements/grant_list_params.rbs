@@ -5,6 +5,7 @@ module Dodopayments
         {
           id: String,
           customer_id: String,
+          integration_type: Dodopayments::Models::Entitlements::GrantListParams::integration_type,
           page_number: Integer,
           page_size: Integer,
           status: Dodopayments::Models::Entitlements::GrantListParams::status
@@ -20,6 +21,12 @@ module Dodopayments
         attr_reader customer_id: String?
 
         def customer_id=: (String) -> String
+
+        attr_reader integration_type: Dodopayments::Models::Entitlements::GrantListParams::integration_type?
+
+        def integration_type=: (
+          Dodopayments::Models::Entitlements::GrantListParams::integration_type
+        ) -> Dodopayments::Models::Entitlements::GrantListParams::integration_type
 
         attr_reader page_number: Integer?
 
@@ -38,6 +45,7 @@ module Dodopayments
         def initialize: (
           id: String,
           ?customer_id: String,
+          ?integration_type: Dodopayments::Models::Entitlements::GrantListParams::integration_type,
           ?page_number: Integer,
           ?page_size: Integer,
           ?status: Dodopayments::Models::Entitlements::GrantListParams::status,
@@ -47,11 +55,37 @@ module Dodopayments
         def to_hash: -> {
           id: String,
           customer_id: String,
+          integration_type: Dodopayments::Models::Entitlements::GrantListParams::integration_type,
           page_number: Integer,
           page_size: Integer,
           status: Dodopayments::Models::Entitlements::GrantListParams::status,
           request_options: Dodopayments::RequestOptions
         }
+
+        type integration_type =
+          :discord
+          | :telegram
+          | :github
+          | :figma
+          | :framer
+          | :notion
+          | :digital_files
+          | :license_key
+
+        module IntegrationType
+          extend Dodopayments::Internal::Type::Enum
+
+          DISCORD: :discord
+          TELEGRAM: :telegram
+          GITHUB: :github
+          FIGMA: :figma
+          FRAMER: :framer
+          NOTION: :notion
+          DIGITAL_FILES: :digital_files
+          LICENSE_KEY: :license_key
+
+          def self?.values: -> ::Array[Dodopayments::Models::Entitlements::GrantListParams::integration_type]
+        end
 
         type status = :Pending | :Delivered | :Failed | :Revoked
 
