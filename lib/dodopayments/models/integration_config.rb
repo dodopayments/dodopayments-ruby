@@ -181,7 +181,17 @@ module Dodopayments
         #   @return [Symbol, Dodopayments::Models::TimeInterval, nil]
         optional :duration_interval, enum: -> { Dodopayments::TimeInterval }, nil?: true
 
-        # @!method initialize(activation_message: nil, activations_limit: nil, duration_count: nil, duration_interval: nil)
+        # @!attribute fulfillment_mode
+        #   Fulfillment mode: `auto` (default) generates keys automatically; `manual`
+        #   creates pending grants the merchant fulfills via the
+        #   `POST /grants/{id}/license-key` endpoint.
+        #
+        #   @return [Symbol, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig::FulfillmentMode, nil]
+        optional :fulfillment_mode,
+                 enum: -> { Dodopayments::IntegrationConfig::LicenseKeyConfig::FulfillmentMode },
+                 nil?: true
+
+        # @!method initialize(activation_message: nil, activations_limit: nil, duration_count: nil, duration_interval: nil, fulfillment_mode: nil)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::IntegrationConfig::LicenseKeyConfig} for more details.
         #
@@ -192,6 +202,23 @@ module Dodopayments
         #   @param duration_count [Integer, nil] Validity duration of issued license keys. Provide both
         #
         #   @param duration_interval [Symbol, Dodopayments::Models::TimeInterval, nil] Unit of `duration_count`.
+        #
+        #   @param fulfillment_mode [Symbol, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig::FulfillmentMode, nil] Fulfillment mode: `auto` (default) generates keys automatically; `manual`
+
+        # Fulfillment mode: `auto` (default) generates keys automatically; `manual`
+        # creates pending grants the merchant fulfills via the
+        # `POST /grants/{id}/license-key` endpoint.
+        #
+        # @see Dodopayments::Models::IntegrationConfig::LicenseKeyConfig#fulfillment_mode
+        module FulfillmentMode
+          extend Dodopayments::Internal::Type::Enum
+
+          AUTO = :auto
+          MANUAL = :manual
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
 
       # @!method self.variants
