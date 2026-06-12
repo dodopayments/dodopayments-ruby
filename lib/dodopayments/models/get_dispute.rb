@@ -11,6 +11,12 @@ module Dodopayments
       #   @return [String]
       required :amount, String
 
+      # @!attribute brand_id
+      #   Brand id this dispute belongs to
+      #
+      #   @return [String]
+      required :brand_id, String
+
       # @!attribute business_id
       #   The unique identifier of the business involved in the dispute.
       #
@@ -59,6 +65,14 @@ module Dodopayments
       #   @return [String]
       required :payment_id, String
 
+      # @!attribute payment_provider
+      #   Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
+      #   routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+      #   processed itself.
+      #
+      #   @return [Symbol, Dodopayments::Models::GetDispute::PaymentProvider]
+      required :payment_provider, enum: -> { Dodopayments::GetDispute::PaymentProvider }
+
       # @!attribute is_resolved_by_rdr
       #   Whether the dispute was resolved by Rapid Dispute Resolution
       #
@@ -77,11 +91,13 @@ module Dodopayments
       #   @return [String, nil]
       optional :remarks, String, nil?: true
 
-      # @!method initialize(amount:, business_id:, created_at:, currency:, customer:, dispute_id:, dispute_stage:, dispute_status:, payment_id:, is_resolved_by_rdr: nil, reason: nil, remarks: nil)
+      # @!method initialize(amount:, brand_id:, business_id:, created_at:, currency:, customer:, dispute_id:, dispute_stage:, dispute_status:, payment_id:, payment_provider:, is_resolved_by_rdr: nil, reason: nil, remarks: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::GetDispute} for more details.
       #
       #   @param amount [String] The amount involved in the dispute, represented as a string to accommodate preci
+      #
+      #   @param brand_id [String] Brand id this dispute belongs to
       #
       #   @param business_id [String] The unique identifier of the business involved in the dispute.
       #
@@ -99,11 +115,29 @@ module Dodopayments
       #
       #   @param payment_id [String] The unique identifier of the payment associated with the dispute.
       #
+      #   @param payment_provider [Symbol, Dodopayments::Models::GetDispute::PaymentProvider] Which processor handled the underlying payment. `stripe` / `adyen` for
+      #
       #   @param is_resolved_by_rdr [Boolean, nil] Whether the dispute was resolved by Rapid Dispute Resolution
       #
       #   @param reason [String, nil] Reason for the dispute
       #
       #   @param remarks [String, nil] Remarks
+
+      # Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
+      # routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+      # processed itself.
+      #
+      # @see Dodopayments::Models::GetDispute#payment_provider
+      module PaymentProvider
+        extend Dodopayments::Internal::Type::Enum
+
+        STRIPE = :stripe
+        ADYEN = :adyen
+        DODO = :dodo
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
     end
   end
 end

@@ -131,13 +131,21 @@ module Dodopayments
       #   @return [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice, nil]
       optional :price, union: -> { Dodopayments::Price }, nil?: true
 
+      # @!attribute pricing_mode
+      #   Update the pricing mode. Omit to leave unchanged; set to null to clear (which
+      #   archives all active localized rules for this product). Changing to a different
+      #   non-null mode also archives any rules whose mode doesn't match the new mode.
+      #
+      #   @return [Symbol, Dodopayments::Models::ProductUpdateParams::PricingMode, nil]
+      optional :pricing_mode, enum: -> { Dodopayments::ProductUpdateParams::PricingMode }, nil?: true
+
       # @!attribute tax_category
       #   Tax category of the product.
       #
       #   @return [Symbol, Dodopayments::Models::TaxCategory, nil]
       optional :tax_category, enum: -> { Dodopayments::TaxCategory }, nil?: true
 
-      # @!method initialize(id:, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, entitlements: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      # @!method initialize(id:, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, entitlements: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, price: nil, pricing_mode: nil, tax_category: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductUpdateParams} for more details.
       #
@@ -170,6 +178,8 @@ module Dodopayments
       #   @param name [String, nil] Name of the product, optional and must be at most 100 characters.
       #
       #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice, nil] Price details of the product.
+      #
+      #   @param pricing_mode [Symbol, Dodopayments::Models::ProductUpdateParams::PricingMode, nil] Update the pricing mode. Omit to leave unchanged; set to null to clear
       #
       #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory, nil] Tax category of the product.
       #
@@ -204,6 +214,19 @@ module Dodopayments
         #   @param files [Array<String>, nil] Uploaded files ids of digital product
         #
         #   @param instructions [String, nil] Instructions to download and use the digital product
+      end
+
+      # Update the pricing mode. Omit to leave unchanged; set to null to clear (which
+      # archives all active localized rules for this product). Changing to a different
+      # non-null mode also archives any rules whose mode doesn't match the new mode.
+      module PricingMode
+        extend Dodopayments::Internal::Type::Enum
+
+        BY_CURRENCY = :by_currency
+        BY_COUNTRY = :by_country
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
   end

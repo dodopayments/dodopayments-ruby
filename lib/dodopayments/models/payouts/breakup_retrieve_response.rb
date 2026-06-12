@@ -12,8 +12,8 @@ module Dodopayments
         required :event_type, String
 
         # @!attribute total
-        #   Total amount for this event type in the payout's currency (in smallest currency
-        #   unit, e.g., cents).
+        #   Total amount for this event type in the payout's currency, in that currency's
+        #   smallest unit (cents for USD, yen for JPY, fils for KWD).
         #
         #   @return [Integer]
         required :total, Integer
@@ -26,7 +26,7 @@ module Dodopayments
         #
         #   @param event_type [String] The type of balance ledger event (e.g., "payment", "refund", "dispute", "payment
         #
-        #   @param total [Integer] Total amount for this event type in the payout's currency (in smallest currency
+        #   @param total [Integer] Total amount for this event type in the payout's currency, in that currency's sm
       end
 
       # @type [Dodopayments::Internal::Type::Converter]

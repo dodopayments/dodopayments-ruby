@@ -25,24 +25,6 @@ module Dodopayments
         sig { params(customer_id: String).void }
         attr_writer :customer_id
 
-        # Filter by integration type
-        sig do
-          returns(
-            T.nilable(
-              Dodopayments::Entitlements::GrantListParams::IntegrationType::OrSymbol
-            )
-          )
-        end
-        attr_reader :integration_type
-
-        sig do
-          params(
-            integration_type:
-              Dodopayments::Entitlements::GrantListParams::IntegrationType::OrSymbol
-          ).void
-        end
-        attr_writer :integration_type
-
         # Page number (default 0)
         sig { returns(T.nilable(Integer)) }
         attr_reader :page_number
@@ -79,8 +61,6 @@ module Dodopayments
           params(
             id: String,
             customer_id: String,
-            integration_type:
-              Dodopayments::Entitlements::GrantListParams::IntegrationType::OrSymbol,
             page_number: Integer,
             page_size: Integer,
             status:
@@ -92,8 +72,6 @@ module Dodopayments
           id:,
           # Filter by customer ID
           customer_id: nil,
-          # Filter by integration type
-          integration_type: nil,
           # Page number (default 0)
           page_number: nil,
           # Page size (default 10, max 100)
@@ -109,8 +87,6 @@ module Dodopayments
             {
               id: String,
               customer_id: String,
-              integration_type:
-                Dodopayments::Entitlements::GrantListParams::IntegrationType::OrSymbol,
               page_number: Integer,
               page_size: Integer,
               status:
@@ -120,71 +96,6 @@ module Dodopayments
           )
         end
         def to_hash
-        end
-
-        # Filter by integration type
-        module IntegrationType
-          extend Dodopayments::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Dodopayments::Entitlements::GrantListParams::IntegrationType
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          DISCORD =
-            T.let(
-              :discord,
-              Dodopayments::Entitlements::GrantListParams::IntegrationType::TaggedSymbol
-            )
-          TELEGRAM =
-            T.let(
-              :telegram,
-              Dodopayments::Entitlements::GrantListParams::IntegrationType::TaggedSymbol
-            )
-          GITHUB =
-            T.let(
-              :github,
-              Dodopayments::Entitlements::GrantListParams::IntegrationType::TaggedSymbol
-            )
-          FIGMA =
-            T.let(
-              :figma,
-              Dodopayments::Entitlements::GrantListParams::IntegrationType::TaggedSymbol
-            )
-          FRAMER =
-            T.let(
-              :framer,
-              Dodopayments::Entitlements::GrantListParams::IntegrationType::TaggedSymbol
-            )
-          NOTION =
-            T.let(
-              :notion,
-              Dodopayments::Entitlements::GrantListParams::IntegrationType::TaggedSymbol
-            )
-          DIGITAL_FILES =
-            T.let(
-              :digital_files,
-              Dodopayments::Entitlements::GrantListParams::IntegrationType::TaggedSymbol
-            )
-          LICENSE_KEY =
-            T.let(
-              :license_key,
-              Dodopayments::Entitlements::GrantListParams::IntegrationType::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Dodopayments::Entitlements::GrantListParams::IntegrationType::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
 
         # Filter by grant status

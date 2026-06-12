@@ -84,8 +84,9 @@ module Dodopayments
       sig { returns(Dodopayments::Currency::TaggedSymbol) }
       attr_accessor :settlement_currency
 
-      # Total amount charged to the customer including tax, in smallest currency unit
-      # (e.g. cents)
+      # Total amount charged to the customer including tax, in the currency's smallest
+      # unit (e.g. cents for USD, yen for JPY, fils for KWD — see the currency's decimal
+      # places)
       sig { returns(Integer) }
       attr_accessor :total_amount
 
@@ -179,7 +180,8 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :subscription_id
 
-      # Amount of tax collected in smallest currency unit (e.g. cents)
+      # Amount of tax collected in the currency's smallest unit (e.g. cents for USD, yen
+      # for JPY, fils for KWD)
       sig { returns(T.nilable(Integer)) }
       attr_accessor :tax
 
@@ -271,8 +273,9 @@ module Dodopayments
         # balance. This may differ from the customer's payment currency in adaptive
         # pricing scenarios.
         settlement_currency:,
-        # Total amount charged to the customer including tax, in smallest currency unit
-        # (e.g. cents)
+        # Total amount charged to the customer including tax, in the currency's smallest
+        # unit (e.g. cents for USD, yen for JPY, fils for KWD — see the currency's decimal
+        # places)
         total_amount:,
         # Cardholder name
         card_holder_name: nil,
@@ -320,7 +323,8 @@ module Dodopayments
         status: nil,
         # Identifier of the subscription if payment is part of a subscription
         subscription_id: nil,
-        # Amount of tax collected in smallest currency unit (e.g. cents)
+        # Amount of tax collected in the currency's smallest unit (e.g. cents for USD, yen
+        # for JPY, fils for KWD)
         tax: nil,
         # Timestamp when the payment was last updated
         updated_at: nil

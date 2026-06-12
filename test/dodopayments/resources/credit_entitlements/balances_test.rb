@@ -151,6 +151,7 @@ class Dodopayments::Test::Resources::CreditEntitlements::BalancesTest < Dodopaym
         amount: String,
         balance_after: String,
         balance_before: String,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         credit_entitlement_id: String,

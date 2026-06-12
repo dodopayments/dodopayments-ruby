@@ -43,6 +43,12 @@ module Dodopayments
         #   @return [String]
         required :available_balance, String
 
+        # @!attribute brand_id
+        #   Brand id this credit entitlement belongs to
+        #
+        #   @return [String]
+        required :brand_id, String
+
         # @!attribute credit_entitlement_id
         #
         #   @return [String]
@@ -78,16 +84,25 @@ module Dodopayments
         #   @return [Integer]
         required :threshold_percent, Integer
 
-        # @!method initialize(available_balance:, credit_entitlement_id:, credit_entitlement_name:, customer_id:, subscription_credits_amount:, subscription_id:, threshold_amount:, threshold_percent:)
+        # @!method initialize(available_balance:, brand_id:, credit_entitlement_id:, credit_entitlement_name:, customer_id:, subscription_credits_amount:, subscription_id:, threshold_amount:, threshold_percent:)
         #   Webhook payload for credit.balance_low event
         #
         #   @param available_balance [String]
+        #
+        #   @param brand_id [String] Brand id this credit entitlement belongs to
+        #
         #   @param credit_entitlement_id [String]
+        #
         #   @param credit_entitlement_name [String]
+        #
         #   @param customer_id [String]
+        #
         #   @param subscription_credits_amount [String]
+        #
         #   @param subscription_id [String]
+        #
         #   @param threshold_amount [String]
+        #
         #   @param threshold_percent [Integer]
       end
     end

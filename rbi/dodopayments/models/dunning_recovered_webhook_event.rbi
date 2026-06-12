@@ -76,6 +76,10 @@ module Dodopayments
             )
           end
 
+        # Brand id this dunning attempt belongs to
+        sig { returns(String) }
+        attr_accessor :brand_id
+
         sig { returns(Time) }
         attr_accessor :created_at
 
@@ -105,6 +109,7 @@ module Dodopayments
         # Webhook payload for dunning.started and dunning.recovered events
         sig do
           params(
+            brand_id: String,
             created_at: Time,
             customer_id: String,
             status:
@@ -116,6 +121,8 @@ module Dodopayments
           ).returns(T.attached_class)
         end
         def self.new(
+          # Brand id this dunning attempt belongs to
+          brand_id:,
           created_at:,
           customer_id:,
           status:,
@@ -128,6 +135,7 @@ module Dodopayments
         sig do
           override.returns(
             {
+              brand_id: String,
               created_at: Time,
               customer_id: String,
               status:

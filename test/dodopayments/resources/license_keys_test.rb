@@ -14,6 +14,7 @@ class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::Resou
     assert_pattern do
       response => {
         id: String,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         customer_id: String,
@@ -40,6 +41,7 @@ class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::Resou
     assert_pattern do
       response => {
         id: String,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         customer_id: String,
@@ -66,6 +68,7 @@ class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::Resou
     assert_pattern do
       response => {
         id: String,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         customer_id: String,
@@ -99,6 +102,7 @@ class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::Resou
     assert_pattern do
       row => {
         id: String,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         customer_id: String,

@@ -25,6 +25,12 @@ module Dodopayments
         #   @return [String]
         required :balance_before, String
 
+        # @!attribute brand_id
+        #   Brand id this credit ledger entry belongs to
+        #
+        #   @return [String]
+        required :brand_id, String
+
         # @!attribute business_id
         #
         #   @return [String]
@@ -86,24 +92,41 @@ module Dodopayments
         #   @return [String, nil]
         optional :reference_type, String, nil?: true
 
-        # @!method initialize(id:, amount:, balance_after:, balance_before:, business_id:, created_at:, credit_entitlement_id:, customer_id:, is_credit:, overage_after:, overage_before:, transaction_type:, description: nil, grant_id: nil, reference_id: nil, reference_type: nil)
+        # @!method initialize(id:, amount:, balance_after:, balance_before:, brand_id:, business_id:, created_at:, credit_entitlement_id:, customer_id:, is_credit:, overage_after:, overage_before:, transaction_type:, description: nil, grant_id: nil, reference_id: nil, reference_type: nil)
         #   Response for a ledger entry
         #
         #   @param id [String]
+        #
         #   @param amount [String]
+        #
         #   @param balance_after [String]
+        #
         #   @param balance_before [String]
+        #
+        #   @param brand_id [String] Brand id this credit ledger entry belongs to
+        #
         #   @param business_id [String]
+        #
         #   @param created_at [Time]
+        #
         #   @param credit_entitlement_id [String]
+        #
         #   @param customer_id [String]
+        #
         #   @param is_credit [Boolean]
+        #
         #   @param overage_after [String]
+        #
         #   @param overage_before [String]
+        #
         #   @param transaction_type [Symbol, Dodopayments::Models::CreditEntitlements::CreditLedgerEntry::TransactionType]
+        #
         #   @param description [String, nil]
+        #
         #   @param grant_id [String, nil]
+        #
         #   @param reference_id [String, nil]
+        #
         #   @param reference_type [String, nil]
 
         # @see Dodopayments::Models::CreditEntitlements::CreditLedgerEntry#transaction_type

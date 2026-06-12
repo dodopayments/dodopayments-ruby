@@ -11,6 +11,12 @@ module Dodopayments
         #   @return [String]
         required :id, String
 
+        # @!attribute brand_id
+        #   Brand id this grant belongs to.
+        #
+        #   @return [String]
+        required :brand_id, String
+
         # @!attribute business_id
         #   Identifier of the business that owns the grant.
         #
@@ -129,7 +135,7 @@ module Dodopayments
         #   @return [String, nil]
         optional :subscription_id, String, nil?: true
 
-        # @!method initialize(id:, business_id:, created_at:, customer_id:, entitlement_id:, integration_type:, metadata:, status:, updated_at:, delivered_at: nil, digital_product_delivery: nil, error_code: nil, error_message: nil, license_key: nil, oauth_expires_at: nil, oauth_url: nil, payment_id: nil, revocation_reason: nil, revoked_at: nil, subscription_id: nil)
+        # @!method initialize(id:, brand_id:, business_id:, created_at:, customer_id:, entitlement_id:, integration_type:, metadata:, status:, updated_at:, delivered_at: nil, digital_product_delivery: nil, error_code: nil, error_message: nil, license_key: nil, oauth_expires_at: nil, oauth_url: nil, payment_id: nil, revocation_reason: nil, revoked_at: nil, subscription_id: nil)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Entitlements::EntitlementGrant} for more details.
         #
@@ -137,6 +143,8 @@ module Dodopayments
         #   and any integration-specific delivery payload.
         #
         #   @param id [String] Unique identifier of the grant.
+        #
+        #   @param brand_id [String] Brand id this grant belongs to.
         #
         #   @param business_id [String] Identifier of the business that owns the grant.
         #

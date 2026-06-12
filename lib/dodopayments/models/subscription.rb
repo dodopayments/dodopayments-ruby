@@ -16,6 +16,12 @@ module Dodopayments
       #   @return [Dodopayments::Models::BillingAddress]
       required :billing, -> { Dodopayments::BillingAddress }
 
+      # @!attribute brand_id
+      #   Brand id this subscription belongs to
+      #
+      #   @return [String]
+      required :brand_id, String
+
       # @!attribute cancel_at_next_billing_date
       #   Indicates if the subscription will cancel at the next billing date
       #
@@ -110,8 +116,8 @@ module Dodopayments
       required :quantity, Integer
 
       # @!attribute recurring_pre_tax_amount
-      #   Amount charged before tax for each recurring payment in smallest currency unit
-      #   (e.g. cents)
+      #   Amount charged before tax for each recurring payment in the currency's smallest
+      #   unit (cents for USD, yen for JPY, fils for KWD)
       #
       #   @return [Integer]
       required :recurring_pre_tax_amount, Integer
@@ -229,7 +235,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(addons:, billing:, cancel_at_next_billing_date:, created_at:, credit_entitlement_cart:, currency:, customer:, metadata:, meter_credit_entitlement_cart:, meters:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancellation_comment: nil, cancellation_feedback: nil, cancelled_at: nil, custom_field_responses: nil, customer_business_name: nil, discount_cycles_remaining: nil, discount_id: nil, discounts: nil, expires_at: nil, payment_method_id: nil, scheduled_change: nil, tax_id: nil)
+      # @!method initialize(addons:, billing:, brand_id:, cancel_at_next_billing_date:, created_at:, credit_entitlement_cart:, currency:, customer:, metadata:, meter_credit_entitlement_cart:, meters:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancellation_comment: nil, cancellation_feedback: nil, cancelled_at: nil, custom_field_responses: nil, customer_business_name: nil, discount_cycles_remaining: nil, discount_id: nil, discounts: nil, expires_at: nil, payment_method_id: nil, scheduled_change: nil, tax_id: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Subscription} for more details.
       #
@@ -238,6 +244,8 @@ module Dodopayments
       #   @param addons [Array<Dodopayments::Models::AddonCartResponseItem>] Addons associated with this subscription
       #
       #   @param billing [Dodopayments::Models::BillingAddress] Billing address details for payments
+      #
+      #   @param brand_id [String] Brand id this subscription belongs to
       #
       #   @param cancel_at_next_billing_date [Boolean] Indicates if the subscription will cancel at the next billing date
       #
@@ -269,7 +277,7 @@ module Dodopayments
       #
       #   @param quantity [Integer] Number of units/items included in the subscription
       #
-      #   @param recurring_pre_tax_amount [Integer] Amount charged before tax for each recurring payment in smallest currency unit (
+      #   @param recurring_pre_tax_amount [Integer] Amount charged before tax for each recurring payment in the currency's smallest
       #
       #   @param status [Symbol, Dodopayments::Models::SubscriptionStatus] Current status of the subscription
       #

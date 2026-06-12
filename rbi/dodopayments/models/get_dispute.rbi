@@ -13,6 +13,10 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :amount
 
+      # Brand id this dispute belongs to
+      sig { returns(String) }
+      attr_accessor :brand_id
+
       # The unique identifier of the business involved in the dispute.
       sig { returns(String) }
       attr_accessor :business_id
@@ -50,6 +54,12 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :payment_id
 
+      # Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
+      # routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+      # processed itself.
+      sig { returns(Dodopayments::GetDispute::PaymentProvider::TaggedSymbol) }
+      attr_accessor :payment_provider
+
       # Whether the dispute was resolved by Rapid Dispute Resolution
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :is_resolved_by_rdr
@@ -65,6 +75,7 @@ module Dodopayments
       sig do
         params(
           amount: String,
+          brand_id: String,
           business_id: String,
           created_at: Time,
           currency: String,
@@ -73,6 +84,7 @@ module Dodopayments
           dispute_stage: Dodopayments::DisputeStage::OrSymbol,
           dispute_status: Dodopayments::DisputeStatus::OrSymbol,
           payment_id: String,
+          payment_provider: Dodopayments::GetDispute::PaymentProvider::OrSymbol,
           is_resolved_by_rdr: T.nilable(T::Boolean),
           reason: T.nilable(String),
           remarks: T.nilable(String)
@@ -82,6 +94,8 @@ module Dodopayments
         # The amount involved in the dispute, represented as a string to accommodate
         # precision.
         amount:,
+        # Brand id this dispute belongs to
+        brand_id:,
         # The unique identifier of the business involved in the dispute.
         business_id:,
         # The timestamp of when the dispute was created, in UTC.
@@ -98,6 +112,10 @@ module Dodopayments
         dispute_status:,
         # The unique identifier of the payment associated with the dispute.
         payment_id:,
+        # Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
+        # routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+        # processed itself.
+        payment_provider:,
         # Whether the dispute was resolved by Rapid Dispute Resolution
         is_resolved_by_rdr: nil,
         # Reason for the dispute
@@ -111,6 +129,7 @@ module Dodopayments
         override.returns(
           {
             amount: String,
+            brand_id: String,
             business_id: String,
             created_at: Time,
             currency: String,
@@ -119,6 +138,8 @@ module Dodopayments
             dispute_stage: Dodopayments::DisputeStage::TaggedSymbol,
             dispute_status: Dodopayments::DisputeStatus::TaggedSymbol,
             payment_id: String,
+            payment_provider:
+              Dodopayments::GetDispute::PaymentProvider::TaggedSymbol,
             is_resolved_by_rdr: T.nilable(T::Boolean),
             reason: T.nilable(String),
             remarks: T.nilable(String)
@@ -126,6 +147,37 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      # Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
+      # routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+      # processed itself.
+      module PaymentProvider
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, Dodopayments::GetDispute::PaymentProvider)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        STRIPE =
+          T.let(
+            :stripe,
+            Dodopayments::GetDispute::PaymentProvider::TaggedSymbol
+          )
+        ADYEN =
+          T.let(:adyen, Dodopayments::GetDispute::PaymentProvider::TaggedSymbol)
+        DODO =
+          T.let(:dodo, Dodopayments::GetDispute::PaymentProvider::TaggedSymbol)
+
+        sig do
+          override.returns(
+            T::Array[Dodopayments::GetDispute::PaymentProvider::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
       end
     end
   end

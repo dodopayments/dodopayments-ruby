@@ -91,8 +91,8 @@ module Dodopayments
       required :quantity, Integer
 
       # @!attribute recurring_pre_tax_amount
-      #   Amount charged before tax for each recurring payment in smallest currency unit
-      #   (e.g. cents)
+      #   Amount charged before tax for each recurring payment in the currency's smallest
+      #   unit (cents for USD, yen for JPY, fils for KWD)
       #
       #   @return [Integer]
       required :recurring_pre_tax_amount, Integer
@@ -216,7 +216,7 @@ module Dodopayments
       #
       #   @param quantity [Integer] Number of units/items included in the subscription
       #
-      #   @param recurring_pre_tax_amount [Integer] Amount charged before tax for each recurring payment in smallest currency unit (
+      #   @param recurring_pre_tax_amount [Integer] Amount charged before tax for each recurring payment in the currency's smallest
       #
       #   @param status [Symbol, Dodopayments::Models::SubscriptionStatus] Current status of the subscription
       #
