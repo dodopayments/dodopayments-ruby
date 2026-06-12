@@ -26,8 +26,8 @@ module Dodopayments
           sig { returns(String) }
           attr_accessor :event_type
 
-          # Original amount in the original currency (in smallest currency unit, e.g.,
-          # cents).
+          # Original amount in the original currency, in that currency's smallest unit
+          # (cents for USD, yen for JPY, fils for KWD).
           sig { returns(Integer) }
           attr_accessor :original_amount
 
@@ -35,8 +35,9 @@ module Dodopayments
           sig { returns(String) }
           attr_accessor :original_currency
 
-          # Amount in the payout's currency (in smallest currency unit). Uses cumulative
-          # rounding to ensure sum matches payout total exactly.
+          # Amount in the payout's currency, in that currency's smallest unit (cents for
+          # USD, yen for JPY, fils for KWD). Uses cumulative rounding to ensure sum matches
+          # payout total exactly.
           sig { returns(Integer) }
           attr_accessor :payout_currency_amount
 
@@ -75,13 +76,14 @@ module Dodopayments
             # The type of balance ledger event (e.g., "payment", "refund", "dispute",
             # "payment_fees").
             event_type:,
-            # Original amount in the original currency (in smallest currency unit, e.g.,
-            # cents).
+            # Original amount in the original currency, in that currency's smallest unit
+            # (cents for USD, yen for JPY, fils for KWD).
             original_amount:,
             # Original currency as ISO 4217 code (e.g., "USD", "EUR").
             original_currency:,
-            # Amount in the payout's currency (in smallest currency unit). Uses cumulative
-            # rounding to ensure sum matches payout total exactly.
+            # Amount in the payout's currency, in that currency's smallest unit (cents for
+            # USD, yen for JPY, fils for KWD). Uses cumulative rounding to ensure sum matches
+            # payout total exactly.
             payout_currency_amount:,
             # USD equivalent of the original amount (in cents).
             usd_equivalent_amount:,

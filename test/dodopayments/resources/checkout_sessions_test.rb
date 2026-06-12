@@ -54,6 +54,7 @@ class Dodopayments::Test::Resources::CheckoutSessionsTest < Dodopayments::Test::
         billing_country: Dodopayments::CountryCode,
         currency: Dodopayments::Currency,
         current_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup,
+        is_byop: Dodopayments::Internal::Type::Boolean,
         product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart]),
         total_price: Integer,
         recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup | nil,

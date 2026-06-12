@@ -80,6 +80,7 @@ module Dodopayments
 
         AUTO = :auto
         IMPORT = :import
+        MANUAL = :manual
 
         # @!method self.values
         #   @return [Array<Symbol>]

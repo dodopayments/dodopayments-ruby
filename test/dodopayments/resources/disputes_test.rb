@@ -13,6 +13,7 @@ class Dodopayments::Test::Resources::DisputesTest < Dodopayments::Test::Resource
     assert_pattern do
       response => {
         amount: String,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         currency: String,
@@ -21,6 +22,7 @@ class Dodopayments::Test::Resources::DisputesTest < Dodopayments::Test::Resource
         dispute_stage: Dodopayments::DisputeStage,
         dispute_status: Dodopayments::DisputeStatus,
         payment_id: String,
+        payment_provider: Dodopayments::GetDispute::PaymentProvider,
         is_resolved_by_rdr: Dodopayments::Internal::Type::Boolean | nil,
         reason: String | nil,
         remarks: String | nil
@@ -52,6 +54,7 @@ class Dodopayments::Test::Resources::DisputesTest < Dodopayments::Test::Resource
         dispute_stage: Dodopayments::DisputeStage,
         dispute_status: Dodopayments::DisputeStatus,
         payment_id: String,
+        payment_provider: Dodopayments::Models::DisputeListResponse::PaymentProvider,
         is_resolved_by_rdr: Dodopayments::Internal::Type::Boolean | nil
       }
     end

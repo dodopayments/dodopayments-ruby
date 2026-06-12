@@ -3,6 +3,7 @@ module Dodopayments
     type license_key =
       {
         id: String,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         customer_id: String,
@@ -19,6 +20,8 @@ module Dodopayments
 
     class LicenseKey < Dodopayments::Internal::Type::BaseModel
       attr_accessor id: String
+
+      attr_accessor brand_id: String
 
       attr_accessor business_id: String
 
@@ -46,6 +49,7 @@ module Dodopayments
 
       def initialize: (
         id: String,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         customer_id: String,
@@ -62,6 +66,7 @@ module Dodopayments
 
       def to_hash: -> {
         id: String,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         customer_id: String,
@@ -76,13 +81,14 @@ module Dodopayments
         subscription_id: String?
       }
 
-      type source = :auto | :import
+      type source = :auto | :import | :manual
 
       module Source
         extend Dodopayments::Internal::Type::Enum
 
         AUTO: :auto
         IMPORT: :import
+        MANUAL: :manual
 
         def self?.values: -> ::Array[Dodopayments::Models::LicenseKey::source]
       end

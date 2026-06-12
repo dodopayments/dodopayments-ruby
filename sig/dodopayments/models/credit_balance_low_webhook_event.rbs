@@ -34,6 +34,7 @@ module Dodopayments
       type data =
         {
           available_balance: String,
+          brand_id: String,
           credit_entitlement_id: String,
           credit_entitlement_name: String,
           customer_id: String,
@@ -45,6 +46,8 @@ module Dodopayments
 
       class Data < Dodopayments::Internal::Type::BaseModel
         attr_accessor available_balance: String
+
+        attr_accessor brand_id: String
 
         attr_accessor credit_entitlement_id: String
 
@@ -62,6 +65,7 @@ module Dodopayments
 
         def initialize: (
           available_balance: String,
+          brand_id: String,
           credit_entitlement_id: String,
           credit_entitlement_name: String,
           customer_id: String,
@@ -73,6 +77,7 @@ module Dodopayments
 
         def to_hash: -> {
           available_balance: String,
+          brand_id: String,
           credit_entitlement_id: String,
           credit_entitlement_name: String,
           customer_id: String,

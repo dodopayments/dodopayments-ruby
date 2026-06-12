@@ -17,8 +17,8 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :event_type
 
-        # Total amount for this event type in the payout's currency (in smallest currency
-        # unit, e.g., cents).
+        # Total amount for this event type in the payout's currency, in that currency's
+        # smallest unit (cents for USD, yen for JPY, fils for KWD).
         sig { returns(Integer) }
         attr_accessor :total
 
@@ -30,8 +30,8 @@ module Dodopayments
           # The type of balance ledger event (e.g., "payment", "refund", "dispute",
           # "payment_fees").
           event_type:,
-          # Total amount for this event type in the payout's currency (in smallest currency
-          # unit, e.g., cents).
+          # Total amount for this event type in the payout's currency, in that currency's
+          # smallest unit (cents for USD, yen for JPY, fils for KWD).
           total:
         )
         end

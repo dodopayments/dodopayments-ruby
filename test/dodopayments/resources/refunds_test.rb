@@ -12,6 +12,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
 
     assert_pattern do
       response => {
+        brand_id: String,
         business_id: String,
         created_at: Time,
         customer: Dodopayments::CustomerLimitedDetails,
@@ -36,6 +37,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
 
     assert_pattern do
       response => {
+        brand_id: String,
         business_id: String,
         created_at: Time,
         customer: Dodopayments::CustomerLimitedDetails,

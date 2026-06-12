@@ -44,10 +44,30 @@ module Dodopayments
       #   @return [String]
       required :payment_id, String
 
+      # @!attribute payment_provider
+      #   Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
+      #   merchant's own Hyperswitch connector); `dodo` for everything Dodo processed
+      #   itself.
+      #
+      #   @return [Symbol, Dodopayments::Models::PaymentListResponse::PaymentProvider]
+      required :payment_provider, enum: -> { Dodopayments::Models::PaymentListResponse::PaymentProvider }
+
       # @!attribute total_amount
       #
       #   @return [Integer]
       required :total_amount, Integer
+
+      # @!attribute card_last_four
+      #   The last four digits of the card
+      #
+      #   @return [String, nil]
+      optional :card_last_four, String, nil?: true
+
+      # @!attribute card_network
+      #   Card network like VISA, MASTERCARD etc.
+      #
+      #   @return [String, nil]
+      optional :card_network, String, nil?: true
 
       # @!attribute dispute_status
       #   The most recent dispute status for this payment. None if no disputes exist.
@@ -94,7 +114,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :subscription_id, String, nil?: true
 
-      # @!method initialize(brand_id:, created_at:, currency:, customer:, digital_products_delivered:, has_license_key:, metadata:, payment_id:, total_amount:, dispute_status: nil, invoice_id: nil, invoice_url: nil, payment_method: nil, payment_method_type: nil, refund_status: nil, status: nil, subscription_id: nil)
+      # @!method initialize(brand_id:, created_at:, currency:, customer:, digital_products_delivered:, has_license_key:, metadata:, payment_id:, payment_provider:, total_amount:, card_last_four: nil, card_network: nil, dispute_status: nil, invoice_id: nil, invoice_url: nil, payment_method: nil, payment_method_type: nil, refund_status: nil, status: nil, subscription_id: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::PaymentListResponse} for more details.
       #
@@ -114,7 +134,13 @@ module Dodopayments
       #
       #   @param payment_id [String]
       #
+      #   @param payment_provider [Symbol, Dodopayments::Models::PaymentListResponse::PaymentProvider] Which processor handled this payment. `stripe` / `adyen` for BYOP routes
+      #
       #   @param total_amount [Integer]
+      #
+      #   @param card_last_four [String, nil] The last four digits of the card
+      #
+      #   @param card_network [String, nil] Card network like VISA, MASTERCARD etc.
       #
       #   @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus, nil] The most recent dispute status for this payment. None if no disputes exist.
       #
@@ -131,6 +157,22 @@ module Dodopayments
       #   @param status [Symbol, Dodopayments::Models::IntentStatus, nil]
       #
       #   @param subscription_id [String, nil]
+
+      # Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
+      # merchant's own Hyperswitch connector); `dodo` for everything Dodo processed
+      # itself.
+      #
+      # @see Dodopayments::Models::PaymentListResponse#payment_provider
+      module PaymentProvider
+        extend Dodopayments::Internal::Type::Enum
+
+        STRIPE = :stripe
+        ADYEN = :adyen
+        DODO = :dodo
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
     end
   end
 end

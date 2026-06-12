@@ -36,6 +36,8 @@ module Dodopayments
             T.nilable(Dodopayments::LicenseKeyDuration::OrHash),
           license_key_enabled: T.nilable(T::Boolean),
           metadata: T::Hash[Symbol, String],
+          pricing_mode:
+            T.nilable(Dodopayments::ProductCreateParams::PricingMode::OrSymbol),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Product)
       end
@@ -50,7 +52,7 @@ module Dodopayments
         addons: nil,
         # Brand id for the product, if not provided will default to primary brand
         brand_id: nil,
-        # Optional credit entitlements to attach (max 3)
+        # Optional credit entitlements to attach (max 5)
         credit_entitlements: nil,
         # Optional description of the product
         description: nil,
@@ -58,7 +60,7 @@ module Dodopayments
         #
         # deprecated: use entitlements instead
         digital_product_delivery: nil,
-        # Optional entitlements to attach to this product (max 20)
+        # Optional entitlements to attach to this product (max 50)
         entitlements: nil,
         # Optional message displayed during license key activation
         #
@@ -85,6 +87,10 @@ module Dodopayments
         license_key_enabled: nil,
         # Additional metadata for the product
         metadata: nil,
+        # Pricing mode for localized pricing. When set, rules from
+        # /products/{id}/localized-prices apply at checkout. NULL means base-only
+        # (existing behavior).
+        pricing_mode: nil,
         request_options: {}
       )
       end
@@ -132,6 +138,8 @@ module Dodopayments
                 Dodopayments::Price::UsageBasedPrice::OrHash
               )
             ),
+          pricing_mode:
+            T.nilable(Dodopayments::ProductUpdateParams::PricingMode::OrSymbol),
           tax_category: T.nilable(Dodopayments::TaxCategory::OrSymbol),
           request_options: Dodopayments::RequestOptions::OrHash
         ).void
@@ -189,6 +197,10 @@ module Dodopayments
         name: nil,
         # Price details of the product.
         price: nil,
+        # Update the pricing mode. Omit to leave unchanged; set to null to clear (which
+        # archives all active localized rules for this product). Changing to a different
+        # non-null mode also archives any rules whose mode doesn't match the new mode.
+        pricing_mode: nil,
         # Tax category of the product.
         tax_category: nil,
         request_options: {}

@@ -53,6 +53,12 @@ module Dodopayments
         required :abandonment_reason,
                  enum: -> { Dodopayments::AbandonedCheckoutDetectedWebhookEvent::Data::AbandonmentReason }
 
+        # @!attribute brand_id
+        #   Brand id this abandoned checkout belongs to
+        #
+        #   @return [String]
+        required :brand_id, String
+
         # @!attribute customer_id
         #
         #   @return [String]
@@ -73,15 +79,22 @@ module Dodopayments
         #   @return [String, nil]
         optional :recovered_payment_id, String, nil?: true
 
-        # @!method initialize(abandoned_at:, abandonment_reason:, customer_id:, payment_id:, status:, recovered_payment_id: nil)
+        # @!method initialize(abandoned_at:, abandonment_reason:, brand_id:, customer_id:, payment_id:, status:, recovered_payment_id: nil)
         #   Webhook payload for abandoned_checkout.detected and abandoned_checkout.recovered
         #   events
         #
         #   @param abandoned_at [Time]
+        #
         #   @param abandonment_reason [Symbol, Dodopayments::Models::AbandonedCheckoutDetectedWebhookEvent::Data::AbandonmentReason]
+        #
+        #   @param brand_id [String] Brand id this abandoned checkout belongs to
+        #
         #   @param customer_id [String]
+        #
         #   @param payment_id [String]
+        #
         #   @param status [Symbol, Dodopayments::Models::AbandonedCheckoutDetectedWebhookEvent::Data::Status]
+        #
         #   @param recovered_payment_id [String, nil]
 
         # @see Dodopayments::Models::AbandonedCheckoutDetectedWebhookEvent::Data#abandonment_reason

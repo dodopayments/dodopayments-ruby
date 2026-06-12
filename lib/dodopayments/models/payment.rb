@@ -64,6 +64,14 @@ module Dodopayments
       #   @return [String]
       required :payment_id, String
 
+      # @!attribute payment_provider
+      #   Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
+      #   merchant's own Hyperswitch connector); `dodo` for everything Dodo processed
+      #   itself.
+      #
+      #   @return [Symbol, Dodopayments::Models::Payment::PaymentProvider]
+      required :payment_provider, enum: -> { Dodopayments::Payment::PaymentProvider }
+
       # @!attribute refunds
       #   List of refunds issued for this payment
       #
@@ -95,8 +103,9 @@ module Dodopayments
       required :settlement_currency, enum: -> { Dodopayments::Currency }
 
       # @!attribute total_amount
-      #   Total amount charged to the customer including tax, in smallest currency unit
-      #   (e.g. cents)
+      #   Total amount charged to the customer including tax, in the currency's smallest
+      #   unit (e.g. cents for USD, yen for JPY, fils for KWD — see the currency's decimal
+      #   places)
       #
       #   @return [Integer]
       required :total_amount, Integer
@@ -240,7 +249,8 @@ module Dodopayments
       optional :subscription_id, String, nil?: true
 
       # @!attribute tax
-      #   Amount of tax collected in smallest currency unit (e.g. cents)
+      #   Amount of tax collected in the currency's smallest unit (e.g. cents for USD, yen
+      #   for JPY, fils for KWD)
       #
       #   @return [Integer, nil]
       optional :tax, Integer, nil?: true
@@ -251,7 +261,7 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, refunds:, retry_attempt:, settlement_amount:, settlement_currency:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, discounts: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, payment_provider:, refunds:, retry_attempt:, settlement_amount:, settlement_currency:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, discounts: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
@@ -275,6 +285,8 @@ module Dodopayments
       #
       #   @param payment_id [String] Unique identifier for the payment
       #
+      #   @param payment_provider [Symbol, Dodopayments::Models::Payment::PaymentProvider] Which processor handled this payment. `stripe` / `adyen` for BYOP routes
+      #
       #   @param refunds [Array<Dodopayments::Models::RefundListItem>] List of refunds issued for this payment
       #
       #   @param retry_attempt [Integer] Retry attempt number for subscription renewal payments.
@@ -283,7 +295,7 @@ module Dodopayments
       #
       #   @param settlement_currency [Symbol, Dodopayments::Models::Currency] The currency in which the settlement_amount will be credited to your Dodo balanc
       #
-      #   @param total_amount [Integer] Total amount charged to the customer including tax, in smallest currency unit (e
+      #   @param total_amount [Integer] Total amount charged to the customer including tax, in the currency's smallest u
       #
       #   @param card_holder_name [String, nil] Cardholder name
       #
@@ -327,9 +339,25 @@ module Dodopayments
       #
       #   @param subscription_id [String, nil] Identifier of the subscription if payment is part of a subscription
       #
-      #   @param tax [Integer, nil] Amount of tax collected in smallest currency unit (e.g. cents)
+      #   @param tax [Integer, nil] Amount of tax collected in the currency's smallest unit
       #
       #   @param updated_at [Time, nil] Timestamp when the payment was last updated
+
+      # Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
+      # merchant's own Hyperswitch connector); `dodo` for everything Dodo processed
+      # itself.
+      #
+      # @see Dodopayments::Models::Payment#payment_provider
+      module PaymentProvider
+        extend Dodopayments::Internal::Type::Enum
+
+        STRIPE = :stripe
+        ADYEN = :adyen
+        DODO = :dodo
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
 
       class ProductCart < Dodopayments::Internal::Type::BaseModel
         # @!attribute product_id

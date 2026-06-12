@@ -2,6 +2,7 @@ module Dodopayments
   module Models
     type refund =
       {
+        brand_id: String,
         business_id: String,
         created_at: Time,
         customer: Dodopayments::CustomerLimitedDetails,
@@ -16,6 +17,8 @@ module Dodopayments
       }
 
     class Refund < Dodopayments::Internal::Type::BaseModel
+      attr_accessor brand_id: String
+
       attr_accessor business_id: String
 
       attr_accessor created_at: Time
@@ -39,6 +42,7 @@ module Dodopayments
       attr_accessor reason: String?
 
       def initialize: (
+        brand_id: String,
         business_id: String,
         created_at: Time,
         customer: Dodopayments::CustomerLimitedDetails,
@@ -53,6 +57,7 @@ module Dodopayments
       ) -> void
 
       def to_hash: -> {
+        brand_id: String,
         business_id: String,
         created_at: Time,
         customer: Dodopayments::CustomerLimitedDetails,

@@ -12,6 +12,10 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :id
 
+      # Brand id this license key belongs to
+      sig { returns(String) }
+      attr_accessor :brand_id
+
       # The unique identifier of the business associated with the license key.
       sig { returns(String) }
       attr_accessor :business_id
@@ -65,6 +69,7 @@ module Dodopayments
       sig do
         params(
           id: String,
+          brand_id: String,
           business_id: String,
           created_at: Time,
           customer_id: String,
@@ -82,6 +87,8 @@ module Dodopayments
       def self.new(
         # The unique identifier of the license key.
         id:,
+        # Brand id this license key belongs to
+        brand_id:,
         # The unique identifier of the business associated with the license key.
         business_id:,
         # The timestamp indicating when the license key was created, in UTC.
@@ -115,6 +122,7 @@ module Dodopayments
         override.returns(
           {
             id: String,
+            brand_id: String,
             business_id: String,
             created_at: Time,
             customer_id: String,
@@ -144,6 +152,7 @@ module Dodopayments
 
         AUTO = T.let(:auto, Dodopayments::LicenseKey::Source::TaggedSymbol)
         IMPORT = T.let(:import, Dodopayments::LicenseKey::Source::TaggedSymbol)
+        MANUAL = T.let(:manual, Dodopayments::LicenseKey::Source::TaggedSymbol)
 
         sig do
           override.returns(

@@ -35,6 +35,13 @@ module Dodopayments
       end
       attr_writer :current_breakup
 
+      # Whether the payment will be routed through the merchant's own processor (BYOP).
+      # True when the session's business has a BYOP route configured for the billing
+      # country; in that case the quoted amounts exclude Dodo-computed tax because the
+      # merchant is MoR and owns tax.
+      sig { returns(T::Boolean) }
+      attr_accessor :is_byop
+
       # The total product cart
       sig do
         returns(
@@ -84,6 +91,7 @@ module Dodopayments
           currency: Dodopayments::Currency::OrSymbol,
           current_breakup:
             Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup::OrHash,
+          is_byop: T::Boolean,
           product_cart:
             T::Array[
               Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::OrHash
@@ -104,6 +112,11 @@ module Dodopayments
         currency:,
         # Breakup of the current payment
         current_breakup:,
+        # Whether the payment will be routed through the merchant's own processor (BYOP).
+        # True when the session's business has a BYOP route configured for the billing
+        # country; in that case the quoted amounts exclude Dodo-computed tax because the
+        # merchant is MoR and owns tax.
+        is_byop:,
         # The total product cart
         product_cart:,
         # Total calculate price of the product cart
@@ -124,6 +137,7 @@ module Dodopayments
             currency: Dodopayments::Currency::TaggedSymbol,
             current_breakup:
               Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup,
+            is_byop: T::Boolean,
             product_cart:
               T::Array[
                 Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart

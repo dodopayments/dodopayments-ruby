@@ -19,6 +19,10 @@ module Dodopayments
       sig { params(billing: Dodopayments::BillingAddress::OrHash).void }
       attr_writer :billing
 
+      # Brand id this subscription belongs to
+      sig { returns(String) }
+      attr_accessor :brand_id
+
       # Indicates if the subscription will cancel at the next billing date
       sig { returns(T::Boolean) }
       attr_accessor :cancel_at_next_billing_date
@@ -87,8 +91,8 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :quantity
 
-      # Amount charged before tax for each recurring payment in smallest currency unit
-      # (e.g. cents)
+      # Amount charged before tax for each recurring payment in the currency's smallest
+      # unit (cents for USD, yen for JPY, fils for KWD)
       sig { returns(Integer) }
       attr_accessor :recurring_pre_tax_amount
 
@@ -179,6 +183,7 @@ module Dodopayments
         params(
           addons: T::Array[Dodopayments::AddonCartResponseItem::OrHash],
           billing: Dodopayments::BillingAddress::OrHash,
+          brand_id: String,
           cancel_at_next_billing_date: T::Boolean,
           created_at: Time,
           credit_entitlement_cart:
@@ -225,6 +230,8 @@ module Dodopayments
         addons:,
         # Billing address details for payments
         billing:,
+        # Brand id this subscription belongs to
+        brand_id:,
         # Indicates if the subscription will cancel at the next billing date
         cancel_at_next_billing_date:,
         # Timestamp when the subscription was created
@@ -256,8 +263,8 @@ module Dodopayments
         product_id:,
         # Number of units/items included in the subscription
         quantity:,
-        # Amount charged before tax for each recurring payment in smallest currency unit
-        # (e.g. cents)
+        # Amount charged before tax for each recurring payment in the currency's smallest
+        # unit (cents for USD, yen for JPY, fils for KWD)
         recurring_pre_tax_amount:,
         # Current status of the subscription
         status:,
@@ -304,6 +311,7 @@ module Dodopayments
           {
             addons: T::Array[Dodopayments::AddonCartResponseItem],
             billing: Dodopayments::BillingAddress,
+            brand_id: String,
             cancel_at_next_billing_date: T::Boolean,
             created_at: Time,
             credit_entitlement_cart:
