@@ -38,7 +38,7 @@ module Dodopayments
         optional :last_used_at, Time, nil?: true
 
         # @!attribute payment_method_type
-        #   All supported payment method types (from Hyperswitch).
+        #   All supported payment method types.
         #
         #   Used for disabled-payment-methods filtering and validation.
         #
@@ -63,7 +63,7 @@ module Dodopayments
         #
         #   @param last_used_at [Time, nil]
         #
-        #   @param payment_method_type [Symbol, Dodopayments::Models::PaymentMethodTypes, nil] All supported payment method types (from Hyperswitch).
+        #   @param payment_method_type [Symbol, Dodopayments::Models::PaymentMethodTypes, nil] All supported payment method types.
         #
         #   @param recurring_enabled [Boolean, nil]
 

@@ -2,7 +2,7 @@
 
 module Dodopayments
   module Models
-    # All supported payment method types (from Hyperswitch).
+    # All supported payment method types.
     #
     # Used for disabled-payment-methods filtering and validation.
     module PaymentMethodTypes

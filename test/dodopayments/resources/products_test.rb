@@ -116,6 +116,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         name: String | nil,
         price: Integer | nil,
         price_detail: Dodopayments::Price | nil,
+        pricing_mode: Dodopayments::Models::ProductListResponse::PricingMode | nil,
         tax_inclusive: Dodopayments::Internal::Type::Boolean | nil
       }
     end
