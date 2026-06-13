@@ -308,9 +308,9 @@ module Dodopayments
         sig { returns(T.nilable(Dodopayments::TimeInterval::OrSymbol)) }
         attr_accessor :duration_interval
 
-        # Fulfillment mode: `auto` (default) generates keys automatically; `manual`
-        # creates pending grants the merchant fulfills via the
-        # `POST /grants/{id}/license-key` endpoint.
+        # How license keys are fulfilled. `auto` (default) generates and delivers keys to
+        # customers automatically; `manual` creates pending grants that you fulfill with
+        # the supplied key via `POST /grants/{grant_id}/license-key`.
         sig do
           returns(
             T.nilable(
@@ -344,9 +344,9 @@ module Dodopayments
           duration_count: nil,
           # Unit of `duration_count`.
           duration_interval: nil,
-          # Fulfillment mode: `auto` (default) generates keys automatically; `manual`
-          # creates pending grants the merchant fulfills via the
-          # `POST /grants/{id}/license-key` endpoint.
+          # How license keys are fulfilled. `auto` (default) generates and delivers keys to
+          # customers automatically; `manual` creates pending grants that you fulfill with
+          # the supplied key via `POST /grants/{grant_id}/license-key`.
           fulfillment_mode: nil
         )
         end
@@ -369,9 +369,9 @@ module Dodopayments
         def to_hash
         end
 
-        # Fulfillment mode: `auto` (default) generates keys automatically; `manual`
-        # creates pending grants the merchant fulfills via the
-        # `POST /grants/{id}/license-key` endpoint.
+        # How license keys are fulfilled. `auto` (default) generates and delivers keys to
+        # customers automatically; `manual` creates pending grants that you fulfill with
+        # the supplied key via `POST /grants/{grant_id}/license-key`.
         module FulfillmentMode
           extend Dodopayments::Internal::Type::Enum
 

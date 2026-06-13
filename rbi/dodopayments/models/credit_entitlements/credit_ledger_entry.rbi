@@ -24,6 +24,10 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :balance_before
 
+        # Brand id this credit ledger entry belongs to
+        sig { returns(String) }
+        attr_accessor :brand_id
+
         sig { returns(String) }
         attr_accessor :business_id
 
@@ -71,6 +75,7 @@ module Dodopayments
             amount: String,
             balance_after: String,
             balance_before: String,
+            brand_id: String,
             business_id: String,
             created_at: Time,
             credit_entitlement_id: String,
@@ -91,6 +96,8 @@ module Dodopayments
           amount:,
           balance_after:,
           balance_before:,
+          # Brand id this credit ledger entry belongs to
+          brand_id:,
           business_id:,
           created_at:,
           credit_entitlement_id:,
@@ -113,6 +120,7 @@ module Dodopayments
               amount: String,
               balance_after: String,
               balance_before: String,
+              brand_id: String,
               business_id: String,
               created_at: Time,
               credit_entitlement_id: String,

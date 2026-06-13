@@ -4,6 +4,12 @@ module Dodopayments
   module Models
     # @see Dodopayments::Resources::Refunds#create
     class Refund < Dodopayments::Internal::Type::BaseModel
+      # @!attribute brand_id
+      #   Brand id this refund belongs to
+      #
+      #   @return [String]
+      required :brand_id, String
+
       # @!attribute business_id
       #   The unique identifier of the business issuing the refund.
       #
@@ -70,7 +76,9 @@ module Dodopayments
       #   @return [String, nil]
       optional :reason, String, nil?: true
 
-      # @!method initialize(business_id:, created_at:, customer:, is_partial:, metadata:, payment_id:, refund_id:, status:, amount: nil, currency: nil, reason: nil)
+      # @!method initialize(brand_id:, business_id:, created_at:, customer:, is_partial:, metadata:, payment_id:, refund_id:, status:, amount: nil, currency: nil, reason: nil)
+      #   @param brand_id [String] Brand id this refund belongs to
+      #
       #   @param business_id [String] The unique identifier of the business issuing the refund.
       #
       #   @param created_at [Time] The timestamp of when the refund was created in UTC.

@@ -6,6 +6,7 @@ module Dodopayments
       type entitlement_grant =
         {
           id: String,
+          brand_id: String,
           business_id: String,
           created_at: Time,
           customer_id: String,
@@ -29,6 +30,8 @@ module Dodopayments
 
       class EntitlementGrant < Dodopayments::Internal::Type::BaseModel
         attr_accessor id: String
+
+        attr_accessor brand_id: String
 
         attr_accessor business_id: String
 
@@ -70,6 +73,7 @@ module Dodopayments
 
         def initialize: (
           id: String,
+          brand_id: String,
           business_id: String,
           created_at: Time,
           customer_id: String,
@@ -93,6 +97,7 @@ module Dodopayments
 
         def to_hash: -> {
           id: String,
+          brand_id: String,
           business_id: String,
           created_at: Time,
           customer_id: String,

@@ -101,7 +101,8 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :price_per_unit
 
-        # Total price charged for this meter in smallest currency unit (cents)
+        # Total price charged for this meter in the currency's smallest unit (cents for
+        # USD, yen for JPY, fils for KWD)
         sig { returns(Integer) }
         attr_accessor :total_price
 
@@ -132,7 +133,8 @@ module Dodopayments
           name:,
           # Price per unit in string format for precision
           price_per_unit:,
-          # Total price charged for this meter in smallest currency unit (cents)
+          # Total price charged for this meter in the currency's smallest unit (cents for
+          # USD, yen for JPY, fils for KWD)
           total_price:
         )
         end

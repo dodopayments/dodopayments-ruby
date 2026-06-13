@@ -18,6 +18,10 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :id
 
+        # Brand id this grant belongs to.
+        sig { returns(String) }
+        attr_accessor :brand_id
+
         # Identifier of the business that owns the grant.
         sig { returns(String) }
         attr_accessor :business_id
@@ -123,6 +127,7 @@ module Dodopayments
         sig do
           params(
             id: String,
+            brand_id: String,
             business_id: String,
             created_at: Time,
             customer_id: String,
@@ -151,6 +156,8 @@ module Dodopayments
         def self.new(
           # Unique identifier of the grant.
           id:,
+          # Brand id this grant belongs to.
+          brand_id:,
           # Identifier of the business that owns the grant.
           business_id:,
           # Timestamp when the grant was created.
@@ -200,6 +207,7 @@ module Dodopayments
           override.returns(
             {
               id: String,
+              brand_id: String,
               business_id: String,
               created_at: Time,
               customer_id: String,

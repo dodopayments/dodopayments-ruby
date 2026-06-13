@@ -9,8 +9,6 @@ module Dodopayments
           params(
             id: String,
             customer_id: String,
-            integration_type:
-              Dodopayments::Entitlements::GrantListParams::IntegrationType::OrSymbol,
             page_number: Integer,
             page_size: Integer,
             status:
@@ -27,8 +25,6 @@ module Dodopayments
           id,
           # Filter by customer ID
           customer_id: nil,
-          # Filter by integration type
-          integration_type: nil,
           # Page number (default 0)
           page_number: nil,
           # Page size (default 10, max 100)

@@ -103,8 +103,9 @@ module Dodopayments
       required :settlement_currency, enum: -> { Dodopayments::Currency }
 
       # @!attribute total_amount
-      #   Total amount charged to the customer including tax, in smallest currency unit
-      #   (e.g. cents)
+      #   Total amount charged to the customer including tax, in the currency's smallest
+      #   unit (e.g. cents for USD, yen for JPY, fils for KWD — see the currency's decimal
+      #   places)
       #
       #   @return [Integer]
       required :total_amount, Integer
@@ -248,7 +249,8 @@ module Dodopayments
       optional :subscription_id, String, nil?: true
 
       # @!attribute tax
-      #   Amount of tax collected in smallest currency unit (e.g. cents)
+      #   Amount of tax collected in the currency's smallest unit (e.g. cents for USD, yen
+      #   for JPY, fils for KWD)
       #
       #   @return [Integer, nil]
       optional :tax, Integer, nil?: true
@@ -293,7 +295,7 @@ module Dodopayments
       #
       #   @param settlement_currency [Symbol, Dodopayments::Models::Currency] The currency in which the settlement_amount will be credited to your Dodo balanc
       #
-      #   @param total_amount [Integer] Total amount charged to the customer including tax, in smallest currency unit (e
+      #   @param total_amount [Integer] Total amount charged to the customer including tax, in the currency's smallest u
       #
       #   @param card_holder_name [String, nil] Cardholder name
       #
@@ -337,7 +339,7 @@ module Dodopayments
       #
       #   @param subscription_id [String, nil] Identifier of the subscription if payment is part of a subscription
       #
-      #   @param tax [Integer, nil] Amount of tax collected in smallest currency unit (e.g. cents)
+      #   @param tax [Integer, nil] Amount of tax collected in the currency's smallest unit
       #
       #   @param updated_at [Time, nil] Timestamp when the payment was last updated
 

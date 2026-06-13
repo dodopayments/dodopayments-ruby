@@ -325,6 +325,11 @@ module Dodopayments
           required :currency, enum: -> { Dodopayments::Currency }
 
           # @!attribute customer_credits
+          #   Net credit movement in the smallest currency unit (e.g. cents). **Negative** –
+          #   credits were deducted from the customer's balance to offset the charge (typical
+          #   on upgrades). **Positive** – credits were added to the customer's balance,
+          #   either from a downgrade proration refund or from topping-up the wallet to meet a
+          #   gateway minimum-charge threshold. **Zero** – no credit movement occurred.
           #
           #   @return [Integer]
           required :customer_credits, Integer
@@ -355,12 +360,22 @@ module Dodopayments
           optional :tax, Integer, nil?: true
 
           # @!method initialize(currency:, customer_credits:, settlement_amount:, settlement_currency:, total_amount:, settlement_tax: nil, tax: nil)
+          #   Some parameter documentations has been truncated, see
+          #   {Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::Summary}
+          #   for more details.
+          #
           #   @param currency [Symbol, Dodopayments::Models::Currency]
-          #   @param customer_credits [Integer]
+          #
+          #   @param customer_credits [Integer] Net credit movement in the smallest currency unit (e.g. cents).
+          #
           #   @param settlement_amount [Integer]
+          #
           #   @param settlement_currency [Symbol, Dodopayments::Models::Currency]
+          #
           #   @param total_amount [Integer]
+          #
           #   @param settlement_tax [Integer, nil]
+          #
           #   @param tax [Integer, nil]
         end
       end

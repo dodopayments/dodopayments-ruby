@@ -38,6 +38,12 @@ module Dodopayments
 
       # @see Dodopayments::Models::DunningRecoveredWebhookEvent#data
       class Data < Dodopayments::Internal::Type::BaseModel
+        # @!attribute brand_id
+        #   Brand id this dunning attempt belongs to
+        #
+        #   @return [String]
+        required :brand_id, String
+
         # @!attribute created_at
         #
         #   @return [Time]
@@ -68,14 +74,21 @@ module Dodopayments
         #   @return [String, nil]
         optional :payment_id, String, nil?: true
 
-        # @!method initialize(created_at:, customer_id:, status:, subscription_id:, trigger_state:, payment_id: nil)
+        # @!method initialize(brand_id:, created_at:, customer_id:, status:, subscription_id:, trigger_state:, payment_id: nil)
         #   Webhook payload for dunning.started and dunning.recovered events
         #
+        #   @param brand_id [String] Brand id this dunning attempt belongs to
+        #
         #   @param created_at [Time]
+        #
         #   @param customer_id [String]
+        #
         #   @param status [Symbol, Dodopayments::Models::DunningRecoveredWebhookEvent::Data::Status]
+        #
         #   @param subscription_id [String]
+        #
         #   @param trigger_state [Symbol, Dodopayments::Models::DunningRecoveredWebhookEvent::Data::TriggerState]
+        #
         #   @param payment_id [String, nil]
 
         # @see Dodopayments::Models::DunningRecoveredWebhookEvent::Data#status

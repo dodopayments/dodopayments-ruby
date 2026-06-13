@@ -37,6 +37,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         license_key_activations_limit: Integer | nil,
         license_key_duration: Dodopayments::LicenseKeyDuration | nil,
         name: String | nil,
+        pricing_mode: Dodopayments::Product::PricingMode | nil,
         product_collection_id: String | nil
       }
     end
@@ -71,6 +72,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         license_key_activations_limit: Integer | nil,
         license_key_duration: Dodopayments::LicenseKeyDuration | nil,
         name: String | nil,
+        pricing_mode: Dodopayments::Product::PricingMode | nil,
         product_collection_id: String | nil
       }
     end

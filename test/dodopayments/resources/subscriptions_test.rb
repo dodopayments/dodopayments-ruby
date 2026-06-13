@@ -45,6 +45,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
       response => {
         addons: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::AddonCartResponseItem]),
         billing: Dodopayments::BillingAddress,
+        brand_id: String,
         cancel_at_next_billing_date: Dodopayments::Internal::Type::Boolean,
         created_at: Time,
         credit_entitlement_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::CreditEntitlementCartResponse]),
@@ -94,6 +95,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
       response => {
         addons: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::AddonCartResponseItem]),
         billing: Dodopayments::BillingAddress,
+        brand_id: String,
         cancel_at_next_billing_date: Dodopayments::Internal::Type::Boolean,
         created_at: Time,
         credit_entitlement_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::CreditEntitlementCartResponse]),

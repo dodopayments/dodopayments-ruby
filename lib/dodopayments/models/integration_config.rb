@@ -182,9 +182,9 @@ module Dodopayments
         optional :duration_interval, enum: -> { Dodopayments::TimeInterval }, nil?: true
 
         # @!attribute fulfillment_mode
-        #   Fulfillment mode: `auto` (default) generates keys automatically; `manual`
-        #   creates pending grants the merchant fulfills via the
-        #   `POST /grants/{id}/license-key` endpoint.
+        #   How license keys are fulfilled. `auto` (default) generates and delivers keys to
+        #   customers automatically; `manual` creates pending grants that you fulfill with
+        #   the supplied key via `POST /grants/{grant_id}/license-key`.
         #
         #   @return [Symbol, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig::FulfillmentMode, nil]
         optional :fulfillment_mode,
@@ -203,11 +203,11 @@ module Dodopayments
         #
         #   @param duration_interval [Symbol, Dodopayments::Models::TimeInterval, nil] Unit of `duration_count`.
         #
-        #   @param fulfillment_mode [Symbol, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig::FulfillmentMode, nil] Fulfillment mode: `auto` (default) generates keys automatically; `manual`
+        #   @param fulfillment_mode [Symbol, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig::FulfillmentMode, nil] How license keys are fulfilled. `auto` (default) generates and delivers
 
-        # Fulfillment mode: `auto` (default) generates keys automatically; `manual`
-        # creates pending grants the merchant fulfills via the
-        # `POST /grants/{id}/license-key` endpoint.
+        # How license keys are fulfilled. `auto` (default) generates and delivers keys to
+        # customers automatically; `manual` creates pending grants that you fulfill with
+        # the supplied key via `POST /grants/{grant_id}/license-key`.
         #
         # @see Dodopayments::Models::IntegrationConfig::LicenseKeyConfig#fulfillment_mode
         module FulfillmentMode

@@ -12,7 +12,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductCreateParams} for more details.
       #
-      # @overload create(name:, price:, tax_category:, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, entitlements: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, request_options: {})
+      # @overload create(name:, price:, tax_category:, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, entitlements: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, pricing_mode: nil, request_options: {})
       #
       # @param name [String] Name of the product
       #
@@ -24,13 +24,13 @@ module Dodopayments
       #
       # @param brand_id [String, nil] Brand id for the product, if not provided will default to primary brand
       #
-      # @param credit_entitlements [Array<Dodopayments::Models::AttachCreditEntitlement>, nil] Optional credit entitlements to attach (max 3)
+      # @param credit_entitlements [Array<Dodopayments::Models::AttachCreditEntitlement>, nil] Optional credit entitlements to attach (max 5)
       #
       # @param description [String, nil] Optional description of the product
       #
       # @param digital_product_delivery [Dodopayments::Models::ProductCreateParams::DigitalProductDelivery, nil] Choose how you would like you digital product delivered
       #
-      # @param entitlements [Array<Dodopayments::Models::AttachProductEntitlement>, nil] Optional entitlements to attach to this product (max 20)
+      # @param entitlements [Array<Dodopayments::Models::AttachProductEntitlement>, nil] Optional entitlements to attach to this product (max 50)
       #
       # @param license_key_activation_message [String, nil] Optional message displayed during license key activation
       #
@@ -41,6 +41,8 @@ module Dodopayments
       # @param license_key_enabled [Boolean, nil] When true, generates and sends a license key to your customer.
       #
       # @param metadata [Hash{Symbol=>String}] Additional metadata for the product
+      #
+      # @param pricing_mode [Symbol, Dodopayments::Models::ProductCreateParams::PricingMode, nil] Pricing mode for localized pricing. When set, rules from
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -79,7 +81,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductUpdateParams} for more details.
       #
-      # @overload update(id, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, entitlements: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      # @overload update(id, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, entitlements: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, price: nil, pricing_mode: nil, tax_category: nil, request_options: {})
       #
       # @param id [String]
       #
@@ -110,6 +112,8 @@ module Dodopayments
       # @param name [String, nil] Name of the product, optional and must be at most 100 characters.
       #
       # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice, nil] Price details of the product.
+      #
+      # @param pricing_mode [Symbol, Dodopayments::Models::ProductUpdateParams::PricingMode, nil] Update the pricing mode. Omit to leave unchanged; set to null to clear
       #
       # @param tax_category [Symbol, Dodopayments::Models::TaxCategory, nil] Tax category of the product.
       #
