@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.16.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.15.0...v2.16.0) (2026-06-13)
+
+
+### Features
+
+* **spec:** update OpenAPI to 1.105.0 — localized prices ([182e314](https://github.com/dodopayments/dodopayments-ruby/commit/182e31497aff19f43624a0daa471a19e4b560c24))
+* **spec:** update OpenAPI to 1.105.0 — localized prices ([805944a](https://github.com/dodopayments/dodopayments-ruby/commit/805944a87ef7448264953dca7ec6be701c77cb5e))
+
 ## [2.15.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.14.0...v2.15.0) (2026-06-13)
 
 
