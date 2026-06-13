@@ -55,7 +55,7 @@ module Dodopayments
 
       # @!attribute payment_provider
       #   Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
-      #   routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+      #   routes (the merchant's own payment connector); `dodo` for everything Dodo
       #   processed itself.
       #
       #   @return [Symbol, Dodopayments::Models::DisputeListResponse::PaymentProvider]
@@ -92,7 +92,7 @@ module Dodopayments
       #   @param is_resolved_by_rdr [Boolean, nil] Whether the dispute was resolved by Rapid Dispute Resolution
 
       # Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
-      # routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+      # routes (the merchant's own payment connector); `dodo` for everything Dodo
       # processed itself.
       #
       # @see Dodopayments::Models::DisputeListResponse#payment_provider
