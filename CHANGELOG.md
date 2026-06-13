@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.15.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.14.0...v2.15.0) (2026-06-13)
+
+
+### Features
+
+* **spec:** update OpenAPI to 1.104.0 — product localized prices ([6d425ef](https://github.com/dodopayments/dodopayments-ruby/commit/6d425ef7c218ccb7a3b4fbece57640a0682ad3d3))
+* **spec:** update OpenAPI to 1.104.0 — product localized prices ([dbf0ea5](https://github.com/dodopayments/dodopayments-ruby/commit/dbf0ea5f0c42a1caa3c8e5c0eb76a471abcd9acb))
+* **spec:** update OpenAPI to 1.104.0 — product localized prices ([#93](https://github.com/dodopayments/dodopayments-ruby/issues/93)) ([6d425ef](https://github.com/dodopayments/dodopayments-ruby/commit/6d425ef7c218ccb7a3b4fbece57640a0682ad3d3))
+
 ## [2.11.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.11.0...v2.11.1) (2026-06-01)
 
 
