@@ -45,7 +45,7 @@ module Dodopayments
       attr_accessor :payment_id
 
       # Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
-      # routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+      # routes (the merchant's own payment connector); `dodo` for everything Dodo
       # processed itself.
       sig do
         returns(
@@ -92,7 +92,7 @@ module Dodopayments
         # The unique identifier of the payment associated with the dispute.
         payment_id:,
         # Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
-        # routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+        # routes (the merchant's own payment connector); `dodo` for everything Dodo
         # processed itself.
         payment_provider:,
         # Whether the dispute was resolved by Rapid Dispute Resolution
@@ -121,7 +121,7 @@ module Dodopayments
       end
 
       # Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
-      # routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+      # routes (the merchant's own payment connector); `dodo` for everything Dodo
       # processed itself.
       module PaymentProvider
         extend Dodopayments::Internal::Type::Enum

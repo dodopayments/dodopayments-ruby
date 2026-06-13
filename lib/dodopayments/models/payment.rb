@@ -66,8 +66,7 @@ module Dodopayments
 
       # @!attribute payment_provider
       #   Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
-      #   merchant's own Hyperswitch connector); `dodo` for everything Dodo processed
-      #   itself.
+      #   merchant's own payment connector); `dodo` for everything Dodo processed itself.
       #
       #   @return [Symbol, Dodopayments::Models::Payment::PaymentProvider]
       required :payment_provider, enum: -> { Dodopayments::Payment::PaymentProvider }
@@ -344,8 +343,7 @@ module Dodopayments
       #   @param updated_at [Time, nil] Timestamp when the payment was last updated
 
       # Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
-      # merchant's own Hyperswitch connector); `dodo` for everything Dodo processed
-      # itself.
+      # merchant's own payment connector); `dodo` for everything Dodo processed itself.
       #
       # @see Dodopayments::Models::Payment#payment_provider
       module PaymentProvider

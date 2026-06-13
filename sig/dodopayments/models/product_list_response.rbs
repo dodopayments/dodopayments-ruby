@@ -16,6 +16,7 @@ module Dodopayments
         name: String?,
         price: Integer?,
         price_detail: Dodopayments::Models::price?,
+        pricing_mode: Dodopayments::Models::ProductListResponse::pricing_mode?,
         tax_inclusive: bool?
       }
 
@@ -48,6 +49,8 @@ module Dodopayments
 
       attr_accessor price_detail: Dodopayments::Models::price?
 
+      attr_accessor pricing_mode: Dodopayments::Models::ProductListResponse::pricing_mode?
+
       attr_accessor tax_inclusive: bool?
 
       def initialize: (
@@ -65,6 +68,7 @@ module Dodopayments
         ?name: String?,
         ?price: Integer?,
         ?price_detail: Dodopayments::Models::price?,
+        ?pricing_mode: Dodopayments::Models::ProductListResponse::pricing_mode?,
         ?tax_inclusive: bool?
       ) -> void
 
@@ -83,8 +87,20 @@ module Dodopayments
         name: String?,
         price: Integer?,
         price_detail: Dodopayments::Models::price?,
+        pricing_mode: Dodopayments::Models::ProductListResponse::pricing_mode?,
         tax_inclusive: bool?
       }
+
+      type pricing_mode = :by_currency | :by_country
+
+      module PricingMode
+        extend Dodopayments::Internal::Type::Enum
+
+        BY_CURRENCY: :by_currency
+        BY_COUNTRY: :by_country
+
+        def self?.values: -> ::Array[Dodopayments::Models::ProductListResponse::pricing_mode]
+      end
     end
   end
 end

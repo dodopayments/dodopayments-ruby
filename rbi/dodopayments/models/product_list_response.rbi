@@ -76,6 +76,17 @@ module Dodopayments
       sig { returns(T.nilable(Dodopayments::Price::Variants)) }
       attr_accessor :price_detail
 
+      # Pricing mode for localized pricing. NULL means base-only (no localized rules
+      # apply).
+      sig do
+        returns(
+          T.nilable(
+            Dodopayments::Models::ProductListResponse::PricingMode::TaggedSymbol
+          )
+        )
+      end
+      attr_accessor :pricing_mode
+
       # Indicates if the price is tax inclusive
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :tax_inclusive
@@ -103,6 +114,10 @@ module Dodopayments
                 Dodopayments::Price::RecurringPrice::OrHash,
                 Dodopayments::Price::UsageBasedPrice::OrHash
               )
+            ),
+          pricing_mode:
+            T.nilable(
+              Dodopayments::Models::ProductListResponse::PricingMode::OrSymbol
             ),
           tax_inclusive: T.nilable(T::Boolean)
         ).returns(T.attached_class)
@@ -145,6 +160,9 @@ module Dodopayments
         price: nil,
         # Details of the price
         price_detail: nil,
+        # Pricing mode for localized pricing. NULL means base-only (no localized rules
+        # apply).
+        pricing_mode: nil,
         # Indicates if the price is tax inclusive
         tax_inclusive: nil
       )
@@ -167,11 +185,51 @@ module Dodopayments
             name: T.nilable(String),
             price: T.nilable(Integer),
             price_detail: T.nilable(Dodopayments::Price::Variants),
+            pricing_mode:
+              T.nilable(
+                Dodopayments::Models::ProductListResponse::PricingMode::TaggedSymbol
+              ),
             tax_inclusive: T.nilable(T::Boolean)
           }
         )
       end
       def to_hash
+      end
+
+      # Pricing mode for localized pricing. NULL means base-only (no localized rules
+      # apply).
+      module PricingMode
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(
+              Symbol,
+              Dodopayments::Models::ProductListResponse::PricingMode
+            )
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        BY_CURRENCY =
+          T.let(
+            :by_currency,
+            Dodopayments::Models::ProductListResponse::PricingMode::TaggedSymbol
+          )
+        BY_COUNTRY =
+          T.let(
+            :by_country,
+            Dodopayments::Models::ProductListResponse::PricingMode::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Dodopayments::Models::ProductListResponse::PricingMode::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
       end
     end
   end
