@@ -67,7 +67,7 @@ module Dodopayments
 
       # @!attribute payment_provider
       #   Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
-      #   routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+      #   routes (the merchant's own payment connector); `dodo` for everything Dodo
       #   processed itself.
       #
       #   @return [Symbol, Dodopayments::Models::GetDispute::PaymentProvider]
@@ -124,7 +124,7 @@ module Dodopayments
       #   @param remarks [String, nil] Remarks
 
       # Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
-      # routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+      # routes (the merchant's own payment connector); `dodo` for everything Dodo
       # processed itself.
       #
       # @see Dodopayments::Models::GetDispute#payment_provider

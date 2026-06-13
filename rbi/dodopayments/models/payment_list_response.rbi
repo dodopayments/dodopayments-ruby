@@ -41,8 +41,7 @@ module Dodopayments
       attr_accessor :payment_id
 
       # Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
-      # merchant's own Hyperswitch connector); `dodo` for everything Dodo processed
-      # itself.
+      # merchant's own payment connector); `dodo` for everything Dodo processed itself.
       sig do
         returns(
           Dodopayments::Models::PaymentListResponse::PaymentProvider::TaggedSymbol
@@ -127,8 +126,7 @@ module Dodopayments
         metadata:,
         payment_id:,
         # Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
-        # merchant's own Hyperswitch connector); `dodo` for everything Dodo processed
-        # itself.
+        # merchant's own payment connector); `dodo` for everything Dodo processed itself.
         payment_provider:,
         total_amount:,
         # The last four digits of the card
@@ -184,8 +182,7 @@ module Dodopayments
       end
 
       # Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
-      # merchant's own Hyperswitch connector); `dodo` for everything Dodo processed
-      # itself.
+      # merchant's own payment connector); `dodo` for everything Dodo processed itself.
       module PaymentProvider
         extend Dodopayments::Internal::Type::Enum
 
