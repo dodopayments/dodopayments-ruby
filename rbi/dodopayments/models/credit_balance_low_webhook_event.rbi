@@ -79,6 +79,10 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :available_balance
 
+        # Brand id this credit entitlement belongs to
+        sig { returns(String) }
+        attr_accessor :brand_id
+
         sig { returns(String) }
         attr_accessor :credit_entitlement_id
 
@@ -104,6 +108,7 @@ module Dodopayments
         sig do
           params(
             available_balance: String,
+            brand_id: String,
             credit_entitlement_id: String,
             credit_entitlement_name: String,
             customer_id: String,
@@ -115,6 +120,8 @@ module Dodopayments
         end
         def self.new(
           available_balance:,
+          # Brand id this credit entitlement belongs to
+          brand_id:,
           credit_entitlement_id:,
           credit_entitlement_name:,
           customer_id:,
@@ -129,6 +136,7 @@ module Dodopayments
           override.returns(
             {
               available_balance: String,
+              brand_id: String,
               credit_entitlement_id: String,
               credit_entitlement_name: String,
               customer_id: String,

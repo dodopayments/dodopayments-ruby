@@ -5,6 +5,7 @@ module Dodopayments
         billing_country: Dodopayments::Models::country_code,
         currency: Dodopayments::Models::currency,
         current_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup,
+        is_byop: bool,
         product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
         total_price: Integer,
         recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
@@ -18,6 +19,8 @@ module Dodopayments
       attr_accessor currency: Dodopayments::Models::currency
 
       attr_accessor current_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup
+
+      attr_accessor is_byop: bool
 
       attr_accessor product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart]
 
@@ -33,6 +36,7 @@ module Dodopayments
         billing_country: Dodopayments::Models::country_code,
         currency: Dodopayments::Models::currency,
         current_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup,
+        is_byop: bool,
         product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
         total_price: Integer,
         ?recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
@@ -44,6 +48,7 @@ module Dodopayments
         billing_country: Dodopayments::Models::country_code,
         currency: Dodopayments::Models::currency,
         current_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup,
+        is_byop: bool,
         product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
         total_price: Integer,
         recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,

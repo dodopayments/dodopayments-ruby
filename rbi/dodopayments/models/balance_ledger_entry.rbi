@@ -212,6 +212,11 @@ module Dodopayments
             :payment_retry_fee,
             Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
           )
+        BYOP_FEE =
+          T.let(
+            :byop_fee,
+            Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
+          )
 
         sig do
           override.returns(

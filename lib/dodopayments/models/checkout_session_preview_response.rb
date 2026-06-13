@@ -22,6 +22,15 @@ module Dodopayments
       #   @return [Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup]
       required :current_breakup, -> { Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup }
 
+      # @!attribute is_byop
+      #   Whether the payment will be routed through the merchant's own processor (BYOP).
+      #   True when the session's business has a BYOP route configured for the billing
+      #   country; in that case the quoted amounts exclude Dodo-computed tax because the
+      #   merchant is MoR and owns tax.
+      #
+      #   @return [Boolean]
+      required :is_byop, Dodopayments::Internal::Type::Boolean
+
       # @!attribute product_cart
       #   The total product cart
       #
@@ -55,7 +64,10 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :total_tax, Integer, nil?: true
 
-      # @!method initialize(billing_country:, currency:, current_breakup:, product_cart:, total_price:, recurring_breakup: nil, tax_id_err_msg: nil, total_tax: nil)
+      # @!method initialize(billing_country:, currency:, current_breakup:, is_byop:, product_cart:, total_price:, recurring_breakup: nil, tax_id_err_msg: nil, total_tax: nil)
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::CheckoutSessionPreviewResponse} for more details.
+      #
       #   Data returned by the calculate checkout session API
       #
       #   @param billing_country [Symbol, Dodopayments::Models::CountryCode] Billing country
@@ -63,6 +75,8 @@ module Dodopayments
       #   @param currency [Symbol, Dodopayments::Models::Currency] Currency in which the calculations were made
       #
       #   @param current_breakup [Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup] Breakup of the current payment
+      #
+      #   @param is_byop [Boolean] Whether the payment will be routed through the merchant's own
       #
       #   @param product_cart [Array<Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart>] The total product cart
       #

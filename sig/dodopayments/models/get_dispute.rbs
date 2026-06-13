@@ -3,6 +3,7 @@ module Dodopayments
     type get_dispute =
       {
         amount: String,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         currency: String,
@@ -11,6 +12,7 @@ module Dodopayments
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
         payment_id: String,
+        payment_provider: Dodopayments::Models::GetDispute::payment_provider,
         is_resolved_by_rdr: bool?,
         reason: String?,
         remarks: String?
@@ -18,6 +20,8 @@ module Dodopayments
 
     class GetDispute < Dodopayments::Internal::Type::BaseModel
       attr_accessor amount: String
+
+      attr_accessor brand_id: String
 
       attr_accessor business_id: String
 
@@ -35,6 +39,8 @@ module Dodopayments
 
       attr_accessor payment_id: String
 
+      attr_accessor payment_provider: Dodopayments::Models::GetDispute::payment_provider
+
       attr_accessor is_resolved_by_rdr: bool?
 
       attr_accessor reason: String?
@@ -43,6 +49,7 @@ module Dodopayments
 
       def initialize: (
         amount: String,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         currency: String,
@@ -51,6 +58,7 @@ module Dodopayments
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
         payment_id: String,
+        payment_provider: Dodopayments::Models::GetDispute::payment_provider,
         ?is_resolved_by_rdr: bool?,
         ?reason: String?,
         ?remarks: String?
@@ -58,6 +66,7 @@ module Dodopayments
 
       def to_hash: -> {
         amount: String,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         currency: String,
@@ -66,10 +75,23 @@ module Dodopayments
         dispute_stage: Dodopayments::Models::dispute_stage,
         dispute_status: Dodopayments::Models::dispute_status,
         payment_id: String,
+        payment_provider: Dodopayments::Models::GetDispute::payment_provider,
         is_resolved_by_rdr: bool?,
         reason: String?,
         remarks: String?
       }
+
+      type payment_provider = :stripe | :adyen | :dodo
+
+      module PaymentProvider
+        extend Dodopayments::Internal::Type::Enum
+
+        STRIPE: :stripe
+        ADYEN: :adyen
+        DODO: :dodo
+
+        def self?.values: -> ::Array[Dodopayments::Models::GetDispute::payment_provider]
+      end
     end
   end
 end

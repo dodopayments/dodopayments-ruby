@@ -6,10 +6,12 @@ module Dodopayments
       type entitlement_grant =
         {
           id: String,
+          brand_id: String,
           business_id: String,
           created_at: Time,
           customer_id: String,
           entitlement_id: String,
+          integration_type: Dodopayments::Models::entitlement_integration_type,
           metadata: ::Hash[Symbol, String],
           status: Dodopayments::Models::Entitlements::EntitlementGrant::status,
           updated_at: Time,
@@ -29,6 +31,8 @@ module Dodopayments
       class EntitlementGrant < Dodopayments::Internal::Type::BaseModel
         attr_accessor id: String
 
+        attr_accessor brand_id: String
+
         attr_accessor business_id: String
 
         attr_accessor created_at: Time
@@ -36,6 +40,8 @@ module Dodopayments
         attr_accessor customer_id: String
 
         attr_accessor entitlement_id: String
+
+        attr_accessor integration_type: Dodopayments::Models::entitlement_integration_type
 
         attr_accessor metadata: ::Hash[Symbol, String]
 
@@ -67,10 +73,12 @@ module Dodopayments
 
         def initialize: (
           id: String,
+          brand_id: String,
           business_id: String,
           created_at: Time,
           customer_id: String,
           entitlement_id: String,
+          integration_type: Dodopayments::Models::entitlement_integration_type,
           metadata: ::Hash[Symbol, String],
           status: Dodopayments::Models::Entitlements::EntitlementGrant::status,
           updated_at: Time,
@@ -89,10 +97,12 @@ module Dodopayments
 
         def to_hash: -> {
           id: String,
+          brand_id: String,
           business_id: String,
           created_at: Time,
           customer_id: String,
           entitlement_id: String,
+          integration_type: Dodopayments::Models::entitlement_integration_type,
           metadata: ::Hash[Symbol, String],
           status: Dodopayments::Models::Entitlements::EntitlementGrant::status,
           updated_at: Time,

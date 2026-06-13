@@ -141,6 +141,12 @@ module Dodopayments
           #   @return [String]
           required :available_balance, String
 
+          # @!attribute brand_id
+          #   Brand id this credit entitlement belongs to
+          #
+          #   @return [String]
+          required :brand_id, String
+
           # @!attribute credit_entitlement_id
           #
           #   @return [String]
@@ -181,15 +187,25 @@ module Dodopayments
           #   @return [Integer]
           required :threshold_percent, Integer
 
-          # @!method initialize(available_balance:, credit_entitlement_id:, credit_entitlement_name:, customer_id:, subscription_credits_amount:, subscription_id:, threshold_amount:, threshold_percent:, payload_type: :CreditBalanceLow)
+          # @!method initialize(available_balance:, brand_id:, credit_entitlement_id:, credit_entitlement_name:, customer_id:, subscription_credits_amount:, subscription_id:, threshold_amount:, threshold_percent:, payload_type: :CreditBalanceLow)
           #   @param available_balance [String]
+          #
+          #   @param brand_id [String] Brand id this credit entitlement belongs to
+          #
           #   @param credit_entitlement_id [String]
+          #
           #   @param credit_entitlement_name [String]
+          #
           #   @param customer_id [String]
+          #
           #   @param subscription_credits_amount [String]
+          #
           #   @param subscription_id [String]
+          #
           #   @param threshold_amount [String]
+          #
           #   @param threshold_percent [Integer]
+          #
           #   @param payload_type [Symbol, :CreditBalanceLow]
         end
 
@@ -204,6 +220,12 @@ module Dodopayments
           #   @return [Symbol, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::AbandonmentReason]
           required :abandonment_reason,
                    enum: -> { Dodopayments::WebhookPayload::Data::AbandonedCheckout::AbandonmentReason }
+
+          # @!attribute brand_id
+          #   Brand id this abandoned checkout belongs to
+          #
+          #   @return [String]
+          required :brand_id, String
 
           # @!attribute customer_id
           #
@@ -230,13 +252,21 @@ module Dodopayments
           #   @return [String, nil]
           optional :recovered_payment_id, String, nil?: true
 
-          # @!method initialize(abandoned_at:, abandonment_reason:, customer_id:, payment_id:, status:, recovered_payment_id: nil, payload_type: :AbandonedCheckout)
+          # @!method initialize(abandoned_at:, abandonment_reason:, brand_id:, customer_id:, payment_id:, status:, recovered_payment_id: nil, payload_type: :AbandonedCheckout)
           #   @param abandoned_at [Time]
+          #
           #   @param abandonment_reason [Symbol, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::AbandonmentReason]
+          #
+          #   @param brand_id [String] Brand id this abandoned checkout belongs to
+          #
           #   @param customer_id [String]
+          #
           #   @param payment_id [String]
+          #
           #   @param status [Symbol, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout::Status]
+          #
           #   @param recovered_payment_id [String, nil]
+          #
           #   @param payload_type [Symbol, :AbandonedCheckout]
 
           # @see Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout#abandonment_reason
@@ -266,6 +296,12 @@ module Dodopayments
         end
 
         class DunningAttempt < Dodopayments::Internal::Type::BaseModel
+          # @!attribute brand_id
+          #   Brand id this dunning attempt belongs to
+          #
+          #   @return [String]
+          required :brand_id, String
+
           # @!attribute created_at
           #
           #   @return [Time]
@@ -301,13 +337,21 @@ module Dodopayments
           #   @return [String, nil]
           optional :payment_id, String, nil?: true
 
-          # @!method initialize(created_at:, customer_id:, status:, subscription_id:, trigger_state:, payment_id: nil, payload_type: :DunningAttempt)
+          # @!method initialize(brand_id:, created_at:, customer_id:, status:, subscription_id:, trigger_state:, payment_id: nil, payload_type: :DunningAttempt)
+          #   @param brand_id [String] Brand id this dunning attempt belongs to
+          #
           #   @param created_at [Time]
+          #
           #   @param customer_id [String]
+          #
           #   @param status [Symbol, Dodopayments::Models::WebhookPayload::Data::DunningAttempt::Status]
+          #
           #   @param subscription_id [String]
+          #
           #   @param trigger_state [Symbol, Dodopayments::Models::WebhookPayload::Data::DunningAttempt::TriggerState]
+          #
           #   @param payment_id [String, nil]
+          #
           #   @param payload_type [Symbol, :DunningAttempt]
 
           # @see Dodopayments::Models::WebhookPayload::Data::DunningAttempt#status

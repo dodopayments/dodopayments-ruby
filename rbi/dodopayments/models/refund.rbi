@@ -8,6 +8,10 @@ module Dodopayments
           T.any(Dodopayments::Refund, Dodopayments::Internal::AnyHash)
         end
 
+      # Brand id this refund belongs to
+      sig { returns(String) }
+      attr_accessor :brand_id
+
       # The unique identifier of the business issuing the refund.
       sig { returns(String) }
       attr_accessor :business_id
@@ -59,6 +63,7 @@ module Dodopayments
 
       sig do
         params(
+          brand_id: String,
           business_id: String,
           created_at: Time,
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
@@ -73,6 +78,8 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        # Brand id this refund belongs to
+        brand_id:,
         # The unique identifier of the business issuing the refund.
         business_id:,
         # The timestamp of when the refund was created in UTC.
@@ -101,6 +108,7 @@ module Dodopayments
       sig do
         override.returns(
           {
+            brand_id: String,
             business_id: String,
             created_at: Time,
             customer: Dodopayments::CustomerLimitedDetails,

@@ -20,10 +20,12 @@ class Dodopayments::Test::Resources::Entitlements::GrantsTest < Dodopayments::Te
     assert_pattern do
       row => {
         id: String,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         customer_id: String,
         entitlement_id: String,
+        integration_type: Dodopayments::EntitlementIntegrationType,
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         status: Dodopayments::Entitlements::EntitlementGrant::Status,
         updated_at: Time,
@@ -52,10 +54,12 @@ class Dodopayments::Test::Resources::Entitlements::GrantsTest < Dodopayments::Te
     assert_pattern do
       response => {
         id: String,
+        brand_id: String,
         business_id: String,
         created_at: Time,
         customer_id: String,
         entitlement_id: String,
+        integration_type: Dodopayments::EntitlementIntegrationType,
         metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         status: Dodopayments::Entitlements::EntitlementGrant::Status,
         updated_at: Time,

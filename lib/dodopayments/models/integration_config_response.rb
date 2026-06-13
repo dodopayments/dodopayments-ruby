@@ -241,7 +241,17 @@ module Dodopayments
         #   @return [Symbol, Dodopayments::Models::TimeInterval, nil]
         optional :duration_interval, enum: -> { Dodopayments::TimeInterval }, nil?: true
 
-        # @!method initialize(activation_message: nil, activations_limit: nil, duration_count: nil, duration_interval: nil)
+        # @!attribute fulfillment_mode
+        #   How license keys are fulfilled. `auto` (default) generates and delivers keys to
+        #   customers automatically; `manual` creates pending grants that you fulfill with
+        #   the supplied key via `POST /grants/{grant_id}/license-key`.
+        #
+        #   @return [Symbol, Dodopayments::Models::IntegrationConfigResponse::LicenseKeyConfig::FulfillmentMode, nil]
+        optional :fulfillment_mode,
+                 enum: -> { Dodopayments::IntegrationConfigResponse::LicenseKeyConfig::FulfillmentMode },
+                 nil?: true
+
+        # @!method initialize(activation_message: nil, activations_limit: nil, duration_count: nil, duration_interval: nil, fulfillment_mode: nil)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::IntegrationConfigResponse::LicenseKeyConfig} for more
         #   details.
@@ -253,6 +263,23 @@ module Dodopayments
         #   @param duration_count [Integer, nil] Validity duration of issued license keys. Provide both
         #
         #   @param duration_interval [Symbol, Dodopayments::Models::TimeInterval, nil] Unit of `duration_count`.
+        #
+        #   @param fulfillment_mode [Symbol, Dodopayments::Models::IntegrationConfigResponse::LicenseKeyConfig::FulfillmentMode, nil] How license keys are fulfilled. `auto` (default) generates and delivers
+
+        # How license keys are fulfilled. `auto` (default) generates and delivers keys to
+        # customers automatically; `manual` creates pending grants that you fulfill with
+        # the supplied key via `POST /grants/{grant_id}/license-key`.
+        #
+        # @see Dodopayments::Models::IntegrationConfigResponse::LicenseKeyConfig#fulfillment_mode
+        module FulfillmentMode
+          extend Dodopayments::Internal::Type::Enum
+
+          AUTO = :auto
+          MANUAL = :manual
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
 
       # @!method self.variants

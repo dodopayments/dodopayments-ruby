@@ -44,6 +44,16 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :payment_id
 
+      # Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
+      # routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+      # processed itself.
+      sig do
+        returns(
+          Dodopayments::Models::DisputeListResponse::PaymentProvider::TaggedSymbol
+        )
+      end
+      attr_accessor :payment_provider
+
       # Whether the dispute was resolved by Rapid Dispute Resolution
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :is_resolved_by_rdr
@@ -58,6 +68,8 @@ module Dodopayments
           dispute_stage: Dodopayments::DisputeStage::OrSymbol,
           dispute_status: Dodopayments::DisputeStatus::OrSymbol,
           payment_id: String,
+          payment_provider:
+            Dodopayments::Models::DisputeListResponse::PaymentProvider::OrSymbol,
           is_resolved_by_rdr: T.nilable(T::Boolean)
         ).returns(T.attached_class)
       end
@@ -79,6 +91,10 @@ module Dodopayments
         dispute_status:,
         # The unique identifier of the payment associated with the dispute.
         payment_id:,
+        # Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
+        # routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+        # processed itself.
+        payment_provider:,
         # Whether the dispute was resolved by Rapid Dispute Resolution
         is_resolved_by_rdr: nil
       )
@@ -95,11 +111,55 @@ module Dodopayments
             dispute_stage: Dodopayments::DisputeStage::TaggedSymbol,
             dispute_status: Dodopayments::DisputeStatus::TaggedSymbol,
             payment_id: String,
+            payment_provider:
+              Dodopayments::Models::DisputeListResponse::PaymentProvider::TaggedSymbol,
             is_resolved_by_rdr: T.nilable(T::Boolean)
           }
         )
       end
       def to_hash
+      end
+
+      # Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
+      # routes (the merchant's own Hyperswitch connector); `dodo` for everything Dodo
+      # processed itself.
+      module PaymentProvider
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(
+              Symbol,
+              Dodopayments::Models::DisputeListResponse::PaymentProvider
+            )
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        STRIPE =
+          T.let(
+            :stripe,
+            Dodopayments::Models::DisputeListResponse::PaymentProvider::TaggedSymbol
+          )
+        ADYEN =
+          T.let(
+            :adyen,
+            Dodopayments::Models::DisputeListResponse::PaymentProvider::TaggedSymbol
+          )
+        DODO =
+          T.let(
+            :dodo,
+            Dodopayments::Models::DisputeListResponse::PaymentProvider::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Dodopayments::Models::DisputeListResponse::PaymentProvider::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
       end
     end
   end

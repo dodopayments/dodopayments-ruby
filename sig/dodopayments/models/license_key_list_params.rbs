@@ -77,13 +77,14 @@ module Dodopayments
         request_options: Dodopayments::RequestOptions
       }
 
-      type source = :auto | :import
+      type source = :auto | :import | :manual
 
       module Source
         extend Dodopayments::Internal::Type::Enum
 
         AUTO: :auto
         IMPORT: :import
+        MANUAL: :manual
 
         def self?.values: -> ::Array[Dodopayments::Models::LicenseKeyListParams::source]
       end

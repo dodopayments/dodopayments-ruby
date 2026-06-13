@@ -38,7 +38,7 @@ module Dodopayments
       optional :brand_id, String, nil?: true
 
       # @!attribute credit_entitlements
-      #   Optional credit entitlements to attach (max 3)
+      #   Optional credit entitlements to attach (max 5)
       #
       #   @return [Array<Dodopayments::Models::AttachCreditEntitlement>, nil]
       optional :credit_entitlements,
@@ -62,7 +62,7 @@ module Dodopayments
                nil?: true
 
       # @!attribute entitlements
-      #   Optional entitlements to attach to this product (max 20)
+      #   Optional entitlements to attach to this product (max 50)
       #
       #   @return [Array<Dodopayments::Models::AttachProductEntitlement>, nil]
       optional :entitlements,
@@ -120,7 +120,15 @@ module Dodopayments
       #   @return [Hash{Symbol=>String}, nil]
       optional :metadata, Dodopayments::Internal::Type::HashOf[String]
 
-      # @!method initialize(name:, price:, tax_category:, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, entitlements: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, request_options: {})
+      # @!attribute pricing_mode
+      #   Pricing mode for localized pricing. When set, rules from
+      #   /products/{id}/localized-prices apply at checkout. NULL means base-only
+      #   (existing behavior).
+      #
+      #   @return [Symbol, Dodopayments::Models::ProductCreateParams::PricingMode, nil]
+      optional :pricing_mode, enum: -> { Dodopayments::ProductCreateParams::PricingMode }, nil?: true
+
+      # @!method initialize(name:, price:, tax_category:, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, entitlements: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, pricing_mode: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::ProductCreateParams} for more details.
       #
@@ -134,13 +142,13 @@ module Dodopayments
       #
       #   @param brand_id [String, nil] Brand id for the product, if not provided will default to primary brand
       #
-      #   @param credit_entitlements [Array<Dodopayments::Models::AttachCreditEntitlement>, nil] Optional credit entitlements to attach (max 3)
+      #   @param credit_entitlements [Array<Dodopayments::Models::AttachCreditEntitlement>, nil] Optional credit entitlements to attach (max 5)
       #
       #   @param description [String, nil] Optional description of the product
       #
       #   @param digital_product_delivery [Dodopayments::Models::ProductCreateParams::DigitalProductDelivery, nil] Choose how you would like you digital product delivered
       #
-      #   @param entitlements [Array<Dodopayments::Models::AttachProductEntitlement>, nil] Optional entitlements to attach to this product (max 20)
+      #   @param entitlements [Array<Dodopayments::Models::AttachProductEntitlement>, nil] Optional entitlements to attach to this product (max 50)
       #
       #   @param license_key_activation_message [String, nil] Optional message displayed during license key activation
       #
@@ -151,6 +159,8 @@ module Dodopayments
       #   @param license_key_enabled [Boolean, nil] When true, generates and sends a license key to your customer.
       #
       #   @param metadata [Hash{Symbol=>String}] Additional metadata for the product
+      #
+      #   @param pricing_mode [Symbol, Dodopayments::Models::ProductCreateParams::PricingMode, nil] Pricing mode for localized pricing. When set, rules from
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 
@@ -175,6 +185,19 @@ module Dodopayments
         #   @param external_url [String, nil] External URL to digital product
         #
         #   @param instructions [String, nil] Instructions to download and use the digital product
+      end
+
+      # Pricing mode for localized pricing. When set, rules from
+      # /products/{id}/localized-prices apply at checkout. NULL means base-only
+      # (existing behavior).
+      module PricingMode
+        extend Dodopayments::Internal::Type::Enum
+
+        BY_CURRENCY = :by_currency
+        BY_COUNTRY = :by_country
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
   end

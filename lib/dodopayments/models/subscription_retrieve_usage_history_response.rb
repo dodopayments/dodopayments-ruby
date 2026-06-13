@@ -74,12 +74,17 @@ module Dodopayments
         required :price_per_unit, String
 
         # @!attribute total_price
-        #   Total price charged for this meter in smallest currency unit (cents)
+        #   Total price charged for this meter in the currency's smallest unit (cents for
+        #   USD, yen for JPY, fils for KWD)
         #
         #   @return [Integer]
         required :total_price, Integer
 
         # @!method initialize(id:, chargeable_units:, consumed_units:, currency:, free_threshold:, name:, price_per_unit:, total_price:)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::SubscriptionRetrieveUsageHistoryResponse::Meter} for more
+        #   details.
+        #
         #   @param id [String] Meter identifier
         #
         #   @param chargeable_units [String] Chargeable units (after free threshold) as string for precision
@@ -94,7 +99,7 @@ module Dodopayments
         #
         #   @param price_per_unit [String] Price per unit in string format for precision
         #
-        #   @param total_price [Integer] Total price charged for this meter in smallest currency unit (cents)
+        #   @param total_price [Integer] Total price charged for this meter in the currency's smallest unit
       end
     end
   end

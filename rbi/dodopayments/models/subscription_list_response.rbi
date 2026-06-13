@@ -80,8 +80,8 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :quantity
 
-      # Amount charged before tax for each recurring payment in smallest currency unit
-      # (e.g. cents)
+      # Amount charged before tax for each recurring payment in the currency's smallest
+      # unit (cents for USD, yen for JPY, fils for KWD)
       sig { returns(Integer) }
       attr_accessor :recurring_pre_tax_amount
 
@@ -217,8 +217,8 @@ module Dodopayments
         product_id:,
         # Number of units/items included in the subscription
         quantity:,
-        # Amount charged before tax for each recurring payment in smallest currency unit
-        # (e.g. cents)
+        # Amount charged before tax for each recurring payment in the currency's smallest
+        # unit (cents for USD, yen for JPY, fils for KWD)
         recurring_pre_tax_amount:,
         # Current status of the subscription
         status:,

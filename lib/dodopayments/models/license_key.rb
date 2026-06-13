@@ -10,6 +10,12 @@ module Dodopayments
       #   @return [String]
       required :id, String
 
+      # @!attribute brand_id
+      #   Brand id this license key belongs to
+      #
+      #   @return [String]
+      required :brand_id, String
+
       # @!attribute business_id
       #   The unique identifier of the business associated with the license key.
       #
@@ -84,11 +90,13 @@ module Dodopayments
       #   @return [String, nil]
       optional :subscription_id, String, nil?: true
 
-      # @!method initialize(id:, business_id:, created_at:, customer_id:, instances_count:, key:, product_id:, source:, status:, activations_limit: nil, expires_at: nil, payment_id: nil, subscription_id: nil)
+      # @!method initialize(id:, brand_id:, business_id:, created_at:, customer_id:, instances_count:, key:, product_id:, source:, status:, activations_limit: nil, expires_at: nil, payment_id: nil, subscription_id: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::LicenseKey} for more details.
       #
       #   @param id [String] The unique identifier of the license key.
+      #
+      #   @param brand_id [String] Brand id this license key belongs to
       #
       #   @param business_id [String] The unique identifier of the business associated with the license key.
       #
@@ -123,6 +131,7 @@ module Dodopayments
 
         AUTO = :auto
         IMPORT = :import
+        MANUAL = :manual
 
         # @!method self.values
         #   @return [Array<Symbol>]

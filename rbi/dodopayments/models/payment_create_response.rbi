@@ -33,7 +33,8 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :payment_id
 
-      # Total amount of the payment in smallest currency unit (e.g. cents)
+      # Total amount of the payment in the currency's smallest unit (cents for USD, yen
+      # for JPY, fils for KWD)
       sig { returns(Integer) }
       attr_accessor :total_amount
 
@@ -83,7 +84,8 @@ module Dodopayments
         metadata:,
         # Unique identifier for the payment
         payment_id:,
-        # Total amount of the payment in smallest currency unit (e.g. cents)
+        # Total amount of the payment in the currency's smallest unit (cents for USD, yen
+        # for JPY, fils for KWD)
         total_amount:,
         # DEPRECATED: Use discount_ids instead. Returns the first discount's ID if
         # present.

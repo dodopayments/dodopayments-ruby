@@ -26,8 +26,8 @@ module Dodopayments
           required :event_type, String
 
           # @!attribute original_amount
-          #   Original amount in the original currency (in smallest currency unit, e.g.,
-          #   cents).
+          #   Original amount in the original currency, in that currency's smallest unit
+          #   (cents for USD, yen for JPY, fils for KWD).
           #
           #   @return [Integer]
           required :original_amount, Integer
@@ -39,8 +39,9 @@ module Dodopayments
           required :original_currency, String
 
           # @!attribute payout_currency_amount
-          #   Amount in the payout's currency (in smallest currency unit). Uses cumulative
-          #   rounding to ensure sum matches payout total exactly.
+          #   Amount in the payout's currency, in that currency's smallest unit (cents for
+          #   USD, yen for JPY, fils for KWD). Uses cumulative rounding to ensure sum matches
+          #   payout total exactly.
           #
           #   @return [Integer]
           required :payout_currency_amount, Integer
@@ -76,11 +77,11 @@ module Dodopayments
           #
           #   @param event_type [String] The type of balance ledger event (e.g., "payment", "refund", "dispute", "payment
           #
-          #   @param original_amount [Integer] Original amount in the original currency (in smallest currency unit, e.g., cents
+          #   @param original_amount [Integer] Original amount in the original currency, in that currency's smallest unit
           #
           #   @param original_currency [String] Original currency as ISO 4217 code (e.g., "USD", "EUR").
           #
-          #   @param payout_currency_amount [Integer] Amount in the payout's currency (in smallest currency unit). Uses cumulative rou
+          #   @param payout_currency_amount [Integer] Amount in the payout's currency, in that currency's smallest unit
           #
           #   @param usd_equivalent_amount [Integer] USD equivalent of the original amount (in cents).
           #

@@ -30,7 +30,8 @@ module Dodopayments
       required :payment_id, String
 
       # @!attribute total_amount
-      #   Total amount of the payment in smallest currency unit (e.g. cents)
+      #   Total amount of the payment in the currency's smallest unit (cents for USD, yen
+      #   for JPY, fils for KWD)
       #
       #   @return [Integer]
       required :total_amount, Integer
@@ -82,7 +83,7 @@ module Dodopayments
       #
       #   @param payment_id [String] Unique identifier for the payment
       #
-      #   @param total_amount [Integer] Total amount of the payment in smallest currency unit (e.g. cents)
+      #   @param total_amount [Integer] Total amount of the payment in the currency's smallest unit
       #
       #   @param discount_id [String, nil] DEPRECATED: Use discount_ids instead. Returns the first discount's ID if present
       #

@@ -90,6 +90,10 @@ module Dodopayments
         end
         attr_accessor :abandonment_reason
 
+        # Brand id this abandoned checkout belongs to
+        sig { returns(String) }
+        attr_accessor :brand_id
+
         sig { returns(String) }
         attr_accessor :customer_id
 
@@ -113,6 +117,7 @@ module Dodopayments
             abandoned_at: Time,
             abandonment_reason:
               Dodopayments::AbandonedCheckoutDetectedWebhookEvent::Data::AbandonmentReason::OrSymbol,
+            brand_id: String,
             customer_id: String,
             payment_id: String,
             status:
@@ -123,6 +128,8 @@ module Dodopayments
         def self.new(
           abandoned_at:,
           abandonment_reason:,
+          # Brand id this abandoned checkout belongs to
+          brand_id:,
           customer_id:,
           payment_id:,
           status:,
@@ -136,6 +143,7 @@ module Dodopayments
               abandoned_at: Time,
               abandonment_reason:
                 Dodopayments::AbandonedCheckoutDetectedWebhookEvent::Data::AbandonmentReason::TaggedSymbol,
+              brand_id: String,
               customer_id: String,
               payment_id: String,
               status:

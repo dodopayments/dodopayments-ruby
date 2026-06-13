@@ -42,7 +42,7 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :brand_id
 
-      # Optional credit entitlements to attach (max 3)
+      # Optional credit entitlements to attach (max 5)
       sig do
         returns(T.nilable(T::Array[Dodopayments::AttachCreditEntitlement]))
       end
@@ -72,7 +72,7 @@ module Dodopayments
       end
       attr_writer :digital_product_delivery
 
-      # Optional entitlements to attach to this product (max 20)
+      # Optional entitlements to attach to this product (max 50)
       sig do
         returns(T.nilable(T::Array[Dodopayments::AttachProductEntitlement]))
       end
@@ -124,6 +124,16 @@ module Dodopayments
       sig { params(metadata: T::Hash[Symbol, String]).void }
       attr_writer :metadata
 
+      # Pricing mode for localized pricing. When set, rules from
+      # /products/{id}/localized-prices apply at checkout. NULL means base-only
+      # (existing behavior).
+      sig do
+        returns(
+          T.nilable(Dodopayments::ProductCreateParams::PricingMode::OrSymbol)
+        )
+      end
+      attr_accessor :pricing_mode
+
       sig do
         params(
           name: String,
@@ -151,6 +161,8 @@ module Dodopayments
             T.nilable(Dodopayments::LicenseKeyDuration::OrHash),
           license_key_enabled: T.nilable(T::Boolean),
           metadata: T::Hash[Symbol, String],
+          pricing_mode:
+            T.nilable(Dodopayments::ProductCreateParams::PricingMode::OrSymbol),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -165,7 +177,7 @@ module Dodopayments
         addons: nil,
         # Brand id for the product, if not provided will default to primary brand
         brand_id: nil,
-        # Optional credit entitlements to attach (max 3)
+        # Optional credit entitlements to attach (max 5)
         credit_entitlements: nil,
         # Optional description of the product
         description: nil,
@@ -173,7 +185,7 @@ module Dodopayments
         #
         # deprecated: use entitlements instead
         digital_product_delivery: nil,
-        # Optional entitlements to attach to this product (max 20)
+        # Optional entitlements to attach to this product (max 50)
         entitlements: nil,
         # Optional message displayed during license key activation
         #
@@ -200,6 +212,10 @@ module Dodopayments
         license_key_enabled: nil,
         # Additional metadata for the product
         metadata: nil,
+        # Pricing mode for localized pricing. When set, rules from
+        # /products/{id}/localized-prices apply at checkout. NULL means base-only
+        # (existing behavior).
+        pricing_mode: nil,
         request_options: {}
       )
       end
@@ -231,6 +247,10 @@ module Dodopayments
             license_key_duration: T.nilable(Dodopayments::LicenseKeyDuration),
             license_key_enabled: T.nilable(T::Boolean),
             metadata: T::Hash[Symbol, String],
+            pricing_mode:
+              T.nilable(
+                Dodopayments::ProductCreateParams::PricingMode::OrSymbol
+              ),
             request_options: Dodopayments::RequestOptions
           }
         )
@@ -278,6 +298,40 @@ module Dodopayments
           )
         end
         def to_hash
+        end
+      end
+
+      # Pricing mode for localized pricing. When set, rules from
+      # /products/{id}/localized-prices apply at checkout. NULL means base-only
+      # (existing behavior).
+      module PricingMode
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, Dodopayments::ProductCreateParams::PricingMode)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        BY_CURRENCY =
+          T.let(
+            :by_currency,
+            Dodopayments::ProductCreateParams::PricingMode::TaggedSymbol
+          )
+        BY_COUNTRY =
+          T.let(
+            :by_country,
+            Dodopayments::ProductCreateParams::PricingMode::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Dodopayments::ProductCreateParams::PricingMode::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
         end
       end
     end

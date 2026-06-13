@@ -15,7 +15,8 @@ module Dodopayments
         license_key_activations_limit: Integer?,
         license_key_duration: Dodopayments::LicenseKeyDuration?,
         license_key_enabled: bool?,
-        metadata: ::Hash[Symbol, String]
+        metadata: ::Hash[Symbol, String],
+        pricing_mode: Dodopayments::Models::ProductCreateParams::pricing_mode?
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -53,6 +54,8 @@ module Dodopayments
 
       def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
+      attr_accessor pricing_mode: Dodopayments::Models::ProductCreateParams::pricing_mode?
+
       def initialize: (
         name: String,
         price: Dodopayments::Models::price,
@@ -68,6 +71,7 @@ module Dodopayments
         ?license_key_duration: Dodopayments::LicenseKeyDuration?,
         ?license_key_enabled: bool?,
         ?metadata: ::Hash[Symbol, String],
+        ?pricing_mode: Dodopayments::Models::ProductCreateParams::pricing_mode?,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
@@ -86,6 +90,7 @@ module Dodopayments
         license_key_duration: Dodopayments::LicenseKeyDuration?,
         license_key_enabled: bool?,
         metadata: ::Hash[Symbol, String],
+        pricing_mode: Dodopayments::Models::ProductCreateParams::pricing_mode?,
         request_options: Dodopayments::RequestOptions
       }
 
@@ -100,6 +105,17 @@ module Dodopayments
         def initialize: (?external_url: String?, ?instructions: String?) -> void
 
         def to_hash: -> { external_url: String?, instructions: String? }
+      end
+
+      type pricing_mode = :by_currency | :by_country
+
+      module PricingMode
+        extend Dodopayments::Internal::Type::Enum
+
+        BY_CURRENCY: :by_currency
+        BY_COUNTRY: :by_country
+
+        def self?.values: -> ::Array[Dodopayments::Models::ProductCreateParams::pricing_mode]
       end
     end
   end

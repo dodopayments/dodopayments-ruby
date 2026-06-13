@@ -56,6 +56,12 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :payment_id
 
+      # Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
+      # merchant's own Hyperswitch connector); `dodo` for everything Dodo processed
+      # itself.
+      sig { returns(Dodopayments::Payment::PaymentProvider::TaggedSymbol) }
+      attr_accessor :payment_provider
+
       # List of refunds issued for this payment
       sig { returns(T::Array[Dodopayments::RefundListItem]) }
       attr_accessor :refunds
@@ -78,8 +84,9 @@ module Dodopayments
       sig { returns(Dodopayments::Currency::TaggedSymbol) }
       attr_accessor :settlement_currency
 
-      # Total amount charged to the customer including tax, in smallest currency unit
-      # (e.g. cents)
+      # Total amount charged to the customer including tax, in the currency's smallest
+      # unit (e.g. cents for USD, yen for JPY, fils for KWD — see the currency's decimal
+      # places)
       sig { returns(Integer) }
       attr_accessor :total_amount
 
@@ -173,7 +180,8 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :subscription_id
 
-      # Amount of tax collected in smallest currency unit (e.g. cents)
+      # Amount of tax collected in the currency's smallest unit (e.g. cents for USD, yen
+      # for JPY, fils for KWD)
       sig { returns(T.nilable(Integer)) }
       attr_accessor :tax
 
@@ -193,6 +201,7 @@ module Dodopayments
           disputes: T::Array[Dodopayments::Dispute::OrHash],
           metadata: T::Hash[Symbol, String],
           payment_id: String,
+          payment_provider: Dodopayments::Payment::PaymentProvider::OrSymbol,
           refunds: T::Array[Dodopayments::RefundListItem::OrHash],
           retry_attempt: Integer,
           settlement_amount: Integer,
@@ -246,6 +255,10 @@ module Dodopayments
         metadata:,
         # Unique identifier for the payment
         payment_id:,
+        # Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
+        # merchant's own Hyperswitch connector); `dodo` for everything Dodo processed
+        # itself.
+        payment_provider:,
         # List of refunds issued for this payment
         refunds:,
         # Retry attempt number for subscription renewal payments. `0` for the original
@@ -260,8 +273,9 @@ module Dodopayments
         # balance. This may differ from the customer's payment currency in adaptive
         # pricing scenarios.
         settlement_currency:,
-        # Total amount charged to the customer including tax, in smallest currency unit
-        # (e.g. cents)
+        # Total amount charged to the customer including tax, in the currency's smallest
+        # unit (e.g. cents for USD, yen for JPY, fils for KWD — see the currency's decimal
+        # places)
         total_amount:,
         # Cardholder name
         card_holder_name: nil,
@@ -309,7 +323,8 @@ module Dodopayments
         status: nil,
         # Identifier of the subscription if payment is part of a subscription
         subscription_id: nil,
-        # Amount of tax collected in smallest currency unit (e.g. cents)
+        # Amount of tax collected in the currency's smallest unit (e.g. cents for USD, yen
+        # for JPY, fils for KWD)
         tax: nil,
         # Timestamp when the payment was last updated
         updated_at: nil
@@ -329,6 +344,8 @@ module Dodopayments
             disputes: T::Array[Dodopayments::Dispute],
             metadata: T::Hash[Symbol, String],
             payment_id: String,
+            payment_provider:
+              Dodopayments::Payment::PaymentProvider::TaggedSymbol,
             refunds: T::Array[Dodopayments::RefundListItem],
             retry_attempt: Integer,
             settlement_amount: Integer,
@@ -365,6 +382,32 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      # Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
+      # merchant's own Hyperswitch connector); `dodo` for everything Dodo processed
+      # itself.
+      module PaymentProvider
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias { T.all(Symbol, Dodopayments::Payment::PaymentProvider) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        STRIPE =
+          T.let(:stripe, Dodopayments::Payment::PaymentProvider::TaggedSymbol)
+        ADYEN =
+          T.let(:adyen, Dodopayments::Payment::PaymentProvider::TaggedSymbol)
+        DODO =
+          T.let(:dodo, Dodopayments::Payment::PaymentProvider::TaggedSymbol)
+
+        sig do
+          override.returns(
+            T::Array[Dodopayments::Payment::PaymentProvider::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
       end
 
       class ProductCart < Dodopayments::Internal::Type::BaseModel

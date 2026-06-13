@@ -256,6 +256,10 @@ module Dodopayments
           sig { returns(String) }
           attr_accessor :available_balance
 
+          # Brand id this credit entitlement belongs to
+          sig { returns(String) }
+          attr_accessor :brand_id
+
           sig { returns(String) }
           attr_accessor :credit_entitlement_id
 
@@ -283,6 +287,7 @@ module Dodopayments
           sig do
             params(
               available_balance: String,
+              brand_id: String,
               credit_entitlement_id: String,
               credit_entitlement_name: String,
               customer_id: String,
@@ -295,6 +300,8 @@ module Dodopayments
           end
           def self.new(
             available_balance:,
+            # Brand id this credit entitlement belongs to
+            brand_id:,
             credit_entitlement_id:,
             credit_entitlement_name:,
             customer_id:,
@@ -310,6 +317,7 @@ module Dodopayments
             override.returns(
               {
                 available_balance: String,
+                brand_id: String,
                 credit_entitlement_id: String,
                 credit_entitlement_name: String,
                 customer_id: String,
@@ -344,6 +352,10 @@ module Dodopayments
           end
           attr_accessor :abandonment_reason
 
+          # Brand id this abandoned checkout belongs to
+          sig { returns(String) }
+          attr_accessor :brand_id
+
           sig { returns(String) }
           attr_accessor :customer_id
 
@@ -368,6 +380,7 @@ module Dodopayments
               abandoned_at: Time,
               abandonment_reason:
                 Dodopayments::WebhookPayload::Data::AbandonedCheckout::AbandonmentReason::OrSymbol,
+              brand_id: String,
               customer_id: String,
               payment_id: String,
               status:
@@ -379,6 +392,8 @@ module Dodopayments
           def self.new(
             abandoned_at:,
             abandonment_reason:,
+            # Brand id this abandoned checkout belongs to
+            brand_id:,
             customer_id:,
             payment_id:,
             status:,
@@ -393,6 +408,7 @@ module Dodopayments
                 abandoned_at: Time,
                 abandonment_reason:
                   Dodopayments::WebhookPayload::Data::AbandonedCheckout::AbandonmentReason::OrSymbol,
+                brand_id: String,
                 customer_id: String,
                 payload_type: Symbol,
                 payment_id: String,
@@ -498,6 +514,10 @@ module Dodopayments
               )
             end
 
+          # Brand id this dunning attempt belongs to
+          sig { returns(String) }
+          attr_accessor :brand_id
+
           sig { returns(Time) }
           attr_accessor :created_at
 
@@ -529,6 +549,7 @@ module Dodopayments
 
           sig do
             params(
+              brand_id: String,
               created_at: Time,
               customer_id: String,
               status:
@@ -541,6 +562,8 @@ module Dodopayments
             ).returns(T.attached_class)
           end
           def self.new(
+            # Brand id this dunning attempt belongs to
+            brand_id:,
             created_at:,
             customer_id:,
             status:,
@@ -554,6 +577,7 @@ module Dodopayments
           sig do
             override.returns(
               {
+                brand_id: String,
                 created_at: Time,
                 customer_id: String,
                 payload_type: Symbol,

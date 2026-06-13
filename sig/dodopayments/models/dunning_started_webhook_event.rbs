@@ -33,6 +33,7 @@ module Dodopayments
 
       type data =
         {
+          brand_id: String,
           created_at: Time,
           customer_id: String,
           status: Dodopayments::Models::DunningStartedWebhookEvent::Data::status,
@@ -42,6 +43,8 @@ module Dodopayments
         }
 
       class Data < Dodopayments::Internal::Type::BaseModel
+        attr_accessor brand_id: String
+
         attr_accessor created_at: Time
 
         attr_accessor customer_id: String
@@ -55,6 +58,7 @@ module Dodopayments
         attr_accessor payment_id: String?
 
         def initialize: (
+          brand_id: String,
           created_at: Time,
           customer_id: String,
           status: Dodopayments::Models::DunningStartedWebhookEvent::Data::status,
@@ -64,6 +68,7 @@ module Dodopayments
         ) -> void
 
         def to_hash: -> {
+          brand_id: String,
           created_at: Time,
           customer_id: String,
           status: Dodopayments::Models::DunningStartedWebhookEvent::Data::status,
