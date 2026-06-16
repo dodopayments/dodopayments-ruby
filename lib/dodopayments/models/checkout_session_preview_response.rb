@@ -52,11 +52,23 @@ module Dodopayments
                -> { Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup },
                nil?: true
 
+      # @!attribute tax_id_business_name
+      #   Registered business name from the official registry (EU/GB/AU) when found
+      #
+      #   @return [String, nil]
+      optional :tax_id_business_name, String, nil?: true
+
       # @!attribute tax_id_err_msg
       #   Error message if tax ID validation failed
       #
       #   @return [String, nil]
       optional :tax_id_err_msg, String, nil?: true
+
+      # @!attribute tax_id_format_name
+      #   The matched tax ID notation (e.g. "VAT Number", "GSTIN") when valid
+      #
+      #   @return [String, nil]
+      optional :tax_id_format_name, String, nil?: true
 
       # @!attribute total_tax
       #   Total tax
@@ -64,7 +76,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :total_tax, Integer, nil?: true
 
-      # @!method initialize(billing_country:, currency:, current_breakup:, is_byop:, product_cart:, total_price:, recurring_breakup: nil, tax_id_err_msg: nil, total_tax: nil)
+      # @!method initialize(billing_country:, currency:, current_breakup:, is_byop:, product_cart:, total_price:, recurring_breakup: nil, tax_id_business_name: nil, tax_id_err_msg: nil, tax_id_format_name: nil, total_tax: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionPreviewResponse} for more details.
       #
@@ -84,7 +96,11 @@ module Dodopayments
       #
       #   @param recurring_breakup [Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup, nil] Breakup of recurring payments (None for one-time only)
       #
+      #   @param tax_id_business_name [String, nil] Registered business name from the official registry (EU/GB/AU) when found
+      #
       #   @param tax_id_err_msg [String, nil] Error message if tax ID validation failed
+      #
+      #   @param tax_id_format_name [String, nil] The matched tax ID notation (e.g. "VAT Number", "GSTIN") when valid
       #
       #   @param total_tax [Integer, nil] Total tax
 
