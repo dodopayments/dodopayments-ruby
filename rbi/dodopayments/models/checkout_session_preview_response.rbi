@@ -76,9 +76,17 @@ module Dodopayments
       end
       attr_writer :recurring_breakup
 
+      # Registered business name from the official registry (EU/GB/AU) when found
+      sig { returns(T.nilable(String)) }
+      attr_accessor :tax_id_business_name
+
       # Error message if tax ID validation failed
       sig { returns(T.nilable(String)) }
       attr_accessor :tax_id_err_msg
+
+      # The matched tax ID notation (e.g. "VAT Number", "GSTIN") when valid
+      sig { returns(T.nilable(String)) }
+      attr_accessor :tax_id_format_name
 
       # Total tax
       sig { returns(T.nilable(Integer)) }
@@ -101,7 +109,9 @@ module Dodopayments
             T.nilable(
               Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup::OrHash
             ),
+          tax_id_business_name: T.nilable(String),
           tax_id_err_msg: T.nilable(String),
+          tax_id_format_name: T.nilable(String),
           total_tax: T.nilable(Integer)
         ).returns(T.attached_class)
       end
@@ -123,8 +133,12 @@ module Dodopayments
         total_price:,
         # Breakup of recurring payments (None for one-time only)
         recurring_breakup: nil,
+        # Registered business name from the official registry (EU/GB/AU) when found
+        tax_id_business_name: nil,
         # Error message if tax ID validation failed
         tax_id_err_msg: nil,
+        # The matched tax ID notation (e.g. "VAT Number", "GSTIN") when valid
+        tax_id_format_name: nil,
         # Total tax
         total_tax: nil
       )
@@ -147,7 +161,9 @@ module Dodopayments
               T.nilable(
                 Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup
               ),
+            tax_id_business_name: T.nilable(String),
             tax_id_err_msg: T.nilable(String),
+            tax_id_format_name: T.nilable(String),
             total_tax: T.nilable(Integer)
           }
         )
