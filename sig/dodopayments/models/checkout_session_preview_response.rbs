@@ -9,7 +9,9 @@ module Dodopayments
         product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
         total_price: Integer,
         recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
+        tax_id_business_name: String?,
         tax_id_err_msg: String?,
+        tax_id_format_name: String?,
         total_tax: Integer?
       }
 
@@ -28,7 +30,11 @@ module Dodopayments
 
       attr_accessor recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?
 
+      attr_accessor tax_id_business_name: String?
+
       attr_accessor tax_id_err_msg: String?
+
+      attr_accessor tax_id_format_name: String?
 
       attr_accessor total_tax: Integer?
 
@@ -40,7 +46,9 @@ module Dodopayments
         product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
         total_price: Integer,
         ?recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
+        ?tax_id_business_name: String?,
         ?tax_id_err_msg: String?,
+        ?tax_id_format_name: String?,
         ?total_tax: Integer?
       ) -> void
 
@@ -52,7 +60,9 @@ module Dodopayments
         product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
         total_price: Integer,
         recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
+        tax_id_business_name: String?,
         tax_id_err_msg: String?,
+        tax_id_format_name: String?,
         total_tax: Integer?
       }
 
