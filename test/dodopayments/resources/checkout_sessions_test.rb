@@ -58,7 +58,9 @@ class Dodopayments::Test::Resources::CheckoutSessionsTest < Dodopayments::Test::
         product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart]),
         total_price: Integer,
         recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup | nil,
+        tax_id_business_name: String | nil,
         tax_id_err_msg: String | nil,
+        tax_id_format_name: String | nil,
         total_tax: Integer | nil
       }
     end
