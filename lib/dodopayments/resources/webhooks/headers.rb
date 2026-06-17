@@ -8,7 +8,8 @@ module Dodopayments
         #
         # @overload retrieve(webhook_id, request_options: {})
         #
-        # @param webhook_id [String]
+        # @param webhook_id [String] Webhook ID
+        #
         # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Dodopayments::Models::Webhooks::HeaderRetrieveResponse]
@@ -27,7 +28,7 @@ module Dodopayments
         #
         # @overload update(webhook_id, headers:, request_options: {})
         #
-        # @param webhook_id [String]
+        # @param webhook_id [String] Webhook ID
         #
         # @param headers [Hash{Symbol=>String}] Object of header-value pair to update or add
         #

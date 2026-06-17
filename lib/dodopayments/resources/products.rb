@@ -83,7 +83,7 @@ module Dodopayments
       #
       # @overload update(id, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, entitlements: nil, image_id: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, name: nil, price: nil, pricing_mode: nil, tax_category: nil, request_options: {})
       #
-      # @param id [String]
+      # @param id [String] Product Id
       #
       # @param addons [Array<String>, nil] Available Addons for subscription products
       #
@@ -168,7 +168,8 @@ module Dodopayments
 
       # @overload archive(id, request_options: {})
       #
-      # @param id [String]
+      # @param id [String] Product Id
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
@@ -185,7 +186,8 @@ module Dodopayments
 
       # @overload unarchive(id, request_options: {})
       #
-      # @param id [String]
+      # @param id [String] Product Id
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]

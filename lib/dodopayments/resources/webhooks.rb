@@ -49,7 +49,8 @@ module Dodopayments
       #
       # @overload retrieve(webhook_id, request_options: {})
       #
-      # @param webhook_id [String]
+      # @param webhook_id [String] Webhook ID
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::WebhookDetails]
@@ -71,7 +72,7 @@ module Dodopayments
       #
       # @overload update(webhook_id, description: nil, disabled: nil, filter_types: nil, metadata: nil, rate_limit: nil, url: nil, request_options: {})
       #
-      # @param webhook_id [String]
+      # @param webhook_id [String] Webhook ID
       #
       # @param description [String, nil] Description of the webhook
       #
@@ -131,7 +132,8 @@ module Dodopayments
       #
       # @overload delete(webhook_id, request_options: {})
       #
-      # @param webhook_id [String]
+      # @param webhook_id [String] Webhook ID
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
@@ -150,7 +152,8 @@ module Dodopayments
       #
       # @overload retrieve_secret(webhook_id, request_options: {})
       #
-      # @param webhook_id [String]
+      # @param webhook_id [String] Webhook ID
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::WebhookRetrieveSecretResponse]
