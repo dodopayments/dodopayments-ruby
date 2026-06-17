@@ -4,7 +4,7 @@ require_relative "../../test_helper"
 
 class Dodopayments::Test::Resources::Webhooks::HeadersTest < Dodopayments::Test::ResourceTest
   def test_retrieve
-    response = @dodo_payments.webhooks.headers.retrieve("webhook_id")
+    response = @dodo_payments.webhooks.headers.retrieve("whk_YdWqVEGKmSYKbsIyDxEab")
 
     assert_pattern do
       response => Dodopayments::Models::Webhooks::HeaderRetrieveResponse
@@ -19,7 +19,7 @@ class Dodopayments::Test::Resources::Webhooks::HeadersTest < Dodopayments::Test:
   end
 
   def test_update_required_params
-    response = @dodo_payments.webhooks.headers.update("webhook_id", headers: {foo: "string"})
+    response = @dodo_payments.webhooks.headers.update("whk_YdWqVEGKmSYKbsIyDxEab", headers: {foo: "string"})
 
     assert_pattern do
       response => nil

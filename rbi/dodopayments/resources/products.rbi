@@ -145,6 +145,7 @@ module Dodopayments
         ).void
       end
       def update(
+        # Product Id
         id,
         # Available Addons for subscription products
         addons: nil,
@@ -246,7 +247,11 @@ module Dodopayments
           request_options: Dodopayments::RequestOptions::OrHash
         ).void
       end
-      def archive(id, request_options: {})
+      def archive(
+        # Product Id
+        id,
+        request_options: {}
+      )
       end
 
       sig do
@@ -255,7 +260,11 @@ module Dodopayments
           request_options: Dodopayments::RequestOptions::OrHash
         ).void
       end
-      def unarchive(id, request_options: {})
+      def unarchive(
+        # Product Id
+        id,
+        request_options: {}
+      )
       end
 
       sig do

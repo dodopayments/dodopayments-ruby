@@ -31,7 +31,7 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
   end
 
   def test_retrieve
-    response = @dodo_payments.discounts.retrieve("discount_id")
+    response = @dodo_payments.discounts.retrieve("dsc_qxxEmg5PuM1uNTE0LgkP9")
 
     assert_pattern do
       response => Dodopayments::Discount
@@ -58,7 +58,7 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
   end
 
   def test_update
-    response = @dodo_payments.discounts.update("discount_id")
+    response = @dodo_payments.discounts.update("dsc_qxxEmg5PuM1uNTE0LgkP9")
 
     assert_pattern do
       response => Dodopayments::Discount
@@ -119,7 +119,7 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
   end
 
   def test_delete
-    response = @dodo_payments.discounts.delete("discount_id")
+    response = @dodo_payments.discounts.delete("dsc_qxxEmg5PuM1uNTE0LgkP9")
 
     assert_pattern do
       response => nil
