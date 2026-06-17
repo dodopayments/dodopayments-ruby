@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.17.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.16.0...v2.17.0) (2026-06-16)
+
+
+### Features
+
+* **api:** regenerate SDK from latest OpenAPI spec ([170e2a0](https://github.com/dodopayments/dodopayments-ruby/commit/170e2a0460dd322252dee5ba0ec6912e9005ac06))
+
 ## [2.15.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.14.0...v2.15.0) (2026-06-13)
 
 
