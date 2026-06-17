@@ -35,7 +35,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
   end
 
   def test_retrieve
-    response = @dodo_payments.subscriptions.retrieve("subscription_id")
+    response = @dodo_payments.subscriptions.retrieve("sub_Iuaq622bbmmfOGrVTqdXv")
 
     assert_pattern do
       response => Dodopayments::Subscription
@@ -85,7 +85,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
   end
 
   def test_update
-    response = @dodo_payments.subscriptions.update("subscription_id")
+    response = @dodo_payments.subscriptions.update("sub_Iuaq622bbmmfOGrVTqdXv")
 
     assert_pattern do
       response => Dodopayments::Subscription
@@ -184,7 +184,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
   end
 
   def test_cancel_change_plan
-    response = @dodo_payments.subscriptions.cancel_change_plan("subscription_id")
+    response = @dodo_payments.subscriptions.cancel_change_plan("sub_Iuaq622bbmmfOGrVTqdXv")
 
     assert_pattern do
       response => nil
@@ -194,7 +194,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
   def test_change_plan_required_params
     response =
       @dodo_payments.subscriptions.change_plan(
-        "subscription_id",
+        "sub_Iuaq622bbmmfOGrVTqdXv",
         product_id: "product_id",
         proration_billing_mode: :prorated_immediately,
         quantity: 0
@@ -206,7 +206,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
   end
 
   def test_charge_required_params
-    response = @dodo_payments.subscriptions.charge("subscription_id", product_price: 0)
+    response = @dodo_payments.subscriptions.charge("sub_Iuaq622bbmmfOGrVTqdXv", product_price: 0)
 
     assert_pattern do
       response => Dodopayments::Models::SubscriptionChargeResponse
@@ -222,7 +222,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
   def test_preview_change_plan_required_params
     response =
       @dodo_payments.subscriptions.preview_change_plan(
-        "subscription_id",
+        "sub_Iuaq622bbmmfOGrVTqdXv",
         product_id: "product_id",
         proration_billing_mode: :prorated_immediately,
         quantity: 0
@@ -241,7 +241,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
   end
 
   def test_retrieve_credit_usage
-    response = @dodo_payments.subscriptions.retrieve_credit_usage("subscription_id")
+    response = @dodo_payments.subscriptions.retrieve_credit_usage("sub_Iuaq622bbmmfOGrVTqdXv")
 
     assert_pattern do
       response => Dodopayments::Models::SubscriptionRetrieveCreditUsageResponse
@@ -256,7 +256,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
   end
 
   def test_retrieve_usage_history
-    response = @dodo_payments.subscriptions.retrieve_usage_history("subscription_id")
+    response = @dodo_payments.subscriptions.retrieve_usage_history("sub_Iuaq622bbmmfOGrVTqdXv")
 
     assert_pattern do
       response => Dodopayments::Internal::DefaultPageNumberPagination
@@ -280,7 +280,10 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
 
   def test_update_payment_method_required_params
     response =
-      @dodo_payments.subscriptions.update_payment_method("subscription_id", payment_method: {type: :new})
+      @dodo_payments.subscriptions.update_payment_method(
+        "sub_Iuaq622bbmmfOGrVTqdXv",
+        payment_method: {type: :new}
+      )
 
     assert_pattern do
       response => Dodopayments::Models::SubscriptionUpdatePaymentMethodResponse

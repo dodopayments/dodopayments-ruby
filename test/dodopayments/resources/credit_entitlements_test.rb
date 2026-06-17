@@ -43,7 +43,7 @@ class Dodopayments::Test::Resources::CreditEntitlementsTest < Dodopayments::Test
   end
 
   def test_retrieve
-    response = @dodo_payments.credit_entitlements.retrieve("id")
+    response = @dodo_payments.credit_entitlements.retrieve("cde_ztxm5XJsKxWucRWA3rjdM")
 
     assert_pattern do
       response => Dodopayments::CreditEntitlement
@@ -75,7 +75,7 @@ class Dodopayments::Test::Resources::CreditEntitlementsTest < Dodopayments::Test
   end
 
   def test_update
-    response = @dodo_payments.credit_entitlements.update("id")
+    response = @dodo_payments.credit_entitlements.update("cde_ztxm5XJsKxWucRWA3rjdM")
 
     assert_pattern do
       response => nil
@@ -122,7 +122,7 @@ class Dodopayments::Test::Resources::CreditEntitlementsTest < Dodopayments::Test
   end
 
   def test_delete
-    response = @dodo_payments.credit_entitlements.delete("id")
+    response = @dodo_payments.credit_entitlements.delete("cde_ztxm5XJsKxWucRWA3rjdM")
 
     assert_pattern do
       response => nil
@@ -130,7 +130,7 @@ class Dodopayments::Test::Resources::CreditEntitlementsTest < Dodopayments::Test
   end
 
   def test_undelete
-    response = @dodo_payments.credit_entitlements.undelete("id")
+    response = @dodo_payments.credit_entitlements.undelete("cde_ztxm5XJsKxWucRWA3rjdM")
 
     assert_pattern do
       response => nil

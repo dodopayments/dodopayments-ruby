@@ -44,7 +44,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
   end
 
   def test_retrieve
-    response = @dodo_payments.products.retrieve("id")
+    response = @dodo_payments.products.retrieve("pdt_R8AWMPiV8RyJElcCKvAID")
 
     assert_pattern do
       response => Dodopayments::Product
@@ -79,7 +79,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
   end
 
   def test_update
-    response = @dodo_payments.products.update("id")
+    response = @dodo_payments.products.update("pdt_R8AWMPiV8RyJElcCKvAID")
 
     assert_pattern do
       response => nil
@@ -123,7 +123,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
   end
 
   def test_archive
-    response = @dodo_payments.products.archive("id")
+    response = @dodo_payments.products.archive("pdt_R8AWMPiV8RyJElcCKvAID")
 
     assert_pattern do
       response => nil
@@ -131,7 +131,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
   end
 
   def test_unarchive
-    response = @dodo_payments.products.unarchive("id")
+    response = @dodo_payments.products.unarchive("pdt_R8AWMPiV8RyJElcCKvAID")
 
     assert_pattern do
       response => nil
@@ -139,7 +139,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
   end
 
   def test_update_files_required_params
-    response = @dodo_payments.products.update_files("id", file_name: "file_name")
+    response = @dodo_payments.products.update_files("pdt_R8AWMPiV8RyJElcCKvAID", file_name: "file_name")
 
     assert_pattern do
       response => Dodopayments::Models::ProductUpdateFilesResponse

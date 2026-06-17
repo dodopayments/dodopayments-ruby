@@ -28,7 +28,7 @@ class Dodopayments::Test::Resources::AddonsTest < Dodopayments::Test::ResourceTe
   end
 
   def test_retrieve
-    response = @dodo_payments.addons.retrieve("id")
+    response = @dodo_payments.addons.retrieve("adn_NX1zdqW4Hbivsqz8vI9dc")
 
     assert_pattern do
       response => Dodopayments::AddonResponse
@@ -51,7 +51,7 @@ class Dodopayments::Test::Resources::AddonsTest < Dodopayments::Test::ResourceTe
   end
 
   def test_update
-    response = @dodo_payments.addons.update("id")
+    response = @dodo_payments.addons.update("adn_NX1zdqW4Hbivsqz8vI9dc")
 
     assert_pattern do
       response => Dodopayments::AddonResponse
@@ -104,7 +104,7 @@ class Dodopayments::Test::Resources::AddonsTest < Dodopayments::Test::ResourceTe
   end
 
   def test_update_images
-    response = @dodo_payments.addons.update_images("id")
+    response = @dodo_payments.addons.update_images("adn_NX1zdqW4Hbivsqz8vI9dc")
 
     assert_pattern do
       response => Dodopayments::Models::AddonUpdateImagesResponse
