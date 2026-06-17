@@ -26,7 +26,7 @@ class Dodopayments::Test::Resources::WebhooksTest < Dodopayments::Test::Resource
   end
 
   def test_retrieve
-    response = @dodo_payments.webhooks.retrieve("webhook_id")
+    response = @dodo_payments.webhooks.retrieve("whk_YdWqVEGKmSYKbsIyDxEab")
 
     assert_pattern do
       response => Dodopayments::WebhookDetails
@@ -48,7 +48,7 @@ class Dodopayments::Test::Resources::WebhooksTest < Dodopayments::Test::Resource
   end
 
   def test_update
-    response = @dodo_payments.webhooks.update("webhook_id")
+    response = @dodo_payments.webhooks.update("whk_YdWqVEGKmSYKbsIyDxEab")
 
     assert_pattern do
       response => Dodopayments::WebhookDetails
@@ -99,7 +99,7 @@ class Dodopayments::Test::Resources::WebhooksTest < Dodopayments::Test::Resource
   end
 
   def test_delete
-    response = @dodo_payments.webhooks.delete("webhook_id")
+    response = @dodo_payments.webhooks.delete("whk_YdWqVEGKmSYKbsIyDxEab")
 
     assert_pattern do
       response => nil
@@ -107,7 +107,7 @@ class Dodopayments::Test::Resources::WebhooksTest < Dodopayments::Test::Resource
   end
 
   def test_retrieve_secret
-    response = @dodo_payments.webhooks.retrieve_secret("webhook_id")
+    response = @dodo_payments.webhooks.retrieve_secret("whk_YdWqVEGKmSYKbsIyDxEab")
 
     assert_pattern do
       response => Dodopayments::Models::WebhookRetrieveSecretResponse

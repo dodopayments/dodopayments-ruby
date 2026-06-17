@@ -34,7 +34,7 @@ class Dodopayments::Test::Resources::ProductCollectionsTest < Dodopayments::Test
   end
 
   def test_retrieve
-    response = @dodo_payments.product_collections.retrieve("id")
+    response = @dodo_payments.product_collections.retrieve("pdc_8BWv0hojwUH7iCDabr0NI")
 
     assert_pattern do
       response => Dodopayments::ProductCollection
@@ -60,7 +60,7 @@ class Dodopayments::Test::Resources::ProductCollectionsTest < Dodopayments::Test
   end
 
   def test_update
-    response = @dodo_payments.product_collections.update("id")
+    response = @dodo_payments.product_collections.update("pdc_8BWv0hojwUH7iCDabr0NI")
 
     assert_pattern do
       response => nil
@@ -95,7 +95,7 @@ class Dodopayments::Test::Resources::ProductCollectionsTest < Dodopayments::Test
   end
 
   def test_delete
-    response = @dodo_payments.product_collections.delete("id")
+    response = @dodo_payments.product_collections.delete("pdc_8BWv0hojwUH7iCDabr0NI")
 
     assert_pattern do
       response => nil
@@ -103,7 +103,7 @@ class Dodopayments::Test::Resources::ProductCollectionsTest < Dodopayments::Test
   end
 
   def test_unarchive
-    response = @dodo_payments.product_collections.unarchive("id")
+    response = @dodo_payments.product_collections.unarchive("pdc_8BWv0hojwUH7iCDabr0NI")
 
     assert_pattern do
       response => Dodopayments::Models::ProductCollectionUnarchiveResponse
@@ -119,7 +119,7 @@ class Dodopayments::Test::Resources::ProductCollectionsTest < Dodopayments::Test
   end
 
   def test_update_images
-    response = @dodo_payments.product_collections.update_images("id")
+    response = @dodo_payments.product_collections.update_images("pdc_8BWv0hojwUH7iCDabr0NI")
 
     assert_pattern do
       response => Dodopayments::Models::ProductCollectionUpdateImagesResponse

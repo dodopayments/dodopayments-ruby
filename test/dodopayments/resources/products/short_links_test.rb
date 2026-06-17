@@ -4,7 +4,7 @@ require_relative "../../test_helper"
 
 class Dodopayments::Test::Resources::Products::ShortLinksTest < Dodopayments::Test::ResourceTest
   def test_create_required_params
-    response = @dodo_payments.products.short_links.create("id", slug: "slug")
+    response = @dodo_payments.products.short_links.create("pdt_R8AWMPiV8RyJElcCKvAID", slug: "slug")
 
     assert_pattern do
       response => Dodopayments::Models::Products::ShortLinkCreateResponse
