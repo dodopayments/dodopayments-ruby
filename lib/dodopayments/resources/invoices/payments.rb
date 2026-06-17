@@ -6,7 +6,8 @@ module Dodopayments
       class Payments
         # @overload retrieve(payment_id, request_options: {})
         #
-        # @param payment_id [String]
+        # @param payment_id [String] Payment ID
+        #
         # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [StringIO]
@@ -24,7 +25,8 @@ module Dodopayments
 
         # @overload retrieve_payout(payout_id, request_options: {})
         #
-        # @param payout_id [String]
+        # @param payout_id [String] Payout ID
+        #
         # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [StringIO]
@@ -42,7 +44,8 @@ module Dodopayments
 
         # @overload retrieve_refund(refund_id, request_options: {})
         #
-        # @param refund_id [String]
+        # @param refund_id [String] Refund ID
+        #
         # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [StringIO]

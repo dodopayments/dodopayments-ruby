@@ -10,7 +10,11 @@ module Dodopayments
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(StringIO)
         end
-        def retrieve(payment_id, request_options: {})
+        def retrieve(
+          # Payment ID
+          payment_id,
+          request_options: {}
+        )
         end
 
         sig do
@@ -19,7 +23,11 @@ module Dodopayments
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(StringIO)
         end
-        def retrieve_payout(payout_id, request_options: {})
+        def retrieve_payout(
+          # Payout ID
+          payout_id,
+          request_options: {}
+        )
         end
 
         sig do
@@ -28,7 +36,11 @@ module Dodopayments
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(StringIO)
         end
-        def retrieve_refund(refund_id, request_options: {})
+        def retrieve_refund(
+          # Refund ID
+          refund_id,
+          request_options: {}
+        )
         end
 
         # @api private

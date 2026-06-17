@@ -32,7 +32,7 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
   end
 
   def test_retrieve
-    response = @dodo_payments.entitlements.retrieve("id")
+    response = @dodo_payments.entitlements.retrieve("ent_jt7jcvI79Xh8eehqgWdcm")
 
     assert_pattern do
       response => Dodopayments::Entitlement
@@ -55,7 +55,7 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
   end
 
   def test_update
-    response = @dodo_payments.entitlements.update("id")
+    response = @dodo_payments.entitlements.update("ent_jt7jcvI79Xh8eehqgWdcm")
 
     assert_pattern do
       response => Dodopayments::Entitlement
@@ -108,7 +108,7 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
   end
 
   def test_delete
-    response = @dodo_payments.entitlements.delete("id")
+    response = @dodo_payments.entitlements.delete("ent_jt7jcvI79Xh8eehqgWdcm")
 
     assert_pattern do
       response => nil
