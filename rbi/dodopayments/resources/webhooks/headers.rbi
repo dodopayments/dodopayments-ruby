@@ -11,7 +11,11 @@ module Dodopayments
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(Dodopayments::Models::Webhooks::HeaderRetrieveResponse)
         end
-        def retrieve(webhook_id, request_options: {})
+        def retrieve(
+          # Webhook ID
+          webhook_id,
+          request_options: {}
+        )
         end
 
         # Patch a webhook by id
@@ -23,6 +27,7 @@ module Dodopayments
           ).void
         end
         def update(
+          # Webhook ID
           webhook_id,
           # Object of header-value pair to update or add
           headers:,

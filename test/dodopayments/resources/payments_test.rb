@@ -32,7 +32,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
   end
 
   def test_retrieve
-    response = @dodo_payments.payments.retrieve("payment_id")
+    response = @dodo_payments.payments.retrieve("pay_gr4RizvMOXFJ6xca3y2tU")
 
     assert_pattern do
       response => Dodopayments::Payment
@@ -124,7 +124,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
   end
 
   def test_retrieve_line_items
-    response = @dodo_payments.payments.retrieve_line_items("payment_id")
+    response = @dodo_payments.payments.retrieve_line_items("pay_gr4RizvMOXFJ6xca3y2tU")
 
     assert_pattern do
       response => Dodopayments::Models::PaymentRetrieveLineItemsResponse

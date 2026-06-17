@@ -23,7 +23,7 @@ class Dodopayments::Test::Resources::CheckoutSessionsTest < Dodopayments::Test::
   end
 
   def test_retrieve
-    response = @dodo_payments.checkout_sessions.retrieve("id")
+    response = @dodo_payments.checkout_sessions.retrieve("cks_n010SZaY4NXc7F1ck3Tq1")
 
     assert_pattern do
       response => Dodopayments::CheckoutSessionStatus

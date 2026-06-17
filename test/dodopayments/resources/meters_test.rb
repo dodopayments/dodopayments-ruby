@@ -33,7 +33,7 @@ class Dodopayments::Test::Resources::MetersTest < Dodopayments::Test::ResourceTe
   end
 
   def test_retrieve
-    response = @dodo_payments.meters.retrieve("id")
+    response = @dodo_payments.meters.retrieve("mtr_h5tgTWL55OyMO0L2Q9w9v")
 
     assert_pattern do
       response => Dodopayments::Meter
@@ -86,7 +86,7 @@ class Dodopayments::Test::Resources::MetersTest < Dodopayments::Test::ResourceTe
   end
 
   def test_archive
-    response = @dodo_payments.meters.archive("id")
+    response = @dodo_payments.meters.archive("mtr_h5tgTWL55OyMO0L2Q9w9v")
 
     assert_pattern do
       response => nil
@@ -94,7 +94,7 @@ class Dodopayments::Test::Resources::MetersTest < Dodopayments::Test::ResourceTe
   end
 
   def test_unarchive
-    response = @dodo_payments.meters.unarchive("id")
+    response = @dodo_payments.meters.unarchive("mtr_h5tgTWL55OyMO0L2Q9w9v")
 
     assert_pattern do
       response => nil
