@@ -116,7 +116,11 @@ module Dodopayments
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::CheckoutSessionStatus)
       end
-      def retrieve(id, request_options: {})
+      def retrieve(
+        # Checkout Session ID
+        id,
+        request_options: {}
+      )
       end
 
       sig do

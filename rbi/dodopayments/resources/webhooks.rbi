@@ -50,7 +50,11 @@ module Dodopayments
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::WebhookDetails)
       end
-      def retrieve(webhook_id, request_options: {})
+      def retrieve(
+        # Webhook ID
+        webhook_id,
+        request_options: {}
+      )
       end
 
       # Patch a webhook by id
@@ -68,6 +72,7 @@ module Dodopayments
         ).returns(Dodopayments::WebhookDetails)
       end
       def update(
+        # Webhook ID
         webhook_id,
         # Description of the webhook
         description: nil,
@@ -115,7 +120,11 @@ module Dodopayments
           request_options: Dodopayments::RequestOptions::OrHash
         ).void
       end
-      def delete(webhook_id, request_options: {})
+      def delete(
+        # Webhook ID
+        webhook_id,
+        request_options: {}
+      )
       end
 
       # Get webhook secret by id
@@ -125,7 +134,11 @@ module Dodopayments
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Models::WebhookRetrieveSecretResponse)
       end
-      def retrieve_secret(webhook_id, request_options: {})
+      def retrieve_secret(
+        # Webhook ID
+        webhook_id,
+        request_options: {}
+      )
       end
 
       sig do

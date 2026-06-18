@@ -6,8 +6,8 @@ class Dodopayments::Test::Resources::CreditEntitlements::BalancesTest < Dodopaym
   def test_retrieve_required_params
     response =
       @dodo_payments.credit_entitlements.balances.retrieve(
-        "customer_id",
-        credit_entitlement_id: "credit_entitlement_id"
+        "cus_TV52uJWWXt2yIoBBxpjaa",
+        credit_entitlement_id: "cde_ztxm5XJsKxWucRWA3rjdM"
       )
 
     assert_pattern do
@@ -29,7 +29,7 @@ class Dodopayments::Test::Resources::CreditEntitlements::BalancesTest < Dodopaym
   end
 
   def test_list
-    response = @dodo_payments.credit_entitlements.balances.list("credit_entitlement_id")
+    response = @dodo_payments.credit_entitlements.balances.list("cde_ztxm5XJsKxWucRWA3rjdM")
 
     assert_pattern do
       response => Dodopayments::Internal::DefaultPageNumberPagination
@@ -59,8 +59,8 @@ class Dodopayments::Test::Resources::CreditEntitlements::BalancesTest < Dodopaym
   def test_create_ledger_entry_required_params
     response =
       @dodo_payments.credit_entitlements.balances.create_ledger_entry(
-        "customer_id",
-        credit_entitlement_id: "credit_entitlement_id",
+        "cus_TV52uJWWXt2yIoBBxpjaa",
+        credit_entitlement_id: "cde_ztxm5XJsKxWucRWA3rjdM",
         amount: "amount",
         entry_type: :credit
       )
@@ -91,8 +91,8 @@ class Dodopayments::Test::Resources::CreditEntitlements::BalancesTest < Dodopaym
   def test_list_grants_required_params
     response =
       @dodo_payments.credit_entitlements.balances.list_grants(
-        "customer_id",
-        credit_entitlement_id: "credit_entitlement_id"
+        "cus_TV52uJWWXt2yIoBBxpjaa",
+        credit_entitlement_id: "cde_ztxm5XJsKxWucRWA3rjdM"
       )
 
     assert_pattern do
@@ -130,8 +130,8 @@ class Dodopayments::Test::Resources::CreditEntitlements::BalancesTest < Dodopaym
   def test_list_ledger_required_params
     response =
       @dodo_payments.credit_entitlements.balances.list_ledger(
-        "customer_id",
-        credit_entitlement_id: "credit_entitlement_id"
+        "cus_TV52uJWWXt2yIoBBxpjaa",
+        credit_entitlement_id: "cde_ztxm5XJsKxWucRWA3rjdM"
       )
 
     assert_pattern do

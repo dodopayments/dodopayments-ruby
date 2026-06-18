@@ -74,7 +74,8 @@ module Dodopayments
 
       # @overload retrieve(id, request_options: {})
       #
-      # @param id [String]
+      # @param id [String] Checkout Session ID
+      #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dodopayments::Models::CheckoutSessionStatus]

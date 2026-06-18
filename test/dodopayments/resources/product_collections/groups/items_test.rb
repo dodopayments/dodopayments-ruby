@@ -7,7 +7,7 @@ class Dodopayments::Test::Resources::ProductCollections::Groups::ItemsTest < Dod
     response =
       @dodo_payments.product_collections.groups.items.create(
         "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        id: "id",
+        id: "pdc_8BWv0hojwUH7iCDabr0NI",
         products: [{product_id: "product_id"}]
       )
 
@@ -20,7 +20,7 @@ class Dodopayments::Test::Resources::ProductCollections::Groups::ItemsTest < Dod
     response =
       @dodo_payments.product_collections.groups.items.update(
         "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        id: "id",
+        id: "pdc_8BWv0hojwUH7iCDabr0NI",
         group_id: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         status: true
       )
@@ -34,7 +34,7 @@ class Dodopayments::Test::Resources::ProductCollections::Groups::ItemsTest < Dod
     response =
       @dodo_payments.product_collections.groups.items.delete(
         "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        id: "id",
+        id: "pdc_8BWv0hojwUH7iCDabr0NI",
         group_id: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"
       )
 
