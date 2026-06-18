@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.17.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.17.0...v2.17.1) (2026-06-18)
+
+
+### Bug Fixes
+
+* **pagination:** stop cursor auto-pagination dropping pages ([3087920](https://github.com/dodopayments/dodopayments-ruby/commit/30879201b468d8c91cf5b153f7a0658efd1eff60))
+* **pagination:** stop cursor auto-pagination dropping pages ([2a00fad](https://github.com/dodopayments/dodopayments-ruby/commit/2a00fad57b3a3c2481cde3d99df06b17739d199d))
+
+
+### Chores
+
+* restore release-please-owned files from main ([cb8a39d](https://github.com/dodopayments/dodopayments-ruby/commit/cb8a39dccedcfa3ff0ccdb718e659ae2af0a7140))
+
 ## [2.17.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.16.0...v2.17.0) (2026-06-16)
 
 
