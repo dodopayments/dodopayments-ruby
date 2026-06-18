@@ -6,7 +6,7 @@ class Dodopayments::Test::Resources::Customers::Wallets::LedgerEntriesTest < Dod
   def test_create_required_params
     response =
       @dodo_payments.customers.wallets.ledger_entries.create(
-        "customer_id",
+        "cus_TV52uJWWXt2yIoBBxpjaa",
         amount: 0,
         currency: :AED,
         entry_type: :credit
@@ -28,7 +28,7 @@ class Dodopayments::Test::Resources::Customers::Wallets::LedgerEntriesTest < Dod
   end
 
   def test_list
-    response = @dodo_payments.customers.wallets.ledger_entries.list("customer_id")
+    response = @dodo_payments.customers.wallets.ledger_entries.list("cus_TV52uJWWXt2yIoBBxpjaa")
 
     assert_pattern do
       response => Dodopayments::Internal::DefaultPageNumberPagination

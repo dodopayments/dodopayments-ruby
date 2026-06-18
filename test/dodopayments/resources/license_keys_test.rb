@@ -32,7 +32,7 @@ class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::Resou
   end
 
   def test_retrieve
-    response = @dodo_payments.license_keys.retrieve("lic_123")
+    response = @dodo_payments.license_keys.retrieve("lic_7namTC0VcgrnzrF3GTSwB")
 
     assert_pattern do
       response => Dodopayments::LicenseKey
@@ -59,7 +59,7 @@ class Dodopayments::Test::Resources::LicenseKeysTest < Dodopayments::Test::Resou
   end
 
   def test_update
-    response = @dodo_payments.license_keys.update("lic_123")
+    response = @dodo_payments.license_keys.update("lic_7namTC0VcgrnzrF3GTSwB")
 
     assert_pattern do
       response => Dodopayments::LicenseKey

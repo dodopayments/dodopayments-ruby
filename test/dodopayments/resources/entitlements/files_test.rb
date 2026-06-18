@@ -4,7 +4,7 @@ require_relative "../../test_helper"
 
 class Dodopayments::Test::Resources::Entitlements::FilesTest < Dodopayments::Test::ResourceTest
   def test_delete_required_params
-    response = @dodo_payments.entitlements.files.delete("file_id", id: "id")
+    response = @dodo_payments.entitlements.files.delete("file_id", id: "ent_jt7jcvI79Xh8eehqgWdcm")
 
     assert_pattern do
       response => nil
@@ -12,7 +12,7 @@ class Dodopayments::Test::Resources::Entitlements::FilesTest < Dodopayments::Tes
   end
 
   def test_upload
-    response = @dodo_payments.entitlements.files.upload("id")
+    response = @dodo_payments.entitlements.files.upload("ent_jt7jcvI79Xh8eehqgWdcm")
 
     assert_pattern do
       response => Dodopayments::Models::Entitlements::FileUploadResponse

@@ -29,7 +29,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
   end
 
   def test_retrieve
-    response = @dodo_payments.refunds.retrieve("refund_id")
+    response = @dodo_payments.refunds.retrieve("ref_F0gZetLvTxxBrMU2CZcmy")
 
     assert_pattern do
       response => Dodopayments::Refund
