@@ -4,7 +4,7 @@ require_relative "../../test_helper"
 
 class Dodopayments::Test::Resources::Entitlements::GrantsTest < Dodopayments::Test::ResourceTest
   def test_list
-    response = @dodo_payments.entitlements.grants.list("id")
+    response = @dodo_payments.entitlements.grants.list("ent_jt7jcvI79Xh8eehqgWdcm")
 
     assert_pattern do
       response => Dodopayments::Internal::DefaultPageNumberPagination
@@ -45,7 +45,8 @@ class Dodopayments::Test::Resources::Entitlements::GrantsTest < Dodopayments::Te
   end
 
   def test_revoke_required_params
-    response = @dodo_payments.entitlements.grants.revoke("grant_id", id: "id")
+    response =
+      @dodo_payments.entitlements.grants.revoke("entg_w0ZCJZgNXuNDdMVzvja6p", id: "ent_jt7jcvI79Xh8eehqgWdcm")
 
     assert_pattern do
       response => Dodopayments::Entitlements::EntitlementGrant
