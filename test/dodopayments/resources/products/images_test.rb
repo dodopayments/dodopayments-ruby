@@ -4,7 +4,7 @@ require_relative "../../test_helper"
 
 class Dodopayments::Test::Resources::Products::ImagesTest < Dodopayments::Test::ResourceTest
   def test_update
-    response = @dodo_payments.products.images.update("id")
+    response = @dodo_payments.products.images.update("pdt_R8AWMPiV8RyJElcCKvAID")
 
     assert_pattern do
       response => Dodopayments::Models::Products::ImageUpdateResponse

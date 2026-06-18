@@ -29,7 +29,7 @@ class Dodopayments::Test::Resources::BrandsTest < Dodopayments::Test::ResourceTe
   end
 
   def test_retrieve
-    response = @dodo_payments.brands.retrieve("id")
+    response = @dodo_payments.brands.retrieve("brnd_8dFiAW42v28JzhlVSocjq")
 
     assert_pattern do
       response => Dodopayments::Brand
@@ -54,7 +54,7 @@ class Dodopayments::Test::Resources::BrandsTest < Dodopayments::Test::ResourceTe
   end
 
   def test_update
-    response = @dodo_payments.brands.update("id")
+    response = @dodo_payments.brands.update("brnd_8dFiAW42v28JzhlVSocjq")
 
     assert_pattern do
       response => Dodopayments::Brand
@@ -93,7 +93,7 @@ class Dodopayments::Test::Resources::BrandsTest < Dodopayments::Test::ResourceTe
   end
 
   def test_update_images
-    response = @dodo_payments.brands.update_images("id")
+    response = @dodo_payments.brands.update_images("brnd_8dFiAW42v28JzhlVSocjq")
 
     assert_pattern do
       response => Dodopayments::Models::BrandUpdateImagesResponse
