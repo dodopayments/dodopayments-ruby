@@ -37,7 +37,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         license_key_activations_limit: Integer | nil,
         license_key_duration: Dodopayments::LicenseKeyDuration | nil,
         name: String | nil,
-        pricing_mode: Dodopayments::Product::PricingMode | nil,
+        pricing_mode: Dodopayments::Products::PricingMode | nil,
         product_collection_id: String | nil
       }
     end
@@ -72,7 +72,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         license_key_activations_limit: Integer | nil,
         license_key_duration: Dodopayments::LicenseKeyDuration | nil,
         name: String | nil,
-        pricing_mode: Dodopayments::Product::PricingMode | nil,
+        pricing_mode: Dodopayments::Products::PricingMode | nil,
         product_collection_id: String | nil
       }
     end
@@ -116,7 +116,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
         name: String | nil,
         price: Integer | nil,
         price_detail: Dodopayments::Price | nil,
-        pricing_mode: Dodopayments::Models::ProductListResponse::PricingMode | nil,
+        pricing_mode: Dodopayments::Products::PricingMode | nil,
         tax_inclusive: Dodopayments::Internal::Type::Boolean | nil
       }
     end

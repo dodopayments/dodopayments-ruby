@@ -1,0 +1,41 @@
+module Dodopayments
+  module Resources
+    class Products
+      class LocalizedPrices
+        def create: (
+          String product_id,
+          amount: Integer,
+          currency: Dodopayments::Models::currency,
+          ?country_code: Dodopayments::Models::country_code?,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Products::LocalizedPrice
+
+        def retrieve: (
+          String id,
+          product_id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Products::LocalizedPrice
+
+        def update: (
+          String id,
+          product_id: String,
+          ?amount: Integer?,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Products::LocalizedPrice
+
+        def list: (
+          String product_id,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Products::ListLocalizedPricesResponse
+
+        def archive: (
+          String id,
+          product_id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> nil
+
+        def initialize: (client: Dodopayments::Client) -> void
+      end
+    end
+  end
+end

@@ -1,0 +1,7 @@
+module Dodopayments
+  module Models
+    type metadata = ::Hash[Symbol, String]
+
+    Metadata: Dodopayments::Internal::Type::Converter
+  end
+end

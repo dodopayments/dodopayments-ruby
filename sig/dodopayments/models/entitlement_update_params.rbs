@@ -5,7 +5,7 @@ module Dodopayments
         id: String,
         description: String?,
         integration_config: Dodopayments::Models::integration_config?,
-        metadata: ::Hash[Symbol, String]?,
+        metadata: Dodopayments::Models::metadata?,
         name: String?
       }
       & Dodopayments::Internal::Type::request_parameters
@@ -20,7 +20,7 @@ module Dodopayments
 
       attr_accessor integration_config: Dodopayments::Models::integration_config?
 
-      attr_accessor metadata: ::Hash[Symbol, String]?
+      attr_accessor metadata: Dodopayments::Models::metadata?
 
       attr_accessor name: String?
 
@@ -28,7 +28,7 @@ module Dodopayments
         id: String,
         ?description: String?,
         ?integration_config: Dodopayments::Models::integration_config?,
-        ?metadata: ::Hash[Symbol, String]?,
+        ?metadata: Dodopayments::Models::metadata?,
         ?name: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
@@ -37,7 +37,7 @@ module Dodopayments
         id: String,
         description: String?,
         integration_config: Dodopayments::Models::integration_config?,
-        metadata: ::Hash[Symbol, String]?,
+        metadata: Dodopayments::Models::metadata?,
         name: String?,
         request_options: Dodopayments::RequestOptions
       }

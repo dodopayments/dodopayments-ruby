@@ -12,7 +12,7 @@ module Dodopayments
           customer_id: String,
           entitlement_id: String,
           integration_type: Dodopayments::Models::entitlement_integration_type,
-          metadata: ::Hash[Symbol, String],
+          metadata: Dodopayments::Models::metadata,
           status: Dodopayments::Models::Entitlements::EntitlementGrant::status,
           updated_at: Time,
           delivered_at: Time?,
@@ -43,7 +43,7 @@ module Dodopayments
 
         attr_accessor integration_type: Dodopayments::Models::entitlement_integration_type
 
-        attr_accessor metadata: ::Hash[Symbol, String]
+        attr_accessor metadata: Dodopayments::Models::metadata
 
         attr_accessor status: Dodopayments::Models::Entitlements::EntitlementGrant::status
 
@@ -79,7 +79,7 @@ module Dodopayments
           customer_id: String,
           entitlement_id: String,
           integration_type: Dodopayments::Models::entitlement_integration_type,
-          metadata: ::Hash[Symbol, String],
+          metadata: Dodopayments::Models::metadata,
           status: Dodopayments::Models::Entitlements::EntitlementGrant::status,
           updated_at: Time,
           ?delivered_at: Time?,
@@ -103,7 +103,7 @@ module Dodopayments
           customer_id: String,
           entitlement_id: String,
           integration_type: Dodopayments::Models::entitlement_integration_type,
-          metadata: ::Hash[Symbol, String],
+          metadata: Dodopayments::Models::metadata,
           status: Dodopayments::Models::Entitlements::EntitlementGrant::status,
           updated_at: Time,
           delivered_at: Time?,
