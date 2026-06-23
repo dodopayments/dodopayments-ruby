@@ -15,7 +15,7 @@ module Dodopayments
           source_type: Dodopayments::Models::CreditEntitlements::BalanceListGrantsResponse::source_type,
           updated_at: Time,
           expires_at: Time?,
-          metadata: ::Hash[Symbol, String]?,
+          metadata: Dodopayments::Models::metadata?,
           parent_grant_id: String?,
           source_id: String?
         }
@@ -45,7 +45,7 @@ module Dodopayments
 
         attr_accessor expires_at: Time?
 
-        attr_accessor metadata: ::Hash[Symbol, String]?
+        attr_accessor metadata: Dodopayments::Models::metadata?
 
         attr_accessor parent_grant_id: String?
 
@@ -64,7 +64,7 @@ module Dodopayments
           source_type: Dodopayments::Models::CreditEntitlements::BalanceListGrantsResponse::source_type,
           updated_at: Time,
           ?expires_at: Time?,
-          ?metadata: ::Hash[Symbol, String]?,
+          ?metadata: Dodopayments::Models::metadata?,
           ?parent_grant_id: String?,
           ?source_id: String?
         ) -> void
@@ -82,7 +82,7 @@ module Dodopayments
           source_type: Dodopayments::Models::CreditEntitlements::BalanceListGrantsResponse::source_type,
           updated_at: Time,
           expires_at: Time?,
-          metadata: ::Hash[Symbol, String]?,
+          metadata: Dodopayments::Models::metadata?,
           parent_grant_id: String?,
           source_id: String?
         }

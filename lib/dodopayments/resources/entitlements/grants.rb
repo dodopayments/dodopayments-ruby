@@ -36,6 +36,41 @@ module Dodopayments
           )
         end
 
+        # Some parameter documentations has been truncated, see
+        # {Dodopayments::Models::Entitlements::GrantFulfillLicenseKeyParams} for more
+        # details.
+        #
+        # For entitlements whose license-key config uses `manual` fulfillment, grants are
+        # created in the `pending` state without a key. Call this endpoint to deliver the
+        # key: the grant moves to `delivered`, the customer is emailed the key, and the
+        # `license_key.created` and `entitlement_grant.delivered` webhook events are sent.
+        #
+        # @overload fulfill_license_key(grant_id, key:, activations_limit: nil, expires_at: nil, request_options: {})
+        #
+        # @param grant_id [String] Grant ID
+        #
+        # @param key [String] The license key value to deliver to the customer.
+        #
+        # @param activations_limit [Integer, nil] Per-key activation limit. Defaults to the entitlement's license-key configuratio
+        #
+        # @param expires_at [Time, nil] When the key expires. Defaults to the duration in the entitlement's license-key
+        #
+        # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [Dodopayments::Models::Entitlements::EntitlementGrant]
+        #
+        # @see Dodopayments::Models::Entitlements::GrantFulfillLicenseKeyParams
+        def fulfill_license_key(grant_id, params)
+          parsed, options = Dodopayments::Entitlements::GrantFulfillLicenseKeyParams.dump_request(params)
+          @client.request(
+            method: :post,
+            path: ["grants/%1$s/license-key", grant_id],
+            body: parsed,
+            model: Dodopayments::Entitlements::EntitlementGrant,
+            options: options
+          )
+        end
+
         # Revoke a single grant. Idempotent: re-revoking an already-revoked grant returns
         # the grant in its current state.
         #

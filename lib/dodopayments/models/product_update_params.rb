@@ -136,8 +136,8 @@ module Dodopayments
       #   archives all active localized rules for this product). Changing to a different
       #   non-null mode also archives any rules whose mode doesn't match the new mode.
       #
-      #   @return [Symbol, Dodopayments::Models::ProductUpdateParams::PricingMode, nil]
-      optional :pricing_mode, enum: -> { Dodopayments::ProductUpdateParams::PricingMode }, nil?: true
+      #   @return [Symbol, Dodopayments::Models::Products::PricingMode, nil]
+      optional :pricing_mode, enum: -> { Dodopayments::Products::PricingMode }, nil?: true
 
       # @!attribute tax_category
       #   Tax category of the product.
@@ -179,7 +179,7 @@ module Dodopayments
       #
       #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice, nil] Price details of the product.
       #
-      #   @param pricing_mode [Symbol, Dodopayments::Models::ProductUpdateParams::PricingMode, nil] Update the pricing mode. Omit to leave unchanged; set to null to clear
+      #   @param pricing_mode [Symbol, Dodopayments::Models::Products::PricingMode, nil] Update the pricing mode. Omit to leave unchanged; set to null to clear
       #
       #   @param tax_category [Symbol, Dodopayments::Models::TaxCategory, nil] Tax category of the product.
       #
@@ -214,19 +214,6 @@ module Dodopayments
         #   @param files [Array<String>, nil] Uploaded files ids of digital product
         #
         #   @param instructions [String, nil] Instructions to download and use the digital product
-      end
-
-      # Update the pricing mode. Omit to leave unchanged; set to null to clear (which
-      # archives all active localized rules for this product). Changing to a different
-      # non-null mode also archives any rules whose mode doesn't match the new mode.
-      module PricingMode
-        extend Dodopayments::Internal::Type::Enum
-
-        BY_CURRENCY = :by_currency
-        BY_COUNTRY = :by_country
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
       end
     end
   end

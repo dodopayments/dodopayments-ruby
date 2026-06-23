@@ -107,7 +107,7 @@ module Dodopayments
       # Pricing mode for localized pricing. NULL means base-only (no localized rules
       # apply).
       sig do
-        returns(T.nilable(Dodopayments::Product::PricingMode::TaggedSymbol))
+        returns(T.nilable(Dodopayments::Products::PricingMode::TaggedSymbol))
       end
       attr_accessor :pricing_mode
 
@@ -146,7 +146,8 @@ module Dodopayments
           license_key_duration:
             T.nilable(Dodopayments::LicenseKeyDuration::OrHash),
           name: T.nilable(String),
-          pricing_mode: T.nilable(Dodopayments::Product::PricingMode::OrSymbol),
+          pricing_mode:
+            T.nilable(Dodopayments::Products::PricingMode::OrSymbol),
           product_collection_id: T.nilable(String)
         ).returns(T.attached_class)
       end
@@ -225,35 +226,12 @@ module Dodopayments
             license_key_duration: T.nilable(Dodopayments::LicenseKeyDuration),
             name: T.nilable(String),
             pricing_mode:
-              T.nilable(Dodopayments::Product::PricingMode::TaggedSymbol),
+              T.nilable(Dodopayments::Products::PricingMode::TaggedSymbol),
             product_collection_id: T.nilable(String)
           }
         )
       end
       def to_hash
-      end
-
-      # Pricing mode for localized pricing. NULL means base-only (no localized rules
-      # apply).
-      module PricingMode
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias { T.all(Symbol, Dodopayments::Product::PricingMode) }
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        BY_CURRENCY =
-          T.let(:by_currency, Dodopayments::Product::PricingMode::TaggedSymbol)
-        BY_COUNTRY =
-          T.let(:by_country, Dodopayments::Product::PricingMode::TaggedSymbol)
-
-        sig do
-          override.returns(
-            T::Array[Dodopayments::Product::PricingMode::TaggedSymbol]
-          )
-        end
-        def self.values
-        end
       end
     end
   end

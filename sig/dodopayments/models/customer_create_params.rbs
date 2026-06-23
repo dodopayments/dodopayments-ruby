@@ -4,7 +4,7 @@ module Dodopayments
       {
         email: String,
         name: String,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         phone_number: String?
       }
       & Dodopayments::Internal::Type::request_parameters
@@ -17,16 +17,18 @@ module Dodopayments
 
       attr_accessor name: String
 
-      attr_reader metadata: ::Hash[Symbol, String]?
+      attr_reader metadata: Dodopayments::Models::metadata?
 
-      def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+      def metadata=: (
+        Dodopayments::Models::metadata
+      ) -> Dodopayments::Models::metadata
 
       attr_accessor phone_number: String?
 
       def initialize: (
         email: String,
         name: String,
-        ?metadata: ::Hash[Symbol, String],
+        ?metadata: Dodopayments::Models::metadata,
         ?phone_number: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
@@ -34,7 +36,7 @@ module Dodopayments
       def to_hash: -> {
         email: String,
         name: String,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         phone_number: String?,
         request_options: Dodopayments::RequestOptions
       }

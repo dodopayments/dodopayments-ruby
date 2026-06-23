@@ -6,7 +6,7 @@ module Dodopayments
         product_price: Integer,
         adaptive_currency_fees_inclusive: bool?,
         customer_balance_config: Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig?,
-        metadata: ::Hash[Symbol, String]?,
+        metadata: Dodopayments::Models::metadata?,
         product_currency: Dodopayments::Models::currency?,
         product_description: String?
       }
@@ -24,7 +24,7 @@ module Dodopayments
 
       attr_accessor customer_balance_config: Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig?
 
-      attr_accessor metadata: ::Hash[Symbol, String]?
+      attr_accessor metadata: Dodopayments::Models::metadata?
 
       attr_accessor product_currency: Dodopayments::Models::currency?
 
@@ -35,7 +35,7 @@ module Dodopayments
         product_price: Integer,
         ?adaptive_currency_fees_inclusive: bool?,
         ?customer_balance_config: Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig?,
-        ?metadata: ::Hash[Symbol, String]?,
+        ?metadata: Dodopayments::Models::metadata?,
         ?product_currency: Dodopayments::Models::currency?,
         ?product_description: String?,
         ?request_options: Dodopayments::request_opts
@@ -46,7 +46,7 @@ module Dodopayments
         product_price: Integer,
         adaptive_currency_fees_inclusive: bool?,
         customer_balance_config: Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig?,
-        metadata: ::Hash[Symbol, String]?,
+        metadata: Dodopayments::Models::metadata?,
         product_currency: Dodopayments::Models::currency?,
         product_description: String?,
         request_options: Dodopayments::RequestOptions
