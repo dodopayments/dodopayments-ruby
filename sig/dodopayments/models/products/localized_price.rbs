@@ -1,0 +1,57 @@
+module Dodopayments
+  module Models
+    module Products
+      type localized_price =
+        {
+          id: String,
+          amount: Integer,
+          created_at: Time,
+          currency: Dodopayments::Models::currency,
+          mode: Dodopayments::Models::Products::pricing_mode,
+          product_id: String,
+          updated_at: Time,
+          country_code: Dodopayments::Models::country_code?
+        }
+
+      class LocalizedPrice < Dodopayments::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor amount: Integer
+
+        attr_accessor created_at: Time
+
+        attr_accessor currency: Dodopayments::Models::currency
+
+        attr_accessor mode: Dodopayments::Models::Products::pricing_mode
+
+        attr_accessor product_id: String
+
+        attr_accessor updated_at: Time
+
+        attr_accessor country_code: Dodopayments::Models::country_code?
+
+        def initialize: (
+          id: String,
+          amount: Integer,
+          created_at: Time,
+          currency: Dodopayments::Models::currency,
+          mode: Dodopayments::Models::Products::pricing_mode,
+          product_id: String,
+          updated_at: Time,
+          ?country_code: Dodopayments::Models::country_code?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          amount: Integer,
+          created_at: Time,
+          currency: Dodopayments::Models::currency,
+          mode: Dodopayments::Models::Products::pricing_mode,
+          product_id: String,
+          updated_at: Time,
+          country_code: Dodopayments::Models::country_code?
+        }
+      end
+    end
+  end
+end

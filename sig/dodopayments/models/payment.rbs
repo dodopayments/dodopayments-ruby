@@ -10,7 +10,7 @@ module Dodopayments
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
         disputes: ::Array[Dodopayments::Dispute],
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         payment_id: String,
         payment_provider: Dodopayments::Models::Payment::payment_provider,
         refunds: ::Array[Dodopayments::RefundListItem],
@@ -60,7 +60,7 @@ module Dodopayments
 
       attr_accessor disputes: ::Array[Dodopayments::Dispute]
 
-      attr_accessor metadata: ::Hash[Symbol, String]
+      attr_accessor metadata: Dodopayments::Models::metadata
 
       attr_accessor payment_id: String
 
@@ -131,7 +131,7 @@ module Dodopayments
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
         disputes: ::Array[Dodopayments::Dispute],
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         payment_id: String,
         payment_provider: Dodopayments::Models::Payment::payment_provider,
         refunds: ::Array[Dodopayments::RefundListItem],
@@ -173,7 +173,7 @@ module Dodopayments
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
         disputes: ::Array[Dodopayments::Dispute],
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         payment_id: String,
         payment_provider: Dodopayments::Models::Payment::payment_provider,
         refunds: ::Array[Dodopayments::RefundListItem],

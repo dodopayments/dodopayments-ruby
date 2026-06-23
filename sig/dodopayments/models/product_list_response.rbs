@@ -6,7 +6,7 @@ module Dodopayments
         created_at: Time,
         entitlements: ::Array[Dodopayments::ProductEntitlementSummary],
         is_recurring: bool,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         product_id: String,
         tax_category: Dodopayments::Models::tax_category,
         updated_at: Time,
@@ -16,7 +16,7 @@ module Dodopayments
         name: String?,
         price: Integer?,
         price_detail: Dodopayments::Models::price?,
-        pricing_mode: Dodopayments::Models::ProductListResponse::pricing_mode?,
+        pricing_mode: Dodopayments::Models::Products::pricing_mode?,
         tax_inclusive: bool?
       }
 
@@ -29,7 +29,7 @@ module Dodopayments
 
       attr_accessor is_recurring: bool
 
-      attr_accessor metadata: ::Hash[Symbol, String]
+      attr_accessor metadata: Dodopayments::Models::metadata
 
       attr_accessor product_id: String
 
@@ -49,7 +49,7 @@ module Dodopayments
 
       attr_accessor price_detail: Dodopayments::Models::price?
 
-      attr_accessor pricing_mode: Dodopayments::Models::ProductListResponse::pricing_mode?
+      attr_accessor pricing_mode: Dodopayments::Models::Products::pricing_mode?
 
       attr_accessor tax_inclusive: bool?
 
@@ -58,7 +58,7 @@ module Dodopayments
         created_at: Time,
         entitlements: ::Array[Dodopayments::ProductEntitlementSummary],
         is_recurring: bool,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         product_id: String,
         tax_category: Dodopayments::Models::tax_category,
         updated_at: Time,
@@ -68,7 +68,7 @@ module Dodopayments
         ?name: String?,
         ?price: Integer?,
         ?price_detail: Dodopayments::Models::price?,
-        ?pricing_mode: Dodopayments::Models::ProductListResponse::pricing_mode?,
+        ?pricing_mode: Dodopayments::Models::Products::pricing_mode?,
         ?tax_inclusive: bool?
       ) -> void
 
@@ -77,7 +77,7 @@ module Dodopayments
         created_at: Time,
         entitlements: ::Array[Dodopayments::ProductEntitlementSummary],
         is_recurring: bool,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         product_id: String,
         tax_category: Dodopayments::Models::tax_category,
         updated_at: Time,
@@ -87,20 +87,9 @@ module Dodopayments
         name: String?,
         price: Integer?,
         price_detail: Dodopayments::Models::price?,
-        pricing_mode: Dodopayments::Models::ProductListResponse::pricing_mode?,
+        pricing_mode: Dodopayments::Models::Products::pricing_mode?,
         tax_inclusive: bool?
       }
-
-      type pricing_mode = :by_currency | :by_country
-
-      module PricingMode
-        extend Dodopayments::Internal::Type::Enum
-
-        BY_CURRENCY: :by_currency
-        BY_COUNTRY: :by_country
-
-        def self?.values: -> ::Array[Dodopayments::Models::ProductListResponse::pricing_mode]
-      end
     end
   end
 end

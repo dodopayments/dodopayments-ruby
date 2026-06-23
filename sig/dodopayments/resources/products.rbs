@@ -5,6 +5,8 @@ module Dodopayments
 
       attr_reader short_links: Dodopayments::Resources::Products::ShortLinks
 
+      attr_reader localized_prices: Dodopayments::Resources::Products::LocalizedPrices
+
       def create: (
         name: String,
         price: Dodopayments::Models::price,
@@ -19,8 +21,8 @@ module Dodopayments
         ?license_key_activations_limit: Integer?,
         ?license_key_duration: Dodopayments::LicenseKeyDuration?,
         ?license_key_enabled: bool?,
-        ?metadata: ::Hash[Symbol, String],
-        ?pricing_mode: Dodopayments::Models::ProductCreateParams::pricing_mode?,
+        ?metadata: Dodopayments::Models::metadata,
+        ?pricing_mode: Dodopayments::Models::Products::pricing_mode?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Product
 
@@ -42,10 +44,10 @@ module Dodopayments
         ?license_key_activations_limit: Integer?,
         ?license_key_duration: Dodopayments::LicenseKeyDuration?,
         ?license_key_enabled: bool?,
-        ?metadata: ::Hash[Symbol, String]?,
+        ?metadata: Dodopayments::Models::metadata?,
         ?name: String?,
         ?price: Dodopayments::Models::price?,
-        ?pricing_mode: Dodopayments::Models::ProductUpdateParams::pricing_mode?,
+        ?pricing_mode: Dodopayments::Models::Products::pricing_mode?,
         ?tax_category: Dodopayments::Models::tax_category?,
         ?request_options: Dodopayments::request_opts
       ) -> nil

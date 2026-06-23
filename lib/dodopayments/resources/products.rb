@@ -9,6 +9,9 @@ module Dodopayments
       # @return [Dodopayments::Resources::Products::ShortLinks]
       attr_reader :short_links
 
+      # @return [Dodopayments::Resources::Products::LocalizedPrices]
+      attr_reader :localized_prices
+
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductCreateParams} for more details.
       #
@@ -42,7 +45,7 @@ module Dodopayments
       #
       # @param metadata [Hash{Symbol=>String}] Additional metadata for the product
       #
-      # @param pricing_mode [Symbol, Dodopayments::Models::ProductCreateParams::PricingMode, nil] Pricing mode for localized pricing. When set, rules from
+      # @param pricing_mode [Symbol, Dodopayments::Models::Products::PricingMode, nil] Pricing mode for localized pricing. When set, rules from
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -113,7 +116,7 @@ module Dodopayments
       #
       # @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice, nil] Price details of the product.
       #
-      # @param pricing_mode [Symbol, Dodopayments::Models::ProductUpdateParams::PricingMode, nil] Update the pricing mode. Omit to leave unchanged; set to null to clear
+      # @param pricing_mode [Symbol, Dodopayments::Models::Products::PricingMode, nil] Update the pricing mode. Omit to leave unchanged; set to null to clear
       #
       # @param tax_category [Symbol, Dodopayments::Models::TaxCategory, nil] Tax category of the product.
       #
@@ -231,6 +234,7 @@ module Dodopayments
         @client = client
         @images = Dodopayments::Resources::Products::Images.new(client: client)
         @short_links = Dodopayments::Resources::Products::ShortLinks.new(client: client)
+        @localized_prices = Dodopayments::Resources::Products::LocalizedPrices.new(client: client)
       end
     end
   end
