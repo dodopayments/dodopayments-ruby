@@ -9,6 +9,9 @@ module Dodopayments
       sig { returns(Dodopayments::Resources::Products::ShortLinks) }
       attr_reader :short_links
 
+      sig { returns(Dodopayments::Resources::Products::LocalizedPrices) }
+      attr_reader :localized_prices
+
       sig do
         params(
           name: String,
@@ -37,7 +40,7 @@ module Dodopayments
           license_key_enabled: T.nilable(T::Boolean),
           metadata: T::Hash[Symbol, String],
           pricing_mode:
-            T.nilable(Dodopayments::ProductCreateParams::PricingMode::OrSymbol),
+            T.nilable(Dodopayments::Products::PricingMode::OrSymbol),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Product)
       end
@@ -139,7 +142,7 @@ module Dodopayments
               )
             ),
           pricing_mode:
-            T.nilable(Dodopayments::ProductUpdateParams::PricingMode::OrSymbol),
+            T.nilable(Dodopayments::Products::PricingMode::OrSymbol),
           tax_category: T.nilable(Dodopayments::TaxCategory::OrSymbol),
           request_options: Dodopayments::RequestOptions::OrHash
         ).void

@@ -269,6 +269,8 @@ module Dodopayments
 
   class LicenseValidateParams = Dodopayments::Models::LicenseValidateParams
 
+  Metadata: Dodopayments::Internal::Type::Converter
+
   class Meter = Dodopayments::Models::Meter
 
   class MeterAggregation = Dodopayments::Models::MeterAggregation

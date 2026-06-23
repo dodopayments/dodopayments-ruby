@@ -14,7 +14,7 @@ module Dodopayments
         ?discount_codes: ::Array[String]?,
         ?force_3ds: bool?,
         ?mandate_min_amount_inr_paise: Integer?,
-        ?metadata: ::Hash[Symbol, String],
+        ?metadata: Dodopayments::Models::metadata,
         ?on_demand: Dodopayments::OnDemandSubscription?,
         ?one_time_product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?,
         ?payment_link: bool?,
@@ -45,7 +45,7 @@ module Dodopayments
         ?customer_business_name: String?,
         ?customer_name: String?,
         ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
-        ?metadata: ::Hash[Symbol, String]?,
+        ?metadata: Dodopayments::Models::metadata?,
         ?next_billing_date: Time?,
         ?status: Dodopayments::Models::subscription_status?,
         ?tax_id: String?,
@@ -79,7 +79,7 @@ module Dodopayments
         ?discount_code: String?,
         ?discount_codes: ::Array[String]?,
         ?effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
-        ?metadata: ::Hash[Symbol, String]?,
+        ?metadata: Dodopayments::Models::metadata?,
         ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?,
         ?request_options: Dodopayments::request_opts
       ) -> nil
@@ -89,7 +89,7 @@ module Dodopayments
         product_price: Integer,
         ?adaptive_currency_fees_inclusive: bool?,
         ?customer_balance_config: Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig?,
-        ?metadata: ::Hash[Symbol, String]?,
+        ?metadata: Dodopayments::Models::metadata?,
         ?product_currency: Dodopayments::Models::currency?,
         ?product_description: String?,
         ?request_options: Dodopayments::request_opts
@@ -105,7 +105,7 @@ module Dodopayments
         ?discount_code: String?,
         ?discount_codes: ::Array[String]?,
         ?effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
-        ?metadata: ::Hash[Symbol, String]?,
+        ?metadata: Dodopayments::Models::metadata?,
         ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::SubscriptionPreviewChangePlanResponse

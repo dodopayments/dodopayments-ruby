@@ -1,0 +1,20 @@
+module Dodopayments
+  module Models
+    module Products
+      type list_localized_prices_response =
+        { items: ::Array[Dodopayments::Products::LocalizedPrice] }
+
+      class ListLocalizedPricesResponse < Dodopayments::Internal::Type::BaseModel
+        attr_accessor items: ::Array[Dodopayments::Products::LocalizedPrice]
+
+        def initialize: (
+          items: ::Array[Dodopayments::Products::LocalizedPrice]
+        ) -> void
+
+        def to_hash: -> {
+          items: ::Array[Dodopayments::Products::LocalizedPrice]
+        }
+      end
+    end
+  end
+end

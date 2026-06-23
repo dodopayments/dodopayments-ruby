@@ -1,0 +1,16 @@
+module Dodopayments
+  module Models
+    module Products
+      type pricing_mode = :by_currency | :by_country
+
+      module PricingMode
+        extend Dodopayments::Internal::Type::Enum
+
+        BY_CURRENCY: :by_currency
+        BY_COUNTRY: :by_country
+
+        def self?.values: -> ::Array[Dodopayments::Models::Products::pricing_mode]
+      end
+    end
+  end
+end

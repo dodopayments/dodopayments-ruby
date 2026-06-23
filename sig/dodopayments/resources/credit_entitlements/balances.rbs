@@ -23,7 +23,7 @@ module Dodopayments
           entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type,
           ?expires_at: Time?,
           ?idempotency_key: String?,
-          ?metadata: ::Hash[Symbol, String]?,
+          ?metadata: Dodopayments::Models::metadata?,
           ?reason: String?,
           ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::Models::CreditEntitlements::BalanceCreateLedgerEntryResponse

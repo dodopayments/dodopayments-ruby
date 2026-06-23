@@ -7,7 +7,7 @@ module Dodopayments
         customer_id: String,
         email: String,
         name: String,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         phone_number: String?
       }
 
@@ -22,9 +22,11 @@ module Dodopayments
 
       attr_accessor name: String
 
-      attr_reader metadata: ::Hash[Symbol, String]?
+      attr_reader metadata: Dodopayments::Models::metadata?
 
-      def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+      def metadata=: (
+        Dodopayments::Models::metadata
+      ) -> Dodopayments::Models::metadata
 
       attr_accessor phone_number: String?
 
@@ -34,7 +36,7 @@ module Dodopayments
         customer_id: String,
         email: String,
         name: String,
-        ?metadata: ::Hash[Symbol, String],
+        ?metadata: Dodopayments::Models::metadata,
         ?phone_number: String?
       ) -> void
 
@@ -44,7 +46,7 @@ module Dodopayments
         customer_id: String,
         email: String,
         name: String,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         phone_number: String?
       }
     end
