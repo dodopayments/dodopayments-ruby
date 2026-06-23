@@ -12,7 +12,7 @@ module Dodopayments
         customer_business_name: String?,
         customer_name: String?,
         disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
-        metadata: ::Hash[Symbol, String]?,
+        metadata: Dodopayments::Models::metadata?,
         next_billing_date: Time?,
         status: Dodopayments::Models::subscription_status?,
         tax_id: String?
@@ -43,7 +43,7 @@ module Dodopayments
 
       attr_accessor disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?
 
-      attr_accessor metadata: ::Hash[Symbol, String]?
+      attr_accessor metadata: Dodopayments::Models::metadata?
 
       attr_accessor next_billing_date: Time?
 
@@ -62,7 +62,7 @@ module Dodopayments
         ?customer_business_name: String?,
         ?customer_name: String?,
         ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
-        ?metadata: ::Hash[Symbol, String]?,
+        ?metadata: Dodopayments::Models::metadata?,
         ?next_billing_date: Time?,
         ?status: Dodopayments::Models::subscription_status?,
         ?tax_id: String?,
@@ -80,7 +80,7 @@ module Dodopayments
         customer_business_name: String?,
         customer_name: String?,
         disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
-        metadata: ::Hash[Symbol, String]?,
+        metadata: Dodopayments::Models::metadata?,
         next_billing_date: Time?,
         status: Dodopayments::Models::subscription_status?,
         tax_id: String?,

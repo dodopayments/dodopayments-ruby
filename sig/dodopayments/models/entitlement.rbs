@@ -8,7 +8,7 @@ module Dodopayments
         integration_config: Dodopayments::Models::integration_config_response,
         integration_type: Dodopayments::Models::entitlement_integration_type,
         is_active: bool,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         name: String,
         updated_at: Time,
         description: String?
@@ -27,7 +27,7 @@ module Dodopayments
 
       attr_accessor is_active: bool
 
-      attr_accessor metadata: ::Hash[Symbol, String]
+      attr_accessor metadata: Dodopayments::Models::metadata
 
       attr_accessor name: String
 
@@ -42,7 +42,7 @@ module Dodopayments
         integration_config: Dodopayments::Models::integration_config_response,
         integration_type: Dodopayments::Models::entitlement_integration_type,
         is_active: bool,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         name: String,
         updated_at: Time,
         ?description: String?
@@ -55,7 +55,7 @@ module Dodopayments
         integration_config: Dodopayments::Models::integration_config_response,
         integration_type: Dodopayments::Models::entitlement_integration_type,
         is_active: bool,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         name: String,
         updated_at: Time,
         description: String?

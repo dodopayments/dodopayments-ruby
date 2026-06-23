@@ -4,7 +4,7 @@ module Dodopayments
       {
         addons: ::Array[Dodopayments::AddonCartResponseItem],
         customer: Dodopayments::CustomerLimitedDetails,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         payment_id: String,
         recurring_pre_tax_amount: Integer,
         subscription_id: String,
@@ -21,7 +21,7 @@ module Dodopayments
 
       attr_accessor customer: Dodopayments::CustomerLimitedDetails
 
-      attr_accessor metadata: ::Hash[Symbol, String]
+      attr_accessor metadata: Dodopayments::Models::metadata
 
       attr_accessor payment_id: String
 
@@ -44,7 +44,7 @@ module Dodopayments
       def initialize: (
         addons: ::Array[Dodopayments::AddonCartResponseItem],
         customer: Dodopayments::CustomerLimitedDetails,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         payment_id: String,
         recurring_pre_tax_amount: Integer,
         subscription_id: String,
@@ -59,7 +59,7 @@ module Dodopayments
       def to_hash: -> {
         addons: ::Array[Dodopayments::AddonCartResponseItem],
         customer: Dodopayments::CustomerLimitedDetails,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         payment_id: String,
         recurring_pre_tax_amount: Integer,
         subscription_id: String,

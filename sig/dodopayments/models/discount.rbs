@@ -7,7 +7,7 @@ module Dodopayments
         code: String,
         created_at: Time,
         discount_id: String,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         preserve_on_plan_change: bool,
         restricted_to: ::Array[String],
         times_used: Integer,
@@ -29,7 +29,7 @@ module Dodopayments
 
       attr_accessor discount_id: String
 
-      attr_accessor metadata: ::Hash[Symbol, String]
+      attr_accessor metadata: Dodopayments::Models::metadata
 
       attr_accessor preserve_on_plan_change: bool
 
@@ -53,7 +53,7 @@ module Dodopayments
         code: String,
         created_at: Time,
         discount_id: String,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         preserve_on_plan_change: bool,
         restricted_to: ::Array[String],
         times_used: Integer,
@@ -70,7 +70,7 @@ module Dodopayments
         code: String,
         created_at: Time,
         discount_id: String,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         preserve_on_plan_change: bool,
         restricted_to: ::Array[String],
         times_used: Integer,

@@ -310,6 +310,12 @@ module Dodopayments
 
   LicenseValidateParams = Dodopayments::Models::LicenseValidateParams
 
+  Metadata =
+    T.let(
+      Dodopayments::Models::Metadata,
+      Dodopayments::Internal::Type::Converter
+    )
+
   Meter = Dodopayments::Models::Meter
 
   MeterAggregation = Dodopayments::Models::MeterAggregation

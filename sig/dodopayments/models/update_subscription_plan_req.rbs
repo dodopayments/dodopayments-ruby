@@ -10,7 +10,7 @@ module Dodopayments
         discount_code: String?,
         discount_codes: ::Array[String]?,
         effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
-        metadata: ::Hash[Symbol, String]?,
+        metadata: Dodopayments::Models::metadata?,
         on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
       }
 
@@ -35,7 +35,7 @@ module Dodopayments
         Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at
       ) -> Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at
 
-      attr_accessor metadata: ::Hash[Symbol, String]?
+      attr_accessor metadata: Dodopayments::Models::metadata?
 
       attr_accessor on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
 
@@ -48,7 +48,7 @@ module Dodopayments
         ?discount_code: String?,
         ?discount_codes: ::Array[String]?,
         ?effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
-        ?metadata: ::Hash[Symbol, String]?,
+        ?metadata: Dodopayments::Models::metadata?,
         ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
       ) -> void
 
@@ -61,7 +61,7 @@ module Dodopayments
         discount_code: String?,
         discount_codes: ::Array[String]?,
         effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
-        metadata: ::Hash[Symbol, String]?,
+        metadata: Dodopayments::Models::metadata?,
         on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
       }
 

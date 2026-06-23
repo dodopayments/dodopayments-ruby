@@ -10,7 +10,7 @@ module Dodopayments
         integration_type: Dodopayments::Models::entitlement_integration_type,
         name: String,
         ?description: String?,
-        ?metadata: ::Hash[Symbol, String],
+        ?metadata: Dodopayments::Models::metadata,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Entitlement
 
@@ -23,7 +23,7 @@ module Dodopayments
         String id,
         ?description: String?,
         ?integration_config: Dodopayments::Models::integration_config?,
-        ?metadata: ::Hash[Symbol, String]?,
+        ?metadata: Dodopayments::Models::metadata?,
         ?name: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Entitlement

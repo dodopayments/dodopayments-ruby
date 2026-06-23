@@ -125,8 +125,8 @@ module Dodopayments
       #   /products/{id}/localized-prices apply at checkout. NULL means base-only
       #   (existing behavior).
       #
-      #   @return [Symbol, Dodopayments::Models::ProductCreateParams::PricingMode, nil]
-      optional :pricing_mode, enum: -> { Dodopayments::ProductCreateParams::PricingMode }, nil?: true
+      #   @return [Symbol, Dodopayments::Models::Products::PricingMode, nil]
+      optional :pricing_mode, enum: -> { Dodopayments::Products::PricingMode }, nil?: true
 
       # @!method initialize(name:, price:, tax_category:, addons: nil, brand_id: nil, credit_entitlements: nil, description: nil, digital_product_delivery: nil, entitlements: nil, license_key_activation_message: nil, license_key_activations_limit: nil, license_key_duration: nil, license_key_enabled: nil, metadata: nil, pricing_mode: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
@@ -160,7 +160,7 @@ module Dodopayments
       #
       #   @param metadata [Hash{Symbol=>String}] Additional metadata for the product
       #
-      #   @param pricing_mode [Symbol, Dodopayments::Models::ProductCreateParams::PricingMode, nil] Pricing mode for localized pricing. When set, rules from
+      #   @param pricing_mode [Symbol, Dodopayments::Models::Products::PricingMode, nil] Pricing mode for localized pricing. When set, rules from
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 
@@ -185,19 +185,6 @@ module Dodopayments
         #   @param external_url [String, nil] External URL to digital product
         #
         #   @param instructions [String, nil] Instructions to download and use the digital product
-      end
-
-      # Pricing mode for localized pricing. When set, rules from
-      # /products/{id}/localized-prices apply at checkout. NULL means base-only
-      # (existing behavior).
-      module PricingMode
-        extend Dodopayments::Internal::Type::Enum
-
-        BY_CURRENCY = :by_currency
-        BY_COUNTRY = :by_country
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
       end
     end
   end

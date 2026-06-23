@@ -9,7 +9,7 @@ module Dodopayments
           entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type,
           expires_at: Time?,
           idempotency_key: String?,
-          metadata: ::Hash[Symbol, String]?,
+          metadata: Dodopayments::Models::metadata?,
           reason: String?
         }
         & Dodopayments::Internal::Type::request_parameters
@@ -30,7 +30,7 @@ module Dodopayments
 
         attr_accessor idempotency_key: String?
 
-        attr_accessor metadata: ::Hash[Symbol, String]?
+        attr_accessor metadata: Dodopayments::Models::metadata?
 
         attr_accessor reason: String?
 
@@ -41,7 +41,7 @@ module Dodopayments
           entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type,
           ?expires_at: Time?,
           ?idempotency_key: String?,
-          ?metadata: ::Hash[Symbol, String]?,
+          ?metadata: Dodopayments::Models::metadata?,
           ?reason: String?,
           ?request_options: Dodopayments::request_opts
         ) -> void
@@ -53,7 +53,7 @@ module Dodopayments
           entry_type: Dodopayments::Models::CreditEntitlements::ledger_entry_type,
           expires_at: Time?,
           idempotency_key: String?,
-          metadata: ::Hash[Symbol, String]?,
+          metadata: Dodopayments::Models::metadata?,
           reason: String?,
           request_options: Dodopayments::RequestOptions
         }

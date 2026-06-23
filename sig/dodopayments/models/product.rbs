@@ -9,7 +9,7 @@ module Dodopayments
         entitlements: ::Array[Dodopayments::ProductEntitlementSummary],
         is_recurring: bool,
         license_key_enabled: bool,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         price: Dodopayments::Models::price,
         product_id: String,
         tax_category: Dodopayments::Models::tax_category,
@@ -22,7 +22,7 @@ module Dodopayments
         license_key_activations_limit: Integer?,
         license_key_duration: Dodopayments::LicenseKeyDuration?,
         name: String?,
-        pricing_mode: Dodopayments::Models::Product::pricing_mode?,
+        pricing_mode: Dodopayments::Models::Products::pricing_mode?,
         product_collection_id: String?
       }
 
@@ -41,7 +41,7 @@ module Dodopayments
 
       attr_accessor license_key_enabled: bool
 
-      attr_accessor metadata: ::Hash[Symbol, String]
+      attr_accessor metadata: Dodopayments::Models::metadata
 
       attr_accessor price: Dodopayments::Models::price
 
@@ -67,7 +67,7 @@ module Dodopayments
 
       attr_accessor name: String?
 
-      attr_accessor pricing_mode: Dodopayments::Models::Product::pricing_mode?
+      attr_accessor pricing_mode: Dodopayments::Models::Products::pricing_mode?
 
       attr_accessor product_collection_id: String?
 
@@ -79,7 +79,7 @@ module Dodopayments
         entitlements: ::Array[Dodopayments::ProductEntitlementSummary],
         is_recurring: bool,
         license_key_enabled: bool,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         price: Dodopayments::Models::price,
         product_id: String,
         tax_category: Dodopayments::Models::tax_category,
@@ -92,7 +92,7 @@ module Dodopayments
         ?license_key_activations_limit: Integer?,
         ?license_key_duration: Dodopayments::LicenseKeyDuration?,
         ?name: String?,
-        ?pricing_mode: Dodopayments::Models::Product::pricing_mode?,
+        ?pricing_mode: Dodopayments::Models::Products::pricing_mode?,
         ?product_collection_id: String?
       ) -> void
 
@@ -104,7 +104,7 @@ module Dodopayments
         entitlements: ::Array[Dodopayments::ProductEntitlementSummary],
         is_recurring: bool,
         license_key_enabled: bool,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         price: Dodopayments::Models::price,
         product_id: String,
         tax_category: Dodopayments::Models::tax_category,
@@ -117,20 +117,9 @@ module Dodopayments
         license_key_activations_limit: Integer?,
         license_key_duration: Dodopayments::LicenseKeyDuration?,
         name: String?,
-        pricing_mode: Dodopayments::Models::Product::pricing_mode?,
+        pricing_mode: Dodopayments::Models::Products::pricing_mode?,
         product_collection_id: String?
       }
-
-      type pricing_mode = :by_currency | :by_country
-
-      module PricingMode
-        extend Dodopayments::Internal::Type::Enum
-
-        BY_CURRENCY: :by_currency
-        BY_COUNTRY: :by_country
-
-        def self?.values: -> ::Array[Dodopayments::Models::Product::pricing_mode]
-      end
     end
   end
 end

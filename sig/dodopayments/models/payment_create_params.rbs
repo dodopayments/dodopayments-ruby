@@ -12,7 +12,7 @@ module Dodopayments
         discount_code: String?,
         discount_codes: ::Array[String]?,
         :force_3ds => bool?,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         payment_link: bool?,
         payment_method_id: String?,
         redirect_immediately: bool,
@@ -48,9 +48,11 @@ module Dodopayments
 
       attr_accessor force_3ds: bool?
 
-      attr_reader metadata: ::Hash[Symbol, String]?
+      attr_reader metadata: Dodopayments::Models::metadata?
 
-      def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+      def metadata=: (
+        Dodopayments::Models::metadata
+      ) -> Dodopayments::Models::metadata
 
       attr_accessor payment_link: bool?
 
@@ -85,7 +87,7 @@ module Dodopayments
         ?discount_code: String?,
         ?discount_codes: ::Array[String]?,
         ?force_3ds: bool?,
-        ?metadata: ::Hash[Symbol, String],
+        ?metadata: Dodopayments::Models::metadata,
         ?payment_link: bool?,
         ?payment_method_id: String?,
         ?redirect_immediately: bool,
@@ -108,7 +110,7 @@ module Dodopayments
         discount_code: String?,
         discount_codes: ::Array[String]?,
         :force_3ds => bool?,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         payment_link: bool?,
         payment_method_id: String?,
         redirect_immediately: bool,

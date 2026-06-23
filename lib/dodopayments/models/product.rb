@@ -136,8 +136,8 @@ module Dodopayments
       #   Pricing mode for localized pricing. NULL means base-only (no localized rules
       #   apply).
       #
-      #   @return [Symbol, Dodopayments::Models::Product::PricingMode, nil]
-      optional :pricing_mode, enum: -> { Dodopayments::Product::PricingMode }, nil?: true
+      #   @return [Symbol, Dodopayments::Models::Products::PricingMode, nil]
+      optional :pricing_mode, enum: -> { Dodopayments::Products::PricingMode }, nil?: true
 
       # @!attribute product_collection_id
       #   The product collection ID this product belongs to, if any
@@ -189,23 +189,9 @@ module Dodopayments
       #
       #   @param name [String, nil] Name of the product, optional.
       #
-      #   @param pricing_mode [Symbol, Dodopayments::Models::Product::PricingMode, nil] Pricing mode for localized pricing. NULL means base-only (no localized rules app
+      #   @param pricing_mode [Symbol, Dodopayments::Models::Products::PricingMode, nil] Pricing mode for localized pricing. NULL means base-only (no localized rules app
       #
       #   @param product_collection_id [String, nil] The product collection ID this product belongs to, if any
-
-      # Pricing mode for localized pricing. NULL means base-only (no localized rules
-      # apply).
-      #
-      # @see Dodopayments::Models::Product#pricing_mode
-      module PricingMode
-        extend Dodopayments::Internal::Type::Enum
-
-        BY_CURRENCY = :by_currency
-        BY_COUNTRY = :by_country
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
     end
   end
 end

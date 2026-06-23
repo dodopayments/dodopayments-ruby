@@ -8,7 +8,7 @@ module Dodopayments
       def create: (
         email: String,
         name: String,
-        ?metadata: ::Hash[Symbol, String],
+        ?metadata: Dodopayments::Models::metadata,
         ?phone_number: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Customer
@@ -21,7 +21,7 @@ module Dodopayments
       def update: (
         String customer_id,
         ?email: String?,
-        ?metadata: ::Hash[Symbol, String]?,
+        ?metadata: Dodopayments::Models::metadata?,
         ?name: String?,
         ?phone_number: String?,
         ?request_options: Dodopayments::request_opts

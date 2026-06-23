@@ -14,7 +14,7 @@ module Dodopayments
         discount_codes: ::Array[String]?,
         :force_3ds => bool?,
         mandate_min_amount_inr_paise: Integer?,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         on_demand: Dodopayments::OnDemandSubscription?,
         one_time_product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?,
         payment_link: bool?,
@@ -57,9 +57,11 @@ module Dodopayments
 
       attr_accessor mandate_min_amount_inr_paise: Integer?
 
-      attr_reader metadata: ::Hash[Symbol, String]?
+      attr_reader metadata: Dodopayments::Models::metadata?
 
-      def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+      def metadata=: (
+        Dodopayments::Models::metadata
+      ) -> Dodopayments::Models::metadata
 
       attr_accessor on_demand: Dodopayments::OnDemandSubscription?
 
@@ -102,7 +104,7 @@ module Dodopayments
         ?discount_codes: ::Array[String]?,
         ?force_3ds: bool?,
         ?mandate_min_amount_inr_paise: Integer?,
-        ?metadata: ::Hash[Symbol, String],
+        ?metadata: Dodopayments::Models::metadata,
         ?on_demand: Dodopayments::OnDemandSubscription?,
         ?one_time_product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?,
         ?payment_link: bool?,
@@ -130,7 +132,7 @@ module Dodopayments
         discount_codes: ::Array[String]?,
         :force_3ds => bool?,
         mandate_min_amount_inr_paise: Integer?,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         on_demand: Dodopayments::OnDemandSubscription?,
         one_time_product_cart: ::Array[Dodopayments::OneTimeProductCartItem]?,
         payment_link: bool?,
