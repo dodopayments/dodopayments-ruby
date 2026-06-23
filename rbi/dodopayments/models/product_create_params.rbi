@@ -127,11 +127,7 @@ module Dodopayments
       # Pricing mode for localized pricing. When set, rules from
       # /products/{id}/localized-prices apply at checkout. NULL means base-only
       # (existing behavior).
-      sig do
-        returns(
-          T.nilable(Dodopayments::ProductCreateParams::PricingMode::OrSymbol)
-        )
-      end
+      sig { returns(T.nilable(Dodopayments::Products::PricingMode::OrSymbol)) }
       attr_accessor :pricing_mode
 
       sig do
@@ -162,7 +158,7 @@ module Dodopayments
           license_key_enabled: T.nilable(T::Boolean),
           metadata: T::Hash[Symbol, String],
           pricing_mode:
-            T.nilable(Dodopayments::ProductCreateParams::PricingMode::OrSymbol),
+            T.nilable(Dodopayments::Products::PricingMode::OrSymbol),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -248,9 +244,7 @@ module Dodopayments
             license_key_enabled: T.nilable(T::Boolean),
             metadata: T::Hash[Symbol, String],
             pricing_mode:
-              T.nilable(
-                Dodopayments::ProductCreateParams::PricingMode::OrSymbol
-              ),
+              T.nilable(Dodopayments::Products::PricingMode::OrSymbol),
             request_options: Dodopayments::RequestOptions
           }
         )
@@ -298,40 +292,6 @@ module Dodopayments
           )
         end
         def to_hash
-        end
-      end
-
-      # Pricing mode for localized pricing. When set, rules from
-      # /products/{id}/localized-prices apply at checkout. NULL means base-only
-      # (existing behavior).
-      module PricingMode
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, Dodopayments::ProductCreateParams::PricingMode)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        BY_CURRENCY =
-          T.let(
-            :by_currency,
-            Dodopayments::ProductCreateParams::PricingMode::TaggedSymbol
-          )
-        BY_COUNTRY =
-          T.let(
-            :by_country,
-            Dodopayments::ProductCreateParams::PricingMode::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Dodopayments::ProductCreateParams::PricingMode::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
         end
       end
     end

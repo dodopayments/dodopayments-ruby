@@ -212,6 +212,8 @@ module Dodopayments
       NAVER_PAY =
         T.let(:naver_pay, Dodopayments::PaymentMethodTypes::TaggedSymbol)
       PAYCO = T.let(:payco, Dodopayments::PaymentMethodTypes::TaggedSymbol)
+      SATISPAY =
+        T.let(:satispay, Dodopayments::PaymentMethodTypes::TaggedSymbol)
 
       sig do
         override.returns(

@@ -11,6 +11,14 @@ module Dodopayments
           ?request_options: Dodopayments::request_opts
         ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Entitlements::EntitlementGrant]
 
+        def fulfill_license_key: (
+          String grant_id,
+          key: String,
+          ?activations_limit: Integer?,
+          ?expires_at: Time?,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Entitlements::EntitlementGrant
+
         def revoke: (
           String grant_id,
           id: String,

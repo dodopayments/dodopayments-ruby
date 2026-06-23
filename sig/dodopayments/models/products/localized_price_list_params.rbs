@@ -1,0 +1,26 @@
+module Dodopayments
+  module Models
+    module Products
+      type localized_price_list_params =
+        { product_id: String }
+        & Dodopayments::Internal::Type::request_parameters
+
+      class LocalizedPriceListParams < Dodopayments::Internal::Type::BaseModel
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
+
+        attr_accessor product_id: String
+
+        def initialize: (
+          product_id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          product_id: String,
+          request_options: Dodopayments::RequestOptions
+        }
+      end
+    end
+  end
+end
