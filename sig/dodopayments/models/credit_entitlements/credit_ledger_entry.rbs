@@ -13,6 +13,7 @@ module Dodopayments
           credit_entitlement_id: String,
           customer_id: String,
           is_credit: bool,
+          metadata: ::Hash[Symbol, String],
           overage_after: String,
           overage_before: String,
           transaction_type: Dodopayments::Models::CreditEntitlements::CreditLedgerEntry::transaction_type,
@@ -43,6 +44,8 @@ module Dodopayments
 
         attr_accessor is_credit: bool
 
+        attr_accessor metadata: ::Hash[Symbol, String]
+
         attr_accessor overage_after: String
 
         attr_accessor overage_before: String
@@ -68,6 +71,7 @@ module Dodopayments
           credit_entitlement_id: String,
           customer_id: String,
           is_credit: bool,
+          metadata: ::Hash[Symbol, String],
           overage_after: String,
           overage_before: String,
           transaction_type: Dodopayments::Models::CreditEntitlements::CreditLedgerEntry::transaction_type,
@@ -88,6 +92,7 @@ module Dodopayments
           credit_entitlement_id: String,
           customer_id: String,
           is_credit: bool,
+          metadata: ::Hash[Symbol, String],
           overage_after: String,
           overage_before: String,
           transaction_type: Dodopayments::Models::CreditEntitlements::CreditLedgerEntry::transaction_type,

@@ -17,7 +17,7 @@ module Dodopayments
         metadata: ::Hash[Symbol, String]?,
         name: String?,
         price: Dodopayments::Models::price?,
-        pricing_mode: Dodopayments::Models::ProductUpdateParams::pricing_mode?,
+        pricing_mode: Dodopayments::Models::Products::pricing_mode?,
         tax_category: Dodopayments::Models::tax_category?
       }
       & Dodopayments::Internal::Type::request_parameters
@@ -56,7 +56,7 @@ module Dodopayments
 
       attr_accessor price: Dodopayments::Models::price?
 
-      attr_accessor pricing_mode: Dodopayments::Models::ProductUpdateParams::pricing_mode?
+      attr_accessor pricing_mode: Dodopayments::Models::Products::pricing_mode?
 
       attr_accessor tax_category: Dodopayments::Models::tax_category?
 
@@ -76,7 +76,7 @@ module Dodopayments
         ?metadata: ::Hash[Symbol, String]?,
         ?name: String?,
         ?price: Dodopayments::Models::price?,
-        ?pricing_mode: Dodopayments::Models::ProductUpdateParams::pricing_mode?,
+        ?pricing_mode: Dodopayments::Models::Products::pricing_mode?,
         ?tax_category: Dodopayments::Models::tax_category?,
         ?request_options: Dodopayments::request_opts
       ) -> void
@@ -97,7 +97,7 @@ module Dodopayments
         metadata: ::Hash[Symbol, String]?,
         name: String?,
         price: Dodopayments::Models::price?,
-        pricing_mode: Dodopayments::Models::ProductUpdateParams::pricing_mode?,
+        pricing_mode: Dodopayments::Models::Products::pricing_mode?,
         tax_category: Dodopayments::Models::tax_category?,
         request_options: Dodopayments::RequestOptions
       }
@@ -127,17 +127,6 @@ module Dodopayments
           files: ::Array[String]?,
           instructions: String?
         }
-      end
-
-      type pricing_mode = :by_currency | :by_country
-
-      module PricingMode
-        extend Dodopayments::Internal::Type::Enum
-
-        BY_CURRENCY: :by_currency
-        BY_COUNTRY: :by_country
-
-        def self?.values: -> ::Array[Dodopayments::Models::ProductUpdateParams::pricing_mode]
       end
     end
   end
