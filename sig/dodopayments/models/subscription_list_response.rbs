@@ -8,7 +8,7 @@ module Dodopayments
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
         discounts: ::Array[Dodopayments::Models::SubscriptionListResponse::Discount],
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         next_billing_date: Time,
         on_demand: bool,
         payment_frequency_count: Integer,
@@ -46,7 +46,7 @@ module Dodopayments
 
       attr_accessor discounts: ::Array[Dodopayments::Models::SubscriptionListResponse::Discount]
 
-      attr_accessor metadata: ::Hash[Symbol, String]
+      attr_accessor metadata: Dodopayments::Models::metadata
 
       attr_accessor next_billing_date: Time
 
@@ -99,7 +99,7 @@ module Dodopayments
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
         discounts: ::Array[Dodopayments::Models::SubscriptionListResponse::Discount],
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         next_billing_date: Time,
         on_demand: bool,
         payment_frequency_count: Integer,
@@ -131,7 +131,7 @@ module Dodopayments
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
         discounts: ::Array[Dodopayments::Models::SubscriptionListResponse::Discount],
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         next_billing_date: Time,
         on_demand: bool,
         payment_frequency_count: Integer,

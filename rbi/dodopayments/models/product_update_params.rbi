@@ -135,11 +135,7 @@ module Dodopayments
       # Update the pricing mode. Omit to leave unchanged; set to null to clear (which
       # archives all active localized rules for this product). Changing to a different
       # non-null mode also archives any rules whose mode doesn't match the new mode.
-      sig do
-        returns(
-          T.nilable(Dodopayments::ProductUpdateParams::PricingMode::OrSymbol)
-        )
-      end
+      sig { returns(T.nilable(Dodopayments::Products::PricingMode::OrSymbol)) }
       attr_accessor :pricing_mode
 
       # Tax category of the product.
@@ -177,7 +173,7 @@ module Dodopayments
               )
             ),
           pricing_mode:
-            T.nilable(Dodopayments::ProductUpdateParams::PricingMode::OrSymbol),
+            T.nilable(Dodopayments::Products::PricingMode::OrSymbol),
           tax_category: T.nilable(Dodopayments::TaxCategory::OrSymbol),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -276,9 +272,7 @@ module Dodopayments
                 )
               ),
             pricing_mode:
-              T.nilable(
-                Dodopayments::ProductUpdateParams::PricingMode::OrSymbol
-              ),
+              T.nilable(Dodopayments::Products::PricingMode::OrSymbol),
             tax_category: T.nilable(Dodopayments::TaxCategory::OrSymbol),
             request_options: Dodopayments::RequestOptions
           }
@@ -338,40 +332,6 @@ module Dodopayments
           )
         end
         def to_hash
-        end
-      end
-
-      # Update the pricing mode. Omit to leave unchanged; set to null to clear (which
-      # archives all active localized rules for this product). Changing to a different
-      # non-null mode also archives any rules whose mode doesn't match the new mode.
-      module PricingMode
-        extend Dodopayments::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, Dodopayments::ProductUpdateParams::PricingMode)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        BY_CURRENCY =
-          T.let(
-            :by_currency,
-            Dodopayments::ProductUpdateParams::PricingMode::TaggedSymbol
-          )
-        BY_COUNTRY =
-          T.let(
-            :by_country,
-            Dodopayments::ProductUpdateParams::PricingMode::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Dodopayments::ProductUpdateParams::PricingMode::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
         end
       end
     end

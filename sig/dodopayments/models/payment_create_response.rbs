@@ -4,7 +4,7 @@ module Dodopayments
       {
         client_secret: String,
         customer: Dodopayments::CustomerLimitedDetails,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         payment_id: String,
         total_amount: Integer,
         discount_id: String?,
@@ -19,7 +19,7 @@ module Dodopayments
 
       attr_accessor customer: Dodopayments::CustomerLimitedDetails
 
-      attr_accessor metadata: ::Hash[Symbol, String]
+      attr_accessor metadata: Dodopayments::Models::metadata
 
       attr_accessor payment_id: String
 
@@ -38,7 +38,7 @@ module Dodopayments
       def initialize: (
         client_secret: String,
         customer: Dodopayments::CustomerLimitedDetails,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         payment_id: String,
         total_amount: Integer,
         ?discount_id: String?,
@@ -51,7 +51,7 @@ module Dodopayments
       def to_hash: -> {
         client_secret: String,
         customer: Dodopayments::CustomerLimitedDetails,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         payment_id: String,
         total_amount: Integer,
         discount_id: String?,

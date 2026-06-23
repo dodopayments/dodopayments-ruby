@@ -10,7 +10,7 @@ module Dodopayments
         credit_entitlement_cart: ::Array[Dodopayments::CreditEntitlementCartResponse],
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         meter_credit_entitlement_cart: ::Array[Dodopayments::MeterCreditEntitlementCartResponse],
         meters: ::Array[Dodopayments::MeterCartResponseItem],
         next_billing_date: Time,
@@ -58,7 +58,7 @@ module Dodopayments
 
       attr_accessor customer: Dodopayments::CustomerLimitedDetails
 
-      attr_accessor metadata: ::Hash[Symbol, String]
+      attr_accessor metadata: Dodopayments::Models::metadata
 
       attr_accessor meter_credit_entitlement_cart: ::Array[Dodopayments::MeterCreditEntitlementCartResponse]
 
@@ -125,7 +125,7 @@ module Dodopayments
         credit_entitlement_cart: ::Array[Dodopayments::CreditEntitlementCartResponse],
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         meter_credit_entitlement_cart: ::Array[Dodopayments::MeterCreditEntitlementCartResponse],
         meters: ::Array[Dodopayments::MeterCartResponseItem],
         next_billing_date: Time,
@@ -165,7 +165,7 @@ module Dodopayments
         credit_entitlement_cart: ::Array[Dodopayments::CreditEntitlementCartResponse],
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         meter_credit_entitlement_cart: ::Array[Dodopayments::MeterCreditEntitlementCartResponse],
         meters: ::Array[Dodopayments::MeterCartResponseItem],
         next_billing_date: Time,

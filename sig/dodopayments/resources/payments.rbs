@@ -12,7 +12,7 @@ module Dodopayments
         ?discount_code: String?,
         ?discount_codes: ::Array[String]?,
         ?force_3ds: bool?,
-        ?metadata: ::Hash[Symbol, String],
+        ?metadata: Dodopayments::Models::metadata,
         ?payment_link: bool?,
         ?payment_method_id: String?,
         ?redirect_immediately: bool,

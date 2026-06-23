@@ -7,7 +7,7 @@ module Dodopayments
         created_at: Time,
         customer: Dodopayments::CustomerLimitedDetails,
         is_partial: bool,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         payment_id: String,
         refund_id: String,
         status: Dodopayments::Models::refund_status,
@@ -27,7 +27,7 @@ module Dodopayments
 
       attr_accessor is_partial: bool
 
-      attr_accessor metadata: ::Hash[Symbol, String]
+      attr_accessor metadata: Dodopayments::Models::metadata
 
       attr_accessor payment_id: String
 
@@ -47,7 +47,7 @@ module Dodopayments
         created_at: Time,
         customer: Dodopayments::CustomerLimitedDetails,
         is_partial: bool,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         payment_id: String,
         refund_id: String,
         status: Dodopayments::Models::refund_status,
@@ -62,7 +62,7 @@ module Dodopayments
         created_at: Time,
         customer: Dodopayments::CustomerLimitedDetails,
         is_partial: bool,
-        metadata: ::Hash[Symbol, String],
+        metadata: Dodopayments::Models::metadata,
         payment_id: String,
         refund_id: String,
         status: Dodopayments::Models::refund_status,
