@@ -113,6 +113,7 @@ module Dodopayments
       REVOLUT_PAY = :revolut_pay
       NAVER_PAY = :naver_pay
       PAYCO = :payco
+      SATISPAY = :satispay
 
       # @!method self.values
       #   @return [Array<Symbol>]

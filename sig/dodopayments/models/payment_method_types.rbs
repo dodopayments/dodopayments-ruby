@@ -106,6 +106,7 @@ module Dodopayments
       | :revolut_pay
       | :naver_pay
       | :payco
+      | :satispay
 
     module PaymentMethodTypes
       extend Dodopayments::Internal::Type::Enum
@@ -215,6 +216,7 @@ module Dodopayments
       REVOLUT_PAY: :revolut_pay
       NAVER_PAY: :naver_pay
       PAYCO: :payco
+      SATISPAY: :satispay
 
       def self?.values: -> ::Array[Dodopayments::Models::payment_method_types]
     end

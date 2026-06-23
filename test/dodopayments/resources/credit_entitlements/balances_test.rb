@@ -157,6 +157,7 @@ class Dodopayments::Test::Resources::CreditEntitlements::BalancesTest < Dodopaym
         credit_entitlement_id: String,
         customer_id: String,
         is_credit: Dodopayments::Internal::Type::Boolean,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
         overage_after: String,
         overage_before: String,
         transaction_type: Dodopayments::CreditEntitlements::CreditLedgerEntry::TransactionType,
