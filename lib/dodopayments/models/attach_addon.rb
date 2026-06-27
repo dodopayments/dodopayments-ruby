@@ -9,13 +9,15 @@ module Dodopayments
       required :addon_id, String
 
       # @!attribute quantity
+      #   Number of units of this addon.
       #
       #   @return [Integer]
       required :quantity, Integer
 
       # @!method initialize(addon_id:, quantity:)
       #   @param addon_id [String]
-      #   @param quantity [Integer]
+      #
+      #   @param quantity [Integer] Number of units of this addon.
     end
   end
 end

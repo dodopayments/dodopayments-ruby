@@ -2,6 +2,7 @@
 
 module Dodopayments
   module Models
+    # Unit of a duration count (e.g. license-key validity period).
     module TimeInterval
       extend Dodopayments::Internal::Type::Enum
 

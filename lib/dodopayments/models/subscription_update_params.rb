@@ -189,22 +189,33 @@ module Dodopayments
         optional :rollover_timeframe_count, Integer, nil?: true
 
         # @!attribute rollover_timeframe_interval
+        #   Unit of a duration count (e.g. license-key validity period).
         #
         #   @return [Symbol, Dodopayments::Models::TimeInterval, nil]
         optional :rollover_timeframe_interval, enum: -> { Dodopayments::TimeInterval }, nil?: true
 
         # @!method initialize(credit_entitlement_id:, credits_amount: nil, expires_after_days: nil, low_balance_threshold_percent: nil, max_rollover_count: nil, overage_enabled: nil, overage_limit: nil, rollover_enabled: nil, rollover_percentage: nil, rollover_timeframe_count: nil, rollover_timeframe_interval: nil)
         #   @param credit_entitlement_id [String]
+        #
         #   @param credits_amount [String, nil]
+        #
         #   @param expires_after_days [Integer, nil]
+        #
         #   @param low_balance_threshold_percent [Integer, nil]
+        #
         #   @param max_rollover_count [Integer, nil]
+        #
         #   @param overage_enabled [Boolean, nil]
+        #
         #   @param overage_limit [String, nil]
+        #
         #   @param rollover_enabled [Boolean, nil]
+        #
         #   @param rollover_percentage [Integer, nil]
+        #
         #   @param rollover_timeframe_count [Integer, nil]
-        #   @param rollover_timeframe_interval [Symbol, Dodopayments::Models::TimeInterval, nil]
+        #
+        #   @param rollover_timeframe_interval [Symbol, Dodopayments::Models::TimeInterval, nil] Unit of a duration count (e.g. license-key validity period).
       end
 
       class DisableOnDemand < Dodopayments::Internal::Type::BaseModel

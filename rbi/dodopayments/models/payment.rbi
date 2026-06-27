@@ -40,7 +40,7 @@ module Dodopayments
       end
       attr_writer :customer
 
-      # brand id this payment belongs to
+      # Whether the digital products purchased in this payment have been delivered.
       sig { returns(T::Boolean) }
       attr_accessor :digital_products_delivered
 
@@ -246,7 +246,7 @@ module Dodopayments
         currency:,
         # Details about the customer who made the payment
         customer:,
-        # brand id this payment belongs to
+        # Whether the digital products purchased in this payment have been delivered.
         digital_products_delivered:,
         # List of disputes associated with this payment
         disputes:,

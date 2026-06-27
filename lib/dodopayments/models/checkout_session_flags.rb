@@ -71,6 +71,15 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :allow_discount_code, Dodopayments::Internal::Type::Boolean
 
+      # @!attribute allow_editing_addons
+      #   If true, the customer can add or remove addons on a subscription product during
+      #   checkout.
+      #
+      #   Default is false
+      #
+      #   @return [Boolean, nil]
+      optional :allow_editing_addons, Dodopayments::Internal::Type::Boolean
+
       # @!attribute allow_phone_number_collection
       #   If phone number is collected from customer, set it to rue
       #
@@ -113,7 +122,7 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :require_phone_number, Dodopayments::Internal::Type::Boolean
 
-      # @!method initialize(allow_currency_selection: nil, allow_customer_editing_business_name: nil, allow_customer_editing_city: nil, allow_customer_editing_country: nil, allow_customer_editing_email: nil, allow_customer_editing_name: nil, allow_customer_editing_state: nil, allow_customer_editing_street: nil, allow_customer_editing_tax_id: nil, allow_customer_editing_zipcode: nil, allow_discount_code: nil, allow_phone_number_collection: nil, allow_tax_id: nil, always_create_new_customer: nil, redirect_immediately: nil, require_phone_number: nil)
+      # @!method initialize(allow_currency_selection: nil, allow_customer_editing_business_name: nil, allow_customer_editing_city: nil, allow_customer_editing_country: nil, allow_customer_editing_email: nil, allow_customer_editing_name: nil, allow_customer_editing_state: nil, allow_customer_editing_street: nil, allow_customer_editing_tax_id: nil, allow_customer_editing_zipcode: nil, allow_discount_code: nil, allow_editing_addons: nil, allow_phone_number_collection: nil, allow_tax_id: nil, always_create_new_customer: nil, redirect_immediately: nil, require_phone_number: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionFlags} for more details.
       #
@@ -138,6 +147,8 @@ module Dodopayments
       #   @param allow_customer_editing_zipcode [Boolean]
       #
       #   @param allow_discount_code [Boolean] If the customer is allowed to apply discount code, set it to true.
+      #
+      #   @param allow_editing_addons [Boolean] If true, the customer can add or remove addons on a subscription product
       #
       #   @param allow_phone_number_collection [Boolean] If phone number is collected from customer, set it to rue
       #

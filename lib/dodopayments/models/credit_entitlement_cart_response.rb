@@ -95,6 +95,7 @@ module Dodopayments
       optional :rollover_timeframe_count, Integer, nil?: true
 
       # @!attribute rollover_timeframe_interval
+      #   Unit of a duration count (e.g. license-key validity period).
       #
       #   @return [Symbol, Dodopayments::Models::TimeInterval, nil]
       optional :rollover_timeframe_interval, enum: -> { Dodopayments::TimeInterval }, nil?: true
@@ -137,7 +138,7 @@ module Dodopayments
       #
       #   @param rollover_timeframe_count [Integer, nil]
       #
-      #   @param rollover_timeframe_interval [Symbol, Dodopayments::Models::TimeInterval, nil]
+      #   @param rollover_timeframe_interval [Symbol, Dodopayments::Models::TimeInterval, nil] Unit of a duration count (e.g. license-key validity period).
     end
   end
 end
