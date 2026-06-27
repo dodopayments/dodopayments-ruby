@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.18.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.18.0...v2.18.1) (2026-06-27)
+
+
+### Bug Fixes
+
+* **api:** add allow_editing_addons checkout flag and refine schema descriptions ([bb29016](https://github.com/dodopayments/dodopayments-ruby/commit/bb29016fe5ae1b7d8cfca80131645f699f99f928))
+* **api:** add allow_editing_addons checkout flag and refine schema descriptions ([c8bca49](https://github.com/dodopayments/dodopayments-ruby/commit/c8bca49c58066c378d071a2a353e24986d6c6134))
+
 ## [2.18.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.17.1...v2.18.0) (2026-06-23)
 
 
