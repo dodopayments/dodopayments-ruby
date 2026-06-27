@@ -14,6 +14,7 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :count
 
+      # Unit of a duration count (e.g. license-key validity period).
       sig { returns(Dodopayments::TimeInterval::OrSymbol) }
       attr_accessor :interval
 
@@ -23,7 +24,11 @@ module Dodopayments
           interval: Dodopayments::TimeInterval::OrSymbol
         ).returns(T.attached_class)
       end
-      def self.new(count:, interval:)
+      def self.new(
+        count:,
+        # Unit of a duration count (e.g. license-key validity period).
+        interval:
+      )
       end
 
       sig do

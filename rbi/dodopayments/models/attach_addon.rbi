@@ -11,13 +11,18 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :addon_id
 
+      # Number of units of this addon.
       sig { returns(Integer) }
       attr_accessor :quantity
 
       sig do
         params(addon_id: String, quantity: Integer).returns(T.attached_class)
       end
-      def self.new(addon_id:, quantity:)
+      def self.new(
+        addon_id:,
+        # Number of units of this addon.
+        quantity:
+      )
       end
 
       sig { override.returns({ addon_id: String, quantity: Integer }) }

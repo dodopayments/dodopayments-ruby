@@ -41,7 +41,7 @@ module Dodopayments
       required :customer, -> { Dodopayments::CustomerLimitedDetails }
 
       # @!attribute digital_products_delivered
-      #   brand id this payment belongs to
+      #   Whether the digital products purchased in this payment have been delivered.
       #
       #   @return [Boolean]
       required :digital_products_delivered, Dodopayments::Internal::Type::Boolean
@@ -276,7 +276,7 @@ module Dodopayments
       #
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails] Details about the customer who made the payment
       #
-      #   @param digital_products_delivered [Boolean] brand id this payment belongs to
+      #   @param digital_products_delivered [Boolean] Whether the digital products purchased in this payment have been delivered.
       #
       #   @param disputes [Array<Dodopayments::Models::Dispute>] List of disputes associated with this payment
       #
