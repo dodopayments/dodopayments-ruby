@@ -67,6 +67,7 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :rollover_timeframe_count
 
+      # Unit of a duration count (e.g. license-key validity period).
       sig { returns(T.nilable(Dodopayments::TimeInterval::TaggedSymbol)) }
       attr_accessor :rollover_timeframe_interval
 
@@ -115,6 +116,7 @@ module Dodopayments
         price_per_unit: nil,
         rollover_percentage: nil,
         rollover_timeframe_count: nil,
+        # Unit of a duration count (e.g. license-key validity period).
         rollover_timeframe_interval: nil
       )
       end

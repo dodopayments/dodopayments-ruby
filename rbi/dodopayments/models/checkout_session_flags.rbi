@@ -90,6 +90,16 @@ module Dodopayments
       sig { params(allow_discount_code: T::Boolean).void }
       attr_writer :allow_discount_code
 
+      # If true, the customer can add or remove addons on a subscription product during
+      # checkout.
+      #
+      # Default is false
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :allow_editing_addons
+
+      sig { params(allow_editing_addons: T::Boolean).void }
+      attr_writer :allow_editing_addons
+
       # If phone number is collected from customer, set it to rue
       #
       # Default is true
@@ -150,6 +160,7 @@ module Dodopayments
           allow_customer_editing_tax_id: T::Boolean,
           allow_customer_editing_zipcode: T::Boolean,
           allow_discount_code: T::Boolean,
+          allow_editing_addons: T::Boolean,
           allow_phone_number_collection: T::Boolean,
           allow_tax_id: T::Boolean,
           always_create_new_customer: T::Boolean,
@@ -182,6 +193,11 @@ module Dodopayments
         #
         # Default is true
         allow_discount_code: nil,
+        # If true, the customer can add or remove addons on a subscription product during
+        # checkout.
+        #
+        # Default is false
+        allow_editing_addons: nil,
         # If phone number is collected from customer, set it to rue
         #
         # Default is true
@@ -221,6 +237,7 @@ module Dodopayments
             allow_customer_editing_tax_id: T::Boolean,
             allow_customer_editing_zipcode: T::Boolean,
             allow_discount_code: T::Boolean,
+            allow_editing_addons: T::Boolean,
             allow_phone_number_collection: T::Boolean,
             allow_tax_id: T::Boolean,
             always_create_new_customer: T::Boolean,
