@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.19.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.18.1...v2.19.0) (2026-07-04)
+
+
+### Features
+
+* **api:** register Feature/FeatureType models and expose customer entitlement-grants list endpoint ([e0a2559](https://github.com/dodopayments/dodopayments-ruby/commit/e0a2559136a4c577fd58c08445a6d54e5aa5036c))
+* **api:** register Feature/FeatureType models and expose customer entitlement-grants list endpoint ([b4e6b71](https://github.com/dodopayments/dodopayments-ruby/commit/b4e6b7103d93dd44e282a3143a235f4ddc0b6068))
+
 ## [2.18.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.18.0...v2.18.1) (2026-06-27)
 
 
