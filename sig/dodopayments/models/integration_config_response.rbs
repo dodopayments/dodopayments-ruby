@@ -1,7 +1,8 @@
 module Dodopayments
   module Models
     type integration_config_response =
-      Dodopayments::IntegrationConfigResponse::GitHubConfig
+      Dodopayments::IntegrationConfigResponse::FeatureFlagConfig
+      | Dodopayments::IntegrationConfigResponse::GitHubConfig
       | Dodopayments::IntegrationConfigResponse::DiscordConfig
       | Dodopayments::IntegrationConfigResponse::TelegramConfig
       | Dodopayments::IntegrationConfigResponse::FigmaConfig
@@ -12,6 +13,25 @@ module Dodopayments
 
     module IntegrationConfigResponse
       extend Dodopayments::Internal::Type::Union
+
+      type feature_flag_config =
+        { feature_id: String, feature_type: Dodopayments::Models::feature_type }
+
+      class FeatureFlagConfig < Dodopayments::Internal::Type::BaseModel
+        attr_accessor feature_id: String
+
+        attr_accessor feature_type: Dodopayments::Models::feature_type
+
+        def initialize: (
+          feature_id: String,
+          feature_type: Dodopayments::Models::feature_type
+        ) -> void
+
+        def to_hash: -> {
+          feature_id: String,
+          feature_type: Dodopayments::Models::feature_type
+        }
+      end
 
       type github_config =
         {

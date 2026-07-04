@@ -165,6 +165,8 @@ module Dodopayments
 
   CustomerListCreditEntitlementsParams = Dodopayments::Models::CustomerListCreditEntitlementsParams
 
+  CustomerListEntitlementGrantsParams = Dodopayments::Models::CustomerListEntitlementGrantsParams
+
   CustomerListEntitlementsParams = Dodopayments::Models::CustomerListEntitlementsParams
 
   CustomerListParams = Dodopayments::Models::CustomerListParams
@@ -263,6 +265,10 @@ module Dodopayments
 
   EventInput = Dodopayments::Models::EventInput
 
+  Feature = Dodopayments::Models::Feature
+
+  FeatureType = Dodopayments::Models::FeatureType
+
   FilterOperator = Dodopayments::Models::FilterOperator
 
   FilterType = Dodopayments::Models::FilterType
@@ -311,6 +317,8 @@ module Dodopayments
 
   # @type [Dodopayments::Internal::Type::Converter]
   Metadata = Dodopayments::Models::Metadata
+
+  MetadataItem = Dodopayments::Models::MetadataItem
 
   Meter = Dodopayments::Models::Meter
 

@@ -72,9 +72,12 @@ module Dodopayments
       optional :disable_on_demand, -> { Dodopayments::SubscriptionUpdateParams::DisableOnDemand }, nil?: true
 
       # @!attribute metadata
+      #   Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
       #
-      #   @return [Hash{Symbol=>String}, nil]
-      optional :metadata, Dodopayments::Internal::Type::HashOf[String], nil?: true
+      #   @return [Hash{Symbol=>String, Float, Boolean}, nil]
+      optional :metadata,
+               -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] },
+               nil?: true
 
       # @!attribute next_billing_date
       #
@@ -115,7 +118,7 @@ module Dodopayments
       #
       #   @param disable_on_demand [Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, nil]
       #
-      #   @param metadata [Hash{Symbol=>String}, nil]
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
       #
       #   @param next_billing_date [Time, nil]
       #

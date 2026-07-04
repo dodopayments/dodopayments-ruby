@@ -87,10 +87,18 @@ module Dodopayments
       attr_accessor :mandate_min_amount_inr_paise
 
       # Additional metadata for the subscription Defaults to empty if not specified
-      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      sig do
+        returns(
+          T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants])
+        )
+      end
       attr_reader :metadata
 
-      sig { params(metadata: T::Hash[Symbol, String]).void }
+      sig do
+        params(
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants]
+        ).void
+      end
       attr_writer :metadata
 
       sig { returns(T.nilable(Dodopayments::OnDemandSubscription)) }
@@ -179,7 +187,7 @@ module Dodopayments
           discount_codes: T.nilable(T::Array[String]),
           force_3ds: T.nilable(T::Boolean),
           mandate_min_amount_inr_paise: T.nilable(Integer),
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           on_demand: T.nilable(Dodopayments::OnDemandSubscription::OrHash),
           one_time_product_cart:
             T.nilable(T::Array[Dodopayments::OneTimeProductCartItem::OrHash]),
@@ -290,7 +298,7 @@ module Dodopayments
             discount_codes: T.nilable(T::Array[String]),
             force_3ds: T.nilable(T::Boolean),
             mandate_min_amount_inr_paise: T.nilable(Integer),
-            metadata: T::Hash[Symbol, String],
+            metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             on_demand: T.nilable(Dodopayments::OnDemandSubscription),
             one_time_product_cart:
               T.nilable(T::Array[Dodopayments::OneTimeProductCartItem]),

@@ -121,7 +121,11 @@ module Dodopayments
 
       # Additional metadata associated with the payment. Defaults to empty if not
       # provided.
-      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      sig do
+        returns(
+          T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants])
+        )
+      end
       attr_accessor :metadata
 
       # If true, only zipcode is required when confirm is true; other address fields
@@ -199,7 +203,8 @@ module Dodopayments
           feature_flags: Dodopayments::CheckoutSessionFlags::OrHash,
           force_3ds: T.nilable(T::Boolean),
           mandate_min_amount_inr_paise: T.nilable(Integer),
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata:
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           minimal_address: T::Boolean,
           payment_method_id: T.nilable(String),
           product_collection_id: T.nilable(String),
@@ -305,7 +310,8 @@ module Dodopayments
             feature_flags: Dodopayments::CheckoutSessionFlags,
             force_3ds: T.nilable(T::Boolean),
             mandate_min_amount_inr_paise: T.nilable(Integer),
-            metadata: T.nilable(T::Hash[Symbol, String]),
+            metadata:
+              T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
             minimal_address: T::Boolean,
             payment_method_id: T.nilable(String),
             product_collection_id: T.nilable(String),

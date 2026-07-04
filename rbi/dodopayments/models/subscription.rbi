@@ -49,7 +49,7 @@ module Dodopayments
       attr_writer :customer
 
       # Additional custom data associated with the subscription
-      sig { returns(T::Hash[Symbol, String]) }
+      sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
       attr_accessor :metadata
 
       # Meter credit entitlement cart settings for this subscription
@@ -190,7 +190,7 @@ module Dodopayments
             T::Array[Dodopayments::CreditEntitlementCartResponse::OrHash],
           currency: Dodopayments::Currency::OrSymbol,
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           meter_credit_entitlement_cart:
             T::Array[Dodopayments::MeterCreditEntitlementCartResponse::OrHash],
           meters: T::Array[Dodopayments::MeterCartResponseItem::OrHash],
@@ -318,7 +318,7 @@ module Dodopayments
               T::Array[Dodopayments::CreditEntitlementCartResponse],
             currency: Dodopayments::Currency::TaggedSymbol,
             customer: Dodopayments::CustomerLimitedDetails,
-            metadata: T::Hash[Symbol, String],
+            metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             meter_credit_entitlement_cart:
               T::Array[Dodopayments::MeterCreditEntitlementCartResponse],
             meters: T::Array[Dodopayments::MeterCartResponseItem],

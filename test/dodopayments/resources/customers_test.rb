@@ -17,7 +17,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         customer_id: String,
         email: String,
         name: String,
-        metadata: ^(Dodopayments::Internal::Type::HashOf[String]) | nil,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]) | nil,
         phone_number: String | nil
       }
     end
@@ -37,7 +37,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         customer_id: String,
         email: String,
         name: String,
-        metadata: ^(Dodopayments::Internal::Type::HashOf[String]) | nil,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]) | nil,
         phone_number: String | nil
       }
     end
@@ -57,7 +57,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         customer_id: String,
         email: String,
         name: String,
-        metadata: ^(Dodopayments::Internal::Type::HashOf[String]) | nil,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]) | nil,
         phone_number: String | nil
       }
     end
@@ -84,7 +84,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         customer_id: String,
         email: String,
         name: String,
-        metadata: ^(Dodopayments::Internal::Type::HashOf[String]) | nil,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]) | nil,
         phone_number: String | nil
       }
     end
@@ -112,6 +112,48 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
     assert_pattern do
       response => {
         items: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::CustomerListCreditEntitlementsResponse::Item])
+      }
+    end
+  end
+
+  def test_list_entitlement_grants
+    response = @dodo_payments.customers.list_entitlement_grants("cus_TV52uJWWXt2yIoBBxpjaa")
+
+    assert_pattern do
+      response => Dodopayments::Internal::DefaultPageNumberPagination
+    end
+
+    row = response.to_enum.first
+    return if row.nil?
+
+    assert_pattern do
+      row => Dodopayments::Entitlements::EntitlementGrant
+    end
+
+    assert_pattern do
+      row => {
+        id: String,
+        brand_id: String,
+        business_id: String,
+        created_at: Time,
+        customer_id: String,
+        entitlement_id: String,
+        integration_type: Dodopayments::EntitlementIntegrationType,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]),
+        status: Dodopayments::Entitlements::EntitlementGrant::Status,
+        updated_at: Time,
+        delivered_at: Time | nil,
+        digital_product_delivery: Dodopayments::DigitalProductDelivery | nil,
+        error_code: String | nil,
+        error_message: String | nil,
+        feature: Dodopayments::Feature | nil,
+        license_key: Dodopayments::Entitlements::LicenseKeyGrant | nil,
+        oauth_expires_at: Time | nil,
+        oauth_url: String | nil,
+        payment_id: String | nil,
+        revocation_reason: String | nil,
+        revoked_at: Time | nil,
+        subscription_id: String | nil
       }
     end
   end

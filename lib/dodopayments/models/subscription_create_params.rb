@@ -101,8 +101,8 @@ module Dodopayments
       # @!attribute metadata
       #   Additional metadata for the subscription Defaults to empty if not specified
       #
-      #   @return [Hash{Symbol=>String}, nil]
-      optional :metadata, Dodopayments::Internal::Type::HashOf[String]
+      #   @return [Hash{Symbol=>String, Float, Boolean}, nil]
+      optional :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
       # @!attribute on_demand
       #
@@ -207,7 +207,7 @@ module Dodopayments
       #
       #   @param mandate_min_amount_inr_paise [Integer, nil] Override the merchant-level mandate floor (in INR paise) for INR
       #
-      #   @param metadata [Hash{Symbol=>String}] Additional metadata for the subscription
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata for the subscription
       #
       #   @param on_demand [Dodopayments::Models::OnDemandSubscription, nil]
       #

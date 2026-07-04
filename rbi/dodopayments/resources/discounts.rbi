@@ -11,7 +11,7 @@ module Dodopayments
           type: Dodopayments::DiscountType::OrSymbol,
           code: T.nilable(String),
           expires_at: T.nilable(Time),
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           name: T.nilable(String),
           preserve_on_plan_change: T::Boolean,
           restricted_to: T.nilable(T::Array[String]),
@@ -74,7 +74,8 @@ module Dodopayments
           amount: T.nilable(Integer),
           code: T.nilable(String),
           expires_at: T.nilable(Time),
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata:
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           name: T.nilable(String),
           preserve_on_plan_change: T.nilable(T::Boolean),
           restricted_to: T.nilable(T::Array[String]),

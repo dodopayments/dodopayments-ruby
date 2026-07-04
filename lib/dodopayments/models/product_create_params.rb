@@ -117,8 +117,8 @@ module Dodopayments
       # @!attribute metadata
       #   Additional metadata for the product
       #
-      #   @return [Hash{Symbol=>String}, nil]
-      optional :metadata, Dodopayments::Internal::Type::HashOf[String]
+      #   @return [Hash{Symbol=>String, Float, Boolean}, nil]
+      optional :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
       # @!attribute pricing_mode
       #   Pricing mode for localized pricing. When set, rules from
@@ -158,7 +158,7 @@ module Dodopayments
       #
       #   @param license_key_enabled [Boolean, nil] When true, generates and sends a license key to your customer.
       #
-      #   @param metadata [Hash{Symbol=>String}] Additional metadata for the product
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata for the product
       #
       #   @param pricing_mode [Symbol, Dodopayments::Models::Products::PricingMode, nil] Pricing mode for localized pricing. When set, rules from
       #

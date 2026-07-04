@@ -20,7 +20,7 @@ module Dodopayments
           discount_code: T.nilable(String),
           discount_codes: T.nilable(T::Array[String]),
           force_3ds: T.nilable(T::Boolean),
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           payment_link: T.nilable(T::Boolean),
           payment_method_id: T.nilable(String),
           redirect_immediately: T::Boolean,
