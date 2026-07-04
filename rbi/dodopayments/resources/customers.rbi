@@ -13,7 +13,7 @@ module Dodopayments
         params(
           email: String,
           name: String,
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           phone_number: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Customer)
@@ -45,7 +45,8 @@ module Dodopayments
         params(
           customer_id: String,
           email: T.nilable(String),
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata:
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           name: T.nilable(String),
           phone_number: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
@@ -121,6 +122,39 @@ module Dodopayments
       def list_credit_entitlements(
         # Customer ID
         customer_id,
+        request_options: {}
+      )
+      end
+
+      # List all of a customer's entitlement grants across every entitlement. One row
+      # per grant.
+      sig do
+        params(
+          customer_id: String,
+          integration_type:
+            Dodopayments::CustomerListEntitlementGrantsParams::IntegrationType::OrSymbol,
+          page_number: Integer,
+          page_size: Integer,
+          status:
+            Dodopayments::CustomerListEntitlementGrantsParams::Status::OrSymbol,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(
+          Dodopayments::Internal::DefaultPageNumberPagination[
+            Dodopayments::Entitlements::EntitlementGrant
+          ]
+        )
+      end
+      def list_entitlement_grants(
+        # Customer ID
+        customer_id,
+        # Filter by integration type (e.g. `feature_flag`)
+        integration_type: nil,
+        # Page number (default 0)
+        page_number: nil,
+        # Page size (default 10, max 100)
+        page_size: nil,
+        # Filter by grant status
+        status: nil,
         request_options: {}
       )
       end

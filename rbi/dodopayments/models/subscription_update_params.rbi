@@ -87,7 +87,12 @@ module Dodopayments
       end
       attr_writer :disable_on_demand
 
-      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+      sig do
+        returns(
+          T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants])
+        )
+      end
       attr_accessor :metadata
 
       sig { returns(T.nilable(Time)) }
@@ -123,7 +128,8 @@ module Dodopayments
             T.nilable(
               Dodopayments::SubscriptionUpdateParams::DisableOnDemand::OrHash
             ),
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata:
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           next_billing_date: T.nilable(Time),
           status: T.nilable(Dodopayments::SubscriptionStatus::OrSymbol),
           tax_id: T.nilable(String),
@@ -151,6 +157,7 @@ module Dodopayments
         customer_business_name: nil,
         customer_name: nil,
         disable_on_demand: nil,
+        # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
         metadata: nil,
         next_billing_date: nil,
         status: nil,
@@ -184,7 +191,8 @@ module Dodopayments
               T.nilable(
                 Dodopayments::SubscriptionUpdateParams::DisableOnDemand
               ),
-            metadata: T.nilable(T::Hash[Symbol, String]),
+            metadata:
+              T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
             next_billing_date: T.nilable(Time),
             status: T.nilable(Dodopayments::SubscriptionStatus::OrSymbol),
             tax_id: T.nilable(String),

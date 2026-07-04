@@ -34,7 +34,8 @@ module Dodopayments
       sig { returns(T::Boolean) }
       attr_accessor :has_license_key
 
-      sig { returns(T::Hash[Symbol, String]) }
+      # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+      sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
       attr_accessor :metadata
 
       sig { returns(String) }
@@ -99,7 +100,7 @@ module Dodopayments
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
           digital_products_delivered: T::Boolean,
           has_license_key: T::Boolean,
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           payment_id: String,
           payment_provider:
             Dodopayments::Models::PaymentListResponse::PaymentProvider::OrSymbol,
@@ -123,6 +124,7 @@ module Dodopayments
         customer:,
         digital_products_delivered:,
         has_license_key:,
+        # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
         metadata:,
         payment_id:,
         # Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
@@ -158,7 +160,7 @@ module Dodopayments
             customer: Dodopayments::CustomerLimitedDetails,
             digital_products_delivered: T::Boolean,
             has_license_key: T::Boolean,
-            metadata: T::Hash[Symbol, String],
+            metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             payment_id: String,
             payment_provider:
               Dodopayments::Models::PaymentListResponse::PaymentProvider::TaggedSymbol,

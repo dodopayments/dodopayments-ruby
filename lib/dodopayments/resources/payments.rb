@@ -30,7 +30,7 @@ module Dodopayments
       #
       # @param force_3ds [Boolean, nil] Override merchant default 3DS behaviour for this payment
       #
-      # @param metadata [Hash{Symbol=>String}] Additional metadata associated with the payment.
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata associated with the payment.
       #
       # @param payment_link [Boolean, nil] Whether to generate a payment link. Defaults to false if not specified.
       #

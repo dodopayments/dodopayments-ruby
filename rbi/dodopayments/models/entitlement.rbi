@@ -35,7 +35,7 @@ module Dodopayments
       attr_accessor :is_active
 
       # Arbitrary key-value metadata supplied at creation or via PATCH.
-      sig { returns(T::Hash[Symbol, String]) }
+      sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
       attr_accessor :metadata
 
       # Display name supplied at creation.
@@ -59,6 +59,7 @@ module Dodopayments
           created_at: Time,
           integration_config:
             T.any(
+              Dodopayments::IntegrationConfigResponse::FeatureFlagConfig::OrHash,
               Dodopayments::IntegrationConfigResponse::GitHubConfig::OrHash,
               Dodopayments::IntegrationConfigResponse::DiscordConfig::OrHash,
               Dodopayments::IntegrationConfigResponse::TelegramConfig::OrHash,
@@ -70,7 +71,7 @@ module Dodopayments
             ),
           integration_type: Dodopayments::EntitlementIntegrationType::OrSymbol,
           is_active: T::Boolean,
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           name: String,
           updated_at: Time,
           description: T.nilable(String)
@@ -113,7 +114,7 @@ module Dodopayments
             integration_type:
               Dodopayments::EntitlementIntegrationType::TaggedSymbol,
             is_active: T::Boolean,
-            metadata: T::Hash[Symbol, String],
+            metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             name: String,
             updated_at: Time,
             description: T.nilable(String)

@@ -144,7 +144,7 @@ module Dodopayments
         #
         # @param idempotency_key [String, nil] Body param: Idempotency key to prevent duplicate entries
         #
-        # @param metadata [Hash{Symbol=>String}, nil] Body param: Optional metadata (max 50 key-value pairs, key max 40 chars, value m
+        # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Body param: Optional metadata (max 50 key-value pairs, key max 40 chars, value m
         #
         # @param reason [String, nil] Body param: Human-readable reason for the entry
         #

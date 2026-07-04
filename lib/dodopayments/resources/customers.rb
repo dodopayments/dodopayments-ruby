@@ -15,7 +15,7 @@ module Dodopayments
       #
       # @param name [String]
       #
-      # @param metadata [Hash{Symbol=>String}] Additional metadata for the customer
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata for the customer
       #
       # @param phone_number [String, nil]
       #
@@ -59,7 +59,7 @@ module Dodopayments
       #
       # @param email [String, nil]
       #
-      # @param metadata [Hash{Symbol=>String}, nil] Additional metadata for the customer
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Additional metadata for the customer
       #
       # @param name [String, nil]
       #
@@ -155,6 +155,39 @@ module Dodopayments
           path: ["customers/%1$s/credit-entitlements", customer_id],
           model: Dodopayments::Models::CustomerListCreditEntitlementsResponse,
           options: params[:request_options]
+        )
+      end
+
+      # List all of a customer's entitlement grants across every entitlement. One row
+      # per grant.
+      #
+      # @overload list_entitlement_grants(customer_id, integration_type: nil, page_number: nil, page_size: nil, status: nil, request_options: {})
+      #
+      # @param customer_id [String] Customer ID
+      #
+      # @param integration_type [Symbol, Dodopayments::Models::CustomerListEntitlementGrantsParams::IntegrationType] Filter by integration type (e.g. `feature_flag`)
+      #
+      # @param page_number [Integer] Page number (default 0)
+      #
+      # @param page_size [Integer] Page size (default 10, max 100)
+      #
+      # @param status [Symbol, Dodopayments::Models::CustomerListEntitlementGrantsParams::Status] Filter by grant status
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Internal::DefaultPageNumberPagination<Dodopayments::Models::Entitlements::EntitlementGrant>]
+      #
+      # @see Dodopayments::Models::CustomerListEntitlementGrantsParams
+      def list_entitlement_grants(customer_id, params = {})
+        parsed, options = Dodopayments::CustomerListEntitlementGrantsParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
+        @client.request(
+          method: :get,
+          path: ["customers/%1$s/entitlement-grants", customer_id],
+          query: query,
+          page: Dodopayments::Internal::DefaultPageNumberPagination,
+          model: Dodopayments::Entitlements::EntitlementGrant,
+          options: options
         )
       end
 

@@ -18,6 +18,7 @@ module Dodopayments
       sig do
         returns(
           T.any(
+            Dodopayments::IntegrationConfig::FeatureFlagConfig,
             Dodopayments::IntegrationConfig::GitHubConfig,
             Dodopayments::IntegrationConfig::DiscordConfig,
             Dodopayments::IntegrationConfig::TelegramConfig,
@@ -44,16 +45,25 @@ module Dodopayments
       attr_accessor :description
 
       # Additional metadata for the entitlement
-      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      sig do
+        returns(
+          T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants])
+        )
+      end
       attr_reader :metadata
 
-      sig { params(metadata: T::Hash[Symbol, String]).void }
+      sig do
+        params(
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants]
+        ).void
+      end
       attr_writer :metadata
 
       sig do
         params(
           integration_config:
             T.any(
+              Dodopayments::IntegrationConfig::FeatureFlagConfig::OrHash,
               Dodopayments::IntegrationConfig::GitHubConfig::OrHash,
               Dodopayments::IntegrationConfig::DiscordConfig::OrHash,
               Dodopayments::IntegrationConfig::TelegramConfig::OrHash,
@@ -66,7 +76,7 @@ module Dodopayments
           integration_type: Dodopayments::EntitlementIntegrationType::OrSymbol,
           name: String,
           description: T.nilable(String),
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -90,6 +100,7 @@ module Dodopayments
           {
             integration_config:
               T.any(
+                Dodopayments::IntegrationConfig::FeatureFlagConfig,
                 Dodopayments::IntegrationConfig::GitHubConfig,
                 Dodopayments::IntegrationConfig::DiscordConfig,
                 Dodopayments::IntegrationConfig::TelegramConfig,
@@ -103,7 +114,7 @@ module Dodopayments
               Dodopayments::EntitlementIntegrationType::OrSymbol,
             name: String,
             description: T.nilable(String),
-            metadata: T::Hash[Symbol, String],
+            metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             request_options: Dodopayments::RequestOptions
           }
         )

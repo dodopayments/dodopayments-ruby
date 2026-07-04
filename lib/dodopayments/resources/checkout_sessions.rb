@@ -38,7 +38,7 @@ module Dodopayments
       #
       # @param mandate_min_amount_inr_paise [Integer, nil] Override the merchant-level mandate floor (in INR paise) for INR
       #
-      # @param metadata [Hash{Symbol=>String}, nil] Additional metadata associated with the payment. Defaults to empty if not provid
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Additional metadata associated with the payment. Defaults to empty if not provid
       #
       # @param minimal_address [Boolean] If true, only zipcode is required when confirm is true; other address fields rem
       #
@@ -125,7 +125,7 @@ module Dodopayments
       #
       # @param mandate_min_amount_inr_paise [Integer, nil] Override the merchant-level mandate floor (in INR paise) for INR
       #
-      # @param metadata [Hash{Symbol=>String}, nil] Additional metadata associated with the payment. Defaults to empty if not provid
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Additional metadata associated with the payment. Defaults to empty if not provid
       #
       # @param minimal_address [Boolean] If true, only zipcode is required when confirm is true; other address fields rem
       #

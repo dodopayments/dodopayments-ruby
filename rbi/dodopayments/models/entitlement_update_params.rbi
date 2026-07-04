@@ -22,10 +22,15 @@ module Dodopayments
 
       # Integration-specific configuration supplied when creating or updating an
       # entitlement. The shape required matches the entitlement's `integration_type`.
+      #
+      # Untagged enum: variants are matched in order. `FeatureFlag` must precede
+      # `LicenseKey`, whose fields are all optional and would otherwise match a
+      # `feature_flag` config.
       sig do
         returns(
           T.nilable(
             T.any(
+              Dodopayments::IntegrationConfig::FeatureFlagConfig,
               Dodopayments::IntegrationConfig::GitHubConfig,
               Dodopayments::IntegrationConfig::DiscordConfig,
               Dodopayments::IntegrationConfig::TelegramConfig,
@@ -40,7 +45,12 @@ module Dodopayments
       end
       attr_accessor :integration_config
 
-      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+      sig do
+        returns(
+          T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants])
+        )
+      end
       attr_accessor :metadata
 
       sig { returns(T.nilable(String)) }
@@ -53,6 +63,7 @@ module Dodopayments
           integration_config:
             T.nilable(
               T.any(
+                Dodopayments::IntegrationConfig::FeatureFlagConfig::OrHash,
                 Dodopayments::IntegrationConfig::GitHubConfig::OrHash,
                 Dodopayments::IntegrationConfig::DiscordConfig::OrHash,
                 Dodopayments::IntegrationConfig::TelegramConfig::OrHash,
@@ -63,7 +74,8 @@ module Dodopayments
                 Dodopayments::IntegrationConfig::LicenseKeyConfig::OrHash
               )
             ),
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata:
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           name: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -73,7 +85,12 @@ module Dodopayments
         description: nil,
         # Integration-specific configuration supplied when creating or updating an
         # entitlement. The shape required matches the entitlement's `integration_type`.
+        #
+        # Untagged enum: variants are matched in order. `FeatureFlag` must precede
+        # `LicenseKey`, whose fields are all optional and would otherwise match a
+        # `feature_flag` config.
         integration_config: nil,
+        # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
         metadata: nil,
         name: nil,
         request_options: {}
@@ -88,6 +105,7 @@ module Dodopayments
             integration_config:
               T.nilable(
                 T.any(
+                  Dodopayments::IntegrationConfig::FeatureFlagConfig,
                   Dodopayments::IntegrationConfig::GitHubConfig,
                   Dodopayments::IntegrationConfig::DiscordConfig,
                   Dodopayments::IntegrationConfig::TelegramConfig,
@@ -98,7 +116,8 @@ module Dodopayments
                   Dodopayments::IntegrationConfig::LicenseKeyConfig
                 )
               ),
-            metadata: T.nilable(T::Hash[Symbol, String]),
+            metadata:
+              T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
             name: T.nilable(String),
             request_options: Dodopayments::RequestOptions
           }

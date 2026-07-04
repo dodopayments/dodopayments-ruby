@@ -48,6 +48,15 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::CustomerListCreditEntitlementsResponse
 
+      def list_entitlement_grants: (
+        String customer_id,
+        ?integration_type: Dodopayments::Models::CustomerListEntitlementGrantsParams::integration_type,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?status: Dodopayments::Models::CustomerListEntitlementGrantsParams::status,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Entitlements::EntitlementGrant]
+
       def list_entitlements: (
         String customer_id,
         ?request_options: Dodopayments::request_opts

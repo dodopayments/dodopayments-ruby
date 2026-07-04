@@ -35,9 +35,10 @@ module Dodopayments
       required :has_license_key, Dodopayments::Internal::Type::Boolean
 
       # @!attribute metadata
+      #   Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
       #
-      #   @return [Hash{Symbol=>String}]
-      required :metadata, Dodopayments::Internal::Type::HashOf[String]
+      #   @return [Hash{Symbol=>String, Float, Boolean}]
+      required :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
       # @!attribute payment_id
       #
@@ -129,7 +130,7 @@ module Dodopayments
       #
       #   @param has_license_key [Boolean]
       #
-      #   @param metadata [Hash{Symbol=>String}]
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
       #
       #   @param payment_id [String]
       #

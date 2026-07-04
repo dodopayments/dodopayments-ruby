@@ -14,6 +14,7 @@ module Dodopayments
         params(
           integration_config:
             T.any(
+              Dodopayments::IntegrationConfig::FeatureFlagConfig::OrHash,
               Dodopayments::IntegrationConfig::GitHubConfig::OrHash,
               Dodopayments::IntegrationConfig::DiscordConfig::OrHash,
               Dodopayments::IntegrationConfig::TelegramConfig::OrHash,
@@ -26,7 +27,7 @@ module Dodopayments
           integration_type: Dodopayments::EntitlementIntegrationType::OrSymbol,
           name: String,
           description: T.nilable(String),
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Entitlement)
       end
@@ -67,6 +68,7 @@ module Dodopayments
           integration_config:
             T.nilable(
               T.any(
+                Dodopayments::IntegrationConfig::FeatureFlagConfig::OrHash,
                 Dodopayments::IntegrationConfig::GitHubConfig::OrHash,
                 Dodopayments::IntegrationConfig::DiscordConfig::OrHash,
                 Dodopayments::IntegrationConfig::TelegramConfig::OrHash,
@@ -77,7 +79,8 @@ module Dodopayments
                 Dodopayments::IntegrationConfig::LicenseKeyConfig::OrHash
               )
             ),
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata:
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           name: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Entitlement)
@@ -88,7 +91,12 @@ module Dodopayments
         description: nil,
         # Integration-specific configuration supplied when creating or updating an
         # entitlement. The shape required matches the entitlement's `integration_type`.
+        #
+        # Untagged enum: variants are matched in order. `FeatureFlag` must precede
+        # `LicenseKey`, whose fields are all optional and would otherwise match a
+        # `feature_flag` config.
         integration_config: nil,
+        # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
         metadata: nil,
         name: nil,
         request_options: {}

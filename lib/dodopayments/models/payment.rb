@@ -55,8 +55,8 @@ module Dodopayments
       # @!attribute metadata
       #   Additional custom data associated with the payment
       #
-      #   @return [Hash{Symbol=>String}]
-      required :metadata, Dodopayments::Internal::Type::HashOf[String]
+      #   @return [Hash{Symbol=>String, Float, Boolean}]
+      required :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
       # @!attribute payment_id
       #   Unique identifier for the payment
@@ -280,7 +280,7 @@ module Dodopayments
       #
       #   @param disputes [Array<Dodopayments::Models::Dispute>] List of disputes associated with this payment
       #
-      #   @param metadata [Hash{Symbol=>String}] Additional custom data associated with the payment
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional custom data associated with the payment
       #
       #   @param payment_id [String] Unique identifier for the payment
       #
