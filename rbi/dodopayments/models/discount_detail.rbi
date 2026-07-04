@@ -29,7 +29,7 @@ module Dodopayments
       attr_accessor :discount_id
 
       # Additional metadata
-      sig { returns(T::Hash[Symbol, String]) }
+      sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
       attr_accessor :metadata
 
       # Position of this discount in the stack (0-based)
@@ -82,7 +82,7 @@ module Dodopayments
           code: String,
           created_at: Time,
           discount_id: String,
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           position: Integer,
           preserve_on_plan_change: T::Boolean,
           restricted_to: T::Array[String],
@@ -140,7 +140,7 @@ module Dodopayments
             code: String,
             created_at: Time,
             discount_id: String,
-            metadata: T::Hash[Symbol, String],
+            metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             position: Integer,
             preserve_on_plan_change: T::Boolean,
             restricted_to: T::Array[String],

@@ -26,7 +26,7 @@ module Dodopayments
       attr_writer :customer
 
       # Additional metadata associated with the payment
-      sig { returns(T::Hash[Symbol, String]) }
+      sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
       attr_accessor :metadata
 
       # Unique identifier for the payment
@@ -63,7 +63,7 @@ module Dodopayments
         params(
           client_secret: String,
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           payment_id: String,
           total_amount: Integer,
           discount_id: T.nilable(String),
@@ -106,7 +106,7 @@ module Dodopayments
           {
             client_secret: String,
             customer: Dodopayments::CustomerLimitedDetails,
-            metadata: T::Hash[Symbol, String],
+            metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             payment_id: String,
             total_amount: Integer,
             discount_id: T.nilable(String),

@@ -41,6 +41,7 @@ module Dodopayments
           id: String,
           integration_config:
             T.any(
+              Dodopayments::IntegrationConfigResponse::FeatureFlagConfig::OrHash,
               Dodopayments::IntegrationConfigResponse::GitHubConfig::OrHash,
               Dodopayments::IntegrationConfigResponse::DiscordConfig::OrHash,
               Dodopayments::IntegrationConfigResponse::TelegramConfig::OrHash,

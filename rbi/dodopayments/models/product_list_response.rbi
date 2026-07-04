@@ -28,7 +28,7 @@ module Dodopayments
       attr_accessor :is_recurring
 
       # Additional custom data associated with the product
-      sig { returns(T::Hash[Symbol, String]) }
+      sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
       attr_accessor :metadata
 
       # Unique identifier for the product.
@@ -94,7 +94,7 @@ module Dodopayments
           entitlements:
             T::Array[Dodopayments::ProductEntitlementSummary::OrHash],
           is_recurring: T::Boolean,
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           product_id: String,
           tax_category: Dodopayments::TaxCategory::OrSymbol,
           updated_at: Time,
@@ -169,7 +169,7 @@ module Dodopayments
             created_at: Time,
             entitlements: T::Array[Dodopayments::ProductEntitlementSummary],
             is_recurring: T::Boolean,
-            metadata: T::Hash[Symbol, String],
+            metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             product_id: String,
             tax_category: Dodopayments::TaxCategory::TaggedSymbol,
             updated_at: Time,

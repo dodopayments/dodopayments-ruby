@@ -22,7 +22,7 @@ module Dodopayments
           discount_codes: T.nilable(T::Array[String]),
           force_3ds: T.nilable(T::Boolean),
           mandate_min_amount_inr_paise: T.nilable(Integer),
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           on_demand: T.nilable(Dodopayments::OnDemandSubscription::OrHash),
           one_time_product_cart:
             T.nilable(T::Array[Dodopayments::OneTimeProductCartItem::OrHash]),
@@ -150,7 +150,8 @@ module Dodopayments
             T.nilable(
               Dodopayments::SubscriptionUpdateParams::DisableOnDemand::OrHash
             ),
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata:
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           next_billing_date: T.nilable(Time),
           status: T.nilable(Dodopayments::SubscriptionStatus::OrSymbol),
           tax_id: T.nilable(String),
@@ -179,6 +180,7 @@ module Dodopayments
         customer_business_name: nil,
         customer_name: nil,
         disable_on_demand: nil,
+        # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
         metadata: nil,
         next_billing_date: nil,
         status: nil,
@@ -251,7 +253,8 @@ module Dodopayments
           discount_codes: T.nilable(T::Array[String]),
           effective_at:
             Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol,
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata:
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           on_payment_failure:
             T.nilable(
               Dodopayments::UpdateSubscriptionPlanReq::OnPaymentFailure::OrSymbol
@@ -311,7 +314,8 @@ module Dodopayments
             T.nilable(
               Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig::OrHash
             ),
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata:
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           product_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           product_description: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
@@ -355,7 +359,8 @@ module Dodopayments
           discount_codes: T.nilable(T::Array[String]),
           effective_at:
             Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol,
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata:
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           on_payment_failure:
             T.nilable(
               Dodopayments::UpdateSubscriptionPlanReq::OnPaymentFailure::OrSymbol

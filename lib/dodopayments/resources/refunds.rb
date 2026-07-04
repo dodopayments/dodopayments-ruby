@@ -9,7 +9,7 @@ module Dodopayments
       #
       # @param items [Array<Dodopayments::Models::RefundCreateParams::Item>, nil] Partially Refund an Individual Item
       #
-      # @param metadata [Hash{Symbol=>String}] Additional metadata associated with the refund.
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata associated with the refund.
       #
       # @param reason [String, nil] The reason for the refund, if any. Maximum length is 3000 characters. Optional.
       #

@@ -4,12 +4,17 @@ module Dodopayments
   module Models
     # Integration-specific configuration supplied when creating or updating an
     # entitlement. The shape required matches the entitlement's `integration_type`.
+    #
+    # Untagged enum: variants are matched in order. `FeatureFlag` must precede
+    # `LicenseKey`, whose fields are all optional and would otherwise match a
+    # `feature_flag` config.
     module IntegrationConfig
       extend Dodopayments::Internal::Type::Union
 
       Variants =
         T.type_alias do
           T.any(
+            Dodopayments::IntegrationConfig::FeatureFlagConfig,
             Dodopayments::IntegrationConfig::GitHubConfig,
             Dodopayments::IntegrationConfig::DiscordConfig,
             Dodopayments::IntegrationConfig::TelegramConfig,
@@ -20,6 +25,43 @@ module Dodopayments
             Dodopayments::IntegrationConfig::LicenseKeyConfig
           )
         end
+
+      class FeatureFlagConfig < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::IntegrationConfig::FeatureFlagConfig,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        # Merchant-chosen identifier for the capability this entitlement unlocks. Not
+        # unique across entitlements.
+        sig { returns(String) }
+        attr_accessor :feature_id
+
+        # Type of capability conferred.
+        sig { returns(Symbol) }
+        attr_accessor :feature_type
+
+        sig do
+          params(feature_id: String, feature_type: Symbol).returns(
+            T.attached_class
+          )
+        end
+        def self.new(
+          # Merchant-chosen identifier for the capability this entitlement unlocks. Not
+          # unique across entitlements.
+          feature_id:,
+          # Type of capability conferred.
+          feature_type: :boolean
+        )
+        end
+
+        sig { override.returns({ feature_id: String, feature_type: Symbol }) }
+        def to_hash
+        end
+      end
 
       class GitHubConfig < Dodopayments::Internal::Type::BaseModel
         OrHash =

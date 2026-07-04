@@ -44,8 +44,8 @@ module Dodopayments
       # @!attribute metadata
       #   Additional custom data associated with the subscription
       #
-      #   @return [Hash{Symbol=>String}]
-      required :metadata, Dodopayments::Internal::Type::HashOf[String]
+      #   @return [Hash{Symbol=>String, Float, Boolean}]
+      required :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
       # @!attribute next_billing_date
       #   Timestamp of the next scheduled billing. Indicates the end of current billing
@@ -200,7 +200,7 @@ module Dodopayments
       #
       #   @param discounts [Array<Dodopayments::Models::SubscriptionListResponse::Discount>] All stacked discounts applied, in order of application
       #
-      #   @param metadata [Hash{Symbol=>String}] Additional custom data associated with the subscription
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional custom data associated with the subscription
       #
       #   @param next_billing_date [Time] Timestamp of the next scheduled billing. Indicates the end of current billing pe
       #

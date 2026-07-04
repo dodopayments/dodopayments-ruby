@@ -4,8 +4,14 @@ module Dodopayments
   module Models
     # Integration-specific configuration supplied when creating or updating an
     # entitlement. The shape required matches the entitlement's `integration_type`.
+    #
+    # Untagged enum: variants are matched in order. `FeatureFlag` must precede
+    # `LicenseKey`, whose fields are all optional and would otherwise match a
+    # `feature_flag` config.
     module IntegrationConfig
       extend Dodopayments::Internal::Type::Union
+
+      variant -> { Dodopayments::IntegrationConfig::FeatureFlagConfig }
 
       variant -> { Dodopayments::IntegrationConfig::GitHubConfig }
 
@@ -22,6 +28,29 @@ module Dodopayments
       variant -> { Dodopayments::IntegrationConfig::DigitalFilesConfig }
 
       variant -> { Dodopayments::IntegrationConfig::LicenseKeyConfig }
+
+      class FeatureFlagConfig < Dodopayments::Internal::Type::BaseModel
+        # @!attribute feature_id
+        #   Merchant-chosen identifier for the capability this entitlement unlocks. Not
+        #   unique across entitlements.
+        #
+        #   @return [String]
+        required :feature_id, String
+
+        # @!attribute feature_type
+        #   Type of capability conferred.
+        #
+        #   @return [Symbol, :boolean]
+        required :feature_type, const: :boolean
+
+        # @!method initialize(feature_id:, feature_type: :boolean)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::IntegrationConfig::FeatureFlagConfig} for more details.
+        #
+        #   @param feature_id [String] Merchant-chosen identifier for the capability this entitlement
+        #
+        #   @param feature_type [Symbol, :boolean] Type of capability conferred.
+      end
 
       class GitHubConfig < Dodopayments::Internal::Type::BaseModel
         # @!attribute permission
@@ -222,7 +251,7 @@ module Dodopayments
       end
 
       # @!method self.variants
-      #   @return [Array(Dodopayments::Models::IntegrationConfig::GitHubConfig, Dodopayments::Models::IntegrationConfig::DiscordConfig, Dodopayments::Models::IntegrationConfig::TelegramConfig, Dodopayments::Models::IntegrationConfig::FigmaConfig, Dodopayments::Models::IntegrationConfig::FramerConfig, Dodopayments::Models::IntegrationConfig::NotionConfig, Dodopayments::Models::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig)]
+      #   @return [Array(Dodopayments::Models::IntegrationConfig::FeatureFlagConfig, Dodopayments::Models::IntegrationConfig::GitHubConfig, Dodopayments::Models::IntegrationConfig::DiscordConfig, Dodopayments::Models::IntegrationConfig::TelegramConfig, Dodopayments::Models::IntegrationConfig::FigmaConfig, Dodopayments::Models::IntegrationConfig::FramerConfig, Dodopayments::Models::IntegrationConfig::NotionConfig, Dodopayments::Models::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig)]
     end
   end
 end

@@ -17,7 +17,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         customer_id: String,
         email: String,
         name: String,
-        metadata: ^(Dodopayments::Internal::Type::HashOf[String]) | nil,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]) | nil,
         phone_number: String | nil
       }
     end
@@ -37,7 +37,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         customer_id: String,
         email: String,
         name: String,
-        metadata: ^(Dodopayments::Internal::Type::HashOf[String]) | nil,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]) | nil,
         phone_number: String | nil
       }
     end
@@ -57,7 +57,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         customer_id: String,
         email: String,
         name: String,
-        metadata: ^(Dodopayments::Internal::Type::HashOf[String]) | nil,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]) | nil,
         phone_number: String | nil
       }
     end
@@ -84,7 +84,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         customer_id: String,
         email: String,
         name: String,
-        metadata: ^(Dodopayments::Internal::Type::HashOf[String]) | nil,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]) | nil,
         phone_number: String | nil
       }
     end

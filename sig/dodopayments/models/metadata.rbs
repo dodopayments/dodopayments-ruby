@@ -1,6 +1,14 @@
 module Dodopayments
   module Models
-    type metadata = ::Hash[Symbol, String]
+    type metadata_item = String | Float | bool
+
+    module MetadataItem
+      extend Dodopayments::Internal::Type::Union
+
+      def self?.variants: -> ::Array[Dodopayments::Models::metadata_item]
+    end
+
+    type metadata = ::Hash[Symbol, Dodopayments::Models::metadata_item]
 
     Metadata: Dodopayments::Internal::Type::Converter
   end

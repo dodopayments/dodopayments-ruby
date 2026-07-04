@@ -19,6 +19,7 @@ module Dodopayments
           digital_product_delivery: Dodopayments::DigitalProductDelivery?,
           error_code: String?,
           error_message: String?,
+          feature: Dodopayments::Entitlements::EntitlementGrant::Feature?,
           license_key: Dodopayments::Entitlements::LicenseKeyGrant?,
           oauth_expires_at: Time?,
           oauth_url: String?,
@@ -57,6 +58,8 @@ module Dodopayments
 
         attr_accessor error_message: String?
 
+        attr_accessor feature: Dodopayments::Entitlements::EntitlementGrant::Feature?
+
         attr_accessor license_key: Dodopayments::Entitlements::LicenseKeyGrant?
 
         attr_accessor oauth_expires_at: Time?
@@ -86,6 +89,7 @@ module Dodopayments
           ?digital_product_delivery: Dodopayments::DigitalProductDelivery?,
           ?error_code: String?,
           ?error_message: String?,
+          ?feature: Dodopayments::Entitlements::EntitlementGrant::Feature?,
           ?license_key: Dodopayments::Entitlements::LicenseKeyGrant?,
           ?oauth_expires_at: Time?,
           ?oauth_url: String?,
@@ -110,6 +114,7 @@ module Dodopayments
           digital_product_delivery: Dodopayments::DigitalProductDelivery?,
           error_code: String?,
           error_message: String?,
+          feature: Dodopayments::Entitlements::EntitlementGrant::Feature?,
           license_key: Dodopayments::Entitlements::LicenseKeyGrant?,
           oauth_expires_at: Time?,
           oauth_url: String?,
@@ -130,6 +135,18 @@ module Dodopayments
           REVOKED: :Revoked
 
           def self?.values: -> ::Array[Dodopayments::Models::Entitlements::EntitlementGrant::status]
+        end
+
+        type feature = { feature_id: String, feature_type: :boolean }
+
+        class Feature < Dodopayments::Internal::Type::BaseModel
+          attr_accessor feature_id: String
+
+          attr_accessor feature_type: :boolean
+
+          def initialize: (feature_id: String, ?feature_type: :boolean) -> void
+
+          def to_hash: -> { feature_id: String, feature_type: :boolean }
         end
       end
     end

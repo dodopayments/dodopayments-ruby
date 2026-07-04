@@ -49,7 +49,7 @@ module Dodopayments
       attr_accessor :disputes
 
       # Additional custom data associated with the payment
-      sig { returns(T::Hash[Symbol, String]) }
+      sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
       attr_accessor :metadata
 
       # Unique identifier for the payment
@@ -198,7 +198,7 @@ module Dodopayments
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
           digital_products_delivered: T::Boolean,
           disputes: T::Array[Dodopayments::Dispute::OrHash],
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           payment_id: String,
           payment_provider: Dodopayments::Payment::PaymentProvider::OrSymbol,
           refunds: T::Array[Dodopayments::RefundListItem::OrHash],
@@ -340,7 +340,7 @@ module Dodopayments
             customer: Dodopayments::CustomerLimitedDetails,
             digital_products_delivered: T::Boolean,
             disputes: T::Array[Dodopayments::Dispute],
-            metadata: T::Hash[Symbol, String],
+            metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             payment_id: String,
             payment_provider:
               Dodopayments::Payment::PaymentProvider::TaggedSymbol,
