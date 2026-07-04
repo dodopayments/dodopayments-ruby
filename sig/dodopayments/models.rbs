@@ -271,6 +271,8 @@ module Dodopayments
 
   Metadata: Dodopayments::Internal::Type::Converter
 
+  type metadata_item = Dodopayments::Models::metadata_item
+
   class Meter = Dodopayments::Models::Meter
 
   class MeterAggregation = Dodopayments::Models::MeterAggregation

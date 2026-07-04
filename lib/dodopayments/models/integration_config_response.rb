@@ -9,6 +9,8 @@ module Dodopayments
     module IntegrationConfigResponse
       extend Dodopayments::Internal::Type::Union
 
+      variant -> { Dodopayments::IntegrationConfigResponse::FeatureFlagConfig }
+
       variant -> { Dodopayments::IntegrationConfigResponse::GitHubConfig }
 
       variant -> { Dodopayments::IntegrationConfigResponse::DiscordConfig }
@@ -24,6 +26,25 @@ module Dodopayments
       variant -> { Dodopayments::IntegrationConfigResponse::DigitalFilesConfig }
 
       variant -> { Dodopayments::IntegrationConfigResponse::LicenseKeyConfig }
+
+      class FeatureFlagConfig < Dodopayments::Internal::Type::BaseModel
+        # @!attribute feature_id
+        #   Merchant-chosen identifier for the capability this entitlement unlocks.
+        #
+        #   @return [String]
+        required :feature_id, String
+
+        # @!attribute feature_type
+        #   Type of capability conferred. Only `boolean` is supported today.
+        #
+        #   @return [Symbol, :boolean]
+        required :feature_type, const: :boolean
+
+        # @!method initialize(feature_id:, feature_type: :boolean)
+        #   @param feature_id [String] Merchant-chosen identifier for the capability this entitlement unlocks.
+        #
+        #   @param feature_type [Symbol, :boolean] Type of capability conferred. Only `boolean` is supported today.
+      end
 
       class GitHubConfig < Dodopayments::Internal::Type::BaseModel
         # @!attribute permission
@@ -283,7 +304,7 @@ module Dodopayments
       end
 
       # @!method self.variants
-      #   @return [Array(Dodopayments::Models::IntegrationConfigResponse::GitHubConfig, Dodopayments::Models::IntegrationConfigResponse::DiscordConfig, Dodopayments::Models::IntegrationConfigResponse::TelegramConfig, Dodopayments::Models::IntegrationConfigResponse::FigmaConfig, Dodopayments::Models::IntegrationConfigResponse::FramerConfig, Dodopayments::Models::IntegrationConfigResponse::NotionConfig, Dodopayments::Models::IntegrationConfigResponse::DigitalFilesConfig, Dodopayments::Models::IntegrationConfigResponse::LicenseKeyConfig)]
+      #   @return [Array(Dodopayments::Models::IntegrationConfigResponse::FeatureFlagConfig, Dodopayments::Models::IntegrationConfigResponse::GitHubConfig, Dodopayments::Models::IntegrationConfigResponse::DiscordConfig, Dodopayments::Models::IntegrationConfigResponse::TelegramConfig, Dodopayments::Models::IntegrationConfigResponse::FigmaConfig, Dodopayments::Models::IntegrationConfigResponse::FramerConfig, Dodopayments::Models::IntegrationConfigResponse::NotionConfig, Dodopayments::Models::IntegrationConfigResponse::DigitalFilesConfig, Dodopayments::Models::IntegrationConfigResponse::LicenseKeyConfig)]
     end
   end
 end

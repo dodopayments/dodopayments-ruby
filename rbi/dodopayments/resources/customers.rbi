@@ -13,7 +13,7 @@ module Dodopayments
         params(
           email: String,
           name: String,
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           phone_number: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Customer)
@@ -45,7 +45,8 @@ module Dodopayments
         params(
           customer_id: String,
           email: T.nilable(String),
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata:
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           name: T.nilable(String),
           phone_number: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash

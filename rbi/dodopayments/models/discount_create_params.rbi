@@ -37,10 +37,18 @@ module Dodopayments
       attr_accessor :expires_at
 
       # Additional metadata for the discount
-      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      sig do
+        returns(
+          T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants])
+        )
+      end
       attr_reader :metadata
 
-      sig { params(metadata: T::Hash[Symbol, String]).void }
+      sig do
+        params(
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants]
+        ).void
+      end
       attr_writer :metadata
 
       sig { returns(T.nilable(String)) }
@@ -74,7 +82,7 @@ module Dodopayments
           type: Dodopayments::DiscountType::OrSymbol,
           code: T.nilable(String),
           expires_at: T.nilable(Time),
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           name: T.nilable(String),
           preserve_on_plan_change: T::Boolean,
           restricted_to: T.nilable(T::Array[String]),
@@ -123,7 +131,7 @@ module Dodopayments
             type: Dodopayments::DiscountType::OrSymbol,
             code: T.nilable(String),
             expires_at: T.nilable(Time),
-            metadata: T::Hash[Symbol, String],
+            metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             name: T.nilable(String),
             preserve_on_plan_change: T::Boolean,
             restricted_to: T.nilable(T::Array[String]),

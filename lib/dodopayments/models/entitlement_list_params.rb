@@ -46,6 +46,7 @@ module Dodopayments
         NOTION = :notion
         DIGITAL_FILES = :digital_files
         LICENSE_KEY = :license_key
+        FEATURE_FLAG = :feature_flag
 
         # @!method self.values
         #   @return [Array<Symbol>]

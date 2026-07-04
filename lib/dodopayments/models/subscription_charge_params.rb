@@ -39,8 +39,10 @@ module Dodopayments
       #   Metadata for the payment. If not passed, the metadata of the subscription will
       #   be taken
       #
-      #   @return [Hash{Symbol=>String}, nil]
-      optional :metadata, Dodopayments::Internal::Type::HashOf[String], nil?: true
+      #   @return [Hash{Symbol=>String, Float, Boolean}, nil]
+      optional :metadata,
+               -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] },
+               nil?: true
 
       # @!attribute product_currency
       #   Optional currency of the product price. If not specified, defaults to the
@@ -68,7 +70,7 @@ module Dodopayments
       #
       #   @param customer_balance_config [Dodopayments::Models::SubscriptionChargeParams::CustomerBalanceConfig, nil] Specify how customer balance is used for the payment
       #
-      #   @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
       #   @param product_currency [Symbol, Dodopayments::Models::Currency, nil] Optional currency of the product price. If not specified, defaults to the curren
       #

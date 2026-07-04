@@ -52,7 +52,12 @@ module Dodopayments
         sig { returns(T.nilable(Time)) }
         attr_accessor :expires_at
 
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+        sig do
+          returns(
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants])
+          )
+        end
         attr_accessor :metadata
 
         sig { returns(T.nilable(String)) }
@@ -77,7 +82,8 @@ module Dodopayments
               Dodopayments::Models::CreditEntitlements::BalanceListGrantsResponse::SourceType::OrSymbol,
             updated_at: Time,
             expires_at: T.nilable(Time),
-            metadata: T.nilable(T::Hash[Symbol, String]),
+            metadata:
+              T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
             parent_grant_id: T.nilable(String),
             source_id: T.nilable(String)
           ).returns(T.attached_class)
@@ -95,6 +101,7 @@ module Dodopayments
           source_type:,
           updated_at:,
           expires_at: nil,
+          # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
           metadata: nil,
           parent_grant_id: nil,
           source_id: nil
@@ -117,7 +124,10 @@ module Dodopayments
                 Dodopayments::Models::CreditEntitlements::BalanceListGrantsResponse::SourceType::TaggedSymbol,
               updated_at: Time,
               expires_at: T.nilable(Time),
-              metadata: T.nilable(T::Hash[Symbol, String]),
+              metadata:
+                T.nilable(
+                  T::Hash[Symbol, Dodopayments::MetadataItem::Variants]
+                ),
               parent_grant_id: T.nilable(String),
               source_id: T.nilable(String)
             }

@@ -41,7 +41,11 @@ module Dodopayments
 
         # Optional metadata (max 50 key-value pairs, key max 40 chars, value max 500
         # chars)
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        sig do
+          returns(
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants])
+          )
+        end
         attr_accessor :metadata
 
         # Human-readable reason for the entry
@@ -57,7 +61,8 @@ module Dodopayments
               Dodopayments::CreditEntitlements::LedgerEntryType::OrSymbol,
             expires_at: T.nilable(Time),
             idempotency_key: T.nilable(String),
-            metadata: T.nilable(T::Hash[Symbol, String]),
+            metadata:
+              T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
             reason: T.nilable(String),
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(T.attached_class)
@@ -92,7 +97,10 @@ module Dodopayments
                 Dodopayments::CreditEntitlements::LedgerEntryType::OrSymbol,
               expires_at: T.nilable(Time),
               idempotency_key: T.nilable(String),
-              metadata: T.nilable(T::Hash[Symbol, String]),
+              metadata:
+                T.nilable(
+                  T::Hash[Symbol, Dodopayments::MetadataItem::Variants]
+                ),
               reason: T.nilable(String),
               request_options: Dodopayments::RequestOptions
             }

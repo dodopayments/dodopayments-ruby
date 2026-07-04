@@ -316,6 +316,8 @@ module Dodopayments
       Dodopayments::Internal::Type::Converter
     )
 
+  MetadataItem = Dodopayments::Models::MetadataItem
+
   Meter = Dodopayments::Models::Meter
 
   MeterAggregation = Dodopayments::Models::MeterAggregation

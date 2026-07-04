@@ -15,7 +15,7 @@ module Dodopayments
       #
       # @param name [String]
       #
-      # @param metadata [Hash{Symbol=>String}] Additional metadata for the customer
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata for the customer
       #
       # @param phone_number [String, nil]
       #
@@ -59,7 +59,7 @@ module Dodopayments
       #
       # @param email [String, nil]
       #
-      # @param metadata [Hash{Symbol=>String}, nil] Additional metadata for the customer
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Additional metadata for the customer
       #
       # @param name [String, nil]
       #

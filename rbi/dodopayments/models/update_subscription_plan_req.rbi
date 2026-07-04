@@ -72,7 +72,11 @@ module Dodopayments
 
       # Metadata for the payment. If not passed, the metadata of the subscription will
       # be taken
-      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      sig do
+        returns(
+          T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants])
+        )
+      end
       attr_accessor :metadata
 
       # Controls behavior when the plan change payment fails.
@@ -103,7 +107,8 @@ module Dodopayments
           discount_codes: T.nilable(T::Array[String]),
           effective_at:
             Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol,
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata:
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           on_payment_failure:
             T.nilable(
               Dodopayments::UpdateSubscriptionPlanReq::OnPaymentFailure::OrSymbol
@@ -163,7 +168,8 @@ module Dodopayments
             discount_codes: T.nilable(T::Array[String]),
             effective_at:
               Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol,
-            metadata: T.nilable(T::Hash[Symbol, String]),
+            metadata:
+              T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
             on_payment_failure:
               T.nilable(
                 Dodopayments::UpdateSubscriptionPlanReq::OnPaymentFailure::OrSymbol

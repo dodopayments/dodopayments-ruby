@@ -50,7 +50,11 @@ module Dodopayments
 
       # Metadata for the payment. If not passed, the metadata of the subscription will
       # be taken
-      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      sig do
+        returns(
+          T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants])
+        )
+      end
       attr_accessor :metadata
 
       # Optional currency of the product price. If not specified, defaults to the
@@ -72,7 +76,8 @@ module Dodopayments
             T.nilable(
               Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig::OrHash
             ),
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata:
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           product_currency: T.nilable(Dodopayments::Currency::OrSymbol),
           product_description: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
@@ -112,7 +117,8 @@ module Dodopayments
               T.nilable(
                 Dodopayments::SubscriptionChargeParams::CustomerBalanceConfig
               ),
-            metadata: T.nilable(T::Hash[Symbol, String]),
+            metadata:
+              T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
             product_currency: T.nilable(Dodopayments::Currency::OrSymbol),
             product_description: T.nilable(String),
             request_options: Dodopayments::RequestOptions

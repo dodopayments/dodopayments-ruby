@@ -50,8 +50,8 @@ module Dodopayments
         # @!attribute metadata
         #   Arbitrary key-value metadata recorded on the grant.
         #
-        #   @return [Hash{Symbol=>String}]
-        required :metadata, Dodopayments::Internal::Type::HashOf[String]
+        #   @return [Hash{Symbol=>String, Float, Boolean}]
+        required :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
         # @!attribute status
         #   Lifecycle status of the grant.
@@ -89,6 +89,13 @@ module Dodopayments
         #
         #   @return [String, nil]
         optional :error_message, String, nil?: true
+
+        # @!attribute feature
+        #   Typed feature payload, present only when the entitlement integration is
+        #   `feature_flag`; `null` for every other integration type.
+        #
+        #   @return [Dodopayments::Models::Entitlements::EntitlementGrant::Feature, nil]
+        optional :feature, -> { Dodopayments::Entitlements::EntitlementGrant::Feature }, nil?: true
 
         # @!attribute license_key
         #   License-key delivery payload, present when the entitlement integration is
@@ -135,7 +142,7 @@ module Dodopayments
         #   @return [String, nil]
         optional :subscription_id, String, nil?: true
 
-        # @!method initialize(id:, brand_id:, business_id:, created_at:, customer_id:, entitlement_id:, integration_type:, metadata:, status:, updated_at:, delivered_at: nil, digital_product_delivery: nil, error_code: nil, error_message: nil, license_key: nil, oauth_expires_at: nil, oauth_url: nil, payment_id: nil, revocation_reason: nil, revoked_at: nil, subscription_id: nil)
+        # @!method initialize(id:, brand_id:, business_id:, created_at:, customer_id:, entitlement_id:, integration_type:, metadata:, status:, updated_at:, delivered_at: nil, digital_product_delivery: nil, error_code: nil, error_message: nil, feature: nil, license_key: nil, oauth_expires_at: nil, oauth_url: nil, payment_id: nil, revocation_reason: nil, revoked_at: nil, subscription_id: nil)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Entitlements::EntitlementGrant} for more details.
         #
@@ -156,7 +163,7 @@ module Dodopayments
         #
         #   @param integration_type [Symbol, Dodopayments::Models::EntitlementIntegrationType] The integration type of the grant's entitlement (e.g. `license_key`).
         #
-        #   @param metadata [Hash{Symbol=>String}] Arbitrary key-value metadata recorded on the grant.
+        #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Arbitrary key-value metadata recorded on the grant.
         #
         #   @param status [Symbol, Dodopayments::Models::Entitlements::EntitlementGrant::Status] Lifecycle status of the grant.
         #
@@ -169,6 +176,8 @@ module Dodopayments
         #   @param error_code [String, nil] Machine-readable code reported when delivery failed, when applicable.
         #
         #   @param error_message [String, nil] Human-readable message reported when delivery failed, when applicable.
+        #
+        #   @param feature [Dodopayments::Models::Entitlements::EntitlementGrant::Feature, nil] Typed feature payload, present only when the entitlement integration is
         #
         #   @param license_key [Dodopayments::Models::Entitlements::LicenseKeyGrant, nil] License-key delivery payload, present when the entitlement integration
         #
@@ -197,6 +206,29 @@ module Dodopayments
 
           # @!method self.values
           #   @return [Array<Symbol>]
+        end
+
+        # @see Dodopayments::Models::Entitlements::EntitlementGrant#feature
+        class Feature < Dodopayments::Internal::Type::BaseModel
+          # @!attribute feature_id
+          #   Identifier of the capability this grant confers.
+          #
+          #   @return [String]
+          required :feature_id, String
+
+          # @!attribute feature_type
+          #   Type of capability conferred.
+          #
+          #   @return [Symbol, :boolean]
+          required :feature_type, const: :boolean
+
+          # @!method initialize(feature_id:, feature_type: :boolean)
+          #   Typed feature payload, present only when the entitlement integration is
+          #   `feature_flag`; `null` for every other integration type.
+          #
+          #   @param feature_id [String] Identifier of the capability this grant confers.
+          #
+          #   @param feature_type [Symbol, :boolean] Type of capability conferred.
         end
       end
     end

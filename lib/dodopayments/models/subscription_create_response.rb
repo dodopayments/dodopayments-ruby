@@ -19,8 +19,8 @@ module Dodopayments
       # @!attribute metadata
       #   Additional metadata associated with the subscription
       #
-      #   @return [Hash{Symbol=>String}]
-      required :metadata, Dodopayments::Internal::Type::HashOf[String]
+      #   @return [Hash{Symbol=>String, Float, Boolean}]
+      required :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
       # @!attribute payment_id
       #   First payment id for the subscription
@@ -91,7 +91,7 @@ module Dodopayments
       #
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails] Customer details associated with this subscription
       #
-      #   @param metadata [Hash{Symbol=>String}] Additional metadata associated with the subscription
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata associated with the subscription
       #
       #   @param payment_id [String] First payment id for the subscription
       #
