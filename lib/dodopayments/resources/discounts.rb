@@ -19,7 +19,7 @@ module Dodopayments
       #
       # @param expires_at [Time, nil] When the discount expires, if ever.
       #
-      # @param metadata [Hash{Symbol=>String}] Additional metadata for the discount
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata for the discount
       #
       # @param name [String, nil]
       #
@@ -82,7 +82,7 @@ module Dodopayments
       #
       # @param expires_at [Time, nil]
       #
-      # @param metadata [Hash{Symbol=>String}, nil] Additional metadata for the discount
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Additional metadata for the discount
       #
       # @param name [String, nil]
       #

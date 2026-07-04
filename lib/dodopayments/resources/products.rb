@@ -43,7 +43,7 @@ module Dodopayments
       #
       # @param license_key_enabled [Boolean, nil] When true, generates and sends a license key to your customer.
       #
-      # @param metadata [Hash{Symbol=>String}] Additional metadata for the product
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata for the product
       #
       # @param pricing_mode [Symbol, Dodopayments::Models::Products::PricingMode, nil] Pricing mode for localized pricing. When set, rules from
       #
@@ -110,7 +110,7 @@ module Dodopayments
       #
       # @param license_key_enabled [Boolean, nil] Whether the product requires a license key.
       #
-      # @param metadata [Hash{Symbol=>String}, nil] Additional metadata for the product
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Additional metadata for the product
       #
       # @param name [String, nil] Name of the product, optional and must be at most 100 characters.
       #

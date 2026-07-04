@@ -43,7 +43,7 @@ module Dodopayments
         attr_accessor :integration_type
 
         # Arbitrary key-value metadata recorded on the grant.
-        sig { returns(T::Hash[Symbol, String]) }
+        sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
         attr_accessor :metadata
 
         # Lifecycle status of the grant.
@@ -82,6 +82,14 @@ module Dodopayments
         # Human-readable message reported when delivery failed, when applicable.
         sig { returns(T.nilable(String)) }
         attr_accessor :error_message
+
+        # Typed feature payload, present only when the entitlement integration is
+        # `feature_flag`; `null` for every other integration type.
+        sig { returns(T.nilable(Dodopayments::Feature)) }
+        attr_reader :feature
+
+        sig { params(feature: T.nilable(Dodopayments::Feature::OrHash)).void }
+        attr_writer :feature
 
         # License-key delivery payload, present when the entitlement integration is
         # `license_key`.
@@ -134,7 +142,7 @@ module Dodopayments
             entitlement_id: String,
             integration_type:
               Dodopayments::EntitlementIntegrationType::OrSymbol,
-            metadata: T::Hash[Symbol, String],
+            metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             status:
               Dodopayments::Entitlements::EntitlementGrant::Status::OrSymbol,
             updated_at: Time,
@@ -143,6 +151,7 @@ module Dodopayments
               T.nilable(Dodopayments::DigitalProductDelivery::OrHash),
             error_code: T.nilable(String),
             error_message: T.nilable(String),
+            feature: T.nilable(Dodopayments::Feature::OrHash),
             license_key:
               T.nilable(Dodopayments::Entitlements::LicenseKeyGrant::OrHash),
             oauth_expires_at: T.nilable(Time),
@@ -183,6 +192,9 @@ module Dodopayments
           error_code: nil,
           # Human-readable message reported when delivery failed, when applicable.
           error_message: nil,
+          # Typed feature payload, present only when the entitlement integration is
+          # `feature_flag`; `null` for every other integration type.
+          feature: nil,
           # License-key delivery payload, present when the entitlement integration is
           # `license_key`.
           license_key: nil,
@@ -214,7 +226,7 @@ module Dodopayments
               entitlement_id: String,
               integration_type:
                 Dodopayments::EntitlementIntegrationType::TaggedSymbol,
-              metadata: T::Hash[Symbol, String],
+              metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
               status:
                 Dodopayments::Entitlements::EntitlementGrant::Status::TaggedSymbol,
               updated_at: Time,
@@ -223,6 +235,7 @@ module Dodopayments
                 T.nilable(Dodopayments::DigitalProductDelivery),
               error_code: T.nilable(String),
               error_message: T.nilable(String),
+              feature: T.nilable(Dodopayments::Feature),
               license_key:
                 T.nilable(Dodopayments::Entitlements::LicenseKeyGrant),
               oauth_expires_at: T.nilable(Time),

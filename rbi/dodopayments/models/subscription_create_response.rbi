@@ -25,7 +25,7 @@ module Dodopayments
       attr_writer :customer
 
       # Additional metadata associated with the subscription
-      sig { returns(T::Hash[Symbol, String]) }
+      sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
       attr_accessor :metadata
 
       # First payment id for the subscription
@@ -79,7 +79,7 @@ module Dodopayments
         params(
           addons: T::Array[Dodopayments::AddonCartResponseItem::OrHash],
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           payment_id: String,
           recurring_pre_tax_amount: Integer,
           subscription_id: String,
@@ -132,7 +132,7 @@ module Dodopayments
           {
             addons: T::Array[Dodopayments::AddonCartResponseItem],
             customer: Dodopayments::CustomerLimitedDetails,
-            metadata: T::Hash[Symbol, String],
+            metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             payment_id: String,
             recurring_pre_tax_amount: Integer,
             subscription_id: String,

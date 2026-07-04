@@ -13,7 +13,7 @@ module Dodopayments
       #
       # @overload create(integration_config:, integration_type:, name:, description: nil, metadata: nil, request_options: {})
       #
-      # @param integration_config [Dodopayments::Models::IntegrationConfig::GitHubConfig, Dodopayments::Models::IntegrationConfig::DiscordConfig, Dodopayments::Models::IntegrationConfig::TelegramConfig, Dodopayments::Models::IntegrationConfig::FigmaConfig, Dodopayments::Models::IntegrationConfig::FramerConfig, Dodopayments::Models::IntegrationConfig::NotionConfig, Dodopayments::Models::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig] Platform-specific configuration (validated per integration_type)
+      # @param integration_config [Dodopayments::Models::IntegrationConfig::FeatureFlagConfig, Dodopayments::Models::IntegrationConfig::GitHubConfig, Dodopayments::Models::IntegrationConfig::DiscordConfig, Dodopayments::Models::IntegrationConfig::TelegramConfig, Dodopayments::Models::IntegrationConfig::FigmaConfig, Dodopayments::Models::IntegrationConfig::FramerConfig, Dodopayments::Models::IntegrationConfig::NotionConfig, Dodopayments::Models::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig] Platform-specific configuration (validated per integration_type)
       #
       # @param integration_type [Symbol, Dodopayments::Models::EntitlementIntegrationType] Which platform integration this entitlement uses
       #
@@ -21,7 +21,7 @@ module Dodopayments
       #
       # @param description [String, nil] Optional description
       #
-      # @param metadata [Hash{Symbol=>String}] Additional metadata for the entitlement
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata for the entitlement
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -70,9 +70,9 @@ module Dodopayments
       #
       # @param description [String, nil]
       #
-      # @param integration_config [Dodopayments::Models::IntegrationConfig::GitHubConfig, Dodopayments::Models::IntegrationConfig::DiscordConfig, Dodopayments::Models::IntegrationConfig::TelegramConfig, Dodopayments::Models::IntegrationConfig::FigmaConfig, Dodopayments::Models::IntegrationConfig::FramerConfig, Dodopayments::Models::IntegrationConfig::NotionConfig, Dodopayments::Models::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig, nil] Integration-specific configuration supplied when creating or updating
+      # @param integration_config [Dodopayments::Models::IntegrationConfig::FeatureFlagConfig, Dodopayments::Models::IntegrationConfig::GitHubConfig, Dodopayments::Models::IntegrationConfig::DiscordConfig, Dodopayments::Models::IntegrationConfig::TelegramConfig, Dodopayments::Models::IntegrationConfig::FigmaConfig, Dodopayments::Models::IntegrationConfig::FramerConfig, Dodopayments::Models::IntegrationConfig::NotionConfig, Dodopayments::Models::IntegrationConfig::DigitalFilesConfig, Dodopayments::Models::IntegrationConfig::LicenseKeyConfig, nil] Integration-specific configuration supplied when creating or updating
       #
-      # @param metadata [Hash{Symbol=>String}, nil]
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
       #
       # @param name [String, nil]
       #

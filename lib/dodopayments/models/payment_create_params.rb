@@ -86,8 +86,8 @@ module Dodopayments
       #   Additional metadata associated with the payment. Defaults to empty if not
       #   provided.
       #
-      #   @return [Hash{Symbol=>String}, nil]
-      optional :metadata, Dodopayments::Internal::Type::HashOf[String]
+      #   @return [Hash{Symbol=>String, Float, Boolean}, nil]
+      optional :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
       # @!attribute payment_link
       #   Whether to generate a payment link. Defaults to false if not specified.
@@ -168,7 +168,7 @@ module Dodopayments
       #
       #   @param force_3ds [Boolean, nil] Override merchant default 3DS behaviour for this payment
       #
-      #   @param metadata [Hash{Symbol=>String}] Additional metadata associated with the payment.
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata associated with the payment.
       #
       #   @param payment_link [Boolean, nil] Whether to generate a payment link. Defaults to false if not specified.
       #

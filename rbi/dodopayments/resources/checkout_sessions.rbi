@@ -28,7 +28,8 @@ module Dodopayments
           feature_flags: Dodopayments::CheckoutSessionFlags::OrHash,
           force_3ds: T.nilable(T::Boolean),
           mandate_min_amount_inr_paise: T.nilable(Integer),
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata:
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           minimal_address: T::Boolean,
           payment_method_id: T.nilable(String),
           product_collection_id: T.nilable(String),
@@ -148,7 +149,8 @@ module Dodopayments
           feature_flags: Dodopayments::CheckoutSessionFlags::OrHash,
           force_3ds: T.nilable(T::Boolean),
           mandate_min_amount_inr_paise: T.nilable(Integer),
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata:
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           minimal_address: T::Boolean,
           payment_method_id: T.nilable(String),
           product_collection_id: T.nilable(String),

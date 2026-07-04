@@ -56,8 +56,8 @@ module Dodopayments
       # @!attribute metadata
       #   Additional custom data associated with the subscription
       #
-      #   @return [Hash{Symbol=>String}]
-      required :metadata, Dodopayments::Internal::Type::HashOf[String]
+      #   @return [Hash{Symbol=>String, Float, Boolean}]
+      required :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
       # @!attribute meter_credit_entitlement_cart
       #   Meter credit entitlement cart settings for this subscription
@@ -257,7 +257,7 @@ module Dodopayments
       #
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails] Customer details associated with the subscription
       #
-      #   @param metadata [Hash{Symbol=>String}] Additional custom data associated with the subscription
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional custom data associated with the subscription
       #
       #   @param meter_credit_entitlement_cart [Array<Dodopayments::Models::MeterCreditEntitlementCartResponse>] Meter credit entitlement cart settings for this subscription
       #

@@ -38,7 +38,7 @@ module Dodopayments
           license_key_duration:
             T.nilable(Dodopayments::LicenseKeyDuration::OrHash),
           license_key_enabled: T.nilable(T::Boolean),
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           pricing_mode:
             T.nilable(Dodopayments::Products::PricingMode::OrSymbol),
           request_options: Dodopayments::RequestOptions::OrHash
@@ -131,7 +131,8 @@ module Dodopayments
           license_key_duration:
             T.nilable(Dodopayments::LicenseKeyDuration::OrHash),
           license_key_enabled: T.nilable(T::Boolean),
-          metadata: T.nilable(T::Hash[Symbol, String]),
+          metadata:
+            T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           name: T.nilable(String),
           price:
             T.nilable(

@@ -6,7 +6,7 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
   def test_create_required_params
     response =
       @dodo_payments.entitlements.create(
-        integration_config: {permission: :pull, target_id: "target_id"},
+        integration_config: {feature_id: "feature_id", feature_type: :boolean},
         integration_type: :discord,
         name: "name"
       )
@@ -23,7 +23,7 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
         integration_config: Dodopayments::IntegrationConfigResponse,
         integration_type: Dodopayments::EntitlementIntegrationType,
         is_active: Dodopayments::Internal::Type::Boolean,
-        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
+        metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]),
         name: String,
         updated_at: Time,
         description: String | nil
@@ -46,7 +46,7 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
         integration_config: Dodopayments::IntegrationConfigResponse,
         integration_type: Dodopayments::EntitlementIntegrationType,
         is_active: Dodopayments::Internal::Type::Boolean,
-        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
+        metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]),
         name: String,
         updated_at: Time,
         description: String | nil
@@ -69,7 +69,7 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
         integration_config: Dodopayments::IntegrationConfigResponse,
         integration_type: Dodopayments::EntitlementIntegrationType,
         is_active: Dodopayments::Internal::Type::Boolean,
-        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
+        metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]),
         name: String,
         updated_at: Time,
         description: String | nil
@@ -99,7 +99,7 @@ class Dodopayments::Test::Resources::EntitlementsTest < Dodopayments::Test::Reso
         integration_config: Dodopayments::IntegrationConfigResponse,
         integration_type: Dodopayments::EntitlementIntegrationType,
         is_active: Dodopayments::Internal::Type::Boolean,
-        metadata: ^(Dodopayments::Internal::Type::HashOf[String]),
+        metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]),
         name: String,
         updated_at: Time,
         description: String | nil

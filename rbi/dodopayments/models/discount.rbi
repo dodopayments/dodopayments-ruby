@@ -28,7 +28,8 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :discount_id
 
-      sig { returns(T::Hash[Symbol, String]) }
+      # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+      sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
       attr_accessor :metadata
 
       # Whether this discount should be preserved when a subscription changes plans.
@@ -73,7 +74,7 @@ module Dodopayments
           code: String,
           created_at: Time,
           discount_id: String,
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           preserve_on_plan_change: T::Boolean,
           restricted_to: T::Array[String],
           times_used: Integer,
@@ -95,6 +96,7 @@ module Dodopayments
         created_at:,
         # The unique discount ID
         discount_id:,
+        # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
         metadata:,
         # Whether this discount should be preserved when a subscription changes plans.
         # Default: false (discount is removed on plan change)
@@ -126,7 +128,7 @@ module Dodopayments
             code: String,
             created_at: Time,
             discount_id: String,
-            metadata: T::Hash[Symbol, String],
+            metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             preserve_on_plan_change: T::Boolean,
             restricted_to: T::Array[String],
             times_used: Integer,

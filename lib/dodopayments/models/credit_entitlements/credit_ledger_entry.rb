@@ -61,8 +61,8 @@ module Dodopayments
         #   created at checkout). Empty when the grant has no resolvable source (e.g.
         #   credits granted directly via the API).
         #
-        #   @return [Hash{Symbol=>String}]
-        required :metadata, Dodopayments::Internal::Type::HashOf[String]
+        #   @return [Hash{Symbol=>String, Float, Boolean}]
+        required :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
         # @!attribute overage_after
         #
@@ -126,7 +126,7 @@ module Dodopayments
         #
         #   @param is_credit [Boolean]
         #
-        #   @param metadata [Hash{Symbol=>String}] Metadata associated with the credit grant's source (the subscription or
+        #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Metadata associated with the credit grant's source (the subscription or
         #
         #   @param overage_after [String]
         #

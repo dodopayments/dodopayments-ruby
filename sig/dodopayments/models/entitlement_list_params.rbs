@@ -49,6 +49,7 @@ module Dodopayments
         | :notion
         | :digital_files
         | :license_key
+        | :feature_flag
 
       module IntegrationType
         extend Dodopayments::Internal::Type::Enum
@@ -61,6 +62,7 @@ module Dodopayments
         NOTION: :notion
         DIGITAL_FILES: :digital_files
         LICENSE_KEY: :license_key
+        FEATURE_FLAG: :feature_flag
 
         def self?.values: -> ::Array[Dodopayments::Models::EntitlementListParams::integration_type]
       end

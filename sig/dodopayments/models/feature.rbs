@@ -1,0 +1,22 @@
+module Dodopayments
+  module Models
+    type feature =
+      { feature_id: String, feature_type: Dodopayments::Models::feature_type }
+
+    class Feature < Dodopayments::Internal::Type::BaseModel
+      attr_accessor feature_id: String
+
+      attr_accessor feature_type: Dodopayments::Models::feature_type
+
+      def initialize: (
+        feature_id: String,
+        feature_type: Dodopayments::Models::feature_type
+      ) -> void
+
+      def to_hash: -> {
+        feature_id: String,
+        feature_type: Dodopayments::Models::feature_type
+      }
+    end
+  end
+end

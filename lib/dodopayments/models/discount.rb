@@ -35,9 +35,10 @@ module Dodopayments
       required :discount_id, String
 
       # @!attribute metadata
+      #   Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
       #
-      #   @return [Hash{Symbol=>String}]
-      required :metadata, Dodopayments::Internal::Type::HashOf[String]
+      #   @return [Hash{Symbol=>String, Float, Boolean}]
+      required :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
       # @!attribute preserve_on_plan_change
       #   Whether this discount should be preserved when a subscription changes plans.
@@ -104,7 +105,7 @@ module Dodopayments
       #
       #   @param discount_id [String] The unique discount ID
       #
-      #   @param metadata [Hash{Symbol=>String}]
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
       #
       #   @param preserve_on_plan_change [Boolean] Whether this discount should be preserved when a subscription changes plans.
       #

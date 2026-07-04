@@ -67,9 +67,12 @@ module Dodopayments
         optional :expires_at, Time, nil?: true
 
         # @!attribute metadata
+        #   Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
         #
-        #   @return [Hash{Symbol=>String}, nil]
-        optional :metadata, Dodopayments::Internal::Type::HashOf[String], nil?: true
+        #   @return [Hash{Symbol=>String, Float, Boolean}, nil]
+        optional :metadata,
+                 -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] },
+                 nil?: true
 
         # @!attribute parent_grant_id
         #
@@ -82,22 +85,40 @@ module Dodopayments
         optional :source_id, String, nil?: true
 
         # @!method initialize(id:, created_at:, credit_entitlement_id:, customer_id:, initial_amount:, is_expired:, is_rolled_over:, remaining_amount:, rollover_count:, source_type:, updated_at:, expires_at: nil, metadata: nil, parent_grant_id: nil, source_id: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::CreditEntitlements::BalanceListGrantsResponse} for more
+        #   details.
+        #
         #   Response for a credit grant
         #
         #   @param id [String]
+        #
         #   @param created_at [Time]
+        #
         #   @param credit_entitlement_id [String]
+        #
         #   @param customer_id [String]
+        #
         #   @param initial_amount [String]
+        #
         #   @param is_expired [Boolean]
+        #
         #   @param is_rolled_over [Boolean]
+        #
         #   @param remaining_amount [String]
+        #
         #   @param rollover_count [Integer]
+        #
         #   @param source_type [Symbol, Dodopayments::Models::CreditEntitlements::BalanceListGrantsResponse::SourceType]
+        #
         #   @param updated_at [Time]
+        #
         #   @param expires_at [Time, nil]
-        #   @param metadata [Hash{Symbol=>String}, nil]
+        #
+        #   @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+        #
         #   @param parent_grant_id [String, nil]
+        #
         #   @param source_id [String, nil]
 
         # @see Dodopayments::Models::CreditEntitlements::BalanceListGrantsResponse#source_type

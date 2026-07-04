@@ -36,8 +36,8 @@ module Dodopayments
       # @!attribute metadata
       #   Additional metadata
       #
-      #   @return [Hash{Symbol=>String}]
-      required :metadata, Dodopayments::Internal::Type::HashOf[String]
+      #   @return [Hash{Symbol=>String, Float, Boolean}]
+      required :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
       # @!attribute position
       #   Position of this discount in the stack (0-based)
@@ -117,7 +117,7 @@ module Dodopayments
       #
       #   @param discount_id [String] The unique discount ID
       #
-      #   @param metadata [Hash{Symbol=>String}] Additional metadata
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata
       #
       #   @param position [Integer] Position of this discount in the stack (0-based)
       #

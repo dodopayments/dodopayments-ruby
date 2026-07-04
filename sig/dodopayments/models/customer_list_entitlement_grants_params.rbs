@@ -1,0 +1,98 @@
+module Dodopayments
+  module Models
+    type customer_list_entitlement_grants_params =
+      {
+        customer_id: String,
+        integration_type: Dodopayments::Models::CustomerListEntitlementGrantsParams::integration_type,
+        page_number: Integer,
+        page_size: Integer,
+        status: Dodopayments::Models::CustomerListEntitlementGrantsParams::status
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class CustomerListEntitlementGrantsParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor customer_id: String
+
+      attr_reader integration_type: Dodopayments::Models::CustomerListEntitlementGrantsParams::integration_type?
+
+      def integration_type=: (
+        Dodopayments::Models::CustomerListEntitlementGrantsParams::integration_type
+      ) -> Dodopayments::Models::CustomerListEntitlementGrantsParams::integration_type
+
+      attr_reader page_number: Integer?
+
+      def page_number=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
+
+      attr_reader status: Dodopayments::Models::CustomerListEntitlementGrantsParams::status?
+
+      def status=: (
+        Dodopayments::Models::CustomerListEntitlementGrantsParams::status
+      ) -> Dodopayments::Models::CustomerListEntitlementGrantsParams::status
+
+      def initialize: (
+        customer_id: String,
+        ?integration_type: Dodopayments::Models::CustomerListEntitlementGrantsParams::integration_type,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?status: Dodopayments::Models::CustomerListEntitlementGrantsParams::status,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        customer_id: String,
+        integration_type: Dodopayments::Models::CustomerListEntitlementGrantsParams::integration_type,
+        page_number: Integer,
+        page_size: Integer,
+        status: Dodopayments::Models::CustomerListEntitlementGrantsParams::status,
+        request_options: Dodopayments::RequestOptions
+      }
+
+      type integration_type =
+        :discord
+        | :telegram
+        | :github
+        | :figma
+        | :framer
+        | :notion
+        | :digital_files
+        | :license_key
+        | :feature_flag
+
+      module IntegrationType
+        extend Dodopayments::Internal::Type::Enum
+
+        DISCORD: :discord
+        TELEGRAM: :telegram
+        GITHUB: :github
+        FIGMA: :figma
+        FRAMER: :framer
+        NOTION: :notion
+        DIGITAL_FILES: :digital_files
+        LICENSE_KEY: :license_key
+        FEATURE_FLAG: :feature_flag
+
+        def self?.values: -> ::Array[Dodopayments::Models::CustomerListEntitlementGrantsParams::integration_type]
+      end
+
+      type status = :Pending | :Delivered | :Failed | :Revoked
+
+      module Status
+        extend Dodopayments::Internal::Type::Enum
+
+        PENDING: :Pending
+        DELIVERED: :Delivered
+        FAILED: :Failed
+        REVOKED: :Revoked
+
+        def self?.values: -> ::Array[Dodopayments::Models::CustomerListEntitlementGrantsParams::status]
+      end
+    end
+  end
+end

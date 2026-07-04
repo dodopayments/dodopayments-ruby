@@ -36,7 +36,7 @@ module Dodopayments
       attr_accessor :license_key_enabled
 
       # Additional custom data associated with the product
-      sig { returns(T::Hash[Symbol, String]) }
+      sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
       attr_accessor :metadata
 
       # Pricing information for the product.
@@ -126,7 +126,7 @@ module Dodopayments
             T::Array[Dodopayments::ProductEntitlementSummary::OrHash],
           is_recurring: T::Boolean,
           license_key_enabled: T::Boolean,
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           price:
             T.any(
               Dodopayments::Price::OneTimePrice::OrHash,
@@ -211,7 +211,7 @@ module Dodopayments
             entitlements: T::Array[Dodopayments::ProductEntitlementSummary],
             is_recurring: T::Boolean,
             license_key_enabled: T::Boolean,
-            metadata: T::Hash[Symbol, String],
+            metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             price: Dodopayments::Price::Variants,
             product_id: String,
             tax_category: Dodopayments::TaxCategory::TaggedSymbol,

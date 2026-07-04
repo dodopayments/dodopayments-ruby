@@ -46,8 +46,10 @@ module Dodopayments
         #   Optional metadata (max 50 key-value pairs, key max 40 chars, value max 500
         #   chars)
         #
-        #   @return [Hash{Symbol=>String}, nil]
-        optional :metadata, Dodopayments::Internal::Type::HashOf[String], nil?: true
+        #   @return [Hash{Symbol=>String, Float, Boolean}, nil]
+        optional :metadata,
+                 -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] },
+                 nil?: true
 
         # @!attribute reason
         #   Human-readable reason for the entry
@@ -72,7 +74,7 @@ module Dodopayments
         #
         #   @param idempotency_key [String, nil] Idempotency key to prevent duplicate entries
         #
-        #   @param metadata [Hash{Symbol=>String}, nil] Optional metadata (max 50 key-value pairs, key max 40 chars, value max 500 chars
+        #   @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Optional metadata (max 50 key-value pairs, key max 40 chars, value max 500 chars
         #
         #   @param reason [String, nil] Human-readable reason for the entry
         #
