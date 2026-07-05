@@ -32,8 +32,8 @@ module Dodopayments
       # @!attribute metadata
       #   Additional custom data associated with the product
       #
-      #   @return [Hash{Symbol=>String}]
-      required :metadata, Dodopayments::Internal::Type::HashOf[String]
+      #   @return [Hash{Symbol=>String, Float, Boolean}]
+      required :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
       # @!attribute product_id
       #   Unique identifier for the product.
@@ -123,7 +123,7 @@ module Dodopayments
       #
       #   @param is_recurring [Boolean] Indicates if the product is recurring (e.g., subscriptions).
       #
-      #   @param metadata [Hash{Symbol=>String}] Additional custom data associated with the product
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional custom data associated with the product
       #
       #   @param product_id [String] Unique identifier for the product.
       #

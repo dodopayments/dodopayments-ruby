@@ -125,6 +125,8 @@ module Dodopayments
 
   class CustomerListCreditEntitlementsParams = Dodopayments::Models::CustomerListCreditEntitlementsParams
 
+  class CustomerListEntitlementGrantsParams = Dodopayments::Models::CustomerListEntitlementGrantsParams
+
   class CustomerListEntitlementsParams = Dodopayments::Models::CustomerListEntitlementsParams
 
   class CustomerListParams = Dodopayments::Models::CustomerListParams
@@ -223,6 +225,10 @@ module Dodopayments
 
   class EventInput = Dodopayments::Models::EventInput
 
+  class Feature = Dodopayments::Models::Feature
+
+  module FeatureType = Dodopayments::Models::FeatureType
+
   module FilterOperator = Dodopayments::Models::FilterOperator
 
   module FilterType = Dodopayments::Models::FilterType
@@ -270,6 +276,8 @@ module Dodopayments
   class LicenseValidateParams = Dodopayments::Models::LicenseValidateParams
 
   Metadata: Dodopayments::Internal::Type::Converter
+
+  type metadata_item = Dodopayments::Models::metadata_item
 
   class Meter = Dodopayments::Models::Meter
 

@@ -130,6 +130,11 @@ module Dodopayments
             :license_key,
             Dodopayments::EntitlementListParams::IntegrationType::TaggedSymbol
           )
+        FEATURE_FLAG =
+          T.let(
+            :feature_flag,
+            Dodopayments::EntitlementListParams::IntegrationType::TaggedSymbol
+          )
 
         sig do
           override.returns(

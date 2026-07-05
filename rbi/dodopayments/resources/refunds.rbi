@@ -8,7 +8,7 @@ module Dodopayments
           payment_id: String,
           items:
             T.nilable(T::Array[Dodopayments::RefundCreateParams::Item::OrHash]),
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           reason: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Refund)

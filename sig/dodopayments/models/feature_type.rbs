@@ -1,0 +1,13 @@
+module Dodopayments
+  module Models
+    type feature_type = :boolean
+
+    module FeatureType
+      extend Dodopayments::Internal::Type::Enum
+
+      BOOLEAN: :boolean
+
+      def self?.values: -> ::Array[Dodopayments::Models::feature_type]
+    end
+  end
+end

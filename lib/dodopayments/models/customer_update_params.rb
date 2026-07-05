@@ -20,8 +20,10 @@ module Dodopayments
       # @!attribute metadata
       #   Additional metadata for the customer
       #
-      #   @return [Hash{Symbol=>String}, nil]
-      optional :metadata, Dodopayments::Internal::Type::HashOf[String], nil?: true
+      #   @return [Hash{Symbol=>String, Float, Boolean}, nil]
+      optional :metadata,
+               -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] },
+               nil?: true
 
       # @!attribute name
       #
@@ -38,7 +40,7 @@ module Dodopayments
       #
       #   @param email [String, nil]
       #
-      #   @param metadata [Hash{Symbol=>String}, nil] Additional metadata for the customer
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Additional metadata for the customer
       #
       #   @param name [String, nil]
       #

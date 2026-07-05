@@ -48,7 +48,7 @@ module Dodopayments
       attr_accessor :discounts
 
       # Additional custom data associated with the subscription
-      sig { returns(T::Hash[Symbol, String]) }
+      sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
       attr_accessor :metadata
 
       # Timestamp of the next scheduled billing. Indicates the end of current billing
@@ -161,7 +161,7 @@ module Dodopayments
             T::Array[
               Dodopayments::Models::SubscriptionListResponse::Discount::OrHash
             ],
-          metadata: T::Hash[Symbol, String],
+          metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           next_billing_date: Time,
           on_demand: T::Boolean,
           payment_frequency_count: Integer,
@@ -264,7 +264,7 @@ module Dodopayments
               T::Array[
                 Dodopayments::Models::SubscriptionListResponse::Discount
               ],
-            metadata: T::Hash[Symbol, String],
+            metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             next_billing_date: Time,
             on_demand: T::Boolean,
             payment_frequency_count: Integer,

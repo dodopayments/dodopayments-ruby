@@ -52,8 +52,8 @@ module Dodopayments
       # @!attribute metadata
       #   Additional custom data associated with the product
       #
-      #   @return [Hash{Symbol=>String}]
-      required :metadata, Dodopayments::Internal::Type::HashOf[String]
+      #   @return [Hash{Symbol=>String, Float, Boolean}]
+      required :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
       # @!attribute price
       #   Pricing information for the product.
@@ -163,7 +163,7 @@ module Dodopayments
       #
       #   @param license_key_enabled [Boolean] Indicates whether the product requires a license key.
       #
-      #   @param metadata [Hash{Symbol=>String}] Additional custom data associated with the product
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional custom data associated with the product
       #
       #   @param price [Dodopayments::Models::Price::OneTimePrice, Dodopayments::Models::Price::RecurringPrice, Dodopayments::Models::Price::UsageBasedPrice] Pricing information for the product.
       #

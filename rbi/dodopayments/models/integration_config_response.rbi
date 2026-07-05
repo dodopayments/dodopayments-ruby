@@ -12,6 +12,7 @@ module Dodopayments
       Variants =
         T.type_alias do
           T.any(
+            Dodopayments::IntegrationConfigResponse::FeatureFlagConfig,
             Dodopayments::IntegrationConfigResponse::GitHubConfig,
             Dodopayments::IntegrationConfigResponse::DiscordConfig,
             Dodopayments::IntegrationConfigResponse::TelegramConfig,
@@ -22,6 +23,49 @@ module Dodopayments
             Dodopayments::IntegrationConfigResponse::LicenseKeyConfig
           )
         end
+
+      class FeatureFlagConfig < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::IntegrationConfigResponse::FeatureFlagConfig,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        # Merchant-chosen identifier for the capability this entitlement unlocks.
+        sig { returns(String) }
+        attr_accessor :feature_id
+
+        # Type of capability conferred. Only `boolean` is supported today.
+        sig { returns(Dodopayments::FeatureType::TaggedSymbol) }
+        attr_accessor :feature_type
+
+        sig do
+          params(
+            feature_id: String,
+            feature_type: Dodopayments::FeatureType::OrSymbol
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Merchant-chosen identifier for the capability this entitlement unlocks.
+          feature_id:,
+          # Type of capability conferred. Only `boolean` is supported today.
+          feature_type:
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              feature_id: String,
+              feature_type: Dodopayments::FeatureType::TaggedSymbol
+            }
+          )
+        end
+        def to_hash
+        end
+      end
 
       class GitHubConfig < Dodopayments::Internal::Type::BaseModel
         OrHash =

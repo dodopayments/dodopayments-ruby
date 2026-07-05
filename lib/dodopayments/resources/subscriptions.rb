@@ -34,7 +34,7 @@ module Dodopayments
       #
       # @param mandate_min_amount_inr_paise [Integer, nil] Override the merchant-level mandate floor (in INR paise) for INR
       #
-      # @param metadata [Hash{Symbol=>String}] Additional metadata for the subscription
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata for the subscription
       #
       # @param on_demand [Dodopayments::Models::OnDemandSubscription, nil]
       #
@@ -117,7 +117,7 @@ module Dodopayments
       #
       # @param disable_on_demand [Dodopayments::Models::SubscriptionUpdateParams::DisableOnDemand, nil]
       #
-      # @param metadata [Hash{Symbol=>String}, nil]
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
       #
       # @param next_billing_date [Time, nil]
       #
@@ -218,7 +218,7 @@ module Dodopayments
       #
       # @param effective_at [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::EffectiveAt] When to apply the plan change.
       #
-      # @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
       # @param on_payment_failure [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::OnPaymentFailure, nil] Controls behavior when the plan change payment fails.
       #
@@ -251,7 +251,7 @@ module Dodopayments
       #
       # @param customer_balance_config [Dodopayments::Models::SubscriptionChargeParams::CustomerBalanceConfig, nil] Specify how customer balance is used for the payment
       #
-      # @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
       # @param product_currency [Symbol, Dodopayments::Models::Currency, nil] Optional currency of the product price. If not specified, defaults to the curren
       #
@@ -296,7 +296,7 @@ module Dodopayments
       #
       # @param effective_at [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::EffectiveAt] When to apply the plan change.
       #
-      # @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
       # @param on_payment_failure [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::OnPaymentFailure, nil] Controls behavior when the plan change payment fails.
       #

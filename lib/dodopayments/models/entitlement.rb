@@ -26,7 +26,7 @@ module Dodopayments
       #   Integration-specific configuration. For `digital_files` entitlements this
       #   includes presigned download URLs for each attached file.
       #
-      #   @return [Dodopayments::Models::IntegrationConfigResponse::GitHubConfig, Dodopayments::Models::IntegrationConfigResponse::DiscordConfig, Dodopayments::Models::IntegrationConfigResponse::TelegramConfig, Dodopayments::Models::IntegrationConfigResponse::FigmaConfig, Dodopayments::Models::IntegrationConfigResponse::FramerConfig, Dodopayments::Models::IntegrationConfigResponse::NotionConfig, Dodopayments::Models::IntegrationConfigResponse::DigitalFilesConfig, Dodopayments::Models::IntegrationConfigResponse::LicenseKeyConfig]
+      #   @return [Dodopayments::Models::IntegrationConfigResponse::FeatureFlagConfig, Dodopayments::Models::IntegrationConfigResponse::GitHubConfig, Dodopayments::Models::IntegrationConfigResponse::DiscordConfig, Dodopayments::Models::IntegrationConfigResponse::TelegramConfig, Dodopayments::Models::IntegrationConfigResponse::FigmaConfig, Dodopayments::Models::IntegrationConfigResponse::FramerConfig, Dodopayments::Models::IntegrationConfigResponse::NotionConfig, Dodopayments::Models::IntegrationConfigResponse::DigitalFilesConfig, Dodopayments::Models::IntegrationConfigResponse::LicenseKeyConfig]
       required :integration_config, union: -> { Dodopayments::IntegrationConfigResponse }
 
       # @!attribute integration_type
@@ -45,8 +45,8 @@ module Dodopayments
       # @!attribute metadata
       #   Arbitrary key-value metadata supplied at creation or via PATCH.
       #
-      #   @return [Hash{Symbol=>String}]
-      required :metadata, Dodopayments::Internal::Type::HashOf[String]
+      #   @return [Hash{Symbol=>String, Float, Boolean}]
+      required :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
       # @!attribute name
       #   Display name supplied at creation.
@@ -79,13 +79,13 @@ module Dodopayments
       #
       #   @param created_at [Time] Timestamp when the entitlement was created.
       #
-      #   @param integration_config [Dodopayments::Models::IntegrationConfigResponse::GitHubConfig, Dodopayments::Models::IntegrationConfigResponse::DiscordConfig, Dodopayments::Models::IntegrationConfigResponse::TelegramConfig, Dodopayments::Models::IntegrationConfigResponse::FigmaConfig, Dodopayments::Models::IntegrationConfigResponse::FramerConfig, Dodopayments::Models::IntegrationConfigResponse::NotionConfig, Dodopayments::Models::IntegrationConfigResponse::DigitalFilesConfig, Dodopayments::Models::IntegrationConfigResponse::LicenseKeyConfig] Integration-specific configuration. For `digital_files` entitlements
+      #   @param integration_config [Dodopayments::Models::IntegrationConfigResponse::FeatureFlagConfig, Dodopayments::Models::IntegrationConfigResponse::GitHubConfig, Dodopayments::Models::IntegrationConfigResponse::DiscordConfig, Dodopayments::Models::IntegrationConfigResponse::TelegramConfig, Dodopayments::Models::IntegrationConfigResponse::FigmaConfig, Dodopayments::Models::IntegrationConfigResponse::FramerConfig, Dodopayments::Models::IntegrationConfigResponse::NotionConfig, Dodopayments::Models::IntegrationConfigResponse::DigitalFilesConfig, Dodopayments::Models::IntegrationConfigResponse::LicenseKeyConfig] Integration-specific configuration. For `digital_files` entitlements
       #
       #   @param integration_type [Symbol, Dodopayments::Models::EntitlementIntegrationType] Platform integration this entitlement uses.
       #
       #   @param is_active [Boolean] Always `true` for entitlements returned by the public API;
       #
-      #   @param metadata [Hash{Symbol=>String}] Arbitrary key-value metadata supplied at creation or via PATCH.
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Arbitrary key-value metadata supplied at creation or via PATCH.
       #
       #   @param name [String] Display name supplied at creation.
       #

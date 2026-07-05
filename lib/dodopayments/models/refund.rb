@@ -37,8 +37,8 @@ module Dodopayments
       # @!attribute metadata
       #   Additional metadata stored with the refund.
       #
-      #   @return [Hash{Symbol=>String}]
-      required :metadata, Dodopayments::Internal::Type::HashOf[String]
+      #   @return [Hash{Symbol=>String, Float, Boolean}]
+      required :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
       # @!attribute payment_id
       #   The unique identifier of the payment associated with the refund.
@@ -87,7 +87,7 @@ module Dodopayments
       #
       #   @param is_partial [Boolean] If true the refund is a partial refund
       #
-      #   @param metadata [Hash{Symbol=>String}] Additional metadata stored with the refund.
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata stored with the refund.
       #
       #   @param payment_id [String] The unique identifier of the payment associated with the refund.
       #

@@ -67,8 +67,10 @@ module Dodopayments
       #   Metadata for the payment. If not passed, the metadata of the subscription will
       #   be taken
       #
-      #   @return [Hash{Symbol=>String}, nil]
-      optional :metadata, Dodopayments::Internal::Type::HashOf[String], nil?: true
+      #   @return [Hash{Symbol=>String, Float, Boolean}, nil]
+      optional :metadata,
+               -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] },
+               nil?: true
 
       # @!attribute on_payment_failure
       #   Controls behavior when the plan change payment fails.
@@ -104,7 +106,7 @@ module Dodopayments
       #
       #   @param effective_at [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::EffectiveAt] When to apply the plan change.
       #
-      #   @param metadata [Hash{Symbol=>String}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
+      #   @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
       #   @param on_payment_failure [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::OnPaymentFailure, nil] Controls behavior when the plan change payment fails.
 

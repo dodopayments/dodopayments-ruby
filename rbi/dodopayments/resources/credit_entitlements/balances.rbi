@@ -121,7 +121,8 @@ module Dodopayments
               Dodopayments::CreditEntitlements::LedgerEntryType::OrSymbol,
             expires_at: T.nilable(Time),
             idempotency_key: T.nilable(String),
-            metadata: T.nilable(T::Hash[Symbol, String]),
+            metadata:
+              T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
             reason: T.nilable(String),
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(
