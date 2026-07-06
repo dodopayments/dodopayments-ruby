@@ -95,7 +95,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionUpdateParams} for more details.
       #
-      # @overload update(subscription_id, billing: nil, cancel_at_next_billing_date: nil, cancel_reason: nil, cancellation_comment: nil, cancellation_feedback: nil, credit_entitlement_cart: nil, customer_business_name: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
+      # @overload update(subscription_id, billing: nil, cancel_at_next_billing_date: nil, cancel_reason: nil, cancellation_comment: nil, cancellation_feedback: nil, credit_entitlement_cart: nil, customer_business_name: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, subscription_period_count: nil, subscription_period_interval: nil, tax_id: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -122,6 +122,10 @@ module Dodopayments
       # @param next_billing_date [Time, nil]
       #
       # @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
+      #
+      # @param subscription_period_count [Integer, nil] New number of `subscription_period_interval` units the subscription
+      #
+      # @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval, nil] New interval unit for the subscription period. When changing the period,
       #
       # @param tax_id [String, nil]
       #

@@ -25,7 +25,8 @@ module Dodopayments
       optional :description, String, nil?: true
 
       # @!attribute image_id
-      #   Addon image id after its uploaded to S3
+      #   Addon image id after its uploaded to S3. Pass `null` to remove the existing
+      #   image, omit to keep it unchanged.
       #
       #   @return [String, nil]
       optional :image_id, String, nil?: true
@@ -49,13 +50,16 @@ module Dodopayments
       optional :tax_category, enum: -> { Dodopayments::TaxCategory }, nil?: true
 
       # @!method initialize(id:, currency: nil, description: nil, image_id: nil, name: nil, price: nil, tax_category: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::AddonUpdateParams} for more details.
+      #
       #   @param id [String]
       #
       #   @param currency [Symbol, Dodopayments::Models::Currency, nil] The currency of the Addon
       #
       #   @param description [String, nil] Description of the Addon, optional and must be at most 1000 characters.
       #
-      #   @param image_id [String, nil] Addon image id after its uploaded to S3
+      #   @param image_id [String, nil] Addon image id after its uploaded to S3.
       #
       #   @param name [String, nil] Name of the Addon, optional and must be at most 100 characters.
       #
