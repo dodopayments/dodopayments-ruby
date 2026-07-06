@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.20.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.19.0...v2.20.0) (2026-07-06)
+
+
+### Features
+
+* **api:** add subscription period override fields to subscription update ([78fe4eb](https://github.com/dodopayments/dodopayments-ruby/commit/78fe4ebc8d7a9af07327b52ab68dc518d46386bd))
+* **api:** add subscription period override fields to subscription update ([31f78a6](https://github.com/dodopayments/dodopayments-ruby/commit/31f78a62a6a27270e94d785e75ad7c686efba7e8))
+
 ## [2.19.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.18.1...v2.19.0) (2026-07-04)
 
 
