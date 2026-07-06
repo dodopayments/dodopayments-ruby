@@ -49,6 +49,9 @@ module Dodopayments
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::AddonUpdateParams} for more details.
+      #
       # @overload update(id, currency: nil, description: nil, image_id: nil, name: nil, price: nil, tax_category: nil, request_options: {})
       #
       # @param id [String] Addon Id
@@ -57,7 +60,7 @@ module Dodopayments
       #
       # @param description [String, nil] Description of the Addon, optional and must be at most 1000 characters.
       #
-      # @param image_id [String, nil] Addon image id after its uploaded to S3
+      # @param image_id [String, nil] Addon image id after its uploaded to S3.
       #
       # @param name [String, nil] Name of the Addon, optional and must be at most 100 characters.
       #
