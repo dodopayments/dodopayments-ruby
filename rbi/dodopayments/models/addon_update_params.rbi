@@ -25,7 +25,8 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :description
 
-      # Addon image id after its uploaded to S3
+      # Addon image id after its uploaded to S3. Pass `null` to remove the existing
+      # image, omit to keep it unchanged.
       sig { returns(T.nilable(String)) }
       attr_accessor :image_id
 
@@ -59,7 +60,8 @@ module Dodopayments
         currency: nil,
         # Description of the Addon, optional and must be at most 1000 characters.
         description: nil,
-        # Addon image id after its uploaded to S3
+        # Addon image id after its uploaded to S3. Pass `null` to remove the existing
+        # image, omit to keep it unchanged.
         image_id: nil,
         # Name of the Addon, optional and must be at most 100 characters.
         name: nil,

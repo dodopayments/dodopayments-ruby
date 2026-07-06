@@ -101,6 +101,19 @@ module Dodopayments
       sig { returns(T.nilable(Dodopayments::SubscriptionStatus::OrSymbol)) }
       attr_accessor :status
 
+      # New number of `subscription_period_interval` units the subscription entitlement
+      # should span. Used together with `subscription_period_interval` to extend the
+      # subscription period. The resulting period must not be shorter than the current
+      # one (this endpoint only extends).
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :subscription_period_count
+
+      # New interval unit for the subscription period. When changing the period, this
+      # may be supplied alongside `subscription_period_count`; if omitted the existing
+      # interval is retained.
+      sig { returns(T.nilable(Dodopayments::TimeInterval::OrSymbol)) }
+      attr_accessor :subscription_period_interval
+
       sig { returns(T.nilable(String)) }
       attr_accessor :tax_id
 
@@ -132,6 +145,9 @@ module Dodopayments
             T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           next_billing_date: T.nilable(Time),
           status: T.nilable(Dodopayments::SubscriptionStatus::OrSymbol),
+          subscription_period_count: T.nilable(Integer),
+          subscription_period_interval:
+            T.nilable(Dodopayments::TimeInterval::OrSymbol),
           tax_id: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -161,6 +177,15 @@ module Dodopayments
         metadata: nil,
         next_billing_date: nil,
         status: nil,
+        # New number of `subscription_period_interval` units the subscription entitlement
+        # should span. Used together with `subscription_period_interval` to extend the
+        # subscription period. The resulting period must not be shorter than the current
+        # one (this endpoint only extends).
+        subscription_period_count: nil,
+        # New interval unit for the subscription period. When changing the period, this
+        # may be supplied alongside `subscription_period_count`; if omitted the existing
+        # interval is retained.
+        subscription_period_interval: nil,
         tax_id: nil,
         request_options: {}
       )
@@ -195,6 +220,9 @@ module Dodopayments
               T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
             next_billing_date: T.nilable(Time),
             status: T.nilable(Dodopayments::SubscriptionStatus::OrSymbol),
+            subscription_period_count: T.nilable(Integer),
+            subscription_period_interval:
+              T.nilable(Dodopayments::TimeInterval::OrSymbol),
             tax_id: T.nilable(String),
             request_options: Dodopayments::RequestOptions
           }

@@ -89,12 +89,29 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
       optional :status, enum: -> { Dodopayments::SubscriptionStatus }, nil?: true
 
+      # @!attribute subscription_period_count
+      #   New number of `subscription_period_interval` units the subscription entitlement
+      #   should span. Used together with `subscription_period_interval` to extend the
+      #   subscription period. The resulting period must not be shorter than the current
+      #   one (this endpoint only extends).
+      #
+      #   @return [Integer, nil]
+      optional :subscription_period_count, Integer, nil?: true
+
+      # @!attribute subscription_period_interval
+      #   New interval unit for the subscription period. When changing the period, this
+      #   may be supplied alongside `subscription_period_count`; if omitted the existing
+      #   interval is retained.
+      #
+      #   @return [Symbol, Dodopayments::Models::TimeInterval, nil]
+      optional :subscription_period_interval, enum: -> { Dodopayments::TimeInterval }, nil?: true
+
       # @!attribute tax_id
       #
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(subscription_id:, billing: nil, cancel_at_next_billing_date: nil, cancel_reason: nil, cancellation_comment: nil, cancellation_feedback: nil, credit_entitlement_cart: nil, customer_business_name: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, tax_id: nil, request_options: {})
+      # @!method initialize(subscription_id:, billing: nil, cancel_at_next_billing_date: nil, cancel_reason: nil, cancellation_comment: nil, cancellation_feedback: nil, credit_entitlement_cart: nil, customer_business_name: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, subscription_period_count: nil, subscription_period_interval: nil, tax_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionUpdateParams} for more details.
       #
@@ -123,6 +140,10 @@ module Dodopayments
       #   @param next_billing_date [Time, nil]
       #
       #   @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
+      #
+      #   @param subscription_period_count [Integer, nil] New number of `subscription_period_interval` units the subscription
+      #
+      #   @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval, nil] New interval unit for the subscription period. When changing the period,
       #
       #   @param tax_id [String, nil]
       #

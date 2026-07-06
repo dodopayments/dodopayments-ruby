@@ -48,6 +48,8 @@ module Dodopayments
         ?metadata: Dodopayments::Models::metadata?,
         ?next_billing_date: Time?,
         ?status: Dodopayments::Models::subscription_status?,
+        ?subscription_period_count: Integer?,
+        ?subscription_period_interval: Dodopayments::Models::time_interval?,
         ?tax_id: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Subscription
