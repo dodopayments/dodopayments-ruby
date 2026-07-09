@@ -48,6 +48,11 @@ module Dodopayments
       sig { returns(T::Array[Dodopayments::Dispute]) }
       attr_accessor :disputes
 
+      # Whether this payment was created solely to update a subscription's payment
+      # method (a zero-/setup-amount charge). `false` for normal charges.
+      sig { returns(T::Boolean) }
+      attr_accessor :is_update_payment_method
+
       # Additional custom data associated with the payment
       sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
       attr_accessor :metadata
@@ -150,6 +155,10 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :payment_method
 
+      # Identifier of the saved payment method used for this payment, if any.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :payment_method_id
+
       # Specific type of payment method (e.g. "visa", "mastercard")
       sig { returns(T.nilable(String)) }
       attr_accessor :payment_method_type
@@ -198,6 +207,7 @@ module Dodopayments
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
           digital_products_delivered: T::Boolean,
           disputes: T::Array[Dodopayments::Dispute::OrHash],
+          is_update_payment_method: T::Boolean,
           metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           payment_id: String,
           payment_provider: Dodopayments::Payment::PaymentProvider::OrSymbol,
@@ -222,6 +232,7 @@ module Dodopayments
           invoice_url: T.nilable(String),
           payment_link: T.nilable(String),
           payment_method: T.nilable(String),
+          payment_method_id: T.nilable(String),
           payment_method_type: T.nilable(String),
           product_cart:
             T.nilable(T::Array[Dodopayments::Payment::ProductCart::OrHash]),
@@ -250,6 +261,9 @@ module Dodopayments
         digital_products_delivered:,
         # List of disputes associated with this payment
         disputes:,
+        # Whether this payment was created solely to update a subscription's payment
+        # method (a zero-/setup-amount charge). `false` for normal charges.
+        is_update_payment_method:,
         # Additional custom data associated with the payment
         metadata:,
         # Unique identifier for the payment
@@ -306,6 +320,8 @@ module Dodopayments
         payment_link: nil,
         # Payment method used by customer (e.g. "card", "bank_transfer")
         payment_method: nil,
+        # Identifier of the saved payment method used for this payment, if any.
+        payment_method_id: nil,
         # Specific type of payment method (e.g. "visa", "mastercard")
         payment_method_type: nil,
         # List of products purchased in a one-time payment
@@ -340,6 +356,7 @@ module Dodopayments
             customer: Dodopayments::CustomerLimitedDetails,
             digital_products_delivered: T::Boolean,
             disputes: T::Array[Dodopayments::Dispute],
+            is_update_payment_method: T::Boolean,
             metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             payment_id: String,
             payment_provider:
@@ -366,6 +383,7 @@ module Dodopayments
             invoice_url: T.nilable(String),
             payment_link: T.nilable(String),
             payment_method: T.nilable(String),
+            payment_method_id: T.nilable(String),
             payment_method_type: T.nilable(String),
             product_cart:
               T.nilable(T::Array[Dodopayments::Payment::ProductCart]),

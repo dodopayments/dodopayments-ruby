@@ -10,6 +10,7 @@ module Dodopayments
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
         disputes: ::Array[Dodopayments::Dispute],
+        is_update_payment_method: bool,
         metadata: Dodopayments::Models::metadata,
         payment_id: String,
         payment_provider: Dodopayments::Models::Payment::payment_provider,
@@ -33,6 +34,7 @@ module Dodopayments
         invoice_url: String?,
         payment_link: String?,
         payment_method: String?,
+        payment_method_id: String?,
         payment_method_type: String?,
         product_cart: ::Array[Dodopayments::Payment::ProductCart]?,
         refund_status: Dodopayments::Models::payment_refund_status?,
@@ -59,6 +61,8 @@ module Dodopayments
       attr_accessor digital_products_delivered: bool
 
       attr_accessor disputes: ::Array[Dodopayments::Dispute]
+
+      attr_accessor is_update_payment_method: bool
 
       attr_accessor metadata: Dodopayments::Models::metadata
 
@@ -106,6 +110,8 @@ module Dodopayments
 
       attr_accessor payment_method: String?
 
+      attr_accessor payment_method_id: String?
+
       attr_accessor payment_method_type: String?
 
       attr_accessor product_cart: ::Array[Dodopayments::Payment::ProductCart]?
@@ -131,6 +137,7 @@ module Dodopayments
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
         disputes: ::Array[Dodopayments::Dispute],
+        is_update_payment_method: bool,
         metadata: Dodopayments::Models::metadata,
         payment_id: String,
         payment_provider: Dodopayments::Models::Payment::payment_provider,
@@ -154,6 +161,7 @@ module Dodopayments
         ?invoice_url: String?,
         ?payment_link: String?,
         ?payment_method: String?,
+        ?payment_method_id: String?,
         ?payment_method_type: String?,
         ?product_cart: ::Array[Dodopayments::Payment::ProductCart]?,
         ?refund_status: Dodopayments::Models::payment_refund_status?,
@@ -173,6 +181,7 @@ module Dodopayments
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
         disputes: ::Array[Dodopayments::Dispute],
+        is_update_payment_method: bool,
         metadata: Dodopayments::Models::metadata,
         payment_id: String,
         payment_provider: Dodopayments::Models::Payment::payment_provider,
@@ -196,6 +205,7 @@ module Dodopayments
         invoice_url: String?,
         payment_link: String?,
         payment_method: String?,
+        payment_method_id: String?,
         payment_method_type: String?,
         product_cart: ::Array[Dodopayments::Payment::ProductCart]?,
         refund_status: Dodopayments::Models::payment_refund_status?,

@@ -56,6 +56,7 @@ module Dodopayments
 
       def list: (
         ?brand_id: String,
+        ?cancel_at_next_billing_date: bool,
         ?created_at_gte: Time,
         ?created_at_lte: Time,
         ?customer_id: String,
