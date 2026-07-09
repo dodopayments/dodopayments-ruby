@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.20.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.20.0...v2.20.1) (2026-07-09)
+
+
+### Bug Fixes
+
+* **api:** add subscription.update_payment_method webhook and payment-method fields ([67881e2](https://github.com/dodopayments/dodopayments-ruby/commit/67881e21860b5692c69085d56a58534bb243fed8))
+* **api:** add subscription.update_payment_method webhook and payment-method fields ([4f62da1](https://github.com/dodopayments/dodopayments-ruby/commit/4f62da18abf750e179ebd2c697958fb00bf0320e))
+
 ## [2.20.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.19.0...v2.20.0) (2026-07-06)
 
 
