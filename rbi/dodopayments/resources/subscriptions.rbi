@@ -204,6 +204,7 @@ module Dodopayments
       sig do
         params(
           brand_id: String,
+          cancel_at_next_billing_date: T::Boolean,
           created_at_gte: Time,
           created_at_lte: Time,
           customer_id: String,
@@ -221,6 +222,8 @@ module Dodopayments
       def list(
         # filter by Brand id
         brand_id: nil,
+        # Filter by cancel_at_next_billing_date (subscriptions scheduled for cancellation)
+        cancel_at_next_billing_date: nil,
         # Get events after this created time
         created_at_gte: nil,
         # Get events created before this time

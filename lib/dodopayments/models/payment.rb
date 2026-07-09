@@ -52,6 +52,13 @@ module Dodopayments
       #   @return [Array<Dodopayments::Models::Dispute>]
       required :disputes, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Dispute] }
 
+      # @!attribute is_update_payment_method
+      #   Whether this payment was created solely to update a subscription's payment
+      #   method (a zero-/setup-amount charge). `false` for normal charges.
+      #
+      #   @return [Boolean]
+      required :is_update_payment_method, Dodopayments::Internal::Type::Boolean
+
       # @!attribute metadata
       #   Additional custom data associated with the payment
       #
@@ -206,6 +213,12 @@ module Dodopayments
       #   @return [String, nil]
       optional :payment_method, String, nil?: true
 
+      # @!attribute payment_method_id
+      #   Identifier of the saved payment method used for this payment, if any.
+      #
+      #   @return [String, nil]
+      optional :payment_method_id, String, nil?: true
+
       # @!attribute payment_method_type
       #   Specific type of payment method (e.g. "visa", "mastercard")
       #
@@ -260,7 +273,7 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, metadata:, payment_id:, payment_provider:, refunds:, retry_attempt:, settlement_amount:, settlement_currency:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, discounts: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, is_update_payment_method:, metadata:, payment_id:, payment_provider:, refunds:, retry_attempt:, settlement_amount:, settlement_currency:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, discounts: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_id: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
@@ -279,6 +292,8 @@ module Dodopayments
       #   @param digital_products_delivered [Boolean] Whether the digital products purchased in this payment have been delivered.
       #
       #   @param disputes [Array<Dodopayments::Models::Dispute>] List of disputes associated with this payment
+      #
+      #   @param is_update_payment_method [Boolean] Whether this payment was created solely to update a subscription's
       #
       #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional custom data associated with the payment
       #
@@ -325,6 +340,8 @@ module Dodopayments
       #   @param payment_link [String, nil] Checkout URL
       #
       #   @param payment_method [String, nil] Payment method used by customer (e.g. "card", "bank_transfer")
+      #
+      #   @param payment_method_id [String, nil] Identifier of the saved payment method used for this payment, if any.
       #
       #   @param payment_method_type [String, nil] Specific type of payment method (e.g. "visa", "mastercard")
       #

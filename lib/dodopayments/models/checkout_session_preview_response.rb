@@ -44,6 +44,15 @@ module Dodopayments
       #   @return [Integer]
       required :total_price, Integer
 
+      # @!attribute next_billing_date
+      #   The upcoming billing date for subscriptions, computed relative to now: with a
+      #   trial it is `now + trial_period_days`, otherwise `now + payment frequency`.
+      #   `None` for one-time-only carts. This is a preview estimate; the authoritative
+      #   value is set when the subscription activates.
+      #
+      #   @return [Time, nil]
+      optional :next_billing_date, Time, nil?: true
+
       # @!attribute recurring_breakup
       #   Breakup of recurring payments (None for one-time only)
       #
@@ -76,7 +85,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :total_tax, Integer, nil?: true
 
-      # @!method initialize(billing_country:, currency:, current_breakup:, is_byop:, product_cart:, total_price:, recurring_breakup: nil, tax_id_business_name: nil, tax_id_err_msg: nil, tax_id_format_name: nil, total_tax: nil)
+      # @!method initialize(billing_country:, currency:, current_breakup:, is_byop:, product_cart:, total_price:, next_billing_date: nil, recurring_breakup: nil, tax_id_business_name: nil, tax_id_err_msg: nil, tax_id_format_name: nil, total_tax: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionPreviewResponse} for more details.
       #
@@ -93,6 +102,8 @@ module Dodopayments
       #   @param product_cart [Array<Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart>] The total product cart
       #
       #   @param total_price [Integer] Total calculate price of the product cart
+      #
+      #   @param next_billing_date [Time, nil] The upcoming billing date for subscriptions, computed relative to now:
       #
       #   @param recurring_breakup [Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup, nil] Breakup of recurring payments (None for one-time only)
       #

@@ -57,6 +57,7 @@ class Dodopayments::Test::Resources::CheckoutSessionsTest < Dodopayments::Test::
         is_byop: Dodopayments::Internal::Type::Boolean,
         product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart]),
         total_price: Integer,
+        next_billing_date: Time | nil,
         recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup | nil,
         tax_id_business_name: String | nil,
         tax_id_err_msg: String | nil,
