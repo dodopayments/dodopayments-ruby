@@ -8,6 +8,7 @@ module Dodopayments
         is_byop: bool,
         product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
         total_price: Integer,
+        next_billing_date: Time?,
         recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
         tax_id_business_name: String?,
         tax_id_err_msg: String?,
@@ -28,6 +29,8 @@ module Dodopayments
 
       attr_accessor total_price: Integer
 
+      attr_accessor next_billing_date: Time?
+
       attr_accessor recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?
 
       attr_accessor tax_id_business_name: String?
@@ -45,6 +48,7 @@ module Dodopayments
         is_byop: bool,
         product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
         total_price: Integer,
+        ?next_billing_date: Time?,
         ?recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
         ?tax_id_business_name: String?,
         ?tax_id_err_msg: String?,
@@ -59,6 +63,7 @@ module Dodopayments
         is_byop: bool,
         product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
         total_price: Integer,
+        next_billing_date: Time?,
         recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
         tax_id_business_name: String?,
         tax_id_err_msg: String?,

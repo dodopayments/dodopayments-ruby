@@ -56,6 +56,13 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :total_price
 
+      # The upcoming billing date for subscriptions, computed relative to now: with a
+      # trial it is `now + trial_period_days`, otherwise `now + payment frequency`.
+      # `None` for one-time-only carts. This is a preview estimate; the authoritative
+      # value is set when the subscription activates.
+      sig { returns(T.nilable(Time)) }
+      attr_accessor :next_billing_date
+
       # Breakup of recurring payments (None for one-time only)
       sig do
         returns(
@@ -105,6 +112,7 @@ module Dodopayments
               Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::OrHash
             ],
           total_price: Integer,
+          next_billing_date: T.nilable(Time),
           recurring_breakup:
             T.nilable(
               Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup::OrHash
@@ -131,6 +139,11 @@ module Dodopayments
         product_cart:,
         # Total calculate price of the product cart
         total_price:,
+        # The upcoming billing date for subscriptions, computed relative to now: with a
+        # trial it is `now + trial_period_days`, otherwise `now + payment frequency`.
+        # `None` for one-time-only carts. This is a preview estimate; the authoritative
+        # value is set when the subscription activates.
+        next_billing_date: nil,
         # Breakup of recurring payments (None for one-time only)
         recurring_breakup: nil,
         # Registered business name from the official registry (EU/GB/AU) when found
@@ -157,6 +170,7 @@ module Dodopayments
                 Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart
               ],
             total_price: Integer,
+            next_billing_date: T.nilable(Time),
             recurring_breakup:
               T.nilable(
                 Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup

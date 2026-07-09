@@ -13,6 +13,12 @@ module Dodopayments
       #   @return [String, nil]
       optional :brand_id, String
 
+      # @!attribute cancel_at_next_billing_date
+      #   Filter by cancel_at_next_billing_date (subscriptions scheduled for cancellation)
+      #
+      #   @return [Boolean, nil]
+      optional :cancel_at_next_billing_date, Dodopayments::Internal::Type::Boolean
+
       # @!attribute created_at_gte
       #   Get events after this created time
       #
@@ -55,8 +61,13 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::SubscriptionListParams::Status, nil]
       optional :status, enum: -> { Dodopayments::SubscriptionListParams::Status }
 
-      # @!method initialize(brand_id: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
+      # @!method initialize(brand_id: nil, cancel_at_next_billing_date: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::SubscriptionListParams} for more details.
+      #
       #   @param brand_id [String] filter by Brand id
+      #
+      #   @param cancel_at_next_billing_date [Boolean] Filter by cancel_at_next_billing_date (subscriptions scheduled for cancellation)
       #
       #   @param created_at_gte [Time] Get events after this created time
       #

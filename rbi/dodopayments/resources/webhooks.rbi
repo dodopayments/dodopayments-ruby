@@ -182,6 +182,7 @@ module Dodopayments
             Dodopayments::SubscriptionOnHoldWebhookEvent,
             Dodopayments::SubscriptionPlanChangedWebhookEvent,
             Dodopayments::SubscriptionRenewedWebhookEvent,
+            Dodopayments::SubscriptionUpdatePaymentMethodWebhookEvent,
             Dodopayments::SubscriptionUpdatedWebhookEvent
           )
         )
@@ -237,6 +238,7 @@ module Dodopayments
             Dodopayments::SubscriptionOnHoldWebhookEvent,
             Dodopayments::SubscriptionPlanChangedWebhookEvent,
             Dodopayments::SubscriptionRenewedWebhookEvent,
+            Dodopayments::SubscriptionUpdatePaymentMethodWebhookEvent,
             Dodopayments::SubscriptionUpdatedWebhookEvent
           )
         )
