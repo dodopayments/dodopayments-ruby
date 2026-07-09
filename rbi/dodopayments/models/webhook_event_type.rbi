@@ -96,6 +96,11 @@ module Dodopayments
           :"subscription.updated",
           Dodopayments::WebhookEventType::TaggedSymbol
         )
+      SUBSCRIPTION_UPDATE_PAYMENT_METHOD =
+        T.let(
+          :"subscription.update_payment_method",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
       LICENSE_KEY_CREATED =
         T.let(
           :"license_key.created",

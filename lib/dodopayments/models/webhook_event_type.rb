@@ -28,6 +28,7 @@ module Dodopayments
       SUBSCRIPTION_EXPIRED = :"subscription.expired"
       SUBSCRIPTION_PLAN_CHANGED = :"subscription.plan_changed"
       SUBSCRIPTION_UPDATED = :"subscription.updated"
+      SUBSCRIPTION_UPDATE_PAYMENT_METHOD = :"subscription.update_payment_method"
       LICENSE_KEY_CREATED = :"license_key.created"
       PAYOUT_NOT_INITIATED = :"payout.not_initiated"
       PAYOUT_ON_HOLD = :"payout.on_hold"

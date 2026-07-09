@@ -145,9 +145,14 @@ module Dodopayments
         )
       end
 
-      # @overload list(brand_id: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::SubscriptionListParams} for more details.
+      #
+      # @overload list(brand_id: nil, cancel_at_next_billing_date: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
       #
       # @param brand_id [String] filter by Brand id
+      #
+      # @param cancel_at_next_billing_date [Boolean] Filter by cancel_at_next_billing_date (subscriptions scheduled for cancellation)
       #
       # @param created_at_gte [Time] Get events after this created time
       #

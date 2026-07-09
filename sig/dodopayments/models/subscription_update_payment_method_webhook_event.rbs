@@ -1,0 +1,35 @@
+module Dodopayments
+  module Models
+    type subscription_update_payment_method_webhook_event =
+      {
+        business_id: String,
+        data: Dodopayments::Subscription,
+        timestamp: Time,
+        type: :"subscription.update_payment_method"
+      }
+
+    class SubscriptionUpdatePaymentMethodWebhookEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::Subscription
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: :"subscription.update_payment_method"
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::Subscription,
+        timestamp: Time,
+        ?type: :"subscription.update_payment_method"
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::Subscription,
+        timestamp: Time,
+        type: :"subscription.update_payment_method"
+      }
+    end
+  end
+end

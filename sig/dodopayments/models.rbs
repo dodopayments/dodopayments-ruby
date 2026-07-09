@@ -437,6 +437,8 @@ module Dodopayments
 
   class SubscriptionUpdatePaymentMethodParams = Dodopayments::Models::SubscriptionUpdatePaymentMethodParams
 
+  class SubscriptionUpdatePaymentMethodWebhookEvent = Dodopayments::Models::SubscriptionUpdatePaymentMethodWebhookEvent
+
   module TaxCategory = Dodopayments::Models::TaxCategory
 
   class ThemeConfig = Dodopayments::Models::ThemeConfig
