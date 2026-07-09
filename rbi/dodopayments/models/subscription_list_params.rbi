@@ -21,6 +21,13 @@ module Dodopayments
       sig { params(brand_id: String).void }
       attr_writer :brand_id
 
+      # Filter by cancel_at_next_billing_date (subscriptions scheduled for cancellation)
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :cancel_at_next_billing_date
+
+      sig { params(cancel_at_next_billing_date: T::Boolean).void }
+      attr_writer :cancel_at_next_billing_date
+
       # Get events after this created time
       sig { returns(T.nilable(Time)) }
       attr_reader :created_at_gte
@@ -81,6 +88,7 @@ module Dodopayments
       sig do
         params(
           brand_id: String,
+          cancel_at_next_billing_date: T::Boolean,
           created_at_gte: Time,
           created_at_lte: Time,
           customer_id: String,
@@ -94,6 +102,8 @@ module Dodopayments
       def self.new(
         # filter by Brand id
         brand_id: nil,
+        # Filter by cancel_at_next_billing_date (subscriptions scheduled for cancellation)
+        cancel_at_next_billing_date: nil,
         # Get events after this created time
         created_at_gte: nil,
         # Get events created before this time
@@ -116,6 +126,7 @@ module Dodopayments
         override.returns(
           {
             brand_id: String,
+            cancel_at_next_billing_date: T::Boolean,
             created_at_gte: Time,
             created_at_lte: Time,
             customer_id: String,

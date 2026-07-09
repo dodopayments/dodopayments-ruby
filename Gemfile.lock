@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    dodopayments (2.19.0)
+    dodopayments (2.20.0)
       cgi
       connection_pool
       standardwebhooks
