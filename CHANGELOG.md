@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.21.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.20.1...v2.21.0) (2026-07-24)
+
+
+### Features
+
+* **api:** add discount customers endpoints, trial support, currency options, and failure details ([5aaae29](https://github.com/dodopayments/dodopayments-ruby/commit/5aaae29fb5cabc885b193df6eb5de2f4a3613446))
+* **api:** add discount customers endpoints, trial support, currency options, and failure details ([f71fd20](https://github.com/dodopayments/dodopayments-ruby/commit/f71fd20da899aa0f7f8ea7e6d4e892d60064082e))
+
 ## [2.20.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.20.0...v2.20.1) (2026-07-09)
 
 
