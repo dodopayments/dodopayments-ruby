@@ -30,7 +30,8 @@ module Dodopayments
         payment_method_id: String?,
         product_name: String?,
         scheduled_change: Dodopayments::ScheduledPlanChange?,
-        tax_id: String?
+        tax_id: String?,
+        trial_amount: Integer?
       }
 
     class SubscriptionListResponse < Dodopayments::Internal::Type::BaseModel
@@ -92,6 +93,8 @@ module Dodopayments
 
       attr_accessor tax_id: String?
 
+      attr_accessor trial_amount: Integer?
+
       def initialize: (
         billing: Dodopayments::BillingAddress,
         cancel_at_next_billing_date: bool,
@@ -121,7 +124,8 @@ module Dodopayments
         ?payment_method_id: String?,
         ?product_name: String?,
         ?scheduled_change: Dodopayments::ScheduledPlanChange?,
-        ?tax_id: String?
+        ?tax_id: String?,
+        ?trial_amount: Integer?
       ) -> void
 
       def to_hash: -> {
@@ -153,7 +157,8 @@ module Dodopayments
         payment_method_id: String?,
         product_name: String?,
         scheduled_change: Dodopayments::ScheduledPlanChange?,
-        tax_id: String?
+        tax_id: String?,
+        trial_amount: Integer?
       }
 
       type discount =

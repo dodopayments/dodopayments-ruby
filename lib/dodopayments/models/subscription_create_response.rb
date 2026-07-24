@@ -83,7 +83,14 @@ module Dodopayments
       #   @return [String, nil]
       optional :payment_link, String, nil?: true
 
-      # @!method initialize(addons:, customer:, metadata:, payment_id:, recurring_pre_tax_amount:, subscription_id:, client_secret: nil, discount_id: nil, discount_ids: nil, expires_on: nil, one_time_product_cart: nil, payment_link: nil)
+      # @!attribute trial_amount
+      #   Per-unit trial amount after discounts, in the price currency's minor units
+      #   (pre-quantity, pre-tax). Null for a free trial or no trial.
+      #
+      #   @return [Integer, nil]
+      optional :trial_amount, Integer, nil?: true
+
+      # @!method initialize(addons:, customer:, metadata:, payment_id:, recurring_pre_tax_amount:, subscription_id:, client_secret: nil, discount_id: nil, discount_ids: nil, expires_on: nil, one_time_product_cart: nil, payment_link: nil, trial_amount: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionCreateResponse} for more details.
       #
@@ -110,6 +117,8 @@ module Dodopayments
       #   @param one_time_product_cart [Array<Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart>, nil] One time products associated with the purchase of subscription
       #
       #   @param payment_link [String, nil] URL to checkout page
+      #
+      #   @param trial_amount [Integer, nil] Per-unit trial amount after discounts, in the price currency's minor units
 
       class OneTimeProductCart < Dodopayments::Internal::Type::BaseModel
         # @!attribute product_id

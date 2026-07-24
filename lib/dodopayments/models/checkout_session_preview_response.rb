@@ -85,7 +85,22 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :total_tax, Integer, nil?: true
 
-      # @!method initialize(billing_country:, currency:, current_breakup:, is_byop:, product_cart:, total_price:, next_billing_date: nil, recurring_breakup: nil, tax_id_business_name: nil, tax_id_err_msg: nil, tax_id_format_name: nil, total_tax: nil)
+      # @!attribute trial_amount
+      #   Per-unit trial amount after discounts, in the price currency's minor units
+      #   (pre-quantity, pre-tax; see `current_breakup` for the taxed total due today).
+      #   Only present for a paid trial; `None` for a free trial or no trial.
+      #
+      #   @return [Integer, nil]
+      optional :trial_amount, Integer, nil?: true
+
+      # @!attribute trial_period_days
+      #   Effective trial duration in days for the subscription line, when there's a trial
+      #   (free or paid). `None` if no subscription or no trial.
+      #
+      #   @return [Integer, nil]
+      optional :trial_period_days, Integer, nil?: true
+
+      # @!method initialize(billing_country:, currency:, current_breakup:, is_byop:, product_cart:, total_price:, next_billing_date: nil, recurring_breakup: nil, tax_id_business_name: nil, tax_id_err_msg: nil, tax_id_format_name: nil, total_tax: nil, trial_amount: nil, trial_period_days: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionPreviewResponse} for more details.
       #
@@ -114,6 +129,10 @@ module Dodopayments
       #   @param tax_id_format_name [String, nil] The matched tax ID notation (e.g. "VAT Number", "GSTIN") when valid
       #
       #   @param total_tax [Integer, nil] Total tax
+      #
+      #   @param trial_amount [Integer, nil] Per-unit trial amount after discounts, in the price currency's minor units
+      #
+      #   @param trial_period_days [Integer, nil] Effective trial duration in days for the subscription line, when
 
       # @see Dodopayments::Models::CheckoutSessionPreviewResponse#current_breakup
       class CurrentBreakup < Dodopayments::Internal::Type::BaseModel
@@ -245,7 +264,8 @@ module Dodopayments
         optional :description, String, nil?: true
 
         # @!attribute discount_amount
-        #   discount percentage
+        #   Percentage rate (basis points) of the applicable percentage code; null for flat
+        #   codes (their deduction is `og_price - discounted_price`).
         #
         #   @return [Integer, nil]
         optional :discount_amount, Integer, nil?: true
@@ -269,6 +289,10 @@ module Dodopayments
         optional :tax, Integer, nil?: true
 
         # @!method initialize(credit_entitlements:, currency:, discounted_price:, is_subscription:, is_usage_based:, meters:, og_currency:, og_price:, product_id:, quantity:, tax_category:, tax_inclusive:, tax_rate:, addons: nil, description: nil, discount_amount: nil, discount_cycle: nil, name: nil, tax: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart} for more
+        #   details.
+        #
         #   @param credit_entitlements [Array<Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::CreditEntitlement>] Credit entitlements that will be granted upon purchase
         #
         #   @param currency [Symbol, Dodopayments::Models::Currency] the currency in which the calculatiosn were made
@@ -299,7 +323,7 @@ module Dodopayments
         #
         #   @param description [String, nil]
         #
-        #   @param discount_amount [Integer, nil] discount percentage
+        #   @param discount_amount [Integer, nil] Percentage rate (basis points) of the applicable percentage code; null
         #
         #   @param discount_cycle [Integer, nil] number of cycles the discount will apply
         #
@@ -438,6 +462,8 @@ module Dodopayments
           optional :description, String, nil?: true
 
           # @!attribute discount_amount
+          #   Percentage rate (basis points) of the applicable percentage code; null for flat
+          #   codes (their deduction is `og_price - discounted_price`).
           #
           #   @return [Integer, nil]
           optional :discount_amount, Integer, nil?: true
@@ -474,7 +500,7 @@ module Dodopayments
           #
           #   @param description [String, nil]
           #
-          #   @param discount_amount [Integer, nil]
+          #   @param discount_amount [Integer, nil] Percentage rate (basis points) of the applicable percentage code; null
           #
           #   @param tax [Integer, nil]
         end

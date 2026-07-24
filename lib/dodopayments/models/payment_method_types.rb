@@ -85,7 +85,6 @@ module Dodopayments
       SEPA = :sepa
       SEPA_BANK_TRANSFER = :sepa_bank_transfer
       SOFORT = :sofort
-      SUNBIT = :sunbit
       SWISH = :swish
       TOUCH_N_GO = :touch_n_go
       TRUSTLY = :trustly

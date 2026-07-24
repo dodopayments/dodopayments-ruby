@@ -134,7 +134,9 @@ module Dodopayments
           customer_id,
           # Path param: Credit Entitlement ID
           credit_entitlement_id:,
-          # Body param: Amount to credit or debit
+          # Body param: Amount to credit or debit. Bounded to a `NUMERIC(38,28)` column, so
+          # the integer part must have fewer than 10 digits (< 10^10); larger values
+          # previously reached the DB and failed with a 22003 overflow surfaced as a 500.
           amount:,
           # Body param: Entry type: credit or debit
           entry_type:,
