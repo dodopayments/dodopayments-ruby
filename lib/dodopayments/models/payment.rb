@@ -189,6 +189,16 @@ module Dodopayments
       #   @return [String, nil]
       optional :error_message, String, nil?: true
 
+      # @!attribute failure_details
+      #   Purpose-built failure messaging for the merchant and the customer, derived from
+      #   `error_code`. Present whenever `error_code` is set, regardless of payment
+      #   status; unrecognised codes still resolve via a generic fallback rather than
+      #   being omitted. The customer copy is always generic for fraud-sensitive declines
+      #   (lost/stolen/pickup/fraudulent) so the true reason is never leaked.
+      #
+      #   @return [Dodopayments::Models::Payment::FailureDetails, nil]
+      optional :failure_details, -> { Dodopayments::Payment::FailureDetails }, nil?: true
+
       # @!attribute invoice_id
       #   Invoice ID for this payment. Uses India-specific invoice ID if available.
       #
@@ -273,7 +283,7 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, is_update_payment_method:, metadata:, payment_id:, payment_provider:, refunds:, retry_attempt:, settlement_amount:, settlement_currency:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, discounts: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_id: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, is_update_payment_method:, metadata:, payment_id:, payment_provider:, refunds:, retry_attempt:, settlement_amount:, settlement_currency:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, discounts: nil, error_code: nil, error_message: nil, failure_details: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_id: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
@@ -333,6 +343,8 @@ module Dodopayments
       #
       #   @param error_message [String, nil] An error message if the payment failed
       #
+      #   @param failure_details [Dodopayments::Models::Payment::FailureDetails, nil] Purpose-built failure messaging for the merchant and the customer, derived
+      #
       #   @param invoice_id [String, nil] Invoice ID for this payment. Uses India-specific invoice ID if available.
       #
       #   @param invoice_url [String, nil] URL to download the invoice PDF for this payment.
@@ -372,6 +384,138 @@ module Dodopayments
 
         # @!method self.values
         #   @return [Array<Symbol>]
+      end
+
+      # @see Dodopayments::Models::Payment#failure_details
+      class FailureDetails < Dodopayments::Internal::Type::BaseModel
+        # @!attribute code
+        #   The unified error code (echoes `error_code`).
+        #
+        #   @return [String]
+        required :code, String
+
+        # @!attribute customer_cta
+        #   The primary CTA to show the customer.
+        #
+        #   @return [Symbol, Dodopayments::Models::Payment::FailureDetails::CustomerCta]
+        required :customer_cta, enum: -> { Dodopayments::Payment::FailureDetails::CustomerCta }
+
+        # @!attribute customer_fixable
+        #   Whether the customer can resolve this themselves (e.g. fix CVC).
+        #
+        #   @return [Boolean]
+        required :customer_fixable, Dodopayments::Internal::Type::Boolean
+
+        # @!attribute customer_message
+        #   The customer-facing string. Always generic (`C11`) for the fraud-4.
+        #
+        #   @return [String]
+        required :customer_message, String
+
+        # @!attribute customer_template
+        #   The customer message template identifier (C1..C20).
+        #
+        #   @return [Symbol, Dodopayments::Models::Payment::FailureDetails::CustomerTemplate]
+        required :customer_template, enum: -> { Dodopayments::Payment::FailureDetails::CustomerTemplate }
+
+        # @!attribute decline_type
+        #   Soft or hard decline.
+        #
+        #   @return [Symbol, Dodopayments::Models::Payment::FailureDetails::DeclineType]
+        required :decline_type, enum: -> { Dodopayments::Payment::FailureDetails::DeclineType }
+
+        # @!attribute merchant_message
+        #   Merchant-facing headline + recommended action (Payment Details). For the fraud-4
+        #   this includes the operator "do not reveal" warning.
+        #
+        #   @return [String]
+        required :merchant_message, String
+
+        # @!method initialize(code:, customer_cta:, customer_fixable:, customer_message:, customer_template:, decline_type:, merchant_message:)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::Payment::FailureDetails} for more details.
+        #
+        #   Purpose-built failure messaging for the merchant and the customer, derived from
+        #   `error_code`. Present whenever `error_code` is set, regardless of payment
+        #   status; unrecognised codes still resolve via a generic fallback rather than
+        #   being omitted. The customer copy is always generic for fraud-sensitive declines
+        #   (lost/stolen/pickup/fraudulent) so the true reason is never leaked.
+        #
+        #   @param code [String] The unified error code (echoes `error_code`).
+        #
+        #   @param customer_cta [Symbol, Dodopayments::Models::Payment::FailureDetails::CustomerCta] The primary CTA to show the customer.
+        #
+        #   @param customer_fixable [Boolean] Whether the customer can resolve this themselves (e.g. fix CVC).
+        #
+        #   @param customer_message [String] The customer-facing string. Always generic (`C11`) for the fraud-4.
+        #
+        #   @param customer_template [Symbol, Dodopayments::Models::Payment::FailureDetails::CustomerTemplate] The customer message template identifier (C1..C20).
+        #
+        #   @param decline_type [Symbol, Dodopayments::Models::Payment::FailureDetails::DeclineType] Soft or hard decline.
+        #
+        #   @param merchant_message [String] Merchant-facing headline + recommended action (Payment Details). For the fraud-4
+
+        # The primary CTA to show the customer.
+        #
+        # @see Dodopayments::Models::Payment::FailureDetails#customer_cta
+        module CustomerCta
+          extend Dodopayments::Internal::Type::Enum
+
+          EDIT_AND_RETRY = :edit_and_retry
+          USE_ANOTHER_METHOD = :use_another_method
+          TRY_AGAIN = :try_again
+          TRY_LATER = :try_later
+          RETRY_AND_VERIFY = :retry_and_verify
+          RESTART = :restart
+          UPDATE_METHOD = :update_method
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # The customer message template identifier (C1..C20).
+        #
+        # @see Dodopayments::Models::Payment::FailureDetails#customer_template
+        module CustomerTemplate
+          extend Dodopayments::Internal::Type::Enum
+
+          C1 = :C1
+          C2 = :C2
+          C3 = :C3
+          C4 = :C4
+          C5 = :C5
+          C6 = :C6
+          C7 = :C7
+          C8 = :C8
+          C9 = :C9
+          C10 = :C10
+          C11 = :C11
+          C12 = :C12
+          C13 = :C13
+          C14 = :C14
+          C15 = :C15
+          C16 = :C16
+          C17 = :C17
+          C18 = :C18
+          C19 = :C19
+          C20 = :C20
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # Soft or hard decline.
+        #
+        # @see Dodopayments::Models::Payment::FailureDetails#decline_type
+        module DeclineType
+          extend Dodopayments::Internal::Type::Enum
+
+          SOFT = :soft
+          HARD = :hard
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
 
       class ProductCart < Dodopayments::Internal::Type::BaseModel

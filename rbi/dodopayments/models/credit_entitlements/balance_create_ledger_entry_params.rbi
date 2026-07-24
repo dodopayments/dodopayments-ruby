@@ -21,7 +21,9 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :customer_id
 
-        # Amount to credit or debit
+        # Amount to credit or debit. Bounded to a `NUMERIC(38,28)` column, so the integer
+        # part must have fewer than 10 digits (< 10^10); larger values previously reached
+        # the DB and failed with a 22003 overflow surfaced as a 500.
         sig { returns(String) }
         attr_accessor :amount
 
@@ -70,7 +72,9 @@ module Dodopayments
         def self.new(
           credit_entitlement_id:,
           customer_id:,
-          # Amount to credit or debit
+          # Amount to credit or debit. Bounded to a `NUMERIC(38,28)` column, so the integer
+          # part must have fewer than 10 digits (< 10^10); larger values previously reached
+          # the DB and failed with a 22003 overflow surfaced as a 500.
           amount:,
           # Entry type: credit or debit
           entry_type:,

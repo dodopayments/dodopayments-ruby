@@ -139,6 +139,22 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :error_message
 
+      # Purpose-built failure messaging for the merchant and the customer, derived from
+      # `error_code`. Present whenever `error_code` is set, regardless of payment
+      # status; unrecognised codes still resolve via a generic fallback rather than
+      # being omitted. The customer copy is always generic for fraud-sensitive declines
+      # (lost/stolen/pickup/fraudulent) so the true reason is never leaked.
+      sig { returns(T.nilable(Dodopayments::Payment::FailureDetails)) }
+      attr_reader :failure_details
+
+      sig do
+        params(
+          failure_details:
+            T.nilable(Dodopayments::Payment::FailureDetails::OrHash)
+        ).void
+      end
+      attr_writer :failure_details
+
       # Invoice ID for this payment. Uses India-specific invoice ID if available.
       sig { returns(T.nilable(String)) }
       attr_accessor :invoice_id
@@ -228,6 +244,8 @@ module Dodopayments
           discounts: T.nilable(T::Array[Dodopayments::DiscountDetail::OrHash]),
           error_code: T.nilable(String),
           error_message: T.nilable(String),
+          failure_details:
+            T.nilable(Dodopayments::Payment::FailureDetails::OrHash),
           invoice_id: T.nilable(String),
           invoice_url: T.nilable(String),
           payment_link: T.nilable(String),
@@ -312,6 +330,12 @@ module Dodopayments
         error_code: nil,
         # An error message if the payment failed
         error_message: nil,
+        # Purpose-built failure messaging for the merchant and the customer, derived from
+        # `error_code`. Present whenever `error_code` is set, regardless of payment
+        # status; unrecognised codes still resolve via a generic fallback rather than
+        # being omitted. The customer copy is always generic for fraud-sensitive declines
+        # (lost/stolen/pickup/fraudulent) so the true reason is never leaked.
+        failure_details: nil,
         # Invoice ID for this payment. Uses India-specific invoice ID if available.
         invoice_id: nil,
         # URL to download the invoice PDF for this payment.
@@ -379,6 +403,7 @@ module Dodopayments
             discounts: T.nilable(T::Array[Dodopayments::DiscountDetail]),
             error_code: T.nilable(String),
             error_message: T.nilable(String),
+            failure_details: T.nilable(Dodopayments::Payment::FailureDetails),
             invoice_id: T.nilable(String),
             invoice_url: T.nilable(String),
             payment_link: T.nilable(String),
@@ -422,6 +447,328 @@ module Dodopayments
           )
         end
         def self.values
+        end
+      end
+
+      class FailureDetails < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::Payment::FailureDetails,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        # The unified error code (echoes `error_code`).
+        sig { returns(String) }
+        attr_accessor :code
+
+        # The primary CTA to show the customer.
+        sig do
+          returns(
+            Dodopayments::Payment::FailureDetails::CustomerCta::TaggedSymbol
+          )
+        end
+        attr_accessor :customer_cta
+
+        # Whether the customer can resolve this themselves (e.g. fix CVC).
+        sig { returns(T::Boolean) }
+        attr_accessor :customer_fixable
+
+        # The customer-facing string. Always generic (`C11`) for the fraud-4.
+        sig { returns(String) }
+        attr_accessor :customer_message
+
+        # The customer message template identifier (C1..C20).
+        sig do
+          returns(
+            Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+          )
+        end
+        attr_accessor :customer_template
+
+        # Soft or hard decline.
+        sig do
+          returns(
+            Dodopayments::Payment::FailureDetails::DeclineType::TaggedSymbol
+          )
+        end
+        attr_accessor :decline_type
+
+        # Merchant-facing headline + recommended action (Payment Details). For the fraud-4
+        # this includes the operator "do not reveal" warning.
+        sig { returns(String) }
+        attr_accessor :merchant_message
+
+        # Purpose-built failure messaging for the merchant and the customer, derived from
+        # `error_code`. Present whenever `error_code` is set, regardless of payment
+        # status; unrecognised codes still resolve via a generic fallback rather than
+        # being omitted. The customer copy is always generic for fraud-sensitive declines
+        # (lost/stolen/pickup/fraudulent) so the true reason is never leaked.
+        sig do
+          params(
+            code: String,
+            customer_cta:
+              Dodopayments::Payment::FailureDetails::CustomerCta::OrSymbol,
+            customer_fixable: T::Boolean,
+            customer_message: String,
+            customer_template:
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::OrSymbol,
+            decline_type:
+              Dodopayments::Payment::FailureDetails::DeclineType::OrSymbol,
+            merchant_message: String
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # The unified error code (echoes `error_code`).
+          code:,
+          # The primary CTA to show the customer.
+          customer_cta:,
+          # Whether the customer can resolve this themselves (e.g. fix CVC).
+          customer_fixable:,
+          # The customer-facing string. Always generic (`C11`) for the fraud-4.
+          customer_message:,
+          # The customer message template identifier (C1..C20).
+          customer_template:,
+          # Soft or hard decline.
+          decline_type:,
+          # Merchant-facing headline + recommended action (Payment Details). For the fraud-4
+          # this includes the operator "do not reveal" warning.
+          merchant_message:
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              code: String,
+              customer_cta:
+                Dodopayments::Payment::FailureDetails::CustomerCta::TaggedSymbol,
+              customer_fixable: T::Boolean,
+              customer_message: String,
+              customer_template:
+                Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol,
+              decline_type:
+                Dodopayments::Payment::FailureDetails::DeclineType::TaggedSymbol,
+              merchant_message: String
+            }
+          )
+        end
+        def to_hash
+        end
+
+        # The primary CTA to show the customer.
+        module CustomerCta
+          extend Dodopayments::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Dodopayments::Payment::FailureDetails::CustomerCta)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          EDIT_AND_RETRY =
+            T.let(
+              :edit_and_retry,
+              Dodopayments::Payment::FailureDetails::CustomerCta::TaggedSymbol
+            )
+          USE_ANOTHER_METHOD =
+            T.let(
+              :use_another_method,
+              Dodopayments::Payment::FailureDetails::CustomerCta::TaggedSymbol
+            )
+          TRY_AGAIN =
+            T.let(
+              :try_again,
+              Dodopayments::Payment::FailureDetails::CustomerCta::TaggedSymbol
+            )
+          TRY_LATER =
+            T.let(
+              :try_later,
+              Dodopayments::Payment::FailureDetails::CustomerCta::TaggedSymbol
+            )
+          RETRY_AND_VERIFY =
+            T.let(
+              :retry_and_verify,
+              Dodopayments::Payment::FailureDetails::CustomerCta::TaggedSymbol
+            )
+          RESTART =
+            T.let(
+              :restart,
+              Dodopayments::Payment::FailureDetails::CustomerCta::TaggedSymbol
+            )
+          UPDATE_METHOD =
+            T.let(
+              :update_method,
+              Dodopayments::Payment::FailureDetails::CustomerCta::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Dodopayments::Payment::FailureDetails::CustomerCta::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        # The customer message template identifier (C1..C20).
+        module CustomerTemplate
+          extend Dodopayments::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Dodopayments::Payment::FailureDetails::CustomerTemplate
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          C1 =
+            T.let(
+              :C1,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C2 =
+            T.let(
+              :C2,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C3 =
+            T.let(
+              :C3,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C4 =
+            T.let(
+              :C4,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C5 =
+            T.let(
+              :C5,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C6 =
+            T.let(
+              :C6,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C7 =
+            T.let(
+              :C7,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C8 =
+            T.let(
+              :C8,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C9 =
+            T.let(
+              :C9,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C10 =
+            T.let(
+              :C10,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C11 =
+            T.let(
+              :C11,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C12 =
+            T.let(
+              :C12,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C13 =
+            T.let(
+              :C13,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C14 =
+            T.let(
+              :C14,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C15 =
+            T.let(
+              :C15,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C16 =
+            T.let(
+              :C16,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C17 =
+            T.let(
+              :C17,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C18 =
+            T.let(
+              :C18,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C19 =
+            T.let(
+              :C19,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+          C20 =
+            T.let(
+              :C20,
+              Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Dodopayments::Payment::FailureDetails::CustomerTemplate::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        # Soft or hard decline.
+        module DeclineType
+          extend Dodopayments::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Dodopayments::Payment::FailureDetails::DeclineType)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          SOFT =
+            T.let(
+              :soft,
+              Dodopayments::Payment::FailureDetails::DeclineType::TaggedSymbol
+            )
+          HARD =
+            T.let(
+              :hard,
+              Dodopayments::Payment::FailureDetails::DeclineType::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Dodopayments::Payment::FailureDetails::DeclineType::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
 
