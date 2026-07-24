@@ -13,7 +13,9 @@ module Dodopayments
         tax_id_business_name: String?,
         tax_id_err_msg: String?,
         tax_id_format_name: String?,
-        total_tax: Integer?
+        total_tax: Integer?,
+        trial_amount: Integer?,
+        trial_period_days: Integer?
       }
 
     class CheckoutSessionPreviewResponse < Dodopayments::Internal::Type::BaseModel
@@ -41,6 +43,10 @@ module Dodopayments
 
       attr_accessor total_tax: Integer?
 
+      attr_accessor trial_amount: Integer?
+
+      attr_accessor trial_period_days: Integer?
+
       def initialize: (
         billing_country: Dodopayments::Models::country_code,
         currency: Dodopayments::Models::currency,
@@ -53,7 +59,9 @@ module Dodopayments
         ?tax_id_business_name: String?,
         ?tax_id_err_msg: String?,
         ?tax_id_format_name: String?,
-        ?total_tax: Integer?
+        ?total_tax: Integer?,
+        ?trial_amount: Integer?,
+        ?trial_period_days: Integer?
       ) -> void
 
       def to_hash: -> {
@@ -68,7 +76,9 @@ module Dodopayments
         tax_id_business_name: String?,
         tax_id_err_msg: String?,
         tax_id_format_name: String?,
-        total_tax: Integer?
+        total_tax: Integer?,
+        trial_amount: Integer?,
+        trial_period_days: Integer?
       }
 
       type current_breakup =
