@@ -14,7 +14,9 @@ module Dodopayments
           )
         end
 
-      # Filter by active status (true = not expired, false = expired)
+      # Filter by active status. `true` = currently redeemable (started, not expired,
+      # not usage-exhausted). `false` = not currently redeemable (expired,
+      # usage-exhausted, or pending a future `starts_at`).
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :active
 
@@ -68,7 +70,9 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
-        # Filter by active status (true = not expired, false = expired)
+        # Filter by active status. `true` = currently redeemable (started, not expired,
+        # not usage-exhausted). `false` = not currently redeemable (expired,
+        # usage-exhausted, or pending a future `starts_at`).
         active: nil,
         # Filter by discount code (partial match, case-insensitive)
         code: nil,

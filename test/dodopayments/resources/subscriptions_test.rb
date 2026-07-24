@@ -29,7 +29,8 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         discount_ids: ^(Dodopayments::Internal::Type::ArrayOf[String]) | nil,
         expires_on: Time | nil,
         one_time_product_cart: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart]) | nil,
-        payment_link: String | nil
+        payment_link: String | nil,
+        trial_amount: Integer | nil
       }
     end
   end
@@ -79,7 +80,8 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         expires_at: Time | nil,
         payment_method_id: String | nil,
         scheduled_change: Dodopayments::ScheduledPlanChange | nil,
-        tax_id: String | nil
+        tax_id: String | nil,
+        trial_amount: Integer | nil
       }
     end
   end
@@ -129,7 +131,8 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         expires_at: Time | nil,
         payment_method_id: String | nil,
         scheduled_change: Dodopayments::ScheduledPlanChange | nil,
-        tax_id: String | nil
+        tax_id: String | nil,
+        trial_amount: Integer | nil
       }
     end
   end
@@ -178,7 +181,8 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         payment_method_id: String | nil,
         product_name: String | nil,
         scheduled_change: Dodopayments::ScheduledPlanChange | nil,
-        tax_id: String | nil
+        tax_id: String | nil,
+        trial_amount: Integer | nil
       }
     end
   end

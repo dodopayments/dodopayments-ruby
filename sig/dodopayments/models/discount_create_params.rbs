@@ -5,11 +5,15 @@ module Dodopayments
         amount: Integer,
         type: Dodopayments::Models::discount_type,
         code: String?,
+        currency_options: ::Array[Dodopayments::DiscountCreateParams::CurrencyOption]?,
+        customer_eligibility: Dodopayments::Models::DiscountCreateParams::customer_eligibility?,
         expires_at: Time?,
         metadata: Dodopayments::Models::metadata,
         name: String?,
+        per_customer_usage_limit: Integer?,
         preserve_on_plan_change: bool,
         restricted_to: ::Array[String]?,
+        starts_at: Time?,
         subscription_cycles: Integer?,
         usage_limit: Integer?
       }
@@ -25,6 +29,10 @@ module Dodopayments
 
       attr_accessor code: String?
 
+      attr_accessor currency_options: ::Array[Dodopayments::DiscountCreateParams::CurrencyOption]?
+
+      attr_accessor customer_eligibility: Dodopayments::Models::DiscountCreateParams::customer_eligibility?
+
       attr_accessor expires_at: Time?
 
       attr_reader metadata: Dodopayments::Models::metadata?
@@ -35,11 +43,15 @@ module Dodopayments
 
       attr_accessor name: String?
 
+      attr_accessor per_customer_usage_limit: Integer?
+
       attr_reader preserve_on_plan_change: bool?
 
       def preserve_on_plan_change=: (bool) -> bool
 
       attr_accessor restricted_to: ::Array[String]?
+
+      attr_accessor starts_at: Time?
 
       attr_accessor subscription_cycles: Integer?
 
@@ -49,11 +61,15 @@ module Dodopayments
         amount: Integer,
         type: Dodopayments::Models::discount_type,
         ?code: String?,
+        ?currency_options: ::Array[Dodopayments::DiscountCreateParams::CurrencyOption]?,
+        ?customer_eligibility: Dodopayments::Models::DiscountCreateParams::customer_eligibility?,
         ?expires_at: Time?,
         ?metadata: Dodopayments::Models::metadata,
         ?name: String?,
+        ?per_customer_usage_limit: Integer?,
         ?preserve_on_plan_change: bool,
         ?restricted_to: ::Array[String]?,
+        ?starts_at: Time?,
         ?subscription_cycles: Integer?,
         ?usage_limit: Integer?,
         ?request_options: Dodopayments::request_opts
@@ -63,15 +79,68 @@ module Dodopayments
         amount: Integer,
         type: Dodopayments::Models::discount_type,
         code: String?,
+        currency_options: ::Array[Dodopayments::DiscountCreateParams::CurrencyOption]?,
+        customer_eligibility: Dodopayments::Models::DiscountCreateParams::customer_eligibility?,
         expires_at: Time?,
         metadata: Dodopayments::Models::metadata,
         name: String?,
+        per_customer_usage_limit: Integer?,
         preserve_on_plan_change: bool,
         restricted_to: ::Array[String]?,
+        starts_at: Time?,
         subscription_cycles: Integer?,
         usage_limit: Integer?,
         request_options: Dodopayments::RequestOptions
       }
+
+      type currency_option =
+        {
+          currency: Dodopayments::Models::currency,
+          is_default: bool,
+          max_amount_possible: Integer?,
+          minimum_subtotal: Integer
+        }
+
+      class CurrencyOption < Dodopayments::Internal::Type::BaseModel
+        attr_accessor currency: Dodopayments::Models::currency
+
+        attr_reader is_default: bool?
+
+        def is_default=: (bool) -> bool
+
+        attr_accessor max_amount_possible: Integer?
+
+        attr_reader minimum_subtotal: Integer?
+
+        def minimum_subtotal=: (Integer) -> Integer
+
+        def initialize: (
+          currency: Dodopayments::Models::currency,
+          ?is_default: bool,
+          ?max_amount_possible: Integer?,
+          ?minimum_subtotal: Integer
+        ) -> void
+
+        def to_hash: -> {
+          currency: Dodopayments::Models::currency,
+          is_default: bool,
+          max_amount_possible: Integer?,
+          minimum_subtotal: Integer
+        }
+      end
+
+      type customer_eligibility = :any | :first_time | :existing | :specific
+
+      module CustomerEligibility
+        extend Dodopayments::Internal::Type::Enum
+
+        ANY: :any
+        FIRST_TIME: :first_time
+        EXISTING: :existing
+        SPECIFIC: :specific
+
+        def self?.values: -> ::Array[Dodopayments::Models::DiscountCreateParams::customer_eligibility]
+      end
     end
   end
 end

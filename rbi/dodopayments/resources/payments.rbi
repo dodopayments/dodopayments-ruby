@@ -112,6 +112,7 @@ module Dodopayments
           brand_id: String,
           created_at_gte: Time,
           created_at_lte: Time,
+          currency: Dodopayments::PaymentListParams::Currency::OrSymbol,
           customer_id: String,
           page_number: Integer,
           page_size: Integer,
@@ -132,6 +133,8 @@ module Dodopayments
         created_at_gte: nil,
         # Get events created before this time
         created_at_lte: nil,
+        # Filter by currency
+        currency: nil,
         # Filter by customer id
         customer_id: nil,
         # Page number default is 0

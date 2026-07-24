@@ -5,6 +5,7 @@ module Dodopayments
     module DiscountType
       extend Dodopayments::Internal::Type::Enum
 
+      FLAT = :flat
       PERCENTAGE = :percentage
 
       # @!method self.values

@@ -99,6 +99,17 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :total_tax
 
+      # Per-unit trial amount after discounts, in the price currency's minor units
+      # (pre-quantity, pre-tax; see `current_breakup` for the taxed total due today).
+      # Only present for a paid trial; `None` for a free trial or no trial.
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :trial_amount
+
+      # Effective trial duration in days for the subscription line, when there's a trial
+      # (free or paid). `None` if no subscription or no trial.
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :trial_period_days
+
       # Data returned by the calculate checkout session API
       sig do
         params(
@@ -120,7 +131,9 @@ module Dodopayments
           tax_id_business_name: T.nilable(String),
           tax_id_err_msg: T.nilable(String),
           tax_id_format_name: T.nilable(String),
-          total_tax: T.nilable(Integer)
+          total_tax: T.nilable(Integer),
+          trial_amount: T.nilable(Integer),
+          trial_period_days: T.nilable(Integer)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -153,7 +166,14 @@ module Dodopayments
         # The matched tax ID notation (e.g. "VAT Number", "GSTIN") when valid
         tax_id_format_name: nil,
         # Total tax
-        total_tax: nil
+        total_tax: nil,
+        # Per-unit trial amount after discounts, in the price currency's minor units
+        # (pre-quantity, pre-tax; see `current_breakup` for the taxed total due today).
+        # Only present for a paid trial; `None` for a free trial or no trial.
+        trial_amount: nil,
+        # Effective trial duration in days for the subscription line, when there's a trial
+        # (free or paid). `None` if no subscription or no trial.
+        trial_period_days: nil
       )
       end
 
@@ -178,7 +198,9 @@ module Dodopayments
             tax_id_business_name: T.nilable(String),
             tax_id_err_msg: T.nilable(String),
             tax_id_format_name: T.nilable(String),
-            total_tax: T.nilable(Integer)
+            total_tax: T.nilable(Integer),
+            trial_amount: T.nilable(Integer),
+            trial_period_days: T.nilable(Integer)
           }
         )
       end
@@ -330,7 +352,8 @@ module Dodopayments
         sig { returns(T.nilable(String)) }
         attr_accessor :description
 
-        # discount percentage
+        # Percentage rate (basis points) of the applicable percentage code; null for flat
+        # codes (their deduction is `og_price - discounted_price`).
         sig { returns(T.nilable(Integer)) }
         attr_accessor :discount_amount
 
@@ -407,7 +430,8 @@ module Dodopayments
           tax_rate:,
           addons: nil,
           description: nil,
-          # discount percentage
+          # Percentage rate (basis points) of the applicable percentage code; null for flat
+          # codes (their deduction is `og_price - discounted_price`).
           discount_amount: nil,
           # number of cycles the discount will apply
           discount_cycle: nil,
@@ -619,6 +643,8 @@ module Dodopayments
           sig { returns(T.nilable(String)) }
           attr_accessor :description
 
+          # Percentage rate (basis points) of the applicable percentage code; null for flat
+          # codes (their deduction is `og_price - discounted_price`).
           sig { returns(T.nilable(Integer)) }
           attr_accessor :discount_amount
 
@@ -656,6 +682,8 @@ module Dodopayments
             tax_inclusive:,
             tax_rate:,
             description: nil,
+            # Percentage rate (basis points) of the applicable percentage code; null for flat
+            # codes (their deduction is `og_price - discounted_price`).
             discount_amount: nil,
             tax: nil
           )
