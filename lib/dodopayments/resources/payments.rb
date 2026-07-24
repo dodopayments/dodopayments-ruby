@@ -82,13 +82,15 @@ module Dodopayments
         )
       end
 
-      # @overload list(brand_id: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, subscription_id: nil, request_options: {})
+      # @overload list(brand_id: nil, created_at_gte: nil, created_at_lte: nil, currency: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, subscription_id: nil, request_options: {})
       #
       # @param brand_id [String] filter by Brand id
       #
       # @param created_at_gte [Time] Get events after this created time
       #
       # @param created_at_lte [Time] Get events created before this time
+      #
+      # @param currency [Symbol, Dodopayments::Models::PaymentListParams::Currency] Filter by currency
       #
       # @param customer_id [String] Filter by customer id
       #

@@ -74,6 +74,8 @@ module Dodopayments
           subscription_period_interval: Dodopayments::Models::time_interval,
           type: :recurring_price,
           tax_inclusive: bool?,
+          trial_amount: Integer?,
+          trial_apply_discounts: bool?,
           trial_period_days: Integer
         }
 
@@ -98,6 +100,10 @@ module Dodopayments
 
         attr_accessor tax_inclusive: bool?
 
+        attr_accessor trial_amount: Integer?
+
+        attr_accessor trial_apply_discounts: bool?
+
         attr_reader trial_period_days: Integer?
 
         def trial_period_days=: (Integer) -> Integer
@@ -112,6 +118,8 @@ module Dodopayments
           subscription_period_count: Integer,
           subscription_period_interval: Dodopayments::Models::time_interval,
           ?tax_inclusive: bool?,
+          ?trial_amount: Integer?,
+          ?trial_apply_discounts: bool?,
           ?trial_period_days: Integer,
           ?type: :recurring_price
         ) -> void
@@ -127,6 +135,8 @@ module Dodopayments
           subscription_period_interval: Dodopayments::Models::time_interval,
           type: :recurring_price,
           tax_inclusive: bool?,
+          trial_amount: Integer?,
+          trial_apply_discounts: bool?,
           trial_period_days: Integer
         }
       end
