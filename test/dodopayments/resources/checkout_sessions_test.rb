@@ -62,7 +62,9 @@ class Dodopayments::Test::Resources::CheckoutSessionsTest < Dodopayments::Test::
         tax_id_business_name: String | nil,
         tax_id_err_msg: String | nil,
         tax_id_format_name: String | nil,
-        total_tax: Integer | nil
+        total_tax: Integer | nil,
+        trial_amount: Integer | nil,
+        trial_period_days: Integer | nil
       }
     end
   end

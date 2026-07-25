@@ -136,7 +136,7 @@ module Dodopayments
         #
         # @param credit_entitlement_id [String] Path param: Credit Entitlement ID
         #
-        # @param amount [String] Body param: Amount to credit or debit
+        # @param amount [String] Body param: Amount to credit or debit. Bounded to a `NUMERIC(38,28)` column, so
         #
         # @param entry_type [Symbol, Dodopayments::Models::CreditEntitlements::LedgerEntryType] Body param: Entry type: credit or debit
         #

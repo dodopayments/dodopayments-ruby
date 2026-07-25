@@ -176,6 +176,16 @@ module Dodopayments
         sig { returns(T.nilable(T::Boolean)) }
         attr_accessor :tax_inclusive
 
+        # Amount charged today for a paid trial, in the price currency's minor units.
+        # Requires `trial_period_days > 0`. Omit or null for a free trial (the default).
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :trial_amount
+
+        # Whether discount codes reduce the trial charge. Defaults to false. Only
+        # meaningful when a paid trial is configured.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_accessor :trial_apply_discounts
+
         # Number of days for the trial period. A value of `0` indicates no trial period.
         sig { returns(T.nilable(Integer)) }
         attr_reader :trial_period_days
@@ -195,6 +205,8 @@ module Dodopayments
             subscription_period_count: Integer,
             subscription_period_interval: Dodopayments::TimeInterval::OrSymbol,
             tax_inclusive: T.nilable(T::Boolean),
+            trial_amount: T.nilable(Integer),
+            trial_apply_discounts: T.nilable(T::Boolean),
             trial_period_days: Integer,
             type: Symbol
           ).returns(T.attached_class)
@@ -222,6 +234,12 @@ module Dodopayments
           subscription_period_interval:,
           # Indicates if the price is tax inclusive
           tax_inclusive: nil,
+          # Amount charged today for a paid trial, in the price currency's minor units.
+          # Requires `trial_period_days > 0`. Omit or null for a free trial (the default).
+          trial_amount: nil,
+          # Whether discount codes reduce the trial charge. Defaults to false. Only
+          # meaningful when a paid trial is configured.
+          trial_apply_discounts: nil,
           # Number of days for the trial period. A value of `0` indicates no trial period.
           trial_period_days: nil,
           type: :recurring_price
@@ -242,6 +260,8 @@ module Dodopayments
                 Dodopayments::TimeInterval::OrSymbol,
               type: Symbol,
               tax_inclusive: T.nilable(T::Boolean),
+              trial_amount: T.nilable(Integer),
+              trial_apply_discounts: T.nilable(T::Boolean),
               trial_period_days: Integer
             }
           )

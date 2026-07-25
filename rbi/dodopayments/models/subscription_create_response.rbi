@@ -75,6 +75,11 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :payment_link
 
+      # Per-unit trial amount after discounts, in the price currency's minor units
+      # (pre-quantity, pre-tax). Null for a free trial or no trial.
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :trial_amount
+
       sig do
         params(
           addons: T::Array[Dodopayments::AddonCartResponseItem::OrHash],
@@ -93,7 +98,8 @@ module Dodopayments
                 Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart::OrHash
               ]
             ),
-          payment_link: T.nilable(String)
+          payment_link: T.nilable(String),
+          trial_amount: T.nilable(Integer)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -123,7 +129,10 @@ module Dodopayments
         # One time products associated with the purchase of subscription
         one_time_product_cart: nil,
         # URL to checkout page
-        payment_link: nil
+        payment_link: nil,
+        # Per-unit trial amount after discounts, in the price currency's minor units
+        # (pre-quantity, pre-tax). Null for a free trial or no trial.
+        trial_amount: nil
       )
       end
 
@@ -146,7 +155,8 @@ module Dodopayments
                   Dodopayments::Models::SubscriptionCreateResponse::OneTimeProductCart
                 ]
               ),
-            payment_link: T.nilable(String)
+            payment_link: T.nilable(String),
+            trial_amount: T.nilable(Integer)
           }
         )
       end

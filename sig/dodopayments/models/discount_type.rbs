@@ -1,10 +1,11 @@
 module Dodopayments
   module Models
-    type discount_type = :percentage
+    type discount_type = :flat | :percentage
 
     module DiscountType
       extend Dodopayments::Internal::Type::Enum
 
+      FLAT: :flat
       PERCENTAGE: :percentage
 
       def self?.values: -> ::Array[Dodopayments::Models::discount_type]

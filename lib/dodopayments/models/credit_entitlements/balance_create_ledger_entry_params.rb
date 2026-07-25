@@ -19,7 +19,9 @@ module Dodopayments
         required :customer_id, String
 
         # @!attribute amount
-        #   Amount to credit or debit
+        #   Amount to credit or debit. Bounded to a `NUMERIC(38,28)` column, so the integer
+        #   part must have fewer than 10 digits (< 10^10); larger values previously reached
+        #   the DB and failed with a 22003 overflow surfaced as a 500.
         #
         #   @return [String]
         required :amount, String
@@ -66,7 +68,7 @@ module Dodopayments
         #
         #   @param customer_id [String]
         #
-        #   @param amount [String] Amount to credit or debit
+        #   @param amount [String] Amount to credit or debit. Bounded to a `NUMERIC(38,28)` column, so the
         #
         #   @param entry_type [Symbol, Dodopayments::Models::CreditEntitlements::LedgerEntryType] Entry type: credit or debit
         #

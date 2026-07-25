@@ -30,6 +30,7 @@ module Dodopayments
         discounts: ::Array[Dodopayments::DiscountDetail]?,
         error_code: String?,
         error_message: String?,
+        failure_details: Dodopayments::Payment::FailureDetails?,
         invoice_id: String?,
         invoice_url: String?,
         payment_link: String?,
@@ -102,6 +103,8 @@ module Dodopayments
 
       attr_accessor error_message: String?
 
+      attr_accessor failure_details: Dodopayments::Payment::FailureDetails?
+
       attr_accessor invoice_id: String?
 
       attr_accessor invoice_url: String?
@@ -157,6 +160,7 @@ module Dodopayments
         ?discounts: ::Array[Dodopayments::DiscountDetail]?,
         ?error_code: String?,
         ?error_message: String?,
+        ?failure_details: Dodopayments::Payment::FailureDetails?,
         ?invoice_id: String?,
         ?invoice_url: String?,
         ?payment_link: String?,
@@ -201,6 +205,7 @@ module Dodopayments
         discounts: ::Array[Dodopayments::DiscountDetail]?,
         error_code: String?,
         error_message: String?,
+        failure_details: Dodopayments::Payment::FailureDetails?,
         invoice_id: String?,
         invoice_url: String?,
         payment_link: String?,
@@ -226,6 +231,136 @@ module Dodopayments
         DODO: :dodo
 
         def self?.values: -> ::Array[Dodopayments::Models::Payment::payment_provider]
+      end
+
+      type failure_details =
+        {
+          code: String,
+          customer_cta: Dodopayments::Models::Payment::FailureDetails::customer_cta,
+          customer_fixable: bool,
+          customer_message: String,
+          customer_template: Dodopayments::Models::Payment::FailureDetails::customer_template,
+          decline_type: Dodopayments::Models::Payment::FailureDetails::decline_type,
+          merchant_message: String
+        }
+
+      class FailureDetails < Dodopayments::Internal::Type::BaseModel
+        attr_accessor code: String
+
+        attr_accessor customer_cta: Dodopayments::Models::Payment::FailureDetails::customer_cta
+
+        attr_accessor customer_fixable: bool
+
+        attr_accessor customer_message: String
+
+        attr_accessor customer_template: Dodopayments::Models::Payment::FailureDetails::customer_template
+
+        attr_accessor decline_type: Dodopayments::Models::Payment::FailureDetails::decline_type
+
+        attr_accessor merchant_message: String
+
+        def initialize: (
+          code: String,
+          customer_cta: Dodopayments::Models::Payment::FailureDetails::customer_cta,
+          customer_fixable: bool,
+          customer_message: String,
+          customer_template: Dodopayments::Models::Payment::FailureDetails::customer_template,
+          decline_type: Dodopayments::Models::Payment::FailureDetails::decline_type,
+          merchant_message: String
+        ) -> void
+
+        def to_hash: -> {
+          code: String,
+          customer_cta: Dodopayments::Models::Payment::FailureDetails::customer_cta,
+          customer_fixable: bool,
+          customer_message: String,
+          customer_template: Dodopayments::Models::Payment::FailureDetails::customer_template,
+          decline_type: Dodopayments::Models::Payment::FailureDetails::decline_type,
+          merchant_message: String
+        }
+
+        type customer_cta =
+          :edit_and_retry
+          | :use_another_method
+          | :try_again
+          | :try_later
+          | :retry_and_verify
+          | :restart
+          | :update_method
+
+        module CustomerCta
+          extend Dodopayments::Internal::Type::Enum
+
+          EDIT_AND_RETRY: :edit_and_retry
+          USE_ANOTHER_METHOD: :use_another_method
+          TRY_AGAIN: :try_again
+          TRY_LATER: :try_later
+          RETRY_AND_VERIFY: :retry_and_verify
+          RESTART: :restart
+          UPDATE_METHOD: :update_method
+
+          def self?.values: -> ::Array[Dodopayments::Models::Payment::FailureDetails::customer_cta]
+        end
+
+        type customer_template =
+          :C1
+          | :C2
+          | :C3
+          | :C4
+          | :C5
+          | :C6
+          | :C7
+          | :C8
+          | :C9
+          | :C10
+          | :C11
+          | :C12
+          | :C13
+          | :C14
+          | :C15
+          | :C16
+          | :C17
+          | :C18
+          | :C19
+          | :C20
+
+        module CustomerTemplate
+          extend Dodopayments::Internal::Type::Enum
+
+          C1: :C1
+          C2: :C2
+          C3: :C3
+          C4: :C4
+          C5: :C5
+          C6: :C6
+          C7: :C7
+          C8: :C8
+          C9: :C9
+          C10: :C10
+          C11: :C11
+          C12: :C12
+          C13: :C13
+          C14: :C14
+          C15: :C15
+          C16: :C16
+          C17: :C17
+          C18: :C18
+          C19: :C19
+          C20: :C20
+
+          def self?.values: -> ::Array[Dodopayments::Models::Payment::FailureDetails::customer_template]
+        end
+
+        type decline_type = :soft | :hard
+
+        module DeclineType
+          extend Dodopayments::Internal::Type::Enum
+
+          SOFT: :soft
+          HARD: :hard
+
+          def self?.values: -> ::Array[Dodopayments::Models::Payment::FailureDetails::decline_type]
+        end
       end
 
       type product_cart = { product_id: String, quantity: Integer }

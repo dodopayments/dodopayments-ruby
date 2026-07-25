@@ -8,7 +8,9 @@ module Dodopayments
       include Dodopayments::Internal::Type::RequestParameters
 
       # @!attribute active
-      #   Filter by active status (true = not expired, false = expired)
+      #   Filter by active status. `true` = currently redeemable (started, not expired,
+      #   not usage-exhausted). `false` = not currently redeemable (expired,
+      #   usage-exhausted, or pending a future `starts_at`).
       #
       #   @return [Boolean, nil]
       optional :active, Dodopayments::Internal::Type::Boolean
@@ -44,7 +46,10 @@ module Dodopayments
       optional :product_id, String
 
       # @!method initialize(active: nil, code: nil, discount_type: nil, page_number: nil, page_size: nil, product_id: nil, request_options: {})
-      #   @param active [Boolean] Filter by active status (true = not expired, false = expired)
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::DiscountListParams} for more details.
+      #
+      #   @param active [Boolean] Filter by active status. `true` = currently redeemable (started, not
       #
       #   @param code [String] Filter by discount code (partial match, case-insensitive)
       #

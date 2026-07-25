@@ -9,13 +9,17 @@ module Dodopayments
       # POST /discounts If `code` is omitted or empty, a random 16-char uppercase code
       # is generated.
       #
-      # @overload create(amount:, type:, code: nil, expires_at: nil, metadata: nil, name: nil, preserve_on_plan_change: nil, restricted_to: nil, subscription_cycles: nil, usage_limit: nil, request_options: {})
+      # @overload create(amount:, type:, code: nil, currency_options: nil, customer_eligibility: nil, expires_at: nil, metadata: nil, name: nil, per_customer_usage_limit: nil, preserve_on_plan_change: nil, restricted_to: nil, starts_at: nil, subscription_cycles: nil, usage_limit: nil, request_options: {})
       #
       # @param amount [Integer] The discount amount in **basis points** (e.g. `540` means `5.4%`, `10000` means
       #
-      # @param type [Symbol, Dodopayments::Models::DiscountType] The discount type. Currently only `percentage` is supported.
+      # @param type [Symbol, Dodopayments::Models::DiscountType] The discount type: `percentage` or `flat` (`flat_per_unit` stays blocked).
       #
       # @param code [String, nil] Optionally supply a code (will be uppercased).
+      #
+      # @param currency_options [Array<Dodopayments::Models::DiscountCreateParams::CurrencyOption>, nil] Per-currency options (flat deduction / percentage cap + minimum subtotal).
+      #
+      # @param customer_eligibility [Symbol, Dodopayments::Models::DiscountCreateParams::CustomerEligibility, nil] Who may redeem this discount code. Defaults to `any` (unrestricted).
       #
       # @param expires_at [Time, nil] When the discount expires, if ever.
       #
@@ -23,9 +27,13 @@ module Dodopayments
       #
       # @param name [String, nil]
       #
+      # @param per_customer_usage_limit [Integer, nil] Maximum number of times a single customer may redeem this discount.
+      #
       # @param preserve_on_plan_change [Boolean] Whether this discount should be preserved when a subscription changes plans.
       #
       # @param restricted_to [Array<String>, nil] List of product IDs to restrict usage (if any).
+      #
+      # @param starts_at [Time, nil] When the discount becomes active, if scheduled for the future.
       #
       # @param subscription_cycles [Integer, nil] Number of subscription billing cycles this discount is valid for.
       #
@@ -72,7 +80,7 @@ module Dodopayments
       #
       # PATCH /discounts/{discount_id}
       #
-      # @overload update(discount_id, amount: nil, code: nil, expires_at: nil, metadata: nil, name: nil, preserve_on_plan_change: nil, restricted_to: nil, subscription_cycles: nil, type: nil, usage_limit: nil, request_options: {})
+      # @overload update(discount_id, amount: nil, code: nil, currency_options: nil, customer_eligibility: nil, expires_at: nil, metadata: nil, name: nil, per_customer_usage_limit: nil, preserve_on_plan_change: nil, restricted_to: nil, starts_at: nil, subscription_cycles: nil, type: nil, usage_limit: nil, request_options: {})
       #
       # @param discount_id [String] Discount Id
       #
@@ -80,19 +88,27 @@ module Dodopayments
       #
       # @param code [String, nil] If present, update the discount code (uppercase).
       #
+      # @param currency_options [Array<Dodopayments::Models::DiscountUpdateParams::CurrencyOption>, nil] If present, fully replaces the discount's currency options (replace-set
+      #
+      # @param customer_eligibility [Symbol, Dodopayments::Models::DiscountUpdateParams::CustomerEligibility, nil] If present, update who may redeem this discount. Plain field (not
+      #
       # @param expires_at [Time, nil]
       #
       # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Additional metadata for the discount
       #
       # @param name [String, nil]
       #
+      # @param per_customer_usage_limit [Integer, nil] If present, update the per-customer usage limit (double-option: send
+      #
       # @param preserve_on_plan_change [Boolean, nil] Whether this discount should be preserved when a subscription changes plans.
       #
       # @param restricted_to [Array<String>, nil] If present, replaces all restricted product IDs with this new set.
       #
+      # @param starts_at [Time, nil] If present, update `starts_at` (double-option: send `null` to clear it).
+      #
       # @param subscription_cycles [Integer, nil] Number of subscription billing cycles this discount is valid for.
       #
-      # @param type [Symbol, Dodopayments::Models::DiscountType, nil] If present, update the discount type. Currently only `percentage` is supported.
+      # @param type [Symbol, Dodopayments::Models::DiscountType, nil] If present, update the discount type (`percentage` or `flat`).
       #
       # @param usage_limit [Integer, nil]
       #
@@ -112,11 +128,14 @@ module Dodopayments
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::DiscountListParams} for more details.
+      #
       # GET /discounts
       #
       # @overload list(active: nil, code: nil, discount_type: nil, page_number: nil, page_size: nil, product_id: nil, request_options: {})
       #
-      # @param active [Boolean] Filter by active status (true = not expired, false = expired)
+      # @param active [Boolean] Filter by active status. `true` = currently redeemable (started, not
       #
       # @param code [String] Filter by discount code (partial match, case-insensitive)
       #

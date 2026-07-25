@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::ResourceTest
   def test_create_required_params
-    response = @dodo_payments.discounts.create(amount: 0, type: :percentage)
+    response = @dodo_payments.discounts.create(amount: 0, type: :flat)
 
     assert_pattern do
       response => Dodopayments::Discount
@@ -16,14 +16,18 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
         business_id: String,
         code: String,
         created_at: Time,
+        customer_eligibility: Dodopayments::Discount::CustomerEligibility,
         discount_id: String,
         metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]),
         preserve_on_plan_change: Dodopayments::Internal::Type::Boolean,
         restricted_to: ^(Dodopayments::Internal::Type::ArrayOf[String]),
         times_used: Integer,
         type: Dodopayments::DiscountType,
+        currency_options: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Discount::CurrencyOption]) | nil,
         expires_at: Time | nil,
         name: String | nil,
+        per_customer_usage_limit: Integer | nil,
+        starts_at: Time | nil,
         subscription_cycles: Integer | nil,
         usage_limit: Integer | nil
       }
@@ -43,14 +47,18 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
         business_id: String,
         code: String,
         created_at: Time,
+        customer_eligibility: Dodopayments::Discount::CustomerEligibility,
         discount_id: String,
         metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]),
         preserve_on_plan_change: Dodopayments::Internal::Type::Boolean,
         restricted_to: ^(Dodopayments::Internal::Type::ArrayOf[String]),
         times_used: Integer,
         type: Dodopayments::DiscountType,
+        currency_options: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Discount::CurrencyOption]) | nil,
         expires_at: Time | nil,
         name: String | nil,
+        per_customer_usage_limit: Integer | nil,
+        starts_at: Time | nil,
         subscription_cycles: Integer | nil,
         usage_limit: Integer | nil
       }
@@ -70,14 +78,18 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
         business_id: String,
         code: String,
         created_at: Time,
+        customer_eligibility: Dodopayments::Discount::CustomerEligibility,
         discount_id: String,
         metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]),
         preserve_on_plan_change: Dodopayments::Internal::Type::Boolean,
         restricted_to: ^(Dodopayments::Internal::Type::ArrayOf[String]),
         times_used: Integer,
         type: Dodopayments::DiscountType,
+        currency_options: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Discount::CurrencyOption]) | nil,
         expires_at: Time | nil,
         name: String | nil,
+        per_customer_usage_limit: Integer | nil,
+        starts_at: Time | nil,
         subscription_cycles: Integer | nil,
         usage_limit: Integer | nil
       }
@@ -104,14 +116,18 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
         business_id: String,
         code: String,
         created_at: Time,
+        customer_eligibility: Dodopayments::Discount::CustomerEligibility,
         discount_id: String,
         metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]),
         preserve_on_plan_change: Dodopayments::Internal::Type::Boolean,
         restricted_to: ^(Dodopayments::Internal::Type::ArrayOf[String]),
         times_used: Integer,
         type: Dodopayments::DiscountType,
+        currency_options: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Discount::CurrencyOption]) | nil,
         expires_at: Time | nil,
         name: String | nil,
+        per_customer_usage_limit: Integer | nil,
+        starts_at: Time | nil,
         subscription_cycles: Integer | nil,
         usage_limit: Integer | nil
       }
@@ -139,14 +155,18 @@ class Dodopayments::Test::Resources::DiscountsTest < Dodopayments::Test::Resourc
         business_id: String,
         code: String,
         created_at: Time,
+        customer_eligibility: Dodopayments::Discount::CustomerEligibility,
         discount_id: String,
         metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]),
         preserve_on_plan_change: Dodopayments::Internal::Type::Boolean,
         restricted_to: ^(Dodopayments::Internal::Type::ArrayOf[String]),
         times_used: Integer,
         type: Dodopayments::DiscountType,
+        currency_options: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Discount::CurrencyOption]) | nil,
         expires_at: Time | nil,
         name: String | nil,
+        per_customer_usage_limit: Integer | nil,
+        starts_at: Time | nil,
         subscription_cycles: Integer | nil,
         usage_limit: Integer | nil
       }

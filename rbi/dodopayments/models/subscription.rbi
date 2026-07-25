@@ -178,6 +178,12 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :tax_id
 
+      # Per-unit trial amount after discounts, snapshotted at subscription creation
+      # (price currency minor units, pre-quantity, pre-tax). Null for a free trial or no
+      # trial.
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :trial_amount
+
       # Response struct representing subscription details
       sig do
         params(
@@ -222,7 +228,8 @@ module Dodopayments
           payment_method_id: T.nilable(String),
           scheduled_change:
             T.nilable(Dodopayments::ScheduledPlanChange::OrHash),
-          tax_id: T.nilable(String)
+          tax_id: T.nilable(String),
+          trial_amount: T.nilable(Integer)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -302,7 +309,11 @@ module Dodopayments
         # Scheduled plan change details, if any
         scheduled_change: nil,
         # Tax identifier provided for this subscription (if applicable)
-        tax_id: nil
+        tax_id: nil,
+        # Per-unit trial amount after discounts, snapshotted at subscription creation
+        # (price currency minor units, pre-quantity, pre-tax). Null for a free trial or no
+        # trial.
+        trial_amount: nil
       )
       end
 
@@ -351,7 +362,8 @@ module Dodopayments
             expires_at: T.nilable(Time),
             payment_method_id: T.nilable(String),
             scheduled_change: T.nilable(Dodopayments::ScheduledPlanChange),
-            tax_id: T.nilable(String)
+            tax_id: T.nilable(String),
+            trial_amount: T.nilable(Integer)
           }
         )
       end

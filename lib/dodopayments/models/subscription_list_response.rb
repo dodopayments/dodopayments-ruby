@@ -182,7 +182,15 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(billing:, cancel_at_next_billing_date:, created_at:, currency:, customer:, discounts:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, customer_business_name: nil, discount_cycles_remaining: nil, discount_id: nil, payment_method_id: nil, product_name: nil, scheduled_change: nil, tax_id: nil)
+      # @!attribute trial_amount
+      #   Per-unit trial amount after discounts, snapshotted at subscription creation
+      #   (price currency minor units, pre-quantity, pre-tax). Null for a free trial or no
+      #   trial.
+      #
+      #   @return [Integer, nil]
+      optional :trial_amount, Integer, nil?: true
+
+      # @!method initialize(billing:, cancel_at_next_billing_date:, created_at:, currency:, customer:, discounts:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, customer_business_name: nil, discount_cycles_remaining: nil, discount_id: nil, payment_method_id: nil, product_name: nil, scheduled_change: nil, tax_id: nil, trial_amount: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionListResponse} for more details.
       #
@@ -245,6 +253,8 @@ module Dodopayments
       #   @param scheduled_change [Dodopayments::Models::ScheduledPlanChange, nil] Scheduled plan change details, if any
       #
       #   @param tax_id [String, nil] Tax identifier provided for this subscription (if applicable)
+      #
+      #   @param trial_amount [Integer, nil] Per-unit trial amount after discounts, snapshotted at subscription creation
 
       class Discount < Dodopayments::Internal::Type::BaseModel
         # @!attribute discount_id

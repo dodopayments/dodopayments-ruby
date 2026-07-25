@@ -8,6 +8,7 @@ module Dodopayments
       TaggedSymbol = T.type_alias { T.all(Symbol, Dodopayments::DiscountType) }
       OrSymbol = T.type_alias { T.any(Symbol, String) }
 
+      FLAT = T.let(:flat, Dodopayments::DiscountType::TaggedSymbol)
       PERCENTAGE = T.let(:percentage, Dodopayments::DiscountType::TaggedSymbol)
 
       sig do

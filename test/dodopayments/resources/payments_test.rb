@@ -68,6 +68,7 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         discounts: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::DiscountDetail]) | nil,
         error_code: String | nil,
         error_message: String | nil,
+        failure_details: Dodopayments::Payment::FailureDetails | nil,
         invoice_id: String | nil,
         invoice_url: String | nil,
         payment_link: String | nil,

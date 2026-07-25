@@ -160,13 +160,27 @@ module Dodopayments
         #   @return [Boolean, nil]
         optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
+        # @!attribute trial_amount
+        #   Amount charged today for a paid trial, in the price currency's minor units.
+        #   Requires `trial_period_days > 0`. Omit or null for a free trial (the default).
+        #
+        #   @return [Integer, nil]
+        optional :trial_amount, Integer, nil?: true
+
+        # @!attribute trial_apply_discounts
+        #   Whether discount codes reduce the trial charge. Defaults to false. Only
+        #   meaningful when a paid trial is configured.
+        #
+        #   @return [Boolean, nil]
+        optional :trial_apply_discounts, Dodopayments::Internal::Type::Boolean, nil?: true
+
         # @!attribute trial_period_days
         #   Number of days for the trial period. A value of `0` indicates no trial period.
         #
         #   @return [Integer, nil]
         optional :trial_period_days, Integer
 
-        # @!method initialize(currency:, discount:, payment_frequency_count:, payment_frequency_interval:, price:, purchasing_power_parity:, subscription_period_count:, subscription_period_interval:, tax_inclusive: nil, trial_period_days: nil, type: :recurring_price)
+        # @!method initialize(currency:, discount:, payment_frequency_count:, payment_frequency_interval:, price:, purchasing_power_parity:, subscription_period_count:, subscription_period_interval:, tax_inclusive: nil, trial_amount: nil, trial_apply_discounts: nil, trial_period_days: nil, type: :recurring_price)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Price::RecurringPrice} for more details.
         #
@@ -189,6 +203,10 @@ module Dodopayments
         #   @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval] The time interval for the subscription period (e.g., day, month, year).
         #
         #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive
+        #
+        #   @param trial_amount [Integer, nil] Amount charged today for a paid trial, in the price currency's minor units.
+        #
+        #   @param trial_apply_discounts [Boolean, nil] Whether discount codes reduce the trial charge. Defaults to false. Only meaningf
         #
         #   @param trial_period_days [Integer] Number of days for the trial period. A value of `0` indicates no trial period.
         #
