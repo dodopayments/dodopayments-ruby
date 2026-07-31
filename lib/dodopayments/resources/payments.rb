@@ -82,6 +82,9 @@ module Dodopayments
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::PaymentListParams} for more details.
+      #
       # @overload list(brand_id: nil, created_at_gte: nil, created_at_lte: nil, currency: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, subscription_id: nil, request_options: {})
       #
       # @param brand_id [String] filter by Brand id
@@ -94,7 +97,7 @@ module Dodopayments
       #
       # @param customer_id [String] Filter by customer id
       #
-      # @param page_number [Integer] Page number default is 0
+      # @param page_number [Integer] Page number default is 0. Capped to bound OFFSET-based deep pagination,
       #
       # @param page_size [Integer] Page size default is 10 max is 100
       #
