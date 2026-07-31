@@ -106,11 +106,8 @@ module Dodopayments
           :"license_key.created",
           Dodopayments::WebhookEventType::TaggedSymbol
         )
-      PAYOUT_NOT_INITIATED =
-        T.let(
-          :"payout.not_initiated",
-          Dodopayments::WebhookEventType::TaggedSymbol
-        )
+      PAYOUT_CREATED =
+        T.let(:"payout.created", Dodopayments::WebhookEventType::TaggedSymbol)
       PAYOUT_ON_HOLD =
         T.let(:"payout.on_hold", Dodopayments::WebhookEventType::TaggedSymbol)
       PAYOUT_IN_PROGRESS =
