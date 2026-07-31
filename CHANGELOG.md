@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.22.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.21.0...v2.22.0) (2026-07-31)
+
+
+### Features
+
+* **api:** add payout webhook events and remove payment failure_details ([de7c577](https://github.com/dodopayments/dodopayments-ruby/commit/de7c577f484a03e6a6cb8474dc8bef89e7b938cb))
+* **api:** add payout webhook events and remove payment failure_details ([4822183](https://github.com/dodopayments/dodopayments-ruby/commit/482218348d81bc473129b896bb8e9392d2477e70))
+
 ## [2.21.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.20.1...v2.21.0) (2026-07-24)
 
 
