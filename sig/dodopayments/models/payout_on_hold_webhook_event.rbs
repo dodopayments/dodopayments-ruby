@@ -1,0 +1,137 @@
+module Dodopayments
+  module Models
+    type payout_on_hold_webhook_event =
+      {
+        business_id: String,
+        data: Dodopayments::PayoutOnHoldWebhookEvent::Data,
+        timestamp: Time,
+        type: :"payout.on_hold"
+      }
+
+    class PayoutOnHoldWebhookEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::PayoutOnHoldWebhookEvent::Data
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: :"payout.on_hold"
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::PayoutOnHoldWebhookEvent::Data,
+        timestamp: Time,
+        ?type: :"payout.on_hold"
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::PayoutOnHoldWebhookEvent::Data,
+        timestamp: Time,
+        type: :"payout.on_hold"
+      }
+
+      type data =
+        {
+          amount: Integer,
+          business_id: String,
+          chargebacks: Integer,
+          created_at: Time,
+          currency: Dodopayments::Models::currency,
+          fee: Integer,
+          payment_method: String,
+          payout_id: String,
+          refunds: Integer,
+          status: Dodopayments::Models::PayoutOnHoldWebhookEvent::Data::status,
+          tax: Integer,
+          updated_at: Time,
+          name: String?,
+          payout_document_url: String?,
+          remarks: String?
+        }
+
+      class Data < Dodopayments::Internal::Type::BaseModel
+        attr_accessor amount: Integer
+
+        attr_accessor business_id: String
+
+        attr_accessor chargebacks: Integer
+
+        attr_accessor created_at: Time
+
+        attr_accessor currency: Dodopayments::Models::currency
+
+        attr_accessor fee: Integer
+
+        attr_accessor payment_method: String
+
+        attr_accessor payout_id: String
+
+        attr_accessor refunds: Integer
+
+        attr_accessor status: Dodopayments::Models::PayoutOnHoldWebhookEvent::Data::status
+
+        attr_accessor tax: Integer
+
+        attr_accessor updated_at: Time
+
+        attr_accessor name: String?
+
+        attr_accessor payout_document_url: String?
+
+        attr_accessor remarks: String?
+
+        def initialize: (
+          amount: Integer,
+          business_id: String,
+          chargebacks: Integer,
+          created_at: Time,
+          currency: Dodopayments::Models::currency,
+          fee: Integer,
+          payment_method: String,
+          payout_id: String,
+          refunds: Integer,
+          status: Dodopayments::Models::PayoutOnHoldWebhookEvent::Data::status,
+          tax: Integer,
+          updated_at: Time,
+          ?name: String?,
+          ?payout_document_url: String?,
+          ?remarks: String?
+        ) -> void
+
+        def to_hash: -> {
+          amount: Integer,
+          business_id: String,
+          chargebacks: Integer,
+          created_at: Time,
+          currency: Dodopayments::Models::currency,
+          fee: Integer,
+          payment_method: String,
+          payout_id: String,
+          refunds: Integer,
+          status: Dodopayments::Models::PayoutOnHoldWebhookEvent::Data::status,
+          tax: Integer,
+          updated_at: Time,
+          name: String?,
+          payout_document_url: String?,
+          remarks: String?
+        }
+
+        type status =
+          :not_initiated | :in_progress | :on_hold | :failed | :success
+
+        module Status
+          extend Dodopayments::Internal::Type::Enum
+
+          NOT_INITIATED: :not_initiated
+          IN_PROGRESS: :in_progress
+          ON_HOLD: :on_hold
+          FAILED: :failed
+          SUCCESS: :success
+
+          def self?.values: -> ::Array[Dodopayments::Models::PayoutOnHoldWebhookEvent::Data::status]
+        end
+      end
+    end
+  end
+end

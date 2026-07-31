@@ -38,7 +38,8 @@ module Dodopayments
       optional :customer_id, String
 
       # @!attribute page_number
-      #   Page number default is 0
+      #   Page number default is 0. Capped to bound OFFSET-based deep pagination, which
+      #   forces Postgres to scan and discard every preceding row.
       #
       #   @return [Integer, nil]
       optional :page_number, Integer
@@ -68,6 +69,9 @@ module Dodopayments
       optional :subscription_id, String
 
       # @!method initialize(brand_id: nil, created_at_gte: nil, created_at_lte: nil, currency: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, subscription_id: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::PaymentListParams} for more details.
+      #
       #   @param brand_id [String] filter by Brand id
       #
       #   @param created_at_gte [Time] Get events after this created time
@@ -78,7 +82,7 @@ module Dodopayments
       #
       #   @param customer_id [String] Filter by customer id
       #
-      #   @param page_number [Integer] Page number default is 0
+      #   @param page_number [Integer] Page number default is 0. Capped to bound OFFSET-based deep pagination,
       #
       #   @param page_size [Integer] Page size default is 10 max is 100
       #

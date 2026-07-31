@@ -30,7 +30,7 @@ module Dodopayments
       SUBSCRIPTION_UPDATED = :"subscription.updated"
       SUBSCRIPTION_UPDATE_PAYMENT_METHOD = :"subscription.update_payment_method"
       LICENSE_KEY_CREATED = :"license_key.created"
-      PAYOUT_NOT_INITIATED = :"payout.not_initiated"
+      PAYOUT_CREATED = :"payout.created"
       PAYOUT_ON_HOLD = :"payout.on_hold"
       PAYOUT_IN_PROGRESS = :"payout.in_progress"
       PAYOUT_FAILED = :"payout.failed"

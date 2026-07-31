@@ -37,6 +37,7 @@ module Dodopayments
         | Dodopayments::WebhookPayload::Data::Refund
         | Dodopayments::WebhookPayload::Data::Dispute
         | Dodopayments::WebhookPayload::Data::LicenseKey
+        | Dodopayments::WebhookPayload::Data::Payout
         | Dodopayments::WebhookPayload::Data::CreditLedgerEntry
         | Dodopayments::WebhookPayload::Data::CreditBalanceLow
         | Dodopayments::WebhookPayload::Data::AbandonedCheckout
@@ -104,6 +105,113 @@ module Dodopayments
           def initialize: (?payload_type: :LicenseKey) -> void
 
           def to_hash: -> { payload_type: :LicenseKey }
+        end
+
+        type payout =
+          {
+            amount: Integer,
+            business_id: String,
+            chargebacks: Integer,
+            created_at: Time,
+            currency: Dodopayments::Models::currency,
+            fee: Integer,
+            payload_type: :Payout,
+            payment_method: String,
+            payout_id: String,
+            refunds: Integer,
+            status: Dodopayments::Models::WebhookPayload::Data::Payout::status,
+            tax: Integer,
+            updated_at: Time,
+            name: String?,
+            payout_document_url: String?,
+            remarks: String?
+          }
+
+        class Payout < Dodopayments::Internal::Type::BaseModel
+          attr_accessor amount: Integer
+
+          attr_accessor business_id: String
+
+          attr_accessor chargebacks: Integer
+
+          attr_accessor created_at: Time
+
+          attr_accessor currency: Dodopayments::Models::currency
+
+          attr_accessor fee: Integer
+
+          attr_accessor payload_type: :Payout
+
+          attr_accessor payment_method: String
+
+          attr_accessor payout_id: String
+
+          attr_accessor refunds: Integer
+
+          attr_accessor status: Dodopayments::Models::WebhookPayload::Data::Payout::status
+
+          attr_accessor tax: Integer
+
+          attr_accessor updated_at: Time
+
+          attr_accessor name: String?
+
+          attr_accessor payout_document_url: String?
+
+          attr_accessor remarks: String?
+
+          def initialize: (
+            amount: Integer,
+            business_id: String,
+            chargebacks: Integer,
+            created_at: Time,
+            currency: Dodopayments::Models::currency,
+            fee: Integer,
+            payment_method: String,
+            payout_id: String,
+            refunds: Integer,
+            status: Dodopayments::Models::WebhookPayload::Data::Payout::status,
+            tax: Integer,
+            updated_at: Time,
+            ?name: String?,
+            ?payout_document_url: String?,
+            ?remarks: String?,
+            ?payload_type: :Payout
+          ) -> void
+
+          def to_hash: -> {
+            amount: Integer,
+            business_id: String,
+            chargebacks: Integer,
+            created_at: Time,
+            currency: Dodopayments::Models::currency,
+            fee: Integer,
+            payload_type: :Payout,
+            payment_method: String,
+            payout_id: String,
+            refunds: Integer,
+            status: Dodopayments::Models::WebhookPayload::Data::Payout::status,
+            tax: Integer,
+            updated_at: Time,
+            name: String?,
+            payout_document_url: String?,
+            remarks: String?
+          }
+
+          type status =
+            :not_initiated | :in_progress | :on_hold | :failed | :success
+
+          module Status
+            extend Dodopayments::Internal::Type::Enum
+
+            NOT_INITIATED: :not_initiated
+            IN_PROGRESS: :in_progress
+            ON_HOLD: :on_hold
+            FAILED: :failed
+            SUCCESS: :success
+
+            def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::Payout::status]
+          end
         end
 
         type credit_ledger_entry = { payload_type: :CreditLedgerEntry }

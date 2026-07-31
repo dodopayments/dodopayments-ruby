@@ -30,6 +30,11 @@ module Dodopayments
       | Dodopayments::PaymentFailedWebhookEvent
       | Dodopayments::PaymentProcessingWebhookEvent
       | Dodopayments::PaymentSucceededWebhookEvent
+      | Dodopayments::PayoutCreatedWebhookEvent
+      | Dodopayments::PayoutFailedWebhookEvent
+      | Dodopayments::PayoutInProgressWebhookEvent
+      | Dodopayments::PayoutOnHoldWebhookEvent
+      | Dodopayments::PayoutSuccessWebhookEvent
       | Dodopayments::RefundFailedWebhookEvent
       | Dodopayments::RefundSucceededWebhookEvent
       | Dodopayments::SubscriptionActiveWebhookEvent
