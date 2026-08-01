@@ -329,9 +329,19 @@ module Dodopayments
 
   class PaymentSucceededWebhookEvent = Dodopayments::Models::PaymentSucceededWebhookEvent
 
+  class PayoutCreatedWebhookEvent = Dodopayments::Models::PayoutCreatedWebhookEvent
+
+  class PayoutFailedWebhookEvent = Dodopayments::Models::PayoutFailedWebhookEvent
+
+  class PayoutInProgressWebhookEvent = Dodopayments::Models::PayoutInProgressWebhookEvent
+
   class PayoutListParams = Dodopayments::Models::PayoutListParams
 
+  class PayoutOnHoldWebhookEvent = Dodopayments::Models::PayoutOnHoldWebhookEvent
+
   module Payouts = Dodopayments::Models::Payouts
+
+  class PayoutSuccessWebhookEvent = Dodopayments::Models::PayoutSuccessWebhookEvent
 
   module Price = Dodopayments::Models::Price
 

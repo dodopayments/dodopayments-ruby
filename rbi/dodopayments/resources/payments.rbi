@@ -137,7 +137,8 @@ module Dodopayments
         currency: nil,
         # Filter by customer id
         customer_id: nil,
-        # Page number default is 0
+        # Page number default is 0. Capped to bound OFFSET-based deep pagination, which
+        # forces Postgres to scan and discard every preceding row.
         page_number: nil,
         # Page size default is 10 max is 100
         page_size: nil,

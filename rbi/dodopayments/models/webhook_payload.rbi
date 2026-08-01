@@ -20,6 +20,7 @@ module Dodopayments
             Dodopayments::WebhookPayload::Data::Refund,
             Dodopayments::WebhookPayload::Data::Dispute,
             Dodopayments::WebhookPayload::Data::LicenseKey,
+            Dodopayments::WebhookPayload::Data::Payout,
             Dodopayments::WebhookPayload::Data::CreditLedgerEntry,
             Dodopayments::WebhookPayload::Data::CreditBalanceLow,
             Dodopayments::WebhookPayload::Data::AbandonedCheckout,
@@ -49,6 +50,7 @@ module Dodopayments
               Dodopayments::WebhookPayload::Data::Refund::OrHash,
               Dodopayments::WebhookPayload::Data::Dispute::OrHash,
               Dodopayments::WebhookPayload::Data::LicenseKey::OrHash,
+              Dodopayments::WebhookPayload::Data::Payout::OrHash,
               Dodopayments::WebhookPayload::Data::CreditLedgerEntry::OrHash,
               Dodopayments::WebhookPayload::Data::CreditBalanceLow::OrHash,
               Dodopayments::WebhookPayload::Data::AbandonedCheckout::OrHash,
@@ -82,6 +84,7 @@ module Dodopayments
                 Dodopayments::WebhookPayload::Data::Refund,
                 Dodopayments::WebhookPayload::Data::Dispute,
                 Dodopayments::WebhookPayload::Data::LicenseKey,
+                Dodopayments::WebhookPayload::Data::Payout,
                 Dodopayments::WebhookPayload::Data::CreditLedgerEntry,
                 Dodopayments::WebhookPayload::Data::CreditBalanceLow,
                 Dodopayments::WebhookPayload::Data::AbandonedCheckout,
@@ -108,6 +111,7 @@ module Dodopayments
               Dodopayments::WebhookPayload::Data::Refund,
               Dodopayments::WebhookPayload::Data::Dispute,
               Dodopayments::WebhookPayload::Data::LicenseKey,
+              Dodopayments::WebhookPayload::Data::Payout,
               Dodopayments::WebhookPayload::Data::CreditLedgerEntry,
               Dodopayments::WebhookPayload::Data::CreditBalanceLow,
               Dodopayments::WebhookPayload::Data::AbandonedCheckout,
@@ -219,6 +223,215 @@ module Dodopayments
 
           sig { override.returns({ payload_type: Symbol }) }
           def to_hash
+          end
+        end
+
+        class Payout < Dodopayments::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Dodopayments::WebhookPayload::Data::Payout,
+                Dodopayments::Internal::AnyHash
+              )
+            end
+
+          # The total amount of the payout.
+          sig { returns(Integer) }
+          attr_accessor :amount
+
+          # The unique identifier of the business associated with the payout.
+          sig { returns(String) }
+          attr_accessor :business_id
+
+          # The total value of chargebacks associated with the payout.
+          sig { returns(Integer) }
+          attr_accessor :chargebacks
+
+          # The timestamp when the payout was created, in UTC.
+          sig { returns(Time) }
+          attr_accessor :created_at
+
+          # The currency of the payout, represented as an ISO 4217 currency code.
+          sig { returns(Dodopayments::Currency::OrSymbol) }
+          attr_accessor :currency
+
+          # The fee charged for processing the payout.
+          sig { returns(Integer) }
+          attr_accessor :fee
+
+          sig { returns(Symbol) }
+          attr_accessor :payload_type
+
+          # The payment method used for the payout (e.g., bank transfer, card, etc.).
+          sig { returns(String) }
+          attr_accessor :payment_method
+
+          # The unique identifier of the payout.
+          sig { returns(String) }
+          attr_accessor :payout_id
+
+          # The total value of refunds associated with the payout.
+          sig { returns(Integer) }
+          attr_accessor :refunds
+
+          # The current status of the payout.
+          sig do
+            returns(
+              Dodopayments::WebhookPayload::Data::Payout::Status::OrSymbol
+            )
+          end
+          attr_accessor :status
+
+          # The tax applied to the payout.
+          sig { returns(Integer) }
+          attr_accessor :tax
+
+          # The timestamp when the payout was last updated, in UTC.
+          sig { returns(Time) }
+          attr_accessor :updated_at
+
+          # The name of the payout recipient or purpose.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :name
+
+          # The URL of the document associated with the payout.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :payout_document_url
+
+          # Any additional remarks or notes associated with the payout.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :remarks
+
+          sig do
+            params(
+              amount: Integer,
+              business_id: String,
+              chargebacks: Integer,
+              created_at: Time,
+              currency: Dodopayments::Currency::OrSymbol,
+              fee: Integer,
+              payment_method: String,
+              payout_id: String,
+              refunds: Integer,
+              status:
+                Dodopayments::WebhookPayload::Data::Payout::Status::OrSymbol,
+              tax: Integer,
+              updated_at: Time,
+              name: T.nilable(String),
+              payout_document_url: T.nilable(String),
+              remarks: T.nilable(String),
+              payload_type: Symbol
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            # The total amount of the payout.
+            amount:,
+            # The unique identifier of the business associated with the payout.
+            business_id:,
+            # The total value of chargebacks associated with the payout.
+            chargebacks:,
+            # The timestamp when the payout was created, in UTC.
+            created_at:,
+            # The currency of the payout, represented as an ISO 4217 currency code.
+            currency:,
+            # The fee charged for processing the payout.
+            fee:,
+            # The payment method used for the payout (e.g., bank transfer, card, etc.).
+            payment_method:,
+            # The unique identifier of the payout.
+            payout_id:,
+            # The total value of refunds associated with the payout.
+            refunds:,
+            # The current status of the payout.
+            status:,
+            # The tax applied to the payout.
+            tax:,
+            # The timestamp when the payout was last updated, in UTC.
+            updated_at:,
+            # The name of the payout recipient or purpose.
+            name: nil,
+            # The URL of the document associated with the payout.
+            payout_document_url: nil,
+            # Any additional remarks or notes associated with the payout.
+            remarks: nil,
+            payload_type: :Payout
+          )
+          end
+
+          sig do
+            override.returns(
+              {
+                amount: Integer,
+                business_id: String,
+                chargebacks: Integer,
+                created_at: Time,
+                currency: Dodopayments::Currency::OrSymbol,
+                fee: Integer,
+                payload_type: Symbol,
+                payment_method: String,
+                payout_id: String,
+                refunds: Integer,
+                status:
+                  Dodopayments::WebhookPayload::Data::Payout::Status::OrSymbol,
+                tax: Integer,
+                updated_at: Time,
+                name: T.nilable(String),
+                payout_document_url: T.nilable(String),
+                remarks: T.nilable(String)
+              }
+            )
+          end
+          def to_hash
+          end
+
+          # The current status of the payout.
+          module Status
+            extend Dodopayments::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Dodopayments::WebhookPayload::Data::Payout::Status
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            NOT_INITIATED =
+              T.let(
+                :not_initiated,
+                Dodopayments::WebhookPayload::Data::Payout::Status::TaggedSymbol
+              )
+            IN_PROGRESS =
+              T.let(
+                :in_progress,
+                Dodopayments::WebhookPayload::Data::Payout::Status::TaggedSymbol
+              )
+            ON_HOLD =
+              T.let(
+                :on_hold,
+                Dodopayments::WebhookPayload::Data::Payout::Status::TaggedSymbol
+              )
+            FAILED =
+              T.let(
+                :failed,
+                Dodopayments::WebhookPayload::Data::Payout::Status::TaggedSymbol
+              )
+            SUCCESS =
+              T.let(
+                :success,
+                Dodopayments::WebhookPayload::Data::Payout::Status::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Dodopayments::WebhookPayload::Data::Payout::Status::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
           end
         end
 
