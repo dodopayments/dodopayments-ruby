@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.23.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.22.0...v2.23.0) (2026-08-05)
+
+
+### Features
+
+* **api:** add addon single_quantity_price and live_tutoring tax category ([531e3b0](https://github.com/dodopayments/dodopayments-ruby/commit/531e3b0e327d01fb8340fb02f9baaadca25723bc))
+* **api:** add addon single_quantity_price and live_tutoring tax category ([a347ee8](https://github.com/dodopayments/dodopayments-ruby/commit/a347ee844bc54bcd9a8c2a82f726b39f488673d7))
+
 ## [2.22.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.21.0...v2.22.0) (2026-07-31)
 
 
