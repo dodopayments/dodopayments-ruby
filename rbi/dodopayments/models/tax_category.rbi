@@ -15,6 +15,8 @@ module Dodopayments
       SAAS = T.let(:saas, Dodopayments::TaxCategory::TaggedSymbol)
       E_BOOK = T.let(:e_book, Dodopayments::TaxCategory::TaggedSymbol)
       EDTECH = T.let(:edtech, Dodopayments::TaxCategory::TaggedSymbol)
+      LIVE_TUTORING =
+        T.let(:live_tutoring, Dodopayments::TaxCategory::TaggedSymbol)
 
       sig do
         override.returns(T::Array[Dodopayments::TaxCategory::TaggedSymbol])

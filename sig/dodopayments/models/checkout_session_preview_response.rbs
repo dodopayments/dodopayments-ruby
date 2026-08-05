@@ -297,6 +297,7 @@ module Dodopayments
             og_currency: Dodopayments::Models::currency,
             og_price: Integer,
             quantity: Integer,
+            single_quantity_price: Integer,
             tax_category: Dodopayments::Models::tax_category,
             tax_inclusive: bool,
             tax_rate: Integer,
@@ -320,6 +321,8 @@ module Dodopayments
 
           attr_accessor quantity: Integer
 
+          attr_accessor single_quantity_price: Integer
+
           attr_accessor tax_category: Dodopayments::Models::tax_category
 
           attr_accessor tax_inclusive: bool
@@ -340,6 +343,7 @@ module Dodopayments
             og_currency: Dodopayments::Models::currency,
             og_price: Integer,
             quantity: Integer,
+            single_quantity_price: Integer,
             tax_category: Dodopayments::Models::tax_category,
             tax_inclusive: bool,
             tax_rate: Integer,
@@ -356,6 +360,7 @@ module Dodopayments
             og_currency: Dodopayments::Models::currency,
             og_price: Integer,
             quantity: Integer,
+            single_quantity_price: Integer,
             tax_category: Dodopayments::Models::tax_category,
             tax_inclusive: bool,
             tax_rate: Integer,

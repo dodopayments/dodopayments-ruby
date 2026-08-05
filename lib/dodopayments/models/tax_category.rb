@@ -11,6 +11,7 @@ module Dodopayments
       SAAS = :saas
       E_BOOK = :e_book
       EDTECH = :edtech
+      LIVE_TUTORING = :live_tutoring
 
       # @!method self.values
       #   @return [Array<Symbol>]
