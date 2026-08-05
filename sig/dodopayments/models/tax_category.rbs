@@ -1,6 +1,7 @@
 module Dodopayments
   module Models
-    type tax_category = :digital_products | :saas | :e_book | :edtech
+    type tax_category =
+      :digital_products | :saas | :e_book | :edtech | :live_tutoring
 
     module TaxCategory
       extend Dodopayments::Internal::Type::Enum
@@ -9,6 +10,7 @@ module Dodopayments
       SAAS: :saas
       E_BOOK: :e_book
       EDTECH: :edtech
+      LIVE_TUTORING: :live_tutoring
 
       def self?.values: -> ::Array[Dodopayments::Models::tax_category]
     end

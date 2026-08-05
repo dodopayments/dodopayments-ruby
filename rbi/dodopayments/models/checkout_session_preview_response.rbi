@@ -629,6 +629,13 @@ module Dodopayments
           sig { returns(Integer) }
           attr_accessor :quantity
 
+          # Per-unit price in `currency`, converted and adaptive-priced but pre-tax and
+          # pre-discount (both depend on quantity and the rest of the cart). Set even when
+          # `quantity` is 0, so the checkout page can price the addon before the buyer has
+          # selected any.
+          sig { returns(Integer) }
+          attr_accessor :single_quantity_price
+
           # Represents the different categories of taxation applicable to various products
           # and services.
           sig { returns(Dodopayments::TaxCategory::TaggedSymbol) }
@@ -660,6 +667,7 @@ module Dodopayments
               og_currency: Dodopayments::Currency::OrSymbol,
               og_price: Integer,
               quantity: Integer,
+              single_quantity_price: Integer,
               tax_category: Dodopayments::TaxCategory::OrSymbol,
               tax_inclusive: T::Boolean,
               tax_rate: Integer,
@@ -676,6 +684,11 @@ module Dodopayments
             og_currency:,
             og_price:,
             quantity:,
+            # Per-unit price in `currency`, converted and adaptive-priced but pre-tax and
+            # pre-discount (both depend on quantity and the rest of the cart). Set even when
+            # `quantity` is 0, so the checkout page can price the addon before the buyer has
+            # selected any.
+            single_quantity_price:,
             # Represents the different categories of taxation applicable to various products
             # and services.
             tax_category:,
@@ -699,6 +712,7 @@ module Dodopayments
                 og_currency: Dodopayments::Currency::TaggedSymbol,
                 og_price: Integer,
                 quantity: Integer,
+                single_quantity_price: Integer,
                 tax_category: Dodopayments::TaxCategory::TaggedSymbol,
                 tax_inclusive: T::Boolean,
                 tax_rate: Integer,
