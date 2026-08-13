@@ -153,6 +153,7 @@ module Dodopayments
           metadata:
             T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           next_billing_date: T.nilable(Time),
+          pause: T.nilable(T::Boolean),
           status: T.nilable(Dodopayments::SubscriptionStatus::OrSymbol),
           subscription_period_count: T.nilable(Integer),
           subscription_period_interval:
@@ -186,6 +187,9 @@ module Dodopayments
         # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
         metadata: nil,
         next_billing_date: nil,
+        # `Some(true)` pauses an active subscription; `Some(false)` unpauses a `Paused`
+        # (or abandoned `OnHold`) subscription. Exclusive of every other field.
+        pause: nil,
         status: nil,
         # New number of `subscription_period_interval` units the subscription entitlement
         # should span. Used together with `subscription_period_interval` to extend the

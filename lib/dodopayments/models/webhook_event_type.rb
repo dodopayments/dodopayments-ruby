@@ -23,6 +23,7 @@ module Dodopayments
       SUBSCRIPTION_RENEWED = :"subscription.renewed"
       SUBSCRIPTION_ON_HOLD = :"subscription.on_hold"
       SUBSCRIPTION_PAUSED = :"subscription.paused"
+      SUBSCRIPTION_UNPAUSED = :"subscription.unpaused"
       SUBSCRIPTION_CANCELLED = :"subscription.cancelled"
       SUBSCRIPTION_FAILED = :"subscription.failed"
       SUBSCRIPTION_EXPIRED = :"subscription.expired"
