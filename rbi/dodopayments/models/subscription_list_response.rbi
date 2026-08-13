@@ -126,6 +126,11 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :discount_id
 
+      # Timestamp when the subscription was paused, if it currently is (or is `OnHold`
+      # due to an unresolved pause settlement). `null` otherwise.
+      sig { returns(T.nilable(Time)) }
+      attr_accessor :paused_at
+
       # Saved payment method id used for recurring charges
       sig { returns(T.nilable(String)) }
       attr_accessor :payment_method_id
@@ -186,6 +191,7 @@ module Dodopayments
           customer_business_name: T.nilable(String),
           discount_cycles_remaining: T.nilable(Integer),
           discount_id: T.nilable(String),
+          paused_at: T.nilable(Time),
           payment_method_id: T.nilable(String),
           product_name: T.nilable(String),
           scheduled_change:
@@ -248,6 +254,9 @@ module Dodopayments
         discount_cycles_remaining: nil,
         # DEPRECATED: Use discounts instead.
         discount_id: nil,
+        # Timestamp when the subscription was paused, if it currently is (or is `OnHold`
+        # due to an unresolved pause settlement). `null` otherwise.
+        paused_at: nil,
         # Saved payment method id used for recurring charges
         payment_method_id: nil,
         # Name of the product associated with this subscription
@@ -296,6 +305,7 @@ module Dodopayments
             customer_business_name: T.nilable(String),
             discount_cycles_remaining: T.nilable(Integer),
             discount_id: T.nilable(String),
+            paused_at: T.nilable(Time),
             payment_method_id: T.nilable(String),
             product_name: T.nilable(String),
             scheduled_change: T.nilable(Dodopayments::ScheduledPlanChange),

@@ -36,6 +36,7 @@ module Dodopayments
         discount_id: String?,
         discounts: ::Array[Dodopayments::DiscountDetail]?,
         expires_at: Time?,
+        paused_at: Time?,
         payment_method_id: String?,
         scheduled_change: Dodopayments::ScheduledPlanChange?,
         tax_id: String?,
@@ -111,6 +112,8 @@ module Dodopayments
 
       attr_accessor expires_at: Time?
 
+      attr_accessor paused_at: Time?
+
       attr_accessor payment_method_id: String?
 
       attr_accessor scheduled_change: Dodopayments::ScheduledPlanChange?
@@ -154,6 +157,7 @@ module Dodopayments
         ?discount_id: String?,
         ?discounts: ::Array[Dodopayments::DiscountDetail]?,
         ?expires_at: Time?,
+        ?paused_at: Time?,
         ?payment_method_id: String?,
         ?scheduled_change: Dodopayments::ScheduledPlanChange?,
         ?tax_id: String?,
@@ -195,6 +199,7 @@ module Dodopayments
         discount_id: String?,
         discounts: ::Array[Dodopayments::DiscountDetail]?,
         expires_at: Time?,
+        paused_at: Time?,
         payment_method_id: String?,
         scheduled_change: Dodopayments::ScheduledPlanChange?,
         tax_id: String?,

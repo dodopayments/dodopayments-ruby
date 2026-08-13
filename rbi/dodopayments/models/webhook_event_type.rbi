@@ -71,6 +71,11 @@ module Dodopayments
           :"subscription.paused",
           Dodopayments::WebhookEventType::TaggedSymbol
         )
+      SUBSCRIPTION_UNPAUSED =
+        T.let(
+          :"subscription.unpaused",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
       SUBSCRIPTION_CANCELLED =
         T.let(
           :"subscription.cancelled",

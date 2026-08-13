@@ -14,6 +14,7 @@ module Dodopayments
         disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         metadata: Dodopayments::Models::metadata?,
         next_billing_date: Time?,
+        pause: bool?,
         status: Dodopayments::Models::subscription_status?,
         subscription_period_count: Integer?,
         subscription_period_interval: Dodopayments::Models::time_interval?,
@@ -49,6 +50,8 @@ module Dodopayments
 
       attr_accessor next_billing_date: Time?
 
+      attr_accessor pause: bool?
+
       attr_accessor status: Dodopayments::Models::subscription_status?
 
       attr_accessor subscription_period_count: Integer?
@@ -70,6 +73,7 @@ module Dodopayments
         ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         ?metadata: Dodopayments::Models::metadata?,
         ?next_billing_date: Time?,
+        ?pause: bool?,
         ?status: Dodopayments::Models::subscription_status?,
         ?subscription_period_count: Integer?,
         ?subscription_period_interval: Dodopayments::Models::time_interval?,
@@ -90,6 +94,7 @@ module Dodopayments
         disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         metadata: Dodopayments::Models::metadata?,
         next_billing_date: Time?,
+        pause: bool?,
         status: Dodopayments::Models::subscription_status?,
         subscription_period_count: Integer?,
         subscription_period_interval: Dodopayments::Models::time_interval?,

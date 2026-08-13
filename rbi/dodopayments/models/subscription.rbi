@@ -159,6 +159,11 @@ module Dodopayments
       sig { returns(T.nilable(Time)) }
       attr_accessor :expires_at
 
+      # Timestamp when the subscription was paused, if it currently is (or is `OnHold`
+      # due to an unresolved pause settlement). `null` otherwise.
+      sig { returns(T.nilable(Time)) }
+      attr_accessor :paused_at
+
       # Saved payment method id used for recurring charges
       sig { returns(T.nilable(String)) }
       attr_accessor :payment_method_id
@@ -225,6 +230,7 @@ module Dodopayments
           discount_id: T.nilable(String),
           discounts: T.nilable(T::Array[Dodopayments::DiscountDetail::OrHash]),
           expires_at: T.nilable(Time),
+          paused_at: T.nilable(Time),
           payment_method_id: T.nilable(String),
           scheduled_change:
             T.nilable(Dodopayments::ScheduledPlanChange::OrHash),
@@ -304,6 +310,9 @@ module Dodopayments
         discounts: nil,
         # Timestamp when the subscription will expire
         expires_at: nil,
+        # Timestamp when the subscription was paused, if it currently is (or is `OnHold`
+        # due to an unresolved pause settlement). `null` otherwise.
+        paused_at: nil,
         # Saved payment method id used for recurring charges
         payment_method_id: nil,
         # Scheduled plan change details, if any
@@ -360,6 +369,7 @@ module Dodopayments
             discount_id: T.nilable(String),
             discounts: T.nilable(T::Array[Dodopayments::DiscountDetail]),
             expires_at: T.nilable(Time),
+            paused_at: T.nilable(Time),
             payment_method_id: T.nilable(String),
             scheduled_change: T.nilable(Dodopayments::ScheduledPlanChange),
             tax_id: T.nilable(String),
