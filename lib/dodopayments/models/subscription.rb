@@ -217,6 +217,13 @@ module Dodopayments
       #   @return [Time, nil]
       optional :expires_at, Time, nil?: true
 
+      # @!attribute paused_at
+      #   Timestamp when the subscription was paused, if it currently is (or is `OnHold`
+      #   due to an unresolved pause settlement). `null` otherwise.
+      #
+      #   @return [Time, nil]
+      optional :paused_at, Time, nil?: true
+
       # @!attribute payment_method_id
       #   Saved payment method id used for recurring charges
       #
@@ -243,7 +250,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :trial_amount, Integer, nil?: true
 
-      # @!method initialize(addons:, billing:, brand_id:, cancel_at_next_billing_date:, created_at:, credit_entitlement_cart:, currency:, customer:, metadata:, meter_credit_entitlement_cart:, meters:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancellation_comment: nil, cancellation_feedback: nil, cancelled_at: nil, custom_field_responses: nil, customer_business_name: nil, discount_cycles_remaining: nil, discount_id: nil, discounts: nil, expires_at: nil, payment_method_id: nil, scheduled_change: nil, tax_id: nil, trial_amount: nil)
+      # @!method initialize(addons:, billing:, brand_id:, cancel_at_next_billing_date:, created_at:, credit_entitlement_cart:, currency:, customer:, metadata:, meter_credit_entitlement_cart:, meters:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancellation_comment: nil, cancellation_feedback: nil, cancelled_at: nil, custom_field_responses: nil, customer_business_name: nil, discount_cycles_remaining: nil, discount_id: nil, discounts: nil, expires_at: nil, paused_at: nil, payment_method_id: nil, scheduled_change: nil, tax_id: nil, trial_amount: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Subscription} for more details.
       #
@@ -316,6 +323,8 @@ module Dodopayments
       #   @param discounts [Array<Dodopayments::Models::DiscountDetail>, nil] All stacked discounts applied, ordered by position
       #
       #   @param expires_at [Time, nil] Timestamp when the subscription will expire
+      #
+      #   @param paused_at [Time, nil] Timestamp when the subscription was paused, if it currently is (or is
       #
       #   @param payment_method_id [String, nil] Saved payment method id used for recurring charges
       #

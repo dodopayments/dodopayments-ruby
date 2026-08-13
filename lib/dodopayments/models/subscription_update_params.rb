@@ -84,6 +84,13 @@ module Dodopayments
       #   @return [Time, nil]
       optional :next_billing_date, Time, nil?: true
 
+      # @!attribute pause
+      #   `Some(true)` pauses an active subscription; `Some(false)` unpauses a `Paused`
+      #   (or abandoned `OnHold`) subscription. Exclusive of every other field.
+      #
+      #   @return [Boolean, nil]
+      optional :pause, Dodopayments::Internal::Type::Boolean, nil?: true
+
       # @!attribute status
       #
       #   @return [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
@@ -111,7 +118,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(subscription_id:, billing: nil, cancel_at_next_billing_date: nil, cancel_reason: nil, cancellation_comment: nil, cancellation_feedback: nil, credit_entitlement_cart: nil, customer_business_name: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, status: nil, subscription_period_count: nil, subscription_period_interval: nil, tax_id: nil, request_options: {})
+      # @!method initialize(subscription_id:, billing: nil, cancel_at_next_billing_date: nil, cancel_reason: nil, cancellation_comment: nil, cancellation_feedback: nil, credit_entitlement_cart: nil, customer_business_name: nil, customer_name: nil, disable_on_demand: nil, metadata: nil, next_billing_date: nil, pause: nil, status: nil, subscription_period_count: nil, subscription_period_interval: nil, tax_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionUpdateParams} for more details.
       #
@@ -138,6 +145,8 @@ module Dodopayments
       #   @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
       #
       #   @param next_billing_date [Time, nil]
+      #
+      #   @param pause [Boolean, nil] `Some(true)` pauses an active subscription; `Some(false)` unpauses a
       #
       #   @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
       #

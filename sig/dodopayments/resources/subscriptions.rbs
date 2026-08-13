@@ -47,6 +47,7 @@ module Dodopayments
         ?disable_on_demand: Dodopayments::SubscriptionUpdateParams::DisableOnDemand?,
         ?metadata: Dodopayments::Models::metadata?,
         ?next_billing_date: Time?,
+        ?pause: bool?,
         ?status: Dodopayments::Models::subscription_status?,
         ?subscription_period_count: Integer?,
         ?subscription_period_interval: Dodopayments::Models::time_interval?,
