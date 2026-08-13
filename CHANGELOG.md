@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.24.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.23.0...v2.24.0) (2026-08-13)
+
+
+### Features
+
+* **api:** add subscription pause/unpause ([40d887a](https://github.com/dodopayments/dodopayments-ruby/commit/40d887abc1f80fca0fffedbd7c9966ef89ec4051))
+* **api:** add subscription pause/unpause ([40280ad](https://github.com/dodopayments/dodopayments-ruby/commit/40280ad39a2abb9297ff48468da7f2bea721d622))
+
 ## [2.23.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.22.0...v2.23.0) (2026-08-05)
 
 
