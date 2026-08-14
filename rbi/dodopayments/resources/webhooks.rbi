@@ -185,8 +185,10 @@ module Dodopayments
             Dodopayments::SubscriptionExpiredWebhookEvent,
             Dodopayments::SubscriptionFailedWebhookEvent,
             Dodopayments::SubscriptionOnHoldWebhookEvent,
+            Dodopayments::SubscriptionPausedWebhookEvent,
             Dodopayments::SubscriptionPlanChangedWebhookEvent,
             Dodopayments::SubscriptionRenewedWebhookEvent,
+            Dodopayments::SubscriptionUnpausedWebhookEvent,
             Dodopayments::SubscriptionUpdatePaymentMethodWebhookEvent,
             Dodopayments::SubscriptionUpdatedWebhookEvent
           )
@@ -246,8 +248,10 @@ module Dodopayments
             Dodopayments::SubscriptionExpiredWebhookEvent,
             Dodopayments::SubscriptionFailedWebhookEvent,
             Dodopayments::SubscriptionOnHoldWebhookEvent,
+            Dodopayments::SubscriptionPausedWebhookEvent,
             Dodopayments::SubscriptionPlanChangedWebhookEvent,
             Dodopayments::SubscriptionRenewedWebhookEvent,
+            Dodopayments::SubscriptionUnpausedWebhookEvent,
             Dodopayments::SubscriptionUpdatePaymentMethodWebhookEvent,
             Dodopayments::SubscriptionUpdatedWebhookEvent
           )

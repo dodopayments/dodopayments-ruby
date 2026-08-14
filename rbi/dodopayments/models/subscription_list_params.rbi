@@ -166,6 +166,11 @@ module Dodopayments
             :on_hold,
             Dodopayments::SubscriptionListParams::Status::TaggedSymbol
           )
+        PAUSED =
+          T.let(
+            :paused,
+            Dodopayments::SubscriptionListParams::Status::TaggedSymbol
+          )
         CANCELLED =
           T.let(
             :cancelled,
