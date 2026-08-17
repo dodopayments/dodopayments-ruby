@@ -122,7 +122,17 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :require_phone_number, Dodopayments::Internal::Type::Boolean
 
-      # @!method initialize(allow_currency_selection: nil, allow_customer_editing_business_name: nil, allow_customer_editing_city: nil, allow_customer_editing_country: nil, allow_customer_editing_email: nil, allow_customer_editing_name: nil, allow_customer_editing_state: nil, allow_customer_editing_street: nil, allow_customer_editing_tax_id: nil, allow_customer_editing_zipcode: nil, allow_discount_code: nil, allow_editing_addons: nil, allow_phone_number_collection: nil, allow_tax_id: nil, always_create_new_customer: nil, redirect_immediately: nil, require_phone_number: nil)
+      # @!attribute single_page
+      #   If true, the session uses the single-page checkout flow: the page initializes
+      #   the payment at load time and confirms it in place, with no separate payment
+      #   page.
+      #
+      #   Default is false
+      #
+      #   @return [Boolean, nil]
+      optional :single_page, Dodopayments::Internal::Type::Boolean
+
+      # @!method initialize(allow_currency_selection: nil, allow_customer_editing_business_name: nil, allow_customer_editing_city: nil, allow_customer_editing_country: nil, allow_customer_editing_email: nil, allow_customer_editing_name: nil, allow_customer_editing_state: nil, allow_customer_editing_street: nil, allow_customer_editing_tax_id: nil, allow_customer_editing_zipcode: nil, allow_discount_code: nil, allow_editing_addons: nil, allow_phone_number_collection: nil, allow_tax_id: nil, always_create_new_customer: nil, redirect_immediately: nil, require_phone_number: nil, single_page: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionFlags} for more details.
       #
@@ -159,6 +169,8 @@ module Dodopayments
       #   @param redirect_immediately [Boolean] If true, redirects the customer immediately after payment completion
       #
       #   @param require_phone_number [Boolean] If true, the customer must provide a phone number to complete checkout.
+      #
+      #   @param single_page [Boolean] If true, the session uses the single-page checkout flow: the page
     end
   end
 end

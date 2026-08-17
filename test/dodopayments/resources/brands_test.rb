@@ -18,6 +18,7 @@ class Dodopayments::Test::Resources::BrandsTest < Dodopayments::Test::ResourceTe
         statement_descriptor: String,
         verification_enabled: Dodopayments::Internal::Type::Boolean,
         verification_status: Dodopayments::Brand::VerificationStatus,
+        archived_at: Time | nil,
         description: String | nil,
         image: String | nil,
         name: String | nil,
@@ -43,6 +44,7 @@ class Dodopayments::Test::Resources::BrandsTest < Dodopayments::Test::ResourceTe
         statement_descriptor: String,
         verification_enabled: Dodopayments::Internal::Type::Boolean,
         verification_status: Dodopayments::Brand::VerificationStatus,
+        archived_at: Time | nil,
         description: String | nil,
         image: String | nil,
         name: String | nil,
@@ -68,6 +70,7 @@ class Dodopayments::Test::Resources::BrandsTest < Dodopayments::Test::ResourceTe
         statement_descriptor: String,
         verification_enabled: Dodopayments::Internal::Type::Boolean,
         verification_status: Dodopayments::Brand::VerificationStatus,
+        archived_at: Time | nil,
         description: String | nil,
         image: String | nil,
         name: String | nil,
@@ -88,6 +91,25 @@ class Dodopayments::Test::Resources::BrandsTest < Dodopayments::Test::ResourceTe
     assert_pattern do
       response => {
         items: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Brand])
+      }
+    end
+  end
+
+  def test_archive
+    response = @dodo_payments.brands.archive("brnd_8dFiAW42v28JzhlVSocjq")
+
+    assert_pattern do
+      response => Dodopayments::Models::BrandArchiveResponse
+    end
+
+    assert_pattern do
+      response => {
+        archived_at: Time,
+        brand_id: String,
+        collections_moved: Integer,
+        products_moved: Integer,
+        subscriptions_moved: Integer,
+        moved_to_brand_id: String | nil
       }
     end
   end

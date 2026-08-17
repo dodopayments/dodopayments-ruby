@@ -147,6 +147,17 @@ module Dodopayments
       sig { params(require_phone_number: T::Boolean).void }
       attr_writer :require_phone_number
 
+      # If true, the session uses the single-page checkout flow: the page initializes
+      # the payment at load time and confirms it in place, with no separate payment
+      # page.
+      #
+      # Default is false
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :single_page
+
+      sig { params(single_page: T::Boolean).void }
+      attr_writer :single_page
+
       sig do
         params(
           allow_currency_selection: T::Boolean,
@@ -165,7 +176,8 @@ module Dodopayments
           allow_tax_id: T::Boolean,
           always_create_new_customer: T::Boolean,
           redirect_immediately: T::Boolean,
-          require_phone_number: T::Boolean
+          require_phone_number: T::Boolean,
+          single_page: T::Boolean
         ).returns(T.attached_class)
       end
       def self.new(
@@ -219,7 +231,13 @@ module Dodopayments
         # `allow_phone_number_collection` to also be true.
         #
         # Default is false
-        require_phone_number: nil
+        require_phone_number: nil,
+        # If true, the session uses the single-page checkout flow: the page initializes
+        # the payment at load time and confirms it in place, with no separate payment
+        # page.
+        #
+        # Default is false
+        single_page: nil
       )
       end
 
@@ -242,7 +260,8 @@ module Dodopayments
             allow_tax_id: T::Boolean,
             always_create_new_customer: T::Boolean,
             redirect_immediately: T::Boolean,
-            require_phone_number: T::Boolean
+            require_phone_number: T::Boolean,
+            single_page: T::Boolean
           }
         )
       end
