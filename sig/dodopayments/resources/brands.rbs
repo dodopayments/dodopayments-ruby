@@ -27,8 +27,15 @@ module Dodopayments
       ) -> Dodopayments::Brand
 
       def list: (
+        ?include_archived: bool,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::BrandListResponse
+
+      def archive: (
+        String id,
+        ?move_products_to: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::BrandArchiveResponse
 
       def update_images: (
         String id,

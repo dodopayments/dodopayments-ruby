@@ -1,0 +1,45 @@
+module Dodopayments
+  module Models
+    type brand_archive_response =
+      {
+        archived_at: Time,
+        brand_id: String,
+        collections_moved: Integer,
+        products_moved: Integer,
+        subscriptions_moved: Integer,
+        moved_to_brand_id: String?
+      }
+
+    class BrandArchiveResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor archived_at: Time
+
+      attr_accessor brand_id: String
+
+      attr_accessor collections_moved: Integer
+
+      attr_accessor products_moved: Integer
+
+      attr_accessor subscriptions_moved: Integer
+
+      attr_accessor moved_to_brand_id: String?
+
+      def initialize: (
+        archived_at: Time,
+        brand_id: String,
+        collections_moved: Integer,
+        products_moved: Integer,
+        subscriptions_moved: Integer,
+        ?moved_to_brand_id: String?
+      ) -> void
+
+      def to_hash: -> {
+        archived_at: Time,
+        brand_id: String,
+        collections_moved: Integer,
+        products_moved: Integer,
+        subscriptions_moved: Integer,
+        moved_to_brand_id: String?
+      }
+    end
+  end
+end

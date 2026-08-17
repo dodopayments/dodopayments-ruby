@@ -64,11 +64,37 @@ module Dodopayments
       end
 
       sig do
-        params(request_options: Dodopayments::RequestOptions::OrHash).returns(
-          Dodopayments::Models::BrandListResponse
-        )
+        params(
+          include_archived: T::Boolean,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Models::BrandListResponse)
       end
-      def list(request_options: {})
+      def list(
+        # Set to true to also list archived brands. Default false.
+        include_archived: nil,
+        request_options: {}
+      )
+      end
+
+      # Archive a brand. Its products, live subscriptions, and product collections move
+      # to the `move_products_to` brand. Archive is permanent.
+      sig do
+        params(
+          id: String,
+          move_products_to: T.nilable(String),
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Models::BrandArchiveResponse)
+      end
+      def archive(
+        # Brand Id
+        id,
+        # Brand that takes over the products and the live subscriptions of the brand you
+        # archive. It must be a brand of the same business, and it must not be archived.
+        # The primary brand (its brand id is the business id) is a valid target. Omit this
+        # field only when the brand holds no products and no live subscriptions.
+        move_products_to: nil,
+        request_options: {}
+      )
       end
 
       sig do

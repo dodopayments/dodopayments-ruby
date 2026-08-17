@@ -26,6 +26,10 @@ module Dodopayments
       sig { returns(Dodopayments::Brand::VerificationStatus::TaggedSymbol) }
       attr_accessor :verification_status
 
+      # Time the brand was archived. Null for an active brand.
+      sig { returns(T.nilable(Time)) }
+      attr_accessor :archived_at
+
       sig { returns(T.nilable(String)) }
       attr_accessor :description
 
@@ -54,6 +58,7 @@ module Dodopayments
           verification_enabled: T::Boolean,
           verification_status:
             Dodopayments::Brand::VerificationStatus::OrSymbol,
+          archived_at: T.nilable(Time),
           description: T.nilable(String),
           image: T.nilable(String),
           name: T.nilable(String),
@@ -69,6 +74,8 @@ module Dodopayments
         statement_descriptor:,
         verification_enabled:,
         verification_status:,
+        # Time the brand was archived. Null for an active brand.
+        archived_at: nil,
         description: nil,
         image: nil,
         name: nil,
@@ -89,6 +96,7 @@ module Dodopayments
             verification_enabled: T::Boolean,
             verification_status:
               Dodopayments::Brand::VerificationStatus::TaggedSymbol,
+            archived_at: T.nilable(Time),
             description: T.nilable(String),
             image: T.nilable(String),
             name: T.nilable(String),

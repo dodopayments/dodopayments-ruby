@@ -7,7 +7,15 @@ module Dodopayments
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      # @!method initialize(request_options: {})
+      # @!attribute include_archived
+      #   Set to true to also list archived brands. Default false.
+      #
+      #   @return [Boolean, nil]
+      optional :include_archived, Dodopayments::Internal::Type::Boolean
+
+      # @!method initialize(include_archived: nil, request_options: {})
+      #   @param include_archived [Boolean] Set to true to also list archived brands. Default false.
+      #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end
   end
