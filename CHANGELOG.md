@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.25.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.24.0...v2.25.0) (2026-08-17)
+
+
+### Features
+
+* **api:** add brand archive endpoint ([ccc5fc9](https://github.com/dodopayments/dodopayments-ruby/commit/ccc5fc9c61410ac28010e98cc241ab8eb471cb72))
+* **api:** add brand archive endpoint ([90fc52d](https://github.com/dodopayments/dodopayments-ruby/commit/90fc52df5e05849e2dfdd5b307ea2ff34edb050e))
+
 ## [2.24.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.23.0...v2.24.0) (2026-08-13)
 
 
