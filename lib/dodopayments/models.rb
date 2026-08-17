@@ -75,6 +75,8 @@ module Dodopayments
 
   Brand = Dodopayments::Models::Brand
 
+  BrandArchiveParams = Dodopayments::Models::BrandArchiveParams
+
   BrandCreateParams = Dodopayments::Models::BrandCreateParams
 
   BrandListParams = Dodopayments::Models::BrandListParams

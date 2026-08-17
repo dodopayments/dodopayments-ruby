@@ -35,6 +35,8 @@ module Dodopayments
 
   class Brand = Dodopayments::Models::Brand
 
+  class BrandArchiveParams = Dodopayments::Models::BrandArchiveParams
+
   class BrandCreateParams = Dodopayments::Models::BrandCreateParams
 
   class BrandListParams = Dodopayments::Models::BrandListParams

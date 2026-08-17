@@ -1,24 +1,26 @@
 module Dodopayments
   module Models
-    type brand_list_params =
-      { include_archived: bool }
+    type brand_archive_params =
+      { id: String, move_products_to: String? }
       & Dodopayments::Internal::Type::request_parameters
 
-    class BrandListParams < Dodopayments::Internal::Type::BaseModel
+    class BrandArchiveParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      attr_reader include_archived: bool?
+      attr_accessor id: String
 
-      def include_archived=: (bool) -> bool
+      attr_accessor move_products_to: String?
 
       def initialize: (
-        ?include_archived: bool,
+        id: String,
+        ?move_products_to: String?,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
       def to_hash: -> {
-        include_archived: bool,
+        id: String,
+        move_products_to: String?,
         request_options: Dodopayments::RequestOptions
       }
     end

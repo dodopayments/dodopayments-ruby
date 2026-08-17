@@ -8,6 +8,7 @@ module Dodopayments
         statement_descriptor: String,
         verification_enabled: bool,
         verification_status: Dodopayments::Models::Brand::verification_status,
+        archived_at: Time?,
         description: String?,
         image: String?,
         name: String?,
@@ -29,6 +30,8 @@ module Dodopayments
 
       attr_accessor verification_status: Dodopayments::Models::Brand::verification_status
 
+      attr_accessor archived_at: Time?
+
       attr_accessor description: String?
 
       attr_accessor image: String?
@@ -48,6 +51,7 @@ module Dodopayments
         statement_descriptor: String,
         verification_enabled: bool,
         verification_status: Dodopayments::Models::Brand::verification_status,
+        ?archived_at: Time?,
         ?description: String?,
         ?image: String?,
         ?name: String?,
@@ -63,6 +67,7 @@ module Dodopayments
         statement_descriptor: String,
         verification_enabled: bool,
         verification_status: Dodopayments::Models::Brand::verification_status,
+        archived_at: Time?,
         description: String?,
         image: String?,
         name: String?,
