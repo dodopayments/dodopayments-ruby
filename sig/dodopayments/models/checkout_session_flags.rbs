@@ -18,7 +18,8 @@ module Dodopayments
         allow_tax_id: bool,
         always_create_new_customer: bool,
         redirect_immediately: bool,
-        require_phone_number: bool
+        require_phone_number: bool,
+        single_page: bool
       }
 
     class CheckoutSessionFlags < Dodopayments::Internal::Type::BaseModel
@@ -90,6 +91,10 @@ module Dodopayments
 
       def require_phone_number=: (bool) -> bool
 
+      attr_reader single_page: bool?
+
+      def single_page=: (bool) -> bool
+
       def initialize: (
         ?allow_currency_selection: bool,
         ?allow_customer_editing_business_name: bool,
@@ -107,7 +112,8 @@ module Dodopayments
         ?allow_tax_id: bool,
         ?always_create_new_customer: bool,
         ?redirect_immediately: bool,
-        ?require_phone_number: bool
+        ?require_phone_number: bool,
+        ?single_page: bool
       ) -> void
 
       def to_hash: -> {
@@ -127,7 +133,8 @@ module Dodopayments
         allow_tax_id: bool,
         always_create_new_customer: bool,
         redirect_immediately: bool,
-        require_phone_number: bool
+        require_phone_number: bool,
+        single_page: bool
       }
     end
   end

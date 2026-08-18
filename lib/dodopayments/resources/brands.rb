@@ -78,7 +78,9 @@ module Dodopayments
         )
       end
 
-      # @overload list(request_options: {})
+      # @overload list(include_archived: nil, request_options: {})
+      #
+      # @param include_archived [Boolean] Set to true to also list archived brands. Default false.
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -86,11 +88,42 @@ module Dodopayments
       #
       # @see Dodopayments::Models::BrandListParams
       def list(params = {})
+        parsed, options = Dodopayments::BrandListParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "brands",
+          query: query,
           model: Dodopayments::Models::BrandListResponse,
-          options: params[:request_options]
+          options: options
+        )
+      end
+
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::BrandArchiveParams} for more details.
+      #
+      # Archive a brand. Its products, live subscriptions, and product collections move
+      # to the `move_products_to` brand. Archive is permanent.
+      #
+      # @overload archive(id, move_products_to: nil, request_options: {})
+      #
+      # @param id [String] Brand Id
+      #
+      # @param move_products_to [String, nil] Brand that takes over the products and the live subscriptions of the
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Models::BrandArchiveResponse]
+      #
+      # @see Dodopayments::Models::BrandArchiveParams
+      def archive(id, params = {})
+        parsed, options = Dodopayments::BrandArchiveParams.dump_request(params)
+        @client.request(
+          method: :post,
+          path: ["brands/%1$s/archive", id],
+          body: parsed,
+          model: Dodopayments::Models::BrandArchiveResponse,
+          options: options
         )
       end
 

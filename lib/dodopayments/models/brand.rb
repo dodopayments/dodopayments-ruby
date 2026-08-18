@@ -34,6 +34,12 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::Brand::VerificationStatus]
       required :verification_status, enum: -> { Dodopayments::Brand::VerificationStatus }
 
+      # @!attribute archived_at
+      #   Time the brand was archived. Null for an active brand.
+      #
+      #   @return [Time, nil]
+      optional :archived_at, Time, nil?: true
+
       # @!attribute description
       #
       #   @return [String, nil]
@@ -65,7 +71,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :url, String, nil?: true
 
-      # @!method initialize(brand_id:, business_id:, enabled:, statement_descriptor:, verification_enabled:, verification_status:, description: nil, image: nil, name: nil, reason_for_hold: nil, support_email: nil, url: nil)
+      # @!method initialize(brand_id:, business_id:, enabled:, statement_descriptor:, verification_enabled:, verification_status:, archived_at: nil, description: nil, image: nil, name: nil, reason_for_hold: nil, support_email: nil, url: nil)
       #   @param brand_id [String]
       #
       #   @param business_id [String]
@@ -77,6 +83,8 @@ module Dodopayments
       #   @param verification_enabled [Boolean]
       #
       #   @param verification_status [Symbol, Dodopayments::Models::Brand::VerificationStatus]
+      #
+      #   @param archived_at [Time, nil] Time the brand was archived. Null for an active brand.
       #
       #   @param description [String, nil]
       #
