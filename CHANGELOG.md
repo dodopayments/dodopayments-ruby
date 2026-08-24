@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.26.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.25.0...v2.26.0) (2026-08-24)
+
+
+### Features
+
+* **api:** return checkout handles from subscription change-plan ([2214ac1](https://github.com/dodopayments/dodopayments-ruby/commit/2214ac15c534b4f0f0dd3bd99b54d7ea3a902ef1))
+* **api:** return checkout handles from subscription change-plan ([33a5304](https://github.com/dodopayments/dodopayments-ruby/commit/33a5304d28904f9cb0d6bfc3e60a4765925c308a))
+
 ## [2.25.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.24.0...v2.25.0) (2026-08-17)
 
 
