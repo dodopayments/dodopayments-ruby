@@ -187,9 +187,21 @@ module Dodopayments
         # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
         metadata: nil,
         next_billing_date: nil,
-        # `Some(true)` pauses an active subscription; `Some(false)` unpauses a `Paused`
-        # (or abandoned `OnHold`) subscription. Exclusive of every other field.
+        # Removed. Use `status: paused` to pause and `status: active` to resume. This
+        # field always fails with 422, so a caller still on it gets a loud error instead
+        # of a silent no-op.
         pause: nil,
+        # Set to `cancelled` to cancel the subscription. See `cancel_reason`,
+        # `cancellation_feedback`, `cancellation_comment`, and
+        # `cancel_at_next_billing_date` for cancellation options.
+        #
+        # Set to `paused` to pause an active subscription. Set to `active` to resume a
+        # `paused` subscription. `active` also resumes an `on_hold` subscription that has
+        # an unpaid pause invoice. This voids that invoice.
+        #
+        # Send `paused` or `active` alone. A request that combines either with any other
+        # field fails with 422. `cancelled` is not exclusive this way — see
+        # `cancel_reason` and friends below.
         status: nil,
         # New number of `subscription_period_interval` units the subscription entitlement
         # should span. Used together with `subscription_period_interval` to extend the
@@ -268,6 +280,8 @@ module Dodopayments
           quantity: Integer,
           adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
+          cancel_scheduled_change_plan: T::Boolean,
+          collect_via_payment_link: T::Boolean,
           discount_code: T.nilable(String),
           discount_codes: T.nilable(T::Array[String]),
           effective_at:
@@ -279,7 +293,7 @@ module Dodopayments
               Dodopayments::UpdateSubscriptionPlanReq::OnPaymentFailure::OrSymbol
             ),
           request_options: Dodopayments::RequestOptions::OrHash
-        ).void
+        ).returns(Dodopayments::Models::SubscriptionChangePlanResponse)
       end
       def change_plan(
         # Subscription Id
@@ -296,6 +310,28 @@ module Dodopayments
         # Addons for the new plan. Note : Leaving this empty would remove any existing
         # addons
         addons: nil,
+        # Replace a scheduled plan change with this one.
+        #
+        # The scheduled change is cancelled by the transaction that applies this change. A
+        # change that never applies leaves the schedule in place.
+        #
+        # `effective_at: next_billing_date` is allowed. The new schedule then replaces the
+        # old one in the request transaction.
+        #
+        # A pending plan change still gets a `409`. This field does not affect it.
+        #
+        # The preview route shares this request body, so a preview that sets this field
+        # also passes the scheduled-change `409`.
+        cancel_scheduled_change_plan: nil,
+        # Collect the plan-change amount with a payment link. The customer then pays on a
+        # checkout page.
+        #
+        # The business needs the `allow_plan_change_via_payment_link` capability. The
+        # request needs `effective_at: immediately`. The request also needs
+        # `on_payment_failure: prevent_change`.
+        #
+        # The preview route shares this request body and ignores this field.
+        collect_via_payment_link: nil,
         # DEPRECATED: Use discount_codes instead. Cannot be used together with
         # discount_codes.
         discount_code: nil,
@@ -374,6 +410,8 @@ module Dodopayments
           quantity: Integer,
           adaptive_currency_fees_inclusive: T.nilable(T::Boolean),
           addons: T.nilable(T::Array[Dodopayments::AttachAddon::OrHash]),
+          cancel_scheduled_change_plan: T::Boolean,
+          collect_via_payment_link: T::Boolean,
           discount_code: T.nilable(String),
           discount_codes: T.nilable(T::Array[String]),
           effective_at:
@@ -402,6 +440,28 @@ module Dodopayments
         # Addons for the new plan. Note : Leaving this empty would remove any existing
         # addons
         addons: nil,
+        # Replace a scheduled plan change with this one.
+        #
+        # The scheduled change is cancelled by the transaction that applies this change. A
+        # change that never applies leaves the schedule in place.
+        #
+        # `effective_at: next_billing_date` is allowed. The new schedule then replaces the
+        # old one in the request transaction.
+        #
+        # A pending plan change still gets a `409`. This field does not affect it.
+        #
+        # The preview route shares this request body, so a preview that sets this field
+        # also passes the scheduled-change `409`.
+        cancel_scheduled_change_plan: nil,
+        # Collect the plan-change amount with a payment link. The customer then pays on a
+        # checkout page.
+        #
+        # The business needs the `allow_plan_change_via_payment_link` capability. The
+        # request needs `effective_at: immediately`. The request also needs
+        # `on_payment_failure: prevent_change`.
+        #
+        # The preview route shares this request body and ignores this field.
+        collect_via_payment_link: nil,
         # DEPRECATED: Use discount_codes instead. Cannot be used together with
         # discount_codes.
         discount_code: nil,
