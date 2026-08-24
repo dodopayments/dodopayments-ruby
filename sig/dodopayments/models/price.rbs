@@ -13,9 +13,9 @@ module Dodopayments
           currency: Dodopayments::Models::currency,
           discount: Integer,
           price: Integer,
-          purchasing_power_parity: bool,
           type: :one_time_price,
           pay_what_you_want: bool,
+          purchasing_power_parity: bool,
           suggested_price: Integer?,
           tax_inclusive: bool?
         }
@@ -27,13 +27,15 @@ module Dodopayments
 
         attr_accessor price: Integer
 
-        attr_accessor purchasing_power_parity: bool
-
         attr_accessor type: :one_time_price
 
         attr_reader pay_what_you_want: bool?
 
         def pay_what_you_want=: (bool) -> bool
+
+        attr_reader purchasing_power_parity: bool?
+
+        def purchasing_power_parity=: (bool) -> bool
 
         attr_accessor suggested_price: Integer?
 
@@ -43,8 +45,8 @@ module Dodopayments
           currency: Dodopayments::Models::currency,
           discount: Integer,
           price: Integer,
-          purchasing_power_parity: bool,
           ?pay_what_you_want: bool,
+          ?purchasing_power_parity: bool,
           ?suggested_price: Integer?,
           ?tax_inclusive: bool?,
           ?type: :one_time_price
@@ -54,9 +56,9 @@ module Dodopayments
           currency: Dodopayments::Models::currency,
           discount: Integer,
           price: Integer,
-          purchasing_power_parity: bool,
           type: :one_time_price,
           pay_what_you_want: bool,
+          purchasing_power_parity: bool,
           suggested_price: Integer?,
           tax_inclusive: bool?
         }
@@ -69,10 +71,10 @@ module Dodopayments
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::time_interval,
           price: Integer,
-          purchasing_power_parity: bool,
           subscription_period_count: Integer,
           subscription_period_interval: Dodopayments::Models::time_interval,
           type: :recurring_price,
+          purchasing_power_parity: bool,
           tax_inclusive: bool?,
           trial_amount: Integer?,
           trial_apply_discounts: bool?,
@@ -90,13 +92,15 @@ module Dodopayments
 
         attr_accessor price: Integer
 
-        attr_accessor purchasing_power_parity: bool
-
         attr_accessor subscription_period_count: Integer
 
         attr_accessor subscription_period_interval: Dodopayments::Models::time_interval
 
         attr_accessor type: :recurring_price
+
+        attr_reader purchasing_power_parity: bool?
+
+        def purchasing_power_parity=: (bool) -> bool
 
         attr_accessor tax_inclusive: bool?
 
@@ -114,9 +118,9 @@ module Dodopayments
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::time_interval,
           price: Integer,
-          purchasing_power_parity: bool,
           subscription_period_count: Integer,
           subscription_period_interval: Dodopayments::Models::time_interval,
+          ?purchasing_power_parity: bool,
           ?tax_inclusive: bool?,
           ?trial_amount: Integer?,
           ?trial_apply_discounts: bool?,
@@ -130,10 +134,10 @@ module Dodopayments
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::time_interval,
           price: Integer,
-          purchasing_power_parity: bool,
           subscription_period_count: Integer,
           subscription_period_interval: Dodopayments::Models::time_interval,
           type: :recurring_price,
+          purchasing_power_parity: bool,
           tax_inclusive: bool?,
           trial_amount: Integer?,
           trial_apply_discounts: bool?,
@@ -148,11 +152,11 @@ module Dodopayments
           fixed_price: Integer,
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::time_interval,
-          purchasing_power_parity: bool,
           subscription_period_count: Integer,
           subscription_period_interval: Dodopayments::Models::time_interval,
           type: :usage_based_price,
           meters: ::Array[Dodopayments::AddMeterToPrice]?,
+          purchasing_power_parity: bool,
           tax_inclusive: bool?
         }
 
@@ -167,8 +171,6 @@ module Dodopayments
 
         attr_accessor payment_frequency_interval: Dodopayments::Models::time_interval
 
-        attr_accessor purchasing_power_parity: bool
-
         attr_accessor subscription_period_count: Integer
 
         attr_accessor subscription_period_interval: Dodopayments::Models::time_interval
@@ -176,6 +178,10 @@ module Dodopayments
         attr_accessor type: :usage_based_price
 
         attr_accessor meters: ::Array[Dodopayments::AddMeterToPrice]?
+
+        attr_reader purchasing_power_parity: bool?
+
+        def purchasing_power_parity=: (bool) -> bool
 
         attr_accessor tax_inclusive: bool?
 
@@ -185,10 +191,10 @@ module Dodopayments
           fixed_price: Integer,
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::time_interval,
-          purchasing_power_parity: bool,
           subscription_period_count: Integer,
           subscription_period_interval: Dodopayments::Models::time_interval,
           ?meters: ::Array[Dodopayments::AddMeterToPrice]?,
+          ?purchasing_power_parity: bool,
           ?tax_inclusive: bool?,
           ?type: :usage_based_price
         ) -> void
@@ -199,11 +205,11 @@ module Dodopayments
           fixed_price: Integer,
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::time_interval,
-          purchasing_power_parity: bool,
           subscription_period_count: Integer,
           subscription_period_interval: Dodopayments::Models::time_interval,
           type: :usage_based_price,
           meters: ::Array[Dodopayments::AddMeterToPrice]?,
+          purchasing_power_parity: bool,
           tax_inclusive: bool?
         }
       end

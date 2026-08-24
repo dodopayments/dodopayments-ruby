@@ -7,6 +7,8 @@ module Dodopayments
         quantity: Integer,
         adaptive_currency_fees_inclusive: bool?,
         addons: ::Array[Dodopayments::AttachAddon]?,
+        cancel_scheduled_change_plan: bool,
+        collect_via_payment_link: bool,
         discount_code: String?,
         discount_codes: ::Array[String]?,
         effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
@@ -24,6 +26,14 @@ module Dodopayments
       attr_accessor adaptive_currency_fees_inclusive: bool?
 
       attr_accessor addons: ::Array[Dodopayments::AttachAddon]?
+
+      attr_reader cancel_scheduled_change_plan: bool?
+
+      def cancel_scheduled_change_plan=: (bool) -> bool
+
+      attr_reader collect_via_payment_link: bool?
+
+      def collect_via_payment_link=: (bool) -> bool
 
       attr_accessor discount_code: String?
 
@@ -45,6 +55,8 @@ module Dodopayments
         quantity: Integer,
         ?adaptive_currency_fees_inclusive: bool?,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
+        ?cancel_scheduled_change_plan: bool,
+        ?collect_via_payment_link: bool,
         ?discount_code: String?,
         ?discount_codes: ::Array[String]?,
         ?effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
@@ -58,6 +70,8 @@ module Dodopayments
         quantity: Integer,
         adaptive_currency_fees_inclusive: bool?,
         addons: ::Array[Dodopayments::AttachAddon]?,
+        cancel_scheduled_change_plan: bool,
+        collect_via_payment_link: bool,
         discount_code: String?,
         discount_codes: ::Array[String]?,
         effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,

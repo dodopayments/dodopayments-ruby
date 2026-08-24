@@ -121,9 +121,9 @@ module Dodopayments
       #
       # @param next_billing_date [Time, nil]
       #
-      # @param pause [Boolean, nil] `Some(true)` pauses an active subscription; `Some(false)` unpauses a
+      # @param pause [Boolean, nil] Removed. Use `status: paused` to pause and `status: active` to resume.
       #
-      # @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil]
+      # @param status [Symbol, Dodopayments::Models::SubscriptionStatus, nil] Set to `cancelled` to cancel the subscription. See `cancel_reason`,
       #
       # @param subscription_period_count [Integer, nil] New number of `subscription_period_interval` units the subscription
       #
@@ -209,7 +209,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionChangePlanParams} for more details.
       #
-      # @overload change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, request_options: {})
+      # @overload change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, cancel_scheduled_change_plan: nil, collect_via_payment_link: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -223,6 +223,10 @@ module Dodopayments
       #
       # @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
       #
+      # @param cancel_scheduled_change_plan [Boolean] Replace a scheduled plan change with this one.
+      #
+      # @param collect_via_payment_link [Boolean] Collect the plan-change amount with a payment link. The customer then
+      #
       # @param discount_code [String, nil] DEPRECATED: Use discount_codes instead. Cannot be used together with discount_co
       #
       # @param discount_codes [Array<String>, nil] Stacked discount codes to apply to the new plan. Max 20.
@@ -235,7 +239,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [nil]
+      # @return [Dodopayments::Models::SubscriptionChangePlanResponse]
       #
       # @see Dodopayments::Models::SubscriptionChangePlanParams
       def change_plan(subscription_id, params)
@@ -244,7 +248,7 @@ module Dodopayments
           method: :post,
           path: ["subscriptions/%1$s/change-plan", subscription_id],
           body: parsed,
-          model: NilClass,
+          model: Dodopayments::Models::SubscriptionChangePlanResponse,
           options: options
         )
       end
@@ -287,7 +291,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionPreviewChangePlanParams} for more details.
       #
-      # @overload preview_change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, request_options: {})
+      # @overload preview_change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, cancel_scheduled_change_plan: nil, collect_via_payment_link: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -300,6 +304,10 @@ module Dodopayments
       # @param adaptive_currency_fees_inclusive [Boolean, nil] Whether adaptive currency fees should be included in the price (true) or added o
       #
       # @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
+      #
+      # @param cancel_scheduled_change_plan [Boolean] Replace a scheduled plan change with this one.
+      #
+      # @param collect_via_payment_link [Boolean] Collect the plan-change amount with a payment link. The customer then
       #
       # @param discount_code [String, nil] DEPRECATED: Use discount_codes instead. Cannot be used together with discount_co
       #
