@@ -40,11 +40,6 @@ module Dodopayments
         sig { returns(Integer) }
         attr_accessor :price
 
-        # Indicates if purchasing power parity adjustments are applied to the price.
-        # Purchasing power parity feature is not available as of now.
-        sig { returns(T::Boolean) }
-        attr_accessor :purchasing_power_parity
-
         sig { returns(Symbol) }
         attr_accessor :type
 
@@ -55,6 +50,15 @@ module Dodopayments
 
         sig { params(pay_what_you_want: T::Boolean).void }
         attr_writer :pay_what_you_want
+
+        # Opts this price in to purchasing power parity. The business must also enable
+        # purchasing power parity. The discount percentage per country is always
+        # business-wide. Defaults to `false`.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :purchasing_power_parity
+
+        sig { params(purchasing_power_parity: T::Boolean).void }
+        attr_writer :purchasing_power_parity
 
         # A suggested price for the user to pay. This value is only considered if
         # [`pay_what_you_want`](Self::pay_what_you_want) is `true`. Otherwise, it is
@@ -72,8 +76,8 @@ module Dodopayments
             currency: Dodopayments::Currency::OrSymbol,
             discount: Integer,
             price: Integer,
-            purchasing_power_parity: T::Boolean,
             pay_what_you_want: T::Boolean,
+            purchasing_power_parity: T::Boolean,
             suggested_price: T.nilable(Integer),
             tax_inclusive: T.nilable(T::Boolean),
             type: Symbol
@@ -90,12 +94,13 @@ module Dodopayments
           # If [`pay_what_you_want`](Self::pay_what_you_want) is set to `true`, this field
           # represents the **minimum** amount the customer must pay.
           price:,
-          # Indicates if purchasing power parity adjustments are applied to the price.
-          # Purchasing power parity feature is not available as of now.
-          purchasing_power_parity:,
           # Indicates whether the customer can pay any amount they choose. If set to `true`,
           # the [`price`](Self::price) field is the minimum amount.
           pay_what_you_want: nil,
+          # Opts this price in to purchasing power parity. The business must also enable
+          # purchasing power parity. The discount percentage per country is always
+          # business-wide. Defaults to `false`.
+          purchasing_power_parity: nil,
           # A suggested price for the user to pay. This value is only considered if
           # [`pay_what_you_want`](Self::pay_what_you_want) is `true`. Otherwise, it is
           # ignored.
@@ -112,9 +117,9 @@ module Dodopayments
               currency: Dodopayments::Currency::OrSymbol,
               discount: Integer,
               price: Integer,
-              purchasing_power_parity: T::Boolean,
               type: Symbol,
               pay_what_you_want: T::Boolean,
+              purchasing_power_parity: T::Boolean,
               suggested_price: T.nilable(Integer),
               tax_inclusive: T.nilable(T::Boolean)
             }
@@ -155,11 +160,6 @@ module Dodopayments
         sig { returns(Integer) }
         attr_accessor :price
 
-        # Indicates if purchasing power parity adjustments are applied to the price.
-        # Purchasing power parity feature is not available as of now
-        sig { returns(T::Boolean) }
-        attr_accessor :purchasing_power_parity
-
         # Number of units for the subscription period. For example, a value of `12` with a
         # `subscription_period_interval` of `month` represents a one-year subscription.
         sig { returns(Integer) }
@@ -171,6 +171,15 @@ module Dodopayments
 
         sig { returns(Symbol) }
         attr_accessor :type
+
+        # Opts this price in to purchasing power parity. The business must also enable
+        # purchasing power parity. The discount percentage per country is always
+        # business-wide. Defaults to `false`.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :purchasing_power_parity
+
+        sig { params(purchasing_power_parity: T::Boolean).void }
+        attr_writer :purchasing_power_parity
 
         # Indicates if the price is tax inclusive
         sig { returns(T.nilable(T::Boolean)) }
@@ -201,9 +210,9 @@ module Dodopayments
             payment_frequency_count: Integer,
             payment_frequency_interval: Dodopayments::TimeInterval::OrSymbol,
             price: Integer,
-            purchasing_power_parity: T::Boolean,
             subscription_period_count: Integer,
             subscription_period_interval: Dodopayments::TimeInterval::OrSymbol,
+            purchasing_power_parity: T::Boolean,
             tax_inclusive: T.nilable(T::Boolean),
             trial_amount: T.nilable(Integer),
             trial_apply_discounts: T.nilable(T::Boolean),
@@ -224,14 +233,15 @@ module Dodopayments
           # The payment amount. Represented in the lowest denomination of the currency
           # (e.g., cents for USD). For example, to charge $1.00, pass `100`.
           price:,
-          # Indicates if purchasing power parity adjustments are applied to the price.
-          # Purchasing power parity feature is not available as of now
-          purchasing_power_parity:,
           # Number of units for the subscription period. For example, a value of `12` with a
           # `subscription_period_interval` of `month` represents a one-year subscription.
           subscription_period_count:,
           # The time interval for the subscription period (e.g., day, month, year).
           subscription_period_interval:,
+          # Opts this price in to purchasing power parity. The business must also enable
+          # purchasing power parity. The discount percentage per country is always
+          # business-wide. Defaults to `false`.
+          purchasing_power_parity: nil,
           # Indicates if the price is tax inclusive
           tax_inclusive: nil,
           # Amount charged today for a paid trial, in the price currency's minor units.
@@ -254,11 +264,11 @@ module Dodopayments
               payment_frequency_count: Integer,
               payment_frequency_interval: Dodopayments::TimeInterval::OrSymbol,
               price: Integer,
-              purchasing_power_parity: T::Boolean,
               subscription_period_count: Integer,
               subscription_period_interval:
                 Dodopayments::TimeInterval::OrSymbol,
               type: Symbol,
+              purchasing_power_parity: T::Boolean,
               tax_inclusive: T.nilable(T::Boolean),
               trial_amount: T.nilable(Integer),
               trial_apply_discounts: T.nilable(T::Boolean),
@@ -301,11 +311,6 @@ module Dodopayments
         sig { returns(Dodopayments::TimeInterval::OrSymbol) }
         attr_accessor :payment_frequency_interval
 
-        # Indicates if purchasing power parity adjustments are applied to the price.
-        # Purchasing power parity feature is not available as of now
-        sig { returns(T::Boolean) }
-        attr_accessor :purchasing_power_parity
-
         # Number of units for the subscription period. For example, a value of `12` with a
         # `subscription_period_interval` of `month` represents a one-year subscription.
         sig { returns(Integer) }
@@ -321,6 +326,16 @@ module Dodopayments
         sig { returns(T.nilable(T::Array[Dodopayments::AddMeterToPrice])) }
         attr_accessor :meters
 
+        # Opts this price in to purchasing power parity. The business must also enable
+        # purchasing power parity. The discount percentage per country is always
+        # business-wide. Applies to the fixed fee only, never to metered usage. Defaults
+        # to `false`.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :purchasing_power_parity
+
+        sig { params(purchasing_power_parity: T::Boolean).void }
+        attr_writer :purchasing_power_parity
+
         # Indicates if the price is tax inclusive
         sig { returns(T.nilable(T::Boolean)) }
         attr_accessor :tax_inclusive
@@ -333,10 +348,10 @@ module Dodopayments
             fixed_price: Integer,
             payment_frequency_count: Integer,
             payment_frequency_interval: Dodopayments::TimeInterval::OrSymbol,
-            purchasing_power_parity: T::Boolean,
             subscription_period_count: Integer,
             subscription_period_interval: Dodopayments::TimeInterval::OrSymbol,
             meters: T.nilable(T::Array[Dodopayments::AddMeterToPrice::OrHash]),
+            purchasing_power_parity: T::Boolean,
             tax_inclusive: T.nilable(T::Boolean),
             type: Symbol
           ).returns(T.attached_class)
@@ -354,15 +369,17 @@ module Dodopayments
           payment_frequency_count:,
           # The time interval for the payment frequency (e.g., day, month, year).
           payment_frequency_interval:,
-          # Indicates if purchasing power parity adjustments are applied to the price.
-          # Purchasing power parity feature is not available as of now
-          purchasing_power_parity:,
           # Number of units for the subscription period. For example, a value of `12` with a
           # `subscription_period_interval` of `month` represents a one-year subscription.
           subscription_period_count:,
           # The time interval for the subscription period (e.g., day, month, year).
           subscription_period_interval:,
           meters: nil,
+          # Opts this price in to purchasing power parity. The business must also enable
+          # purchasing power parity. The discount percentage per country is always
+          # business-wide. Applies to the fixed fee only, never to metered usage. Defaults
+          # to `false`.
+          purchasing_power_parity: nil,
           # Indicates if the price is tax inclusive
           tax_inclusive: nil,
           type: :usage_based_price
@@ -377,12 +394,12 @@ module Dodopayments
               fixed_price: Integer,
               payment_frequency_count: Integer,
               payment_frequency_interval: Dodopayments::TimeInterval::OrSymbol,
-              purchasing_power_parity: T::Boolean,
               subscription_period_count: Integer,
               subscription_period_interval:
                 Dodopayments::TimeInterval::OrSymbol,
               type: Symbol,
               meters: T.nilable(T::Array[Dodopayments::AddMeterToPrice]),
+              purchasing_power_parity: T::Boolean,
               tax_inclusive: T.nilable(T::Boolean)
             }
           )

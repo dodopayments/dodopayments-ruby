@@ -98,11 +98,23 @@ module Dodopayments
       sig { returns(T.nilable(Time)) }
       attr_accessor :next_billing_date
 
-      # `Some(true)` pauses an active subscription; `Some(false)` unpauses a `Paused`
-      # (or abandoned `OnHold`) subscription. Exclusive of every other field.
+      # Removed. Use `status: paused` to pause and `status: active` to resume. This
+      # field always fails with 422, so a caller still on it gets a loud error instead
+      # of a silent no-op.
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :pause
 
+      # Set to `cancelled` to cancel the subscription. See `cancel_reason`,
+      # `cancellation_feedback`, `cancellation_comment`, and
+      # `cancel_at_next_billing_date` for cancellation options.
+      #
+      # Set to `paused` to pause an active subscription. Set to `active` to resume a
+      # `paused` subscription. `active` also resumes an `on_hold` subscription that has
+      # an unpaid pause invoice. This voids that invoice.
+      #
+      # Send `paused` or `active` alone. A request that combines either with any other
+      # field fails with 422. `cancelled` is not exclusive this way — see
+      # `cancel_reason` and friends below.
       sig { returns(T.nilable(Dodopayments::SubscriptionStatus::OrSymbol)) }
       attr_accessor :status
 
@@ -182,9 +194,21 @@ module Dodopayments
         # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
         metadata: nil,
         next_billing_date: nil,
-        # `Some(true)` pauses an active subscription; `Some(false)` unpauses a `Paused`
-        # (or abandoned `OnHold`) subscription. Exclusive of every other field.
+        # Removed. Use `status: paused` to pause and `status: active` to resume. This
+        # field always fails with 422, so a caller still on it gets a loud error instead
+        # of a silent no-op.
         pause: nil,
+        # Set to `cancelled` to cancel the subscription. See `cancel_reason`,
+        # `cancellation_feedback`, `cancellation_comment`, and
+        # `cancel_at_next_billing_date` for cancellation options.
+        #
+        # Set to `paused` to pause an active subscription. Set to `active` to resume a
+        # `paused` subscription. `active` also resumes an `on_hold` subscription that has
+        # an unpaid pause invoice. This voids that invoice.
+        #
+        # Send `paused` or `active` alone. A request that combines either with any other
+        # field fails with 422. `cancelled` is not exclusive this way — see
+        # `cancel_reason` and friends below.
         status: nil,
         # New number of `subscription_period_interval` units the subscription entitlement
         # should span. Used together with `subscription_period_interval` to extend the

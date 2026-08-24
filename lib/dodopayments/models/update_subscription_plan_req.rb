@@ -36,6 +36,36 @@ module Dodopayments
       #   @return [Array<Dodopayments::Models::AttachAddon>, nil]
       optional :addons, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::AttachAddon] }, nil?: true
 
+      # @!attribute cancel_scheduled_change_plan
+      #   Replace a scheduled plan change with this one.
+      #
+      #   The scheduled change is cancelled by the transaction that applies this change. A
+      #   change that never applies leaves the schedule in place.
+      #
+      #   `effective_at: next_billing_date` is allowed. The new schedule then replaces the
+      #   old one in the request transaction.
+      #
+      #   A pending plan change still gets a `409`. This field does not affect it.
+      #
+      #   The preview route shares this request body, so a preview that sets this field
+      #   also passes the scheduled-change `409`.
+      #
+      #   @return [Boolean, nil]
+      optional :cancel_scheduled_change_plan, Dodopayments::Internal::Type::Boolean
+
+      # @!attribute collect_via_payment_link
+      #   Collect the plan-change amount with a payment link. The customer then pays on a
+      #   checkout page.
+      #
+      #   The business needs the `allow_plan_change_via_payment_link` capability. The
+      #   request needs `effective_at: immediately`. The request also needs
+      #   `on_payment_failure: prevent_change`.
+      #
+      #   The preview route shares this request body and ignores this field.
+      #
+      #   @return [Boolean, nil]
+      optional :collect_via_payment_link, Dodopayments::Internal::Type::Boolean
+
       # @!attribute discount_code
       #   @deprecated Use `discount_id` instead.
       #
@@ -86,7 +116,7 @@ module Dodopayments
                enum: -> { Dodopayments::UpdateSubscriptionPlanReq::OnPaymentFailure },
                nil?: true
 
-      # @!method initialize(product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil)
+      # @!method initialize(product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, cancel_scheduled_change_plan: nil, collect_via_payment_link: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::UpdateSubscriptionPlanReq} for more details.
       #
@@ -99,6 +129,10 @@ module Dodopayments
       #   @param adaptive_currency_fees_inclusive [Boolean, nil] Whether adaptive currency fees should be included in the price (true) or added o
       #
       #   @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
+      #
+      #   @param cancel_scheduled_change_plan [Boolean] Replace a scheduled plan change with this one.
+      #
+      #   @param collect_via_payment_link [Boolean] Collect the plan-change amount with a payment link. The customer then
       #
       #   @param discount_code [String, nil] DEPRECATED: Use discount_codes instead. Cannot be used together with discount_co
       #
