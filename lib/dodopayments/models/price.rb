@@ -40,13 +40,6 @@ module Dodopayments
         #   @return [Integer]
         required :price, Integer
 
-        # @!attribute purchasing_power_parity
-        #   Indicates if purchasing power parity adjustments are applied to the price.
-        #   Purchasing power parity feature is not available as of now.
-        #
-        #   @return [Boolean]
-        required :purchasing_power_parity, Dodopayments::Internal::Type::Boolean
-
         # @!attribute type
         #
         #   @return [Symbol, :one_time_price]
@@ -58,6 +51,14 @@ module Dodopayments
         #
         #   @return [Boolean, nil]
         optional :pay_what_you_want, Dodopayments::Internal::Type::Boolean
+
+        # @!attribute purchasing_power_parity
+        #   Opts this price in to purchasing power parity. The business must also enable
+        #   purchasing power parity. The discount percentage per country is always
+        #   business-wide. Defaults to `false`.
+        #
+        #   @return [Boolean, nil]
+        optional :purchasing_power_parity, Dodopayments::Internal::Type::Boolean
 
         # @!attribute suggested_price
         #   A suggested price for the user to pay. This value is only considered if
@@ -73,7 +74,7 @@ module Dodopayments
         #   @return [Boolean, nil]
         optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
-        # @!method initialize(currency:, discount:, price:, purchasing_power_parity:, pay_what_you_want: nil, suggested_price: nil, tax_inclusive: nil, type: :one_time_price)
+        # @!method initialize(currency:, discount:, price:, pay_what_you_want: nil, purchasing_power_parity: nil, suggested_price: nil, tax_inclusive: nil, type: :one_time_price)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Price::OneTimePrice} for more details.
         #
@@ -85,9 +86,9 @@ module Dodopayments
         #
         #   @param price [Integer] The payment amount, in the smallest denomination of the currency (e.g., cents fo
         #
-        #   @param purchasing_power_parity [Boolean] Indicates if purchasing power parity adjustments are applied to the price.
-        #
         #   @param pay_what_you_want [Boolean] Indicates whether the customer can pay any amount they choose.
+        #
+        #   @param purchasing_power_parity [Boolean] Opts this price in to purchasing power parity. The business must also
         #
         #   @param suggested_price [Integer, nil] A suggested price for the user to pay. This value is only considered if
         #
@@ -129,13 +130,6 @@ module Dodopayments
         #   @return [Integer]
         required :price, Integer
 
-        # @!attribute purchasing_power_parity
-        #   Indicates if purchasing power parity adjustments are applied to the price.
-        #   Purchasing power parity feature is not available as of now
-        #
-        #   @return [Boolean]
-        required :purchasing_power_parity, Dodopayments::Internal::Type::Boolean
-
         # @!attribute subscription_period_count
         #   Number of units for the subscription period. For example, a value of `12` with a
         #   `subscription_period_interval` of `month` represents a one-year subscription.
@@ -153,6 +147,14 @@ module Dodopayments
         #
         #   @return [Symbol, :recurring_price]
         required :type, const: :recurring_price
+
+        # @!attribute purchasing_power_parity
+        #   Opts this price in to purchasing power parity. The business must also enable
+        #   purchasing power parity. The discount percentage per country is always
+        #   business-wide. Defaults to `false`.
+        #
+        #   @return [Boolean, nil]
+        optional :purchasing_power_parity, Dodopayments::Internal::Type::Boolean
 
         # @!attribute tax_inclusive
         #   Indicates if the price is tax inclusive
@@ -180,7 +182,7 @@ module Dodopayments
         #   @return [Integer, nil]
         optional :trial_period_days, Integer
 
-        # @!method initialize(currency:, discount:, payment_frequency_count:, payment_frequency_interval:, price:, purchasing_power_parity:, subscription_period_count:, subscription_period_interval:, tax_inclusive: nil, trial_amount: nil, trial_apply_discounts: nil, trial_period_days: nil, type: :recurring_price)
+        # @!method initialize(currency:, discount:, payment_frequency_count:, payment_frequency_interval:, price:, subscription_period_count:, subscription_period_interval:, purchasing_power_parity: nil, tax_inclusive: nil, trial_amount: nil, trial_apply_discounts: nil, trial_period_days: nil, type: :recurring_price)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Price::RecurringPrice} for more details.
         #
@@ -196,11 +198,11 @@ module Dodopayments
         #
         #   @param price [Integer] The payment amount. Represented in the lowest denomination of the currency (e.g.
         #
-        #   @param purchasing_power_parity [Boolean] Indicates if purchasing power parity adjustments are applied to the price.
-        #
         #   @param subscription_period_count [Integer] Number of units for the subscription period.
         #
         #   @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval] The time interval for the subscription period (e.g., day, month, year).
+        #
+        #   @param purchasing_power_parity [Boolean] Opts this price in to purchasing power parity. The business must also
         #
         #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive
         #
@@ -246,13 +248,6 @@ module Dodopayments
         #   @return [Symbol, Dodopayments::Models::TimeInterval]
         required :payment_frequency_interval, enum: -> { Dodopayments::TimeInterval }
 
-        # @!attribute purchasing_power_parity
-        #   Indicates if purchasing power parity adjustments are applied to the price.
-        #   Purchasing power parity feature is not available as of now
-        #
-        #   @return [Boolean]
-        required :purchasing_power_parity, Dodopayments::Internal::Type::Boolean
-
         # @!attribute subscription_period_count
         #   Number of units for the subscription period. For example, a value of `12` with a
         #   `subscription_period_interval` of `month` represents a one-year subscription.
@@ -280,13 +275,22 @@ module Dodopayments
                  },
                  nil?: true
 
+        # @!attribute purchasing_power_parity
+        #   Opts this price in to purchasing power parity. The business must also enable
+        #   purchasing power parity. The discount percentage per country is always
+        #   business-wide. Applies to the fixed fee only, never to metered usage. Defaults
+        #   to `false`.
+        #
+        #   @return [Boolean, nil]
+        optional :purchasing_power_parity, Dodopayments::Internal::Type::Boolean
+
         # @!attribute tax_inclusive
         #   Indicates if the price is tax inclusive
         #
         #   @return [Boolean, nil]
         optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
-        # @!method initialize(currency:, discount:, fixed_price:, payment_frequency_count:, payment_frequency_interval:, purchasing_power_parity:, subscription_period_count:, subscription_period_interval:, meters: nil, tax_inclusive: nil, type: :usage_based_price)
+        # @!method initialize(currency:, discount:, fixed_price:, payment_frequency_count:, payment_frequency_interval:, subscription_period_count:, subscription_period_interval:, meters: nil, purchasing_power_parity: nil, tax_inclusive: nil, type: :usage_based_price)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Price::UsageBasedPrice} for more details.
         #
@@ -302,13 +306,13 @@ module Dodopayments
         #
         #   @param payment_frequency_interval [Symbol, Dodopayments::Models::TimeInterval] The time interval for the payment frequency (e.g., day, month, year).
         #
-        #   @param purchasing_power_parity [Boolean] Indicates if purchasing power parity adjustments are applied to the price.
-        #
         #   @param subscription_period_count [Integer] Number of units for the subscription period.
         #
         #   @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval] The time interval for the subscription period (e.g., day, month, year).
         #
         #   @param meters [Array<Dodopayments::Models::AddMeterToPrice>, nil]
+        #
+        #   @param purchasing_power_parity [Boolean] Opts this price in to purchasing power parity. The business must also
         #
         #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive
         #

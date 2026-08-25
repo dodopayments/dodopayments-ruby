@@ -208,7 +208,16 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
       )
 
     assert_pattern do
-      response => nil
+      response => Dodopayments::Models::SubscriptionChangePlanResponse
+    end
+
+    assert_pattern do
+      response => {
+        client_secret: String | nil,
+        expires_on: Time | nil,
+        payment_id: String | nil,
+        payment_link: String | nil
+      }
     end
   end
 

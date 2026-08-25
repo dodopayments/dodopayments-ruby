@@ -3,31 +3,41 @@ module Dodopayments
     module Entitlements
       type license_key_grant =
         {
+          id: String,
           activations_used: Integer,
           key: String,
+          status: Dodopayments::Models::license_key_status,
           activations_limit: Integer?,
           expires_at: Time?
         }
 
       class LicenseKeyGrant < Dodopayments::Internal::Type::BaseModel
+        attr_accessor id: String
+
         attr_accessor activations_used: Integer
 
         attr_accessor key: String
+
+        attr_accessor status: Dodopayments::Models::license_key_status
 
         attr_accessor activations_limit: Integer?
 
         attr_accessor expires_at: Time?
 
         def initialize: (
+          id: String,
           activations_used: Integer,
           key: String,
+          status: Dodopayments::Models::license_key_status,
           ?activations_limit: Integer?,
           ?expires_at: Time?
         ) -> void
 
         def to_hash: -> {
+          id: String,
           activations_used: Integer,
           key: String,
+          status: Dodopayments::Models::license_key_status,
           activations_limit: Integer?,
           expires_at: Time?
         }
