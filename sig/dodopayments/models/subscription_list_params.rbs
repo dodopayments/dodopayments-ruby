@@ -90,6 +90,7 @@ module Dodopayments
         | :cancelled
         | :failed
         | :expired
+        | :past_due
 
       module Status
         extend Dodopayments::Internal::Type::Enum
@@ -101,6 +102,7 @@ module Dodopayments
         CANCELLED: :cancelled
         FAILED: :failed
         EXPIRED: :expired
+        PAST_DUE: :past_due
 
         def self?.values: -> ::Array[Dodopayments::Models::SubscriptionListParams::status]
       end

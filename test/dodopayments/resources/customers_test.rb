@@ -17,6 +17,8 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         customer_id: String,
         email: String,
         name: String,
+        blocked_at: Time | nil,
+        blocklist_entry_id: String | nil,
         metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]) | nil,
         phone_number: String | nil
       }
@@ -37,6 +39,8 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         customer_id: String,
         email: String,
         name: String,
+        blocked_at: Time | nil,
+        blocklist_entry_id: String | nil,
         metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]) | nil,
         phone_number: String | nil
       }
@@ -57,6 +61,8 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         customer_id: String,
         email: String,
         name: String,
+        blocked_at: Time | nil,
+        blocklist_entry_id: String | nil,
         metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]) | nil,
         phone_number: String | nil
       }
@@ -84,6 +90,8 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         customer_id: String,
         email: String,
         name: String,
+        blocked_at: Time | nil,
+        blocklist_entry_id: String | nil,
         metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]) | nil,
         phone_number: String | nil
       }

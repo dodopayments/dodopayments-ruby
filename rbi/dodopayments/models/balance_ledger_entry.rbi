@@ -45,6 +45,9 @@ module Dodopayments
       attr_accessor :description
 
       sig { returns(T.nilable(String)) }
+      attr_accessor :payout_id
+
+      sig { returns(T.nilable(String)) }
       attr_accessor :reference_object_id
 
       sig do
@@ -60,6 +63,7 @@ module Dodopayments
           after_balance: T.nilable(Integer),
           before_balance: T.nilable(Integer),
           description: T.nilable(String),
+          payout_id: T.nilable(String),
           reference_object_id: T.nilable(String)
         ).returns(T.attached_class)
       end
@@ -75,6 +79,7 @@ module Dodopayments
         after_balance: nil,
         before_balance: nil,
         description: nil,
+        payout_id: nil,
         reference_object_id: nil
       )
       end
@@ -94,6 +99,7 @@ module Dodopayments
             after_balance: T.nilable(Integer),
             before_balance: T.nilable(Integer),
             description: T.nilable(String),
+            payout_id: T.nilable(String),
             reference_object_id: T.nilable(String)
           }
         )

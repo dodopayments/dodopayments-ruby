@@ -30,6 +30,7 @@ class Dodopayments::Test::Resources::BalancesTest < Dodopayments::Test::Resource
         after_balance: Integer | nil,
         before_balance: Integer | nil,
         description: String | nil,
+        payout_id: String | nil,
         reference_object_id: String | nil
       }
     end

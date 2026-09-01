@@ -1,0 +1,25 @@
+module Dodopayments
+  module Models
+    module Blocklist
+      type customer_retrieve_params =
+        { entry_id: String } & Dodopayments::Internal::Type::request_parameters
+
+      class CustomerRetrieveParams < Dodopayments::Internal::Type::BaseModel
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
+
+        attr_accessor entry_id: String
+
+        def initialize: (
+          entry_id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          entry_id: String,
+          request_options: Dodopayments::RequestOptions
+        }
+      end
+    end
+  end
+end

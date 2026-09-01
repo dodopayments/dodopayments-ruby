@@ -49,6 +49,7 @@ module Dodopayments
             Dodopayments::SubscriptionExpiredWebhookEvent,
             Dodopayments::SubscriptionFailedWebhookEvent,
             Dodopayments::SubscriptionOnHoldWebhookEvent,
+            Dodopayments::SubscriptionPastDueWebhookEvent,
             Dodopayments::SubscriptionPausedWebhookEvent,
             Dodopayments::SubscriptionPlanChangedWebhookEvent,
             Dodopayments::SubscriptionRenewedWebhookEvent,

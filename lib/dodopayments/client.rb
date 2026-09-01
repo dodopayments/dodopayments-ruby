@@ -51,6 +51,9 @@ module Dodopayments
     # @return [Dodopayments::Resources::Customers]
     attr_reader :customers
 
+    # @return [Dodopayments::Resources::Blocklist]
+    attr_reader :blocklist
+
     # @return [Dodopayments::Resources::Refunds]
     attr_reader :refunds
 
@@ -183,6 +186,7 @@ module Dodopayments
       @license_keys = Dodopayments::Resources::LicenseKeys.new(client: self)
       @license_key_instances = Dodopayments::Resources::LicenseKeyInstances.new(client: self)
       @customers = Dodopayments::Resources::Customers.new(client: self)
+      @blocklist = Dodopayments::Resources::Blocklist.new(client: self)
       @refunds = Dodopayments::Resources::Refunds.new(client: self)
       @disputes = Dodopayments::Resources::Disputes.new(client: self)
       @payouts = Dodopayments::Resources::Payouts.new(client: self)

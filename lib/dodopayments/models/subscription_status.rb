@@ -12,6 +12,7 @@ module Dodopayments
       CANCELLED = :cancelled
       FAILED = :failed
       EXPIRED = :expired
+      PAST_DUE = :past_due
 
       # @!method self.values
       #   @return [Array<Symbol>]

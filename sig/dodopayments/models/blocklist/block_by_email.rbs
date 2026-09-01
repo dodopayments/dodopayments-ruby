@@ -1,0 +1,15 @@
+module Dodopayments
+  module Models
+    module Blocklist
+      type block_by_email = { email: String }
+
+      class BlockByEmail < Dodopayments::Internal::Type::BaseModel
+        attr_accessor email: String
+
+        def initialize: (email: String) -> void
+
+        def to_hash: -> { email: String }
+      end
+    end
+  end
+end

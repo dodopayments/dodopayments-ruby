@@ -66,6 +66,11 @@ module Dodopayments
           :"subscription.on_hold",
           Dodopayments::WebhookEventType::TaggedSymbol
         )
+      SUBSCRIPTION_PAST_DUE =
+        T.let(
+          :"subscription.past_due",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
       SUBSCRIPTION_PAUSED =
         T.let(
           :"subscription.paused",

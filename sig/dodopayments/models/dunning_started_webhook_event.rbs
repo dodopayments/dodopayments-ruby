@@ -89,13 +89,14 @@ module Dodopayments
           def self?.values: -> ::Array[Dodopayments::Models::DunningStartedWebhookEvent::Data::status]
         end
 
-        type trigger_state = :on_hold | :cancelled
+        type trigger_state = :on_hold | :cancelled | :past_due
 
         module TriggerState
           extend Dodopayments::Internal::Type::Enum
 
           ON_HOLD: :on_hold
           CANCELLED: :cancelled
+          PAST_DUE: :past_due
 
           def self?.values: -> ::Array[Dodopayments::Models::DunningStartedWebhookEvent::Data::trigger_state]
         end
