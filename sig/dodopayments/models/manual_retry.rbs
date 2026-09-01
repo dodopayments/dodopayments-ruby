@@ -1,0 +1,55 @@
+module Dodopayments
+  module Models
+    type manual_retry =
+      {
+        invoice_id: String,
+        is_manual_retry: bool,
+        payment_id: String,
+        retry_attempt: Integer,
+        sends_allowed: Integer,
+        sends_used: Integer,
+        retry_available_at: Time?,
+        status: Dodopayments::Models::intent_status?
+      }
+
+    class ManualRetry < Dodopayments::Internal::Type::BaseModel
+      attr_accessor invoice_id: String
+
+      attr_accessor is_manual_retry: bool
+
+      attr_accessor payment_id: String
+
+      attr_accessor retry_attempt: Integer
+
+      attr_accessor sends_allowed: Integer
+
+      attr_accessor sends_used: Integer
+
+      attr_accessor retry_available_at: Time?
+
+      attr_accessor status: Dodopayments::Models::intent_status?
+
+      def initialize: (
+        invoice_id: String,
+        is_manual_retry: bool,
+        payment_id: String,
+        retry_attempt: Integer,
+        sends_allowed: Integer,
+        sends_used: Integer,
+        ?retry_available_at: Time?,
+        ?status: Dodopayments::Models::intent_status?
+      ) -> void
+
+      def to_hash: -> {
+        invoice_id: String,
+        is_manual_retry: bool,
+        payment_id: String,
+        retry_attempt: Integer,
+        sends_allowed: Integer,
+        sends_used: Integer,
+        retry_available_at: Time?,
+        status: Dodopayments::Models::intent_status?
+      }
+    end
+  end
+end

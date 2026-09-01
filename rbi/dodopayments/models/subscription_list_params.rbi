@@ -186,6 +186,11 @@ module Dodopayments
             :expired,
             Dodopayments::SubscriptionListParams::Status::TaggedSymbol
           )
+        PAST_DUE =
+          T.let(
+            :past_due,
+            Dodopayments::SubscriptionListParams::Status::TaggedSymbol
+          )
 
         sig do
           override.returns(

@@ -59,12 +59,17 @@ module Dodopayments
       #   @return [String, nil]
       optional :description, String, nil?: true
 
+      # @!attribute payout_id
+      #
+      #   @return [String, nil]
+      optional :payout_id, String, nil?: true
+
       # @!attribute reference_object_id
       #
       #   @return [String, nil]
       optional :reference_object_id, String, nil?: true
 
-      # @!method initialize(id:, amount:, business_id:, created_at:, currency:, event_type:, is_credit:, usd_equivalent_amount:, after_balance: nil, before_balance: nil, description: nil, reference_object_id: nil)
+      # @!method initialize(id:, amount:, business_id:, created_at:, currency:, event_type:, is_credit:, usd_equivalent_amount:, after_balance: nil, before_balance: nil, description: nil, payout_id: nil, reference_object_id: nil)
       #   @param id [String]
       #   @param amount [Integer]
       #   @param business_id [String]
@@ -76,6 +81,7 @@ module Dodopayments
       #   @param after_balance [Integer, nil]
       #   @param before_balance [Integer, nil]
       #   @param description [String, nil]
+      #   @param payout_id [String, nil]
       #   @param reference_object_id [String, nil]
 
       # @see Dodopayments::Models::BalanceLedgerEntry#event_type

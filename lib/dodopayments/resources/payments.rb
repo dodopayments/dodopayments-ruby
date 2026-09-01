@@ -143,6 +143,42 @@ module Dodopayments
         )
       end
 
+      # @overload retrieve_retry_state(payment_id, request_options: {})
+      #
+      # @param payment_id [String] Id of the failed payment
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Models::ManualRetryState]
+      #
+      # @see Dodopayments::Models::PaymentRetrieveRetryStateParams
+      def retrieve_retry_state(payment_id, params = {})
+        @client.request(
+          method: :get,
+          path: ["payments/%1$s/retry", payment_id],
+          model: Dodopayments::ManualRetryState,
+          options: params[:request_options]
+        )
+      end
+
+      # @overload retry_(payment_id, request_options: {})
+      #
+      # @param payment_id [String] Id of the failed payment
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Models::ManualRetry]
+      #
+      # @see Dodopayments::Models::PaymentRetryParams
+      def retry_(payment_id, params = {})
+        @client.request(
+          method: :post,
+          path: ["payments/%1$s/retry", payment_id],
+          model: Dodopayments::ManualRetry,
+          options: params[:request_options]
+        )
+      end
+
       # @api private
       #
       # @param client [Dodopayments::Client]

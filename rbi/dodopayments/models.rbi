@@ -38,6 +38,8 @@ module Dodopayments
 
   BillingAddress = Dodopayments::Models::BillingAddress
 
+  Blocklist = Dodopayments::Models::Blocklist
+
   Brand = Dodopayments::Models::Brand
 
   BrandArchiveParams = Dodopayments::Models::BrandArchiveParams
@@ -319,6 +321,10 @@ module Dodopayments
 
   LicenseValidateParams = Dodopayments::Models::LicenseValidateParams
 
+  ManualRetry = Dodopayments::Models::ManualRetry
+
+  ManualRetryState = Dodopayments::Models::ManualRetryState
+
   Metadata =
     T.let(
       Dodopayments::Models::Metadata,
@@ -379,6 +385,11 @@ module Dodopayments
     Dodopayments::Models::PaymentRetrieveLineItemsParams
 
   PaymentRetrieveParams = Dodopayments::Models::PaymentRetrieveParams
+
+  PaymentRetrieveRetryStateParams =
+    Dodopayments::Models::PaymentRetrieveRetryStateParams
+
+  PaymentRetryParams = Dodopayments::Models::PaymentRetryParams
 
   PaymentSucceededWebhookEvent =
     Dodopayments::Models::PaymentSucceededWebhookEvent
@@ -496,6 +507,9 @@ module Dodopayments
 
   SubscriptionOnHoldWebhookEvent =
     Dodopayments::Models::SubscriptionOnHoldWebhookEvent
+
+  SubscriptionPastDueWebhookEvent =
+    Dodopayments::Models::SubscriptionPastDueWebhookEvent
 
   SubscriptionPausedWebhookEvent =
     Dodopayments::Models::SubscriptionPausedWebhookEvent

@@ -109,6 +109,7 @@ module Dodopayments
 
           ON_HOLD = :on_hold
           CANCELLED = :cancelled
+          PAST_DUE = :past_due
 
           # @!method self.values
           #   @return [Array<Symbol>]

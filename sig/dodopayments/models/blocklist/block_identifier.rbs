@@ -1,0 +1,15 @@
+module Dodopayments
+  module Models
+    module Blocklist
+      type block_identifier =
+        Dodopayments::Blocklist::BlockByCustomerID
+        | Dodopayments::Blocklist::BlockByEmail
+
+      module BlockIdentifier
+        extend Dodopayments::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Dodopayments::Models::Blocklist::block_identifier]
+      end
+    end
+  end
+end
