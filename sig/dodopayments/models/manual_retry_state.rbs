@@ -1,0 +1,40 @@
+module Dodopayments
+  module Models
+    type manual_retry_state =
+      {
+        can_retry: bool,
+        sends_allowed: Integer,
+        sends_used: Integer,
+        reason: String?,
+        retry_available_at: Time?
+      }
+
+    class ManualRetryState < Dodopayments::Internal::Type::BaseModel
+      attr_accessor can_retry: bool
+
+      attr_accessor sends_allowed: Integer
+
+      attr_accessor sends_used: Integer
+
+      attr_accessor reason: String?
+
+      attr_accessor retry_available_at: Time?
+
+      def initialize: (
+        can_retry: bool,
+        sends_allowed: Integer,
+        sends_used: Integer,
+        ?reason: String?,
+        ?retry_available_at: Time?
+      ) -> void
+
+      def to_hash: -> {
+        can_retry: bool,
+        sends_allowed: Integer,
+        sends_used: Integer,
+        reason: String?,
+        retry_available_at: Time?
+      }
+    end
+  end
+end

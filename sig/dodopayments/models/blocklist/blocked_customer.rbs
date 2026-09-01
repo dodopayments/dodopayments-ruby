@@ -1,0 +1,87 @@
+module Dodopayments
+  module Models
+    module Blocklist
+      type blocked_customer =
+        {
+          id: String,
+          created_at: Time,
+          customer_email: String,
+          customer_id: String,
+          customer_name: String,
+          identifier: String,
+          source: Dodopayments::Models::Blocklist::blocked_customer_source,
+          blocked_by_email: String?,
+          cancelled_subscription_ids: ::Array[String]?,
+          notes: ::Array[Dodopayments::Blocklist::Customers::BlockedCustomerNote]?,
+          reason: String?,
+          remaining_subscription_ids: ::Array[String]?,
+          subscriptions_swept: bool?,
+          unblocked_at: Time?
+        }
+
+      class BlockedCustomer < Dodopayments::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor customer_email: String
+
+        attr_accessor customer_id: String
+
+        attr_accessor customer_name: String
+
+        attr_accessor identifier: String
+
+        attr_accessor source: Dodopayments::Models::Blocklist::blocked_customer_source
+
+        attr_accessor blocked_by_email: String?
+
+        attr_accessor cancelled_subscription_ids: ::Array[String]?
+
+        attr_accessor notes: ::Array[Dodopayments::Blocklist::Customers::BlockedCustomerNote]?
+
+        attr_accessor reason: String?
+
+        attr_accessor remaining_subscription_ids: ::Array[String]?
+
+        attr_accessor subscriptions_swept: bool?
+
+        attr_accessor unblocked_at: Time?
+
+        def initialize: (
+          id: String,
+          created_at: Time,
+          customer_email: String,
+          customer_id: String,
+          customer_name: String,
+          identifier: String,
+          source: Dodopayments::Models::Blocklist::blocked_customer_source,
+          ?blocked_by_email: String?,
+          ?cancelled_subscription_ids: ::Array[String]?,
+          ?notes: ::Array[Dodopayments::Blocklist::Customers::BlockedCustomerNote]?,
+          ?reason: String?,
+          ?remaining_subscription_ids: ::Array[String]?,
+          ?subscriptions_swept: bool?,
+          ?unblocked_at: Time?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          customer_email: String,
+          customer_id: String,
+          customer_name: String,
+          identifier: String,
+          source: Dodopayments::Models::Blocklist::blocked_customer_source,
+          blocked_by_email: String?,
+          cancelled_subscription_ids: ::Array[String]?,
+          notes: ::Array[Dodopayments::Blocklist::Customers::BlockedCustomerNote]?,
+          reason: String?,
+          remaining_subscription_ids: ::Array[String]?,
+          subscriptions_swept: bool?,
+          unblocked_at: Time?
+        }
+      end
+    end
+  end
+end

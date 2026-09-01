@@ -1,0 +1,36 @@
+module Dodopayments
+  module Resources
+    class Blocklist
+      class Customers
+        attr_reader notes: Dodopayments::Resources::Blocklist::Customers::Notes
+
+        def create: (
+          create_blocked_customer_request: Dodopayments::Models::Blocklist::create_blocked_customer_request,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Blocklist::BlockedCustomer
+
+        def retrieve: (
+          String entry_id,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Blocklist::BlockedCustomer
+
+        def list: (
+          ?blocked_by_email: String?,
+          ?created_at_gte: Time?,
+          ?created_at_lte: Time?,
+          ?identifier: String?,
+          ?page_number: Integer?,
+          ?page_size: Integer?,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Blocklist::BlockedCustomer]
+
+        def delete: (
+          String entry_id,
+          ?request_options: Dodopayments::request_opts
+        ) -> nil
+
+        def initialize: (client: Dodopayments::Client) -> void
+      end
+    end
+  end
+end

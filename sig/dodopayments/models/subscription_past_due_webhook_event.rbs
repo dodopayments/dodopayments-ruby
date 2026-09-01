@@ -1,0 +1,47 @@
+module Dodopayments
+  module Models
+    type subscription_past_due_webhook_event =
+      {
+        business_id: String,
+        data: Dodopayments::SubscriptionPastDueWebhookEvent::Data,
+        timestamp: Time,
+        type: :"subscription.past_due"
+      }
+
+    class SubscriptionPastDueWebhookEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::SubscriptionPastDueWebhookEvent::Data
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: :"subscription.past_due"
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::SubscriptionPastDueWebhookEvent::Data,
+        timestamp: Time,
+        ?type: :"subscription.past_due"
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::SubscriptionPastDueWebhookEvent::Data,
+        timestamp: Time,
+        type: :"subscription.past_due"
+      }
+
+      type data = { past_due_ends_at: Time? }
+
+      class Data < Dodopayments::Models::Subscription
+        def past_due_ends_at: -> Time?
+
+        def past_due_ends_at=: (Time? _) -> Time?
+
+        def initialize: (?past_due_ends_at: Time?) -> void
+
+        def to_hash: -> { past_due_ends_at: Time? }
+      end
+    end
+  end
+end

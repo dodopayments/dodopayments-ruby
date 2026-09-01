@@ -50,6 +50,9 @@ module Dodopayments
     sig { returns(Dodopayments::Resources::Customers) }
     attr_reader :customers
 
+    sig { returns(Dodopayments::Resources::Blocklist) }
+    attr_reader :blocklist
+
     sig { returns(Dodopayments::Resources::Refunds) }
     attr_reader :refunds
 

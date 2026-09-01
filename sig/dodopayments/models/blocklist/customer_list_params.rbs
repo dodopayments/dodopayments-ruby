@@ -1,0 +1,53 @@
+module Dodopayments
+  module Models
+    module Blocklist
+      type customer_list_params =
+        {
+          blocked_by_email: String?,
+          created_at_gte: Time?,
+          created_at_lte: Time?,
+          identifier: String?,
+          page_number: Integer?,
+          page_size: Integer?
+        }
+        & Dodopayments::Internal::Type::request_parameters
+
+      class CustomerListParams < Dodopayments::Internal::Type::BaseModel
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
+
+        attr_accessor blocked_by_email: String?
+
+        attr_accessor created_at_gte: Time?
+
+        attr_accessor created_at_lte: Time?
+
+        attr_accessor identifier: String?
+
+        attr_accessor page_number: Integer?
+
+        attr_accessor page_size: Integer?
+
+        def initialize: (
+          ?blocked_by_email: String?,
+          ?created_at_gte: Time?,
+          ?created_at_lte: Time?,
+          ?identifier: String?,
+          ?page_number: Integer?,
+          ?page_size: Integer?,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          blocked_by_email: String?,
+          created_at_gte: Time?,
+          created_at_lte: Time?,
+          identifier: String?,
+          page_number: Integer?,
+          page_size: Integer?,
+          request_options: Dodopayments::RequestOptions
+        }
+      end
+    end
+  end
+end
