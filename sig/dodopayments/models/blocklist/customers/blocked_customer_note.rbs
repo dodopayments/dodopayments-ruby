@@ -1,0 +1,44 @@
+module Dodopayments
+  module Models
+    module Blocklist
+      module Customers
+        type blocked_customer_note =
+          {
+            id: String,
+            created_at: Time,
+            note: String,
+            author_email: String?,
+            updated_at: Time?
+          }
+
+        class BlockedCustomerNote < Dodopayments::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor note: String
+
+          attr_accessor author_email: String?
+
+          attr_accessor updated_at: Time?
+
+          def initialize: (
+            id: String,
+            created_at: Time,
+            note: String,
+            ?author_email: String?,
+            ?updated_at: Time?
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            created_at: Time,
+            note: String,
+            author_email: String?,
+            updated_at: Time?
+          }
+        end
+      end
+    end
+  end
+end

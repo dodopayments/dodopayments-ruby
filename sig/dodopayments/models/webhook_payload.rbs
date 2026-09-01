@@ -59,16 +59,27 @@ module Dodopayments
           def to_hash: -> { payload_type: :Payment }
         end
 
-        type subscription = { payload_type: :Subscription }
+        type subscription =
+          { payload_type: :Subscription, past_due_ends_at: Time? }
 
         class Subscription < Dodopayments::Models::Subscription
           def payload_type: -> :Subscription
 
           def payload_type=: (:Subscription _) -> :Subscription
 
-          def initialize: (?payload_type: :Subscription) -> void
+          def past_due_ends_at: -> Time?
 
-          def to_hash: -> { payload_type: :Subscription }
+          def past_due_ends_at=: (Time? _) -> Time?
+
+          def initialize: (
+            ?past_due_ends_at: Time?,
+            ?payload_type: :Subscription
+          ) -> void
+
+          def to_hash: -> {
+            payload_type: :Subscription,
+            past_due_ends_at: Time?
+          }
         end
 
         type refund = { payload_type: :Refund }
@@ -429,13 +440,14 @@ module Dodopayments
             def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::DunningAttempt::status]
           end
 
-          type trigger_state = :on_hold | :cancelled
+          type trigger_state = :on_hold | :cancelled | :past_due
 
           module TriggerState
             extend Dodopayments::Internal::Type::Enum
 
             ON_HOLD: :on_hold
             CANCELLED: :cancelled
+            PAST_DUE: :past_due
 
             def self?.values: -> ::Array[Dodopayments::Models::WebhookPayload::Data::DunningAttempt::trigger_state]
           end

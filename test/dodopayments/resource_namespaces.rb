@@ -3,6 +3,11 @@
 module Dodopayments
   module Test
     module Resources
+      module Blocklist
+        module Customers
+        end
+      end
+
       module Breakup
       end
 

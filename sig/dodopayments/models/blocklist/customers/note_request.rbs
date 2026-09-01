@@ -1,0 +1,17 @@
+module Dodopayments
+  module Models
+    module Blocklist
+      module Customers
+        type note_request = { note: String }
+
+        class NoteRequest < Dodopayments::Internal::Type::BaseModel
+          attr_accessor note: String
+
+          def initialize: (note: String) -> void
+
+          def to_hash: -> { note: String }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,71 @@
+module Dodopayments
+  module Models
+    module Blocklist
+      type create_blocked_customer_request =
+        Dodopayments::Blocklist::CreateBlockedCustomerRequest::BlocklistCustomersBlockByCustomerID
+        | Dodopayments::Blocklist::CreateBlockedCustomerRequest::BlocklistCustomersBlockByEmail
+
+      module CreateBlockedCustomerRequest
+        extend Dodopayments::Internal::Type::Union
+
+        type blocklist_customers_block_by_customer_id =
+          {
+            reason: String?,
+            source: Dodopayments::Models::Blocklist::blocked_customer_source?
+          }
+
+        class BlocklistCustomersBlockByCustomerID < Dodopayments::Models::Blocklist::BlockByCustomerID
+          def reason: -> String?
+
+          def reason=: (String? _) -> String?
+
+          def source: -> Dodopayments::Models::Blocklist::blocked_customer_source?
+
+          def source=: (
+            Dodopayments::Models::Blocklist::blocked_customer_source? _
+          ) -> Dodopayments::Models::Blocklist::blocked_customer_source?
+
+          def initialize: (
+            ?reason: String?,
+            ?source: Dodopayments::Models::Blocklist::blocked_customer_source?
+          ) -> void
+
+          def to_hash: -> {
+            reason: String?,
+            source: Dodopayments::Models::Blocklist::blocked_customer_source?
+          }
+        end
+
+        type blocklist_customers_block_by_email =
+          {
+            reason: String?,
+            source: Dodopayments::Models::Blocklist::blocked_customer_source?
+          }
+
+        class BlocklistCustomersBlockByEmail < Dodopayments::Models::Blocklist::BlockByEmail
+          def reason: -> String?
+
+          def reason=: (String? _) -> String?
+
+          def source: -> Dodopayments::Models::Blocklist::blocked_customer_source?
+
+          def source=: (
+            Dodopayments::Models::Blocklist::blocked_customer_source? _
+          ) -> Dodopayments::Models::Blocklist::blocked_customer_source?
+
+          def initialize: (
+            ?reason: String?,
+            ?source: Dodopayments::Models::Blocklist::blocked_customer_source?
+          ) -> void
+
+          def to_hash: -> {
+            reason: String?,
+            source: Dodopayments::Models::Blocklist::blocked_customer_source?
+          }
+        end
+
+        def self?.variants: -> ::Array[Dodopayments::Models::Blocklist::create_blocked_customer_request]
+      end
+    end
+  end
+end

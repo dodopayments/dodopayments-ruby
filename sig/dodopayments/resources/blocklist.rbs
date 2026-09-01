@@ -1,0 +1,9 @@
+module Dodopayments
+  module Resources
+    class Blocklist
+      attr_reader customers: Dodopayments::Resources::Blocklist::Customers
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

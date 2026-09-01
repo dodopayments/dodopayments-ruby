@@ -33,6 +33,8 @@ module Dodopayments
 
     attr_reader customers: Dodopayments::Resources::Customers
 
+    attr_reader blocklist: Dodopayments::Resources::Blocklist
+
     attr_reader refunds: Dodopayments::Resources::Refunds
 
     attr_reader disputes: Dodopayments::Resources::Disputes

@@ -33,6 +33,8 @@ module Dodopayments
 
   class BillingAddress = Dodopayments::Models::BillingAddress
 
+  module Blocklist = Dodopayments::Models::Blocklist
+
   class Brand = Dodopayments::Models::Brand
 
   class BrandArchiveParams = Dodopayments::Models::BrandArchiveParams
@@ -277,6 +279,10 @@ module Dodopayments
 
   class LicenseValidateParams = Dodopayments::Models::LicenseValidateParams
 
+  class ManualRetry = Dodopayments::Models::ManualRetry
+
+  class ManualRetryState = Dodopayments::Models::ManualRetryState
+
   Metadata: Dodopayments::Internal::Type::Converter
 
   type metadata_item = Dodopayments::Models::metadata_item
@@ -328,6 +334,10 @@ module Dodopayments
   class PaymentRetrieveLineItemsParams = Dodopayments::Models::PaymentRetrieveLineItemsParams
 
   class PaymentRetrieveParams = Dodopayments::Models::PaymentRetrieveParams
+
+  class PaymentRetrieveRetryStateParams = Dodopayments::Models::PaymentRetrieveRetryStateParams
+
+  class PaymentRetryParams = Dodopayments::Models::PaymentRetryParams
 
   class PaymentSucceededWebhookEvent = Dodopayments::Models::PaymentSucceededWebhookEvent
 
@@ -428,6 +438,8 @@ module Dodopayments
   class SubscriptionListParams = Dodopayments::Models::SubscriptionListParams
 
   class SubscriptionOnHoldWebhookEvent = Dodopayments::Models::SubscriptionOnHoldWebhookEvent
+
+  class SubscriptionPastDueWebhookEvent = Dodopayments::Models::SubscriptionPastDueWebhookEvent
 
   class SubscriptionPausedWebhookEvent = Dodopayments::Models::SubscriptionPausedWebhookEvent
 
