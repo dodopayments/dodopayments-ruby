@@ -29,6 +29,20 @@ module Dodopayments
       #   @return [String]
       required :name, String
 
+      # @!attribute blocked_at
+      #   When the merchant blocked this customer. The dashboard shows the "Blocked" badge
+      #   and the unblock action from it. The list route leaves it empty; only the
+      #   single-customer route resolves it.
+      #
+      #   @return [Time, nil]
+      optional :blocked_at, Time, nil?: true
+
+      # @!attribute blocklist_entry_id
+      #   Blocklist entry behind `blocked_at`, so the dashboard can link to it.
+      #
+      #   @return [String, nil]
+      optional :blocklist_entry_id, String, nil?: true
+
       # @!attribute metadata
       #   Additional metadata for the customer
       #
@@ -40,7 +54,10 @@ module Dodopayments
       #   @return [String, nil]
       optional :phone_number, String, nil?: true
 
-      # @!method initialize(business_id:, created_at:, customer_id:, email:, name:, metadata: nil, phone_number: nil)
+      # @!method initialize(business_id:, created_at:, customer_id:, email:, name:, blocked_at: nil, blocklist_entry_id: nil, metadata: nil, phone_number: nil)
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::Customer} for more details.
+      #
       #   @param business_id [String]
       #
       #   @param created_at [Time]
@@ -50,6 +67,10 @@ module Dodopayments
       #   @param email [String]
       #
       #   @param name [String]
+      #
+      #   @param blocked_at [Time, nil] When the merchant blocked this customer. The dashboard shows the
+      #
+      #   @param blocklist_entry_id [String, nil] Blocklist entry behind `blocked_at`, so the dashboard can link to it.
       #
       #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata for the customer
       #

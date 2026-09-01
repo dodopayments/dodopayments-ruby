@@ -1,0 +1,36 @@
+module Dodopayments
+  module Models
+    module Blocklist
+      module Customers
+        type note_update_params =
+          { entry_id: String, note_id: String }
+          & Dodopayments::Internal::Type::request_parameters
+
+        class NoteUpdateParams < Dodopayments::Models::Blocklist::Customers::NoteRequest
+          extend Dodopayments::Internal::Type::RequestParameters::Converter
+          include Dodopayments::Internal::Type::RequestParameters
+
+          def entry_id: -> String
+
+          def entry_id=: (String _) -> String
+
+          def note_id: -> String
+
+          def note_id=: (String _) -> String
+
+          def initialize: (
+            entry_id: String,
+            note_id: String,
+            ?request_options: Dodopayments::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            entry_id: String,
+            note_id: String,
+            request_options: Dodopayments::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

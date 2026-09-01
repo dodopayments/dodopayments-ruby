@@ -1,0 +1,20 @@
+module Dodopayments
+  module Models
+    module Blocklist
+      type blocked_customer_source =
+        :blocklist_page | :customer_page | :payment_page | :dispute_page | :api
+
+      module BlockedCustomerSource
+        extend Dodopayments::Internal::Type::Enum
+
+        BLOCKLIST_PAGE: :blocklist_page
+        CUSTOMER_PAGE: :customer_page
+        PAYMENT_PAGE: :payment_page
+        DISPUTE_PAGE: :dispute_page
+        API: :api
+
+        def self?.values: -> ::Array[Dodopayments::Models::Blocklist::blocked_customer_source]
+      end
+    end
+  end
+end

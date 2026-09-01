@@ -211,6 +211,11 @@ module Dodopayments
               :cancelled,
               Dodopayments::DunningStartedWebhookEvent::Data::TriggerState::TaggedSymbol
             )
+          PAST_DUE =
+            T.let(
+              :past_due,
+              Dodopayments::DunningStartedWebhookEvent::Data::TriggerState::TaggedSymbol
+            )
 
           sig do
             override.returns(

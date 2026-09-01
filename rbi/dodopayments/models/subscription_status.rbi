@@ -17,6 +17,8 @@ module Dodopayments
         T.let(:cancelled, Dodopayments::SubscriptionStatus::TaggedSymbol)
       FAILED = T.let(:failed, Dodopayments::SubscriptionStatus::TaggedSymbol)
       EXPIRED = T.let(:expired, Dodopayments::SubscriptionStatus::TaggedSymbol)
+      PAST_DUE =
+        T.let(:past_due, Dodopayments::SubscriptionStatus::TaggedSymbol)
 
       sig do
         override.returns(

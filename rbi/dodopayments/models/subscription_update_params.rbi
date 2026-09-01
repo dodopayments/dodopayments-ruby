@@ -289,6 +289,11 @@ module Dodopayments
             :cancelled_by_merchant_send_dunning,
             Dodopayments::SubscriptionUpdateParams::CancelReason::TaggedSymbol
           )
+        CANCELLED_BY_MERCHANT_GRACE_PERIOD_EXPIRED =
+          T.let(
+            :cancelled_by_merchant_grace_period_expired,
+            Dodopayments::SubscriptionUpdateParams::CancelReason::TaggedSymbol
+          )
         DODO_TEAM =
           T.let(
             :dodo_team,
