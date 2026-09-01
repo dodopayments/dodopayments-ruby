@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.27.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.26.0...v2.27.0) (2026-09-01)
+
+
+### Features
+
+* **api:** add customer blocklist and manual payment retry ([05c0fdc](https://github.com/dodopayments/dodopayments-ruby/commit/05c0fdc1049a6e375c4c6091ea0142aa2f6ad2ca))
+* **api:** add customer blocklist and manual payment retry ([3d61750](https://github.com/dodopayments/dodopayments-ruby/commit/3d6175004e3e30d39719c6c08fd541398a287487))
+
 ## [2.26.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.25.0...v2.26.0) (2026-08-24)
 
 
