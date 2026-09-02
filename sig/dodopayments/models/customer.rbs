@@ -7,6 +7,8 @@ module Dodopayments
         customer_id: String,
         email: String,
         name: String,
+        blocked_at: Time?,
+        blocklist_entry_id: String?,
         metadata: Dodopayments::Models::metadata,
         phone_number: String?
       }
@@ -22,6 +24,10 @@ module Dodopayments
 
       attr_accessor name: String
 
+      attr_accessor blocked_at: Time?
+
+      attr_accessor blocklist_entry_id: String?
+
       attr_reader metadata: Dodopayments::Models::metadata?
 
       def metadata=: (
@@ -36,6 +42,8 @@ module Dodopayments
         customer_id: String,
         email: String,
         name: String,
+        ?blocked_at: Time?,
+        ?blocklist_entry_id: String?,
         ?metadata: Dodopayments::Models::metadata,
         ?phone_number: String?
       ) -> void
@@ -46,6 +54,8 @@ module Dodopayments
         customer_id: String,
         email: String,
         name: String,
+        blocked_at: Time?,
+        blocklist_entry_id: String?,
         metadata: Dodopayments::Models::metadata,
         phone_number: String?
       }

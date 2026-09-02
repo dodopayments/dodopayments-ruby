@@ -1,0 +1,24 @@
+module Dodopayments
+  module Resources
+    class Blocklist
+      class Customers
+        class Notes
+          def create: (
+            String entry_id,
+            note: String,
+            ?request_options: Dodopayments::request_opts
+          ) -> Dodopayments::Blocklist::Customers::BlockedCustomerNote
+
+          def update: (
+            String note_id,
+            entry_id: String,
+            note: String,
+            ?request_options: Dodopayments::request_opts
+          ) -> Dodopayments::Blocklist::Customers::BlockedCustomerNote
+
+          def initialize: (client: Dodopayments::Client) -> void
+        end
+      end
+    end
+  end
+end

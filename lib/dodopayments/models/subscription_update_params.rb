@@ -176,6 +176,7 @@ module Dodopayments
         CANCELLED_BY_CUSTOMER = :cancelled_by_customer
         CANCELLED_BY_MERCHANT = :cancelled_by_merchant
         CANCELLED_BY_MERCHANT_SEND_DUNNING = :cancelled_by_merchant_send_dunning
+        CANCELLED_BY_MERCHANT_GRACE_PERIOD_EXPIRED = :cancelled_by_merchant_grace_period_expired
         DODO_TEAM = :dodo_team
 
         # @!method self.values

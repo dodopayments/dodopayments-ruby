@@ -165,6 +165,32 @@ module Dodopayments
       )
       end
 
+      sig do
+        params(
+          payment_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::ManualRetryState)
+      end
+      def retrieve_retry_state(
+        # Id of the failed payment
+        payment_id,
+        request_options: {}
+      )
+      end
+
+      sig do
+        params(
+          payment_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::ManualRetry)
+      end
+      def retry_(
+        # Id of the failed payment
+        payment_id,
+        request_options: {}
+      )
+      end
+
       # @api private
       sig { params(client: Dodopayments::Client).returns(T.attached_class) }
       def self.new(client:)

@@ -153,12 +153,41 @@ module Dodopayments
           sig { returns(Symbol) }
           attr_accessor :payload_type
 
+          # Time when the grace period ends. The subscription moves to `on_hold` or to
+          # `cancelled` at this time.
+          #
+          # Read in the same query as the rest of the payload, so it always comes from the
+          # row snapshot that produced `status`. It is set whenever the subscription sits in
+          # a window at that moment. A delayed event of another type therefore carries the
+          # deadline too, next to a `past_due` status.
+          sig { returns(T.nilable(Time)) }
+          attr_accessor :past_due_ends_at
+
           # Response struct representing subscription details
-          sig { params(payload_type: Symbol).returns(T.attached_class) }
-          def self.new(payload_type: :Subscription)
+          sig do
+            params(
+              past_due_ends_at: T.nilable(Time),
+              payload_type: Symbol
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            # Time when the grace period ends. The subscription moves to `on_hold` or to
+            # `cancelled` at this time.
+            #
+            # Read in the same query as the rest of the payload, so it always comes from the
+            # row snapshot that produced `status`. It is set whenever the subscription sits in
+            # a window at that moment. A delayed event of another type therefore carries the
+            # deadline too, next to a `past_due` status.
+            past_due_ends_at: nil,
+            payload_type: :Subscription
+          )
           end
 
-          sig { override.returns({ payload_type: Symbol }) }
+          sig do
+            override.returns(
+              { payload_type: Symbol, past_due_ends_at: T.nilable(Time) }
+            )
+          end
           def to_hash
           end
         end
@@ -865,6 +894,11 @@ module Dodopayments
             CANCELLED =
               T.let(
                 :cancelled,
+                Dodopayments::WebhookPayload::Data::DunningAttempt::TriggerState::TaggedSymbol
+              )
+            PAST_DUE =
+              T.let(
+                :past_due,
                 Dodopayments::WebhookPayload::Data::DunningAttempt::TriggerState::TaggedSymbol
               )
 

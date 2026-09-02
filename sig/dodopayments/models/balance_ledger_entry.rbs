@@ -13,6 +13,7 @@ module Dodopayments
         after_balance: Integer?,
         before_balance: Integer?,
         description: String?,
+        payout_id: String?,
         reference_object_id: String?
       }
 
@@ -39,6 +40,8 @@ module Dodopayments
 
       attr_accessor description: String?
 
+      attr_accessor payout_id: String?
+
       attr_accessor reference_object_id: String?
 
       def initialize: (
@@ -53,6 +56,7 @@ module Dodopayments
         ?after_balance: Integer?,
         ?before_balance: Integer?,
         ?description: String?,
+        ?payout_id: String?,
         ?reference_object_id: String?
       ) -> void
 
@@ -68,6 +72,7 @@ module Dodopayments
         after_balance: Integer?,
         before_balance: Integer?,
         description: String?,
+        payout_id: String?,
         reference_object_id: String?
       }
 

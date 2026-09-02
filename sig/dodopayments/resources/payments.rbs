@@ -48,6 +48,16 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::PaymentRetrieveLineItemsResponse
 
+      def retrieve_retry_state: (
+        String payment_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::ManualRetryState
+
+      def retry_: (
+        String payment_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::ManualRetry
+
       def initialize: (client: Dodopayments::Client) -> void
     end
   end

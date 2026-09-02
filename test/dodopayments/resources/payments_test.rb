@@ -139,4 +139,43 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
       }
     end
   end
+
+  def test_retrieve_retry_state
+    response = @dodo_payments.payments.retrieve_retry_state("payment_id")
+
+    assert_pattern do
+      response => Dodopayments::ManualRetryState
+    end
+
+    assert_pattern do
+      response => {
+        can_retry: Dodopayments::Internal::Type::Boolean,
+        sends_allowed: Integer,
+        sends_used: Integer,
+        reason: String | nil,
+        retry_available_at: Time | nil
+      }
+    end
+  end
+
+  def test_retry_
+    response = @dodo_payments.payments.retry_("payment_id")
+
+    assert_pattern do
+      response => Dodopayments::ManualRetry
+    end
+
+    assert_pattern do
+      response => {
+        invoice_id: String,
+        is_manual_retry: Dodopayments::Internal::Type::Boolean,
+        payment_id: String,
+        retry_attempt: Integer,
+        sends_allowed: Integer,
+        sends_used: Integer,
+        retry_available_at: Time | nil,
+        status: Dodopayments::IntentStatus | nil
+      }
+    end
+  end
 end
