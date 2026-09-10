@@ -11,9 +11,10 @@ module Dodopayments
       type one_time_price =
         {
           currency: Dodopayments::Models::currency,
-          discount: Integer,
           price: Integer,
           type: :one_time_price,
+          discount: Integer,
+          discount_bps: Integer?,
           pay_what_you_want: bool,
           purchasing_power_parity: bool,
           suggested_price: Integer?,
@@ -23,11 +24,15 @@ module Dodopayments
       class OneTimePrice < Dodopayments::Internal::Type::BaseModel
         attr_accessor currency: Dodopayments::Models::currency
 
-        attr_accessor discount: Integer
-
         attr_accessor price: Integer
 
         attr_accessor type: :one_time_price
+
+        attr_reader discount: Integer?
+
+        def discount=: (Integer) -> Integer
+
+        attr_accessor discount_bps: Integer?
 
         attr_reader pay_what_you_want: bool?
 
@@ -43,8 +48,9 @@ module Dodopayments
 
         def initialize: (
           currency: Dodopayments::Models::currency,
-          discount: Integer,
           price: Integer,
+          ?discount: Integer,
+          ?discount_bps: Integer?,
           ?pay_what_you_want: bool,
           ?purchasing_power_parity: bool,
           ?suggested_price: Integer?,
@@ -54,9 +60,10 @@ module Dodopayments
 
         def to_hash: -> {
           currency: Dodopayments::Models::currency,
-          discount: Integer,
           price: Integer,
           type: :one_time_price,
+          discount: Integer,
+          discount_bps: Integer?,
           pay_what_you_want: bool,
           purchasing_power_parity: bool,
           suggested_price: Integer?,
@@ -67,24 +74,25 @@ module Dodopayments
       type recurring_price =
         {
           currency: Dodopayments::Models::currency,
-          discount: Integer,
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::time_interval,
           price: Integer,
           subscription_period_count: Integer,
           subscription_period_interval: Dodopayments::Models::time_interval,
           type: :recurring_price,
+          discount: Integer,
+          discount_bps: Integer?,
           purchasing_power_parity: bool,
           tax_inclusive: bool?,
           trial_amount: Integer?,
           trial_apply_discounts: bool?,
-          trial_period_days: Integer
+          trial_payment_method_optional: bool,
+          trial_period_days: Integer,
+          zero_amount_payment_method_optional: bool
         }
 
       class RecurringPrice < Dodopayments::Internal::Type::BaseModel
         attr_accessor currency: Dodopayments::Models::currency
-
-        attr_accessor discount: Integer
 
         attr_accessor payment_frequency_count: Integer
 
@@ -98,6 +106,12 @@ module Dodopayments
 
         attr_accessor type: :recurring_price
 
+        attr_reader discount: Integer?
+
+        def discount=: (Integer) -> Integer
+
+        attr_accessor discount_bps: Integer?
+
         attr_reader purchasing_power_parity: bool?
 
         def purchasing_power_parity=: (bool) -> bool
@@ -108,53 +122,68 @@ module Dodopayments
 
         attr_accessor trial_apply_discounts: bool?
 
+        attr_reader trial_payment_method_optional: bool?
+
+        def trial_payment_method_optional=: (bool) -> bool
+
         attr_reader trial_period_days: Integer?
 
         def trial_period_days=: (Integer) -> Integer
 
+        attr_reader zero_amount_payment_method_optional: bool?
+
+        def zero_amount_payment_method_optional=: (bool) -> bool
+
         def initialize: (
           currency: Dodopayments::Models::currency,
-          discount: Integer,
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::time_interval,
           price: Integer,
           subscription_period_count: Integer,
           subscription_period_interval: Dodopayments::Models::time_interval,
+          ?discount: Integer,
+          ?discount_bps: Integer?,
           ?purchasing_power_parity: bool,
           ?tax_inclusive: bool?,
           ?trial_amount: Integer?,
           ?trial_apply_discounts: bool?,
+          ?trial_payment_method_optional: bool,
           ?trial_period_days: Integer,
+          ?zero_amount_payment_method_optional: bool,
           ?type: :recurring_price
         ) -> void
 
         def to_hash: -> {
           currency: Dodopayments::Models::currency,
-          discount: Integer,
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::time_interval,
           price: Integer,
           subscription_period_count: Integer,
           subscription_period_interval: Dodopayments::Models::time_interval,
           type: :recurring_price,
+          discount: Integer,
+          discount_bps: Integer?,
           purchasing_power_parity: bool,
           tax_inclusive: bool?,
           trial_amount: Integer?,
           trial_apply_discounts: bool?,
-          trial_period_days: Integer
+          trial_payment_method_optional: bool,
+          trial_period_days: Integer,
+          zero_amount_payment_method_optional: bool
         }
       end
 
       type usage_based_price =
         {
           currency: Dodopayments::Models::currency,
-          discount: Integer,
           fixed_price: Integer,
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::time_interval,
           subscription_period_count: Integer,
           subscription_period_interval: Dodopayments::Models::time_interval,
           type: :usage_based_price,
+          discount: Integer,
+          discount_bps: Integer?,
           meters: ::Array[Dodopayments::AddMeterToPrice]?,
           purchasing_power_parity: bool,
           tax_inclusive: bool?
@@ -162,8 +191,6 @@ module Dodopayments
 
       class UsageBasedPrice < Dodopayments::Internal::Type::BaseModel
         attr_accessor currency: Dodopayments::Models::currency
-
-        attr_accessor discount: Integer
 
         attr_accessor fixed_price: Integer
 
@@ -177,6 +204,12 @@ module Dodopayments
 
         attr_accessor type: :usage_based_price
 
+        attr_reader discount: Integer?
+
+        def discount=: (Integer) -> Integer
+
+        attr_accessor discount_bps: Integer?
+
         attr_accessor meters: ::Array[Dodopayments::AddMeterToPrice]?
 
         attr_reader purchasing_power_parity: bool?
@@ -187,12 +220,13 @@ module Dodopayments
 
         def initialize: (
           currency: Dodopayments::Models::currency,
-          discount: Integer,
           fixed_price: Integer,
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::time_interval,
           subscription_period_count: Integer,
           subscription_period_interval: Dodopayments::Models::time_interval,
+          ?discount: Integer,
+          ?discount_bps: Integer?,
           ?meters: ::Array[Dodopayments::AddMeterToPrice]?,
           ?purchasing_power_parity: bool,
           ?tax_inclusive: bool?,
@@ -201,13 +235,14 @@ module Dodopayments
 
         def to_hash: -> {
           currency: Dodopayments::Models::currency,
-          discount: Integer,
           fixed_price: Integer,
           payment_frequency_count: Integer,
           payment_frequency_interval: Dodopayments::Models::time_interval,
           subscription_period_count: Integer,
           subscription_period_interval: Dodopayments::Models::time_interval,
           type: :usage_based_price,
+          discount: Integer,
+          discount_bps: Integer?,
           meters: ::Array[Dodopayments::AddMeterToPrice]?,
           purchasing_power_parity: bool,
           tax_inclusive: bool?

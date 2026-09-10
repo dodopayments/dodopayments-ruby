@@ -31,6 +31,13 @@ module Dodopayments
       #   @return [Boolean]
       required :is_byop, Dodopayments::Internal::Type::Boolean
 
+      # @!attribute payment_method_required
+      #   False when the customer can confirm this session with no card. True for every
+      #   other cart, including a one-time cart.
+      #
+      #   @return [Boolean]
+      required :payment_method_required, Dodopayments::Internal::Type::Boolean
+
       # @!attribute product_cart
       #   The total product cart
       #
@@ -100,7 +107,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :trial_period_days, Integer, nil?: true
 
-      # @!method initialize(billing_country:, currency:, current_breakup:, is_byop:, product_cart:, total_price:, next_billing_date: nil, recurring_breakup: nil, tax_id_business_name: nil, tax_id_err_msg: nil, tax_id_format_name: nil, total_tax: nil, trial_amount: nil, trial_period_days: nil)
+      # @!method initialize(billing_country:, currency:, current_breakup:, is_byop:, payment_method_required:, product_cart:, total_price:, next_billing_date: nil, recurring_breakup: nil, tax_id_business_name: nil, tax_id_err_msg: nil, tax_id_format_name: nil, total_tax: nil, trial_amount: nil, trial_period_days: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionPreviewResponse} for more details.
       #
@@ -113,6 +120,8 @@ module Dodopayments
       #   @param current_breakup [Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup] Breakup of the current payment
       #
       #   @param is_byop [Boolean] Whether the payment will be routed through the merchant's own
+      #
+      #   @param payment_method_required [Boolean] False when the customer can confirm this session with no card. True for
       #
       #   @param product_cart [Array<Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart>] The total product cart
       #

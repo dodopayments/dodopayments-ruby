@@ -50,6 +50,12 @@ module Dodopayments
         #   @return [Boolean]
         required :is_credit, Dodopayments::Internal::Type::Boolean
 
+        # @!attribute metadata
+        #   Metadata stored on this entry.
+        #
+        #   @return [Hash{Symbol=>String, Float, Boolean}]
+        required :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
+
         # @!attribute overage_after
         #
         #   @return [String]
@@ -70,21 +76,35 @@ module Dodopayments
         #   @return [String, nil]
         optional :reason, String, nil?: true
 
-        # @!method initialize(id:, amount:, balance_after:, balance_before:, created_at:, credit_entitlement_id:, customer_id:, entry_type:, is_credit:, overage_after:, overage_before:, grant_id: nil, reason: nil)
+        # @!method initialize(id:, amount:, balance_after:, balance_before:, created_at:, credit_entitlement_id:, customer_id:, entry_type:, is_credit:, metadata:, overage_after:, overage_before:, grant_id: nil, reason: nil)
         #   Response for creating a ledger entry
         #
         #   @param id [String]
+        #
         #   @param amount [String]
+        #
         #   @param balance_after [String]
+        #
         #   @param balance_before [String]
+        #
         #   @param created_at [Time]
+        #
         #   @param credit_entitlement_id [String]
+        #
         #   @param customer_id [String]
+        #
         #   @param entry_type [Symbol, Dodopayments::Models::CreditEntitlements::LedgerEntryType]
+        #
         #   @param is_credit [Boolean]
+        #
+        #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Metadata stored on this entry.
+        #
         #   @param overage_after [String]
+        #
         #   @param overage_before [String]
+        #
         #   @param grant_id [String, nil]
+        #
         #   @param reason [String, nil]
       end
     end

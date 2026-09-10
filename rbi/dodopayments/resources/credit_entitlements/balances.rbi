@@ -104,6 +104,7 @@ module Dodopayments
         # - `reason` - Optional human-readable reason
         # - `expires_at` - Optional expiration for credited amount (only for credit type)
         # - `idempotency_key` - Optional key to prevent duplicate entries
+        # - `metadata` - Optional key-value pairs
         #
         # # Responses
         #
@@ -145,7 +146,7 @@ module Dodopayments
           # Body param: Idempotency key to prevent duplicate entries
           idempotency_key: nil,
           # Body param: Optional metadata (max 50 key-value pairs, key max 40 chars, value
-          # max 500 chars)
+          # max 500 chars).
           metadata: nil,
           # Body param: Human-readable reason for the entry
           reason: nil,

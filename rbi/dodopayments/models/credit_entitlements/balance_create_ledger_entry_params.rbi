@@ -42,7 +42,7 @@ module Dodopayments
         attr_accessor :idempotency_key
 
         # Optional metadata (max 50 key-value pairs, key max 40 chars, value max 500
-        # chars)
+        # chars).
         sig do
           returns(
             T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants])
@@ -83,7 +83,7 @@ module Dodopayments
           # Idempotency key to prevent duplicate entries
           idempotency_key: nil,
           # Optional metadata (max 50 key-value pairs, key max 40 chars, value max 500
-          # chars)
+          # chars).
           metadata: nil,
           # Human-readable reason for the entry
           reason: nil,

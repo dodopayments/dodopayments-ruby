@@ -42,6 +42,11 @@ module Dodopayments
       sig { returns(T::Boolean) }
       attr_accessor :is_byop
 
+      # False when the customer can confirm this session with no card. True for every
+      # other cart, including a one-time cart.
+      sig { returns(T::Boolean) }
+      attr_accessor :payment_method_required
+
       # The total product cart
       sig do
         returns(
@@ -118,6 +123,7 @@ module Dodopayments
           current_breakup:
             Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup::OrHash,
           is_byop: T::Boolean,
+          payment_method_required: T::Boolean,
           product_cart:
             T::Array[
               Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::OrHash
@@ -148,6 +154,9 @@ module Dodopayments
         # country; in that case the quoted amounts exclude Dodo-computed tax because the
         # merchant is MoR and owns tax.
         is_byop:,
+        # False when the customer can confirm this session with no card. True for every
+        # other cart, including a one-time cart.
+        payment_method_required:,
         # The total product cart
         product_cart:,
         # Total calculate price of the product cart
@@ -185,6 +194,7 @@ module Dodopayments
             current_breakup:
               Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup,
             is_byop: T::Boolean,
+            payment_method_required: T::Boolean,
             product_cart:
               T::Array[
                 Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart

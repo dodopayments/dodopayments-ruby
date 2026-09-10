@@ -24,12 +24,6 @@ module Dodopayments
         #   @return [Symbol, Dodopayments::Models::Currency]
         required :currency, enum: -> { Dodopayments::Currency }
 
-        # @!attribute discount
-        #   Discount applied to the price, represented as a percentage (0 to 100).
-        #
-        #   @return [Integer]
-        required :discount, Integer
-
         # @!attribute price
         #   The payment amount, in the smallest denomination of the currency (e.g., cents
         #   for USD). For example, to charge $1.00, pass `100`.
@@ -44,6 +38,27 @@ module Dodopayments
         #
         #   @return [Symbol, :one_time_price]
         required :type, const: :one_time_price
+
+        # @!attribute discount
+        #   @deprecated
+        #
+        #   Deprecated: use `discount_bps` instead.
+        #
+        #   Discount applied to the price, represented as a percentage (0 to 100). A
+        #   response rounds this value to the nearest whole percent. Defaults to `0`.
+        #
+        #   @return [Integer, nil]
+        optional :discount, Integer
+
+        # @!attribute discount_bps
+        #   Discount applied to the price, in basis points. 100 basis points make one
+        #   percent, so `1250` is a discount of 12.5%.
+        #
+        #   Use this field for a discount with a fraction of a percent. A request that sends
+        #   this field ignores `discount`. A value of `0` gives no discount.
+        #
+        #   @return [Integer, nil]
+        optional :discount_bps, Integer, nil?: true
 
         # @!attribute pay_what_you_want
         #   Indicates whether the customer can pay any amount they choose. If set to `true`,
@@ -74,7 +89,7 @@ module Dodopayments
         #   @return [Boolean, nil]
         optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
-        # @!method initialize(currency:, discount:, price:, pay_what_you_want: nil, purchasing_power_parity: nil, suggested_price: nil, tax_inclusive: nil, type: :one_time_price)
+        # @!method initialize(currency:, price:, discount: nil, discount_bps: nil, pay_what_you_want: nil, purchasing_power_parity: nil, suggested_price: nil, tax_inclusive: nil, type: :one_time_price)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Price::OneTimePrice} for more details.
         #
@@ -82,9 +97,11 @@ module Dodopayments
         #
         #   @param currency [Symbol, Dodopayments::Models::Currency] The currency in which the payment is made.
         #
-        #   @param discount [Integer] Discount applied to the price, represented as a percentage (0 to 100).
-        #
         #   @param price [Integer] The payment amount, in the smallest denomination of the currency (e.g., cents fo
+        #
+        #   @param discount [Integer] Deprecated: use `discount_bps` instead.
+        #
+        #   @param discount_bps [Integer, nil] Discount applied to the price, in basis points. 100 basis points make
         #
         #   @param pay_what_you_want [Boolean] Indicates whether the customer can pay any amount they choose.
         #
@@ -103,12 +120,6 @@ module Dodopayments
         #
         #   @return [Symbol, Dodopayments::Models::Currency]
         required :currency, enum: -> { Dodopayments::Currency }
-
-        # @!attribute discount
-        #   Discount applied to the price, represented as a percentage (0 to 100).
-        #
-        #   @return [Integer]
-        required :discount, Integer
 
         # @!attribute payment_frequency_count
         #   Number of units for the payment frequency. For example, a value of `1` with a
@@ -148,6 +159,27 @@ module Dodopayments
         #   @return [Symbol, :recurring_price]
         required :type, const: :recurring_price
 
+        # @!attribute discount
+        #   @deprecated
+        #
+        #   Deprecated: use `discount_bps` instead.
+        #
+        #   Discount applied to the price, represented as a percentage (0 to 100). A
+        #   response rounds this value to the nearest whole percent. Defaults to `0`.
+        #
+        #   @return [Integer, nil]
+        optional :discount, Integer
+
+        # @!attribute discount_bps
+        #   Discount applied to the price, in basis points. 100 basis points make one
+        #   percent, so `1250` is a discount of 12.5%.
+        #
+        #   Use this field for a discount with a fraction of a percent. A request that sends
+        #   this field ignores `discount`. A value of `0` gives no discount.
+        #
+        #   @return [Integer, nil]
+        optional :discount_bps, Integer, nil?: true
+
         # @!attribute purchasing_power_parity
         #   Opts this price in to purchasing power parity. The business must also enable
         #   purchasing power parity. The discount percentage per country is always
@@ -176,21 +208,32 @@ module Dodopayments
         #   @return [Boolean, nil]
         optional :trial_apply_discounts, Dodopayments::Internal::Type::Boolean, nil?: true
 
+        # @!attribute trial_payment_method_optional
+        #   Let a customer start a free trial with no card. Defaults to false.
+        #
+        #   @return [Boolean, nil]
+        optional :trial_payment_method_optional, Dodopayments::Internal::Type::Boolean
+
         # @!attribute trial_period_days
         #   Number of days for the trial period. A value of `0` indicates no trial period.
         #
         #   @return [Integer, nil]
         optional :trial_period_days, Integer
 
-        # @!method initialize(currency:, discount:, payment_frequency_count:, payment_frequency_interval:, price:, subscription_period_count:, subscription_period_interval:, purchasing_power_parity: nil, tax_inclusive: nil, trial_amount: nil, trial_apply_discounts: nil, trial_period_days: nil, type: :recurring_price)
+        # @!attribute zero_amount_payment_method_optional
+        #   Let a customer start a subscription with no card, when the amount due today is
+        #   `0` (a native `0` price, or a 100% discount). Defaults to false.
+        #
+        #   @return [Boolean, nil]
+        optional :zero_amount_payment_method_optional, Dodopayments::Internal::Type::Boolean
+
+        # @!method initialize(currency:, payment_frequency_count:, payment_frequency_interval:, price:, subscription_period_count:, subscription_period_interval:, discount: nil, discount_bps: nil, purchasing_power_parity: nil, tax_inclusive: nil, trial_amount: nil, trial_apply_discounts: nil, trial_payment_method_optional: nil, trial_period_days: nil, zero_amount_payment_method_optional: nil, type: :recurring_price)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Price::RecurringPrice} for more details.
         #
         #   Recurring price details.
         #
         #   @param currency [Symbol, Dodopayments::Models::Currency] The currency in which the payment is made.
-        #
-        #   @param discount [Integer] Discount applied to the price, represented as a percentage (0 to 100).
         #
         #   @param payment_frequency_count [Integer] Number of units for the payment frequency.
         #
@@ -202,6 +245,10 @@ module Dodopayments
         #
         #   @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval] The time interval for the subscription period (e.g., day, month, year).
         #
+        #   @param discount [Integer] Deprecated: use `discount_bps` instead.
+        #
+        #   @param discount_bps [Integer, nil] Discount applied to the price, in basis points. 100 basis points make
+        #
         #   @param purchasing_power_parity [Boolean] Opts this price in to purchasing power parity. The business must also
         #
         #   @param tax_inclusive [Boolean, nil] Indicates if the price is tax inclusive
@@ -210,7 +257,11 @@ module Dodopayments
         #
         #   @param trial_apply_discounts [Boolean, nil] Whether discount codes reduce the trial charge. Defaults to false. Only meaningf
         #
+        #   @param trial_payment_method_optional [Boolean] Let a customer start a free trial with no card. Defaults to false.
+        #
         #   @param trial_period_days [Integer] Number of days for the trial period. A value of `0` indicates no trial period.
+        #
+        #   @param zero_amount_payment_method_optional [Boolean] Let a customer start a subscription with no card, when the amount due
         #
         #   @param type [Symbol, :recurring_price]
       end
@@ -221,12 +272,6 @@ module Dodopayments
         #
         #   @return [Symbol, Dodopayments::Models::Currency]
         required :currency, enum: -> { Dodopayments::Currency }
-
-        # @!attribute discount
-        #   Discount applied to the price, represented as a percentage (0 to 100).
-        #
-        #   @return [Integer]
-        required :discount, Integer
 
         # @!attribute fixed_price
         #   The fixed payment amount. Represented in the lowest denomination of the currency
@@ -266,6 +311,27 @@ module Dodopayments
         #   @return [Symbol, :usage_based_price]
         required :type, const: :usage_based_price
 
+        # @!attribute discount
+        #   @deprecated
+        #
+        #   Deprecated: use `discount_bps` instead.
+        #
+        #   Discount applied to the price, represented as a percentage (0 to 100). A
+        #   response rounds this value to the nearest whole percent. Defaults to `0`.
+        #
+        #   @return [Integer, nil]
+        optional :discount, Integer
+
+        # @!attribute discount_bps
+        #   Discount applied to the price, in basis points. 100 basis points make one
+        #   percent, so `1250` is a discount of 12.5%.
+        #
+        #   Use this field for a discount with a fraction of a percent. A request that sends
+        #   this field ignores `discount`. A value of `0` gives no discount.
+        #
+        #   @return [Integer, nil]
+        optional :discount_bps, Integer, nil?: true
+
         # @!attribute meters
         #
         #   @return [Array<Dodopayments::Models::AddMeterToPrice>, nil]
@@ -290,15 +356,13 @@ module Dodopayments
         #   @return [Boolean, nil]
         optional :tax_inclusive, Dodopayments::Internal::Type::Boolean, nil?: true
 
-        # @!method initialize(currency:, discount:, fixed_price:, payment_frequency_count:, payment_frequency_interval:, subscription_period_count:, subscription_period_interval:, meters: nil, purchasing_power_parity: nil, tax_inclusive: nil, type: :usage_based_price)
+        # @!method initialize(currency:, fixed_price:, payment_frequency_count:, payment_frequency_interval:, subscription_period_count:, subscription_period_interval:, discount: nil, discount_bps: nil, meters: nil, purchasing_power_parity: nil, tax_inclusive: nil, type: :usage_based_price)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Price::UsageBasedPrice} for more details.
         #
         #   Usage Based price details.
         #
         #   @param currency [Symbol, Dodopayments::Models::Currency] The currency in which the payment is made.
-        #
-        #   @param discount [Integer] Discount applied to the price, represented as a percentage (0 to 100).
         #
         #   @param fixed_price [Integer] The fixed payment amount. Represented in the lowest denomination of the currency
         #
@@ -309,6 +373,10 @@ module Dodopayments
         #   @param subscription_period_count [Integer] Number of units for the subscription period.
         #
         #   @param subscription_period_interval [Symbol, Dodopayments::Models::TimeInterval] The time interval for the subscription period (e.g., day, month, year).
+        #
+        #   @param discount [Integer] Deprecated: use `discount_bps` instead.
+        #
+        #   @param discount_bps [Integer, nil] Discount applied to the price, in basis points. 100 basis points make
         #
         #   @param meters [Array<Dodopayments::Models::AddMeterToPrice>, nil]
         #

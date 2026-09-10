@@ -10,6 +10,7 @@ module Dodopayments
         credit_entitlement_cart: ::Array[Dodopayments::CreditEntitlementCartResponse],
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
+        has_payment_method: bool,
         metadata: Dodopayments::Models::metadata,
         meter_credit_entitlement_cart: ::Array[Dodopayments::MeterCreditEntitlementCartResponse],
         meters: ::Array[Dodopayments::MeterCartResponseItem],
@@ -59,6 +60,8 @@ module Dodopayments
       attr_accessor currency: Dodopayments::Models::currency
 
       attr_accessor customer: Dodopayments::CustomerLimitedDetails
+
+      attr_accessor has_payment_method: bool
 
       attr_accessor metadata: Dodopayments::Models::metadata
 
@@ -131,6 +134,7 @@ module Dodopayments
         credit_entitlement_cart: ::Array[Dodopayments::CreditEntitlementCartResponse],
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
+        has_payment_method: bool,
         metadata: Dodopayments::Models::metadata,
         meter_credit_entitlement_cart: ::Array[Dodopayments::MeterCreditEntitlementCartResponse],
         meters: ::Array[Dodopayments::MeterCartResponseItem],
@@ -173,6 +177,7 @@ module Dodopayments
         credit_entitlement_cart: ::Array[Dodopayments::CreditEntitlementCartResponse],
         currency: Dodopayments::Models::currency,
         customer: Dodopayments::CustomerLimitedDetails,
+        has_payment_method: bool,
         metadata: Dodopayments::Models::metadata,
         meter_credit_entitlement_cart: ::Array[Dodopayments::MeterCreditEntitlementCartResponse],
         meters: ::Array[Dodopayments::MeterCartResponseItem],

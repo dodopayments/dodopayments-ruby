@@ -53,6 +53,13 @@ module Dodopayments
       #   @return [Dodopayments::Models::CustomerLimitedDetails]
       required :customer, -> { Dodopayments::CustomerLimitedDetails }
 
+      # @!attribute has_payment_method
+      #   Whether a payment method is on file. False while a card-optional subscription
+      #   waits for the customer to add one.
+      #
+      #   @return [Boolean]
+      required :has_payment_method, Dodopayments::Internal::Type::Boolean
+
       # @!attribute metadata
       #   Additional custom data associated with the subscription
       #
@@ -250,7 +257,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :trial_amount, Integer, nil?: true
 
-      # @!method initialize(addons:, billing:, brand_id:, cancel_at_next_billing_date:, created_at:, credit_entitlement_cart:, currency:, customer:, metadata:, meter_credit_entitlement_cart:, meters:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancellation_comment: nil, cancellation_feedback: nil, cancelled_at: nil, custom_field_responses: nil, customer_business_name: nil, discount_cycles_remaining: nil, discount_id: nil, discounts: nil, expires_at: nil, paused_at: nil, payment_method_id: nil, scheduled_change: nil, tax_id: nil, trial_amount: nil)
+      # @!method initialize(addons:, billing:, brand_id:, cancel_at_next_billing_date:, created_at:, credit_entitlement_cart:, currency:, customer:, has_payment_method:, metadata:, meter_credit_entitlement_cart:, meters:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancellation_comment: nil, cancellation_feedback: nil, cancelled_at: nil, custom_field_responses: nil, customer_business_name: nil, discount_cycles_remaining: nil, discount_id: nil, discounts: nil, expires_at: nil, paused_at: nil, payment_method_id: nil, scheduled_change: nil, tax_id: nil, trial_amount: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Subscription} for more details.
       #
@@ -271,6 +278,8 @@ module Dodopayments
       #   @param currency [Symbol, Dodopayments::Models::Currency] Currency used for the subscription payments
       #
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails] Customer details associated with the subscription
+      #
+      #   @param has_payment_method [Boolean] Whether a payment method is on file. False while a card-optional
       #
       #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional custom data associated with the subscription
       #

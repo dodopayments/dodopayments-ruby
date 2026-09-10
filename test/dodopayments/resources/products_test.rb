@@ -7,7 +7,7 @@ class Dodopayments::Test::Resources::ProductsTest < Dodopayments::Test::Resource
     response =
       @dodo_payments.products.create(
         name: "name",
-        price: {currency: :AED, discount: 0, price: 0, type: :one_time_price},
+        price: {currency: :AED, price: 0, type: :one_time_price},
         tax_category: :digital_products
       )
 

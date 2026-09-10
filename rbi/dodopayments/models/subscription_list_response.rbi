@@ -47,6 +47,11 @@ module Dodopayments
       end
       attr_accessor :discounts
 
+      # Whether a payment method is on file. False while a card-optional subscription
+      # waits for the customer to add one.
+      sig { returns(T::Boolean) }
+      attr_accessor :has_payment_method
+
       # Additional custom data associated with the subscription
       sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
       attr_accessor :metadata
@@ -172,6 +177,7 @@ module Dodopayments
             T::Array[
               Dodopayments::Models::SubscriptionListResponse::Discount::OrHash
             ],
+          has_payment_method: T::Boolean,
           metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           next_billing_date: Time,
           on_demand: T::Boolean,
@@ -213,6 +219,9 @@ module Dodopayments
         customer:,
         # All stacked discounts applied, in order of application
         discounts:,
+        # Whether a payment method is on file. False while a card-optional subscription
+        # waits for the customer to add one.
+        has_payment_method:,
         # Additional custom data associated with the subscription
         metadata:,
         # Timestamp of the next scheduled billing. Indicates the end of current billing
@@ -284,6 +293,7 @@ module Dodopayments
               T::Array[
                 Dodopayments::Models::SubscriptionListResponse::Discount
               ],
+            has_payment_method: T::Boolean,
             metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             next_billing_date: Time,
             on_demand: T::Boolean,

@@ -1,0 +1,42 @@
+module Dodopayments
+  module Models
+    module Customers
+      type email_body =
+        {
+          merchant_authored: bool,
+          failure_code: Dodopayments::Models::Customers::email_failure_code?,
+          failure_reason: String?,
+          html: String?,
+          text: String?
+        }
+
+      class EmailBody < Dodopayments::Internal::Type::BaseModel
+        attr_accessor merchant_authored: bool
+
+        attr_accessor failure_code: Dodopayments::Models::Customers::email_failure_code?
+
+        attr_accessor failure_reason: String?
+
+        attr_accessor html: String?
+
+        attr_accessor text: String?
+
+        def initialize: (
+          merchant_authored: bool,
+          ?failure_code: Dodopayments::Models::Customers::email_failure_code?,
+          ?failure_reason: String?,
+          ?html: String?,
+          ?text: String?
+        ) -> void
+
+        def to_hash: -> {
+          merchant_authored: bool,
+          failure_code: Dodopayments::Models::Customers::email_failure_code?,
+          failure_reason: String?,
+          html: String?,
+          text: String?
+        }
+      end
+    end
+  end
+end

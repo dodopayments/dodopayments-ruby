@@ -11,7 +11,7 @@ module Dodopayments
       #   when Dodopayments::Price::OneTimePrice
       #     puts(price.currency)
       #   when Dodopayments::Price::RecurringPrice
-      #     puts(price.discount)
+      #     puts(price.payment_frequency_count)
       #   when Dodopayments::Price::UsageBasedPrice
       #     puts(price.fixed_price)
       #   else
@@ -20,11 +20,21 @@ module Dodopayments
       #
       # @example
       #   case price
-      #   in {type: :one_time_price, currency: currency, discount: discount, price: price}
+      #   in {type: :one_time_price, currency: currency, price: price, discount: discount}
       #     puts(currency)
-      #   in {type: :recurring_price, currency: currency, discount: discount, payment_frequency_count: payment_frequency_count}
-      #     puts(discount)
-      #   in {type: :usage_based_price, currency: currency, discount: discount, fixed_price: fixed_price}
+      #   in {
+      #     type: :recurring_price,
+      #     currency: currency,
+      #     payment_frequency_count: payment_frequency_count,
+      #     payment_frequency_interval: payment_frequency_interval
+      #   }
+      #     puts(payment_frequency_count)
+      #   in {
+      #     type: :usage_based_price,
+      #     currency: currency,
+      #     fixed_price: fixed_price,
+      #     payment_frequency_count: payment_frequency_count
+      #   }
       #     puts(fixed_price)
       #   else
       #     puts(price)
