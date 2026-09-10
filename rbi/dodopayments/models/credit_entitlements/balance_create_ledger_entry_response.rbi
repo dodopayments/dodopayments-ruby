@@ -43,6 +43,10 @@ module Dodopayments
         sig { returns(T::Boolean) }
         attr_accessor :is_credit
 
+        # Metadata stored on this entry.
+        sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
+        attr_accessor :metadata
+
         sig { returns(String) }
         attr_accessor :overage_after
 
@@ -68,6 +72,7 @@ module Dodopayments
             entry_type:
               Dodopayments::CreditEntitlements::LedgerEntryType::OrSymbol,
             is_credit: T::Boolean,
+            metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             overage_after: String,
             overage_before: String,
             grant_id: T.nilable(String),
@@ -84,6 +89,8 @@ module Dodopayments
           customer_id:,
           entry_type:,
           is_credit:,
+          # Metadata stored on this entry.
+          metadata:,
           overage_after:,
           overage_before:,
           grant_id: nil,
@@ -104,6 +111,7 @@ module Dodopayments
               entry_type:
                 Dodopayments::CreditEntitlements::LedgerEntryType::TaggedSymbol,
               is_credit: T::Boolean,
+              metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
               overage_after: String,
               overage_before: String,
               grant_id: T.nilable(String),

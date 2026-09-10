@@ -57,9 +57,7 @@ module Dodopayments
         required :is_credit, Dodopayments::Internal::Type::Boolean
 
         # @!attribute metadata
-        #   Metadata associated with the credit grant's source (the subscription or payment
-        #   created at checkout). Empty when the grant has no resolvable source (e.g.
-        #   credits granted directly via the API).
+        #   Metadata associated with this entry.
         #
         #   @return [Hash{Symbol=>String, Float, Boolean}]
         required :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
@@ -101,9 +99,6 @@ module Dodopayments
         optional :reference_type, String, nil?: true
 
         # @!method initialize(id:, amount:, balance_after:, balance_before:, brand_id:, business_id:, created_at:, credit_entitlement_id:, customer_id:, is_credit:, metadata:, overage_after:, overage_before:, transaction_type:, description: nil, grant_id: nil, reference_id: nil, reference_type: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Dodopayments::Models::CreditEntitlements::CreditLedgerEntry} for more details.
-        #
         #   Response for a ledger entry
         #
         #   @param id [String]
@@ -126,7 +121,7 @@ module Dodopayments
         #
         #   @param is_credit [Boolean]
         #
-        #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Metadata associated with the credit grant's source (the subscription or
+        #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Metadata associated with this entry.
         #
         #   @param overage_after [String]
         #

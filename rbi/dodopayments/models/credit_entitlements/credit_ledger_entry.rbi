@@ -43,9 +43,7 @@ module Dodopayments
         sig { returns(T::Boolean) }
         attr_accessor :is_credit
 
-        # Metadata associated with the credit grant's source (the subscription or payment
-        # created at checkout). Empty when the grant has no resolvable source (e.g.
-        # credits granted directly via the API).
+        # Metadata associated with this entry.
         sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
         attr_accessor :metadata
 
@@ -110,9 +108,7 @@ module Dodopayments
           credit_entitlement_id:,
           customer_id:,
           is_credit:,
-          # Metadata associated with the credit grant's source (the subscription or payment
-          # created at checkout). Empty when the grant has no resolvable source (e.g.
-          # credits granted directly via the API).
+          # Metadata associated with this entry.
           metadata:,
           overage_after:,
           overage_before:,

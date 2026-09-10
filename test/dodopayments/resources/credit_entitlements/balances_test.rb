@@ -80,6 +80,7 @@ class Dodopayments::Test::Resources::CreditEntitlements::BalancesTest < Dodopaym
         customer_id: String,
         entry_type: Dodopayments::CreditEntitlements::LedgerEntryType,
         is_credit: Dodopayments::Internal::Type::Boolean,
+        metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]),
         overage_after: String,
         overage_before: String,
         grant_id: String | nil,

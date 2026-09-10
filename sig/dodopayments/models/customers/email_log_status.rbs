@@ -1,0 +1,20 @@
+module Dodopayments
+  module Models
+    module Customers
+      type email_log_status =
+        :sent | :delivered | :failed | :complained | :blocked
+
+      module EmailLogStatus
+        extend Dodopayments::Internal::Type::Enum
+
+        SENT: :sent
+        DELIVERED: :delivered
+        FAILED: :failed
+        COMPLAINED: :complained
+        BLOCKED: :blocked
+
+        def self?.values: -> ::Array[Dodopayments::Models::Customers::email_log_status]
+      end
+    end
+  end
+end

@@ -48,6 +48,11 @@ module Dodopayments
       end
       attr_writer :customer
 
+      # Whether a payment method is on file. False while a card-optional subscription
+      # waits for the customer to add one.
+      sig { returns(T::Boolean) }
+      attr_accessor :has_payment_method
+
       # Additional custom data associated with the subscription
       sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
       attr_accessor :metadata
@@ -201,6 +206,7 @@ module Dodopayments
             T::Array[Dodopayments::CreditEntitlementCartResponse::OrHash],
           currency: Dodopayments::Currency::OrSymbol,
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
+          has_payment_method: T::Boolean,
           metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           meter_credit_entitlement_cart:
             T::Array[Dodopayments::MeterCreditEntitlementCartResponse::OrHash],
@@ -255,6 +261,9 @@ module Dodopayments
         currency:,
         # Customer details associated with the subscription
         customer:,
+        # Whether a payment method is on file. False while a card-optional subscription
+        # waits for the customer to add one.
+        has_payment_method:,
         # Additional custom data associated with the subscription
         metadata:,
         # Meter credit entitlement cart settings for this subscription
@@ -338,6 +347,7 @@ module Dodopayments
               T::Array[Dodopayments::CreditEntitlementCartResponse],
             currency: Dodopayments::Currency::TaggedSymbol,
             customer: Dodopayments::CustomerLimitedDetails,
+            has_payment_method: T::Boolean,
             metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             meter_credit_entitlement_cart:
               T::Array[Dodopayments::MeterCreditEntitlementCartResponse],

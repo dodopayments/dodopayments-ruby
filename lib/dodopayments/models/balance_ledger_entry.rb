@@ -110,6 +110,8 @@ module Dodopayments
         DUNNING_FEES = :dunning_fees
         PAYMENT_RETRY_FEE = :payment_retry_fee
         BYOP_FEE = :byop_fee
+        ETHOCA_FEES = :ethoca_fees
+        ETHOCA_FEES_REVERSAL = :ethoca_fees_reversal
 
         # @!method self.values
         #   @return [Array<Symbol>]
