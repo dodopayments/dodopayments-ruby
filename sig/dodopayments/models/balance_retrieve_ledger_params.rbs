@@ -399,6 +399,8 @@ module Dodopayments
         | :dunning_fees
         | :payment_retry_fee
         | :byop_fee
+        | :ethoca_fees
+        | :ethoca_fees_reversal
 
       module EventType
         extend Dodopayments::Internal::Type::Enum
@@ -425,6 +427,8 @@ module Dodopayments
         DUNNING_FEES: :dunning_fees
         PAYMENT_RETRY_FEE: :payment_retry_fee
         BYOP_FEE: :byop_fee
+        ETHOCA_FEES: :ethoca_fees
+        ETHOCA_FEES_REVERSAL: :ethoca_fees_reversal
 
         def self?.values: -> ::Array[Dodopayments::Models::BalanceRetrieveLedgerParams::event_type]
       end

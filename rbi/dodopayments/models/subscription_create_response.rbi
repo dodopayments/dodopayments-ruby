@@ -32,6 +32,11 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :payment_id
 
+      # False when the customer can start this subscription with no card. True for every
+      # other subscription.
+      sig { returns(T::Boolean) }
+      attr_accessor :payment_method_required
+
       # Tax will be added to the amount and charged to the customer on each billing
       # cycle
       sig { returns(Integer) }
@@ -86,6 +91,7 @@ module Dodopayments
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
           metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           payment_id: String,
+          payment_method_required: T::Boolean,
           recurring_pre_tax_amount: Integer,
           subscription_id: String,
           client_secret: T.nilable(String),
@@ -111,6 +117,9 @@ module Dodopayments
         metadata:,
         # First payment id for the subscription
         payment_id:,
+        # False when the customer can start this subscription with no card. True for every
+        # other subscription.
+        payment_method_required:,
         # Tax will be added to the amount and charged to the customer on each billing
         # cycle
         recurring_pre_tax_amount:,
@@ -143,6 +152,7 @@ module Dodopayments
             customer: Dodopayments::CustomerLimitedDetails,
             metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             payment_id: String,
+            payment_method_required: T::Boolean,
             recurring_pre_tax_amount: Integer,
             subscription_id: String,
             client_secret: T.nilable(String),

@@ -1,0 +1,22 @@
+module Dodopayments
+  module Resources
+    class Customers
+      class Emails
+        def list: (
+          String customer_id,
+          ?page_number: Integer,
+          ?page_size: Integer,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Customers::EmailLogItem]
+
+        def retrieve_body: (
+          String email_log_id,
+          customer_id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Customers::EmailBody
+
+        def initialize: (client: Dodopayments::Client) -> void
+      end
+    end
+  end
+end

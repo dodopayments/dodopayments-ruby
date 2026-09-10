@@ -5,6 +5,8 @@ module Dodopayments
 
       attr_reader wallets: Dodopayments::Resources::Customers::Wallets
 
+      attr_reader emails: Dodopayments::Resources::Customers::Emails
+
       def create: (
         email: String,
         name: String,

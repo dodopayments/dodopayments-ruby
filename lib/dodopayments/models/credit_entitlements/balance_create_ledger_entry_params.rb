@@ -46,7 +46,7 @@ module Dodopayments
 
         # @!attribute metadata
         #   Optional metadata (max 50 key-value pairs, key max 40 chars, value max 500
-        #   chars)
+        #   chars).
         #
         #   @return [Hash{Symbol=>String, Float, Boolean}, nil]
         optional :metadata,

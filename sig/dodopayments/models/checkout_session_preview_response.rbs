@@ -6,6 +6,7 @@ module Dodopayments
         currency: Dodopayments::Models::currency,
         current_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup,
         is_byop: bool,
+        payment_method_required: bool,
         product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
         total_price: Integer,
         next_billing_date: Time?,
@@ -26,6 +27,8 @@ module Dodopayments
       attr_accessor current_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup
 
       attr_accessor is_byop: bool
+
+      attr_accessor payment_method_required: bool
 
       attr_accessor product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart]
 
@@ -52,6 +55,7 @@ module Dodopayments
         currency: Dodopayments::Models::currency,
         current_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup,
         is_byop: bool,
+        payment_method_required: bool,
         product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
         total_price: Integer,
         ?next_billing_date: Time?,
@@ -69,6 +73,7 @@ module Dodopayments
         currency: Dodopayments::Models::currency,
         current_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::CurrentBreakup,
         is_byop: bool,
+        payment_method_required: bool,
         product_cart: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart],
         total_price: Integer,
         next_billing_date: Time?,

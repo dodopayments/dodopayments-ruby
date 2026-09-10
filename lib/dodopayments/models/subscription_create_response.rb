@@ -28,6 +28,13 @@ module Dodopayments
       #   @return [String]
       required :payment_id, String
 
+      # @!attribute payment_method_required
+      #   False when the customer can start this subscription with no card. True for every
+      #   other subscription.
+      #
+      #   @return [Boolean]
+      required :payment_method_required, Dodopayments::Internal::Type::Boolean
+
       # @!attribute recurring_pre_tax_amount
       #   Tax will be added to the amount and charged to the customer on each billing
       #   cycle
@@ -90,7 +97,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :trial_amount, Integer, nil?: true
 
-      # @!method initialize(addons:, customer:, metadata:, payment_id:, recurring_pre_tax_amount:, subscription_id:, client_secret: nil, discount_id: nil, discount_ids: nil, expires_on: nil, one_time_product_cart: nil, payment_link: nil, trial_amount: nil)
+      # @!method initialize(addons:, customer:, metadata:, payment_id:, payment_method_required:, recurring_pre_tax_amount:, subscription_id:, client_secret: nil, discount_id: nil, discount_ids: nil, expires_on: nil, one_time_product_cart: nil, payment_link: nil, trial_amount: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionCreateResponse} for more details.
       #
@@ -101,6 +108,8 @@ module Dodopayments
       #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata associated with the subscription
       #
       #   @param payment_id [String] First payment id for the subscription
+      #
+      #   @param payment_method_required [Boolean] False when the customer can start this subscription with no card.
       #
       #   @param recurring_pre_tax_amount [Integer] Tax will be added to the amount and charged to the customer on each billing cycl
       #

@@ -1,0 +1,30 @@
+module Dodopayments
+  module Models
+    module Customers
+      type email_failure_code =
+        :mailbox_not_found
+        | :address_rejected
+        | :address_suppressed
+        | :mailbox_full
+        | :temporary_failure
+        | :message_too_large
+        | :marked_as_spam
+        | :send_failed
+
+      module EmailFailureCode
+        extend Dodopayments::Internal::Type::Enum
+
+        MAILBOX_NOT_FOUND: :mailbox_not_found
+        ADDRESS_REJECTED: :address_rejected
+        ADDRESS_SUPPRESSED: :address_suppressed
+        MAILBOX_FULL: :mailbox_full
+        TEMPORARY_FAILURE: :temporary_failure
+        MESSAGE_TOO_LARGE: :message_too_large
+        MARKED_AS_SPAM: :marked_as_spam
+        SEND_FAILED: :send_failed
+
+        def self?.values: -> ::Array[Dodopayments::Models::Customers::email_failure_code]
+      end
+    end
+  end
+end

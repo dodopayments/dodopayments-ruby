@@ -223,6 +223,16 @@ module Dodopayments
             :byop_fee,
             Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
           )
+        ETHOCA_FEES =
+          T.let(
+            :ethoca_fees,
+            Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
+          )
+        ETHOCA_FEES_REVERSAL =
+          T.let(
+            :ethoca_fees_reversal,
+            Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
+          )
 
         sig do
           override.returns(
