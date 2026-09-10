@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.28.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.27.0...v2.28.0) (2026-09-10)
+
+
+### Features
+
+* **api:** add customer email logs ([05c9087](https://github.com/dodopayments/dodopayments-ruby/commit/05c90872fff106b200f7abf64bb7be0fe8fd566a))
+* **api:** add customer email logs ([87730fa](https://github.com/dodopayments/dodopayments-ruby/commit/87730faf0153a9b9a02cdee21ee0c5fe386a3532))
+
 ## [2.27.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.26.0...v2.27.0) (2026-09-01)
 
 
