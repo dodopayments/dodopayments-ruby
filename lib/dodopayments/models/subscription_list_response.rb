@@ -41,6 +41,13 @@ module Dodopayments
       required :discounts,
                -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::SubscriptionListResponse::Discount] }
 
+      # @!attribute has_payment_method
+      #   Whether a payment method is on file. False while a card-optional subscription
+      #   waits for the customer to add one.
+      #
+      #   @return [Boolean]
+      required :has_payment_method, Dodopayments::Internal::Type::Boolean
+
       # @!attribute metadata
       #   Additional custom data associated with the subscription
       #
@@ -197,7 +204,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :trial_amount, Integer, nil?: true
 
-      # @!method initialize(billing:, cancel_at_next_billing_date:, created_at:, currency:, customer:, discounts:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, customer_business_name: nil, discount_cycles_remaining: nil, discount_id: nil, paused_at: nil, payment_method_id: nil, product_name: nil, scheduled_change: nil, tax_id: nil, trial_amount: nil)
+      # @!method initialize(billing:, cancel_at_next_billing_date:, created_at:, currency:, customer:, discounts:, has_payment_method:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, customer_business_name: nil, discount_cycles_remaining: nil, discount_id: nil, paused_at: nil, payment_method_id: nil, product_name: nil, scheduled_change: nil, tax_id: nil, trial_amount: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionListResponse} for more details.
       #
@@ -214,6 +221,8 @@ module Dodopayments
       #   @param customer [Dodopayments::Models::CustomerLimitedDetails] Customer details associated with the subscription
       #
       #   @param discounts [Array<Dodopayments::Models::SubscriptionListResponse::Discount>] All stacked discounts applied, in order of application
+      #
+      #   @param has_payment_method [Boolean] Whether a payment method is on file. False while a card-optional
       #
       #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional custom data associated with the subscription
       #

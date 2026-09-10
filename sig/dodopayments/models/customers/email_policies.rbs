@@ -1,0 +1,37 @@
+module Dodopayments
+  module Models
+    module Customers
+      type email_policies =
+        {
+          requires_different_address: bool,
+          resend_allowed: bool,
+          resends_remaining: Integer,
+          retry_allowed: bool
+        }
+
+      class EmailPolicies < Dodopayments::Internal::Type::BaseModel
+        attr_accessor requires_different_address: bool
+
+        attr_accessor resend_allowed: bool
+
+        attr_accessor resends_remaining: Integer
+
+        attr_accessor retry_allowed: bool
+
+        def initialize: (
+          requires_different_address: bool,
+          resend_allowed: bool,
+          resends_remaining: Integer,
+          retry_allowed: bool
+        ) -> void
+
+        def to_hash: -> {
+          requires_different_address: bool,
+          resend_allowed: bool,
+          resends_remaining: Integer,
+          retry_allowed: bool
+        }
+      end
+    end
+  end
+end

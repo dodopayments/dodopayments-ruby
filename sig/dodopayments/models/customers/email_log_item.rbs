@@ -1,0 +1,82 @@
+module Dodopayments
+  module Models
+    module Customers
+      type email_log_item =
+        {
+          category: String,
+          created_at: Time,
+          email_log_id: String,
+          email_type: String,
+          has_preview: bool,
+          policies: Dodopayments::Customers::EmailPolicies,
+          status: Dodopayments::Models::Customers::email_log_status,
+          failure_code: Dodopayments::Models::Customers::email_failure_code?,
+          failure_reason: String?,
+          from: String?,
+          intended_recipient: String?,
+          recipient: String?,
+          subject: String?
+        }
+
+      class EmailLogItem < Dodopayments::Internal::Type::BaseModel
+        attr_accessor category: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor email_log_id: String
+
+        attr_accessor email_type: String
+
+        attr_accessor has_preview: bool
+
+        attr_accessor policies: Dodopayments::Customers::EmailPolicies
+
+        attr_accessor status: Dodopayments::Models::Customers::email_log_status
+
+        attr_accessor failure_code: Dodopayments::Models::Customers::email_failure_code?
+
+        attr_accessor failure_reason: String?
+
+        attr_accessor from: String?
+
+        attr_accessor intended_recipient: String?
+
+        attr_accessor recipient: String?
+
+        attr_accessor subject: String?
+
+        def initialize: (
+          category: String,
+          created_at: Time,
+          email_log_id: String,
+          email_type: String,
+          has_preview: bool,
+          policies: Dodopayments::Customers::EmailPolicies,
+          status: Dodopayments::Models::Customers::email_log_status,
+          ?failure_code: Dodopayments::Models::Customers::email_failure_code?,
+          ?failure_reason: String?,
+          ?from: String?,
+          ?intended_recipient: String?,
+          ?recipient: String?,
+          ?subject: String?
+        ) -> void
+
+        def to_hash: -> {
+          category: String,
+          created_at: Time,
+          email_log_id: String,
+          email_type: String,
+          has_preview: bool,
+          policies: Dodopayments::Customers::EmailPolicies,
+          status: Dodopayments::Models::Customers::email_log_status,
+          failure_code: Dodopayments::Models::Customers::email_failure_code?,
+          failure_reason: String?,
+          from: String?,
+          intended_recipient: String?,
+          recipient: String?,
+          subject: String?
+        }
+      end
+    end
+  end
+end

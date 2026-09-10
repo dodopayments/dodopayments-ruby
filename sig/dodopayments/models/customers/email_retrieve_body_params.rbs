@@ -1,0 +1,30 @@
+module Dodopayments
+  module Models
+    module Customers
+      type email_retrieve_body_params =
+        { customer_id: String, email_log_id: String }
+        & Dodopayments::Internal::Type::request_parameters
+
+      class EmailRetrieveBodyParams < Dodopayments::Internal::Type::BaseModel
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
+
+        attr_accessor customer_id: String
+
+        attr_accessor email_log_id: String
+
+        def initialize: (
+          customer_id: String,
+          email_log_id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          customer_id: String,
+          email_log_id: String,
+          request_options: Dodopayments::RequestOptions
+        }
+      end
+    end
+  end
+end
