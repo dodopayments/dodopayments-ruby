@@ -63,11 +63,6 @@ module Dodopayments
         sig { returns(T.nilable(String)) }
         attr_accessor :from
 
-        # What the merchant typed, when test mode redirected the send to the business
-        # owner.
-        sig { returns(T.nilable(String)) }
-        attr_accessor :intended_recipient
-
         # The address the email reached.
         sig { returns(T.nilable(String)) }
         attr_accessor :recipient
@@ -89,7 +84,6 @@ module Dodopayments
               T.nilable(Dodopayments::Customers::EmailFailureCode::OrSymbol),
             failure_reason: T.nilable(String),
             from: T.nilable(String),
-            intended_recipient: T.nilable(String),
             recipient: T.nilable(String),
             subject: T.nilable(String)
           ).returns(T.attached_class)
@@ -117,9 +111,6 @@ module Dodopayments
           failure_reason: nil,
           # The address the email was sent from.
           from: nil,
-          # What the merchant typed, when test mode redirected the send to the business
-          # owner.
-          intended_recipient: nil,
           # The address the email reached.
           recipient: nil,
           # The subject line as it was sent. Empty until the provider replicates.
@@ -143,7 +134,6 @@ module Dodopayments
                 ),
               failure_reason: T.nilable(String),
               from: T.nilable(String),
-              intended_recipient: T.nilable(String),
               recipient: T.nilable(String),
               subject: T.nilable(String)
             }

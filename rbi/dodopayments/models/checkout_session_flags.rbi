@@ -147,6 +147,23 @@ module Dodopayments
       sig { params(require_phone_number: T::Boolean).void }
       attr_writer :require_phone_number
 
+      # If true, the customer must give a tax id to check out as a business. A tax id is
+      # the GST number in India, or the VAT number in the EU. You must also set
+      # `allow_tax_id` to true.
+      #
+      # On the checkout page, this field does not change checkout for a customer who
+      # buys as an individual.
+      #
+      # A `confirm: true` request skips the checkout page. The request must contain
+      # `tax_id`.
+      #
+      # Default is false
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :require_tax_id
+
+      sig { params(require_tax_id: T::Boolean).void }
+      attr_writer :require_tax_id
+
       # If true, the session uses the single-page checkout flow: the page initializes
       # the payment at load time and confirms it in place, with no separate payment
       # page.
@@ -177,6 +194,7 @@ module Dodopayments
           always_create_new_customer: T::Boolean,
           redirect_immediately: T::Boolean,
           require_phone_number: T::Boolean,
+          require_tax_id: T::Boolean,
           single_page: T::Boolean
         ).returns(T.attached_class)
       end
@@ -232,6 +250,18 @@ module Dodopayments
         #
         # Default is false
         require_phone_number: nil,
+        # If true, the customer must give a tax id to check out as a business. A tax id is
+        # the GST number in India, or the VAT number in the EU. You must also set
+        # `allow_tax_id` to true.
+        #
+        # On the checkout page, this field does not change checkout for a customer who
+        # buys as an individual.
+        #
+        # A `confirm: true` request skips the checkout page. The request must contain
+        # `tax_id`.
+        #
+        # Default is false
+        require_tax_id: nil,
         # If true, the session uses the single-page checkout flow: the page initializes
         # the payment at load time and confirms it in place, with no separate payment
         # page.
@@ -261,6 +291,7 @@ module Dodopayments
             always_create_new_customer: T::Boolean,
             redirect_immediately: T::Boolean,
             require_phone_number: T::Boolean,
+            require_tax_id: T::Boolean,
             single_page: T::Boolean
           }
         )

@@ -112,6 +112,10 @@ module Dodopayments
         BYOP_FEE = :byop_fee
         ETHOCA_FEES = :ethoca_fees
         ETHOCA_FEES_REVERSAL = :ethoca_fees_reversal
+        VISA_RDR_FEE = :visa_rdr_fee
+        DISPUTE_FEES_REVERSAL = :dispute_fees_reversal
+        DEFLECTION_FEES = :deflection_fees
+        DEFLECTION_FEES_REVERSAL = :deflection_fees_reversal
 
         # @!method self.values
         #   @return [Array<Symbol>]
