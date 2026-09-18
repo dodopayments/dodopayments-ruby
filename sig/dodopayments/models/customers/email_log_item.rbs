@@ -13,7 +13,6 @@ module Dodopayments
           failure_code: Dodopayments::Models::Customers::email_failure_code?,
           failure_reason: String?,
           from: String?,
-          intended_recipient: String?,
           recipient: String?,
           subject: String?
         }
@@ -39,8 +38,6 @@ module Dodopayments
 
         attr_accessor from: String?
 
-        attr_accessor intended_recipient: String?
-
         attr_accessor recipient: String?
 
         attr_accessor subject: String?
@@ -56,7 +53,6 @@ module Dodopayments
           ?failure_code: Dodopayments::Models::Customers::email_failure_code?,
           ?failure_reason: String?,
           ?from: String?,
-          ?intended_recipient: String?,
           ?recipient: String?,
           ?subject: String?
         ) -> void
@@ -72,7 +68,6 @@ module Dodopayments
           failure_code: Dodopayments::Models::Customers::email_failure_code?,
           failure_reason: String?,
           from: String?,
-          intended_recipient: String?,
           recipient: String?,
           subject: String?
         }
