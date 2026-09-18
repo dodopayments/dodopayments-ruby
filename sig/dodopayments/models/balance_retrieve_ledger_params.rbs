@@ -401,6 +401,10 @@ module Dodopayments
         | :byop_fee
         | :ethoca_fees
         | :ethoca_fees_reversal
+        | :visa_rdr_fee
+        | :dispute_fees_reversal
+        | :deflection_fees
+        | :deflection_fees_reversal
 
       module EventType
         extend Dodopayments::Internal::Type::Enum
@@ -429,6 +433,10 @@ module Dodopayments
         BYOP_FEE: :byop_fee
         ETHOCA_FEES: :ethoca_fees
         ETHOCA_FEES_REVERSAL: :ethoca_fees_reversal
+        VISA_RDR_FEE: :visa_rdr_fee
+        DISPUTE_FEES_REVERSAL: :dispute_fees_reversal
+        DEFLECTION_FEES: :deflection_fees
+        DEFLECTION_FEES_REVERSAL: :deflection_fees_reversal
 
         def self?.values: -> ::Array[Dodopayments::Models::BalanceRetrieveLedgerParams::event_type]
       end

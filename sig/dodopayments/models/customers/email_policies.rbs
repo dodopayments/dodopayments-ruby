@@ -6,7 +6,8 @@ module Dodopayments
           requires_different_address: bool,
           resend_allowed: bool,
           resends_remaining: Integer,
-          retry_allowed: bool
+          retry_allowed: bool,
+          superseded: bool
         }
 
       class EmailPolicies < Dodopayments::Internal::Type::BaseModel
@@ -18,18 +19,22 @@ module Dodopayments
 
         attr_accessor retry_allowed: bool
 
+        attr_accessor superseded: bool
+
         def initialize: (
           requires_different_address: bool,
           resend_allowed: bool,
           resends_remaining: Integer,
-          retry_allowed: bool
+          retry_allowed: bool,
+          superseded: bool
         ) -> void
 
         def to_hash: -> {
           requires_different_address: bool,
           resend_allowed: bool,
           resends_remaining: Integer,
-          retry_allowed: bool
+          retry_allowed: bool,
+          superseded: bool
         }
       end
     end

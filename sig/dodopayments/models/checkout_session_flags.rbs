@@ -19,6 +19,7 @@ module Dodopayments
         always_create_new_customer: bool,
         redirect_immediately: bool,
         require_phone_number: bool,
+        require_tax_id: bool,
         single_page: bool
       }
 
@@ -91,6 +92,10 @@ module Dodopayments
 
       def require_phone_number=: (bool) -> bool
 
+      attr_reader require_tax_id: bool?
+
+      def require_tax_id=: (bool) -> bool
+
       attr_reader single_page: bool?
 
       def single_page=: (bool) -> bool
@@ -113,6 +118,7 @@ module Dodopayments
         ?always_create_new_customer: bool,
         ?redirect_immediately: bool,
         ?require_phone_number: bool,
+        ?require_tax_id: bool,
         ?single_page: bool
       ) -> void
 
@@ -134,6 +140,7 @@ module Dodopayments
         always_create_new_customer: bool,
         redirect_immediately: bool,
         require_phone_number: bool,
+        require_tax_id: bool,
         single_page: bool
       }
     end

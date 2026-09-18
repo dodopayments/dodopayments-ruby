@@ -233,6 +233,26 @@ module Dodopayments
             :ethoca_fees_reversal,
             Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
           )
+        VISA_RDR_FEE =
+          T.let(
+            :visa_rdr_fee,
+            Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
+          )
+        DISPUTE_FEES_REVERSAL =
+          T.let(
+            :dispute_fees_reversal,
+            Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
+          )
+        DEFLECTION_FEES =
+          T.let(
+            :deflection_fees,
+            Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
+          )
+        DEFLECTION_FEES_REVERSAL =
+          T.let(
+            :deflection_fees_reversal,
+            Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
+          )
 
         sig do
           override.returns(

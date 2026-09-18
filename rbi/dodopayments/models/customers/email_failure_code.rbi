@@ -56,6 +56,11 @@ module Dodopayments
             :send_failed,
             Dodopayments::Customers::EmailFailureCode::TaggedSymbol
           )
+        TEST_MODE_QUOTA_SPENT =
+          T.let(
+            :test_mode_quota_spent,
+            Dodopayments::Customers::EmailFailureCode::TaggedSymbol
+          )
 
         sig do
           override.returns(

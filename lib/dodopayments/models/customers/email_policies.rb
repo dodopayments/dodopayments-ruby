@@ -28,7 +28,17 @@ module Dodopayments
         #   @return [Boolean]
         required :retry_allowed, Dodopayments::Internal::Type::Boolean
 
-        # @!method initialize(requires_different_address:, resend_allowed:, resends_remaining:, retry_allowed:)
+        # @!attribute superseded
+        #   A later send of this email reached the provider, so this row is history. To send
+        #   it again would deliver a second copy.
+        #
+        #   @return [Boolean]
+        required :superseded, Dodopayments::Internal::Type::Boolean
+
+        # @!method initialize(requires_different_address:, resend_allowed:, resends_remaining:, retry_allowed:, superseded:)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::Customers::EmailPolicies} for more details.
+        #
         #   What the merchant may do with one row. The server decides; the client never
         #   derives eligibility itself.
         #
@@ -39,6 +49,8 @@ module Dodopayments
         #   @param resends_remaining [Integer] How many sends are left in this email's chain.
         #
         #   @param retry_allowed [Boolean] The row failed and may be sent again.
+        #
+        #   @param superseded [Boolean] A later send of this email reached the provider, so this row is history.
       end
     end
   end
