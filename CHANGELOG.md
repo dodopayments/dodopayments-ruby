@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.29.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.28.0...v2.29.0) (2026-09-18)
+
+
+### Features
+
+* **api:** tax id checkout flag, ledger event types, email policy fields ([ad7450d](https://github.com/dodopayments/dodopayments-ruby/commit/ad7450dd2a99f9cd25e68dd98a41707502b4450b))
+* **api:** tax id checkout flag, ledger event types, email policy fields ([ec1a1fc](https://github.com/dodopayments/dodopayments-ruby/commit/ec1a1fc18aafce1c716a2d3d7aa661043c4521e5))
+
+
+### Chores
+
+* add Dependabot config for GitHub Actions ([f0c36db](https://github.com/dodopayments/dodopayments-ruby/commit/f0c36dbd15a20af18c77240dcac3a7205b71cae8))
+
 ## [2.28.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.27.0...v2.28.0) (2026-09-10)
 
 
