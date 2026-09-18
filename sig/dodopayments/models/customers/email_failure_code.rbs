@@ -10,6 +10,7 @@ module Dodopayments
         | :message_too_large
         | :marked_as_spam
         | :send_failed
+        | :test_mode_quota_spent
 
       module EmailFailureCode
         extend Dodopayments::Internal::Type::Enum
@@ -22,6 +23,7 @@ module Dodopayments
         MESSAGE_TOO_LARGE: :message_too_large
         MARKED_AS_SPAM: :marked_as_spam
         SEND_FAILED: :send_failed
+        TEST_MODE_QUOTA_SPENT: :test_mode_quota_spent
 
         def self?.values: -> ::Array[Dodopayments::Models::Customers::email_failure_code]
       end

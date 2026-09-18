@@ -28,6 +28,11 @@ module Dodopayments
         sig { returns(T::Boolean) }
         attr_accessor :retry_allowed
 
+        # A later send of this email reached the provider, so this row is history. To send
+        # it again would deliver a second copy.
+        sig { returns(T::Boolean) }
+        attr_accessor :superseded
+
         # What the merchant may do with one row. The server decides; the client never
         # derives eligibility itself.
         sig do
@@ -35,7 +40,8 @@ module Dodopayments
             requires_different_address: T::Boolean,
             resend_allowed: T::Boolean,
             resends_remaining: Integer,
-            retry_allowed: T::Boolean
+            retry_allowed: T::Boolean,
+            superseded: T::Boolean
           ).returns(T.attached_class)
         end
         def self.new(
@@ -46,7 +52,10 @@ module Dodopayments
           # How many sends are left in this email's chain.
           resends_remaining:,
           # The row failed and may be sent again.
-          retry_allowed:
+          retry_allowed:,
+          # A later send of this email reached the provider, so this row is history. To send
+          # it again would deliver a second copy.
+          superseded:
         )
         end
 
@@ -56,7 +65,8 @@ module Dodopayments
               requires_different_address: T::Boolean,
               resend_allowed: T::Boolean,
               resends_remaining: Integer,
-              retry_allowed: T::Boolean
+              retry_allowed: T::Boolean,
+              superseded: T::Boolean
             }
           )
         end

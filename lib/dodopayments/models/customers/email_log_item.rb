@@ -67,13 +67,6 @@ module Dodopayments
         #   @return [String, nil]
         optional :from, String, nil?: true
 
-        # @!attribute intended_recipient
-        #   What the merchant typed, when test mode redirected the send to the business
-        #   owner.
-        #
-        #   @return [String, nil]
-        optional :intended_recipient, String, nil?: true
-
         # @!attribute recipient
         #   The address the email reached.
         #
@@ -86,7 +79,7 @@ module Dodopayments
         #   @return [String, nil]
         optional :subject, String, nil?: true
 
-        # @!method initialize(category:, created_at:, email_log_id:, email_type:, has_preview:, policies:, status:, failure_code: nil, failure_reason: nil, from: nil, intended_recipient: nil, recipient: nil, subject: nil)
+        # @!method initialize(category:, created_at:, email_log_id:, email_type:, has_preview:, policies:, status:, failure_code: nil, failure_reason: nil, from: nil, recipient: nil, subject: nil)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::Customers::EmailLogItem} for more details.
         #
@@ -109,8 +102,6 @@ module Dodopayments
         #   @param failure_reason [String, nil] A sentence that explains `failure_code`. It is null unless the email
         #
         #   @param from [String, nil] The address the email was sent from.
-        #
-        #   @param intended_recipient [String, nil] What the merchant typed, when test mode redirected the send to the
         #
         #   @param recipient [String, nil] The address the email reached.
         #

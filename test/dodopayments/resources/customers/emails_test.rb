@@ -29,7 +29,6 @@ class Dodopayments::Test::Resources::Customers::EmailsTest < Dodopayments::Test:
         failure_code: Dodopayments::Customers::EmailFailureCode | nil,
         failure_reason: String | nil,
         from: String | nil,
-        intended_recipient: String | nil,
         recipient: String | nil,
         subject: String | nil
       }

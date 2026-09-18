@@ -18,6 +18,7 @@ module Dodopayments
         MESSAGE_TOO_LARGE = :message_too_large
         MARKED_AS_SPAM = :marked_as_spam
         SEND_FAILED = :send_failed
+        TEST_MODE_QUOTA_SPENT = :test_mode_quota_spent
 
         # @!method self.values
         #   @return [Array<Symbol>]
