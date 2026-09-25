@@ -1,0 +1,15 @@
+module Dodopayments
+  module Models
+    type moderation_decision = :allow | :flag | :deny
+
+    module ModerationDecision
+      extend Dodopayments::Internal::Type::Enum
+
+      ALLOW: :allow
+      FLAG: :flag
+      DENY: :deny
+
+      def self?.values: -> ::Array[Dodopayments::Models::moderation_decision]
+    end
+  end
+end

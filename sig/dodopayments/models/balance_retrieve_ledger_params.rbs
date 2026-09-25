@@ -405,6 +405,9 @@ module Dodopayments
         | :dispute_fees_reversal
         | :deflection_fees
         | :deflection_fees_reversal
+        | :reserve_hold
+        | :reserve_release
+        | :moderation_fees
 
       module EventType
         extend Dodopayments::Internal::Type::Enum
@@ -437,6 +440,9 @@ module Dodopayments
         DISPUTE_FEES_REVERSAL: :dispute_fees_reversal
         DEFLECTION_FEES: :deflection_fees
         DEFLECTION_FEES_REVERSAL: :deflection_fees_reversal
+        RESERVE_HOLD: :reserve_hold
+        RESERVE_RELEASE: :reserve_release
+        MODERATION_FEES: :moderation_fees
 
         def self?.values: -> ::Array[Dodopayments::Models::BalanceRetrieveLedgerParams::event_type]
       end

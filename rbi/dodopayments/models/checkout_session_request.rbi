@@ -11,6 +11,9 @@ module Dodopayments
           )
         end
 
+      # The products of the checkout. A cart holds at most 20 of them, one-time and
+      # subscription products together. An empty cart is valid for the
+      # product-collection flow, where the customer chooses the product later.
       sig { returns(T::Array[Dodopayments::ProductItemReq]) }
       attr_accessor :product_cart
 
@@ -216,6 +219,9 @@ module Dodopayments
         ).returns(T.attached_class)
       end
       def self.new(
+        # The products of the checkout. A cart holds at most 20 of them, one-time and
+        # subscription products together. An empty cart is valid for the
+        # product-collection flow, where the customer chooses the product later.
         product_cart:,
         # Customers will never see payment methods that are not in this list. However,
         # adding a method here does not guarantee customers will see it. Availability

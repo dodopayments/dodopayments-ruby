@@ -68,7 +68,8 @@ module Dodopayments
         optional :from, String, nil?: true
 
         # @!attribute recipient
-        #   The address the email reached.
+        #   The address the email went to. On a failed email this is the address the
+        #   provider reports as bounced.
         #
         #   @return [String, nil]
         optional :recipient, String, nil?: true
@@ -103,7 +104,7 @@ module Dodopayments
         #
         #   @param from [String, nil] The address the email was sent from.
         #
-        #   @param recipient [String, nil] The address the email reached.
+        #   @param recipient [String, nil] The address the email went to. On a failed email this is the address the
         #
         #   @param subject [String, nil] The subject line as it was sent. Empty until the provider replicates.
       end

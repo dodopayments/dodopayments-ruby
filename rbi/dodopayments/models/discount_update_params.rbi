@@ -211,12 +211,13 @@ module Dodopayments
             )
           end
 
-        # The currency this option applies to.
+        # The currency this option applies to. The row applies when the buyer pays in this
+        # currency.
         sig { returns(Dodopayments::Currency::OrSymbol) }
         attr_accessor :currency
 
-        # Whether this row is the default to convert from for unconfigured currencies. At
-        # most one row per discount may be default.
+        # Whether this row is the default to convert from when the buyer pays in a
+        # currency that has no row. At most one row per discount may be default.
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :is_default
 
@@ -250,10 +251,11 @@ module Dodopayments
           ).returns(T.attached_class)
         end
         def self.new(
-          # The currency this option applies to.
+          # The currency this option applies to. The row applies when the buyer pays in this
+          # currency.
           currency:,
-          # Whether this row is the default to convert from for unconfigured currencies. At
-          # most one row per discount may be default.
+          # Whether this row is the default to convert from when the buyer pays in a
+          # currency that has no row. At most one row per discount may be default.
           is_default: nil,
           # The most this code discounts in this currency's subunits. For `flat` codes this
           # is the deduction; for `percentage` codes it is the max-discount cap. Must be > 0

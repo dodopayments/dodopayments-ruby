@@ -1,0 +1,14 @@
+module Dodopayments
+  module Models
+    type moderation_provenance = :targeted | :broad
+
+    module ModerationProvenance
+      extend Dodopayments::Internal::Type::Enum
+
+      TARGETED: :targeted
+      BROAD: :broad
+
+      def self?.values: -> ::Array[Dodopayments::Models::moderation_provenance]
+    end
+  end
+end

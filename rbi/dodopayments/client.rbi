@@ -101,6 +101,9 @@ module Dodopayments
     sig { returns(Dodopayments::Resources::ProductCollections) }
     attr_reader :product_collections
 
+    sig { returns(Dodopayments::Resources::Moderation) }
+    attr_reader :moderation
+
     # @api private
     sig { override.returns(T::Hash[String, String]) }
     private def auth_headers

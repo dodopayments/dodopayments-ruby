@@ -1,0 +1,65 @@
+module Dodopayments
+  module Models
+    type moderation_screen_response =
+      {
+        categories: Dodopayments::ModerationCategoryScores,
+        compound_triggered: bool,
+        decision: Dodopayments::Models::moderation_decision,
+        latency_ms: Integer,
+        normalized_applied: bool,
+        notes: ::Array[String],
+        passes: Integer,
+        provenance: Dodopayments::ModerationCategoryProvenance,
+        request_id: String?,
+        triggered: ::Array[Dodopayments::Models::moderation_category]
+      }
+
+    class ModerationScreenResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor categories: Dodopayments::ModerationCategoryScores
+
+      attr_accessor compound_triggered: bool
+
+      attr_accessor decision: Dodopayments::Models::moderation_decision
+
+      attr_accessor latency_ms: Integer
+
+      attr_accessor normalized_applied: bool
+
+      attr_accessor notes: ::Array[String]
+
+      attr_accessor passes: Integer
+
+      attr_accessor provenance: Dodopayments::ModerationCategoryProvenance
+
+      attr_accessor request_id: String?
+
+      attr_accessor triggered: ::Array[Dodopayments::Models::moderation_category]
+
+      def initialize: (
+        categories: Dodopayments::ModerationCategoryScores,
+        compound_triggered: bool,
+        decision: Dodopayments::Models::moderation_decision,
+        latency_ms: Integer,
+        normalized_applied: bool,
+        notes: ::Array[String],
+        passes: Integer,
+        provenance: Dodopayments::ModerationCategoryProvenance,
+        request_id: String?,
+        triggered: ::Array[Dodopayments::Models::moderation_category]
+      ) -> void
+
+      def to_hash: -> {
+        categories: Dodopayments::ModerationCategoryScores,
+        compound_triggered: bool,
+        decision: Dodopayments::Models::moderation_decision,
+        latency_ms: Integer,
+        normalized_applied: bool,
+        notes: ::Array[String],
+        passes: Integer,
+        provenance: Dodopayments::ModerationCategoryProvenance,
+        request_id: String?,
+        triggered: ::Array[Dodopayments::Models::moderation_category]
+      }
+    end
+  end
+end

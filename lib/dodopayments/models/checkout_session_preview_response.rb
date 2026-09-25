@@ -55,7 +55,9 @@ module Dodopayments
       #   The upcoming billing date for subscriptions, computed relative to now: with a
       #   trial it is `now + trial_period_days`, otherwise `now + payment frequency`.
       #   `None` for one-time-only carts. This is a preview estimate; the authoritative
-      #   value is set when the subscription activates.
+      #   value is set when the subscription activates. For a cart of more than one
+      #   subscription, this is the earliest date of the cart. `subscriptions` gives the
+      #   date of each subscription.
       #
       #   @return [Time, nil]
       optional :next_billing_date, Time, nil?: true
@@ -66,6 +68,15 @@ module Dodopayments
       #   @return [Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup, nil]
       optional :recurring_breakup,
                -> { Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup },
+               nil?: true
+
+      # @!attribute subscriptions
+      #   One entry for each subscription of a cart that holds more than one. Each
+      #   subscription renews on its own schedule, so the checkout shows each one here.
+      #
+      #   @return [Array<Dodopayments::Models::CheckoutSessionPreviewResponse::Subscription>, nil]
+      optional :subscriptions,
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::CheckoutSessionPreviewResponse::Subscription] },
                nil?: true
 
       # @!attribute tax_id_business_name
@@ -95,19 +106,22 @@ module Dodopayments
       # @!attribute trial_amount
       #   Per-unit trial amount after discounts, in the price currency's minor units
       #   (pre-quantity, pre-tax; see `current_breakup` for the taxed total due today).
-      #   Only present for a paid trial; `None` for a free trial or no trial.
+      #   Only present for a paid trial; `None` for a free trial or no trial. Always
+      #   `None` for a cart of more than one subscription.
       #
       #   @return [Integer, nil]
       optional :trial_amount, Integer, nil?: true
 
       # @!attribute trial_period_days
       #   Effective trial duration in days for the subscription line, when there's a trial
-      #   (free or paid). `None` if no subscription or no trial.
+      #   (free or paid). `None` if no subscription or no trial. Always `None` for a cart
+      #   of more than one subscription. Read the trial of each subscription from
+      #   `subscriptions`.
       #
       #   @return [Integer, nil]
       optional :trial_period_days, Integer, nil?: true
 
-      # @!method initialize(billing_country:, currency:, current_breakup:, is_byop:, payment_method_required:, product_cart:, total_price:, next_billing_date: nil, recurring_breakup: nil, tax_id_business_name: nil, tax_id_err_msg: nil, tax_id_format_name: nil, total_tax: nil, trial_amount: nil, trial_period_days: nil)
+      # @!method initialize(billing_country:, currency:, current_breakup:, is_byop:, payment_method_required:, product_cart:, total_price:, next_billing_date: nil, recurring_breakup: nil, subscriptions: nil, tax_id_business_name: nil, tax_id_err_msg: nil, tax_id_format_name: nil, total_tax: nil, trial_amount: nil, trial_period_days: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionPreviewResponse} for more details.
       #
@@ -130,6 +144,8 @@ module Dodopayments
       #   @param next_billing_date [Time, nil] The upcoming billing date for subscriptions, computed relative to now:
       #
       #   @param recurring_breakup [Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup, nil] Breakup of recurring payments (None for one-time only)
+      #
+      #   @param subscriptions [Array<Dodopayments::Models::CheckoutSessionPreviewResponse::Subscription>, nil] One entry for each subscription of a cart that holds more than one. Each
       #
       #   @param tax_id_business_name [String, nil] Registered business name from the official registry (EU/GB/AU) when found
       #
@@ -562,6 +578,72 @@ module Dodopayments
         #   @param total_amount [Integer] Total recurring amount including tax
         #
         #   @param tax [Integer, nil] Total tax on recurring payments
+      end
+
+      class Subscription < Dodopayments::Internal::Type::BaseModel
+        # @!attribute amount_due_now
+        #   The amount this subscription charges today, including tax.
+        #
+        #   @return [Integer]
+        required :amount_due_now, Integer
+
+        # @!attribute product_id
+        #   The subscription product.
+        #
+        #   @return [String]
+        required :product_id, String
+
+        # @!attribute recurring_amount
+        #   The amount of each renewal, including tax.
+        #
+        #   @return [Integer]
+        required :recurring_amount, Integer
+
+        # @!attribute next_billing_date
+        #   A preview of the first renewal date. The date is set when the subscription
+        #   activates.
+        #
+        #   @return [Time, nil]
+        optional :next_billing_date, Time, nil?: true
+
+        # @!attribute recurring_tax
+        #   The tax in `recurring_amount`.
+        #
+        #   @return [Integer, nil]
+        optional :recurring_tax, Integer, nil?: true
+
+        # @!attribute tax_due_now
+        #   The tax in `amount_due_now`.
+        #
+        #   @return [Integer, nil]
+        optional :tax_due_now, Integer, nil?: true
+
+        # @!attribute trial_period_days
+        #   The trial duration in days. `None` when the subscription has no trial.
+        #
+        #   @return [Integer, nil]
+        optional :trial_period_days, Integer, nil?: true
+
+        # @!method initialize(amount_due_now:, product_id:, recurring_amount:, next_billing_date: nil, recurring_tax: nil, tax_due_now: nil, trial_period_days: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::CheckoutSessionPreviewResponse::Subscription} for more
+        #   details.
+        #
+        #   The quote of one subscription in a cart of several.
+        #
+        #   @param amount_due_now [Integer] The amount this subscription charges today, including tax.
+        #
+        #   @param product_id [String] The subscription product.
+        #
+        #   @param recurring_amount [Integer] The amount of each renewal, including tax.
+        #
+        #   @param next_billing_date [Time, nil] A preview of the first renewal date. The date is set when the subscription activ
+        #
+        #   @param recurring_tax [Integer, nil] The tax in `recurring_amount`.
+        #
+        #   @param tax_due_now [Integer, nil] The tax in `amount_due_now`.
+        #
+        #   @param trial_period_days [Integer, nil] The trial duration in days. `None` when the subscription has no trial.
       end
     end
   end

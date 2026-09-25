@@ -1,0 +1,100 @@
+module Dodopayments
+  module Models
+    type moderation_category_scores =
+      {
+        child_sexual_exploitation: Float,
+        defamation: Float,
+        hate: Float,
+        indiscriminate_weapons: Float,
+        intellectual_property: Float,
+        living_artist_style: Float,
+        minor_coded_language: Float,
+        non_consensual_intimate_imagery: Float,
+        non_violent_crimes: Float,
+        privacy: Float,
+        prompt_injection: Float,
+        real_person_likeness: Float,
+        sex_related_crimes: Float,
+        sexual_content: Float,
+        specialized_advice: Float,
+        suicide_and_self_harm: Float,
+        violent_crimes: Float
+      }
+
+    class ModerationCategoryScores < Dodopayments::Internal::Type::BaseModel
+      attr_accessor child_sexual_exploitation: Float
+
+      attr_accessor defamation: Float
+
+      attr_accessor hate: Float
+
+      attr_accessor indiscriminate_weapons: Float
+
+      attr_accessor intellectual_property: Float
+
+      attr_accessor living_artist_style: Float
+
+      attr_accessor minor_coded_language: Float
+
+      attr_accessor non_consensual_intimate_imagery: Float
+
+      attr_accessor non_violent_crimes: Float
+
+      attr_accessor privacy: Float
+
+      attr_accessor prompt_injection: Float
+
+      attr_accessor real_person_likeness: Float
+
+      attr_accessor sex_related_crimes: Float
+
+      attr_accessor sexual_content: Float
+
+      attr_accessor specialized_advice: Float
+
+      attr_accessor suicide_and_self_harm: Float
+
+      attr_accessor violent_crimes: Float
+
+      def initialize: (
+        child_sexual_exploitation: Float,
+        defamation: Float,
+        hate: Float,
+        indiscriminate_weapons: Float,
+        intellectual_property: Float,
+        living_artist_style: Float,
+        minor_coded_language: Float,
+        non_consensual_intimate_imagery: Float,
+        non_violent_crimes: Float,
+        privacy: Float,
+        prompt_injection: Float,
+        real_person_likeness: Float,
+        sex_related_crimes: Float,
+        sexual_content: Float,
+        specialized_advice: Float,
+        suicide_and_self_harm: Float,
+        violent_crimes: Float
+      ) -> void
+
+      def to_hash: -> {
+        child_sexual_exploitation: Float,
+        defamation: Float,
+        hate: Float,
+        indiscriminate_weapons: Float,
+        intellectual_property: Float,
+        living_artist_style: Float,
+        minor_coded_language: Float,
+        non_consensual_intimate_imagery: Float,
+        non_violent_crimes: Float,
+        privacy: Float,
+        prompt_injection: Float,
+        real_person_likeness: Float,
+        sex_related_crimes: Float,
+        sexual_content: Float,
+        specialized_advice: Float,
+        suicide_and_self_harm: Float,
+        violent_crimes: Float
+      }
+    end
+  end
+end

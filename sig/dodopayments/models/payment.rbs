@@ -10,6 +10,7 @@ module Dodopayments
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
         disputes: ::Array[Dodopayments::Dispute],
+        is_multi_subscription: bool,
         is_update_payment_method: bool,
         metadata: Dodopayments::Models::metadata,
         payment_id: String,
@@ -18,6 +19,7 @@ module Dodopayments
         retry_attempt: Integer,
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Models::currency,
+        subscription_ids: ::Array[String],
         total_amount: Integer,
         card_holder_name: String?,
         card_issuing_country: Dodopayments::Models::country_code?,
@@ -62,6 +64,8 @@ module Dodopayments
 
       attr_accessor disputes: ::Array[Dodopayments::Dispute]
 
+      attr_accessor is_multi_subscription: bool
+
       attr_accessor is_update_payment_method: bool
 
       attr_accessor metadata: Dodopayments::Models::metadata
@@ -77,6 +81,8 @@ module Dodopayments
       attr_accessor settlement_amount: Integer
 
       attr_accessor settlement_currency: Dodopayments::Models::currency
+
+      attr_accessor subscription_ids: ::Array[String]
 
       attr_accessor total_amount: Integer
 
@@ -137,6 +143,7 @@ module Dodopayments
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
         disputes: ::Array[Dodopayments::Dispute],
+        is_multi_subscription: bool,
         is_update_payment_method: bool,
         metadata: Dodopayments::Models::metadata,
         payment_id: String,
@@ -145,6 +152,7 @@ module Dodopayments
         retry_attempt: Integer,
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Models::currency,
+        subscription_ids: ::Array[String],
         total_amount: Integer,
         ?card_holder_name: String?,
         ?card_issuing_country: Dodopayments::Models::country_code?,
@@ -181,6 +189,7 @@ module Dodopayments
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
         disputes: ::Array[Dodopayments::Dispute],
+        is_multi_subscription: bool,
         is_update_payment_method: bool,
         metadata: Dodopayments::Models::metadata,
         payment_id: String,
@@ -189,6 +198,7 @@ module Dodopayments
         retry_attempt: Integer,
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Models::currency,
+        subscription_ids: ::Array[String],
         total_amount: Integer,
         card_holder_name: String?,
         card_issuing_country: Dodopayments::Models::country_code?,
