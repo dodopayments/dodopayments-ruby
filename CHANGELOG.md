@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.30.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.29.0...v2.30.0) (2026-09-25)
+
+
+### Features
+
+* **api:** add moderation API and multi-subscription payments ([a65179d](https://github.com/dodopayments/dodopayments-ruby/commit/a65179d7302e29a0a63954ea6c281f78c265c9d9))
+* **api:** add moderation API and multi-subscription payments ([0e91769](https://github.com/dodopayments/dodopayments-ruby/commit/0e9176946ef42edd58987ce612639e360b3d7e5c))
+
 ## [2.29.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.28.0...v2.29.0) (2026-09-18)
 
 
