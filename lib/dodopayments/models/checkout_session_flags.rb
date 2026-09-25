@@ -113,6 +113,15 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :redirect_immediately, Dodopayments::Internal::Type::Boolean
 
+      # @!attribute require_cardholder_name
+      #   If true, the customer must give the name on the card to pay by card. The
+      #   checkout page enforces this. Other payment methods ignore it.
+      #
+      #   Default is false
+      #
+      #   @return [Boolean, nil]
+      optional :require_cardholder_name, Dodopayments::Internal::Type::Boolean
+
       # @!attribute require_phone_number
       #   If true, the customer must provide a phone number to complete checkout. Requires
       #   `allow_phone_number_collection` to also be true.
@@ -148,7 +157,7 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :single_page, Dodopayments::Internal::Type::Boolean
 
-      # @!method initialize(allow_currency_selection: nil, allow_customer_editing_business_name: nil, allow_customer_editing_city: nil, allow_customer_editing_country: nil, allow_customer_editing_email: nil, allow_customer_editing_name: nil, allow_customer_editing_state: nil, allow_customer_editing_street: nil, allow_customer_editing_tax_id: nil, allow_customer_editing_zipcode: nil, allow_discount_code: nil, allow_editing_addons: nil, allow_phone_number_collection: nil, allow_tax_id: nil, always_create_new_customer: nil, redirect_immediately: nil, require_phone_number: nil, require_tax_id: nil, single_page: nil)
+      # @!method initialize(allow_currency_selection: nil, allow_customer_editing_business_name: nil, allow_customer_editing_city: nil, allow_customer_editing_country: nil, allow_customer_editing_email: nil, allow_customer_editing_name: nil, allow_customer_editing_state: nil, allow_customer_editing_street: nil, allow_customer_editing_tax_id: nil, allow_customer_editing_zipcode: nil, allow_discount_code: nil, allow_editing_addons: nil, allow_phone_number_collection: nil, allow_tax_id: nil, always_create_new_customer: nil, redirect_immediately: nil, require_cardholder_name: nil, require_phone_number: nil, require_tax_id: nil, single_page: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionFlags} for more details.
       #
@@ -183,6 +192,8 @@ module Dodopayments
       #   @param always_create_new_customer [Boolean] Set to true if a new customer object should be created.
       #
       #   @param redirect_immediately [Boolean] If true, redirects the customer immediately after payment completion
+      #
+      #   @param require_cardholder_name [Boolean] If true, the customer must give the name on the card to pay by card.
       #
       #   @param require_phone_number [Boolean] If true, the customer must provide a phone number to complete checkout.
       #

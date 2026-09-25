@@ -1,0 +1,31 @@
+# frozen_string_literal: true
+
+module Dodopayments
+  module Models
+    # A moderation category.
+    module ModerationCategory
+      extend Dodopayments::Internal::Type::Enum
+
+      VIOLENT_CRIMES = :violent_crimes
+      SEX_RELATED_CRIMES = :sex_related_crimes
+      CHILD_SEXUAL_EXPLOITATION = :child_sexual_exploitation
+      SUICIDE_AND_SELF_HARM = :suicide_and_self_harm
+      INDISCRIMINATE_WEAPONS = :indiscriminate_weapons
+      INTELLECTUAL_PROPERTY = :intellectual_property
+      DEFAMATION = :defamation
+      NON_VIOLENT_CRIMES = :non_violent_crimes
+      HATE = :hate
+      PRIVACY = :privacy
+      SPECIALIZED_ADVICE = :specialized_advice
+      SEXUAL_CONTENT = :sexual_content
+      NON_CONSENSUAL_INTIMATE_IMAGERY = :non_consensual_intimate_imagery
+      MINOR_CODED_LANGUAGE = :minor_coded_language
+      REAL_PERSON_LIKENESS = :real_person_likeness
+      LIVING_ARTIST_STYLE = :living_artist_style
+      PROMPT_INJECTION = :prompt_injection
+
+      # @!method self.values
+      #   @return [Array<Symbol>]
+    end
+  end
+end

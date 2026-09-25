@@ -1,0 +1,100 @@
+module Dodopayments
+  module Models
+    type moderation_category_provenance =
+      {
+        child_sexual_exploitation: Dodopayments::Models::moderation_provenance,
+        defamation: Dodopayments::Models::moderation_provenance,
+        hate: Dodopayments::Models::moderation_provenance,
+        indiscriminate_weapons: Dodopayments::Models::moderation_provenance,
+        intellectual_property: Dodopayments::Models::moderation_provenance,
+        living_artist_style: Dodopayments::Models::moderation_provenance,
+        minor_coded_language: Dodopayments::Models::moderation_provenance,
+        non_consensual_intimate_imagery: Dodopayments::Models::moderation_provenance,
+        non_violent_crimes: Dodopayments::Models::moderation_provenance,
+        privacy: Dodopayments::Models::moderation_provenance,
+        prompt_injection: Dodopayments::Models::moderation_provenance,
+        real_person_likeness: Dodopayments::Models::moderation_provenance,
+        sex_related_crimes: Dodopayments::Models::moderation_provenance,
+        sexual_content: Dodopayments::Models::moderation_provenance,
+        specialized_advice: Dodopayments::Models::moderation_provenance,
+        suicide_and_self_harm: Dodopayments::Models::moderation_provenance,
+        violent_crimes: Dodopayments::Models::moderation_provenance
+      }
+
+    class ModerationCategoryProvenance < Dodopayments::Internal::Type::BaseModel
+      attr_accessor child_sexual_exploitation: Dodopayments::Models::moderation_provenance
+
+      attr_accessor defamation: Dodopayments::Models::moderation_provenance
+
+      attr_accessor hate: Dodopayments::Models::moderation_provenance
+
+      attr_accessor indiscriminate_weapons: Dodopayments::Models::moderation_provenance
+
+      attr_accessor intellectual_property: Dodopayments::Models::moderation_provenance
+
+      attr_accessor living_artist_style: Dodopayments::Models::moderation_provenance
+
+      attr_accessor minor_coded_language: Dodopayments::Models::moderation_provenance
+
+      attr_accessor non_consensual_intimate_imagery: Dodopayments::Models::moderation_provenance
+
+      attr_accessor non_violent_crimes: Dodopayments::Models::moderation_provenance
+
+      attr_accessor privacy: Dodopayments::Models::moderation_provenance
+
+      attr_accessor prompt_injection: Dodopayments::Models::moderation_provenance
+
+      attr_accessor real_person_likeness: Dodopayments::Models::moderation_provenance
+
+      attr_accessor sex_related_crimes: Dodopayments::Models::moderation_provenance
+
+      attr_accessor sexual_content: Dodopayments::Models::moderation_provenance
+
+      attr_accessor specialized_advice: Dodopayments::Models::moderation_provenance
+
+      attr_accessor suicide_and_self_harm: Dodopayments::Models::moderation_provenance
+
+      attr_accessor violent_crimes: Dodopayments::Models::moderation_provenance
+
+      def initialize: (
+        child_sexual_exploitation: Dodopayments::Models::moderation_provenance,
+        defamation: Dodopayments::Models::moderation_provenance,
+        hate: Dodopayments::Models::moderation_provenance,
+        indiscriminate_weapons: Dodopayments::Models::moderation_provenance,
+        intellectual_property: Dodopayments::Models::moderation_provenance,
+        living_artist_style: Dodopayments::Models::moderation_provenance,
+        minor_coded_language: Dodopayments::Models::moderation_provenance,
+        non_consensual_intimate_imagery: Dodopayments::Models::moderation_provenance,
+        non_violent_crimes: Dodopayments::Models::moderation_provenance,
+        privacy: Dodopayments::Models::moderation_provenance,
+        prompt_injection: Dodopayments::Models::moderation_provenance,
+        real_person_likeness: Dodopayments::Models::moderation_provenance,
+        sex_related_crimes: Dodopayments::Models::moderation_provenance,
+        sexual_content: Dodopayments::Models::moderation_provenance,
+        specialized_advice: Dodopayments::Models::moderation_provenance,
+        suicide_and_self_harm: Dodopayments::Models::moderation_provenance,
+        violent_crimes: Dodopayments::Models::moderation_provenance
+      ) -> void
+
+      def to_hash: -> {
+        child_sexual_exploitation: Dodopayments::Models::moderation_provenance,
+        defamation: Dodopayments::Models::moderation_provenance,
+        hate: Dodopayments::Models::moderation_provenance,
+        indiscriminate_weapons: Dodopayments::Models::moderation_provenance,
+        intellectual_property: Dodopayments::Models::moderation_provenance,
+        living_artist_style: Dodopayments::Models::moderation_provenance,
+        minor_coded_language: Dodopayments::Models::moderation_provenance,
+        non_consensual_intimate_imagery: Dodopayments::Models::moderation_provenance,
+        non_violent_crimes: Dodopayments::Models::moderation_provenance,
+        privacy: Dodopayments::Models::moderation_provenance,
+        prompt_injection: Dodopayments::Models::moderation_provenance,
+        real_person_likeness: Dodopayments::Models::moderation_provenance,
+        sex_related_crimes: Dodopayments::Models::moderation_provenance,
+        sexual_content: Dodopayments::Models::moderation_provenance,
+        specialized_advice: Dodopayments::Models::moderation_provenance,
+        suicide_and_self_harm: Dodopayments::Models::moderation_provenance,
+        violent_crimes: Dodopayments::Models::moderation_provenance
+      }
+    end
+  end
+end

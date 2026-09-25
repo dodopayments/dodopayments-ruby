@@ -4,6 +4,9 @@ module Dodopayments
   module Models
     class CheckoutSessionRequest < Dodopayments::Internal::Type::BaseModel
       # @!attribute product_cart
+      #   The products of the checkout. A cart holds at most 20 of them, one-time and
+      #   subscription products together. An empty cart is valid for the
+      #   product-collection flow, where the customer chooses the product later.
       #
       #   @return [Array<Dodopayments::Models::ProductItemReq>]
       required :product_cart, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::ProductItemReq] }
@@ -176,7 +179,7 @@ module Dodopayments
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionRequest} for more details.
       #
-      #   @param product_cart [Array<Dodopayments::Models::ProductItemReq>]
+      #   @param product_cart [Array<Dodopayments::Models::ProductItemReq>] The products of the checkout. A cart holds at most 20 of them, one-time and
       #
       #   @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil] Customers will never see payment methods that are not in this list.
       #

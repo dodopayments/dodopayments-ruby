@@ -34,6 +34,12 @@ module Dodopayments
       sig { returns(T::Boolean) }
       attr_accessor :has_license_key
 
+      # True when one payment starts more than one subscription. Read this field to find
+      # the payment type. Do not read the length of `subscription_ids`. Do not read
+      # `subscription_id` for null.
+      sig { returns(T::Boolean) }
+      attr_accessor :is_multi_subscription
+
       # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
       sig { returns(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]) }
       attr_accessor :metadata
@@ -49,6 +55,12 @@ module Dodopayments
         )
       end
       attr_accessor :payment_provider
+
+      # Every subscription that this payment starts or charges, in a stable order. It is
+      # empty for a one-time payment. It holds the value of `subscription_id` when the
+      # payment names one subscription.
+      sig { returns(T::Array[String]) }
+      attr_accessor :subscription_ids
 
       sig { returns(Integer) }
       attr_accessor :total_amount
@@ -100,10 +112,12 @@ module Dodopayments
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
           digital_products_delivered: T::Boolean,
           has_license_key: T::Boolean,
+          is_multi_subscription: T::Boolean,
           metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           payment_id: String,
           payment_provider:
             Dodopayments::Models::PaymentListResponse::PaymentProvider::OrSymbol,
+          subscription_ids: T::Array[String],
           total_amount: Integer,
           card_last_four: T.nilable(String),
           card_network: T.nilable(String),
@@ -124,12 +138,20 @@ module Dodopayments
         customer:,
         digital_products_delivered:,
         has_license_key:,
+        # True when one payment starts more than one subscription. Read this field to find
+        # the payment type. Do not read the length of `subscription_ids`. Do not read
+        # `subscription_id` for null.
+        is_multi_subscription:,
         # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
         metadata:,
         payment_id:,
         # Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
         # merchant's own payment connector); `dodo` for everything Dodo processed itself.
         payment_provider:,
+        # Every subscription that this payment starts or charges, in a stable order. It is
+        # empty for a one-time payment. It holds the value of `subscription_id` when the
+        # payment names one subscription.
+        subscription_ids:,
         total_amount:,
         # The last four digits of the card
         card_last_four: nil,
@@ -160,10 +182,12 @@ module Dodopayments
             customer: Dodopayments::CustomerLimitedDetails,
             digital_products_delivered: T::Boolean,
             has_license_key: T::Boolean,
+            is_multi_subscription: T::Boolean,
             metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             payment_id: String,
             payment_provider:
               Dodopayments::Models::PaymentListResponse::PaymentProvider::TaggedSymbol,
+            subscription_ids: T::Array[String],
             total_amount: Integer,
             card_last_four: T.nilable(String),
             card_network: T.nilable(String),

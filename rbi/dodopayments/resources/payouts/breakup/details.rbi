@@ -5,10 +5,10 @@ module Dodopayments
     class Payouts
       class Breakup
         class Details
-          # Returns paginated individual balance ledger entries for a payout, with each
-          # entry's amount pro-rated into the payout's currency. Supports pagination via
-          # `page_size` (default 10, max 100) and `page_number` (default 0) query
-          # parameters.
+          # Returns paginated individual balance ledger entries for a payout. Each entry is
+          # converted into the payout's currency at the rate the payout settled at. Supports
+          # pagination via `page_size` (default 10, max 100) and `page_number` (default 0)
+          # query parameters.
           sig do
             params(
               payout_id: String,

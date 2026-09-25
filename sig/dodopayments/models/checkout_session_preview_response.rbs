@@ -11,6 +11,7 @@ module Dodopayments
         total_price: Integer,
         next_billing_date: Time?,
         recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
+        subscriptions: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::Subscription]?,
         tax_id_business_name: String?,
         tax_id_err_msg: String?,
         tax_id_format_name: String?,
@@ -38,6 +39,8 @@ module Dodopayments
 
       attr_accessor recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?
 
+      attr_accessor subscriptions: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::Subscription]?
+
       attr_accessor tax_id_business_name: String?
 
       attr_accessor tax_id_err_msg: String?
@@ -60,6 +63,7 @@ module Dodopayments
         total_price: Integer,
         ?next_billing_date: Time?,
         ?recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
+        ?subscriptions: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::Subscription]?,
         ?tax_id_business_name: String?,
         ?tax_id_err_msg: String?,
         ?tax_id_format_name: String?,
@@ -78,6 +82,7 @@ module Dodopayments
         total_price: Integer,
         next_billing_date: Time?,
         recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup?,
+        subscriptions: ::Array[Dodopayments::Models::CheckoutSessionPreviewResponse::Subscription]?,
         tax_id_business_name: String?,
         tax_id_err_msg: String?,
         tax_id_format_name: String?,
@@ -405,6 +410,53 @@ module Dodopayments
           subtotal: Integer,
           total_amount: Integer,
           tax: Integer?
+        }
+      end
+
+      type subscription =
+        {
+          amount_due_now: Integer,
+          product_id: String,
+          recurring_amount: Integer,
+          next_billing_date: Time?,
+          recurring_tax: Integer?,
+          tax_due_now: Integer?,
+          trial_period_days: Integer?
+        }
+
+      class Subscription < Dodopayments::Internal::Type::BaseModel
+        attr_accessor amount_due_now: Integer
+
+        attr_accessor product_id: String
+
+        attr_accessor recurring_amount: Integer
+
+        attr_accessor next_billing_date: Time?
+
+        attr_accessor recurring_tax: Integer?
+
+        attr_accessor tax_due_now: Integer?
+
+        attr_accessor trial_period_days: Integer?
+
+        def initialize: (
+          amount_due_now: Integer,
+          product_id: String,
+          recurring_amount: Integer,
+          ?next_billing_date: Time?,
+          ?recurring_tax: Integer?,
+          ?tax_due_now: Integer?,
+          ?trial_period_days: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          amount_due_now: Integer,
+          product_id: String,
+          recurring_amount: Integer,
+          next_billing_date: Time?,
+          recurring_tax: Integer?,
+          tax_due_now: Integer?,
+          trial_period_days: Integer?
         }
       end
     end

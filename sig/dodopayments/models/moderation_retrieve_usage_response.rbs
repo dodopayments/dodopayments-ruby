@@ -1,0 +1,42 @@
+module Dodopayments
+  module Models
+    type moderation_retrieve_usage_response =
+      {
+        daily: ::Array[Dodopayments::Models::ModerationRetrieveUsageResponse::Daily],
+        screens_to_next_block: Integer,
+        unbilled_screens: Integer
+      }
+
+    class ModerationRetrieveUsageResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor daily: ::Array[Dodopayments::Models::ModerationRetrieveUsageResponse::Daily]
+
+      attr_accessor screens_to_next_block: Integer
+
+      attr_accessor unbilled_screens: Integer
+
+      def initialize: (
+        daily: ::Array[Dodopayments::Models::ModerationRetrieveUsageResponse::Daily],
+        screens_to_next_block: Integer,
+        unbilled_screens: Integer
+      ) -> void
+
+      def to_hash: -> {
+        daily: ::Array[Dodopayments::Models::ModerationRetrieveUsageResponse::Daily],
+        screens_to_next_block: Integer,
+        unbilled_screens: Integer
+      }
+
+      type daily = { date: Date, screens: Integer }
+
+      class Daily < Dodopayments::Internal::Type::BaseModel
+        attr_accessor date: Date
+
+        attr_accessor screens: Integer
+
+        def initialize: (date: Date, screens: Integer) -> void
+
+        def to_hash: -> { date: Date, screens: Integer }
+      end
+    end
+  end
+end
