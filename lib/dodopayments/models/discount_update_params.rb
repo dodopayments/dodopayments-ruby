@@ -151,14 +151,15 @@ module Dodopayments
 
       class CurrencyOption < Dodopayments::Internal::Type::BaseModel
         # @!attribute currency
-        #   The currency this option applies to.
+        #   The currency this option applies to. The row applies when the buyer pays in this
+        #   currency.
         #
         #   @return [Symbol, Dodopayments::Models::Currency]
         required :currency, enum: -> { Dodopayments::Currency }
 
         # @!attribute is_default
-        #   Whether this row is the default to convert from for unconfigured currencies. At
-        #   most one row per discount may be default.
+        #   Whether this row is the default to convert from when the buyer pays in a
+        #   currency that has no row. At most one row per discount may be default.
         #
         #   @return [Boolean, nil]
         optional :is_default, Dodopayments::Internal::Type::Boolean
@@ -187,9 +188,9 @@ module Dodopayments
         #   flat deduction for `flat` codes, or the max-discount cap for `percentage` codes.
         #   Maps to the DB column of the same name.
         #
-        #   @param currency [Symbol, Dodopayments::Models::Currency] The currency this option applies to.
+        #   @param currency [Symbol, Dodopayments::Models::Currency] The currency this option applies to. The row applies when the buyer pays
         #
-        #   @param is_default [Boolean] Whether this row is the default to convert from for unconfigured
+        #   @param is_default [Boolean] Whether this row is the default to convert from when the buyer pays in a
         #
         #   @param max_amount_possible [Integer, nil] The most this code discounts in this currency's subunits. For `flat` codes
         #

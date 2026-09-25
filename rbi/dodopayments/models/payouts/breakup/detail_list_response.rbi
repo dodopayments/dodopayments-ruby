@@ -36,8 +36,9 @@ module Dodopayments
           attr_accessor :original_currency
 
           # Amount in the payout's currency, in that currency's smallest unit (cents for
-          # USD, yen for JPY, fils for KWD). Uses cumulative rounding to ensure sum matches
-          # payout total exactly.
+          # USD, yen for JPY, fils for KWD). The entry is converted at the rate the payout
+          # settled at. These amounts sum to the value of the entries, which can be less
+          # than the payout: the grouped breakup reports the difference as `unattributed`.
           sig { returns(Integer) }
           attr_accessor :payout_currency_amount
 
@@ -53,8 +54,8 @@ module Dodopayments
           sig { returns(T.nilable(String)) }
           attr_accessor :reference_object_id
 
-          # Individual balance ledger entry for a payout, with amounts pro-rated into the
-          # payout's currency.
+          # Individual balance ledger entry for a payout, converted into the payout's
+          # currency.
           sig do
             params(
               id: String,
@@ -82,8 +83,9 @@ module Dodopayments
             # Original currency as ISO 4217 code (e.g., "USD", "EUR").
             original_currency:,
             # Amount in the payout's currency, in that currency's smallest unit (cents for
-            # USD, yen for JPY, fils for KWD). Uses cumulative rounding to ensure sum matches
-            # payout total exactly.
+            # USD, yen for JPY, fils for KWD). The entry is converted at the rate the payout
+            # settled at. These amounts sum to the value of the entries, which can be less
+            # than the payout: the grouped breakup reports the difference as `unattributed`.
             payout_currency_amount:,
             # USD equivalent of the original amount (in cents).
             usd_equivalent_amount:,

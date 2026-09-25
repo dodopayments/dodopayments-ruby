@@ -253,6 +253,21 @@ module Dodopayments
             :deflection_fees_reversal,
             Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
           )
+        RESERVE_HOLD =
+          T.let(
+            :reserve_hold,
+            Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
+          )
+        RESERVE_RELEASE =
+          T.let(
+            :reserve_release,
+            Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
+          )
+        MODERATION_FEES =
+          T.let(
+            :moderation_fees,
+            Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
+          )
 
         sig do
           override.returns(

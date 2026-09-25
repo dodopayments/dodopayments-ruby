@@ -1,0 +1,18 @@
+module Dodopayments
+  module Resources
+    class Moderation
+      def retrieve_usage: (
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::ModerationRetrieveUsageResponse
+
+      def screen: (
+        ?image: String?,
+        ?request_id: String?,
+        ?text: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::ModerationScreenResponse
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end

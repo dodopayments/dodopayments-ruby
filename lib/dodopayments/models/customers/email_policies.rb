@@ -29,8 +29,9 @@ module Dodopayments
         required :retry_allowed, Dodopayments::Internal::Type::Boolean
 
         # @!attribute superseded
-        #   A later send of this email reached the provider, so this row is history. To send
-        #   it again would deliver a second copy.
+        #   A later send of this email replaced this row, so this row is history. A row that
+        #   never went out needs a later send that reached the provider. A failed row needs
+        #   a later send that was delivered.
         #
         #   @return [Boolean]
         required :superseded, Dodopayments::Internal::Type::Boolean
@@ -50,7 +51,7 @@ module Dodopayments
         #
         #   @param retry_allowed [Boolean] The row failed and may be sent again.
         #
-        #   @param superseded [Boolean] A later send of this email reached the provider, so this row is history.
+        #   @param superseded [Boolean] A later send of this email replaced this row, so this row is history.
       end
     end
   end

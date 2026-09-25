@@ -18,6 +18,7 @@ module Dodopayments
         allow_tax_id: bool,
         always_create_new_customer: bool,
         redirect_immediately: bool,
+        require_cardholder_name: bool,
         require_phone_number: bool,
         require_tax_id: bool,
         single_page: bool
@@ -88,6 +89,10 @@ module Dodopayments
 
       def redirect_immediately=: (bool) -> bool
 
+      attr_reader require_cardholder_name: bool?
+
+      def require_cardholder_name=: (bool) -> bool
+
       attr_reader require_phone_number: bool?
 
       def require_phone_number=: (bool) -> bool
@@ -117,6 +122,7 @@ module Dodopayments
         ?allow_tax_id: bool,
         ?always_create_new_customer: bool,
         ?redirect_immediately: bool,
+        ?require_cardholder_name: bool,
         ?require_phone_number: bool,
         ?require_tax_id: bool,
         ?single_page: bool
@@ -139,6 +145,7 @@ module Dodopayments
         allow_tax_id: bool,
         always_create_new_customer: bool,
         redirect_immediately: bool,
+        require_cardholder_name: bool,
         require_phone_number: bool,
         require_tax_id: bool,
         single_page: bool

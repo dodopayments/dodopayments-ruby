@@ -137,6 +137,16 @@ module Dodopayments
       sig { params(redirect_immediately: T::Boolean).void }
       attr_writer :redirect_immediately
 
+      # If true, the customer must give the name on the card to pay by card. The
+      # checkout page enforces this. Other payment methods ignore it.
+      #
+      # Default is false
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :require_cardholder_name
+
+      sig { params(require_cardholder_name: T::Boolean).void }
+      attr_writer :require_cardholder_name
+
       # If true, the customer must provide a phone number to complete checkout. Requires
       # `allow_phone_number_collection` to also be true.
       #
@@ -193,6 +203,7 @@ module Dodopayments
           allow_tax_id: T::Boolean,
           always_create_new_customer: T::Boolean,
           redirect_immediately: T::Boolean,
+          require_cardholder_name: T::Boolean,
           require_phone_number: T::Boolean,
           require_tax_id: T::Boolean,
           single_page: T::Boolean
@@ -245,6 +256,11 @@ module Dodopayments
         #
         # Default is false
         redirect_immediately: nil,
+        # If true, the customer must give the name on the card to pay by card. The
+        # checkout page enforces this. Other payment methods ignore it.
+        #
+        # Default is false
+        require_cardholder_name: nil,
         # If true, the customer must provide a phone number to complete checkout. Requires
         # `allow_phone_number_collection` to also be true.
         #
@@ -290,6 +306,7 @@ module Dodopayments
             allow_tax_id: T::Boolean,
             always_create_new_customer: T::Boolean,
             redirect_immediately: T::Boolean,
+            require_cardholder_name: T::Boolean,
             require_phone_number: T::Boolean,
             require_tax_id: T::Boolean,
             single_page: T::Boolean

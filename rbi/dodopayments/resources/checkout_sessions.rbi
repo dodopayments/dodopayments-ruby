@@ -42,6 +42,9 @@ module Dodopayments
         ).returns(Dodopayments::CheckoutSessionResponse)
       end
       def create(
+        # The products of the checkout. A cart holds at most 20 of them, one-time and
+        # subscription products together. An empty cart is valid for the
+        # product-collection flow, where the customer chooses the product later.
         product_cart:,
         # Customers will never see payment methods that are not in this list. However,
         # adding a method here does not guarantee customers will see it. Availability
@@ -163,6 +166,9 @@ module Dodopayments
         ).returns(Dodopayments::Models::CheckoutSessionPreviewResponse)
       end
       def preview(
+        # The products of the checkout. A cart holds at most 20 of them, one-time and
+        # subscription products together. An empty cart is valid for the
+        # product-collection flow, where the customer chooses the product later.
         product_cart:,
         # Customers will never see payment methods that are not in this list. However,
         # adding a method here does not guarantee customers will see it. Availability

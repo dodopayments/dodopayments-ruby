@@ -48,6 +48,12 @@ module Dodopayments
       sig { returns(T::Array[Dodopayments::Dispute]) }
       attr_accessor :disputes
 
+      # True when one payment starts more than one subscription. Read this field to find
+      # the payment type. Do not read the length of `subscription_ids`. Do not read
+      # `subscription_id` for null.
+      sig { returns(T::Boolean) }
+      attr_accessor :is_multi_subscription
+
       # Whether this payment was created solely to update a subscription's payment
       # method (a zero-/setup-amount charge). `false` for normal charges.
       sig { returns(T::Boolean) }
@@ -87,6 +93,12 @@ module Dodopayments
       # pricing scenarios.
       sig { returns(Dodopayments::Currency::TaggedSymbol) }
       attr_accessor :settlement_currency
+
+      # Every subscription that this payment starts or charges, in a stable order. It is
+      # empty for a one-time payment. It holds the value of `subscription_id` when the
+      # payment names one subscription.
+      sig { returns(T::Array[String]) }
+      attr_accessor :subscription_ids
 
       # Total amount charged to the customer including tax, in the currency's smallest
       # unit (e.g. cents for USD, yen for JPY, fils for KWD — see the currency's decimal
@@ -186,7 +198,9 @@ module Dodopayments
       sig { returns(T.nilable(Dodopayments::IntentStatus::TaggedSymbol)) }
       attr_accessor :status
 
-      # Identifier of the subscription if payment is part of a subscription
+      # Identifier of the subscription if payment is part of a subscription. A
+      # multi-subscription payment leaves this null, because no single subscription owns
+      # the payment. Read `subscription_ids` for those.
       sig { returns(T.nilable(String)) }
       attr_accessor :subscription_id
 
@@ -209,6 +223,7 @@ module Dodopayments
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
           digital_products_delivered: T::Boolean,
           disputes: T::Array[Dodopayments::Dispute::OrHash],
+          is_multi_subscription: T::Boolean,
           is_update_payment_method: T::Boolean,
           metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           payment_id: String,
@@ -217,6 +232,7 @@ module Dodopayments
           retry_attempt: Integer,
           settlement_amount: Integer,
           settlement_currency: Dodopayments::Currency::OrSymbol,
+          subscription_ids: T::Array[String],
           total_amount: Integer,
           card_holder_name: T.nilable(String),
           card_issuing_country: T.nilable(Dodopayments::CountryCode::OrSymbol),
@@ -263,6 +279,10 @@ module Dodopayments
         digital_products_delivered:,
         # List of disputes associated with this payment
         disputes:,
+        # True when one payment starts more than one subscription. Read this field to find
+        # the payment type. Do not read the length of `subscription_ids`. Do not read
+        # `subscription_id` for null.
+        is_multi_subscription:,
         # Whether this payment was created solely to update a subscription's payment
         # method (a zero-/setup-amount charge). `false` for normal charges.
         is_update_payment_method:,
@@ -287,6 +307,10 @@ module Dodopayments
         # balance. This may differ from the customer's payment currency in adaptive
         # pricing scenarios.
         settlement_currency:,
+        # Every subscription that this payment starts or charges, in a stable order. It is
+        # empty for a one-time payment. It holds the value of `subscription_id` when the
+        # payment names one subscription.
+        subscription_ids:,
         # Total amount charged to the customer including tax, in the currency's smallest
         # unit (e.g. cents for USD, yen for JPY, fils for KWD — see the currency's decimal
         # places)
@@ -339,7 +363,9 @@ module Dodopayments
         settlement_tax: nil,
         # Current status of the payment intent
         status: nil,
-        # Identifier of the subscription if payment is part of a subscription
+        # Identifier of the subscription if payment is part of a subscription. A
+        # multi-subscription payment leaves this null, because no single subscription owns
+        # the payment. Read `subscription_ids` for those.
         subscription_id: nil,
         # Amount of tax collected in the currency's smallest unit (e.g. cents for USD, yen
         # for JPY, fils for KWD)
@@ -360,6 +386,7 @@ module Dodopayments
             customer: Dodopayments::CustomerLimitedDetails,
             digital_products_delivered: T::Boolean,
             disputes: T::Array[Dodopayments::Dispute],
+            is_multi_subscription: T::Boolean,
             is_update_payment_method: T::Boolean,
             metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             payment_id: String,
@@ -369,6 +396,7 @@ module Dodopayments
             retry_attempt: Integer,
             settlement_amount: Integer,
             settlement_currency: Dodopayments::Currency::TaggedSymbol,
+            subscription_ids: T::Array[String],
             total_amount: Integer,
             card_holder_name: T.nilable(String),
             card_issuing_country:
