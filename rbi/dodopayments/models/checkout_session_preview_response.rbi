@@ -64,7 +64,9 @@ module Dodopayments
       # The upcoming billing date for subscriptions, computed relative to now: with a
       # trial it is `now + trial_period_days`, otherwise `now + payment frequency`.
       # `None` for one-time-only carts. This is a preview estimate; the authoritative
-      # value is set when the subscription activates.
+      # value is set when the subscription activates. For a cart of more than one
+      # subscription, this is the earliest date of the cart. `subscriptions` gives the
+      # date of each subscription.
       sig { returns(T.nilable(Time)) }
       attr_accessor :next_billing_date
 
@@ -88,6 +90,19 @@ module Dodopayments
       end
       attr_writer :recurring_breakup
 
+      # One entry for each subscription of a cart that holds more than one. Each
+      # subscription renews on its own schedule, so the checkout shows each one here.
+      sig do
+        returns(
+          T.nilable(
+            T::Array[
+              Dodopayments::Models::CheckoutSessionPreviewResponse::Subscription
+            ]
+          )
+        )
+      end
+      attr_accessor :subscriptions
+
       # Registered business name from the official registry (EU/GB/AU) when found
       sig { returns(T.nilable(String)) }
       attr_accessor :tax_id_business_name
@@ -106,12 +121,15 @@ module Dodopayments
 
       # Per-unit trial amount after discounts, in the price currency's minor units
       # (pre-quantity, pre-tax; see `current_breakup` for the taxed total due today).
-      # Only present for a paid trial; `None` for a free trial or no trial.
+      # Only present for a paid trial; `None` for a free trial or no trial. Always
+      # `None` for a cart of more than one subscription.
       sig { returns(T.nilable(Integer)) }
       attr_accessor :trial_amount
 
       # Effective trial duration in days for the subscription line, when there's a trial
-      # (free or paid). `None` if no subscription or no trial.
+      # (free or paid). `None` if no subscription or no trial. Always `None` for a cart
+      # of more than one subscription. Read the trial of each subscription from
+      # `subscriptions`.
       sig { returns(T.nilable(Integer)) }
       attr_accessor :trial_period_days
 
@@ -133,6 +151,12 @@ module Dodopayments
           recurring_breakup:
             T.nilable(
               Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup::OrHash
+            ),
+          subscriptions:
+            T.nilable(
+              T::Array[
+                Dodopayments::Models::CheckoutSessionPreviewResponse::Subscription::OrHash
+              ]
             ),
           tax_id_business_name: T.nilable(String),
           tax_id_err_msg: T.nilable(String),
@@ -164,10 +188,15 @@ module Dodopayments
         # The upcoming billing date for subscriptions, computed relative to now: with a
         # trial it is `now + trial_period_days`, otherwise `now + payment frequency`.
         # `None` for one-time-only carts. This is a preview estimate; the authoritative
-        # value is set when the subscription activates.
+        # value is set when the subscription activates. For a cart of more than one
+        # subscription, this is the earliest date of the cart. `subscriptions` gives the
+        # date of each subscription.
         next_billing_date: nil,
         # Breakup of recurring payments (None for one-time only)
         recurring_breakup: nil,
+        # One entry for each subscription of a cart that holds more than one. Each
+        # subscription renews on its own schedule, so the checkout shows each one here.
+        subscriptions: nil,
         # Registered business name from the official registry (EU/GB/AU) when found
         tax_id_business_name: nil,
         # Error message if tax ID validation failed
@@ -178,10 +207,13 @@ module Dodopayments
         total_tax: nil,
         # Per-unit trial amount after discounts, in the price currency's minor units
         # (pre-quantity, pre-tax; see `current_breakup` for the taxed total due today).
-        # Only present for a paid trial; `None` for a free trial or no trial.
+        # Only present for a paid trial; `None` for a free trial or no trial. Always
+        # `None` for a cart of more than one subscription.
         trial_amount: nil,
         # Effective trial duration in days for the subscription line, when there's a trial
-        # (free or paid). `None` if no subscription or no trial.
+        # (free or paid). `None` if no subscription or no trial. Always `None` for a cart
+        # of more than one subscription. Read the trial of each subscription from
+        # `subscriptions`.
         trial_period_days: nil
       )
       end
@@ -204,6 +236,12 @@ module Dodopayments
             recurring_breakup:
               T.nilable(
                 Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup
+              ),
+            subscriptions:
+              T.nilable(
+                T::Array[
+                  Dodopayments::Models::CheckoutSessionPreviewResponse::Subscription
+                ]
               ),
             tax_id_business_name: T.nilable(String),
             tax_id_err_msg: T.nilable(String),
@@ -790,6 +828,92 @@ module Dodopayments
               subtotal: Integer,
               total_amount: Integer,
               tax: T.nilable(Integer)
+            }
+          )
+        end
+        def to_hash
+        end
+      end
+
+      class Subscription < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::Models::CheckoutSessionPreviewResponse::Subscription,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        # The amount this subscription charges today, including tax.
+        sig { returns(Integer) }
+        attr_accessor :amount_due_now
+
+        # The subscription product.
+        sig { returns(String) }
+        attr_accessor :product_id
+
+        # The amount of each renewal, including tax.
+        sig { returns(Integer) }
+        attr_accessor :recurring_amount
+
+        # A preview of the first renewal date. The date is set when the subscription
+        # activates.
+        sig { returns(T.nilable(Time)) }
+        attr_accessor :next_billing_date
+
+        # The tax in `recurring_amount`.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :recurring_tax
+
+        # The tax in `amount_due_now`.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :tax_due_now
+
+        # The trial duration in days. `None` when the subscription has no trial.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :trial_period_days
+
+        # The quote of one subscription in a cart of several.
+        sig do
+          params(
+            amount_due_now: Integer,
+            product_id: String,
+            recurring_amount: Integer,
+            next_billing_date: T.nilable(Time),
+            recurring_tax: T.nilable(Integer),
+            tax_due_now: T.nilable(Integer),
+            trial_period_days: T.nilable(Integer)
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # The amount this subscription charges today, including tax.
+          amount_due_now:,
+          # The subscription product.
+          product_id:,
+          # The amount of each renewal, including tax.
+          recurring_amount:,
+          # A preview of the first renewal date. The date is set when the subscription
+          # activates.
+          next_billing_date: nil,
+          # The tax in `recurring_amount`.
+          recurring_tax: nil,
+          # The tax in `amount_due_now`.
+          tax_due_now: nil,
+          # The trial duration in days. `None` when the subscription has no trial.
+          trial_period_days: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              amount_due_now: Integer,
+              product_id: String,
+              recurring_amount: Integer,
+              next_billing_date: T.nilable(Time),
+              recurring_tax: T.nilable(Integer),
+              tax_due_now: T.nilable(Integer),
+              trial_period_days: T.nilable(Integer)
             }
           )
         end

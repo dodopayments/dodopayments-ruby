@@ -67,6 +67,8 @@ module Dodopayments
 
     attr_reader product_collections: Dodopayments::Resources::ProductCollections
 
+    attr_reader moderation: Dodopayments::Resources::Moderation
+
     private def auth_headers: -> ::Hash[String, String]
 
     def initialize: (

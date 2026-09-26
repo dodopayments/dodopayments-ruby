@@ -350,6 +350,20 @@ module Dodopayments
 
   MiscListSupportedCountriesParams = Dodopayments::Models::MiscListSupportedCountriesParams
 
+  ModerationCategory = Dodopayments::Models::ModerationCategory
+
+  ModerationCategoryProvenance = Dodopayments::Models::ModerationCategoryProvenance
+
+  ModerationCategoryScores = Dodopayments::Models::ModerationCategoryScores
+
+  ModerationDecision = Dodopayments::Models::ModerationDecision
+
+  ModerationProvenance = Dodopayments::Models::ModerationProvenance
+
+  ModerationRetrieveUsageParams = Dodopayments::Models::ModerationRetrieveUsageParams
+
+  ModerationScreenParams = Dodopayments::Models::ModerationScreenParams
+
   NewCustomer = Dodopayments::Models::NewCustomer
 
   OnDemandSubscription = Dodopayments::Models::OnDemandSubscription

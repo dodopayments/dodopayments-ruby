@@ -102,6 +102,9 @@ module Dodopayments
     # @return [Dodopayments::Resources::ProductCollections]
     attr_reader :product_collections
 
+    # @return [Dodopayments::Resources::Moderation]
+    attr_reader :moderation
+
     # @api private
     #
     # @return [Hash{String=>String}]
@@ -203,6 +206,7 @@ module Dodopayments
       @credit_entitlements = Dodopayments::Resources::CreditEntitlements.new(client: self)
       @entitlements = Dodopayments::Resources::Entitlements.new(client: self)
       @product_collections = Dodopayments::Resources::ProductCollections.new(client: self)
+      @moderation = Dodopayments::Resources::Moderation.new(client: self)
     end
   end
 end

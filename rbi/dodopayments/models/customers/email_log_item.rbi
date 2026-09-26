@@ -63,7 +63,8 @@ module Dodopayments
         sig { returns(T.nilable(String)) }
         attr_accessor :from
 
-        # The address the email reached.
+        # The address the email went to. On a failed email this is the address the
+        # provider reports as bounced.
         sig { returns(T.nilable(String)) }
         attr_accessor :recipient
 
@@ -111,7 +112,8 @@ module Dodopayments
           failure_reason: nil,
           # The address the email was sent from.
           from: nil,
-          # The address the email reached.
+          # The address the email went to. On a failed email this is the address the
+          # provider reports as bounced.
           recipient: nil,
           # The subject line as it was sent. Empty until the provider replicates.
           subject: nil

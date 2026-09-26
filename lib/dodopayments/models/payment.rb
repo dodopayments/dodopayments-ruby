@@ -52,6 +52,14 @@ module Dodopayments
       #   @return [Array<Dodopayments::Models::Dispute>]
       required :disputes, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Dispute] }
 
+      # @!attribute is_multi_subscription
+      #   True when one payment starts more than one subscription. Read this field to find
+      #   the payment type. Do not read the length of `subscription_ids`. Do not read
+      #   `subscription_id` for null.
+      #
+      #   @return [Boolean]
+      required :is_multi_subscription, Dodopayments::Internal::Type::Boolean
+
       # @!attribute is_update_payment_method
       #   Whether this payment was created solely to update a subscription's payment
       #   method (a zero-/setup-amount charge). `false` for normal charges.
@@ -107,6 +115,14 @@ module Dodopayments
       #
       #   @return [Symbol, Dodopayments::Models::Currency]
       required :settlement_currency, enum: -> { Dodopayments::Currency }
+
+      # @!attribute subscription_ids
+      #   Every subscription that this payment starts or charges, in a stable order. It is
+      #   empty for a one-time payment. It holds the value of `subscription_id` when the
+      #   payment names one subscription.
+      #
+      #   @return [Array<String>]
+      required :subscription_ids, Dodopayments::Internal::Type::ArrayOf[String]
 
       # @!attribute total_amount
       #   Total amount charged to the customer including tax, in the currency's smallest
@@ -257,7 +273,9 @@ module Dodopayments
       optional :status, enum: -> { Dodopayments::IntentStatus }, nil?: true
 
       # @!attribute subscription_id
-      #   Identifier of the subscription if payment is part of a subscription
+      #   Identifier of the subscription if payment is part of a subscription. A
+      #   multi-subscription payment leaves this null, because no single subscription owns
+      #   the payment. Read `subscription_ids` for those.
       #
       #   @return [String, nil]
       optional :subscription_id, String, nil?: true
@@ -275,7 +293,7 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, is_update_payment_method:, metadata:, payment_id:, payment_provider:, refunds:, retry_attempt:, settlement_amount:, settlement_currency:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, discounts: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_id: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, is_multi_subscription:, is_update_payment_method:, metadata:, payment_id:, payment_provider:, refunds:, retry_attempt:, settlement_amount:, settlement_currency:, subscription_ids:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, discounts: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_id: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
@@ -295,6 +313,8 @@ module Dodopayments
       #
       #   @param disputes [Array<Dodopayments::Models::Dispute>] List of disputes associated with this payment
       #
+      #   @param is_multi_subscription [Boolean] True when one payment starts more than one subscription. Read this field
+      #
       #   @param is_update_payment_method [Boolean] Whether this payment was created solely to update a subscription's
       #
       #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional custom data associated with the payment
@@ -310,6 +330,8 @@ module Dodopayments
       #   @param settlement_amount [Integer] The amount that will be credited to your Dodo balance after currency conversion
       #
       #   @param settlement_currency [Symbol, Dodopayments::Models::Currency] The currency in which the settlement_amount will be credited to your Dodo balanc
+      #
+      #   @param subscription_ids [Array<String>] Every subscription that this payment starts or charges, in a stable order.
       #
       #   @param total_amount [Integer] Total amount charged to the customer including tax, in the currency's smallest u
       #
@@ -355,7 +377,7 @@ module Dodopayments
       #
       #   @param status [Symbol, Dodopayments::Models::IntentStatus, nil] Current status of the payment intent
       #
-      #   @param subscription_id [String, nil] Identifier of the subscription if payment is part of a subscription
+      #   @param subscription_id [String, nil] Identifier of the subscription if payment is part of a subscription.
       #
       #   @param tax [Integer, nil] Amount of tax collected in the currency's smallest unit
       #

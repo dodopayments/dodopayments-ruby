@@ -1,0 +1,32 @@
+module Dodopayments
+  module Models
+    type moderation_screen_params =
+      { image: String?, request_id: String?, text: String? }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class ModerationScreenParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor image: String?
+
+      attr_accessor request_id: String?
+
+      attr_accessor text: String?
+
+      def initialize: (
+        ?image: String?,
+        ?request_id: String?,
+        ?text: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        image: String?,
+        request_id: String?,
+        text: String?,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

@@ -40,8 +40,9 @@ module Dodopayments
 
           # @!attribute payout_currency_amount
           #   Amount in the payout's currency, in that currency's smallest unit (cents for
-          #   USD, yen for JPY, fils for KWD). Uses cumulative rounding to ensure sum matches
-          #   payout total exactly.
+          #   USD, yen for JPY, fils for KWD). The entry is converted at the rate the payout
+          #   settled at. These amounts sum to the value of the entries, which can be less
+          #   than the payout: the grouped breakup reports the difference as `unattributed`.
           #
           #   @return [Integer]
           required :payout_currency_amount, Integer
@@ -68,8 +69,8 @@ module Dodopayments
           #   Some parameter documentations has been truncated, see
           #   {Dodopayments::Models::Payouts::Breakup::DetailListResponse} for more details.
           #
-          #   Individual balance ledger entry for a payout, with amounts pro-rated into the
-          #   payout's currency.
+          #   Individual balance ledger entry for a payout, converted into the payout's
+          #   currency.
           #
           #   @param id [String] Unique identifier of the balance ledger entry.
           #

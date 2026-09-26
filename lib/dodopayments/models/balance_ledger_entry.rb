@@ -116,6 +116,9 @@ module Dodopayments
         DISPUTE_FEES_REVERSAL = :dispute_fees_reversal
         DEFLECTION_FEES = :deflection_fees
         DEFLECTION_FEES_REVERSAL = :deflection_fees_reversal
+        RESERVE_HOLD = :reserve_hold
+        RESERVE_RELEASE = :reserve_release
+        MODERATION_FEES = :moderation_fees
 
         # @!method self.values
         #   @return [Array<Symbol>]

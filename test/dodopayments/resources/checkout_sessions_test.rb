@@ -60,6 +60,7 @@ class Dodopayments::Test::Resources::CheckoutSessionsTest < Dodopayments::Test::
         total_price: Integer,
         next_billing_date: Time | nil,
         recurring_breakup: Dodopayments::Models::CheckoutSessionPreviewResponse::RecurringBreakup | nil,
+        subscriptions: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::CheckoutSessionPreviewResponse::Subscription]) | nil,
         tax_id_business_name: String | nil,
         tax_id_err_msg: String | nil,
         tax_id_format_name: String | nil,

@@ -8,9 +8,11 @@ module Dodopayments
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
         has_license_key: bool,
+        is_multi_subscription: bool,
         metadata: Dodopayments::Models::metadata,
         payment_id: String,
         payment_provider: Dodopayments::Models::PaymentListResponse::payment_provider,
+        subscription_ids: ::Array[String],
         total_amount: Integer,
         card_last_four: String?,
         card_network: String?,
@@ -37,11 +39,15 @@ module Dodopayments
 
       attr_accessor has_license_key: bool
 
+      attr_accessor is_multi_subscription: bool
+
       attr_accessor metadata: Dodopayments::Models::metadata
 
       attr_accessor payment_id: String
 
       attr_accessor payment_provider: Dodopayments::Models::PaymentListResponse::payment_provider
+
+      attr_accessor subscription_ids: ::Array[String]
 
       attr_accessor total_amount: Integer
 
@@ -72,9 +78,11 @@ module Dodopayments
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
         has_license_key: bool,
+        is_multi_subscription: bool,
         metadata: Dodopayments::Models::metadata,
         payment_id: String,
         payment_provider: Dodopayments::Models::PaymentListResponse::payment_provider,
+        subscription_ids: ::Array[String],
         total_amount: Integer,
         ?card_last_four: String?,
         ?card_network: String?,
@@ -95,9 +103,11 @@ module Dodopayments
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
         has_license_key: bool,
+        is_multi_subscription: bool,
         metadata: Dodopayments::Models::metadata,
         payment_id: String,
         payment_provider: Dodopayments::Models::PaymentListResponse::payment_provider,
+        subscription_ids: ::Array[String],
         total_amount: Integer,
         card_last_four: String?,
         card_network: String?,
