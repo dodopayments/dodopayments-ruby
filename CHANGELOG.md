@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.31.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.30.0...v2.31.0) (2026-10-05)
+
+
+### Features
+
+* **api:** refund network references and subscription cancelled_by ([356d0ed](https://github.com/dodopayments/dodopayments-ruby/commit/356d0edaaf1e6008268bc6abefe9f2567e8f89ab))
+* **api:** refund network references and subscription cancelled_by ([565e4b2](https://github.com/dodopayments/dodopayments-ruby/commit/565e4b2b7843f206e4f327e421fc000ad7e075df))
+
 ## [2.30.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.29.0...v2.30.0) (2026-09-25)
 
 
