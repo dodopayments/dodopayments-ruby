@@ -118,6 +118,18 @@ module Dodopayments
       sig { returns(T.nilable(Time)) }
       attr_accessor :cancelled_at
 
+      # The caller that cancelled the subscription or scheduled its cancel. `null` when
+      # no caller is known, for example when the system cancelled the subscription.
+      sig { returns(T.nilable(Dodopayments::SubscriptionCancelledBy)) }
+      attr_reader :cancelled_by
+
+      sig do
+        params(
+          cancelled_by: T.nilable(Dodopayments::SubscriptionCancelledBy::OrHash)
+        ).void
+      end
+      attr_writer :cancelled_by
+
       # Business / legal name associated with the tax id (B2B). When set this is used on
       # the invoice in place of the customer's personal name.
       sig { returns(T.nilable(String)) }
@@ -194,6 +206,8 @@ module Dodopayments
           tax_inclusive: T::Boolean,
           trial_period_days: Integer,
           cancelled_at: T.nilable(Time),
+          cancelled_by:
+            T.nilable(Dodopayments::SubscriptionCancelledBy::OrHash),
           customer_business_name: T.nilable(String),
           discount_cycles_remaining: T.nilable(Integer),
           discount_id: T.nilable(String),
@@ -256,6 +270,9 @@ module Dodopayments
         trial_period_days:,
         # Cancelled timestamp if the subscription is cancelled
         cancelled_at: nil,
+        # The caller that cancelled the subscription or scheduled its cancel. `null` when
+        # no caller is known, for example when the system cancelled the subscription.
+        cancelled_by: nil,
         # Business / legal name associated with the tax id (B2B). When set this is used on
         # the invoice in place of the customer's personal name.
         customer_business_name: nil,
@@ -312,6 +329,7 @@ module Dodopayments
             tax_inclusive: T::Boolean,
             trial_period_days: Integer,
             cancelled_at: T.nilable(Time),
+            cancelled_by: T.nilable(Dodopayments::SubscriptionCancelledBy),
             customer_business_name: T.nilable(String),
             discount_cycles_remaining: T.nilable(Integer),
             discount_id: T.nilable(String),

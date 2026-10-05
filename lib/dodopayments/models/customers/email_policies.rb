@@ -5,7 +5,8 @@ module Dodopayments
     module Customers
       class EmailPolicies < Dodopayments::Internal::Type::BaseModel
         # @!attribute requires_different_address
-        #   A permanent failure was recorded, so the same address would be a no-op.
+        #   A permanent failure was recorded, so a send to the same address delivers
+        #   nothing. It is false for a suppressed address that a resend can clear.
         #
         #   @return [Boolean]
         required :requires_different_address, Dodopayments::Internal::Type::Boolean
@@ -43,7 +44,7 @@ module Dodopayments
         #   What the merchant may do with one row. The server decides; the client never
         #   derives eligibility itself.
         #
-        #   @param requires_different_address [Boolean] A permanent failure was recorded, so the same address would be a no-op.
+        #   @param requires_different_address [Boolean] A permanent failure was recorded, so a send to the same address delivers
         #
         #   @param resend_allowed [Boolean] The row was delivered and may be sent again.
         #

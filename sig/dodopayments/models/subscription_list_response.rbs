@@ -25,6 +25,7 @@ module Dodopayments
         tax_inclusive: bool,
         trial_period_days: Integer,
         cancelled_at: Time?,
+        cancelled_by: Dodopayments::SubscriptionCancelledBy?,
         customer_business_name: String?,
         discount_cycles_remaining: Integer?,
         discount_id: String?,
@@ -83,6 +84,8 @@ module Dodopayments
 
       attr_accessor cancelled_at: Time?
 
+      attr_accessor cancelled_by: Dodopayments::SubscriptionCancelledBy?
+
       attr_accessor customer_business_name: String?
 
       attr_accessor discount_cycles_remaining: Integer?
@@ -125,6 +128,7 @@ module Dodopayments
         tax_inclusive: bool,
         trial_period_days: Integer,
         ?cancelled_at: Time?,
+        ?cancelled_by: Dodopayments::SubscriptionCancelledBy?,
         ?customer_business_name: String?,
         ?discount_cycles_remaining: Integer?,
         ?discount_id: String?,
@@ -160,6 +164,7 @@ module Dodopayments
         tax_inclusive: bool,
         trial_period_days: Integer,
         cancelled_at: Time?,
+        cancelled_by: Dodopayments::SubscriptionCancelledBy?,
         customer_business_name: String?,
         discount_cycles_remaining: Integer?,
         discount_id: String?,

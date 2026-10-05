@@ -325,14 +325,23 @@ module Dodopayments
           required :currency, enum: -> { Dodopayments::Currency }
 
           # @!attribute customer_credits
-          #   Net credit movement in the smallest currency unit (e.g. cents). **Negative** –
-          #   credits were deducted from the customer's balance to offset the charge (typical
-          #   on upgrades). **Positive** – credits were added to the customer's balance,
-          #   either from a downgrade proration refund or from topping-up the wallet to meet a
-          #   gateway minimum-charge threshold. **Zero** – no credit movement occurred.
+          #   Net credit movement in the smallest unit of `customer_credits_currency` (e.g.
+          #   cents). Read `customer_credits_currency` for the currency. It can differ from
+          #   `currency`. **Negative** – credits were deducted from the customer's balance to
+          #   offset the charge (typical on upgrades). **Positive** – credits were added to
+          #   the customer's balance, either from a downgrade proration refund or from
+          #   topping-up the wallet to meet a gateway minimum-charge threshold. **Zero** – no
+          #   credit movement occurred.
           #
           #   @return [Integer]
           required :customer_credits, Integer
+
+          # @!attribute customer_credits_currency
+          #   This field gives the currency of `customer_credits`. The credit wallet uses the
+          #   subscription currency.
+          #
+          #   @return [Symbol, Dodopayments::Models::Currency]
+          required :customer_credits_currency, enum: -> { Dodopayments::Currency }
 
           # @!attribute settlement_amount
           #
@@ -359,14 +368,16 @@ module Dodopayments
           #   @return [Integer, nil]
           optional :tax, Integer, nil?: true
 
-          # @!method initialize(currency:, customer_credits:, settlement_amount:, settlement_currency:, total_amount:, settlement_tax: nil, tax: nil)
+          # @!method initialize(currency:, customer_credits:, customer_credits_currency:, settlement_amount:, settlement_currency:, total_amount:, settlement_tax: nil, tax: nil)
           #   Some parameter documentations has been truncated, see
           #   {Dodopayments::Models::SubscriptionPreviewChangePlanResponse::ImmediateCharge::Summary}
           #   for more details.
           #
           #   @param currency [Symbol, Dodopayments::Models::Currency]
           #
-          #   @param customer_credits [Integer] Net credit movement in the smallest currency unit (e.g. cents).
+          #   @param customer_credits [Integer] Net credit movement in the smallest unit of `customer_credits_currency` (e.g. ce
+          #
+          #   @param customer_credits_currency [Symbol, Dodopayments::Models::Currency] This field gives the currency of `customer_credits`.
           #
           #   @param settlement_amount [Integer]
           #

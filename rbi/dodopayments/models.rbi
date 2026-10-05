@@ -484,6 +484,8 @@ module Dodopayments
 
   RefundListParams = Dodopayments::Models::RefundListParams
 
+  RefundNetworkReferenceType = Dodopayments::Models::RefundNetworkReferenceType
+
   RefundRetrieveParams = Dodopayments::Models::RefundRetrieveParams
 
   RefundStatus = Dodopayments::Models::RefundStatus
@@ -500,6 +502,8 @@ module Dodopayments
 
   SubscriptionCancelChangePlanParams =
     Dodopayments::Models::SubscriptionCancelChangePlanParams
+
+  SubscriptionCancelledBy = Dodopayments::Models::SubscriptionCancelledBy
 
   SubscriptionCancelledWebhookEvent =
     Dodopayments::Models::SubscriptionCancelledWebhookEvent

@@ -1,0 +1,20 @@
+module Dodopayments
+  module Models
+    type refund_network_reference_type =
+      :acquirer_reference_number
+      | :system_trace_audit_number
+      | :retrieval_reference_number
+      | :other
+
+    module RefundNetworkReferenceType
+      extend Dodopayments::Internal::Type::Enum
+
+      ACQUIRER_REFERENCE_NUMBER: :acquirer_reference_number
+      SYSTEM_TRACE_AUDIT_NUMBER: :system_trace_audit_number
+      RETRIEVAL_REFERENCE_NUMBER: :retrieval_reference_number
+      OTHER: :other
+
+      def self?.values: -> ::Array[Dodopayments::Models::refund_network_reference_type]
+    end
+  end
+end

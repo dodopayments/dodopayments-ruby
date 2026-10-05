@@ -1,0 +1,43 @@
+module Dodopayments
+  module Models
+    type subscription_cancelled_by =
+      {
+        actor_type: Dodopayments::Models::SubscriptionCancelledBy::actor_type,
+        email: String?,
+        name: String?
+      }
+
+    class SubscriptionCancelledBy < Dodopayments::Internal::Type::BaseModel
+      attr_accessor actor_type: Dodopayments::Models::SubscriptionCancelledBy::actor_type
+
+      attr_accessor email: String?
+
+      attr_accessor name: String?
+
+      def initialize: (
+        actor_type: Dodopayments::Models::SubscriptionCancelledBy::actor_type,
+        ?email: String?,
+        ?name: String?
+      ) -> void
+
+      def to_hash: -> {
+        actor_type: Dodopayments::Models::SubscriptionCancelledBy::actor_type,
+        email: String?,
+        name: String?
+      }
+
+      type actor_type = :customer | :merchant_user | :api_key | :dodo_team
+
+      module ActorType
+        extend Dodopayments::Internal::Type::Enum
+
+        CUSTOMER: :customer
+        MERCHANT_USER: :merchant_user
+        API_KEY: :api_key
+        DODO_TEAM: :dodo_team
+
+        def self?.values: -> ::Array[Dodopayments::Models::SubscriptionCancelledBy::actor_type]
+      end
+    end
+  end
+end
