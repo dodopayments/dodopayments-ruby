@@ -31,6 +31,7 @@ module Dodopayments
         cancellation_comment: String?,
         cancellation_feedback: Dodopayments::Models::cancellation_feedback?,
         cancelled_at: Time?,
+        cancelled_by: Dodopayments::SubscriptionCancelledBy?,
         custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?,
         customer_business_name: String?,
         discount_cycles_remaining: Integer?,
@@ -103,6 +104,8 @@ module Dodopayments
 
       attr_accessor cancelled_at: Time?
 
+      attr_accessor cancelled_by: Dodopayments::SubscriptionCancelledBy?
+
       attr_accessor custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?
 
       attr_accessor customer_business_name: String?
@@ -155,6 +158,7 @@ module Dodopayments
         ?cancellation_comment: String?,
         ?cancellation_feedback: Dodopayments::Models::cancellation_feedback?,
         ?cancelled_at: Time?,
+        ?cancelled_by: Dodopayments::SubscriptionCancelledBy?,
         ?custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?,
         ?customer_business_name: String?,
         ?discount_cycles_remaining: Integer?,
@@ -198,6 +202,7 @@ module Dodopayments
         cancellation_comment: String?,
         cancellation_feedback: Dodopayments::Models::cancellation_feedback?,
         cancelled_at: Time?,
+        cancelled_by: Dodopayments::SubscriptionCancelledBy?,
         custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?,
         customer_business_name: String?,
         discount_cycles_remaining: Integer?,

@@ -70,13 +70,30 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::Currency, nil]
       optional :currency, enum: -> { Dodopayments::Currency }, nil?: true
 
+      # @!attribute network_reference
+      #   The reference number that the card network or the bank gives to the refund. The
+      #   customer can give this number to their bank to trace the refund. It is null
+      #   until the payment processor sends it.
+      #
+      #   @return [String, nil]
+      optional :network_reference, String, nil?: true
+
+      # @!attribute network_reference_type
+      #   The kind of `network_reference`: ARN, STAN or RRN.
+      #
+      #   @return [Symbol, Dodopayments::Models::RefundNetworkReferenceType, nil]
+      optional :network_reference_type, enum: -> { Dodopayments::RefundNetworkReferenceType }, nil?: true
+
       # @!attribute reason
       #   The reason provided for the refund, if any. Optional.
       #
       #   @return [String, nil]
       optional :reason, String, nil?: true
 
-      # @!method initialize(brand_id:, business_id:, created_at:, customer:, is_partial:, metadata:, payment_id:, refund_id:, status:, amount: nil, currency: nil, reason: nil)
+      # @!method initialize(brand_id:, business_id:, created_at:, customer:, is_partial:, metadata:, payment_id:, refund_id:, status:, amount: nil, currency: nil, network_reference: nil, network_reference_type: nil, reason: nil)
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::Refund} for more details.
+      #
       #   @param brand_id [String] Brand id this refund belongs to
       #
       #   @param business_id [String] The unique identifier of the business issuing the refund.
@@ -98,6 +115,10 @@ module Dodopayments
       #   @param amount [Integer, nil] The refunded amount.
       #
       #   @param currency [Symbol, Dodopayments::Models::Currency, nil] The currency of the refund, represented as an ISO 4217 currency code.
+      #
+      #   @param network_reference [String, nil] The reference number that the card network or the bank gives to the refund. The
+      #
+      #   @param network_reference_type [Symbol, Dodopayments::Models::RefundNetworkReferenceType, nil] The kind of `network_reference`: ARN, STAN or RRN.
       #
       #   @param reason [String, nil] The reason provided for the refund, if any. Optional.
     end

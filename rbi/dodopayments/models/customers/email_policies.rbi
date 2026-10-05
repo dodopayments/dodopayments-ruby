@@ -12,7 +12,8 @@ module Dodopayments
             )
           end
 
-        # A permanent failure was recorded, so the same address would be a no-op.
+        # A permanent failure was recorded, so a send to the same address delivers
+        # nothing. It is false for a suppressed address that a resend can clear.
         sig { returns(T::Boolean) }
         attr_accessor :requires_different_address
 
@@ -46,7 +47,8 @@ module Dodopayments
           ).returns(T.attached_class)
         end
         def self.new(
-          # A permanent failure was recorded, so the same address would be a no-op.
+          # A permanent failure was recorded, so a send to the same address delivers
+          # nothing. It is false for a suppressed address that a resend can clear.
           requires_different_address:,
           # The row was delivered and may be sent again.
           resend_allowed:,

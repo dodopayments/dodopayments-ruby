@@ -146,6 +146,13 @@ module Dodopayments
       #   @return [Time, nil]
       optional :cancelled_at, Time, nil?: true
 
+      # @!attribute cancelled_by
+      #   The caller that cancelled the subscription or scheduled its cancel. `null` when
+      #   no caller is known, for example when the system cancelled the subscription.
+      #
+      #   @return [Dodopayments::Models::SubscriptionCancelledBy, nil]
+      optional :cancelled_by, -> { Dodopayments::SubscriptionCancelledBy }, nil?: true
+
       # @!attribute customer_business_name
       #   Business / legal name associated with the tax id (B2B). When set this is used on
       #   the invoice in place of the customer's personal name.
@@ -204,7 +211,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :trial_amount, Integer, nil?: true
 
-      # @!method initialize(billing:, cancel_at_next_billing_date:, created_at:, currency:, customer:, discounts:, has_payment_method:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, customer_business_name: nil, discount_cycles_remaining: nil, discount_id: nil, paused_at: nil, payment_method_id: nil, product_name: nil, scheduled_change: nil, tax_id: nil, trial_amount: nil)
+      # @!method initialize(billing:, cancel_at_next_billing_date:, created_at:, currency:, customer:, discounts:, has_payment_method:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, cancelled_by: nil, customer_business_name: nil, discount_cycles_remaining: nil, discount_id: nil, paused_at: nil, payment_method_id: nil, product_name: nil, scheduled_change: nil, tax_id: nil, trial_amount: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionListResponse} for more details.
       #
@@ -255,6 +262,8 @@ module Dodopayments
       #   @param trial_period_days [Integer] Number of days in the trial period (0 if no trial)
       #
       #   @param cancelled_at [Time, nil] Cancelled timestamp if the subscription is cancelled
+      #
+      #   @param cancelled_by [Dodopayments::Models::SubscriptionCancelledBy, nil] The caller that cancelled the subscription or scheduled its cancel.
       #
       #   @param customer_business_name [String, nil] Business / legal name associated with the tax id (B2B). When set this is
       #
