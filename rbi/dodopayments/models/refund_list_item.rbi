@@ -40,6 +40,20 @@ module Dodopayments
       sig { returns(T.nilable(Dodopayments::Currency::TaggedSymbol)) }
       attr_accessor :currency
 
+      # The reference number that the card network or the bank gives to the refund. The
+      # customer can give this number to their bank to trace the refund. It is null
+      # until the payment processor sends it.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :network_reference
+
+      # The kind of `network_reference`: ARN, STAN or RRN.
+      sig do
+        returns(
+          T.nilable(Dodopayments::RefundNetworkReferenceType::TaggedSymbol)
+        )
+      end
+      attr_accessor :network_reference_type
+
       # The reason provided for the refund, if any. Optional.
       sig { returns(T.nilable(String)) }
       attr_accessor :reason
@@ -54,6 +68,9 @@ module Dodopayments
           status: Dodopayments::RefundStatus::OrSymbol,
           amount: T.nilable(Integer),
           currency: T.nilable(Dodopayments::Currency::OrSymbol),
+          network_reference: T.nilable(String),
+          network_reference_type:
+            T.nilable(Dodopayments::RefundNetworkReferenceType::OrSymbol),
           reason: T.nilable(String)
         ).returns(T.attached_class)
       end
@@ -74,6 +91,12 @@ module Dodopayments
         amount: nil,
         # The currency of the refund, represented as an ISO 4217 currency code.
         currency: nil,
+        # The reference number that the card network or the bank gives to the refund. The
+        # customer can give this number to their bank to trace the refund. It is null
+        # until the payment processor sends it.
+        network_reference: nil,
+        # The kind of `network_reference`: ARN, STAN or RRN.
+        network_reference_type: nil,
         # The reason provided for the refund, if any. Optional.
         reason: nil
       )
@@ -90,6 +113,9 @@ module Dodopayments
             status: Dodopayments::RefundStatus::TaggedSymbol,
             amount: T.nilable(Integer),
             currency: T.nilable(Dodopayments::Currency::TaggedSymbol),
+            network_reference: T.nilable(String),
+            network_reference_type:
+              T.nilable(Dodopayments::RefundNetworkReferenceType::TaggedSymbol),
             reason: T.nilable(String)
           }
         )

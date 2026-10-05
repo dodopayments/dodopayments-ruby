@@ -40,7 +40,14 @@ module Dodopayments
       end
       attr_writer :billing_address
 
-      # This field is ingored if adaptive pricing is disabled
+      # The currency to charge the customer in.
+      #
+      # Adaptive pricing must be enabled for the business. The customer then pays in
+      # this currency. If you do not set it, the currency comes from the billing
+      # country.
+      #
+      # If adaptive pricing is disabled, the API discards this field. The currency then
+      # comes from the product price, or from the billing country.
       sig { returns(T.nilable(Dodopayments::Currency::OrSymbol)) }
       attr_accessor :billing_currency
 
@@ -133,11 +140,11 @@ module Dodopayments
 
       # If true, only zipcode is required when confirm is true; other address fields
       # remain optional
+      #
+      # Default is true when `feature_flags.single_page` is true. Otherwise, default is
+      # false.
       sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :minimal_address
-
-      sig { params(minimal_address: T::Boolean).void }
-      attr_writer :minimal_address
+      attr_accessor :minimal_address
 
       # Optional payment method ID to use for this checkout session. Only allowed when
       # `confirm` is true. If provided, existing customer id must also be provided.
@@ -208,7 +215,7 @@ module Dodopayments
           mandate_min_amount_inr_paise: T.nilable(Integer),
           metadata:
             T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
-          minimal_address: T::Boolean,
+          minimal_address: T.nilable(T::Boolean),
           payment_method_id: T.nilable(String),
           product_collection_id: T.nilable(String),
           return_url: T.nilable(String),
@@ -232,7 +239,14 @@ module Dodopayments
         allowed_payment_method_types: nil,
         # Billing address information for the session
         billing_address: nil,
-        # This field is ingored if adaptive pricing is disabled
+        # The currency to charge the customer in.
+        #
+        # Adaptive pricing must be enabled for the business. The customer then pays in
+        # this currency. If you do not set it, the currency comes from the billing
+        # country.
+        #
+        # If adaptive pricing is disabled, the API discards this field. The currency then
+        # comes from the product price, or from the billing country.
         billing_currency: nil,
         # The URL to redirect the customer if they cancel or go back from the checkout. If
         # not provided, the back button will not be displayed.
@@ -271,6 +285,9 @@ module Dodopayments
         metadata: nil,
         # If true, only zipcode is required when confirm is true; other address fields
         # remain optional
+        #
+        # Default is true when `feature_flags.single_page` is true. Otherwise, default is
+        # false.
         minimal_address: nil,
         # Optional payment method ID to use for this checkout session. Only allowed when
         # `confirm` is true. If provided, existing customer id must also be provided.
@@ -318,7 +335,7 @@ module Dodopayments
             mandate_min_amount_inr_paise: T.nilable(Integer),
             metadata:
               T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
-            minimal_address: T::Boolean,
+            minimal_address: T.nilable(T::Boolean),
             payment_method_id: T.nilable(String),
             product_collection_id: T.nilable(String),
             return_url: T.nilable(String),

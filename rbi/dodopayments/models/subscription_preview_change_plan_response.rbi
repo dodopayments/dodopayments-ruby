@@ -477,13 +477,20 @@ module Dodopayments
           sig { returns(Dodopayments::Currency::TaggedSymbol) }
           attr_accessor :currency
 
-          # Net credit movement in the smallest currency unit (e.g. cents). **Negative** –
-          # credits were deducted from the customer's balance to offset the charge (typical
-          # on upgrades). **Positive** – credits were added to the customer's balance,
-          # either from a downgrade proration refund or from topping-up the wallet to meet a
-          # gateway minimum-charge threshold. **Zero** – no credit movement occurred.
+          # Net credit movement in the smallest unit of `customer_credits_currency` (e.g.
+          # cents). Read `customer_credits_currency` for the currency. It can differ from
+          # `currency`. **Negative** – credits were deducted from the customer's balance to
+          # offset the charge (typical on upgrades). **Positive** – credits were added to
+          # the customer's balance, either from a downgrade proration refund or from
+          # topping-up the wallet to meet a gateway minimum-charge threshold. **Zero** – no
+          # credit movement occurred.
           sig { returns(Integer) }
           attr_accessor :customer_credits
+
+          # This field gives the currency of `customer_credits`. The credit wallet uses the
+          # subscription currency.
+          sig { returns(Dodopayments::Currency::TaggedSymbol) }
+          attr_accessor :customer_credits_currency
 
           sig { returns(Integer) }
           attr_accessor :settlement_amount
@@ -504,6 +511,7 @@ module Dodopayments
             params(
               currency: Dodopayments::Currency::OrSymbol,
               customer_credits: Integer,
+              customer_credits_currency: Dodopayments::Currency::OrSymbol,
               settlement_amount: Integer,
               settlement_currency: Dodopayments::Currency::OrSymbol,
               total_amount: Integer,
@@ -513,12 +521,17 @@ module Dodopayments
           end
           def self.new(
             currency:,
-            # Net credit movement in the smallest currency unit (e.g. cents). **Negative** –
-            # credits were deducted from the customer's balance to offset the charge (typical
-            # on upgrades). **Positive** – credits were added to the customer's balance,
-            # either from a downgrade proration refund or from topping-up the wallet to meet a
-            # gateway minimum-charge threshold. **Zero** – no credit movement occurred.
+            # Net credit movement in the smallest unit of `customer_credits_currency` (e.g.
+            # cents). Read `customer_credits_currency` for the currency. It can differ from
+            # `currency`. **Negative** – credits were deducted from the customer's balance to
+            # offset the charge (typical on upgrades). **Positive** – credits were added to
+            # the customer's balance, either from a downgrade proration refund or from
+            # topping-up the wallet to meet a gateway minimum-charge threshold. **Zero** – no
+            # credit movement occurred.
             customer_credits:,
+            # This field gives the currency of `customer_credits`. The credit wallet uses the
+            # subscription currency.
+            customer_credits_currency:,
             settlement_amount:,
             settlement_currency:,
             total_amount:,
@@ -532,6 +545,7 @@ module Dodopayments
               {
                 currency: Dodopayments::Currency::TaggedSymbol,
                 customer_credits: Integer,
+                customer_credits_currency: Dodopayments::Currency::TaggedSymbol,
                 settlement_amount: Integer,
                 settlement_currency: Dodopayments::Currency::TaggedSymbol,
                 total_amount: Integer,
