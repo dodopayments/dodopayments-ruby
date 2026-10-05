@@ -18,7 +18,7 @@ module Dodopayments
         :force_3ds => bool?,
         mandate_min_amount_inr_paise: Integer?,
         metadata: Dodopayments::Models::metadata?,
-        minimal_address: bool,
+        minimal_address: bool?,
         payment_method_id: String?,
         product_collection_id: String?,
         return_url: String?,
@@ -71,9 +71,7 @@ module Dodopayments
 
       attr_accessor metadata: Dodopayments::Models::metadata?
 
-      attr_reader minimal_address: bool?
-
-      def minimal_address=: (bool) -> bool
+      attr_accessor minimal_address: bool?
 
       attr_accessor payment_method_id: String?
 
@@ -110,7 +108,7 @@ module Dodopayments
         ?force_3ds: bool?,
         ?mandate_min_amount_inr_paise: Integer?,
         ?metadata: Dodopayments::Models::metadata?,
-        ?minimal_address: bool,
+        ?minimal_address: bool?,
         ?payment_method_id: String?,
         ?product_collection_id: String?,
         ?return_url: String?,
@@ -137,7 +135,7 @@ module Dodopayments
         :force_3ds => bool?,
         mandate_min_amount_inr_paise: Integer?,
         metadata: Dodopayments::Models::metadata?,
-        minimal_address: bool,
+        minimal_address: bool?,
         payment_method_id: String?,
         product_collection_id: String?,
         return_url: String?,

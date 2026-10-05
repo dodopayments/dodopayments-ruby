@@ -139,6 +139,18 @@ module Dodopayments
       sig { returns(T.nilable(Time)) }
       attr_accessor :cancelled_at
 
+      # The caller that cancelled the subscription or scheduled its cancel. `null` when
+      # no caller is known, for example when the system cancelled the subscription.
+      sig { returns(T.nilable(Dodopayments::SubscriptionCancelledBy)) }
+      attr_reader :cancelled_by
+
+      sig do
+        params(
+          cancelled_by: T.nilable(Dodopayments::SubscriptionCancelledBy::OrHash)
+        ).void
+      end
+      attr_writer :cancelled_by
+
       # Customer's responses to custom fields collected during checkout
       sig { returns(T.nilable(T::Array[Dodopayments::CustomFieldResponse])) }
       attr_accessor :custom_field_responses
@@ -229,6 +241,8 @@ module Dodopayments
           cancellation_feedback:
             T.nilable(Dodopayments::CancellationFeedback::OrSymbol),
           cancelled_at: T.nilable(Time),
+          cancelled_by:
+            T.nilable(Dodopayments::SubscriptionCancelledBy::OrHash),
           custom_field_responses:
             T.nilable(T::Array[Dodopayments::CustomFieldResponse::OrHash]),
           customer_business_name: T.nilable(String),
@@ -306,6 +320,9 @@ module Dodopayments
         cancellation_feedback: nil,
         # Cancelled timestamp if the subscription is cancelled
         cancelled_at: nil,
+        # The caller that cancelled the subscription or scheduled its cancel. `null` when
+        # no caller is known, for example when the system cancelled the subscription.
+        cancelled_by: nil,
         # Customer's responses to custom fields collected during checkout
         custom_field_responses: nil,
         # Business / legal name associated with the tax id (B2B). When set this is used on
@@ -372,6 +389,7 @@ module Dodopayments
             cancellation_feedback:
               T.nilable(Dodopayments::CancellationFeedback::TaggedSymbol),
             cancelled_at: T.nilable(Time),
+            cancelled_by: T.nilable(Dodopayments::SubscriptionCancelledBy),
             custom_field_responses:
               T.nilable(T::Array[Dodopayments::CustomFieldResponse]),
             customer_business_name: T.nilable(String),

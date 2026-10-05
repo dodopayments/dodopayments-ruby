@@ -31,7 +31,14 @@ module Dodopayments
       optional :billing_address, -> { Dodopayments::CheckoutSessionBillingAddress }, nil?: true
 
       # @!attribute billing_currency
-      #   This field is ingored if adaptive pricing is disabled
+      #   The currency to charge the customer in.
+      #
+      #   Adaptive pricing must be enabled for the business. The customer then pays in
+      #   this currency. If you do not set it, the currency comes from the billing
+      #   country.
+      #
+      #   If adaptive pricing is disabled, the API discards this field. The currency then
+      #   comes from the product price, or from the billing country.
       #
       #   @return [Symbol, Dodopayments::Models::Currency, nil]
       optional :billing_currency, enum: -> { Dodopayments::Currency }, nil?: true
@@ -129,8 +136,11 @@ module Dodopayments
       #   If true, only zipcode is required when confirm is true; other address fields
       #   remain optional
       #
+      #   Default is true when `feature_flags.single_page` is true. Otherwise, default is
+      #   false.
+      #
       #   @return [Boolean, nil]
-      optional :minimal_address, Dodopayments::Internal::Type::Boolean
+      optional :minimal_address, Dodopayments::Internal::Type::Boolean, nil?: true
 
       # @!attribute payment_method_id
       #   Optional payment method ID to use for this checkout session. Only allowed when
@@ -185,7 +195,7 @@ module Dodopayments
       #
       #   @param billing_address [Dodopayments::Models::CheckoutSessionBillingAddress, nil] Billing address information for the session
       #
-      #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] This field is ingored if adaptive pricing is disabled
+      #   @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] The currency to charge the customer in.
       #
       #   @param cancel_url [String, nil] The URL to redirect the customer if they cancel or go back from the checkout.
       #
@@ -211,7 +221,7 @@ module Dodopayments
       #
       #   @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Additional metadata associated with the payment. Defaults to empty if not provid
       #
-      #   @param minimal_address [Boolean] If true, only zipcode is required when confirm is true; other address fields rem
+      #   @param minimal_address [Boolean, nil] If true, only zipcode is required when confirm is true; other address fields rem
       #
       #   @param payment_method_id [String, nil] Optional payment method ID to use for this checkout session.
       #

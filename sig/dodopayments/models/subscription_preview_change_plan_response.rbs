@@ -283,6 +283,7 @@ module Dodopayments
           {
             currency: Dodopayments::Models::currency,
             customer_credits: Integer,
+            customer_credits_currency: Dodopayments::Models::currency,
             settlement_amount: Integer,
             settlement_currency: Dodopayments::Models::currency,
             total_amount: Integer,
@@ -294,6 +295,8 @@ module Dodopayments
           attr_accessor currency: Dodopayments::Models::currency
 
           attr_accessor customer_credits: Integer
+
+          attr_accessor customer_credits_currency: Dodopayments::Models::currency
 
           attr_accessor settlement_amount: Integer
 
@@ -308,6 +311,7 @@ module Dodopayments
           def initialize: (
             currency: Dodopayments::Models::currency,
             customer_credits: Integer,
+            customer_credits_currency: Dodopayments::Models::currency,
             settlement_amount: Integer,
             settlement_currency: Dodopayments::Models::currency,
             total_amount: Integer,
@@ -318,6 +322,7 @@ module Dodopayments
           def to_hash: -> {
             currency: Dodopayments::Models::currency,
             customer_credits: Integer,
+            customer_credits_currency: Dodopayments::Models::currency,
             settlement_amount: Integer,
             settlement_currency: Dodopayments::Models::currency,
             total_amount: Integer,
