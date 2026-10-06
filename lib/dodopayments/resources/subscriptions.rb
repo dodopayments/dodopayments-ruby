@@ -209,7 +209,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionChangePlanParams} for more details.
       #
-      # @overload change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, cancel_scheduled_change_plan: nil, collect_via_payment_link: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, request_options: {})
+      # @overload change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, cancel_older_payment_link: nil, cancel_scheduled_change_plan: nil, collect_via_payment_link: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, return_url: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -222,6 +222,8 @@ module Dodopayments
       # @param adaptive_currency_fees_inclusive [Boolean, nil] Whether adaptive currency fees should be included in the price (true) or added o
       #
       # @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
+      #
+      # @param cancel_older_payment_link [Boolean] Cancel the payment link of a pending plan change, so that this change
       #
       # @param cancel_scheduled_change_plan [Boolean] Replace a scheduled plan change with this one.
       #
@@ -236,6 +238,8 @@ module Dodopayments
       # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
       # @param on_payment_failure [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::OnPaymentFailure, nil] Controls behavior when the plan change payment fails.
+      #
+      # @param return_url [String, nil] The URL that receives the customer after they pay the payment link.
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -291,7 +295,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionPreviewChangePlanParams} for more details.
       #
-      # @overload preview_change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, cancel_scheduled_change_plan: nil, collect_via_payment_link: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, request_options: {})
+      # @overload preview_change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, cancel_older_payment_link: nil, cancel_scheduled_change_plan: nil, collect_via_payment_link: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, return_url: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -304,6 +308,8 @@ module Dodopayments
       # @param adaptive_currency_fees_inclusive [Boolean, nil] Whether adaptive currency fees should be included in the price (true) or added o
       #
       # @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
+      #
+      # @param cancel_older_payment_link [Boolean] Cancel the payment link of a pending plan change, so that this change
       #
       # @param cancel_scheduled_change_plan [Boolean] Replace a scheduled plan change with this one.
       #
@@ -318,6 +324,8 @@ module Dodopayments
       # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
       # @param on_payment_failure [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::OnPaymentFailure, nil] Controls behavior when the plan change payment fails.
+      #
+      # @param return_url [String, nil] The URL that receives the customer after they pay the payment link.
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
