@@ -59,7 +59,7 @@ module Dodopayments
 
       # The reference number that the card network or the bank gives to the refund. The
       # customer can give this number to their bank to trace the refund. It is null
-      # until the payment processor sends it.
+      # until the reference is available.
       sig { returns(T.nilable(String)) }
       attr_accessor :network_reference
 
@@ -119,7 +119,7 @@ module Dodopayments
         currency: nil,
         # The reference number that the card network or the bank gives to the refund. The
         # customer can give this number to their bank to trace the refund. It is null
-        # until the payment processor sends it.
+        # until the reference is available.
         network_reference: nil,
         # The kind of `network_reference`: ARN, STAN or RRN.
         network_reference_type: nil,
