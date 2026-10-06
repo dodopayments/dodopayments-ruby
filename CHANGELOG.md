@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.32.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.31.0...v2.32.0) (2026-10-06)
+
+
+### Features
+
+* **api:** change-plan cancel_older_payment_link and return_url ([ab42639](https://github.com/dodopayments/dodopayments-ruby/commit/ab42639341e3c3a4595df8792c706ac6cf13d9ce))
+* **api:** change-plan cancel_older_payment_link and return_url ([2b46789](https://github.com/dodopayments/dodopayments-ruby/commit/2b46789c533195890369df6a54daf324b9c689f7))
+
 ## [2.31.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.30.0...v2.31.0) (2026-10-05)
 
 
