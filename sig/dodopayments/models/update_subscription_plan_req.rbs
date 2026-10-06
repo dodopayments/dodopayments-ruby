@@ -7,13 +7,15 @@ module Dodopayments
         quantity: Integer,
         adaptive_currency_fees_inclusive: bool?,
         addons: ::Array[Dodopayments::AttachAddon]?,
+        cancel_older_payment_link: bool,
         cancel_scheduled_change_plan: bool,
         collect_via_payment_link: bool,
         discount_code: String?,
         discount_codes: ::Array[String]?,
         effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
         metadata: Dodopayments::Models::metadata?,
-        on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
+        on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?,
+        return_url: String?
       }
 
     class UpdateSubscriptionPlanReq < Dodopayments::Internal::Type::BaseModel
@@ -26,6 +28,10 @@ module Dodopayments
       attr_accessor adaptive_currency_fees_inclusive: bool?
 
       attr_accessor addons: ::Array[Dodopayments::AttachAddon]?
+
+      attr_reader cancel_older_payment_link: bool?
+
+      def cancel_older_payment_link=: (bool) -> bool
 
       attr_reader cancel_scheduled_change_plan: bool?
 
@@ -49,19 +55,23 @@ module Dodopayments
 
       attr_accessor on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
 
+      attr_accessor return_url: String?
+
       def initialize: (
         product_id: String,
         proration_billing_mode: Dodopayments::Models::UpdateSubscriptionPlanReq::proration_billing_mode,
         quantity: Integer,
         ?adaptive_currency_fees_inclusive: bool?,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
+        ?cancel_older_payment_link: bool,
         ?cancel_scheduled_change_plan: bool,
         ?collect_via_payment_link: bool,
         ?discount_code: String?,
         ?discount_codes: ::Array[String]?,
         ?effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
         ?metadata: Dodopayments::Models::metadata?,
-        ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
+        ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?,
+        ?return_url: String?
       ) -> void
 
       def to_hash: -> {
@@ -70,13 +80,15 @@ module Dodopayments
         quantity: Integer,
         adaptive_currency_fees_inclusive: bool?,
         addons: ::Array[Dodopayments::AttachAddon]?,
+        cancel_older_payment_link: bool,
         cancel_scheduled_change_plan: bool,
         collect_via_payment_link: bool,
         discount_code: String?,
         discount_codes: ::Array[String]?,
         effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
         metadata: Dodopayments::Models::metadata?,
-        on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?
+        on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?,
+        return_url: String?
       }
 
       type proration_billing_mode =

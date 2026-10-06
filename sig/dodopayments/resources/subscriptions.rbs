@@ -80,6 +80,7 @@ module Dodopayments
         quantity: Integer,
         ?adaptive_currency_fees_inclusive: bool?,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
+        ?cancel_older_payment_link: bool,
         ?cancel_scheduled_change_plan: bool,
         ?collect_via_payment_link: bool,
         ?discount_code: String?,
@@ -87,6 +88,7 @@ module Dodopayments
         ?effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
         ?metadata: Dodopayments::Models::metadata?,
         ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?,
+        ?return_url: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::SubscriptionChangePlanResponse
 
@@ -108,6 +110,7 @@ module Dodopayments
         quantity: Integer,
         ?adaptive_currency_fees_inclusive: bool?,
         ?addons: ::Array[Dodopayments::AttachAddon]?,
+        ?cancel_older_payment_link: bool,
         ?cancel_scheduled_change_plan: bool,
         ?collect_via_payment_link: bool,
         ?discount_code: String?,
@@ -115,6 +118,7 @@ module Dodopayments
         ?effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
         ?metadata: Dodopayments::Models::metadata?,
         ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?,
+        ?return_url: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::SubscriptionPreviewChangePlanResponse
 
