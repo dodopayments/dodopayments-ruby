@@ -36,6 +36,23 @@ module Dodopayments
       #   @return [Array<Dodopayments::Models::AttachAddon>, nil]
       optional :addons, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::AttachAddon] }, nil?: true
 
+      # @!attribute cancel_older_payment_link
+      #   Cancel the payment link of a pending plan change, so that this change can
+      #   replace it.
+      #
+      #   The link is cancelled only if the customer has not started to pay. A paid or
+      #   in-progress payment gives a `409`. A failed cancel gives a `503`, and a retry is
+      #   safe.
+      #
+      #   The request is validated before the cancel. A later failure, for example an
+      #   amount below the minimum, leaves the subscription on its current plan with no
+      #   open link. A retry is safe.
+      #
+      #   The preview route shares this request body and ignores this field.
+      #
+      #   @return [Boolean, nil]
+      optional :cancel_older_payment_link, Dodopayments::Internal::Type::Boolean
+
       # @!attribute cancel_scheduled_change_plan
       #   Replace a scheduled plan change with this one.
       #
@@ -116,7 +133,22 @@ module Dodopayments
                enum: -> { Dodopayments::UpdateSubscriptionPlanReq::OnPaymentFailure },
                nil?: true
 
-      # @!method initialize(product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, cancel_scheduled_change_plan: nil, collect_via_payment_link: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil)
+      # @!attribute return_url
+      #   The URL that receives the customer after they pay the payment link. Needs
+      #   `collect_via_payment_link: true`. Without it, the request gets a `422`. A change
+      #   that collects no money issues no link and does not use the URL. The preview
+      #   route validates this field but does not use it.
+      #
+      #   The redirect adds `subscription_id`, `payment_id` and `status`. The `status`
+      #   value is the status of the plan-change payment. It is not the status of the
+      #   subscription. When that payment fails, the subscription stays active on its
+      #   current plan. To try again, call this endpoint again to get a new link. The new
+      #   plan can apply after the redirect, when the payment webhook arrives.
+      #
+      #   @return [String, nil]
+      optional :return_url, String, nil?: true
+
+      # @!method initialize(product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, cancel_older_payment_link: nil, cancel_scheduled_change_plan: nil, collect_via_payment_link: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, return_url: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::UpdateSubscriptionPlanReq} for more details.
       #
@@ -129,6 +161,8 @@ module Dodopayments
       #   @param adaptive_currency_fees_inclusive [Boolean, nil] Whether adaptive currency fees should be included in the price (true) or added o
       #
       #   @param addons [Array<Dodopayments::Models::AttachAddon>, nil] Addons for the new plan.
+      #
+      #   @param cancel_older_payment_link [Boolean] Cancel the payment link of a pending plan change, so that this change
       #
       #   @param cancel_scheduled_change_plan [Boolean] Replace a scheduled plan change with this one.
       #
@@ -143,6 +177,8 @@ module Dodopayments
       #   @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
       #   @param on_payment_failure [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::OnPaymentFailure, nil] Controls behavior when the plan change payment fails.
+      #
+      #   @param return_url [String, nil] The URL that receives the customer after they pay the payment link.
 
       # Proration Billing Mode
       #
