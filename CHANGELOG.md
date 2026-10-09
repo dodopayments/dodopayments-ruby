@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.32.2](https://github.com/dodopayments/dodopayments-ruby/compare/v2.32.1...v2.32.2) (2026-10-09)
+
+
+### Bug Fixes
+
+* **deps:** upgrade SDK toolchains (pnpm, uv, TypeScript 7, Gradle 9, okhttp 5, zod 4) and stop cursor pagination on done ([a5672d8](https://github.com/dodopayments/dodopayments-ruby/commit/a5672d8d65e5bc9d738fae31f708aae54984034a))
+* **deps:** upgrade SDK toolchains (pnpm, uv, TypeScript 7, Gradle 9, okhttp 5, zod 4) and stop cursor pagination on done ([7e80b1c](https://github.com/dodopayments/dodopayments-ruby/commit/7e80b1c860b58e16d08c8d6b6bb5822199726ab2))
+
 ## [2.32.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.32.0...v2.32.1) (2026-10-09)
 
 
