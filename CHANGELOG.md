@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.32.1](https://github.com/dodopayments/dodopayments-ruby/compare/v2.32.0...v2.32.1) (2026-10-09)
+
+
+### Bug Fixes
+
+* **deps:** refresh generated SDK dependencies and CI action pins ([127a0e6](https://github.com/dodopayments/dodopayments-ruby/commit/127a0e68590be4bd726548ae264ddcde302c1482))
+* **deps:** refresh generated SDK dependencies and CI action pins ([7983ad8](https://github.com/dodopayments/dodopayments-ruby/commit/7983ad8f6d1fd8a3bc7fd06877ef599dc6376251))
+
 ## [2.32.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.31.0...v2.32.0) (2026-10-06)
 
 
