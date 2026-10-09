@@ -27,7 +27,7 @@ module Dodopayments
 
       # @return [Boolean]
       def next_page?
-        !data.to_a.empty? && !iterator.to_s.empty?
+        (done != true) && !data.to_a.empty? && !iterator.to_s.empty?
       end
 
       # @raise [Dodopayments::HTTP::Error]
