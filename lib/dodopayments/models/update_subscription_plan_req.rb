@@ -190,6 +190,7 @@ module Dodopayments
         FULL_IMMEDIATELY = :full_immediately
         DIFFERENCE_IMMEDIATELY = :difference_immediately
         DO_NOT_BILL = :do_not_bill
+        PRORATED_IMMEDIATELY_KEEP_CYCLE = :prorated_immediately_keep_cycle
 
         # @!method self.values
         #   @return [Array<Symbol>]

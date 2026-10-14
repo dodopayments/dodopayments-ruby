@@ -393,6 +393,7 @@ require_relative "dodopayments/models/subscription_retrieve_credit_usage_respons
 require_relative "dodopayments/models/subscription_retrieve_params"
 require_relative "dodopayments/models/subscription_retrieve_usage_history_params"
 require_relative "dodopayments/models/subscription_retrieve_usage_history_response"
+require_relative "dodopayments/models/subscription_service_period"
 require_relative "dodopayments/models/subscription_status"
 require_relative "dodopayments/models/subscription_unpaused_webhook_event"
 require_relative "dodopayments/models/subscription_updated_webhook_event"

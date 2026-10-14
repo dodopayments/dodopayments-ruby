@@ -25,6 +25,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
         currency: Dodopayments::Currency | nil,
         network_reference: String | nil,
         network_reference_type: Dodopayments::RefundNetworkReferenceType | nil,
+        network_reference_updated_at: Time | nil,
         reason: String | nil
       }
     end
@@ -52,6 +53,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
         currency: Dodopayments::Currency | nil,
         network_reference: String | nil,
         network_reference_type: Dodopayments::RefundNetworkReferenceType | nil,
+        network_reference_updated_at: Time | nil,
         reason: String | nil
       }
     end
@@ -83,6 +85,7 @@ class Dodopayments::Test::Resources::RefundsTest < Dodopayments::Test::ResourceT
         currency: Dodopayments::Currency | nil,
         network_reference: String | nil,
         network_reference_type: Dodopayments::RefundNetworkReferenceType | nil,
+        network_reference_updated_at: Time | nil,
         reason: String | nil
       }
     end

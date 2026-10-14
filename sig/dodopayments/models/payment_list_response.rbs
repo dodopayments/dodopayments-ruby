@@ -12,10 +12,13 @@ module Dodopayments
         metadata: Dodopayments::Models::metadata,
         payment_id: String,
         payment_provider: Dodopayments::Models::PaymentListResponse::payment_provider,
+        retry_attempt: Integer,
+        service_periods: ::Array[Dodopayments::SubscriptionServicePeriod],
         subscription_ids: ::Array[String],
         total_amount: Integer,
         card_last_four: String?,
         card_network: String?,
+        checkout_session_id: String?,
         dispute_status: Dodopayments::Models::dispute_status?,
         invoice_id: String?,
         invoice_url: String?,
@@ -47,6 +50,10 @@ module Dodopayments
 
       attr_accessor payment_provider: Dodopayments::Models::PaymentListResponse::payment_provider
 
+      attr_accessor retry_attempt: Integer
+
+      attr_accessor service_periods: ::Array[Dodopayments::SubscriptionServicePeriod]
+
       attr_accessor subscription_ids: ::Array[String]
 
       attr_accessor total_amount: Integer
@@ -54,6 +61,8 @@ module Dodopayments
       attr_accessor card_last_four: String?
 
       attr_accessor card_network: String?
+
+      attr_accessor checkout_session_id: String?
 
       attr_accessor dispute_status: Dodopayments::Models::dispute_status?
 
@@ -82,10 +91,13 @@ module Dodopayments
         metadata: Dodopayments::Models::metadata,
         payment_id: String,
         payment_provider: Dodopayments::Models::PaymentListResponse::payment_provider,
+        retry_attempt: Integer,
+        service_periods: ::Array[Dodopayments::SubscriptionServicePeriod],
         subscription_ids: ::Array[String],
         total_amount: Integer,
         ?card_last_four: String?,
         ?card_network: String?,
+        ?checkout_session_id: String?,
         ?dispute_status: Dodopayments::Models::dispute_status?,
         ?invoice_id: String?,
         ?invoice_url: String?,
@@ -107,10 +119,13 @@ module Dodopayments
         metadata: Dodopayments::Models::metadata,
         payment_id: String,
         payment_provider: Dodopayments::Models::PaymentListResponse::payment_provider,
+        retry_attempt: Integer,
+        service_periods: ::Array[Dodopayments::SubscriptionServicePeriod],
         subscription_ids: ::Array[String],
         total_amount: Integer,
         card_last_four: String?,
         card_network: String?,
+        checkout_session_id: String?,
         dispute_status: Dodopayments::Models::dispute_status?,
         invoice_id: String?,
         invoice_url: String?,

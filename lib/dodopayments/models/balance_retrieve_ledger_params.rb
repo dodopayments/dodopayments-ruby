@@ -266,6 +266,9 @@ module Dodopayments
         RESERVE_HOLD = :reserve_hold
         RESERVE_RELEASE = :reserve_release
         MODERATION_FEES = :moderation_fees
+        DODO_FIXED_FEE = :dodo_fixed_fee
+        INTERCHANGE_FEE = :interchange_fee
+        SCHEME_FEE = :scheme_fee
 
         # @!method self.values
         #   @return [Array<Symbol>]

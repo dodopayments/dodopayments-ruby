@@ -408,6 +408,9 @@ module Dodopayments
         | :reserve_hold
         | :reserve_release
         | :moderation_fees
+        | :dodo_fixed_fee
+        | :interchange_fee
+        | :scheme_fee
 
       module EventType
         extend Dodopayments::Internal::Type::Enum
@@ -443,6 +446,9 @@ module Dodopayments
         RESERVE_HOLD: :reserve_hold
         RESERVE_RELEASE: :reserve_release
         MODERATION_FEES: :moderation_fees
+        DODO_FIXED_FEE: :dodo_fixed_fee
+        INTERCHANGE_FEE: :interchange_fee
+        SCHEME_FEE: :scheme_fee
 
         def self?.values: -> ::Array[Dodopayments::Models::BalanceRetrieveLedgerParams::event_type]
       end

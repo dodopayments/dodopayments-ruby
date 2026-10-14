@@ -1,0 +1,26 @@
+module Dodopayments
+  module Models
+    type subscription_service_period =
+      { ends_at: Time, starts_at: Time, subscription_id: String }
+
+    class SubscriptionServicePeriod < Dodopayments::Internal::Type::BaseModel
+      attr_accessor ends_at: Time
+
+      attr_accessor starts_at: Time
+
+      attr_accessor subscription_id: String
+
+      def initialize: (
+        ends_at: Time,
+        starts_at: Time,
+        subscription_id: String
+      ) -> void
+
+      def to_hash: -> {
+        ends_at: Time,
+        starts_at: Time,
+        subscription_id: String
+      }
+    end
+  end
+end

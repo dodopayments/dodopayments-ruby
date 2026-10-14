@@ -71,6 +71,12 @@ module Dodopayments
       end
       attr_accessor :network_reference_type
 
+      # The time in UTC when `network_reference` became available. It is null when the
+      # reference is not available, or when it became available before this field
+      # existed.
+      sig { returns(T.nilable(Time)) }
+      attr_accessor :network_reference_updated_at
+
       # The reason provided for the refund, if any. Optional.
       sig { returns(T.nilable(String)) }
       attr_accessor :reason
@@ -91,6 +97,7 @@ module Dodopayments
           network_reference: T.nilable(String),
           network_reference_type:
             T.nilable(Dodopayments::RefundNetworkReferenceType::OrSymbol),
+          network_reference_updated_at: T.nilable(Time),
           reason: T.nilable(String)
         ).returns(T.attached_class)
       end
@@ -123,6 +130,10 @@ module Dodopayments
         network_reference: nil,
         # The kind of `network_reference`: ARN, STAN or RRN.
         network_reference_type: nil,
+        # The time in UTC when `network_reference` became available. It is null when the
+        # reference is not available, or when it became available before this field
+        # existed.
+        network_reference_updated_at: nil,
         # The reason provided for the refund, if any. Optional.
         reason: nil
       )
@@ -145,6 +156,7 @@ module Dodopayments
             network_reference: T.nilable(String),
             network_reference_type:
               T.nilable(Dodopayments::RefundNetworkReferenceType::TaggedSymbol),
+            network_reference_updated_at: T.nilable(Time),
             reason: T.nilable(String)
           }
         )

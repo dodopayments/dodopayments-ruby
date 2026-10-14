@@ -93,10 +93,18 @@ module Dodopayments
         sig { returns(T.nilable(Time)) }
         attr_accessor :past_due_ends_at
 
+        # Identifier of the payment that caused this event. It is set only for
+        # `subscription.renewed`. It is null for all other subscription events.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :payment_id
+
         # Subscription payload sent on a webhook. It carries every field of
         # `SubscriptionResponse`, plus the grace-period deadline.
         sig do
-          params(past_due_ends_at: T.nilable(Time)).returns(T.attached_class)
+          params(
+            past_due_ends_at: T.nilable(Time),
+            payment_id: T.nilable(String)
+          ).returns(T.attached_class)
         end
         def self.new(
           # Time when the grace period ends. The subscription moves to `on_hold` or to
@@ -106,11 +114,18 @@ module Dodopayments
           # row snapshot that produced `status`. It is set whenever the subscription sits in
           # a window at that moment. A delayed event of another type therefore carries the
           # deadline too, next to a `past_due` status.
-          past_due_ends_at: nil
+          past_due_ends_at: nil,
+          # Identifier of the payment that caused this event. It is set only for
+          # `subscription.renewed`. It is null for all other subscription events.
+          payment_id: nil
         )
         end
 
-        sig { override.returns({ past_due_ends_at: T.nilable(Time) }) }
+        sig do
+          override.returns(
+            { past_due_ends_at: T.nilable(Time), payment_id: T.nilable(String) }
+          )
+        end
         def to_hash
         end
       end

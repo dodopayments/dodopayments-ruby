@@ -66,6 +66,9 @@ module Dodopayments
       # @!attribute allow_discount_code
       #   If the customer is allowed to apply discount code, set it to true.
       #
+      #   If this flag is false, the customer cannot change the discount codes. The
+      #   discount codes that you give when you create the session still apply.
+      #
       #   Default is true
       #
       #   @return [Boolean, nil]

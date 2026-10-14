@@ -17,6 +17,7 @@ module Dodopayments
         payment_provider: Dodopayments::Models::Payment::payment_provider,
         refunds: ::Array[Dodopayments::RefundListItem],
         retry_attempt: Integer,
+        service_periods: ::Array[Dodopayments::SubscriptionServicePeriod],
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Models::currency,
         subscription_ids: ::Array[String],
@@ -77,6 +78,8 @@ module Dodopayments
       attr_accessor refunds: ::Array[Dodopayments::RefundListItem]
 
       attr_accessor retry_attempt: Integer
+
+      attr_accessor service_periods: ::Array[Dodopayments::SubscriptionServicePeriod]
 
       attr_accessor settlement_amount: Integer
 
@@ -150,6 +153,7 @@ module Dodopayments
         payment_provider: Dodopayments::Models::Payment::payment_provider,
         refunds: ::Array[Dodopayments::RefundListItem],
         retry_attempt: Integer,
+        service_periods: ::Array[Dodopayments::SubscriptionServicePeriod],
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Models::currency,
         subscription_ids: ::Array[String],
@@ -196,6 +200,7 @@ module Dodopayments
         payment_provider: Dodopayments::Models::Payment::payment_provider,
         refunds: ::Array[Dodopayments::RefundListItem],
         retry_attempt: Integer,
+        service_periods: ::Array[Dodopayments::SubscriptionServicePeriod],
         settlement_amount: Integer,
         settlement_currency: Dodopayments::Models::currency,
         subscription_ids: ::Array[String],
