@@ -55,7 +55,14 @@ module Dodopayments
         #   @return [Time, nil]
         optional :past_due_ends_at, Time, nil?: true
 
-        # @!method initialize(past_due_ends_at: nil)
+        # @!attribute payment_id
+        #   Identifier of the payment that caused this event. It is set only for
+        #   `subscription.renewed`. It is null for all other subscription events.
+        #
+        #   @return [String, nil]
+        optional :payment_id, String, nil?: true
+
+        # @!method initialize(past_due_ends_at: nil, payment_id: nil)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::SubscriptionUpdatePaymentMethodWebhookEvent::Data} for
         #   more details.
@@ -64,6 +71,8 @@ module Dodopayments
         #   `SubscriptionResponse`, plus the grace-period deadline.
         #
         #   @param past_due_ends_at [Time, nil] Time when the grace period ends. The subscription moves to `on_hold` or
+        #
+        #   @param payment_id [String, nil] Identifier of the payment that caused this event.
       end
     end
   end

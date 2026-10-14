@@ -12,6 +12,7 @@ module Dodopayments
         currency: Dodopayments::Models::currency?,
         network_reference: String?,
         network_reference_type: Dodopayments::Models::refund_network_reference_type?,
+        network_reference_updated_at: Time?,
         reason: String?
       }
 
@@ -36,6 +37,8 @@ module Dodopayments
 
       attr_accessor network_reference_type: Dodopayments::Models::refund_network_reference_type?
 
+      attr_accessor network_reference_updated_at: Time?
+
       attr_accessor reason: String?
 
       def initialize: (
@@ -49,6 +52,7 @@ module Dodopayments
         ?currency: Dodopayments::Models::currency?,
         ?network_reference: String?,
         ?network_reference_type: Dodopayments::Models::refund_network_reference_type?,
+        ?network_reference_updated_at: Time?,
         ?reason: String?
       ) -> void
 
@@ -63,6 +67,7 @@ module Dodopayments
         currency: Dodopayments::Models::currency?,
         network_reference: String?,
         network_reference_type: Dodopayments::Models::refund_network_reference_type?,
+        network_reference_updated_at: Time?,
         reason: String?
       }
     end

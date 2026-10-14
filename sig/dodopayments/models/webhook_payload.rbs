@@ -60,7 +60,11 @@ module Dodopayments
         end
 
         type subscription =
-          { payload_type: :Subscription, past_due_ends_at: Time? }
+          {
+            payload_type: :Subscription,
+            past_due_ends_at: Time?,
+            payment_id: String?
+          }
 
         class Subscription < Dodopayments::Models::Subscription
           def payload_type: -> :Subscription
@@ -71,14 +75,20 @@ module Dodopayments
 
           def past_due_ends_at=: (Time? _) -> Time?
 
+          def payment_id: -> String?
+
+          def payment_id=: (String? _) -> String?
+
           def initialize: (
             ?past_due_ends_at: Time?,
+            ?payment_id: String?,
             ?payload_type: :Subscription
           ) -> void
 
           def to_hash: -> {
             payload_type: :Subscription,
-            past_due_ends_at: Time?
+            past_due_ends_at: Time?,
+            payment_id: String?
           }
         end
 

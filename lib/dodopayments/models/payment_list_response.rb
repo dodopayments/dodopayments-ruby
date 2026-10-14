@@ -60,6 +60,25 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::PaymentListResponse::PaymentProvider]
       required :payment_provider, enum: -> { Dodopayments::Models::PaymentListResponse::PaymentProvider }
 
+      # @!attribute retry_attempt
+      #   The retry attempt number of this payment. The value is `0` for the original
+      #   payment. Each retry after a failed subscription renewal adds `1`. The value is
+      #   always `0` for a payment that is not for a subscription.
+      #
+      #   @return [Integer]
+      required :retry_attempt, Integer
+
+      # @!attribute service_periods
+      #   The service period of each subscription that this payment pays for. The order is
+      #   the same as `subscription_ids`. For a plan change charge, the period starts at
+      #   the plan change and ends at the next billing date. The list is empty unless the
+      #   payment status is `succeeded`. The list is also empty for a one-time payment, an
+      #   on-demand charge, or a payment method update.
+      #
+      #   @return [Array<Dodopayments::Models::SubscriptionServicePeriod>]
+      required :service_periods,
+               -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::SubscriptionServicePeriod] }
+
       # @!attribute subscription_ids
       #   Every subscription that this payment starts or charges, in a stable order. It is
       #   empty for a one-time payment. It holds the value of `subscription_id` when the
@@ -84,6 +103,13 @@ module Dodopayments
       #
       #   @return [String, nil]
       optional :card_network, String, nil?: true
+
+      # @!attribute checkout_session_id
+      #   The ID of the checkout session for this payment. The value is null when the
+      #   payment does not use a checkout session.
+      #
+      #   @return [String, nil]
+      optional :checkout_session_id, String, nil?: true
 
       # @!attribute dispute_status
       #   The most recent dispute status for this payment. None if no disputes exist.
@@ -130,7 +156,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :subscription_id, String, nil?: true
 
-      # @!method initialize(brand_id:, created_at:, currency:, customer:, digital_products_delivered:, has_license_key:, is_multi_subscription:, metadata:, payment_id:, payment_provider:, subscription_ids:, total_amount:, card_last_four: nil, card_network: nil, dispute_status: nil, invoice_id: nil, invoice_url: nil, payment_method: nil, payment_method_type: nil, refund_status: nil, status: nil, subscription_id: nil)
+      # @!method initialize(brand_id:, created_at:, currency:, customer:, digital_products_delivered:, has_license_key:, is_multi_subscription:, metadata:, payment_id:, payment_provider:, retry_attempt:, service_periods:, subscription_ids:, total_amount:, card_last_four: nil, card_network: nil, checkout_session_id: nil, dispute_status: nil, invoice_id: nil, invoice_url: nil, payment_method: nil, payment_method_type: nil, refund_status: nil, status: nil, subscription_id: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::PaymentListResponse} for more details.
       #
@@ -154,6 +180,10 @@ module Dodopayments
       #
       #   @param payment_provider [Symbol, Dodopayments::Models::PaymentListResponse::PaymentProvider] Which processor handled this payment. `stripe` / `adyen` for BYOP routes
       #
+      #   @param retry_attempt [Integer] The retry attempt number of this payment. The value is `0` for the original
+      #
+      #   @param service_periods [Array<Dodopayments::Models::SubscriptionServicePeriod>] The service period of each subscription that this payment pays for.
+      #
       #   @param subscription_ids [Array<String>] Every subscription that this payment starts or charges, in a stable order.
       #
       #   @param total_amount [Integer]
@@ -161,6 +191,8 @@ module Dodopayments
       #   @param card_last_four [String, nil] The last four digits of the card
       #
       #   @param card_network [String, nil] Card network like VISA, MASTERCARD etc.
+      #
+      #   @param checkout_session_id [String, nil] The ID of the checkout session for this payment. The value is null when
       #
       #   @param dispute_status [Symbol, Dodopayments::Models::DisputeStatus, nil] The most recent dispute status for this payment. None if no disputes exist.
       #

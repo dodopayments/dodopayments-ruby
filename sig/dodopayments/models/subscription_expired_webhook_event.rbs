@@ -31,16 +31,20 @@ module Dodopayments
         type: :"subscription.expired"
       }
 
-      type data = { past_due_ends_at: Time? }
+      type data = { past_due_ends_at: Time?, payment_id: String? }
 
       class Data < Dodopayments::Models::Subscription
         def past_due_ends_at: -> Time?
 
         def past_due_ends_at=: (Time? _) -> Time?
 
-        def initialize: (?past_due_ends_at: Time?) -> void
+        def payment_id: -> String?
 
-        def to_hash: -> { past_due_ends_at: Time? }
+        def payment_id=: (String? _) -> String?
+
+        def initialize: (?past_due_ends_at: Time?, ?payment_id: String?) -> void
+
+        def to_hash: -> { past_due_ends_at: Time?, payment_id: String? }
       end
     end
   end

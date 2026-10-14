@@ -83,6 +83,9 @@ module Dodopayments
 
       # If the customer is allowed to apply discount code, set it to true.
       #
+      # If this flag is false, the customer cannot change the discount codes. The
+      # discount codes that you give when you create the session still apply.
+      #
       # Default is true
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :allow_discount_code
@@ -233,6 +236,9 @@ module Dodopayments
         allow_customer_editing_tax_id: nil,
         allow_customer_editing_zipcode: nil,
         # If the customer is allowed to apply discount code, set it to true.
+        #
+        # If this flag is false, the customer cannot change the discount codes. The
+        # discount codes that you give when you create the session still apply.
         #
         # Default is true
         allow_discount_code: nil,
