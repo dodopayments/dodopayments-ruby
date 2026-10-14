@@ -514,6 +514,8 @@ module Dodopayments
 
   SubscriptionRetrieveUsageHistoryParams = Dodopayments::Models::SubscriptionRetrieveUsageHistoryParams
 
+  SubscriptionServicePeriod = Dodopayments::Models::SubscriptionServicePeriod
+
   SubscriptionStatus = Dodopayments::Models::SubscriptionStatus
 
   SubscriptionUnpausedWebhookEvent = Dodopayments::Models::SubscriptionUnpausedWebhookEvent

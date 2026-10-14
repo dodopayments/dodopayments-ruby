@@ -330,6 +330,11 @@ module Dodopayments
             :do_not_bill,
             Dodopayments::ProductCollectionCreateParams::ProrationBillingModeOnDowngrade::TaggedSymbol
           )
+        PRORATED_IMMEDIATELY_KEEP_CYCLE =
+          T.let(
+            :prorated_immediately_keep_cycle,
+            Dodopayments::ProductCollectionCreateParams::ProrationBillingModeOnDowngrade::TaggedSymbol
+          )
 
         sig do
           override.returns(
@@ -374,6 +379,11 @@ module Dodopayments
         DO_NOT_BILL =
           T.let(
             :do_not_bill,
+            Dodopayments::ProductCollectionCreateParams::ProrationBillingModeOnUpgrade::TaggedSymbol
+          )
+        PRORATED_IMMEDIATELY_KEEP_CYCLE =
+          T.let(
+            :prorated_immediately_keep_cycle,
             Dodopayments::ProductCollectionCreateParams::ProrationBillingModeOnUpgrade::TaggedSymbol
           )
 
