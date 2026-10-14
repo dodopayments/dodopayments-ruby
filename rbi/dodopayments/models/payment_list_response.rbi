@@ -56,6 +56,20 @@ module Dodopayments
       end
       attr_accessor :payment_provider
 
+      # The retry attempt number of this payment. The value is `0` for the original
+      # payment. Each retry after a failed subscription renewal adds `1`. The value is
+      # always `0` for a payment that is not for a subscription.
+      sig { returns(Integer) }
+      attr_accessor :retry_attempt
+
+      # The service period of each subscription that this payment pays for. The order is
+      # the same as `subscription_ids`. For a plan change charge, the period starts at
+      # the plan change and ends at the next billing date. The list is empty unless the
+      # payment status is `succeeded`. The list is also empty for a one-time payment, an
+      # on-demand charge, or a payment method update.
+      sig { returns(T::Array[Dodopayments::SubscriptionServicePeriod]) }
+      attr_accessor :service_periods
+
       # Every subscription that this payment starts or charges, in a stable order. It is
       # empty for a one-time payment. It holds the value of `subscription_id` when the
       # payment names one subscription.
@@ -72,6 +86,11 @@ module Dodopayments
       # Card network like VISA, MASTERCARD etc.
       sig { returns(T.nilable(String)) }
       attr_accessor :card_network
+
+      # The ID of the checkout session for this payment. The value is null when the
+      # payment does not use a checkout session.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :checkout_session_id
 
       # The most recent dispute status for this payment. None if no disputes exist.
       sig { returns(T.nilable(Dodopayments::DisputeStatus::TaggedSymbol)) }
@@ -117,10 +136,14 @@ module Dodopayments
           payment_id: String,
           payment_provider:
             Dodopayments::Models::PaymentListResponse::PaymentProvider::OrSymbol,
+          retry_attempt: Integer,
+          service_periods:
+            T::Array[Dodopayments::SubscriptionServicePeriod::OrHash],
           subscription_ids: T::Array[String],
           total_amount: Integer,
           card_last_four: T.nilable(String),
           card_network: T.nilable(String),
+          checkout_session_id: T.nilable(String),
           dispute_status: T.nilable(Dodopayments::DisputeStatus::OrSymbol),
           invoice_id: T.nilable(String),
           invoice_url: T.nilable(String),
@@ -148,6 +171,16 @@ module Dodopayments
         # Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
         # merchant's own payment connector); `dodo` for everything Dodo processed itself.
         payment_provider:,
+        # The retry attempt number of this payment. The value is `0` for the original
+        # payment. Each retry after a failed subscription renewal adds `1`. The value is
+        # always `0` for a payment that is not for a subscription.
+        retry_attempt:,
+        # The service period of each subscription that this payment pays for. The order is
+        # the same as `subscription_ids`. For a plan change charge, the period starts at
+        # the plan change and ends at the next billing date. The list is empty unless the
+        # payment status is `succeeded`. The list is also empty for a one-time payment, an
+        # on-demand charge, or a payment method update.
+        service_periods:,
         # Every subscription that this payment starts or charges, in a stable order. It is
         # empty for a one-time payment. It holds the value of `subscription_id` when the
         # payment names one subscription.
@@ -157,6 +190,9 @@ module Dodopayments
         card_last_four: nil,
         # Card network like VISA, MASTERCARD etc.
         card_network: nil,
+        # The ID of the checkout session for this payment. The value is null when the
+        # payment does not use a checkout session.
+        checkout_session_id: nil,
         # The most recent dispute status for this payment. None if no disputes exist.
         dispute_status: nil,
         # Invoice ID for this payment. Uses India-specific invoice ID if available.
@@ -187,10 +223,13 @@ module Dodopayments
             payment_id: String,
             payment_provider:
               Dodopayments::Models::PaymentListResponse::PaymentProvider::TaggedSymbol,
+            retry_attempt: Integer,
+            service_periods: T::Array[Dodopayments::SubscriptionServicePeriod],
             subscription_ids: T::Array[String],
             total_amount: Integer,
             card_last_four: T.nilable(String),
             card_network: T.nilable(String),
+            checkout_session_id: T.nilable(String),
             dispute_status:
               T.nilable(Dodopayments::DisputeStatus::TaggedSymbol),
             invoice_id: T.nilable(String),

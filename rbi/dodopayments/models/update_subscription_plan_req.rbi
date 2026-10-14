@@ -330,6 +330,11 @@ module Dodopayments
             :do_not_bill,
             Dodopayments::UpdateSubscriptionPlanReq::ProrationBillingMode::TaggedSymbol
           )
+        PRORATED_IMMEDIATELY_KEEP_CYCLE =
+          T.let(
+            :prorated_immediately_keep_cycle,
+            Dodopayments::UpdateSubscriptionPlanReq::ProrationBillingMode::TaggedSymbol
+          )
 
         sig do
           override.returns(

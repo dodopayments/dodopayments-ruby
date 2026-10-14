@@ -65,13 +65,21 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::RefundNetworkReferenceType, nil]
       optional :network_reference_type, enum: -> { Dodopayments::RefundNetworkReferenceType }, nil?: true
 
+      # @!attribute network_reference_updated_at
+      #   The time in UTC when `network_reference` became available. It is null when the
+      #   reference is not available, or when it became available before this field
+      #   existed.
+      #
+      #   @return [Time, nil]
+      optional :network_reference_updated_at, Time, nil?: true
+
       # @!attribute reason
       #   The reason provided for the refund, if any. Optional.
       #
       #   @return [String, nil]
       optional :reason, String, nil?: true
 
-      # @!method initialize(business_id:, created_at:, is_partial:, payment_id:, refund_id:, status:, amount: nil, currency: nil, network_reference: nil, network_reference_type: nil, reason: nil)
+      # @!method initialize(business_id:, created_at:, is_partial:, payment_id:, refund_id:, status:, amount: nil, currency: nil, network_reference: nil, network_reference_type: nil, network_reference_updated_at: nil, reason: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::RefundListItem} for more details.
       #
@@ -94,6 +102,8 @@ module Dodopayments
       #   @param network_reference [String, nil] The reference number that the card network or the bank gives to the refund. The
       #
       #   @param network_reference_type [Symbol, Dodopayments::Models::RefundNetworkReferenceType, nil] The kind of `network_reference`: ARN, STAN or RRN.
+      #
+      #   @param network_reference_updated_at [Time, nil] The time in UTC when `network_reference` became available. It is null when the
       #
       #   @param reason [String, nil] The reason provided for the refund, if any. Optional.
     end

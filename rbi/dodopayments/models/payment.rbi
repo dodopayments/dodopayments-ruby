@@ -82,6 +82,14 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :retry_attempt
 
+      # The service period of each subscription that this payment pays for. The order is
+      # the same as `subscription_ids`. For a plan change charge, the period starts at
+      # the plan change and ends at the next billing date. The list is empty unless the
+      # payment status is `succeeded`. The list is also empty for a one-time payment, an
+      # on-demand charge, or a payment method update.
+      sig { returns(T::Array[Dodopayments::SubscriptionServicePeriod]) }
+      attr_accessor :service_periods
+
       # The amount that will be credited to your Dodo balance after currency conversion
       # and processing. Especially relevant for adaptive pricing where the customer's
       # payment currency differs from your settlement currency.
@@ -230,6 +238,8 @@ module Dodopayments
           payment_provider: Dodopayments::Payment::PaymentProvider::OrSymbol,
           refunds: T::Array[Dodopayments::RefundListItem::OrHash],
           retry_attempt: Integer,
+          service_periods:
+            T::Array[Dodopayments::SubscriptionServicePeriod::OrHash],
           settlement_amount: Integer,
           settlement_currency: Dodopayments::Currency::OrSymbol,
           subscription_ids: T::Array[String],
@@ -299,6 +309,12 @@ module Dodopayments
         # payment, `1`+ for each scheduled off-session retry after a failed renewal.
         # Always `0` for non-subscription payments.
         retry_attempt:,
+        # The service period of each subscription that this payment pays for. The order is
+        # the same as `subscription_ids`. For a plan change charge, the period starts at
+        # the plan change and ends at the next billing date. The list is empty unless the
+        # payment status is `succeeded`. The list is also empty for a one-time payment, an
+        # on-demand charge, or a payment method update.
+        service_periods:,
         # The amount that will be credited to your Dodo balance after currency conversion
         # and processing. Especially relevant for adaptive pricing where the customer's
         # payment currency differs from your settlement currency.
@@ -394,6 +410,7 @@ module Dodopayments
               Dodopayments::Payment::PaymentProvider::TaggedSymbol,
             refunds: T::Array[Dodopayments::RefundListItem],
             retry_attempt: Integer,
+            service_periods: T::Array[Dodopayments::SubscriptionServicePeriod],
             settlement_amount: Integer,
             settlement_currency: Dodopayments::Currency::TaggedSymbol,
             subscription_ids: T::Array[String],

@@ -268,6 +268,21 @@ module Dodopayments
             :moderation_fees,
             Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
           )
+        DODO_FIXED_FEE =
+          T.let(
+            :dodo_fixed_fee,
+            Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
+          )
+        INTERCHANGE_FEE =
+          T.let(
+            :interchange_fee,
+            Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
+          )
+        SCHEME_FEE =
+          T.let(
+            :scheme_fee,
+            Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
+          )
 
         sig do
           override.returns(

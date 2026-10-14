@@ -163,10 +163,16 @@ module Dodopayments
           sig { returns(T.nilable(Time)) }
           attr_accessor :past_due_ends_at
 
+          # Identifier of the payment that caused this event. It is set only for
+          # `subscription.renewed`. It is null for all other subscription events.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :payment_id
+
           # Response struct representing subscription details
           sig do
             params(
               past_due_ends_at: T.nilable(Time),
+              payment_id: T.nilable(String),
               payload_type: Symbol
             ).returns(T.attached_class)
           end
@@ -179,13 +185,20 @@ module Dodopayments
             # a window at that moment. A delayed event of another type therefore carries the
             # deadline too, next to a `past_due` status.
             past_due_ends_at: nil,
+            # Identifier of the payment that caused this event. It is set only for
+            # `subscription.renewed`. It is null for all other subscription events.
+            payment_id: nil,
             payload_type: :Subscription
           )
           end
 
           sig do
             override.returns(
-              { payload_type: Symbol, past_due_ends_at: T.nilable(Time) }
+              {
+                payload_type: Symbol,
+                past_due_ends_at: T.nilable(Time),
+                payment_id: T.nilable(String)
+              }
             )
           end
           def to_hash

@@ -5,6 +5,9 @@ module Dodopayments
         can_retry: bool,
         sends_allowed: Integer,
         sends_used: Integer,
+        automatic_retry_number: Integer?,
+        automatic_retry_total: Integer?,
+        next_automatic_retry_at: Time?,
         reason: String?,
         retry_available_at: Time?
       }
@@ -16,6 +19,12 @@ module Dodopayments
 
       attr_accessor sends_used: Integer
 
+      attr_accessor automatic_retry_number: Integer?
+
+      attr_accessor automatic_retry_total: Integer?
+
+      attr_accessor next_automatic_retry_at: Time?
+
       attr_accessor reason: String?
 
       attr_accessor retry_available_at: Time?
@@ -24,6 +33,9 @@ module Dodopayments
         can_retry: bool,
         sends_allowed: Integer,
         sends_used: Integer,
+        ?automatic_retry_number: Integer?,
+        ?automatic_retry_total: Integer?,
+        ?next_automatic_retry_at: Time?,
         ?reason: String?,
         ?retry_available_at: Time?
       ) -> void
@@ -32,6 +44,9 @@ module Dodopayments
         can_retry: bool,
         sends_allowed: Integer,
         sends_used: Integer,
+        automatic_retry_number: Integer?,
+        automatic_retry_total: Integer?,
+        next_automatic_retry_at: Time?,
         reason: String?,
         retry_available_at: Time?
       }

@@ -100,6 +100,7 @@ module Dodopayments
         | :full_immediately
         | :difference_immediately
         | :do_not_bill
+        | :prorated_immediately_keep_cycle
 
       module ProrationBillingModeOnDowngrade
         extend Dodopayments::Internal::Type::Enum
@@ -108,6 +109,7 @@ module Dodopayments
         FULL_IMMEDIATELY: :full_immediately
         DIFFERENCE_IMMEDIATELY: :difference_immediately
         DO_NOT_BILL: :do_not_bill
+        PRORATED_IMMEDIATELY_KEEP_CYCLE: :prorated_immediately_keep_cycle
 
         def self?.values: -> ::Array[Dodopayments::Models::ProductCollectionCreateParams::proration_billing_mode_on_downgrade]
       end
@@ -117,6 +119,7 @@ module Dodopayments
         | :full_immediately
         | :difference_immediately
         | :do_not_bill
+        | :prorated_immediately_keep_cycle
 
       module ProrationBillingModeOnUpgrade
         extend Dodopayments::Internal::Type::Enum
@@ -125,6 +128,7 @@ module Dodopayments
         FULL_IMMEDIATELY: :full_immediately
         DIFFERENCE_IMMEDIATELY: :difference_immediately
         DO_NOT_BILL: :do_not_bill
+        PRORATED_IMMEDIATELY_KEEP_CYCLE: :prorated_immediately_keep_cycle
 
         def self?.values: -> ::Array[Dodopayments::Models::ProductCollectionCreateParams::proration_billing_mode_on_upgrade]
       end
