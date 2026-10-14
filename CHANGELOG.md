@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.33.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.32.2...v2.33.0) (2026-10-14)
+
+
+### Features
+
+* **api:** payment service periods, retry attempts and subscription renewal payment_id ([4fc54c1](https://github.com/dodopayments/dodopayments-ruby/commit/4fc54c154ba2b49a904249f27d30a7b5b7fb165d))
+* **api:** payment service periods, retry attempts and subscription renewal payment_id ([53b94e3](https://github.com/dodopayments/dodopayments-ruby/commit/53b94e35bbff1d1882582852e58e9cc592ab1772))
+
 ## [2.32.2](https://github.com/dodopayments/dodopayments-ruby/compare/v2.32.1...v2.32.2) (2026-10-09)
 
 
