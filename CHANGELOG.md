@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.34.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.33.0...v2.34.0) (2026-10-21)
+
+
+### Features
+
+* **api:** payment charge type, usage flag and card details, signed invoice link tokens ([3b6eb1d](https://github.com/dodopayments/dodopayments-ruby/commit/3b6eb1d46ca7c02d279ab66c62a746e8df1f14d3))
+* **api:** payment charge type, usage flag and card details, signed invoice link tokens ([f3d6720](https://github.com/dodopayments/dodopayments-ruby/commit/f3d67205537089c45bd7643f399bece43a7d56f5))
+
 ## [2.33.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.32.2...v2.33.0) (2026-10-14)
 
 
