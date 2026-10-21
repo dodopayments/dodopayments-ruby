@@ -18,18 +18,37 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :payout_id
 
+        # The signed link token. If the business asks for a credential on its invoice
+        # links, a valid token for this record replaces the credential.
+        sig { returns(T.nilable(String)) }
+        attr_reader :token
+
+        sig { params(token: String).void }
+        attr_writer :token
+
         sig do
           params(
             payout_id: String,
+            token: String,
             request_options: Dodopayments::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
-        def self.new(payout_id:, request_options: {})
+        def self.new(
+          payout_id:,
+          # The signed link token. If the business asks for a credential on its invoice
+          # links, a valid token for this record replaces the credential.
+          token: nil,
+          request_options: {}
+        )
         end
 
         sig do
           override.returns(
-            { payout_id: String, request_options: Dodopayments::RequestOptions }
+            {
+              payout_id: String,
+              token: String,
+              request_options: Dodopayments::RequestOptions
+            }
           )
         end
         def to_hash

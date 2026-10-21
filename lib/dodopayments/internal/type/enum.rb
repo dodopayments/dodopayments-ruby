@@ -17,28 +17,28 @@ module Dodopayments
       # values safely.
       #
       # @example
-      #   # `intent_status` is a `Dodopayments::IntentStatus`
-      #   case intent_status
-      #   when Dodopayments::IntentStatus::SUCCEEDED
+      #   # `charge_type` is a `Dodopayments::ChargeType`
+      #   case charge_type
+      #   when Dodopayments::ChargeType::NEW
       #     # ...
-      #   when Dodopayments::IntentStatus::FAILED
+      #   when Dodopayments::ChargeType::RENEWAL
       #     # ...
-      #   when Dodopayments::IntentStatus::CANCELLED
+      #   when Dodopayments::ChargeType::PLAN_CHANGE
       #     # ...
       #   else
-      #     puts(intent_status)
+      #     puts(charge_type)
       #   end
       #
       # @example
-      #   case intent_status
-      #   in :succeeded
+      #   case charge_type
+      #   in :new
       #     # ...
-      #   in :failed
+      #   in :renewal
       #     # ...
-      #   in :cancelled
+      #   in :plan_change
       #     # ...
       #   else
-      #     puts(intent_status)
+      #     puts(charge_type)
       #   end
       module Enum
         include Dodopayments::Internal::Type::Converter

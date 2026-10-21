@@ -409,6 +409,13 @@ module Dodopayments
         sig { returns(T.nilable(Integer)) }
         attr_accessor :discount_cycle
 
+        # The monthly equivalent of the yearly unit price after discounts, in minor units
+        # of `currency`. Only the hosted checkout sets it, when the business shows yearly
+        # plans as monthly. The value is only for display. The order summary shows the
+        # amounts that we charge.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :monthly_equivalent
+
         # name of the product
         sig { returns(T.nilable(String)) }
         attr_accessor :name
@@ -447,6 +454,7 @@ module Dodopayments
             description: T.nilable(String),
             discount_amount: T.nilable(Integer),
             discount_cycle: T.nilable(Integer),
+            monthly_equivalent: T.nilable(Integer),
             name: T.nilable(String),
             tax: T.nilable(Integer)
           ).returns(T.attached_class)
@@ -483,6 +491,11 @@ module Dodopayments
           discount_amount: nil,
           # number of cycles the discount will apply
           discount_cycle: nil,
+          # The monthly equivalent of the yearly unit price after discounts, in minor units
+          # of `currency`. Only the hosted checkout sets it, when the business shows yearly
+          # plans as monthly. The value is only for display. The order summary shows the
+          # amounts that we charge.
+          monthly_equivalent: nil,
           # name of the product
           name: nil,
           # total tax
@@ -521,6 +534,7 @@ module Dodopayments
               description: T.nilable(String),
               discount_amount: T.nilable(Integer),
               discount_cycle: T.nilable(Integer),
+              monthly_equivalent: T.nilable(Integer),
               name: T.nilable(String),
               tax: T.nilable(Integer)
             }

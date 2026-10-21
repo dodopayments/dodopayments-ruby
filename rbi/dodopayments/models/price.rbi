@@ -167,12 +167,14 @@ module Dodopayments
         sig { returns(Dodopayments::Currency::OrSymbol) }
         attr_accessor :currency
 
-        # Number of units for the payment frequency. For example, a value of `1` with a
-        # `payment_frequency_interval` of `month` represents monthly payments.
+        # Number of `payment_frequency_interval` units between two charges. This field
+        # sets the billing cycle. For example, `1` with a `payment_frequency_interval` of
+        # `month` charges the customer every month.
         sig { returns(Integer) }
         attr_accessor :payment_frequency_count
 
-        # The time interval for the payment frequency (e.g., day, month, year).
+        # The time unit of the billing cycle (e.g., day, month, year). Use it with
+        # `payment_frequency_count`.
         sig { returns(Dodopayments::TimeInterval::OrSymbol) }
         attr_accessor :payment_frequency_interval
 
@@ -181,12 +183,28 @@ module Dodopayments
         sig { returns(Integer) }
         attr_accessor :price
 
-        # Number of units for the subscription period. For example, a value of `12` with a
-        # `subscription_period_interval` of `month` represents a one-year subscription.
+        # Number of `subscription_period_interval` units for the total duration of the
+        # subscription. This field does not set the billing cycle. Use
+        # `payment_frequency_count` for the billing cycle. When this period ends, the
+        # subscription expires. Dodo Payments does not start a new billing cycle after the
+        # subscription expires. Dodo Payments can still retry a failed payment for an
+        # earlier billing cycle.
+        #
+        # For a subscription that renews until the customer cancels it, set this to `20`
+        # with a `subscription_period_interval` of `year`. This is the recommended value
+        # and also the maximum. The subscription expires after 20 years if the customer
+        # does not cancel it before then.
+        #
+        # For example, a monthly plan uses a `payment_frequency_count` of `1`, a
+        # `payment_frequency_interval` of `month`, and a subscription period of `20`
+        # `year`. Do not set the subscription period to `1` `month` for a monthly plan:
+        # the subscription then expires after one month.
         sig { returns(Integer) }
         attr_accessor :subscription_period_count
 
-        # The time interval for the subscription period (e.g., day, month, year).
+        # The time unit of the total subscription duration (e.g., day, month, year). Use
+        # it with `subscription_period_count`. The recommended value is `year`, with a
+        # `subscription_period_count` of `20`.
         sig { returns(Dodopayments::TimeInterval::OrSymbol) }
         attr_accessor :subscription_period_interval
 
@@ -280,18 +298,36 @@ module Dodopayments
         def self.new(
           # The currency in which the payment is made.
           currency:,
-          # Number of units for the payment frequency. For example, a value of `1` with a
-          # `payment_frequency_interval` of `month` represents monthly payments.
+          # Number of `payment_frequency_interval` units between two charges. This field
+          # sets the billing cycle. For example, `1` with a `payment_frequency_interval` of
+          # `month` charges the customer every month.
           payment_frequency_count:,
-          # The time interval for the payment frequency (e.g., day, month, year).
+          # The time unit of the billing cycle (e.g., day, month, year). Use it with
+          # `payment_frequency_count`.
           payment_frequency_interval:,
           # The payment amount. Represented in the lowest denomination of the currency
           # (e.g., cents for USD). For example, to charge $1.00, pass `100`.
           price:,
-          # Number of units for the subscription period. For example, a value of `12` with a
-          # `subscription_period_interval` of `month` represents a one-year subscription.
+          # Number of `subscription_period_interval` units for the total duration of the
+          # subscription. This field does not set the billing cycle. Use
+          # `payment_frequency_count` for the billing cycle. When this period ends, the
+          # subscription expires. Dodo Payments does not start a new billing cycle after the
+          # subscription expires. Dodo Payments can still retry a failed payment for an
+          # earlier billing cycle.
+          #
+          # For a subscription that renews until the customer cancels it, set this to `20`
+          # with a `subscription_period_interval` of `year`. This is the recommended value
+          # and also the maximum. The subscription expires after 20 years if the customer
+          # does not cancel it before then.
+          #
+          # For example, a monthly plan uses a `payment_frequency_count` of `1`, a
+          # `payment_frequency_interval` of `month`, and a subscription period of `20`
+          # `year`. Do not set the subscription period to `1` `month` for a monthly plan:
+          # the subscription then expires after one month.
           subscription_period_count:,
-          # The time interval for the subscription period (e.g., day, month, year).
+          # The time unit of the total subscription duration (e.g., day, month, year). Use
+          # it with `subscription_period_count`. The recommended value is `year`, with a
+          # `subscription_period_count` of `20`.
           subscription_period_interval:,
           # Deprecated: use `discount_bps` instead.
           #
@@ -372,21 +408,39 @@ module Dodopayments
         sig { returns(Integer) }
         attr_accessor :fixed_price
 
-        # Number of units for the payment frequency. For example, a value of `1` with a
-        # `payment_frequency_interval` of `month` represents monthly payments.
+        # Number of `payment_frequency_interval` units between two charges. This field
+        # sets the billing cycle. For example, `1` with a `payment_frequency_interval` of
+        # `month` charges the customer every month.
         sig { returns(Integer) }
         attr_accessor :payment_frequency_count
 
-        # The time interval for the payment frequency (e.g., day, month, year).
+        # The time unit of the billing cycle (e.g., day, month, year). Use it with
+        # `payment_frequency_count`.
         sig { returns(Dodopayments::TimeInterval::OrSymbol) }
         attr_accessor :payment_frequency_interval
 
-        # Number of units for the subscription period. For example, a value of `12` with a
-        # `subscription_period_interval` of `month` represents a one-year subscription.
+        # Number of `subscription_period_interval` units for the total duration of the
+        # subscription. This field does not set the billing cycle. Use
+        # `payment_frequency_count` for the billing cycle. When this period ends, the
+        # subscription expires. Dodo Payments does not start a new billing cycle after the
+        # subscription expires. Dodo Payments can still retry a failed payment for an
+        # earlier billing cycle.
+        #
+        # For a subscription that renews until the customer cancels it, set this to `20`
+        # with a `subscription_period_interval` of `year`. This is the recommended value
+        # and also the maximum. The subscription expires after 20 years if the customer
+        # does not cancel it before then.
+        #
+        # For example, a monthly plan uses a `payment_frequency_count` of `1`, a
+        # `payment_frequency_interval` of `month`, and a subscription period of `20`
+        # `year`. Do not set the subscription period to `1` `month` for a monthly plan:
+        # the subscription then expires after one month.
         sig { returns(Integer) }
         attr_accessor :subscription_period_count
 
-        # The time interval for the subscription period (e.g., day, month, year).
+        # The time unit of the total subscription duration (e.g., day, month, year). Use
+        # it with `subscription_period_count`. The recommended value is `year`, with a
+        # `subscription_period_count` of `20`.
         sig { returns(Dodopayments::TimeInterval::OrSymbol) }
         attr_accessor :subscription_period_interval
 
@@ -451,15 +505,33 @@ module Dodopayments
           # The fixed payment amount. Represented in the lowest denomination of the currency
           # (e.g., cents for USD). For example, to charge $1.00, pass `100`.
           fixed_price:,
-          # Number of units for the payment frequency. For example, a value of `1` with a
-          # `payment_frequency_interval` of `month` represents monthly payments.
+          # Number of `payment_frequency_interval` units between two charges. This field
+          # sets the billing cycle. For example, `1` with a `payment_frequency_interval` of
+          # `month` charges the customer every month.
           payment_frequency_count:,
-          # The time interval for the payment frequency (e.g., day, month, year).
+          # The time unit of the billing cycle (e.g., day, month, year). Use it with
+          # `payment_frequency_count`.
           payment_frequency_interval:,
-          # Number of units for the subscription period. For example, a value of `12` with a
-          # `subscription_period_interval` of `month` represents a one-year subscription.
+          # Number of `subscription_period_interval` units for the total duration of the
+          # subscription. This field does not set the billing cycle. Use
+          # `payment_frequency_count` for the billing cycle. When this period ends, the
+          # subscription expires. Dodo Payments does not start a new billing cycle after the
+          # subscription expires. Dodo Payments can still retry a failed payment for an
+          # earlier billing cycle.
+          #
+          # For a subscription that renews until the customer cancels it, set this to `20`
+          # with a `subscription_period_interval` of `year`. This is the recommended value
+          # and also the maximum. The subscription expires after 20 years if the customer
+          # does not cancel it before then.
+          #
+          # For example, a monthly plan uses a `payment_frequency_count` of `1`, a
+          # `payment_frequency_interval` of `month`, and a subscription period of `20`
+          # `year`. Do not set the subscription period to `1` `month` for a monthly plan:
+          # the subscription then expires after one month.
           subscription_period_count:,
-          # The time interval for the subscription period (e.g., day, month, year).
+          # The time unit of the total subscription duration (e.g., day, month, year). Use
+          # it with `subscription_period_count`. The recommended value is `year`, with a
+          # `subscription_period_count` of `20`.
           subscription_period_interval:,
           # Deprecated: use `discount_bps` instead.
           #

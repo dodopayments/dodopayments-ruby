@@ -2,7 +2,8 @@ module Dodopayments
   module Models
     module Invoices
       type payment_retrieve_refund_params =
-        { refund_id: String } & Dodopayments::Internal::Type::request_parameters
+        { refund_id: String, token: String }
+        & Dodopayments::Internal::Type::request_parameters
 
       class PaymentRetrieveRefundParams < Dodopayments::Internal::Type::BaseModel
         extend Dodopayments::Internal::Type::RequestParameters::Converter
@@ -10,13 +11,19 @@ module Dodopayments
 
         attr_accessor refund_id: String
 
+        attr_reader token: String?
+
+        def token=: (String) -> String
+
         def initialize: (
           refund_id: String,
+          ?token: String,
           ?request_options: Dodopayments::request_opts
         ) -> void
 
         def to_hash: -> {
           refund_id: String,
+          token: String,
           request_options: Dodopayments::RequestOptions
         }
       end

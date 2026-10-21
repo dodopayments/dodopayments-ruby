@@ -1,0 +1,16 @@
+module Dodopayments
+  module Models
+    type charge_type = :new | :renewal | :plan_change | :on_demand
+
+    module ChargeType
+      extend Dodopayments::Internal::Type::Enum
+
+      NEW: :new
+      RENEWAL: :renewal
+      PLAN_CHANGE: :plan_change
+      ON_DEMAND: :on_demand
+
+      def self?.values: -> ::Array[Dodopayments::Models::charge_type]
+    end
+  end
+end

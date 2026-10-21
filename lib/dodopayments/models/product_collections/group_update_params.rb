@@ -20,7 +20,8 @@ module Dodopayments
 
         # @!attribute group_name
         #   Optional group name update: Some(Some(name)) = set name, Some(None) = clear
-        #   name, None = no change
+        #   name, None = no change The API returns 422 if another group in the collection
+        #   has no name.
         #
         #   @return [String, nil]
         optional :group_name, String, nil?: true
