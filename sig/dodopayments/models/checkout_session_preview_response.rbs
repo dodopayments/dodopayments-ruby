@@ -142,6 +142,7 @@ module Dodopayments
           description: String?,
           discount_amount: Integer?,
           discount_cycle: Integer?,
+          monthly_equivalent: Integer?,
           name: String?,
           tax: Integer?
         }
@@ -181,6 +182,8 @@ module Dodopayments
 
         attr_accessor discount_cycle: Integer?
 
+        attr_accessor monthly_equivalent: Integer?
+
         attr_accessor name: String?
 
         attr_accessor tax: Integer?
@@ -203,6 +206,7 @@ module Dodopayments
           ?description: String?,
           ?discount_amount: Integer?,
           ?discount_cycle: Integer?,
+          ?monthly_equivalent: Integer?,
           ?name: String?,
           ?tax: Integer?
         ) -> void
@@ -225,6 +229,7 @@ module Dodopayments
           description: String?,
           discount_amount: Integer?,
           discount_cycle: Integer?,
+          monthly_equivalent: Integer?,
           name: String?,
           tax: Integer?
         }
