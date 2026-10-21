@@ -52,6 +52,14 @@ module Dodopayments
       #   @return [Array<Dodopayments::Models::Dispute>]
       required :disputes, -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Dispute] }
 
+      # @!attribute includes_usage
+      #   True when this payment also bills metered usage or credit overage. The usage is
+      #   for the billing cycle before the service period, not for the service period. The
+      #   value is set for each payment status. It is false when `charge_type` is null.
+      #
+      #   @return [Boolean]
+      required :includes_usage, Dodopayments::Internal::Type::Boolean
+
       # @!attribute is_multi_subscription
       #   True when one payment starts more than one subscription. Read this field to find
       #   the payment type. Do not read the length of `subscription_ids`. Do not read
@@ -105,7 +113,10 @@ module Dodopayments
       #   the same as `subscription_ids`. For a plan change charge, the period starts at
       #   the plan change and ends at the next billing date. The list is empty unless the
       #   payment status is `succeeded`. The list is also empty for a one-time payment, an
-      #   on-demand charge, or a payment method update.
+      #   on-demand charge, or a payment method update. The list is set for `new`,
+      #   `renewal` and `plan_change` charges that succeeded. It can be empty for some
+      #   zero-amount payments. A `renewal` with no entry for its subscription bills usage
+      #   only. That payment does not extend the service period.
       #
       #   @return [Array<Dodopayments::Models::SubscriptionServicePeriod>]
       required :service_periods,
@@ -143,6 +154,22 @@ module Dodopayments
       #   @return [Integer]
       required :total_amount, Integer
 
+      # @!attribute card_exp_month
+      #   Expiry month of the card, as two digits from `01` to `12`. For Apple Pay and
+      #   Google Pay, this is the expiry of the wallet token, which can differ from the
+      #   expiry of the physical card.
+      #
+      #   @return [String, nil]
+      optional :card_exp_month, String, nil?: true
+
+      # @!attribute card_exp_year
+      #   Expiry year of the card, as four digits, for example `2029`. For Apple Pay and
+      #   Google Pay, this is the expiry of the wallet token, which can differ from the
+      #   expiry of the physical card.
+      #
+      #   @return [String, nil]
+      optional :card_exp_year, String, nil?: true
+
       # @!attribute card_holder_name
       #   Cardholder name
       #
@@ -162,16 +189,26 @@ module Dodopayments
       optional :card_last_four, String, nil?: true
 
       # @!attribute card_network
-      #   Card network like VISA, MASTERCARD etc.
+      #   Card network, in lowercase, for example `visa`, `mastercard` or `amex`. Older
+      #   payments can carry other casing.
       #
       #   @return [String, nil]
       optional :card_network, String, nil?: true
 
       # @!attribute card_type
-      #   The type of card DEBIT or CREDIT
+      #   The type of card, in lowercase: `credit`, `debit` or `prepaid`. Older payments
+      #   can carry other casing.
       #
       #   @return [String, nil]
       optional :card_type, String, nil?: true
+
+      # @!attribute charge_type
+      #   The type of subscription charge that this payment is for. Refer to `ChargeType`.
+      #   The value is set for each payment status, not only for `succeeded`. The value is
+      #   null when this payment charges no subscription.
+      #
+      #   @return [Symbol, Dodopayments::Models::ChargeType, nil]
+      optional :charge_type, enum: -> { Dodopayments::ChargeType }, nil?: true
 
       # @!attribute checkout_session_id
       #   If payment is made using a checkout session, this field is set to the id of the
@@ -225,7 +262,11 @@ module Dodopayments
       optional :invoice_id, String, nil?: true
 
       # @!attribute invoice_url
-      #   URL to download the invoice PDF for this payment.
+      #   @deprecated Use `GET /invoices/payments/{payment_id}` with an API key.
+      #
+      #   DEPRECATED: Use `GET /invoices/payments/{payment_id}` with an API key. URL to
+      #   download the invoice PDF for this payment. The URL has no signed token. If the
+      #   business asks for a credential on its invoice links, the URL needs an API key.
       #
       #   @return [String, nil]
       optional :invoice_url, String, nil?: true
@@ -304,7 +345,7 @@ module Dodopayments
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, is_multi_subscription:, is_update_payment_method:, metadata:, payment_id:, payment_provider:, refunds:, retry_attempt:, service_periods:, settlement_amount:, settlement_currency:, subscription_ids:, total_amount:, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, discounts: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_id: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, includes_usage:, is_multi_subscription:, is_update_payment_method:, metadata:, payment_id:, payment_provider:, refunds:, retry_attempt:, service_periods:, settlement_amount:, settlement_currency:, subscription_ids:, total_amount:, card_exp_month: nil, card_exp_year: nil, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, charge_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, discounts: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_id: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
@@ -323,6 +364,8 @@ module Dodopayments
       #   @param digital_products_delivered [Boolean] Whether the digital products purchased in this payment have been delivered.
       #
       #   @param disputes [Array<Dodopayments::Models::Dispute>] List of disputes associated with this payment
+      #
+      #   @param includes_usage [Boolean] True when this payment also bills metered usage or credit overage. The usage is
       #
       #   @param is_multi_subscription [Boolean] True when one payment starts more than one subscription. Read this field
       #
@@ -348,15 +391,21 @@ module Dodopayments
       #
       #   @param total_amount [Integer] Total amount charged to the customer including tax, in the currency's smallest u
       #
+      #   @param card_exp_month [String, nil] Expiry month of the card, as two digits from `01` to `12`. For Apple Pay and
+      #
+      #   @param card_exp_year [String, nil] Expiry year of the card, as four digits, for example `2029`. For Apple Pay and
+      #
       #   @param card_holder_name [String, nil] Cardholder name
       #
       #   @param card_issuing_country [Symbol, Dodopayments::Models::CountryCode, nil] ISO2 country code of the card
       #
       #   @param card_last_four [String, nil] The last four digits of the card
       #
-      #   @param card_network [String, nil] Card network like VISA, MASTERCARD etc.
+      #   @param card_network [String, nil] Card network, in lowercase, for example `visa`, `mastercard` or `amex`. Older pa
       #
-      #   @param card_type [String, nil] The type of card DEBIT or CREDIT
+      #   @param card_type [String, nil] The type of card, in lowercase: `credit`, `debit` or `prepaid`. Older payments c
+      #
+      #   @param charge_type [Symbol, Dodopayments::Models::ChargeType, nil] The type of subscription charge that this payment is for. Refer to `ChargeType`.
       #
       #   @param checkout_session_id [String, nil] If payment is made using a checkout session,
       #
@@ -372,7 +421,7 @@ module Dodopayments
       #
       #   @param invoice_id [String, nil] Invoice ID for this payment. Uses India-specific invoice ID if available.
       #
-      #   @param invoice_url [String, nil] URL to download the invoice PDF for this payment.
+      #   @param invoice_url [String, nil] DEPRECATED: Use `GET /invoices/payments/{payment_id}` with an API key.
       #
       #   @param payment_link [String, nil] Checkout URL
       #

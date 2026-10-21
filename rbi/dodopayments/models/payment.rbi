@@ -48,6 +48,12 @@ module Dodopayments
       sig { returns(T::Array[Dodopayments::Dispute]) }
       attr_accessor :disputes
 
+      # True when this payment also bills metered usage or credit overage. The usage is
+      # for the billing cycle before the service period, not for the service period. The
+      # value is set for each payment status. It is false when `charge_type` is null.
+      sig { returns(T::Boolean) }
+      attr_accessor :includes_usage
+
       # True when one payment starts more than one subscription. Read this field to find
       # the payment type. Do not read the length of `subscription_ids`. Do not read
       # `subscription_id` for null.
@@ -86,7 +92,10 @@ module Dodopayments
       # the same as `subscription_ids`. For a plan change charge, the period starts at
       # the plan change and ends at the next billing date. The list is empty unless the
       # payment status is `succeeded`. The list is also empty for a one-time payment, an
-      # on-demand charge, or a payment method update.
+      # on-demand charge, or a payment method update. The list is set for `new`,
+      # `renewal` and `plan_change` charges that succeeded. It can be empty for some
+      # zero-amount payments. A `renewal` with no entry for its subscription bills usage
+      # only. That payment does not extend the service period.
       sig { returns(T::Array[Dodopayments::SubscriptionServicePeriod]) }
       attr_accessor :service_periods
 
@@ -114,6 +123,18 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :total_amount
 
+      # Expiry month of the card, as two digits from `01` to `12`. For Apple Pay and
+      # Google Pay, this is the expiry of the wallet token, which can differ from the
+      # expiry of the physical card.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :card_exp_month
+
+      # Expiry year of the card, as four digits, for example `2029`. For Apple Pay and
+      # Google Pay, this is the expiry of the wallet token, which can differ from the
+      # expiry of the physical card.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :card_exp_year
+
       # Cardholder name
       sig { returns(T.nilable(String)) }
       attr_accessor :card_holder_name
@@ -126,13 +147,21 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :card_last_four
 
-      # Card network like VISA, MASTERCARD etc.
+      # Card network, in lowercase, for example `visa`, `mastercard` or `amex`. Older
+      # payments can carry other casing.
       sig { returns(T.nilable(String)) }
       attr_accessor :card_network
 
-      # The type of card DEBIT or CREDIT
+      # The type of card, in lowercase: `credit`, `debit` or `prepaid`. Older payments
+      # can carry other casing.
       sig { returns(T.nilable(String)) }
       attr_accessor :card_type
+
+      # The type of subscription charge that this payment is for. Refer to `ChargeType`.
+      # The value is set for each payment status, not only for `succeeded`. The value is
+      # null when this payment charges no subscription.
+      sig { returns(T.nilable(Dodopayments::ChargeType::TaggedSymbol)) }
+      attr_accessor :charge_type
 
       # If payment is made using a checkout session, this field is set to the id of the
       # session.
@@ -165,7 +194,9 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :invoice_id
 
-      # URL to download the invoice PDF for this payment.
+      # DEPRECATED: Use `GET /invoices/payments/{payment_id}` with an API key. URL to
+      # download the invoice PDF for this payment. The URL has no signed token. If the
+      # business asks for a credential on its invoice links, the URL needs an API key.
       sig { returns(T.nilable(String)) }
       attr_accessor :invoice_url
 
@@ -231,6 +262,7 @@ module Dodopayments
           customer: Dodopayments::CustomerLimitedDetails::OrHash,
           digital_products_delivered: T::Boolean,
           disputes: T::Array[Dodopayments::Dispute::OrHash],
+          includes_usage: T::Boolean,
           is_multi_subscription: T::Boolean,
           is_update_payment_method: T::Boolean,
           metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
@@ -244,11 +276,14 @@ module Dodopayments
           settlement_currency: Dodopayments::Currency::OrSymbol,
           subscription_ids: T::Array[String],
           total_amount: Integer,
+          card_exp_month: T.nilable(String),
+          card_exp_year: T.nilable(String),
           card_holder_name: T.nilable(String),
           card_issuing_country: T.nilable(Dodopayments::CountryCode::OrSymbol),
           card_last_four: T.nilable(String),
           card_network: T.nilable(String),
           card_type: T.nilable(String),
+          charge_type: T.nilable(Dodopayments::ChargeType::OrSymbol),
           checkout_session_id: T.nilable(String),
           custom_field_responses:
             T.nilable(T::Array[Dodopayments::CustomFieldResponse::OrHash]),
@@ -289,6 +324,10 @@ module Dodopayments
         digital_products_delivered:,
         # List of disputes associated with this payment
         disputes:,
+        # True when this payment also bills metered usage or credit overage. The usage is
+        # for the billing cycle before the service period, not for the service period. The
+        # value is set for each payment status. It is false when `charge_type` is null.
+        includes_usage:,
         # True when one payment starts more than one subscription. Read this field to find
         # the payment type. Do not read the length of `subscription_ids`. Do not read
         # `subscription_id` for null.
@@ -313,7 +352,10 @@ module Dodopayments
         # the same as `subscription_ids`. For a plan change charge, the period starts at
         # the plan change and ends at the next billing date. The list is empty unless the
         # payment status is `succeeded`. The list is also empty for a one-time payment, an
-        # on-demand charge, or a payment method update.
+        # on-demand charge, or a payment method update. The list is set for `new`,
+        # `renewal` and `plan_change` charges that succeeded. It can be empty for some
+        # zero-amount payments. A `renewal` with no entry for its subscription bills usage
+        # only. That payment does not extend the service period.
         service_periods:,
         # The amount that will be credited to your Dodo balance after currency conversion
         # and processing. Especially relevant for adaptive pricing where the customer's
@@ -331,16 +373,30 @@ module Dodopayments
         # unit (e.g. cents for USD, yen for JPY, fils for KWD — see the currency's decimal
         # places)
         total_amount:,
+        # Expiry month of the card, as two digits from `01` to `12`. For Apple Pay and
+        # Google Pay, this is the expiry of the wallet token, which can differ from the
+        # expiry of the physical card.
+        card_exp_month: nil,
+        # Expiry year of the card, as four digits, for example `2029`. For Apple Pay and
+        # Google Pay, this is the expiry of the wallet token, which can differ from the
+        # expiry of the physical card.
+        card_exp_year: nil,
         # Cardholder name
         card_holder_name: nil,
         # ISO2 country code of the card
         card_issuing_country: nil,
         # The last four digits of the card
         card_last_four: nil,
-        # Card network like VISA, MASTERCARD etc.
+        # Card network, in lowercase, for example `visa`, `mastercard` or `amex`. Older
+        # payments can carry other casing.
         card_network: nil,
-        # The type of card DEBIT or CREDIT
+        # The type of card, in lowercase: `credit`, `debit` or `prepaid`. Older payments
+        # can carry other casing.
         card_type: nil,
+        # The type of subscription charge that this payment is for. Refer to `ChargeType`.
+        # The value is set for each payment status, not only for `succeeded`. The value is
+        # null when this payment charges no subscription.
+        charge_type: nil,
         # If payment is made using a checkout session, this field is set to the id of the
         # session.
         checkout_session_id: nil,
@@ -358,7 +414,9 @@ module Dodopayments
         error_message: nil,
         # Invoice ID for this payment. Uses India-specific invoice ID if available.
         invoice_id: nil,
-        # URL to download the invoice PDF for this payment.
+        # DEPRECATED: Use `GET /invoices/payments/{payment_id}` with an API key. URL to
+        # download the invoice PDF for this payment. The URL has no signed token. If the
+        # business asks for a credential on its invoice links, the URL needs an API key.
         invoice_url: nil,
         # Checkout URL
         payment_link: nil,
@@ -402,6 +460,7 @@ module Dodopayments
             customer: Dodopayments::CustomerLimitedDetails,
             digital_products_delivered: T::Boolean,
             disputes: T::Array[Dodopayments::Dispute],
+            includes_usage: T::Boolean,
             is_multi_subscription: T::Boolean,
             is_update_payment_method: T::Boolean,
             metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
@@ -415,12 +474,15 @@ module Dodopayments
             settlement_currency: Dodopayments::Currency::TaggedSymbol,
             subscription_ids: T::Array[String],
             total_amount: Integer,
+            card_exp_month: T.nilable(String),
+            card_exp_year: T.nilable(String),
             card_holder_name: T.nilable(String),
             card_issuing_country:
               T.nilable(Dodopayments::CountryCode::TaggedSymbol),
             card_last_four: T.nilable(String),
             card_network: T.nilable(String),
             card_type: T.nilable(String),
+            charge_type: T.nilable(Dodopayments::ChargeType::TaggedSymbol),
             checkout_session_id: T.nilable(String),
             custom_field_responses:
               T.nilable(T::Array[Dodopayments::CustomFieldResponse]),

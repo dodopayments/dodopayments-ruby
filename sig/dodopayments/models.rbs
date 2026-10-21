@@ -55,6 +55,8 @@ module Dodopayments
 
   module CbbProrationBehavior = Dodopayments::Models::CbbProrationBehavior
 
+  module ChargeType = Dodopayments::Models::ChargeType
+
   class CheckoutSessionBillingAddress = Dodopayments::Models::CheckoutSessionBillingAddress
 
   class CheckoutSessionCreateParams = Dodopayments::Models::CheckoutSessionCreateParams
