@@ -8,6 +8,7 @@ module Dodopayments
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
         has_license_key: bool,
+        includes_usage: bool,
         is_multi_subscription: bool,
         metadata: Dodopayments::Models::metadata,
         payment_id: String,
@@ -16,8 +17,12 @@ module Dodopayments
         service_periods: ::Array[Dodopayments::SubscriptionServicePeriod],
         subscription_ids: ::Array[String],
         total_amount: Integer,
+        card_exp_month: String?,
+        card_exp_year: String?,
         card_last_four: String?,
         card_network: String?,
+        card_type: String?,
+        charge_type: Dodopayments::Models::charge_type?,
         checkout_session_id: String?,
         dispute_status: Dodopayments::Models::dispute_status?,
         invoice_id: String?,
@@ -42,6 +47,8 @@ module Dodopayments
 
       attr_accessor has_license_key: bool
 
+      attr_accessor includes_usage: bool
+
       attr_accessor is_multi_subscription: bool
 
       attr_accessor metadata: Dodopayments::Models::metadata
@@ -58,9 +65,17 @@ module Dodopayments
 
       attr_accessor total_amount: Integer
 
+      attr_accessor card_exp_month: String?
+
+      attr_accessor card_exp_year: String?
+
       attr_accessor card_last_four: String?
 
       attr_accessor card_network: String?
+
+      attr_accessor card_type: String?
+
+      attr_accessor charge_type: Dodopayments::Models::charge_type?
 
       attr_accessor checkout_session_id: String?
 
@@ -87,6 +102,7 @@ module Dodopayments
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
         has_license_key: bool,
+        includes_usage: bool,
         is_multi_subscription: bool,
         metadata: Dodopayments::Models::metadata,
         payment_id: String,
@@ -95,8 +111,12 @@ module Dodopayments
         service_periods: ::Array[Dodopayments::SubscriptionServicePeriod],
         subscription_ids: ::Array[String],
         total_amount: Integer,
+        ?card_exp_month: String?,
+        ?card_exp_year: String?,
         ?card_last_four: String?,
         ?card_network: String?,
+        ?card_type: String?,
+        ?charge_type: Dodopayments::Models::charge_type?,
         ?checkout_session_id: String?,
         ?dispute_status: Dodopayments::Models::dispute_status?,
         ?invoice_id: String?,
@@ -115,6 +135,7 @@ module Dodopayments
         customer: Dodopayments::CustomerLimitedDetails,
         digital_products_delivered: bool,
         has_license_key: bool,
+        includes_usage: bool,
         is_multi_subscription: bool,
         metadata: Dodopayments::Models::metadata,
         payment_id: String,
@@ -123,8 +144,12 @@ module Dodopayments
         service_periods: ::Array[Dodopayments::SubscriptionServicePeriod],
         subscription_ids: ::Array[String],
         total_amount: Integer,
+        card_exp_month: String?,
+        card_exp_year: String?,
         card_last_four: String?,
         card_network: String?,
+        card_type: String?,
+        charge_type: Dodopayments::Models::charge_type?,
         checkout_session_id: String?,
         dispute_status: Dodopayments::Models::dispute_status?,
         invoice_id: String?,

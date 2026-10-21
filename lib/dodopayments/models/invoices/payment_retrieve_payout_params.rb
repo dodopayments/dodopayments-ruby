@@ -13,8 +13,21 @@ module Dodopayments
         #   @return [String]
         required :payout_id, String
 
-        # @!method initialize(payout_id:, request_options: {})
+        # @!attribute token
+        #   The signed link token. If the business asks for a credential on its invoice
+        #   links, a valid token for this record replaces the credential.
+        #
+        #   @return [String, nil]
+        optional :token, String
+
+        # @!method initialize(payout_id:, token: nil, request_options: {})
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::Invoices::PaymentRetrievePayoutParams} for more details.
+        #
         #   @param payout_id [String]
+        #
+        #   @param token [String] The signed link token. If the business asks for a credential on its invoice link
+        #
         #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
       end
     end

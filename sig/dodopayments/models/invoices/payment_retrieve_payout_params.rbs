@@ -2,7 +2,8 @@ module Dodopayments
   module Models
     module Invoices
       type payment_retrieve_payout_params =
-        { payout_id: String } & Dodopayments::Internal::Type::request_parameters
+        { payout_id: String, token: String }
+        & Dodopayments::Internal::Type::request_parameters
 
       class PaymentRetrievePayoutParams < Dodopayments::Internal::Type::BaseModel
         extend Dodopayments::Internal::Type::RequestParameters::Converter
@@ -10,13 +11,19 @@ module Dodopayments
 
         attr_accessor payout_id: String
 
+        attr_reader token: String?
+
+        def token=: (String) -> String
+
         def initialize: (
           payout_id: String,
+          ?token: String,
           ?request_options: Dodopayments::request_opts
         ) -> void
 
         def to_hash: -> {
           payout_id: String,
+          token: String,
           request_options: Dodopayments::RequestOptions
         }
       end

@@ -301,6 +301,15 @@ module Dodopayments
         #   @return [Integer, nil]
         optional :discount_cycle, Integer, nil?: true
 
+        # @!attribute monthly_equivalent
+        #   The monthly equivalent of the yearly unit price after discounts, in minor units
+        #   of `currency`. Only the hosted checkout sets it, when the business shows yearly
+        #   plans as monthly. The value is only for display. The order summary shows the
+        #   amounts that we charge.
+        #
+        #   @return [Integer, nil]
+        optional :monthly_equivalent, Integer, nil?: true
+
         # @!attribute name
         #   name of the product
         #
@@ -313,7 +322,7 @@ module Dodopayments
         #   @return [Integer, nil]
         optional :tax, Integer, nil?: true
 
-        # @!method initialize(credit_entitlements:, currency:, discounted_price:, is_subscription:, is_usage_based:, meters:, og_currency:, og_price:, product_id:, quantity:, tax_category:, tax_inclusive:, tax_rate:, addons: nil, description: nil, discount_amount: nil, discount_cycle: nil, name: nil, tax: nil)
+        # @!method initialize(credit_entitlements:, currency:, discounted_price:, is_subscription:, is_usage_based:, meters:, og_currency:, og_price:, product_id:, quantity:, tax_category:, tax_inclusive:, tax_rate:, addons: nil, description: nil, discount_amount: nil, discount_cycle: nil, monthly_equivalent: nil, name: nil, tax: nil)
         #   Some parameter documentations has been truncated, see
         #   {Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart} for more
         #   details.
@@ -351,6 +360,8 @@ module Dodopayments
         #   @param discount_amount [Integer, nil] Percentage rate (basis points) of the applicable percentage code; null
         #
         #   @param discount_cycle [Integer, nil] number of cycles the discount will apply
+        #
+        #   @param monthly_equivalent [Integer, nil] The monthly equivalent of the yearly unit price after discounts, in minor units
         #
         #   @param name [String, nil] name of the product
         #
