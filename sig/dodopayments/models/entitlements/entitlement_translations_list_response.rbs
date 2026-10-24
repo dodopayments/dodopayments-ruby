@@ -1,0 +1,22 @@
+module Dodopayments
+  module Models
+    class EntitlementTranslationsListResponse = Entitlements::EntitlementTranslationsListResponse
+
+    module Entitlements
+      type entitlement_translations_list_response =
+        { items: ::Array[Dodopayments::Entitlements::EntitlementTranslation] }
+
+      class EntitlementTranslationsListResponse < Dodopayments::Internal::Type::BaseModel
+        attr_accessor items: ::Array[Dodopayments::Entitlements::EntitlementTranslation]
+
+        def initialize: (
+          items: ::Array[Dodopayments::Entitlements::EntitlementTranslation]
+        ) -> void
+
+        def to_hash: -> {
+          items: ::Array[Dodopayments::Entitlements::EntitlementTranslation]
+        }
+      end
+    end
+  end
+end

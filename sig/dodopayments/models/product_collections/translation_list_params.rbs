@@ -1,0 +1,32 @@
+module Dodopayments
+  module Models
+    module ProductCollections
+      type translation_list_params =
+        { id: String, locale: ::Array[String] }
+        & Dodopayments::Internal::Type::request_parameters
+
+      class TranslationListParams < Dodopayments::Internal::Type::BaseModel
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_reader locale: ::Array[String]?
+
+        def locale=: (::Array[String]) -> ::Array[String]
+
+        def initialize: (
+          id: String,
+          ?locale: ::Array[String],
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          locale: ::Array[String],
+          request_options: Dodopayments::RequestOptions
+        }
+      end
+    end
+  end
+end

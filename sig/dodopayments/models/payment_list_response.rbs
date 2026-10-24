@@ -31,7 +31,10 @@ module Dodopayments
         payment_method_type: String?,
         refund_status: Dodopayments::Models::payment_refund_status?,
         status: Dodopayments::Models::intent_status?,
-        subscription_id: String?
+        subscription_id: String?,
+        three_ds_flow: Dodopayments::Models::three_ds_flow?,
+        three_ds_status: Dodopayments::Models::three_ds_status?,
+        three_ds_version: String?
       }
 
     class PaymentListResponse < Dodopayments::Internal::Type::BaseModel
@@ -95,6 +98,12 @@ module Dodopayments
 
       attr_accessor subscription_id: String?
 
+      attr_accessor three_ds_flow: Dodopayments::Models::three_ds_flow?
+
+      attr_accessor three_ds_status: Dodopayments::Models::three_ds_status?
+
+      attr_accessor three_ds_version: String?
+
       def initialize: (
         brand_id: String,
         created_at: Time,
@@ -125,7 +134,10 @@ module Dodopayments
         ?payment_method_type: String?,
         ?refund_status: Dodopayments::Models::payment_refund_status?,
         ?status: Dodopayments::Models::intent_status?,
-        ?subscription_id: String?
+        ?subscription_id: String?,
+        ?three_ds_flow: Dodopayments::Models::three_ds_flow?,
+        ?three_ds_status: Dodopayments::Models::three_ds_status?,
+        ?three_ds_version: String?
       ) -> void
 
       def to_hash: -> {
@@ -158,7 +170,10 @@ module Dodopayments
         payment_method_type: String?,
         refund_status: Dodopayments::Models::payment_refund_status?,
         status: Dodopayments::Models::intent_status?,
-        subscription_id: String?
+        subscription_id: String?,
+        three_ds_flow: Dodopayments::Models::three_ds_flow?,
+        three_ds_status: Dodopayments::Models::three_ds_status?,
+        three_ds_version: String?
       }
 
       type payment_provider = :stripe | :adyen | :dodo

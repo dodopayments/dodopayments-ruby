@@ -339,13 +339,35 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :tax, Integer, nil?: true
 
+      # @!attribute three_ds_flow
+      #   How the cardholder completed the 3DS authentication. The value is null when the
+      #   processor does not report it.
+      #
+      #   @return [Symbol, Dodopayments::Models::ThreeDSFlow, nil]
+      optional :three_ds_flow, enum: -> { Dodopayments::ThreeDSFlow }, nil?: true
+
+      # @!attribute three_ds_status
+      #   The result of the 3DS authentication, as the processor reports it. The value is
+      #   null when the processor reports no 3DS data, for example when the payment did
+      #   not use 3DS.
+      #
+      #   @return [Symbol, Dodopayments::Models::ThreeDSStatus, nil]
+      optional :three_ds_status, enum: -> { Dodopayments::ThreeDSStatus }, nil?: true
+
+      # @!attribute three_ds_version
+      #   The 3DS protocol version, for example `2.2.0`. The value is null when the
+      #   processor does not report it.
+      #
+      #   @return [String, nil]
+      optional :three_ds_version, String, nil?: true
+
       # @!attribute updated_at
       #   Timestamp when the payment was last updated
       #
       #   @return [Time, nil]
       optional :updated_at, Time, nil?: true
 
-      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, includes_usage:, is_multi_subscription:, is_update_payment_method:, metadata:, payment_id:, payment_provider:, refunds:, retry_attempt:, service_periods:, settlement_amount:, settlement_currency:, subscription_ids:, total_amount:, card_exp_month: nil, card_exp_year: nil, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, charge_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, discounts: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_id: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, updated_at: nil)
+      # @!method initialize(billing:, brand_id:, business_id:, created_at:, currency:, customer:, digital_products_delivered:, disputes:, includes_usage:, is_multi_subscription:, is_update_payment_method:, metadata:, payment_id:, payment_provider:, refunds:, retry_attempt:, service_periods:, settlement_amount:, settlement_currency:, subscription_ids:, total_amount:, card_exp_month: nil, card_exp_year: nil, card_holder_name: nil, card_issuing_country: nil, card_last_four: nil, card_network: nil, card_type: nil, charge_type: nil, checkout_session_id: nil, custom_field_responses: nil, discount_id: nil, discounts: nil, error_code: nil, error_message: nil, invoice_id: nil, invoice_url: nil, payment_link: nil, payment_method: nil, payment_method_id: nil, payment_method_type: nil, product_cart: nil, refund_status: nil, settlement_tax: nil, status: nil, subscription_id: nil, tax: nil, three_ds_flow: nil, three_ds_status: nil, three_ds_version: nil, updated_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Payment} for more details.
       #
@@ -442,6 +464,12 @@ module Dodopayments
       #   @param subscription_id [String, nil] Identifier of the subscription if payment is part of a subscription.
       #
       #   @param tax [Integer, nil] Amount of tax collected in the currency's smallest unit
+      #
+      #   @param three_ds_flow [Symbol, Dodopayments::Models::ThreeDSFlow, nil] How the cardholder completed the 3DS authentication. The value is null when the
+      #
+      #   @param three_ds_status [Symbol, Dodopayments::Models::ThreeDSStatus, nil] The result of the 3DS authentication, as the processor reports it. The value is
+      #
+      #   @param three_ds_version [String, nil] The 3DS protocol version, for example `2.2.0`. The value is null when the proces
       #
       #   @param updated_at [Time, nil] Timestamp when the payment was last updated
 

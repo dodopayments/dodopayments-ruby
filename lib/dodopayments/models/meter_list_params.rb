@@ -13,6 +13,17 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :archived, Dodopayments::Internal::Type::Boolean
 
+      # @!attribute locale
+      #   Shows the translated name, description and unit of the catalog entities in this
+      #   locale. The value must be a code from `GET /locales`, for example `fr`. A field
+      #   with no translation, an unknown code, or no code shows the base text.
+      #
+      #   Do not send a text from a localized response back in a create or update request.
+      #   The base text then changes to the translated text.
+      #
+      #   @return [String, nil]
+      optional :locale, String
+
       # @!attribute page_number
       #   Page number default is 0
       #
@@ -25,8 +36,13 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :page_size, Integer
 
-      # @!method initialize(archived: nil, page_number: nil, page_size: nil, request_options: {})
+      # @!method initialize(archived: nil, locale: nil, page_number: nil, page_size: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::MeterListParams} for more details.
+      #
       #   @param archived [Boolean] List archived meters
+      #
+      #   @param locale [String] Shows the translated name, description and unit of the catalog entities in this
       #
       #   @param page_number [Integer] Page number default is 0
       #

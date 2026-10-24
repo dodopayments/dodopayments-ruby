@@ -3,9 +3,14 @@
 module Dodopayments
   module Resources
     class Refunds
-      # @overload create(payment_id:, items: nil, metadata: nil, reason: nil, request_options: {})
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::RefundCreateParams} for more details.
+      #
+      # @overload create(payment_id:, currency: nil, items: nil, metadata: nil, reason: nil, request_options: {})
       #
       # @param payment_id [String] The unique identifier of the payment to be refunded.
+      #
+      # @param currency [Symbol, Dodopayments::Models::Currency, nil] The currency of every `items[].amount`. It must be the currency the customer pai
       #
       # @param items [Array<Dodopayments::Models::RefundCreateParams::Item>, nil] Partially Refund an Individual Item
       #

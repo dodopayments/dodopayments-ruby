@@ -55,6 +55,29 @@ class Dodopayments::Test::Resources::MetersTest < Dodopayments::Test::ResourceTe
     end
   end
 
+  def test_update
+    response = @dodo_payments.meters.update("mtr_h5tgTWL55OyMO0L2Q9w9v")
+
+    assert_pattern do
+      response => Dodopayments::Meter
+    end
+
+    assert_pattern do
+      response => {
+        id: String,
+        aggregation: Dodopayments::MeterAggregation,
+        business_id: String,
+        created_at: Time,
+        event_name: String,
+        measurement_unit: String,
+        name: String,
+        updated_at: Time,
+        description: String | nil,
+        filter: Dodopayments::MeterFilter | nil
+      }
+    end
+  end
+
   def test_list
     response = @dodo_payments.meters.list
 

@@ -18,6 +18,11 @@ module Dodopayments
       sig { returns(String) }
       attr_accessor :payment_id
 
+      # The currency of every `items[].amount`. It must be the currency the customer
+      # paid in. Without it, the amounts are in the settlement currency.
+      sig { returns(T.nilable(Dodopayments::Currency::OrSymbol)) }
+      attr_accessor :currency
+
       # Partially Refund an Individual Item
       sig do
         returns(T.nilable(T::Array[Dodopayments::RefundCreateParams::Item]))
@@ -46,6 +51,7 @@ module Dodopayments
       sig do
         params(
           payment_id: String,
+          currency: T.nilable(Dodopayments::Currency::OrSymbol),
           items:
             T.nilable(T::Array[Dodopayments::RefundCreateParams::Item::OrHash]),
           metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
@@ -56,6 +62,9 @@ module Dodopayments
       def self.new(
         # The unique identifier of the payment to be refunded.
         payment_id:,
+        # The currency of every `items[].amount`. It must be the currency the customer
+        # paid in. Without it, the amounts are in the settlement currency.
+        currency: nil,
         # Partially Refund an Individual Item
         items: nil,
         # Additional metadata associated with the refund.
@@ -70,6 +79,7 @@ module Dodopayments
         override.returns(
           {
             payment_id: String,
+            currency: T.nilable(Dodopayments::Currency::OrSymbol),
             items: T.nilable(T::Array[Dodopayments::RefundCreateParams::Item]),
             metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             reason: T.nilable(String),

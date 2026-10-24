@@ -12,7 +12,10 @@ module Dodopayments
       # @return [Dodopayments::Resources::Customers::Emails]
       attr_reader :emails
 
-      # @overload create(email:, name:, metadata: nil, phone_number: nil, request_options: {})
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::CustomerCreateParams} for more details.
+      #
+      # @overload create(email:, name:, metadata: nil, phone_number: nil, preferred_locale: nil, request_options: {})
       #
       # @param email [String]
       #
@@ -21,6 +24,8 @@ module Dodopayments
       # @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata for the customer
       #
       # @param phone_number [String, nil]
+      #
+      # @param preferred_locale [Symbol, Dodopayments::Models::Locale, nil] The language of the customer emails, a code from `GET /locales`. With no value,
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -56,7 +61,10 @@ module Dodopayments
         )
       end
 
-      # @overload update(customer_id, email: nil, metadata: nil, name: nil, phone_number: nil, request_options: {})
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::CustomerUpdateParams} for more details.
+      #
+      # @overload update(customer_id, email: nil, metadata: nil, name: nil, phone_number: nil, preferred_locale: nil, request_options: {})
       #
       # @param customer_id [String] Customer Id
       #
@@ -67,6 +75,8 @@ module Dodopayments
       # @param name [String, nil]
       #
       # @param phone_number [String, nil]
+      #
+      # @param preferred_locale [Symbol, Dodopayments::Models::Locale, nil] The language of the customer emails, a code from `GET /locales`. A value replace
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #

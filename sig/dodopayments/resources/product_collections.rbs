@@ -1,6 +1,8 @@
 module Dodopayments
   module Resources
     class ProductCollections
+      attr_reader translations: Dodopayments::Resources::ProductCollections::Translations
+
       attr_reader groups: Dodopayments::Resources::ProductCollections::Groups
 
       def create: (
@@ -18,6 +20,7 @@ module Dodopayments
 
       def retrieve: (
         String id,
+        ?locale: String,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::ProductCollection
 
@@ -39,6 +42,7 @@ module Dodopayments
       def list: (
         ?archived: bool,
         ?brand_id: String,
+        ?locale: String,
         ?page_number: Integer,
         ?page_size: Integer,
         ?request_options: Dodopayments::request_opts

@@ -3,6 +3,9 @@
 module Dodopayments
   module Resources
     class ProductCollections
+      sig { returns(Dodopayments::Resources::ProductCollections::Translations) }
+      attr_reader :translations
+
       sig { returns(Dodopayments::Resources::ProductCollections::Groups) }
       attr_reader :groups
 
@@ -69,12 +72,20 @@ module Dodopayments
       sig do
         params(
           id: String,
+          locale: String,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::ProductCollection)
       end
       def retrieve(
         # Product Collection Id
         id,
+        # Shows the translated name, description and unit of the catalog entities in this
+        # locale. The value must be a code from `GET /locales`, for example `fr`. A field
+        # with no translation, an unknown code, or no code shows the base text.
+        #
+        # Do not send a text from a localized response back in a create or update request.
+        # The base text then changes to the translated text.
+        locale: nil,
         request_options: {}
       )
       end
@@ -146,6 +157,7 @@ module Dodopayments
         params(
           archived: T::Boolean,
           brand_id: String,
+          locale: String,
           page_number: Integer,
           page_size: Integer,
           request_options: Dodopayments::RequestOptions::OrHash
@@ -160,6 +172,13 @@ module Dodopayments
         archived: nil,
         # Filter by Brand id
         brand_id: nil,
+        # Shows the translated name, description and unit of the catalog entities in this
+        # locale. The value must be a code from `GET /locales`, for example `fr`. A field
+        # with no translation, an unknown code, or no code shows the base text.
+        #
+        # Do not send a text from a localized response back in a create or update request.
+        # The base text then changes to the translated text.
+        locale: nil,
         # Page number default is 0
         page_number: nil,
         # Page size default is 10 max is 100

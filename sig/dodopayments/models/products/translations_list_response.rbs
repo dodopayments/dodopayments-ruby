@@ -1,0 +1,18 @@
+module Dodopayments
+  module Models
+    module Products
+      type translations_list_response =
+        { items: ::Array[Dodopayments::Products::Translation] }
+
+      class TranslationsListResponse < Dodopayments::Internal::Type::BaseModel
+        attr_accessor items: ::Array[Dodopayments::Products::Translation]
+
+        def initialize: (
+          items: ::Array[Dodopayments::Products::Translation]
+        ) -> void
+
+        def to_hash: -> { items: ::Array[Dodopayments::Products::Translation] }
+      end
+    end
+  end
+end

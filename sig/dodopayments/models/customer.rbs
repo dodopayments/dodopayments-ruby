@@ -10,7 +10,8 @@ module Dodopayments
         blocked_at: Time?,
         blocklist_entry_id: String?,
         metadata: Dodopayments::Models::metadata,
-        phone_number: String?
+        phone_number: String?,
+        preferred_locale: Dodopayments::Models::locale?
       }
 
     class Customer < Dodopayments::Internal::Type::BaseModel
@@ -36,6 +37,8 @@ module Dodopayments
 
       attr_accessor phone_number: String?
 
+      attr_accessor preferred_locale: Dodopayments::Models::locale?
+
       def initialize: (
         business_id: String,
         created_at: Time,
@@ -45,7 +48,8 @@ module Dodopayments
         ?blocked_at: Time?,
         ?blocklist_entry_id: String?,
         ?metadata: Dodopayments::Models::metadata,
-        ?phone_number: String?
+        ?phone_number: String?,
+        ?preferred_locale: Dodopayments::Models::locale?
       ) -> void
 
       def to_hash: -> {
@@ -57,7 +61,8 @@ module Dodopayments
         blocked_at: Time?,
         blocklist_entry_id: String?,
         metadata: Dodopayments::Models::metadata,
-        phone_number: String?
+        phone_number: String?,
+        preferred_locale: Dodopayments::Models::locale?
       }
     end
   end

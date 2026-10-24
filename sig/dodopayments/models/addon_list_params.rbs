@@ -1,12 +1,25 @@
 module Dodopayments
   module Models
     type addon_list_params =
-      { page_number: Integer, page_size: Integer }
+      {
+        archived: bool,
+        locale: String,
+        page_number: Integer,
+        page_size: Integer
+      }
       & Dodopayments::Internal::Type::request_parameters
 
     class AddonListParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
+
+      attr_reader archived: bool?
+
+      def archived=: (bool) -> bool
+
+      attr_reader locale: String?
+
+      def locale=: (String) -> String
 
       attr_reader page_number: Integer?
 
@@ -17,12 +30,16 @@ module Dodopayments
       def page_size=: (Integer) -> Integer
 
       def initialize: (
+        ?archived: bool,
+        ?locale: String,
         ?page_number: Integer,
         ?page_size: Integer,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
       def to_hash: -> {
+        archived: bool,
+        locale: String,
         page_number: Integer,
         page_size: Integer,
         request_options: Dodopayments::RequestOptions

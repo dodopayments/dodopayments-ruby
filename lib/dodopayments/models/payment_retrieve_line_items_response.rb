@@ -15,9 +15,18 @@ module Dodopayments
       required :items,
                -> { Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item] }
 
-      # @!method initialize(currency:, items:)
+      # @!attribute partial_refund_allowed
+      #   False when the payment method does not allow a partial refund of this payment.
+      #
+      #   @return [Boolean]
+      required :partial_refund_allowed, Dodopayments::Internal::Type::Boolean
+
+      # @!method initialize(currency:, items:, partial_refund_allowed:)
       #   @param currency [Symbol, Dodopayments::Models::Currency]
+      #
       #   @param items [Array<Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item>]
+      #
+      #   @param partial_refund_allowed [Boolean] False when the payment method does not allow a partial refund of this payment.
 
       class Item < Dodopayments::Internal::Type::BaseModel
         # @!attribute amount

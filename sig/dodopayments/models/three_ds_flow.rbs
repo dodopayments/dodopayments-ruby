@@ -1,0 +1,14 @@
+module Dodopayments
+  module Models
+    type three_ds_flow = :challenge | :frictionless
+
+    module ThreeDSFlow
+      extend Dodopayments::Internal::Type::Enum
+
+      CHALLENGE: :challenge
+      FRICTIONLESS: :frictionless
+
+      def self?.values: -> ::Array[Dodopayments::Models::three_ds_flow]
+    end
+  end
+end

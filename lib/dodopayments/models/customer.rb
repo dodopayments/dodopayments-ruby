@@ -54,7 +54,13 @@ module Dodopayments
       #   @return [String, nil]
       optional :phone_number, String, nil?: true
 
-      # @!method initialize(business_id:, created_at:, customer_id:, email:, name:, blocked_at: nil, blocklist_entry_id: nil, metadata: nil, phone_number: nil)
+      # @!attribute preferred_locale
+      #   The language of the customer emails. `null` gives English.
+      #
+      #   @return [Symbol, Dodopayments::Models::Locale, nil]
+      optional :preferred_locale, enum: -> { Dodopayments::Locale }, nil?: true
+
+      # @!method initialize(business_id:, created_at:, customer_id:, email:, name:, blocked_at: nil, blocklist_entry_id: nil, metadata: nil, phone_number: nil, preferred_locale: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Customer} for more details.
       #
@@ -75,6 +81,8 @@ module Dodopayments
       #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Additional metadata for the customer
       #
       #   @param phone_number [String, nil]
+      #
+      #   @param preferred_locale [Symbol, Dodopayments::Models::Locale, nil] The language of the customer emails. `null` gives English.
     end
   end
 end
