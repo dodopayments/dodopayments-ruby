@@ -203,7 +203,29 @@ module Dodopayments
       #   @return [String, nil]
       optional :subscription_id, String, nil?: true
 
-      # @!method initialize(brand_id:, created_at:, currency:, customer:, digital_products_delivered:, has_license_key:, includes_usage:, is_multi_subscription:, metadata:, payment_id:, payment_provider:, retry_attempt:, service_periods:, subscription_ids:, total_amount:, card_exp_month: nil, card_exp_year: nil, card_last_four: nil, card_network: nil, card_type: nil, charge_type: nil, checkout_session_id: nil, dispute_status: nil, invoice_id: nil, invoice_url: nil, payment_method: nil, payment_method_type: nil, refund_status: nil, status: nil, subscription_id: nil)
+      # @!attribute three_ds_flow
+      #   How the cardholder completed the 3DS authentication. The value is null when the
+      #   processor does not report it.
+      #
+      #   @return [Symbol, Dodopayments::Models::ThreeDSFlow, nil]
+      optional :three_ds_flow, enum: -> { Dodopayments::ThreeDSFlow }, nil?: true
+
+      # @!attribute three_ds_status
+      #   The result of the 3DS authentication, as the processor reports it. The value is
+      #   null when the processor reports no 3DS data, for example when the payment did
+      #   not use 3DS.
+      #
+      #   @return [Symbol, Dodopayments::Models::ThreeDSStatus, nil]
+      optional :three_ds_status, enum: -> { Dodopayments::ThreeDSStatus }, nil?: true
+
+      # @!attribute three_ds_version
+      #   The 3DS protocol version, for example `2.2.0`. The value is null when the
+      #   processor does not report it.
+      #
+      #   @return [String, nil]
+      optional :three_ds_version, String, nil?: true
+
+      # @!method initialize(brand_id:, created_at:, currency:, customer:, digital_products_delivered:, has_license_key:, includes_usage:, is_multi_subscription:, metadata:, payment_id:, payment_provider:, retry_attempt:, service_periods:, subscription_ids:, total_amount:, card_exp_month: nil, card_exp_year: nil, card_last_four: nil, card_network: nil, card_type: nil, charge_type: nil, checkout_session_id: nil, dispute_status: nil, invoice_id: nil, invoice_url: nil, payment_method: nil, payment_method_type: nil, refund_status: nil, status: nil, subscription_id: nil, three_ds_flow: nil, three_ds_status: nil, three_ds_version: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::PaymentListResponse} for more details.
       #
@@ -266,6 +288,12 @@ module Dodopayments
       #   @param status [Symbol, Dodopayments::Models::IntentStatus, nil]
       #
       #   @param subscription_id [String, nil]
+      #
+      #   @param three_ds_flow [Symbol, Dodopayments::Models::ThreeDSFlow, nil] How the cardholder completed the 3DS authentication. The value is null when the
+      #
+      #   @param three_ds_status [Symbol, Dodopayments::Models::ThreeDSStatus, nil] The result of the 3DS authentication, as the processor reports it. The value is
+      #
+      #   @param three_ds_version [String, nil] The 3DS protocol version, for example `2.2.0`. The value is null when the proces
 
       # Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
       # merchant's own payment connector); `dodo` for everything Dodo processed itself.

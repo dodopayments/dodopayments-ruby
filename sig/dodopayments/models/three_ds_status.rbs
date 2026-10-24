@@ -1,0 +1,24 @@
+module Dodopayments
+  module Models
+    type three_ds_status =
+      :authenticated
+      | :attempt_acknowledged
+      | :exempted
+      | :failed
+      | :not_supported
+      | :processing_error
+
+    module ThreeDSStatus
+      extend Dodopayments::Internal::Type::Enum
+
+      AUTHENTICATED: :authenticated
+      ATTEMPT_ACKNOWLEDGED: :attempt_acknowledged
+      EXEMPTED: :exempted
+      FAILED: :failed
+      NOT_SUPPORTED: :not_supported
+      PROCESSING_ERROR: :processing_error
+
+      def self?.values: -> ::Array[Dodopayments::Models::three_ds_status]
+    end
+  end
+end

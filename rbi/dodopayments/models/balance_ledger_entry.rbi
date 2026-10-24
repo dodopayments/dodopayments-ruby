@@ -283,6 +283,11 @@ module Dodopayments
             :scheme_fee,
             Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
           )
+        OPENING_BALANCE =
+          T.let(
+            :opening_balance,
+            Dodopayments::BalanceLedgerEntry::EventType::TaggedSymbol
+          )
 
         sig do
           override.returns(

@@ -87,6 +87,9 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         status: Dodopayments::IntentStatus | nil,
         subscription_id: String | nil,
         tax: Integer | nil,
+        three_ds_flow: Dodopayments::ThreeDSFlow | nil,
+        three_ds_status: Dodopayments::ThreeDSStatus | nil,
+        three_ds_version: String | nil,
         updated_at: Time | nil
       }
     end
@@ -137,7 +140,10 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
         payment_method_type: String | nil,
         refund_status: Dodopayments::PaymentRefundStatus | nil,
         status: Dodopayments::IntentStatus | nil,
-        subscription_id: String | nil
+        subscription_id: String | nil,
+        three_ds_flow: Dodopayments::ThreeDSFlow | nil,
+        three_ds_status: Dodopayments::ThreeDSStatus | nil,
+        three_ds_version: String | nil
       }
     end
   end
@@ -152,7 +158,8 @@ class Dodopayments::Test::Resources::PaymentsTest < Dodopayments::Test::Resource
     assert_pattern do
       response => {
         currency: Dodopayments::Currency,
-        items: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item])
+        items: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item]),
+        partial_refund_allowed: Dodopayments::Internal::Type::Boolean
       }
     end
   end

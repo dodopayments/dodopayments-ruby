@@ -6,6 +6,7 @@ module Dodopayments
       sig do
         params(
           payment_id: String,
+          currency: T.nilable(Dodopayments::Currency::OrSymbol),
           items:
             T.nilable(T::Array[Dodopayments::RefundCreateParams::Item::OrHash]),
           metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
@@ -16,6 +17,9 @@ module Dodopayments
       def create(
         # The unique identifier of the payment to be refunded.
         payment_id:,
+        # The currency of every `items[].amount`. It must be the currency the customer
+        # paid in. Without it, the amounts are in the settlement currency.
+        currency: nil,
         # Partially Refund an Individual Item
         items: nil,
         # Additional metadata associated with the refund.

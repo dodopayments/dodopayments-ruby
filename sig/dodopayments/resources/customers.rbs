@@ -12,6 +12,7 @@ module Dodopayments
         name: String,
         ?metadata: Dodopayments::Models::metadata,
         ?phone_number: String?,
+        ?preferred_locale: Dodopayments::Models::locale?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Customer
 
@@ -26,6 +27,7 @@ module Dodopayments
         ?metadata: Dodopayments::Models::metadata?,
         ?name: String?,
         ?phone_number: String?,
+        ?preferred_locale: Dodopayments::Models::locale?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Customer
 

@@ -74,9 +74,14 @@ module Dodopayments
         )
       end
 
-      # @overload retrieve(subscription_id, request_options: {})
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::SubscriptionRetrieveParams} for more details.
+      #
+      # @overload retrieve(subscription_id, locale: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
+      #
+      # @param locale [String] Shows the translated name, description and unit of the catalog entities in this
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -84,11 +89,14 @@ module Dodopayments
       #
       # @see Dodopayments::Models::SubscriptionRetrieveParams
       def retrieve(subscription_id, params = {})
+        parsed, options = Dodopayments::SubscriptionRetrieveParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["subscriptions/%1$s", subscription_id],
+          query: query,
           model: Dodopayments::Subscription,
-          options: params[:request_options]
+          options: options
         )
       end
 
@@ -150,7 +158,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionListParams} for more details.
       #
-      # @overload list(brand_id: nil, cancel_at_next_billing_date: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
+      # @overload list(brand_id: nil, cancel_at_next_billing_date: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, locale: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
       #
       # @param brand_id [String] filter by Brand id
       #
@@ -161,6 +169,8 @@ module Dodopayments
       # @param created_at_lte [Time] Get events created before this time
       #
       # @param customer_id [String] Filter by customer id
+      #
+      # @param locale [String] Shows the translated name, description and unit of the catalog entities in this
       #
       # @param page_number [Integer] Page number default is 0
       #

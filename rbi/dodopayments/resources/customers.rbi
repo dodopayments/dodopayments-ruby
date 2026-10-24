@@ -18,6 +18,7 @@ module Dodopayments
           name: String,
           metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           phone_number: T.nilable(String),
+          preferred_locale: T.nilable(Dodopayments::Locale::OrSymbol),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Customer)
       end
@@ -27,6 +28,10 @@ module Dodopayments
         # Additional metadata for the customer
         metadata: nil,
         phone_number: nil,
+        # The language of the customer emails, a code from `GET /locales`. With no value,
+        # the emails are in English until a checkout or the customer portal sets a
+        # language.
+        preferred_locale: nil,
         request_options: {}
       )
       end
@@ -52,6 +57,7 @@ module Dodopayments
             T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           name: T.nilable(String),
           phone_number: T.nilable(String),
+          preferred_locale: T.nilable(Dodopayments::Locale::OrSymbol),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Customer)
       end
@@ -63,6 +69,10 @@ module Dodopayments
         metadata: nil,
         name: nil,
         phone_number: nil,
+        # The language of the customer emails, a code from `GET /locales`. A value
+        # replaces the current language, and `null` removes it. Send this field only to
+        # change the language on purpose. With no language, the emails are in English.
+        preferred_locale: nil,
         request_options: {}
       )
       end

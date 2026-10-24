@@ -8,7 +8,9 @@ module Dodopayments
           # Returns paginated individual balance ledger entries for a payout. Each entry is
           # converted into the payout's currency at the rate the payout settled at. Supports
           # pagination via `page_size` (default 10, max 100) and `page_number` (default 0)
-          # query parameters.
+          # query parameters. A settlement batch payout shows its rows in native amounts.
+          # `unattributed` is the payout amount less the sum of its rows in the payout
+          # currency.
           sig do
             params(
               payout_id: String,
@@ -35,7 +37,8 @@ module Dodopayments
           # Downloads the complete payout breakup as a CSV file. Each row represents a
           # balance ledger entry with columns: Ledger ID, Event Type, Original Amount,
           # Original Currency, Reference Object ID, Description, Created At, USD Equivalent
-          # Amount, and Payout Currency Amount.
+          # Amount, and Payout Currency Amount. A settlement batch payout shows its rows in
+          # native amounts.
           sig do
             params(
               payout_id: String,

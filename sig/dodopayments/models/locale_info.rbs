@@ -1,0 +1,26 @@
+module Dodopayments
+  module Models
+    type locale_info =
+      { code: Dodopayments::Models::locale, name: String, native_name: String }
+
+    class LocaleInfo < Dodopayments::Internal::Type::BaseModel
+      attr_accessor code: Dodopayments::Models::locale
+
+      attr_accessor name: String
+
+      attr_accessor native_name: String
+
+      def initialize: (
+        code: Dodopayments::Models::locale,
+        name: String,
+        native_name: String
+      ) -> void
+
+      def to_hash: -> {
+        code: Dodopayments::Models::locale,
+        name: String,
+        native_name: String
+      }
+    end
+  end
+end

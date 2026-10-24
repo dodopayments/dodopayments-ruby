@@ -1,6 +1,8 @@
 module Dodopayments
   module Resources
     class Meters
+      attr_reader translations: Dodopayments::Resources::Meters::Translations
+
       def create: (
         aggregation: Dodopayments::MeterAggregation,
         event_name: String,
@@ -13,11 +15,21 @@ module Dodopayments
 
       def retrieve: (
         String id,
+        ?locale: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Meter
+
+      def update: (
+        String id,
+        ?description: String?,
+        ?measurement_unit: String?,
+        ?name: String?,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Meter
 
       def list: (
         ?archived: bool,
+        ?locale: String,
         ?page_number: Integer,
         ?page_size: Integer,
         ?request_options: Dodopayments::request_opts

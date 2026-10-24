@@ -38,12 +38,19 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :phone_number
 
+      # The language of the customer emails, a code from `GET /locales`. With no value,
+      # the emails are in English until a checkout or the customer portal sets a
+      # language.
+      sig { returns(T.nilable(Dodopayments::Locale::OrSymbol)) }
+      attr_accessor :preferred_locale
+
       sig do
         params(
           email: String,
           name: String,
           metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
           phone_number: T.nilable(String),
+          preferred_locale: T.nilable(Dodopayments::Locale::OrSymbol),
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -53,6 +60,10 @@ module Dodopayments
         # Additional metadata for the customer
         metadata: nil,
         phone_number: nil,
+        # The language of the customer emails, a code from `GET /locales`. With no value,
+        # the emails are in English until a checkout or the customer portal sets a
+        # language.
+        preferred_locale: nil,
         request_options: {}
       )
       end
@@ -64,6 +75,7 @@ module Dodopayments
             name: String,
             metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
             phone_number: T.nilable(String),
+            preferred_locale: T.nilable(Dodopayments::Locale::OrSymbol),
             request_options: Dodopayments::RequestOptions
           }
         )

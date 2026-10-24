@@ -35,7 +35,18 @@ module Dodopayments
       #   @return [String, nil]
       optional :phone_number, String, nil?: true
 
-      # @!method initialize(customer_id:, email: nil, metadata: nil, name: nil, phone_number: nil, request_options: {})
+      # @!attribute preferred_locale
+      #   The language of the customer emails, a code from `GET /locales`. A value
+      #   replaces the current language, and `null` removes it. Send this field only to
+      #   change the language on purpose. With no language, the emails are in English.
+      #
+      #   @return [Symbol, Dodopayments::Models::Locale, nil]
+      optional :preferred_locale, enum: -> { Dodopayments::Locale }, nil?: true
+
+      # @!method initialize(customer_id:, email: nil, metadata: nil, name: nil, phone_number: nil, preferred_locale: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::CustomerUpdateParams} for more details.
+      #
       #   @param customer_id [String]
       #
       #   @param email [String, nil]
@@ -45,6 +56,8 @@ module Dodopayments
       #   @param name [String, nil]
       #
       #   @param phone_number [String, nil]
+      #
+      #   @param preferred_locale [Symbol, Dodopayments::Models::Locale, nil] The language of the customer emails, a code from `GET /locales`. A value replace
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
     end

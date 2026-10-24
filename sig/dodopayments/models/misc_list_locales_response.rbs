@@ -1,0 +1,7 @@
+module Dodopayments
+  module Models
+    type misc_list_locales_response = ::Array[Dodopayments::LocaleInfo]
+
+    MiscListLocalesResponse: Dodopayments::Internal::Type::Converter
+  end
+end

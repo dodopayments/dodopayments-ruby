@@ -3,6 +3,9 @@
 module Dodopayments
   module Resources
     class Products
+      # @return [Dodopayments::Resources::Products::Translations]
+      attr_reader :translations
+
       # @return [Dodopayments::Resources::Products::Images]
       attr_reader :images
 
@@ -63,9 +66,14 @@ module Dodopayments
         )
       end
 
-      # @overload retrieve(id, request_options: {})
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::ProductRetrieveParams} for more details.
+      #
+      # @overload retrieve(id, locale: nil, request_options: {})
       #
       # @param id [String] Product Id
+      #
+      # @param locale [String] Shows the translated name, description and unit of the catalog entities in this
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -73,11 +81,14 @@ module Dodopayments
       #
       # @see Dodopayments::Models::ProductRetrieveParams
       def retrieve(id, params = {})
+        parsed, options = Dodopayments::ProductRetrieveParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["products/%1$s", id],
+          query: query,
           model: Dodopayments::Product,
-          options: params[:request_options]
+          options: options
         )
       end
 
@@ -139,11 +150,13 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::ProductListParams} for more details.
       #
-      # @overload list(archived: nil, brand_id: nil, page_number: nil, page_size: nil, recurring: nil, request_options: {})
+      # @overload list(archived: nil, brand_id: nil, locale: nil, page_number: nil, page_size: nil, recurring: nil, request_options: {})
       #
       # @param archived [Boolean] List archived products
       #
       # @param brand_id [String] filter by Brand id
+      #
+      # @param locale [String] Shows the translated name, description and unit of the catalog entities in this
       #
       # @param page_number [Integer] Page number default is 0
       #
@@ -232,6 +245,7 @@ module Dodopayments
       # @param client [Dodopayments::Client]
       def initialize(client:)
         @client = client
+        @translations = Dodopayments::Resources::Products::Translations.new(client: client)
         @images = Dodopayments::Resources::Products::Images.new(client: client)
         @short_links = Dodopayments::Resources::Products::ShortLinks.new(client: client)
         @localized_prices = Dodopayments::Resources::Products::LocalizedPrices.new(client: client)

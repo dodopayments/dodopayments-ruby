@@ -3,6 +3,7 @@ module Dodopayments
     type entitlement_list_params =
       {
         integration_type: Dodopayments::Models::EntitlementListParams::integration_type,
+        locale: String,
         page_number: Integer,
         page_size: Integer
       }
@@ -18,6 +19,10 @@ module Dodopayments
         Dodopayments::Models::EntitlementListParams::integration_type
       ) -> Dodopayments::Models::EntitlementListParams::integration_type
 
+      attr_reader locale: String?
+
+      def locale=: (String) -> String
+
       attr_reader page_number: Integer?
 
       def page_number=: (Integer) -> Integer
@@ -28,6 +33,7 @@ module Dodopayments
 
       def initialize: (
         ?integration_type: Dodopayments::Models::EntitlementListParams::integration_type,
+        ?locale: String,
         ?page_number: Integer,
         ?page_size: Integer,
         ?request_options: Dodopayments::request_opts
@@ -35,6 +41,7 @@ module Dodopayments
 
       def to_hash: -> {
         integration_type: Dodopayments::Models::EntitlementListParams::integration_type,
+        locale: String,
         page_number: Integer,
         page_size: Integer,
         request_options: Dodopayments::RequestOptions

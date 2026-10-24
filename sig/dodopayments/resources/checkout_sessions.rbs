@@ -36,6 +36,7 @@ module Dodopayments
 
       def preview: (
         product_cart: ::Array[Dodopayments::ProductItemReq],
+        ?locale: String,
         ?allowed_payment_method_types: ::Array[Dodopayments::Models::payment_method_types]?,
         ?billing_address: Dodopayments::CheckoutSessionBillingAddress?,
         ?billing_currency: Dodopayments::Models::currency?,

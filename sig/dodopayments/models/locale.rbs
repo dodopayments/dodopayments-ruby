@@ -1,0 +1,56 @@
+module Dodopayments
+  module Models
+    type locale =
+      :ar
+      | :ca
+      | :zh
+      | :nl
+      | :en
+      | :fr
+      | :de
+      | :he
+      | :id
+      | :it
+      | :ja
+      | :ka
+      | :ko
+      | :ms
+      | :pl
+      | :pt
+      | :ro
+      | :ru
+      | :es
+      | :sv
+      | :th
+      | :tr
+
+    module Locale
+      extend Dodopayments::Internal::Type::Enum
+
+      AR: :ar
+      CA: :ca
+      ZH: :zh
+      NL: :nl
+      EN: :en
+      FR: :fr
+      DE: :de
+      HE: :he
+      ID: :id
+      IT: :it
+      JA: :ja
+      KA: :ka
+      KO: :ko
+      MS: :ms
+      PL: :pl
+      PT: :pt
+      RO: :ro
+      RU: :ru
+      ES: :es
+      SV: :sv
+      TH: :th
+      TR: :tr
+
+      def self?.values: -> ::Array[Dodopayments::Models::locale]
+    end
+  end
+end

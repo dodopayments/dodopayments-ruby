@@ -1,0 +1,24 @@
+module Dodopayments
+  module Models
+    class CreditEntitlementTranslationsListResponse = CreditEntitlements::CreditEntitlementTranslationsListResponse
+
+    module CreditEntitlements
+      type credit_entitlement_translations_list_response =
+        {
+          items: ::Array[Dodopayments::CreditEntitlements::CreditEntitlementTranslation]
+        }
+
+      class CreditEntitlementTranslationsListResponse < Dodopayments::Internal::Type::BaseModel
+        attr_accessor items: ::Array[Dodopayments::CreditEntitlements::CreditEntitlementTranslation]
+
+        def initialize: (
+          items: ::Array[Dodopayments::CreditEntitlements::CreditEntitlementTranslation]
+        ) -> void
+
+        def to_hash: -> {
+          items: ::Array[Dodopayments::CreditEntitlements::CreditEntitlementTranslation]
+        }
+      end
+    end
+  end
+end

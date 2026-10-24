@@ -1,6 +1,10 @@
 module Dodopayments
   module Resources
     class Misc
+      def list_locales: (
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::misc_list_locales_response
+
       def list_supported_countries: (
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::misc_list_supported_countries_response

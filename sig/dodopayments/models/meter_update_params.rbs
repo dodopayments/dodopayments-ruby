@@ -1,0 +1,41 @@
+module Dodopayments
+  module Models
+    type meter_update_params =
+      {
+        id: String,
+        description: String?,
+        measurement_unit: String?,
+        name: String?
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class MeterUpdateParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor id: String
+
+      attr_accessor description: String?
+
+      attr_accessor measurement_unit: String?
+
+      attr_accessor name: String?
+
+      def initialize: (
+        id: String,
+        ?description: String?,
+        ?measurement_unit: String?,
+        ?name: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        description: String?,
+        measurement_unit: String?,
+        name: String?,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

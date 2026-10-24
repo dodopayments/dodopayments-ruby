@@ -1,0 +1,43 @@
+module Dodopayments
+  module Models
+    module ProductCollections
+      type translation_update_params =
+        {
+          id: String,
+          locale: Dodopayments::Models::locale,
+          description: String?,
+          name: String?
+        }
+        & Dodopayments::Internal::Type::request_parameters
+
+      class TranslationUpdateParams < Dodopayments::Internal::Type::BaseModel
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor locale: Dodopayments::Models::locale
+
+        attr_accessor description: String?
+
+        attr_accessor name: String?
+
+        def initialize: (
+          id: String,
+          locale: Dodopayments::Models::locale,
+          ?description: String?,
+          ?name: String?,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          locale: Dodopayments::Models::locale,
+          description: String?,
+          name: String?,
+          request_options: Dodopayments::RequestOptions
+        }
+      end
+    end
+  end
+end

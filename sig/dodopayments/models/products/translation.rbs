@@ -1,0 +1,37 @@
+module Dodopayments
+  module Models
+    module Products
+      type translation =
+        {
+          locale: Dodopayments::Models::locale,
+          updated_at: Time,
+          description: String?,
+          name: String?
+        }
+
+      class Translation < Dodopayments::Internal::Type::BaseModel
+        attr_accessor locale: Dodopayments::Models::locale
+
+        attr_accessor updated_at: Time
+
+        attr_accessor description: String?
+
+        attr_accessor name: String?
+
+        def initialize: (
+          locale: Dodopayments::Models::locale,
+          updated_at: Time,
+          ?description: String?,
+          ?name: String?
+        ) -> void
+
+        def to_hash: -> {
+          locale: Dodopayments::Models::locale,
+          updated_at: Time,
+          description: String?,
+          name: String?
+        }
+      end
+    end
+  end
+end

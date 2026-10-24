@@ -3,7 +3,8 @@ module Dodopayments
     type payment_retrieve_line_items_response =
       {
         currency: Dodopayments::Models::currency,
-        items: ::Array[Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item]
+        items: ::Array[Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item],
+        partial_refund_allowed: bool
       }
 
     class PaymentRetrieveLineItemsResponse < Dodopayments::Internal::Type::BaseModel
@@ -11,14 +12,18 @@ module Dodopayments
 
       attr_accessor items: ::Array[Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item]
 
+      attr_accessor partial_refund_allowed: bool
+
       def initialize: (
         currency: Dodopayments::Models::currency,
-        items: ::Array[Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item]
+        items: ::Array[Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item],
+        partial_refund_allowed: bool
       ) -> void
 
       def to_hash: -> {
         currency: Dodopayments::Models::currency,
-        items: ::Array[Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item]
+        items: ::Array[Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item],
+        partial_refund_allowed: bool
       }
 
       type item =

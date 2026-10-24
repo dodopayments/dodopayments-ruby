@@ -3,6 +3,15 @@
 module Dodopayments
   module Resources
     class Misc
+      # Lists the locales that a translation can have.
+      sig do
+        params(request_options: Dodopayments::RequestOptions::OrHash).returns(
+          T::Array[Dodopayments::LocaleInfo]
+        )
+      end
+      def list_locales(request_options: {})
+      end
+
       sig do
         params(request_options: Dodopayments::RequestOptions::OrHash).returns(
           T::Array[Dodopayments::CountryCode::TaggedSymbol]

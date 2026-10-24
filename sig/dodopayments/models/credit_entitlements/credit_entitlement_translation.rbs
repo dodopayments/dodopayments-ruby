@@ -1,0 +1,39 @@
+module Dodopayments
+  module Models
+    class CreditEntitlementTranslation = CreditEntitlements::CreditEntitlementTranslation
+
+    module CreditEntitlements
+      type credit_entitlement_translation =
+        {
+          locale: Dodopayments::Models::locale,
+          updated_at: Time,
+          name: String?,
+          unit: String?
+        }
+
+      class CreditEntitlementTranslation < Dodopayments::Internal::Type::BaseModel
+        attr_accessor locale: Dodopayments::Models::locale
+
+        attr_accessor updated_at: Time
+
+        attr_accessor name: String?
+
+        attr_accessor unit: String?
+
+        def initialize: (
+          locale: Dodopayments::Models::locale,
+          updated_at: Time,
+          ?name: String?,
+          ?unit: String?
+        ) -> void
+
+        def to_hash: -> {
+          locale: Dodopayments::Models::locale,
+          updated_at: Time,
+          name: String?,
+          unit: String?
+        }
+      end
+    end
+  end
+end
