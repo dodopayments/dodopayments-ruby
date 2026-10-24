@@ -21,6 +21,18 @@ module Dodopayments
       sig { params(deleted: T::Boolean).void }
       attr_writer :deleted
 
+      # Shows the translated name, description and unit of the catalog entities in this
+      # locale. The value must be a code from `GET /locales`, for example `fr`. A field
+      # with no translation, an unknown code, or no code shows the base text.
+      #
+      # Do not send a text from a localized response back in a create or update request.
+      # The base text then changes to the translated text.
+      sig { returns(T.nilable(String)) }
+      attr_reader :locale
+
+      sig { params(locale: String).void }
+      attr_writer :locale
+
       # Page number default is 0
       sig { returns(T.nilable(Integer)) }
       attr_reader :page_number
@@ -38,6 +50,7 @@ module Dodopayments
       sig do
         params(
           deleted: T::Boolean,
+          locale: String,
           page_number: Integer,
           page_size: Integer,
           request_options: Dodopayments::RequestOptions::OrHash
@@ -46,6 +59,13 @@ module Dodopayments
       def self.new(
         # List deleted credit entitlements
         deleted: nil,
+        # Shows the translated name, description and unit of the catalog entities in this
+        # locale. The value must be a code from `GET /locales`, for example `fr`. A field
+        # with no translation, an unknown code, or no code shows the base text.
+        #
+        # Do not send a text from a localized response back in a create or update request.
+        # The base text then changes to the translated text.
+        locale: nil,
         # Page number default is 0
         page_number: nil,
         # Page size default is 10 max is 100
@@ -58,6 +78,7 @@ module Dodopayments
         override.returns(
           {
             deleted: T::Boolean,
+            locale: String,
             page_number: Integer,
             page_size: Integer,
             request_options: Dodopayments::RequestOptions

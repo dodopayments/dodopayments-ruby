@@ -14,7 +14,8 @@ module Dodopayments
 
         # The type of balance ledger event (e.g., "payment", "refund", "dispute",
         # "payment_fees"), or `unattributed` for the payout amount the entries do not
-        # account for.
+        # account for. A settlement batch payout shows `carried_over` for its opening
+        # balance and the entries dated before that row.
         sig { returns(String) }
         attr_accessor :event_type
 
@@ -45,7 +46,8 @@ module Dodopayments
         def self.new(
           # The type of balance ledger event (e.g., "payment", "refund", "dispute",
           # "payment_fees"), or `unattributed` for the payout amount the entries do not
-          # account for.
+          # account for. A settlement batch payout shows `carried_over` for its opening
+          # balance and the entries dated before that row.
           event_type:,
           # Total amount for this event type in the payout's currency, in that currency's
           # smallest unit (cents for USD, yen for JPY, fils for KWD).

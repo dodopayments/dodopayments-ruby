@@ -1,0 +1,30 @@
+module Dodopayments
+  module Models
+    module Products
+      type translation_delete_params =
+        { id: String, locale: Dodopayments::Models::locale }
+        & Dodopayments::Internal::Type::request_parameters
+
+      class TranslationDeleteParams < Dodopayments::Internal::Type::BaseModel
+        extend Dodopayments::Internal::Type::RequestParameters::Converter
+        include Dodopayments::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor locale: Dodopayments::Models::locale
+
+        def initialize: (
+          id: String,
+          locale: Dodopayments::Models::locale,
+          ?request_options: Dodopayments::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          locale: Dodopayments::Models::locale,
+          request_options: Dodopayments::RequestOptions
+        }
+      end
+    end
+  end
+end

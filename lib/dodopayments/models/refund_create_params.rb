@@ -13,6 +13,13 @@ module Dodopayments
       #   @return [String]
       required :payment_id, String
 
+      # @!attribute currency
+      #   The currency of every `items[].amount`. It must be the currency the customer
+      #   paid in. Without it, the amounts are in the settlement currency.
+      #
+      #   @return [Symbol, Dodopayments::Models::Currency, nil]
+      optional :currency, enum: -> { Dodopayments::Currency }, nil?: true
+
       # @!attribute items
       #   Partially Refund an Individual Item
       #
@@ -33,8 +40,13 @@ module Dodopayments
       #   @return [String, nil]
       optional :reason, String, nil?: true
 
-      # @!method initialize(payment_id:, items: nil, metadata: nil, reason: nil, request_options: {})
+      # @!method initialize(payment_id:, currency: nil, items: nil, metadata: nil, reason: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {Dodopayments::Models::RefundCreateParams} for more details.
+      #
       #   @param payment_id [String] The unique identifier of the payment to be refunded.
+      #
+      #   @param currency [Symbol, Dodopayments::Models::Currency, nil] The currency of every `items[].amount`. It must be the currency the customer pai
       #
       #   @param items [Array<Dodopayments::Models::RefundCreateParams::Item>, nil] Partially Refund an Individual Item
       #

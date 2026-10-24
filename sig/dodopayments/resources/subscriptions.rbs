@@ -31,6 +31,7 @@ module Dodopayments
 
       def retrieve: (
         String subscription_id,
+        ?locale: String,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Subscription
 
@@ -61,6 +62,7 @@ module Dodopayments
         ?created_at_gte: Time,
         ?created_at_lte: Time,
         ?customer_id: String,
+        ?locale: String,
         ?page_number: Integer,
         ?page_size: Integer,
         ?product_id: String,

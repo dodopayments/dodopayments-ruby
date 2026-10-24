@@ -1,7 +1,7 @@
 module Dodopayments
   module Models
     type subscription_retrieve_params =
-      { subscription_id: String }
+      { subscription_id: String, locale: String }
       & Dodopayments::Internal::Type::request_parameters
 
     class SubscriptionRetrieveParams < Dodopayments::Internal::Type::BaseModel
@@ -10,13 +10,19 @@ module Dodopayments
 
       attr_accessor subscription_id: String
 
+      attr_reader locale: String?
+
+      def locale=: (String) -> String
+
       def initialize: (
         subscription_id: String,
+        ?locale: String,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
       def to_hash: -> {
         subscription_id: String,
+        locale: String,
         request_options: Dodopayments::RequestOptions
       }
     end

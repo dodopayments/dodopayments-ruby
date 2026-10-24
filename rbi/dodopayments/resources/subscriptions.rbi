@@ -116,12 +116,20 @@ module Dodopayments
       sig do
         params(
           subscription_id: String,
+          locale: String,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Subscription)
       end
       def retrieve(
         # Subscription Id
         subscription_id,
+        # Shows the translated name, description and unit of the catalog entities in this
+        # locale. The value must be a code from `GET /locales`, for example `fr`. A field
+        # with no translation, an unknown code, or no code shows the base text.
+        #
+        # Do not send a text from a localized response back in a create or update request.
+        # The base text then changes to the translated text.
+        locale: nil,
         request_options: {}
       )
       end
@@ -224,6 +232,7 @@ module Dodopayments
           created_at_gte: Time,
           created_at_lte: Time,
           customer_id: String,
+          locale: String,
           page_number: Integer,
           page_size: Integer,
           product_id: String,
@@ -246,6 +255,13 @@ module Dodopayments
         created_at_lte: nil,
         # Filter by customer id
         customer_id: nil,
+        # Shows the translated name, description and unit of the catalog entities in this
+        # locale. The value must be a code from `GET /locales`, for example `fr`. A field
+        # with no translation, an unknown code, or no code shows the base text.
+        #
+        # Do not send a text from a localized response back in a create or update request.
+        # The base text then changes to the translated text.
+        locale: nil,
         # Page number default is 0
         page_number: nil,
         # Page size default is 10 max is 100
@@ -368,6 +384,11 @@ module Dodopayments
         # - `prevent_change`: Keep subscription on current plan until payment succeeds
         # - `apply_change` (default): Apply plan change immediately regardless of payment
         #   outcome
+        #
+        # With `effective_at: next_billing_date`, the plan change payment replaces the
+        # renewal payment. If that payment fails with `prevent_change`, the plan change is
+        # cancelled. The subscription then renews on the current plan, with the usual
+        # payment retries.
         #
         # If not specified, uses the business-level default setting.
         on_payment_failure: nil,
@@ -524,6 +545,11 @@ module Dodopayments
         # - `prevent_change`: Keep subscription on current plan until payment succeeds
         # - `apply_change` (default): Apply plan change immediately regardless of payment
         #   outcome
+        #
+        # With `effective_at: next_billing_date`, the plan change payment replaces the
+        # renewal payment. If that payment fails with `prevent_change`, the plan change is
+        # cancelled. The subscription then renews on the current plan, with the usual
+        # payment retries.
         #
         # If not specified, uses the business-level default setting.
         on_payment_failure: nil,

@@ -122,6 +122,7 @@ module Dodopayments
         DODO_FIXED_FEE = :dodo_fixed_fee
         INTERCHANGE_FEE = :interchange_fee
         SCHEME_FEE = :scheme_fee
+        OPENING_BALANCE = :opening_balance
 
         # @!method self.values
         #   @return [Array<Symbol>]

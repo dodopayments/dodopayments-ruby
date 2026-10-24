@@ -37,6 +37,17 @@ module Dodopayments
       #   @return [String, nil]
       optional :customer_id, String
 
+      # @!attribute locale
+      #   Shows the translated name, description and unit of the catalog entities in this
+      #   locale. The value must be a code from `GET /locales`, for example `fr`. A field
+      #   with no translation, an unknown code, or no code shows the base text.
+      #
+      #   Do not send a text from a localized response back in a create or update request.
+      #   The base text then changes to the translated text.
+      #
+      #   @return [String, nil]
+      optional :locale, String
+
       # @!attribute page_number
       #   Page number default is 0
       #
@@ -61,7 +72,7 @@ module Dodopayments
       #   @return [Symbol, Dodopayments::Models::SubscriptionListParams::Status, nil]
       optional :status, enum: -> { Dodopayments::SubscriptionListParams::Status }
 
-      # @!method initialize(brand_id: nil, cancel_at_next_billing_date: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
+      # @!method initialize(brand_id: nil, cancel_at_next_billing_date: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, locale: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionListParams} for more details.
       #
@@ -74,6 +85,8 @@ module Dodopayments
       #   @param created_at_lte [Time] Get events created before this time
       #
       #   @param customer_id [String] Filter by customer id
+      #
+      #   @param locale [String] Shows the translated name, description and unit of the catalog entities in this
       #
       #   @param page_number [Integer] Page number default is 0
       #

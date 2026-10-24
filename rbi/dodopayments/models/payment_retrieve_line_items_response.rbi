@@ -21,16 +21,26 @@ module Dodopayments
       end
       attr_accessor :items
 
+      # False when the payment method does not allow a partial refund of this payment.
+      sig { returns(T::Boolean) }
+      attr_accessor :partial_refund_allowed
+
       sig do
         params(
           currency: Dodopayments::Currency::OrSymbol,
           items:
             T::Array[
               Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item::OrHash
-            ]
+            ],
+          partial_refund_allowed: T::Boolean
         ).returns(T.attached_class)
       end
-      def self.new(currency:, items:)
+      def self.new(
+        currency:,
+        items:,
+        # False when the payment method does not allow a partial refund of this payment.
+        partial_refund_allowed:
+      )
       end
 
       sig do
@@ -40,7 +50,8 @@ module Dodopayments
             items:
               T::Array[
                 Dodopayments::Models::PaymentRetrieveLineItemsResponse::Item
-              ]
+              ],
+            partial_refund_allowed: T::Boolean
           }
         )
       end

@@ -1,7 +1,8 @@
 module Dodopayments
   module Models
     type payment_retrieve_line_items_params =
-      { payment_id: String } & Dodopayments::Internal::Type::request_parameters
+      { payment_id: String, currency: Dodopayments::Models::currency }
+      & Dodopayments::Internal::Type::request_parameters
 
     class PaymentRetrieveLineItemsParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
@@ -9,13 +10,21 @@ module Dodopayments
 
       attr_accessor payment_id: String
 
+      attr_reader currency: Dodopayments::Models::currency?
+
+      def currency=: (
+        Dodopayments::Models::currency
+      ) -> Dodopayments::Models::currency
+
       def initialize: (
         payment_id: String,
+        ?currency: Dodopayments::Models::currency,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
       def to_hash: -> {
         payment_id: String,
+        currency: Dodopayments::Models::currency,
         request_options: Dodopayments::RequestOptions
       }
     end
