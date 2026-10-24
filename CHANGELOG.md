@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.35.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.34.0...v2.35.0) (2026-10-24)
+
+
+### Features
+
+* **api:** translations and locales, addon delete/unarchive, meter update, 3DS payment details ([3f470a9](https://github.com/dodopayments/dodopayments-ruby/commit/3f470a9af2e2651c9f8189cca0371a77fb1e6ff2))
+* **api:** translations and locales, addon delete/unarchive, meter update, 3DS payment details ([2c095ae](https://github.com/dodopayments/dodopayments-ruby/commit/2c095aef1dd7031dfd35a4165dd40b376e745db3))
+
 ## [2.34.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.33.0...v2.34.0) (2026-10-21)
 
 
