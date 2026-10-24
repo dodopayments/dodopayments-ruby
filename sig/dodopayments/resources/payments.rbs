@@ -45,6 +45,7 @@ module Dodopayments
 
       def retrieve_line_items: (
         String payment_id,
+        ?currency: Dodopayments::Models::currency,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::PaymentRetrieveLineItemsResponse
 

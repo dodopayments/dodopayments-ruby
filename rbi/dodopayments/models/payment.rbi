@@ -248,6 +248,22 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :tax
 
+      # How the cardholder completed the 3DS authentication. The value is null when the
+      # processor does not report it.
+      sig { returns(T.nilable(Dodopayments::ThreeDSFlow::TaggedSymbol)) }
+      attr_accessor :three_ds_flow
+
+      # The result of the 3DS authentication, as the processor reports it. The value is
+      # null when the processor reports no 3DS data, for example when the payment did
+      # not use 3DS.
+      sig { returns(T.nilable(Dodopayments::ThreeDSStatus::TaggedSymbol)) }
+      attr_accessor :three_ds_status
+
+      # The 3DS protocol version, for example `2.2.0`. The value is null when the
+      # processor does not report it.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :three_ds_version
+
       # Timestamp when the payment was last updated
       sig { returns(T.nilable(Time)) }
       attr_accessor :updated_at
@@ -304,6 +320,9 @@ module Dodopayments
           status: T.nilable(Dodopayments::IntentStatus::OrSymbol),
           subscription_id: T.nilable(String),
           tax: T.nilable(Integer),
+          three_ds_flow: T.nilable(Dodopayments::ThreeDSFlow::OrSymbol),
+          three_ds_status: T.nilable(Dodopayments::ThreeDSStatus::OrSymbol),
+          three_ds_version: T.nilable(String),
           updated_at: T.nilable(Time)
         ).returns(T.attached_class)
       end
@@ -444,6 +463,16 @@ module Dodopayments
         # Amount of tax collected in the currency's smallest unit (e.g. cents for USD, yen
         # for JPY, fils for KWD)
         tax: nil,
+        # How the cardholder completed the 3DS authentication. The value is null when the
+        # processor does not report it.
+        three_ds_flow: nil,
+        # The result of the 3DS authentication, as the processor reports it. The value is
+        # null when the processor reports no 3DS data, for example when the payment did
+        # not use 3DS.
+        three_ds_status: nil,
+        # The 3DS protocol version, for example `2.2.0`. The value is null when the
+        # processor does not report it.
+        three_ds_version: nil,
         # Timestamp when the payment was last updated
         updated_at: nil
       )
@@ -504,6 +533,10 @@ module Dodopayments
             status: T.nilable(Dodopayments::IntentStatus::TaggedSymbol),
             subscription_id: T.nilable(String),
             tax: T.nilable(Integer),
+            three_ds_flow: T.nilable(Dodopayments::ThreeDSFlow::TaggedSymbol),
+            three_ds_status:
+              T.nilable(Dodopayments::ThreeDSStatus::TaggedSymbol),
+            three_ds_version: T.nilable(String),
             updated_at: T.nilable(Time)
           }
         )

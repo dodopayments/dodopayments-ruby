@@ -3,6 +3,9 @@
 module Dodopayments
   module Resources
     class CreditEntitlements
+      # @return [Dodopayments::Resources::CreditEntitlements::Translations]
+      attr_reader :translations
+
       # @return [Dodopayments::Resources::CreditEntitlements::Balances]
       attr_reader :balances
 
@@ -101,6 +104,9 @@ module Dodopayments
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::CreditEntitlementRetrieveParams} for more details.
+      #
       # Returns the full details of a single credit entitlement including all
       # configuration settings for expiration, rollover, and overage policies.
       #
@@ -126,9 +132,11 @@ module Dodopayments
       # - Deleted entitlements return a 404 error and must be retrieved via the list
       #   endpoint with `deleted=true`
       #
-      # @overload retrieve(id, request_options: {})
+      # @overload retrieve(id, locale: nil, request_options: {})
       #
       # @param id [String] Credit Entitlement ID
+      #
+      # @param locale [String] Shows the translated name, description and unit of the catalog entities in this
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -136,11 +144,14 @@ module Dodopayments
       #
       # @see Dodopayments::Models::CreditEntitlementRetrieveParams
       def retrieve(id, params = {})
+        parsed, options = Dodopayments::CreditEntitlementRetrieveParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["credit-entitlements/%1$s", id],
+          query: query,
           model: Dodopayments::CreditEntitlement,
-          options: params[:request_options]
+          options: options
         )
       end
 
@@ -249,6 +260,9 @@ module Dodopayments
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::CreditEntitlementListParams} for more details.
+      #
       # Returns a paginated list of credit entitlements, allowing filtering of deleted
       # entitlements. By default, only non-deleted entitlements are returned.
       #
@@ -276,9 +290,11 @@ module Dodopayments
       # - The `deleted` parameter controls visibility of soft-deleted entitlements
       # - Pagination uses offset-based pagination (offset = page_number \* page_size)
       #
-      # @overload list(deleted: nil, page_number: nil, page_size: nil, request_options: {})
+      # @overload list(deleted: nil, locale: nil, page_number: nil, page_size: nil, request_options: {})
       #
       # @param deleted [Boolean] List deleted credit entitlements
+      #
+      # @param locale [String] Shows the translated name, description and unit of the catalog entities in this
       #
       # @param page_number [Integer] Page number default is 0
       #
@@ -384,6 +400,7 @@ module Dodopayments
       # @param client [Dodopayments::Client]
       def initialize(client:)
         @client = client
+        @translations = Dodopayments::Resources::CreditEntitlements::Translations.new(client: client)
         @balances = Dodopayments::Resources::CreditEntitlements::Balances.new(client: client)
       end
     end

@@ -1,0 +1,49 @@
+module Dodopayments
+  module Models
+    class EntitlementTranslation = Entitlements::EntitlementTranslation
+
+    module Entitlements
+      type entitlement_translation =
+        {
+          locale: Dodopayments::Models::locale,
+          updated_at: Time,
+          activation_message: String?,
+          description: String?,
+          instructions: String?,
+          name: String?
+        }
+
+      class EntitlementTranslation < Dodopayments::Internal::Type::BaseModel
+        attr_accessor locale: Dodopayments::Models::locale
+
+        attr_accessor updated_at: Time
+
+        attr_accessor activation_message: String?
+
+        attr_accessor description: String?
+
+        attr_accessor instructions: String?
+
+        attr_accessor name: String?
+
+        def initialize: (
+          locale: Dodopayments::Models::locale,
+          updated_at: Time,
+          ?activation_message: String?,
+          ?description: String?,
+          ?instructions: String?,
+          ?name: String?
+        ) -> void
+
+        def to_hash: -> {
+          locale: Dodopayments::Models::locale,
+          updated_at: Time,
+          activation_message: String?,
+          description: String?,
+          instructions: String?,
+          name: String?
+        }
+      end
+    end
+  end
+end

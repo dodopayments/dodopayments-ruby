@@ -1,6 +1,8 @@
 module Dodopayments
   module Resources
     class Addons
+      attr_reader translations: Dodopayments::Resources::Addons::Translations
+
       def create: (
         currency: Dodopayments::Models::currency,
         name: String,
@@ -12,6 +14,7 @@ module Dodopayments
 
       def retrieve: (
         String id,
+        ?locale: String,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::AddonResponse
 
@@ -27,10 +30,22 @@ module Dodopayments
       ) -> Dodopayments::AddonResponse
 
       def list: (
+        ?archived: bool,
+        ?locale: String,
         ?page_number: Integer,
         ?page_size: Integer,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::AddonResponse]
+
+      def delete: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
+
+      def unarchive: (
+        String id,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
 
       def update_images: (
         String id,

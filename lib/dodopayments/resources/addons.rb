@@ -3,6 +3,9 @@
 module Dodopayments
   module Resources
     class Addons
+      # @return [Dodopayments::Resources::Addons::Translations]
+      attr_reader :translations
+
       # @overload create(currency:, name:, price:, tax_category:, description: nil, request_options: {})
       #
       # @param currency [Symbol, Dodopayments::Models::Currency] The currency of the Addon
@@ -31,9 +34,14 @@ module Dodopayments
         )
       end
 
-      # @overload retrieve(id, request_options: {})
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::AddonRetrieveParams} for more details.
+      #
+      # @overload retrieve(id, locale: nil, request_options: {})
       #
       # @param id [String] Addon Id
+      #
+      # @param locale [String] Shows the translated name, description and unit of the catalog entities in this
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -41,11 +49,14 @@ module Dodopayments
       #
       # @see Dodopayments::Models::AddonRetrieveParams
       def retrieve(id, params = {})
+        parsed, options = Dodopayments::AddonRetrieveParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["addons/%1$s", id],
+          query: query,
           model: Dodopayments::AddonResponse,
-          options: params[:request_options]
+          options: options
         )
       end
 
@@ -84,7 +95,14 @@ module Dodopayments
         )
       end
 
-      # @overload list(page_number: nil, page_size: nil, request_options: {})
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::AddonListParams} for more details.
+      #
+      # @overload list(archived: nil, locale: nil, page_number: nil, page_size: nil, request_options: {})
+      #
+      # @param archived [Boolean] List archived addons. The default is false.
+      #
+      # @param locale [String] Shows the translated name, description and unit of the catalog entities in this
       #
       # @param page_number [Integer] Page number default is 0
       #
@@ -105,6 +123,42 @@ module Dodopayments
           page: Dodopayments::Internal::DefaultPageNumberPagination,
           model: Dodopayments::AddonResponse,
           options: options
+        )
+      end
+
+      # @overload delete(id, request_options: {})
+      #
+      # @param id [String] Addon Id
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [nil]
+      #
+      # @see Dodopayments::Models::AddonDeleteParams
+      def delete(id, params = {})
+        @client.request(
+          method: :delete,
+          path: ["addons/%1$s", id],
+          model: NilClass,
+          options: params[:request_options]
+        )
+      end
+
+      # @overload unarchive(id, request_options: {})
+      #
+      # @param id [String] Addon Id
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [nil]
+      #
+      # @see Dodopayments::Models::AddonUnarchiveParams
+      def unarchive(id, params = {})
+        @client.request(
+          method: :post,
+          path: ["addons/%1$s/unarchive", id],
+          model: NilClass,
+          options: params[:request_options]
         )
       end
 
@@ -131,6 +185,7 @@ module Dodopayments
       # @param client [Dodopayments::Client]
       def initialize(client:)
         @client = client
+        @translations = Dodopayments::Resources::Addons::Translations.new(client: client)
       end
     end
   end

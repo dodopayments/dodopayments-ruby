@@ -103,6 +103,22 @@ class Dodopayments::Test::Resources::AddonsTest < Dodopayments::Test::ResourceTe
     end
   end
 
+  def test_delete
+    response = @dodo_payments.addons.delete("adn_NX1zdqW4Hbivsqz8vI9dc")
+
+    assert_pattern do
+      response => nil
+    end
+  end
+
+  def test_unarchive
+    response = @dodo_payments.addons.unarchive("adn_NX1zdqW4Hbivsqz8vI9dc")
+
+    assert_pattern do
+      response => nil
+    end
+  end
+
   def test_update_images
     response = @dodo_payments.addons.update_images("adn_NX1zdqW4Hbivsqz8vI9dc")
 

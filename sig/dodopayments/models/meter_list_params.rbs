@@ -1,7 +1,12 @@
 module Dodopayments
   module Models
     type meter_list_params =
-      { archived: bool, page_number: Integer, page_size: Integer }
+      {
+        archived: bool,
+        locale: String,
+        page_number: Integer,
+        page_size: Integer
+      }
       & Dodopayments::Internal::Type::request_parameters
 
     class MeterListParams < Dodopayments::Internal::Type::BaseModel
@@ -11,6 +16,10 @@ module Dodopayments
       attr_reader archived: bool?
 
       def archived=: (bool) -> bool
+
+      attr_reader locale: String?
+
+      def locale=: (String) -> String
 
       attr_reader page_number: Integer?
 
@@ -22,6 +31,7 @@ module Dodopayments
 
       def initialize: (
         ?archived: bool,
+        ?locale: String,
         ?page_number: Integer,
         ?page_size: Integer,
         ?request_options: Dodopayments::request_opts
@@ -29,6 +39,7 @@ module Dodopayments
 
       def to_hash: -> {
         archived: bool,
+        locale: String,
         page_number: Integer,
         page_size: Integer,
         request_options: Dodopayments::RequestOptions

@@ -411,6 +411,7 @@ module Dodopayments
         | :dodo_fixed_fee
         | :interchange_fee
         | :scheme_fee
+        | :opening_balance
 
       module EventType
         extend Dodopayments::Internal::Type::Enum
@@ -449,6 +450,7 @@ module Dodopayments
         DODO_FIXED_FEE: :dodo_fixed_fee
         INTERCHANGE_FEE: :interchange_fee
         SCHEME_FEE: :scheme_fee
+        OPENING_BALANCE: :opening_balance
 
         def self?.values: -> ::Array[Dodopayments::Models::BalanceRetrieveLedgerParams::event_type]
       end

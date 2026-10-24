@@ -1,6 +1,8 @@
 module Dodopayments
   module Resources
     class CreditEntitlements
+      attr_reader translations: Dodopayments::Resources::CreditEntitlements::Translations
+
       attr_reader balances: Dodopayments::Resources::CreditEntitlements::Balances
 
       def create: (
@@ -24,6 +26,7 @@ module Dodopayments
 
       def retrieve: (
         String id,
+        ?locale: String,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::CreditEntitlement
 
@@ -48,6 +51,7 @@ module Dodopayments
 
       def list: (
         ?deleted: bool,
+        ?locale: String,
         ?page_number: Integer,
         ?page_size: Integer,
         ?request_options: Dodopayments::request_opts

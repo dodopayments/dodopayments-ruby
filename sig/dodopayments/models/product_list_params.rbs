@@ -4,6 +4,7 @@ module Dodopayments
       {
         archived: bool,
         brand_id: String,
+        locale: String,
         page_number: Integer,
         page_size: Integer,
         recurring: bool
@@ -22,6 +23,10 @@ module Dodopayments
 
       def brand_id=: (String) -> String
 
+      attr_reader locale: String?
+
+      def locale=: (String) -> String
+
       attr_reader page_number: Integer?
 
       def page_number=: (Integer) -> Integer
@@ -37,6 +42,7 @@ module Dodopayments
       def initialize: (
         ?archived: bool,
         ?brand_id: String,
+        ?locale: String,
         ?page_number: Integer,
         ?page_size: Integer,
         ?recurring: bool,
@@ -46,6 +52,7 @@ module Dodopayments
       def to_hash: -> {
         archived: bool,
         brand_id: String,
+        locale: String,
         page_number: Integer,
         page_size: Integer,
         recurring: bool,

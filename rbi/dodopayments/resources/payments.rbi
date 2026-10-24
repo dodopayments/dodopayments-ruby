@@ -155,12 +155,16 @@ module Dodopayments
       sig do
         params(
           payment_id: String,
+          currency: Dodopayments::Currency::OrSymbol,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Models::PaymentRetrieveLineItemsResponse)
       end
       def retrieve_line_items(
         # Payment Id
         payment_id,
+        # The currency of the amounts. It must be the currency that the customer paid in.
+        # Without it, the amounts are in the settlement currency.
+        currency: nil,
         request_options: {}
       )
       end

@@ -49,6 +49,18 @@ module Dodopayments
       sig { params(customer_id: String).void }
       attr_writer :customer_id
 
+      # Shows the translated name, description and unit of the catalog entities in this
+      # locale. The value must be a code from `GET /locales`, for example `fr`. A field
+      # with no translation, an unknown code, or no code shows the base text.
+      #
+      # Do not send a text from a localized response back in a create or update request.
+      # The base text then changes to the translated text.
+      sig { returns(T.nilable(String)) }
+      attr_reader :locale
+
+      sig { params(locale: String).void }
+      attr_writer :locale
+
       # Page number default is 0
       sig { returns(T.nilable(Integer)) }
       attr_reader :page_number
@@ -92,6 +104,7 @@ module Dodopayments
           created_at_gte: Time,
           created_at_lte: Time,
           customer_id: String,
+          locale: String,
           page_number: Integer,
           page_size: Integer,
           product_id: String,
@@ -110,6 +123,13 @@ module Dodopayments
         created_at_lte: nil,
         # Filter by customer id
         customer_id: nil,
+        # Shows the translated name, description and unit of the catalog entities in this
+        # locale. The value must be a code from `GET /locales`, for example `fr`. A field
+        # with no translation, an unknown code, or no code shows the base text.
+        #
+        # Do not send a text from a localized response back in a create or update request.
+        # The base text then changes to the translated text.
+        locale: nil,
         # Page number default is 0
         page_number: nil,
         # Page size default is 10 max is 100
@@ -130,6 +150,7 @@ module Dodopayments
             created_at_gte: Time,
             created_at_lte: Time,
             customer_id: String,
+            locale: String,
             page_number: Integer,
             page_size: Integer,
             product_id: String,

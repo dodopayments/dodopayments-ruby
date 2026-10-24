@@ -13,11 +13,17 @@ module Dodopayments
 
   AddonCreateParams = Dodopayments::Models::AddonCreateParams
 
+  AddonDeleteParams = Dodopayments::Models::AddonDeleteParams
+
   AddonListParams = Dodopayments::Models::AddonListParams
 
   AddonResponse = Dodopayments::Models::AddonResponse
 
   AddonRetrieveParams = Dodopayments::Models::AddonRetrieveParams
+
+  Addons = Dodopayments::Models::Addons
+
+  AddonUnarchiveParams = Dodopayments::Models::AddonUnarchiveParams
 
   AddonUpdateImagesParams = Dodopayments::Models::AddonUpdateImagesParams
 
@@ -323,6 +329,10 @@ module Dodopayments
 
   LicenseValidateParams = Dodopayments::Models::LicenseValidateParams
 
+  Locale = Dodopayments::Models::Locale
+
+  LocaleInfo = Dodopayments::Models::LocaleInfo
+
   ManualRetry = Dodopayments::Models::ManualRetry
 
   ManualRetryState = Dodopayments::Models::ManualRetryState
@@ -354,7 +364,13 @@ module Dodopayments
 
   MeterRetrieveParams = Dodopayments::Models::MeterRetrieveParams
 
+  Meters = Dodopayments::Models::Meters
+
   MeterUnarchiveParams = Dodopayments::Models::MeterUnarchiveParams
+
+  MeterUpdateParams = Dodopayments::Models::MeterUpdateParams
+
+  MiscListLocalesParams = Dodopayments::Models::MiscListLocalesParams
 
   MiscListSupportedCountriesParams =
     Dodopayments::Models::MiscListSupportedCountriesParams
@@ -576,6 +592,10 @@ module Dodopayments
   ThemeConfig = Dodopayments::Models::ThemeConfig
 
   ThemeModeConfig = Dodopayments::Models::ThemeModeConfig
+
+  ThreeDSFlow = Dodopayments::Models::ThreeDSFlow
+
+  ThreeDSStatus = Dodopayments::Models::ThreeDSStatus
 
   TimeInterval = Dodopayments::Models::TimeInterval
 

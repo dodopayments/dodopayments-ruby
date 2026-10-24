@@ -49,6 +49,9 @@ module Dodopayments
         status: Dodopayments::Models::intent_status?,
         subscription_id: String?,
         tax: Integer?,
+        three_ds_flow: Dodopayments::Models::three_ds_flow?,
+        three_ds_status: Dodopayments::Models::three_ds_status?,
+        three_ds_version: String?,
         updated_at: Time?
       }
 
@@ -147,6 +150,12 @@ module Dodopayments
 
       attr_accessor tax: Integer?
 
+      attr_accessor three_ds_flow: Dodopayments::Models::three_ds_flow?
+
+      attr_accessor three_ds_status: Dodopayments::Models::three_ds_status?
+
+      attr_accessor three_ds_version: String?
+
       attr_accessor updated_at: Time?
 
       def initialize: (
@@ -197,6 +206,9 @@ module Dodopayments
         ?status: Dodopayments::Models::intent_status?,
         ?subscription_id: String?,
         ?tax: Integer?,
+        ?three_ds_flow: Dodopayments::Models::three_ds_flow?,
+        ?three_ds_status: Dodopayments::Models::three_ds_status?,
+        ?three_ds_version: String?,
         ?updated_at: Time?
       ) -> void
 
@@ -248,6 +260,9 @@ module Dodopayments
         status: Dodopayments::Models::intent_status?,
         subscription_id: String?,
         tax: Integer?,
+        three_ds_flow: Dodopayments::Models::three_ds_flow?,
+        three_ds_status: Dodopayments::Models::three_ds_status?,
+        three_ds_version: String?,
         updated_at: Time?
       }
 

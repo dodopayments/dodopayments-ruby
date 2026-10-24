@@ -125,9 +125,14 @@ module Dodopayments
         )
       end
 
-      # @overload retrieve_line_items(payment_id, request_options: {})
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::PaymentRetrieveLineItemsParams} for more details.
+      #
+      # @overload retrieve_line_items(payment_id, currency: nil, request_options: {})
       #
       # @param payment_id [String] Payment Id
+      #
+      # @param currency [Symbol, Dodopayments::Models::Currency] The currency of the amounts. It must be the currency that the customer paid in.
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -135,11 +140,14 @@ module Dodopayments
       #
       # @see Dodopayments::Models::PaymentRetrieveLineItemsParams
       def retrieve_line_items(payment_id, params = {})
+        parsed, options = Dodopayments::PaymentRetrieveLineItemsParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["payments/%1$s/line-items", payment_id],
+          query: query,
           model: Dodopayments::Models::PaymentRetrieveLineItemsResponse,
-          options: params[:request_options]
+          options: options
         )
       end
 

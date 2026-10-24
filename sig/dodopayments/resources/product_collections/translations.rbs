@@ -1,0 +1,29 @@
+module Dodopayments
+  module Resources
+    class ProductCollections
+      class Translations
+        def update: (
+          Dodopayments::Models::locale locale,
+          id: String,
+          ?description: String?,
+          ?name: String?,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Products::Translation
+
+        def list: (
+          String id,
+          ?locale: ::Array[String],
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::Products::TranslationsListResponse
+
+        def delete: (
+          Dodopayments::Models::locale locale,
+          id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> nil
+
+        def initialize: (client: Dodopayments::Client) -> void
+      end
+    end
+  end
+end

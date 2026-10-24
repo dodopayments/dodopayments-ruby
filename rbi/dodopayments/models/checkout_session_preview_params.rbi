@@ -14,16 +14,40 @@ module Dodopayments
           )
         end
 
+      # Shows the translated name, description and unit of the catalog entities in this
+      # locale. The value must be a code from `GET /locales`, for example `fr`. A field
+      # with no translation, an unknown code, or no code shows the base text.
+      #
+      # Do not send a text from a localized response back in a create or update request.
+      # The base text then changes to the translated text.
+      sig { returns(T.nilable(String)) }
+      attr_reader :locale
+
+      sig { params(locale: String).void }
+      attr_writer :locale
+
       sig do
-        params(request_options: Dodopayments::RequestOptions::OrHash).returns(
-          T.attached_class
-        )
+        params(
+          locale: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
-      def self.new(request_options: {})
+      def self.new(
+        # Shows the translated name, description and unit of the catalog entities in this
+        # locale. The value must be a code from `GET /locales`, for example `fr`. A field
+        # with no translation, an unknown code, or no code shows the base text.
+        #
+        # Do not send a text from a localized response back in a create or update request.
+        # The base text then changes to the translated text.
+        locale: nil,
+        request_options: {}
+      )
       end
 
       sig do
-        override.returns({ request_options: Dodopayments::RequestOptions })
+        override.returns(
+          { locale: String, request_options: Dodopayments::RequestOptions }
+        )
       end
       def to_hash
       end

@@ -1,7 +1,8 @@
 module Dodopayments
   module Models
     type credit_entitlement_retrieve_params =
-      { id: String } & Dodopayments::Internal::Type::request_parameters
+      { id: String, locale: String }
+      & Dodopayments::Internal::Type::request_parameters
 
     class CreditEntitlementRetrieveParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
@@ -9,13 +10,19 @@ module Dodopayments
 
       attr_accessor id: String
 
+      attr_reader locale: String?
+
+      def locale=: (String) -> String
+
       def initialize: (
         id: String,
+        ?locale: String,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
       def to_hash: -> {
         id: String,
+        locale: String,
         request_options: Dodopayments::RequestOptions
       }
     end

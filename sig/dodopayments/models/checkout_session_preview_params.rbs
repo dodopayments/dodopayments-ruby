@@ -1,15 +1,25 @@
 module Dodopayments
   module Models
     type checkout_session_preview_params =
-      {  } & Dodopayments::Internal::Type::request_parameters
+      { locale: String } & Dodopayments::Internal::Type::request_parameters
 
     class CheckoutSessionPreviewParams < Dodopayments::Models::CheckoutSessionRequest
       extend Dodopayments::Internal::Type::RequestParameters::Converter
       include Dodopayments::Internal::Type::RequestParameters
 
-      def initialize: (?request_options: Dodopayments::request_opts) -> void
+      def locale: -> String?
 
-      def to_hash: -> { request_options: Dodopayments::RequestOptions }
+      def locale=: (String _) -> String
+
+      def initialize: (
+        ?locale: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        locale: String,
+        request_options: Dodopayments::RequestOptions
+      }
     end
   end
 end

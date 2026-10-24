@@ -1,0 +1,29 @@
+module Dodopayments
+  module Resources
+    class CreditEntitlements
+      class Translations
+        def update: (
+          Dodopayments::Models::locale locale,
+          id: String,
+          ?name: String?,
+          ?unit: String?,
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::CreditEntitlements::CreditEntitlementTranslation
+
+        def list: (
+          String id,
+          ?locale: ::Array[String],
+          ?request_options: Dodopayments::request_opts
+        ) -> Dodopayments::CreditEntitlements::CreditEntitlementTranslationsListResponse
+
+        def delete: (
+          Dodopayments::Models::locale locale,
+          id: String,
+          ?request_options: Dodopayments::request_opts
+        ) -> nil
+
+        def initialize: (client: Dodopayments::Client) -> void
+      end
+    end
+  end
+end
