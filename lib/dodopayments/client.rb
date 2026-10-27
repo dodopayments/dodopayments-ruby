@@ -27,6 +27,11 @@ module Dodopayments
     # @return [String, nil]
     attr_reader :webhook_key
 
+    # Workload identity session, or `nil` if the client uses a bearer token.
+    #
+    # @return [Dodopayments::WorkloadIdentity::Session, nil]
+    attr_reader :workload_identity
+
     # @return [Dodopayments::Resources::CheckoutSessions]
     attr_reader :checkout_sessions
 
@@ -114,11 +119,119 @@ module Dodopayments
       {"authorization" => "Bearer #{@bearer_token}"}
     end
 
+    # @api private
+    #
+    # @param req [Hash{Symbol=>Object}]
+    # @param opts [Hash{Symbol=>Object}]
+    #
+    # @return [Hash{Symbol=>Object}]
+    private def build_request(req, opts)
+      request = super
+      headers = request.fetch(:headers)
+      unless @workload_identity.nil? || headers.key?("authorization")
+        headers["authorization"] = "Bearer #{@workload_identity.access_token}"
+      end
+      request
+    end
+
+    # @api private
+    #
+    # With workload identity, a 401 response clears the cached access token. The
+    # client then gets a new access token and sends the request one more time.
+    #
+    # @param req [Hash{Symbol=>Object}]
+    #
+    # @raise [Dodopayments::Errors::APIError]
+    # @return [Object]
+    def request(req)
+      return super if @workload_identity.nil?
+
+      token = @workload_identity.access_token
+      begin
+        super
+      rescue Dodopayments::Errors::AuthenticationError
+        @workload_identity.invalidate(token)
+        @workload_identity.access_token
+        super
+      end
+    end
+
+    # @api private
+    #
+    # Sends a workload identity request without the client credentials. It retries
+    # connection errors and 5xx responses, but not 4xx responses.
+    #
+    # @param method [Symbol]
+    # @param path [String]
+    # @param headers [Hash{String=>String}]
+    # @param body [Object, nil]
+    #
+    # @raise [Dodopayments::Errors::APIError]
+    # @return [Object]
+    private def workload_identity_request(method:, path:, headers:, body:)
+      url = Dodopayments::Internal::Util.join_parsed_uri(@base_url_components, {path: path})
+      headers = Dodopayments::Internal::Util.normalized_headers(@headers.except("authorization"), headers)
+      encoded = nil
+      if body.nil?
+        headers.delete("content-type")
+      else
+        headers, encoded = Dodopayments::Internal::Util.encode_content(headers, body)
+      end
+      request = {method: method, url: url, headers: headers, body: encoded, max_retries: 0, timeout: @timeout}
+
+      retry_count = 0
+      begin
+        _, response, stream = send_request(
+          request,
+          redirect_count: 0,
+          retry_count: retry_count,
+          send_retry_header: true
+        )
+      rescue Dodopayments::Errors::APIConnectionError, Dodopayments::Errors::InternalServerError => e
+        if retry_count < @max_retries
+          sleep(retry_delay(e.headers.to_h, retry_count: retry_count))
+          retry_count += 1
+          retry
+        end
+        raise workload_identity_error(e)
+      rescue Dodopayments::Errors::APIStatusError => e
+        raise workload_identity_error(e)
+      end
+
+      response_headers = Dodopayments::Internal::Util.normalized_headers(response.each_header.to_h)
+      Dodopayments::Internal::Util.decode_content(response_headers, stream: stream, suppress_error: true)
+    end
+
+    # @api private
+    #
+    # @param error [Dodopayments::Errors::APIError]
+    #
+    # @return [Dodopayments::Errors::APIError]
+    private def workload_identity_error(error)
+      return error unless error.is_a?(Dodopayments::Errors::APIStatusError)
+
+      body = error.body
+      details = body.is_a?(Hash) ? [body[:error], body[:error_description]].compact : []
+      message = ["Workload identity request failed with status #{error.status}", *details].join(": ")
+      Dodopayments::Errors::APIStatusError.for(
+        url: error.url,
+        status: error.status.to_i,
+        headers: error.headers,
+        body: body,
+        request: nil,
+        response: nil,
+        message: message
+      )
+    end
+
     # Creates and returns a new client for interacting with the API.
     #
     # @param bearer_token [String, nil] Bearer Token for API authentication Defaults to `ENV["DODO_PAYMENTS_API_KEY"]`
     #
     # @param webhook_key [String, nil] Defaults to `ENV["DODO_PAYMENTS_WEBHOOK_KEY"]`
+    #
+    # @param workload_identity [Dodopayments::WorkloadIdentity::Config, Hash{Symbol=>Object}, nil] Exchange an OIDC token for an access token, instead of a bearer token. See
+    # {Dodopayments::WorkloadIdentity}.
     #
     # @param environment [:live_mode, :test_mode, nil] Specifies the environment to use for the API.
     #
@@ -138,8 +251,9 @@ module Dodopayments
     #
     # @param max_retry_delay [Float]
     def initialize(
-      bearer_token: ENV["DODO_PAYMENTS_API_KEY"],
+      bearer_token: nil,
       webhook_key: ENV["DODO_PAYMENTS_WEBHOOK_KEY"],
+      workload_identity: nil,
       environment: nil,
       base_url: ENV["DODO_PAYMENTS_BASE_URL"],
       max_retries: self.class::DEFAULT_MAX_RETRIES,
@@ -152,7 +266,17 @@ module Dodopayments
         raise ArgumentError.new(message)
       end
 
-      if bearer_token.nil?
+      unless bearer_token.nil? || workload_identity.nil?
+        raise ArgumentError.new("bearer_token and workload_identity cannot be used together")
+      end
+      bearer_token = ENV["DODO_PAYMENTS_API_KEY"] if bearer_token.nil? && workload_identity.nil?
+      if bearer_token.nil? && workload_identity.nil? && !ENV["DODO_PAYMENTS_IDENTITY_PROVIDER_ID"].to_s.empty?
+        provider = Dodopayments::WorkloadIdentity.auto
+        workload_identity = {provider: provider} unless provider.nil?
+      end
+      workload_identity = Dodopayments::WorkloadIdentity::Config.coerce(workload_identity) unless workload_identity.nil?
+
+      if bearer_token.nil? && workload_identity.nil?
         raise ArgumentError.new("bearer_token is required, and can be set via environ: \"DODO_PAYMENTS_API_KEY\"")
       end
 
@@ -169,7 +293,7 @@ module Dodopayments
         headers = parsed.merge(headers)
       end
 
-      @bearer_token = bearer_token.to_s
+      @bearer_token = bearer_token&.to_s
       @webhook_key = webhook_key&.to_s
 
       super(
@@ -207,6 +331,17 @@ module Dodopayments
       @entitlements = Dodopayments::Resources::Entitlements.new(client: self)
       @product_collections = Dodopayments::Resources::ProductCollections.new(client: self)
       @moderation = Dodopayments::Resources::Moderation.new(client: self)
+
+      @workload_identity = nil
+      return if workload_identity.nil?
+      @workload_identity = Dodopayments::WorkloadIdentity::Session.new(
+        config: workload_identity,
+        context: Dodopayments::WorkloadIdentity::Context.new(
+          base_url: @base_url,
+          audience: Dodopayments::Internal::Util.uri_origin(@base_url)
+        ),
+        transport: method(:workload_identity_request)
+      )
     end
   end
 end
