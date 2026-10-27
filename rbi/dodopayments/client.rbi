@@ -20,11 +20,14 @@ module Dodopayments
       )
 
     # Bearer Token for API authentication
-    sig { returns(String) }
+    sig { returns(T.nilable(String)) }
     attr_reader :bearer_token
 
     sig { returns(T.nilable(String)) }
     attr_reader :webhook_key
+
+    sig { returns(T.nilable(Dodopayments::WorkloadIdentity::Session)) }
+    attr_reader :workload_identity
 
     sig { returns(Dodopayments::Resources::CheckoutSessions) }
     attr_reader :checkout_sessions
@@ -114,6 +117,13 @@ module Dodopayments
       params(
         bearer_token: T.nilable(String),
         webhook_key: T.nilable(String),
+        workload_identity:
+          T.nilable(
+            T.any(
+              Dodopayments::WorkloadIdentity::Config,
+              T::Hash[Symbol, T.anything]
+            )
+          ),
         environment: T.nilable(T.any(Symbol, String)),
         base_url: T.nilable(String),
         max_retries: Integer,
@@ -124,9 +134,12 @@ module Dodopayments
     end
     def self.new(
       # Bearer Token for API authentication Defaults to `ENV["DODO_PAYMENTS_API_KEY"]`
-      bearer_token: ENV["DODO_PAYMENTS_API_KEY"],
+      bearer_token: nil,
       # Defaults to `ENV["DODO_PAYMENTS_WEBHOOK_KEY"]`
       webhook_key: ENV["DODO_PAYMENTS_WEBHOOK_KEY"],
+      # Exchange an OIDC token for an access token, instead of a bearer token. See
+      # {Dodopayments::WorkloadIdentity}.
+      workload_identity: nil,
       # Specifies the environment to use for the API.
       #
       # Each environment maps to a different base URL:
