@@ -72,6 +72,26 @@ if page.next_page?
 end
 ```
 
+### Workload identity
+
+Instead of an API key, the client can exchange an OIDC token (JWT) from your platform for a short-lived access token. The client caches the access token and gets a new one when 5 minutes or less remain.
+
+```ruby
+dodo_payments = Dodopayments::Client.new(
+  workload_identity: Dodopayments::WorkloadIdentity::Config.new(
+    identity_provider_id: "wip_...", # defaults to ENV["DODO_PAYMENTS_IDENTITY_PROVIDER_ID"]
+    provider: Dodopayments::WorkloadIdentity.github_actions
+  )
+)
+
+# Revoke the cached access token, for example at the end of a job.
+dodo_payments.workload_identity.revoke
+```
+
+The `Dodopayments::WorkloadIdentity` module has these token sources: `github_actions`, `gitlab`, `terraform_cloud`, `gcp`, `vercel`, `kubernetes`, `file`, `aws` (wraps your function), `static`, and `auto`. A `provider` can also be any object that responds to `call` and returns the JWT.
+
+Do not set `bearer_token` together with `workload_identity`. If you set neither, and `ENV["DODO_PAYMENTS_API_KEY"]` is not set, the client reads `ENV["DODO_PAYMENTS_IDENTITY_PROVIDER_ID"]` and uses the token source that `auto` finds.
+
 ### Handling errors
 
 When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Dodopayments::Errors::APIError` will be thrown:
