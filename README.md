@@ -88,7 +88,7 @@ dodo_payments = Dodopayments::Client.new(
 dodo_payments.workload_identity.revoke
 ```
 
-The `Dodopayments::WorkloadIdentity` module has these token sources: `github_actions`, `gitlab`, `terraform_cloud`, `gcp`, `vercel`, `kubernetes`, `file`, `aws` (wraps your function), `static`, and `auto`. A `provider` can also be any object that responds to `call` and returns the JWT.
+The `Dodopayments::WorkloadIdentity` module has these token sources: `github_actions`, `gitlab`, `terraform_cloud`, `gcp`, `vercel`, `kubernetes`, `file`, `aws` (wraps your function), `static`, and `auto`. A `provider` can also be any object that responds to `call` and returns the JWT. `vercel` gets a Vercel OIDC token with the Dodo Payments audience from the Vercel token endpoint.
 
 Do not set `bearer_token` together with `workload_identity`. If you set neither, and `ENV["DODO_PAYMENTS_API_KEY"]` is not set, the client reads `ENV["DODO_PAYMENTS_IDENTITY_PROVIDER_ID"]` and uses the token source that `auto` finds.
 
