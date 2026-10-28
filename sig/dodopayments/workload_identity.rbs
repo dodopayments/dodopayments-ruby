@@ -1,0 +1,89 @@
+module Dodopayments
+  module WorkloadIdentity
+    GRANT_TYPE: String
+
+    SUBJECT_TOKEN_TYPE: String
+
+    REFRESH_WINDOW_IN_SECONDS: Integer
+
+    PROVIDER_TIMEOUT_IN_SECONDS: Integer
+
+    KUBERNETES_TOKEN_PATH: String
+
+    GCP_METADATA_URL: String
+
+    type provider = ^(Dodopayments::WorkloadIdentity::Context context) -> String
+
+    class Context
+      attr_reader base_url: URI::Generic
+
+      attr_reader audience: String
+
+      def initialize: (base_url: URI::Generic, audience: String) -> void
+    end
+
+    class Config
+      attr_reader identity_provider_id: String
+
+      attr_reader provider: top
+
+      def initialize: (provider: top, ?identity_provider_id: String?) -> void
+
+      def self.coerce: (
+        Dodopayments::WorkloadIdentity::Config | ::Hash[Symbol, top] value
+      ) -> Dodopayments::WorkloadIdentity::Config
+
+      def inspect: -> String
+    end
+
+    class Session
+      attr_reader identity_provider_id: String
+
+      def initialize: (
+        config: Dodopayments::WorkloadIdentity::Config,
+        context: Dodopayments::WorkloadIdentity::Context,
+        transport: top
+      ) -> void
+
+      def access_token: -> String
+
+      def invalidate: (?String? token) -> nil
+
+      def revoke: -> nil
+
+      def inspect: -> String
+    end
+
+    def self.github_actions: (
+      ?audience: String?
+    ) -> Dodopayments::WorkloadIdentity::provider
+
+    def self.gitlab: (
+      ?env_var: String
+    ) -> Dodopayments::WorkloadIdentity::provider
+
+    def self.terraform_cloud: -> Dodopayments::WorkloadIdentity::provider
+
+    def self.gcp: (
+      ?audience: String?
+    ) -> Dodopayments::WorkloadIdentity::provider
+
+    def self.vercel: -> Dodopayments::WorkloadIdentity::provider
+
+    def self.kubernetes: (
+      ?path: String
+    ) -> Dodopayments::WorkloadIdentity::provider
+
+    def self.file: (?path: String?) -> Dodopayments::WorkloadIdentity::provider
+
+    def self.aws: (
+      ?top fn
+    ) ?{
+      -> String
+    } -> Dodopayments::WorkloadIdentity::provider
+
+    def self.static: (String token) -> Dodopayments::WorkloadIdentity::provider
+
+    def self.auto: -> Dodopayments::WorkloadIdentity::provider?
+  end
+end
