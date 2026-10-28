@@ -23,7 +23,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "dodopayments", "~> 2.35.0"
+gem "dodopayments", "~> 2.36.0"
 ```
 
 <!-- x-release-please-end -->
@@ -71,6 +71,26 @@ if page.next_page?
   puts(new_page.items[0].brand_id)
 end
 ```
+
+### Workload identity
+
+Instead of an API key, the client can exchange an OIDC token (JWT) from your platform for a short-lived access token. The client caches the access token and gets a new one when 5 minutes or less remain.
+
+```ruby
+dodo_payments = Dodopayments::Client.new(
+  workload_identity: Dodopayments::WorkloadIdentity::Config.new(
+    identity_provider_id: "wip_...", # defaults to ENV["DODO_PAYMENTS_IDENTITY_PROVIDER_ID"]
+    provider: Dodopayments::WorkloadIdentity.github_actions
+  )
+)
+
+# Revoke the cached access token, for example at the end of a job.
+dodo_payments.workload_identity.revoke
+```
+
+The `Dodopayments::WorkloadIdentity` module has these token sources: `github_actions`, `gitlab`, `terraform_cloud`, `gcp`, `vercel`, `kubernetes`, `file`, `aws` (wraps your function), `static`, and `auto`. A `provider` can also be any object that responds to `call` and returns the JWT.
+
+Do not set `bearer_token` together with `workload_identity`. If you set neither, and `ENV["DODO_PAYMENTS_API_KEY"]` is not set, the client reads `ENV["DODO_PAYMENTS_IDENTITY_PROVIDER_ID"]` and uses the token source that `auto` finds.
 
 ### Handling errors
 
