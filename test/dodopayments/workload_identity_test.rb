@@ -178,4 +178,41 @@ class DodopaymentsWorkloadIdentityTest < Minitest::Test
     assert_requested(:post, TOKEN_URL, times: 2)
     assert_requested(:get, PROBE_URL, times: 1, headers: {"Authorization" => "Bearer access-2"})
   end
+
+  def test_vercel_exchanges_for_default_audience
+    vercel_url = "https://oidc.vercel.com/~token"
+    stub_request(:post, vercel_url).to_return_json(status: 200, body: {token: "vercel-dodo-token", expiry: 1})
+    stub_request(:post, TOKEN_URL).to_return_json(token_response("access-1"))
+    stub_request(:get, PROBE_URL).to_return_json(status: 200, body: {})
+
+    with_env("VERCEL_OIDC_TOKEN" => "vercel-base-token", "VERCEL_OIDC_TOKEN_FILE" => nil) do
+      probe(new_client(provider: Dodopayments::WorkloadIdentity.vercel))
+    end
+
+    assert_requested(:post, vercel_url, times: 1, headers: {"Content-Type" => "application/json"}) do |req|
+      JSON.parse(req.body) == {"token" => "vercel-base-token", "aud" => BASE_URL}
+    end
+    assert_requested(:post, TOKEN_URL, times: 1) do |req|
+      JSON.parse(req.body)["subject_token"] == "vercel-dodo-token"
+    end
+
+    stub_request(:post, vercel_url).to_return(status: 403, body: "denied")
+    e = assert_raises(Dodopayments::Errors::Error) do
+      with_env("VERCEL_OIDC_TOKEN" => "vercel-base-token", "VERCEL_OIDC_TOKEN_FILE" => nil) do
+        Dodopayments::WorkloadIdentity.vercel.call(
+          Dodopayments::WorkloadIdentity::Context.new(base_url: URI(BASE_URL), audience: BASE_URL)
+        )
+      end
+    end
+    assert_match(/status 403/, e.message)
+    refute_match(/vercel-base-token/, e.message)
+  end
+
+  def with_env(vars)
+    saved = vars.keys.to_h { [_1, ENV[_1]] }
+    vars.each { |k, v| ENV[k] = v }
+    yield
+  ensure
+    saved.each { |k, v| ENV[k] = v }
+  end
 end

@@ -12,6 +12,8 @@ module Dodopayments
 
     GCP_METADATA_URL: String
 
+    VERCEL_TOKEN_URL: String
+
     type provider = ^(Dodopayments::WorkloadIdentity::Context context) -> String
 
     class Context
@@ -68,7 +70,9 @@ module Dodopayments
       ?audience: String?
     ) -> Dodopayments::WorkloadIdentity::provider
 
-    def self.vercel: -> Dodopayments::WorkloadIdentity::provider
+    def self.vercel: (
+      ?audience: String?
+    ) -> Dodopayments::WorkloadIdentity::provider
 
     def self.kubernetes: (
       ?path: String
