@@ -19,6 +19,8 @@ module Dodopayments
 
     GCP_METADATA_URL = T.let(T.unsafe(nil), String)
 
+    VERCEL_TOKEN_URL = T.let(T.unsafe(nil), String)
+
     # The values that a subject token provider gets on each token exchange.
     class Context
       # The base URL of the client.
@@ -165,9 +167,17 @@ module Dodopayments
       )
       end
 
-      # Vercel OIDC federation.
-      sig { returns(Dodopayments::WorkloadIdentity::Provider) }
-      def vercel
+      # Vercel: gets a Vercel OIDC token for the Dodo Payments audience on each
+      # exchange.
+      sig do
+        params(audience: T.nilable(String)).returns(
+          Dodopayments::WorkloadIdentity::Provider
+        )
+      end
+      def vercel(
+        # Defaults to the origin of the client base URL.
+        audience: nil
+      )
       end
 
       # Kubernetes: a projected service account token. The file is read on each

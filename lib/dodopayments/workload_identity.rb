@@ -31,6 +31,9 @@ module Dodopayments
     GCP_METADATA_URL =
       "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity"
 
+    # @api private
+    VERCEL_TOKEN_URL = "https://oidc.vercel.com/~token"
+
     # The values that a subject token provider gets on each token exchange.
     class Context
       # The base URL of the client.
@@ -259,10 +262,32 @@ module Dodopayments
         end
       end
 
-      # Vercel OIDC federation.
+      # Vercel: gets a Vercel OIDC token for the Dodo Payments audience on each exchange.
+      # The base token comes from `ENV["VERCEL_OIDC_TOKEN_FILE"]` or `ENV["VERCEL_OIDC_TOKEN"]`.
+      # Vercel exchanges the base token for a token with the audience.
+      #
+      # @param audience [String, nil] Defaults to the origin of the client base URL.
       #
       # @return [Proc]
-      def vercel = ->(_context = nil) { env!("VERCEL_OIDC_TOKEN") }
+      def vercel(audience: nil)
+        lambda do |context|
+          body = {token: vercel_base_token, aud: audience || context.audience}
+          response = http_post_json(URI(VERCEL_TOKEN_URL), body)
+          unless response.is_a?(Net::HTTPSuccess)
+            raise Dodopayments::Errors::Error.new(
+              "The Vercel OIDC token request failed with status #{response.code}: #{response.body.to_s[0,
+                                                                                                       200]}"
+            )
+          end
+          token = vercel_token(response.body.to_s)
+          if token.nil?
+            raise Dodopayments::Errors::Error.new(
+              "The Vercel OIDC token response has no token (status #{response.code})"
+            )
+          end
+          token
+        end
+      end
 
       # Kubernetes: a projected service account token. The file is read on each exchange.
       #
@@ -327,6 +352,41 @@ module Dodopayments
           raise Dodopayments::Errors::Error.new("The environment variable #{name} is not set")
         end
         value
+      end
+
+      private def vercel_base_token
+        path = ENV["VERCEL_OIDC_TOKEN_FILE"]
+        token = path.nil? || path.empty? ? ENV["VERCEL_OIDC_TOKEN"].to_s.strip : File.read(path).strip
+        if token.empty?
+          raise Dodopayments::Errors::Error.new(
+            "Cannot find a Vercel OIDC token. Set VERCEL_OIDC_TOKEN_FILE or VERCEL_OIDC_TOKEN."
+          )
+        end
+        token
+      end
+
+      private def vercel_token(body)
+        data = JSON.parse(body)
+        token = data.is_a?(Hash) ? data["token"] : nil
+        token.is_a?(String) && !token.empty? ? token : nil
+      rescue JSON::ParserError
+        nil
+      end
+
+      private def http_post_json(uri, body)
+        Net::HTTP.start(
+          uri.host,
+          uri.port,
+          use_ssl: uri.scheme == "https",
+          open_timeout: PROVIDER_TIMEOUT_IN_SECONDS,
+          read_timeout: PROVIDER_TIMEOUT_IN_SECONDS
+        ) do |http|
+          http.post(
+            uri.request_uri,
+            JSON.generate(body),
+            {"content-type" => "application/json", "accept" => "application/json"}
+          )
+        end
       end
 
       private def http_get(uri, headers)
