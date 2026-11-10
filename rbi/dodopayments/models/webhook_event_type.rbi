@@ -111,6 +111,31 @@ module Dodopayments
           :"subscription.update_payment_method",
           Dodopayments::WebhookEventType::TaggedSymbol
         )
+      INVOICE_FINALIZED =
+        T.let(
+          :"invoice.finalized",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
+      INVOICE_SENT =
+        T.let(:"invoice.sent", Dodopayments::WebhookEventType::TaggedSymbol)
+      INVOICE_PAID =
+        T.let(:"invoice.paid", Dodopayments::WebhookEventType::TaggedSymbol)
+      INVOICE_PAYMENT_FAILED =
+        T.let(
+          :"invoice.payment_failed",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
+      INVOICE_PAST_DUE =
+        T.let(:"invoice.past_due", Dodopayments::WebhookEventType::TaggedSymbol)
+      INVOICE_REOPENED =
+        T.let(:"invoice.reopened", Dodopayments::WebhookEventType::TaggedSymbol)
+      INVOICE_VOIDED =
+        T.let(:"invoice.voided", Dodopayments::WebhookEventType::TaggedSymbol)
+      INVOICE_MARKED_UNCOLLECTABLE =
+        T.let(
+          :"invoice.marked_uncollectable",
+          Dodopayments::WebhookEventType::TaggedSymbol
+        )
       LICENSE_KEY_CREATED =
         T.let(
           :"license_key.created",

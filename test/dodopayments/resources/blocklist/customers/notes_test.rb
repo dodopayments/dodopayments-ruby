@@ -4,7 +4,7 @@ require_relative "../../../test_helper"
 
 class Dodopayments::Test::Resources::Blocklist::Customers::NotesTest < Dodopayments::Test::ResourceTest
   def test_create_required_params
-    response = @dodo_payments.blocklist.customers.notes.create("entry_id", note: "note")
+    response = @dodo_payments.blocklist.customers.notes.create("entry_id", text: "text")
 
     assert_pattern do
       response => Dodopayments::Blocklist::Customers::BlockedCustomerNote
@@ -22,7 +22,7 @@ class Dodopayments::Test::Resources::Blocklist::Customers::NotesTest < Dodopayme
   end
 
   def test_update_required_params
-    response = @dodo_payments.blocklist.customers.notes.update("note_id", entry_id: "entry_id", note: "note")
+    response = @dodo_payments.blocklist.customers.notes.update("note_id", entry_id: "entry_id", text: "text")
 
     assert_pattern do
       response => Dodopayments::Blocklist::Customers::BlockedCustomerNote

@@ -10,9 +10,11 @@ module Dodopayments
         cancel_older_payment_link: bool,
         cancel_scheduled_change_plan: bool,
         collect_via_payment_link: bool,
+        credit: Dodopayments::Models::UpdateSubscriptionPlanReq::credit?,
         discount_code: String?,
         discount_codes: ::Array[String]?,
         effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
+        invoice: Dodopayments::UpdateSubscriptionPlanReq::Invoice?,
         metadata: Dodopayments::Models::metadata?,
         on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?,
         return_url: String?
@@ -41,6 +43,8 @@ module Dodopayments
 
       def collect_via_payment_link=: (bool) -> bool
 
+      attr_accessor credit: Dodopayments::Models::UpdateSubscriptionPlanReq::credit?
+
       attr_accessor discount_code: String?
 
       attr_accessor discount_codes: ::Array[String]?
@@ -50,6 +54,8 @@ module Dodopayments
       def effective_at=: (
         Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at
       ) -> Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at
+
+      attr_accessor invoice: Dodopayments::UpdateSubscriptionPlanReq::Invoice?
 
       attr_accessor metadata: Dodopayments::Models::metadata?
 
@@ -66,9 +72,11 @@ module Dodopayments
         ?cancel_older_payment_link: bool,
         ?cancel_scheduled_change_plan: bool,
         ?collect_via_payment_link: bool,
+        ?credit: Dodopayments::Models::UpdateSubscriptionPlanReq::credit?,
         ?discount_code: String?,
         ?discount_codes: ::Array[String]?,
         ?effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
+        ?invoice: Dodopayments::UpdateSubscriptionPlanReq::Invoice?,
         ?metadata: Dodopayments::Models::metadata?,
         ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?,
         ?return_url: String?
@@ -83,9 +91,11 @@ module Dodopayments
         cancel_older_payment_link: bool,
         cancel_scheduled_change_plan: bool,
         collect_via_payment_link: bool,
+        credit: Dodopayments::Models::UpdateSubscriptionPlanReq::credit?,
         discount_code: String?,
         discount_codes: ::Array[String]?,
         effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
+        invoice: Dodopayments::UpdateSubscriptionPlanReq::Invoice?,
         metadata: Dodopayments::Models::metadata?,
         on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?,
         return_url: String?
@@ -110,6 +120,17 @@ module Dodopayments
         def self?.values: -> ::Array[Dodopayments::Models::UpdateSubscriptionPlanReq::proration_billing_mode]
       end
 
+      type credit = :customer_balance | :refund
+
+      module Credit
+        extend Dodopayments::Internal::Type::Enum
+
+        CUSTOMER_BALANCE: :customer_balance
+        REFUND: :refund
+
+        def self?.values: -> ::Array[Dodopayments::Models::UpdateSubscriptionPlanReq::credit]
+      end
+
       type effective_at = :immediately | :next_billing_date
 
       module EffectiveAt
@@ -119,6 +140,67 @@ module Dodopayments
         NEXT_BILLING_DATE: :next_billing_date
 
         def self?.values: -> ::Array[Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at]
+      end
+
+      type invoice =
+        {
+          collection_method: Dodopayments::Models::collection_method?,
+          finalize: bool,
+          payment_terms: Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::payment_terms?
+        }
+
+      class Invoice < Dodopayments::Internal::Type::BaseModel
+        attr_accessor collection_method: Dodopayments::Models::collection_method?
+
+        attr_reader finalize: bool?
+
+        def finalize=: (bool) -> bool
+
+        attr_accessor payment_terms: Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::payment_terms?
+
+        def initialize: (
+          ?collection_method: Dodopayments::Models::collection_method?,
+          ?finalize: bool,
+          ?payment_terms: Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::payment_terms?
+        ) -> void
+
+        def to_hash: -> {
+          collection_method: Dodopayments::Models::collection_method?,
+          finalize: bool,
+          payment_terms: Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::payment_terms?
+        }
+
+        type payment_terms =
+          Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::DueOnReceipt
+          | Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Net
+
+        module PaymentTerms
+          extend Dodopayments::Internal::Type::Union
+
+          type due_on_receipt = { type: :due_on_receipt }
+
+          class DueOnReceipt < Dodopayments::Internal::Type::BaseModel
+            attr_accessor type: :due_on_receipt
+
+            def initialize: (?type: :due_on_receipt) -> void
+
+            def to_hash: -> { type: :due_on_receipt }
+          end
+
+          type net = { days: Integer, type: :net }
+
+          class Net < Dodopayments::Internal::Type::BaseModel
+            attr_accessor days: Integer
+
+            attr_accessor type: :net
+
+            def initialize: (days: Integer, ?type: :net) -> void
+
+            def to_hash: -> { days: Integer, type: :net }
+          end
+
+          def self?.variants: -> ::Array[Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::payment_terms]
+        end
       end
 
       type on_payment_failure = :prevent_change | :apply_change

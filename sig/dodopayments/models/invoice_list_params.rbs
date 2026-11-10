@@ -1,0 +1,157 @@
+module Dodopayments
+  module Models
+    type invoice_list_params =
+      {
+        collection_method: Dodopayments::Models::InvoiceListParams::collection_method,
+        created_at_gte: Time,
+        created_at_lte: Time,
+        customer_id: String,
+        due_at_gte: Time,
+        due_at_lte: Time,
+        page_number: Integer,
+        page_size: Integer,
+        status: ::Array[Dodopayments::Models::InvoiceListParams::status],
+        subscription_id: String,
+        tags: ::Array[Dodopayments::Models::InvoiceListParams::tag],
+        total_amount_gte: Integer,
+        total_amount_lte: Integer
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class InvoiceListParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_reader collection_method: Dodopayments::Models::InvoiceListParams::collection_method?
+
+      def collection_method=: (
+        Dodopayments::Models::InvoiceListParams::collection_method
+      ) -> Dodopayments::Models::InvoiceListParams::collection_method
+
+      attr_reader created_at_gte: Time?
+
+      def created_at_gte=: (Time) -> Time
+
+      attr_reader created_at_lte: Time?
+
+      def created_at_lte=: (Time) -> Time
+
+      attr_reader customer_id: String?
+
+      def customer_id=: (String) -> String
+
+      attr_reader due_at_gte: Time?
+
+      def due_at_gte=: (Time) -> Time
+
+      attr_reader due_at_lte: Time?
+
+      def due_at_lte=: (Time) -> Time
+
+      attr_reader page_number: Integer?
+
+      def page_number=: (Integer) -> Integer
+
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
+
+      attr_reader status: ::Array[Dodopayments::Models::InvoiceListParams::status]?
+
+      def status=: (
+        ::Array[Dodopayments::Models::InvoiceListParams::status]
+      ) -> ::Array[Dodopayments::Models::InvoiceListParams::status]
+
+      attr_reader subscription_id: String?
+
+      def subscription_id=: (String) -> String
+
+      attr_reader tags: ::Array[Dodopayments::Models::InvoiceListParams::tag]?
+
+      def tags=: (
+        ::Array[Dodopayments::Models::InvoiceListParams::tag]
+      ) -> ::Array[Dodopayments::Models::InvoiceListParams::tag]
+
+      attr_reader total_amount_gte: Integer?
+
+      def total_amount_gte=: (Integer) -> Integer
+
+      attr_reader total_amount_lte: Integer?
+
+      def total_amount_lte=: (Integer) -> Integer
+
+      def initialize: (
+        ?collection_method: Dodopayments::Models::InvoiceListParams::collection_method,
+        ?created_at_gte: Time,
+        ?created_at_lte: Time,
+        ?customer_id: String,
+        ?due_at_gte: Time,
+        ?due_at_lte: Time,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?status: ::Array[Dodopayments::Models::InvoiceListParams::status],
+        ?subscription_id: String,
+        ?tags: ::Array[Dodopayments::Models::InvoiceListParams::tag],
+        ?total_amount_gte: Integer,
+        ?total_amount_lte: Integer,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        collection_method: Dodopayments::Models::InvoiceListParams::collection_method,
+        created_at_gte: Time,
+        created_at_lte: Time,
+        customer_id: String,
+        due_at_gte: Time,
+        due_at_lte: Time,
+        page_number: Integer,
+        page_size: Integer,
+        status: ::Array[Dodopayments::Models::InvoiceListParams::status],
+        subscription_id: String,
+        tags: ::Array[Dodopayments::Models::InvoiceListParams::tag],
+        total_amount_gte: Integer,
+        total_amount_lte: Integer,
+        request_options: Dodopayments::RequestOptions
+      }
+
+      type collection_method = :auto_charge | :manual
+
+      module CollectionMethod
+        extend Dodopayments::Internal::Type::Enum
+
+        AUTO_CHARGE: :auto_charge
+        MANUAL: :manual
+
+        def self?.values: -> ::Array[Dodopayments::Models::InvoiceListParams::collection_method]
+      end
+
+      type status = :open | :paid | :void | :draft | :past_due | :uncollectable
+
+      module Status
+        extend Dodopayments::Internal::Type::Enum
+
+        OPEN: :open
+        PAID: :paid
+        VOID: :void
+        DRAFT: :draft
+        PAST_DUE: :past_due
+        UNCOLLECTABLE: :uncollectable
+
+        def self?.values: -> ::Array[Dodopayments::Models::InvoiceListParams::status]
+      end
+
+      type tag = :refunded | :partially_refunded | :disputed | :payment_reversed
+
+      module Tag
+        extend Dodopayments::Internal::Type::Enum
+
+        REFUNDED: :refunded
+        PARTIALLY_REFUNDED: :partially_refunded
+        DISPUTED: :disputed
+        PAYMENT_REVERSED: :payment_reversed
+
+        def self?.values: -> ::Array[Dodopayments::Models::InvoiceListParams::tag]
+      end
+    end
+  end
+end
