@@ -93,57 +93,55 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::CheckoutSessionPreviewParams} for more details.
       #
-      # @overload preview(product_cart:, locale: nil, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customer_business_name: nil, customization: nil, discount_code: nil, discount_codes: nil, feature_flags: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil, request_options: {})
+      # @overload preview(product_cart:, allowed_payment_method_types: nil, billing_address: nil, billing_currency: nil, cancel_url: nil, confirm: nil, custom_fields: nil, customer: nil, customer_business_name: nil, customization: nil, discount_code: nil, discount_codes: nil, feature_flags: nil, force_3ds: nil, mandate_min_amount_inr_paise: nil, metadata: nil, minimal_address: nil, payment_method_id: nil, product_collection_id: nil, return_url: nil, short_link: nil, show_saved_payment_methods: nil, subscription_data: nil, tax_id: nil, request_options: {})
       #
-      # @param product_cart [Array<Dodopayments::Models::ProductItemReq>] Body param: The products of the checkout. A cart holds at most 20 of them, one-t
+      # @param product_cart [Array<Dodopayments::Models::ProductItemReq>] The products of the checkout. A cart holds at most 20 of them, one-time and
       #
-      # @param locale [String] Query param: Shows the translated name, description and unit of the catalog enti
+      # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil] Customers will never see payment methods that are not in this list.
       #
-      # @param allowed_payment_method_types [Array<Symbol, Dodopayments::Models::PaymentMethodTypes>, nil] Body param: Customers will never see payment methods that are not in this list.
+      # @param billing_address [Dodopayments::Models::CheckoutSessionBillingAddress, nil] Billing address information for the session
       #
-      # @param billing_address [Dodopayments::Models::CheckoutSessionBillingAddress, nil] Body param: Billing address information for the session
+      # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] The currency to charge the customer in.
       #
-      # @param billing_currency [Symbol, Dodopayments::Models::Currency, nil] Body param: The currency to charge the customer in.
+      # @param cancel_url [String, nil] The URL to redirect the customer if they cancel or go back from the checkout.
       #
-      # @param cancel_url [String, nil] Body param: The URL to redirect the customer if they cancel or go back from the
+      # @param confirm [Boolean] If confirm is true, all the details will be finalized. If required data is missi
       #
-      # @param confirm [Boolean] Body param: If confirm is true, all the details will be finalized. If required d
+      # @param custom_fields [Array<Dodopayments::Models::CustomField>, nil] Custom fields to collect from customer during checkout (max 5 fields)
       #
-      # @param custom_fields [Array<Dodopayments::Models::CustomField>, nil] Body param: Custom fields to collect from customer during checkout (max 5 fields
+      # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer, nil] Customer details for the session
       #
-      # @param customer [Dodopayments::Models::AttachExistingCustomer, Dodopayments::Models::NewCustomer, nil] Body param: Customer details for the session
+      # @param customer_business_name [String, nil] Optional business / legal name associated with the tax id. When provided
       #
-      # @param customer_business_name [String, nil] Body param: Optional business / legal name associated with the tax id. When prov
+      # @param customization [Dodopayments::Models::CheckoutSessionCustomization] Customization for the checkout session page
       #
-      # @param customization [Dodopayments::Models::CheckoutSessionCustomization] Body param: Customization for the checkout session page
+      # @param discount_code [String, nil] DEPRECATED: Use discount_codes instead. Cannot be used together with discount_co
       #
-      # @param discount_code [String, nil] Body param: DEPRECATED: Use discount_codes instead. Cannot be used together with
+      # @param discount_codes [Array<String>, nil] Stacked discount codes to apply, in order. Max 20.
       #
-      # @param discount_codes [Array<String>, nil] Body param: Stacked discount codes to apply, in order. Max 20.
+      # @param feature_flags [Dodopayments::Models::CheckoutSessionFlags]
       #
-      # @param feature_flags [Dodopayments::Models::CheckoutSessionFlags] Body param
+      # @param force_3ds [Boolean, nil] Override merchant default 3DS behaviour for this session
       #
-      # @param force_3ds [Boolean, nil] Body param: Override merchant default 3DS behaviour for this session
+      # @param mandate_min_amount_inr_paise [Integer, nil] Override the merchant-level mandate floor (in INR paise) for INR
       #
-      # @param mandate_min_amount_inr_paise [Integer, nil] Body param: Override the merchant-level mandate floor (in INR paise) for INR
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Additional metadata associated with the payment. Defaults to empty if not provid
       #
-      # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Body param: Additional metadata associated with the payment. Defaults to empty i
+      # @param minimal_address [Boolean, nil] If true, only zipcode is required when confirm is true; other address fields rem
       #
-      # @param minimal_address [Boolean, nil] Body param: If true, only zipcode is required when confirm is true; other addres
+      # @param payment_method_id [String, nil] Optional payment method ID to use for this checkout session.
       #
-      # @param payment_method_id [String, nil] Body param: Optional payment method ID to use for this checkout session.
+      # @param product_collection_id [String, nil] Product collection ID for collection-based checkout flow
       #
-      # @param product_collection_id [String, nil] Body param: Product collection ID for collection-based checkout flow
+      # @param return_url [String, nil] The url to redirect after payment failure or success.
       #
-      # @param return_url [String, nil] Body param: The url to redirect after payment failure or success.
+      # @param short_link [Boolean] If true, returns a shortened checkout URL.
       #
-      # @param short_link [Boolean] Body param: If true, returns a shortened checkout URL.
+      # @param show_saved_payment_methods [Boolean] Display saved payment methods of a returning customer False by default
       #
-      # @param show_saved_payment_methods [Boolean] Body param: Display saved payment methods of a returning customer False by defau
+      # @param subscription_data [Dodopayments::Models::SubscriptionData, nil]
       #
-      # @param subscription_data [Dodopayments::Models::SubscriptionData, nil] Body param
-      #
-      # @param tax_id [String, nil] Body param: Tax ID for the customer (e.g. VAT number). Requires billing_address
+      # @param tax_id [String, nil] Tax ID for the customer (e.g. VAT number). Requires billing_address with country
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -151,14 +149,11 @@ module Dodopayments
       #
       # @see Dodopayments::Models::CheckoutSessionPreviewParams
       def preview(params)
-        query_params = [:locale]
         parsed, options = Dodopayments::CheckoutSessionPreviewParams.dump_request(params)
-        query = Dodopayments::Internal::Util.encode_query_params(parsed.slice(*query_params))
         @client.request(
           method: :post,
           path: "checkouts/preview",
-          query: query,
-          body: parsed.except(*query_params),
+          body: parsed,
           model: Dodopayments::Models::CheckoutSessionPreviewResponse,
           options: options
         )

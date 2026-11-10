@@ -9,6 +9,17 @@ module Dodopayments
       #   @return [String, nil]
       optional :force_language, String, nil?: true
 
+      # @!attribute payment_method_layout
+      #   How a single-page checkout shows the payment methods. You can set it only when
+      #   `feature_flags.single_page` is true.
+      #
+      #   Default is `accordion`.
+      #
+      #   @return [Symbol, Dodopayments::Models::CheckoutSessionCustomization::PaymentMethodLayout, nil]
+      optional :payment_method_layout,
+               enum: -> { Dodopayments::CheckoutSessionCustomization::PaymentMethodLayout },
+               nil?: true
+
       # @!attribute show_on_demand_tag
       #   Show on demand tag
       #
@@ -39,11 +50,13 @@ module Dodopayments
       #   @return [Dodopayments::Models::ThemeConfig, nil]
       optional :theme_config, -> { Dodopayments::ThemeConfig }, nil?: true
 
-      # @!method initialize(force_language: nil, show_on_demand_tag: nil, show_order_details: nil, theme: nil, theme_config: nil)
+      # @!method initialize(force_language: nil, payment_method_layout: nil, show_on_demand_tag: nil, show_order_details: nil, theme: nil, theme_config: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::CheckoutSessionCustomization} for more details.
       #
       #   @param force_language [String, nil] Force the checkout interface to render in a specific language (e.g. `en`, `es`)
+      #
+      #   @param payment_method_layout [Symbol, Dodopayments::Models::CheckoutSessionCustomization::PaymentMethodLayout, nil] How a single-page checkout shows the payment methods. You can set it only
       #
       #   @param show_on_demand_tag [Boolean] Show on demand tag
       #
@@ -52,6 +65,22 @@ module Dodopayments
       #   @param theme [Symbol, Dodopayments::Models::CheckoutSessionCustomization::Theme, nil] Theme of the page (determines which mode - light/dark/system - to use)
       #
       #   @param theme_config [Dodopayments::Models::ThemeConfig, nil] Optional custom theme configuration with colors for light and dark modes
+
+      # How a single-page checkout shows the payment methods. You can set it only when
+      # `feature_flags.single_page` is true.
+      #
+      # Default is `accordion`.
+      #
+      # @see Dodopayments::Models::CheckoutSessionCustomization#payment_method_layout
+      module PaymentMethodLayout
+        extend Dodopayments::Internal::Type::Enum
+
+        ACCORDION = :accordion
+        TABS = :tabs
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
 
       # Theme of the page (determines which mode - light/dark/system - to use)
       #

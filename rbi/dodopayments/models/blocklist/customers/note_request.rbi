@@ -14,13 +14,13 @@ module Dodopayments
             end
 
           sig { returns(String) }
-          attr_accessor :note
+          attr_accessor :text
 
-          sig { params(note: String).returns(T.attached_class) }
-          def self.new(note:)
+          sig { params(text: String).returns(T.attached_class) }
+          def self.new(text:)
           end
 
-          sig { override.returns({ note: String }) }
+          sig { override.returns({ text: String }) }
           def to_hash
           end
         end

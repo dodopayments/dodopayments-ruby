@@ -1,0 +1,16 @@
+module Dodopayments
+  module Models
+    type invoice_create_hosted_link_response =
+      { expires_at: Time, hosted_url: String }
+
+    class InvoiceCreateHostedLinkResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor expires_at: Time
+
+      attr_accessor hosted_url: String
+
+      def initialize: (expires_at: Time, hosted_url: String) -> void
+
+      def to_hash: -> { expires_at: Time, hosted_url: String }
+    end
+  end
+end

@@ -1,8 +1,6 @@
 module Dodopayments
   module Resources
     class Products
-      attr_reader translations: Dodopayments::Resources::Products::Translations
-
       attr_reader images: Dodopayments::Resources::Products::Images
 
       attr_reader short_links: Dodopayments::Resources::Products::ShortLinks
@@ -30,7 +28,6 @@ module Dodopayments
 
       def retrieve: (
         String id,
-        ?locale: String,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Product
 
@@ -58,7 +55,6 @@ module Dodopayments
       def list: (
         ?archived: bool,
         ?brand_id: String,
-        ?locale: String,
         ?page_number: Integer,
         ?page_size: Integer,
         ?recurring: bool,

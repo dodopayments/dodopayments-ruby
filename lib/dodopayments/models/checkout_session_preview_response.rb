@@ -455,6 +455,13 @@ module Dodopayments
           #   @return [Integer]
           required :discounted_price, Integer
 
+          # @!attribute max_quantity_reached
+          #   True when one more unit of this addon puts the cart above the cart value limit
+          #   of the business. False when the limit does not apply to the business.
+          #
+          #   @return [Boolean]
+          required :max_quantity_reached, Dodopayments::Internal::Type::Boolean
+
           # @!attribute name
           #
           #   @return [String]
@@ -518,7 +525,7 @@ module Dodopayments
           #   @return [Integer, nil]
           optional :tax, Integer, nil?: true
 
-          # @!method initialize(addon_id:, currency:, discounted_price:, name:, og_currency:, og_price:, quantity:, single_quantity_price:, tax_category:, tax_inclusive:, tax_rate:, description: nil, discount_amount: nil, tax: nil)
+          # @!method initialize(addon_id:, currency:, discounted_price:, max_quantity_reached:, name:, og_currency:, og_price:, quantity:, single_quantity_price:, tax_category:, tax_inclusive:, tax_rate:, description: nil, discount_amount: nil, tax: nil)
           #   Some parameter documentations has been truncated, see
           #   {Dodopayments::Models::CheckoutSessionPreviewResponse::ProductCart::Addon} for
           #   more details.
@@ -528,6 +535,8 @@ module Dodopayments
           #   @param currency [Symbol, Dodopayments::Models::Currency]
           #
           #   @param discounted_price [Integer]
+          #
+          #   @param max_quantity_reached [Boolean] True when one more unit of this addon puts the cart above the cart value limit o
           #
           #   @param name [String]
           #

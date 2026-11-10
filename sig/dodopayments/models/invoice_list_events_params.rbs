@@ -1,0 +1,23 @@
+module Dodopayments
+  module Models
+    type invoice_list_events_params =
+      { invoice_id: String } & Dodopayments::Internal::Type::request_parameters
+
+    class InvoiceListEventsParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor invoice_id: String
+
+      def initialize: (
+        invoice_id: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        invoice_id: String,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

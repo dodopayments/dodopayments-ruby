@@ -47,6 +47,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
       response => {
         addons: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::AddonCartResponseItem]),
         billing: Dodopayments::BillingAddress,
+        billing_mode: Dodopayments::Subscription::BillingMode,
         brand_id: String,
         cancel_at_next_billing_date: Dodopayments::Internal::Type::Boolean,
         created_at: Time,
@@ -75,6 +76,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         cancellation_feedback: Dodopayments::CancellationFeedback | nil,
         cancelled_at: Time | nil,
         cancelled_by: Dodopayments::SubscriptionCancelledBy | nil,
+        collection_method: Dodopayments::CollectionMethod | nil,
         custom_field_responses: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::CustomFieldResponse]) | nil,
         customer_business_name: String | nil,
         discount_cycles_remaining: Integer | nil,
@@ -83,6 +85,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         expires_at: Time | nil,
         paused_at: Time | nil,
         payment_method_id: String | nil,
+        payment_terms_days: Integer | nil,
         scheduled_change: Dodopayments::ScheduledPlanChange | nil,
         tax_id: String | nil,
         trial_amount: Integer | nil
@@ -101,6 +104,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
       response => {
         addons: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::AddonCartResponseItem]),
         billing: Dodopayments::BillingAddress,
+        billing_mode: Dodopayments::Subscription::BillingMode,
         brand_id: String,
         cancel_at_next_billing_date: Dodopayments::Internal::Type::Boolean,
         created_at: Time,
@@ -129,6 +133,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         cancellation_feedback: Dodopayments::CancellationFeedback | nil,
         cancelled_at: Time | nil,
         cancelled_by: Dodopayments::SubscriptionCancelledBy | nil,
+        collection_method: Dodopayments::CollectionMethod | nil,
         custom_field_responses: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::CustomFieldResponse]) | nil,
         customer_business_name: String | nil,
         discount_cycles_remaining: Integer | nil,
@@ -137,6 +142,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         expires_at: Time | nil,
         paused_at: Time | nil,
         payment_method_id: String | nil,
+        payment_terms_days: Integer | nil,
         scheduled_change: Dodopayments::ScheduledPlanChange | nil,
         tax_id: String | nil,
         trial_amount: Integer | nil
@@ -161,6 +167,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
     assert_pattern do
       row => {
         billing: Dodopayments::BillingAddress,
+        billing_mode: Dodopayments::Models::SubscriptionListResponse::BillingMode,
         cancel_at_next_billing_date: Dodopayments::Internal::Type::Boolean,
         created_at: Time,
         currency: Dodopayments::Currency,
@@ -184,11 +191,13 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         trial_period_days: Integer,
         cancelled_at: Time | nil,
         cancelled_by: Dodopayments::SubscriptionCancelledBy | nil,
+        collection_method: Dodopayments::CollectionMethod | nil,
         customer_business_name: String | nil,
         discount_cycles_remaining: Integer | nil,
         discount_id: String | nil,
         paused_at: Time | nil,
         payment_method_id: String | nil,
+        payment_terms_days: Integer | nil,
         product_name: String | nil,
         scheduled_change: Dodopayments::ScheduledPlanChange | nil,
         tax_id: String | nil,
@@ -222,8 +231,10 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
       response => {
         client_secret: String | nil,
         expires_on: Time | nil,
+        invoice_id: String | nil,
         payment_id: String | nil,
-        payment_link: String | nil
+        payment_link: String | nil,
+        refund_id: String | nil
       }
     end
   end
@@ -274,6 +285,57 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
       response => {
         items: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::SubscriptionRetrieveCreditUsageResponse::Item]),
         subscription_id: String
+      }
+    end
+  end
+
+  def test_retrieve_upcoming_invoice
+    response = @dodo_payments.subscriptions.retrieve_upcoming_invoice("subscription_id")
+
+    assert_pattern do
+      response => Dodopayments::Invoice
+    end
+
+    assert_pattern do
+      response => {
+        allowed_actions: ^(Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::Invoice::AllowedAction]),
+        amount_due: Integer,
+        amount_paid: Integer,
+        amount_refunded: Integer,
+        billing_mode: Dodopayments::Invoice::BillingMode,
+        business_id: String,
+        created_at: Time,
+        credits: Integer,
+        currency: Dodopayments::Currency,
+        customer: Dodopayments::Invoice::Customer,
+        discount_ids: ^(Dodopayments::Internal::Type::ArrayOf[String]),
+        editable_fields: ^(Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::Invoice::EditableField]),
+        frequency: Dodopayments::Invoice::Frequency,
+        invoice_id: String,
+        metadata: Dodopayments::Internal::Type::Unknown,
+        refund_ids: ^(Dodopayments::Internal::Type::ArrayOf[String]),
+        retry_count: Integer,
+        row_version: Integer,
+        status: Dodopayments::InvoiceStatus,
+        subscription_ids: ^(Dodopayments::Internal::Type::ArrayOf[String]),
+        tags: ^(Dodopayments::Internal::Type::ArrayOf[enum: Dodopayments::Invoice::Tag]),
+        tax: Integer,
+        total_amount: Integer,
+        collection_method: Dodopayments::CollectionMethod | nil,
+        due_at: Time | nil,
+        dunning_state: Dodopayments::DunningState | nil,
+        finalized_at: Time | nil,
+        hosted_url: String | nil,
+        lines: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::InvoiceLine]) | nil,
+        memo: String | nil,
+        next_reminder_at: Time | nil,
+        next_retry_at: Time | nil,
+        payment_terms_days: Integer | nil,
+        payments: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Invoice::Payment]) | nil,
+        pdf_url: String | nil,
+        reminder_settings: Dodopayments::Invoice::ReminderSettings | nil,
+        review_deadline: Time | nil,
+        sent_at: Time | nil
       }
     end
   end

@@ -11,7 +11,7 @@ module Dodopayments
       # @!attribute data
       #   The latest data at the time of delivery attempt
       #
-      #   @return [Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::Payout, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout, Dodopayments::Models::WebhookPayload::Data::DunningAttempt, Dodopayments::Models::WebhookPayload::Data::EntitlementGrant]
+      #   @return [Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::Payout, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout, Dodopayments::Models::WebhookPayload::Data::DunningAttempt, Dodopayments::Models::WebhookPayload::Data::EntitlementGrant, Dodopayments::Models::WebhookPayload::Data::Invoice]
       required :data, union: -> { Dodopayments::WebhookPayload::Data }
 
       # @!attribute timestamp
@@ -33,7 +33,7 @@ module Dodopayments
       #
       #   @param business_id [String]
       #
-      #   @param data [Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::Payout, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout, Dodopayments::Models::WebhookPayload::Data::DunningAttempt, Dodopayments::Models::WebhookPayload::Data::EntitlementGrant] The latest data at the time of delivery attempt
+      #   @param data [Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::Payout, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout, Dodopayments::Models::WebhookPayload::Data::DunningAttempt, Dodopayments::Models::WebhookPayload::Data::EntitlementGrant, Dodopayments::Models::WebhookPayload::Data::Invoice] The latest data at the time of delivery attempt
       #
       #   @param timestamp [Time] The timestamp of when the event occurred (not necessarily the same of when it wa
       #
@@ -72,6 +72,9 @@ module Dodopayments
         # Detailed view of a single entitlement grant: who it's for, its
         # lifecycle state, and any integration-specific delivery payload.
         variant :EntitlementGrant, -> { Dodopayments::WebhookPayload::Data::EntitlementGrant }
+
+        # An invoice-led invoice. Every read and every `invoice.*` webhook uses this schema.
+        variant :Invoice, -> { Dodopayments::WebhookPayload::Data::Invoice }
 
         class Payment < Dodopayments::Models::Payment
           # @!attribute payload_type
@@ -575,8 +578,21 @@ module Dodopayments
           #   @param payload_type [Symbol, :EntitlementGrant]
         end
 
+        class Invoice < Dodopayments::Models::Invoice
+          # @!attribute payload_type
+          #
+          #   @return [Symbol, :Invoice]
+          required :payload_type, const: :Invoice
+
+          # @!method initialize(payload_type: :Invoice)
+          #   An invoice-led invoice. Every read and every `invoice.*` webhook uses this
+          #   schema.
+          #
+          #   @param payload_type [Symbol, :Invoice]
+        end
+
         # @!method self.variants
-        #   @return [Array(Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::Payout, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout, Dodopayments::Models::WebhookPayload::Data::DunningAttempt, Dodopayments::Models::WebhookPayload::Data::EntitlementGrant)]
+        #   @return [Array(Dodopayments::Models::WebhookPayload::Data::Payment, Dodopayments::Models::WebhookPayload::Data::Subscription, Dodopayments::Models::WebhookPayload::Data::Refund, Dodopayments::Models::WebhookPayload::Data::Dispute, Dodopayments::Models::WebhookPayload::Data::LicenseKey, Dodopayments::Models::WebhookPayload::Data::Payout, Dodopayments::Models::WebhookPayload::Data::CreditLedgerEntry, Dodopayments::Models::WebhookPayload::Data::CreditBalanceLow, Dodopayments::Models::WebhookPayload::Data::AbandonedCheckout, Dodopayments::Models::WebhookPayload::Data::DunningAttempt, Dodopayments::Models::WebhookPayload::Data::EntitlementGrant, Dodopayments::Models::WebhookPayload::Data::Invoice)]
       end
     end
   end

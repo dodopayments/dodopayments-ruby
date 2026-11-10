@@ -1,0 +1,50 @@
+module Dodopayments
+  module Models
+    type invoice_event =
+      {
+        actor: String,
+        created_at: Time,
+        event_id: String,
+        event_type: String,
+        payload: top,
+        row_version: Integer,
+        actor_email: String?
+      }
+
+    class InvoiceEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor actor: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor event_id: String
+
+      attr_accessor event_type: String
+
+      attr_accessor payload: top
+
+      attr_accessor row_version: Integer
+
+      attr_accessor actor_email: String?
+
+      def initialize: (
+        actor: String,
+        created_at: Time,
+        event_id: String,
+        event_type: String,
+        payload: top,
+        row_version: Integer,
+        ?actor_email: String?
+      ) -> void
+
+      def to_hash: -> {
+        actor: String,
+        created_at: Time,
+        event_id: String,
+        event_type: String,
+        payload: top,
+        row_version: Integer,
+        actor_email: String?
+      }
+    end
+  end
+end
