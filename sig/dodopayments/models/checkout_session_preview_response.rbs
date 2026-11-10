@@ -308,6 +308,7 @@ module Dodopayments
             addon_id: String,
             currency: Dodopayments::Models::currency,
             discounted_price: Integer,
+            max_quantity_reached: bool,
             name: String,
             og_currency: Dodopayments::Models::currency,
             og_price: Integer,
@@ -327,6 +328,8 @@ module Dodopayments
           attr_accessor currency: Dodopayments::Models::currency
 
           attr_accessor discounted_price: Integer
+
+          attr_accessor max_quantity_reached: bool
 
           attr_accessor name: String
 
@@ -354,6 +357,7 @@ module Dodopayments
             addon_id: String,
             currency: Dodopayments::Models::currency,
             discounted_price: Integer,
+            max_quantity_reached: bool,
             name: String,
             og_currency: Dodopayments::Models::currency,
             og_price: Integer,
@@ -371,6 +375,7 @@ module Dodopayments
             addon_id: String,
             currency: Dodopayments::Models::currency,
             discounted_price: Integer,
+            max_quantity_reached: bool,
             name: String,
             og_currency: Dodopayments::Models::currency,
             og_price: Integer,

@@ -1,0 +1,47 @@
+module Dodopayments
+  module Models
+    type invoice_preview_existing_params =
+      {
+        invoice_id: String,
+        format_: Dodopayments::Models::InvoicePreviewExistingParams::format_
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class InvoicePreviewExistingParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor invoice_id: String
+
+      attr_reader format_: Dodopayments::Models::InvoicePreviewExistingParams::format_?
+
+      def format_=: (
+        Dodopayments::Models::InvoicePreviewExistingParams::format_
+      ) -> Dodopayments::Models::InvoicePreviewExistingParams::format_
+
+      def initialize: (
+        invoice_id: String,
+        ?format_: Dodopayments::Models::InvoicePreviewExistingParams::format_,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        invoice_id: String,
+        format_: Dodopayments::Models::InvoicePreviewExistingParams::format_,
+        request_options: Dodopayments::RequestOptions
+      }
+
+      type format_ = :json | :pdf | :email
+
+      module Format
+        extend Dodopayments::Internal::Type::Enum
+
+        JSON: :json
+        PDF: :pdf
+        EMAIL: :email
+
+        def self?.values: -> ::Array[Dodopayments::Models::InvoicePreviewExistingParams::format_]
+      end
+    end
+  end
+end

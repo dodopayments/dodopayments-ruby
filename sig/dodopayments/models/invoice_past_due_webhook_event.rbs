@@ -1,0 +1,35 @@
+module Dodopayments
+  module Models
+    type invoice_past_due_webhook_event =
+      {
+        business_id: String,
+        data: Dodopayments::Invoice,
+        timestamp: Time,
+        type: :"invoice.past_due"
+      }
+
+    class InvoicePastDueWebhookEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::Invoice
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: :"invoice.past_due"
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::Invoice,
+        timestamp: Time,
+        ?type: :"invoice.past_due"
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::Invoice,
+        timestamp: Time,
+        type: :"invoice.past_due"
+      }
+    end
+  end
+end

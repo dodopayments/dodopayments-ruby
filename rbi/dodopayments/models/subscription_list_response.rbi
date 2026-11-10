@@ -18,6 +18,14 @@ module Dodopayments
       sig { params(billing: Dodopayments::BillingAddress::OrHash).void }
       attr_writer :billing
 
+      # `invoice_led` when invoices bill the subscription. `normal` otherwise.
+      sig do
+        returns(
+          Dodopayments::Models::SubscriptionListResponse::BillingMode::TaggedSymbol
+        )
+      end
+      attr_accessor :billing_mode
+
       # Indicates if the subscription will cancel at the next billing date
       sig { returns(T::Boolean) }
       attr_accessor :cancel_at_next_billing_date
@@ -130,6 +138,10 @@ module Dodopayments
       end
       attr_writer :cancelled_by
 
+      # How an invoice-led subscription collects each invoice. `null` for `normal`.
+      sig { returns(T.nilable(Dodopayments::CollectionMethod::TaggedSymbol)) }
+      attr_accessor :collection_method
+
       # Business / legal name associated with the tax id (B2B). When set this is used on
       # the invoice in place of the customer's personal name.
       sig { returns(T.nilable(String)) }
@@ -151,6 +163,10 @@ module Dodopayments
       # Saved payment method id used for recurring charges
       sig { returns(T.nilable(String)) }
       attr_accessor :payment_method_id
+
+      # Days from the invoice date to the due date. `null` for `normal`.
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :payment_terms_days
 
       # Name of the product associated with this subscription
       sig { returns(T.nilable(String)) }
@@ -181,6 +197,8 @@ module Dodopayments
       sig do
         params(
           billing: Dodopayments::BillingAddress::OrHash,
+          billing_mode:
+            Dodopayments::Models::SubscriptionListResponse::BillingMode::OrSymbol,
           cancel_at_next_billing_date: T::Boolean,
           created_at: Time,
           currency: Dodopayments::Currency::OrSymbol,
@@ -208,11 +226,14 @@ module Dodopayments
           cancelled_at: T.nilable(Time),
           cancelled_by:
             T.nilable(Dodopayments::SubscriptionCancelledBy::OrHash),
+          collection_method:
+            T.nilable(Dodopayments::CollectionMethod::OrSymbol),
           customer_business_name: T.nilable(String),
           discount_cycles_remaining: T.nilable(Integer),
           discount_id: T.nilable(String),
           paused_at: T.nilable(Time),
           payment_method_id: T.nilable(String),
+          payment_terms_days: T.nilable(Integer),
           product_name: T.nilable(String),
           scheduled_change:
             T.nilable(Dodopayments::ScheduledPlanChange::OrHash),
@@ -223,6 +244,8 @@ module Dodopayments
       def self.new(
         # Billing address details for payments
         billing:,
+        # `invoice_led` when invoices bill the subscription. `normal` otherwise.
+        billing_mode:,
         # Indicates if the subscription will cancel at the next billing date
         cancel_at_next_billing_date:,
         # Timestamp when the subscription was created
@@ -273,6 +296,8 @@ module Dodopayments
         # The caller that cancelled the subscription or scheduled its cancel. `null` when
         # no caller is known, for example when the system cancelled the subscription.
         cancelled_by: nil,
+        # How an invoice-led subscription collects each invoice. `null` for `normal`.
+        collection_method: nil,
         # Business / legal name associated with the tax id (B2B). When set this is used on
         # the invoice in place of the customer's personal name.
         customer_business_name: nil,
@@ -285,6 +310,8 @@ module Dodopayments
         paused_at: nil,
         # Saved payment method id used for recurring charges
         payment_method_id: nil,
+        # Days from the invoice date to the due date. `null` for `normal`.
+        payment_terms_days: nil,
         # Name of the product associated with this subscription
         product_name: nil,
         # Scheduled plan change details, if any
@@ -302,6 +329,8 @@ module Dodopayments
         override.returns(
           {
             billing: Dodopayments::BillingAddress,
+            billing_mode:
+              Dodopayments::Models::SubscriptionListResponse::BillingMode::TaggedSymbol,
             cancel_at_next_billing_date: T::Boolean,
             created_at: Time,
             currency: Dodopayments::Currency::TaggedSymbol,
@@ -330,11 +359,14 @@ module Dodopayments
             trial_period_days: Integer,
             cancelled_at: T.nilable(Time),
             cancelled_by: T.nilable(Dodopayments::SubscriptionCancelledBy),
+            collection_method:
+              T.nilable(Dodopayments::CollectionMethod::TaggedSymbol),
             customer_business_name: T.nilable(String),
             discount_cycles_remaining: T.nilable(Integer),
             discount_id: T.nilable(String),
             paused_at: T.nilable(Time),
             payment_method_id: T.nilable(String),
+            payment_terms_days: T.nilable(Integer),
             product_name: T.nilable(String),
             scheduled_change: T.nilable(Dodopayments::ScheduledPlanChange),
             tax_id: T.nilable(String),
@@ -343,6 +375,41 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      # `invoice_led` when invoices bill the subscription. `normal` otherwise.
+      module BillingMode
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(
+              Symbol,
+              Dodopayments::Models::SubscriptionListResponse::BillingMode
+            )
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        NORMAL =
+          T.let(
+            :normal,
+            Dodopayments::Models::SubscriptionListResponse::BillingMode::TaggedSymbol
+          )
+        INVOICE_LED =
+          T.let(
+            :invoice_led,
+            Dodopayments::Models::SubscriptionListResponse::BillingMode::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Dodopayments::Models::SubscriptionListResponse::BillingMode::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
       end
 
       class Discount < Dodopayments::Internal::Type::BaseModel

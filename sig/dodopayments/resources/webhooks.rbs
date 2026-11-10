@@ -73,6 +73,14 @@ module Dodopayments
       | Dodopayments::EntitlementGrantDeliveredWebhookEvent
       | Dodopayments::EntitlementGrantFailedWebhookEvent
       | Dodopayments::EntitlementGrantRevokedWebhookEvent
+      | Dodopayments::InvoiceFinalizedWebhookEvent
+      | Dodopayments::InvoiceMarkedUncollectableWebhookEvent
+      | Dodopayments::InvoicePaidWebhookEvent
+      | Dodopayments::InvoicePastDueWebhookEvent
+      | Dodopayments::InvoicePaymentFailedWebhookEvent
+      | Dodopayments::InvoiceReopenedWebhookEvent
+      | Dodopayments::InvoiceSentWebhookEvent
+      | Dodopayments::InvoiceVoidedWebhookEvent
       | Dodopayments::LicenseKeyCreatedWebhookEvent
       | Dodopayments::PaymentCancelledWebhookEvent
       | Dodopayments::PaymentFailedWebhookEvent
@@ -126,6 +134,14 @@ module Dodopayments
       | Dodopayments::EntitlementGrantDeliveredWebhookEvent
       | Dodopayments::EntitlementGrantFailedWebhookEvent
       | Dodopayments::EntitlementGrantRevokedWebhookEvent
+      | Dodopayments::InvoiceFinalizedWebhookEvent
+      | Dodopayments::InvoiceMarkedUncollectableWebhookEvent
+      | Dodopayments::InvoicePaidWebhookEvent
+      | Dodopayments::InvoicePastDueWebhookEvent
+      | Dodopayments::InvoicePaymentFailedWebhookEvent
+      | Dodopayments::InvoiceReopenedWebhookEvent
+      | Dodopayments::InvoiceSentWebhookEvent
+      | Dodopayments::InvoiceVoidedWebhookEvent
       | Dodopayments::LicenseKeyCreatedWebhookEvent
       | Dodopayments::PaymentCancelledWebhookEvent
       | Dodopayments::PaymentFailedWebhookEvent

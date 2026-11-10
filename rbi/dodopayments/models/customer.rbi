@@ -51,10 +51,6 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :phone_number
 
-      # The language of the customer emails. `null` gives English.
-      sig { returns(T.nilable(Dodopayments::Locale::TaggedSymbol)) }
-      attr_accessor :preferred_locale
-
       sig do
         params(
           business_id: String,
@@ -65,8 +61,7 @@ module Dodopayments
           blocked_at: T.nilable(Time),
           blocklist_entry_id: T.nilable(String),
           metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
-          phone_number: T.nilable(String),
-          preferred_locale: T.nilable(Dodopayments::Locale::OrSymbol)
+          phone_number: T.nilable(String)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -83,9 +78,7 @@ module Dodopayments
         blocklist_entry_id: nil,
         # Additional metadata for the customer
         metadata: nil,
-        phone_number: nil,
-        # The language of the customer emails. `null` gives English.
-        preferred_locale: nil
+        phone_number: nil
       )
       end
 
@@ -100,8 +93,7 @@ module Dodopayments
             blocked_at: T.nilable(Time),
             blocklist_entry_id: T.nilable(String),
             metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
-            phone_number: T.nilable(String),
-            preferred_locale: T.nilable(Dodopayments::Locale::TaggedSymbol)
+            phone_number: T.nilable(String)
           }
         )
       end

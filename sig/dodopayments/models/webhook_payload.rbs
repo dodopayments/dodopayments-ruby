@@ -43,6 +43,7 @@ module Dodopayments
         | Dodopayments::WebhookPayload::Data::AbandonedCheckout
         | Dodopayments::WebhookPayload::Data::DunningAttempt
         | Dodopayments::WebhookPayload::Data::EntitlementGrant
+        | Dodopayments::WebhookPayload::Data::Invoice
 
       module Data
         extend Dodopayments::Internal::Type::Union
@@ -473,6 +474,18 @@ module Dodopayments
           def initialize: (?payload_type: :EntitlementGrant) -> void
 
           def to_hash: -> { payload_type: :EntitlementGrant }
+        end
+
+        type invoice = { payload_type: :Invoice }
+
+        class Invoice < Dodopayments::Models::Invoice
+          def payload_type: -> :Invoice
+
+          def payload_type=: (:Invoice _) -> :Invoice
+
+          def initialize: (?payload_type: :Invoice) -> void
+
+          def to_hash: -> { payload_type: :Invoice }
         end
 
         def self?.variants: -> ::Array[Dodopayments::Models::WebhookPayload::data]

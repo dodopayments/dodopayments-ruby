@@ -1,8 +1,6 @@
 module Dodopayments
   module Resources
     class Entitlements
-      attr_reader translations: Dodopayments::Resources::Entitlements::Translations
-
       attr_reader files: Dodopayments::Resources::Entitlements::Files
 
       attr_reader grants: Dodopayments::Resources::Entitlements::Grants
@@ -18,7 +16,6 @@ module Dodopayments
 
       def retrieve: (
         String id,
-        ?locale: String,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Entitlement
 
@@ -33,7 +30,6 @@ module Dodopayments
 
       def list: (
         ?integration_type: Dodopayments::Models::EntitlementListParams::integration_type,
-        ?locale: String,
         ?page_number: Integer,
         ?page_size: Integer,
         ?request_options: Dodopayments::request_opts

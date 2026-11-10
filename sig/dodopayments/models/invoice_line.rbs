@@ -1,0 +1,99 @@
+module Dodopayments
+  module Models
+    type invoice_line =
+      {
+        amount: Integer,
+        kind: Dodopayments::Models::InvoiceLine::kind,
+        quantity: Integer,
+        tax: Integer,
+        tax_inclusive: bool,
+        unit_amount: Integer,
+        addon_id: String?,
+        description: String?,
+        name: String?,
+        period_end: Time?,
+        period_start: Time?,
+        product_id: String?,
+        subscription_id: String?,
+        tax_rate: Integer?
+      }
+
+    class InvoiceLine < Dodopayments::Internal::Type::BaseModel
+      attr_accessor amount: Integer
+
+      attr_accessor kind: Dodopayments::Models::InvoiceLine::kind
+
+      attr_accessor quantity: Integer
+
+      attr_accessor tax: Integer
+
+      attr_accessor tax_inclusive: bool
+
+      attr_accessor unit_amount: Integer
+
+      attr_accessor addon_id: String?
+
+      attr_accessor description: String?
+
+      attr_accessor name: String?
+
+      attr_accessor period_end: Time?
+
+      attr_accessor period_start: Time?
+
+      attr_accessor product_id: String?
+
+      attr_accessor subscription_id: String?
+
+      attr_accessor tax_rate: Integer?
+
+      def initialize: (
+        amount: Integer,
+        kind: Dodopayments::Models::InvoiceLine::kind,
+        quantity: Integer,
+        tax: Integer,
+        tax_inclusive: bool,
+        unit_amount: Integer,
+        ?addon_id: String?,
+        ?description: String?,
+        ?name: String?,
+        ?period_end: Time?,
+        ?period_start: Time?,
+        ?product_id: String?,
+        ?subscription_id: String?,
+        ?tax_rate: Integer?
+      ) -> void
+
+      def to_hash: -> {
+        amount: Integer,
+        kind: Dodopayments::Models::InvoiceLine::kind,
+        quantity: Integer,
+        tax: Integer,
+        tax_inclusive: bool,
+        unit_amount: Integer,
+        addon_id: String?,
+        description: String?,
+        name: String?,
+        period_end: Time?,
+        period_start: Time?,
+        product_id: String?,
+        subscription_id: String?,
+        tax_rate: Integer?
+      }
+
+      type kind = :subscription | :addon | :meter | :credit_overage | :one_time
+
+      module Kind
+        extend Dodopayments::Internal::Type::Enum
+
+        SUBSCRIPTION: :subscription
+        ADDON: :addon
+        METER: :meter
+        CREDIT_OVERAGE: :credit_overage
+        ONE_TIME: :one_time
+
+        def self?.values: -> ::Array[Dodopayments::Models::InvoiceLine::kind]
+      end
+    end
+  end
+end

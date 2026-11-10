@@ -5,8 +5,7 @@ module Dodopayments
         email: String,
         name: String,
         metadata: Dodopayments::Models::metadata,
-        phone_number: String?,
-        preferred_locale: Dodopayments::Models::locale?
+        phone_number: String?
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -26,14 +25,11 @@ module Dodopayments
 
       attr_accessor phone_number: String?
 
-      attr_accessor preferred_locale: Dodopayments::Models::locale?
-
       def initialize: (
         email: String,
         name: String,
         ?metadata: Dodopayments::Models::metadata,
         ?phone_number: String?,
-        ?preferred_locale: Dodopayments::Models::locale?,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
@@ -42,7 +38,6 @@ module Dodopayments
         name: String,
         metadata: Dodopayments::Models::metadata,
         phone_number: String?,
-        preferred_locale: Dodopayments::Models::locale?,
         request_options: Dodopayments::RequestOptions
       }
     end

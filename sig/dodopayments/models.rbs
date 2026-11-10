@@ -17,8 +17,6 @@ module Dodopayments
 
   class AddonRetrieveParams = Dodopayments::Models::AddonRetrieveParams
 
-  module Addons = Dodopayments::Models::Addons
-
   class AddonUnarchiveParams = Dodopayments::Models::AddonUnarchiveParams
 
   class AddonUpdateImagesParams = Dodopayments::Models::AddonUpdateImagesParams
@@ -80,6 +78,8 @@ module Dodopayments
   class CheckoutSessionRetrieveParams = Dodopayments::Models::CheckoutSessionRetrieveParams
 
   class CheckoutSessionStatus = Dodopayments::Models::CheckoutSessionStatus
+
+  module CollectionMethod = Dodopayments::Models::CollectionMethod
 
   module Conjunction = Dodopayments::Models::Conjunction
 
@@ -209,6 +209,8 @@ module Dodopayments
 
   class DunningStartedWebhookEvent = Dodopayments::Models::DunningStartedWebhookEvent
 
+  module DunningState = Dodopayments::Models::DunningState
+
   class Entitlement = Dodopayments::Models::Entitlement
 
   class EntitlementCreateParams = Dodopayments::Models::EntitlementCreateParams
@@ -255,7 +257,65 @@ module Dodopayments
 
   module IntentStatus = Dodopayments::Models::IntentStatus
 
+  class Invoice = Dodopayments::Models::Invoice
+
+  class InvoiceAddNoteParams = Dodopayments::Models::InvoiceAddNoteParams
+
+  class InvoiceCreateHostedLinkParams = Dodopayments::Models::InvoiceCreateHostedLinkParams
+
+  class InvoiceCreateParams = Dodopayments::Models::InvoiceCreateParams
+
+  class InvoiceDeleteParams = Dodopayments::Models::InvoiceDeleteParams
+
+  class InvoiceDuplicateParams = Dodopayments::Models::InvoiceDuplicateParams
+
+  class InvoiceEvent = Dodopayments::Models::InvoiceEvent
+
+  class InvoiceFinalizedWebhookEvent = Dodopayments::Models::InvoiceFinalizedWebhookEvent
+
+  class InvoiceFinalizeParams = Dodopayments::Models::InvoiceFinalizeParams
+
+  class InvoiceLine = Dodopayments::Models::InvoiceLine
+
+  class InvoiceListEventsParams = Dodopayments::Models::InvoiceListEventsParams
+
+  class InvoiceListParams = Dodopayments::Models::InvoiceListParams
+
+  class InvoiceMarkedUncollectableWebhookEvent = Dodopayments::Models::InvoiceMarkedUncollectableWebhookEvent
+
+  class InvoiceMarkUncollectableParams = Dodopayments::Models::InvoiceMarkUncollectableParams
+
+  class InvoicePaidWebhookEvent = Dodopayments::Models::InvoicePaidWebhookEvent
+
+  class InvoicePastDueWebhookEvent = Dodopayments::Models::InvoicePastDueWebhookEvent
+
+  class InvoicePaymentFailedWebhookEvent = Dodopayments::Models::InvoicePaymentFailedWebhookEvent
+
+  class InvoicePreviewExistingParams = Dodopayments::Models::InvoicePreviewExistingParams
+
+  class InvoicePreviewParams = Dodopayments::Models::InvoicePreviewParams
+
+  class InvoiceReopenedWebhookEvent = Dodopayments::Models::InvoiceReopenedWebhookEvent
+
+  class InvoiceRetrieveParams = Dodopayments::Models::InvoiceRetrieveParams
+
+  class InvoiceRetryParams = Dodopayments::Models::InvoiceRetryParams
+
   module Invoices = Dodopayments::Models::Invoices
+
+  class InvoiceSendParams = Dodopayments::Models::InvoiceSendParams
+
+  class InvoiceSentWebhookEvent = Dodopayments::Models::InvoiceSentWebhookEvent
+
+  module InvoiceStatus = Dodopayments::Models::InvoiceStatus
+
+  class InvoiceUpdateDunningParams = Dodopayments::Models::InvoiceUpdateDunningParams
+
+  class InvoiceUpdateParams = Dodopayments::Models::InvoiceUpdateParams
+
+  class InvoiceVoidedWebhookEvent = Dodopayments::Models::InvoiceVoidedWebhookEvent
+
+  class InvoiceVoidParams = Dodopayments::Models::InvoiceVoidParams
 
   class LicenseActivateParams = Dodopayments::Models::LicenseActivateParams
 
@@ -287,10 +347,6 @@ module Dodopayments
 
   class LicenseValidateParams = Dodopayments::Models::LicenseValidateParams
 
-  module Locale = Dodopayments::Models::Locale
-
-  class LocaleInfo = Dodopayments::Models::LocaleInfo
-
   class ManualRetry = Dodopayments::Models::ManualRetry
 
   class ManualRetryState = Dodopayments::Models::ManualRetryState
@@ -317,13 +373,9 @@ module Dodopayments
 
   class MeterRetrieveParams = Dodopayments::Models::MeterRetrieveParams
 
-  module Meters = Dodopayments::Models::Meters
-
   class MeterUnarchiveParams = Dodopayments::Models::MeterUnarchiveParams
 
   class MeterUpdateParams = Dodopayments::Models::MeterUpdateParams
-
-  class MiscListLocalesParams = Dodopayments::Models::MiscListLocalesParams
 
   class MiscListSupportedCountriesParams = Dodopayments::Models::MiscListSupportedCountriesParams
 
@@ -488,6 +540,8 @@ module Dodopayments
   class SubscriptionRetrieveCreditUsageParams = Dodopayments::Models::SubscriptionRetrieveCreditUsageParams
 
   class SubscriptionRetrieveParams = Dodopayments::Models::SubscriptionRetrieveParams
+
+  class SubscriptionRetrieveUpcomingInvoiceParams = Dodopayments::Models::SubscriptionRetrieveUpcomingInvoiceParams
 
   class SubscriptionRetrieveUsageHistoryParams = Dodopayments::Models::SubscriptionRetrieveUsageHistoryParams
 
