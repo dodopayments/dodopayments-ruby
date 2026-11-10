@@ -3,6 +3,7 @@ module Dodopayments
     type checkout_session_customization =
       {
         force_language: String?,
+        payment_method_layout: Dodopayments::Models::CheckoutSessionCustomization::payment_method_layout?,
         show_on_demand_tag: bool,
         show_order_details: bool,
         theme: Dodopayments::Models::CheckoutSessionCustomization::theme?,
@@ -11,6 +12,8 @@ module Dodopayments
 
     class CheckoutSessionCustomization < Dodopayments::Internal::Type::BaseModel
       attr_accessor force_language: String?
+
+      attr_accessor payment_method_layout: Dodopayments::Models::CheckoutSessionCustomization::payment_method_layout?
 
       attr_reader show_on_demand_tag: bool?
 
@@ -26,6 +29,7 @@ module Dodopayments
 
       def initialize: (
         ?force_language: String?,
+        ?payment_method_layout: Dodopayments::Models::CheckoutSessionCustomization::payment_method_layout?,
         ?show_on_demand_tag: bool,
         ?show_order_details: bool,
         ?theme: Dodopayments::Models::CheckoutSessionCustomization::theme?,
@@ -34,11 +38,23 @@ module Dodopayments
 
       def to_hash: -> {
         force_language: String?,
+        payment_method_layout: Dodopayments::Models::CheckoutSessionCustomization::payment_method_layout?,
         show_on_demand_tag: bool,
         show_order_details: bool,
         theme: Dodopayments::Models::CheckoutSessionCustomization::theme?,
         theme_config: Dodopayments::ThemeConfig?
       }
+
+      type payment_method_layout = :accordion | :tabs
+
+      module PaymentMethodLayout
+        extend Dodopayments::Internal::Type::Enum
+
+        ACCORDION: :accordion
+        TABS: :tabs
+
+        def self?.values: -> ::Array[Dodopayments::Models::CheckoutSessionCustomization::payment_method_layout]
+      end
 
       type theme = :dark | :light | :system
 

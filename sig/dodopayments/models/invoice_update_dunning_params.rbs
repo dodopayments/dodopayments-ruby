@@ -1,0 +1,53 @@
+module Dodopayments
+  module Models
+    type invoice_update_dunning_params =
+      {
+        invoice_id: String,
+        action: Dodopayments::Models::InvoiceUpdateDunningParams::action,
+        if_match: String,
+        offsets_days: ::Array[Integer]?
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class InvoiceUpdateDunningParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor invoice_id: String
+
+      attr_accessor action: Dodopayments::Models::InvoiceUpdateDunningParams::action
+
+      attr_accessor if_match: String
+
+      attr_accessor offsets_days: ::Array[Integer]?
+
+      def initialize: (
+        invoice_id: String,
+        action: Dodopayments::Models::InvoiceUpdateDunningParams::action,
+        if_match: String,
+        ?offsets_days: ::Array[Integer]?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        invoice_id: String,
+        action: Dodopayments::Models::InvoiceUpdateDunningParams::action,
+        if_match: String,
+        offsets_days: ::Array[Integer]?,
+        request_options: Dodopayments::RequestOptions
+      }
+
+      type action = :pause | :resume | :reschedule
+
+      module Action
+        extend Dodopayments::Internal::Type::Enum
+
+        PAUSE: :pause
+        RESUME: :resume
+        RESCHEDULE: :reschedule
+
+        def self?.values: -> ::Array[Dodopayments::Models::InvoiceUpdateDunningParams::action]
+      end
+    end
+  end
+end

@@ -1,0 +1,14 @@
+module Dodopayments
+  module Models
+    type invoice_list_events_response =
+      { items: ::Array[Dodopayments::InvoiceEvent] }
+
+    class InvoiceListEventsResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor items: ::Array[Dodopayments::InvoiceEvent]
+
+      def initialize: (items: ::Array[Dodopayments::InvoiceEvent]) -> void
+
+      def to_hash: -> { items: ::Array[Dodopayments::InvoiceEvent] }
+    end
+  end
+end

@@ -1,0 +1,35 @@
+module Dodopayments
+  module Models
+    type invoice_sent_webhook_event =
+      {
+        business_id: String,
+        data: Dodopayments::Invoice,
+        timestamp: Time,
+        type: :"invoice.sent"
+      }
+
+    class InvoiceSentWebhookEvent < Dodopayments::Internal::Type::BaseModel
+      attr_accessor business_id: String
+
+      attr_accessor data: Dodopayments::Invoice
+
+      attr_accessor timestamp: Time
+
+      attr_accessor type: :"invoice.sent"
+
+      def initialize: (
+        business_id: String,
+        data: Dodopayments::Invoice,
+        timestamp: Time,
+        ?type: :"invoice.sent"
+      ) -> void
+
+      def to_hash: -> {
+        business_id: String,
+        data: Dodopayments::Invoice,
+        timestamp: Time,
+        type: :"invoice.sent"
+      }
+    end
+  end
+end

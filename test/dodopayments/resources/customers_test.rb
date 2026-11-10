@@ -20,8 +20,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         blocked_at: Time | nil,
         blocklist_entry_id: String | nil,
         metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]) | nil,
-        phone_number: String | nil,
-        preferred_locale: Dodopayments::Locale | nil
+        phone_number: String | nil
       }
     end
   end
@@ -43,8 +42,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         blocked_at: Time | nil,
         blocklist_entry_id: String | nil,
         metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]) | nil,
-        phone_number: String | nil,
-        preferred_locale: Dodopayments::Locale | nil
+        phone_number: String | nil
       }
     end
   end
@@ -66,8 +64,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         blocked_at: Time | nil,
         blocklist_entry_id: String | nil,
         metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]) | nil,
-        phone_number: String | nil,
-        preferred_locale: Dodopayments::Locale | nil
+        phone_number: String | nil
       }
     end
   end
@@ -96,8 +93,7 @@ class Dodopayments::Test::Resources::CustomersTest < Dodopayments::Test::Resourc
         blocked_at: Time | nil,
         blocklist_entry_id: String | nil,
         metadata: ^(Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem]) | nil,
-        phone_number: String | nil,
-        preferred_locale: Dodopayments::Locale | nil
+        phone_number: String | nil
       }
     end
   end

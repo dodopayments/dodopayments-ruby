@@ -3,9 +3,6 @@
 module Dodopayments
   module Test
     module Resources
-      module Addons
-      end
-
       module Blocklist
         module Customers
         end
@@ -29,9 +26,6 @@ module Dodopayments
       end
 
       module Invoices
-      end
-
-      module Meters
       end
 
       module Payouts
