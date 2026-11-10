@@ -90,7 +90,7 @@ module Dodopayments
 
       # @!attribute payment_terms
       #
-      #   @return [Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::Type, Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::UnionMember1, nil]
+      #   @return [Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::Net, nil]
       optional :payment_terms, union: -> { Dodopayments::InvoiceUpdateParams::PaymentTerms }, nil?: true
 
       # @!attribute review_required
@@ -135,7 +135,7 @@ module Dodopayments
       #
       #   @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
       #
-      #   @param payment_terms [Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::Type, Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::UnionMember1, nil]
+      #   @param payment_terms [Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::Net, nil]
       #
       #   @param review_required [Boolean, nil]
       #
@@ -297,11 +297,13 @@ module Dodopayments
       module PaymentTerms
         extend Dodopayments::Internal::Type::Union
 
-        variant -> { Dodopayments::InvoiceUpdateParams::PaymentTerms::Type }
+        discriminator :type
 
-        variant -> { Dodopayments::InvoiceUpdateParams::PaymentTerms::UnionMember1 }
+        variant :due_on_receipt, -> { Dodopayments::InvoiceUpdateParams::PaymentTerms::DueOnReceipt }
 
-        class Type < Dodopayments::Internal::Type::BaseModel
+        variant :net, -> { Dodopayments::InvoiceUpdateParams::PaymentTerms::Net }
+
+        class DueOnReceipt < Dodopayments::Internal::Type::BaseModel
           # @!attribute type
           #
           #   @return [Symbol, :due_on_receipt]
@@ -311,7 +313,7 @@ module Dodopayments
           #   @param type [Symbol, :due_on_receipt]
         end
 
-        class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+        class Net < Dodopayments::Internal::Type::BaseModel
           # @!attribute days
           #
           #   @return [Integer]
@@ -328,7 +330,7 @@ module Dodopayments
         end
 
         # @!method self.variants
-        #   @return [Array(Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::Type, Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::UnionMember1)]
+        #   @return [Array(Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::Net)]
       end
     end
   end

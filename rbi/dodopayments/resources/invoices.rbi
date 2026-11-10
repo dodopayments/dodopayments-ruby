@@ -35,8 +35,8 @@ module Dodopayments
           payment_terms:
             T.nilable(
               T.any(
-                Dodopayments::InvoiceCreateParams::PaymentTerms::Type::OrHash,
-                Dodopayments::InvoiceCreateParams::PaymentTerms::UnionMember1::OrHash
+                Dodopayments::InvoiceCreateParams::PaymentTerms::DueOnReceipt::OrHash,
+                Dodopayments::InvoiceCreateParams::PaymentTerms::Net::OrHash
               )
             ),
           review_required: T::Boolean,
@@ -133,8 +133,8 @@ module Dodopayments
           payment_terms:
             T.nilable(
               T.any(
-                Dodopayments::InvoiceUpdateParams::PaymentTerms::Type::OrHash,
-                Dodopayments::InvoiceUpdateParams::PaymentTerms::UnionMember1::OrHash
+                Dodopayments::InvoiceUpdateParams::PaymentTerms::DueOnReceipt::OrHash,
+                Dodopayments::InvoiceUpdateParams::PaymentTerms::Net::OrHash
               )
             ),
           review_required: T.nilable(T::Boolean),
@@ -381,8 +381,8 @@ module Dodopayments
           payment_terms:
             T.nilable(
               T.any(
-                Dodopayments::InvoicePreviewParams::PaymentTerms::Type::OrHash,
-                Dodopayments::InvoicePreviewParams::PaymentTerms::UnionMember1::OrHash
+                Dodopayments::InvoicePreviewParams::PaymentTerms::DueOnReceipt::OrHash,
+                Dodopayments::InvoicePreviewParams::PaymentTerms::Net::OrHash
               )
             ),
           review_required: T::Boolean,

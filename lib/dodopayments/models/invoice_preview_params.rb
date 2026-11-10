@@ -88,7 +88,7 @@ module Dodopayments
       # @!attribute payment_terms
       #   Do not send it with `due_at`.
       #
-      #   @return [Dodopayments::Models::InvoicePreviewParams::PaymentTerms::Type, Dodopayments::Models::InvoicePreviewParams::PaymentTerms::UnionMember1, nil]
+      #   @return [Dodopayments::Models::InvoicePreviewParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoicePreviewParams::PaymentTerms::Net, nil]
       optional :payment_terms, union: -> { Dodopayments::InvoicePreviewParams::PaymentTerms }, nil?: true
 
       # @!attribute review_required
@@ -132,7 +132,7 @@ module Dodopayments
       #
       #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
       #
-      #   @param payment_terms [Dodopayments::Models::InvoicePreviewParams::PaymentTerms::Type, Dodopayments::Models::InvoicePreviewParams::PaymentTerms::UnionMember1, nil] Do not send it with `due_at`.
+      #   @param payment_terms [Dodopayments::Models::InvoicePreviewParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoicePreviewParams::PaymentTerms::Net, nil] Do not send it with `due_at`.
       #
       #   @param review_required [Boolean] `true` keeps a renewal draft for review before it finalises.
       #
@@ -309,11 +309,13 @@ module Dodopayments
       module PaymentTerms
         extend Dodopayments::Internal::Type::Union
 
-        variant -> { Dodopayments::InvoicePreviewParams::PaymentTerms::Type }
+        discriminator :type
 
-        variant -> { Dodopayments::InvoicePreviewParams::PaymentTerms::UnionMember1 }
+        variant :due_on_receipt, -> { Dodopayments::InvoicePreviewParams::PaymentTerms::DueOnReceipt }
 
-        class Type < Dodopayments::Internal::Type::BaseModel
+        variant :net, -> { Dodopayments::InvoicePreviewParams::PaymentTerms::Net }
+
+        class DueOnReceipt < Dodopayments::Internal::Type::BaseModel
           # @!attribute type
           #
           #   @return [Symbol, :due_on_receipt]
@@ -323,7 +325,7 @@ module Dodopayments
           #   @param type [Symbol, :due_on_receipt]
         end
 
-        class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+        class Net < Dodopayments::Internal::Type::BaseModel
           # @!attribute days
           #
           #   @return [Integer]
@@ -340,7 +342,7 @@ module Dodopayments
         end
 
         # @!method self.variants
-        #   @return [Array(Dodopayments::Models::InvoicePreviewParams::PaymentTerms::Type, Dodopayments::Models::InvoicePreviewParams::PaymentTerms::UnionMember1)]
+        #   @return [Array(Dodopayments::Models::InvoicePreviewParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoicePreviewParams::PaymentTerms::Net)]
       end
     end
   end

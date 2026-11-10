@@ -250,15 +250,15 @@ module Dodopayments
       end
 
       type payment_terms =
-        Dodopayments::InvoicePreviewParams::PaymentTerms::Type
-        | Dodopayments::InvoicePreviewParams::PaymentTerms::UnionMember1
+        Dodopayments::InvoicePreviewParams::PaymentTerms::DueOnReceipt
+        | Dodopayments::InvoicePreviewParams::PaymentTerms::Net
 
       module PaymentTerms
         extend Dodopayments::Internal::Type::Union
 
-        type type_ = { type: :due_on_receipt }
+        type due_on_receipt = { type: :due_on_receipt }
 
-        class Type < Dodopayments::Internal::Type::BaseModel
+        class DueOnReceipt < Dodopayments::Internal::Type::BaseModel
           attr_accessor type: :due_on_receipt
 
           def initialize: (?type: :due_on_receipt) -> void
@@ -266,9 +266,9 @@ module Dodopayments
           def to_hash: -> { type: :due_on_receipt }
         end
 
-        type union_member1 = { days: Integer, type: :net }
+        type net = { days: Integer, type: :net }
 
-        class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+        class Net < Dodopayments::Internal::Type::BaseModel
           attr_accessor days: Integer
 
           attr_accessor type: :net

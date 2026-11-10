@@ -38,7 +38,7 @@ module Dodopayments
       #
       # @param metadata [Hash{Symbol=>String, Float, Boolean}] Body param: Arbitrary key-value metadata. Values can be string, integer, number,
       #
-      # @param payment_terms [Dodopayments::Models::InvoiceCreateParams::PaymentTerms::Type, Dodopayments::Models::InvoiceCreateParams::PaymentTerms::UnionMember1, nil] Body param: Do not send it with `due_at`.
+      # @param payment_terms [Dodopayments::Models::InvoiceCreateParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoiceCreateParams::PaymentTerms::Net, nil] Body param: Do not send it with `due_at`.
       #
       # @param review_required [Boolean] Body param: `true` keeps a renewal draft for review before it finalises.
       #
@@ -119,7 +119,7 @@ module Dodopayments
       #
       # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Body param: Arbitrary key-value metadata. Values can be string, integer, number,
       #
-      # @param payment_terms [Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::Type, Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::UnionMember1, nil] Body param
+      # @param payment_terms [Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::Net, nil] Body param
       #
       # @param review_required [Boolean, nil] Body param
       #
@@ -395,7 +395,7 @@ module Dodopayments
       #
       # @param metadata [Hash{Symbol=>String, Float, Boolean}] Body param: Arbitrary key-value metadata. Values can be string, integer, number,
       #
-      # @param payment_terms [Dodopayments::Models::InvoicePreviewParams::PaymentTerms::Type, Dodopayments::Models::InvoicePreviewParams::PaymentTerms::UnionMember1, nil] Body param: Do not send it with `due_at`.
+      # @param payment_terms [Dodopayments::Models::InvoicePreviewParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoicePreviewParams::PaymentTerms::Net, nil] Body param: Do not send it with `due_at`.
       #
       # @param review_required [Boolean] Body param: `true` keeps a renewal draft for review before it finalises.
       #

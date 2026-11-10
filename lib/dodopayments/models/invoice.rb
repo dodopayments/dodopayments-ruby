@@ -81,7 +81,7 @@ module Dodopayments
       #   How often the invoice lines bill. `mixed` covers several intervals, or one-time
       #   lines next to a plan.
       #
-      #   @return [Dodopayments::Models::Invoice::Frequency::Type, Dodopayments::Models::Invoice::Frequency::UnionMember1]
+      #   @return [Dodopayments::Models::Invoice::Frequency::OneTime, Dodopayments::Models::Invoice::Frequency::Recurring, Dodopayments::Models::Invoice::Frequency::Mixed]
       required :frequency, union: -> { Dodopayments::Invoice::Frequency }
 
       # @!attribute invoice_id
@@ -213,7 +213,7 @@ module Dodopayments
       # @!attribute reminder_settings
       #   `null` on a draft that keeps all reminder settings of the business.
       #
-      #   @return [Dodopayments::Models::Invoice::ReminderSettings::UnionMember0, Dodopayments::Models::Invoice::ReminderSettings::UnionMember1, nil]
+      #   @return [Dodopayments::Models::Invoice::ReminderSettings::Snapshot, Dodopayments::Models::Invoice::ReminderSettings::Override, nil]
       optional :reminder_settings, union: -> { Dodopayments::Invoice::ReminderSettings }, nil?: true
 
       # @!attribute review_deadline
@@ -258,7 +258,7 @@ module Dodopayments
       #
       #   @param editable_fields [Array<Symbol, Dodopayments::Models::Invoice::EditableField>] The fields that `PATCH` can change in the current status.
       #
-      #   @param frequency [Dodopayments::Models::Invoice::Frequency::Type, Dodopayments::Models::Invoice::Frequency::UnionMember1] How often the invoice lines bill. `mixed` covers several intervals, or one-time
+      #   @param frequency [Dodopayments::Models::Invoice::Frequency::OneTime, Dodopayments::Models::Invoice::Frequency::Recurring, Dodopayments::Models::Invoice::Frequency::Mixed] How often the invoice lines bill. `mixed` covers several intervals, or one-time
       #
       #   @param invoice_id [String]
       #
@@ -304,7 +304,7 @@ module Dodopayments
       #
       #   @param pdf_url [String, nil]
       #
-      #   @param reminder_settings [Dodopayments::Models::Invoice::ReminderSettings::UnionMember0, Dodopayments::Models::Invoice::ReminderSettings::UnionMember1, nil] `null` on a draft that keeps all reminder settings of the business.
+      #   @param reminder_settings [Dodopayments::Models::Invoice::ReminderSettings::Snapshot, Dodopayments::Models::Invoice::ReminderSettings::Override, nil] `null` on a draft that keeps all reminder settings of the business.
       #
       #   @param review_deadline [Time, nil] The time at which a draft that waits for review finalises.
       #
@@ -451,13 +451,15 @@ module Dodopayments
       module Frequency
         extend Dodopayments::Internal::Type::Union
 
-        variant -> { Dodopayments::Invoice::Frequency::Type }
+        discriminator :type
 
-        variant -> { Dodopayments::Invoice::Frequency::UnionMember1 }
+        variant :one_time, -> { Dodopayments::Invoice::Frequency::OneTime }
 
-        variant -> { Dodopayments::Invoice::Frequency::Type }
+        variant :recurring, -> { Dodopayments::Invoice::Frequency::Recurring }
 
-        class Type < Dodopayments::Internal::Type::BaseModel
+        variant :mixed, -> { Dodopayments::Invoice::Frequency::Mixed }
+
+        class OneTime < Dodopayments::Internal::Type::BaseModel
           # @!attribute type
           #
           #   @return [Symbol, :one_time]
@@ -467,7 +469,7 @@ module Dodopayments
           #   @param type [Symbol, :one_time]
         end
 
-        class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+        class Recurring < Dodopayments::Internal::Type::BaseModel
           # @!attribute count
           #
           #   @return [Integer]
@@ -492,8 +494,18 @@ module Dodopayments
           #   @param type [Symbol, :recurring]
         end
 
+        class Mixed < Dodopayments::Internal::Type::BaseModel
+          # @!attribute type
+          #
+          #   @return [Symbol, :mixed]
+          required :type, const: :mixed
+
+          # @!method initialize(type: :mixed)
+          #   @param type [Symbol, :mixed]
+        end
+
         # @!method self.variants
-        #   @return [Array(Dodopayments::Models::Invoice::Frequency::Type, Dodopayments::Models::Invoice::Frequency::UnionMember1, Dodopayments::Models::Invoice::Frequency::Type)]
+        #   @return [Array(Dodopayments::Models::Invoice::Frequency::OneTime, Dodopayments::Models::Invoice::Frequency::Recurring, Dodopayments::Models::Invoice::Frequency::Mixed)]
       end
 
       module Tag
@@ -554,13 +566,15 @@ module Dodopayments
       module ReminderSettings
         extend Dodopayments::Internal::Type::Union
 
+        discriminator :kind
+
         # The settings that finalise froze. The reminders run on them.
-        variant -> { Dodopayments::Invoice::ReminderSettings::UnionMember0 }
+        variant :snapshot, -> { Dodopayments::Invoice::ReminderSettings::Snapshot }
 
         # The changes of a draft. A `null` field keeps the business value at finalise.
-        variant -> { Dodopayments::Invoice::ReminderSettings::UnionMember1 }
+        variant :override, -> { Dodopayments::Invoice::ReminderSettings::Override }
 
-        class UnionMember0 < Dodopayments::Internal::Type::BaseModel
+        class Snapshot < Dodopayments::Internal::Type::BaseModel
           # @!attribute kind
           #
           #   @return [Symbol, :snapshot]
@@ -590,7 +604,7 @@ module Dodopayments
           #   @param kind [Symbol, :snapshot]
         end
 
-        class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+        class Override < Dodopayments::Internal::Type::BaseModel
           # @!attribute kind
           #
           #   @return [Symbol, :override]
@@ -621,7 +635,7 @@ module Dodopayments
         end
 
         # @!method self.variants
-        #   @return [Array(Dodopayments::Models::Invoice::ReminderSettings::UnionMember0, Dodopayments::Models::Invoice::ReminderSettings::UnionMember1)]
+        #   @return [Array(Dodopayments::Models::Invoice::ReminderSettings::Snapshot, Dodopayments::Models::Invoice::ReminderSettings::Override)]
       end
     end
   end

@@ -491,8 +491,8 @@ module Dodopayments
           returns(
             T.nilable(
               T.any(
-                Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type,
-                Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1
+                Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::DueOnReceipt,
+                Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Net
               )
             )
           )
@@ -508,8 +508,8 @@ module Dodopayments
             payment_terms:
               T.nilable(
                 T.any(
-                  Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type::OrHash,
-                  Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1::OrHash
+                  Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::DueOnReceipt::OrHash,
+                  Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Net::OrHash
                 )
               )
           ).returns(T.attached_class)
@@ -534,8 +534,8 @@ module Dodopayments
               payment_terms:
                 T.nilable(
                   T.any(
-                    Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type,
-                    Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1
+                    Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::DueOnReceipt,
+                    Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Net
                   )
                 )
             }
@@ -551,16 +551,16 @@ module Dodopayments
           Variants =
             T.type_alias do
               T.any(
-                Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type,
-                Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1
+                Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::DueOnReceipt,
+                Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Net
               )
             end
 
-          class Type < Dodopayments::Internal::Type::BaseModel
+          class DueOnReceipt < Dodopayments::Internal::Type::BaseModel
             OrHash =
               T.type_alias do
                 T.any(
-                  Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type,
+                  Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::DueOnReceipt,
                   Dodopayments::Internal::AnyHash
                 )
               end
@@ -577,11 +577,11 @@ module Dodopayments
             end
           end
 
-          class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+          class Net < Dodopayments::Internal::Type::BaseModel
             OrHash =
               T.type_alias do
                 T.any(
-                  Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1,
+                  Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Net,
                   Dodopayments::Internal::AnyHash
                 )
               end

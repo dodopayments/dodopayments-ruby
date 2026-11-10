@@ -266,7 +266,7 @@ module Dodopayments
         # @!attribute payment_terms
         #   The terms of the plan-change invoice. The subscription terms apply when absent.
         #
-        #   @return [Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type, Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1, nil]
+        #   @return [Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::DueOnReceipt, Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Net, nil]
         optional :payment_terms,
                  union: -> { Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms },
                  nil?: true
@@ -281,7 +281,7 @@ module Dodopayments
         #
         #   @param finalize [Boolean] `false` keeps the invoice as a draft for review. Default `true`.
         #
-        #   @param payment_terms [Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type, Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1, nil] The terms of the plan-change invoice. The subscription terms apply when absent.
+        #   @param payment_terms [Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::DueOnReceipt, Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Net, nil] The terms of the plan-change invoice. The subscription terms apply when absent.
 
         # The terms of the plan-change invoice. The subscription terms apply when absent.
         #
@@ -289,11 +289,14 @@ module Dodopayments
         module PaymentTerms
           extend Dodopayments::Internal::Type::Union
 
-          variant -> { Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type }
+          discriminator :type
 
-          variant -> { Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1 }
+          variant :due_on_receipt,
+                  -> { Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::DueOnReceipt }
 
-          class Type < Dodopayments::Internal::Type::BaseModel
+          variant :net, -> { Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Net }
+
+          class DueOnReceipt < Dodopayments::Internal::Type::BaseModel
             # @!attribute type
             #
             #   @return [Symbol, :due_on_receipt]
@@ -303,7 +306,7 @@ module Dodopayments
             #   @param type [Symbol, :due_on_receipt]
           end
 
-          class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+          class Net < Dodopayments::Internal::Type::BaseModel
             # @!attribute days
             #
             #   @return [Integer]
@@ -320,7 +323,7 @@ module Dodopayments
           end
 
           # @!method self.variants
-          #   @return [Array(Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type, Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1)]
+          #   @return [Array(Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::DueOnReceipt, Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Net)]
         end
       end
 

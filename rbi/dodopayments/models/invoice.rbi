@@ -180,8 +180,9 @@ module Dodopayments
             T::Array[Dodopayments::Invoice::EditableField::OrSymbol],
           frequency:
             T.any(
-              Dodopayments::Invoice::Frequency::Type::OrHash,
-              Dodopayments::Invoice::Frequency::UnionMember1::OrHash
+              Dodopayments::Invoice::Frequency::OneTime::OrHash,
+              Dodopayments::Invoice::Frequency::Recurring::OrHash,
+              Dodopayments::Invoice::Frequency::Mixed::OrHash
             ),
           invoice_id: String,
           metadata: T.anything,
@@ -209,8 +210,8 @@ module Dodopayments
           reminder_settings:
             T.nilable(
               T.any(
-                Dodopayments::Invoice::ReminderSettings::UnionMember0::OrHash,
-                Dodopayments::Invoice::ReminderSettings::UnionMember1::OrHash
+                Dodopayments::Invoice::ReminderSettings::Snapshot::OrHash,
+                Dodopayments::Invoice::ReminderSettings::Override::OrHash
               )
             ),
           review_deadline: T.nilable(Time),
@@ -593,16 +594,17 @@ module Dodopayments
         Variants =
           T.type_alias do
             T.any(
-              Dodopayments::Invoice::Frequency::Type,
-              Dodopayments::Invoice::Frequency::UnionMember1
+              Dodopayments::Invoice::Frequency::OneTime,
+              Dodopayments::Invoice::Frequency::Recurring,
+              Dodopayments::Invoice::Frequency::Mixed
             )
           end
 
-        class Type < Dodopayments::Internal::Type::BaseModel
+        class OneTime < Dodopayments::Internal::Type::BaseModel
           OrHash =
             T.type_alias do
               T.any(
-                Dodopayments::Invoice::Frequency::Type,
+                Dodopayments::Invoice::Frequency::OneTime,
                 Dodopayments::Internal::AnyHash
               )
             end
@@ -619,11 +621,11 @@ module Dodopayments
           end
         end
 
-        class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+        class Recurring < Dodopayments::Internal::Type::BaseModel
           OrHash =
             T.type_alias do
               T.any(
-                Dodopayments::Invoice::Frequency::UnionMember1,
+                Dodopayments::Invoice::Frequency::Recurring,
                 Dodopayments::Internal::AnyHash
               )
             end
@@ -662,6 +664,27 @@ module Dodopayments
               }
             )
           end
+          def to_hash
+          end
+        end
+
+        class Mixed < Dodopayments::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Dodopayments::Invoice::Frequency::Mixed,
+                Dodopayments::Internal::AnyHash
+              )
+            end
+
+          sig { returns(Symbol) }
+          attr_accessor :type
+
+          sig { params(type: Symbol).returns(T.attached_class) }
+          def self.new(type: :mixed)
+          end
+
+          sig { override.returns({ type: Symbol }) }
           def to_hash
           end
         end
@@ -762,16 +785,16 @@ module Dodopayments
         Variants =
           T.type_alias do
             T.any(
-              Dodopayments::Invoice::ReminderSettings::UnionMember0,
-              Dodopayments::Invoice::ReminderSettings::UnionMember1
+              Dodopayments::Invoice::ReminderSettings::Snapshot,
+              Dodopayments::Invoice::ReminderSettings::Override
             )
           end
 
-        class UnionMember0 < Dodopayments::Internal::Type::BaseModel
+        class Snapshot < Dodopayments::Internal::Type::BaseModel
           OrHash =
             T.type_alias do
               T.any(
-                Dodopayments::Invoice::ReminderSettings::UnionMember0,
+                Dodopayments::Invoice::ReminderSettings::Snapshot,
                 Dodopayments::Internal::AnyHash
               )
             end
@@ -819,11 +842,11 @@ module Dodopayments
           end
         end
 
-        class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+        class Override < Dodopayments::Internal::Type::BaseModel
           OrHash =
             T.type_alias do
               T.any(
-                Dodopayments::Invoice::ReminderSettings::UnionMember1,
+                Dodopayments::Invoice::ReminderSettings::Override,
                 Dodopayments::Internal::AnyHash
               )
             end

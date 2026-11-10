@@ -353,15 +353,16 @@ module Dodopayments
       end
 
       type frequency =
-        Dodopayments::Invoice::Frequency::Type
-        | Dodopayments::Invoice::Frequency::UnionMember1
+        Dodopayments::Invoice::Frequency::OneTime
+        | Dodopayments::Invoice::Frequency::Recurring
+        | Dodopayments::Invoice::Frequency::Mixed
 
       module Frequency
         extend Dodopayments::Internal::Type::Union
 
-        type type_ = { type: :one_time }
+        type one_time = { type: :one_time }
 
-        class Type < Dodopayments::Internal::Type::BaseModel
+        class OneTime < Dodopayments::Internal::Type::BaseModel
           attr_accessor type: :one_time
 
           def initialize: (?type: :one_time) -> void
@@ -369,14 +370,14 @@ module Dodopayments
           def to_hash: -> { type: :one_time }
         end
 
-        type union_member1 =
+        type recurring =
           {
             count: Integer,
             interval: Dodopayments::Models::time_interval,
             type: :recurring
           }
 
-        class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+        class Recurring < Dodopayments::Internal::Type::BaseModel
           attr_accessor count: Integer
 
           attr_accessor interval: Dodopayments::Models::time_interval
@@ -394,6 +395,16 @@ module Dodopayments
             interval: Dodopayments::Models::time_interval,
             type: :recurring
           }
+        end
+
+        type mixed = { type: :mixed }
+
+        class Mixed < Dodopayments::Internal::Type::BaseModel
+          attr_accessor type: :mixed
+
+          def initialize: (?type: :mixed) -> void
+
+          def to_hash: -> { type: :mixed }
         end
 
         def self?.variants: -> ::Array[Dodopayments::Models::Invoice::frequency]
@@ -450,13 +461,13 @@ module Dodopayments
       end
 
       type reminder_settings =
-        Dodopayments::Invoice::ReminderSettings::UnionMember0
-        | Dodopayments::Invoice::ReminderSettings::UnionMember1
+        Dodopayments::Invoice::ReminderSettings::Snapshot
+        | Dodopayments::Invoice::ReminderSettings::Override
 
       module ReminderSettings
         extend Dodopayments::Internal::Type::Union
 
-        type union_member0 =
+        type snapshot =
           {
             kind: :snapshot,
             offsets_minutes: ::Array[Integer],
@@ -464,7 +475,7 @@ module Dodopayments
             reminders_enabled: bool
           }
 
-        class UnionMember0 < Dodopayments::Internal::Type::BaseModel
+        class Snapshot < Dodopayments::Internal::Type::BaseModel
           attr_accessor kind: :snapshot
 
           attr_accessor offsets_minutes: ::Array[Integer]
@@ -488,7 +499,7 @@ module Dodopayments
           }
         end
 
-        type union_member1 =
+        type override =
           {
             kind: :override,
             offsets_minutes: ::Array[Integer]?,
@@ -496,7 +507,7 @@ module Dodopayments
             reminders_enabled: bool?
           }
 
-        class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+        class Override < Dodopayments::Internal::Type::BaseModel
           attr_accessor kind: :override
 
           attr_accessor offsets_minutes: ::Array[Integer]?

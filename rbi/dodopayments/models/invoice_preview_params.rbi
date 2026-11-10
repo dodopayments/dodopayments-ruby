@@ -119,8 +119,8 @@ module Dodopayments
         returns(
           T.nilable(
             T.any(
-              Dodopayments::InvoicePreviewParams::PaymentTerms::Type,
-              Dodopayments::InvoicePreviewParams::PaymentTerms::UnionMember1
+              Dodopayments::InvoicePreviewParams::PaymentTerms::DueOnReceipt,
+              Dodopayments::InvoicePreviewParams::PaymentTerms::Net
             )
           )
         )
@@ -165,8 +165,8 @@ module Dodopayments
           payment_terms:
             T.nilable(
               T.any(
-                Dodopayments::InvoicePreviewParams::PaymentTerms::Type::OrHash,
-                Dodopayments::InvoicePreviewParams::PaymentTerms::UnionMember1::OrHash
+                Dodopayments::InvoicePreviewParams::PaymentTerms::DueOnReceipt::OrHash,
+                Dodopayments::InvoicePreviewParams::PaymentTerms::Net::OrHash
               )
             ),
           review_required: T::Boolean,
@@ -235,8 +235,8 @@ module Dodopayments
             payment_terms:
               T.nilable(
                 T.any(
-                  Dodopayments::InvoicePreviewParams::PaymentTerms::Type,
-                  Dodopayments::InvoicePreviewParams::PaymentTerms::UnionMember1
+                  Dodopayments::InvoicePreviewParams::PaymentTerms::DueOnReceipt,
+                  Dodopayments::InvoicePreviewParams::PaymentTerms::Net
                 )
               ),
             review_required: T::Boolean,
@@ -517,16 +517,16 @@ module Dodopayments
         Variants =
           T.type_alias do
             T.any(
-              Dodopayments::InvoicePreviewParams::PaymentTerms::Type,
-              Dodopayments::InvoicePreviewParams::PaymentTerms::UnionMember1
+              Dodopayments::InvoicePreviewParams::PaymentTerms::DueOnReceipt,
+              Dodopayments::InvoicePreviewParams::PaymentTerms::Net
             )
           end
 
-        class Type < Dodopayments::Internal::Type::BaseModel
+        class DueOnReceipt < Dodopayments::Internal::Type::BaseModel
           OrHash =
             T.type_alias do
               T.any(
-                Dodopayments::InvoicePreviewParams::PaymentTerms::Type,
+                Dodopayments::InvoicePreviewParams::PaymentTerms::DueOnReceipt,
                 Dodopayments::Internal::AnyHash
               )
             end
@@ -543,11 +543,11 @@ module Dodopayments
           end
         end
 
-        class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+        class Net < Dodopayments::Internal::Type::BaseModel
           OrHash =
             T.type_alias do
               T.any(
-                Dodopayments::InvoicePreviewParams::PaymentTerms::UnionMember1,
+                Dodopayments::InvoicePreviewParams::PaymentTerms::Net,
                 Dodopayments::Internal::AnyHash
               )
             end
