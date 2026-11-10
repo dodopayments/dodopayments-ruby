@@ -679,6 +679,11 @@ module Dodopayments
           sig { returns(Integer) }
           attr_accessor :discounted_price
 
+          # True when one more unit of this addon puts the cart above the cart value limit
+          # of the business. False when the limit does not apply to the business.
+          sig { returns(T::Boolean) }
+          attr_accessor :max_quantity_reached
+
           sig { returns(String) }
           attr_accessor :name
 
@@ -725,6 +730,7 @@ module Dodopayments
               addon_id: String,
               currency: Dodopayments::Currency::OrSymbol,
               discounted_price: Integer,
+              max_quantity_reached: T::Boolean,
               name: String,
               og_currency: Dodopayments::Currency::OrSymbol,
               og_price: Integer,
@@ -742,6 +748,9 @@ module Dodopayments
             addon_id:,
             currency:,
             discounted_price:,
+            # True when one more unit of this addon puts the cart above the cart value limit
+            # of the business. False when the limit does not apply to the business.
+            max_quantity_reached:,
             name:,
             og_currency:,
             og_price:,
@@ -770,6 +779,7 @@ module Dodopayments
                 addon_id: String,
                 currency: Dodopayments::Currency::TaggedSymbol,
                 discounted_price: Integer,
+                max_quantity_reached: T::Boolean,
                 name: String,
                 og_currency: Dodopayments::Currency::TaggedSymbol,
                 og_price: Integer,

@@ -10,6 +10,12 @@ module Dodopayments
       #   @return [Dodopayments::Models::BillingAddress]
       required :billing, -> { Dodopayments::BillingAddress }
 
+      # @!attribute billing_mode
+      #   `invoice_led` when invoices bill the subscription. `normal` otherwise.
+      #
+      #   @return [Symbol, Dodopayments::Models::SubscriptionListResponse::BillingMode]
+      required :billing_mode, enum: -> { Dodopayments::Models::SubscriptionListResponse::BillingMode }
+
       # @!attribute cancel_at_next_billing_date
       #   Indicates if the subscription will cancel at the next billing date
       #
@@ -153,6 +159,12 @@ module Dodopayments
       #   @return [Dodopayments::Models::SubscriptionCancelledBy, nil]
       optional :cancelled_by, -> { Dodopayments::SubscriptionCancelledBy }, nil?: true
 
+      # @!attribute collection_method
+      #   How an invoice-led subscription collects each invoice. `null` for `normal`.
+      #
+      #   @return [Symbol, Dodopayments::Models::CollectionMethod, nil]
+      optional :collection_method, enum: -> { Dodopayments::CollectionMethod }, nil?: true
+
       # @!attribute customer_business_name
       #   Business / legal name associated with the tax id (B2B). When set this is used on
       #   the invoice in place of the customer's personal name.
@@ -185,6 +197,12 @@ module Dodopayments
       #   @return [String, nil]
       optional :payment_method_id, String, nil?: true
 
+      # @!attribute payment_terms_days
+      #   Days from the invoice date to the due date. `null` for `normal`.
+      #
+      #   @return [Integer, nil]
+      optional :payment_terms_days, Integer, nil?: true
+
       # @!attribute product_name
       #   Name of the product associated with this subscription
       #
@@ -211,13 +229,15 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :trial_amount, Integer, nil?: true
 
-      # @!method initialize(billing:, cancel_at_next_billing_date:, created_at:, currency:, customer:, discounts:, has_payment_method:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, cancelled_by: nil, customer_business_name: nil, discount_cycles_remaining: nil, discount_id: nil, paused_at: nil, payment_method_id: nil, product_name: nil, scheduled_change: nil, tax_id: nil, trial_amount: nil)
+      # @!method initialize(billing:, billing_mode:, cancel_at_next_billing_date:, created_at:, currency:, customer:, discounts:, has_payment_method:, metadata:, next_billing_date:, on_demand:, payment_frequency_count:, payment_frequency_interval:, previous_billing_date:, product_id:, quantity:, recurring_pre_tax_amount:, status:, subscription_id:, subscription_period_count:, subscription_period_interval:, tax_inclusive:, trial_period_days:, cancelled_at: nil, cancelled_by: nil, collection_method: nil, customer_business_name: nil, discount_cycles_remaining: nil, discount_id: nil, paused_at: nil, payment_method_id: nil, payment_terms_days: nil, product_name: nil, scheduled_change: nil, tax_id: nil, trial_amount: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionListResponse} for more details.
       #
       #   Response struct representing subscription details
       #
       #   @param billing [Dodopayments::Models::BillingAddress] Billing address details for payments
+      #
+      #   @param billing_mode [Symbol, Dodopayments::Models::SubscriptionListResponse::BillingMode] `invoice_led` when invoices bill the subscription. `normal` otherwise.
       #
       #   @param cancel_at_next_billing_date [Boolean] Indicates if the subscription will cancel at the next billing date
       #
@@ -265,6 +285,8 @@ module Dodopayments
       #
       #   @param cancelled_by [Dodopayments::Models::SubscriptionCancelledBy, nil] The caller that cancelled the subscription or scheduled its cancel.
       #
+      #   @param collection_method [Symbol, Dodopayments::Models::CollectionMethod, nil] How an invoice-led subscription collects each invoice. `null` for `normal`.
+      #
       #   @param customer_business_name [String, nil] Business / legal name associated with the tax id (B2B). When set this is
       #
       #   @param discount_cycles_remaining [Integer, nil] DEPRECATED: Use discounts[].cycles_remaining instead.
@@ -275,6 +297,8 @@ module Dodopayments
       #
       #   @param payment_method_id [String, nil] Saved payment method id used for recurring charges
       #
+      #   @param payment_terms_days [Integer, nil] Days from the invoice date to the due date. `null` for `normal`.
+      #
       #   @param product_name [String, nil] Name of the product associated with this subscription
       #
       #   @param scheduled_change [Dodopayments::Models::ScheduledPlanChange, nil] Scheduled plan change details, if any
@@ -282,6 +306,19 @@ module Dodopayments
       #   @param tax_id [String, nil] Tax identifier provided for this subscription (if applicable)
       #
       #   @param trial_amount [Integer, nil] Per-unit trial amount after discounts, snapshotted at subscription creation
+
+      # `invoice_led` when invoices bill the subscription. `normal` otherwise.
+      #
+      # @see Dodopayments::Models::SubscriptionListResponse#billing_mode
+      module BillingMode
+        extend Dodopayments::Internal::Type::Enum
+
+        NORMAL = :normal
+        INVOICE_LED = :invoice_led
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
 
       class Discount < Dodopayments::Internal::Type::BaseModel
         # @!attribute discount_id

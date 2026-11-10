@@ -31,14 +31,11 @@ module Dodopayments
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {Dodopayments::Models::Invoices::PaymentRetrievePayoutParams} for more details.
-        #
         # @overload retrieve_payout(payout_id, token: nil, request_options: {})
         #
         # @param payout_id [String] Payout ID
         #
-        # @param token [String] The signed link token. If the business asks for a credential on its invoice link
+        # @param token [String] The signed link token. A valid token for this record replaces the credential.
         #
         # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
         #

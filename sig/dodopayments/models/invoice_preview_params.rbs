@@ -1,0 +1,285 @@
+module Dodopayments
+  module Models
+    type invoice_preview_params =
+      {
+        collection_method: Dodopayments::Models::collection_method,
+        currency: Dodopayments::Models::currency,
+        customer_id: String,
+        items: ::Array[Dodopayments::Models::InvoicePreviewParams::item],
+        format_: Dodopayments::Models::InvoicePreviewParams::format_,
+        billing_address: Dodopayments::InvoicePreviewParams::BillingAddress?,
+        cc_emails: ::Array[String]?,
+        customer_email: String?,
+        discount_ids: ::Array[String]?,
+        due_at: Time?,
+        dunning: Dodopayments::InvoicePreviewParams::Dunning?,
+        memo: String?,
+        metadata: Dodopayments::Models::metadata,
+        payment_terms: Dodopayments::Models::InvoicePreviewParams::payment_terms?,
+        review_required: bool,
+        tax_id: String?
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class InvoicePreviewParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor collection_method: Dodopayments::Models::collection_method
+
+      attr_accessor currency: Dodopayments::Models::currency
+
+      attr_accessor customer_id: String
+
+      attr_accessor items: ::Array[Dodopayments::Models::InvoicePreviewParams::item]
+
+      attr_reader format_: Dodopayments::Models::InvoicePreviewParams::format_?
+
+      def format_=: (
+        Dodopayments::Models::InvoicePreviewParams::format_
+      ) -> Dodopayments::Models::InvoicePreviewParams::format_
+
+      attr_accessor billing_address: Dodopayments::InvoicePreviewParams::BillingAddress?
+
+      attr_accessor cc_emails: ::Array[String]?
+
+      attr_accessor customer_email: String?
+
+      attr_accessor discount_ids: ::Array[String]?
+
+      attr_accessor due_at: Time?
+
+      attr_accessor dunning: Dodopayments::InvoicePreviewParams::Dunning?
+
+      attr_accessor memo: String?
+
+      attr_reader metadata: Dodopayments::Models::metadata?
+
+      def metadata=: (
+        Dodopayments::Models::metadata
+      ) -> Dodopayments::Models::metadata
+
+      attr_accessor payment_terms: Dodopayments::Models::InvoicePreviewParams::payment_terms?
+
+      attr_reader review_required: bool?
+
+      def review_required=: (bool) -> bool
+
+      attr_accessor tax_id: String?
+
+      def initialize: (
+        collection_method: Dodopayments::Models::collection_method,
+        currency: Dodopayments::Models::currency,
+        customer_id: String,
+        items: ::Array[Dodopayments::Models::InvoicePreviewParams::item],
+        ?format_: Dodopayments::Models::InvoicePreviewParams::format_,
+        ?billing_address: Dodopayments::InvoicePreviewParams::BillingAddress?,
+        ?cc_emails: ::Array[String]?,
+        ?customer_email: String?,
+        ?discount_ids: ::Array[String]?,
+        ?due_at: Time?,
+        ?dunning: Dodopayments::InvoicePreviewParams::Dunning?,
+        ?memo: String?,
+        ?metadata: Dodopayments::Models::metadata,
+        ?payment_terms: Dodopayments::Models::InvoicePreviewParams::payment_terms?,
+        ?review_required: bool,
+        ?tax_id: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        collection_method: Dodopayments::Models::collection_method,
+        currency: Dodopayments::Models::currency,
+        customer_id: String,
+        items: ::Array[Dodopayments::Models::InvoicePreviewParams::item],
+        format_: Dodopayments::Models::InvoicePreviewParams::format_,
+        billing_address: Dodopayments::InvoicePreviewParams::BillingAddress?,
+        cc_emails: ::Array[String]?,
+        customer_email: String?,
+        discount_ids: ::Array[String]?,
+        due_at: Time?,
+        dunning: Dodopayments::InvoicePreviewParams::Dunning?,
+        memo: String?,
+        metadata: Dodopayments::Models::metadata,
+        payment_terms: Dodopayments::Models::InvoicePreviewParams::payment_terms?,
+        review_required: bool,
+        tax_id: String?,
+        request_options: Dodopayments::RequestOptions
+      }
+
+      type item =
+        Dodopayments::InvoicePreviewParams::Item::CustomItem
+        | Dodopayments::InvoicePreviewParams::Item::ProductItem
+
+      module Item
+        extend Dodopayments::Internal::Type::Union
+
+        type custom_item =
+          {
+            description: String,
+            kind: :custom,
+            tax_category: Dodopayments::Models::tax_category,
+            unit_amount: Integer,
+            quantity: Integer?
+          }
+
+        class CustomItem < Dodopayments::Internal::Type::BaseModel
+          attr_accessor description: String
+
+          attr_accessor kind: :custom
+
+          attr_accessor tax_category: Dodopayments::Models::tax_category
+
+          attr_accessor unit_amount: Integer
+
+          attr_accessor quantity: Integer?
+
+          def initialize: (
+            description: String,
+            tax_category: Dodopayments::Models::tax_category,
+            unit_amount: Integer,
+            ?quantity: Integer?,
+            ?kind: :custom
+          ) -> void
+
+          def to_hash: -> {
+            description: String,
+            kind: :custom,
+            tax_category: Dodopayments::Models::tax_category,
+            unit_amount: Integer,
+            quantity: Integer?
+          }
+        end
+
+        type product_item =
+          {
+            product_id: String,
+            quantity: Integer,
+            addons: ::Array[Dodopayments::AttachAddon]?
+          }
+
+        class ProductItem < Dodopayments::Internal::Type::BaseModel
+          attr_accessor product_id: String
+
+          attr_accessor quantity: Integer
+
+          attr_accessor addons: ::Array[Dodopayments::AttachAddon]?
+
+          def initialize: (
+            product_id: String,
+            quantity: Integer,
+            ?addons: ::Array[Dodopayments::AttachAddon]?
+          ) -> void
+
+          def to_hash: -> {
+            product_id: String,
+            quantity: Integer,
+            addons: ::Array[Dodopayments::AttachAddon]?
+          }
+        end
+
+        def self?.variants: -> ::Array[Dodopayments::Models::InvoicePreviewParams::item]
+      end
+
+      type format_ = :json | :pdf | :email
+
+      module Format
+        extend Dodopayments::Internal::Type::Enum
+
+        JSON: :json
+        PDF: :pdf
+        EMAIL: :email
+
+        def self?.values: -> ::Array[Dodopayments::Models::InvoicePreviewParams::format_]
+      end
+
+      type billing_address =
+        {
+          country: Dodopayments::Models::country_code,
+          city: String?,
+          state: String?,
+          street: String?,
+          zipcode: String?
+        }
+
+      class BillingAddress < Dodopayments::Internal::Type::BaseModel
+        attr_accessor country: Dodopayments::Models::country_code
+
+        attr_accessor city: String?
+
+        attr_accessor state: String?
+
+        attr_accessor street: String?
+
+        attr_accessor zipcode: String?
+
+        def initialize: (
+          country: Dodopayments::Models::country_code,
+          ?city: String?,
+          ?state: String?,
+          ?street: String?,
+          ?zipcode: String?
+        ) -> void
+
+        def to_hash: -> {
+          country: Dodopayments::Models::country_code,
+          city: String?,
+          state: String?,
+          street: String?,
+          zipcode: String?
+        }
+      end
+
+      type dunning =
+        { reminders_enabled: bool, offsets_days: ::Array[Integer]? }
+
+      class Dunning < Dodopayments::Internal::Type::BaseModel
+        attr_accessor reminders_enabled: bool
+
+        attr_accessor offsets_days: ::Array[Integer]?
+
+        def initialize: (
+          reminders_enabled: bool,
+          ?offsets_days: ::Array[Integer]?
+        ) -> void
+
+        def to_hash: -> {
+          reminders_enabled: bool,
+          offsets_days: ::Array[Integer]?
+        }
+      end
+
+      type payment_terms =
+        Dodopayments::InvoicePreviewParams::PaymentTerms::Type
+        | Dodopayments::InvoicePreviewParams::PaymentTerms::UnionMember1
+
+      module PaymentTerms
+        extend Dodopayments::Internal::Type::Union
+
+        type type_ = { type: :due_on_receipt }
+
+        class Type < Dodopayments::Internal::Type::BaseModel
+          attr_accessor type: :due_on_receipt
+
+          def initialize: (?type: :due_on_receipt) -> void
+
+          def to_hash: -> { type: :due_on_receipt }
+        end
+
+        type union_member1 = { days: Integer, type: :net }
+
+        class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+          attr_accessor days: Integer
+
+          attr_accessor type: :net
+
+          def initialize: (days: Integer, ?type: :net) -> void
+
+          def to_hash: -> { days: Integer, type: :net }
+        end
+
+        def self?.variants: -> ::Array[Dodopayments::Models::InvoicePreviewParams::payment_terms]
+      end
+    end
+  end
+end

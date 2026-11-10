@@ -31,7 +31,6 @@ module Dodopayments
 
       def retrieve: (
         String subscription_id,
-        ?locale: String,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Subscription
 
@@ -62,7 +61,6 @@ module Dodopayments
         ?created_at_gte: Time,
         ?created_at_lte: Time,
         ?customer_id: String,
-        ?locale: String,
         ?page_number: Integer,
         ?page_size: Integer,
         ?product_id: String,
@@ -85,9 +83,11 @@ module Dodopayments
         ?cancel_older_payment_link: bool,
         ?cancel_scheduled_change_plan: bool,
         ?collect_via_payment_link: bool,
+        ?credit: Dodopayments::Models::UpdateSubscriptionPlanReq::credit?,
         ?discount_code: String?,
         ?discount_codes: ::Array[String]?,
         ?effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
+        ?invoice: Dodopayments::UpdateSubscriptionPlanReq::Invoice?,
         ?metadata: Dodopayments::Models::metadata?,
         ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?,
         ?return_url: String?,
@@ -115,9 +115,11 @@ module Dodopayments
         ?cancel_older_payment_link: bool,
         ?cancel_scheduled_change_plan: bool,
         ?collect_via_payment_link: bool,
+        ?credit: Dodopayments::Models::UpdateSubscriptionPlanReq::credit?,
         ?discount_code: String?,
         ?discount_codes: ::Array[String]?,
         ?effective_at: Dodopayments::Models::UpdateSubscriptionPlanReq::effective_at,
+        ?invoice: Dodopayments::UpdateSubscriptionPlanReq::Invoice?,
         ?metadata: Dodopayments::Models::metadata?,
         ?on_payment_failure: Dodopayments::Models::UpdateSubscriptionPlanReq::on_payment_failure?,
         ?return_url: String?,
@@ -128,6 +130,11 @@ module Dodopayments
         String subscription_id,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::SubscriptionRetrieveCreditUsageResponse
+
+      def retrieve_upcoming_invoice: (
+        String subscription_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Invoice
 
       def retrieve_usage_history: (
         String subscription_id,

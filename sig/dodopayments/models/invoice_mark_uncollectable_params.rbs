@@ -1,0 +1,28 @@
+module Dodopayments
+  module Models
+    type invoice_mark_uncollectable_params =
+      { invoice_id: String, if_match: String }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class InvoiceMarkUncollectableParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor invoice_id: String
+
+      attr_accessor if_match: String
+
+      def initialize: (
+        invoice_id: String,
+        if_match: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        invoice_id: String,
+        if_match: String,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

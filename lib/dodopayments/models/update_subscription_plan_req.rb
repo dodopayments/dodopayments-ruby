@@ -83,6 +83,13 @@ module Dodopayments
       #   @return [Boolean, nil]
       optional :collect_via_payment_link, Dodopayments::Internal::Type::Boolean
 
+      # @!attribute credit
+      #   Where a downgrade credit goes. Only invoice-led subscriptions read it. The
+      #   default is `customer_balance`.
+      #
+      #   @return [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::Credit, nil]
+      optional :credit, enum: -> { Dodopayments::UpdateSubscriptionPlanReq::Credit }, nil?: true
+
       # @!attribute discount_code
       #   @deprecated Use `discount_id` instead.
       #
@@ -109,6 +116,12 @@ module Dodopayments
       #
       #   @return [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::EffectiveAt, nil]
       optional :effective_at, enum: -> { Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt }
+
+      # @!attribute invoice
+      #   The invoice of a plan change billed now. Only invoice-led subscriptions read it.
+      #
+      #   @return [Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice, nil]
+      optional :invoice, -> { Dodopayments::UpdateSubscriptionPlanReq::Invoice }, nil?: true
 
       # @!attribute metadata
       #   Metadata for the payment. If not passed, the metadata of the subscription will
@@ -153,7 +166,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :return_url, String, nil?: true
 
-      # @!method initialize(product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, cancel_older_payment_link: nil, cancel_scheduled_change_plan: nil, collect_via_payment_link: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, return_url: nil)
+      # @!method initialize(product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, cancel_older_payment_link: nil, cancel_scheduled_change_plan: nil, collect_via_payment_link: nil, credit: nil, discount_code: nil, discount_codes: nil, effective_at: nil, invoice: nil, metadata: nil, on_payment_failure: nil, return_url: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::UpdateSubscriptionPlanReq} for more details.
       #
@@ -173,11 +186,15 @@ module Dodopayments
       #
       #   @param collect_via_payment_link [Boolean] Collect the plan-change amount with a payment link. The customer then
       #
+      #   @param credit [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::Credit, nil] Where a downgrade credit goes. Only invoice-led subscriptions read it.
+      #
       #   @param discount_code [String, nil] DEPRECATED: Use discount_codes instead. Cannot be used together with discount_co
       #
       #   @param discount_codes [Array<String>, nil] Stacked discount codes to apply to the new plan. Max 20.
       #
       #   @param effective_at [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::EffectiveAt] When to apply the plan change.
+      #
+      #   @param invoice [Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice, nil] The invoice of a plan change billed now. Only invoice-led subscriptions read it.
       #
       #   @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
@@ -201,6 +218,20 @@ module Dodopayments
         #   @return [Array<Symbol>]
       end
 
+      # Where a downgrade credit goes. Only invoice-led subscriptions read it. The
+      # default is `customer_balance`.
+      #
+      # @see Dodopayments::Models::UpdateSubscriptionPlanReq#credit
+      module Credit
+        extend Dodopayments::Internal::Type::Enum
+
+        CUSTOMER_BALANCE = :customer_balance
+        REFUND = :refund
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
       # When to apply the plan change.
       #
       # - `immediately` (default): Apply the plan change right away
@@ -215,6 +246,82 @@ module Dodopayments
 
         # @!method self.values
         #   @return [Array<Symbol>]
+      end
+
+      # @see Dodopayments::Models::UpdateSubscriptionPlanReq#invoice
+      class Invoice < Dodopayments::Internal::Type::BaseModel
+        # @!attribute collection_method
+        #   The collection method of the invoice. The subscription value applies when
+        #   absent.
+        #
+        #   @return [Symbol, Dodopayments::Models::CollectionMethod, nil]
+        optional :collection_method, enum: -> { Dodopayments::CollectionMethod }, nil?: true
+
+        # @!attribute finalize
+        #   `false` keeps the invoice as a draft for review. Default `true`.
+        #
+        #   @return [Boolean, nil]
+        optional :finalize, Dodopayments::Internal::Type::Boolean
+
+        # @!attribute payment_terms
+        #   The terms of the plan-change invoice. The subscription terms apply when absent.
+        #
+        #   @return [Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type, Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1, nil]
+        optional :payment_terms,
+                 union: -> { Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms },
+                 nil?: true
+
+        # @!method initialize(collection_method: nil, finalize: nil, payment_terms: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice} for more details.
+        #
+        #   The invoice of a plan change billed now. Only invoice-led subscriptions read it.
+        #
+        #   @param collection_method [Symbol, Dodopayments::Models::CollectionMethod, nil] The collection method of the invoice. The subscription value applies when absent
+        #
+        #   @param finalize [Boolean] `false` keeps the invoice as a draft for review. Default `true`.
+        #
+        #   @param payment_terms [Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type, Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1, nil] The terms of the plan-change invoice. The subscription terms apply when absent.
+
+        # The terms of the plan-change invoice. The subscription terms apply when absent.
+        #
+        # @see Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice#payment_terms
+        module PaymentTerms
+          extend Dodopayments::Internal::Type::Union
+
+          variant -> { Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type }
+
+          variant -> { Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1 }
+
+          class Type < Dodopayments::Internal::Type::BaseModel
+            # @!attribute type
+            #
+            #   @return [Symbol, :due_on_receipt]
+            required :type, const: :due_on_receipt
+
+            # @!method initialize(type: :due_on_receipt)
+            #   @param type [Symbol, :due_on_receipt]
+          end
+
+          class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+            # @!attribute days
+            #
+            #   @return [Integer]
+            required :days, Integer
+
+            # @!attribute type
+            #
+            #   @return [Symbol, :net]
+            required :type, const: :net
+
+            # @!method initialize(days:, type: :net)
+            #   @param days [Integer]
+            #   @param type [Symbol, :net]
+          end
+
+          # @!method self.variants
+          #   @return [Array(Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type, Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1)]
+        end
       end
 
       # Controls behavior when the plan change payment fails.

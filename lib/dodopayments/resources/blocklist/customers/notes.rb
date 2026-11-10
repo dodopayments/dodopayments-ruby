@@ -5,11 +5,11 @@ module Dodopayments
     class Blocklist
       class Customers
         class Notes
-          # @overload create(entry_id, note:, request_options: {})
+          # @overload create(entry_id, text:, request_options: {})
           #
           # @param entry_id [String] Blocklist entry id
           #
-          # @param note [String]
+          # @param text [String]
           #
           # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -27,13 +27,13 @@ module Dodopayments
             )
           end
 
-          # @overload update(note_id, entry_id:, note:, request_options: {})
+          # @overload update(note_id, entry_id:, text:, request_options: {})
           #
           # @param note_id [String] Path param: Note id
           #
           # @param entry_id [String] Path param: Blocklist entry id
           #
-          # @param note [String] Body param
+          # @param text [String] Body param
           #
           # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
           #

@@ -5,13 +5,13 @@ module Dodopayments
     module Blocklist
       module Customers
         class NoteRequest < Dodopayments::Internal::Type::BaseModel
-          # @!attribute note
+          # @!attribute text
           #
           #   @return [String]
-          required :note, String
+          required :text, String
 
-          # @!method initialize(note:)
-          #   @param note [String]
+          # @!method initialize(text:)
+          #   @param text [String]
         end
       end
     end
