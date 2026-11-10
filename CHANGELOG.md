@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.38.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.37.0...v2.38.0) (2026-11-10)
+
+
+### Features
+
+* **api:** billing invoices and upcoming invoice; sync spec to prod 1.122.7 ([dcc75a2](https://github.com/dodopayments/dodopayments-ruby/commit/dcc75a24b9e06ef3edace32b8b4ee15a686a9a2a))
+* **api:** billing invoices and upcoming invoice; sync spec to prod 1.122.7 ([717be4a](https://github.com/dodopayments/dodopayments-ruby/commit/717be4abd9c9a942d1345c78feceecfe60396468))
+* **api:** regenerate SDK from latest OpenAPI spec ([1563150](https://github.com/dodopayments/dodopayments-ruby/commit/1563150428a9a2ba0916891b83066e819e1bd7e6))
+* **api:** regenerate SDK from latest OpenAPI spec ([fb48d10](https://github.com/dodopayments/dodopayments-ruby/commit/fb48d10df66f295c6cc22e3998f04939b255982b))
+
 ## [2.37.0](https://github.com/dodopayments/dodopayments-ruby/compare/v2.36.0...v2.37.0) (2026-10-28)
 
 
