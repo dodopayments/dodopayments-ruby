@@ -4,8 +4,10 @@ module Dodopayments
       {
         client_secret: String?,
         expires_on: Time?,
+        invoice_id: String?,
         payment_id: String?,
-        payment_link: String?
+        payment_link: String?,
+        refund_id: String?
       }
 
     class SubscriptionChangePlanResponse < Dodopayments::Internal::Type::BaseModel
@@ -13,22 +15,30 @@ module Dodopayments
 
       attr_accessor expires_on: Time?
 
+      attr_accessor invoice_id: String?
+
       attr_accessor payment_id: String?
 
       attr_accessor payment_link: String?
 
+      attr_accessor refund_id: String?
+
       def initialize: (
         ?client_secret: String?,
         ?expires_on: Time?,
+        ?invoice_id: String?,
         ?payment_id: String?,
-        ?payment_link: String?
+        ?payment_link: String?,
+        ?refund_id: String?
       ) -> void
 
       def to_hash: -> {
         client_secret: String?,
         expires_on: Time?,
+        invoice_id: String?,
         payment_id: String?,
-        payment_link: String?
+        payment_link: String?,
+        refund_id: String?
       }
     end
   end

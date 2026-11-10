@@ -1045,6 +1045,11 @@ module Dodopayments
             :deflection_fees_reversal,
             Dodopayments::BalanceRetrieveLedgerParams::EventType::TaggedSymbol
           )
+        MODERATION_FEES =
+          T.let(
+            :moderation_fees,
+            Dodopayments::BalanceRetrieveLedgerParams::EventType::TaggedSymbol
+          )
         RESERVE_HOLD =
           T.let(
             :reserve_hold,
@@ -1053,11 +1058,6 @@ module Dodopayments
         RESERVE_RELEASE =
           T.let(
             :reserve_release,
-            Dodopayments::BalanceRetrieveLedgerParams::EventType::TaggedSymbol
-          )
-        MODERATION_FEES =
-          T.let(
-            :moderation_fees,
             Dodopayments::BalanceRetrieveLedgerParams::EventType::TaggedSymbol
           )
         DODO_FIXED_FEE =
@@ -1073,11 +1073,6 @@ module Dodopayments
         SCHEME_FEE =
           T.let(
             :scheme_fee,
-            Dodopayments::BalanceRetrieveLedgerParams::EventType::TaggedSymbol
-          )
-        OPENING_BALANCE =
-          T.let(
-            :opening_balance,
             Dodopayments::BalanceRetrieveLedgerParams::EventType::TaggedSymbol
           )
 

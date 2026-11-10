@@ -3,9 +3,6 @@
 module Dodopayments
   module Resources
     class Meters
-      # @return [Dodopayments::Resources::Meters::Translations]
-      attr_reader :translations
-
       # @overload create(aggregation:, event_name:, measurement_unit:, name:, description: nil, filter: nil, request_options: {})
       #
       # @param aggregation [Dodopayments::Models::MeterAggregation] Aggregation configuration for the meter
@@ -36,14 +33,9 @@ module Dodopayments
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {Dodopayments::Models::MeterRetrieveParams} for more details.
-      #
-      # @overload retrieve(id, locale: nil, request_options: {})
+      # @overload retrieve(id, request_options: {})
       #
       # @param id [String] Meter ID
-      #
-      # @param locale [String] Shows the translated name, description and unit of the catalog entities in this
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -51,14 +43,11 @@ module Dodopayments
       #
       # @see Dodopayments::Models::MeterRetrieveParams
       def retrieve(id, params = {})
-        parsed, options = Dodopayments::MeterRetrieveParams.dump_request(params)
-        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["meters/%1$s", id],
-          query: query,
           model: Dodopayments::Meter,
-          options: options
+          options: params[:request_options]
         )
       end
 
@@ -91,14 +80,9 @@ module Dodopayments
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {Dodopayments::Models::MeterListParams} for more details.
-      #
-      # @overload list(archived: nil, locale: nil, page_number: nil, page_size: nil, request_options: {})
+      # @overload list(archived: nil, page_number: nil, page_size: nil, request_options: {})
       #
       # @param archived [Boolean] List archived meters
-      #
-      # @param locale [String] Shows the translated name, description and unit of the catalog entities in this
       #
       # @param page_number [Integer] Page number default is 0
       #
@@ -163,7 +147,6 @@ module Dodopayments
       # @param client [Dodopayments::Client]
       def initialize(client:)
         @client = client
-        @translations = Dodopayments::Resources::Meters::Translations.new(client: client)
       end
     end
   end

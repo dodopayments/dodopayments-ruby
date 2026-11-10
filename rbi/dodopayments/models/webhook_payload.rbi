@@ -25,7 +25,8 @@ module Dodopayments
             Dodopayments::WebhookPayload::Data::CreditBalanceLow,
             Dodopayments::WebhookPayload::Data::AbandonedCheckout,
             Dodopayments::WebhookPayload::Data::DunningAttempt,
-            Dodopayments::WebhookPayload::Data::EntitlementGrant
+            Dodopayments::WebhookPayload::Data::EntitlementGrant,
+            Dodopayments::WebhookPayload::Data::Invoice
           )
         )
       end
@@ -55,7 +56,8 @@ module Dodopayments
               Dodopayments::WebhookPayload::Data::CreditBalanceLow::OrHash,
               Dodopayments::WebhookPayload::Data::AbandonedCheckout::OrHash,
               Dodopayments::WebhookPayload::Data::DunningAttempt::OrHash,
-              Dodopayments::WebhookPayload::Data::EntitlementGrant::OrHash
+              Dodopayments::WebhookPayload::Data::EntitlementGrant::OrHash,
+              Dodopayments::WebhookPayload::Data::Invoice::OrHash
             ),
           timestamp: Time,
           type: Dodopayments::WebhookEventType::OrSymbol
@@ -89,7 +91,8 @@ module Dodopayments
                 Dodopayments::WebhookPayload::Data::CreditBalanceLow,
                 Dodopayments::WebhookPayload::Data::AbandonedCheckout,
                 Dodopayments::WebhookPayload::Data::DunningAttempt,
-                Dodopayments::WebhookPayload::Data::EntitlementGrant
+                Dodopayments::WebhookPayload::Data::EntitlementGrant,
+                Dodopayments::WebhookPayload::Data::Invoice
               ),
             timestamp: Time,
             type: Dodopayments::WebhookEventType::OrSymbol
@@ -116,7 +119,8 @@ module Dodopayments
               Dodopayments::WebhookPayload::Data::CreditBalanceLow,
               Dodopayments::WebhookPayload::Data::AbandonedCheckout,
               Dodopayments::WebhookPayload::Data::DunningAttempt,
-              Dodopayments::WebhookPayload::Data::EntitlementGrant
+              Dodopayments::WebhookPayload::Data::EntitlementGrant,
+              Dodopayments::WebhookPayload::Data::Invoice
             )
           end
 
@@ -943,6 +947,29 @@ module Dodopayments
           # and any integration-specific delivery payload.
           sig { params(payload_type: Symbol).returns(T.attached_class) }
           def self.new(payload_type: :EntitlementGrant)
+          end
+
+          sig { override.returns({ payload_type: Symbol }) }
+          def to_hash
+          end
+        end
+
+        class Invoice < Dodopayments::Models::Invoice
+          OrHash =
+            T.type_alias do
+              T.any(
+                Dodopayments::WebhookPayload::Data::Invoice,
+                Dodopayments::Internal::AnyHash
+              )
+            end
+
+          sig { returns(Symbol) }
+          attr_accessor :payload_type
+
+          # An invoice-led invoice. Every read and every `invoice.*` webhook uses this
+          # schema.
+          sig { params(payload_type: Symbol).returns(T.attached_class) }
+          def self.new(payload_type: :Invoice)
           end
 
           sig { override.returns({ payload_type: Symbol }) }

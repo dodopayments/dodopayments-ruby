@@ -15,6 +15,19 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :force_language
 
+      # How a single-page checkout shows the payment methods. You can set it only when
+      # `feature_flags.single_page` is true.
+      #
+      # Default is `accordion`.
+      sig do
+        returns(
+          T.nilable(
+            Dodopayments::CheckoutSessionCustomization::PaymentMethodLayout::OrSymbol
+          )
+        )
+      end
+      attr_accessor :payment_method_layout
+
       # Show on demand tag
       #
       # Default is true
@@ -55,6 +68,10 @@ module Dodopayments
       sig do
         params(
           force_language: T.nilable(String),
+          payment_method_layout:
+            T.nilable(
+              Dodopayments::CheckoutSessionCustomization::PaymentMethodLayout::OrSymbol
+            ),
           show_on_demand_tag: T::Boolean,
           show_order_details: T::Boolean,
           theme:
@@ -67,6 +84,11 @@ module Dodopayments
       def self.new(
         # Force the checkout interface to render in a specific language (e.g. `en`, `es`)
         force_language: nil,
+        # How a single-page checkout shows the payment methods. You can set it only when
+        # `feature_flags.single_page` is true.
+        #
+        # Default is `accordion`.
+        payment_method_layout: nil,
         # Show on demand tag
         #
         # Default is true
@@ -88,6 +110,10 @@ module Dodopayments
         override.returns(
           {
             force_language: T.nilable(String),
+            payment_method_layout:
+              T.nilable(
+                Dodopayments::CheckoutSessionCustomization::PaymentMethodLayout::OrSymbol
+              ),
             show_on_demand_tag: T::Boolean,
             show_order_details: T::Boolean,
             theme:
@@ -99,6 +125,44 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      # How a single-page checkout shows the payment methods. You can set it only when
+      # `feature_flags.single_page` is true.
+      #
+      # Default is `accordion`.
+      module PaymentMethodLayout
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(
+              Symbol,
+              Dodopayments::CheckoutSessionCustomization::PaymentMethodLayout
+            )
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        ACCORDION =
+          T.let(
+            :accordion,
+            Dodopayments::CheckoutSessionCustomization::PaymentMethodLayout::TaggedSymbol
+          )
+        TABS =
+          T.let(
+            :tabs,
+            Dodopayments::CheckoutSessionCustomization::PaymentMethodLayout::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Dodopayments::CheckoutSessionCustomization::PaymentMethodLayout::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
       end
 
       # Theme of the page (determines which mode - light/dark/system - to use)

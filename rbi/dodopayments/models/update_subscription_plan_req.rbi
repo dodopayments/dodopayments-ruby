@@ -87,6 +87,15 @@ module Dodopayments
       sig { params(collect_via_payment_link: T::Boolean).void }
       attr_writer :collect_via_payment_link
 
+      # Where a downgrade credit goes. Only invoice-led subscriptions read it. The
+      # default is `customer_balance`.
+      sig do
+        returns(
+          T.nilable(Dodopayments::UpdateSubscriptionPlanReq::Credit::OrSymbol)
+        )
+      end
+      attr_accessor :credit
+
       # DEPRECATED: Use discount_codes instead. Cannot be used together with
       # discount_codes.
       sig { returns(T.nilable(String)) }
@@ -119,6 +128,20 @@ module Dodopayments
         ).void
       end
       attr_writer :effective_at
+
+      # The invoice of a plan change billed now. Only invoice-led subscriptions read it.
+      sig do
+        returns(T.nilable(Dodopayments::UpdateSubscriptionPlanReq::Invoice))
+      end
+      attr_reader :invoice
+
+      sig do
+        params(
+          invoice:
+            T.nilable(Dodopayments::UpdateSubscriptionPlanReq::Invoice::OrHash)
+        ).void
+      end
+      attr_writer :invoice
 
       # Metadata for the payment. If not passed, the metadata of the subscription will
       # be taken
@@ -174,10 +197,16 @@ module Dodopayments
           cancel_older_payment_link: T::Boolean,
           cancel_scheduled_change_plan: T::Boolean,
           collect_via_payment_link: T::Boolean,
+          credit:
+            T.nilable(
+              Dodopayments::UpdateSubscriptionPlanReq::Credit::OrSymbol
+            ),
           discount_code: T.nilable(String),
           discount_codes: T.nilable(T::Array[String]),
           effective_at:
             Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol,
+          invoice:
+            T.nilable(Dodopayments::UpdateSubscriptionPlanReq::Invoice::OrHash),
           metadata:
             T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           on_payment_failure:
@@ -235,6 +264,9 @@ module Dodopayments
         #
         # The preview route shares this request body and ignores this field.
         collect_via_payment_link: nil,
+        # Where a downgrade credit goes. Only invoice-led subscriptions read it. The
+        # default is `customer_balance`.
+        credit: nil,
         # DEPRECATED: Use discount_codes instead. Cannot be used together with
         # discount_codes.
         discount_code: nil,
@@ -248,6 +280,8 @@ module Dodopayments
         # - `immediately` (default): Apply the plan change right away
         # - `next_billing_date`: Schedule the change for the next billing date
         effective_at: nil,
+        # The invoice of a plan change billed now. Only invoice-led subscriptions read it.
+        invoice: nil,
         # Metadata for the payment. If not passed, the metadata of the subscription will
         # be taken
         metadata: nil,
@@ -290,10 +324,16 @@ module Dodopayments
             cancel_older_payment_link: T::Boolean,
             cancel_scheduled_change_plan: T::Boolean,
             collect_via_payment_link: T::Boolean,
+            credit:
+              T.nilable(
+                Dodopayments::UpdateSubscriptionPlanReq::Credit::OrSymbol
+              ),
             discount_code: T.nilable(String),
             discount_codes: T.nilable(T::Array[String]),
             effective_at:
               Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol,
+            invoice:
+              T.nilable(Dodopayments::UpdateSubscriptionPlanReq::Invoice),
             metadata:
               T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
             on_payment_failure:
@@ -357,6 +397,39 @@ module Dodopayments
         end
       end
 
+      # Where a downgrade credit goes. Only invoice-led subscriptions read it. The
+      # default is `customer_balance`.
+      module Credit
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, Dodopayments::UpdateSubscriptionPlanReq::Credit)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        CUSTOMER_BALANCE =
+          T.let(
+            :customer_balance,
+            Dodopayments::UpdateSubscriptionPlanReq::Credit::TaggedSymbol
+          )
+        REFUND =
+          T.let(
+            :refund,
+            Dodopayments::UpdateSubscriptionPlanReq::Credit::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Dodopayments::UpdateSubscriptionPlanReq::Credit::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
+      end
+
       # When to apply the plan change.
       #
       # - `immediately` (default): Apply the plan change right away
@@ -389,6 +462,156 @@ module Dodopayments
           )
         end
         def self.values
+        end
+      end
+
+      class Invoice < Dodopayments::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Dodopayments::UpdateSubscriptionPlanReq::Invoice,
+              Dodopayments::Internal::AnyHash
+            )
+          end
+
+        # The collection method of the invoice. The subscription value applies when
+        # absent.
+        sig { returns(T.nilable(Dodopayments::CollectionMethod::OrSymbol)) }
+        attr_accessor :collection_method
+
+        # `false` keeps the invoice as a draft for review. Default `true`.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :finalize
+
+        sig { params(finalize: T::Boolean).void }
+        attr_writer :finalize
+
+        # The terms of the plan-change invoice. The subscription terms apply when absent.
+        sig do
+          returns(
+            T.nilable(
+              T.any(
+                Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type,
+                Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1
+              )
+            )
+          )
+        end
+        attr_accessor :payment_terms
+
+        # The invoice of a plan change billed now. Only invoice-led subscriptions read it.
+        sig do
+          params(
+            collection_method:
+              T.nilable(Dodopayments::CollectionMethod::OrSymbol),
+            finalize: T::Boolean,
+            payment_terms:
+              T.nilable(
+                T.any(
+                  Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type::OrHash,
+                  Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1::OrHash
+                )
+              )
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # The collection method of the invoice. The subscription value applies when
+          # absent.
+          collection_method: nil,
+          # `false` keeps the invoice as a draft for review. Default `true`.
+          finalize: nil,
+          # The terms of the plan-change invoice. The subscription terms apply when absent.
+          payment_terms: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              collection_method:
+                T.nilable(Dodopayments::CollectionMethod::OrSymbol),
+              finalize: T::Boolean,
+              payment_terms:
+                T.nilable(
+                  T.any(
+                    Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type,
+                    Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1
+                  )
+                )
+            }
+          )
+        end
+        def to_hash
+        end
+
+        # The terms of the plan-change invoice. The subscription terms apply when absent.
+        module PaymentTerms
+          extend Dodopayments::Internal::Type::Union
+
+          Variants =
+            T.type_alias do
+              T.any(
+                Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type,
+                Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1
+              )
+            end
+
+          class Type < Dodopayments::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Type,
+                  Dodopayments::Internal::AnyHash
+                )
+              end
+
+            sig { returns(Symbol) }
+            attr_accessor :type
+
+            sig { params(type: Symbol).returns(T.attached_class) }
+            def self.new(type: :due_on_receipt)
+            end
+
+            sig { override.returns({ type: Symbol }) }
+            def to_hash
+            end
+          end
+
+          class UnionMember1 < Dodopayments::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::UnionMember1,
+                  Dodopayments::Internal::AnyHash
+                )
+              end
+
+            sig { returns(Integer) }
+            attr_accessor :days
+
+            sig { returns(Symbol) }
+            attr_accessor :type
+
+            sig do
+              params(days: Integer, type: Symbol).returns(T.attached_class)
+            end
+            def self.new(days:, type: :net)
+            end
+
+            sig { override.returns({ days: Integer, type: Symbol }) }
+            def to_hash
+            end
+          end
+
+          sig do
+            override.returns(
+              T::Array[
+                Dodopayments::UpdateSubscriptionPlanReq::Invoice::PaymentTerms::Variants
+              ]
+            )
+          end
+          def self.variants
+          end
         end
       end
 
