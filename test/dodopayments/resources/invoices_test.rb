@@ -471,7 +471,7 @@ class Dodopayments::Test::Resources::InvoicesTest < Dodopayments::Test::Resource
       )
 
     assert_pattern do
-      response => nil
+      response => StringIO
     end
   end
 
@@ -479,7 +479,7 @@ class Dodopayments::Test::Resources::InvoicesTest < Dodopayments::Test::Resource
     response = @dodo_payments.invoices.preview_existing("invoice_id")
 
     assert_pattern do
-      response => nil
+      response => StringIO
     end
   end
 

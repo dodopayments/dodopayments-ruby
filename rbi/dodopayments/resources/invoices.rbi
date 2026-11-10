@@ -388,7 +388,7 @@ module Dodopayments
           review_required: T::Boolean,
           tax_id: T.nilable(String),
           request_options: Dodopayments::RequestOptions::OrHash
-        ).void
+        ).returns(StringIO)
       end
       def preview(
         # Body param
@@ -437,7 +437,7 @@ module Dodopayments
           invoice_id: String,
           format_: Dodopayments::InvoicePreviewExistingParams::Format::OrSymbol,
           request_options: Dodopayments::RequestOptions::OrHash
-        ).void
+        ).returns(StringIO)
       end
       def preview_existing(
         # Invoice ID

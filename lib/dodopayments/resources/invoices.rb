@@ -403,7 +403,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [nil]
+      # @return [StringIO]
       #
       # @see Dodopayments::Models::InvoicePreviewParams
       def preview(params)
@@ -414,8 +414,9 @@ module Dodopayments
           method: :post,
           path: "billing/invoices/preview",
           query: query.transform_keys(format_: "format"),
+          headers: {"accept" => "application/pdf"},
           body: parsed.except(*query_params),
-          model: NilClass,
+          model: StringIO,
           options: options
         )
       end
@@ -433,7 +434,7 @@ module Dodopayments
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [nil]
+      # @return [StringIO]
       #
       # @see Dodopayments::Models::InvoicePreviewExistingParams
       def preview_existing(invoice_id, params = {})
@@ -443,7 +444,8 @@ module Dodopayments
           method: :get,
           path: ["billing/invoices/%1$s/preview", invoice_id],
           query: query.transform_keys(format_: "format"),
-          model: NilClass,
+          headers: {"accept" => "application/pdf"},
+          model: StringIO,
           options: options
         )
       end

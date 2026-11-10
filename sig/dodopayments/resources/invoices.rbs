@@ -126,13 +126,13 @@ module Dodopayments
         ?review_required: bool,
         ?tax_id: String?,
         ?request_options: Dodopayments::request_opts
-      ) -> nil
+      ) -> StringIO
 
       def preview_existing: (
         String invoice_id,
         ?format_: Dodopayments::Models::InvoicePreviewExistingParams::format_,
         ?request_options: Dodopayments::request_opts
-      ) -> nil
+      ) -> StringIO
 
       def retry_: (
         String invoice_id,
