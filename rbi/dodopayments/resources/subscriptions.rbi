@@ -116,20 +116,12 @@ module Dodopayments
       sig do
         params(
           subscription_id: String,
-          locale: String,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Subscription)
       end
       def retrieve(
         # Subscription Id
         subscription_id,
-        # Shows the translated name, description and unit of the catalog entities in this
-        # locale. The value must be a code from `GET /locales`, for example `fr`. A field
-        # with no translation, an unknown code, or no code shows the base text.
-        #
-        # Do not send a text from a localized response back in a create or update request.
-        # The base text then changes to the translated text.
-        locale: nil,
         request_options: {}
       )
       end
@@ -232,7 +224,6 @@ module Dodopayments
           created_at_gte: Time,
           created_at_lte: Time,
           customer_id: String,
-          locale: String,
           page_number: Integer,
           page_size: Integer,
           product_id: String,
@@ -255,13 +246,6 @@ module Dodopayments
         created_at_lte: nil,
         # Filter by customer id
         customer_id: nil,
-        # Shows the translated name, description and unit of the catalog entities in this
-        # locale. The value must be a code from `GET /locales`, for example `fr`. A field
-        # with no translation, an unknown code, or no code shows the base text.
-        #
-        # Do not send a text from a localized response back in a create or update request.
-        # The base text then changes to the translated text.
-        locale: nil,
         # Page number default is 0
         page_number: nil,
         # Page size default is 10 max is 100
@@ -299,10 +283,16 @@ module Dodopayments
           cancel_older_payment_link: T::Boolean,
           cancel_scheduled_change_plan: T::Boolean,
           collect_via_payment_link: T::Boolean,
+          credit:
+            T.nilable(
+              Dodopayments::UpdateSubscriptionPlanReq::Credit::OrSymbol
+            ),
           discount_code: T.nilable(String),
           discount_codes: T.nilable(T::Array[String]),
           effective_at:
             Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol,
+          invoice:
+            T.nilable(Dodopayments::UpdateSubscriptionPlanReq::Invoice::OrHash),
           metadata:
             T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           on_payment_failure:
@@ -363,6 +353,9 @@ module Dodopayments
         #
         # The preview route shares this request body and ignores this field.
         collect_via_payment_link: nil,
+        # Where a downgrade credit goes. Only invoice-led subscriptions read it. The
+        # default is `customer_balance`.
+        credit: nil,
         # DEPRECATED: Use discount_codes instead. Cannot be used together with
         # discount_codes.
         discount_code: nil,
@@ -376,6 +369,8 @@ module Dodopayments
         # - `immediately` (default): Apply the plan change right away
         # - `next_billing_date`: Schedule the change for the next billing date
         effective_at: nil,
+        # The invoice of a plan change billed now. Only invoice-led subscriptions read it.
+        invoice: nil,
         # Metadata for the payment. If not passed, the metadata of the subscription will
         # be taken
         metadata: nil,
@@ -460,10 +455,16 @@ module Dodopayments
           cancel_older_payment_link: T::Boolean,
           cancel_scheduled_change_plan: T::Boolean,
           collect_via_payment_link: T::Boolean,
+          credit:
+            T.nilable(
+              Dodopayments::UpdateSubscriptionPlanReq::Credit::OrSymbol
+            ),
           discount_code: T.nilable(String),
           discount_codes: T.nilable(T::Array[String]),
           effective_at:
             Dodopayments::UpdateSubscriptionPlanReq::EffectiveAt::OrSymbol,
+          invoice:
+            T.nilable(Dodopayments::UpdateSubscriptionPlanReq::Invoice::OrHash),
           metadata:
             T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
           on_payment_failure:
@@ -524,6 +525,9 @@ module Dodopayments
         #
         # The preview route shares this request body and ignores this field.
         collect_via_payment_link: nil,
+        # Where a downgrade credit goes. Only invoice-led subscriptions read it. The
+        # default is `customer_balance`.
+        credit: nil,
         # DEPRECATED: Use discount_codes instead. Cannot be used together with
         # discount_codes.
         discount_code: nil,
@@ -537,6 +541,8 @@ module Dodopayments
         # - `immediately` (default): Apply the plan change right away
         # - `next_billing_date`: Schedule the change for the next billing date
         effective_at: nil,
+        # The invoice of a plan change billed now. Only invoice-led subscriptions read it.
+        invoice: nil,
         # Metadata for the payment. If not passed, the metadata of the subscription will
         # be taken
         metadata: nil,
@@ -575,6 +581,22 @@ module Dodopayments
         ).returns(Dodopayments::Models::SubscriptionRetrieveCreditUsageResponse)
       end
       def retrieve_credit_usage(
+        # Subscription ID
+        subscription_id,
+        request_options: {}
+      )
+      end
+
+      # Prices the next cycle invoice of an invoice-led subscription. The invoice ID in
+      # the response is not stored, so the response has no allowed actions and no
+      # editable fields.
+      sig do
+        params(
+          subscription_id: String,
+          request_options: Dodopayments::RequestOptions::OrHash
+        ).returns(Dodopayments::Invoice)
+      end
+      def retrieve_upcoming_invoice(
         # Subscription ID
         subscription_id,
         request_options: {}
@@ -655,6 +677,8 @@ module Dodopayments
       )
       end
 
+      # For an invoice-led subscription, billing charges the open invoices after the
+      # change, so the response has no payment.
       sig do
         params(
           subscription_id: String,

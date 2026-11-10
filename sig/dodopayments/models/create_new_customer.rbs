@@ -5,8 +5,7 @@ module Dodopayments
         email: String,
         name: String,
         create_new_customer: bool,
-        phone_number: String?,
-        preferred_locale: Dodopayments::Models::locale?
+        phone_number: String?
       }
 
     class CreateNewCustomer < Dodopayments::Internal::Type::BaseModel
@@ -20,22 +19,18 @@ module Dodopayments
 
       attr_accessor phone_number: String?
 
-      attr_accessor preferred_locale: Dodopayments::Models::locale?
-
       def initialize: (
         email: String,
         name: String,
         ?create_new_customer: bool,
-        ?phone_number: String?,
-        ?preferred_locale: Dodopayments::Models::locale?
+        ?phone_number: String?
       ) -> void
 
       def to_hash: -> {
         email: String,
         name: String,
         create_new_customer: bool,
-        phone_number: String?,
-        preferred_locale: Dodopayments::Models::locale?
+        phone_number: String?
       }
     end
   end

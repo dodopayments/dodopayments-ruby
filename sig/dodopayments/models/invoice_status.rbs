@@ -1,0 +1,19 @@
+module Dodopayments
+  module Models
+    type invoice_status =
+      :open | :paid | :void | :draft | :past_due | :uncollectable
+
+    module InvoiceStatus
+      extend Dodopayments::Internal::Type::Enum
+
+      OPEN: :open
+      PAID: :paid
+      VOID: :void
+      DRAFT: :draft
+      PAST_DUE: :past_due
+      UNCOLLECTABLE: :uncollectable
+
+      def self?.values: -> ::Array[Dodopayments::Models::invoice_status]
+    end
+  end
+end

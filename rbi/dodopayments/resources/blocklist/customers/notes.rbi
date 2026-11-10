@@ -8,14 +8,14 @@ module Dodopayments
           sig do
             params(
               entry_id: String,
-              note: String,
+              text: String,
               request_options: Dodopayments::RequestOptions::OrHash
             ).returns(Dodopayments::Blocklist::Customers::BlockedCustomerNote)
           end
           def create(
             # Blocklist entry id
             entry_id,
-            note:,
+            text:,
             request_options: {}
           )
           end
@@ -24,7 +24,7 @@ module Dodopayments
             params(
               note_id: String,
               entry_id: String,
-              note: String,
+              text: String,
               request_options: Dodopayments::RequestOptions::OrHash
             ).returns(Dodopayments::Blocklist::Customers::BlockedCustomerNote)
           end
@@ -34,7 +34,7 @@ module Dodopayments
             # Path param: Blocklist entry id
             entry_id:,
             # Body param
-            note:,
+            text:,
             request_options: {}
           )
           end

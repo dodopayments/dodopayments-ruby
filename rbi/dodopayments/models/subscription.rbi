@@ -19,6 +19,10 @@ module Dodopayments
       sig { params(billing: Dodopayments::BillingAddress::OrHash).void }
       attr_writer :billing
 
+      # `invoice_led` when invoices bill the subscription. `normal` otherwise.
+      sig { returns(Dodopayments::Subscription::BillingMode::TaggedSymbol) }
+      attr_accessor :billing_mode
+
       # Brand id this subscription belongs to
       sig { returns(String) }
       attr_accessor :brand_id
@@ -151,6 +155,10 @@ module Dodopayments
       end
       attr_writer :cancelled_by
 
+      # How an invoice-led subscription collects each invoice. `null` for `normal`.
+      sig { returns(T.nilable(Dodopayments::CollectionMethod::TaggedSymbol)) }
+      attr_accessor :collection_method
+
       # Customer's responses to custom fields collected during checkout
       sig { returns(T.nilable(T::Array[Dodopayments::CustomFieldResponse])) }
       attr_accessor :custom_field_responses
@@ -185,6 +193,10 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :payment_method_id
 
+      # Days from the invoice date to the due date. `null` for `normal`.
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :payment_terms_days
+
       # Scheduled plan change details, if any
       sig { returns(T.nilable(Dodopayments::ScheduledPlanChange)) }
       attr_reader :scheduled_change
@@ -211,6 +223,7 @@ module Dodopayments
         params(
           addons: T::Array[Dodopayments::AddonCartResponseItem::OrHash],
           billing: Dodopayments::BillingAddress::OrHash,
+          billing_mode: Dodopayments::Subscription::BillingMode::OrSymbol,
           brand_id: String,
           cancel_at_next_billing_date: T::Boolean,
           created_at: Time,
@@ -243,6 +256,8 @@ module Dodopayments
           cancelled_at: T.nilable(Time),
           cancelled_by:
             T.nilable(Dodopayments::SubscriptionCancelledBy::OrHash),
+          collection_method:
+            T.nilable(Dodopayments::CollectionMethod::OrSymbol),
           custom_field_responses:
             T.nilable(T::Array[Dodopayments::CustomFieldResponse::OrHash]),
           customer_business_name: T.nilable(String),
@@ -252,6 +267,7 @@ module Dodopayments
           expires_at: T.nilable(Time),
           paused_at: T.nilable(Time),
           payment_method_id: T.nilable(String),
+          payment_terms_days: T.nilable(Integer),
           scheduled_change:
             T.nilable(Dodopayments::ScheduledPlanChange::OrHash),
           tax_id: T.nilable(String),
@@ -263,6 +279,8 @@ module Dodopayments
         addons:,
         # Billing address details for payments
         billing:,
+        # `invoice_led` when invoices bill the subscription. `normal` otherwise.
+        billing_mode:,
         # Brand id this subscription belongs to
         brand_id:,
         # Indicates if the subscription will cancel at the next billing date
@@ -323,6 +341,8 @@ module Dodopayments
         # The caller that cancelled the subscription or scheduled its cancel. `null` when
         # no caller is known, for example when the system cancelled the subscription.
         cancelled_by: nil,
+        # How an invoice-led subscription collects each invoice. `null` for `normal`.
+        collection_method: nil,
         # Customer's responses to custom fields collected during checkout
         custom_field_responses: nil,
         # Business / legal name associated with the tax id (B2B). When set this is used on
@@ -341,6 +361,8 @@ module Dodopayments
         paused_at: nil,
         # Saved payment method id used for recurring charges
         payment_method_id: nil,
+        # Days from the invoice date to the due date. `null` for `normal`.
+        payment_terms_days: nil,
         # Scheduled plan change details, if any
         scheduled_change: nil,
         # Tax identifier provided for this subscription (if applicable)
@@ -357,6 +379,7 @@ module Dodopayments
           {
             addons: T::Array[Dodopayments::AddonCartResponseItem],
             billing: Dodopayments::BillingAddress,
+            billing_mode: Dodopayments::Subscription::BillingMode::TaggedSymbol,
             brand_id: String,
             cancel_at_next_billing_date: T::Boolean,
             created_at: Time,
@@ -390,6 +413,8 @@ module Dodopayments
               T.nilable(Dodopayments::CancellationFeedback::TaggedSymbol),
             cancelled_at: T.nilable(Time),
             cancelled_by: T.nilable(Dodopayments::SubscriptionCancelledBy),
+            collection_method:
+              T.nilable(Dodopayments::CollectionMethod::TaggedSymbol),
             custom_field_responses:
               T.nilable(T::Array[Dodopayments::CustomFieldResponse]),
             customer_business_name: T.nilable(String),
@@ -399,6 +424,7 @@ module Dodopayments
             expires_at: T.nilable(Time),
             paused_at: T.nilable(Time),
             payment_method_id: T.nilable(String),
+            payment_terms_days: T.nilable(Integer),
             scheduled_change: T.nilable(Dodopayments::ScheduledPlanChange),
             tax_id: T.nilable(String),
             trial_amount: T.nilable(Integer)
@@ -406,6 +432,33 @@ module Dodopayments
         )
       end
       def to_hash
+      end
+
+      # `invoice_led` when invoices bill the subscription. `normal` otherwise.
+      module BillingMode
+        extend Dodopayments::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, Dodopayments::Subscription::BillingMode)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        NORMAL =
+          T.let(:normal, Dodopayments::Subscription::BillingMode::TaggedSymbol)
+        INVOICE_LED =
+          T.let(
+            :invoice_led,
+            Dodopayments::Subscription::BillingMode::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[Dodopayments::Subscription::BillingMode::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
       end
     end
   end

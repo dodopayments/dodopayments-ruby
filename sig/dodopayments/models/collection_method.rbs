@@ -1,0 +1,14 @@
+module Dodopayments
+  module Models
+    type collection_method = :auto_charge | :manual
+
+    module CollectionMethod
+      extend Dodopayments::Internal::Type::Enum
+
+      AUTO_CHARGE: :auto_charge
+      MANUAL: :manual
+
+      def self?.values: -> ::Array[Dodopayments::Models::collection_method]
+    end
+  end
+end
