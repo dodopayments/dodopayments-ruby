@@ -140,7 +140,6 @@ module Dodopayments
       sig do
         params(
           product_cart: T::Array[Dodopayments::ProductItemReq::OrHash],
-          locale: String,
           allowed_payment_method_types:
             T.nilable(T::Array[Dodopayments::PaymentMethodTypes::OrSymbol]),
           billing_address:
@@ -177,29 +176,20 @@ module Dodopayments
         ).returns(Dodopayments::Models::CheckoutSessionPreviewResponse)
       end
       def preview(
-        # Body param: The products of the checkout. A cart holds at most 20 of them,
-        # one-time and subscription products together. An empty cart is valid for the
+        # The products of the checkout. A cart holds at most 20 of them, one-time and
+        # subscription products together. An empty cart is valid for the
         # product-collection flow, where the customer chooses the product later.
         product_cart:,
-        # Query param: Shows the translated name, description and unit of the catalog
-        # entities in this locale. The value must be a code from `GET /locales`, for
-        # example `fr`. A field with no translation, an unknown code, or no code shows the
-        # base text.
-        #
-        # Do not send a text from a localized response back in a create or update request.
-        # The base text then changes to the translated text.
-        locale: nil,
-        # Body param: Customers will never see payment methods that are not in this list.
-        # However, adding a method here does not guarantee customers will see it.
-        # Availability still depends on other factors (e.g., customer location, merchant
-        # settings).
+        # Customers will never see payment methods that are not in this list. However,
+        # adding a method here does not guarantee customers will see it. Availability
+        # still depends on other factors (e.g., customer location, merchant settings).
         #
         # Disclaimar: Always provide 'credit' and 'debit' as a fallback. If all payment
         # methods are unavailable, checkout session will fail.
         allowed_payment_method_types: nil,
-        # Body param: Billing address information for the session
+        # Billing address information for the session
         billing_address: nil,
-        # Body param: The currency to charge the customer in.
+        # The currency to charge the customer in.
         #
         # Adaptive pricing must be enabled for the business. The customer then pays in
         # this currency. If you do not set it, the currency comes from the billing
@@ -208,67 +198,61 @@ module Dodopayments
         # If adaptive pricing is disabled, the API discards this field. The currency then
         # comes from the product price, or from the billing country.
         billing_currency: nil,
-        # Body param: The URL to redirect the customer if they cancel or go back from the
-        # checkout. If not provided, the back button will not be displayed.
+        # The URL to redirect the customer if they cancel or go back from the checkout. If
+        # not provided, the back button will not be displayed.
         cancel_url: nil,
-        # Body param: If confirm is true, all the details will be finalized. If required
-        # data is missing, an API error is thrown.
+        # If confirm is true, all the details will be finalized. If required data is
+        # missing, an API error is thrown.
         confirm: nil,
-        # Body param: Custom fields to collect from customer during checkout (max 5
-        # fields)
+        # Custom fields to collect from customer during checkout (max 5 fields)
         custom_fields: nil,
-        # Body param: Customer details for the session
+        # Customer details for the session
         customer: nil,
-        # Body param: Optional business / legal name associated with the tax id. When
-        # provided together with a valid tax id for a B2B purchase, this name is rendered
-        # on the invoice instead of the customer's personal name.
+        # Optional business / legal name associated with the tax id. When provided
+        # together with a valid tax id for a B2B purchase, this name is rendered on the
+        # invoice instead of the customer's personal name.
         customer_business_name: nil,
-        # Body param: Customization for the checkout session page
+        # Customization for the checkout session page
         customization: nil,
-        # Body param: DEPRECATED: Use discount_codes instead. Cannot be used together with
+        # DEPRECATED: Use discount_codes instead. Cannot be used together with
         # discount_codes.
         discount_code: nil,
-        # Body param: Stacked discount codes to apply, in order. Max 20. Cannot be used
-        # together with discount_code.
+        # Stacked discount codes to apply, in order. Max 20. Cannot be used together with
+        # discount_code.
         discount_codes: nil,
-        # Body param
         feature_flags: nil,
-        # Body param: Override merchant default 3DS behaviour for this session
+        # Override merchant default 3DS behaviour for this session
         force_3ds: nil,
-        # Body param: Override the merchant-level mandate floor (in INR paise) for INR
-        # e-mandates on Indian-card recurring payments. The mandate amount sent to the
-        # processor is `max(this_floor, actual_billing_amount)`, so this is effectively
-        # the customer-facing authorization ceiling whenever billing is lower. When unset,
-        # the merchant setting applies; when that's also unset, the system default of
-        # ₹15,000 applies.
+        # Override the merchant-level mandate floor (in INR paise) for INR e-mandates on
+        # Indian-card recurring payments. The mandate amount sent to the processor is
+        # `max(this_floor, actual_billing_amount)`, so this is effectively the
+        # customer-facing authorization ceiling whenever billing is lower. When unset, the
+        # merchant setting applies; when that's also unset, the system default of ₹15,000
+        # applies.
         mandate_min_amount_inr_paise: nil,
-        # Body param: Additional metadata associated with the payment. Defaults to empty
-        # if not provided.
+        # Additional metadata associated with the payment. Defaults to empty if not
+        # provided.
         metadata: nil,
-        # Body param: If true, only zipcode is required when confirm is true; other
-        # address fields remain optional
+        # If true, only zipcode is required when confirm is true; other address fields
+        # remain optional
         #
         # Default is true when `feature_flags.single_page` is true. Otherwise, default is
         # false.
         minimal_address: nil,
-        # Body param: Optional payment method ID to use for this checkout session. Only
-        # allowed when `confirm` is true. If provided, existing customer id must also be
-        # provided.
+        # Optional payment method ID to use for this checkout session. Only allowed when
+        # `confirm` is true. If provided, existing customer id must also be provided.
         payment_method_id: nil,
-        # Body param: Product collection ID for collection-based checkout flow
+        # Product collection ID for collection-based checkout flow
         product_collection_id: nil,
-        # Body param: The url to redirect after payment failure or success.
+        # The url to redirect after payment failure or success.
         return_url: nil,
-        # Body param: If true, returns a shortened checkout URL. Defaults to false if not
-        # specified.
+        # If true, returns a shortened checkout URL. Defaults to false if not specified.
         short_link: nil,
-        # Body param: Display saved payment methods of a returning customer False by
-        # default
+        # Display saved payment methods of a returning customer False by default
         show_saved_payment_methods: nil,
-        # Body param
         subscription_data: nil,
-        # Body param: Tax ID for the customer (e.g. VAT number). Requires billing_address
-        # with country.
+        # Tax ID for the customer (e.g. VAT number). Requires billing_address with
+        # country.
         tax_id: nil,
         request_options: {}
       )

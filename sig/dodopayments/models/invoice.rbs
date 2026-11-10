@@ -1,0 +1,538 @@
+module Dodopayments
+  module Models
+    type invoice =
+      {
+        allowed_actions: ::Array[Dodopayments::Models::Invoice::allowed_action],
+        amount_due: Integer,
+        amount_paid: Integer,
+        amount_refunded: Integer,
+        billing_mode: Dodopayments::Models::Invoice::billing_mode,
+        business_id: String,
+        created_at: Time,
+        credits: Integer,
+        currency: Dodopayments::Models::currency,
+        customer: Dodopayments::Invoice::Customer,
+        discount_ids: ::Array[String],
+        editable_fields: ::Array[Dodopayments::Models::Invoice::editable_field],
+        frequency: Dodopayments::Models::Invoice::frequency,
+        invoice_id: String,
+        metadata: top,
+        refund_ids: ::Array[String],
+        retry_count: Integer,
+        row_version: Integer,
+        status: Dodopayments::Models::invoice_status,
+        subscription_ids: ::Array[String],
+        tags: ::Array[Dodopayments::Models::Invoice::tag],
+        tax: Integer,
+        total_amount: Integer,
+        collection_method: Dodopayments::Models::collection_method?,
+        due_at: Time?,
+        dunning_state: Dodopayments::Models::dunning_state?,
+        finalized_at: Time?,
+        hosted_url: String?,
+        lines: ::Array[Dodopayments::InvoiceLine]?,
+        memo: String?,
+        next_reminder_at: Time?,
+        next_retry_at: Time?,
+        payment_terms_days: Integer?,
+        payments: ::Array[Dodopayments::Invoice::Payment]?,
+        pdf_url: String?,
+        reminder_settings: Dodopayments::Models::Invoice::reminder_settings?,
+        review_deadline: Time?,
+        sent_at: Time?
+      }
+
+    class Invoice < Dodopayments::Internal::Type::BaseModel
+      attr_accessor allowed_actions: ::Array[Dodopayments::Models::Invoice::allowed_action]
+
+      attr_accessor amount_due: Integer
+
+      attr_accessor amount_paid: Integer
+
+      attr_accessor amount_refunded: Integer
+
+      attr_accessor billing_mode: Dodopayments::Models::Invoice::billing_mode
+
+      attr_accessor business_id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor credits: Integer
+
+      attr_accessor currency: Dodopayments::Models::currency
+
+      attr_accessor customer: Dodopayments::Invoice::Customer
+
+      attr_accessor discount_ids: ::Array[String]
+
+      attr_accessor editable_fields: ::Array[Dodopayments::Models::Invoice::editable_field]
+
+      attr_accessor frequency: Dodopayments::Models::Invoice::frequency
+
+      attr_accessor invoice_id: String
+
+      attr_accessor metadata: top
+
+      attr_accessor refund_ids: ::Array[String]
+
+      attr_accessor retry_count: Integer
+
+      attr_accessor row_version: Integer
+
+      attr_accessor status: Dodopayments::Models::invoice_status
+
+      attr_accessor subscription_ids: ::Array[String]
+
+      attr_accessor tags: ::Array[Dodopayments::Models::Invoice::tag]
+
+      attr_accessor tax: Integer
+
+      attr_accessor total_amount: Integer
+
+      attr_accessor collection_method: Dodopayments::Models::collection_method?
+
+      attr_accessor due_at: Time?
+
+      attr_accessor dunning_state: Dodopayments::Models::dunning_state?
+
+      attr_accessor finalized_at: Time?
+
+      attr_accessor hosted_url: String?
+
+      attr_accessor lines: ::Array[Dodopayments::InvoiceLine]?
+
+      attr_accessor memo: String?
+
+      attr_accessor next_reminder_at: Time?
+
+      attr_accessor next_retry_at: Time?
+
+      attr_accessor payment_terms_days: Integer?
+
+      attr_accessor payments: ::Array[Dodopayments::Invoice::Payment]?
+
+      attr_accessor pdf_url: String?
+
+      attr_accessor reminder_settings: Dodopayments::Models::Invoice::reminder_settings?
+
+      attr_accessor review_deadline: Time?
+
+      attr_accessor sent_at: Time?
+
+      def initialize: (
+        allowed_actions: ::Array[Dodopayments::Models::Invoice::allowed_action],
+        amount_due: Integer,
+        amount_paid: Integer,
+        amount_refunded: Integer,
+        billing_mode: Dodopayments::Models::Invoice::billing_mode,
+        business_id: String,
+        created_at: Time,
+        credits: Integer,
+        currency: Dodopayments::Models::currency,
+        customer: Dodopayments::Invoice::Customer,
+        discount_ids: ::Array[String],
+        editable_fields: ::Array[Dodopayments::Models::Invoice::editable_field],
+        frequency: Dodopayments::Models::Invoice::frequency,
+        invoice_id: String,
+        metadata: top,
+        refund_ids: ::Array[String],
+        retry_count: Integer,
+        row_version: Integer,
+        status: Dodopayments::Models::invoice_status,
+        subscription_ids: ::Array[String],
+        tags: ::Array[Dodopayments::Models::Invoice::tag],
+        tax: Integer,
+        total_amount: Integer,
+        ?collection_method: Dodopayments::Models::collection_method?,
+        ?due_at: Time?,
+        ?dunning_state: Dodopayments::Models::dunning_state?,
+        ?finalized_at: Time?,
+        ?hosted_url: String?,
+        ?lines: ::Array[Dodopayments::InvoiceLine]?,
+        ?memo: String?,
+        ?next_reminder_at: Time?,
+        ?next_retry_at: Time?,
+        ?payment_terms_days: Integer?,
+        ?payments: ::Array[Dodopayments::Invoice::Payment]?,
+        ?pdf_url: String?,
+        ?reminder_settings: Dodopayments::Models::Invoice::reminder_settings?,
+        ?review_deadline: Time?,
+        ?sent_at: Time?
+      ) -> void
+
+      def to_hash: -> {
+        allowed_actions: ::Array[Dodopayments::Models::Invoice::allowed_action],
+        amount_due: Integer,
+        amount_paid: Integer,
+        amount_refunded: Integer,
+        billing_mode: Dodopayments::Models::Invoice::billing_mode,
+        business_id: String,
+        created_at: Time,
+        credits: Integer,
+        currency: Dodopayments::Models::currency,
+        customer: Dodopayments::Invoice::Customer,
+        discount_ids: ::Array[String],
+        editable_fields: ::Array[Dodopayments::Models::Invoice::editable_field],
+        frequency: Dodopayments::Models::Invoice::frequency,
+        invoice_id: String,
+        metadata: top,
+        refund_ids: ::Array[String],
+        retry_count: Integer,
+        row_version: Integer,
+        status: Dodopayments::Models::invoice_status,
+        subscription_ids: ::Array[String],
+        tags: ::Array[Dodopayments::Models::Invoice::tag],
+        tax: Integer,
+        total_amount: Integer,
+        collection_method: Dodopayments::Models::collection_method?,
+        due_at: Time?,
+        dunning_state: Dodopayments::Models::dunning_state?,
+        finalized_at: Time?,
+        hosted_url: String?,
+        lines: ::Array[Dodopayments::InvoiceLine]?,
+        memo: String?,
+        next_reminder_at: Time?,
+        next_retry_at: Time?,
+        payment_terms_days: Integer?,
+        payments: ::Array[Dodopayments::Invoice::Payment]?,
+        pdf_url: String?,
+        reminder_settings: Dodopayments::Models::Invoice::reminder_settings?,
+        review_deadline: Time?,
+        sent_at: Time?
+      }
+
+      type allowed_action =
+        :edit
+        | :finalize
+        | :delete
+        | :send
+        | :retry
+        | :void
+        | :mark_uncollectable
+        | :change_dunning
+        | :add_note
+        | :duplicate
+
+      module AllowedAction
+        extend Dodopayments::Internal::Type::Enum
+
+        EDIT: :edit
+        FINALIZE: :finalize
+        DELETE: :delete
+        SEND: :send
+        RETRY: :retry
+        VOID: :void
+        MARK_UNCOLLECTABLE: :mark_uncollectable
+        CHANGE_DUNNING: :change_dunning
+        ADD_NOTE: :add_note
+        DUPLICATE: :duplicate
+
+        def self?.values: -> ::Array[Dodopayments::Models::Invoice::allowed_action]
+      end
+
+      type billing_mode = :normal | :invoice_led
+
+      module BillingMode
+        extend Dodopayments::Internal::Type::Enum
+
+        NORMAL: :normal
+        INVOICE_LED: :invoice_led
+
+        def self?.values: -> ::Array[Dodopayments::Models::Invoice::billing_mode]
+      end
+
+      type customer =
+        {
+          billing_address: Dodopayments::Invoice::Customer::BillingAddress,
+          cc_emails: ::Array[String],
+          customer_id: String,
+          email: String?,
+          tax_id: String?
+        }
+
+      class Customer < Dodopayments::Internal::Type::BaseModel
+        attr_accessor billing_address: Dodopayments::Invoice::Customer::BillingAddress
+
+        attr_accessor cc_emails: ::Array[String]
+
+        attr_accessor customer_id: String
+
+        attr_accessor email: String?
+
+        attr_accessor tax_id: String?
+
+        def initialize: (
+          billing_address: Dodopayments::Invoice::Customer::BillingAddress,
+          cc_emails: ::Array[String],
+          customer_id: String,
+          ?email: String?,
+          ?tax_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          billing_address: Dodopayments::Invoice::Customer::BillingAddress,
+          cc_emails: ::Array[String],
+          customer_id: String,
+          email: String?,
+          tax_id: String?
+        }
+
+        type billing_address =
+          {
+            city: String?,
+            country: Dodopayments::Models::country_code?,
+            state: String?,
+            street: String?,
+            zipcode: String?
+          }
+
+        class BillingAddress < Dodopayments::Internal::Type::BaseModel
+          attr_accessor city: String?
+
+          attr_accessor country: Dodopayments::Models::country_code?
+
+          attr_accessor state: String?
+
+          attr_accessor street: String?
+
+          attr_accessor zipcode: String?
+
+          def initialize: (
+            ?city: String?,
+            ?country: Dodopayments::Models::country_code?,
+            ?state: String?,
+            ?street: String?,
+            ?zipcode: String?
+          ) -> void
+
+          def to_hash: -> {
+            city: String?,
+            country: Dodopayments::Models::country_code?,
+            state: String?,
+            street: String?,
+            zipcode: String?
+          }
+        end
+      end
+
+      type editable_field =
+        :customer
+        | :items
+        | :discounts
+        | :currency
+        | :billing_address
+        | :tax_id
+        | :review_required
+        | :due_at
+        | :collection_method
+        | :memo
+        | :customer_email
+        | :cc_emails
+        | :dunning
+        | :metadata
+
+      module EditableField
+        extend Dodopayments::Internal::Type::Enum
+
+        CUSTOMER: :customer
+        ITEMS: :items
+        DISCOUNTS: :discounts
+        CURRENCY: :currency
+        BILLING_ADDRESS: :billing_address
+        TAX_ID: :tax_id
+        REVIEW_REQUIRED: :review_required
+        DUE_AT: :due_at
+        COLLECTION_METHOD: :collection_method
+        MEMO: :memo
+        CUSTOMER_EMAIL: :customer_email
+        CC_EMAILS: :cc_emails
+        DUNNING: :dunning
+        METADATA: :metadata
+
+        def self?.values: -> ::Array[Dodopayments::Models::Invoice::editable_field]
+      end
+
+      type frequency =
+        Dodopayments::Invoice::Frequency::OneTime
+        | Dodopayments::Invoice::Frequency::Recurring
+        | Dodopayments::Invoice::Frequency::Mixed
+
+      module Frequency
+        extend Dodopayments::Internal::Type::Union
+
+        type one_time = { type: :one_time }
+
+        class OneTime < Dodopayments::Internal::Type::BaseModel
+          attr_accessor type: :one_time
+
+          def initialize: (?type: :one_time) -> void
+
+          def to_hash: -> { type: :one_time }
+        end
+
+        type recurring =
+          {
+            count: Integer,
+            interval: Dodopayments::Models::time_interval,
+            type: :recurring
+          }
+
+        class Recurring < Dodopayments::Internal::Type::BaseModel
+          attr_accessor count: Integer
+
+          attr_accessor interval: Dodopayments::Models::time_interval
+
+          attr_accessor type: :recurring
+
+          def initialize: (
+            count: Integer,
+            interval: Dodopayments::Models::time_interval,
+            ?type: :recurring
+          ) -> void
+
+          def to_hash: -> {
+            count: Integer,
+            interval: Dodopayments::Models::time_interval,
+            type: :recurring
+          }
+        end
+
+        type mixed = { type: :mixed }
+
+        class Mixed < Dodopayments::Internal::Type::BaseModel
+          attr_accessor type: :mixed
+
+          def initialize: (?type: :mixed) -> void
+
+          def to_hash: -> { type: :mixed }
+        end
+
+        def self?.variants: -> ::Array[Dodopayments::Models::Invoice::frequency]
+      end
+
+      type tag = :refunded | :partially_refunded | :disputed | :payment_reversed
+
+      module Tag
+        extend Dodopayments::Internal::Type::Enum
+
+        REFUNDED: :refunded
+        PARTIALLY_REFUNDED: :partially_refunded
+        DISPUTED: :disputed
+        PAYMENT_REVERSED: :payment_reversed
+
+        def self?.values: -> ::Array[Dodopayments::Models::Invoice::tag]
+      end
+
+      type payment =
+        {
+          amount: Integer,
+          created_at: Time,
+          payment_id: String,
+          retry_attempt: Integer?,
+          status: Dodopayments::Models::intent_status?
+        }
+
+      class Payment < Dodopayments::Internal::Type::BaseModel
+        attr_accessor amount: Integer
+
+        attr_accessor created_at: Time
+
+        attr_accessor payment_id: String
+
+        attr_accessor retry_attempt: Integer?
+
+        attr_accessor status: Dodopayments::Models::intent_status?
+
+        def initialize: (
+          amount: Integer,
+          created_at: Time,
+          payment_id: String,
+          ?retry_attempt: Integer?,
+          ?status: Dodopayments::Models::intent_status?
+        ) -> void
+
+        def to_hash: -> {
+          amount: Integer,
+          created_at: Time,
+          payment_id: String,
+          retry_attempt: Integer?,
+          status: Dodopayments::Models::intent_status?
+        }
+      end
+
+      type reminder_settings =
+        Dodopayments::Invoice::ReminderSettings::Snapshot
+        | Dodopayments::Invoice::ReminderSettings::Override
+
+      module ReminderSettings
+        extend Dodopayments::Internal::Type::Union
+
+        type snapshot =
+          {
+            kind: :snapshot,
+            offsets_minutes: ::Array[Integer],
+            paused: bool,
+            reminders_enabled: bool
+          }
+
+        class Snapshot < Dodopayments::Internal::Type::BaseModel
+          attr_accessor kind: :snapshot
+
+          attr_accessor offsets_minutes: ::Array[Integer]
+
+          attr_accessor paused: bool
+
+          attr_accessor reminders_enabled: bool
+
+          def initialize: (
+            offsets_minutes: ::Array[Integer],
+            paused: bool,
+            reminders_enabled: bool,
+            ?kind: :snapshot
+          ) -> void
+
+          def to_hash: -> {
+            kind: :snapshot,
+            offsets_minutes: ::Array[Integer],
+            paused: bool,
+            reminders_enabled: bool
+          }
+        end
+
+        type override =
+          {
+            kind: :override,
+            offsets_minutes: ::Array[Integer]?,
+            paused: bool?,
+            reminders_enabled: bool?
+          }
+
+        class Override < Dodopayments::Internal::Type::BaseModel
+          attr_accessor kind: :override
+
+          attr_accessor offsets_minutes: ::Array[Integer]?
+
+          attr_accessor paused: bool?
+
+          attr_accessor reminders_enabled: bool?
+
+          def initialize: (
+            ?offsets_minutes: ::Array[Integer]?,
+            ?paused: bool?,
+            ?reminders_enabled: bool?,
+            ?kind: :override
+          ) -> void
+
+          def to_hash: -> {
+            kind: :override,
+            offsets_minutes: ::Array[Integer]?,
+            paused: bool?,
+            reminders_enabled: bool?
+          }
+        end
+
+        def self?.variants: -> ::Array[Dodopayments::Models::Invoice::reminder_settings]
+      end
+    end
+  end
+end

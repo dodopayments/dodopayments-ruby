@@ -1,0 +1,48 @@
+module Dodopayments
+  module Models
+    type invoice_finalize_params =
+      {
+        invoice_id: String,
+        if_match: String,
+        cc_emails: ::Array[String]?,
+        customer_email: String?,
+        send_: bool
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class InvoiceFinalizeParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor invoice_id: String
+
+      attr_accessor if_match: String
+
+      attr_accessor cc_emails: ::Array[String]?
+
+      attr_accessor customer_email: String?
+
+      attr_reader send_: bool?
+
+      def send_=: (bool) -> bool
+
+      def initialize: (
+        invoice_id: String,
+        if_match: String,
+        ?cc_emails: ::Array[String]?,
+        ?customer_email: String?,
+        ?send_: bool,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        invoice_id: String,
+        if_match: String,
+        cc_emails: ::Array[String]?,
+        customer_email: String?,
+        send_: bool,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

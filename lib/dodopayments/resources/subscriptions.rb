@@ -74,14 +74,9 @@ module Dodopayments
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {Dodopayments::Models::SubscriptionRetrieveParams} for more details.
-      #
-      # @overload retrieve(subscription_id, locale: nil, request_options: {})
+      # @overload retrieve(subscription_id, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
-      #
-      # @param locale [String] Shows the translated name, description and unit of the catalog entities in this
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -89,14 +84,11 @@ module Dodopayments
       #
       # @see Dodopayments::Models::SubscriptionRetrieveParams
       def retrieve(subscription_id, params = {})
-        parsed, options = Dodopayments::SubscriptionRetrieveParams.dump_request(params)
-        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["subscriptions/%1$s", subscription_id],
-          query: query,
           model: Dodopayments::Subscription,
-          options: options
+          options: params[:request_options]
         )
       end
 
@@ -158,7 +150,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionListParams} for more details.
       #
-      # @overload list(brand_id: nil, cancel_at_next_billing_date: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, locale: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
+      # @overload list(brand_id: nil, cancel_at_next_billing_date: nil, created_at_gte: nil, created_at_lte: nil, customer_id: nil, page_number: nil, page_size: nil, product_id: nil, status: nil, request_options: {})
       #
       # @param brand_id [String] filter by Brand id
       #
@@ -169,8 +161,6 @@ module Dodopayments
       # @param created_at_lte [Time] Get events created before this time
       #
       # @param customer_id [String] Filter by customer id
-      #
-      # @param locale [String] Shows the translated name, description and unit of the catalog entities in this
       #
       # @param page_number [Integer] Page number default is 0
       #
@@ -219,7 +209,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionChangePlanParams} for more details.
       #
-      # @overload change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, cancel_older_payment_link: nil, cancel_scheduled_change_plan: nil, collect_via_payment_link: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, return_url: nil, request_options: {})
+      # @overload change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, cancel_older_payment_link: nil, cancel_scheduled_change_plan: nil, collect_via_payment_link: nil, credit: nil, discount_code: nil, discount_codes: nil, effective_at: nil, invoice: nil, metadata: nil, on_payment_failure: nil, return_url: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -239,11 +229,15 @@ module Dodopayments
       #
       # @param collect_via_payment_link [Boolean] Collect the plan-change amount with a payment link. The customer then
       #
+      # @param credit [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::Credit, nil] Where a downgrade credit goes. Only invoice-led subscriptions read it.
+      #
       # @param discount_code [String, nil] DEPRECATED: Use discount_codes instead. Cannot be used together with discount_co
       #
       # @param discount_codes [Array<String>, nil] Stacked discount codes to apply to the new plan. Max 20.
       #
       # @param effective_at [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::EffectiveAt] When to apply the plan change.
+      #
+      # @param invoice [Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice, nil] The invoice of a plan change billed now. Only invoice-led subscriptions read it.
       #
       # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
@@ -305,7 +299,7 @@ module Dodopayments
       # Some parameter documentations has been truncated, see
       # {Dodopayments::Models::SubscriptionPreviewChangePlanParams} for more details.
       #
-      # @overload preview_change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, cancel_older_payment_link: nil, cancel_scheduled_change_plan: nil, collect_via_payment_link: nil, discount_code: nil, discount_codes: nil, effective_at: nil, metadata: nil, on_payment_failure: nil, return_url: nil, request_options: {})
+      # @overload preview_change_plan(subscription_id, product_id:, proration_billing_mode:, quantity:, adaptive_currency_fees_inclusive: nil, addons: nil, cancel_older_payment_link: nil, cancel_scheduled_change_plan: nil, collect_via_payment_link: nil, credit: nil, discount_code: nil, discount_codes: nil, effective_at: nil, invoice: nil, metadata: nil, on_payment_failure: nil, return_url: nil, request_options: {})
       #
       # @param subscription_id [String] Subscription Id
       #
@@ -325,11 +319,15 @@ module Dodopayments
       #
       # @param collect_via_payment_link [Boolean] Collect the plan-change amount with a payment link. The customer then
       #
+      # @param credit [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::Credit, nil] Where a downgrade credit goes. Only invoice-led subscriptions read it.
+      #
       # @param discount_code [String, nil] DEPRECATED: Use discount_codes instead. Cannot be used together with discount_co
       #
       # @param discount_codes [Array<String>, nil] Stacked discount codes to apply to the new plan. Max 20.
       #
       # @param effective_at [Symbol, Dodopayments::Models::UpdateSubscriptionPlanReq::EffectiveAt] When to apply the plan change.
+      #
+      # @param invoice [Dodopayments::Models::UpdateSubscriptionPlanReq::Invoice, nil] The invoice of a plan change billed now. Only invoice-led subscriptions read it.
       #
       # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Metadata for the payment. If not passed, the metadata of the subscription will b
       #
@@ -367,6 +365,28 @@ module Dodopayments
           method: :get,
           path: ["subscriptions/%1$s/credit-usage", subscription_id],
           model: Dodopayments::Models::SubscriptionRetrieveCreditUsageResponse,
+          options: params[:request_options]
+        )
+      end
+
+      # Prices the next cycle invoice of an invoice-led subscription. The invoice ID in
+      # the response is not stored, so the response has no allowed actions and no
+      # editable fields.
+      #
+      # @overload retrieve_upcoming_invoice(subscription_id, request_options: {})
+      #
+      # @param subscription_id [String] Subscription ID
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Models::Invoice]
+      #
+      # @see Dodopayments::Models::SubscriptionRetrieveUpcomingInvoiceParams
+      def retrieve_upcoming_invoice(subscription_id, params = {})
+        @client.request(
+          method: :get,
+          path: ["subscriptions/%1$s/upcoming-invoice", subscription_id],
+          model: Dodopayments::Invoice,
           options: params[:request_options]
         )
       end
@@ -446,6 +466,9 @@ module Dodopayments
         )
       end
 
+      # For an invoice-led subscription, billing charges the open invoices after the
+      # change, so the response has no payment.
+      #
       # @overload update_payment_method(subscription_id, payment_method:, request_options: {})
       #
       # @param subscription_id [String] Subscription Id

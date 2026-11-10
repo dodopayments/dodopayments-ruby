@@ -18,8 +18,7 @@ module Dodopayments
         sig { returns(String) }
         attr_accessor :payout_id
 
-        # The signed link token. If the business asks for a credential on its invoice
-        # links, a valid token for this record replaces the credential.
+        # The signed link token. A valid token for this record replaces the credential.
         sig { returns(T.nilable(String)) }
         attr_reader :token
 
@@ -35,8 +34,7 @@ module Dodopayments
         end
         def self.new(
           payout_id:,
-          # The signed link token. If the business asks for a credential on its invoice
-          # links, a valid token for this record replaces the credential.
+          # The signed link token. A valid token for this record replaces the credential.
           token: nil,
           request_options: {}
         )

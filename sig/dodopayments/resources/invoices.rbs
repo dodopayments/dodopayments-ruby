@@ -3,6 +3,163 @@ module Dodopayments
     class Invoices
       attr_reader payments: Dodopayments::Resources::Invoices::Payments
 
+      def create: (
+        collection_method: Dodopayments::Models::collection_method,
+        currency: Dodopayments::Models::currency,
+        customer_id: String,
+        items: ::Array[Dodopayments::Models::InvoiceCreateParams::item],
+        ?billing_address: Dodopayments::InvoiceCreateParams::BillingAddress?,
+        ?cc_emails: ::Array[String]?,
+        ?customer_email: String?,
+        ?discount_ids: ::Array[String]?,
+        ?due_at: Time?,
+        ?dunning: Dodopayments::InvoiceCreateParams::Dunning?,
+        ?memo: String?,
+        ?metadata: Dodopayments::Models::metadata,
+        ?payment_terms: Dodopayments::Models::InvoiceCreateParams::payment_terms?,
+        ?review_required: bool,
+        ?tax_id: String?,
+        ?idempotency_key: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Invoice
+
+      def retrieve: (
+        String invoice_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Invoice
+
+      def update: (
+        String invoice_id,
+        if_match: String,
+        ?billing_address: Dodopayments::InvoiceUpdateParams::BillingAddress?,
+        ?cc_emails: ::Array[String]?,
+        ?collection_method: Dodopayments::Models::collection_method?,
+        ?currency: Dodopayments::Models::currency?,
+        ?customer_email: String?,
+        ?customer_id: String?,
+        ?discount_ids: ::Array[String]?,
+        ?due_at: Time?,
+        ?dunning: Dodopayments::InvoiceUpdateParams::Dunning?,
+        ?items: ::Array[Dodopayments::Models::InvoiceUpdateParams::item]?,
+        ?memo: String?,
+        ?metadata: Dodopayments::Models::metadata?,
+        ?payment_terms: Dodopayments::Models::InvoiceUpdateParams::payment_terms?,
+        ?review_required: bool?,
+        ?tax_id: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Invoice
+
+      def list: (
+        ?collection_method: Dodopayments::Models::InvoiceListParams::collection_method,
+        ?created_at_gte: Time,
+        ?created_at_lte: Time,
+        ?customer_id: String,
+        ?due_at_gte: Time,
+        ?due_at_lte: Time,
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?status: ::Array[Dodopayments::Models::InvoiceListParams::status],
+        ?subscription_id: String,
+        ?tags: ::Array[Dodopayments::Models::InvoiceListParams::tag],
+        ?total_amount_gte: Integer,
+        ?total_amount_lte: Integer,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Invoice]
+
+      def delete: (
+        String invoice_id,
+        if_match: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> nil
+
+      def add_note: (
+        String invoice_id,
+        text: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Invoice
+
+      def create_hosted_link: (
+        String invoice_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::InvoiceCreateHostedLinkResponse
+
+      def duplicate: (
+        String invoice_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Invoice
+
+      def finalize: (
+        String invoice_id,
+        if_match: String,
+        ?cc_emails: ::Array[String]?,
+        ?customer_email: String?,
+        ?send_: bool,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Invoice
+
+      def list_events: (
+        String invoice_id,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::InvoiceListEventsResponse
+
+      def mark_uncollectable: (
+        String invoice_id,
+        if_match: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Invoice
+
+      def preview: (
+        collection_method: Dodopayments::Models::collection_method,
+        currency: Dodopayments::Models::currency,
+        customer_id: String,
+        items: ::Array[Dodopayments::Models::InvoicePreviewParams::item],
+        ?format_: Dodopayments::Models::InvoicePreviewParams::format_,
+        ?billing_address: Dodopayments::InvoicePreviewParams::BillingAddress?,
+        ?cc_emails: ::Array[String]?,
+        ?customer_email: String?,
+        ?discount_ids: ::Array[String]?,
+        ?due_at: Time?,
+        ?dunning: Dodopayments::InvoicePreviewParams::Dunning?,
+        ?memo: String?,
+        ?metadata: Dodopayments::Models::metadata,
+        ?payment_terms: Dodopayments::Models::InvoicePreviewParams::payment_terms?,
+        ?review_required: bool,
+        ?tax_id: String?,
+        ?request_options: Dodopayments::request_opts
+      ) -> StringIO
+
+      def preview_existing: (
+        String invoice_id,
+        ?format_: Dodopayments::Models::InvoicePreviewExistingParams::format_,
+        ?request_options: Dodopayments::request_opts
+      ) -> StringIO
+
+      def retry_: (
+        String invoice_id,
+        if_match: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Invoice
+
+      def send_: (
+        String invoice_id,
+        if_match: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Invoice
+
+      def update_dunning: (
+        String invoice_id,
+        action: Dodopayments::Models::InvoiceUpdateDunningParams::action,
+        if_match: String,
+        ?offsets_days: ::Array[Integer]?,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Invoice
+
+      def `void`: (
+        String invoice_id,
+        if_match: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Invoice
+
       def initialize: (client: Dodopayments::Client) -> void
     end
   end

@@ -4,6 +4,7 @@ module Dodopayments
       {
         addons: ::Array[Dodopayments::AddonCartResponseItem],
         billing: Dodopayments::BillingAddress,
+        billing_mode: Dodopayments::Models::Subscription::billing_mode,
         brand_id: String,
         cancel_at_next_billing_date: bool,
         created_at: Time,
@@ -32,6 +33,7 @@ module Dodopayments
         cancellation_feedback: Dodopayments::Models::cancellation_feedback?,
         cancelled_at: Time?,
         cancelled_by: Dodopayments::SubscriptionCancelledBy?,
+        collection_method: Dodopayments::Models::collection_method?,
         custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?,
         customer_business_name: String?,
         discount_cycles_remaining: Integer?,
@@ -40,6 +42,7 @@ module Dodopayments
         expires_at: Time?,
         paused_at: Time?,
         payment_method_id: String?,
+        payment_terms_days: Integer?,
         scheduled_change: Dodopayments::ScheduledPlanChange?,
         tax_id: String?,
         trial_amount: Integer?
@@ -49,6 +52,8 @@ module Dodopayments
       attr_accessor addons: ::Array[Dodopayments::AddonCartResponseItem]
 
       attr_accessor billing: Dodopayments::BillingAddress
+
+      attr_accessor billing_mode: Dodopayments::Models::Subscription::billing_mode
 
       attr_accessor brand_id: String
 
@@ -106,6 +111,8 @@ module Dodopayments
 
       attr_accessor cancelled_by: Dodopayments::SubscriptionCancelledBy?
 
+      attr_accessor collection_method: Dodopayments::Models::collection_method?
+
       attr_accessor custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?
 
       attr_accessor customer_business_name: String?
@@ -122,6 +129,8 @@ module Dodopayments
 
       attr_accessor payment_method_id: String?
 
+      attr_accessor payment_terms_days: Integer?
+
       attr_accessor scheduled_change: Dodopayments::ScheduledPlanChange?
 
       attr_accessor tax_id: String?
@@ -131,6 +140,7 @@ module Dodopayments
       def initialize: (
         addons: ::Array[Dodopayments::AddonCartResponseItem],
         billing: Dodopayments::BillingAddress,
+        billing_mode: Dodopayments::Models::Subscription::billing_mode,
         brand_id: String,
         cancel_at_next_billing_date: bool,
         created_at: Time,
@@ -159,6 +169,7 @@ module Dodopayments
         ?cancellation_feedback: Dodopayments::Models::cancellation_feedback?,
         ?cancelled_at: Time?,
         ?cancelled_by: Dodopayments::SubscriptionCancelledBy?,
+        ?collection_method: Dodopayments::Models::collection_method?,
         ?custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?,
         ?customer_business_name: String?,
         ?discount_cycles_remaining: Integer?,
@@ -167,6 +178,7 @@ module Dodopayments
         ?expires_at: Time?,
         ?paused_at: Time?,
         ?payment_method_id: String?,
+        ?payment_terms_days: Integer?,
         ?scheduled_change: Dodopayments::ScheduledPlanChange?,
         ?tax_id: String?,
         ?trial_amount: Integer?
@@ -175,6 +187,7 @@ module Dodopayments
       def to_hash: -> {
         addons: ::Array[Dodopayments::AddonCartResponseItem],
         billing: Dodopayments::BillingAddress,
+        billing_mode: Dodopayments::Models::Subscription::billing_mode,
         brand_id: String,
         cancel_at_next_billing_date: bool,
         created_at: Time,
@@ -203,6 +216,7 @@ module Dodopayments
         cancellation_feedback: Dodopayments::Models::cancellation_feedback?,
         cancelled_at: Time?,
         cancelled_by: Dodopayments::SubscriptionCancelledBy?,
+        collection_method: Dodopayments::Models::collection_method?,
         custom_field_responses: ::Array[Dodopayments::CustomFieldResponse]?,
         customer_business_name: String?,
         discount_cycles_remaining: Integer?,
@@ -211,10 +225,22 @@ module Dodopayments
         expires_at: Time?,
         paused_at: Time?,
         payment_method_id: String?,
+        payment_terms_days: Integer?,
         scheduled_change: Dodopayments::ScheduledPlanChange?,
         tax_id: String?,
         trial_amount: Integer?
       }
+
+      type billing_mode = :normal | :invoice_led
+
+      module BillingMode
+        extend Dodopayments::Internal::Type::Enum
+
+        NORMAL: :normal
+        INVOICE_LED: :invoice_led
+
+        def self?.values: -> ::Array[Dodopayments::Models::Subscription::billing_mode]
+      end
     end
   end
 end

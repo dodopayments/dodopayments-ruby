@@ -1,0 +1,25 @@
+module Dodopayments
+  module Models
+    type invoice_add_note_params =
+      { invoice_id: String } & Dodopayments::Internal::Type::request_parameters
+
+    class InvoiceAddNoteParams < Dodopayments::Models::Blocklist::Customers::NoteRequest
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      def invoice_id: -> String
+
+      def invoice_id=: (String _) -> String
+
+      def initialize: (
+        invoice_id: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        invoice_id: String,
+        request_options: Dodopayments::RequestOptions
+      }
+    end
+  end
+end

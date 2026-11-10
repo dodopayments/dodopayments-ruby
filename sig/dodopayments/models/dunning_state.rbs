@@ -1,0 +1,16 @@
+module Dodopayments
+  module Models
+    type dunning_state = :not_started | :active | :paused | :exhausted
+
+    module DunningState
+      extend Dodopayments::Internal::Type::Enum
+
+      NOT_STARTED: :not_started
+      ACTIVE: :active
+      PAUSED: :paused
+      EXHAUSTED: :exhausted
+
+      def self?.values: -> ::Array[Dodopayments::Models::dunning_state]
+    end
+  end
+end

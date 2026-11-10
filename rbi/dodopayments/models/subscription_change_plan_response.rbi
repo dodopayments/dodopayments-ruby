@@ -19,6 +19,11 @@ module Dodopayments
       sig { returns(T.nilable(Time)) }
       attr_accessor :expires_on
 
+      # The invoice that bills the plan change. Set only for an invoice-led
+      # subscription.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :invoice_id
+
       # Id of the payment that settles the plan change.
       sig { returns(T.nilable(String)) }
       attr_accessor :payment_id
@@ -26,6 +31,10 @@ module Dodopayments
       # Checkout page URL. Give this to the customer.
       sig { returns(T.nilable(String)) }
       attr_accessor :payment_link
+
+      # The refund of a downgrade with `credit: refund`.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :refund_id
 
       # Handles for a hosted checkout page that settles a plan change.
       #
@@ -36,8 +45,10 @@ module Dodopayments
         params(
           client_secret: T.nilable(String),
           expires_on: T.nilable(Time),
+          invoice_id: T.nilable(String),
           payment_id: T.nilable(String),
-          payment_link: T.nilable(String)
+          payment_link: T.nilable(String),
+          refund_id: T.nilable(String)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -45,10 +56,15 @@ module Dodopayments
         client_secret: nil,
         # When the link stops working.
         expires_on: nil,
+        # The invoice that bills the plan change. Set only for an invoice-led
+        # subscription.
+        invoice_id: nil,
         # Id of the payment that settles the plan change.
         payment_id: nil,
         # Checkout page URL. Give this to the customer.
-        payment_link: nil
+        payment_link: nil,
+        # The refund of a downgrade with `credit: refund`.
+        refund_id: nil
       )
       end
 
@@ -57,8 +73,10 @@ module Dodopayments
           {
             client_secret: T.nilable(String),
             expires_on: T.nilable(Time),
+            invoice_id: T.nilable(String),
             payment_id: T.nilable(String),
-            payment_link: T.nilable(String)
+            payment_link: T.nilable(String),
+            refund_id: T.nilable(String)
           }
         )
       end
