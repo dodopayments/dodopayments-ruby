@@ -315,6 +315,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         metadata: Dodopayments::Internal::Type::Unknown,
         refund_ids: ^(Dodopayments::Internal::Type::ArrayOf[String]),
         retry_count: Integer,
+        review_required: Dodopayments::Internal::Type::Boolean,
         row_version: Integer,
         status: Dodopayments::InvoiceStatus,
         subscription_ids: ^(Dodopayments::Internal::Type::ArrayOf[String]),
@@ -330,6 +331,7 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         memo: String | nil,
         next_reminder_at: Time | nil,
         next_retry_at: Time | nil,
+        payment_method_id: String | nil,
         payment_terms_days: Integer | nil,
         payments: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Invoice::Payment]) | nil,
         pdf_url: String | nil,
@@ -359,6 +361,28 @@ class Dodopayments::Test::Resources::SubscriptionsTest < Dodopayments::Test::Res
         end_date: Time,
         meters: ^(Dodopayments::Internal::Type::ArrayOf[Dodopayments::Models::SubscriptionRetrieveUsageHistoryResponse::Meter]),
         start_date: Time
+      }
+    end
+  end
+
+  def test_start_trial_required_params
+    response =
+      @dodo_payments.subscriptions.start_trial(
+        collection_method: :auto_charge,
+        currency: :AED,
+        customer_id: "customer_id",
+        product_id: "product_id"
+      )
+
+    assert_pattern do
+      response => Dodopayments::Models::SubscriptionStartTrialResponse
+    end
+
+    assert_pattern do
+      response => {
+        invoice_id: String,
+        subscription_id: String,
+        trial_ends_at: Time
       }
     end
   end

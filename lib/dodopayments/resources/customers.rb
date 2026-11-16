@@ -214,9 +214,13 @@ module Dodopayments
         )
       end
 
-      # @overload retrieve_payment_methods(customer_id, request_options: {})
+      # @overload retrieve_payment_methods(customer_id, billing_country: nil, currency: nil, request_options: {})
       #
       # @param customer_id [String] Customer Id
+      #
+      # @param billing_country [Symbol, Dodopayments::Models::CountryCode] ISO country code alpha2 variant
+      #
+      # @param currency [Symbol, Dodopayments::Models::Currency]
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -224,11 +228,14 @@ module Dodopayments
       #
       # @see Dodopayments::Models::CustomerRetrievePaymentMethodsParams
       def retrieve_payment_methods(customer_id, params = {})
+        parsed, options = Dodopayments::CustomerRetrievePaymentMethodsParams.dump_request(params)
+        query = Dodopayments::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["customers/%1$s/payment-methods", customer_id],
+          query: query,
           model: Dodopayments::Models::CustomerRetrievePaymentMethodsResponse,
-          options: params[:request_options]
+          options: options
         )
       end
 
