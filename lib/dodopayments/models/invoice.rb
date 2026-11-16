@@ -105,6 +105,14 @@ module Dodopayments
       #   @return [Integer]
       required :retry_count, Integer
 
+      # @!attribute review_required
+      #   `true` when a subscription of the invoice has renewal review on now. The value
+      #   follows the subscription, so it can change after finalise. `review_deadline`
+      #   shows that this draft waits.
+      #
+      #   @return [Boolean]
+      required :review_required, Dodopayments::Internal::Type::Boolean
+
       # @!attribute row_version
       #   Goes up by one on each change. Use it to ignore an older webhook delivery.
       #
@@ -190,6 +198,12 @@ module Dodopayments
       #   @return [Time, nil]
       optional :next_retry_at, Time, nil?: true
 
+      # @!attribute payment_method_id
+      #   The saved card that an automatic charge of the invoice uses.
+      #
+      #   @return [String, nil]
+      optional :payment_method_id, String, nil?: true
+
       # @!attribute payment_terms_days
       #   Days from finalise to the due date. `null` when the invoice has a custom due
       #   date.
@@ -227,7 +241,7 @@ module Dodopayments
       #   @return [Time, nil]
       optional :sent_at, Time, nil?: true
 
-      # @!method initialize(allowed_actions:, amount_due:, amount_paid:, amount_refunded:, billing_mode:, business_id:, created_at:, credits:, currency:, customer:, discount_ids:, editable_fields:, frequency:, invoice_id:, metadata:, refund_ids:, retry_count:, row_version:, status:, subscription_ids:, tags:, tax:, total_amount:, collection_method: nil, due_at: nil, dunning_state: nil, finalized_at: nil, hosted_url: nil, lines: nil, memo: nil, next_reminder_at: nil, next_retry_at: nil, payment_terms_days: nil, payments: nil, pdf_url: nil, reminder_settings: nil, review_deadline: nil, sent_at: nil)
+      # @!method initialize(allowed_actions:, amount_due:, amount_paid:, amount_refunded:, billing_mode:, business_id:, created_at:, credits:, currency:, customer:, discount_ids:, editable_fields:, frequency:, invoice_id:, metadata:, refund_ids:, retry_count:, review_required:, row_version:, status:, subscription_ids:, tags:, tax:, total_amount:, collection_method: nil, due_at: nil, dunning_state: nil, finalized_at: nil, hosted_url: nil, lines: nil, memo: nil, next_reminder_at: nil, next_retry_at: nil, payment_method_id: nil, payment_terms_days: nil, payments: nil, pdf_url: nil, reminder_settings: nil, review_deadline: nil, sent_at: nil)
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::Invoice} for more details.
       #
@@ -268,6 +282,8 @@ module Dodopayments
       #
       #   @param retry_count [Integer] The number of failed automatic charges.
       #
+      #   @param review_required [Boolean] `true` when a subscription of the invoice has renewal review on now. The value f
+      #
       #   @param row_version [Integer] Goes up by one on each change. Use it to ignore an older webhook delivery.
       #
       #   @param status [Symbol, Dodopayments::Models::InvoiceStatus] The `message` of each variant is the label of the invoice document.
@@ -297,6 +313,8 @@ module Dodopayments
       #   @param next_reminder_at [Time, nil] The time of the next reminder email to the customer, before or after the due dat
       #
       #   @param next_retry_at [Time, nil]
+      #
+      #   @param payment_method_id [String, nil] The saved card that an automatic charge of the invoice uses.
       #
       #   @param payment_terms_days [Integer, nil] Days from finalise to the due date. `null` when the invoice has a custom due dat
       #
@@ -432,6 +450,7 @@ module Dodopayments
         BILLING_ADDRESS = :billing_address
         TAX_ID = :tax_id
         REVIEW_REQUIRED = :review_required
+        PAYMENT_METHOD = :payment_method
         DUE_AT = :due_at
         COLLECTION_METHOD = :collection_method
         MEMO = :memo

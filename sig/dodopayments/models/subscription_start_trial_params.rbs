@@ -1,0 +1,156 @@
+module Dodopayments
+  module Models
+    type subscription_start_trial_params =
+      {
+        collection_method: Dodopayments::Models::collection_method,
+        currency: Dodopayments::Models::currency,
+        customer_id: String,
+        product_id: String,
+        billing_address: Dodopayments::SubscriptionStartTrialParams::BillingAddress?,
+        payment_method_id: String?,
+        payment_terms: Dodopayments::Models::SubscriptionStartTrialParams::payment_terms?,
+        quantity: Integer,
+        review_required: bool,
+        tax_id: String?,
+        trial_period_days: Integer?,
+        idempotency_key: String
+      }
+      & Dodopayments::Internal::Type::request_parameters
+
+    class SubscriptionStartTrialParams < Dodopayments::Internal::Type::BaseModel
+      extend Dodopayments::Internal::Type::RequestParameters::Converter
+      include Dodopayments::Internal::Type::RequestParameters
+
+      attr_accessor collection_method: Dodopayments::Models::collection_method
+
+      attr_accessor currency: Dodopayments::Models::currency
+
+      attr_accessor customer_id: String
+
+      attr_accessor product_id: String
+
+      attr_accessor billing_address: Dodopayments::SubscriptionStartTrialParams::BillingAddress?
+
+      attr_accessor payment_method_id: String?
+
+      attr_accessor payment_terms: Dodopayments::Models::SubscriptionStartTrialParams::payment_terms?
+
+      attr_reader quantity: Integer?
+
+      def quantity=: (Integer) -> Integer
+
+      attr_reader review_required: bool?
+
+      def review_required=: (bool) -> bool
+
+      attr_accessor tax_id: String?
+
+      attr_accessor trial_period_days: Integer?
+
+      attr_reader idempotency_key: String?
+
+      def idempotency_key=: (String) -> String
+
+      def initialize: (
+        collection_method: Dodopayments::Models::collection_method,
+        currency: Dodopayments::Models::currency,
+        customer_id: String,
+        product_id: String,
+        ?billing_address: Dodopayments::SubscriptionStartTrialParams::BillingAddress?,
+        ?payment_method_id: String?,
+        ?payment_terms: Dodopayments::Models::SubscriptionStartTrialParams::payment_terms?,
+        ?quantity: Integer,
+        ?review_required: bool,
+        ?tax_id: String?,
+        ?trial_period_days: Integer?,
+        ?idempotency_key: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        collection_method: Dodopayments::Models::collection_method,
+        currency: Dodopayments::Models::currency,
+        customer_id: String,
+        product_id: String,
+        billing_address: Dodopayments::SubscriptionStartTrialParams::BillingAddress?,
+        payment_method_id: String?,
+        payment_terms: Dodopayments::Models::SubscriptionStartTrialParams::payment_terms?,
+        quantity: Integer,
+        review_required: bool,
+        tax_id: String?,
+        trial_period_days: Integer?,
+        idempotency_key: String,
+        request_options: Dodopayments::RequestOptions
+      }
+
+      type billing_address =
+        {
+          country: Dodopayments::Models::country_code,
+          city: String?,
+          state: String?,
+          street: String?,
+          zipcode: String?
+        }
+
+      class BillingAddress < Dodopayments::Internal::Type::BaseModel
+        attr_accessor country: Dodopayments::Models::country_code
+
+        attr_accessor city: String?
+
+        attr_accessor state: String?
+
+        attr_accessor street: String?
+
+        attr_accessor zipcode: String?
+
+        def initialize: (
+          country: Dodopayments::Models::country_code,
+          ?city: String?,
+          ?state: String?,
+          ?street: String?,
+          ?zipcode: String?
+        ) -> void
+
+        def to_hash: -> {
+          country: Dodopayments::Models::country_code,
+          city: String?,
+          state: String?,
+          street: String?,
+          zipcode: String?
+        }
+      end
+
+      type payment_terms =
+        Dodopayments::SubscriptionStartTrialParams::PaymentTerms::DueOnReceipt
+        | Dodopayments::SubscriptionStartTrialParams::PaymentTerms::Net
+
+      module PaymentTerms
+        extend Dodopayments::Internal::Type::Union
+
+        type due_on_receipt = { type: :due_on_receipt }
+
+        class DueOnReceipt < Dodopayments::Internal::Type::BaseModel
+          attr_accessor type: :due_on_receipt
+
+          def initialize: (?type: :due_on_receipt) -> void
+
+          def to_hash: -> { type: :due_on_receipt }
+        end
+
+        type net = { days: Integer, type: :net }
+
+        class Net < Dodopayments::Internal::Type::BaseModel
+          attr_accessor days: Integer
+
+          attr_accessor type: :net
+
+          def initialize: (days: Integer, ?type: :net) -> void
+
+          def to_hash: -> { days: Integer, type: :net }
+        end
+
+        def self?.variants: -> ::Array[Dodopayments::Models::SubscriptionStartTrialParams::payment_terms]
+      end
+    end
+  end
+end
