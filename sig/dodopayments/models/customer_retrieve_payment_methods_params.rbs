@@ -1,7 +1,12 @@
 module Dodopayments
   module Models
     type customer_retrieve_payment_methods_params =
-      { customer_id: String } & Dodopayments::Internal::Type::request_parameters
+      {
+        customer_id: String,
+        billing_country: Dodopayments::Models::country_code,
+        currency: Dodopayments::Models::currency
+      }
+      & Dodopayments::Internal::Type::request_parameters
 
     class CustomerRetrievePaymentMethodsParams < Dodopayments::Internal::Type::BaseModel
       extend Dodopayments::Internal::Type::RequestParameters::Converter
@@ -9,13 +14,29 @@ module Dodopayments
 
       attr_accessor customer_id: String
 
+      attr_reader billing_country: Dodopayments::Models::country_code?
+
+      def billing_country=: (
+        Dodopayments::Models::country_code
+      ) -> Dodopayments::Models::country_code
+
+      attr_reader currency: Dodopayments::Models::currency?
+
+      def currency=: (
+        Dodopayments::Models::currency
+      ) -> Dodopayments::Models::currency
+
       def initialize: (
         customer_id: String,
+        ?billing_country: Dodopayments::Models::country_code,
+        ?currency: Dodopayments::Models::currency,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
       def to_hash: -> {
         customer_id: String,
+        billing_country: Dodopayments::Models::country_code,
+        currency: Dodopayments::Models::currency,
         request_options: Dodopayments::RequestOptions
       }
     end

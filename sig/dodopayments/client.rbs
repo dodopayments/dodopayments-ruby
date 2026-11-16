@@ -71,6 +71,8 @@ module Dodopayments
 
     attr_reader moderation: Dodopayments::Resources::Moderation
 
+    attr_reader app_installation: Dodopayments::Resources::AppInstallation
+
     private def auth_headers: -> ::Hash[String, String]
 
     def initialize: (

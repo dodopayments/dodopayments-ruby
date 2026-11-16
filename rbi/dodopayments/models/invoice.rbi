@@ -80,6 +80,12 @@ module Dodopayments
       sig { returns(Integer) }
       attr_accessor :retry_count
 
+      # `true` when a subscription of the invoice has renewal review on now. The value
+      # follows the subscription, so it can change after finalise. `review_deadline`
+      # shows that this draft waits.
+      sig { returns(T::Boolean) }
+      attr_accessor :review_required
+
       # Goes up by one on each change. Use it to ignore an older webhook delivery.
       sig { returns(Integer) }
       attr_accessor :row_version
@@ -135,6 +141,10 @@ module Dodopayments
       sig { returns(T.nilable(Time)) }
       attr_accessor :next_retry_at
 
+      # The saved card that an automatic charge of the invoice uses.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :payment_method_id
+
       # Days from finalise to the due date. `null` when the invoice has a custom due
       # date.
       sig { returns(T.nilable(Integer)) }
@@ -188,6 +198,7 @@ module Dodopayments
           metadata: T.anything,
           refund_ids: T::Array[String],
           retry_count: Integer,
+          review_required: T::Boolean,
           row_version: Integer,
           status: Dodopayments::InvoiceStatus::OrSymbol,
           subscription_ids: T::Array[String],
@@ -204,6 +215,7 @@ module Dodopayments
           memo: T.nilable(String),
           next_reminder_at: T.nilable(Time),
           next_retry_at: T.nilable(Time),
+          payment_method_id: T.nilable(String),
           payment_terms_days: T.nilable(Integer),
           payments: T.nilable(T::Array[Dodopayments::Invoice::Payment::OrHash]),
           pdf_url: T.nilable(String),
@@ -250,6 +262,10 @@ module Dodopayments
         refund_ids:,
         # The number of failed automatic charges.
         retry_count:,
+        # `true` when a subscription of the invoice has renewal review on now. The value
+        # follows the subscription, so it can change after finalise. `review_deadline`
+        # shows that this draft waits.
+        review_required:,
         # Goes up by one on each change. Use it to ignore an older webhook delivery.
         row_version:,
         # The `message` of each variant is the label of the invoice document.
@@ -275,6 +291,8 @@ module Dodopayments
         # date. `null` when no reminder email will go out.
         next_reminder_at: nil,
         next_retry_at: nil,
+        # The saved card that an automatic charge of the invoice uses.
+        payment_method_id: nil,
         # Days from finalise to the due date. `null` when the invoice has a custom due
         # date.
         payment_terms_days: nil,
@@ -311,6 +329,7 @@ module Dodopayments
             metadata: T.anything,
             refund_ids: T::Array[String],
             retry_count: Integer,
+            review_required: T::Boolean,
             row_version: Integer,
             status: Dodopayments::InvoiceStatus::TaggedSymbol,
             subscription_ids: T::Array[String],
@@ -327,6 +346,7 @@ module Dodopayments
             memo: T.nilable(String),
             next_reminder_at: T.nilable(Time),
             next_retry_at: T.nilable(Time),
+            payment_method_id: T.nilable(String),
             payment_terms_days: T.nilable(Integer),
             payments: T.nilable(T::Array[Dodopayments::Invoice::Payment]),
             pdf_url: T.nilable(String),
@@ -555,6 +575,11 @@ module Dodopayments
         REVIEW_REQUIRED =
           T.let(
             :review_required,
+            Dodopayments::Invoice::EditableField::TaggedSymbol
+          )
+        PAYMENT_METHOD =
+          T.let(
+            :payment_method,
             Dodopayments::Invoice::EditableField::TaggedSymbol
           )
         DUE_AT =

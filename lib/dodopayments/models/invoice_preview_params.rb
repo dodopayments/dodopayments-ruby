@@ -85,6 +85,12 @@ module Dodopayments
       #   @return [Hash{Symbol=>String, Float, Boolean}, nil]
       optional :metadata, -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] }
 
+      # @!attribute payment_method_id
+      #   A saved card of the customer. The new subscriptions of the invoice charge it.
+      #
+      #   @return [String, nil]
+      optional :payment_method_id, String, nil?: true
+
       # @!attribute payment_terms
       #   Do not send it with `due_at`.
       #
@@ -102,7 +108,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(collection_method:, currency:, customer_id:, items:, format_: nil, billing_address: nil, cc_emails: nil, customer_email: nil, discount_ids: nil, due_at: nil, dunning: nil, memo: nil, metadata: nil, payment_terms: nil, review_required: nil, tax_id: nil, request_options: {})
+      # @!method initialize(collection_method:, currency:, customer_id:, items:, format_: nil, billing_address: nil, cc_emails: nil, customer_email: nil, discount_ids: nil, due_at: nil, dunning: nil, memo: nil, metadata: nil, payment_method_id: nil, payment_terms: nil, review_required: nil, tax_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::InvoicePreviewParams} for more details.
       #
@@ -131,6 +137,8 @@ module Dodopayments
       #   @param memo [String, nil]
       #
       #   @param metadata [Hash{Symbol=>String, Float, Boolean}] Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+      #
+      #   @param payment_method_id [String, nil] A saved card of the customer. The new subscriptions of the invoice charge it.
       #
       #   @param payment_terms [Dodopayments::Models::InvoicePreviewParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoicePreviewParams::PaymentTerms::Net, nil] Do not send it with `due_at`.
       #

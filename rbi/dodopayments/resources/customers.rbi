@@ -179,12 +179,17 @@ module Dodopayments
       sig do
         params(
           customer_id: String,
+          billing_country: Dodopayments::CountryCode::OrSymbol,
+          currency: Dodopayments::Currency::OrSymbol,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Models::CustomerRetrievePaymentMethodsResponse)
       end
       def retrieve_payment_methods(
         # Customer Id
         customer_id,
+        # ISO country code alpha2 variant
+        billing_country: nil,
+        currency: nil,
         request_options: {}
       )
       end
