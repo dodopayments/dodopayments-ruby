@@ -66,6 +66,8 @@ module Dodopayments
 
       def retrieve_payment_methods: (
         String customer_id,
+        ?billing_country: Dodopayments::Models::country_code,
+        ?currency: Dodopayments::Models::currency,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::CustomerRetrievePaymentMethodsResponse
 

@@ -32,6 +32,7 @@ module Dodopayments
             T.nilable(Dodopayments::InvoiceCreateParams::Dunning::OrHash),
           memo: T.nilable(String),
           metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
+          payment_method_id: T.nilable(String),
           payment_terms:
             T.nilable(
               T.any(
@@ -72,6 +73,9 @@ module Dodopayments
         # Body param: Arbitrary key-value metadata. Values can be string, integer, number,
         # or boolean.
         metadata: nil,
+        # Body param: A saved card of the customer. The new subscriptions of the invoice
+        # charge it.
+        payment_method_id: nil,
         # Body param: Do not send it with `due_at`.
         payment_terms: nil,
         # Body param: `true` keeps a renewal draft for review before it finalises.
@@ -130,6 +134,7 @@ module Dodopayments
           memo: T.nilable(String),
           metadata:
             T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
+          payment_method_id: T.nilable(String),
           payment_terms:
             T.nilable(
               T.any(
@@ -173,6 +178,9 @@ module Dodopayments
         # Body param: Arbitrary key-value metadata. Values can be string, integer, number,
         # or boolean.
         metadata: nil,
+        # Body param: A saved card of the customer. `null` removes the card from the
+        # draft.
+        payment_method_id: nil,
         # Body param
         payment_terms: nil,
         # Body param
@@ -264,8 +272,8 @@ module Dodopayments
       )
       end
 
-      # Returns the page where the customer pays. A copied link counts as a send, so the
-      # first call sets `sent_at`.
+      # Returns the page where the customer pays. The first call sets `sent_at` and
+      # records a `link_shared` event. It sends no email and no `invoice.sent` webhook.
       sig do
         params(
           invoice_id: String,
@@ -378,6 +386,7 @@ module Dodopayments
             T.nilable(Dodopayments::InvoicePreviewParams::Dunning::OrHash),
           memo: T.nilable(String),
           metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
+          payment_method_id: T.nilable(String),
           payment_terms:
             T.nilable(
               T.any(
@@ -421,6 +430,9 @@ module Dodopayments
         # Body param: Arbitrary key-value metadata. Values can be string, integer, number,
         # or boolean.
         metadata: nil,
+        # Body param: A saved card of the customer. The new subscriptions of the invoice
+        # charge it.
+        payment_method_id: nil,
         # Body param: Do not send it with `due_at`.
         payment_terms: nil,
         # Body param: `true` keeps a renewal draft for review before it finalises.
