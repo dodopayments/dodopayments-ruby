@@ -19,6 +19,7 @@ module Dodopayments
         metadata: top,
         refund_ids: ::Array[String],
         retry_count: Integer,
+        review_required: bool,
         row_version: Integer,
         status: Dodopayments::Models::invoice_status,
         subscription_ids: ::Array[String],
@@ -34,6 +35,7 @@ module Dodopayments
         memo: String?,
         next_reminder_at: Time?,
         next_retry_at: Time?,
+        payment_method_id: String?,
         payment_terms_days: Integer?,
         payments: ::Array[Dodopayments::Invoice::Payment]?,
         pdf_url: String?,
@@ -77,6 +79,8 @@ module Dodopayments
 
       attr_accessor retry_count: Integer
 
+      attr_accessor review_required: bool
+
       attr_accessor row_version: Integer
 
       attr_accessor status: Dodopayments::Models::invoice_status
@@ -106,6 +110,8 @@ module Dodopayments
       attr_accessor next_reminder_at: Time?
 
       attr_accessor next_retry_at: Time?
+
+      attr_accessor payment_method_id: String?
 
       attr_accessor payment_terms_days: Integer?
 
@@ -137,6 +143,7 @@ module Dodopayments
         metadata: top,
         refund_ids: ::Array[String],
         retry_count: Integer,
+        review_required: bool,
         row_version: Integer,
         status: Dodopayments::Models::invoice_status,
         subscription_ids: ::Array[String],
@@ -152,6 +159,7 @@ module Dodopayments
         ?memo: String?,
         ?next_reminder_at: Time?,
         ?next_retry_at: Time?,
+        ?payment_method_id: String?,
         ?payment_terms_days: Integer?,
         ?payments: ::Array[Dodopayments::Invoice::Payment]?,
         ?pdf_url: String?,
@@ -178,6 +186,7 @@ module Dodopayments
         metadata: top,
         refund_ids: ::Array[String],
         retry_count: Integer,
+        review_required: bool,
         row_version: Integer,
         status: Dodopayments::Models::invoice_status,
         subscription_ids: ::Array[String],
@@ -193,6 +202,7 @@ module Dodopayments
         memo: String?,
         next_reminder_at: Time?,
         next_retry_at: Time?,
+        payment_method_id: String?,
         payment_terms_days: Integer?,
         payments: ::Array[Dodopayments::Invoice::Payment]?,
         pdf_url: String?,
@@ -323,6 +333,7 @@ module Dodopayments
         | :billing_address
         | :tax_id
         | :review_required
+        | :payment_method
         | :due_at
         | :collection_method
         | :memo
@@ -341,6 +352,7 @@ module Dodopayments
         BILLING_ADDRESS: :billing_address
         TAX_ID: :tax_id
         REVIEW_REQUIRED: :review_required
+        PAYMENT_METHOD: :payment_method
         DUE_AT: :due_at
         COLLECTION_METHOD: :collection_method
         MEMO: :memo

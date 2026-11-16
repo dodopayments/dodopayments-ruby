@@ -466,6 +466,56 @@ module Dodopayments
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Dodopayments::Models::SubscriptionStartTrialParams} for more details.
+      #
+      # Creates an invoice-led subscription and a paid $0 invoice for the trial. The
+      # first invoice after the trial bills at `trial_ends_at`.
+      #
+      # @overload start_trial(collection_method:, currency:, customer_id:, product_id:, billing_address: nil, payment_method_id: nil, payment_terms: nil, quantity: nil, review_required: nil, tax_id: nil, trial_period_days: nil, idempotency_key: nil, request_options: {})
+      #
+      # @param collection_method [Symbol, Dodopayments::Models::CollectionMethod] Body param
+      #
+      # @param currency [Symbol, Dodopayments::Models::Currency] Body param
+      #
+      # @param customer_id [String] Body param
+      #
+      # @param product_id [String] Body param: A recurring product.
+      #
+      # @param billing_address [Dodopayments::Models::SubscriptionStartTrialParams::BillingAddress, nil] Body param: The billing address of an invoice request.
+      #
+      # @param payment_method_id [String, nil] Body param: A saved card of the customer. Automatic charge needs it.
+      #
+      # @param payment_terms [Dodopayments::Models::SubscriptionStartTrialParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::SubscriptionStartTrialParams::PaymentTerms::Net, nil] Body param: The terms of the invoices after the trial.
+      #
+      # @param quantity [Integer] Body param
+      #
+      # @param review_required [Boolean] Body param: `true` keeps each renewal draft for review before it finalises.
+      #
+      # @param tax_id [String, nil] Body param
+      #
+      # @param trial_period_days [Integer, nil] Body param: 1 to 730 days. When this is not set, the product trial applies and t
+      #
+      # @param idempotency_key [String] Header param: A key of 1 to 255 characters. A repeat with the same key returns t
+      #
+      # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Dodopayments::Models::SubscriptionStartTrialResponse]
+      #
+      # @see Dodopayments::Models::SubscriptionStartTrialParams
+      def start_trial(params)
+        parsed, options = Dodopayments::SubscriptionStartTrialParams.dump_request(params)
+        header_params = {idempotency_key: "idempotency-key"}
+        @client.request(
+          method: :post,
+          path: "billing/subscriptions",
+          headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+          body: parsed.except(*header_params.keys),
+          model: Dodopayments::Models::SubscriptionStartTrialResponse,
+          options: options
+        )
+      end
+
       # For an invoice-led subscription, billing charges the open invoices after the
       # change, so the response has no payment.
       #

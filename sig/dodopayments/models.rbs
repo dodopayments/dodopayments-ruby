@@ -23,6 +23,8 @@ module Dodopayments
 
   class AddonUpdateParams = Dodopayments::Models::AddonUpdateParams
 
+  class AppInstallationRetrieveSettingsParams = Dodopayments::Models::AppInstallationRetrieveSettingsParams
+
   class AttachAddon = Dodopayments::Models::AttachAddon
 
   class AttachCreditEntitlement = Dodopayments::Models::AttachCreditEntitlement
@@ -546,6 +548,8 @@ module Dodopayments
   class SubscriptionRetrieveUsageHistoryParams = Dodopayments::Models::SubscriptionRetrieveUsageHistoryParams
 
   class SubscriptionServicePeriod = Dodopayments::Models::SubscriptionServicePeriod
+
+  class SubscriptionStartTrialParams = Dodopayments::Models::SubscriptionStartTrialParams
 
   module SubscriptionStatus = Dodopayments::Models::SubscriptionStatus
 
