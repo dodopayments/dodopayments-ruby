@@ -1,0 +1,60 @@
+module Dodopayments
+  module Models
+    type app_installation_retrieve_settings_response =
+      {
+        action_needed: bool,
+        app_id: String,
+        installation_id: String,
+        invalid_keys: ::Array[String],
+        secrets: top,
+        values: top,
+        live_manifest_version: Integer?,
+        manifest_version: Integer?,
+        updated_at: Time?
+      }
+
+    class AppInstallationRetrieveSettingsResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor action_needed: bool
+
+      attr_accessor app_id: String
+
+      attr_accessor installation_id: String
+
+      attr_accessor invalid_keys: ::Array[String]
+
+      attr_accessor secrets: top
+
+      attr_accessor values: top
+
+      attr_accessor live_manifest_version: Integer?
+
+      attr_accessor manifest_version: Integer?
+
+      attr_accessor updated_at: Time?
+
+      def initialize: (
+        action_needed: bool,
+        app_id: String,
+        installation_id: String,
+        invalid_keys: ::Array[String],
+        secrets: top,
+        values: top,
+        ?live_manifest_version: Integer?,
+        ?manifest_version: Integer?,
+        ?updated_at: Time?
+      ) -> void
+
+      def to_hash: -> {
+        action_needed: bool,
+        app_id: String,
+        installation_id: String,
+        invalid_keys: ::Array[String],
+        secrets: top,
+        values: top,
+        live_manifest_version: Integer?,
+        manifest_version: Integer?,
+        updated_at: Time?
+      }
+    end
+  end
+end

@@ -96,6 +96,10 @@ module Dodopayments
       end
       attr_writer :metadata
 
+      # A saved card of the customer. The new subscriptions of the invoice charge it.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :payment_method_id
+
       # Do not send it with `due_at`.
       sig do
         returns(
@@ -149,6 +153,7 @@ module Dodopayments
             T.nilable(Dodopayments::InvoiceCreateParams::Dunning::OrHash),
           memo: T.nilable(String),
           metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
+          payment_method_id: T.nilable(String),
           payment_terms:
             T.nilable(
               T.any(
@@ -184,6 +189,8 @@ module Dodopayments
         memo: nil,
         # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
         metadata: nil,
+        # A saved card of the customer. The new subscriptions of the invoice charge it.
+        payment_method_id: nil,
         # Do not send it with `due_at`.
         payment_terms: nil,
         # `true` keeps a renewal draft for review before it finalises.
@@ -216,6 +223,7 @@ module Dodopayments
             dunning: T.nilable(Dodopayments::InvoiceCreateParams::Dunning),
             memo: T.nilable(String),
             metadata: T::Hash[Symbol, Dodopayments::MetadataItem::Variants],
+            payment_method_id: T.nilable(String),
             payment_terms:
               T.nilable(
                 T.any(

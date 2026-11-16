@@ -1,0 +1,11 @@
+module Dodopayments
+  module Resources
+    class AppInstallation
+      def retrieve_settings: (
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::AppInstallationRetrieveSettingsResponse
+
+      def initialize: (client: Dodopayments::Client) -> void
+    end
+  end
+end
