@@ -88,6 +88,12 @@ module Dodopayments
                -> { Dodopayments::Internal::Type::HashOf[union: Dodopayments::MetadataItem] },
                nil?: true
 
+      # @!attribute payment_method_id
+      #   A saved card of the customer. `null` removes the card from the draft.
+      #
+      #   @return [String, nil]
+      optional :payment_method_id, String, nil?: true
+
       # @!attribute payment_terms
       #
       #   @return [Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::Net, nil]
@@ -103,7 +109,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!method initialize(invoice_id:, if_match:, billing_address: nil, cc_emails: nil, collection_method: nil, currency: nil, customer_email: nil, customer_id: nil, discount_ids: nil, due_at: nil, dunning: nil, items: nil, memo: nil, metadata: nil, payment_terms: nil, review_required: nil, tax_id: nil, request_options: {})
+      # @!method initialize(invoice_id:, if_match:, billing_address: nil, cc_emails: nil, collection_method: nil, currency: nil, customer_email: nil, customer_id: nil, discount_ids: nil, due_at: nil, dunning: nil, items: nil, memo: nil, metadata: nil, payment_method_id: nil, payment_terms: nil, review_required: nil, tax_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::InvoiceUpdateParams} for more details.
       #
@@ -134,6 +140,8 @@ module Dodopayments
       #   @param memo [String, nil]
       #
       #   @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+      #
+      #   @param payment_method_id [String, nil] A saved card of the customer. `null` removes the card from the draft.
       #
       #   @param payment_terms [Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::Net, nil]
       #

@@ -95,6 +95,10 @@ module Dodopayments
       end
       attr_accessor :metadata
 
+      # A saved card of the customer. `null` removes the card from the draft.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :payment_method_id
+
       sig do
         returns(
           T.nilable(
@@ -143,6 +147,7 @@ module Dodopayments
           memo: T.nilable(String),
           metadata:
             T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
+          payment_method_id: T.nilable(String),
           payment_terms:
             T.nilable(
               T.any(
@@ -177,6 +182,8 @@ module Dodopayments
         memo: nil,
         # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
         metadata: nil,
+        # A saved card of the customer. `null` removes the card from the draft.
+        payment_method_id: nil,
         payment_terms: nil,
         review_required: nil,
         tax_id: nil,
@@ -212,6 +219,7 @@ module Dodopayments
             memo: T.nilable(String),
             metadata:
               T.nilable(T::Hash[Symbol, Dodopayments::MetadataItem::Variants]),
+            payment_method_id: T.nilable(String),
             payment_terms:
               T.nilable(
                 T.any(
