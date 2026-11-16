@@ -12,7 +12,7 @@ module Dodopayments
       # Creates a draft. A repeat with the same `Idempotency-Key` returns the first
       # draft.
       #
-      # @overload create(collection_method:, currency:, customer_id:, items:, billing_address: nil, cc_emails: nil, customer_email: nil, discount_ids: nil, due_at: nil, dunning: nil, memo: nil, metadata: nil, payment_terms: nil, review_required: nil, tax_id: nil, idempotency_key: nil, request_options: {})
+      # @overload create(collection_method:, currency:, customer_id:, items:, billing_address: nil, cc_emails: nil, customer_email: nil, discount_ids: nil, due_at: nil, dunning: nil, memo: nil, metadata: nil, payment_method_id: nil, payment_terms: nil, review_required: nil, tax_id: nil, idempotency_key: nil, request_options: {})
       #
       # @param collection_method [Symbol, Dodopayments::Models::CollectionMethod] Body param
       #
@@ -37,6 +37,8 @@ module Dodopayments
       # @param memo [String, nil] Body param
       #
       # @param metadata [Hash{Symbol=>String, Float, Boolean}] Body param: Arbitrary key-value metadata. Values can be string, integer, number,
+      #
+      # @param payment_method_id [String, nil] Body param: A saved card of the customer. The new subscriptions of the invoice c
       #
       # @param payment_terms [Dodopayments::Models::InvoiceCreateParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoiceCreateParams::PaymentTerms::Net, nil] Body param: Do not send it with `due_at`.
       #
@@ -89,7 +91,7 @@ module Dodopayments
       #
       # Changes only the sent fields. `null` clears a field that can be empty.
       #
-      # @overload update(invoice_id, if_match:, billing_address: nil, cc_emails: nil, collection_method: nil, currency: nil, customer_email: nil, customer_id: nil, discount_ids: nil, due_at: nil, dunning: nil, items: nil, memo: nil, metadata: nil, payment_terms: nil, review_required: nil, tax_id: nil, request_options: {})
+      # @overload update(invoice_id, if_match:, billing_address: nil, cc_emails: nil, collection_method: nil, currency: nil, customer_email: nil, customer_id: nil, discount_ids: nil, due_at: nil, dunning: nil, items: nil, memo: nil, metadata: nil, payment_method_id: nil, payment_terms: nil, review_required: nil, tax_id: nil, request_options: {})
       #
       # @param invoice_id [String] Path param: Invoice ID
       #
@@ -118,6 +120,8 @@ module Dodopayments
       # @param memo [String, nil] Body param
       #
       # @param metadata [Hash{Symbol=>String, Float, Boolean}, nil] Body param: Arbitrary key-value metadata. Values can be string, integer, number,
+      #
+      # @param payment_method_id [String, nil] Body param: A saved card of the customer. `null` removes the card from the draft
       #
       # @param payment_terms [Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoiceUpdateParams::PaymentTerms::Net, nil] Body param
       #
@@ -243,8 +247,8 @@ module Dodopayments
         )
       end
 
-      # Returns the page where the customer pays. A copied link counts as a send, so the
-      # first call sets `sent_at`.
+      # Returns the page where the customer pays. The first call sets `sent_at` and
+      # records a `link_shared` event. It sends no email and no `invoice.sent` webhook.
       #
       # @overload create_hosted_link(invoice_id, request_options: {})
       #
@@ -367,7 +371,7 @@ module Dodopayments
       #
       # Prices the body as a draft and returns it. No row is saved.
       #
-      # @overload preview(collection_method:, currency:, customer_id:, items:, format_: nil, billing_address: nil, cc_emails: nil, customer_email: nil, discount_ids: nil, due_at: nil, dunning: nil, memo: nil, metadata: nil, payment_terms: nil, review_required: nil, tax_id: nil, request_options: {})
+      # @overload preview(collection_method:, currency:, customer_id:, items:, format_: nil, billing_address: nil, cc_emails: nil, customer_email: nil, discount_ids: nil, due_at: nil, dunning: nil, memo: nil, metadata: nil, payment_method_id: nil, payment_terms: nil, review_required: nil, tax_id: nil, request_options: {})
       #
       # @param collection_method [Symbol, Dodopayments::Models::CollectionMethod] Body param
       #
@@ -394,6 +398,8 @@ module Dodopayments
       # @param memo [String, nil] Body param
       #
       # @param metadata [Hash{Symbol=>String, Float, Boolean}] Body param: Arbitrary key-value metadata. Values can be string, integer, number,
+      #
+      # @param payment_method_id [String, nil] Body param: A saved card of the customer. The new subscriptions of the invoice c
       #
       # @param payment_terms [Dodopayments::Models::InvoicePreviewParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoicePreviewParams::PaymentTerms::Net, nil] Body param: Do not send it with `due_at`.
       #

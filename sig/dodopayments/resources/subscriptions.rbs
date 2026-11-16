@@ -146,6 +146,22 @@ module Dodopayments
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Internal::DefaultPageNumberPagination[Dodopayments::Models::SubscriptionRetrieveUsageHistoryResponse]
 
+      def start_trial: (
+        collection_method: Dodopayments::Models::collection_method,
+        currency: Dodopayments::Models::currency,
+        customer_id: String,
+        product_id: String,
+        ?billing_address: Dodopayments::SubscriptionStartTrialParams::BillingAddress?,
+        ?payment_method_id: String?,
+        ?payment_terms: Dodopayments::Models::SubscriptionStartTrialParams::payment_terms?,
+        ?quantity: Integer,
+        ?review_required: bool,
+        ?tax_id: String?,
+        ?trial_period_days: Integer?,
+        ?idempotency_key: String,
+        ?request_options: Dodopayments::request_opts
+      ) -> Dodopayments::Models::SubscriptionStartTrialResponse
+
       def update_payment_method: (
         String subscription_id,
         payment_method: Dodopayments::Models::SubscriptionUpdatePaymentMethodParams::payment_method,

@@ -110,6 +110,9 @@ module Dodopayments
     # @return [Dodopayments::Resources::Moderation]
     attr_reader :moderation
 
+    # @return [Dodopayments::Resources::AppInstallation]
+    attr_reader :app_installation
+
     # @api private
     #
     # @return [Hash{String=>String}]
@@ -325,6 +328,7 @@ module Dodopayments
       @entitlements = Dodopayments::Resources::Entitlements.new(client: self)
       @product_collections = Dodopayments::Resources::ProductCollections.new(client: self)
       @moderation = Dodopayments::Resources::Moderation.new(client: self)
+      @app_installation = Dodopayments::Resources::AppInstallation.new(client: self)
 
       @workload_identity = nil
       return if workload_identity.nil?

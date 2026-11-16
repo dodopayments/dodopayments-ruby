@@ -15,6 +15,7 @@ module Dodopayments
         dunning: Dodopayments::InvoicePreviewParams::Dunning?,
         memo: String?,
         metadata: Dodopayments::Models::metadata,
+        payment_method_id: String?,
         payment_terms: Dodopayments::Models::InvoicePreviewParams::payment_terms?,
         review_required: bool,
         tax_id: String?
@@ -59,6 +60,8 @@ module Dodopayments
         Dodopayments::Models::metadata
       ) -> Dodopayments::Models::metadata
 
+      attr_accessor payment_method_id: String?
+
       attr_accessor payment_terms: Dodopayments::Models::InvoicePreviewParams::payment_terms?
 
       attr_reader review_required: bool?
@@ -81,6 +84,7 @@ module Dodopayments
         ?dunning: Dodopayments::InvoicePreviewParams::Dunning?,
         ?memo: String?,
         ?metadata: Dodopayments::Models::metadata,
+        ?payment_method_id: String?,
         ?payment_terms: Dodopayments::Models::InvoicePreviewParams::payment_terms?,
         ?review_required: bool,
         ?tax_id: String?,
@@ -101,6 +105,7 @@ module Dodopayments
         dunning: Dodopayments::InvoicePreviewParams::Dunning?,
         memo: String?,
         metadata: Dodopayments::Models::metadata,
+        payment_method_id: String?,
         payment_terms: Dodopayments::Models::InvoicePreviewParams::payment_terms?,
         review_required: bool,
         tax_id: String?,

@@ -1,0 +1,26 @@
+module Dodopayments
+  module Models
+    type subscription_start_trial_response =
+      { invoice_id: String, subscription_id: String, trial_ends_at: Time }
+
+    class SubscriptionStartTrialResponse < Dodopayments::Internal::Type::BaseModel
+      attr_accessor invoice_id: String
+
+      attr_accessor subscription_id: String
+
+      attr_accessor trial_ends_at: Time
+
+      def initialize: (
+        invoice_id: String,
+        subscription_id: String,
+        trial_ends_at: Time
+      ) -> void
+
+      def to_hash: -> {
+        invoice_id: String,
+        subscription_id: String,
+        trial_ends_at: Time
+      }
+    end
+  end
+end
