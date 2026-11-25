@@ -158,7 +158,6 @@ module Dodopayments
         ?review_required: bool,
         ?tax_id: String?,
         ?trial_period_days: Integer?,
-        ?idempotency_key: String,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Models::SubscriptionStartTrialResponse
 

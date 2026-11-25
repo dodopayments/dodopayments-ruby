@@ -316,6 +316,48 @@ class DodopaymentsTest < Minitest::Test
     end
   end
 
+  def test_client_default_idempotency_key_on_writes
+    stub_request(:post, "http://localhost/checkouts").to_return_json(status: 500, body: {})
+
+    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
+
+    assert_raises(Dodopayments::Errors::InternalServerError) do
+      dodo_payments.checkout_sessions.create(
+        product_cart: [{product_id: "product_id", quantity: 0}],
+        request_options: {max_retries: 1}
+      )
+    end
+
+    headers = []
+    assert_requested(:any, /./, times: 2) do
+      header = _1.headers.transform_keys(&:downcase).fetch("idempotency-key")
+      headers << header
+      refute_empty(header)
+    end
+
+    assert_equal(*headers)
+  end
+
+  def test_request_option_idempotency_key_on_writes
+    stub_request(:post, "http://localhost/checkouts").to_return_json(status: 500, body: {})
+
+    dodo_payments = Dodopayments::Client.new(base_url: "http://localhost", bearer_token: "My Bearer Token")
+
+    assert_raises(Dodopayments::Errors::InternalServerError) do
+      dodo_payments.checkout_sessions.create(
+        product_cart: [{product_id: "product_id", quantity: 0}],
+        request_options: {max_retries: 1, idempotency_key: "user-supplied-key"}
+      )
+    end
+
+    assert_requested(
+      :any,
+      /./,
+      headers: {"idempotency-key" => "user-supplied-key"},
+      times: 2
+    )
+  end
+
   def test_default_headers
     stub_request(:post, "http://localhost/checkouts").to_return_json(status: 200, body: {})
 

@@ -12,41 +12,39 @@ module Dodopayments
       # Creates a draft. A repeat with the same `Idempotency-Key` returns the first
       # draft.
       #
-      # @overload create(collection_method:, currency:, customer_id:, items:, billing_address: nil, cc_emails: nil, customer_email: nil, discount_ids: nil, due_at: nil, dunning: nil, memo: nil, metadata: nil, payment_method_id: nil, payment_terms: nil, review_required: nil, tax_id: nil, idempotency_key: nil, request_options: {})
+      # @overload create(collection_method:, currency:, customer_id:, items:, billing_address: nil, cc_emails: nil, customer_email: nil, discount_ids: nil, due_at: nil, dunning: nil, memo: nil, metadata: nil, payment_method_id: nil, payment_terms: nil, review_required: nil, tax_id: nil, request_options: {})
       #
-      # @param collection_method [Symbol, Dodopayments::Models::CollectionMethod] Body param
+      # @param collection_method [Symbol, Dodopayments::Models::CollectionMethod]
       #
-      # @param currency [Symbol, Dodopayments::Models::Currency] Body param
+      # @param currency [Symbol, Dodopayments::Models::Currency]
       #
-      # @param customer_id [String] Body param
+      # @param customer_id [String]
       #
-      # @param items [Array<Dodopayments::Models::InvoiceCreateParams::Item::CustomItem, Dodopayments::Models::InvoiceCreateParams::Item::ProductItem>] Body param: 1 to 50 items.
+      # @param items [Array<Dodopayments::Models::InvoiceCreateParams::Item::CustomItem, Dodopayments::Models::InvoiceCreateParams::Item::ProductItem>] 1 to 50 items.
       #
-      # @param billing_address [Dodopayments::Models::InvoiceCreateParams::BillingAddress, nil] Body param: The billing address of an invoice request.
+      # @param billing_address [Dodopayments::Models::InvoiceCreateParams::BillingAddress, nil] The billing address of an invoice request.
       #
-      # @param cc_emails [Array<String>, nil] Body param: 10 addresses or fewer.
+      # @param cc_emails [Array<String>, nil] 10 addresses or fewer.
       #
-      # @param customer_email [String, nil] Body param: The customer email is used when this is not set.
+      # @param customer_email [String, nil] The customer email is used when this is not set.
       #
-      # @param discount_ids [Array<String>, nil] Body param: 20 codes or fewer.
+      # @param discount_ids [Array<String>, nil] 20 codes or fewer.
       #
-      # @param due_at [Time, nil] Body param: A custom due date. Do not send it with `payment_terms`.
+      # @param due_at [Time, nil] A custom due date. Do not send it with `payment_terms`.
       #
-      # @param dunning [Dodopayments::Models::InvoiceCreateParams::Dunning, nil] Body param: The reminder override of one invoice. The business settings fill the
+      # @param dunning [Dodopayments::Models::InvoiceCreateParams::Dunning, nil] The reminder override of one invoice. The business settings fill the other dunni
       #
-      # @param memo [String, nil] Body param
+      # @param memo [String, nil]
       #
-      # @param metadata [Hash{Symbol=>String, Float, Boolean}] Body param: Arbitrary key-value metadata. Values can be string, integer, number,
+      # @param metadata [Hash{Symbol=>String, Float, Boolean}] Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
       #
-      # @param payment_method_id [String, nil] Body param: A saved card of the customer. The new subscriptions of the invoice c
+      # @param payment_method_id [String, nil] A saved card of the customer. The new subscriptions of the invoice charge it.
       #
-      # @param payment_terms [Dodopayments::Models::InvoiceCreateParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoiceCreateParams::PaymentTerms::Net, nil] Body param: Do not send it with `due_at`.
+      # @param payment_terms [Dodopayments::Models::InvoiceCreateParams::PaymentTerms::DueOnReceipt, Dodopayments::Models::InvoiceCreateParams::PaymentTerms::Net, nil] Do not send it with `due_at`.
       #
-      # @param review_required [Boolean] Body param: `true` keeps a renewal draft for review before it finalises.
+      # @param review_required [Boolean] `true` keeps a renewal draft for review before it finalises.
       #
-      # @param tax_id [String, nil] Body param
-      #
-      # @param idempotency_key [String] Header param: A key of 1 to 255 characters. A repeat with the same key returns t
+      # @param tax_id [String, nil]
       #
       # @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -55,12 +53,10 @@ module Dodopayments
       # @see Dodopayments::Models::InvoiceCreateParams
       def create(params)
         parsed, options = Dodopayments::InvoiceCreateParams.dump_request(params)
-        header_params = {idempotency_key: "idempotency-key"}
         @client.request(
           method: :post,
           path: "billing/invoices",
-          headers: parsed.slice(*header_params.keys).transform_keys(header_params),
-          body: parsed.except(*header_params.keys),
+          body: parsed,
           model: Dodopayments::Invoice,
           options: options
         )

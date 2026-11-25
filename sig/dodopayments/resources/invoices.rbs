@@ -20,7 +20,6 @@ module Dodopayments
         ?payment_terms: Dodopayments::Models::InvoiceCreateParams::payment_terms?,
         ?review_required: bool,
         ?tax_id: String?,
-        ?idempotency_key: String,
         ?request_options: Dodopayments::request_opts
       ) -> Dodopayments::Invoice
 

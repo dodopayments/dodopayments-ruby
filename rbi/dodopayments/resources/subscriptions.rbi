@@ -701,37 +701,28 @@ module Dodopayments
           review_required: T::Boolean,
           tax_id: T.nilable(String),
           trial_period_days: T.nilable(Integer),
-          idempotency_key: String,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Models::SubscriptionStartTrialResponse)
       end
       def start_trial(
-        # Body param
         collection_method:,
-        # Body param
         currency:,
-        # Body param
         customer_id:,
-        # Body param: A recurring product.
+        # A recurring product.
         product_id:,
-        # Body param: The billing address of an invoice request.
+        # The billing address of an invoice request.
         billing_address: nil,
-        # Body param: A saved card of the customer. Automatic charge needs it.
+        # A saved card of the customer. Automatic charge needs it.
         payment_method_id: nil,
-        # Body param: The terms of the invoices after the trial.
+        # The terms of the invoices after the trial.
         payment_terms: nil,
-        # Body param
         quantity: nil,
-        # Body param: `true` keeps each renewal draft for review before it finalises.
+        # `true` keeps each renewal draft for review before it finalises.
         review_required: nil,
-        # Body param
         tax_id: nil,
-        # Body param: 1 to 730 days. When this is not set, the product trial applies and
-        # the trial misuse check runs.
+        # 1 to 730 days. When this is not set, the product trial applies and the trial
+        # misuse check runs.
         trial_period_days: nil,
-        # Header param: A key of 1 to 255 characters. A repeat with the same key returns
-        # the first trial.
-        idempotency_key: nil,
         request_options: {}
       )
       end
