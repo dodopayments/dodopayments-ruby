@@ -17,8 +17,7 @@ module Dodopayments
         payment_method_id: String?,
         payment_terms: Dodopayments::Models::InvoiceCreateParams::payment_terms?,
         review_required: bool,
-        tax_id: String?,
-        idempotency_key: String
+        tax_id: String?
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -64,10 +63,6 @@ module Dodopayments
 
       attr_accessor tax_id: String?
 
-      attr_reader idempotency_key: String?
-
-      def idempotency_key=: (String) -> String
-
       def initialize: (
         collection_method: Dodopayments::Models::collection_method,
         currency: Dodopayments::Models::currency,
@@ -85,7 +80,6 @@ module Dodopayments
         ?payment_terms: Dodopayments::Models::InvoiceCreateParams::payment_terms?,
         ?review_required: bool,
         ?tax_id: String?,
-        ?idempotency_key: String,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
@@ -106,7 +100,6 @@ module Dodopayments
         payment_terms: Dodopayments::Models::InvoiceCreateParams::payment_terms?,
         review_required: bool,
         tax_id: String?,
-        idempotency_key: String,
         request_options: Dodopayments::RequestOptions
       }
 

@@ -100,12 +100,7 @@ module Dodopayments
       #   @return [String, nil]
       optional :tax_id, String, nil?: true
 
-      # @!attribute idempotency_key
-      #
-      #   @return [String, nil]
-      optional :idempotency_key, String
-
-      # @!method initialize(collection_method:, currency:, customer_id:, items:, billing_address: nil, cc_emails: nil, customer_email: nil, discount_ids: nil, due_at: nil, dunning: nil, memo: nil, metadata: nil, payment_method_id: nil, payment_terms: nil, review_required: nil, tax_id: nil, idempotency_key: nil, request_options: {})
+      # @!method initialize(collection_method:, currency:, customer_id:, items:, billing_address: nil, cc_emails: nil, customer_email: nil, discount_ids: nil, due_at: nil, dunning: nil, memo: nil, metadata: nil, payment_method_id: nil, payment_terms: nil, review_required: nil, tax_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::InvoiceCreateParams} for more details.
       #
@@ -140,8 +135,6 @@ module Dodopayments
       #   @param review_required [Boolean] `true` keeps a renewal draft for review before it finalises.
       #
       #   @param tax_id [String, nil]
-      #
-      #   @param idempotency_key [String]
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 

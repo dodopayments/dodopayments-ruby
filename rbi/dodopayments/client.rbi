@@ -132,7 +132,8 @@ module Dodopayments
         max_retries: Integer,
         timeout: Float,
         initial_retry_delay: Float,
-        max_retry_delay: Float
+        max_retry_delay: Float,
+        idempotency_header: String
       ).returns(T.attached_class)
     end
     def self.new(
@@ -157,7 +158,8 @@ module Dodopayments
       max_retries: Dodopayments::Client::DEFAULT_MAX_RETRIES,
       timeout: Dodopayments::Client::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: Dodopayments::Client::DEFAULT_INITIAL_RETRY_DELAY,
-      max_retry_delay: Dodopayments::Client::DEFAULT_MAX_RETRY_DELAY
+      max_retry_delay: Dodopayments::Client::DEFAULT_MAX_RETRY_DELAY,
+      idempotency_header: "Idempotency-Key"
     )
     end
   end

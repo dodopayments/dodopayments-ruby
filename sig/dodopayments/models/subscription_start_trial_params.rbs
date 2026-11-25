@@ -12,8 +12,7 @@ module Dodopayments
         quantity: Integer,
         review_required: bool,
         tax_id: String?,
-        trial_period_days: Integer?,
-        idempotency_key: String
+        trial_period_days: Integer?
       }
       & Dodopayments::Internal::Type::request_parameters
 
@@ -47,10 +46,6 @@ module Dodopayments
 
       attr_accessor trial_period_days: Integer?
 
-      attr_reader idempotency_key: String?
-
-      def idempotency_key=: (String) -> String
-
       def initialize: (
         collection_method: Dodopayments::Models::collection_method,
         currency: Dodopayments::Models::currency,
@@ -63,7 +58,6 @@ module Dodopayments
         ?review_required: bool,
         ?tax_id: String?,
         ?trial_period_days: Integer?,
-        ?idempotency_key: String,
         ?request_options: Dodopayments::request_opts
       ) -> void
 
@@ -79,7 +73,6 @@ module Dodopayments
         review_required: bool,
         tax_id: String?,
         trial_period_days: Integer?,
-        idempotency_key: String,
         request_options: Dodopayments::RequestOptions
       }
 
