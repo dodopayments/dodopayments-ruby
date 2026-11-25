@@ -123,12 +123,6 @@ module Dodopayments
       sig { returns(T.nilable(String)) }
       attr_accessor :tax_id
 
-      sig { returns(T.nilable(String)) }
-      attr_reader :idempotency_key
-
-      sig { params(idempotency_key: String).void }
-      attr_writer :idempotency_key
-
       sig do
         params(
           collection_method: Dodopayments::CollectionMethod::OrSymbol,
@@ -163,7 +157,6 @@ module Dodopayments
             ),
           review_required: T::Boolean,
           tax_id: T.nilable(String),
-          idempotency_key: String,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -196,7 +189,6 @@ module Dodopayments
         # `true` keeps a renewal draft for review before it finalises.
         review_required: nil,
         tax_id: nil,
-        idempotency_key: nil,
         request_options: {}
       )
       end
@@ -233,7 +225,6 @@ module Dodopayments
               ),
             review_required: T::Boolean,
             tax_id: T.nilable(String),
-            idempotency_key: String,
             request_options: Dodopayments::RequestOptions
           }
         )

@@ -83,12 +83,6 @@ module Dodopayments
       sig { returns(T.nilable(Integer)) }
       attr_accessor :trial_period_days
 
-      sig { returns(T.nilable(String)) }
-      attr_reader :idempotency_key
-
-      sig { params(idempotency_key: String).void }
-      attr_writer :idempotency_key
-
       sig do
         params(
           collection_method: Dodopayments::CollectionMethod::OrSymbol,
@@ -111,7 +105,6 @@ module Dodopayments
           review_required: T::Boolean,
           tax_id: T.nilable(String),
           trial_period_days: T.nilable(Integer),
-          idempotency_key: String,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -134,7 +127,6 @@ module Dodopayments
         # 1 to 730 days. When this is not set, the product trial applies and the trial
         # misuse check runs.
         trial_period_days: nil,
-        idempotency_key: nil,
         request_options: {}
       )
       end
@@ -162,7 +154,6 @@ module Dodopayments
             review_required: T::Boolean,
             tax_id: T.nilable(String),
             trial_period_days: T.nilable(Integer),
-            idempotency_key: String,
             request_options: Dodopayments::RequestOptions
           }
         )

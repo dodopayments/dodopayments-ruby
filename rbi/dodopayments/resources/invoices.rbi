@@ -42,49 +42,38 @@ module Dodopayments
             ),
           review_required: T::Boolean,
           tax_id: T.nilable(String),
-          idempotency_key: String,
           request_options: Dodopayments::RequestOptions::OrHash
         ).returns(Dodopayments::Invoice)
       end
       def create(
-        # Body param
         collection_method:,
-        # Body param
         currency:,
-        # Body param
         customer_id:,
-        # Body param: 1 to 50 items.
+        # 1 to 50 items.
         items:,
-        # Body param: The billing address of an invoice request.
+        # The billing address of an invoice request.
         billing_address: nil,
-        # Body param: 10 addresses or fewer.
+        # 10 addresses or fewer.
         cc_emails: nil,
-        # Body param: The customer email is used when this is not set.
+        # The customer email is used when this is not set.
         customer_email: nil,
-        # Body param: 20 codes or fewer.
+        # 20 codes or fewer.
         discount_ids: nil,
-        # Body param: A custom due date. Do not send it with `payment_terms`.
+        # A custom due date. Do not send it with `payment_terms`.
         due_at: nil,
-        # Body param: The reminder override of one invoice. The business settings fill the
-        # other dunning values.
+        # The reminder override of one invoice. The business settings fill the other
+        # dunning values.
         dunning: nil,
-        # Body param
         memo: nil,
-        # Body param: Arbitrary key-value metadata. Values can be string, integer, number,
-        # or boolean.
+        # Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
         metadata: nil,
-        # Body param: A saved card of the customer. The new subscriptions of the invoice
-        # charge it.
+        # A saved card of the customer. The new subscriptions of the invoice charge it.
         payment_method_id: nil,
-        # Body param: Do not send it with `due_at`.
+        # Do not send it with `due_at`.
         payment_terms: nil,
-        # Body param: `true` keeps a renewal draft for review before it finalises.
+        # `true` keeps a renewal draft for review before it finalises.
         review_required: nil,
-        # Body param
         tax_id: nil,
-        # Header param: A key of 1 to 255 characters. A repeat with the same key returns
-        # the first draft.
-        idempotency_key: nil,
         request_options: {}
       )
       end

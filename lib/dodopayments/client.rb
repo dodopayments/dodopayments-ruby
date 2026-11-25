@@ -247,6 +247,8 @@ module Dodopayments
     # @param initial_retry_delay [Float]
     #
     # @param max_retry_delay [Float]
+    #
+    # @param idempotency_header [String]
     def initialize(
       bearer_token: nil,
       webhook_key: ENV["DODO_PAYMENTS_WEBHOOK_KEY"],
@@ -256,7 +258,8 @@ module Dodopayments
       max_retries: self.class::DEFAULT_MAX_RETRIES,
       timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
-      max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY
+      max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY,
+      idempotency_header: "Idempotency-Key"
     )
       base_url ||= Dodopayments::Client::ENVIRONMENTS.fetch(environment&.to_sym || :live_mode) do
         message = "environment must be one of #{Dodopayments::Client::ENVIRONMENTS.keys}, got #{environment}"
@@ -299,7 +302,8 @@ module Dodopayments
         max_retries: max_retries,
         initial_retry_delay: initial_retry_delay,
         max_retry_delay: max_retry_delay,
-        headers: headers
+        headers: headers,
+        idempotency_header: idempotency_header
       )
 
       @checkout_sessions = Dodopayments::Resources::CheckoutSessions.new(client: self)

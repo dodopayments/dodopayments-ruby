@@ -71,12 +71,7 @@ module Dodopayments
       #   @return [Integer, nil]
       optional :trial_period_days, Integer, nil?: true
 
-      # @!attribute idempotency_key
-      #
-      #   @return [String, nil]
-      optional :idempotency_key, String
-
-      # @!method initialize(collection_method:, currency:, customer_id:, product_id:, billing_address: nil, payment_method_id: nil, payment_terms: nil, quantity: nil, review_required: nil, tax_id: nil, trial_period_days: nil, idempotency_key: nil, request_options: {})
+      # @!method initialize(collection_method:, currency:, customer_id:, product_id:, billing_address: nil, payment_method_id: nil, payment_terms: nil, quantity: nil, review_required: nil, tax_id: nil, trial_period_days: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Dodopayments::Models::SubscriptionStartTrialParams} for more details.
       #
@@ -101,8 +96,6 @@ module Dodopayments
       #   @param tax_id [String, nil]
       #
       #   @param trial_period_days [Integer, nil] 1 to 730 days. When this is not set, the product trial applies and the trial mis
-      #
-      #   @param idempotency_key [String]
       #
       #   @param request_options [Dodopayments::RequestOptions, Hash{Symbol=>Object}]
 

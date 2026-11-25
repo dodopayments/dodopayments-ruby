@@ -86,7 +86,8 @@ module Dodopayments
       ?max_retries: Integer,
       ?timeout: Float,
       ?initial_retry_delay: Float,
-      ?max_retry_delay: Float
+      ?max_retry_delay: Float,
+      ?idempotency_header: String
     ) -> void
   end
 end
